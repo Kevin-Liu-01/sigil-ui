@@ -13,6 +13,12 @@ export { Frame, type FrameProps } from "./layout/Frame";
 export { PageGrid, type PageGridProps } from "./layout/PageGrid";
 export { Margin, type MarginProps } from "./layout/Margin";
 export { Gutter, type GutterProps } from "./layout/Gutter";
+export {
+  SigilPageGrid, SigilGutter, useIsInsidePageGrid, usePageGridConfig,
+  type SigilPageGridProps, type PageGridConfig, type SigilGutterProps,
+} from "./layout/SigilPageGrid";
+export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
+export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
 export { Divider, type DividerProps } from "./layout/Divider";
 export { HRule, type HRuleProps } from "./layout/HRule";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";

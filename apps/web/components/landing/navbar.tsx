@@ -1,7 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
+import Image from "next/image";
+
+const LOGO_VARIANTS = [
+  "/logo.svg",
+  "/logo-v2-mixed-shapes.svg",
+  "/logo-v3-gradient-dots.svg",
+  "/logo-v4-outline.svg",
+  "/logo-v5-asymmetric.svg",
+  "/logo-v6-monochrome.svg",
+] as const;
 
 const NAV_LINKS = [
   { label: "Manifesto", href: "/manifesto", icon: <Flame size={14} /> },
@@ -14,6 +24,11 @@ const NAV_LINKS = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(true);
+  const [logoIdx, setLogoIdx] = useState(0);
+
+  const cycleLogo = useCallback(() => {
+    setLogoIdx((i) => (i + 1) % LOGO_VARIANTS.length);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -51,9 +66,10 @@ export function Navbar() {
           transition: "max-width 400ms cubic-bezier(0.16, 1, 0.3, 1), padding 400ms cubic-bezier(0.16, 1, 0.3, 1), height 400ms cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
-        {/* Logo */}
+        {/* Logo — cycles through 6 variants on hover */}
         <a
           href="/"
+          onMouseEnter={cycleLogo}
           style={{
             display: "flex",
             alignItems: "center",
@@ -62,10 +78,14 @@ export function Navbar() {
             color: "var(--s-text)",
           }}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
+          <Image
+            src={LOGO_VARIANTS[logoIdx]}
+            alt="Sigil"
+            width={24}
+            height={24}
+            priority
+            style={{ transition: "transform 200ms ease" }}
+          />
           <span
             style={{
               fontFamily: "var(--s-font-mono)",

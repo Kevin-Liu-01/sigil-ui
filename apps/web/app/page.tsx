@@ -1,12 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import type { ReactNode } from "react";
+import { useState, useEffect } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
 import { PresetShowcase } from "@/components/landing/preset-showcase";
 import { PresetTable } from "@/components/landing/preset-table";
-import { Navbar } from "@/components/landing/navbar";
 import { Terminal } from "@/components/landing/terminal";
 import {
   TokenFlowDiagram,
@@ -18,33 +16,164 @@ import {
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
-import { Stack, Button } from "@sigil-ui/components";
+import { SigilPageGrid, SigilSection, SigilNavbar } from "@sigil-ui/components";
+import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
 /* ================================================================ */
-/* Shared layout                                                     */
+/* Navbar                                                            */
 /* ================================================================ */
 
-function ContentWrap({
-  children,
-  className,
-  style,
-}: {
-  children: ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
+const NAV_LINKS = [
+  { label: "Manifesto", href: "/manifesto", icon: <Flame size={14} /> },
+  { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+  { label: "Components", href: "#components", icon: <LayoutGrid size={14} /> },
+  { label: "Presets", href: "#presets", icon: <Palette size={14} /> },
+  { label: "GitHub", href: "https://github.com/Kevin-Liu-01/sigil-ui", external: true, icon: <ExternalLink size={14} /> },
+] as const;
+
+function LandingNavbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 16);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  function toggleTheme() {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("dark", next);
+    document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
+  }
+
   return (
-    <div
-      className={className}
+    <SigilNavbar
+      variant="full"
       style={{
-        maxWidth: "var(--s-align-rail-width, 1200px)",
-        margin: "0 auto",
-        padding: "0 var(--s-align-rail-margin, 24px)",
-        ...style,
+        backdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
+        backgroundColor: scrolled
+          ? "color-mix(in oklch, var(--s-background) 80%, transparent)"
+          : "transparent",
+        borderBottom: scrolled
+          ? "1px solid var(--s-border-muted)"
+          : "1px solid transparent",
+        transition: "all 400ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      {children}
-    </div>
+      {/* Logo */}
+      <a
+        href="/"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+          textDecoration: "none",
+          color: "var(--s-text)",
+        }}
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="1.5" />
+          <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="1.5" />
+        </svg>
+        <span
+          style={{
+            fontFamily: "var(--s-font-mono)",
+            fontWeight: 600,
+            fontSize: 15,
+            letterSpacing: "-0.01em",
+          }}
+        >
+          sigil
+        </span>
+      </a>
+
+      {/* Links + theme toggle */}
+      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              fontFamily: "var(--s-font-mono)",
+              fontSize: 12,
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase" as const,
+              textDecoration: "none",
+              color: "var(--s-text-muted)",
+              transition: "color 150ms ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+            {...("external" in link && link.external
+              ? { target: "_blank", rel: "noopener noreferrer" }
+              : {})}
+          >
+            {link.icon}
+            {link.label}
+          </a>
+        ))}
+
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: 32,
+            height: 32,
+            padding: 0,
+            border: "none",
+            background: "none",
+            color: "var(--s-text-muted)",
+            cursor: "pointer",
+            borderRadius: "var(--s-radius-sm, 0px)",
+            transition: "color 150ms ease",
+          }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+        >
+          {isDark ? <SunIcon /> : <MoonIcon />}
+        </button>
+      </div>
+    </SigilNavbar>
+  );
+}
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="8" y1="1" x2="8" y2="3" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="1" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="13" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="3.05" y1="3.05" x2="4.46" y2="4.46" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="11.54" y1="11.54" x2="12.95" y2="12.95" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="3.05" y1="12.95" x2="4.46" y2="11.54" stroke="currentColor" strokeWidth="1.2" />
+      <line x1="11.54" y1="4.46" x2="12.95" y2="3.05" stroke="currentColor" strokeWidth="1.2" />
+    </svg>
+  );
+}
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M13.5 9.5a5.5 5.5 0 01-7-7 5.5 5.5 0 107 7z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -82,117 +211,107 @@ function Hero() {
   };
 
   return (
-    <section
-      style={{
-        padding: "100px 0 64px",
-        borderBottom: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap>
-        {/* Hero copy */}
-        <div style={{ marginBottom: 48 }}>
-          <span className="s-label" style={{ display: "block", marginBottom: 16 }}>/ sigil ui</span>
+    <SigilSection borderTop showCrosses padding="100px 0 64px">
+      <div style={{ marginBottom: 48 }}>
+        <span className="s-label" style={{ display: "block", marginBottom: 16 }}>/ sigil ui</span>
 
-          <h1
+        <h1
+          style={{
+            fontFamily: "var(--s-font-display)",
+            fontWeight: 700,
+            fontSize: "clamp(32px, 5vw, 56px)",
+            lineHeight: 1.08,
+            letterSpacing: "-0.03em",
+            color: "var(--s-text)",
+            margin: "0 0 16px 0",
+          }}
+        >
+          The Foundation for your Design System.
+        </h1>
+
+        <p
+          className="s-mono"
+          style={{
+            fontSize: 14,
+            lineHeight: 1.6,
+            color: "var(--s-text-secondary)",
+            margin: "0 0 24px 0",
+            maxWidth: 520,
+          }}
+        >
+          100+ components. 300+ tokens. 30 presets. One markdown file controls every color, radius, border, and sound.
+        </p>
+
+        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+          <a
+            href="/docs"
             style={{
-              fontFamily: "var(--s-font-display)",
-              fontWeight: 700,
-              fontSize: "clamp(32px, 5vw, 56px)",
-              lineHeight: 1.08,
-              letterSpacing: "-0.03em",
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "10px 20px",
+              background: "var(--s-primary)",
+              color: "var(--s-primary-contrast, #fff)",
+              fontFamily: "var(--s-font-mono)",
+              fontSize: 13,
+              fontWeight: 600,
+              border: "1px solid var(--s-primary)",
+              textDecoration: "none",
+              transition: "all 200ms",
+            }}
+          >
+            Get Started
+          </a>
+          <a
+            href="/docs/components/button"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              padding: "10px 20px",
+              background: "transparent",
               color: "var(--s-text)",
-              margin: "0 0 16px 0",
+              fontFamily: "var(--s-font-mono)",
+              fontSize: 13,
+              fontWeight: 500,
+              border: "1px solid var(--s-border)",
+              textDecoration: "none",
+              transition: "all 200ms",
             }}
           >
-            The Foundation for your Design System.
-          </h1>
+            View Components
+          </a>
+        </div>
 
-          <p
-            className="s-mono"
-            style={{
-              fontSize: 14,
-              lineHeight: 1.6,
-              color: "var(--s-text-secondary)",
-              margin: "0 0 24px 0",
-              maxWidth: 520,
-            }}
-          >
-            100+ components. 300+ tokens. 30 presets. One markdown file controls every color, radius, border, and sound.
-          </p>
-
-          <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-            <a
-              href="/docs"
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20 }}>
+          {PRESET_DOTS.map((p) => (
+            <button
+              key={p.name}
+              type="button"
+              title={p.name}
+              onClick={() => handlePresetDot(p.name)}
               style={{
-                display: "inline-flex",
-                alignItems: "center",
-                padding: "10px 20px",
-                background: "var(--s-primary)",
-                color: "var(--s-primary-contrast, #fff)",
-                fontFamily: "var(--s-font-mono)",
-                fontSize: 13,
-                fontWeight: 600,
-                border: "1px solid var(--s-primary)",
-                textDecoration: "none",
-                transition: "all 200ms",
-              }}
-            >
-              Get Started
-            </a>
-            <a
-              href="/docs/components/button"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                padding: "10px 20px",
-                background: "transparent",
-                color: "var(--s-text)",
-                fontFamily: "var(--s-font-mono)",
-                fontSize: 13,
-                fontWeight: 500,
+                width: 10,
+                height: 10,
+                borderRadius: 0,
+                background: p.color,
                 border: "1px solid var(--s-border)",
-                textDecoration: "none",
-                transition: "all 200ms",
+                cursor: "pointer",
+                padding: 0,
+                transition: "transform 150ms",
               }}
-            >
-              View Components
-            </a>
-          </div>
-
-          {/* Preset dots */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20 }}>
-            {PRESET_DOTS.map((p) => (
-              <button
-                key={p.name}
-                type="button"
-                title={p.name}
-                onClick={() => handlePresetDot(p.name)}
-                style={{
-                  width: 10,
-                  height: 10,
-                  borderRadius: 0,
-                  background: p.color,
-                  border: "1px solid var(--s-border)",
-                  cursor: "pointer",
-                  padding: 0,
-                  transition: "transform 150ms",
-                }}
-                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.5)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-              />
-            ))}
-          </div>
+              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.5)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+            />
+          ))}
         </div>
+      </div>
 
-        {/* Component showcase — full width below hero copy */}
-        <div>
-          <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>Fig. 01</span>
-          <div className="s-transition-all">
-            <HeroShowcase />
-          </div>
+      <div>
+        <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>Fig. 01</span>
+        <div className="s-transition-all">
+          <HeroShowcase />
         </div>
-      </ContentWrap>
-    </section>
+      </div>
+    </SigilSection>
   );
 }
 
@@ -200,60 +319,41 @@ function Hero() {
 /* 2 — Token System                                                  */
 /* ================================================================ */
 
-const TOKEN_MD = `# sigil.tokens.md
-
-## Colors
-| Token       | Value                  |
-|-------------|------------------------|
-| primary     | oklch(0.65 0.15 280)   |
-| background  | #0a0a0f                |
-| surface     | #141419                |
-| text        | #fafafa                |
-
-## Typography
-| Token       | Value                  |
-|-------------|------------------------|
-| display     | ABC Monument Grotesk   |
-| body        | system-ui, sans-serif  |
-| mono        | Roboto Mono, monospace |`;
-
-
 function TokenSystem() {
   return (
-    <section style={{ padding: "80px 0", borderBottom: "1px solid var(--s-border-muted)" }}>
-      <ContentWrap>
-        <span className="s-label" style={{ display: "block", marginBottom: 12 }}>
-          / Token System
-        </span>
+    <SigilSection borderTop showCrosses>
+      <span className="s-label" style={{ display: "block", marginBottom: 12 }}>
+        / Token System
+      </span>
 
-        <h2 style={{
-          fontFamily: "var(--s-font-display)",
-          fontSize: "clamp(24px, 3vw, 36px)",
-          fontWeight: 700,
-          letterSpacing: "-0.02em",
-          color: "var(--s-text)",
-          margin: "0 0 12px 0",
-        }}>
-          One file compiles to everything.
-        </h2>
-        <p className="s-mono" style={{ fontSize: 14, color: "var(--s-text-muted)", marginBottom: 40, maxWidth: 560 }}>
-          Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly.
-        </p>
+      <h2 style={{
+        fontFamily: "var(--s-font-display)",
+        fontSize: "clamp(24px, 3vw, 36px)",
+        fontWeight: 700,
+        letterSpacing: "-0.02em",
+        color: "var(--s-text)",
+        margin: "0 0 12px 0",
+      }}>
+        One file compiles to everything.
+      </h2>
+      <p className="s-mono" style={{ fontSize: 14, color: "var(--s-text-muted)", marginBottom: 40, maxWidth: 560 }}>
+        Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly.
+      </p>
 
-        <ParallaxSection speed={0.03}>
-          <TokenFlowDiagram />
-        </ParallaxSection>
+      <ParallaxSection speed={0.03}>
+        <TokenFlowDiagram />
+      </ParallaxSection>
 
-        <div style={{ marginTop: 48 }}>
-          <span className="s-fig" style={{ display: "block", marginBottom: 16 }}>Fig. 02 — Preset comparison</span>
-          <PresetTransitionDemo />
-        </div>
+      <div style={{ marginTop: 48 }}>
+        <span className="s-fig" style={{ display: "block", marginBottom: 16 }}>Fig. 02 — Preset comparison</span>
+        <PresetTransitionDemo />
+      </div>
 
-        <div style={{ marginTop: 48 }}>
-          <CodeExample
-            filename="app/layout.tsx"
-            language="tsx"
-            code={`import { SigilShell } from "@sigil-ui/components";
+      <div style={{ marginTop: 48 }}>
+        <CodeExample
+          filename="app/layout.tsx"
+          language="tsx"
+          code={`import { SigilShell } from "@sigil-ui/components";
 
 export default function Layout({ children }) {
   return (
@@ -264,14 +364,12 @@ export default function Layout({ children }) {
     </html>
   );
 }`}
-            highlightLines={[1, 6]}
-          />
-        </div>
-      </ContentWrap>
-    </section>
+          highlightLines={[1, 6]}
+        />
+      </div>
+    </SigilSection>
   );
 }
-
 
 /* ================================================================ */
 /* 3 — Components                                                    */
@@ -410,10 +508,8 @@ function MiniComponentRender({ name }: { name: string }) {
                 fontSize: 8,
                 textAlign: "center",
                 padding: 2,
-                color:
-                  i === 5 ? "var(--s-primary)" : "var(--s-text-muted)",
-                background:
-                  i === 5 ? "var(--s-primary-muted)" : "transparent",
+                color: i === 5 ? "var(--s-primary)" : "var(--s-text-muted)",
+                background: i === 5 ? "var(--s-primary-muted)" : "transparent",
               }}
             >
               {i + 1}
@@ -445,24 +541,10 @@ function MiniComponentRender({ name }: { name: string }) {
                 marginBottom: 2,
               }}
             >
-              <span
-                style={{
-                  ...mono,
-                  fontSize: 8,
-                  flex: 1,
-                  color: "var(--s-text-secondary)",
-                }}
-              >
+              <span style={{ ...mono, fontSize: 8, flex: 1, color: "var(--s-text-secondary)" }}>
                 {r}
               </span>
-              <span
-                style={{
-                  ...mono,
-                  fontSize: 8,
-                  flex: 1,
-                  color: "var(--s-success)",
-                }}
-              >
+              <span style={{ ...mono, fontSize: 8, flex: 1, color: "var(--s-success)" }}>
                 ok
               </span>
             </div>
@@ -495,126 +577,106 @@ function Components() {
   const [activeTab, setActiveTab] = useState("UI");
 
   return (
-    <section
-      id="components"
-      style={{
-        padding: "80px 0",
-        borderBottom: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            marginBottom: 32,
-          }}
-        >
-          <span className="s-label">/ Components</span>
-          <span className="s-fig">Fig. 02</span>
-        </div>
+    <SigilSection id="components" borderTop showCrosses>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: 32,
+        }}
+      >
+        <span className="s-label">/ Components</span>
+        <span className="s-fig">Fig. 02</span>
+      </div>
 
-        {/* Tab bar */}
-        <div
-          style={{
-            display: "flex",
-            gap: 0,
-            borderBottom: "1px solid var(--s-border)",
-            marginBottom: 32,
-          }}
-        >
-          {COMPONENT_TABS.map((tab) => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => setActiveTab(tab)}
+      <div
+        style={{
+          display: "flex",
+          gap: 0,
+          borderBottom: "1px solid var(--s-border)",
+          marginBottom: 32,
+        }}
+      >
+        {COMPONENT_TABS.map((tab) => (
+          <button
+            key={tab}
+            type="button"
+            onClick={() => setActiveTab(tab)}
+            className="s-mono"
+            style={{
+              background: "none",
+              border: "none",
+              borderBottom:
+                activeTab === tab
+                  ? "2px solid var(--s-primary)"
+                  : "2px solid transparent",
+              padding: "8px 16px",
+              fontSize: 12,
+              fontFamily: "var(--s-font-mono)",
+              color: activeTab === tab ? "var(--s-text)" : "var(--s-text-muted)",
+              cursor: "pointer",
+              letterSpacing: "0.02em",
+              transition: "color 150ms, border-color 150ms",
+            }}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 0,
+        }}
+      >
+        {COMPONENT_CELLS.map((cell) => (
+          <div
+            key={cell.name}
+            style={{
+              border: "1px solid var(--s-border)",
+              borderRadius: 0,
+              padding: 20,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              minHeight: 120,
+              gap: 12,
+              marginRight: -1,
+              marginBottom: -1,
+            }}
+          >
+            <MiniComponentRender name={cell.name} />
+            <span
               className="s-mono"
-              style={{
-                background: "none",
-                border: "none",
-                borderBottom:
-                  activeTab === tab
-                    ? "2px solid var(--s-primary)"
-                    : "2px solid transparent",
-                padding: "8px 16px",
-                fontSize: 12,
-                fontFamily: "var(--s-font-mono)",
-                color:
-                  activeTab === tab
-                    ? "var(--s-text)"
-                    : "var(--s-text-muted)",
-                cursor: "pointer",
-                letterSpacing: "0.02em",
-                transition: "color 150ms, border-color 150ms",
-              }}
+              style={{ fontSize: 11, color: "var(--s-text-muted)" }}
             >
-              {tab}
-            </button>
-          ))}
-        </div>
+              {cell.name} — {cell.vars} vars
+            </span>
+          </div>
+        ))}
+      </div>
 
-        {/* 4×2 component grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 0,
-          }}
-        >
-          {COMPONENT_CELLS.map((cell) => (
-            <div
-              key={cell.name}
-              style={{
-                border: "1px solid var(--s-border)",
-                borderRadius: 0,
-                padding: 20,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                minHeight: 120,
-                gap: 12,
-                marginRight: -1,
-                marginBottom: -1,
-              }}
-            >
-              <MiniComponentRender name={cell.name} />
-              <span
-                className="s-mono"
-                style={{
-                  fontSize: 11,
-                  color: "var(--s-text-muted)",
-                }}
-              >
-                {cell.name} — {cell.vars} vars
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <a
-          href="/docs/components/button"
-          className="s-mono"
-          style={{
-            display: "inline-block",
-            marginTop: 24,
-            fontSize: 13,
-            color: "var(--s-text-muted)",
-            textDecoration: "none",
-            transition: "color 150ms",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "var(--s-primary)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--s-text-muted)";
-          }}
-        >
-          79 more in /docs →
-        </a>
-      </ContentWrap>
-    </section>
+      <a
+        href="/docs/components/button"
+        className="s-mono"
+        style={{
+          display: "inline-block",
+          marginTop: 24,
+          fontSize: 13,
+          color: "var(--s-text-muted)",
+          textDecoration: "none",
+          transition: "color 150ms",
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-primary)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+      >
+        79 more in /docs →
+      </a>
+    </SigilSection>
   );
 }
 
@@ -624,33 +686,25 @@ function Components() {
 
 function Presets() {
   return (
-    <section
-      id="presets"
-      style={{
-        padding: "80px 0",
-        borderBottom: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            marginBottom: 32,
-          }}
-        >
-          <span className="s-label">/ Presets</span>
-          <span className="s-fig">Fig. 03</span>
-        </div>
+    <SigilSection id="presets" borderTop showCrosses>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: 32,
+        }}
+      >
+        <span className="s-label">/ Presets</span>
+        <span className="s-fig">Fig. 03</span>
+      </div>
 
-        <PresetTable />
+      <PresetTable />
 
-        <div style={{ marginTop: 48 }}>
-          <PresetShowcase />
-        </div>
-      </ContentWrap>
-    </section>
+      <div style={{ marginTop: 48 }}>
+        <PresetShowcase />
+      </div>
+    </SigilSection>
   );
 }
 
@@ -673,93 +727,78 @@ const DEMOS = [
 
 function DemoSites() {
   return (
-    <section
-      style={{
-        padding: "80px 0",
-        borderBottom: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "baseline",
-            marginBottom: 32,
-          }}
-        >
-          <span className="s-label">/ Demos</span>
-          <span className="s-fig">Fig. 04</span>
-        </div>
+    <SigilSection borderTop showCrosses>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "baseline",
+          marginBottom: 32,
+        }}
+      >
+        <span className="s-label">/ Demos</span>
+        <span className="s-fig">Fig. 04</span>
+      </div>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          {DEMOS.map((demo) => (
-            <a
-              key={demo.num}
-              href={demo.href}
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        {DEMOS.map((demo) => (
+          <a
+            key={demo.num}
+            href={demo.href}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "48px 1fr 1fr 32px",
+              alignItems: "center",
+              gap: 16,
+              padding: "14px 0",
+              borderBottom: "1px solid var(--s-border-muted)",
+              textDecoration: "none",
+              color: "inherit",
+              transition: "background 150ms",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--s-surface)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
+          >
+            <span
+              className="s-mono"
               style={{
-                display: "grid",
-                gridTemplateColumns: "48px 1fr 1fr 32px",
-                alignItems: "center",
-                gap: 16,
-                padding: "14px 0",
-                borderBottom: "1px solid var(--s-border-muted)",
-                textDecoration: "none",
-                color: "inherit",
-                transition: "background 150ms",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background =
-                  "var(--s-surface)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
+                fontSize: 18,
+                fontWeight: 500,
+                color: "var(--s-text-muted)",
+                letterSpacing: "-0.02em",
               }}
             >
-              <span
-                className="s-mono"
-                style={{
-                  fontSize: 18,
-                  fontWeight: 500,
-                  color: "var(--s-text-muted)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {demo.num}
-              </span>
-              <span
-                style={{
-                  fontSize: 15,
-                  fontWeight: 600,
-                  color: "var(--s-text)",
-                  fontFamily: "var(--s-font-body)",
-                }}
-              >
-                {demo.name}
-              </span>
-              <span
-                className="s-mono"
-                style={{
-                  fontSize: 12,
-                  color: "var(--s-text-subtle)",
-                }}
-              >
-                {demo.url}
-              </span>
-              <span
-                style={{
-                  fontSize: 16,
-                  color: "var(--s-text-muted)",
-                  textAlign: "right",
-                }}
-              >
-                →
-              </span>
-            </a>
-          ))}
-        </div>
-      </ContentWrap>
-    </section>
+              {demo.num}
+            </span>
+            <span
+              style={{
+                fontSize: 15,
+                fontWeight: 600,
+                color: "var(--s-text)",
+                fontFamily: "var(--s-font-body)",
+              }}
+            >
+              {demo.name}
+            </span>
+            <span
+              className="s-mono"
+              style={{ fontSize: 12, color: "var(--s-text-subtle)" }}
+            >
+              {demo.url}
+            </span>
+            <span
+              style={{
+                fontSize: 16,
+                color: "var(--s-text-muted)",
+                textAlign: "right",
+              }}
+            >
+              →
+            </span>
+          </a>
+        ))}
+      </div>
+    </SigilSection>
   );
 }
 
@@ -770,54 +809,19 @@ function DemoSites() {
 const CLI_LINES = [
   { text: "npx sigil init", prefix: "$", color: "var(--s-text)", delay: 800 },
   { text: "", delay: 300 },
-  {
-    text: "Preset: sigil",
-    prefix: "✓",
-    color: "var(--s-success)",
-    delay: 500,
-  },
-  {
-    text: "Created sigil.config.ts",
-    prefix: "✓",
-    color: "var(--s-success)",
-    delay: 400,
-  },
-  {
-    text: "Created sigil.tokens.md",
-    prefix: "✓",
-    color: "var(--s-success)",
-    delay: 400,
-  },
-  {
-    text: "Installed token CSS variables",
-    prefix: "✓",
-    color: "var(--s-success)",
-    delay: 400,
-  },
-  {
-    text: "Ready to import components",
-    prefix: "✓",
-    color: "var(--s-success)",
-    delay: 400,
-  },
+  { text: "Preset: sigil", prefix: "✓", color: "var(--s-success)", delay: 500 },
+  { text: "Created sigil.config.ts", prefix: "✓", color: "var(--s-success)", delay: 400 },
+  { text: "Created sigil.tokens.md", prefix: "✓", color: "var(--s-success)", delay: 400 },
+  { text: "Installed token CSS variables", prefix: "✓", color: "var(--s-success)", delay: 400 },
+  { text: "Ready to import components", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "", delay: 200 },
-  {
-    text: "Done in 1.2s",
-    prefix: " ",
-    color: "var(--s-text-muted)",
-    delay: 300,
-  },
+  { text: "Done in 1.2s", prefix: " ", color: "var(--s-text-muted)", delay: 300 },
 ];
 
 function CLISection() {
   return (
-    <section
-      style={{
-        padding: "80px 0",
-        borderBottom: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap style={{ maxWidth: 720 }}>
+    <SigilSection borderTop showCrosses>
+      <div style={{ maxWidth: 720 }}>
         <span
           className="s-label"
           style={{ display: "block", marginBottom: 24 }}
@@ -840,8 +844,8 @@ function CLISection() {
         </h3>
 
         <Terminal lines={CLI_LINES} title="~/ — zsh" />
-      </ContentWrap>
-    </section>
+      </div>
+    </SigilSection>
   );
 }
 
@@ -863,10 +867,7 @@ const FOOTER_COLS = [
     group: "Community",
     links: [
       { label: "GitHub", href: "https://github.com/sigil-ui/sigil" },
-      {
-        label: "npm",
-        href: "https://www.npmjs.com/package/@sigil-ui/components",
-      },
+      { label: "npm", href: "https://www.npmjs.com/package/@sigil-ui/components" },
       { label: "Discord", href: "#" },
     ],
   },
@@ -891,104 +892,89 @@ const FOOTER_COLS = [
 
 function Footer() {
   return (
-    <footer
-      style={{
-        padding: "64px 0 32px",
-        borderTop: "1px solid var(--s-border-muted)",
-      }}
-    >
-      <ContentWrap>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 32,
-          }}
-        >
-          {FOOTER_COLS.map((col) => (
-            <div key={col.group}>
-              <span
-                className="s-mono"
-                style={{
-                  fontSize: 10,
-                  color: "var(--s-text-subtle)",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.08em",
-                  fontWeight: 600,
-                  display: "block",
-                  marginBottom: 16,
-                }}
-              >
-                {col.group}
-              </span>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                {col.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="s-mono"
-                    style={{
-                      fontSize: 12,
-                      color: "var(--s-text-muted)",
-                      textDecoration: "none",
-                      transition: "color var(--s-duration-fast)",
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "var(--s-text)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "var(--s-text-muted)";
-                    }}
-                  >
-                    {link.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: 48,
-            paddingTop: 24,
-            borderTop: "1px solid var(--s-border-muted)",
-          }}
-        >
-          <span
-            className="s-mono"
-            style={{ fontSize: 12, color: "var(--s-text-muted)" }}
-          >
-            © 2026 Sigil UI. MIT License.
-          </span>
-          <span
-            className="s-mono"
-            style={{ fontSize: 12, color: "var(--s-text-muted)" }}
-          >
-            Built by{" "}
-            <a
-              href="https://kevinliu.me"
+    <SigilSection as="footer" borderTop showCrosses padding="64px 0 32px">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 32,
+        }}
+      >
+        {FOOTER_COLS.map((col) => (
+          <div key={col.group}>
+            <span
+              className="s-mono"
               style={{
-                color: "var(--s-text-muted)",
-                textDecoration: "none",
-                transition: "color var(--s-duration-fast)",
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--s-text)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--s-text-muted)";
+                fontSize: 10,
+                color: "var(--s-text-subtle)",
+                textTransform: "uppercase",
+                letterSpacing: "0.08em",
+                fontWeight: 600,
+                display: "block",
+                marginBottom: 16,
               }}
             >
-              Kevin Liu
-            </a>
-          </span>
-        </div>
-      </ContentWrap>
-    </footer>
+              {col.group}
+            </span>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {col.links.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="s-mono"
+                  style={{
+                    fontSize: 12,
+                    color: "var(--s-text-muted)",
+                    textDecoration: "none",
+                    transition: "color var(--s-duration-fast)",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginTop: 48,
+          paddingTop: 24,
+          borderTop: "1px solid var(--s-border-muted)",
+        }}
+      >
+        <span
+          className="s-mono"
+          style={{ fontSize: 12, color: "var(--s-text-muted)" }}
+        >
+          © 2026 Sigil UI. MIT License.
+        </span>
+        <span
+          className="s-mono"
+          style={{ fontSize: 12, color: "var(--s-text-muted)" }}
+        >
+          Built by{" "}
+          <a
+            href="https://kevinliu.me"
+            style={{
+              color: "var(--s-text-muted)",
+              textDecoration: "none",
+              transition: "color var(--s-duration-fast)",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+          >
+            Kevin Liu
+          </a>
+        </span>
+      </div>
+    </SigilSection>
   );
 }
 
@@ -999,14 +985,16 @@ function Footer() {
 export default function LandingPage() {
   return (
     <>
-      <Navbar />
+      <LandingNavbar />
       <main>
-        <Hero />
-        <TokenSystem />
-        <Components />
-        <Presets />
-        <DemoSites />
-        <CLISection />
+        <SigilPageGrid showGutterGrid showMarginLines>
+          <Hero />
+          <TokenSystem />
+          <Components />
+          <Presets />
+          <DemoSites />
+          <CLISection />
+        </SigilPageGrid>
       </main>
       <Footer />
     </>
