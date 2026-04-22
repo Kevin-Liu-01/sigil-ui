@@ -84,113 +84,111 @@ function Hero() {
   return (
     <section
       style={{
-        minHeight: "100vh",
-        padding: "120px 0 80px",
+        padding: "100px 0 64px",
         borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "55% 45%",
-            gap: 48,
-            alignItems: "start",
-          }}
-        >
-          {/* Left — Copy */}
-          <div
+        {/* Hero copy */}
+        <div style={{ marginBottom: 48 }}>
+          <span className="s-label" style={{ display: "block", marginBottom: 16 }}>/ sigil ui</span>
+
+          <h1
             style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 24,
-              paddingTop: 24,
+              fontFamily: "var(--s-font-display)",
+              fontWeight: 700,
+              fontSize: "clamp(32px, 5vw, 56px)",
+              lineHeight: 1.08,
+              letterSpacing: "-0.03em",
+              color: "var(--s-text)",
+              margin: "0 0 16px 0",
             }}
           >
-            <span className="s-label">/ sigil ui</span>
+            The Foundation for your Design System.
+          </h1>
 
-            <h1
+          <p
+            className="s-mono"
+            style={{
+              fontSize: 14,
+              lineHeight: 1.6,
+              color: "var(--s-text-secondary)",
+              margin: "0 0 24px 0",
+              maxWidth: 520,
+            }}
+          >
+            100+ components. 300+ tokens. 30 presets. One markdown file controls every color, radius, border, and sound.
+          </p>
+
+          <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+            <a
+              href="/docs"
               style={{
-                fontFamily: "var(--s-font-display)",
-                fontWeight: 700,
-                fontSize: 64,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "10px 20px",
+                background: "var(--s-primary)",
+                color: "var(--s-primary-contrast, #fff)",
+                fontFamily: "var(--s-font-mono)",
+                fontSize: 13,
+                fontWeight: 600,
+                border: "1px solid var(--s-primary)",
+                textDecoration: "none",
+                transition: "all 200ms",
+              }}
+            >
+              Get Started
+            </a>
+            <a
+              href="/docs/components/button"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                padding: "10px 20px",
+                background: "transparent",
                 color: "var(--s-text)",
-                margin: 0,
+                fontFamily: "var(--s-font-mono)",
+                fontSize: 13,
+                fontWeight: 500,
+                border: "1px solid var(--s-border)",
+                textDecoration: "none",
+                transition: "all 200ms",
               }}
             >
-              The Foundation
-              <br />
-              for your
-              <br />
-              Design System
-            </h1>
-
-            <p
-              className="s-mono"
-              style={{
-                fontSize: 15,
-                lineHeight: 1.6,
-                color: "var(--s-text-muted)",
-                margin: 0,
-                maxWidth: 420,
-              }}
-            >
-              100+ components. 300+ tokens. 30 presets.
-              <br />
-              One markdown file controls every visual property.
-            </p>
-
-            <Stack direction="row" gap={12}>
-              <Button asChild style={{ borderRadius: 0 }}>
-                <a href="/docs">New Project</a>
-              </Button>
-              <Button variant="secondary" asChild style={{ borderRadius: 0 }}>
-                <a href="/docs/components/button">View Components</a>
-              </Button>
-            </Stack>
-
-            {/* Preset dots */}
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              {PRESET_DOTS.map((p) => (
-                <button
-                  key={p.name}
-                  type="button"
-                  title={p.name}
-                  onClick={() => handlePresetDot(p.name)}
-                  style={{
-                    width: 10,
-                    height: 10,
-                    borderRadius: 0,
-                    background: p.color,
-                    border: "1px solid var(--s-border)",
-                    cursor: "pointer",
-                    padding: 0,
-                    transition: "transform 150ms",
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "scale(1.5)";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "scale(1)";
-                  }}
-                />
-              ))}
-            </div>
+              View Components
+            </a>
           </div>
 
-          {/* Right — Showcase */}
-          <div>
-            <span
-              className="s-fig"
-              style={{ display: "block", marginBottom: 12 }}
-            >
-              Fig. 01
-            </span>
-            <div className="s-transition-all">
-              <HeroShowcase />
-            </div>
+          {/* Preset dots */}
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20 }}>
+            {PRESET_DOTS.map((p) => (
+              <button
+                key={p.name}
+                type="button"
+                title={p.name}
+                onClick={() => handlePresetDot(p.name)}
+                style={{
+                  width: 10,
+                  height: 10,
+                  borderRadius: 0,
+                  background: p.color,
+                  border: "1px solid var(--s-border)",
+                  cursor: "pointer",
+                  padding: 0,
+                  transition: "transform 150ms",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.5)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Component showcase — full width below hero copy */}
+        <div>
+          <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>Fig. 01</span>
+          <div className="s-transition-all">
+            <HeroShowcase />
           </div>
         </div>
       </ContentWrap>
