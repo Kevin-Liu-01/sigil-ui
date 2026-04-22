@@ -328,78 +328,11 @@ html[data-theme="dark"],
 }
 
 /* ================================================================== */
-/* Backward-compat: --s-* aliases → --s-* (for copied landing comps)  */
+/* Backward-compat: --s-bg alias                                       */
 /* ================================================================== */
 
 :root {
   --s-bg: var(--s-background);
-  --s-surface: var(--s-surface);
-  --s-surface-elevated: var(--s-surface-elevated);
-  --s-primary: var(--s-primary);
-  --s-primary-hover: var(--s-primary-hover);
-  --s-primary-muted: var(--s-primary-muted);
-  --s-secondary: var(--s-secondary);
-  --s-text: var(--s-text);
-  --s-text-secondary: var(--s-text-secondary);
-  --s-text-muted: var(--s-text-muted);
-  --s-text-subtle: var(--s-text-subtle);
-  --s-text-disabled: var(--s-text-disabled);
-  --s-border: var(--s-border);
-  --s-border-muted: var(--s-border-muted);
-  --s-border-strong: var(--s-border-strong);
-  --s-border-interactive: var(--s-border-interactive);
-  --s-success: var(--s-success);
-  --s-success-muted: var(--s-success-muted);
-  --s-warning: var(--s-warning);
-  --s-warning-muted: var(--s-warning-muted);
-  --s-error: var(--s-error);
-  --s-error-muted: var(--s-error-muted);
-  --s-info: var(--s-info);
-  --s-info-muted: var(--s-info-muted);
-  --s-font-display: var(--s-font-display);
-  --s-font-body: var(--s-font-body);
-  --s-font-mono: var(--s-font-mono);
-  --s-space-1: var(--s-space-1);
-  --s-space-2: var(--s-space-2);
-  --s-space-3: var(--s-space-3);
-  --s-space-4: var(--s-space-4);
-  --s-space-6: var(--s-space-6);
-  --s-space-8: var(--s-space-8);
-  --s-space-12: var(--s-space-12);
-  --s-space-16: var(--s-space-16);
-  --s-space-20: var(--s-space-20);
-  --s-space-24: var(--s-space-24);
-  --s-radius-none: var(--s-radius-none);
-  --s-radius-sm: var(--s-radius-sm);
-  --s-radius-md: var(--s-radius-md);
-  --s-radius-lg: var(--s-radius-lg);
-  --s-radius-xl: var(--s-radius-xl);
-  --s-radius-2xl: var(--s-radius-2xl);
-  --s-radius-full: var(--s-radius-full);
-  --s-card-radius: var(--s-card-radius);
-  --s-grid-cell: var(--s-grid-cell);
-  --s-cross-arm: var(--s-cross-arm);
-  --s-cross-stroke: var(--s-cross-stroke);
-  --s-rail-gap: var(--s-rail-gap);
-  --s-content-max: var(--s-content-max);
-  --s-border-width-thin: var(--s-border-width-thin);
-  --s-border-width-medium: var(--s-border-width-medium);
-  --s-border-width-thick: var(--s-border-width-thick);
-  --s-shadow-sm: var(--s-shadow-sm);
-  --s-shadow-md: var(--s-shadow-md);
-  --s-shadow-lg: var(--s-shadow-lg);
-  --s-shadow-xl: var(--s-shadow-xl);
-  --s-shadow-primary: var(--s-shadow-primary);
-  --s-duration-instant: var(--s-duration-instant);
-  --s-duration-fast: var(--s-duration-fast);
-  --s-duration-normal: var(--s-duration-normal);
-  --s-duration-slow: var(--s-duration-slow);
-  --s-duration-slower: var(--s-duration-slower);
-  --s-ease-default: var(--s-ease-default);
-  --s-ease-in: var(--s-ease-in);
-  --s-ease-out: var(--s-ease-out);
-  --s-ease-in-out: var(--s-ease-in-out);
-  --s-ease-spring: var(--s-ease-spring);
 }
 
 /* ================================================================== */

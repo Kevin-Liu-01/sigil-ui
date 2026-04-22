@@ -2,18 +2,20 @@
 
 > Change the tokens. Everything updates.
 
-The component library where one markdown file controls your entire design system. 70+ components. 31 presets. Built for AI agents.
+An opinionated design language and token-driven component system. 70+ components. 31 presets. One markdown file controls your entire visual identity. Built for AI agents — because they're building the UI whether we like it or not.
+
+**[Read the Manifesto →](MANIFESTO.md)**
 
 ## Why Sigil?
 
-shadcn gives you components. You still build the system.
+Every AI-coded site looks the same — and it's because design systems give agents components without opinions. Sigil is different: visual identity is a first-class primitive, encoded in a structured token spec that agents can read, reason about, and modify. The agent doesn't need taste. The preset has taste.
 
 ```
-shadcn:   copy components → manually edit each one → drift → inconsistency
-Sigil:  install preset → all components inherit → agent edits token doc → instant iteration
+shadcn:   copy components → manually edit each one → drift → everything looks the same
+Sigil:    install preset → all components inherit → agent edits token doc → distinct visual identity
 ```
 
-**The core innovation:** a single `sigil.tokens.md` file that an AI agent can read and edit. All components consume tokens from this file. Swap presets, and every component updates.
+**The core innovation:** a single `sigil.tokens.md` file that an AI agent can read and edit. 259 configurable tokens across 16 categories. All components consume tokens from this file. Swap presets, and every component updates — not a theme toggle, a different design language.
 
 ## Quick Start
 

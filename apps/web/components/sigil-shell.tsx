@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { SigilTokensProvider, useSigilTokens } from "./sandbox/token-provider";
 import { SigilDevBar } from "./devbar";
 import { SigilSoundProvider } from "./sound-provider";
@@ -27,163 +27,130 @@ function useIsDark() {
 function TokenStyleInjector() {
   const { tokens } = useSigilTokens();
   const isDark = useIsDark();
+  const styleRef = useRef<HTMLStyleElement | null>(null);
 
   useEffect(() => {
-    const root = document.documentElement;
+    if (!styleRef.current) {
+      styleRef.current = document.createElement("style");
+      styleRef.current.setAttribute("data-sigil-tokens", "true");
+      document.head.appendChild(styleRef.current);
+    }
 
-    function applyThemed(key: string, value: unknown) {
-      if (value && typeof value === "object" && "light" in (value as Record<string, unknown>) && "dark" in (value as Record<string, unknown>)) {
+    const vars: string[] = [];
+
+    function addVar(name: string, value: string) {
+      vars.push(`${name}: ${value} !important;`);
+    }
+
+    function addThemed(key: string, value: unknown) {
+      if (
+        value &&
+        typeof value === "object" &&
+        "light" in (value as Record<string, unknown>) &&
+        "dark" in (value as Record<string, unknown>)
+      ) {
         const themed = value as { light: string; dark: string };
-        root.style.setProperty(`--s-${key}`, isDark ? themed.dark : themed.light);
+        addVar(`--s-${key}`, isDark ? themed.dark : themed.light);
       } else if (typeof value === "string") {
-        root.style.setProperty(`--s-${key}`, value);
+        addVar(`--s-${key}`, value);
       }
     }
 
+    // Colors (ThemedColor-aware)
     if (tokens.colors) {
       for (const [key, value] of Object.entries(tokens.colors)) {
-        applyThemed(key, value);
+        addThemed(key, value);
       }
     }
 
+    // Typography
     if (tokens.typography) {
       for (const [key, value] of Object.entries(tokens.typography)) {
         if (typeof value === "string") {
-          root.style.setProperty(`--s-${key}`, value);
+          addVar(`--s-${key}`, value);
         }
-      }
-
-      if (tokens.typography["font-display"]) {
-        root.style.setProperty("--s-font-display", tokens.typography["font-display"] as string);
-      }
-      if (tokens.typography["font-body"]) {
-        root.style.setProperty("--s-font-body", tokens.typography["font-body"] as string);
-        document.body.style.fontFamily = tokens.typography["font-body"] as string;
-      }
-      if (tokens.typography["font-mono"]) {
-        root.style.setProperty("--s-font-mono", tokens.typography["font-mono"] as string);
       }
     }
 
+    // Radius — set both --s-radius-{key} and --s-card-radius for compat
     if (tokens.radius) {
       for (const [key, value] of Object.entries(tokens.radius)) {
         if (typeof value === "string") {
-          root.style.setProperty(`--s-radius-${key}`, value);
-          if (key === "lg") root.style.setProperty("--s-card-radius", value);
+          addVar(`--s-radius-${key}`, value);
+          if (key === "card") addVar("--s-card-radius", value);
         }
       }
     }
 
-    if (tokens.sigil) {
-      for (const [key, value] of Object.entries(tokens.sigil)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-${key}`, value);
-        }
-      }
-    }
-
+    // Shadows
     if (tokens.shadows) {
       for (const [key, value] of Object.entries(tokens.shadows)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-shadow-${key}`, value);
+        if (typeof value === "string") addVar(`--s-shadow-${key}`, value);
+      }
+    }
+
+    // Sigil grid
+    if (tokens.sigil) {
+      for (const [key, value] of Object.entries(tokens.sigil)) {
+        if (typeof value === "string") addVar(`--s-${key}`, value);
+      }
+    }
+
+    // Motion (nested: duration.*, easing.*)
+    if (tokens.motion) {
+      if (tokens.motion.duration) {
+        for (const [key, value] of Object.entries(tokens.motion.duration)) {
+          if (typeof value === "string") addVar(`--s-duration-${key}`, value);
+        }
+      }
+      if (tokens.motion.easing) {
+        for (const [key, value] of Object.entries(tokens.motion.easing)) {
+          if (typeof value === "string") addVar(`--s-ease-${key}`, value);
         }
       }
     }
 
-    if (tokens.layout) {
-      for (const [key, value] of Object.entries(tokens.layout)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-${key}`, value);
+    // Borders (nested: width.*)
+    if (tokens.borders) {
+      if (tokens.borders.width) {
+        for (const [key, value] of Object.entries(tokens.borders.width)) {
+          if (typeof value === "string") addVar(`--s-border-width-${key}`, value);
         }
       }
     }
 
-    if (tokens.spacing) {
-      for (const [key, value] of Object.entries(tokens.spacing)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-${key}`, value);
+    // Prefixed flat categories
+    const prefixedCategories: { key: string; prefix: string }[] = [
+      { key: "layout", prefix: "" },
+      { key: "spacing", prefix: "" },
+      { key: "buttons", prefix: "btn-" },
+      { key: "cards", prefix: "card-" },
+      { key: "navigation", prefix: "nav-" },
+      { key: "headings", prefix: "heading-" },
+      { key: "backgrounds", prefix: "bg-" },
+      { key: "alignment", prefix: "align-" },
+      { key: "sections", prefix: "section-" },
+      { key: "dividers", prefix: "divider-" },
+      { key: "gridVisuals", prefix: "grid-" },
+    ];
+
+    for (const { key, prefix } of prefixedCategories) {
+      const obj = tokens[key as keyof typeof tokens];
+      if (obj && typeof obj === "object") {
+        for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
+          if (typeof v === "string") addVar(`--s-${prefix}${k}`, v);
+          else if (typeof v === "boolean") addVar(`--s-${prefix}${k}`, v ? "1" : "0");
+          else if (typeof v === "number") addVar(`--s-${prefix}${k}`, String(v));
         }
       }
     }
 
-    if (tokens.buttons) {
-      for (const [key, value] of Object.entries(tokens.buttons)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-btn-${key}`, value);
-        }
-      }
-    }
+    const css = `:root {\n${vars.join("\n")}\n}`;
+    styleRef.current.textContent = css;
 
-    if (tokens.cards) {
-      for (const [key, value] of Object.entries(tokens.cards)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-card-${key}`, value);
-        }
-      }
-    }
-
-    if (tokens.navigation) {
-      for (const [key, value] of Object.entries(tokens.navigation)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-nav-${key}`, value);
-        }
-      }
-    }
-
-    if (tokens.headings) {
-      for (const [key, value] of Object.entries(tokens.headings)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-heading-${key}`, value);
-        }
-      }
-    }
-
-    if (tokens.backgrounds) {
-      for (const [key, value] of Object.entries(tokens.backgrounds)) {
-        if (typeof value === "string" || typeof value === "boolean") {
-          root.style.setProperty(`--s-bg-${key}`, String(value));
-        }
-      }
-    }
-
-    if (tokens.alignment) {
-      for (const [key, value] of Object.entries(tokens.alignment)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-align-${key}`, value);
-        } else if (typeof value === "boolean") {
-          root.style.setProperty(`--s-align-${key}`, value ? "1" : "0");
-        }
-      }
-    }
-
-    if (tokens.sections) {
-      for (const [key, value] of Object.entries(tokens.sections)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-section-${key}`, value);
-        } else if (typeof value === "boolean") {
-          root.style.setProperty(`--s-section-${key}`, value ? "1" : "0");
-        }
-      }
-    }
-
-    if (tokens.dividers) {
-      for (const [key, value] of Object.entries(tokens.dividers)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-divider-${key}`, value);
-        } else if (typeof value === "boolean") {
-          root.style.setProperty(`--s-divider-${key}`, value ? "1" : "0");
-        }
-      }
-    }
-
-    if (tokens.gridVisuals) {
-      for (const [key, value] of Object.entries(tokens.gridVisuals)) {
-        if (typeof value === "string") {
-          root.style.setProperty(`--s-grid-${key}`, value);
-        } else if (typeof value === "boolean") {
-          root.style.setProperty(`--s-grid-${key}`, value ? "1" : "0");
-        }
-      }
+    // Force body font-family directly for immediate effect
+    if (tokens.typography?.["font-body"]) {
+      document.body.style.fontFamily = tokens.typography["font-body"] as string;
     }
   }, [tokens, isDark]);
 
@@ -195,7 +162,9 @@ export function SigilShell({ children }: { children: ReactNode }) {
     <SigilTokensProvider>
       <SigilSoundProvider>
         <TokenStyleInjector />
-        {children}
+        <div className="s-transition-all">
+          {children}
+        </div>
         <SigilDevBar />
       </SigilSoundProvider>
     </SigilTokensProvider>
