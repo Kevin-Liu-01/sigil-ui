@@ -3,36 +3,30 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-import { ComponentGrid } from "@/components/landing/component-grid";
-import { PresetShowcase } from "@/components/landing/preset-showcase";
-import { DemoBrowser } from "@/components/landing/demo-browser";
 import { HeroShowcase } from "@/components/landing/hero-showcase";
+import { PresetShowcase } from "@/components/landing/preset-showcase";
+import { PresetTable } from "@/components/landing/preset-table";
 import { Navbar } from "@/components/landing/navbar";
 import { Terminal } from "@/components/landing/terminal";
-import { ShaderBackground } from "@/components/shader-bg";
+import {
+  TokenFlowDiagram,
+  ComponentShowcaseGrid,
+  PresetTransitionDemo,
+  CodeExample,
+  ParallaxSection,
+} from "@/components/landing/interactive-diagrams";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
-import {
-  Stack,
-  Button,
-  Badge,
-  Divider,
-  Tessellation,
-  Pattern,
-  LoadingSpinner,
-  Skeleton,
-} from "@sigil-ui/components";
+import { Stack, Button } from "@sigil-ui/components";
 
-/* ================================================================== */
-/* Shared layout                                                       */
-/* ================================================================== */
-
-const CONTENT_MAX = 1200;
+/* ================================================================ */
+/* Shared layout                                                     */
+/* ================================================================ */
 
 function ContentWrap({
   children,
-  className = "",
+  className,
   style,
 }: {
   children: ReactNode;
@@ -42,16 +36,16 @@ function ContentWrap({
   return (
     <div
       className={className}
-      style={{ maxWidth: CONTENT_MAX, margin: "0 auto", ...style }}
+      style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", ...style }}
     >
       {children}
     </div>
   );
 }
 
-/* ================================================================== */
-/* 1 — Hero                                                            */
-/* ================================================================== */
+/* ================================================================ */
+/* 1 — Hero                                                          */
+/* ================================================================ */
 
 const PRESET_DOTS: { name: string; color: string }[] = [
   { name: "sigil", color: "#9b99e8" },
@@ -62,25 +56,20 @@ const PRESET_DOTS: { name: string; color: string }[] = [
   { name: "cipher", color: "#22c55e" },
 ];
 
-function HeroShader() {
-  try {
-    const { activePreset } = useSigilTokens();
-    return <ShaderBackground preset={activePreset.replace("*", "")} />;
-  } catch {
-    return <ShaderBackground preset="sigil" />;
-  }
-}
-
 function Hero() {
   let setPreset: ((name: string) => Promise<void>) | null = null;
   let sound: { play: (name: string) => void } = { play: () => {} };
   try {
     const ctx = useSigilTokens();
     setPreset = ctx.setPreset;
-  } catch { /* no provider */ }
+  } catch {
+    /* no provider */
+  }
   try {
     sound = useSigilSound();
-  } catch { /* no sound provider */ }
+  } catch {
+    /* no sound provider */
+  }
 
   const handlePresetDot = (name: string) => {
     setPreset?.(name);
@@ -90,84 +79,123 @@ function Hero() {
   return (
     <section
       style={{
-        background: "var(--s-background)",
-        padding: "80px 0 0 0",
+        minHeight: "100vh",
+        padding: "120px 0 80px",
+        borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
-      {/* Headline + CTAs */}
-      <ContentWrap style={{ padding: "0 24px" }}>
-        <div style={{ textAlign: "center", maxWidth: 720, margin: "0 auto" }}>
-          <h1
+      <ContentWrap>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "55% 45%",
+            gap: 48,
+            alignItems: "start",
+          }}
+        >
+          {/* Left — Copy */}
+          <div
             style={{
-              fontFamily: "var(--s-font-display)",
-              fontWeight: 700,
-              fontSize: "clamp(36px, 5vw, 64px)",
-              lineHeight: 1.08,
-              letterSpacing: "-0.03em",
-              color: "var(--s-text)",
-              margin: 0,
+              display: "flex",
+              flexDirection: "column",
+              gap: 24,
+              paddingTop: 24,
             }}
           >
-            The Foundation for your
-            <br />
-            Design System
-          </h1>
-          <p
-            style={{
-              fontSize: 17,
-              lineHeight: 1.6,
-              color: "var(--s-text-secondary)",
-              margin: "16px auto 0",
-              maxWidth: 560,
-            }}
-          >
-            100+ token-driven components that animate between 30 presets.
-            One markdown file controls every color, radius, border, and sound.
-          </p>
-          <Stack direction="row" gap={12} justify="center" className="mt-6">
-            <Button asChild>
-              <a href="/docs">New Project</a>
-            </Button>
-            <Button variant="secondary" asChild>
-              <a href="/docs/components/button">View Components</a>
-            </Button>
-          </Stack>
+            <span className="s-label">/ sigil ui</span>
 
-          {/* Preset dots */}
-          <div className="flex items-center justify-center gap-3 mt-6">
-            {PRESET_DOTS.map((p) => (
-              <button
-                key={p.name}
-                type="button"
-                title={p.name}
-                onClick={() => handlePresetDot(p.name)}
-                className="transition-all hover:scale-125"
-                style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: "50%",
-                  background: p.color,
-                  border: "2px solid var(--s-border)",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
-              />
-            ))}
+            <h1
+              style={{
+                fontFamily: "var(--s-font-display)",
+                fontWeight: 700,
+                fontSize: 64,
+                lineHeight: 1.05,
+                letterSpacing: "-0.03em",
+                color: "var(--s-text)",
+                margin: 0,
+              }}
+            >
+              The Foundation
+              <br />
+              for your
+              <br />
+              Design System
+            </h1>
+
+            <p
+              className="s-mono"
+              style={{
+                fontSize: 15,
+                lineHeight: 1.6,
+                color: "var(--s-text-muted)",
+                margin: 0,
+                maxWidth: 420,
+              }}
+            >
+              100+ components. 300+ tokens. 30 presets.
+              <br />
+              One markdown file controls every visual property.
+            </p>
+
+            <Stack direction="row" gap={12}>
+              <Button asChild style={{ borderRadius: 0 }}>
+                <a href="/docs">New Project</a>
+              </Button>
+              <Button variant="secondary" asChild style={{ borderRadius: 0 }}>
+                <a href="/docs/components/button">View Components</a>
+              </Button>
+            </Stack>
+
+            {/* Preset dots */}
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              {PRESET_DOTS.map((p) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  title={p.name}
+                  onClick={() => handlePresetDot(p.name)}
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: 0,
+                    background: p.color,
+                    border: "1px solid var(--s-border)",
+                    cursor: "pointer",
+                    padding: 0,
+                    transition: "transform 150ms",
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "scale(1.5)";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "scale(1)";
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right — Showcase */}
+          <div>
+            <span
+              className="s-fig"
+              style={{ display: "block", marginBottom: 12 }}
+            >
+              Fig. 01
+            </span>
+            <div className="s-transition-all">
+              <HeroShowcase />
+            </div>
           </div>
         </div>
       </ContentWrap>
-
-      {/* Full-width component showcase — like shadcn's hero grid */}
-      <div className="s-transition-all" style={{ marginTop: 48, padding: "0 24px 64px" }}>
-        <HeroShowcase className="mx-auto" style={{ maxWidth: 1400 }} />
-      </div>
     </section>
   );
 }
 
-/* ================================================================== */
-/* 2 — Token System                                                    */
-/* ================================================================== */
+/* ================================================================ */
+/* 2 — Token System                                                  */
+/* ================================================================ */
 
 const TOKEN_MD = `# sigil.tokens.md
 
@@ -186,245 +214,54 @@ const TOKEN_MD = `# sigil.tokens.md
 | body        | system-ui, sans-serif  |
 | mono        | Roboto Mono, monospace |`;
 
+
 function TokenSystem() {
   return (
-    <section
-      style={{
-        padding: "80px 24px",
-        background: "var(--s-surface-sunken)",
-      }}
-    >
+    <section style={{ padding: "80px 0", borderBottom: "1px solid var(--s-border-muted)" }}>
       <ContentWrap>
-        <div
-          className="grid gap-16"
-          style={{ gridTemplateColumns: "1fr 1fr", alignItems: "start" }}
-        >
-          {/* Left — code block */}
-          <pre
-            className="s-mono"
-            style={{
-              margin: 0,
-              padding: "24px 0 24px 24px",
-              fontSize: 12.5,
-              lineHeight: 1.7,
-              color: "var(--s-text-secondary)",
-              borderLeft: "3px solid var(--s-primary)",
-              whiteSpace: "pre",
-              overflow: "auto",
-            }}
-          >
-            <code>{TOKEN_MD}</code>
-          </pre>
+        <span className="s-label" style={{ display: "block", marginBottom: 12 }}>
+          / Token System
+        </span>
 
-          {/* Right — flow */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-              paddingTop: 16,
-            }}
-          >
-            <span
-              className="s-mono"
-              style={{
-                fontWeight: 700,
-                fontSize: 18,
-                color: "var(--s-text)",
-              }}
-            >
-              Edit one file
-            </span>
-            <span
-              style={{
-                fontSize: 28,
-                color: "var(--s-text-muted)",
-                lineHeight: 1,
-              }}
-            >
-              →
-            </span>
-            <span
-              style={{
-                fontSize: 16,
-                color: "var(--s-text-secondary)",
-                lineHeight: 1.5,
-              }}
-            >
-              300+ CSS variables compile
-            </span>
-            <span
-              style={{
-                fontSize: 28,
-                color: "var(--s-text-muted)",
-                lineHeight: 1,
-              }}
-            >
-              →
-            </span>
-            <span
-              style={{
-                fontSize: 16,
-                color: "var(--s-text-secondary)",
-                lineHeight: 1.5,
-              }}
-            >
-              100+ components update instantly
-            </span>
-          </div>
+        <h2 style={{
+          fontFamily: "var(--s-font-display)",
+          fontSize: "clamp(24px, 3vw, 36px)",
+          fontWeight: 700,
+          letterSpacing: "-0.02em",
+          color: "var(--s-text)",
+          margin: "0 0 12px 0",
+        }}>
+          One file compiles to everything.
+        </h2>
+        <p className="s-mono" style={{ fontSize: 14, color: "var(--s-text-muted)", marginBottom: 40, maxWidth: 560 }}>
+          Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly.
+        </p>
+
+        <ParallaxSection speed={0.03}>
+          <TokenFlowDiagram />
+        </ParallaxSection>
+
+        <div style={{ marginTop: 48 }}>
+          <span className="s-fig" style={{ display: "block", marginBottom: 16 }}>Fig. 02 — Preset comparison</span>
+          <PresetTransitionDemo />
         </div>
 
-        {/* Comparison pairs */}
-        <div
-          className="grid gap-6 mt-16"
-          style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
-        >
-          <TokenPair
-            label="Button"
-            left={
-              <button
-                type="button"
-                style={{
-                  background: "#6366f1",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 8,
-                  padding: "8px 18px",
-                  fontSize: 13,
-                  fontWeight: 500,
-                  cursor: "default",
-                }}
-              >
-                sigil
-              </button>
-            }
-            right={
-              <button
-                type="button"
-                style={{
-                  background: "#ea580c",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 4,
-                  padding: "8px 18px",
-                  fontSize: 13,
-                  fontWeight: 600,
-                  cursor: "default",
-                  fontFamily: "monospace",
-                }}
-              >
-                forge
-              </button>
-            }
-          />
+        <div style={{ marginTop: 48 }}>
+          <CodeExample
+            filename="app/layout.tsx"
+            language="tsx"
+            code={`import { SigilShell } from "@sigil-ui/components";
 
-          <TokenPair
-            label="Card"
-            left={
-              <div
-                style={{
-                  padding: 12,
-                  borderRadius: 10,
-                  border: "1px solid rgba(255,255,255,0.06)",
-                  background: "#141419",
-                  width: "100%",
-                }}
-              >
-                <div
-                  className="s-mono"
-                  style={{ fontSize: 11, color: "#fafafa" }}
-                >
-                  crux — minimal
-                </div>
-              </div>
-            }
-            right={
-              <div
-                style={{
-                  padding: 12,
-                  borderRadius: 2,
-                  border: "2px solid #71717a",
-                  background: "#292524",
-                  width: "100%",
-                }}
-              >
-                <div
-                  className="s-mono"
-                  style={{ fontSize: 11, color: "#fafaf9" }}
-                >
-                  alloy — industrial
-                </div>
-              </div>
-            }
-          />
-
-          <TokenPair
-            label="Badge"
-            left={
-              <span
-                style={{
-                  padding: "3px 10px",
-                  borderRadius: 4,
-                  background: "#052e16",
-                  color: "#22c55e",
-                  fontSize: 11,
-                  fontFamily: "monospace",
-                  fontWeight: 500,
-                }}
-              >
-                cipher
-              </span>
-            }
-            right={
-              <span
-                style={{
-                  padding: "3px 10px",
-                  borderRadius: 20,
-                  background: "#fef08a",
-                  color: "#ec4899",
-                  fontSize: 11,
-                  fontWeight: 700,
-                }}
-              >
-                vex
-              </span>
-            }
-          />
-
-          <TokenPair
-            label="Input"
-            left={
-              <div
-                className="s-mono"
-                style={{
-                  padding: "6px 10px",
-                  borderRadius: 4,
-                  border: "1px solid #262626",
-                  background: "#000",
-                  color: "#666",
-                  fontSize: 11,
-                  width: "100%",
-                }}
-              >
-                noir — dark
-              </div>
-            }
-            right={
-              <div
-                className="s-mono"
-                style={{
-                  padding: "6px 10px",
-                  borderRadius: 8,
-                  border: "1px solid #c4b5fd",
-                  background: "#f5f3ff",
-                  color: "#7c3aed",
-                  fontSize: 11,
-                  width: "100%",
-                }}
-              >
-                arc — light
-              </div>
-            }
+export default function Layout({ children }) {
+  return (
+    <html lang="en" data-theme="dark">
+      <body>
+        <SigilShell>{children}</SigilShell>
+      </body>
+    </html>
+  );
+}`}
+            highlightLines={[1, 6]}
           />
         </div>
       </ContentWrap>
@@ -432,124 +269,322 @@ function TokenSystem() {
   );
 }
 
-function TokenPair({
-  label,
-  left,
-  right,
-}: {
-  label: string;
-  left: ReactNode;
-  right: ReactNode;
-}) {
-  return (
-    <div className="flex flex-col gap-3">
-      <span
-        className="s-mono"
-        style={{
-          fontSize: 10,
-          color: "var(--s-text-muted)",
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-        }}
-      >
-        {label}
-      </span>
-      <div className="flex items-center gap-3">
-        <div className="flex-1 flex items-center justify-center">{left}</div>
-        <span
-          style={{ fontSize: 14, color: "var(--s-text-subtle)", flexShrink: 0 }}
-        >
-          vs
-        </span>
-        <div className="flex-1 flex items-center justify-center">{right}</div>
-      </div>
-    </div>
-  );
-}
 
-/* ================================================================== */
-/* 3 — Components                                                      */
-/* ================================================================== */
+/* ================================================================ */
+/* 3 — Components                                                    */
+/* ================================================================ */
 
-const MINI_COMPONENTS = [
-  "Button",
-  "Card",
-  "Badge",
-  "Input",
-  "Switch",
-  "Slider",
-  "Avatar",
-  "KPI",
-  "Accordion",
-  "Dialog",
-  "Tabs",
-  "Select",
-  "Tooltip",
-  "Popover",
-  "Alert",
-  "Toast",
-  "Progress",
-  "Toggle",
-  "Skeleton",
-  "Spinner",
-  "Breadcrumb",
-  "Sidebar",
-  "Table",
-  "Command",
+const COMPONENT_TABS = [
+  "Layout",
+  "UI",
+  "Navigation",
+  "Overlays",
+  "Shapes",
+  "3D",
+  "Diagrams",
+  "Marketing",
 ];
 
+const COMPONENT_CELLS = [
+  { name: "Button", vars: 5 },
+  { name: "Card", vars: 7 },
+  { name: "Input", vars: 6 },
+  { name: "Tabs", vars: 4 },
+  { name: "Dialog", vars: 5 },
+  { name: "Calendar", vars: 8 },
+  { name: "DataTable", vars: 9 },
+  { name: "Alert", vars: 3 },
+];
+
+function MiniComponentRender({ name }: { name: string }) {
+  const mono: React.CSSProperties = {
+    fontFamily: "var(--s-font-mono)",
+    fontSize: 10,
+    color: "var(--s-text-muted)",
+  };
+
+  switch (name) {
+    case "Button":
+      return (
+        <button
+          type="button"
+          style={{
+            background: "var(--s-primary)",
+            color: "#fff",
+            border: "none",
+            borderRadius: 0,
+            padding: "6px 16px",
+            fontSize: 12,
+            fontWeight: 500,
+            cursor: "default",
+          }}
+        >
+          Click me
+        </button>
+      );
+    case "Card":
+      return (
+        <div
+          style={{
+            padding: 12,
+            border: "1px solid var(--s-border)",
+            borderRadius: 0,
+            background: "var(--s-surface)",
+            width: "100%",
+          }}
+        >
+          <span style={mono}>Card content</span>
+        </div>
+      );
+    case "Input":
+      return (
+        <div
+          style={{
+            padding: "6px 10px",
+            border: "1px solid var(--s-border)",
+            borderRadius: 0,
+            background: "var(--s-background)",
+            width: "100%",
+            ...mono,
+          }}
+        >
+          Search...
+        </div>
+      );
+    case "Tabs":
+      return (
+        <div style={{ display: "flex", gap: 0, width: "100%" }}>
+          {["Tab 1", "Tab 2"].map((t, i) => (
+            <span
+              key={t}
+              style={{
+                ...mono,
+                padding: "4px 12px",
+                borderBottom:
+                  i === 0
+                    ? "2px solid var(--s-primary)"
+                    : "1px solid var(--s-border)",
+                color:
+                  i === 0 ? "var(--s-text)" : "var(--s-text-muted)",
+              }}
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      );
+    case "Dialog":
+      return (
+        <div
+          style={{
+            padding: 10,
+            border: "1px solid var(--s-border)",
+            borderRadius: 0,
+            background: "var(--s-surface-elevated)",
+            width: "100%",
+          }}
+        >
+          <span style={{ ...mono, display: "block", textAlign: "center" }}>
+            [ Dialog ]
+          </span>
+        </div>
+      );
+    case "Calendar":
+      return (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(7, 1fr)",
+            gap: 2,
+            width: "100%",
+          }}
+        >
+          {Array.from({ length: 14 }, (_, i) => (
+            <span
+              key={i}
+              style={{
+                ...mono,
+                fontSize: 8,
+                textAlign: "center",
+                padding: 2,
+                color:
+                  i === 5 ? "var(--s-primary)" : "var(--s-text-muted)",
+                background:
+                  i === 5 ? "var(--s-primary-muted)" : "transparent",
+              }}
+            >
+              {i + 1}
+            </span>
+          ))}
+        </div>
+      );
+    case "DataTable":
+      return (
+        <div style={{ width: "100%", overflow: "hidden" }}>
+          <div
+            style={{
+              display: "flex",
+              borderBottom: "1px solid var(--s-border)",
+              paddingBottom: 2,
+              marginBottom: 4,
+            }}
+          >
+            <span style={{ ...mono, fontSize: 8, flex: 1 }}>name</span>
+            <span style={{ ...mono, fontSize: 8, flex: 1 }}>status</span>
+          </div>
+          {["alpha", "beta"].map((r) => (
+            <div
+              key={r}
+              style={{
+                display: "flex",
+                borderBottom: "1px solid var(--s-border-muted)",
+                paddingBottom: 2,
+                marginBottom: 2,
+              }}
+            >
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 8,
+                  flex: 1,
+                  color: "var(--s-text-secondary)",
+                }}
+              >
+                {r}
+              </span>
+              <span
+                style={{
+                  ...mono,
+                  fontSize: 8,
+                  flex: 1,
+                  color: "var(--s-success)",
+                }}
+              >
+                ok
+              </span>
+            </div>
+          ))}
+        </div>
+      );
+    case "Alert":
+      return (
+        <div
+          style={{
+            padding: "6px 10px",
+            border: "1px solid var(--s-border)",
+            borderLeft: "3px solid var(--s-warning)",
+            borderRadius: 0,
+            background: "var(--s-surface)",
+            width: "100%",
+          }}
+        >
+          <span style={{ ...mono, fontSize: 9, color: "var(--s-text-secondary)" }}>
+            ⚠ Warning alert
+          </span>
+        </div>
+      );
+    default:
+      return null;
+  }
+}
+
 function Components() {
+  const [activeTab, setActiveTab] = useState("UI");
+
   return (
     <section
       id="components"
       style={{
-        padding: "80px 24px",
-        background: "var(--s-background)",
+        padding: "80px 0",
+        borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap>
-        <h2
+        <div
           style={{
-            fontFamily: "var(--s-font-display)",
-            fontWeight: 700,
-            fontSize: "clamp(32px, 4vw, 52px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            color: "var(--s-text)",
-            margin: "0 0 40px 0",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: 32,
           }}
         >
-          103 components.
-        </h2>
+          <span className="s-label">/ Components</span>
+          <span className="s-fig">Fig. 02</span>
+        </div>
 
+        {/* Tab bar */}
         <div
-          className="grid gap-3"
-          style={{ gridTemplateColumns: "repeat(6, 1fr)" }}
+          style={{
+            display: "flex",
+            gap: 0,
+            borderBottom: "1px solid var(--s-border)",
+            marginBottom: 32,
+          }}
         >
-          {MINI_COMPONENTS.map((name) => (
-            <div
-              key={name}
-              className="group flex flex-col items-center justify-center transition-all"
+          {COMPONENT_TABS.map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className="s-mono"
               style={{
-                width: "100%",
-                height: 80,
-                borderRadius: "var(--s-radius-md)",
-                border: "1px solid var(--s-border-muted)",
-                background: "var(--s-surface)",
-                cursor: "default",
+                background: "none",
+                border: "none",
+                borderBottom:
+                  activeTab === tab
+                    ? "2px solid var(--s-primary)"
+                    : "2px solid transparent",
+                padding: "8px 16px",
+                fontSize: 12,
+                fontFamily: "var(--s-font-mono)",
+                color:
+                  activeTab === tab
+                    ? "var(--s-text)"
+                    : "var(--s-text-muted)",
+                cursor: "pointer",
+                letterSpacing: "0.02em",
+                transition: "color 150ms, border-color 150ms",
               }}
             >
-              <MiniComponentDot name={name} />
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        {/* 4×2 component grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 0,
+          }}
+        >
+          {COMPONENT_CELLS.map((cell) => (
+            <div
+              key={cell.name}
+              style={{
+                border: "1px solid var(--s-border)",
+                borderRadius: 0,
+                padding: 20,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: 120,
+                gap: 12,
+                marginRight: -1,
+                marginBottom: -1,
+              }}
+            >
+              <MiniComponentRender name={cell.name} />
               <span
                 className="s-mono"
                 style={{
-                  fontSize: 10,
+                  fontSize: 11,
                   color: "var(--s-text-muted)",
-                  marginTop: 6,
-                  transition: "color 150ms",
                 }}
               >
-                {name}
+                {cell.name} — {cell.vars} vars
               </span>
             </div>
           ))}
@@ -557,200 +592,166 @@ function Components() {
 
         <a
           href="/docs/components/button"
-          className="s-mono no-underline mt-8 inline-block transition-colors"
+          className="s-mono"
           style={{
+            display: "inline-block",
+            marginTop: 24,
             fontSize: 13,
             color: "var(--s-text-muted)",
+            textDecoration: "none",
+            transition: "color 150ms",
           }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.color = "var(--s-primary)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.color = "var(--s-text-muted)")
-          }
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = "var(--s-primary)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "var(--s-text-muted)";
+          }}
         >
-          79 more →
+          79 more in /docs →
         </a>
       </ContentWrap>
     </section>
   );
 }
 
-function MiniComponentDot({ name }: { name: string }) {
-  const char = name[0];
-  return (
-    <div
-      className="flex items-center justify-center"
-      style={{
-        width: 28,
-        height: 28,
-        borderRadius: "var(--s-radius-sm)",
-        background:
-          "color-mix(in oklch, var(--s-primary) 12%, var(--s-surface))",
-        color: "var(--s-primary)",
-        fontSize: 12,
-        fontWeight: 600,
-        fontFamily: "var(--s-font-mono)",
-      }}
-    >
-      {char}
-    </div>
-  );
-}
-
-/* ================================================================== */
-/* 4 — Presets                                                         */
-/* ================================================================== */
+/* ================================================================ */
+/* 4 — Presets                                                       */
+/* ================================================================ */
 
 function Presets() {
   return (
     <section
       id="presets"
       style={{
-        padding: "80px 24px",
-        background: "var(--s-surface-sunken)",
+        padding: "80px 0",
+        borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap>
-        <h2
+        <div
           style={{
-            fontFamily: "var(--s-font-display)",
-            fontWeight: 700,
-            fontSize: "clamp(32px, 4vw, 52px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            color: "var(--s-text)",
-            margin: "0 0 8px 0",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: 32,
           }}
         >
-          30 presets. Not just colors.
-        </h2>
-        <p
-          style={{
-            fontSize: 16,
-            color: "var(--s-text-secondary)",
-            margin: "0 0 40px 0",
-            lineHeight: 1.6,
-            maxWidth: 600,
-          }}
-        >
-          Every preset changes layout, spacing, borders, radii, dividers, and
-          grids — not just the palette.
-        </p>
+          <span className="s-label">/ Presets</span>
+          <span className="s-fig">Fig. 03</span>
+        </div>
 
-        <PresetShowcase />
+        <PresetTable />
 
-        <a
-          href="/docs/presets"
-          className="s-mono no-underline mt-8 inline-block transition-colors"
-          style={{
-            fontSize: 13,
-            color: "var(--s-text-muted)",
-          }}
-          onMouseEnter={(e) =>
-            (e.currentTarget.style.color = "var(--s-primary)")
-          }
-          onMouseLeave={(e) =>
-            (e.currentTarget.style.color = "var(--s-text-muted)")
-          }
-        >
-          See all 30 →
-        </a>
+        <div style={{ marginTop: 48 }}>
+          <PresetShowcase />
+        </div>
       </ContentWrap>
     </section>
   );
 }
 
-/* ================================================================== */
-/* 5 — Demo Sites                                                      */
-/* ================================================================== */
+/* ================================================================ */
+/* 5 — Demo Sites                                                    */
+/* ================================================================ */
 
-const EXTRA_DEMOS = [
-  { name: "Portfolio", href: "/demos/portfolio" },
-  { name: "Blog", href: "/demos/blog" },
-  { name: "Agency", href: "/demos/agency" },
-  { name: "CLI Tool", href: "/demos/cli-tool" },
-  { name: "Playground", href: "/demos/playground" },
+const DEMOS = [
+  { num: "01", name: "AI SaaS Landing", url: "ai-saas.sigil-ui.dev", href: "/demos/ai-saas" },
+  { num: "02", name: "Dashboard", url: "dashboard.sigil-ui.dev", href: "/demos/dashboard" },
+  { num: "03", name: "E-commerce", url: "shop.sigil-ui.dev", href: "/demos/ecommerce" },
+  { num: "04", name: "Developer Docs", url: "docs.sigil-ui.dev", href: "/demos/dev-docs" },
+  { num: "05", name: "Startup", url: "startup.sigil-ui.dev", href: "/demos/startup" },
+  { num: "06", name: "Portfolio", url: "portfolio.sigil-ui.dev", href: "/demos/portfolio" },
+  { num: "07", name: "Blog", url: "blog.sigil-ui.dev", href: "/demos/blog" },
+  { num: "08", name: "Agency", url: "agency.sigil-ui.dev", href: "/demos/agency" },
+  { num: "09", name: "CLI Tool", url: "cli.sigil-ui.dev", href: "/demos/cli-tool" },
+  { num: "10", name: "Playground", url: "play.sigil-ui.dev", href: "/demos/playground" },
 ];
 
 function DemoSites() {
   return (
     <section
       style={{
-        padding: "80px 24px",
-        background: "var(--s-background)",
+        padding: "80px 0",
+        borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap>
-        <h2
+        <div
           style={{
-            fontFamily: "var(--s-font-display)",
-            fontWeight: 700,
-            fontSize: "clamp(32px, 4vw, 52px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.02em",
-            color: "var(--s-text)",
-            margin: "0 0 40px 0",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "baseline",
+            marginBottom: 32,
           }}
         >
-          10 demo sites.
-        </h2>
-
-        {/* Primary demo — full width */}
-        <DemoBrowser
-          title="AI SaaS Landing"
-          url="ai-saas.sigil-ui.dev"
-          href="/demos/ai-saas"
-          variant="large"
-        />
-
-        {/* 2x2 grid */}
-        <div
-          className="grid gap-4 mt-4"
-          style={{ gridTemplateColumns: "1fr 1fr" }}
-        >
-          <DemoBrowser
-            title="Dashboard"
-            url="dashboard.sigil-ui.dev"
-            href="/demos/dashboard"
-            variant="small"
-          />
-          <DemoBrowser
-            title="E-commerce"
-            url="shop.sigil-ui.dev"
-            href="/demos/ecommerce"
-            variant="small"
-          />
-          <DemoBrowser
-            title="Dev Docs"
-            url="docs.sigil-ui.dev"
-            href="/demos/dev-docs"
-            variant="small"
-          />
-          <DemoBrowser
-            title="Startup"
-            url="startup.sigil-ui.dev"
-            href="/demos/startup"
-            variant="small"
-          />
+          <span className="s-label">/ Demos</span>
+          <span className="s-fig">Fig. 04</span>
         </div>
 
-        {/* Text links row */}
-        <div className="flex items-center gap-6 mt-6 flex-wrap">
-          {EXTRA_DEMOS.map((d) => (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {DEMOS.map((demo) => (
             <a
-              key={d.name}
-              href={d.href}
-              className="s-mono no-underline transition-colors"
-              style={{ fontSize: 13, color: "var(--s-text-muted)" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--s-text)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--s-text-muted)")
-              }
+              key={demo.num}
+              href={demo.href}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "48px 1fr 1fr 32px",
+                alignItems: "center",
+                gap: 16,
+                padding: "14px 0",
+                borderBottom: "1px solid var(--s-border-muted)",
+                textDecoration: "none",
+                color: "inherit",
+                transition: "background 150ms",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background =
+                  "var(--s-surface)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+              }}
             >
-              {d.name} →
+              <span
+                className="s-mono"
+                style={{
+                  fontSize: 18,
+                  fontWeight: 500,
+                  color: "var(--s-text-muted)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {demo.num}
+              </span>
+              <span
+                style={{
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color: "var(--s-text)",
+                  fontFamily: "var(--s-font-body)",
+                }}
+              >
+                {demo.name}
+              </span>
+              <span
+                className="s-mono"
+                style={{
+                  fontSize: 12,
+                  color: "var(--s-text-subtle)",
+                }}
+              >
+                {demo.url}
+              </span>
+              <span
+                style={{
+                  fontSize: 16,
+                  color: "var(--s-text-muted)",
+                  textAlign: "right",
+                }}
+              >
+                →
+              </span>
             </a>
           ))}
         </div>
@@ -759,97 +760,9 @@ function DemoSites() {
   );
 }
 
-/* ================================================================== */
-/* 6 — Sandbox CTA                                                     */
-/* ================================================================== */
-
-function SandboxCTA() {
-  return (
-    <section
-      style={{
-        padding: "80px 24px",
-        background: "var(--s-surface-sunken)",
-      }}
-    >
-      <ContentWrap>
-        <div
-          className="grid gap-16"
-          style={{ gridTemplateColumns: "1fr 1fr", alignItems: "center" }}
-        >
-          {/* Left */}
-          <div>
-            <h3
-              style={{
-                fontFamily: "var(--s-font-display)",
-                fontWeight: 700,
-                fontSize: "clamp(24px, 3vw, 36px)",
-                lineHeight: 1.15,
-                letterSpacing: "-0.02em",
-                color: "var(--s-text)",
-                margin: "0 0 12px 0",
-              }}
-            >
-              Describe what you want.
-            </h3>
-            <p
-              style={{
-                fontSize: 15,
-                lineHeight: 1.6,
-                color: "var(--s-text-secondary)",
-                margin: "0 0 24px 0",
-                maxWidth: 400,
-              }}
-            >
-              Your agent builds it with your active preset.
-            </p>
-            <Button asChild>
-              <a href="/sandbox">Open Sandbox</a>
-            </Button>
-          </div>
-
-          {/* Right — mock chat */}
-          <pre
-            className="s-mono"
-            style={{
-              margin: 0,
-              padding: "20px 24px",
-              fontSize: 13,
-              lineHeight: 2,
-              color: "var(--s-text-secondary)",
-              background:
-                "color-mix(in oklch, var(--s-surface) 60%, transparent)",
-              borderRadius: "var(--s-radius-md)",
-              whiteSpace: "pre",
-              overflow: "hidden",
-            }}
-          >
-            <code>
-              <span style={{ color: "var(--s-text-muted)" }}>you</span>
-              {"    → "}
-              <span style={{ color: "var(--s-text)" }}>
-                &quot;dark mode pricing page&quot;
-              </span>
-              {"\n"}
-              <span style={{ color: "var(--s-primary)" }}>sigil</span>
-              {"  → "}
-              <span>Generated Pricing with noir preset</span>
-              {"\n"}
-              <span style={{ color: "var(--s-text-muted)" }}>you</span>
-              {"    → "}
-              <span style={{ color: "var(--s-text)" }}>
-                &quot;make the cards float&quot;
-              </span>
-            </code>
-          </pre>
-        </div>
-      </ContentWrap>
-    </section>
-  );
-}
-
-/* ================================================================== */
-/* 7 — CLI                                                             */
-/* ================================================================== */
+/* ================================================================ */
+/* 6 — CLI                                                           */
+/* ================================================================ */
 
 const CLI_LINES = [
   { text: "npx sigil init", prefix: "$", color: "var(--s-text)", delay: 800 },
@@ -897,11 +810,18 @@ function CLISection() {
   return (
     <section
       style={{
-        padding: "80px 24px",
-        background: "var(--s-background)",
+        padding: "80px 0",
+        borderBottom: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap style={{ maxWidth: 720 }}>
+        <span
+          className="s-label"
+          style={{ display: "block", marginBottom: 24 }}
+        >
+          / CLI
+        </span>
+
         <h3
           className="s-mono"
           style={{
@@ -922,9 +842,9 @@ function CLISection() {
   );
 }
 
-/* ================================================================== */
-/* 8 — Footer                                                          */
-/* ================================================================== */
+/* ================================================================ */
+/* 7 — Footer                                                        */
+/* ================================================================ */
 
 const FOOTER_COLS = [
   {
@@ -958,6 +878,7 @@ const FOOTER_COLS = [
   {
     group: "Company",
     links: [
+      { label: "Manifesto", href: "/manifesto" },
       { label: "About", href: "/about" },
       { label: "Blog", href: "/blog" },
       { label: "Contact", href: "mailto:hello@sigil-ui.dev" },
@@ -969,21 +890,24 @@ function Footer() {
   return (
     <footer
       style={{
-        padding: "64px 24px 32px",
-        background: "var(--s-surface)",
+        padding: "64px 0 32px",
+        borderTop: "1px solid var(--s-border-muted)",
       }}
     >
       <ContentWrap>
         <div
-          className="grid gap-8"
-          style={{ gridTemplateColumns: "repeat(4, 1fr)" }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: 32,
+          }}
         >
           {FOOTER_COLS.map((col) => (
             <div key={col.group}>
               <span
                 className="s-mono"
                 style={{
-                  fontSize: 11,
+                  fontSize: 10,
                   color: "var(--s-text-subtle)",
                   textTransform: "uppercase",
                   letterSpacing: "0.08em",
@@ -999,18 +923,19 @@ function Footer() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="s-mono no-underline transition-colors"
+                    className="s-mono"
                     style={{
                       fontSize: 12,
                       color: "var(--s-text-muted)",
-                      transitionDuration: "var(--s-duration-fast)",
+                      textDecoration: "none",
+                      transition: "color var(--s-duration-fast)",
                     }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = "var(--s-text)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = "var(--s-text-muted)")
-                    }
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "var(--s-text)";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "var(--s-text-muted)";
+                    }}
                   >
                     {link.label}
                   </a>
@@ -1021,8 +946,11 @@ function Footer() {
         </div>
 
         <div
-          className="flex flex-wrap items-center justify-between gap-4 mt-12"
           style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: 48,
             paddingTop: 24,
             borderTop: "1px solid var(--s-border-muted)",
           }}
@@ -1031,7 +959,7 @@ function Footer() {
             className="s-mono"
             style={{ fontSize: 12, color: "var(--s-text-muted)" }}
           >
-            MIT License
+            © 2026 Sigil UI. MIT License.
           </span>
           <span
             className="s-mono"
@@ -1040,14 +968,17 @@ function Footer() {
             Built by{" "}
             <a
               href="https://kevinliu.me"
-              className="no-underline transition-colors"
-              style={{ color: "var(--s-text-muted)" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.color = "var(--s-text)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.color = "var(--s-text-muted)")
-              }
+              style={{
+                color: "var(--s-text-muted)",
+                textDecoration: "none",
+                transition: "color var(--s-duration-fast)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--s-text)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--s-text-muted)";
+              }}
             >
               Kevin Liu
             </a>
@@ -1058,9 +989,9 @@ function Footer() {
   );
 }
 
-/* ================================================================== */
-/* Page                                                                */
-/* ================================================================== */
+/* ================================================================ */
+/* Page                                                              */
+/* ================================================================ */
 
 export default function LandingPage() {
   return (
@@ -1072,7 +1003,6 @@ export default function LandingPage() {
         <Components />
         <Presets />
         <DemoSites />
-        <SandboxCTA />
         <CLISection />
       </main>
       <Footer />

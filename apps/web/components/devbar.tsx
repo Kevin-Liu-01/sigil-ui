@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect, useRef, type ReactNode } from "react";
 import { Stack, Divider, Badge, Button, Frame } from "@sigil-ui/components";
+import { Palette, Paintbrush, Type, LayoutGrid, Blocks, Volume2, VolumeX, Settings, Shuffle } from "lucide-react";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
 import { ControlPanel } from "./control-panel";
@@ -172,12 +173,12 @@ export function SigilDevBar() {
     setPreset(randomPreset.name);
   }, [setPreset]);
 
-  const tabs: { id: Tab; label: string }[] = [
-    { id: "presets", label: "Presets" },
-    { id: "tokens", label: "Tokens" },
-    { id: "fonts", label: "Fonts" },
-    { id: "layout", label: "Layout" },
-    { id: "components", label: "Components" },
+  const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
+    { id: "presets", label: "Presets", icon: <Palette size={12} /> },
+    { id: "tokens", label: "Tokens", icon: <Paintbrush size={12} /> },
+    { id: "fonts", label: "Fonts", icon: <Type size={12} /> },
+    { id: "layout", label: "Layout", icon: <LayoutGrid size={12} /> },
+    { id: "components", label: "Components", icon: <Blocks size={12} /> },
   ];
 
   return (
@@ -236,7 +237,7 @@ export function SigilDevBar() {
               fontSize: 10, color: soundEnabled ? "var(--s-primary)" : "var(--s-text-muted)",
             }}
           >
-            {soundEnabled ? "🔊" : "🔇"} Sound
+            <span style={{ display: "flex", alignItems: "center", gap: 4 }}>{soundEnabled ? <Volume2 size={12} /> : <VolumeX size={12} />} Sound</span>
           </button>
           <button
             type="button"
@@ -248,7 +249,7 @@ export function SigilDevBar() {
               fontSize: 10, color: "var(--s-text-muted)",
             }}
           >
-            ⚙️ Customize
+            <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Settings size={12} /> Customize</span>
           </button>
           <button
             type="button"
@@ -260,7 +261,7 @@ export function SigilDevBar() {
               fontSize: 10, color: "var(--s-text-muted)",
             }}
           >
-            🎲 Random
+            <span style={{ display: "flex", alignItems: "center", gap: 4 }}><Shuffle size={12} /> Random</span>
           </button>
           <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>
             {open ? "▼" : "▲"}
@@ -305,7 +306,10 @@ export function SigilDevBar() {
                 transition: "all 150ms",
               }}
             >
-              {t.label}
+              <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                {t.icon}
+                {t.label}
+              </span>
             </button>
           ))}
         </div>

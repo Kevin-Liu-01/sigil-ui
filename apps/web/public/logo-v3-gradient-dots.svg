@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Plus divider (thin, precise) -->
+  <line x1="60" y1="0" x2="60" y2="120" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="0" y1="60" x2="120" y2="60" stroke="currentColor" stroke-width="1.5"/>
+
+  <!-- Top-left: 4 circles descending in size (large to small, gradient indigo) -->
+  <circle cx="20" cy="20" r="14" fill="#9b99e8"/>
+  <circle cx="44" cy="20" r="11" fill="#7c7ce0"/>
+  <circle cx="20" cy="44" r="8" fill="#6366f1"/>
+  <circle cx="44" cy="44" r="6" fill="#4f46e5"/>
+
+  <!-- Top-right: 2 circles (warm) -->
+  <circle cx="80" cy="28" r="12" fill="#ea580c"/>
+  <circle cx="100" cy="42" r="8" fill="#f97316"/>
+
+  <!-- Bottom-left: 1 circle (green) -->
+  <circle cx="30" cy="88" r="16" fill="#22c55e"/>
+
+  <!-- Bottom-right: 3 circles ascending in size -->
+  <circle cx="76" cy="76" r="6" fill="#ec4899"/>
+  <circle cx="96" cy="80" r="10" fill="#d946ef"/>
+  <circle cx="90" cy="102" r="14" fill="#a855f7"/>
+</svg>

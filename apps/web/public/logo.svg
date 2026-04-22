@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Plus divider -->
+  <line x1="60" y1="4" x2="60" y2="116" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="4" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="2.5"/>
+
+  <!-- Top-left: 4 small circles (2x2) -->
+  <circle cx="24" cy="24" r="10" fill="#9b99e8"/>
+  <circle cx="46" cy="24" r="10" fill="#7c7ce0"/>
+  <circle cx="24" cy="46" r="10" fill="#6366f1"/>
+  <circle cx="46" cy="46" r="10" fill="#4f46e5"/>
+
+  <!-- Top-right: 1 large circle + 1 small arc -->
+  <circle cx="88" cy="32" r="18" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+  <circle cx="76" cy="48" r="5" fill="#f97316"/>
+
+  <!-- Bottom-left: 2 medium circles + 1 small -->
+  <circle cx="24" cy="82" r="12" fill="#22c55e"/>
+  <circle cx="46" cy="90" r="9" fill="#16a34a"/>
+  <circle cx="30" cy="104" r="5" fill="#15803d"/>
+
+  <!-- Bottom-right: 1 giant circle -->
+  <circle cx="90" cy="90" r="24" fill="#d946ef"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Plus divider (thick, bold) -->
+  <line x1="60" y1="2" x2="60" y2="118" stroke="currentColor" stroke-width="3"/>
+  <line x1="2" y1="60" x2="118" y2="60" stroke="currentColor" stroke-width="3"/>
+
+  <!-- Top-left: 4 filled circles, tight grid -->
+  <circle cx="22" cy="22" r="12" fill="#9b99e8"/>
+  <circle cx="44" cy="22" r="12" fill="#6366f1"/>
+  <circle cx="22" cy="44" r="12" fill="#a78bfa"/>
+  <circle cx="44" cy="44" r="12" fill="#4f46e5"/>
+
+  <!-- Top-right: 2 OUTLINE circles -->
+  <circle cx="82" cy="26" r="14" fill="none" stroke="#ea580c" stroke-width="2.5"/>
+  <circle cx="100" cy="44" r="9" fill="none" stroke="#f97316" stroke-width="2.5"/>
+
+  <!-- Bottom-left: 1 HALF-FILLED circle -->
+  <circle cx="32" cy="88" r="16" fill="#22c55e"/>
+  <path d="M 32 72 A 16 16 0 0 1 32 104" fill="#16a34a"/>
+
+  <!-- Bottom-right: 3 nested outline circles -->
+  <circle cx="90" cy="90" r="22" fill="none" stroke="#d946ef" stroke-width="2"/>
+  <circle cx="90" cy="90" r="14" fill="none" stroke="#ec4899" stroke-width="2"/>
+  <circle cx="90" cy="90" r="6" fill="#f472b6"/>
+</svg>

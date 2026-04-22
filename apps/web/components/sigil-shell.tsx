@@ -1,13 +1,32 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { SigilTokensProvider, useSigilTokens } from "./sandbox/token-provider";
 import { SigilDevBar } from "./devbar";
 import { SigilSoundProvider } from "./sound-provider";
 import type { SigilTokens } from "@sigil-ui/tokens";
 
+function useIsDark() {
+  const [isDark, setIsDark] = useState(true);
+  useEffect(() => {
+    const root = document.documentElement;
+    const check = () => {
+      setIsDark(
+        root.classList.contains("dark") ||
+        root.getAttribute("data-theme") === "dark"
+      );
+    };
+    check();
+    const observer = new MutationObserver(check);
+    observer.observe(root, { attributes: true, attributeFilter: ["class", "data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+  return isDark;
+}
+
 function TokenStyleInjector() {
   const { tokens } = useSigilTokens();
+  const isDark = useIsDark();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -15,7 +34,7 @@ function TokenStyleInjector() {
     function applyThemed(key: string, value: unknown) {
       if (value && typeof value === "object" && "light" in (value as Record<string, unknown>) && "dark" in (value as Record<string, unknown>)) {
         const themed = value as { light: string; dark: string };
-        root.style.setProperty(`--s-${key}`, themed.dark);
+        root.style.setProperty(`--s-${key}`, isDark ? themed.dark : themed.light);
       } else if (typeof value === "string") {
         root.style.setProperty(`--s-${key}`, value);
       }
@@ -166,7 +185,7 @@ function TokenStyleInjector() {
         }
       }
     }
-  }, [tokens]);
+  }, [tokens, isDark]);
 
   return null;
 }

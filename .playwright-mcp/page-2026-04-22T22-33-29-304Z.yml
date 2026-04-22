@@ -1,0 +1,100 @@
+- generic:
+  - generic [active]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - navigation [ref=e6]:
+            - button "previous" [disabled] [ref=e7]:
+              - img "previous" [ref=e8]
+            - generic [ref=e10]:
+              - generic [ref=e11]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e12]:
+              - img "next" [ref=e13]
+          - img
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - generic "Latest available version is detected (16.2.4)." [ref=e19]: Next.js 16.2.4
+            - generic [ref=e20]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e22]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e29]: Build Error
+              - generic [ref=e30]:
+                - button "Copy Error Info" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+                - button "No related documentation found" [disabled] [ref=e34]:
+                  - img [ref=e35]
+                - button "Attach Node.js inspector" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e47]: Export Github doesn't exist in target module
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - img [ref=e53]
+              - generic [ref=e56]: ./apps/web/components/landing/navbar.tsx (5:1)
+              - button "Open in editor" [ref=e57] [cursor=pointer]:
+                - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: Export Github doesn't exist in target module
+              - generic [ref=e64]: 3 |
+              - text: import
+              - generic [ref=e65]: "{ useEffect, useState }"
+              - text: from "react"
+              - generic [ref=e66]: ;
+              - generic [ref=e67]: 4 |
+              - text: import
+              - generic [ref=e68]: "{"
+              - text: Stack
+              - generic [ref=e69]: ","
+              - text: Margin
+              - generic [ref=e70]: ","
+              - text: Button
+              - generic [ref=e71]: ","
+              - text: Cross
+              - generic [ref=e72]: "}"
+              - text: from "@sigil-ui/components"
+              - generic [ref=e73]: ;
+              - text: ">"
+              - generic [ref=e74]: 5 |
+              - text: import
+              - generic [ref=e75]: "{"
+              - text: BookOpen
+              - generic [ref=e76]: ","
+              - text: LayoutGrid
+              - generic [ref=e77]: ","
+              - text: Palette
+              - generic [ref=e78]: ","
+              - text: Github
+              - generic [ref=e79]: "}"
+              - text: from "lucide-react"
+              - generic [ref=e80]: ;
+              - generic [ref=e81]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              - generic [ref=e82]: 6 |
+              - generic [ref=e83]: 7 |
+              - text: const NAV_LINKS
+              - generic [ref=e84]: = [
+              - generic [ref=e85]: 8 |
+              - generic [ref=e86]: "{ label:"
+              - text: "\"Docs\""
+              - generic [ref=e87]: ", href:"
+              - text: "\"#\""
+              - generic [ref=e88]: ", icon: <"
+              - text: BookOpen
+              - generic [ref=e89]: "size={"
+              - text: "14"
+              - generic [ref=e90]: "} /> }, The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript). Did you mean to import Gift? All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. Import traces: Client Component Browser: ./apps/web/components/landing/navbar.tsx [Client Component Browser] ./apps/web/app/page.tsx [Client Component Browser] ./apps/web/app/page.tsx [Server Component] Client Component SSR: ./apps/web/components/landing/navbar.tsx [Client Component SSR] ./apps/web/app/page.tsx [Client Component SSR] ./apps/web/app/page.tsx [Server Component]"
+        - generic [ref=e91]: "1"
+        - generic [ref=e92]: "2"
+    - generic [ref=e97] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e98]:
+        - img [ref=e99]
+      - button "Open issues overlay" [ref=e103]:
+        - generic [ref=e104]:
+          - generic [ref=e105]: "0"
+          - generic [ref=e106]: "1"
+        - generic [ref=e107]: Issue
+  - alert [ref=e108]

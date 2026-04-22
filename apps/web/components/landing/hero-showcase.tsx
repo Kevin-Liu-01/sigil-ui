@@ -37,13 +37,42 @@ import {
   Textarea,
   NumberField,
 } from "@sigil-ui/components";
+import {
+  CreditCard,
+  Lock,
+  Send,
+  Search,
+  Globe,
+  Users,
+  UserPlus,
+  MessageSquare,
+  Bookmark,
+  Shield,
+  CheckCircle,
+  Cpu,
+  Paintbrush,
+  Plus,
+  Sparkles,
+  Archive,
+  Flag,
+  Bell,
+  MoreHorizontal,
+  ChevronLeft,
+  ChevronRight,
+  Bot,
+  Loader2,
+  MousePointer,
+  LayoutGrid,
+  Columns,
+  AlertTriangle,
+} from "lucide-react";
 
 const TRANSITION_EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
 
 const compositionStyle: React.CSSProperties = {
   background: "var(--s-surface)",
   border: "1px solid var(--s-border)",
-  borderRadius: "var(--s-card-radius, 12px)",
+  borderRadius: 0,
   padding: 24,
   maxWidth: 280,
   width: "100%",
@@ -56,13 +85,17 @@ function PaymentForm() {
   return (
     <div style={compositionStyle} className="flex flex-col gap-4">
       <div className="flex flex-col gap-1">
-        <h3
-          className="text-base font-semibold"
-          style={{ color: "var(--s-text)" }}
-        >
-          Payment Method
-        </h3>
-        <p className="text-xs" style={{ color: "var(--s-text-muted)" }}>
+        <div className="flex items-center gap-1.5">
+          <CreditCard size={16} style={{ color: "var(--s-text-muted)" }} />
+          <h3
+            className="text-base font-semibold"
+            style={{ color: "var(--s-text)" }}
+          >
+            Payment Method
+          </h3>
+        </div>
+        <p className="flex items-center gap-1 text-xs" style={{ color: "var(--s-text-muted)" }}>
+          <Lock size={12} style={{ color: "var(--s-text-subtle)" }} />
           All transactions are encrypted and secure.
         </p>
       </div>
@@ -130,6 +163,7 @@ function PaymentForm() {
 
       <div className="flex gap-2 pt-1">
         <Button size="sm" className="flex-1 text-xs">
+          <Send size={14} style={{ color: "var(--s-primary)" }} />
           Submit
         </Button>
         <Button size="sm" variant="outline" className="text-xs">
@@ -148,7 +182,12 @@ function TeamNotifications() {
     <div style={compositionStyle} className="flex flex-col gap-4">
       <Card className="w-full">
         <CardHeader className="p-3 pb-2">
-          <CardTitle className="text-sm">Team Members</CardTitle>
+          <CardTitle className="text-sm">
+            <span className="flex items-center gap-1.5">
+              <Users size={16} style={{ color: "var(--s-text-muted)" }} />
+              Team Members
+            </span>
+          </CardTitle>
           <CardDescription className="text-xs">
             No pending invitations
           </CardDescription>
@@ -160,6 +199,7 @@ function TeamNotifications() {
             <Avatar fallback="AR" size="sm" />
           </div>
           <Button size="sm" variant="outline" className="w-full text-xs">
+            <UserPlus size={14} style={{ color: "var(--s-primary)" }} />
             Invite Members
           </Button>
         </CardContent>
@@ -174,6 +214,7 @@ function TeamNotifications() {
       <Input
         placeholder="Send a message..."
         className="h-8 text-xs"
+        iconLeft={<MessageSquare size={14} style={{ color: "var(--s-text-muted)" }} />}
       />
 
       <div className="flex flex-col gap-1.5">
@@ -186,12 +227,7 @@ function TeamNotifications() {
           <Input
             placeholder="Search components..."
             className="h-8 text-xs flex-1"
-            iconLeft={
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-              </svg>
-            }
+            iconLeft={<Search size={12} style={{ color: "var(--s-text-muted)" }} />}
           />
         </div>
         <span className="text-[10px]" style={{ color: "var(--s-text-muted)" }}>
@@ -216,34 +252,34 @@ function SettingsPanel() {
   return (
     <div style={compositionStyle} className="flex flex-col gap-4">
       <div
-        className="flex items-center gap-2 rounded-[var(--s-radius-md,6px)] px-3 py-1.5 text-xs"
+        className="flex items-center gap-2 px-3 py-1.5 text-xs"
         style={{
           background: "var(--s-background)",
           border: "1px solid var(--s-border)",
+          borderRadius: 0,
           color: "var(--s-text-muted)",
         }}
       >
+        <Globe size={14} style={{ color: "var(--s-text-muted)" }} />
         <span style={{ color: "var(--s-text-muted)" }}>https://</span>
         <span className="flex-1 truncate" style={{ color: "var(--s-text)" }}>
           app.sigil-ui.dev/settings
         </span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--s-text-muted)" }}>
-          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-        </svg>
+        <Bookmark size={14} style={{ color: "var(--s-text-muted)" }} />
       </div>
 
       <div className="flex items-center justify-between">
-        <Label className="text-xs">Two-Factor Auth</Label>
+        <Label className="text-xs flex items-center gap-1.5">
+          <Shield size={14} style={{ color: "var(--s-text-muted)" }} />
+          Two-Factor Auth
+        </Label>
         <Button size="sm" variant="outline" className="text-xs h-7 px-2">
           Enable
         </Button>
       </div>
 
       <div className="flex items-center gap-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--s-success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-          <path d="m9 11 3 3L22 4" />
-        </svg>
+        <CheckCircle size={14} style={{ color: "var(--s-success)" }} />
         <span className="text-xs" style={{ color: "var(--s-text)" }}>
           Profile verified
         </span>
@@ -264,7 +300,10 @@ function SettingsPanel() {
           <div className="flex items-start gap-2">
             <RadioGroupItem value="k8s" className="mt-0.5" />
             <div className="flex flex-col">
-              <Label className="text-xs cursor-pointer">Kubernetes</Label>
+              <Label className="text-xs cursor-pointer flex items-center gap-1">
+                <Cpu size={14} style={{ color: "var(--s-text-muted)" }} />
+                Kubernetes
+              </Label>
               <span
                 className="text-[10px]"
                 style={{ color: "var(--s-text-muted)" }}
@@ -300,7 +339,10 @@ function SettingsPanel() {
       </div>
 
       <div className="flex items-center justify-between">
-        <Label className="text-xs">Wallpaper Tinting</Label>
+        <Label className="text-xs flex items-center gap-1.5">
+          <Paintbrush size={14} style={{ color: "var(--s-text-muted)" }} />
+          Wallpaper Tinting
+        </Label>
         <Switch defaultChecked />
       </div>
     </div>
@@ -314,12 +356,14 @@ function AIContextPanel() {
   return (
     <div style={compositionStyle} className="flex flex-col gap-3">
       <Button size="sm" variant="outline" className="w-full text-xs">
-        + Add context
+        <Plus size={14} style={{ color: "var(--s-primary)" }} />
+        Add context
       </Button>
 
       <Input
         placeholder="Ask, search, or make anything..."
         className="h-8 text-xs"
+        iconLeft={<Sparkles size={14} style={{ color: "var(--s-primary)" }} />}
       />
 
       <div className="flex gap-1">
@@ -329,16 +373,19 @@ function AIContextPanel() {
 
       <div className="flex gap-1.5 flex-wrap">
         <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
+          <Archive size={14} style={{ color: "var(--s-text-muted)" }} />
           Archive
         </Button>
         <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
+          <Flag size={14} style={{ color: "var(--s-text-muted)" }} />
           Report
         </Button>
         <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
+          <Bell size={14} style={{ color: "var(--s-text-muted)" }} />
           Snooze
         </Button>
         <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
-          &hellip;
+          <MoreHorizontal size={14} style={{ color: "var(--s-text-muted)" }} />
         </Button>
       </div>
 
@@ -356,13 +403,14 @@ function AIContextPanel() {
           </Button>
         ))}
         <Button size="sm" variant="ghost" className="h-7 px-1 text-[10px]">
-          &lsaquo;
+          <ChevronLeft size={14} style={{ color: "var(--s-text-muted)" }} />
         </Button>
         <Button size="sm" variant="ghost" className="h-7 px-1 text-[10px]">
-          &rsaquo;
+          <ChevronRight size={14} style={{ color: "var(--s-text-muted)" }} />
         </Button>
         <div className="flex-1" />
         <Button size="sm" variant="secondary" className="h-7 text-[10px]">
+          <Bot size={14} style={{ color: "var(--s-primary)" }} />
           Copilot
         </Button>
       </div>
@@ -393,15 +441,17 @@ function AIContextPanel() {
       </Card>
 
       <div
-        className="flex items-center gap-3 rounded-[var(--s-radius-md,6px)] p-3"
+        className="flex items-center gap-3 p-3"
         style={{
           background: "var(--s-surface-elevated)",
           border: "1px solid var(--s-border)",
+          borderRadius: 0,
         }}
       >
         <LoadingSpinner variant="braille" size="sm" />
         <div className="flex flex-col flex-1 gap-0.5">
-          <span className="text-xs" style={{ color: "var(--s-text)" }}>
+          <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--s-text)" }}>
+            <Loader2 size={14} className="animate-spin" style={{ color: "var(--s-text-muted)" }} />
             Processing your request
           </span>
           <Progress value={65} className="h-1" />
@@ -435,11 +485,12 @@ function HeroCompositions() {
 type GridCell = {
   name: string;
   render: () => React.ReactNode;
+  icon?: React.ReactNode;
 };
 
 const GRID_CELLS: GridCell[] = [
   /* Row 1 */
-  { name: "Button", render: () => <Button size="sm">Primary</Button> },
+  { name: "Button", render: () => <Button size="sm">Primary</Button>, icon: <MousePointer size={10} /> },
   { name: "Secondary", render: () => <Button size="sm" variant="secondary">Secondary</Button> },
   { name: "Ghost", render: () => <Button size="sm" variant="ghost">Ghost</Button> },
   { name: "Badge", render: () => <Badge>New</Badge> },
@@ -489,7 +540,7 @@ const GRID_CELLS: GridCell[] = [
       <Separator />
     </div>
   )},
-  { name: "Alert", render: () => <Alert variant="info" className="p-2"><AlertTitle className="text-[10px]">Info alert</AlertTitle></Alert> },
+  { name: "Alert", render: () => <Alert variant="info" className="p-2"><AlertTitle className="text-[10px]">Info alert</AlertTitle></Alert>, icon: <AlertTriangle size={10} /> },
 
   /* Row 4 */
   { name: "Skeleton text", render: () => (
@@ -521,6 +572,7 @@ const GRID_CELLS: GridCell[] = [
   },
   {
     name: "Tabs",
+    icon: <Columns size={10} />,
     render: () => (
       <Tabs defaultValue="code" className="w-full">
         <TabsList className="h-7 p-0.5">
@@ -532,6 +584,7 @@ const GRID_CELLS: GridCell[] = [
   },
   {
     name: "Card",
+    icon: <LayoutGrid size={10} />,
     render: () => (
       <Card className="w-full">
         <CardHeader className="p-2">
@@ -553,7 +606,7 @@ function DenseComponentGrid() {
           style={{
             minHeight: 80,
             padding: "10px 8px 6px",
-            borderRadius: "var(--s-radius-md, 6px)",
+            borderRadius: 0,
             border: "1px solid var(--s-border-muted)",
             background: "var(--s-surface)",
             transition: `transform 200ms ${TRANSITION_EASING}, border-color 200ms ${TRANSITION_EASING}`,
@@ -571,13 +624,14 @@ function DenseComponentGrid() {
             {cell.render()}
           </div>
           <span
-            className="mt-1.5 font-mono leading-none select-none"
+            className="mt-1.5 font-mono leading-none select-none flex items-center gap-0.5"
             style={{
               fontSize: 9,
               color: "var(--s-text-muted)",
               letterSpacing: "0.02em",
             }}
           >
+            {cell.icon}
             {cell.name}
           </span>
         </div>
@@ -635,6 +689,7 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
     <div className={className} style={style}>
       <style dangerouslySetInnerHTML={{ __html: TRANSITION_CSS }} />
       <div className="hero-transition-wrapper">
+        <span className="s-fig">Fig. 01</span>
         <HeroCompositions />
         <DenseComponentGrid />
         <PresetDots />

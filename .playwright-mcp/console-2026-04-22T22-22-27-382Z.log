@@ -1,0 +1,61 @@
+[     195ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     214ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   45441ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   46350ms] [LOG] [Fast Refresh] done in 1009ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   47343ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   47351ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   47483ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   47590ms] [LOG] [Fast Refresh] done in 208ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   65873ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   65892ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   67265ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   67318ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   69734ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/components:0
+[   69751ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   69766ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   71755ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   71787ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  240909ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  240953ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  259213ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  259310ms] [LOG] [Fast Refresh] done in 149ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  282551ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  282624ms] ReferenceError: useState is not defined
+    at useIsDark (http://localhost:3000/_next/static/chunks/_0go-idh._.js?id=%255Bproject%255D%252Fapps%252Fweb%252Fcomponents%252Fsigil-shell.tsx+%255Bapp-client%255D+%2528ecmascript%2529:22:33)
+    at TokenStyleInjector (http://localhost:3000/_next/static/chunks/_0go-idh._.js?id=%255Bproject%255D%252Fapps%252Fweb%252Fcomponents%252Fsigil-shell.tsx+%255Bapp-client%255D+%2528ecmascript%2529:51:20)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9098:47)
+    at performSyncWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10263:9)
+    at flushSyncWorkAcrossRoots_impl (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10179:316)
+    at flushSyncWork$1 (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9230:86)
+    at Object.scheduleRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:299:13)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:391:33
+    at Set.forEach (<anonymous>)
+    at Object.performReactRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:384:38)
+    at applyUpdate (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:878:31)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:886:13
+[  282633ms] [LOG] [Fast Refresh] done in 153ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  282735ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  282979ms] [LOG] [Fast Refresh] done in 345ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  292516ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  292594ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  292724ms] [LOG] [Fast Refresh] done in 178ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293082ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293108ms] [LOG] [Fast Refresh] done in 128ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293272ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293298ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293434ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  293532ms] [LOG] [Fast Refresh] done in 208ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  317531ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  317534ms] [ERROR] The final argument passed to %s changed size between renders. The order and size of this array must remain constant.
+
+Previous: %s
+Incoming: %s useEffect [[object Object]] [[object Object], true] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  317568ms] [LOG] [Fast Refresh] done in 67ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

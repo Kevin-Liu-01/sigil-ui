@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Docs", href: "#" },
-  { label: "Components", href: "#components" },
-  { label: "Presets", href: "#presets" },
-  { label: "GitHub", href: "https://github.com/sigil-ui/sigil", external: true },
+  { label: "Manifesto", href: "/manifesto", icon: <Flame size={14} /> },
+  { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+  { label: "Components", href: "#components", icon: <LayoutGrid size={14} /> },
+  { label: "Presets", href: "#presets", icon: <Palette size={14} /> },
+  { label: "GitHub", href: "https://github.com/Kevin-Liu-01/sigil-ui", external: true, icon: <ExternalLink size={14} /> },
 ] as const;
 
 export function Navbar() {
@@ -68,12 +70,13 @@ export function Navbar() {
               <Button key={link.label} variant="ghost" size="sm" asChild>
                 <a
                   href={link.href}
-                  className="r-mono no-underline"
+                  className="r-mono no-underline flex items-center gap-1.5"
                   style={{ fontSize: "13px" }}
                   {...("external" in link && link.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                 >
+                  {link.icon}
                   {link.label}
                 </a>
               </Button>

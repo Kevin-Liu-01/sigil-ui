@@ -1,0 +1,2315 @@
+[      99ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     111ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   61159ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   61661ms] [LOG] [Fast Refresh] done in 603ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   72778ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   72786ms] [LOG] [Fast Refresh] done in 109ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   89964ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   89977ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  125709ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  125739ms] [LOG] [Fast Refresh] done in 50ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  132007ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  133901ms] [LOG] [Fast Refresh] done in 1969ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  135699ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  135995ms] [LOG] [Fast Refresh] done in 364ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  139623ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  139891ms] [LOG] [Fast Refresh] done in 336ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  144397ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  144874ms] [LOG] [Fast Refresh] done in 207ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  147944ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  148232ms] [LOG] [Fast Refresh] done in 358ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  153084ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  153339ms] [LOG] [Fast Refresh] done in 334ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  159912ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  160147ms] [LOG] [Fast Refresh] done in 315ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  164756ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  164992ms] [LOG] [Fast Refresh] done in 307ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  170305ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  170530ms] [LOG] [Fast Refresh] done in 294ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  173998ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  174411ms] [LOG] [Fast Refresh] done in 484ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  178775ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  179026ms] [LOG] [Fast Refresh] done in 331ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  182653ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  182897ms] [LOG] [Fast Refresh] done in 323ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  186275ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  186559ms] [LOG] [Fast Refresh] done in 353ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  192933ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  193208ms] [LOG] [Fast Refresh] done in 352ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  199738ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  200006ms] [LOG] [Fast Refresh] done in 336ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  205289ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  205542ms] [LOG] [Fast Refresh] done in 321ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  211825ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  212138ms] [LOG] [Fast Refresh] done in 128ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  217462ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  217492ms] [LOG] [Fast Refresh] done in 50ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  221728ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  222470ms] [LOG] [Fast Refresh] done in 816ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  229550ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  229882ms] [LOG] [Fast Refresh] done in 390ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234736ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234769ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  243122ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  243151ms] [LOG] [Fast Refresh] done in 56ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  248466ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  251501ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  251502ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  251554ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  251555ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  251560ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  251604ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  251661ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  251665ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  251703ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  251969ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  252002ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  252002ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  252003ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252003ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252053ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252053ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252093ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252093ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  252160ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  256278ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  256372ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256372ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256444ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  256461ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  256486ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  256518ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  256615ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256616ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256632ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256632ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256716ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  256857ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256857ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256858ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256858ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  256957ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  257162ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  257162ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  257220ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  265060ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  266118ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266118ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266130ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  266145ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  266204ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  266159ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  266161ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266161ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266197ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266197ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266261ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  266308ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266308ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  266364ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  271617ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  272295ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272295ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272311ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  272324ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  272364ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  272329ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  272332ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272332ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272375ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272375ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272492ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272492ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  272554ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  275377ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  275441ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  275459ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  275486ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  275468ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  275468ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275468ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275514ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275514ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275559ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275559ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  275615ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  279412ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  280107ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280107ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280122ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  280135ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  280177ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  280143ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  280144ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280144ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280180ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280180ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280268ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280268ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  280330ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  283547ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  283947ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  283960ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  283997ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  283966ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  283968ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  283968ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  284002ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  284002ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  284075ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  284075ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  284141ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  286664ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  287127ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287127ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287158ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  287172ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  287215ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  287177ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  287180ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287180ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287182ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287182ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287216ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287216ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287280ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287280ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  287341ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  320988ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  320989ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321090ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  321678ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321678ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321709ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  321727ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  321807ms] Error: ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/components/landing/navbar.tsx:5:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  321737ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  321754ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321754ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321790ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321791ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321850ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  321971ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  321971ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  322017ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-client] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  322017ms] [ERROR] ./apps/web/components/landing/navbar.tsx:5:1
+Export Github doesn't exist in target module
+  3 | import { useEffect, useState } from "react";
+  4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+> 5 | import { BookOpen, LayoutGrid, Palette, Github } from "lucide-react";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | const NAV_LINKS = [
+  8 |   { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+
+The export Github was not found in module [project]/node_modules/.pnpm/lucide-react@1.8.0_react@19.2.5/node_modules/lucide-react/dist/esm/lucide-react.js [app-ssr] (ecmascript).
+Did you mean to import Gift?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  322084ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Plus divider -->
+  <line x1="60" y1="2" x2="60" y2="118" stroke="currentColor" stroke-width="2"/>
+  <line x1="2" y1="60" x2="118" y2="60" stroke="currentColor" stroke-width="2"/>
+
+  <!-- All circles use currentColor at different opacities -->
+  <!-- Top-left: 4 dots -->
+  <circle cx="22" cy="22" r="11" fill="currentColor" opacity="1"/>
+  <circle cx="44" cy="22" r="11" fill="currentColor" opacity="0.8"/>
+  <circle cx="22" cy="44" r="11" fill="currentColor" opacity="0.6"/>
+  <circle cx="44" cy="44" r="11" fill="currentColor" opacity="0.4"/>
+
+  <!-- Top-right: 2 dots -->
+  <circle cx="82" cy="28" r="13" fill="currentColor" opacity="0.9"/>
+  <circle cx="102" cy="44" r="8" fill="currentColor" opacity="0.5"/>
+
+  <!-- Bottom-left: 1 dot -->
+  <circle cx="32" cy="88" r="16" fill="currentColor" opacity="0.7"/>
+
+  <!-- Bottom-right: 3 dots -->
+  <circle cx="80" cy="78" r="8" fill="currentColor" opacity="0.3"/>
+  <circle cx="100" cy="82" r="12" fill="currentColor" opacity="0.6"/>
+  <circle cx="90" cy="104" r="10" fill="currentColor" opacity="0.85"/>
+</svg>
