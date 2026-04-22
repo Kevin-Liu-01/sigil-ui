@@ -1,0 +1,11 @@
+{
+  "title": "Diagrams",
+  "pages": [
+    "diagram",
+    "exploded-view",
+    "flow-diagram",
+    "timeline",
+    "comparison-table",
+    "architecture-diagram"
+  ]
+}

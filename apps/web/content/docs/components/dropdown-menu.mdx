@@ -1,0 +1,157 @@
+---
+title: DropdownMenu
+description: Trigger-activated dropdown with items, submenus, checkboxes, and radio groups.
+---
+
+# DropdownMenu
+
+> Trigger-activated dropdown with items, submenus, checkboxes, and radio groups.
+
+## Installation
+
+```bash
+npx sigil add dropdown-menu
+```
+
+## Import
+
+```tsx
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuLabel,
+  DropdownMenuGroup,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Options</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Account</DropdownMenuLabel>
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>Settings</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Log out</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Examples
+
+### With submenus
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button>Actions</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Edit</DropdownMenuItem>
+    <DropdownMenuSub>
+      <DropdownMenuSubTrigger>Share</DropdownMenuSubTrigger>
+      <DropdownMenuSubContent>
+        <DropdownMenuItem>Copy link</DropdownMenuItem>
+        <DropdownMenuItem>Email</DropdownMenuItem>
+        <DropdownMenuItem>Slack</DropdownMenuItem>
+      </DropdownMenuSubContent>
+    </DropdownMenuSub>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem className="text-[var(--s-error)]">Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With checkbox items
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">View</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
+    <DropdownMenuCheckboxItem checked={showStatus} onCheckedChange={setShowStatus}>
+      Status
+    </DropdownMenuCheckboxItem>
+    <DropdownMenuCheckboxItem checked={showEmail} onCheckedChange={setShowEmail}>
+      Email
+    </DropdownMenuCheckboxItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+### With radio group
+
+```tsx
+<DropdownMenu>
+  <DropdownMenuTrigger asChild>
+    <Button variant="outline">Sort</Button>
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuRadioGroup value={sortBy} onValueChange={setSortBy}>
+      <DropdownMenuRadioItem value="name">Name</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="date">Date</DropdownMenuRadioItem>
+      <DropdownMenuRadioItem value="status">Status</DropdownMenuRadioItem>
+    </DropdownMenuRadioGroup>
+  </DropdownMenuContent>
+</DropdownMenu>
+```
+
+## Props
+
+### DropdownMenuContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `sideOffset` | `number` | `4` | Distance from trigger |
+| `className` | `string` | — | Additional CSS classes |
+
+### DropdownMenuItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Add left padding for icon alignment |
+| `disabled` | `boolean` | `false` | Disable the item |
+| `onSelect` | `() => void` | — | Selection handler |
+
+### DropdownMenuCheckboxItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | — | Checked state |
+| `onCheckedChange` | `(checked: boolean) => void` | — | Change handler |
+
+### DropdownMenuRadioItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string` | — | Radio value |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-surface` — menu background
+- `--s-border` — menu border, separator
+- `--s-card-radius` — menu border radius
+- `--s-radius-sm` — item border radius
+- `--s-shadow-md` — menu elevation
+- `--s-text` — item text, focus state
+- `--s-text-muted` — labels, disabled items, shortcut text
+- `--s-background` — item focus background
+- `--s-primary` — checkbox/radio indicator
+- `--s-duration-fast` — focus transition

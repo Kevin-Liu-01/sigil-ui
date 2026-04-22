@@ -1,0 +1,1188 @@
+[     149ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     168ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     237ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="dark robot..." data-theme="dark" suppressHydrationWarning={true}>
+                          <head>
+                          <body
++                           style={{paddingBottom:40}}
+-                           style={{padding-bottom:"40px"}}
+                          >
+                  ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  289539ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  289880ms] [LOG] [Fast Refresh] done in 441ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  406021ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  406041ms] [LOG] [Fast Refresh] done in 47ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  414681ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  414704ms] [LOG] [Fast Refresh] done in 42ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  427984ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  428020ms] [LOG] [Fast Refresh] done in 44ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  665314ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  665338ms] [LOG] [Fast Refresh] done in 65ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  707480ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  707543ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  707563ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  707631ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  707682ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[  707742ms] Error: ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-client] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./apps/web/app/page.tsx:16:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[  707721ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  707766ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-client] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707766ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-ssr] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707797ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-client] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707798ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-ssr] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707861ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  707935ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-client] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707935ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-ssr] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  707981ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  715157ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-client] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715157ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Export Tessellation doesn't exist in target module
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+The export Tessellation was not found in module [project]/packages/components/dist/index.js [app-ssr] (ecmascript).
+Did you mean to import TableCaption?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715210ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  715692ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Module not found: Can't resolve '@sigil-ui/components'
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715692ms] [ERROR] ./apps/web/components/landing/navbar.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | const NAV_LINKS = [
+  7 |   { label: "Docs", href: "#" },
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715692ms] [ERROR] ./apps/web/app/sandbox/layout.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useState, useCallback, type ReactNode } from "react";
+> 4 | import { Stack, Divider, Margin } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | type SandboxLayoutProps = {
+  7 |   children: ReactNode;
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715692ms] [ERROR] ./apps/web/components/sandbox/canvas-item.tsx:8:1
+Module not found: Can't resolve '@sigil-ui/components'
+   6 | import type { CanvasItemData } from "./canvas";
+   7 |
+>  8 | import {
+     | ^^^^^^^
+>  9 |   Hero,
+     | ^^^^^^^
+> 10 |   Button,
+     | ^^^^^^^^^
+> 11 |   Card,
+     | ^^^^^^^
+> 12 |   CardContent,
+     | ^^^^^^^^^^^^^^
+> 13 |   CardHeader,
+     | ^^^^^^^^^^^^^
+> 14 |   CardTitle,
+     | ^^^^^^^^^^^^
+> 15 |   Badge,
+     | ^^^^^^^^
+> 16 |   Input,
+     | ^^^^^^^^
+> 17 |   KPI,
+     | ^^^^^^
+> 18 |   Terminal,
+     | ^^^^^^^^^^^
+> 19 |   CodeBlock,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 21 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 22 |   Stack,
+     | ^^^^^^^^
+> 23 |   Diamond,
+     | ^^^^^^^^^^
+> 24 |   Hexagon,
+     | ^^^^^^^^^^
+> 25 |   Triangle,
+     | ^^^^^^^^^^^
+> 26 |   Box3D,
+     | ^^^^^^^^
+> 27 |   Card3D,
+     | ^^^^^^^^^
+> 28 |   Pricing,
+     | ^^^^^^^^^^
+> 29 |   CTA,
+     | ^^^^^^
+> 30 |   FeatureFrame,
+     | ^^^^^^^^^^^^^^^
+> 31 |   TestimonialCard,
+     | ^^^^^^^^^^^^^^^^^^
+> 32 |   Timeline,
+     | ^^^^^^^^^^^
+> 33 |   Navbar,
+     | ^^^^^^^^^
+> 34 |   NavbarLogo,
+     | ^^^^^^^^^^^^^
+> 35 |   Footer,
+     | ^^^^^^^^^
+> 36 |   Accordion,
+     | ^^^^^^^^^^^^
+> 37 |   AccordionItem,
+     | ^^^^^^^^^^^^^^^^
+> 38 |   AccordionTrigger,
+     | ^^^^^^^^^^^^^^^^^^^
+> 39 |   AccordionContent,
+     | ^^^^^^^^^^^^^^^^^^^
+> 40 |   Table,
+     | ^^^^^^^^
+> 41 |   TableHeader,
+     | ^^^^^^^^^^^^^^
+> 42 |   TableBody,
+     | ^^^^^^^^^^^^
+> 43 |   TableRow,
+     | ^^^^^^^^^^^
+> 44 |   TableHead,
+     | ^^^^^^^^^^^^
+> 45 |   TableCell,
+     | ^^^^^^^^^^^^
+> 46 |   Tabs,
+     | ^^^^^^^
+> 47 |   TabsList,
+     | ^^^^^^^^^^^
+> 48 |   TabsTrigger,
+     | ^^^^^^^^^^^^^^
+> 49 |   TabsContent,
+     | ^^^^^^^^^^^^^^
+> 50 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 51 |   Separator,
+     | ^^^^^^^^^^^^
+> 52 |   Avatar,
+     | ^^^^^^^^^
+> 53 |   Progress,
+     | ^^^^^^^^^^^
+> 54 |   LogoBar,
+     | ^^^^^^^^^^
+> 55 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  56 |
+  57 | // ---------------------------------------------------------------------------
+  58 | // Component registry — maps string names to actual components + defaults
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[  715732ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  715769ms] [LOG] [Fast Refresh] done in 76ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[  716152ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  716248ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  716309ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="dark robot..." data-theme="dark" suppressHydrationWarning={true}>
+                          <head>
+                          <body
++                           style={{paddingBottom:40}}
+-                           style={{padding-bottom:"40px"}}
+                          >
+                  ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  716439ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  716442ms] [LOG] [Fast Refresh] done in 104ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  723468ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  723786ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Module not found: Can't resolve '@sigil-ui/components'
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  723787ms] [ERROR] ./apps/web/components/landing/navbar.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | const NAV_LINKS = [
+  7 |   { label: "Docs", href: "#" },
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  723787ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  723794ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Module not found: Can't resolve '@sigil-ui/components'
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  723794ms] [ERROR] ./apps/web/components/landing/navbar.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | const NAV_LINKS = [
+  7 |   { label: "Docs", href: "#" },
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  723798ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724078ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724122ms] [LOG] [Fast Refresh] done in 44ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724262ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724274ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724474ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="dark robot..." data-theme="dark" suppressHydrationWarning={true}>
+                          <head>
+                          <body
++                           style={{paddingBottom:40}}
+-                           style={{padding-bottom:"40px"}}
+                          >
+                  ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  724570ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  724611ms] [LOG] [Fast Refresh] done in 142ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  757956ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  758094ms] [ERROR] ./apps/web/app/page.tsx:16:1
+Module not found: Can't resolve '@sigil-ui/components'
+  14 | import { Terminal } from "@/components/landing/terminal";
+  15 |
+> 16 | import {
+     | ^^^^^^^
+> 17 |   Section as SigilSection,
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 18 |   Stack,
+     | ^^^^^^^^
+> 19 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 21 |   Frame,
+     | ^^^^^^^^
+> 22 |   Divider,
+     | ^^^^^^^^^^
+> 23 |   Button,
+     | ^^^^^^^^^
+> 24 |   Card,
+     | ^^^^^^^
+> 25 |   Badge,
+     | ^^^^^^^^
+> 26 |   Cross,
+     | ^^^^^^^^
+> 27 |   Tessellation,
+     | ^^^^^^^^^^^^^^^
+> 28 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 29 |   Skeleton,
+     | ^^^^^^^^^^^
+> 30 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  31 |
+  32 | /* ================================================================== */
+  33 | /* Section 1 — Hero                                                   */
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  758095ms] [ERROR] ./apps/web/components/landing/navbar.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useEffect, useState } from "react";
+> 4 | import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | const NAV_LINKS = [
+  7 |   { label: "Docs", href: "#" },
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/navbar.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/navbar.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  758095ms] [ERROR] ./apps/web/app/sandbox/layout.tsx:4:1
+Module not found: Can't resolve '@sigil-ui/components'
+  2 |
+  3 | import { useState, useCallback, type ReactNode } from "react";
+> 4 | import { Stack, Divider, Margin } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 |
+  6 | type SandboxLayoutProps = {
+  7 |   children: ReactNode;
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  758095ms] [ERROR] ./apps/web/components/sandbox/canvas-item.tsx:8:1
+Module not found: Can't resolve '@sigil-ui/components'
+   6 | import type { CanvasItemData } from "./canvas";
+   7 |
+>  8 | import {
+     | ^^^^^^^
+>  9 |   Hero,
+     | ^^^^^^^
+> 10 |   Button,
+     | ^^^^^^^^^
+> 11 |   Card,
+     | ^^^^^^^
+> 12 |   CardContent,
+     | ^^^^^^^^^^^^^^
+> 13 |   CardHeader,
+     | ^^^^^^^^^^^^^
+> 14 |   CardTitle,
+     | ^^^^^^^^^^^^
+> 15 |   Badge,
+     | ^^^^^^^^
+> 16 |   Input,
+     | ^^^^^^^^
+> 17 |   KPI,
+     | ^^^^^^
+> 18 |   Terminal,
+     | ^^^^^^^^^^^
+> 19 |   CodeBlock,
+     | ^^^^^^^^^^^^
+> 20 |   SigilGrid,
+     | ^^^^^^^^^^^^
+> 21 |   SigilGridCell,
+     | ^^^^^^^^^^^^^^^^
+> 22 |   Stack,
+     | ^^^^^^^^
+> 23 |   Diamond,
+     | ^^^^^^^^^^
+> 24 |   Hexagon,
+     | ^^^^^^^^^^
+> 25 |   Triangle,
+     | ^^^^^^^^^^^
+> 26 |   Box3D,
+     | ^^^^^^^^
+> 27 |   Card3D,
+     | ^^^^^^^^^
+> 28 |   Pricing,
+     | ^^^^^^^^^^
+> 29 |   CTA,
+     | ^^^^^^
+> 30 |   FeatureFrame,
+     | ^^^^^^^^^^^^^^^
+> 31 |   TestimonialCard,
+     | ^^^^^^^^^^^^^^^^^^
+> 32 |   Timeline,
+     | ^^^^^^^^^^^
+> 33 |   Navbar,
+     | ^^^^^^^^^
+> 34 |   NavbarLogo,
+     | ^^^^^^^^^^^^^
+> 35 |   Footer,
+     | ^^^^^^^^^
+> 36 |   Accordion,
+     | ^^^^^^^^^^^^
+> 37 |   AccordionItem,
+     | ^^^^^^^^^^^^^^^^
+> 38 |   AccordionTrigger,
+     | ^^^^^^^^^^^^^^^^^^^
+> 39 |   AccordionContent,
+     | ^^^^^^^^^^^^^^^^^^^
+> 40 |   Table,
+     | ^^^^^^^^
+> 41 |   TableHeader,
+     | ^^^^^^^^^^^^^^
+> 42 |   TableBody,
+     | ^^^^^^^^^^^^
+> 43 |   TableRow,
+     | ^^^^^^^^^^^
+> 44 |   TableHead,
+     | ^^^^^^^^^^^^
+> 45 |   TableCell,
+     | ^^^^^^^^^^^^
+> 46 |   Tabs,
+     | ^^^^^^^
+> 47 |   TabsList,
+     | ^^^^^^^^^^^
+> 48 |   TabsTrigger,
+     | ^^^^^^^^^^^^^^
+> 49 |   TabsContent,
+     | ^^^^^^^^^^^^^^
+> 50 |   LoadingSpinner,
+     | ^^^^^^^^^^^^^^^^^
+> 51 |   Separator,
+     | ^^^^^^^^^^^^
+> 52 |   Avatar,
+     | ^^^^^^^^^
+> 53 |   Progress,
+     | ^^^^^^^^^^^
+> 54 |   LogoBar,
+     | ^^^^^^^^^^
+> 55 | } from "@sigil-ui/components";
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  56 |
+  57 | // ---------------------------------------------------------------------------
+  58 | // Component registry — maps string names to actual components + defaults
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  758105ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  758534ms] [LOG] [Fast Refresh] done in 394ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  758708ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  758856ms] [LOG] [Fast Refresh] done in 248ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

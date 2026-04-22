@@ -1,0 +1,112 @@
+---
+title: Carousel
+description: Scrollable content carousel powered by Embla with previous/next navigation.
+---
+
+# Carousel
+
+> Scrollable content carousel powered by Embla with previous/next navigation.
+
+## Installation
+
+```bash
+npx sigil add carousel
+```
+
+## Import
+
+```tsx
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Carousel>
+  <CarouselContent>
+    <CarouselItem>Slide 1</CarouselItem>
+    <CarouselItem>Slide 2</CarouselItem>
+    <CarouselItem>Slide 3</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Examples
+
+### Vertical orientation
+
+```tsx
+<Carousel orientation="vertical" className="h-[300px]">
+  <CarouselContent>
+    <CarouselItem>Top</CarouselItem>
+    <CarouselItem>Middle</CarouselItem>
+    <CarouselItem>Bottom</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+### With Embla options
+
+```tsx
+<Carousel opts={{ loop: true, align: "start" }}>
+  <CarouselContent>
+    <CarouselItem className="basis-1/3">Card 1</CarouselItem>
+    <CarouselItem className="basis-1/3">Card 2</CarouselItem>
+    <CarouselItem className="basis-1/3">Card 3</CarouselItem>
+    <CarouselItem className="basis-1/3">Card 4</CarouselItem>
+  </CarouselContent>
+</Carousel>
+```
+
+### Image gallery
+
+```tsx
+<Carousel>
+  <CarouselContent>
+    {images.map((src, i) => (
+      <CarouselItem key={i}>
+        <img src={src} alt={`Photo ${i + 1}`} className="w-full rounded-[var(--s-radius-md)]" />
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+```
+
+## Props
+
+### Carousel
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Scroll direction |
+| `opts` | `EmblaOptionsType` | — | Embla carousel options |
+| `className` | `string` | — | Additional CSS classes |
+
+### CarouselItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Width control (e.g. `basis-1/3`) |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-border` — navigation button border
+- `--s-background` — navigation button background
+- `--s-text-muted` — navigation arrow color
+- `--s-surface-elevated` — navigation button hover
+- `--s-radius-full` — navigation button shape
+- `--s-shadow-sm` — navigation button elevation

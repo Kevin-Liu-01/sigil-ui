@@ -1,0 +1,98 @@
+[    2052ms] [WARNING] Mixed Content: The page at 'https://www.google.com/search?q=v0&rlz=1C5CHFA_enUS1097US1097&oq=v0&gs_lcrp=EgZjaHJvbWUyDAgAEEUYORixAxiABDIKCAEQABixAxiABDINCAIQABiDARixAxiABDIKCAMQABixAxiABDINCAQQABiDARixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiABDINCAkQABiDARixAxiABNIBBzg0NWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8&sei=dznpaeCQDdjO0PEP0L7ryQc' was loaded over HTTPS, but requested an insecure element 'http://img.youtube.com/vi/PAgpK51s6lQ/hqdefault.jpg'. This request was automatically upgraded to HTTPS, For more information see https://blog.chromium.org/2019/10/no-more-mixed-messages-about-https.html @ https://www.google.com/search?q=v0&rlz=1C5CHFA_enUS1097US1097&oq=v0&gs_lcrp=EgZjaHJvbWUyDAgAEEUYORixAxiABDIKCAEQABixAxiABDINCAIQABiDARixAxiABDIKCAMQABixAxiABDINCAQQABiDARixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiABDINCAkQABiDARixAxiABNIBBzg0NWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8&sei=dznpaeCQDdjO0PEP0L7ryQc:0
+[    2052ms] [WARNING] Mixed Content: The page at 'https://www.google.com/search?q=v0&rlz=1C5CHFA_enUS1097US1097&oq=v0&gs_lcrp=EgZjaHJvbWUyDAgAEEUYORixAxiABDIKCAEQABixAxiABDINCAIQABiDARixAxiABDIKCAMQABixAxiABDINCAQQABiDARixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiABDINCAkQABiDARixAxiABNIBBzg0NWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8&sei=dznpaeCQDdjO0PEP0L7ryQc' was loaded over HTTPS, but requested an insecure element 'http://img.youtube.com/vi/y8EIpZIJv6Q/hqdefault.jpg'. This request was automatically upgraded to HTTPS, For more information see https://blog.chromium.org/2019/10/no-more-mixed-messages-about-https.html @ https://www.google.com/search?q=v0&rlz=1C5CHFA_enUS1097US1097&oq=v0&gs_lcrp=EgZjaHJvbWUyDAgAEEUYORixAxiABDIKCAEQABixAxiABDINCAIQABiDARixAxiABDIKCAMQABixAxiABDINCAQQABiDARixAxiABDIHCAUQABiABDIKCAYQABixAxiABDIHCAcQABiABDIHCAgQABiABDINCAkQABiDARixAxiABNIBBzg0NWowajeoAgCwAgA&sourceid=chrome&ie=UTF-8&sei=dznpaeCQDdjO0PEP0L7ryQc:0
+[    4349ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?next=%2F&_rsc=l5937:0
+[    4357ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?next=%2F&action=signup&_rsc=l5937:0
+[    5057ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?_rsc=l5937:0
+[    6547ms] [ERROR] Access to fetch at 'https://vercel.com/api/vercel-auth?redirectUrl=https%3A%2F%2Fv0.app%2Fapi%2Fauth%2Fcallback&qs=&clientId=v0&state=aP3zVzRBEKHrdOK5hUVzwvjXF%7EJPVopO2RIi7c9l2zo' (redirected from 'https://v0.app/api/auth/login?next=%2F&_rsc=ac7ad') from origin 'https://v0.app' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource. @ https://v0.app/:0
+[    6547ms] [ERROR] Failed to load resource: net::ERR_FAILED @ https://vercel.com/api/vercel-auth?redirectUrl=https%3A%2F%2Fv0.app%2Fapi%2Fauth%2Fcallback&qs=&clientId=v0&state=aP3zVzRBEKHrdOK5hUVzwvjXF%7EJPVopO2RIi7c9l2zo:0
+[    6547ms] [ERROR] Failed to fetch RSC payload for https://v0.app/api/auth/login?next=%2F. Falling back to browser navigation. TypeError: Failed to fetch (v0.app)
+    at window.fetch (https://v0.app/:1:19081)
+    at https://v0.app/chat-static/_next/static/chunks/0m0ihwrb7ojps.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:14:5448
+    at globalThis.fetch (https://v0.app/chat-static/_next/static/chunks/0m0ihwrb7ojps.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:14:10987)
+    at A (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:67868)
+    at v (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:65725)
+    at S (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:85632)
+    at https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:84553
+    at _ (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:84591)
+    at s (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:89801)
+    at s (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:3760)
+    at Object.action (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:6710)
+    at _ (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:5905)
+    at https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:6447
+    at Object.dispatch (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:6670)
+    at o (https://v0.app/chat-static/_next/static/chunks/0zf9xk92u9a7n.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:26515)
+    at i (https://v0.app/chat-static/_next/static/chunks/0zf9xk92u9a7n.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:26161)
+    at m (https://v0.app/chat-static/_next/static/chunks/3twly5moz0_yk.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:7389)
+    at https://v0.app/chat-static/_next/static/chunks/37ax-q75kiv_f.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:5005
+    at Object.N [as startTransition] (https://v0.app/chat-static/_next/static/chunks/2zlypvqq49gge.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:27545)
+    at https://v0.app/chat-static/_next/static/chunks/37ax-q75kiv_f.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:4984
+    at onClick (https://v0.app/chat-static/_next/static/chunks/37ax-q75kiv_f.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:5102)
+    at sZ (https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:537301)
+    at https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:543197
+    at tF (https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:405200)
+    at s4 (https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:538534)
+    at dI (https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:575270)
+    at dz (https://v0.app/chat-static/_next/static/chunks/2e7s32resl_hp.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:1:575092)
+    at HTMLDocument.n (https://v0.app/chat-static/_next/static/chunks/0m0ihwrb7ojps.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:2:4689) @ https://v0.app/chat-static/_next/static/chunks/0m0ihwrb7ojps.js?dpl=dpl_64XZ2CPHLN8SWxR8u42qMHx98eh1:4
+[    7185ms] [LOG] %c
+▲
+
+    ____                               _ __
+   / __ \________  ____ _____ ___     (_) /_
+  / / / / ___/ _ \/ __ `/ __ `__ \   / / __/
+ / /_/ / /  /  __/ /_/ / / / / / /  / / /__
+/_____/_/   \___/\__,_/_/ /_/ /_/  /_/\__( )
+   _____ __    _          _ __           |/
+  / ___// /_  (_)___     (_) /_
+  \__ \/ __ \/ / __ \   / / __/
+ ___/ / / / / / /_/ /  / / /_
+/____/_/ /_/_/ .___/  /_/\__/
+            /_/
+  
+
+Hello!
+
+- Open Source https://vercel.com/oss
+- Careers https://vercel.com/careers
+- Status https://vercel-status.com
+
+ font-family: "Geist Mono", monospace; white-space: pre; line-height: 1; @ https://vercel.com/_next/static/chunks/1sjcl_g7---zh.js?dpl=dpl_BL9eW6QV6i6GLtyHXrcZKDA4uLwg:78
+[    7378ms] [ERROR] Failed to load resource: the server responded with a status of 403 () @ https://vercel.com/api/jwt:0
+[    7393ms] [WARNING] [GSI_LOGGER]: Your client application uses one of the Google One Tap prompt UI status methods that may stop functioning when FedCM becomes mandatory. Refer to the migration guide to update your code accordingly and opt-in to FedCM to test your changes. Learn more: https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#display_moment and https://developers.google.com/identity/gsi/web/guides/fedcm-migration?s=dc#skipped_moment @ https://accounts.google.com/gsi/client:84
+[    7408ms] [ERROR] Not signed in with the identity provider. @ https://vercel.com/login/v0?next=%2Fapi%2Fvercel-auth%3FredirectUrl%3Dhttps%253A%252F%252Fv0.app%252Fapi%252Fauth%252Fcallback%26qs%3D%26clientId%3Dv0%26state%3Dov5kL9p.87kF2A.qIvrgnejQ8RxYmlQqihUYEgcRhWJ:0
+[    7517ms] [WARNING] Deprecated API for given entry type. @ https://vercel.com/_next/static/chunks/1h3_-al3cyhlj.js?dpl=dpl_BL9eW6QV6i6GLtyHXrcZKDA4uLwg:18
+[    8190ms] [ERROR] [GSI_LOGGER]: FedCM get() rejects with AbortError: signal is aborted without reason @ https://vercel.com/_next/static/chunks/0kxa-ben1kq69.js?dpl=dpl_BL9eW6QV6i6GLtyHXrcZKDA4uLwg:1
+[    8833ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ https://accounts.google.com/v3/signin/identifier?opparams=%253F&dsh=S774912289%3A1776892286426154&client_id=258013614557-nema0dumfbottebi6to7aqi85qot9pvs.apps.googleusercontent.com&o2v=2&redirect_uri=https%3A%2F%2Fvercel.com%2Fapi%2Fregistration%2Fgoogle%2Fcallback&response_type=code&scope=openid+profile+email&service=lso&state=b10660dede0500647b742415fec96bd5740aa7747c9a68d90074a538d466605a9c5de943a7480364c4e47c108c23de433cd9d0ecd4e8fe80899347b6545f3566875a7c21489a3f0d85e4c1babf16f05b697fef6663a51650cadee9379ebe1961561e670793d3c5aa9548365eb2afb3405732c9020774980789381d25212ead69fbe6f2b04a1246a1c89eef11fa34b26c838df94fcf604bb2cb86b7dc861392b3165d1624d4a9b2d5ef5e7514bcb4bba351941e774b4d4f17bb0b1970519d61e56ac992cd7409af1644d0094790b8ce26a53a6eaeca4d550329e5d603f83b88bbd39a611377fb274d6b2d25e1e3ec8085a3b0348728d455c0c760523bf958d1c033ca01d2a07519cc4650f10c2fe8c0f9a85ab39129e4c37213dcf0c7b480ddaae6395e06e2c056183186dbe23ba5a188b4530f137e0803fd471df47ac46bf983a8597821110a3309483e992b294cfda46a078585267a6b23c74e6f4532c110d5528e70e1fa2f104fffc84a097373c3629984d6cc3b6c8870160d564e8f005e8b337be910c92627cc0f164f33bcfc6d7d28881140c51e3c8a50e15335486ef857a5a9bc5bc19ddf9dd51dafc582b00d2d867988172779de41ccaf03477ad9cc18df59ef0ef86b62665adab7d7ae3aa0a49b4b6619f3ef95e375cae1cfdca7ea95323b0335dc07229800d242d1be900829e3f1439491ebe7e83d609a92&flowName=GeneralOAuthFlow&continue=https%3A%2F%2Faccounts.google.com%2Fsignin%2Foauth%2Fconsent%3Fauthuser%3Dunknown%26part%3DAJi8hAOokz8fTtL-EtkK8WbayxWiWAEsF0CbFUcdQ3iHfzoQrVCJfKuf3jzjDbziZNYZ8V380BbLAeUvWF4Tc6rDspjvLp71mRsFHKQ9JPbrjQt1E3uLMZxOm7vckdzLiYkXphgXx4boP_Wv0Swkzz8poPiFLnMLLic2FqWnpsGSF23OxdHRelKsXdin5sOgeq-6UTbM_k4mTue_gWVpiMoipB7Fzn-Qa9Rtsi46R-teaGLLwqRgXanInUJtTEgq6P2NigMb-z-ITa0ntX-GSSL7ka8U8kKULIql2hK1BH-2n6JMx3YNS0INqApVMkhwiJQ7Kh07VJyJdgYVP4qPuuLcj3B1IEL_KbW_7DNJBJvgPL1e_vh7bXqUl-CI0FwyhSY86dlUxaMGyIX76OdUTJZGFimGamIgI6qa2rvefTY0GGKa4MSUIbEkeN-YPODLebTRYsaAdiKo7NfW3tpRsbFJJdIhwxCKDQ%26flowName%3DGeneralOAuthFlow%26as%3DS774912289%253A1776892286426154%26client_id%3D258013614557-nema0dumfbottebi6to7aqi85qot9pvs.apps.googleusercontent.com%26requestPath%3D%252Fsignin%252Foauth%252Fconsent%23&app_domain=https%3A%2F%2Fvercel.com&rart=ANgoxccVwlfAUTbiP-AOPOEnYZIHRGg3oarD8ITSoZaFuNaNwsPvrp-SZAcxNDBVPHPHgOCELgD36pkCxm0mFC1OqZCYj04uQienjvqGs4k2mP1D32Qp0Ho:0
+[    8839ms] [LOG] %c%s color: red; background: yellow; font-size: 24px; WARNING! @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.en_US.8tJAv8mZf9w.es5.O/am=Kf8GAABCEUgGwP___zcAIACCaOB6FoAmEBkAAAAAAAAAALBAAAAaAQ/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHY3YrFkmwUqXLobOFJ2A2NzhLFZw/dti=1/m=_b,_tp:468
+[    8839ms] [LOG] %c%s font-size: 18px; Using this console may allow attackers to impersonate you and steal your information using an attack called Self-XSS.
+Do not enter or paste code that you do not understand. @ https://www.gstatic.com/_/mss/boq-identity/_/js/k=boq-identity.AccountsSignInUi.en_US.8tJAv8mZf9w.es5.O/am=Kf8GAABCEUgGwP___zcAIACCaOB6FoAmEBkAAAAAAAAAALBAAAAaAQ/d=1/excm=_b,_tp,identifierview/ed=1/dg=0/wt=2/ujg=1/rs=AOaEmlHY3YrFkmwUqXLobOFJ2A2NzhLFZw/dti=1/m=_b,_tp:468
+[   10916ms] [LOG] %c
+▲
+
+ _____ _              _                    _   _             __
+|_   _| |__   ___    / \   __ _  ___ _ __ | |_(_) ___       / /
+  | | | '_ \ / _ \  / _ \ / _` |/ _ \ '_ \| __| |/ __|     / /
+  | | | | | |  __/ / ___ \ (_| |  __/ | | | |_| | (__     /_/
+  |_| |_| |_|\___|/_/   \_\__, |\___|_| |_|\__|_|\___|    (_)
+                           |___/
+ ___        __               _                   _                 _
+|_ _|_ __  / _|_ __ __ _ ___| |_ _ __ _   _  ___| |_ _   _ _ __ ___
+ | || '_ \| |_| '__/ _` / __| __| '__| | | |/ __| __| | | | '__/ _ \
+ | || | | |  _| | | (_| \__ \ |_| |  | |_| | (__| |_| |_| | | |  __/
+|___|_| |_|_| |_|  \__,_|___/\__|_|   \__,_|\___|\__|\__,_|_|  \___|
+  
+
+Hello!
+
+- Open Source https://vercel.com/oss
+- Careers https://vercel.com/careers
+- Status https://vercel-status.com
+
+ font-family: "Geist Mono", monospace; white-space: pre; line-height: 1; @ https://vercel.com/_next/static/chunks/1sjcl_g7---zh.js?dpl=dpl_BL9eW6QV6i6GLtyHXrcZKDA4uLwg:78
+[   11522ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?next=%2F&action=signup&_rsc=l5937:0
+[   11535ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?next=%2F&_rsc=l5937:0
+[   12416ms] [ERROR] Failed to load resource: the server responded with a status of 404 () @ https://v0.app/api/auth/login?_rsc=l5937:0
+[   13012ms] [ERROR] Connecting to 'https://api.v0.app/_vercel/speed-insights/vitals' violates the following Content Security Policy directive: "connect-src 'self' https://v0.dev https://v0.app https://vercel.live/ https://vercel.com https://*.pusher.com/ https://blob.vercel-storage.com https://*.blob.vercel-storage.com https://blobs.vusercontent.net https://uploads.vusercontent.net wss://*.pusher.com/ wss://*.vercel.run https://fides-vercel.us.fides.ethyca.com/api/v1/ https://cdn-api.ethyca.com/location https://privacy-vercel.us.fides.ethyca.com/api/v1/ https://vercel.com/.well-known/otel/metrics https://*.sentry.io/api/ https://huggingface.co/onnx-community/ https://cas-bridge.xethub.hf.co/xet-bridge-us/ https://cdn.jsdelivr.net/npm/@huggingface/ *.cr-relay.com https://*.s3.us-east-1.amazonaws.com". The action has been blocked. @ https://v0.app/:0
+[   13012ms] [ERROR] Fetch API cannot load https://api.v0.app/_vercel/speed-insights/vitals. Refused to connect because it violates the document's Content Security Policy. @ https://v0.app/:0
+[   13013ms] [ERROR] Connecting to 'https://api.v0.app/_vercel/speed-insights/vitals' violates the following Content Security Policy directive: "connect-src 'self' https://v0.dev https://v0.app https://vercel.live/ https://vercel.com https://*.pusher.com/ https://blob.vercel-storage.com https://*.blob.vercel-storage.com https://blobs.vusercontent.net https://uploads.vusercontent.net wss://*.pusher.com/ wss://*.vercel.run https://fides-vercel.us.fides.ethyca.com/api/v1/ https://cdn-api.ethyca.com/location https://privacy-vercel.us.fides.ethyca.com/api/v1/ https://vercel.com/.well-known/otel/metrics https://*.sentry.io/api/ https://huggingface.co/onnx-community/ https://cas-bridge.xethub.hf.co/xet-bridge-us/ https://cdn.jsdelivr.net/npm/@huggingface/ *.cr-relay.com https://*.s3.us-east-1.amazonaws.com". The action has been blocked. @ https://v0.app/:0
+[   13013ms] [ERROR] Fetch API cannot load https://api.v0.app/_vercel/speed-insights/vitals. Refused to connect because it violates the document's Content Security Policy. @ https://v0.app/:0

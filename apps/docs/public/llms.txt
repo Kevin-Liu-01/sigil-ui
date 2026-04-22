@@ -1,0 +1,56 @@
+# Sigil UI
+
+> The component library where one token file updates everything. Built for agents.
+
+## What is Sigil UI?
+
+Sigil UI is a React component library built on a three-layer token system (primitive → semantic → component). Every component reads from CSS custom properties prefixed with `--r-`. Changing a single token value cascades to every component that references it.
+
+## Packages
+
+- `@sigil-ui/tokens` — Design tokens compiler. Exports CSS, Tailwind v4, and TypeScript.
+- `@sigil-ui/components` — React components that consume `--r-*` CSS variables.
+
+## Installation
+
+```bash
+pnpm add @sigil-ui/tokens @sigil-ui/components
+```
+
+## Component inventory
+
+### Components
+- **Button** — Polymorphic button with variants (primary, secondary, ghost, outline, destructive), sizes (sm, md, lg), asChild support via Radix Slot, loading state.
+- **Card** — Composable card with CardHeader, CardBody, CardFooter slots. Variants: default, outlined, elevated, ghost. Interactive mode with hover elevation.
+- **Input** — Styled text input with variants (outline, filled, flush), sizes, error state, prefix/suffix support.
+
+### Layout
+- **Stack** — Flex container for vertical/horizontal stacking. Configurable gap, alignment, justification. Polymorphic `as` prop.
+- **SigilGrid** — CSS Grid with visible dot pattern at intersections. 2-6 columns. Includes SigilGridCell with hover highlight.
+
+### Shapes
+- **Diamond** — Rotated-square shape via CSS clip-path. Configurable size, color, variants (filled, outlined), animations (pulse, spin, float).
+- **Hexagon** — Regular hexagon via CSS clip-path. Flat or pointy orientation. Variants: filled, outlined, gradient. Supports children for avatars/badges.
+
+### 3D
+- **Box3D** — CSS 3D box with six faces. GSAP-powered rotation. Variants: solid, wireframe, glass. Interactive cursor-follow and auto-rotate modes.
+- **Card3D** — Perspective tilt card that follows cursor. GSAP spring physics. Glare effect, depth layers for parallax, configurable tilt intensity.
+
+## Token categories
+
+- **Colors** — OKLCH-based with light/dark mode. background, surface, primary, text, border, semantic (success/warning/error/info).
+- **Typography** — font-display, font-body, font-mono.
+- **Spacing** — 10-step scale from 4px to 96px.
+- **Radius** — none through full (0px to 9999px).
+- **Shadows** — sm through xl, multi-layer with transparency.
+- **Motion** — Durations (instant to slower) and easings (default, in, out, in-out, spring).
+- **Borders** — Width scale (none, thin, medium, thick).
+- **Sigil** — grid-cell, cross-arm, cross-stroke, rail-gap, content-max, card-radius.
+
+## Key differentiator
+
+Unlike shadcn/ui where theming requires editing multiple files (tailwind.config.ts, CSS variables, individual component files), Sigil centralizes all design decisions in a single typed token object. One edit propagates everywhere.
+
+## Documentation
+
+Full docs at https://sigil-ui.dev/docs

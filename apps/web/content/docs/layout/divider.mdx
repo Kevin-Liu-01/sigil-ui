@@ -1,0 +1,74 @@
+---
+title: Divider
+description: A full-width horizontal or vertical divider with configurable thickness, color, and spacing. The layout counterpart to Separator.
+---
+
+## Import
+
+```tsx
+import { Divider } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Divider />
+```
+
+## With spacing
+
+```tsx
+<Divider spacing="sm" />
+<Divider spacing="md" />
+<Divider spacing="lg" />
+```
+
+Adds vertical margin above and below the line.
+
+## Vertical
+
+```tsx
+<Stack direction="row" gap={16} className="h-8">
+  <span>Left</span>
+  <Divider orientation="vertical" />
+  <span>Right</span>
+</Stack>
+```
+
+## Custom color
+
+```tsx
+<Divider color="var(--s-primary)" />
+<Divider color="var(--s-border-muted)" />
+```
+
+## Thickness
+
+```tsx
+<Divider thickness={1} />
+<Divider thickness={2} />
+<Divider thickness={4} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-border` | Default line color |
+| `--s-border-muted` | Subtle variant |
+| `--s-space-4` | Default spacing (md) |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Divider direction |
+| `spacing` | `"sm" \| "md" \| "lg" \| "none"` | `"none"` | Margin around divider |
+| `color` | `string` | `var(--s-border)` | Line color |
+| `thickness` | `number` | `1` | Line thickness in px |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Renders with `role="separator"` and `aria-orientation`
+- Decorative by default — add `role="none"` to suppress semantics

@@ -1,0 +1,81 @@
+---
+title: CTA
+description: A call-to-action section with headline, description, and action buttons. Used for conversion points throughout a page.
+---
+
+## Import
+
+```tsx
+import { CTA } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<CTA
+  headline="Ready to build?"
+  description="Start with a preset and ship your first page in minutes."
+>
+  <Button variant="primary" size="lg">Get started</Button>
+</CTA>
+```
+
+## With secondary action
+
+```tsx
+<CTA
+  headline="Join 5,000+ developers"
+  description="Token-driven design for teams that ship fast."
+>
+  <Button variant="primary" size="lg">Start free trial</Button>
+  <Button variant="ghost" size="lg">View demos</Button>
+</CTA>
+```
+
+## Background variants
+
+```tsx
+<CTA variant="default" headline="Default CTA" />
+<CTA variant="subtle" headline="Subtle background" />
+<CTA variant="primary" headline="Primary accent background" />
+```
+
+## Compact
+
+```tsx
+<CTA size="sm" headline="Subscribe to updates">
+  <Stack direction="row" gap={8}>
+    <Input placeholder="you@email.com" />
+    <Button variant="primary">Subscribe</Button>
+  </Stack>
+</CTA>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Headline color |
+| `--s-text-muted` | Description color |
+| `--s-primary` | Primary variant background |
+| `--s-surface-elevated` | Subtle variant background |
+| `--s-font-display` | Headline font |
+| `--s-space-section` | Vertical padding |
+| `--s-card-radius` | Section border radius |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `headline` | `string` | — | CTA headline |
+| `description` | `string` | — | Supporting text |
+| `variant` | `"default" \| "subtle" \| "primary"` | `"default"` | Background variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Section padding |
+| `align` | `"left" \| "center"` | `"center"` | Content alignment |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Action buttons |
+
+## Accessibility
+
+- Headline renders as `<h2>` for page structure
+- Buttons are focusable with visible focus ring

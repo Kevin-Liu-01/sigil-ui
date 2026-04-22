@@ -1,0 +1,135 @@
+---
+title: AlertDialog
+description: Modal confirmation dialog that requires an explicit user decision before proceeding.
+---
+
+# AlertDialog
+
+> Modal confirmation dialog that requires an explicit user decision before proceeding.
+
+## Installation
+
+```bash
+npx sigil add alert-dialog
+```
+
+## Import
+
+```tsx
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogAction,
+  AlertDialogCancel,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button variant="destructive">Delete account</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This will permanently delete your account and all associated data.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction>Delete</AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Examples
+
+### Custom action styling
+
+Override the action button for non-destructive confirmations.
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger asChild>
+    <Button>Publish</Button>
+  </AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Publish article?</AlertDialogTitle>
+      <AlertDialogDescription>
+        This will make the article visible to everyone.
+      </AlertDialogDescription>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Not yet</AlertDialogCancel>
+      <AlertDialogAction className="bg-[var(--s-success)]">
+        Publish
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+### Controlled state
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<AlertDialog open={open} onOpenChange={setOpen}>
+  <AlertDialogContent>
+    <AlertDialogHeader>
+      <AlertDialogTitle>Confirm</AlertDialogTitle>
+    </AlertDialogHeader>
+    <AlertDialogFooter>
+      <AlertDialogCancel>Cancel</AlertDialogCancel>
+      <AlertDialogAction onClick={() => handleConfirm()}>
+        Confirm
+      </AlertDialogAction>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Props
+
+### AlertDialog
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Open state change handler |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled default state |
+
+### AlertDialogContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+### AlertDialogAction / AlertDialogCancel
+
+Standard button HTML attributes.
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-background` — dialog background
+- `--s-border` — dialog border, cancel button border
+- `--s-shadow-lg` — dialog elevation
+- `--s-card-radius` — dialog border radius
+- `--s-radius-md` — button border radius
+- `--s-primary` — action button background and focus ring
+- `--s-surface-elevated` — cancel button hover
+- `--s-text` — title and cancel text
+- `--s-text-muted` — description text
+- `--s-duration-fast` — transition speed

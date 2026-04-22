@@ -1,0 +1,82 @@
+---
+title: Breadcrumb
+description: Navigation trail showing the current page location within a hierarchy.
+---
+
+# Breadcrumb
+
+> Navigation trail showing the current page location within a hierarchy.
+
+## Installation
+
+```bash
+npx sigil add breadcrumb
+```
+
+## Import
+
+```tsx
+import { Breadcrumb } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Docs", href: "/docs" },
+    { label: "Breadcrumb" },
+  ]}
+/>
+```
+
+## Examples
+
+### Custom separator
+
+```tsx
+<Breadcrumb
+  separator="›"
+  items={[
+    { label: "Dashboard", href: "/dashboard" },
+    { label: "Settings", href: "/settings" },
+    { label: "Profile" },
+  ]}
+/>
+```
+
+### With icons as separator
+
+```tsx
+<Breadcrumb
+  separator={<ChevronRight className="size-3" />}
+  items={[
+    { label: "Home", href: "/" },
+    { label: "Components", href: "/docs/components" },
+    { label: "Breadcrumb" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `BreadcrumbItem[]` | — | Trail items; last item is the current page |
+| `separator` | `ReactNode` | `"/"` | Separator between items |
+| `className` | `string` | — | Additional CSS classes |
+
+### BreadcrumbItem
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `label` | `string` | Display text |
+| `href` | `string` | Link URL (omit for current page) |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-text` — current page text color
+- `--s-text-muted` — ancestor links and separator color

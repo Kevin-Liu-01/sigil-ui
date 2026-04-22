@@ -1,0 +1,71 @@
+---
+title: Gutter
+description: A horizontal padding container that matches the page grid rail spacing. Keeps content aligned with the global column system.
+---
+
+## Import
+
+```tsx
+import { Gutter } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Gutter>
+  <h1>Content aligned to the page grid</h1>
+  <p>Horizontal padding matches the rail gap tokens.</p>
+</Gutter>
+```
+
+## Sizes
+
+```tsx
+<Gutter size="sm">Narrow gutters</Gutter>
+<Gutter size="md">Default gutters</Gutter>
+<Gutter size="lg">Wide gutters</Gutter>
+```
+
+## With max-width
+
+```tsx
+<Gutter maxWidth="var(--s-max-width)">
+  <p>Content constrained and centered.</p>
+</Gutter>
+```
+
+## Full-bleed breakout
+
+Nest a full-bleed child inside the gutter:
+
+```tsx
+<Gutter>
+  <p>Constrained content.</p>
+  <div className="-mx-[var(--s-rail-gap)]">
+    <img src="/banner.jpg" alt="" className="w-full" />
+  </div>
+  <p>Back to constrained.</p>
+</Gutter>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-rail-gap` | Default horizontal padding |
+| `--s-max-width` | Optional content max-width |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Gutter width |
+| `maxWidth` | `string` | — | Max-width constraint |
+| `as` | `ElementType` | `"div"` | HTML element to render |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Gutter content |
+
+## Accessibility
+
+- Purely presentational layout primitive
+- Use `as="main"` or `as="section"` for semantic meaning

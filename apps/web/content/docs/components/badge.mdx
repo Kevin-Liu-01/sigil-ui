@@ -1,0 +1,79 @@
+---
+title: Badge
+description: Inline status indicator with variant and size options.
+---
+
+# Badge
+
+> Inline status indicator with variant and size options.
+
+## Installation
+
+```bash
+npx sigil add badge
+```
+
+## Import
+
+```tsx
+import { Badge } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Badge>Default</Badge>
+```
+
+## Examples
+
+### Variants
+
+```tsx
+<Badge variant="default">Primary</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="outline">Outline</Badge>
+<Badge variant="destructive">Error</Badge>
+```
+
+### Small size
+
+```tsx
+<Badge size="sm">New</Badge>
+<Badge size="sm" variant="destructive">Critical</Badge>
+```
+
+### Inside other components
+
+Badges work well inside cards, tables, and list items.
+
+```tsx
+<Card>
+  <CardHeader>
+    <div className="flex items-center gap-2">
+      <h3>API Keys</h3>
+      <Badge variant="secondary">3 active</Badge>
+    </div>
+  </CardHeader>
+</Card>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "secondary" \| "outline" \| "destructive"` | `"default"` | Visual variant |
+| `size` | `"sm" \| "md"` | `"md"` | Badge size |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Badge content |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-primary` — default variant background
+- `--s-surface-elevated` — secondary variant background
+- `--s-border` — secondary and outline variant border
+- `--s-error` — destructive variant background
+- `--s-text` — outline variant text
+- `--s-text-secondary` — secondary variant text

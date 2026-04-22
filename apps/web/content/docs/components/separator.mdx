@@ -1,0 +1,68 @@
+---
+title: Separator
+description: A visual divider between content sections. Supports horizontal and vertical orientations with token-driven color and spacing.
+---
+
+## Import
+
+```tsx
+import { Separator } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Separator />
+```
+
+## Vertical
+
+```tsx
+<Stack direction="row" gap={16} align="center">
+  <span>Home</span>
+  <Separator orientation="vertical" className="h-4" />
+  <span>About</span>
+  <Separator orientation="vertical" className="h-4" />
+  <span>Contact</span>
+</Stack>
+```
+
+## With label
+
+```tsx
+<Separator label="or" />
+```
+
+Renders text centered on the separator line.
+
+## Decorative vs semantic
+
+```tsx
+<Separator decorative />
+<Separator decorative={false} />
+```
+
+When `decorative={false}`, the separator has `role="separator"`.
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-border` | Line color |
+| `--s-border-muted` | Subtle variant color |
+| `--s-text-muted` | Label text color |
+| `--s-surface` | Label background (to mask the line) |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Divider direction |
+| `label` | `string` | — | Centered text label |
+| `decorative` | `boolean` | `true` | Whether purely decorative |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- `decorative={true}` sets `role="none"` so screen readers skip it
+- `decorative={false}` sets `role="separator"` with `aria-orientation`

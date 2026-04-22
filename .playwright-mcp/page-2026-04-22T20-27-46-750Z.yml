@@ -1,0 +1,198 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "Sigil UI" [ref=e6] [cursor=pointer]:
+            - /url: /
+          - button "Collapse Sidebar" [ref=e7]:
+            - img [ref=e8]
+        - button "Search ⌘ K" [ref=e10]:
+          - img [ref=e11]
+          - text: Search
+          - generic [ref=e14]:
+            - generic [ref=e15]: ⌘
+            - generic [ref=e16]: K
+      - generic [ref=e19]:
+        - paragraph [ref=e20]: Getting Started
+        - link "Getting Started" [ref=e21] [cursor=pointer]:
+          - /url: /docs
+        - link "Installation" [ref=e22] [cursor=pointer]:
+          - /url: /docs/installation
+        - link "Theming" [ref=e23] [cursor=pointer]:
+          - /url: /docs/theming
+        - link "CLI Reference" [ref=e24] [cursor=pointer]:
+          - /url: /docs/cli
+        - paragraph [ref=e25]: Components
+        - link "Button" [ref=e26] [cursor=pointer]:
+          - /url: /docs/components/button
+        - link "Card" [ref=e27] [cursor=pointer]:
+          - /url: /docs/components/card
+        - link "Input" [ref=e28] [cursor=pointer]:
+          - /url: /docs/components/input
+        - paragraph [ref=e29]: Layout
+        - link "Stack" [ref=e30] [cursor=pointer]:
+          - /url: /docs/layout/stack
+        - link "SigilGrid" [ref=e31] [cursor=pointer]:
+          - /url: /docs/layout/grid
+        - paragraph [ref=e32]: Shapes
+        - link "Diamond" [ref=e33] [cursor=pointer]:
+          - /url: /docs/shapes/diamond
+        - link "Hexagon" [ref=e34] [cursor=pointer]:
+          - /url: /docs/shapes/hexagon
+        - paragraph [ref=e35]: 3D
+        - link "Box3D" [ref=e36] [cursor=pointer]:
+          - /url: /docs/3d/box3d
+        - link "Card3D" [ref=e37] [cursor=pointer]:
+          - /url: /docs/3d/card3d
+      - button "Toggle Theme" [ref=e40]:
+        - img [ref=e41]
+        - img [ref=e47]
+    - generic:
+      - button "Collapse Sidebar":
+        - img
+      - button "Open Search":
+        - img
+    - banner [ref=e50]:
+      - button "0 Getting Started" [ref=e51]:
+        - progressbar [ref=e52]
+        - generic [ref=e56]: Getting Started
+        - img [ref=e57]
+    - article [ref=e59]:
+      - heading "Getting Started" [level=1] [ref=e60]
+      - paragraph [ref=e61]: Ship a design system your agent can maintain. One token file updates every component, every theme, every breakpoint.
+      - generic [ref=e62]:
+        - heading "Why Sigil UI" [level=2] [ref=e63]:
+          - link "Why Sigil UI" [ref=e64] [cursor=pointer]:
+            - /url: "#why-sigil-ui"
+          - img [ref=e65]
+        - paragraph [ref=e68]: Most component libraries scatter design decisions across dozens of files. Change a border radius? Hunt through every component. Update a color? Grep and pray.
+        - paragraph [ref=e69]:
+          - strong [ref=e70]: Sigil takes the opposite approach.
+        - paragraph [ref=e71]: Every component reads from a single token object. Colors, spacing, radii, shadows, motion — all derived from one source. Change once, update everywhere.
+        - heading "How it compares to shadcn" [level=3] [ref=e72]:
+          - link "How it compares to shadcn" [ref=e73] [cursor=pointer]:
+            - /url: "#how-it-compares-to-shadcn"
+          - img [ref=e74]
+        - table [ref=e78]:
+          - rowgroup [ref=e79]:
+            - row "shadcn/ui Sigil UI" [ref=e80]:
+              - columnheader [ref=e81]
+              - columnheader "shadcn/ui" [ref=e82]
+              - columnheader "Sigil UI" [ref=e83]
+          - rowgroup [ref=e84]:
+            - row "Theming Edit tailwind.config.ts + CSS variables + component files Edit one token file" [ref=e85]:
+              - cell "Theming" [ref=e86]
+              - cell "Edit tailwind.config.ts + CSS variables + component files" [ref=e87]:
+                - text: Edit
+                - code [ref=e88]: tailwind.config.ts
+                - text: + CSS variables + component files
+              - cell "Edit one token file" [ref=e89]
+            - row "Agent workflow Agent modifies scattered Tailwind classes Your agent edits one file" [ref=e90]:
+              - cell "Agent workflow" [ref=e91]
+              - cell "Agent modifies scattered Tailwind classes" [ref=e92]
+              - cell "Your agent edits one file" [ref=e93]
+            - row "Presets Copy a Tailwind config from a blog post npx sigil init --preset minimal" [ref=e94]:
+              - cell "Presets" [ref=e95]
+              - cell "Copy a Tailwind config from a blog post" [ref=e96]
+              - cell "npx sigil init --preset minimal" [ref=e97]:
+                - code [ref=e98]: npx sigil init --preset minimal
+            - 'row "Token system CSS variables, manually maintained Three-layer architecture: primitive → semantic → component" [ref=e99]':
+              - cell "Token system" [ref=e100]
+              - cell "CSS variables, manually maintained" [ref=e101]
+              - 'cell "Three-layer architecture: primitive → semantic → component" [ref=e102]'
+            - row "Shipping themes \"Just change the CSS variables\" Ship a preset, not a Tailwind config" [ref=e103]:
+              - cell "Shipping themes" [ref=e104]
+              - cell "\"Just change the CSS variables\"" [ref=e105]
+              - cell "Ship a preset, not a Tailwind config" [ref=e106]
+        - heading "Quick start" [level=3] [ref=e107]:
+          - link "Quick start" [ref=e108] [cursor=pointer]:
+            - /url: "#quick-start"
+          - img [ref=e109]
+        - figure [ref=e112]:
+          - button "Copy Text" [ref=e114]:
+            - img [ref=e115]
+          - region [ref=e118]:
+            - code [ref=e120]:
+              - generic [ref=e121]: "# Install the packages"
+              - generic [ref=e122]: pnpm add @sigil-ui/tokens @sigil-ui/components
+              - generic [ref=e124]: "# Or scaffold a new project"
+              - generic [ref=e125]: npx sigil init
+        - paragraph [ref=e126]: "Import the token CSS and start building:"
+        - figure [ref=e127]:
+          - button "Copy Text" [ref=e129]:
+            - img [ref=e130]
+          - region [ref=e133]:
+            - code [ref=e135]:
+              - generic [ref=e136]: import "@sigil-ui/tokens/css";
+              - generic [ref=e137]: "import { Button } from \"@sigil-ui/components\";"
+              - generic [ref=e139]: "export default function App() {"
+              - generic [ref=e140]: return <Button variant="primary">Get started</Button>;
+              - generic [ref=e141]: "}"
+        - heading "Token architecture" [level=3] [ref=e142]:
+          - link "Token architecture" [ref=e143] [cursor=pointer]:
+            - /url: "#token-architecture"
+          - img [ref=e144]
+        - paragraph [ref=e147]: "Sigil uses a three-layer token system:"
+        - list [ref=e148]:
+          - listitem [ref=e149]:
+            - strong [ref=e150]: Primitive
+            - text: — raw values like
+            - code [ref=e151]: oklch(0.65 0.15 280)
+            - text: or
+            - code [ref=e152]: 8px
+          - listitem [ref=e153]:
+            - strong [ref=e154]: Semantic
+            - text: — purpose-driven aliases like
+            - code [ref=e155]: "--s-primary"
+            - text: or
+            - code [ref=e156]: "--s-radius-md"
+          - listitem [ref=e157]:
+            - strong [ref=e158]: Component
+            - text: — scoped tokens like
+            - code [ref=e159]: "--s-card-radius"
+            - text: consumed by individual components
+        - paragraph [ref=e160]:
+          - text: Every layer compiles to CSS custom properties with the
+          - code [ref=e161]: "--s-"
+          - text: prefix. Components only read variables — they never hardcode values.
+        - figure [ref=e162]:
+          - button "Copy Text" [ref=e164]:
+            - img [ref=e165]
+          - region [ref=e168]:
+            - code [ref=e170]:
+              - generic [ref=e171]: /* Your token file controls everything */
+              - generic [ref=e172]: ":root {"
+              - generic [ref=e173]: "--s-primary: oklch(0.65 0.15 280);"
+              - generic [ref=e174]: "--s-radius-md: 8px;"
+              - generic [ref=e175]: "--s-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), ...;"
+              - generic [ref=e176]: "}"
+        - heading "Next steps" [level=3] [ref=e177]:
+          - link "Next steps" [ref=e178] [cursor=pointer]:
+            - /url: "#next-steps"
+          - img [ref=e179]
+        - list [ref=e182]:
+          - listitem [ref=e183]:
+            - link "Installation" [ref=e184] [cursor=pointer]:
+              - /url: /docs/installation
+            - text: — detailed setup for Next.js, Vite, and Remix
+          - listitem [ref=e185]:
+            - link "Theming" [ref=e186] [cursor=pointer]:
+              - /url: /docs/theming
+            - text: — create and share presets
+          - listitem [ref=e187]:
+            - link "CLI Reference" [ref=e188] [cursor=pointer]:
+              - /url: /docs/cli
+            - text: — all available commands
+          - listitem [ref=e189]:
+            - link "Button" [ref=e190] [cursor=pointer]:
+              - /url: /docs/components/button
+            - text: — your first component
+      - link "Installation Add Sigil UI to a new or existing project in under two minutes." [ref=e192] [cursor=pointer]:
+        - /url: /docs/installation
+        - generic [ref=e193]:
+          - img [ref=e194]
+          - paragraph [ref=e196]: Installation
+        - paragraph [ref=e197]: Add Sigil UI to a new or existing project in under two minutes.
+  - button "Open Next.js Dev Tools" [ref=e203] [cursor=pointer]:
+    - img [ref=e204]

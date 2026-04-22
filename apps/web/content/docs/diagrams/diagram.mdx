@@ -1,0 +1,93 @@
+---
+title: Diagram
+description: A generic diagram container with SVG canvas, node positioning, and connection lines. The base for all Sigil diagram components.
+---
+
+## Import
+
+```tsx
+import { Diagram, DiagramNode, DiagramEdge } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Diagram width={600} height={300}>
+  <DiagramNode id="a" x={50} y={100} label="Input" />
+  <DiagramNode id="b" x={250} y={100} label="Process" />
+  <DiagramNode id="c" x={450} y={100} label="Output" />
+  <DiagramEdge from="a" to="b" />
+  <DiagramEdge from="b" to="c" />
+</Diagram>
+```
+
+## Node variants
+
+```tsx
+<DiagramNode id="start" x={50} y={50} label="Start" variant="circle" />
+<DiagramNode id="step" x={200} y={50} label="Step" variant="rectangle" />
+<DiagramNode id="decision" x={350} y={50} label="Yes/No" variant="diamond" />
+```
+
+## Edge styles
+
+```tsx
+<DiagramEdge from="a" to="b" style="solid" />
+<DiagramEdge from="b" to="c" style="dashed" />
+<DiagramEdge from="c" to="d" style="dotted" animated />
+```
+
+## Interactive nodes
+
+```tsx
+<DiagramNode id="api" x={100} y={100} label="API" onClick={(id) => select(id)} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Node background |
+| `--s-border` | Node border and edge stroke |
+| `--s-primary` | Selected node accent |
+| `--s-text` | Label text |
+| `--s-text-muted` | Edge labels |
+| `--s-radius-md` | Rectangle node radius |
+| `--s-font-mono` | Node label font |
+
+## Props
+
+### Diagram
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `width` | `number` | `600` | Canvas width |
+| `height` | `number` | `400` | Canvas height |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Nodes and edges |
+
+### DiagramNode
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `id` | `string` | — | Unique node identifier |
+| `x` | `number` | — | X position |
+| `y` | `number` | — | Y position |
+| `label` | `string` | — | Node label |
+| `variant` | `"rectangle" \| "circle" \| "diamond"` | `"rectangle"` | Node shape |
+| `onClick` | `(id: string) => void` | — | Click handler |
+
+### DiagramEdge
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `from` | `string` | — | Source node id |
+| `to` | `string` | — | Target node id |
+| `style` | `"solid" \| "dashed" \| "dotted"` | `"solid"` | Line style |
+| `animated` | `boolean` | `false` | Animated flow indicator |
+| `label` | `string` | — | Edge label text |
+
+## Accessibility
+
+- SVG canvas has `role="img"` with `aria-label`
+- Interactive nodes are focusable with keyboard navigation

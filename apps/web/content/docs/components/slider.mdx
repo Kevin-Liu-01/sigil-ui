@@ -1,0 +1,84 @@
+---
+title: Slider
+description: A range slider with one or two thumbs. Built on Radix Slider with token-driven track, thumb, and range colors.
+---
+
+## Import
+
+```tsx
+import { Slider } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Slider defaultValue={[50]} max={100} step={1} />
+```
+
+## Range slider
+
+```tsx
+<Slider defaultValue={[20, 80]} max={100} step={1} />
+```
+
+Two thumbs define a range between values.
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function VolumeSlider() {
+  const [volume, setVolume] = useState([75]);
+
+  return <Slider value={volume} onValueChange={setVolume} max={100} />;
+}
+```
+
+## With label
+
+```tsx
+<Stack gap={8}>
+  <Label>Opacity: {value}%</Label>
+  <Slider value={[value]} onValueChange={([v]) => setValue(v)} max={100} />
+</Stack>
+```
+
+## Sizes
+
+```tsx
+<Slider size="sm" defaultValue={[50]} />
+<Slider size="md" defaultValue={[50]} />
+<Slider size="lg" defaultValue={[50]} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Track background |
+| `--s-primary` | Active range fill |
+| `--s-primary-hover` | Thumb hover color |
+| `--s-border-interactive` | Focus ring |
+| `--s-radius-full` | Track and thumb radius |
+| `--s-duration-fast` | Thumb hover transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number[]` | — | Controlled value(s) |
+| `defaultValue` | `number[]` | — | Default value(s) |
+| `onValueChange` | `(value: number[]) => void` | — | Change handler |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Track height |
+| `disabled` | `boolean` | `false` | Disable interactions |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="slider"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
+- Arrow keys adjust by `step`; Page Up/Down adjust by 10×step
+- Thumb is focusable with visible focus ring

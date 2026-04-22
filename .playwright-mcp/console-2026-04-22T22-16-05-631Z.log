@@ -1,0 +1,107 @@
+[      74ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[      83ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[      89ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     140ms] [ERROR] In HTML, %s cannot be a descendant of <%s>.
+This will cause a hydration error.%s <button> button 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function LandingPage} serverProvidedParams={{...}}>
+          <LandingPage params={Promise} searchParams={Promise}>
+            <Navbar>
+            <main>
+              <Hero>
+              <TokenSystem>
+              <Components>
+              <Presets>
+                <section id="presets" style={{padding:"8...", ...}}>
+                  <ContentWrap>
+                    <div className="" style={{maxWidth:1200, ...}}>
+                      <h2>
+                      <p>
+                      <PresetShowcase>
+                        <div className={"flex gap..."} style={{...}}>
+                          <div style={{...}}>
+                            <MiniPage preset={{name:"sigil", ...}} active={true} onClick={function onClick}>
+>                             <button
+>                               type="button"
+>                               onClick={function onClick}
+>                               className="flex-shrink-0 flex flex-col items-center gap-2 group"
+>                               style={{cursor:"pointer"}}
+>                             >
+                                <div className="relative o..." style={{width:280, ...}}>
+                                  <div style={{width:560, ...}}>
+                                    <h3>
+>                                   <button
+>                                     type="button"
+>                                     style={{background:"#9b99e8",color:"#000",border:"none",borderRadius:6,padding:"10px 20px",fontSize:14, ...}}
+>                                   >
+                                    ...
+                                ...
+                          ...
+                      ...
+              ...
+            ...
+      ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[     140ms] [ERROR] <%s> cannot contain a nested %s.
+See this log for the ancestor stack trace. button <button> @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[     243ms] TypeError: value.startsWith is not a function
+    at ColorInput (http://localhost:3000/_next/static/chunks/_0go-idh._.js:14636:22)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)
+[   42992ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   43248ms] [ERROR] ./apps/web/components/landing/preset-showcase.tsx:138:7
+Expected corresponding JSX closing tag for <div>
+  136 |         {preset.name}
+  137 |       </span>
+> 138 |     </button>
+      |       ^^^^^^
+  139 |   );
+  140 | }
+  141 |
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/preset-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/preset-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   78010ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78013ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78024ms] [LOG] [Fast Refresh] done in 83ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78210ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78219ms] [LOG] [Fast Refresh] done in 111ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78353ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[   78399ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78411ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   78682ms] TypeError: value.startsWith is not a function
+    at ColorInput (http://localhost:3000/_next/static/chunks/_0go-idh._.js:14636:22)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)

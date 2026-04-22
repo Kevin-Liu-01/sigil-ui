@@ -1,0 +1,100 @@
+---
+title: Collapsible
+description: Expandable/collapsible container built on Radix with animated height transitions.
+---
+
+# Collapsible
+
+> Expandable/collapsible container built on Radix with animated height transitions.
+
+## Installation
+
+```bash
+npx sigil add collapsible
+```
+
+## Import
+
+```tsx
+import {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Collapsible>
+  <CollapsibleTrigger asChild>
+    <Button variant="ghost">Toggle details</Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <p>Hidden content that expands with an animated height transition.</p>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Examples
+
+### Default open
+
+```tsx
+<Collapsible defaultOpen>
+  <CollapsibleTrigger asChild>
+    <Button variant="outline">Collapse me</Button>
+  </CollapsibleTrigger>
+  <CollapsibleContent>
+    <p>This starts open and can be collapsed.</p>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+### Controlled
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Collapsible open={open} onOpenChange={setOpen}>
+  <div className="flex items-center gap-2">
+    <span className="text-sm font-medium">Advanced settings</span>
+    <CollapsibleTrigger asChild>
+      <Button variant="ghost" size="sm">
+        {open ? "Hide" : "Show"}
+      </Button>
+    </CollapsibleTrigger>
+  </div>
+  <CollapsibleContent>
+    <div className="mt-2 rounded-[var(--s-radius-md)] border border-[var(--s-border)] p-4">
+      <p className="text-sm text-[var(--s-text-secondary)]">
+        Additional configuration options.
+      </p>
+    </div>
+  </CollapsibleContent>
+</Collapsible>
+```
+
+## Props
+
+### Collapsible
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | Open state change handler |
+| `defaultOpen` | `boolean` | `false` | Default open state |
+
+### CollapsibleTrigger
+
+Unstyled trigger — wrap your own button with `asChild`.
+
+### CollapsibleContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+This component is a behavior primitive and does not read tokens directly. Content inside inherits tokens from the global scope. The expand/collapse animation uses CSS keyframes with `ease-out` timing.

@@ -1,0 +1,134 @@
+---
+title: Alignment Rails
+description: "Snap sections, navbars, and grids to a deterministic alignment rail system."
+---
+
+## What are alignment rails
+
+Alignment rails are invisible vertical guides that every layout component snaps to. They create consistent horizontal rhythm across navbars, hero sections, content areas, and footers — without manually matching padding values.
+
+Sigil defines two rail pairs:
+
+| Rail | Token | Default | Purpose |
+|------|-------|---------|---------|
+| **Outer rail** | `--s-rail-gap` | `24px` | Distance from viewport edge to content boundary |
+| **Content rail** | `--s-content-max` | `1280px` | Maximum content width, centered |
+
+Every layout component — `Section`, `Navbar`, `Grid`, `PageGrid`, `Footer` — reads these tokens. Change `--s-content-max` once and every section realigns.
+
+## How it works
+
+```
+┌──────────────────────────────────────────────────┐
+│  viewport                                        │
+│  ┌─ outer rail ─────────────────── outer rail ─┐ │
+│  │  24px         content max 1280px       24px │ │
+│  │  ┌───────────────────────────────────────┐  │ │
+│  │  │  Navbar                               │  │ │
+│  │  ├───────────────────────────────────────┤  │ │
+│  │  │  Hero section                         │  │ │
+│  │  ├───────────────────────────────────────┤  │ │
+│  │  │  Content grid                         │  │ │
+│  │  └───────────────────────────────────────┘  │ │
+│  └─────────────────────────────────────────────┘ │
+└──────────────────────────────────────────────────┘
+```
+
+## Using the alignment system
+
+### Section
+
+`Section` centers content within the content rail and applies outer rail padding automatically.
+
+```tsx
+import { Section } from "@sigil-ui/components";
+
+<Section>
+  <h2>This content snaps to the alignment rails</h2>
+  <p>Max width is controlled by --s-content-max.</p>
+</Section>
+```
+
+### Full-bleed sections
+
+Some sections need to break out of the content rail while keeping inner content aligned:
+
+```tsx
+<Section fullBleed>
+  <div className="bg-[var(--s-surface)]">
+    {/* Background extends to viewport edges */}
+    {/* Inner content still respects content-max */}
+    <p>Full bleed background, aligned content.</p>
+  </div>
+</Section>
+```
+
+### Navbar alignment
+
+The Navbar component reads the same rail tokens, so its content automatically aligns with page sections below it:
+
+```tsx
+import { Navbar } from "@sigil-ui/components";
+
+<Navbar>
+  <Navbar.Brand>Sigil</Navbar.Brand>
+  <Navbar.Links>
+    <a href="/docs">Docs</a>
+    <a href="/presets">Presets</a>
+  </Navbar.Links>
+</Navbar>
+<Section>
+  <p>This text aligns with the navbar brand above.</p>
+</Section>
+```
+
+### Grid snapping
+
+The `Grid` component subdivides the content rail into cells using `--s-grid-cell`:
+
+```tsx
+import { Grid } from "@sigil-ui/components";
+
+<Section>
+  <Grid columns={3} gap={24}>
+    <div>Column 1</div>
+    <div>Column 2</div>
+    <div>Column 3</div>
+  </Grid>
+</Section>
+```
+
+## Customizing rails
+
+Override the rail tokens in your preset or global CSS:
+
+```css
+:root {
+  --s-rail-gap: 32px;
+  --s-content-max: 1440px;
+  --s-grid-cell: 64px;
+}
+```
+
+### Responsive rails
+
+Use media queries to tighten rails on smaller screens:
+
+```css
+@media (max-width: 768px) {
+  :root {
+    --s-rail-gap: 16px;
+    --s-content-max: 100%;
+  }
+}
+```
+
+## Rail tokens reference
+
+| Token | Default | Description |
+|-------|---------|-------------|
+| `--s-rail-gap` | `24px` | Outer margin between viewport and content |
+| `--s-content-max` | `1280px` | Maximum content width |
+| `--s-grid-cell` | `48px` | Base grid cell dimension |
+| `--s-cross-arm` | `10px` | Cross mark arm length (structural grid) |
+| `--s-cross-stroke` | `1.5px` | Cross mark stroke width |

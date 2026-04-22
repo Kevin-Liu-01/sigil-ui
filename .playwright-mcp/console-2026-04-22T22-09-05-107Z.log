@@ -1,0 +1,224 @@
+[     140ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     342ms] [LOG] [Fast Refresh] done in 302ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     438ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     471ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     595ms] [ERROR] In HTML, %s cannot be a descendant of <%s>.
+This will cause a hydration error.%s <button> button 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function LandingPage} serverProvidedParams={{...}}>
+          <LandingPage params={Promise} searchParams={Promise}>
+            <Navbar>
+            <main>
+              <Hero>
+              <TokenSystem>
+              <Components>
+              <Presets>
+                <section id="presets" style={{padding:"8...", ...}}>
+                  <ContentWrap>
+                    <div className="" style={{maxWidth:1200, ...}}>
+                      <h2>
+                      <p>
+                      <PresetShowcase>
+                        <div className={"flex gap..."} style={{...}}>
+                          <div style={{...}}>
+                            <MiniPage preset={{name:"sigil", ...}} active={true} onClick={function onClick}>
+>                             <button
+>                               type="button"
+>                               onClick={function onClick}
+>                               className="flex-shrink-0 flex flex-col items-center gap-2 group"
+>                               style={{cursor:"pointer"}}
+>                             >
+                                <div className="relative o..." style={{width:280, ...}}>
+                                  <div style={{width:560, ...}}>
+                                    <h3>
+>                                   <button
+>                                     type="button"
+>                                     style={{background:"#9b99e8",color:"#000",border:"none",borderRadius:6,padding:"10px 20px",fontSize:14, ...}}
+>                                   >
+                                    ...
+                                ...
+                          ...
+                      ...
+              ...
+            ...
+      ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[     596ms] [ERROR] <%s> cannot contain a nested %s.
+See this log for the ancestor stack trace. button <button> @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[     620ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[     817ms] Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="dark robot..." data-theme="dark" suppressHydrationWarning={true}>
+                          <head>
+                          <body
++                           style={{paddingBottom:40}}
+-                           style={{padding-bottom:"40px"}}
+                          >
+                  ...
+
+    at throwOnHydrationMismatch (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:3318:56)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6758:918)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopConcurrentByScheduler (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9551:58)
+    at renderRootConcurrent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9534:71)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)
+[  213922ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  213937ms] [LOG] [Fast Refresh] done in 98ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  217993ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  218023ms] [LOG] [Fast Refresh] done in 52ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  225351ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  225387ms] [LOG] [Fast Refresh] done in 40ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  230940ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  231110ms] [ERROR] ./apps/web/components/devbar.tsx:495:1
+Unexpected token. Did you mean `{'}'}` or `&rbrace;`?
+  493 |     </div>
+  494 |   );
+> 495 | }
+      | ^
+  496 |
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/devbar.tsx [Client Component Browser]
+    ./apps/web/components/sigil-shell.tsx [Client Component Browser]
+    ./apps/web/components/sigil-shell.tsx [Server Component]
+    ./apps/web/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/devbar.tsx [Client Component SSR]
+    ./apps/web/components/sigil-shell.tsx [Client Component SSR]
+    ./apps/web/components/sigil-shell.tsx [Server Component]
+    ./apps/web/app/layout.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  234321ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234536ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234744ms] [LOG] [Fast Refresh] done in 309ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234925ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235021ms] [LOG] [Fast Refresh] done in 197ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235524ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  235584ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235606ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235645ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  235720ms] [ERROR] In HTML, %s cannot be a descendant of <%s>.
+This will cause a hydration error.%s <button> button 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function LandingPage} serverProvidedParams={{...}}>
+          <LandingPage params={Promise} searchParams={Promise}>
+            <Navbar>
+            <main>
+              <Hero>
+              <TokenSystem>
+              <Components>
+              <Presets>
+                <section id="presets" style={{padding:"8...", ...}}>
+                  <ContentWrap>
+                    <div className="" style={{maxWidth:1200, ...}}>
+                      <h2>
+                      <p>
+                      <PresetShowcase>
+                        <div className={"flex gap..."} style={{...}}>
+                          <div style={{...}}>
+                            <MiniPage preset={{name:"sigil", ...}} active={true} onClick={function onClick}>
+>                             <button
+>                               type="button"
+>                               onClick={function onClick}
+>                               className="flex-shrink-0 flex flex-col items-center gap-2 group"
+>                               style={{cursor:"pointer"}}
+>                             >
+                                <div className="relative o..." style={{width:280, ...}}>
+                                  <div style={{width:560, ...}}>
+                                    <h3>
+>                                   <button
+>                                     type="button"
+>                                     style={{background:"#9b99e8",color:"#000",border:"none",borderRadius:6,padding:"10px 20px",fontSize:14, ...}}
+>                                   >
+                                    ...
+                                ...
+                          ...
+                      ...
+              ...
+            ...
+      ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  235720ms] [ERROR] <%s> cannot contain a nested %s.
+See this log for the ancestor stack trace. button <button> @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  235815ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235817ms] [LOG] [Fast Refresh] done in 178ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  235850ms] TypeError: value.startsWith is not a function
+    at ColorInput (http://localhost:3000/_next/static/chunks/_0go-idh._.js:14636:22)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9098:47)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)
+[  258749ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[  258764ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  258770ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  258778ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  258843ms] TypeError: value.startsWith is not a function
+    at ColorInput (http://localhost:3000/_next/static/chunks/_0go-idh._.js:14636:22)
+    at Object.react_stack_bottom_frame (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:15037:24)
+    at renderWithHooks (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:4620:24)
+    at updateFunctionComponent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6081:21)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6691:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9449:40)
+    at renderRootSync (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9433:13)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9061:186)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)

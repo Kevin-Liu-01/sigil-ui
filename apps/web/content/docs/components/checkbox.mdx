@@ -1,0 +1,74 @@
+---
+title: Checkbox
+description: Styled checkbox input with optional label.
+---
+
+# Checkbox
+
+> Styled checkbox input with optional label.
+
+## Installation
+
+```bash
+npx sigil add checkbox
+```
+
+## Import
+
+```tsx
+import { Checkbox } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Checkbox label="Accept terms and conditions" />
+```
+
+## Examples
+
+### Without label
+
+```tsx
+<Checkbox aria-label="Select row" />
+```
+
+### Controlled
+
+```tsx
+const [checked, setChecked] = useState(false);
+
+<Checkbox
+  label="Enable notifications"
+  checked={checked}
+  onChange={(e) => setChecked(e.target.checked)}
+/>
+```
+
+### Disabled
+
+```tsx
+<Checkbox label="Read-only option" disabled checked />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `label` | `string` | — | Label text displayed next to the checkbox |
+| `checked` | `boolean` | — | Controlled checked state |
+| `onChange` | `ChangeEventHandler` | — | Change event handler |
+| `disabled` | `boolean` | `false` | Disable the checkbox |
+| `id` | `string` | — | Custom id (auto-generated from label if omitted) |
+| `className` | `string` | — | Additional CSS classes on the input |
+
+Plus all standard `<input>` HTML attributes (except `type`).
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-primary` — checked accent color and focus ring
+- `--s-border` — unchecked border
+- `--s-text` — label text color
+- `--s-radius-sm` — checkbox border radius

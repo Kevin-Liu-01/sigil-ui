@@ -1,0 +1,68 @@
+- generic [ref=e1]:
+  - generic [active]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - generic [ref=e6]:
+          - navigation [ref=e7]:
+            - button "previous" [disabled] [ref=e8]:
+              - img "previous" [ref=e9]
+            - generic [ref=e11]:
+              - generic [ref=e12]: 1/
+              - text: "4"
+            - button "next" [ref=e13] [cursor=pointer]:
+              - img "next" [ref=e14]
+          - img
+        - generic [ref=e16]:
+          - generic [ref=e17]:
+            - img [ref=e18]
+            - generic "Latest available version is detected (16.2.4)." [ref=e20]: Next.js 16.2.4
+            - generic [ref=e21]: Turbopack
+          - img
+      - generic [ref=e22]:
+        - dialog "Console Error" [ref=e23]:
+          - generic [ref=e27]:
+            - generic [ref=e28]:
+              - generic [ref=e30]: Console Error
+              - generic [ref=e31]:
+                - button "Copy Error Info" [ref=e32] [cursor=pointer]:
+                  - img [ref=e33]
+                - button "No related documentation found" [disabled] [ref=e35]:
+                  - img [ref=e36]
+                - button "Attach Node.js inspector" [ref=e38] [cursor=pointer]:
+                  - img [ref=e39]
+            - generic [ref=e48]:
+              - text: Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (
+              - link "https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template" [ref=e49] [cursor=pointer]:
+                - /url: https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template
+              - text: ).
+          - generic [ref=e50]: "1"
+          - generic [ref=e51]: "2"
+        - contentinfo [ref=e52]:
+          - region "Error feedback" [ref=e53]:
+            - paragraph [ref=e54]:
+              - link "Was this helpful?" [ref=e55] [cursor=pointer]:
+                - /url: https://nextjs.org/telemetry#error-feedback
+            - button "Mark as helpful" [ref=e56] [cursor=pointer]:
+              - img [ref=e57]
+            - button "Mark as not helpful" [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+    - generic [ref=e67] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e68]:
+        - img [ref=e69]
+      - generic [ref=e72]:
+        - button "Open issues overlay" [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]: "3"
+            - generic [ref=e76]: "4"
+          - generic [ref=e77]:
+            - text: Issue
+            - generic [ref=e78]: s
+        - button "Collapse issues badge" [ref=e79]:
+          - img [ref=e80]
+  - generic [ref=e83]:
+    - img [ref=e84]
+    - heading "This page couldn’t load" [level=1] [ref=e86]
+    - paragraph [ref=e87]: Reload to try again, or go back.
+    - generic [ref=e88]:
+      - button "Reload" [ref=e90] [cursor=pointer]
+      - button "Back" [ref=e91] [cursor=pointer]

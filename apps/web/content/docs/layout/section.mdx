@@ -1,0 +1,72 @@
+---
+title: Section
+description: A semantic page section with configurable vertical padding, max-width constraint, and optional background color.
+---
+
+## Import
+
+```tsx
+import { Section } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Section>
+  <h2>Features</h2>
+  <p>Everything you need to build modern interfaces.</p>
+</Section>
+```
+
+## Padding sizes
+
+```tsx
+<Section padding="sm">Compact section</Section>
+<Section padding="md">Default section</Section>
+<Section padding="lg">Spacious section</Section>
+<Section padding="xl">Hero-sized section</Section>
+```
+
+## With background
+
+```tsx
+<Section background="var(--s-surface-elevated)">
+  <h2>Highlighted section</h2>
+  <p>Stands out from surrounding content.</p>
+</Section>
+```
+
+## Full width
+
+Remove the max-width constraint for edge-to-edge content:
+
+```tsx
+<Section fullWidth>
+  <img src="/banner.jpg" alt="Full width banner" className="w-full" />
+</Section>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-space-section` | Default vertical padding |
+| `--s-max-width` | Content max-width constraint |
+| `--s-surface` | Default background |
+| `--s-surface-elevated` | Alternate background |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `padding` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Vertical padding |
+| `background` | `string` | — | Background color or CSS variable |
+| `fullWidth` | `boolean` | `false` | Remove max-width constraint |
+| `as` | `ElementType` | `"section"` | HTML element to render |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Section content |
+
+## Accessibility
+
+- Renders as `<section>` by default for semantic structure
+- Add an `aria-labelledby` pointing to the section heading for screen readers

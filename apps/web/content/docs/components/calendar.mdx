@@ -1,0 +1,92 @@
+---
+title: Calendar
+description: Date picker calendar powered by react-day-picker with token-driven styling.
+---
+
+# Calendar
+
+> Date picker calendar powered by react-day-picker with token-driven styling.
+
+## Installation
+
+```bash
+npx sigil add calendar
+```
+
+## Import
+
+```tsx
+import { Calendar } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+const [date, setDate] = useState<Date | undefined>(new Date());
+
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+/>
+```
+
+## Examples
+
+### Date range
+
+```tsx
+const [range, setRange] = useState<DateRange | undefined>();
+
+<Calendar
+  mode="range"
+  selected={range}
+  onSelect={setRange}
+  numberOfMonths={2}
+/>
+```
+
+### With disabled dates
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  disabled={(day) => day < new Date()}
+/>
+```
+
+### Hide outside days
+
+```tsx
+<Calendar
+  mode="single"
+  selected={date}
+  onSelect={setDate}
+  showOutsideDays={false}
+/>
+```
+
+## Props
+
+Extends all `react-day-picker` `DayPicker` props.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `mode` | `"single" \| "range" \| "multiple"` | — | Selection mode |
+| `selected` | `Date \| DateRange \| Date[]` | — | Selected date(s) |
+| `onSelect` | `function` | — | Selection change handler |
+| `showOutsideDays` | `boolean` | `true` | Show days from adjacent months |
+| `numberOfMonths` | `number` | `1` | Number of months to display |
+| `disabled` | `Matcher \| Matcher[]` | — | Dates to disable |
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-primary` — selected day background, today ring, focus ring
+- `--s-text` — day text, caption label
+- `--s-text-muted` — weekday headers, outside days, navigation arrows
+- `--s-radius-sm` — day cell and navigation button radius

@@ -1,0 +1,64 @@
+---
+title: ScrollArea
+description: A custom scrollbar container built on Radix ScrollArea. Token-driven scrollbar colors, width, and radius.
+---
+
+## Import
+
+```tsx
+import { ScrollArea } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ScrollArea className="h-[200px]">
+  <div className="p-4">
+    {items.map((item) => (
+      <p key={item.id}>{item.text}</p>
+    ))}
+  </div>
+</ScrollArea>
+```
+
+## Horizontal scrolling
+
+```tsx
+<ScrollArea orientation="horizontal" className="w-full">
+  <Stack direction="row" gap={16} className="p-4 w-max">
+    {cards.map((card) => <Card key={card.id}>{card.title}</Card>)}
+  </Stack>
+</ScrollArea>
+```
+
+## Both axes
+
+```tsx
+<ScrollArea orientation="both" className="h-[300px] w-[400px]">
+  <div className="w-[800px] h-[600px] p-4">Large content area</div>
+</ScrollArea>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-border` | Scrollbar thumb color |
+| `--s-border-muted` | Scrollbar track color |
+| `--s-radius-full` | Thumb border radius |
+| `--s-duration-fast` | Thumb fade transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `orientation` | `"vertical" \| "horizontal" \| "both"` | `"vertical"` | Scroll direction |
+| `scrollbarSize` | `number` | `8` | Scrollbar width in px |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Scrollable content |
+
+## Accessibility
+
+- Scrollbar is styled only — native scroll behavior is preserved
+- Keyboard scrolling works natively with arrow keys and Page Up/Down
+- Scrollbar is visible on hover and during scroll, hidden otherwise

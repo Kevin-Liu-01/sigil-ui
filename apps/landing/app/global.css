@@ -1,0 +1,333 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/* Sigil Tokens — Light                                              */
+/* ------------------------------------------------------------------ */
+:root {
+  color-scheme: light dark;
+
+  /* Backgrounds */
+  --r-bg: #ffffff;
+  --r-surface: #f8f8f8;
+  --r-surface-elevated: #f2f2f4;
+
+  /* Brand */
+  --r-primary: oklch(0.65 0.15 280);
+  --r-primary-hover: oklch(0.60 0.18 280);
+  --r-primary-muted: oklch(0.90 0.04 280);
+  --r-secondary: oklch(0.70 0.12 60);
+
+  /* Text hierarchy */
+  --r-text: #0a0a0f;
+  --r-text-secondary: #52525b;
+  --r-text-muted: #71717a;
+  --r-text-subtle: #a1a1aa;
+  --r-text-disabled: #d4d4d8;
+
+  /* Borders */
+  --r-border: #e4e4e7;
+  --r-border-muted: #f0f0f2;
+  --r-border-strong: #a1a1aa;
+  --r-border-interactive: oklch(0.65 0.15 280);
+
+  /* State */
+  --r-success: #10b981;
+  --r-success-muted: #ecfdf5;
+  --r-warning: #f59e0b;
+  --r-warning-muted: #fffbeb;
+  --r-error: #ef4444;
+  --r-error-muted: #fef2f2;
+  --r-info: #3b82f6;
+  --r-info-muted: #eff6ff;
+
+  /* Accent palette */
+  --r-accent-indigo: oklch(0.65 0.15 280);
+  --r-accent-emerald: oklch(0.65 0.17 160);
+  --r-accent-amber: oklch(0.75 0.15 85);
+  --r-accent-sky: oklch(0.60 0.15 250);
+  --r-accent-fuchsia: oklch(0.65 0.18 320);
+  --r-accent-rose: oklch(0.60 0.20 25);
+
+  /* Shadows */
+  --r-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --r-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06), 0 2px 4px 0 rgb(0 0 0 / 0.04);
+  --r-shadow-lg: 0 0 0 1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.06), 0 4px 8px -2px rgb(0 0 0 / 0.08);
+  --r-shadow-xl: 0 0 0 1px rgb(0 0 0 / 0.03), 0 4px 6px -4px rgb(0 0 0 / 0.06), 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --r-shadow-primary: 0 0 0 1px oklch(0.65 0.15 280 / 0.15), 0 4px 12px oklch(0.65 0.15 280 / 0.12);
+
+  /* Typography */
+  --r-font-display: "Nacelle", system-ui, sans-serif;
+  --r-font-body: system-ui, -apple-system, sans-serif;
+  --r-font-mono: "Roboto Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Spacing */
+  --r-space-1: 4px;
+  --r-space-2: 8px;
+  --r-space-3: 12px;
+  --r-space-4: 16px;
+  --r-space-6: 24px;
+  --r-space-8: 32px;
+  --r-space-12: 48px;
+  --r-space-16: 64px;
+  --r-space-20: 80px;
+  --r-space-24: 96px;
+
+  /* Radius */
+  --r-radius-none: 0px;
+  --r-radius-sm: 4px;
+  --r-radius-md: 8px;
+  --r-radius-lg: 12px;
+  --r-radius-xl: 16px;
+  --r-radius-2xl: 24px;
+  --r-radius-full: 9999px;
+  --r-card-radius: 10px;
+
+  /* Sigil grid */
+  --r-grid-cell: 48px;
+  --r-cross-arm: 10px;
+  --r-cross-stroke: 1.5px;
+  --r-rail-gap: 24px;
+  --r-content-max: 1280px;
+
+  /* Border widths */
+  --r-border-width-thin: 1px;
+  --r-border-width-medium: 1.5px;
+  --r-border-width-thick: 2px;
+
+  /* Motion */
+  --r-duration-instant: 0ms;
+  --r-duration-fast: 150ms;
+  --r-duration-normal: 250ms;
+  --r-duration-slow: 400ms;
+  --r-duration-slower: 600ms;
+  --r-ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --r-ease-out: cubic-bezier(0, 0.55, 0.45, 1);
+  --r-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --r-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Sigil Tokens — Dark                                               */
+/* ------------------------------------------------------------------ */
+.dark,
+[data-theme="dark"] {
+  --r-bg: #0a0a0f;
+  --r-surface: #141419;
+  --r-surface-elevated: #1a1a22;
+
+  --r-text: #fafafa;
+  --r-text-secondary: #a1a1aa;
+  --r-text-muted: #71717a;
+  --r-text-subtle: #52525b;
+  --r-text-disabled: #3f3f46;
+
+  --r-border: #27272a;
+  --r-border-muted: #1e1e24;
+  --r-border-strong: #52525b;
+
+  --r-success-muted: #052e16;
+  --r-warning-muted: #451a03;
+  --r-error-muted: #450a0a;
+  --r-info-muted: #172554;
+
+  --r-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --r-shadow-md: 0 0 0 1px rgb(255 255 255 / 0.04), 0 1px 2px -1px rgb(0 0 0 / 0.3), 0 2px 4px 0 rgb(0 0 0 / 0.2);
+  --r-shadow-lg: 0 0 0 1px rgb(255 255 255 / 0.03), 0 2px 4px -2px rgb(0 0 0 / 0.3), 0 4px 8px -2px rgb(0 0 0 / 0.4);
+  --r-shadow-xl: 0 0 0 1px rgb(255 255 255 / 0.02), 0 4px 6px -4px rgb(0 0 0 / 0.3), 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --r-shadow-primary: 0 0 0 1px oklch(0.65 0.15 280 / 0.2), 0 4px 16px oklch(0.65 0.15 280 / 0.15);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                 */
+/* ------------------------------------------------------------------ */
+
+@font-face {
+  font-family: "Nacelle";
+  src: local("Nacelle");
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--r-font-body);
+  background-color: var(--r-bg);
+  color: var(--r-text);
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------ */
+/* Grid background pattern                                              */
+/* ------------------------------------------------------------------ */
+
+.r-grid-bg {
+  background-image:
+    linear-gradient(var(--r-border-muted) var(--r-border-width-thin), transparent var(--r-border-width-thin)),
+    linear-gradient(90deg, var(--r-border-muted) var(--r-border-width-thin), transparent var(--r-border-width-thin));
+  background-size: var(--r-grid-cell) var(--r-grid-cell);
+}
+
+.r-grid-bg-subtle {
+  background-image:
+    linear-gradient(var(--r-border-muted) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, var(--r-border-muted) 0.5px, transparent 0.5px);
+  background-size: var(--r-grid-cell) var(--r-grid-cell);
+}
+
+/* Cross marks at intersections */
+.r-cross::before,
+.r-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--r-border-strong);
+}
+
+.r-cross::before {
+  width: var(--r-cross-stroke);
+  height: calc(var(--r-cross-arm) * 2);
+  top: calc(50% - var(--r-cross-arm));
+  left: calc(50% - var(--r-cross-stroke) / 2);
+}
+
+.r-cross::after {
+  height: var(--r-cross-stroke);
+  width: calc(var(--r-cross-arm) * 2);
+  left: calc(50% - var(--r-cross-arm));
+  top: calc(50% - var(--r-cross-stroke) / 2);
+}
+
+/* Standalone cross marks for decorative placement */
+.r-cross-mark {
+  position: relative;
+  width: calc(var(--r-cross-arm) * 2);
+  height: calc(var(--r-cross-arm) * 2);
+}
+
+.r-cross-mark::before,
+.r-cross-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--r-text-subtle);
+}
+
+.r-cross-mark::before {
+  width: var(--r-cross-stroke);
+  height: 100%;
+  left: calc(50% - var(--r-cross-stroke) / 2);
+}
+
+.r-cross-mark::after {
+  height: var(--r-cross-stroke);
+  width: 100%;
+  top: calc(50% - var(--r-cross-stroke) / 2);
+}
+
+/* ------------------------------------------------------------------ */
+/* Utility classes                                                      */
+/* ------------------------------------------------------------------ */
+
+.r-mono {
+  font-family: var(--r-font-mono);
+}
+
+.r-display {
+  font-family: var(--r-font-display);
+}
+
+.r-balance {
+  text-wrap: balance;
+}
+
+.r-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------ */
+/* Word cycle animation                                                 */
+/* ------------------------------------------------------------------ */
+
+@keyframes r-word-cycle {
+  0%, 20% { content: "tokens"; }
+  25%, 45% { content: "preset"; }
+  50%, 70% { content: "agent"; }
+  75%, 95% { content: "design"; }
+}
+
+@keyframes r-fade-cycle {
+  0%, 18% { opacity: 1; transform: translateY(0); }
+  20%, 22% { opacity: 0; transform: translateY(-8px); }
+  24%, 42% { opacity: 1; transform: translateY(0); }
+  44%, 46% { opacity: 0; transform: translateY(-8px); }
+  48%, 68% { opacity: 1; transform: translateY(0); }
+  70%, 72% { opacity: 0; transform: translateY(-8px); }
+  74%, 92% { opacity: 1; transform: translateY(0); }
+  94%, 96% { opacity: 0; transform: translateY(-8px); }
+  98%, 100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ------------------------------------------------------------------ */
+/* Terminal typing effect                                               */
+/* ------------------------------------------------------------------ */
+
+@keyframes r-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.r-cursor-blink::after {
+  content: "▋";
+  animation: r-blink 1s step-end infinite;
+  color: var(--r-primary);
+  margin-left: 2px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scrollbar                                                            */
+/* ------------------------------------------------------------------ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--r-border);
+  border-radius: var(--r-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--r-border-strong);
+}
+
+/* ------------------------------------------------------------------ */
+/* Selection                                                            */
+/* ------------------------------------------------------------------ */
+
+::selection {
+  background: oklch(0.65 0.15 280 / 0.25);
+  color: inherit;
+}
+
+/* ------------------------------------------------------------------ */
+/* Button active press                                                  */
+/* ------------------------------------------------------------------ */
+
+.r-press:active {
+  transform: scale(0.97);
+}

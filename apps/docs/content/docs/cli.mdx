@@ -1,0 +1,162 @@
+---
+title: CLI Reference
+description: The Sigil CLI scaffolds projects, compiles tokens, and manages presets.
+---
+
+## Installation
+
+The CLI ships with the `@sigil-ui/tokens` package. You can also run it directly with `npx`:
+
+```bash
+npx sigil <command> [options]
+```
+
+## Commands
+
+### `init`
+
+Scaffold a new Sigil project or add Sigil to an existing one.
+
+```bash
+npx sigil init [options]
+```
+
+| Option | Description | Default |
+|---|---|---|
+| `--preset <name>` | Apply a built-in preset | `default` |
+| `--cwd <path>` | Working directory | `.` |
+| `--typescript` | Generate TypeScript token file | `true` |
+| `--css` | Generate CSS-only (no TS) | `false` |
+| `--skip-install` | Skip package installation | `false` |
+
+**What it does:**
+
+1. Creates `sigil.tokens.ts` (or `.css`) in your project root
+2. Adds `@sigil-ui/tokens` and `@sigil-ui/components` to `package.json`
+3. Injects the CSS import into your root layout
+4. Optionally applies a named preset
+
+```bash
+# Scaffold with defaults
+npx sigil init
+
+# Use the brutalist preset
+npx sigil init --preset brutalist
+
+# Target a specific directory
+npx sigil init --cwd ./apps/marketing
+```
+
+### `compile`
+
+Compile a TypeScript token file into CSS.
+
+```bash
+npx sigil compile <input> [options]
+```
+
+| Option | Description | Default |
+|---|---|---|
+| `--out <path>` | Output CSS file | `stdout` |
+| `--prefix <string>` | CSS variable prefix | `--r-` |
+| `--light-only` | Skip dark mode output | `false` |
+| `--dark-only` | Skip light mode output | `false` |
+| `--selector <string>` | Root selector | `:root` |
+| `--dark-selector <string>` | Dark mode selector | `.dark` |
+| `--minify` | Minify output | `false` |
+
+```bash
+# Compile to a file
+npx sigil compile ./tokens/brand.ts --out ./public/brand.css
+
+# Compile to stdout for piping
+npx sigil compile ./tokens/brand.ts | pbcopy
+
+# Custom prefix
+npx sigil compile ./tokens/brand.ts --prefix --brand- --out ./brand.css
+```
+
+### `preset`
+
+List available built-in presets or inspect a preset.
+
+```bash
+npx sigil preset [name]
+```
+
+```bash
+# List all presets
+npx sigil preset
+
+# Inspect a preset
+npx sigil preset brutalist
+```
+
+**Built-in presets:**
+
+| Preset | Description |
+|---|---|
+| `default` | Sigil defaults — neutral with purple primary, OKLCH colors |
+| `minimal` | Tighter spacing, smaller radii, muted palette |
+| `brutalist` | No border radius, high contrast, monospace display font |
+| `warm` | Earthy tones, larger radii, generous spacing |
+| `mono` | Grayscale only, no chroma, clean and stark |
+
+### `eject`
+
+Export the current compiled tokens as a standalone CSS file that does not depend on `@sigil-ui/tokens` at runtime.
+
+```bash
+npx sigil eject [options]
+```
+
+| Option | Description | Default |
+|---|---|---|
+| `--out <path>` | Output CSS file | `./sigil-tokens.css` |
+| `--format <type>` | `css` or `json` | `css` |
+
+```bash
+npx sigil eject --out ./styles/tokens.css
+npx sigil eject --format json --out ./tokens.json
+```
+
+### `diff`
+
+Compare two token files and show what changed.
+
+```bash
+npx sigil diff <file-a> <file-b>
+```
+
+```bash
+npx sigil diff ./tokens/v1.ts ./tokens/v2.ts
+```
+
+Output:
+
+```diff
+  colors.primary
+-   oklch(0.65 0.15 280)
++   oklch(0.55 0.20 145)
+
+  radius.md
+-   8px
++   6px
+
+  2 tokens changed, 0 added, 0 removed
+```
+
+## Environment variables
+
+| Variable | Description |
+|---|---|
+| `SIGIL_PREFIX` | Override the default `--r-` prefix |
+| `SIGIL_NO_COLOR` | Disable colored CLI output |
+
+## Exit codes
+
+| Code | Meaning |
+|---|---|
+| `0` | Success |
+| `1` | Invalid arguments or missing files |
+| `2` | Compilation error (invalid token shape) |

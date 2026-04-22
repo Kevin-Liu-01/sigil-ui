@@ -1,0 +1,179 @@
+---
+title: Card3D
+description: A card with perspective tilt that follows the cursor. GSAP-powered with configurable depth, glare, and spring physics.
+---
+
+## Import
+
+```tsx
+import { Card3D } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Card3D>
+  <h3>Hover me</h3>
+  <p>This card tilts toward your cursor with smooth spring physics.</p>
+</Card3D>
+```
+
+The card applies `perspective` and `rotateX`/`rotateY` transforms based on cursor position within the element. GSAP interpolates the values with spring easing for a natural feel.
+
+## Tilt intensity
+
+Control how far the card can tilt:
+
+```tsx
+{/* Subtle tilt */}
+<Card3D maxTilt={5}>...</Card3D>
+
+{/* Default */}
+<Card3D maxTilt={15}>...</Card3D>
+
+{/* Dramatic */}
+<Card3D maxTilt={30}>...</Card3D>
+```
+
+## Perspective
+
+```tsx
+{/* Tight perspective (more pronounced 3D) */}
+<Card3D perspective={600}>...</Card3D>
+
+{/* Default */}
+<Card3D perspective={1000}>...</Card3D>
+
+{/* Flat perspective (subtle) */}
+<Card3D perspective={2000}>...</Card3D>
+```
+
+## Glare effect
+
+An overlay that simulates light reflecting off the card surface:
+
+```tsx
+<Card3D glare>
+  <h3>With glare</h3>
+  <p>A light reflection follows the tilt angle.</p>
+</Card3D>
+```
+
+Control glare intensity:
+
+```tsx
+<Card3D glare glareMaxOpacity={0.3}>...</Card3D>
+<Card3D glare glareMaxOpacity={0.1}>...</Card3D>
+```
+
+## Depth layers
+
+Push child elements forward in Z-space for a parallax depth effect:
+
+```tsx
+<Card3D>
+  <Card3D.Layer depth={0}>
+    <img src="/bg.jpg" alt="" className="w-full" />
+  </Card3D.Layer>
+  <Card3D.Layer depth={20}>
+    <h3>Floating title</h3>
+  </Card3D.Layer>
+  <Card3D.Layer depth={40}>
+    <Button variant="primary">CTA</Button>
+  </Card3D.Layer>
+</Card3D>
+```
+
+Each `Card3D.Layer` translates forward by `depth` pixels in Z-space, creating a parallax effect as the card tilts.
+
+## Reset on leave
+
+By default the card smoothly resets to flat when the cursor leaves. Disable to keep the last tilt angle:
+
+```tsx
+<Card3D resetOnLeave={false}>...</Card3D>
+```
+
+## Scale on hover
+
+```tsx
+<Card3D scale={1.05}>
+  <p>Slight zoom on hover</p>
+</Card3D>
+```
+
+## Card variants
+
+Card3D inherits Card's visual variants:
+
+```tsx
+<Card3D variant="outlined">...</Card3D>
+<Card3D variant="elevated">...</Card3D>
+<Card3D variant="ghost">...</Card3D>
+```
+
+## Pricing card pattern
+
+```tsx
+<Card3D glare maxTilt={10} scale={1.02}>
+  <Stack gap={16} align="center" className="p-8">
+    <Diamond size={16} color="var(--s-primary)" />
+    <h3 className="text-xl font-semibold">Pro</h3>
+    <p className="text-4xl font-bold">$29<span className="text-base">/mo</span></p>
+    <Stack gap={8}>
+      <p>Unlimited components</p>
+      <p>Custom presets</p>
+      <p>Priority support</p>
+    </Stack>
+    <Button variant="primary" fullWidth>Get started</Button>
+  </Stack>
+</Card3D>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Card background |
+| `--s-surface-elevated` | Hover surface shift |
+| `--s-border` | Outlined variant border |
+| `--s-card-radius` | Border radius |
+| `--s-shadow-lg` | Resting elevation |
+| `--s-shadow-xl` | Hover elevation |
+| `--s-duration-fast` | Scale transition |
+| `--s-duration-normal` | Tilt reset transition |
+| `--s-ease-spring` | Tilt interpolation |
+| `--s-ease-default` | Reset easing |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `maxTilt` | `number` | `15` | Maximum tilt angle in degrees |
+| `perspective` | `number` | `1000` | CSS perspective value (px) |
+| `glare` | `boolean` | `false` | Enable glare overlay |
+| `glareMaxOpacity` | `number` | `0.2` | Maximum glare opacity |
+| `scale` | `number` | `1` | Hover scale factor |
+| `resetOnLeave` | `boolean` | `true` | Reset tilt when cursor leaves |
+| `variant` | `"default" \| "outlined" \| "elevated" \| "ghost"` | `"default"` | Card visual variant |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Card content |
+
+### Card3D.Layer
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `depth` | `number` | `0` | Z-axis translation in pixels |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Layer content |
+
+## Browser support
+
+Requires `perspective` and `transform-style: preserve-3d` (all modern browsers). GSAP handles animation with automatic `requestAnimationFrame` scheduling.
+
+## Accessibility
+
+- `prefers-reduced-motion` disables tilt animation and holds the card flat
+- Content inside remains fully accessible regardless of tilt state
+- Focus ring renders at `--s-border-interactive` when focused via keyboard
+- Keyboard users are not affected by the tilt effect

@@ -1,0 +1,85 @@
+---
+title: IsometricView
+description: A CSS transform wrapper that renders children in isometric projection (30° rotation). No WebGL required.
+---
+
+## Import
+
+```tsx
+import { IsometricView } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<IsometricView>
+  <Card className="w-48 h-32">
+    <CardBody>Isometric card</CardBody>
+  </Card>
+</IsometricView>
+```
+
+Applies `rotateX(60deg) rotateZ(-45deg)` for a standard isometric view.
+
+## Custom angle
+
+```tsx
+<IsometricView angle={45}>
+  Custom rotation angle.
+</IsometricView>
+```
+
+## Interactive hover
+
+Flattens back to 0° on hover for a reveal effect:
+
+```tsx
+<IsometricView interactive>
+  <Card>Hover to flatten</Card>
+</IsometricView>
+```
+
+## Scale
+
+```tsx
+<IsometricView scale={0.8}>Smaller isometric view</IsometricView>
+<IsometricView scale={1.2}>Larger isometric view</IsometricView>
+```
+
+## Stacked layers
+
+```tsx
+<IsometricView>
+  <Stack gap={-20}>
+    <Card className="w-48 h-32">Layer 1</Card>
+    <Card className="w-48 h-32">Layer 2</Card>
+    <Card className="w-48 h-32">Layer 3</Card>
+  </Stack>
+</IsometricView>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-shadow-lg` | Isometric drop shadow |
+| `--s-duration-normal` | Hover flatten transition |
+| `--s-ease-default` | Transition easing |
+| `--s-ease-spring` | Interactive hover spring |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `angle` | `number` | `30` | Isometric rotation angle |
+| `scale` | `number` | `1` | Scale multiplier |
+| `interactive` | `boolean` | `false` | Flatten on hover |
+| `perspective` | `number` | `800` | CSS perspective value |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content to project |
+
+## Accessibility
+
+- `prefers-reduced-motion` disables hover transition
+- Content inside remains readable and accessible
+- Decorative transform — `aria-hidden` not needed since content is meaningful

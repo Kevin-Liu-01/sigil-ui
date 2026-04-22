@@ -1,0 +1,73 @@
+- generic:
+  - generic [active]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - navigation [ref=e6]:
+            - button "previous" [disabled] [ref=e7]:
+              - img "previous" [ref=e8]
+            - generic [ref=e10]:
+              - generic [ref=e11]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e12]:
+              - img "next" [ref=e13]
+          - img
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - generic "Latest available version is detected (16.2.4)." [ref=e19]: Next.js 16.2.4
+            - generic [ref=e20]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e22]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e29]: Build Error
+              - generic [ref=e30]:
+                - button "Copy Error Info" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+                - link "Go to related documentation" [ref=e34] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/messages/module-not-found
+                  - img [ref=e35]
+                - button "Attach Node.js inspector" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e47]: "Module not found: Can't resolve '@/lib/source'"
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - img [ref=e53]
+              - generic [ref=e56]: ./apps/web/app/docs/[[...slug]]/page.tsx (1:1)
+              - button "Open in editor" [ref=e57] [cursor=pointer]:
+                - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: "Module not found: Can't resolve '@/lib/source'"
+              - text: ">"
+              - generic [ref=e64]: 1 |
+              - text: import
+              - generic [ref=e65]: "{ source }"
+              - text: from "@/lib/source"
+              - generic [ref=e66]: ;
+              - generic [ref=e67]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              - generic [ref=e68]: 2 |
+              - text: import
+              - generic [ref=e69]: "{"
+              - generic [ref=e70]: 3 |
+              - text: DocsBody
+              - generic [ref=e71]: ","
+              - generic [ref=e72]: 4 |
+              - text: DocsDescription
+              - generic [ref=e73]:
+                - text: ", Import map: aliased to relative './' inside of [project]/apps/web"
+                - link "https://nextjs.org/docs/messages/module-not-found" [ref=e74] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/messages/module-not-found
+        - generic [ref=e75]: "1"
+        - generic [ref=e76]: "2"
+    - generic [ref=e81] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e82]:
+        - img [ref=e83]
+      - button "Open issues overlay" [ref=e87]:
+        - generic [ref=e88]:
+          - generic [ref=e89]: "0"
+          - generic [ref=e90]: "1"
+        - generic [ref=e91]: Issue
+  - alert [ref=e92]

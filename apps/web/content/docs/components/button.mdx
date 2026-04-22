@@ -1,0 +1,117 @@
+---
+title: Button
+description: A polymorphic button with token-driven variants, sizes, and states. Supports asChild via Radix Slot.
+---
+
+## Import
+
+```tsx
+import { Button } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Button>Default button</Button>
+```
+
+```tsx
+<Button variant="primary">Primary action</Button>
+<Button variant="secondary">Secondary action</Button>
+<Button variant="ghost">Ghost button</Button>
+<Button variant="outline">Outline button</Button>
+<Button variant="destructive">Delete</Button>
+```
+
+## Sizes
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+```
+
+## With icon
+
+```tsx
+<Button variant="primary">
+  <PlusIcon className="size-4" />
+  Add item
+</Button>
+```
+
+## As a link
+
+Using the `asChild` prop, the Button renders as whatever element you pass as a child. This works with Next.js `<Link>`, React Router `<Link>`, or a plain `<a>`.
+
+```tsx
+import Link from "next/link";
+
+<Button asChild variant="primary">
+  <Link href="/dashboard">Go to dashboard</Link>
+</Button>
+```
+
+## Disabled state
+
+```tsx
+<Button disabled>Can't touch this</Button>
+```
+
+## Loading state
+
+```tsx
+<Button loading>Saving...</Button>
+```
+
+## Full width
+
+```tsx
+<Button fullWidth variant="primary">
+  Submit
+</Button>
+```
+
+## Token integration
+
+Button reads these CSS variables from your token file:
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-primary` | `variant="primary"` background |
+| `--s-primary-hover` | Primary hover state |
+| `--s-secondary` | `variant="secondary"` background |
+| `--s-text` | Default text color |
+| `--s-text-muted` | Disabled text color |
+| `--s-border` | `variant="outline"` border |
+| `--s-border-interactive` | Focus ring |
+| `--s-radius-md` | Border radius |
+| `--s-shadow-sm` | Subtle elevation |
+| `--s-duration-fast` | Hover/press transition |
+| `--s-ease-default` | Transition easing |
+| `--s-error` | `variant="destructive"` background |
+
+Change any of these tokens and every Button in your app updates. No prop changes. No class overrides.
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"primary" \| "secondary" \| "ghost" \| "outline" \| "destructive"` | `"primary"` | Visual variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Button size |
+| `asChild` | `boolean` | `false` | Render as child element (via Radix Slot) |
+| `disabled` | `boolean` | `false` | Disable interactions |
+| `loading` | `boolean` | `false` | Show loading state |
+| `fullWidth` | `boolean` | `false` | Expand to container width |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Button content |
+
+Plus all standard `<button>` HTML attributes.
+
+## Accessibility
+
+- Uses native `<button>` element by default
+- `disabled` attribute sets `aria-disabled` and prevents focus
+- `loading` state sets `aria-busy="true"`
+- Focus ring uses `--s-border-interactive` for visibility
+- Meets WCAG 2.1 contrast requirements with default tokens

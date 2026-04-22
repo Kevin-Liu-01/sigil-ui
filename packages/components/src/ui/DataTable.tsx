@@ -1,0 +1,86 @@
+"use client";
+
+import { type ReactNode } from "react";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "./Table";
+import { cn } from "../utils";
+
+export interface DataTableColumn<T> {
+  key: string;
+  header: ReactNode;
+  cell?: (row: T, index: number) => ReactNode;
+}
+
+export interface DataTableProps<T> {
+  columns: DataTableColumn<T>[];
+  data: T[];
+  className?: string;
+  emptyMessage?: string;
+  onRowClick?: (row: T, index: number) => void;
+  rowClassName?: string | ((row: T, index: number) => string);
+}
+
+export function DataTable<T extends Record<string, unknown>>({
+  columns,
+  data,
+  className,
+  emptyMessage = "No results.",
+  onRowClick,
+  rowClassName,
+}: DataTableProps<T>) {
+  return (
+    <Table className={className}>
+      <TableHeader>
+        <TableRow>
+          {columns.map((col) => (
+            <TableHead key={col.key}>{col.header}</TableHead>
+          ))}
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {data.length === 0 ? (
+          <TableRow>
+            <TableCell
+              colSpan={columns.length}
+              className="h-24 text-center text-[var(--s-text-muted)]"
+            >
+              {emptyMessage}
+            </TableCell>
+          </TableRow>
+        ) : (
+          data.map((row, rowIdx) => {
+            const rowCls =
+              typeof rowClassName === "function"
+                ? rowClassName(row, rowIdx)
+                : rowClassName;
+
+            return (
+              <TableRow
+                key={rowIdx}
+                onClick={onRowClick ? () => onRowClick(row, rowIdx) : undefined}
+                className={cn(
+                  onRowClick && "cursor-pointer",
+                  rowCls,
+                )}
+              >
+                {columns.map((col) => (
+                  <TableCell key={col.key}>
+                    {col.cell
+                      ? col.cell(row, rowIdx)
+                      : (row[col.key] as ReactNode) ?? null}
+                  </TableCell>
+                ))}
+              </TableRow>
+            );
+          })
+        )}
+      </TableBody>
+    </Table>
+  );
+}

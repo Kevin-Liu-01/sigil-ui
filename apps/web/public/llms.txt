@@ -1,0 +1,48 @@
+# Sigil UI
+
+> The component library where one token file updates everything.
+
+Sigil UI is a React component library with centralized design tokens. Unlike shadcn/ui where you copy components and manually edit each one, Sigil uses a single `sigil.tokens.md` markdown file that an AI agent can read and edit. All components consume tokens from this file. Swap presets, and every component updates.
+
+## Packages
+
+- @sigil-ui/tokens — Design token system (CSS variables, Tailwind v4, TypeScript constants)
+- @sigil-ui/components — 70+ styled components
+- @sigil-ui/primitives — Headless behavior (Radix-based)
+- @sigil-ui/cli — CLI for init, add, preset management
+- @sigil-ui/presets — 5 built-in presets
+
+## Components (70+)
+
+### Layout: Stack, Grid, GridCell, Section, Frame, PageGrid, Margin, Gutter, Divider, HRule
+### UI: Button, Badge, Card, Label, Input, Textarea, Select, Checkbox, Switch, Slider, Progress, Separator, Avatar, Skeleton, Table, Tabs, Accordion, Tooltip, ScrollArea, KPI, Terminal, CodeBlock, LoadingSpinner
+### Navigation: Navbar, Footer, Breadcrumb, Pagination
+### Overlays: Dialog, Sheet, Popover, Toast
+### Shapes: Shape, Diamond, Hexagon, Triangle, Diagonal
+### 3D: Box3D, Box3DGrid, Card3D, FloatingUI, IsometricView
+### Diagrams: Diagram, ExplodedView, FlowDiagram, Timeline, ComparisonTable, ArchitectureDiagram
+### Marketing: Hero, FeatureFrame, Pricing, CTA, LogoBar, TestimonialCard
+### Patterns: Pattern (dots, hatch, diagonal, diamond, hexagon, triangle, crosshatch), Cross
+### Animation: AnimateOnScroll, useSigilAnimate hook
+
+## Presets
+
+- sigil — Structural visibility, soft indigo, Nacelle font
+- midnight — Dark premium, electric blue, GT America font
+- editorial — Paper-like, cobalt accent, Soehne font
+- brutalist — High contrast, acid yellow, Space Grotesk font
+- soft — Warm pastels, coral accent, Satoshi font
+
+## Quick Start
+
+```bash
+npx sigil init
+npx sigil add button card input
+npx sigil preset midnight
+```
+
+## Links
+
+- Documentation: https://sigil-ui.dev/docs
+- GitHub: https://github.com/Kevin-Liu-01/sigil-ui
+- npm: https://www.npmjs.com/package/@sigil-ui/components

@@ -1,0 +1,760 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+/* ================================================================== */
+/* Font Faces — Pangram Pangram Collection                            */
+/* ================================================================== */
+
+/* PP Neue Montreal (default body + display) */
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-Book.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-Italic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "PP Neue Montreal"; src: url("/fonts/PPNeueMontreal-BoldItalic.otf") format("opentype"); font-weight: 700; font-style: italic; font-display: swap; }
+
+/* PP Fraktion Mono (default mono) */
+@font-face { font-family: "PP Fraktion Mono"; src: url("/fonts/PPFraktionMono-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Fraktion Mono"; src: url("/fonts/PPFraktionMono-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Fraktion Mono"; src: url("/fonts/PPFraktionMono-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Editorial New (serif display) */
+@font-face { font-family: "PP Editorial New"; src: url("/fonts/PPEditorialNew-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Editorial New"; src: url("/fonts/PPEditorialNew-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Editorial New"; src: url("/fonts/PPEditorialNew-Italic.otf") format("opentype"); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "PP Editorial New"; src: url("/fonts/PPEditorialNew-Ultrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* PP Mori */
+@font-face { font-family: "PP Mori"; src: url("/fonts/PPMori-Extralight.otf") format("opentype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Mori"; src: url("/fonts/PPMori-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Mori"; src: url("/fonts/PPMori-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+
+/* PP Telegraf */
+@font-face { font-family: "PP Telegraf"; src: url("/fonts/PPTelegraf-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Telegraf"; src: url("/fonts/PPTelegraf-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Monument Extended */
+@font-face { font-family: "PP Monument Extended"; src: url("/fonts/PPMonumentExtended-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Monument Extended"; src: url("/fonts/PPMonumentExtended-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Monument Extended"; src: url("/fonts/PPMonumentExtended-Black.otf") format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+
+/* PP Neue Machina */
+@font-face { font-family: "PP Neue Machina"; src: url("/fonts/PPNeueMachina-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Machina"; src: url("/fonts/PPNeueMachina-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Machina"; src: url("/fonts/PPNeueMachina-Ultrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* PP Eiko (serif) */
+@font-face { font-family: "PP Eiko"; src: url("/fonts/PPEiko-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Eiko"; src: url("/fonts/PPEiko-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Eiko"; src: url("/fonts/PPEiko-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+
+/* PP Hatton (geometric serif) */
+@font-face { font-family: "PP Hatton"; src: url("/fonts/PPHatton-Ultralight.otf") format("opentype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Hatton"; src: url("/fonts/PPHatton-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Hatton"; src: url("/fonts/PPHatton-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Gosha Sans */
+@font-face { font-family: "PP Gosha Sans"; src: url("/fonts/PPGoshaSans-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Gosha Sans"; src: url("/fonts/PPGoshaSans-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Radio Grotesk */
+@font-face { font-family: "PP Radio Grotesk"; src: url("/fonts/PPRadioGrotesk-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Radio Grotesk"; src: url("/fonts/PPRadioGrotesk-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Pangram Sans */
+@font-face { font-family: "PP Pangram Sans"; src: url("/fonts/PPPangramSans-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Pangram Sans"; src: url("/fonts/PPPangramSans-Medium.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Pangram Sans"; src: url("/fonts/PPPangramSans-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Supply Sans + Mono */
+@font-face { font-family: "PP Supply Sans"; src: url("/fonts/PPSupplySans-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Sans"; src: url("/fonts/PPSupplySans-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Supply Mono"; src: url("/fonts/PPSupplyMono-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Fraktion Sans */
+@font-face { font-family: "PP Fraktion Sans"; src: url("/fonts/PPFraktionSans-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Fraktion Sans"; src: url("/fonts/PPFraktionSans-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Pier Sans */
+@font-face { font-family: "PP Pier Sans"; src: url("/fonts/PPPierSans-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Pier Sans"; src: url("/fonts/PPPierSans-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Rader (serif) */
+@font-face { font-family: "PP Rader"; src: url("/fonts/PPRader-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Rader"; src: url("/fonts/PPRader-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Cirka (serif) */
+@font-face { font-family: "PP Cirka"; src: url("/fonts/PPCirka-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Cirka"; src: url("/fonts/PPCirka-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Writer (serif) */
+@font-face { font-family: "PP Writer"; src: url("/fonts/PPWriter-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Writer"; src: url("/fonts/PPWriter-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Stellar */
+@font-face { font-family: "PP Stellar"; src: url("/fonts/PPStellar-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Stellar"; src: url("/fonts/PPStellar-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Woodland */
+@font-face { font-family: "PP Woodland"; src: url("/fonts/PPWoodland-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Woodland"; src: url("/fonts/PPWoodland-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Mondwest */
+@font-face { font-family: "PP Mondwest"; src: url("/fonts/PPMondwest-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Mondwest"; src: url("/fonts/PPMondwest-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Acma */
+@font-face { font-family: "PP Acma"; src: url("/fonts/PPAcma-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Acma"; src: url("/fonts/PPAcma-Semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+
+/* PP Formula Condensed */
+@font-face { font-family: "PP Formula Condensed"; src: url("/fonts/PPFormulaCondensed-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Formula Condensed"; src: url("/fonts/PPFormulaCondensed-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Fuji */
+@font-face { font-family: "PP Fuji"; src: url("/fonts/PPFuji-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Fuji"; src: url("/fonts/PPFuji-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Gatwick */
+@font-face { font-family: "PP Gatwick"; src: url("/fonts/PPGatwick-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Gatwick"; src: url("/fonts/PPGatwick-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Charlevoix */
+@font-face { font-family: "PP Charlevoix"; src: url("/fonts/PPCharlevoix-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Charlevoix"; src: url("/fonts/PPCharlevoix-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Migra */
+@font-face { font-family: "Migra"; src: url("/fonts/Migra-Extralight.otf") format("opentype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "Migra"; src: url("/fonts/Migra-Extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* PP Fragment */
+@font-face { font-family: "PP Fragment Sans"; src: url("/fonts/PPFragment-SansRegular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Fragment Serif"; src: url("/fonts/PPFragment-SerifRegular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* PP Neue Bit (bitmap) */
+@font-face { font-family: "PP Neue Bit"; src: url("/fonts/PPNeueBit-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "PP Neue Bit"; src: url("/fonts/PPNeueBit-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* PP Casa */
+@font-face { font-family: "PP Casa"; src: url("/fonts/PPCasa-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+
+/* ================================================================== */
+/* Font Faces — Dedalus Collection                                     */
+/* ================================================================== */
+
+/* ABC Monument Grotesk */
+@font-face { font-family: "ABC Monument Grotesk"; src: url("/fonts/ABCMonumentGrotesk-Light-Trial.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "ABC Monument Grotesk"; src: url("/fonts/ABCMonumentGrotesk-Regular-Trial.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "ABC Monument Grotesk"; src: url("/fonts/ABCMonumentGrotesk-Medium-Trial.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "ABC Monument Grotesk"; src: url("/fonts/ABCMonumentGrotesk-Bold-Trial.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Apfel Grotezk */
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/ApfelGrotezk-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/ApfelGrotezk-Mittel.otf") format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Apfel Grotezk"; src: url("/fonts/ApfelGrotezk-Fett.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Nacelle (self-hosted) */
+@font-face { font-family: "Nacelle"; src: url("/fonts/Nacelle-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nacelle"; src: url("/fonts/Nacelle-Regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nacelle"; src: url("/fonts/Nacelle-SemiBold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Nacelle"; src: url("/fonts/Nacelle-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* Tex Gyre Heros */
+@font-face { font-family: "Tex Gyre Heros"; src: url("/fonts/texgyreheros-regular.otf") format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Tex Gyre Heros"; src: url("/fonts/texgyreheros-bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* TT Commons Classic */
+@font-face { font-family: "TT Commons Classic"; src: url("/fonts/TT Commons Classic Trial Var Roman.ttf") format("truetype"); font-weight: 100 900; font-style: normal; font-display: swap; }
+
+/* Vulf Sans */
+@font-face { font-family: "Vulf Sans"; src: url("/fonts/VulfSans-Light.ttf") format("truetype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Vulf Sans"; src: url("/fonts/VulfSans-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Vulf Sans"; src: url("/fonts/VulfSans-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Vulf Sans"; src: url("/fonts/VulfSans-Bold.ttf") format("truetype"); font-weight: 700; font-style: normal; font-display: swap; }
+
+/* ================================================================== */
+/* Sigil Tokens — Light Mode                                          */
+/* ================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* Backgrounds */
+  --s-background: #ffffff;
+  --s-surface: #f8f8fa;
+  --s-surface-elevated: #ffffff;
+  --s-surface-sunken: #f0f0f4;
+
+  /* Brand */
+  --s-primary: #9b99e8;
+  --s-primary-hover: #8280d4;
+  --s-primary-muted: rgba(155, 153, 232, 0.15);
+  --s-secondary: #da8325;
+
+  /* Text hierarchy */
+  --s-text: #0a0a0f;
+  --s-text-secondary: #4a4a55;
+  --s-text-muted: #8a8a95;
+  --s-text-subtle: #a8a8b3;
+  --s-text-disabled: #c8c8d0;
+
+  /* Borders */
+  --s-border: #e5e5ea;
+  --s-border-muted: #f0f0f4;
+  --s-border-strong: #c5c5cc;
+  --s-border-interactive: #9b99e8;
+
+  /* State */
+  --s-success: #10b981;
+  --s-success-muted: #ecfdf5;
+  --s-warning: #f59e0b;
+  --s-warning-muted: #fffbeb;
+  --s-error: #ef4444;
+  --s-error-muted: #fef2f2;
+  --s-info: #3b82f6;
+  --s-info-muted: #eff6ff;
+
+  /* Accent palette */
+  --s-accent-indigo: #9b99e8;
+  --s-accent-emerald: #10b981;
+  --s-accent-amber: #f59e0b;
+  --s-accent-sky: #3b82f6;
+  --s-accent-fuchsia: #c026d3;
+  --s-accent-rose: #ef4444;
+
+  /* Typography */
+  --s-font-display: "ABC Monument Grotesk", "PP Neue Montreal", system-ui, sans-serif;
+  --s-font-body: "ABC Monument Grotesk", "PP Neue Montreal", system-ui, sans-serif;
+  --s-font-mono: "PP Fraktion Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  /* Spacing */
+  --s-space-1: 4px;
+  --s-space-2: 8px;
+  --s-space-3: 12px;
+  --s-space-4: 16px;
+  --s-space-6: 24px;
+  --s-space-8: 32px;
+  --s-space-12: 48px;
+  --s-space-16: 64px;
+  --s-space-20: 80px;
+  --s-space-24: 96px;
+
+  /* Radius */
+  --s-radius-none: 0px;
+  --s-radius-sm: 4px;
+  --s-radius-md: 8px;
+  --s-radius-lg: 12px;
+  --s-radius-xl: 16px;
+  --s-radius-2xl: 24px;
+  --s-radius-full: 9999px;
+  --s-card-radius: 10px;
+
+  /* Sigil grid */
+  --s-grid-cell: 48px;
+  --s-cross-arm: 10px;
+  --s-cross-stroke: 1.5px;
+  --s-rail-gap: 24px;
+  --s-content-max: 1280px;
+
+  /* Border widths */
+  --s-border-width-thin: 1px;
+  --s-border-width-medium: 1.5px;
+  --s-border-width-thick: 2px;
+
+  /* Shadows */
+  --s-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --s-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06),
+    0 2px 4px 0 rgb(0 0 0 / 0.04);
+  --s-shadow-lg: 0 0 0 1px rgb(0 0 0 / 0.04),
+    0 2px 4px -2px rgb(0 0 0 / 0.06), 0 4px 8px -2px rgb(0 0 0 / 0.08);
+  --s-shadow-xl: 0 0 0 1px rgb(0 0 0 / 0.03),
+    0 4px 6px -4px rgb(0 0 0 / 0.06), 0 10px 15px -3px rgb(0 0 0 / 0.1),
+    0 20px 25px -5px rgb(0 0 0 / 0.06);
+  --s-shadow-primary: 0 0 0 1px rgba(155, 153, 232, 0.15),
+    0 4px 12px rgba(155, 153, 232, 0.12);
+
+  /* Motion */
+  --s-duration-instant: 0ms;
+  --s-duration-fast: 150ms;
+  --s-duration-normal: 250ms;
+  --s-duration-slow: 400ms;
+  --s-duration-slower: 600ms;
+  --s-ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --s-ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --s-ease-out: cubic-bezier(0, 0.55, 0.45, 1);
+  --s-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --s-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ================================================================== */
+/* Sigil Tokens — Dark Mode                                           */
+/* ================================================================== */
+
+.dark,
+:root[data-theme="dark"],
+html[data-theme="dark"],
+[data-theme="dark"] {
+  --s-background: #0a0a0f;
+  --s-surface: #141419;
+  --s-surface-elevated: #1a1a22;
+  --s-surface-sunken: #06060a;
+
+  --s-text: #fafafa;
+  --s-text-secondary: #a0a0aa;
+  --s-text-muted: #68687a;
+  --s-text-subtle: #4a4a55;
+  --s-text-disabled: #3a3a44;
+
+  --s-border: rgba(255, 255, 255, 0.08);
+  --s-border-muted: rgba(255, 255, 255, 0.04);
+  --s-border-strong: rgba(255, 255, 255, 0.15);
+
+  --s-success-muted: #052e16;
+  --s-warning-muted: #451a03;
+  --s-error-muted: #450a0a;
+  --s-info-muted: #172554;
+
+  --s-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --s-shadow-md: 0 0 0 1px rgb(255 255 255 / 0.04),
+    0 1px 2px -1px rgb(0 0 0 / 0.3), 0 2px 4px 0 rgb(0 0 0 / 0.2);
+  --s-shadow-lg: 0 0 0 1px rgb(255 255 255 / 0.03),
+    0 2px 4px -2px rgb(0 0 0 / 0.3), 0 4px 8px -2px rgb(0 0 0 / 0.4);
+  --s-shadow-xl: 0 0 0 1px rgb(255 255 255 / 0.02),
+    0 4px 6px -4px rgb(0 0 0 / 0.3), 0 10px 15px -3px rgb(0 0 0 / 0.5);
+  --s-shadow-primary: 0 0 0 1px rgba(155, 153, 232, 0.2),
+    0 4px 16px rgba(155, 153, 232, 0.15);
+}
+
+/* ================================================================== */
+/* Backward-compat: --s-* aliases → --s-* (for copied landing comps)  */
+/* ================================================================== */
+
+:root {
+  --s-bg: var(--s-background);
+  --s-surface: var(--s-surface);
+  --s-surface-elevated: var(--s-surface-elevated);
+  --s-primary: var(--s-primary);
+  --s-primary-hover: var(--s-primary-hover);
+  --s-primary-muted: var(--s-primary-muted);
+  --s-secondary: var(--s-secondary);
+  --s-text: var(--s-text);
+  --s-text-secondary: var(--s-text-secondary);
+  --s-text-muted: var(--s-text-muted);
+  --s-text-subtle: var(--s-text-subtle);
+  --s-text-disabled: var(--s-text-disabled);
+  --s-border: var(--s-border);
+  --s-border-muted: var(--s-border-muted);
+  --s-border-strong: var(--s-border-strong);
+  --s-border-interactive: var(--s-border-interactive);
+  --s-success: var(--s-success);
+  --s-success-muted: var(--s-success-muted);
+  --s-warning: var(--s-warning);
+  --s-warning-muted: var(--s-warning-muted);
+  --s-error: var(--s-error);
+  --s-error-muted: var(--s-error-muted);
+  --s-info: var(--s-info);
+  --s-info-muted: var(--s-info-muted);
+  --s-font-display: var(--s-font-display);
+  --s-font-body: var(--s-font-body);
+  --s-font-mono: var(--s-font-mono);
+  --s-space-1: var(--s-space-1);
+  --s-space-2: var(--s-space-2);
+  --s-space-3: var(--s-space-3);
+  --s-space-4: var(--s-space-4);
+  --s-space-6: var(--s-space-6);
+  --s-space-8: var(--s-space-8);
+  --s-space-12: var(--s-space-12);
+  --s-space-16: var(--s-space-16);
+  --s-space-20: var(--s-space-20);
+  --s-space-24: var(--s-space-24);
+  --s-radius-none: var(--s-radius-none);
+  --s-radius-sm: var(--s-radius-sm);
+  --s-radius-md: var(--s-radius-md);
+  --s-radius-lg: var(--s-radius-lg);
+  --s-radius-xl: var(--s-radius-xl);
+  --s-radius-2xl: var(--s-radius-2xl);
+  --s-radius-full: var(--s-radius-full);
+  --s-card-radius: var(--s-card-radius);
+  --s-grid-cell: var(--s-grid-cell);
+  --s-cross-arm: var(--s-cross-arm);
+  --s-cross-stroke: var(--s-cross-stroke);
+  --s-rail-gap: var(--s-rail-gap);
+  --s-content-max: var(--s-content-max);
+  --s-border-width-thin: var(--s-border-width-thin);
+  --s-border-width-medium: var(--s-border-width-medium);
+  --s-border-width-thick: var(--s-border-width-thick);
+  --s-shadow-sm: var(--s-shadow-sm);
+  --s-shadow-md: var(--s-shadow-md);
+  --s-shadow-lg: var(--s-shadow-lg);
+  --s-shadow-xl: var(--s-shadow-xl);
+  --s-shadow-primary: var(--s-shadow-primary);
+  --s-duration-instant: var(--s-duration-instant);
+  --s-duration-fast: var(--s-duration-fast);
+  --s-duration-normal: var(--s-duration-normal);
+  --s-duration-slow: var(--s-duration-slow);
+  --s-duration-slower: var(--s-duration-slower);
+  --s-ease-default: var(--s-ease-default);
+  --s-ease-in: var(--s-ease-in);
+  --s-ease-out: var(--s-ease-out);
+  --s-ease-in-out: var(--s-ease-in-out);
+  --s-ease-spring: var(--s-ease-spring);
+}
+
+/* ================================================================== */
+/* Font faces — local fallback                                        */
+/* ==================================================================
+
+/* ================================================================== */
+/* Base                                                               */
+/* ================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: var(--s-font-body);
+  background-color: var(--s-background, #0a0a0f);
+  color: var(--s-text, #fafafa);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--s-font-display);
+}
+
+/* ================================================================== */
+/* Grid background patterns                                           */
+/* ================================================================== */
+
+.s-grid-bg,
+.r-grid-bg {
+  background-image: linear-gradient(
+      var(--s-border-muted) var(--s-border-width-thin),
+      transparent var(--s-border-width-thin)
+    ),
+    linear-gradient(
+      90deg,
+      var(--s-border-muted) var(--s-border-width-thin),
+      transparent var(--s-border-width-thin)
+    );
+  background-size: var(--s-grid-cell) var(--s-grid-cell);
+}
+
+.s-grid-bg-subtle,
+.r-grid-bg-subtle {
+  background-image: linear-gradient(
+      var(--s-border-muted) 0.5px,
+      transparent 0.5px
+    ),
+    linear-gradient(90deg, var(--s-border-muted) 0.5px, transparent 0.5px);
+  background-size: var(--s-grid-cell) var(--s-grid-cell);
+}
+
+/* ================================================================== */
+/* Cross marks                                                        */
+/* ================================================================== */
+
+.s-cross::before,
+.s-cross::after,
+.r-cross::before,
+.r-cross::after {
+  content: "";
+  position: absolute;
+  background: var(--s-border-strong);
+}
+
+.s-cross::before,
+.r-cross::before {
+  width: var(--s-cross-stroke);
+  height: calc(var(--s-cross-arm) * 2);
+  top: calc(50% - var(--s-cross-arm));
+  left: calc(50% - var(--s-cross-stroke) / 2);
+}
+
+.s-cross::after,
+.r-cross::after {
+  height: var(--s-cross-stroke);
+  width: calc(var(--s-cross-arm) * 2);
+  left: calc(50% - var(--s-cross-arm));
+  top: calc(50% - var(--s-cross-stroke) / 2);
+}
+
+.s-cross-mark,
+.r-cross-mark {
+  position: relative;
+  width: calc(var(--s-cross-arm) * 2);
+  height: calc(var(--s-cross-arm) * 2);
+}
+
+.s-cross-mark::before,
+.s-cross-mark::after,
+.r-cross-mark::before,
+.r-cross-mark::after {
+  content: "";
+  position: absolute;
+  background: var(--s-text-subtle);
+}
+
+.s-cross-mark::before,
+.r-cross-mark::before {
+  width: var(--s-cross-stroke);
+  height: 100%;
+  left: calc(50% - var(--s-cross-stroke) / 2);
+}
+
+.s-cross-mark::after,
+.r-cross-mark::after {
+  height: var(--s-cross-stroke);
+  width: 100%;
+  top: calc(50% - var(--s-cross-stroke) / 2);
+}
+
+/* ================================================================== */
+/* Utility classes                                                    */
+/* ================================================================== */
+
+.s-mono,
+.r-mono {
+  font-family: var(--s-font-mono);
+}
+
+.s-display,
+.r-display {
+  font-family: var(--s-font-display);
+}
+
+.s-balance,
+.r-balance {
+  text-wrap: balance;
+}
+
+.s-tabular,
+.r-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+.s-press:active,
+.r-press:active {
+  transform: scale(0.97);
+}
+
+/* ================================================================== */
+/* Animations                                                         */
+/* ================================================================== */
+
+@keyframes s-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes s-fade-cycle {
+  0%,
+  18% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  20%,
+  22% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  24%,
+  42% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  44%,
+  46% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  48%,
+  68% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  70%,
+  72% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  74%,
+  92% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  94%,
+  96% {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  98%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes s-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes s-spin-slow {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
+}
+
+@keyframes s-pulse-glow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Terminal cursor blink (backward-compat class) */
+.s-cursor-blink::after,
+.r-cursor-blink::after {
+  content: "▋";
+  animation: s-blink 1s step-end infinite;
+  color: var(--s-primary);
+  margin-left: 2px;
+}
+
+/* ================================================================== */
+/* Scrollbar                                                          */
+/* ================================================================== */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--s-border);
+  border-radius: var(--s-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--s-border-strong);
+}
+
+/* ================================================================== */
+/* Selection                                                          */
+/* ================================================================== */
+
+::selection {
+  background: rgba(155, 153, 232, 0.25);
+  color: inherit;
+}
+
+/* ================================================================== */
+/* Preset Transition System                                            */
+/* ================================================================== */
+
+.s-transition-all,
+.s-transition-all * {
+  transition:
+    background-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    fill 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.s-transition-all *:focus,
+.s-transition-all *:active {
+  transition-duration: 100ms;
+}
+
+/* ================================================================== */
+/* Alignment Rail System                                               */
+/* ================================================================== */
+
+.s-rail-container {
+  max-width: var(--s-align-rail-width, 1440px);
+  margin: 0 auto;
+  padding: 0 var(--s-align-rail-margin, 24px);
+}
+
+.s-section {
+  padding-top: var(--s-section-padding-y, 64px);
+  padding-bottom: var(--s-section-padding-y, 64px);
+  padding-left: var(--s-section-padding-x, 24px);
+  padding-right: var(--s-section-padding-x, 24px);
+  max-width: var(--s-section-max-width, 1200px);
+  margin: 0 auto;
+}
+
+.s-section-hero {
+  padding-top: var(--s-section-padding-y-hero, 120px);
+  padding-bottom: var(--s-section-padding-y-hero, 120px);
+}
+
+.s-divider {
+  border: none;
+  border-top-style: var(--s-divider-style, solid);
+  border-top-width: var(--s-divider-width, 1px);
+  border-top-color: var(--s-divider-color, var(--s-border));
+  margin-top: var(--s-divider-spacing, 0px);
+  margin-bottom: var(--s-divider-spacing, 0px);
+}
+
+.s-grid-visual {
+  gap: var(--s-grid-cell-padding, 16px);
+}
+
+.s-grid-visual[data-show-lines="1"] {
+  background-image:
+    linear-gradient(to right, var(--s-grid-line-color, var(--s-border-muted)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px)),
+    linear-gradient(to bottom, var(--s-grid-line-color, var(--s-border-muted)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px));
+  background-size: calc(100% / var(--s-align-rail-columns, 12)) calc(100% / var(--s-align-rail-columns, 12));
+}
+
+.s-card-token {
+  background: var(--s-card-background, var(--s-surface));
+  border-style: var(--s-card-border-style, solid);
+  border-width: var(--s-card-border-width, 1px);
+  border-color: var(--s-border);
+  border-radius: var(--s-radius-card, var(--s-card-radius, 10px));
+  padding: var(--s-card-padding, 24px);
+  box-shadow: var(--s-card-shadow, none);
+}

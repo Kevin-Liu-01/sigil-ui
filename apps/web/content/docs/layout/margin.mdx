@@ -1,0 +1,72 @@
+---
+title: Margin
+description: A layout primitive that adds consistent outer spacing using the token spacing scale. Replaces arbitrary margin utilities.
+---
+
+## Import
+
+```tsx
+import { Margin } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Margin size="md">
+  <Card>Content with consistent outer spacing</Card>
+</Margin>
+```
+
+## Directional
+
+```tsx
+<Margin top="lg">Top margin only</Margin>
+<Margin bottom="md">Bottom margin only</Margin>
+<Margin x="lg">Horizontal margins</Margin>
+<Margin y="xl">Vertical margins</Margin>
+```
+
+## Sizes
+
+```tsx
+<Margin size="xs">4px</Margin>
+<Margin size="sm">8px</Margin>
+<Margin size="md">16px</Margin>
+<Margin size="lg">24px</Margin>
+<Margin size="xl">48px</Margin>
+```
+
+## Auto centering
+
+```tsx
+<Margin x="auto" className="max-w-2xl">
+  <p>Horizontally centered content.</p>
+</Margin>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-space-1` | `xs` value |
+| `--s-space-2` | `sm` value |
+| `--s-space-4` | `md` value |
+| `--s-space-6` | `lg` value |
+| `--s-space-12` | `xl` value |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | — | All-sides margin |
+| `top` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | — | Top margin |
+| `bottom` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | — | Bottom margin |
+| `x` | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "auto"` | — | Horizontal margin |
+| `y` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | — | Vertical margin |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content |
+
+## Accessibility
+
+- Purely presentational — no ARIA implications
+- Renders as a `<div>` by default

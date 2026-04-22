@@ -1,0 +1,101 @@
+- generic:
+  - generic [active]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - navigation [ref=e6]:
+            - button "previous" [disabled] [ref=e7]:
+              - img "previous" [ref=e8]
+            - generic [ref=e10]:
+              - generic [ref=e11]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e12]:
+              - img "next" [ref=e13]
+          - img
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - generic "Latest available version is detected (16.2.4)." [ref=e19]: Next.js 16.2.4
+            - generic [ref=e20]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e22]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e29]: Build Error
+              - generic [ref=e30]:
+                - button "Copy Error Info" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+                - button "No related documentation found" [disabled] [ref=e34]:
+                  - img [ref=e35]
+                - button "Attach Node.js inspector" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e47]: Export PanelGroup doesn't exist in target module
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - img [ref=e53]
+              - generic [ref=e55]: ./packages/components/dist/index.js (14:1)
+              - button "Open in editor" [ref=e56] [cursor=pointer]:
+                - img [ref=e58]
+            - generic [ref=e61]:
+              - generic [ref=e62]: Export PanelGroup doesn't exist in target module
+              - generic [ref=e63]: 12 |
+              - text: import
+              - generic [ref=e64]: "*"
+              - text: as ToggleGroupPrimitive from '@radix-ui/react-toggle-group'
+              - generic [ref=e65]: ;
+              - generic [ref=e66]: 13 |
+              - text: import
+              - generic [ref=e67]: "{"
+              - text: OTPInput
+              - generic [ref=e68]: ","
+              - text: OTPInputContext
+              - generic [ref=e69]: "}"
+              - text: from 'input-otp'
+              - generic [ref=e70]: ;
+              - text: ">"
+              - generic [ref=e71]: 14 |
+              - text: import
+              - generic [ref=e72]: "{"
+              - text: PanelGroup
+              - generic [ref=e73]: ","
+              - text: Panel
+              - generic [ref=e74]: ","
+              - text: PanelResizeHandle
+              - generic [ref=e75]: "}"
+              - text: from 'react-resizable-panels'
+              - generic [ref=e76]: ;
+              - generic [ref=e77]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+              - generic [ref=e78]: 15 |
+              - text: import
+              - generic [ref=e79]: "{"
+              - text: ResponsiveContainer
+              - generic [ref=e80]: ","
+              - text: Tooltip as Tooltip$1
+              - generic [ref=e81]: ","
+              - text: Legend
+              - generic [ref=e82]: "}"
+              - text: from 'recharts'
+              - generic [ref=e83]: ;
+              - generic [ref=e84]: 16 |
+              - text: import
+              - generic [ref=e85]: "*"
+              - text: as NavPrimitive from '@radix-ui/react-navigation-menu'
+              - generic [ref=e86]: ;
+              - generic [ref=e87]: 17 |
+              - text: import
+              - generic [ref=e88]: "*"
+              - text: as MenubarPrimitive from '@radix-ui/react-menubar'
+              - generic [ref=e89]: "; The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript). Did you mean to import Panel? All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist. Import traces: Client Component Browser: ./packages/components/dist/index.js [Client Component Browser] ./apps/web/app/page.tsx [Client Component Browser] ./apps/web/app/page.tsx [Server Component] Client Component SSR: ./packages/components/dist/index.js [Client Component SSR] ./apps/web/app/page.tsx [Client Component SSR] ./apps/web/app/page.tsx [Server Component]"
+        - generic [ref=e90]: "1"
+        - generic [ref=e91]: "2"
+    - generic [ref=e96] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e97]:
+        - img [ref=e98]
+      - button "Open issues overlay" [ref=e102]:
+        - generic [ref=e103]:
+          - generic [ref=e104]: "0"
+          - generic [ref=e105]: "1"
+        - generic [ref=e106]: Issue
+  - alert [ref=e107]

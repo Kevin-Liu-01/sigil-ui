@@ -1,0 +1,86 @@
+---
+title: LogoBar
+description: A row of partner or customer logos with optional grayscale, infinite scroll animation, and responsive wrapping.
+---
+
+## Import
+
+```tsx
+import { LogoBar } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<LogoBar
+  logos={[
+    { src: "/logos/acme.svg", alt: "Acme" },
+    { src: "/logos/globex.svg", alt: "Globex" },
+    { src: "/logos/initech.svg", alt: "Initech" },
+    { src: "/logos/umbrella.svg", alt: "Umbrella" },
+  ]}
+/>
+```
+
+## With heading
+
+```tsx
+<LogoBar
+  heading="Trusted by teams at"
+  logos={[
+    { src: "/logos/vercel.svg", alt: "Vercel" },
+    { src: "/logos/stripe.svg", alt: "Stripe" },
+    { src: "/logos/linear.svg", alt: "Linear" },
+  ]}
+/>
+```
+
+## Infinite scroll
+
+```tsx
+<LogoBar animated logos={logos} />
+```
+
+Logos scroll infinitely using a CSS marquee animation.
+
+## Grayscale
+
+```tsx
+<LogoBar grayscale logos={logos} />
+```
+
+Logos appear in grayscale and colorize on hover.
+
+## Sizes
+
+```tsx
+<LogoBar size="sm" logos={logos} />
+<LogoBar size="md" logos={logos} />
+<LogoBar size="lg" logos={logos} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text-muted` | Heading text color |
+| `--s-border` | Separator line (if enabled) |
+| `--s-duration-slower` | Marquee animation speed |
+| `--s-space-8` | Logo spacing |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `logos` | `{ src: string; alt: string }[]` | — | Logo images |
+| `heading` | `string` | — | Section heading |
+| `animated` | `boolean` | `false` | Infinite scroll marquee |
+| `grayscale` | `boolean` | `false` | Grayscale with color on hover |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Logo height |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Each logo has an `alt` attribute for screen readers
+- Marquee animation respects `prefers-reduced-motion`
+- Heading renders as a `<p>` (not a heading element) to avoid document outline pollution

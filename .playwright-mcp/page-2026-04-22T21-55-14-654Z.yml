@@ -1,0 +1,490 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "3"
+          - generic [ref=e15]: "4"
+        - generic [ref=e16]:
+          - text: Issue
+          - generic [ref=e17]: s
+      - button "Collapse issues badge" [ref=e18]:
+        - img [ref=e19]
+  - banner [ref=e21]:
+    - navigation [ref=e23]:
+      - link "sigil" [ref=e24] [cursor=pointer]:
+        - /url: /
+        - img [ref=e25]
+        - generic [ref=e26]: sigil
+      - generic [ref=e27]:
+        - link "Docs" [ref=e28] [cursor=pointer]:
+          - /url: "#"
+        - link "Components" [ref=e29] [cursor=pointer]:
+          - /url: "#components"
+        - link "Presets" [ref=e30] [cursor=pointer]:
+          - /url: "#presets"
+        - link "GitHub" [ref=e31] [cursor=pointer]:
+          - /url: https://github.com/sigil-ui/sigil
+        - button "Toggle theme" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+  - main [ref=e39]:
+    - generic [ref=e42]:
+      - generic [ref=e43]:
+        - text: v0.1
+        - heading "One token file. Every component updates." [level=1] [ref=e44]:
+          - text: One token file.
+          - text: Every component updates.
+        - paragraph [ref=e45]: 100+ components. 300+ tokens. 30 presets.
+        - generic [ref=e46]:
+          - link "View docs" [ref=e47] [cursor=pointer]:
+            - /url: /docs
+          - link "Try sandbox" [ref=e48] [cursor=pointer]:
+            - /url: /sandbox
+        - code [ref=e50]: "primary oklch(0.65 0.18 275) surface #141419 font \"ABC Monument Grotesk\" radius 10px grid-cell 48px"
+        - generic [ref=e51]:
+          - button "sigil" [ref=e52] [cursor=pointer]
+          - button "noir" [ref=e53] [cursor=pointer]
+          - button "forge" [ref=e54] [cursor=pointer]
+          - button "vex" [ref=e55] [cursor=pointer]
+          - button "arc" [ref=e56] [cursor=pointer]
+          - button "cipher" [ref=e57] [cursor=pointer]
+      - generic [ref=e59]:
+        - generic [ref=e62]:
+          - button "Primary" [ref=e63] [cursor=pointer]
+          - button "Secondary" [ref=e64] [cursor=pointer]
+          - button "Ghost" [ref=e65] [cursor=pointer]
+        - generic [ref=e69]:
+          - heading "Dashboard" [level=3] [ref=e70]
+          - paragraph [ref=e71]: Manage your workspace and team settings
+        - generic [ref=e74]:
+          - generic [ref=e75]: New
+          - generic [ref=e76]: Beta
+          - generic [ref=e77]: v2.0
+        - textbox "Search..." [ref=e81]
+        - generic [ref=e84]:
+          - button "On" [pressed] [ref=e85]
+          - checkbox [checked] [ref=e88]
+        - generic [ref=e91]:
+          - slider [ref=e93] [cursor=pointer]: "65"
+          - generic:
+            - progressbar
+        - generic [ref=e96]:
+          - generic [ref=e98]: KL
+          - generic [ref=e100]: JD
+        - generic [ref=e103]:
+          - generic [ref=e104]: Users
+          - generic [ref=e105]: 2,847
+          - generic [ref=e106]:
+            - generic [ref=e107]: ↑
+            - text: +12%
+        - radiogroup [ref=e110]:
+          - generic [ref=e111]:
+            - radio [ref=e112]
+            - generic [ref=e113] [cursor=pointer]: Option A
+          - generic [ref=e114]:
+            - radio [checked] [ref=e115]:
+              - img [ref=e117]
+            - generic [ref=e119] [cursor=pointer]: Option B
+          - generic [ref=e120]:
+            - radio [ref=e121]
+            - generic [ref=e122] [cursor=pointer]: Option C
+        - generic [ref=e125]:
+          - generic [ref=e126]:
+            - heading "What is Sigil?" [level=3] [ref=e127]:
+              - button "What is Sigil?" [ref=e128]:
+                - text: What is Sigil?
+                - img [ref=e129]
+            - region [ref=e131]:
+              - generic [ref=e133]: A token-driven design system.
+          - generic [ref=e134]:
+            - heading "How do presets work?" [level=3] [ref=e135]:
+              - button "How do presets work?" [ref=e136]:
+                - text: How do presets work?
+                - img [ref=e137]
+            - region [ref=e139]:
+              - generic [ref=e141]: One config changes everything.
+        - alert [ref=e144]:
+          - heading "Heads up" [level=5] [ref=e145]
+        - status "Loading" [ref=e149]: ⠋Loading…
+    - generic [ref=e154]:
+      - generic [ref=e155]:
+        - code [ref=e157]: "# sigil.tokens.md ## Colors | Token | Value | |-------------|------------------------| | primary | oklch(0.65 0.15 280) | | background | #0a0a0f | | surface | #141419 | | text | #fafafa | ## Typography | Token | Value | |-------------|------------------------| | display | ABC Monument Grotesk | | body | system-ui, sans-serif | | mono | Roboto Mono, monospace |"
+        - generic [ref=e158]:
+          - generic [ref=e159]: Edit one file
+          - generic [ref=e160]: →
+          - generic [ref=e161]: 300+ CSS variables compile
+          - generic [ref=e162]: →
+          - generic [ref=e163]: 100+ components update instantly
+      - generic [ref=e164]:
+        - generic [ref=e165]:
+          - generic [ref=e166]: Button
+          - generic [ref=e167]:
+            - button "sigil" [ref=e169]
+            - generic [ref=e170]: vs
+            - button "forge" [ref=e172]
+        - generic [ref=e173]:
+          - generic [ref=e174]: Card
+          - generic [ref=e175]:
+            - generic [ref=e178]: crux — minimal
+            - generic [ref=e179]: vs
+            - generic [ref=e182]: alloy — industrial
+        - generic [ref=e183]:
+          - generic [ref=e184]: Badge
+          - generic [ref=e185]:
+            - generic [ref=e187]: cipher
+            - generic [ref=e188]: vs
+            - generic [ref=e190]: vex
+        - generic [ref=e191]:
+          - generic [ref=e192]: Input
+          - generic [ref=e193]:
+            - generic [ref=e195]: noir — dark
+            - generic [ref=e196]: vs
+            - generic [ref=e198]: arc — light
+    - generic [ref=e200]:
+      - heading "103 components." [level=2] [ref=e201]
+      - generic [ref=e202]:
+        - generic [ref=e203]:
+          - generic [ref=e204]: B
+          - generic [ref=e205]: Button
+        - generic [ref=e206]:
+          - generic [ref=e207]: C
+          - generic [ref=e208]: Card
+        - generic [ref=e209]:
+          - generic [ref=e210]: B
+          - generic [ref=e211]: Badge
+        - generic [ref=e212]:
+          - generic [ref=e213]: I
+          - generic [ref=e214]: Input
+        - generic [ref=e215]:
+          - generic [ref=e216]: S
+          - generic [ref=e217]: Switch
+        - generic [ref=e218]:
+          - generic [ref=e219]: S
+          - generic [ref=e220]: Slider
+        - generic [ref=e221]:
+          - generic [ref=e222]: A
+          - generic [ref=e223]: Avatar
+        - generic [ref=e224]:
+          - generic [ref=e225]: K
+          - generic [ref=e226]: KPI
+        - generic [ref=e227]:
+          - generic [ref=e228]: A
+          - generic [ref=e229]: Accordion
+        - generic [ref=e230]:
+          - generic [ref=e231]: D
+          - generic [ref=e232]: Dialog
+        - generic [ref=e233]:
+          - generic [ref=e234]: T
+          - generic [ref=e235]: Tabs
+        - generic [ref=e236]:
+          - generic [ref=e237]: S
+          - generic [ref=e238]: Select
+        - generic [ref=e239]:
+          - generic [ref=e240]: T
+          - generic [ref=e241]: Tooltip
+        - generic [ref=e242]:
+          - generic [ref=e243]: P
+          - generic [ref=e244]: Popover
+        - generic [ref=e245]:
+          - generic [ref=e246]: A
+          - generic [ref=e247]: Alert
+        - generic [ref=e248]:
+          - generic [ref=e249]: T
+          - generic [ref=e250]: Toast
+        - generic [ref=e251]:
+          - generic [ref=e252]: P
+          - generic [ref=e253]: Progress
+        - generic [ref=e254]:
+          - generic [ref=e255]: T
+          - generic [ref=e256]: Toggle
+        - generic [ref=e257]:
+          - generic [ref=e258]: S
+          - generic [ref=e259]: Skeleton
+        - generic [ref=e260]:
+          - generic [ref=e261]: S
+          - generic [ref=e262]: Spinner
+        - generic [ref=e263]:
+          - generic [ref=e264]: B
+          - generic [ref=e265]: Breadcrumb
+        - generic [ref=e266]:
+          - generic [ref=e267]: S
+          - generic [ref=e268]: Sidebar
+        - generic [ref=e269]:
+          - generic [ref=e270]: T
+          - generic [ref=e271]: Table
+        - generic [ref=e272]:
+          - generic [ref=e273]: C
+          - generic [ref=e274]: Command
+      - link "79 more →" [ref=e275] [cursor=pointer]:
+        - /url: /docs/components/button
+    - generic [ref=e277]:
+      - heading "30 presets. Not just colors." [level=2] [ref=e278]
+      - paragraph [ref=e279]: Every preset changes layout, spacing, borders, radii, dividers, and grids — not just the palette.
+      - generic [ref=e280]:
+        - button "Welcome to sigil Get started Quick overview A preset shapes every surface, color, and motion in your app. sigil" [ref=e282] [cursor=pointer]:
+          - generic [ref=e284]:
+            - heading "Welcome to sigil" [level=3] [ref=e285]
+            - button "Get started" [ref=e286]
+            - generic [ref=e287]:
+              - generic [ref=e288]: Quick overview
+              - generic [ref=e289]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e291]: sigil
+        - button "Welcome to noir Get started Quick overview A preset shapes every surface, color, and motion in your app. noir" [ref=e293] [cursor=pointer]:
+          - generic [ref=e295]:
+            - heading "Welcome to noir" [level=3] [ref=e296]
+            - button "Get started" [ref=e297]
+            - generic [ref=e298]:
+              - generic [ref=e299]: Quick overview
+              - generic [ref=e300]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e302]: noir
+        - button "Welcome to forge Get started Quick overview A preset shapes every surface, color, and motion in your app. forge" [ref=e304] [cursor=pointer]:
+          - generic [ref=e306]:
+            - heading "Welcome to forge" [level=3] [ref=e307]
+            - button "Get started" [ref=e308]
+            - generic [ref=e309]:
+              - generic [ref=e310]: Quick overview
+              - generic [ref=e311]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e313]: forge
+        - button "Welcome to vex Get started Quick overview A preset shapes every surface, color, and motion in your app. vex" [ref=e315] [cursor=pointer]:
+          - generic [ref=e317]:
+            - heading "Welcome to vex" [level=3] [ref=e318]
+            - button "Get started" [ref=e319]
+            - generic [ref=e320]:
+              - generic [ref=e321]: Quick overview
+              - generic [ref=e322]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e324]: vex
+        - button "Welcome to arc Get started Quick overview A preset shapes every surface, color, and motion in your app. arc" [ref=e326] [cursor=pointer]:
+          - generic [ref=e328]:
+            - heading "Welcome to arc" [level=3] [ref=e329]
+            - button "Get started" [ref=e330]
+            - generic [ref=e331]:
+              - generic [ref=e332]: Quick overview
+              - generic [ref=e333]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e335]: arc
+        - button "Welcome to cipher Get started Quick overview A preset shapes every surface, color, and motion in your app. cipher" [ref=e337] [cursor=pointer]:
+          - generic [ref=e339]:
+            - heading "Welcome to cipher" [level=3] [ref=e340]
+            - button "Get started" [ref=e341]
+            - generic [ref=e342]:
+              - generic [ref=e343]: Quick overview
+              - generic [ref=e344]: A preset shapes every surface, color, and motion in your app.
+          - generic [ref=e346]: cipher
+      - link "See all 30 →" [ref=e347] [cursor=pointer]:
+        - /url: /docs/presets
+    - generic [ref=e349]:
+      - heading "10 demo sites." [level=2] [ref=e350]
+      - link "ai-saas.sigil-ui.dev AI SaaS Landing Built with Sigil" [ref=e351] [cursor=pointer]:
+        - /url: /demos/ai-saas
+        - generic [ref=e357]: ai-saas.sigil-ui.dev
+        - generic [ref=e359]:
+          - generic [ref=e360]: AI SaaS Landing
+          - generic [ref=e361]: Built with Sigil
+      - generic [ref=e362]:
+        - link "dashboard.sigil-ui.dev Dashboard Built with Sigil" [ref=e363] [cursor=pointer]:
+          - /url: /demos/dashboard
+          - generic [ref=e369]: dashboard.sigil-ui.dev
+          - generic [ref=e371]:
+            - generic [ref=e372]: Dashboard
+            - generic [ref=e373]: Built with Sigil
+        - link "shop.sigil-ui.dev E-commerce Built with Sigil" [ref=e374] [cursor=pointer]:
+          - /url: /demos/ecommerce
+          - generic [ref=e380]: shop.sigil-ui.dev
+          - generic [ref=e382]:
+            - generic [ref=e383]: E-commerce
+            - generic [ref=e384]: Built with Sigil
+        - link "docs.sigil-ui.dev Dev Docs Built with Sigil" [ref=e385] [cursor=pointer]:
+          - /url: /demos/dev-docs
+          - generic [ref=e391]: docs.sigil-ui.dev
+          - generic [ref=e393]:
+            - generic [ref=e394]: Dev Docs
+            - generic [ref=e395]: Built with Sigil
+        - link "startup.sigil-ui.dev Startup Built with Sigil" [ref=e396] [cursor=pointer]:
+          - /url: /demos/startup
+          - generic [ref=e402]: startup.sigil-ui.dev
+          - generic [ref=e404]:
+            - generic [ref=e405]: Startup
+            - generic [ref=e406]: Built with Sigil
+      - generic [ref=e407]:
+        - link "Portfolio →" [ref=e408] [cursor=pointer]:
+          - /url: /demos/portfolio
+        - link "Blog →" [ref=e409] [cursor=pointer]:
+          - /url: /demos/blog
+        - link "Agency →" [ref=e410] [cursor=pointer]:
+          - /url: /demos/agency
+        - link "CLI Tool →" [ref=e411] [cursor=pointer]:
+          - /url: /demos/cli-tool
+        - link "Playground →" [ref=e412] [cursor=pointer]:
+          - /url: /demos/playground
+    - generic [ref=e415]:
+      - generic [ref=e416]:
+        - heading "Describe what you want." [level=3] [ref=e417]
+        - paragraph [ref=e418]: Your agent builds it with your active preset.
+        - link "Open Sandbox" [ref=e419] [cursor=pointer]:
+          - /url: /sandbox
+      - code [ref=e421]: you → "dark mode pricing page" sigil → Generated Pricing with noir preset you → "make the cards float"
+    - generic [ref=e423]:
+      - heading "One command." [level=3] [ref=e424]
+      - generic [ref=e425]:
+        - generic [ref=e431]: ~/ — zsh
+        - generic [ref=e433]: ▋
+  - contentinfo [ref=e434]:
+    - generic [ref=e435]:
+      - generic [ref=e436]:
+        - generic [ref=e437]:
+          - generic [ref=e438]: Product
+          - generic [ref=e439]:
+            - link "Docs" [ref=e440] [cursor=pointer]:
+              - /url: /docs
+            - link "Components" [ref=e441] [cursor=pointer]:
+              - /url: /docs/components/button
+            - link "Presets" [ref=e442] [cursor=pointer]:
+              - /url: /docs/presets
+            - link "Sandbox" [ref=e443] [cursor=pointer]:
+              - /url: /sandbox
+        - generic [ref=e444]:
+          - generic [ref=e445]: Community
+          - generic [ref=e446]:
+            - link "GitHub" [ref=e447] [cursor=pointer]:
+              - /url: https://github.com/sigil-ui/sigil
+            - link "npm" [ref=e448] [cursor=pointer]:
+              - /url: https://www.npmjs.com/package/@sigil-ui/components
+            - link "Discord" [ref=e449] [cursor=pointer]:
+              - /url: "#"
+        - generic [ref=e450]:
+          - generic [ref=e451]: Resources
+          - generic [ref=e452]:
+            - link "Token Guide" [ref=e453] [cursor=pointer]:
+              - /url: /docs/theming
+            - link "Preset API" [ref=e454] [cursor=pointer]:
+              - /url: /docs/cli
+            - link "Agent Integration" [ref=e455] [cursor=pointer]:
+              - /url: /docs
+        - generic [ref=e456]:
+          - generic [ref=e457]: Company
+          - generic [ref=e458]:
+            - link "About" [ref=e459] [cursor=pointer]:
+              - /url: /about
+            - link "Blog" [ref=e460] [cursor=pointer]:
+              - /url: /blog
+            - link "Contact" [ref=e461] [cursor=pointer]:
+              - /url: mailto:hello@sigil-ui.dev
+      - generic [ref=e462]:
+        - generic [ref=e463]: MIT License
+        - generic [ref=e464]:
+          - text: Built by
+          - link "Kevin Liu" [ref=e465] [cursor=pointer]:
+            - /url: https://kevinliu.me
+  - generic [ref=e466]:
+    - generic [ref=e467] [cursor=pointer]:
+      - generic [ref=e468]:
+        - img [ref=e469]
+        - generic [ref=e470]: sigil devbar
+        - generic [ref=e471]: sigil
+      - generic [ref=e472]:
+        - button "🔇 Sound" [ref=e473]
+        - button "🎲 Random" [ref=e474]
+        - generic [ref=e475]: ▲
+    - generic [ref=e476]:
+      - generic [ref=e477]:
+        - button "Presets" [ref=e478] [cursor=pointer]
+        - button "Tokens" [ref=e479] [cursor=pointer]
+        - button "Fonts" [ref=e480] [cursor=pointer]
+        - button "Layout" [ref=e481] [cursor=pointer]
+        - button "Components" [ref=e482] [cursor=pointer]
+      - generic [ref=e484]:
+        - button "sigil structural" [ref=e485] [cursor=pointer]:
+          - generic [ref=e491]: sigil
+          - generic [ref=e492]: structural
+        - button "crux minimal" [ref=e493] [cursor=pointer]:
+          - generic [ref=e499]: crux
+          - generic [ref=e500]: minimal
+        - button "alloy industrial" [ref=e501] [cursor=pointer]:
+          - generic [ref=e507]: alloy
+          - generic [ref=e508]: industrial
+        - button "basalt volcanic" [ref=e509] [cursor=pointer]:
+          - generic [ref=e515]: basalt
+          - generic [ref=e516]: volcanic
+        - button "forge fiery" [ref=e517] [cursor=pointer]:
+          - generic [ref=e523]: forge
+          - generic [ref=e524]: fiery
+        - button "onyx luxury" [ref=e525] [cursor=pointer]:
+          - generic [ref=e531]: onyx
+          - generic [ref=e532]: luxury
+        - button "flux dynamic" [ref=e533] [cursor=pointer]:
+          - generic [ref=e539]: flux
+          - generic [ref=e540]: dynamic
+        - button "kova nordic" [ref=e541] [cursor=pointer]:
+          - generic [ref=e547]: kova
+          - generic [ref=e548]: nordic
+        - button "etch engraved" [ref=e549] [cursor=pointer]:
+          - generic [ref=e555]: etch
+          - generic [ref=e556]: engraved
+        - button "anvil heavy" [ref=e557] [cursor=pointer]:
+          - generic [ref=e563]: anvil
+          - generic [ref=e564]: heavy
+        - button "rivet structural" [ref=e565] [cursor=pointer]:
+          - generic [ref=e571]: rivet
+          - generic [ref=e572]: structural
+        - button "shard angular" [ref=e573] [cursor=pointer]:
+          - generic [ref=e579]: shard
+          - generic [ref=e580]: angular
+        - button "rune ancient" [ref=e581] [cursor=pointer]:
+          - generic [ref=e587]: rune
+          - generic [ref=e588]: ancient
+        - button "fang predatory" [ref=e589] [cursor=pointer]:
+          - generic [ref=e595]: fang
+          - generic [ref=e596]: predatory
+        - button "cobalt metallic" [ref=e597] [cursor=pointer]:
+          - generic [ref=e603]: cobalt
+          - generic [ref=e604]: metallic
+        - button "strata geological" [ref=e605] [cursor=pointer]:
+          - generic [ref=e611]: strata
+          - generic [ref=e612]: geological
+        - button "brass vintage" [ref=e613] [cursor=pointer]:
+          - generic [ref=e619]: brass
+          - generic [ref=e620]: vintage
+        - button "obsid obsidian" [ref=e621] [cursor=pointer]:
+          - generic [ref=e627]: obsid
+          - generic [ref=e628]: obsidian
+        - button "axiom mathematical" [ref=e629] [cursor=pointer]:
+          - generic [ref=e635]: axiom
+          - generic [ref=e636]: mathematical
+        - button "glyph typographic" [ref=e637] [cursor=pointer]:
+          - generic [ref=e643]: glyph
+          - generic [ref=e644]: typographic
+        - button "cipher terminal" [ref=e645] [cursor=pointer]:
+          - generic [ref=e651]: cipher
+          - generic [ref=e652]: terminal
+        - button "prism spectral" [ref=e653] [cursor=pointer]:
+          - generic [ref=e659]: prism
+          - generic [ref=e660]: spectral
+        - button "helix biotech" [ref=e661] [cursor=pointer]:
+          - generic [ref=e667]: helix
+          - generic [ref=e668]: biotech
+        - button "hex geometric" [ref=e669] [cursor=pointer]:
+          - generic [ref=e675]: hex
+          - generic [ref=e676]: geometric
+        - button "vex punk" [ref=e677] [cursor=pointer]:
+          - generic [ref=e683]: vex
+          - generic [ref=e684]: punk
+        - button "arc flowing" [ref=e685] [cursor=pointer]:
+          - generic [ref=e691]: arc
+          - generic [ref=e692]: flowing
+        - button "dsgn wireframe" [ref=e693] [cursor=pointer]:
+          - generic [ref=e699]: dsgn
+          - generic [ref=e700]: wireframe
+        - button "mrkr annotated" [ref=e701] [cursor=pointer]:
+          - generic [ref=e707]: mrkr
+          - generic [ref=e708]: annotated
+        - button "noir cinematic" [ref=e709] [cursor=pointer]:
+          - generic [ref=e715]: noir
+          - generic [ref=e716]: cinematic
+        - button "dusk twilight" [ref=e717] [cursor=pointer]:
+          - generic [ref=e723]: dusk
+          - generic [ref=e724]: twilight
+        - button "mono monochrome" [ref=e725] [cursor=pointer]:
+          - generic [ref=e731]: mono
+          - generic [ref=e732]: monochrome
+  - alert [ref=e733]

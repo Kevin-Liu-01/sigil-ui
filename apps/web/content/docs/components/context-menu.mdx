@@ -1,0 +1,119 @@
+---
+title: ContextMenu
+description: Right-click menu with nested submenus, checkboxes, and radio items.
+---
+
+# ContextMenu
+
+> Right-click menu with nested submenus, checkboxes, and radio items.
+
+## Installation
+
+```bash
+npx sigil add context-menu
+```
+
+## Import
+
+```tsx
+import {
+  ContextMenu,
+  ContextMenuTrigger,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuSeparator,
+  ContextMenuSub,
+  ContextMenuSubTrigger,
+  ContextMenuSubContent,
+  ContextMenuCheckboxItem,
+  ContextMenuRadioGroup,
+  ContextMenuRadioItem,
+  ContextMenuLabel,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-[var(--s-radius-md)] border border-dashed border-[var(--s-border)]">
+    Right click here
+  </ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Cut</ContextMenuItem>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Paste</ContextMenuItem>
+    <ContextMenuSeparator />
+    <ContextMenuItem>Delete</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Examples
+
+### With submenus
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Back</ContextMenuItem>
+    <ContextMenuItem>Forward</ContextMenuItem>
+    <ContextMenuSub>
+      <ContextMenuSubTrigger>Share</ContextMenuSubTrigger>
+      <ContextMenuSubContent>
+        <ContextMenuItem>Email</ContextMenuItem>
+        <ContextMenuItem>Slack</ContextMenuItem>
+        <ContextMenuItem>Copy link</ContextMenuItem>
+      </ContextMenuSubContent>
+    </ContextMenuSub>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+### With checkbox items
+
+```tsx
+<ContextMenu>
+  <ContextMenuTrigger>Right click</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuLabel>View</ContextMenuLabel>
+    <ContextMenuCheckboxItem checked={showGrid} onCheckedChange={setShowGrid}>
+      Show grid
+    </ContextMenuCheckboxItem>
+    <ContextMenuCheckboxItem checked={showRulers} onCheckedChange={setShowRulers}>
+      Show rulers
+    </ContextMenuCheckboxItem>
+  </ContextMenuContent>
+</ContextMenu>
+```
+
+## Props
+
+### ContextMenuContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+### ContextMenuItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `inset` | `boolean` | `false` | Add left padding for icon alignment |
+| `disabled` | `boolean` | `false` | Disable the item |
+| `onSelect` | `() => void` | — | Selection handler |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-surface` — menu background
+- `--s-border` — menu border, separator
+- `--s-card-radius` — menu border radius
+- `--s-radius-sm` — item border radius
+- `--s-shadow-md` — menu elevation
+- `--s-text` — item text, focus state
+- `--s-text-muted` — disabled items, labels
+- `--s-background` — item focus background
+- `--s-primary` — checkbox/radio indicator

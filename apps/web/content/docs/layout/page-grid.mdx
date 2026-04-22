@@ -1,0 +1,70 @@
+---
+title: PageGrid
+description: A full-page grid layout with sidebar, header, and main content areas. Configurable column counts and responsive breakpoints.
+---
+
+## Import
+
+```tsx
+import { PageGrid, PageGridSidebar, PageGridMain, PageGridHeader } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<PageGrid>
+  <PageGridHeader>
+    <nav>Header navigation</nav>
+  </PageGridHeader>
+  <PageGridSidebar>
+    <Sidebar>...</Sidebar>
+  </PageGridSidebar>
+  <PageGridMain>
+    <h1>Page content</h1>
+  </PageGridMain>
+</PageGrid>
+```
+
+## Without sidebar
+
+```tsx
+<PageGrid sidebar={false}>
+  <PageGridHeader>Header</PageGridHeader>
+  <PageGridMain>Full-width content</PageGridMain>
+</PageGrid>
+```
+
+## Custom sidebar width
+
+```tsx
+<PageGrid sidebarWidth={280}>
+  <PageGridSidebar>Wide sidebar</PageGridSidebar>
+  <PageGridMain>Content</PageGridMain>
+</PageGrid>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-max-width` | Main content max-width |
+| `--s-rail-gap` | Gap between sidebar and main |
+| `--s-surface` | Page background |
+| `--s-border` | Sidebar border |
+
+## Props
+
+### PageGrid
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `sidebar` | `boolean` | `true` | Show sidebar slot |
+| `sidebarWidth` | `number \| string` | `240` | Sidebar width |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Grid areas |
+
+## Accessibility
+
+- Uses CSS Grid with named areas for semantic layout
+- Sidebar renders as `<aside>` with `role="complementary"`
+- Main renders as `<main>` with `role="main"`

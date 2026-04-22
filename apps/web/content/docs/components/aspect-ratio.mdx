@@ -1,0 +1,77 @@
+---
+title: AspectRatio
+description: Constrain child content to a fixed aspect ratio using CSS.
+---
+
+# AspectRatio
+
+> Constrain child content to a fixed aspect ratio using CSS.
+
+## Installation
+
+```bash
+npx sigil add aspect-ratio
+```
+
+## Import
+
+```tsx
+import { AspectRatio } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <img
+    src="/hero.jpg"
+    alt="Hero image"
+    className="h-full w-full object-cover"
+  />
+</AspectRatio>
+```
+
+## Examples
+
+### Square
+
+```tsx
+<AspectRatio ratio={1}>
+  <img src="/avatar.jpg" alt="Profile" className="h-full w-full object-cover rounded-[var(--s-radius-md)]" />
+</AspectRatio>
+```
+
+### Video embed
+
+```tsx
+<AspectRatio ratio={16 / 9}>
+  <iframe
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    className="h-full w-full"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+    allowFullScreen
+  />
+</AspectRatio>
+```
+
+### 4:3 with background
+
+```tsx
+<AspectRatio ratio={4 / 3} className="bg-[var(--s-surface)] rounded-[var(--s-radius-lg)]">
+  <div className="flex items-center justify-center h-full">
+    <p className="text-[var(--s-text-muted)]">4:3 container</p>
+  </div>
+</AspectRatio>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `ratio` | `number` | `1` | Width-to-height ratio (e.g. `16/9`) |
+| `className` | `string` | — | Additional CSS classes on the wrapper |
+| `children` | `ReactNode` | — | Content to constrain |
+
+## Tokens
+
+This component is layout-only and does not read design tokens directly. Child content inherits tokens from the global scope.

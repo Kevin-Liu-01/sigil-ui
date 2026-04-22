@@ -1,0 +1,139 @@
+---
+title: Command
+description: Command palette with search, keyboard navigation, and grouped actions.
+---
+
+# Command
+
+> Command palette with search, keyboard navigation, and grouped actions.
+
+## Installation
+
+```bash
+npx sigil add command
+```
+
+## Import
+
+```tsx
+import {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+  CommandSeparator,
+  CommandDialog,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Command>
+  <CommandInput placeholder="Type a command..." />
+  <CommandList>
+    <CommandEmpty>No results found.</CommandEmpty>
+    <CommandGroup heading="Actions">
+      <CommandItem>New file</CommandItem>
+      <CommandItem>New folder</CommandItem>
+    </CommandGroup>
+    <CommandSeparator />
+    <CommandGroup heading="Settings">
+      <CommandItem>Profile</CommandItem>
+      <CommandItem>Preferences</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## Examples
+
+### As a dialog (⌘K)
+
+```tsx
+const [open, setOpen] = useState(false);
+
+useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      setOpen((prev) => !prev);
+    }
+  };
+  document.addEventListener("keydown", handler);
+  return () => document.removeEventListener("keydown", handler);
+}, []);
+
+<CommandDialog open={open} onOpenChange={setOpen}>
+  <CommandInput placeholder="Search..." />
+  <CommandList>
+    <CommandEmpty>No results.</CommandEmpty>
+    <CommandGroup heading="Pages">
+      <CommandItem>Dashboard</CommandItem>
+      <CommandItem>Settings</CommandItem>
+      <CommandItem>Billing</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</CommandDialog>
+```
+
+### With icons
+
+```tsx
+<Command>
+  <CommandInput placeholder="Search..." />
+  <CommandList>
+    <CommandGroup heading="Navigation">
+      <CommandItem>
+        <HomeIcon className="mr-2 size-4" />
+        Home
+      </CommandItem>
+      <CommandItem>
+        <SettingsIcon className="mr-2 size-4" />
+        Settings
+      </CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+```
+
+## Props
+
+### Command
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+### CommandInput
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | — | Input placeholder text |
+
+### CommandItem
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `onSelect` | `(value: string) => void` | — | Selection handler |
+| `disabled` | `boolean` | `false` | Disable this item |
+
+### CommandDialog
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | State change handler |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-background` — command container and hover state
+- `--s-border` — input border, separator
+- `--s-card-radius` — container radius
+- `--s-text` — item text
+- `--s-text-muted` — placeholder, search icon, group heading
+- `--s-shadow-lg` — dialog elevation

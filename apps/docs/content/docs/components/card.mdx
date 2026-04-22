@@ -1,0 +1,148 @@
+---
+title: Card
+description: A composable card with header, body, and footer slots. Reads radius and shadow from your token file.
+---
+
+## Import
+
+```tsx
+import { Card, CardHeader, CardBody, CardFooter } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Card>
+  <CardHeader>
+    <h3>Card title</h3>
+  </CardHeader>
+  <CardBody>
+    <p>Card content goes here. This reads from your token file for
+    radius, shadow, and surface color.</p>
+  </CardBody>
+  <CardFooter>
+    <Button variant="primary">Action</Button>
+  </CardFooter>
+</Card>
+```
+
+## Variants
+
+### Outlined
+
+```tsx
+<Card variant="outlined">
+  <CardBody>
+    <p>A card with a border instead of a shadow.</p>
+  </CardBody>
+</Card>
+```
+
+### Elevated
+
+```tsx
+<Card variant="elevated">
+  <CardBody>
+    <p>A card with stronger elevation shadow.</p>
+  </CardBody>
+</Card>
+```
+
+### Ghost
+
+```tsx
+<Card variant="ghost">
+  <CardBody>
+    <p>No border, no shadow. Just structured content.</p>
+  </CardBody>
+</Card>
+```
+
+## Interactive card
+
+Add `interactive` to enable hover and press states:
+
+```tsx
+<Card interactive onClick={() => console.log("clicked")}>
+  <CardBody>
+    <p>Hover me for an elevation shift.</p>
+  </CardBody>
+</Card>
+```
+
+## Padding control
+
+```tsx
+<Card padding="none">
+  <img src="/hero.jpg" alt="Full bleed image" />
+  <CardBody>
+    <p>Image bleeds to card edges.</p>
+  </CardBody>
+</Card>
+```
+
+## As a link
+
+```tsx
+<Card asChild interactive>
+  <a href="/details">
+    <CardBody>
+      <p>The entire card is a link.</p>
+    </CardBody>
+  </a>
+</Card>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--r-surface` | Card background |
+| `--r-surface-elevated` | Hover state / elevated variant |
+| `--r-border` | `variant="outlined"` border |
+| `--r-border-muted` | Subtle divider between header/body/footer |
+| `--r-card-radius` | Border radius (component-layer token) |
+| `--r-shadow-md` | Default elevation |
+| `--r-shadow-lg` | Elevated variant / hover state |
+| `--r-duration-normal` | Hover transition duration |
+| `--r-ease-default` | Transition easing |
+
+## Props
+
+### Card
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"default" \| "outlined" \| "elevated" \| "ghost"` | `"default"` | Visual variant |
+| `interactive` | `boolean` | `false` | Enable hover/press states |
+| `padding` | `"none" \| "sm" \| "md" \| "lg"` | `"md"` | Internal padding |
+| `asChild` | `boolean` | `false` | Render as child element |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Card content |
+
+### CardHeader
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Header content |
+
+### CardBody
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Body content |
+
+### CardFooter
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Footer content |
+
+## Accessibility
+
+- Renders as a `<div>` by default with no implicit role
+- When `interactive`, adds `tabIndex={0}` and `role="button"` unless `asChild` provides a semantic element
+- Focus ring uses `--r-border-interactive`

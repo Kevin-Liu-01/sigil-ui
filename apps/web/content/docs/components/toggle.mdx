@@ -1,0 +1,89 @@
+---
+title: Toggle
+description: A two-state toggle button for options like bold, italic, or view mode. Built on Radix Toggle.
+---
+
+## Import
+
+```tsx
+import { Toggle } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Toggle aria-label="Toggle bold">
+  <BoldIcon className="size-4" />
+</Toggle>
+```
+
+## With text
+
+```tsx
+<Toggle>
+  <BoldIcon className="size-4" />
+  Bold
+</Toggle>
+```
+
+## Variants
+
+```tsx
+<Toggle variant="default"><BoldIcon className="size-4" /></Toggle>
+<Toggle variant="outline"><ItalicIcon className="size-4" /></Toggle>
+```
+
+## Sizes
+
+```tsx
+<Toggle size="sm"><BoldIcon className="size-3" /></Toggle>
+<Toggle size="md"><BoldIcon className="size-4" /></Toggle>
+<Toggle size="lg"><BoldIcon className="size-5" /></Toggle>
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function BoldToggle() {
+  const [bold, setBold] = useState(false);
+
+  return (
+    <Toggle pressed={bold} onPressedChange={setBold} aria-label="Toggle bold">
+      <BoldIcon className="size-4" />
+    </Toggle>
+  );
+}
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface-elevated` | Pressed background |
+| `--s-text` | Icon/text color |
+| `--s-text-muted` | Unpressed icon color |
+| `--s-border` | Outline variant border |
+| `--s-border-interactive` | Focus ring |
+| `--s-radius-md` | Border radius |
+| `--s-duration-fast` | Press transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `pressed` | `boolean` | — | Controlled pressed state |
+| `defaultPressed` | `boolean` | `false` | Default pressed state |
+| `onPressedChange` | `(pressed: boolean) => void` | — | Change handler |
+| `variant` | `"default" \| "outline"` | `"default"` | Visual variant |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Toggle size |
+| `disabled` | `boolean` | `false` | Disable interactions |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Toggle content |
+
+## Accessibility
+
+- Uses `aria-pressed` to indicate toggle state
+- Supports Space and Enter to toggle
+- Always provide `aria-label` when using icon-only toggles

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://unpkg.com/@web-kits/audio/schemas/patch.schema.json",
+  "name": "sigil",
+  "author": "Sigil UI",
+  "version": "0.1.0",
+  "description": "Default sound patch for Sigil UI — structural, precise tones",
+  "tags": ["ui", "interaction", "minimal"],
+  "sounds": {
+    "tap": {
+      "source": { "type": "sine", "frequency": { "start": 600, "end": 400 } },
+      "envelope": { "decay": 0.04 },
+      "gain": 0.25
+    },
+    "toggle": {
+      "source": { "type": "triangle", "frequency": { "start": 500, "end": 350 } },
+      "envelope": { "decay": 0.06 },
+      "gain": 0.2
+    },
+    "success": {
+      "layers": [
+        { "source": { "type": "triangle", "frequency": 523 }, "envelope": { "decay": 0.15 }, "gain": 0.2 },
+        { "source": { "type": "triangle", "frequency": 659 }, "envelope": { "decay": 0.15 }, "gain": 0.2, "delay": 0.08 }
+      ]
+    },
+    "error": {
+      "source": { "type": "sawtooth", "frequency": { "start": 200, "end": 120 } },
+      "envelope": { "decay": 0.15 },
+      "gain": 0.15
+    },
+    "hover": {
+      "source": { "type": "sine", "frequency": { "start": 800, "end": 750 } },
+      "envelope": { "decay": 0.02 },
+      "gain": 0.08
+    },
+    "preset": {
+      "layers": [
+        { "source": { "type": "sine", "frequency": 440 }, "envelope": { "decay": 0.1 }, "gain": 0.15 },
+        { "source": { "type": "sine", "frequency": 554 }, "envelope": { "decay": 0.1 }, "gain": 0.15, "delay": 0.05 },
+        { "source": { "type": "sine", "frequency": 659 }, "envelope": { "decay": 0.15 }, "gain": 0.15, "delay": 0.1 }
+      ]
+    }
+  }
+}

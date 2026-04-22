@@ -1,0 +1,146 @@
+---
+title: Hexagon
+description: A regular hexagon shape via CSS clip-path. Use for avatars, badges, decorative grids, and honeycomb layouts.
+---
+
+## Import
+
+```tsx
+import { Hexagon } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Hexagon />
+```
+
+Renders a regular hexagon using a CSS `clip-path: polygon(...)`. Default size is `48px`.
+
+## Sizes
+
+```tsx
+<Hexagon size={32} />
+<Hexagon size={48} />
+<Hexagon size={64} />
+<Hexagon size={96} />
+```
+
+## Orientation
+
+```tsx
+{/* Flat-top (default) */}
+<Hexagon orientation="flat" />
+
+{/* Pointy-top */}
+<Hexagon orientation="pointy" />
+```
+
+## Colors
+
+```tsx
+<Hexagon color="var(--s-primary)" />
+<Hexagon color="var(--s-secondary)" />
+<Hexagon color="oklch(0.65 0.17 160)" />
+```
+
+## Variants
+
+### Filled
+
+```tsx
+<Hexagon variant="filled" color="var(--s-primary)" />
+```
+
+### Outlined
+
+```tsx
+<Hexagon variant="outlined" color="var(--s-primary)" />
+```
+
+### Gradient
+
+```tsx
+<Hexagon
+  variant="gradient"
+  gradientFrom="var(--s-primary)"
+  gradientTo="var(--s-secondary)"
+/>
+```
+
+## Avatar hexagon
+
+Clip an image into a hexagon:
+
+```tsx
+<Hexagon size={80}>
+  <img
+    src="/avatar.jpg"
+    alt="User avatar"
+    className="w-full h-full object-cover"
+  />
+</Hexagon>
+```
+
+## Badge pattern
+
+```tsx
+<Hexagon size={40} color="var(--s-primary)">
+  <span className="text-white text-sm font-bold">3</span>
+</Hexagon>
+```
+
+## Honeycomb grid
+
+Combine with CSS grid for a honeycomb layout:
+
+```tsx
+<div className="grid grid-cols-4 gap-2">
+  {items.map((item) => (
+    <Hexagon key={item.id} size={64} color="var(--s-surface-elevated)">
+      <item.icon className="size-6" />
+    </Hexagon>
+  ))}
+</div>
+```
+
+## Animation
+
+```tsx
+<Hexagon animated="pulse" color="var(--s-primary)" />
+<Hexagon animated="spin" color="var(--s-secondary)" />
+<Hexagon animated="float" color="var(--s-primary-muted)" />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-primary` | Default fill color |
+| `--s-border` | Outlined variant stroke |
+| `--s-surface-elevated` | Subtle background variant |
+| `--s-duration-slow` | Animation duration |
+| `--s-ease-spring` | Animation easing |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `number \| string` | `48` | Width and height |
+| `color` | `string` | `var(--s-primary)` | Fill or stroke color |
+| `variant` | `"filled" \| "outlined" \| "gradient"` | `"filled"` | Visual variant |
+| `orientation` | `"flat" \| "pointy"` | `"flat"` | Hexagon orientation |
+| `gradientFrom` | `string` | — | Gradient start color |
+| `gradientTo` | `string` | — | Gradient end color |
+| `strokeWidth` | `number` | `1.5` | Stroke width for outlined variant |
+| `animated` | `"pulse" \| "spin" \| "float" \| false` | `false` | Animation type |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content clipped inside the hexagon |
+
+Plus all standard `<div>` HTML attributes.
+
+## Accessibility
+
+- Renders with `role="presentation"` by default
+- When used as an avatar or badge, add `role="img"` and `aria-label`
+- Children inside the hexagon are still accessible to screen readers

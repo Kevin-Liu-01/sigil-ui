@@ -1,0 +1,81 @@
+---
+title: Terminal
+description: A styled terminal/code output block with syntax highlighting, copy button, and line numbers. Uses mono font tokens.
+---
+
+## Import
+
+```tsx
+import { Terminal } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Terminal>npm install @sigil-ui/components</Terminal>
+```
+
+## With title
+
+```tsx
+<Terminal title="Terminal">
+  npx create-sigil-app my-app
+</Terminal>
+```
+
+## Multi-line output
+
+```tsx
+<Terminal title="Output">
+{`$ sigil doctor
+✓ Token file found
+✓ Preset valid
+✓ Components installed
+✓ No issues detected`}
+</Terminal>
+```
+
+## With line numbers
+
+```tsx
+<Terminal lineNumbers>
+{`const tokens = loadTokens();
+const css = compileCSS(tokens);
+writeFile("tokens.css", css);`}
+</Terminal>
+```
+
+## Copy button
+
+```tsx
+<Terminal copyable>
+  pnpm add @sigil-ui/components @sigil-ui/tokens
+</Terminal>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Terminal background |
+| `--s-text` | Output text color |
+| `--s-text-muted` | Line numbers and title |
+| `--s-border` | Terminal border |
+| `--s-card-radius` | Border radius |
+| `--s-font-mono` | Monospace font family |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `string` | — | Window title bar text |
+| `lineNumbers` | `boolean` | `false` | Show line numbers |
+| `copyable` | `boolean` | `false` | Show copy-to-clipboard button |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Terminal content |
+
+## Accessibility
+
+- Content wrapped in `<pre><code>` for semantic code blocks
+- Copy button has `aria-label="Copy to clipboard"`
+- Line numbers are `aria-hidden` to avoid noisy screen reader output

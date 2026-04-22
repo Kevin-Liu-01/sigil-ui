@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+/*
+ * Sigil UI design tokens.
+ * Every component reads from --r-* variables.
+ * Change once, update everywhere.
+ */
+:root {
+  /* Colors — light mode */
+  --r-background: oklch(0.99 0 0);
+  --r-surface: oklch(0.97 0 0);
+  --r-surface-elevated: oklch(0.98 0 0);
+  --r-primary: oklch(0.65 0.15 280);
+  --r-primary-hover: oklch(0.60 0.18 280);
+  --r-primary-muted: oklch(0.90 0.04 280);
+  --r-secondary: oklch(0.70 0.12 60);
+  --r-text: oklch(0.15 0 0);
+  --r-text-secondary: oklch(0.40 0 0);
+  --r-text-muted: oklch(0.55 0 0);
+  --r-text-subtle: oklch(0.70 0 0);
+  --r-text-disabled: oklch(0.80 0 0);
+  --r-border: oklch(0.90 0 0);
+  --r-border-muted: oklch(0.94 0 0);
+  --r-border-strong: oklch(0.80 0 0);
+  --r-border-interactive: oklch(0.65 0.15 280);
+  --r-success: oklch(0.65 0.17 160);
+  --r-warning: oklch(0.75 0.15 85);
+  --r-error: oklch(0.60 0.20 25);
+  --r-info: oklch(0.60 0.15 250);
+
+  /* Typography */
+  --r-font-display: "Nacelle", system-ui, sans-serif;
+  --r-font-body: system-ui, -apple-system, sans-serif;
+  --r-font-mono: "Roboto Mono", ui-monospace, monospace;
+
+  /* Spacing scale (index → value) */
+  --r-space-0: 4px;
+  --r-space-1: 8px;
+  --r-space-2: 12px;
+  --r-space-3: 16px;
+  --r-space-4: 24px;
+  --r-space-5: 32px;
+  --r-space-6: 48px;
+  --r-space-7: 64px;
+  --r-space-8: 80px;
+  --r-space-9: 96px;
+
+  /* Sigil grid */
+  --r-grid-cell: 48px;
+  --r-cross-arm: 10px;
+  --r-cross-stroke: 1.5px;
+  --r-rail-gap: 24px;
+  --r-content-max: 1280px;
+  --r-card-radius: 10px;
+
+  /* Radius */
+  --r-radius-none: 0px;
+  --r-radius-sm: 4px;
+  --r-radius-md: 8px;
+  --r-radius-lg: 12px;
+  --r-radius-xl: 16px;
+  --r-radius-2xl: 24px;
+  --r-radius-full: 9999px;
+
+  /* Shadows */
+  --r-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --r-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06),
+    0 2px 4px 0 rgb(0 0 0 / 0.04);
+  --r-shadow-lg: 0 0 0 1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.06),
+    0 4px 8px -2px rgb(0 0 0 / 0.08);
+  --r-shadow-xl: 0 0 0 1px rgb(0 0 0 / 0.03), 0 4px 6px -4px rgb(0 0 0 / 0.06),
+    0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.06);
+
+  /* Motion — durations */
+  --r-duration-instant: 0ms;
+  --r-duration-fast: 150ms;
+  --r-duration-normal: 250ms;
+  --r-duration-slow: 400ms;
+  --r-duration-slower: 600ms;
+
+  /* Motion — easings */
+  --r-ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --r-ease-out: cubic-bezier(0, 0.55, 0.45, 1);
+  --r-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+  --r-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Borders */
+  --r-border-width-none: 0px;
+  --r-border-width-thin: 1px;
+  --r-border-width-medium: 1.5px;
+  --r-border-width-thick: 2px;
+}
+
+.dark,
+[data-theme="dark"] {
+  --r-background: oklch(0.07 0.01 280);
+  --r-surface: oklch(0.12 0.01 280);
+  --r-surface-elevated: oklch(0.15 0.01 280);
+  --r-text: oklch(0.93 0 0);
+  --r-text-secondary: oklch(0.70 0 0);
+  --r-text-muted: oklch(0.55 0 0);
+  --r-text-subtle: oklch(0.40 0 0);
+  --r-text-disabled: oklch(0.30 0 0);
+  --r-border: oklch(0.22 0 0);
+  --r-border-muted: oklch(0.18 0 0);
+  --r-border-strong: oklch(0.35 0 0);
+}

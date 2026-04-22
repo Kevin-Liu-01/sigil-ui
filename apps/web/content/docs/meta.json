@@ -1,0 +1,26 @@
+{
+  "title": "Docs",
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "installation",
+    "theming",
+    "cli",
+    "presets",
+    "alignment",
+    "---Components---",
+    "...components",
+    "---Layout---",
+    "...layout",
+    "---Shapes---",
+    "...shapes",
+    "---3D---",
+    "...3d",
+    "---Diagrams---",
+    "...diagrams",
+    "---Marketing---",
+    "...marketing",
+    "---Patterns---",
+    "...patterns"
+  ]
+}

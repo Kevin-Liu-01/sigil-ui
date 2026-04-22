@@ -1,0 +1,569 @@
+[      40ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[      48ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/0e-u_react-dom_0037m-m._.js:15305
+[      62ms] Error: ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./packages/components/dist/index.js:14:1)
+    at Object.getCompilationErrors (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/hot-reloader-turbopack.js:1186:59)
+    at DevBundlerService.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/lib/dev-bundler-service.js:44:55)
+    at DevServer.getCompilationError (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:719:42)
+    at DevServer.findPageComponents (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/dev/next-dev-server.js:689:43)
+    at async DevServer.renderErrorToResponseImpl (file:///Users/kevinliu/Documents/GitHub/reticle-ui/node_modules/.pnpm/next@16.2.4_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/server/base-server.js:1745:26)
+[      52ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[      53ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      54ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  #1 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #2 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/layout.tsx [Server Component]
+
+  #3 [Client Component Browser]:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Client Component Browser]
+    ./apps/web/app/sandbox/page.tsx [Server Component]
+
+  #4 [Client Component SSR]:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/components/sandbox/canvas-item.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Client Component SSR]
+    ./apps/web/app/sandbox/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      85ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      85ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      85ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[      85ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[   71142ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[   71142ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelGroup doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelGroup was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[   71142ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-client] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[   71142ms] [ERROR] ./packages/components/dist/index.js:14:1
+Export PanelResizeHandle doesn't exist in target module
+  12 | import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
+  13 | import { OTPInput, OTPInputContext } from 'input-otp';
+> 14 | import { PanelGroup, Panel, PanelResizeHandle } from 'react-resizable-panels';
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  15 | import { ResponsiveContainer, Tooltip as Tooltip$1, Legend } from 'recharts';
+  16 | import * as NavPrimitive from '@radix-ui/react-navigation-menu';
+  17 | import * as MenubarPrimitive from '@radix-ui/react-menubar';
+
+The export PanelResizeHandle was not found in module [project]/node_modules/.pnpm/react-resizable-panels@4.10.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/react-resizable-panels/dist/react-resizable-panels.js [app-ssr] (ecmascript).
+Did you mean to import Panel?
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./packages/components/dist/index.js [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./packages/components/dist/index.js [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1945
+[   71243ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[   73624ms] [LOG] [Fast Refresh] done in 677ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_10gys1k._.js:1226
+[   74898ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   74911ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   75012ms] [ERROR] In HTML, %s cannot be a descendant of <%s>.
+This will cause a hydration error.%s <button> button 
+
+  ...
+    <InnerLayoutRouter url="/" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+      <SegmentViewNode type="page" pagePath="page.tsx">
+        <SegmentTrieNode>
+        <ClientPageRoot Component={function LandingPage} serverProvidedParams={{...}}>
+          <LandingPage params={Promise} searchParams={Promise}>
+            <Navbar>
+            <main>
+              <Hero>
+              <TokenSystem>
+              <Components>
+              <Presets>
+                <section id="presets" style={{padding:"8...", ...}}>
+                  <ContentWrap>
+                    <div className="" style={{maxWidth:1200, ...}}>
+                      <h2>
+                      <p>
+                      <PresetShowcase>
+                        <div className={"flex gap..."} style={{...}}>
+                          <div style={{...}}>
+                            <MiniPage preset={{name:"sigil", ...}} active={true} onClick={function onClick}>
+>                             <button
+>                               type="button"
+>                               onClick={function onClick}
+>                               className="flex-shrink-0 flex flex-col items-center gap-2 group"
+>                               style={{cursor:"pointer"}}
+>                             >
+                                <div className="relative o..." style={{width:280, ...}}>
+                                  <div style={{width:560, ...}}>
+                                    <h3>
+>                                   <button
+>                                     type="button"
+>                                     style={{background:"#9b99e8",color:"#000",border:"none",borderRadius:6,padding:"10px 20px",fontSize:14, ...}}
+>                                   >
+                                    ...
+                                ...
+                          ...
+                      ...
+              ...
+            ...
+      ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   75012ms] [ERROR] <%s> cannot contain a nested %s.
+See this log for the ancestor stack trace. button <button> @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   75018ms] [ERROR] Encountered a script tag while rendering React component. Scripts inside React components are never executed when rendering on the client. Consider using template tag instead (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   75099ms] Error: Hydration failed because the server rendered HTML didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="dark robot..." data-theme="dark" suppressHydrationWarning={true}>
+                          <head>
+                          <body
++                           style={{paddingBottom:40}}
+-                           style={{padding-bottom:"40px"}}
+                          >
+                  ...
+
+    at throwOnHydrationMismatch (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:3318:56)
+    at beginWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:6758:918)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:965:74)
+    at performUnitOfWork (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9555:97)
+    at workLoopConcurrentByScheduler (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9551:58)
+    at renderRootConcurrent (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9534:71)
+    at performWorkOnRoot (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_react-dom_00tuwn.._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:2647:64)
+[   75095ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   75096ms] [LOG] [Fast Refresh] done in 164ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

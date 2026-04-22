@@ -1,0 +1,126 @@
+---
+title: Dialog
+description: Modal dialog with backdrop overlay, keyboard dismissal, and focus trapping.
+---
+
+# Dialog
+
+> Modal dialog with backdrop overlay, keyboard dismissal, and focus trapping.
+
+## Installation
+
+```bash
+npx sigil add dialog
+```
+
+## Import
+
+```tsx
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Open dialog</Button>
+  </DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit profile</DialogTitle>
+      <DialogDescription>Update your name and email address.</DialogDescription>
+    </DialogHeader>
+    <div className="grid gap-4 py-4">
+      <Input label="Name" defaultValue="Kevin" />
+      <Input label="Email" defaultValue="kevin@sigil.dev" />
+    </div>
+    <DialogFooter>
+      <DialogClose asChild>
+        <Button variant="ghost">Cancel</Button>
+      </DialogClose>
+      <Button variant="primary">Save changes</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## Examples
+
+### Controlled state
+
+```tsx
+const [open, setOpen] = useState(false);
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Confirm action</DialogTitle>
+    </DialogHeader>
+    <DialogFooter>
+      <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+      <Button variant="primary" onClick={handleSubmit}>Confirm</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+### Scrollable content
+
+```tsx
+<Dialog>
+  <DialogTrigger asChild>
+    <Button>Terms of service</Button>
+  </DialogTrigger>
+  <DialogContent className="max-h-[80vh] overflow-y-auto">
+    <DialogHeader>
+      <DialogTitle>Terms of Service</DialogTitle>
+    </DialogHeader>
+    <div className="prose text-sm text-[var(--s-text-secondary)]">
+      {longContent}
+    </div>
+  </DialogContent>
+</Dialog>
+```
+
+## Props
+
+### Dialog
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | — | Controlled open state |
+| `onOpenChange` | `(open: boolean) => void` | — | State change handler |
+| `defaultOpen` | `boolean` | `false` | Uncontrolled default state |
+
+### DialogContent
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+
+### DialogClose
+
+Renders a close button. Use `asChild` to wrap your own button.
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-background` — dialog surface
+- `--s-border` — dialog border
+- `--s-shadow-lg` — dialog elevation
+- `--s-card-radius` — dialog border radius
+- `--s-text` — title text
+- `--s-text-muted` — description text
+- `--s-duration-fast` — overlay fade
+- `--s-ease-default` — animation easing

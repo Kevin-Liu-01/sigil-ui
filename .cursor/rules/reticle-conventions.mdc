@@ -1,0 +1,36 @@
+# Reticle UI Development Conventions
+
+## Token Variable Prefix
+All CSS variables use the `--r-` prefix: `var(--r-primary)`, `var(--r-surface)`, etc.
+
+## Component Rules
+- Every component is a "use client" component if it uses hooks or interactivity
+- Every component accepts a `className` prop for Tailwind overrides
+- Use `cn()` from utils for class merging (clsx + tailwind-merge)
+- All colors reference CSS variables, never hardcoded hex
+- All spacing uses the token scale (4, 8, 12, 16, 24, 32, 48, 64, 80, 96)
+- Components use `var(--r-*)` tokens, not Tailwind color classes directly
+- All interactive components must be keyboard-accessible
+- All components include JSDoc comments
+
+## File Structure
+- Layout primitives: `packages/components/src/layout/`
+- Core UI: `packages/components/src/ui/`
+- Navigation: `packages/components/src/navigation/`
+- Overlays: `packages/components/src/overlays/`
+- Shapes: `packages/components/src/shapes/`
+- 3D components: `packages/components/src/3d/`
+- Diagrams: `packages/components/src/diagrams/`
+- Marketing: `packages/components/src/marketing/`
+- Patterns: `packages/components/src/patterns/`
+- Animation: `packages/components/src/animation/`
+
+## Naming
+- Component files: PascalCase (Button.tsx, Card3D.tsx)
+- Utility files: camelCase (utils.ts, animate.ts)
+- Export components as named exports, not default
+- Prefix Reticle-specific layout components with nothing (Stack, Grid, Section — clean names)
+
+## Presets
+Each preset provides a complete ReticleTokens object. Presets live in `packages/presets/src/`.
+The canonical preset list: reticle, midnight, editorial, brutalist, soft.

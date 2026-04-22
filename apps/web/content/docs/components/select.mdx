@@ -1,0 +1,107 @@
+---
+title: Select
+description: A styled dropdown select with search, groups, and multi-select support. Built on Radix Select.
+---
+
+## Import
+
+```tsx
+import {
+  Select, SelectTrigger, SelectContent, SelectItem,
+  SelectGroup, SelectLabel, SelectValue, SelectSeparator,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a fruit" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="apple">Apple</SelectItem>
+    <SelectItem value="banana">Banana</SelectItem>
+    <SelectItem value="cherry">Cherry</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+## With groups
+
+```tsx
+<SelectContent>
+  <SelectGroup>
+    <SelectLabel>Fruits</SelectLabel>
+    <SelectItem value="apple">Apple</SelectItem>
+    <SelectItem value="banana">Banana</SelectItem>
+  </SelectGroup>
+  <SelectSeparator />
+  <SelectGroup>
+    <SelectLabel>Vegetables</SelectLabel>
+    <SelectItem value="carrot">Carrot</SelectItem>
+    <SelectItem value="celery">Celery</SelectItem>
+  </SelectGroup>
+</SelectContent>
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function RegionSelect() {
+  const [region, setRegion] = useState("us-east");
+
+  return (
+    <Select value={region} onValueChange={setRegion}>
+      <SelectTrigger><SelectValue /></SelectTrigger>
+      <SelectContent>
+        <SelectItem value="us-east">US East</SelectItem>
+        <SelectItem value="us-west">US West</SelectItem>
+        <SelectItem value="eu-west">EU West</SelectItem>
+      </SelectContent>
+    </Select>
+  );
+}
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Content background |
+| `--s-surface-elevated` | Item hover background |
+| `--s-text` | Item text |
+| `--s-text-muted` | Placeholder and label text |
+| `--s-border` | Trigger and content border |
+| `--s-border-interactive` | Focus ring |
+| `--s-radius-md` | Border radius |
+| `--s-shadow-lg` | Content elevation |
+| `--s-duration-fast` | Open/close animation |
+
+## Props
+
+### Select
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled value |
+| `defaultValue` | `string` | — | Default selected value |
+| `onValueChange` | `(value: string) => void` | — | Change handler |
+| `disabled` | `boolean` | `false` | Disable the select |
+
+### SelectItem
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Item value |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Item label |
+
+## Accessibility
+
+- Uses Radix Select ARIA pattern with `role="listbox"`
+- Arrow key navigation and type-ahead search
+- Focus returns to trigger on close

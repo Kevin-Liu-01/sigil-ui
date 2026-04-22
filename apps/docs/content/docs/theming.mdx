@@ -1,0 +1,221 @@
+---
+title: Theming
+description: "Change once, update everywhere. Sigil's three-layer token system makes theming deterministic."
+---
+
+## How tokens work
+
+Every visual property in Sigil flows through CSS custom properties prefixed with `--r-`. Components never hardcode colors, spacing, or radii — they read from variables.
+
+This means a single edit to your token file cascades through every component that references it. No grep-and-replace. No stale overrides.
+
+```
+┌────────────────────────────────────────────────────┐
+│  tokens.ts (or preset)                             │
+│  ↓ compile                                         │
+│  :root { --r-primary: oklch(0.65 0.15 280); ... }  │
+│  ↓ consumed by                                     │
+│  <Button /> <Card /> <Input /> ...                  │
+└────────────────────────────────────────────────────┘
+```
+
+### The three layers
+
+| Layer | Purpose | Example |
+|---|---|---|
+| **Primitive** | Raw values | `oklch(0.65 0.15 280)`, `8px`, `150ms` |
+| **Semantic** | Meaning-driven aliases | `--r-primary`, `--r-radius-md`, `--r-duration-fast` |
+| **Component** | Scoped to a specific component | `--r-card-radius`, `--r-grid-cell` |
+
+Higher layers reference lower ones. A component token like `--r-card-radius` defaults to a semantic token like `--r-radius-lg`, which resolves to the primitive `12px`.
+
+## Creating a preset
+
+A preset is a named token object with optional metadata. Define one in TypeScript:
+
+```ts title="presets/brand.ts"
+import type { SigilPreset } from "@sigil-ui/tokens";
+
+export const brandPreset: SigilPreset = {
+  name: "brand",
+  metadata: {
+    description: "Corporate brand theme",
+    author: "Design team",
+    version: "1.0.0",
+  },
+  tokens: {
+    colors: {
+      background: { light: "oklch(0.99 0 0)", dark: "oklch(0.08 0.01 260)" },
+      surface: { light: "oklch(0.97 0 0)", dark: "oklch(0.13 0.01 260)" },
+      "surface-elevated": { light: "oklch(0.98 0 0)", dark: "oklch(0.16 0.01 260)" },
+      primary: "oklch(0.55 0.20 145)",
+      "primary-hover": "oklch(0.50 0.23 145)",
+      "primary-muted": "oklch(0.88 0.05 145)",
+      secondary: "oklch(0.65 0.12 30)",
+      text: { light: "oklch(0.15 0 0)", dark: "oklch(0.93 0 0)" },
+      "text-secondary": { light: "oklch(0.40 0 0)", dark: "oklch(0.70 0 0)" },
+      "text-muted": { light: "oklch(0.55 0 0)", dark: "oklch(0.55 0 0)" },
+      "text-subtle": { light: "oklch(0.70 0 0)", dark: "oklch(0.40 0 0)" },
+      "text-disabled": { light: "oklch(0.80 0 0)", dark: "oklch(0.30 0 0)" },
+      border: { light: "oklch(0.90 0 0)", dark: "oklch(0.22 0 0)" },
+      "border-muted": { light: "oklch(0.94 0 0)", dark: "oklch(0.18 0 0)" },
+      "border-strong": { light: "oklch(0.80 0 0)", dark: "oklch(0.35 0 0)" },
+      "border-interactive": { light: "oklch(0.55 0.20 145)", dark: "oklch(0.55 0.20 145)" },
+      success: "oklch(0.65 0.17 160)",
+      warning: "oklch(0.75 0.15 85)",
+      error: "oklch(0.60 0.20 25)",
+      info: "oklch(0.60 0.15 250)",
+    },
+    typography: {
+      "font-display": '"Inter", system-ui, sans-serif',
+      "font-body": "system-ui, -apple-system, sans-serif",
+      "font-mono": '"JetBrains Mono", ui-monospace, monospace',
+    },
+    spacing: { scale: [4, 8, 12, 16, 24, 32, 48, 64, 80, 96], unit: "px" },
+    sigil: {
+      "grid-cell": "48px",
+      "cross-arm": "10px",
+      "cross-stroke": "1.5px",
+      "rail-gap": "24px",
+      "content-max": "1280px",
+      "card-radius": "12px",
+    },
+    radius: {
+      none: "0px",
+      sm: "4px",
+      md: "8px",
+      lg: "12px",
+      xl: "16px",
+      "2xl": "24px",
+      full: "9999px",
+    },
+    shadows: {
+      sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      md: "0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06), 0 2px 4px 0 rgb(0 0 0 / 0.04)",
+      lg: "0 0 0 1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.06), 0 4px 8px -2px rgb(0 0 0 / 0.08)",
+      xl: "0 0 0 1px rgb(0 0 0 / 0.03), 0 4px 6px -4px rgb(0 0 0 / 0.06), 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.06)",
+    },
+    motion: {
+      duration: { instant: "0ms", fast: "150ms", normal: "250ms", slow: "400ms", slower: "600ms" },
+      easing: {
+        default: "cubic-bezier(0.16, 1, 0.3, 1)",
+        in: "cubic-bezier(0.55, 0, 1, 0.45)",
+        out: "cubic-bezier(0, 0.55, 0.45, 1)",
+        "in-out": "cubic-bezier(0.45, 0, 0.55, 1)",
+        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+      },
+    },
+    borders: {
+      width: { none: "0px", thin: "1px", medium: "1.5px", thick: "2px" },
+    },
+  },
+};
+```
+
+## Compiling a preset
+
+Use the CLI to compile your preset to CSS:
+
+```bash
+npx sigil compile ./presets/brand.ts --out ./public/brand.css
+```
+
+This generates a CSS file with all `--r-*` variables set to your preset values, including light/dark mode support.
+
+## Applying a preset at runtime
+
+Load the compiled CSS dynamically or swap the `<link>` tag:
+
+```tsx
+<link rel="stylesheet" href="/brand.css" />
+```
+
+Or override variables in a scoped container:
+
+```tsx
+<div style={{ "--r-primary": "oklch(0.55 0.20 145)" } as React.CSSProperties}>
+  <Button variant="primary">Themed button</Button>
+</div>
+```
+
+## Dark mode
+
+Themed color tokens include light and dark variants. The compiled CSS uses the `.dark` and `[data-theme="dark"]` selectors automatically.
+
+Sigil works with any dark mode strategy — class-based, attribute-based, or `prefers-color-scheme`. The fumadocs `RootProvider` handles the toggle for this docs site.
+
+## Agent workflow
+
+The key insight: **your agent edits one file.** When a designer says "make the primary color green," the agent updates a single token value. Every button, link, card border, and focus ring updates in lockstep.
+
+No searching through component files. No stale overrides. No Tailwind config wrestling.
+
+```diff
+  // One line changes everything
+  colors: {
+-   primary: "oklch(0.65 0.15 280)",
++   primary: "oklch(0.55 0.20 145)",
+  },
+```
+
+## Tokens reference
+
+### Colors
+
+| Token | Light | Dark |
+|---|---|---|
+| `--r-background` | `oklch(0.99 0 0)` | `oklch(0.07 0.01 280)` |
+| `--r-surface` | `oklch(0.97 0 0)` | `oklch(0.12 0.01 280)` |
+| `--r-surface-elevated` | `oklch(0.98 0 0)` | `oklch(0.15 0.01 280)` |
+| `--r-primary` | `oklch(0.65 0.15 280)` | — |
+| `--r-primary-hover` | `oklch(0.60 0.18 280)` | — |
+| `--r-primary-muted` | `oklch(0.90 0.04 280)` | — |
+| `--r-secondary` | `oklch(0.70 0.12 60)` | — |
+| `--r-text` | `oklch(0.15 0 0)` | `oklch(0.93 0 0)` |
+| `--r-text-secondary` | `oklch(0.40 0 0)` | `oklch(0.70 0 0)` |
+| `--r-border` | `oklch(0.90 0 0)` | `oklch(0.22 0 0)` |
+
+### Spacing
+
+| Token | Value |
+|---|---|
+| `--r-space-0` | `4px` |
+| `--r-space-1` | `8px` |
+| `--r-space-2` | `12px` |
+| `--r-space-3` | `16px` |
+| `--r-space-4` | `24px` |
+| `--r-space-5` | `32px` |
+| `--r-space-6` | `48px` |
+| `--r-space-7` | `64px` |
+| `--r-space-8` | `80px` |
+| `--r-space-9` | `96px` |
+
+### Radius
+
+| Token | Value |
+|---|---|
+| `--r-radius-none` | `0px` |
+| `--r-radius-sm` | `4px` |
+| `--r-radius-md` | `8px` |
+| `--r-radius-lg` | `12px` |
+| `--r-radius-xl` | `16px` |
+| `--r-radius-2xl` | `24px` |
+| `--r-radius-full` | `9999px` |
+
+### Motion
+
+| Duration token | Value |
+|---|---|
+| `--r-duration-instant` | `0ms` |
+| `--r-duration-fast` | `150ms` |
+| `--r-duration-normal` | `250ms` |
+| `--r-duration-slow` | `400ms` |
+| `--r-duration-slower` | `600ms` |
+
+| Easing token | Value |
+|---|---|
+| `--r-ease-default` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+| `--r-ease-in` | `cubic-bezier(0.55, 0, 1, 0.45)` |
+| `--r-ease-out` | `cubic-bezier(0, 0.55, 0.45, 1)` |
+| `--r-ease-in-out` | `cubic-bezier(0.45, 0, 0.55, 1)` |
+| `--r-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |

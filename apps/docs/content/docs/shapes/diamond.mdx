@@ -1,0 +1,143 @@
+---
+title: Diamond
+description: A rotated-square diamond shape with configurable size, color, and optional animation. Perfect for decorative accents and status indicators.
+---
+
+## Import
+
+```tsx
+import { Diamond } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Diamond />
+```
+
+Renders a 45-degree rotated square using CSS `clip-path`. Default size is `24px`.
+
+## Sizes
+
+```tsx
+<Diamond size={12} />
+<Diamond size={24} />
+<Diamond size={48} />
+<Diamond size={64} />
+```
+
+Or use a string for CSS units:
+
+```tsx
+<Diamond size="2rem" />
+```
+
+## Colors
+
+```tsx
+{/* Token-driven (default) */}
+<Diamond color="var(--r-primary)" />
+
+{/* Direct color */}
+<Diamond color="oklch(0.65 0.17 160)" />
+
+{/* Semantic token */}
+<Diamond color="var(--r-success)" />
+<Diamond color="var(--r-error)" />
+<Diamond color="var(--r-warning)" />
+```
+
+## Filled vs outlined
+
+```tsx
+{/* Filled (default) */}
+<Diamond variant="filled" color="var(--r-primary)" />
+
+{/* Outlined */}
+<Diamond variant="outlined" color="var(--r-primary)" />
+<Diamond variant="outlined" strokeWidth={2} />
+```
+
+## Animation
+
+### Pulse
+
+```tsx
+<Diamond animated="pulse" color="var(--r-success)" />
+```
+
+A gentle scale pulse using `--r-duration-slow` and `--r-ease-spring`.
+
+### Spin
+
+```tsx
+<Diamond animated="spin" color="var(--r-primary)" />
+```
+
+Continuous rotation using `--r-duration-slower`.
+
+### Float
+
+```tsx
+<Diamond animated="float" color="var(--r-secondary)" />
+```
+
+Subtle vertical float for decorative use.
+
+## Status indicator pattern
+
+```tsx
+<Stack direction="row" gap={8} align="center">
+  <Diamond size={8} color="var(--r-success)" />
+  <span>Online</span>
+</Stack>
+
+<Stack direction="row" gap={8} align="center">
+  <Diamond size={8} color="var(--r-error)" />
+  <span>Offline</span>
+</Stack>
+
+<Stack direction="row" gap={8} align="center">
+  <Diamond size={8} color="var(--r-warning)" animated="pulse" />
+  <span>Connecting...</span>
+</Stack>
+```
+
+## Decorative scatter pattern
+
+```tsx
+<div className="relative h-64">
+  <Diamond size={48} color="var(--r-primary-muted)" className="absolute top-4 left-8" />
+  <Diamond size={24} color="var(--r-primary)" className="absolute top-12 right-16" />
+  <Diamond size={32} color="var(--r-secondary)" className="absolute bottom-8 left-1/2" />
+</div>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--r-primary` | Default fill color |
+| `--r-border` | Outlined variant stroke |
+| `--r-duration-slow` | Pulse animation duration |
+| `--r-duration-slower` | Spin animation duration |
+| `--r-ease-spring` | Pulse easing |
+| `--r-ease-default` | Float easing |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `number \| string` | `24` | Width and height |
+| `color` | `string` | `var(--r-primary)` | Fill or stroke color |
+| `variant` | `"filled" \| "outlined"` | `"filled"` | Visual variant |
+| `strokeWidth` | `number` | `1.5` | Stroke width for outlined variant |
+| `animated` | `"pulse" \| "spin" \| "float" \| false` | `false` | Animation type |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.
+
+## Accessibility
+
+- Renders with `role="presentation"` by default (decorative)
+- Add `role="img"` and `aria-label` when the diamond conveys meaning (e.g. status indicator)

@@ -1,0 +1,72 @@
+---
+title: Avatar
+description: User avatar with image support and initials fallback.
+---
+
+# Avatar
+
+> User avatar with image support and initials fallback.
+
+## Installation
+
+```bash
+npx sigil add avatar
+```
+
+## Import
+
+```tsx
+import { Avatar } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Avatar src="/avatars/kevin.jpg" alt="Kevin Liu" />
+```
+
+## Examples
+
+### With fallback initials
+
+When no image is available or it fails to load, the avatar shows initials.
+
+```tsx
+<Avatar fallback="KL" alt="Kevin Liu" />
+```
+
+### Sizes
+
+```tsx
+<Avatar src="/avatar.jpg" alt="User" size="sm" />
+<Avatar src="/avatar.jpg" alt="User" size="md" />
+<Avatar src="/avatar.jpg" alt="User" size="lg" />
+<Avatar src="/avatar.jpg" alt="User" size="xl" />
+```
+
+### Auto-initial from alt
+
+If `fallback` is not provided, the first letter of `alt` is used.
+
+```tsx
+<Avatar alt="Alice" />
+{/* Shows "A" */}
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `src` | `string` | — | Image source URL |
+| `alt` | `string` | — | Alt text (also used for auto-initial) |
+| `fallback` | `string` | — | Explicit initials when image is unavailable |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Avatar size (`32px`, `40px`, `48px`, `64px`) |
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-surface-elevated` — fallback background
+- `--s-border` — ring border
+- `--s-text-secondary` — fallback initials color

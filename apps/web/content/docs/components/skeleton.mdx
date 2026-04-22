@@ -1,0 +1,70 @@
+---
+title: Skeleton
+description: A placeholder shimmer for loading states. Matches the shape of the content it replaces with token-driven animation.
+---
+
+## Import
+
+```tsx
+import { Skeleton } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Skeleton className="h-4 w-[200px]" />
+```
+
+## Card skeleton
+
+```tsx
+<Card>
+  <CardBody>
+    <Stack gap={12}>
+      <Skeleton className="h-6 w-[150px]" />
+      <Skeleton className="h-4 w-full" />
+      <Skeleton className="h-4 w-[80%]" />
+    </Stack>
+  </CardBody>
+</Card>
+```
+
+## Avatar and text
+
+```tsx
+<Stack direction="row" gap={12} align="center">
+  <Skeleton className="size-10 rounded-full" />
+  <Stack gap={4}>
+    <Skeleton className="h-4 w-[120px]" />
+    <Skeleton className="h-3 w-[80px]" />
+  </Stack>
+</Stack>
+```
+
+## Circle variant
+
+```tsx
+<Skeleton variant="circle" size={48} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Base skeleton color |
+| `--s-surface-elevated` | Shimmer highlight color |
+| `--s-radius-md` | Default border radius |
+| `--s-duration-slower` | Shimmer animation cycle |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"rectangle" \| "circle"` | `"rectangle"` | Shape variant |
+| `size` | `number` | — | Width and height for circle variant |
+| `className` | `string` | — | Width, height, and radius via CSS |
+
+## Accessibility
+
+- Renders with `aria-hidden="true"` since it is a decorative placeholder
+- Pair with `aria-busy="true"` on the parent container during loading

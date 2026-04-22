@@ -1,0 +1,87 @@
+---
+title: VoronoiBento
+description: An organic bento grid layout based on Voronoi cell subdivision. Each cell is uniquely shaped for editorial and landing page designs.
+---
+
+## Import
+
+```tsx
+import { VoronoiBento, VoronoiCell } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<VoronoiBento columns={3} rows={2}>
+  <VoronoiCell span="wide">
+    <h2>Feature highlight</h2>
+    <p>This cell spans two columns.</p>
+  </VoronoiCell>
+  <VoronoiCell>
+    <h3>Metric</h3>
+    <p>$48k MRR</p>
+  </VoronoiCell>
+  <VoronoiCell>
+    <h3>Users</h3>
+    <p>12,000+</p>
+  </VoronoiCell>
+</VoronoiBento>
+```
+
+## Cell spans
+
+```tsx
+<VoronoiCell span="default">1×1 cell</VoronoiCell>
+<VoronoiCell span="wide">2×1 cell</VoronoiCell>
+<VoronoiCell span="tall">1×2 cell</VoronoiCell>
+<VoronoiCell span="large">2×2 cell</VoronoiCell>
+```
+
+## Seed-based randomization
+
+Pass a seed for deterministic organic shapes:
+
+```tsx
+<VoronoiBento seed={42} columns={4} rows={3}>
+  {items.map((item) => (
+    <VoronoiCell key={item.id}>{item.content}</VoronoiCell>
+  ))}
+</VoronoiBento>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-grid-cell` | Base cell size |
+| `--s-rail-gap` | Gap between cells |
+| `--s-surface` | Cell background |
+| `--s-surface-elevated` | Cell hover background |
+| `--s-border` | Cell border |
+| `--s-card-radius` | Cell border radius |
+
+## Props
+
+### VoronoiBento
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `number` | `3` | Grid column count |
+| `rows` | `number` | `2` | Grid row count |
+| `seed` | `number` | — | Deterministic randomization seed |
+| `gap` | `string \| number` | `var(--s-rail-gap)` | Cell gap |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | VoronoiCell children |
+
+### VoronoiCell
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `span` | `"default" \| "wide" \| "tall" \| "large"` | `"default"` | Cell span |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Cell content |
+
+## Accessibility
+
+- Uses CSS Grid with named areas for predictable reading order
+- Content order matches DOM order regardless of visual placement

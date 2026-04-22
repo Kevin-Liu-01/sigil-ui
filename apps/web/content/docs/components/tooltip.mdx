@@ -1,0 +1,89 @@
+---
+title: Tooltip
+description: A brief text label that appears on hover or focus. Built on Radix Tooltip with token-driven delay, offset, and styling.
+---
+
+## Import
+
+```tsx
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@sigil-ui/components";
+```
+
+## Setup
+
+Wrap your app in `<TooltipProvider>`:
+
+```tsx
+<TooltipProvider>
+  <App />
+</TooltipProvider>
+```
+
+## Usage
+
+```tsx
+<Tooltip>
+  <TooltipTrigger asChild>
+    <Button variant="ghost" size="sm">
+      <InfoIcon className="size-4" />
+    </Button>
+  </TooltipTrigger>
+  <TooltipContent>More information</TooltipContent>
+</Tooltip>
+```
+
+## Placement
+
+```tsx
+<TooltipContent side="top">Above</TooltipContent>
+<TooltipContent side="right">Right</TooltipContent>
+<TooltipContent side="bottom">Below</TooltipContent>
+<TooltipContent side="left">Left</TooltipContent>
+```
+
+## Custom delay
+
+```tsx
+<TooltipProvider delayDuration={0}>
+  <Tooltip>
+    <TooltipTrigger>Instant tooltip</TooltipTrigger>
+    <TooltipContent>No delay</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Tooltip background |
+| `--s-text` | Tooltip text color |
+| `--s-radius-sm` | Border radius |
+| `--s-shadow-sm` | Subtle elevation |
+| `--s-duration-fast` | Fade animation |
+| `--s-font-size-sm` | Text size |
+
+## Props
+
+### TooltipContent
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side |
+| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment |
+| `sideOffset` | `number` | `4` | Offset from trigger in px |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Tooltip text |
+
+### TooltipProvider
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `delayDuration` | `number` | `400` | Open delay in ms |
+
+## Accessibility
+
+- Tooltip appears on both hover and focus
+- Content is linked via `aria-describedby`
+- Escape closes the tooltip
+- Follows WAI-ARIA Tooltip pattern

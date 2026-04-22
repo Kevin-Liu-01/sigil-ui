@@ -1,0 +1,106 @@
+---
+title: Combobox
+description: Searchable select with keyboard navigation and filtered options list.
+---
+
+# Combobox
+
+> Searchable select with keyboard navigation and filtered options list.
+
+## Installation
+
+```bash
+npx sigil add combobox
+```
+
+## Import
+
+```tsx
+import { Combobox } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Combobox
+  options={[
+    { value: "react", label: "React" },
+    { value: "vue", label: "Vue" },
+    { value: "svelte", label: "Svelte" },
+    { value: "solid", label: "Solid" },
+  ]}
+  placeholder="Select framework..."
+/>
+```
+
+## Examples
+
+### Controlled value
+
+```tsx
+const [framework, setFramework] = useState("");
+
+<Combobox
+  options={frameworks}
+  value={framework}
+  onValueChange={setFramework}
+  placeholder="Pick a framework..."
+/>
+```
+
+### Custom empty state
+
+```tsx
+<Combobox
+  options={users}
+  placeholder="Search users..."
+  searchPlaceholder="Type a name..."
+  emptyText="No users found."
+/>
+```
+
+### With disabled options
+
+```tsx
+<Combobox
+  options={[
+    { value: "free", label: "Free" },
+    { value: "pro", label: "Pro" },
+    { value: "enterprise", label: "Enterprise", disabled: true },
+  ]}
+  placeholder="Select plan..."
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `options` | `ComboboxOption[]` | — | List of selectable options |
+| `value` | `string` | — | Controlled selected value |
+| `onValueChange` | `(value: string) => void` | — | Selection change handler |
+| `placeholder` | `string` | `"Select…"` | Trigger placeholder text |
+| `searchPlaceholder` | `string` | `"Search…"` | Search input placeholder |
+| `emptyText` | `string` | `"No results."` | Text when no options match |
+| `className` | `string` | — | Additional CSS classes |
+
+### ComboboxOption
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `value` | `string` | Option value |
+| `label` | `string` | Display label |
+| `disabled` | `boolean` | Disable this option |
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-background` — dropdown background
+- `--s-surface` — option hover background
+- `--s-border` — trigger and dropdown border
+- `--s-text` — selected text and options
+- `--s-text-muted` — placeholder and search icon
+- `--s-primary` — focus ring and checkmark
+- `--s-radius-md` — trigger and dropdown radius
+- `--s-shadow-md` — dropdown elevation

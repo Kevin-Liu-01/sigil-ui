@@ -1,0 +1,99 @@
+---
+title: Tabs
+description: A tabbed interface with animated indicator, keyboard navigation, and lazy content rendering. Built on Radix Tabs.
+---
+
+## Import
+
+```tsx
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Tabs defaultValue="overview">
+  <TabsList>
+    <TabsTrigger value="overview">Overview</TabsTrigger>
+    <TabsTrigger value="analytics">Analytics</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+  </TabsList>
+  <TabsContent value="overview">Overview content</TabsContent>
+  <TabsContent value="analytics">Analytics content</TabsContent>
+  <TabsContent value="settings">Settings content</TabsContent>
+</Tabs>
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function ControlledTabs() {
+  const [tab, setTab] = useState("overview");
+
+  return (
+    <Tabs value={tab} onValueChange={setTab}>
+      <TabsList>
+        <TabsTrigger value="overview">Overview</TabsTrigger>
+        <TabsTrigger value="settings">Settings</TabsTrigger>
+      </TabsList>
+      <TabsContent value="overview">Overview</TabsContent>
+      <TabsContent value="settings">Settings</TabsContent>
+    </Tabs>
+  );
+}
+```
+
+## Vertical tabs
+
+```tsx
+<Tabs orientation="vertical" defaultValue="general">
+  <TabsList>
+    <TabsTrigger value="general">General</TabsTrigger>
+    <TabsTrigger value="security">Security</TabsTrigger>
+  </TabsList>
+  <TabsContent value="general">General settings</TabsContent>
+  <TabsContent value="security">Security settings</TabsContent>
+</Tabs>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Tab list background |
+| `--s-surface-elevated` | Active tab indicator |
+| `--s-primary` | Active tab text |
+| `--s-text` | Tab text |
+| `--s-text-muted` | Inactive tab text |
+| `--s-border` | Tab list border |
+| `--s-radius-md` | Tab list and indicator radius |
+| `--s-duration-fast` | Indicator slide animation |
+| `--s-ease-default` | Animation easing |
+
+## Props
+
+### Tabs
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled active tab |
+| `defaultValue` | `string` | — | Default active tab |
+| `onValueChange` | `(value: string) => void` | — | Change handler |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+
+### TabsTrigger
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Tab identifier |
+| `disabled` | `boolean` | `false` | Disable this tab |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Tab label |
+
+## Accessibility
+
+- Uses `role="tablist"`, `role="tab"`, `role="tabpanel"`
+- Arrow keys navigate between tabs
+- Active tab has `aria-selected="true"`

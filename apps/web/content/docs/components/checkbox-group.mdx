@@ -1,0 +1,98 @@
+---
+title: CheckboxGroup
+description: Group of related checkboxes with a shared label and optional description.
+---
+
+# CheckboxGroup
+
+> Group of related checkboxes with a shared label and optional description.
+
+## Installation
+
+```bash
+npx sigil add checkbox-group
+```
+
+## Import
+
+```tsx
+import { Checkbox } from "@sigil-ui/components";
+```
+
+## Usage
+
+Compose multiple `Checkbox` components inside a `fieldset` for grouped selection.
+
+```tsx
+<fieldset>
+  <legend className="text-sm font-medium text-[var(--s-text)] mb-2">
+    Notifications
+  </legend>
+  <div className="flex flex-col gap-2">
+    <Checkbox label="Email" />
+    <Checkbox label="Push" />
+    <Checkbox label="SMS" />
+  </div>
+</fieldset>
+```
+
+## Examples
+
+### Horizontal layout
+
+```tsx
+<fieldset>
+  <legend className="text-sm font-medium text-[var(--s-text)] mb-2">
+    Features
+  </legend>
+  <div className="flex gap-4">
+    <Checkbox label="Dark mode" />
+    <Checkbox label="Analytics" />
+    <Checkbox label="Webhooks" />
+  </div>
+</fieldset>
+```
+
+### With controlled values
+
+```tsx
+const [features, setFeatures] = useState<Set<string>>(new Set());
+
+const toggle = (key: string) => {
+  setFeatures((prev) => {
+    const next = new Set(prev);
+    next.has(key) ? next.delete(key) : next.add(key);
+    return next;
+  });
+};
+
+<fieldset>
+  <legend className="text-sm font-medium text-[var(--s-text)] mb-2">
+    Plan features
+  </legend>
+  <div className="flex flex-col gap-2">
+    <Checkbox label="SSO" checked={features.has("sso")} onChange={() => toggle("sso")} />
+    <Checkbox label="Audit log" checked={features.has("audit")} onChange={() => toggle("audit")} />
+    <Checkbox label="Custom domain" checked={features.has("domain")} onChange={() => toggle("domain")} />
+  </div>
+</fieldset>
+```
+
+## Props
+
+CheckboxGroup is a composition pattern using the `Checkbox` component. See [Checkbox](/docs/components/checkbox) for individual checkbox props.
+
+| Pattern element | HTML element | Purpose |
+|-----------------|--------------|---------|
+| `fieldset` | `<fieldset>` | Groups related checkboxes |
+| `legend` | `<legend>` | Group label |
+| `Checkbox` | `<input type="checkbox">` | Individual option |
+
+## Tokens
+
+Inherits all tokens from [Checkbox](/docs/components/checkbox):
+
+- `--s-primary` — checked accent color
+- `--s-border` — unchecked border
+- `--s-text` — label text
+- `--s-radius-sm` — checkbox border radius

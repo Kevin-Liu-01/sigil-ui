@@ -1,0 +1,92 @@
+---
+title: Hero
+description: A full-width hero section with headline, subheadline, CTA buttons, and optional background media. The top-of-page entry point.
+---
+
+## Import
+
+```tsx
+import { Hero } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Hero
+  headline="Build interfaces that feel alive"
+  subheadline="A token-driven design system with 31 presets."
+>
+  <Button variant="primary" size="lg">Get started</Button>
+  <Button variant="outline" size="lg">View docs</Button>
+</Hero>
+```
+
+## With background
+
+```tsx
+<Hero
+  headline="Ship faster"
+  subheadline="One token file controls everything."
+  background="var(--s-surface-elevated)"
+>
+  <Button variant="primary">Start building</Button>
+</Hero>
+```
+
+## With image
+
+```tsx
+<Hero
+  headline="Design engineering"
+  subheadline="Components that read from your token file."
+  image="/hero-visual.png"
+>
+  <Button variant="primary">Try it free</Button>
+</Hero>
+```
+
+## Alignment
+
+```tsx
+<Hero align="left" headline="Left-aligned hero" subheadline="Content flows naturally." />
+<Hero align="center" headline="Centered hero" subheadline="Symmetrical layout." />
+```
+
+## Sizes
+
+```tsx
+<Hero size="sm" headline="Compact hero" />
+<Hero size="md" headline="Default hero" />
+<Hero size="lg" headline="Full-screen hero" />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Headline color |
+| `--s-text-muted` | Subheadline color |
+| `--s-surface` | Default background |
+| `--s-font-display` | Headline font family |
+| `--s-font-body` | Subheadline font family |
+| `--s-space-section` | Vertical padding |
+| `--s-max-width` | Content max-width |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `headline` | `string` | — | Main heading text |
+| `subheadline` | `string` | — | Supporting text |
+| `image` | `string` | — | Background or side image URL |
+| `background` | `string` | — | Background color or gradient |
+| `align` | `"left" \| "center"` | `"center"` | Content alignment |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Section height |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | CTA buttons and extra content |
+
+## Accessibility
+
+- Headline renders as `<h1>` for page structure
+- CTA buttons are focusable with visible focus ring
+- Background images are decorative with `aria-hidden="true"`

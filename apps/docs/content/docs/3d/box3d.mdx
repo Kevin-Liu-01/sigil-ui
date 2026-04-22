@@ -1,0 +1,162 @@
+---
+title: Box3D
+description: A CSS 3D box with six faces, configurable dimensions, and GSAP-powered rotation. No WebGL required.
+---
+
+## Import
+
+```tsx
+import { Box3D } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Box3D />
+```
+
+Renders a cube using CSS 3D transforms (`transform-style: preserve-3d`). Each face is a positioned `<div>`. GSAP handles smooth rotation on hover and idle animation.
+
+## Size
+
+```tsx
+<Box3D size={80} />
+<Box3D size={120} />
+<Box3D size={200} />
+```
+
+## Custom dimensions
+
+For non-cubic shapes:
+
+```tsx
+<Box3D width={200} height={120} depth={80} />
+```
+
+## Colors
+
+Each face can be styled independently, or use a single color that shifts lightness per face:
+
+```tsx
+{/* Uniform color with automatic face shading */}
+<Box3D color="var(--r-primary)" />
+
+{/* Per-face colors */}
+<Box3D
+  faces={{
+    front: "var(--r-primary)",
+    back: "var(--r-primary-muted)",
+    left: "oklch(0.60 0.15 280)",
+    right: "oklch(0.70 0.15 280)",
+    top: "oklch(0.75 0.10 280)",
+    bottom: "oklch(0.50 0.15 280)",
+  }}
+/>
+```
+
+## Rotation
+
+### Interactive (hover)
+
+```tsx
+<Box3D interactive />
+```
+
+The box follows the cursor on hover using GSAP for smooth interpolation.
+
+### Auto-rotate
+
+```tsx
+<Box3D autoRotate />
+<Box3D autoRotate speed={0.5} />
+<Box3D autoRotate speed={2} axis="y" />
+```
+
+### Static angle
+
+```tsx
+<Box3D rotateX={-20} rotateY={30} />
+```
+
+## Face content
+
+Render content on any face:
+
+```tsx
+<Box3D size={150}>
+  <Box3D.Face side="front">
+    <span className="text-2xl">✦</span>
+  </Box3D.Face>
+  <Box3D.Face side="top">
+    <span className="text-sm">TOP</span>
+  </Box3D.Face>
+</Box3D>
+```
+
+## Wireframe mode
+
+```tsx
+<Box3D variant="wireframe" color="var(--r-border)" />
+```
+
+Renders only edges — no filled faces. Uses `--r-border` for line color and `--r-border-width-thin` for stroke.
+
+## Glass mode
+
+```tsx
+<Box3D variant="glass" />
+```
+
+Semi-transparent faces with `backdrop-filter: blur()` for a frosted-glass cube.
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--r-primary` | Default face color |
+| `--r-surface` | Wireframe face background |
+| `--r-border` | Wireframe edge color |
+| `--r-border-width-thin` | Wireframe stroke |
+| `--r-shadow-lg` | Drop shadow beneath the box |
+| `--r-duration-normal` | Hover transition |
+| `--r-duration-slower` | Auto-rotate cycle |
+| `--r-ease-default` | Rotation easing |
+| `--r-ease-spring` | Interactive hover spring |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `number` | `100` | Uniform width/height/depth |
+| `width` | `number` | — | Box width (overrides `size`) |
+| `height` | `number` | — | Box height (overrides `size`) |
+| `depth` | `number` | — | Box depth (overrides `size`) |
+| `color` | `string` | `var(--r-primary)` | Face color |
+| `faces` | `Record<Face, string>` | — | Per-face color map |
+| `variant` | `"solid" \| "wireframe" \| "glass"` | `"solid"` | Rendering mode |
+| `interactive` | `boolean` | `false` | Follow cursor on hover |
+| `autoRotate` | `boolean` | `false` | Continuous rotation |
+| `speed` | `number` | `1` | Auto-rotate speed multiplier |
+| `axis` | `"x" \| "y" \| "xy"` | `"xy"` | Rotation axis |
+| `rotateX` | `number` | `0` | Static X rotation (degrees) |
+| `rotateY` | `number` | `0` | Static Y rotation (degrees) |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Face content via `Box3D.Face` |
+
+### Box3D.Face
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `side` | `"front" \| "back" \| "left" \| "right" \| "top" \| "bottom"` | — | Which face to render on |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Face content |
+
+## Browser support
+
+CSS 3D transforms are supported in all modern browsers. GSAP animation uses `requestAnimationFrame` with automatic fallback. The `glass` variant requires `backdrop-filter` support (all modern browsers except Firefox < 103).
+
+## Accessibility
+
+- Decorative by default: `role="presentation"` and `aria-hidden="true"`
+- Add `role="img"` and `aria-label` if the box conveys meaning
+- `prefers-reduced-motion` disables auto-rotate and hover animations

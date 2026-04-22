@@ -1,0 +1,577 @@
+/**
+ * Sigil UI — Complete Design Token Type System
+ *
+ * A preset controls EVERYTHING about a website's visual identity:
+ * colors, typography, spacing, layout, buttons, cards, navigation,
+ * backgrounds, code blocks, headings, and motion.
+ */
+
+export const TokenLayer = {
+  Primitive: "primitive",
+  Semantic: "semantic",
+  Component: "component",
+} as const;
+
+export type TokenLayer = (typeof TokenLayer)[keyof typeof TokenLayer];
+
+// ---------------------------------------------------------------------------
+// Primitives
+// ---------------------------------------------------------------------------
+
+export type ColorValue = string;
+
+export type ThemedColor = {
+  readonly light: ColorValue;
+  readonly dark: ColorValue;
+};
+
+// ---------------------------------------------------------------------------
+// Color tokens
+// ---------------------------------------------------------------------------
+
+export type ColorTokens = {
+  readonly background: ThemedColor;
+  readonly surface: ThemedColor;
+  readonly "surface-elevated": ThemedColor;
+  readonly "surface-sunken"?: ThemedColor;
+
+  readonly primary: ColorValue;
+  readonly "primary-hover": ColorValue;
+  readonly "primary-muted": ColorValue;
+  readonly "primary-contrast"?: ColorValue;
+  readonly secondary: ColorValue;
+  readonly "secondary-hover"?: ColorValue;
+  readonly "secondary-muted"?: ColorValue;
+  readonly accent?: ColorValue;
+  readonly "accent-hover"?: ColorValue;
+  readonly "accent-muted"?: ColorValue;
+
+  readonly text: ThemedColor;
+  readonly "text-secondary": ThemedColor;
+  readonly "text-muted": ThemedColor;
+  readonly "text-subtle": ThemedColor;
+  readonly "text-disabled": ThemedColor;
+  readonly "text-inverse"?: ThemedColor;
+
+  readonly border: ThemedColor;
+  readonly "border-muted": ThemedColor;
+  readonly "border-strong": ThemedColor;
+  readonly "border-interactive": ThemedColor;
+
+  readonly success: ColorValue;
+  readonly "success-muted"?: ColorValue;
+  readonly warning: ColorValue;
+  readonly "warning-muted"?: ColorValue;
+  readonly error: ColorValue;
+  readonly "error-muted"?: ColorValue;
+  readonly info: ColorValue;
+  readonly "info-muted"?: ColorValue;
+
+  readonly "gradient-start"?: ColorValue;
+  readonly "gradient-end"?: ColorValue;
+  readonly glow?: ColorValue;
+};
+
+// ---------------------------------------------------------------------------
+// Typography tokens
+// ---------------------------------------------------------------------------
+
+export type TypographyTokens = {
+  readonly "font-display": string;
+  readonly "font-body": string;
+  readonly "font-mono": string;
+
+  readonly "size-xs"?: string;
+  readonly "size-sm"?: string;
+  readonly "size-base"?: string;
+  readonly "size-lg"?: string;
+  readonly "size-xl"?: string;
+  readonly "size-2xl"?: string;
+  readonly "size-3xl"?: string;
+  readonly "size-4xl"?: string;
+  readonly "size-5xl"?: string;
+  readonly "size-6xl"?: string;
+
+  readonly "weight-normal"?: string;
+  readonly "weight-medium"?: string;
+  readonly "weight-semibold"?: string;
+  readonly "weight-bold"?: string;
+  readonly "weight-extrabold"?: string;
+
+  readonly "leading-tight"?: string;
+  readonly "leading-normal"?: string;
+  readonly "leading-relaxed"?: string;
+  readonly "leading-loose"?: string;
+
+  readonly "tracking-tighter"?: string;
+  readonly "tracking-tight"?: string;
+  readonly "tracking-normal"?: string;
+  readonly "tracking-wide"?: string;
+  readonly "tracking-wider"?: string;
+
+  readonly "heading-weight"?: string;
+  readonly "heading-tracking"?: string;
+  readonly "heading-transform"?: "none" | "uppercase" | "capitalize" | "lowercase";
+  readonly "heading-family"?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Spacing tokens
+// ---------------------------------------------------------------------------
+
+export type SpacingScale = readonly number[];
+
+export type SpacingTokens = {
+  readonly scale: SpacingScale;
+  readonly unit: "px" | "rem";
+
+  readonly "button-px"?: string;
+  readonly "button-py"?: string;
+  readonly "button-px-sm"?: string;
+  readonly "button-py-sm"?: string;
+  readonly "button-px-lg"?: string;
+  readonly "button-py-lg"?: string;
+
+  readonly "card-padding"?: string;
+  readonly "card-padding-sm"?: string;
+  readonly "card-padding-lg"?: string;
+
+  readonly "input-px"?: string;
+  readonly "input-py"?: string;
+
+  readonly "badge-px"?: string;
+  readonly "badge-py"?: string;
+
+  readonly "section-py"?: string;
+  readonly "section-py-lg"?: string;
+
+  readonly "navbar-height"?: string;
+  readonly "navbar-px"?: string;
+
+  readonly "footer-py"?: string;
+
+  readonly "modal-padding"?: string;
+  readonly "popover-padding"?: string;
+  readonly "tooltip-padding"?: string;
+
+  readonly "table-cell-px"?: string;
+  readonly "table-cell-py"?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Layout tokens
+// ---------------------------------------------------------------------------
+
+export type LayoutTokens = {
+  readonly "content-max": string;
+  readonly "content-max-narrow": string;
+  readonly "content-max-wide": string;
+
+  readonly "page-margin": string;
+  readonly "page-margin-sm": string;
+  readonly "page-margin-lg": string;
+
+  readonly gutter: string;
+  readonly "gutter-sm": string;
+  readonly "gutter-lg": string;
+
+  readonly "grid-columns": string;
+  readonly "grid-gap": string;
+
+  readonly "bento-gap": string;
+  readonly "bento-radius": string;
+  readonly "bento-min-height": string;
+
+  readonly "section-gap": string;
+
+  readonly "sidebar-width": string;
+  readonly "sidebar-collapsed": string;
+
+  readonly "footer-columns": string;
+
+  readonly "stack-gap": string;
+  readonly "stack-gap-sm": string;
+  readonly "stack-gap-lg": string;
+
+  readonly "prose-max": string;
+};
+
+// ---------------------------------------------------------------------------
+// Sigil grid tokens (structural-visibility system)
+// ---------------------------------------------------------------------------
+
+export type SigilGridTokens = {
+  readonly "grid-cell": string;
+  readonly "cross-arm": string;
+  readonly "cross-stroke": string;
+  readonly "rail-gap": string;
+  readonly "card-radius": string;
+};
+
+// ---------------------------------------------------------------------------
+// Radius tokens
+// ---------------------------------------------------------------------------
+
+export type RadiusTokens = {
+  readonly none: string;
+  readonly sm: string;
+  readonly md: string;
+  readonly lg: string;
+  readonly xl: string;
+  readonly "2xl": string;
+  readonly full: string;
+
+  readonly button?: string;
+  readonly card?: string;
+  readonly input?: string;
+  readonly badge?: string;
+  readonly modal?: string;
+  readonly popover?: string;
+  readonly tooltip?: string;
+  readonly image?: string;
+  readonly bento?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Shadow tokens
+// ---------------------------------------------------------------------------
+
+export type ShadowTokens = {
+  readonly sm: string;
+  readonly md: string;
+  readonly lg: string;
+  readonly xl: string;
+  readonly "2xl"?: string;
+  readonly glow?: string;
+  readonly "glow-sm"?: string;
+  readonly colored?: string;
+  readonly inner?: string;
+  readonly card?: string;
+  readonly button?: string;
+  readonly "button-hover"?: string;
+  readonly dropdown?: string;
+  readonly modal?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Motion tokens
+// ---------------------------------------------------------------------------
+
+export type MotionDurations = {
+  readonly instant: string;
+  readonly fast: string;
+  readonly normal: string;
+  readonly slow: string;
+  readonly slower: string;
+  readonly slowest?: string;
+};
+
+export type MotionEasings = {
+  readonly default: string;
+  readonly in: string;
+  readonly out: string;
+  readonly "in-out": string;
+  readonly spring: string;
+  readonly bounce?: string;
+};
+
+export type MotionTokens = {
+  readonly duration: MotionDurations;
+  readonly easing: MotionEasings;
+  readonly "enter-preset"?: string;
+  readonly "exit-preset"?: string;
+  readonly "hover-scale"?: string;
+  readonly "press-scale"?: string;
+  readonly "hover-lift"?: string;
+  readonly "stagger-interval"?: string;
+  readonly "stagger-interval-fast"?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Border tokens
+// ---------------------------------------------------------------------------
+
+export type BorderTokens = {
+  readonly width: {
+    readonly none: string;
+    readonly thin: string;
+    readonly medium: string;
+    readonly thick: string;
+  };
+  readonly style?: "solid" | "dashed" | "dotted" | "double" | "none";
+  readonly "card-border"?: string;
+  readonly "card-border-hover"?: string;
+  readonly "button-border"?: string;
+  readonly "input-border"?: string;
+  readonly "divider-style"?: "solid" | "dashed" | "dotted";
+  readonly "divider-width"?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Button tokens
+// ---------------------------------------------------------------------------
+
+export type ButtonTokens = {
+  readonly "font-weight": string;
+  readonly "text-transform": "none" | "uppercase" | "capitalize" | "lowercase";
+  readonly "letter-spacing": string;
+  readonly "font-family": string;
+  readonly "border-width": string;
+  readonly "hover-effect": "glow" | "lift" | "darken" | "outline" | "fill" | "none";
+  readonly "active-scale": string;
+  readonly "icon-gap": string;
+  readonly "min-width": string;
+};
+
+// ---------------------------------------------------------------------------
+// Card tokens
+// ---------------------------------------------------------------------------
+
+export type CardTokens = {
+  readonly "border-style": "solid" | "dashed" | "dotted" | "none";
+  readonly "border-width": string;
+  readonly "hover-effect": "lift" | "glow" | "border" | "scale" | "none";
+  readonly "hover-border-color": string;
+  readonly padding: string;
+  readonly "header-padding": string;
+  readonly "footer-padding": string;
+  readonly "title-size": string;
+  readonly "title-weight": string;
+  readonly "description-size": string;
+  readonly "background"?: "surface" | "transparent" | "elevated" | "sunken";
+  readonly "shadow"?: "none" | "sm" | "md" | "lg" | "xl" | "2xl";
+  readonly "outline"?: boolean;
+  readonly "outline-on-hover-only"?: boolean;
+  readonly "gap-between"?: string;
+  readonly "aspect-ratio"?: "auto" | "1/1" | "4/3" | "16/9";
+  readonly "content-padding-x"?: string;
+  readonly "content-padding-y"?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Heading tokens
+// ---------------------------------------------------------------------------
+
+export type HeadingTokens = {
+  readonly "h1-size": string;
+  readonly "h1-weight": string;
+  readonly "h1-tracking": string;
+  readonly "h1-leading": string;
+  readonly "h2-size": string;
+  readonly "h2-weight": string;
+  readonly "h2-tracking": string;
+  readonly "h3-size": string;
+  readonly "h3-weight": string;
+  readonly "h4-size": string;
+  readonly "h4-weight": string;
+  readonly "display-size": string;
+  readonly "display-weight": string;
+  readonly "display-tracking": string;
+  readonly "display-leading": string;
+};
+
+// ---------------------------------------------------------------------------
+// Navigation tokens
+// ---------------------------------------------------------------------------
+
+export type NavigationTokens = {
+  readonly "navbar-height": string;
+  readonly "navbar-backdrop-blur": string;
+  readonly "navbar-border": string;
+  readonly "navbar-bg-opacity": string;
+  readonly "nav-link-weight": string;
+  readonly "nav-link-size": string;
+  readonly "nav-link-hover": "underline" | "color" | "background" | "none";
+  readonly "breadcrumb-separator": string;
+  readonly "pagination-radius": string;
+  readonly "sidebar-width": string;
+  readonly "sidebar-item-radius": string;
+  readonly "sidebar-item-padding": string;
+};
+
+// ---------------------------------------------------------------------------
+// Background / decoration tokens
+// ---------------------------------------------------------------------------
+
+export type BackgroundTokens = {
+  readonly pattern: "none" | "dots" | "grid" | "crosshatch" | "diagonal" | "diamond" | "hexagon" | "triangle";
+  readonly "pattern-opacity": string;
+  readonly "pattern-scale": string;
+  readonly noise: boolean;
+  readonly "noise-opacity": string;
+  readonly "gradient-angle": string;
+  readonly "gradient-type": "none" | "linear" | "radial" | "conic";
+  readonly "hero-pattern": "none" | "grid" | "radial-glow" | "gradient" | "noise" | "crosshatch";
+  readonly "section-divider": "none" | "line" | "diagonal" | "wave" | "zigzag";
+};
+
+// ---------------------------------------------------------------------------
+// Code block tokens
+// ---------------------------------------------------------------------------
+
+export type CodeTokens = {
+  readonly "font-family": string;
+  readonly "font-size": string;
+  readonly "line-height": string;
+  readonly "bg": string;
+  readonly "border": string;
+  readonly "border-radius": string;
+  readonly padding: string;
+  readonly "tab-size": string;
+  readonly "selection-bg": string;
+  readonly "comment-color": string;
+  readonly "keyword-color": string;
+  readonly "string-color": string;
+  readonly "number-color": string;
+  readonly "function-color": string;
+};
+
+// ---------------------------------------------------------------------------
+// Input / form tokens
+// ---------------------------------------------------------------------------
+
+export type InputTokens = {
+  readonly height: string;
+  readonly "height-sm": string;
+  readonly "height-lg": string;
+  readonly "border-width": string;
+  readonly "focus-ring-width": string;
+  readonly "focus-ring-color": string;
+  readonly "focus-ring-offset": string;
+  readonly "placeholder-color": string;
+  readonly "error-border-color": string;
+  readonly "label-size": string;
+  readonly "label-weight": string;
+  readonly "label-spacing": string;
+  readonly "helper-size": string;
+};
+
+// ---------------------------------------------------------------------------
+// Alignment rail tokens — unified grid system for page-level alignment
+// ---------------------------------------------------------------------------
+
+export type AlignmentTokens = {
+  readonly "rail-width"?: string;
+  readonly "rail-columns"?: string;
+  readonly "rail-gutter"?: string;
+  readonly "rail-margin"?: string;
+  readonly "rail-visible"?: boolean;
+  readonly "rail-color"?: string;
+  readonly "content-align"?: "center" | "left" | "wide";
+  readonly "hero-align"?: "center" | "left" | "full-bleed";
+  readonly "section-align"?: "center" | "left" | "inset";
+  readonly "navbar-align"?: "full" | "content" | "inset";
+  readonly "footer-align"?: "full" | "content" | "inset";
+  readonly "title-align"?: "left" | "center";
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Section tokens — per-section layout control
+// ---------------------------------------------------------------------------
+
+export type SectionStyleTokens = {
+  readonly "padding-y"?: string;
+  readonly "padding-y-hero"?: string;
+  readonly "padding-x"?: string;
+  readonly "max-width"?: string;
+  readonly "gap"?: string;
+  readonly "title-align"?: "left" | "center";
+  readonly "divider-above"?: boolean;
+  readonly "divider-below"?: boolean;
+  readonly "background-alt"?: boolean;
+  readonly "indent"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Divider tokens — structural line appearance
+// ---------------------------------------------------------------------------
+
+export type DividerStyleTokens = {
+  readonly "style"?: "solid" | "dashed" | "dotted" | "double" | "groove" | "none";
+  readonly "width"?: string;
+  readonly "color"?: string;
+  readonly "spacing"?: string;
+  readonly "show-cross"?: boolean;
+  readonly "show-label"?: boolean;
+  readonly "full-bleed"?: boolean;
+  readonly "ornament"?: "none" | "cross" | "dot" | "diamond" | "dash";
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Grid visual tokens — how grids look beyond just layout
+// ---------------------------------------------------------------------------
+
+export type GridVisualTokens = {
+  readonly "show-lines"?: boolean;
+  readonly "line-color"?: string;
+  readonly "line-width"?: string;
+  readonly "show-dots"?: boolean;
+  readonly "dot-size"?: string;
+  readonly "cell-background"?: "none" | "surface" | "alternate";
+  readonly "cell-border"?: boolean;
+  readonly "cell-radius"?: string;
+  readonly "cell-padding"?: string;
+  readonly "hover-effect"?: "highlight" | "lift" | "border" | "glow" | "none";
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Composite token object
+// ---------------------------------------------------------------------------
+
+export type SigilTokens = {
+  readonly colors: ColorTokens;
+  readonly typography: TypographyTokens;
+  readonly spacing: SpacingTokens;
+  readonly layout?: LayoutTokens;
+  readonly sigil: SigilGridTokens;
+  readonly radius: RadiusTokens;
+  readonly shadows: ShadowTokens;
+  readonly motion: MotionTokens;
+  readonly borders: BorderTokens;
+  readonly buttons?: ButtonTokens;
+  readonly cards?: CardTokens;
+  readonly headings?: HeadingTokens;
+  readonly navigation?: NavigationTokens;
+  readonly backgrounds?: BackgroundTokens;
+  readonly code?: CodeTokens;
+  readonly inputs?: InputTokens;
+  readonly alignment?: AlignmentTokens;
+  readonly sections?: SectionStyleTokens;
+  readonly dividers?: DividerStyleTokens;
+  readonly gridVisuals?: GridVisualTokens;
+};
+
+// ---------------------------------------------------------------------------
+// Preset
+// ---------------------------------------------------------------------------
+
+export type PresetMetadata = {
+  readonly description: string;
+  readonly author?: string;
+  readonly version?: string;
+  readonly tags?: readonly string[];
+  readonly mood?: string;
+  readonly inspiration?: string;
+};
+
+export type SigilPreset = {
+  readonly name: string;
+  readonly tokens: SigilTokens;
+  readonly metadata: PresetMetadata;
+};
+
+// ---------------------------------------------------------------------------
+// Compiler options
+// ---------------------------------------------------------------------------
+
+export type CssCompileOptions = {
+  readonly prefix?: string;
+  readonly includeLight?: boolean;
+  readonly includeDark?: boolean;
+  readonly selector?: string;
+  readonly darkSelector?: string;
+};

@@ -1,0 +1,90 @@
+---
+title: Alert
+description: Contextual banner with variant-colored accent border for status messages.
+---
+
+# Alert
+
+> Contextual banner with variant-colored accent border for status messages.
+
+## Installation
+
+```bash
+npx sigil add alert
+```
+
+## Import
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Alert>
+  <AlertTitle>Heads up</AlertTitle>
+  <AlertDescription>This is a default alert with neutral styling.</AlertDescription>
+</Alert>
+```
+
+## Examples
+
+### Destructive
+
+```tsx
+<Alert variant="destructive">
+  <AlertTitle>Error</AlertTitle>
+  <AlertDescription>Something went wrong. Please try again.</AlertDescription>
+</Alert>
+```
+
+### Success
+
+```tsx
+<Alert variant="success">
+  <AlertTitle>Saved</AlertTitle>
+  <AlertDescription>Your changes have been saved successfully.</AlertDescription>
+</Alert>
+```
+
+### Warning
+
+```tsx
+<Alert variant="warning">
+  <AlertTitle>Warning</AlertTitle>
+  <AlertDescription>This action cannot be undone.</AlertDescription>
+</Alert>
+```
+
+## Props
+
+### Alert
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `"default" \| "destructive" \| "success" \| "warning" \| "info"` | `"default"` | Visual variant controlling accent color |
+| `className` | `string` | — | Additional CSS classes |
+
+### AlertTitle
+
+Renders an `<h5>`. Accepts all heading HTML attributes.
+
+### AlertDescription
+
+Renders a `<p>`. Accepts all paragraph HTML attributes.
+
+## Tokens
+
+This component reads these CSS variables:
+
+- `--s-surface-elevated` — default variant background
+- `--s-border` — outer border
+- `--s-border-strong` — default variant left accent
+- `--s-error` — destructive variant accent and tint
+- `--s-success` — success variant accent and tint
+- `--s-warning` — warning variant accent and tint
+- `--s-info` — info variant accent and tint
+- `--s-text` — title text color
+- `--s-text-secondary` — description text color
+- `--s-card-radius` — border radius

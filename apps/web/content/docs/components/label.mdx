@@ -1,0 +1,70 @@
+---
+title: Label
+description: A styled label element that pairs with form controls. Supports required indicators and disabled states.
+---
+
+## Import
+
+```tsx
+import { Label } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Label htmlFor="email">Email address</Label>
+<Input id="email" type="email" />
+```
+
+## Required indicator
+
+```tsx
+<Label htmlFor="name" required>Full name</Label>
+<Input id="name" />
+```
+
+Renders an asterisk styled with `--s-error`.
+
+## With Field
+
+Use inside a `Field` for automatic `htmlFor` wiring:
+
+```tsx
+<Field>
+  <Label>Username</Label>
+  <Input />
+</Field>
+```
+
+## Disabled
+
+```tsx
+<Label disabled>Disabled field</Label>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Label text color |
+| `--s-text-disabled` | Disabled label color |
+| `--s-error` | Required asterisk color |
+| `--s-font-body` | Font family |
+| `--s-font-size-sm` | Font size |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `htmlFor` | `string` | — | Associated input id |
+| `required` | `boolean` | `false` | Show required asterisk |
+| `disabled` | `boolean` | `false` | Dim the label |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Label text |
+
+Plus all standard `<label>` HTML attributes.
+
+## Accessibility
+
+- Uses native `<label>` element with `htmlFor` binding
+- Required asterisk is wrapped in `aria-hidden="true"` with `aria-required` on the input

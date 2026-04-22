@@ -1,0 +1,85 @@
+---
+title: Meter
+description: A gauge-style meter for displaying a value within a known range. Ideal for scores, ratings, and capacity indicators.
+---
+
+## Import
+
+```tsx
+import { Meter } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Meter value={72} />
+```
+
+## With label
+
+```tsx
+<Meter value={72} label="Storage used" />
+```
+
+## Min and max
+
+```tsx
+<Meter value={3.8} min={0} max={5} label="Rating" />
+```
+
+## Color thresholds
+
+The meter automatically shifts color based on value:
+
+```tsx
+<Meter value={25} label="Low" />
+<Meter value={60} label="Normal" />
+<Meter value={90} label="Critical" />
+```
+
+Low uses `--s-success`, mid-range uses `--s-warning`, high uses `--s-error`.
+
+## Sizes
+
+```tsx
+<Meter size="sm" value={50} />
+<Meter size="md" value={50} />
+<Meter size="lg" value={50} />
+```
+
+## Show value
+
+```tsx
+<Meter value={72} showValue label="CPU" />
+```
+
+Renders the numeric value alongside the bar.
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Track background |
+| `--s-success` | Low range fill |
+| `--s-warning` | Mid range fill |
+| `--s-error` | High range fill |
+| `--s-text-muted` | Label color |
+| `--s-radius-full` | Track border radius |
+| `--s-duration-normal` | Fill animation |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number` | — | Current value |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `label` | `string` | — | Accessible label |
+| `showValue` | `boolean` | `false` | Display numeric value |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Bar height |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="meter"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
+- `aria-label` set from the `label` prop

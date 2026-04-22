@@ -1,0 +1,70 @@
+---
+title: Getting Started
+description: Ship a design system your agent can maintain. One token file updates every component, every theme, every breakpoint.
+---
+
+## Why Sigil UI
+
+Most component libraries scatter design decisions across dozens of files.
+Change a border radius? Hunt through every component. Update a color? Grep and pray.
+
+**Sigil takes the opposite approach.**
+
+Every component reads from a single token object. Colors, spacing, radii, shadows, motion — all derived from one source. Change once, update everywhere.
+
+### How it compares to shadcn
+
+| | shadcn/ui | Sigil UI |
+|---|---|---|
+| Theming | Edit `tailwind.config.ts` + CSS variables + component files | Edit one token file |
+| Agent workflow | Agent modifies scattered Tailwind classes | Your agent edits one file |
+| Presets | Copy a Tailwind config from a blog post | `npx sigil init --preset minimal` |
+| Token system | CSS variables, manually maintained | Three-layer architecture: primitive → semantic → component |
+| Shipping themes | "Just change the CSS variables" | Ship a preset, not a Tailwind config |
+
+### Quick start
+
+```bash
+# Install the packages
+pnpm add @sigil-ui/tokens @sigil-ui/components
+
+# Or scaffold a new project
+npx sigil init
+```
+
+Import the token CSS and start building:
+
+```tsx
+import "@sigil-ui/tokens/css";
+import { Button } from "@sigil-ui/components";
+
+export default function App() {
+  return <Button variant="primary">Get started</Button>;
+}
+```
+
+### Token architecture
+
+Sigil uses a three-layer token system:
+
+1. **Primitive** — raw values like `oklch(0.65 0.15 280)` or `8px`
+2. **Semantic** — purpose-driven aliases like `--r-primary` or `--r-radius-md`
+3. **Component** — scoped tokens like `--r-card-radius` consumed by individual components
+
+Every layer compiles to CSS custom properties with the `--r-` prefix. Components only read variables — they never hardcode values.
+
+```css
+/* Your token file controls everything */
+:root {
+  --r-primary: oklch(0.65 0.15 280);
+  --r-radius-md: 8px;
+  --r-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), ...;
+}
+```
+
+### Next steps
+
+- [Installation](/docs/installation) — detailed setup for Next.js, Vite, and Remix
+- [Theming](/docs/theming) — create and share presets
+- [CLI Reference](/docs/cli) — all available commands
+- [Button](/docs/components/button) — your first component

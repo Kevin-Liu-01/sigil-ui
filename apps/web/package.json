@@ -1,0 +1,41 @@
+{
+  "name": "@sigil-ui/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@ai-sdk/gateway": "^3.0.104",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@sigil-ui/components": "workspace:*",
+    "@sigil-ui/presets": "workspace:*",
+    "@sigil-ui/tokens": "workspace:*",
+    "@types/mdx": "^2.0.13",
+    "@web-kits/audio": "^0.1.0",
+    "ai": "^6.0.168",
+    "clsx": "^2.1.1",
+    "fumadocs-core": "^16.8.2",
+    "fumadocs-mdx": "^14.3.1",
+    "fumadocs-ui": "^16.8.2",
+    "gsap": "^3.15.0",
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "shaders": "^2.5.107",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.4",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "postcss": "^8.5.10",
+    "typescript": "^6.0.3"
+  }
+}

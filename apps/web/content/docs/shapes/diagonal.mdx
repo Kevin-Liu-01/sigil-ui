@@ -1,0 +1,82 @@
+---
+title: Diagonal
+description: A diagonal line or slash element rendered via CSS. Use for decorative section dividers, strikethrough effects, and geometric patterns.
+---
+
+## Import
+
+```tsx
+import { Diagonal } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Diagonal />
+```
+
+Renders a 45-degree diagonal line using a CSS gradient or SVG stroke.
+
+## Angles
+
+```tsx
+<Diagonal angle={45} />
+<Diagonal angle={-45} />
+<Diagonal angle={30} />
+<Diagonal angle={60} />
+```
+
+## Sizes
+
+```tsx
+<Diagonal size={32} />
+<Diagonal size={64} />
+<Diagonal size={128} />
+```
+
+## Colors
+
+```tsx
+<Diagonal color="var(--s-primary)" />
+<Diagonal color="var(--s-border)" />
+<Diagonal color="var(--s-error)" />
+```
+
+## Thickness
+
+```tsx
+<Diagonal thickness={1} />
+<Diagonal thickness={2} />
+<Diagonal thickness={4} />
+```
+
+## Section divider pattern
+
+```tsx
+<div className="relative h-24 w-full overflow-hidden">
+  <Diagonal angle={-5} size="100%" color="var(--s-surface-elevated)" thickness={100} />
+</div>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-border` | Default stroke color |
+| `--s-primary` | Accent color variant |
+| `--s-cross-stroke` | Default thickness |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `number \| string` | `48` | Container width and height |
+| `angle` | `number` | `45` | Line angle in degrees |
+| `color` | `string` | `var(--s-border)` | Line color |
+| `thickness` | `number` | `1` | Line thickness in px |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Renders with `role="presentation"` and `aria-hidden="true"`
+- Purely decorative — no semantic meaning

@@ -1,0 +1,151 @@
+---
+title: Stack
+description: A flex container for vertical or horizontal stacking with configurable gap, alignment, and polymorphic rendering.
+---
+
+## Import
+
+```tsx
+import { Stack } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Stack gap={16}>
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</Stack>
+```
+
+## Direction
+
+Stack defaults to vertical (`column`). Switch to horizontal with `direction="row"`:
+
+```tsx
+<Stack direction="row" gap={12}>
+  <Button>Cancel</Button>
+  <Button variant="primary">Save</Button>
+</Stack>
+```
+
+## Gap values
+
+Gap accepts a number (pixels) or a string (any CSS value):
+
+```tsx
+{/* Pixel value */}
+<Stack gap={24}>...</Stack>
+
+{/* CSS variable from your token file */}
+<Stack gap="var(--s-space-4)">...</Stack>
+
+{/* rem, em, or any CSS unit */}
+<Stack gap="1.5rem">...</Stack>
+```
+
+## Flush stacking
+
+Set `flush` to remove all gaps — useful for flush card lists or accordion-style layouts:
+
+```tsx
+<Stack flush>
+  <Card>No gap between cards</Card>
+  <Card>Flush stacking</Card>
+  <Card>Tight layout</Card>
+</Stack>
+```
+
+## Alignment
+
+Control cross-axis alignment with `align` and main-axis distribution with `justify`:
+
+```tsx
+<Stack direction="row" gap={16} align="center" justify="between">
+  <Logo />
+  <nav>...</nav>
+  <Button>Sign in</Button>
+</Stack>
+```
+
+### Align options
+
+| Value | CSS | Description |
+|---|---|---|
+| `start` | `align-items: flex-start` | Align to start |
+| `center` | `align-items: center` | Center on cross axis |
+| `end` | `align-items: flex-end` | Align to end |
+| `stretch` | `align-items: stretch` | Stretch to fill |
+| `baseline` | `align-items: baseline` | Align to text baseline |
+
+### Justify options
+
+| Value | CSS | Description |
+|---|---|---|
+| `start` | `justify-content: flex-start` | Pack to start |
+| `center` | `justify-content: center` | Center on main axis |
+| `end` | `justify-content: flex-end` | Pack to end |
+| `between` | `justify-content: space-between` | Equal space between items |
+| `around` | `justify-content: space-around` | Equal space around items |
+| `evenly` | `justify-content: space-evenly` | Equal space between and around |
+
+## Polymorphic rendering
+
+Render as any HTML element with the `as` prop:
+
+```tsx
+<Stack as="section" gap={32}>
+  <h2>Section heading</h2>
+  <p>Section content</p>
+</Stack>
+
+<Stack as="nav" direction="row" gap={16}>
+  <a href="/home">Home</a>
+  <a href="/about">About</a>
+</Stack>
+
+<Stack as="ul" gap={8}>
+  <li>Item one</li>
+  <li>Item two</li>
+</Stack>
+```
+
+## Nested stacks
+
+Stacks compose naturally:
+
+```tsx
+<Stack gap={32}>
+  <Stack gap={8}>
+    <h2>Account</h2>
+    <p>Manage your account settings.</p>
+  </Stack>
+
+  <Stack direction="row" gap={16} justify="end">
+    <Button variant="ghost">Cancel</Button>
+    <Button variant="primary">Save changes</Button>
+  </Stack>
+</Stack>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `gap` | `string \| number` | — | Space between children |
+| `flush` | `boolean` | `false` | Remove all gaps |
+| `direction` | `"row" \| "column"` | `"column"` | Stack direction |
+| `align` | `"start" \| "center" \| "end" \| "stretch" \| "baseline"` | — | Cross-axis alignment |
+| `justify` | `"start" \| "center" \| "end" \| "between" \| "around" \| "evenly"` | — | Main-axis justification |
+| `as` | `ElementType` | `"div"` | HTML element to render |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Stack content |
+
+Plus all standard HTML attributes for the rendered element.
+
+## Accessibility
+
+- Renders semantic HTML when you specify `as="nav"`, `as="section"`, etc.
+- No implicit ARIA roles — uses the semantics of the `as` element
+- Keyboard navigation follows natural document flow

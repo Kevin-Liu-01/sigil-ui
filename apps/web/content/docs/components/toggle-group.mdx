@@ -1,0 +1,85 @@
+---
+title: ToggleGroup
+description: A group of toggle buttons where one or multiple can be active. Built on Radix ToggleGroup.
+---
+
+## Import
+
+```tsx
+import { ToggleGroup, ToggleGroupItem } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ToggleGroup type="single" defaultValue="center">
+  <ToggleGroupItem value="left" aria-label="Align left">
+    <AlignLeftIcon className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="center" aria-label="Align center">
+    <AlignCenterIcon className="size-4" />
+  </ToggleGroupItem>
+  <ToggleGroupItem value="right" aria-label="Align right">
+    <AlignRightIcon className="size-4" />
+  </ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Multiple selection
+
+```tsx
+<ToggleGroup type="multiple" defaultValue={["bold", "italic"]}>
+  <ToggleGroupItem value="bold" aria-label="Bold">B</ToggleGroupItem>
+  <ToggleGroupItem value="italic" aria-label="Italic">I</ToggleGroupItem>
+  <ToggleGroupItem value="underline" aria-label="Underline">U</ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Variants
+
+```tsx
+<ToggleGroup type="single" variant="outline">
+  <ToggleGroupItem value="a">A</ToggleGroupItem>
+  <ToggleGroupItem value="b">B</ToggleGroupItem>
+</ToggleGroup>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface-elevated` | Pressed item background |
+| `--s-text` | Active item text |
+| `--s-text-muted` | Inactive item text |
+| `--s-border` | Group and item border |
+| `--s-border-interactive` | Focus ring |
+| `--s-radius-md` | Group border radius |
+| `--s-duration-fast` | Press transition |
+
+## Props
+
+### ToggleGroup
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `type` | `"single" \| "multiple"` | — | Selection mode |
+| `value` | `string \| string[]` | — | Controlled value |
+| `defaultValue` | `string \| string[]` | — | Default value |
+| `onValueChange` | `(value: string \| string[]) => void` | — | Change handler |
+| `variant` | `"default" \| "outline"` | `"default"` | Visual variant |
+| `disabled` | `boolean` | `false` | Disable all items |
+
+### ToggleGroupItem
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Item value |
+| `disabled` | `boolean` | `false` | Disable this item |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Item content |
+
+## Accessibility
+
+- Uses `role="group"` with `aria-pressed` on each item
+- Arrow keys navigate between items
+- Provide `aria-label` for icon-only items

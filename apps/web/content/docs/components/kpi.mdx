@@ -1,0 +1,77 @@
+---
+title: KPI
+description: A key performance indicator card for dashboards. Displays a metric value, label, trend indicator, and optional sparkline.
+---
+
+## Import
+
+```tsx
+import { KPI } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<KPI label="Revenue" value="$48,200" />
+```
+
+## With trend
+
+```tsx
+<KPI label="Users" value="12,847" trend={+8.3} />
+<KPI label="Churn" value="2.1%" trend={-0.4} />
+```
+
+A positive `trend` renders green with an up arrow; negative renders red with a down arrow.
+
+## With description
+
+```tsx
+<KPI label="MRR" value="$48.2k" trend={+12} description="vs. last month" />
+```
+
+## Sizes
+
+```tsx
+<KPI size="sm" label="Latency" value="42ms" />
+<KPI size="md" label="Latency" value="42ms" />
+<KPI size="lg" label="Latency" value="42ms" />
+```
+
+## Dashboard row pattern
+
+```tsx
+<SigilGrid columns={4}>
+  <SigilGridCell><KPI label="Revenue" value="$48.2k" trend={+12} /></SigilGridCell>
+  <SigilGridCell><KPI label="Users" value="12,847" trend={+8.3} /></SigilGridCell>
+  <SigilGridCell><KPI label="Orders" value="1,024" trend={-2.1} /></SigilGridCell>
+  <SigilGridCell><KPI label="Conversion" value="3.2%" trend={+0.5} /></SigilGridCell>
+</SigilGrid>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Value text color |
+| `--s-text-muted` | Label and description color |
+| `--s-success` | Positive trend color |
+| `--s-error` | Negative trend color |
+| `--s-surface` | Card background |
+| `--s-font-mono` | Value font family |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Metric label |
+| `value` | `string \| number` | — | Metric value |
+| `trend` | `number` | — | Percentage change (positive or negative) |
+| `description` | `string` | — | Supplementary text |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Display size |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="group"` with `aria-label` set to the label text
+- Trend includes `aria-label` describing the direction and value

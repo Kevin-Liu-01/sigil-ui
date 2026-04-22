@@ -1,0 +1,11 @@
+{
+  "title": "Marketing",
+  "pages": [
+    "hero",
+    "feature-frame",
+    "pricing",
+    "cta",
+    "logo-bar",
+    "testimonial-card"
+  ]
+}
