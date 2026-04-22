@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 interface TabsContextValue {
   activeTab: string;
@@ -87,6 +88,7 @@ export interface TabsTriggerProps extends HTMLAttributes<HTMLButtonElement> {
 export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
   function TabsTrigger({ value, disabled, className, children, ...rest }, ref) {
     const { activeTab, setActiveTab, baseId } = useTabsContext();
+    const { play } = useSigilSound();
     const isActive = activeTab === value;
 
     return (
@@ -98,7 +100,7 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         aria-controls={`${baseId}-content-${value}`}
         aria-selected={isActive}
         disabled={disabled}
-        onClick={() => setActiveTab(value)}
+        onClick={() => { play("tap"); setActiveTab(value); }}
         className={cn(
           "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--s-radius-sm,4px)] px-3 py-1.5 text-sm font-medium",
           "transition-all duration-150",

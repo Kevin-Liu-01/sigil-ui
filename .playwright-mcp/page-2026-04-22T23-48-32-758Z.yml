@@ -1,0 +1,80 @@
+- generic:
+  - generic [active]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - navigation [ref=e6]:
+            - button "previous" [disabled] [ref=e7]:
+              - img "previous" [ref=e8]
+            - generic [ref=e10]:
+              - generic [ref=e11]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e12]:
+              - img "next" [ref=e13]
+          - img
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - generic "Latest available version is detected (16.2.4)." [ref=e19]: Next.js 16.2.4
+            - generic [ref=e20]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e22]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e29]: Build Error
+              - generic [ref=e30]:
+                - button "Copy Error Info" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+                - link "Go to related documentation" [ref=e34] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+                  - img [ref=e35]
+                - button "Attach Node.js inspector" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e47]: "Next.js can't recognize the exported `generateStaticParams` field in route. App pages cannot use both \"use client\" and export function \"generateStaticParams()\"."
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - img [ref=e53]
+              - generic [ref=e56]: ./apps/web/app/demos/[slug]/page.tsx (217:8)
+              - button "Open in editor" [ref=e57] [cursor=pointer]:
+                - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: "Next.js can't recognize the exported `generateStaticParams` field in route. App pages cannot use both \"use client\" and export function \"generateStaticParams()\"."
+              - generic [ref=e64]: 215 |
+              - generic [ref=e65]: /* -------------------------------------------------------------------------- */
+              - generic [ref=e66]: 216 |
+              - text: ">"
+              - generic [ref=e67]: 217 |
+              - text: export function
+              - generic [ref=e68]: "generateStaticParams() {"
+              - generic [ref=e69]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ >
+              - generic [ref=e70]: 218 |
+              - text: return SLUGS
+              - generic [ref=e71]: ".map((slug) => ({ slug }));"
+              - generic [ref=e72]: "|"
+              - text: ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ >
+              - generic [ref=e73]: 219 |
+              - generic [ref=e74]: "}"
+              - generic [ref=e75]: "|"
+              - text: ^
+              - generic [ref=e76]: 220 |
+              - generic [ref=e77]: 221 |
+              - text: export function
+              - generic [ref=e78]: "generateMetadata({"
+              - generic [ref=e79]: 222 |
+              - generic [ref=e80]:
+                - text: "params, The exported configuration object in a source file needs to have a very specific format from which some properties can be statically parsed at compiled-time. Import traces: Client Component Browser: ./apps/web/app/demos/[slug]/page.tsx [Client Component Browser] ./apps/web/app/demos/[slug]/page.tsx [Server Component] Client Component SSR: ./apps/web/app/demos/[slug]/page.tsx [Client Component SSR] ./apps/web/app/demos/[slug]/page.tsx [Server Component]"
+                - link "https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config" [ref=e81] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+        - generic [ref=e82]: "1"
+        - generic [ref=e83]: "2"
+    - generic [ref=e88] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e89]:
+        - img [ref=e90]
+      - button "Open issues overlay" [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]: "0"
+          - generic [ref=e97]: "1"
+        - generic [ref=e98]: Issue
+  - alert [ref=e99]

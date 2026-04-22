@@ -3,6 +3,7 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as TogglePrimitive from "@radix-ui/react-toggle";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface ToggleProps extends ComponentPropsWithoutRef<typeof TogglePrimitive.Root> {
   /** Visual variant. @default "default" */
@@ -24,9 +25,11 @@ const sizeStyles: Record<string, string> = {
 
 /** Pressable toggle button with on/off state. */
 export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle(
-  { variant = "default", size = "md", className, ...rest },
+  { variant = "default", size = "md", className, onPressedChange, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
+
   return (
     <TogglePrimitive.Root
       ref={ref}
@@ -41,6 +44,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle
         sizeStyles[size],
         className,
       )}
+      onPressedChange={(pressed) => { play("toggle"); onPressedChange?.(pressed); }}
       {...rest}
     />
   );

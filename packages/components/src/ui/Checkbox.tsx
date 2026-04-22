@@ -2,6 +2,7 @@
 
 import { forwardRef, type InputHTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Label text next to the checkbox. */
@@ -10,9 +11,10 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 
 /** Styled checkbox with optional label. */
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Checkbox(
-  { label, className, id, ...rest },
+  { label, className, id, onChange, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   const inputId = id ?? (label ? `checkbox-${label.replace(/\s+/g, "-").toLowerCase()}` : undefined);
 
   return (
@@ -30,6 +32,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(function Che
           "disabled:cursor-not-allowed disabled:opacity-50",
           className,
         )}
+        onChange={(e) => { play("toggle"); onChange?.(e); }}
         {...rest}
       />
       {label && (

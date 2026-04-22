@@ -2,6 +2,7 @@
 
 import { forwardRef, type SelectHTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   /** Error message — puts the select in error state when truthy. */
@@ -10,9 +11,10 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 /** Styled native select wrapper. */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
-  { error, className, children, ...rest },
+  { error, className, children, onChange, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   const hasError = Boolean(error);
 
   return (
@@ -35,6 +37,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
             : "border-[var(--s-border)]",
           className,
         )}
+        onChange={(e) => { play("tap"); onChange?.(e); }}
         {...rest}
       >
         {children}

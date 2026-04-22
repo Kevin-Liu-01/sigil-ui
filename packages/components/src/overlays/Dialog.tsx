@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 interface DialogContextValue {
   open: boolean;
@@ -42,14 +43,16 @@ export interface DialogProps {
 export function Dialog({ open: controlledOpen, onOpenChange, defaultOpen = false, children }: DialogProps) {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const baseId = useId();
+  const { play } = useSigilSound();
   const isOpen = controlledOpen ?? internalOpen;
 
   const setOpen = useCallback(
     (v: boolean) => {
+      play(v ? "open" : "close");
       if (controlledOpen === undefined) setInternalOpen(v);
       onOpenChange?.(v);
     },
-    [controlledOpen, onOpenChange],
+    [controlledOpen, onOpenChange, play],
   );
 
   return (

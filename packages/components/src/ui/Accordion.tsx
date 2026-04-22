@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 interface AccordionContextValue {
   openItems: Set<string>;
@@ -94,6 +95,7 @@ export interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement>
 export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   function AccordionTrigger({ className, children, ...rest }, ref) {
     const { openItems, toggle } = useAccordionContext();
+    const { play } = useSigilSound();
     const itemEl = useRef<HTMLElement | null>(null);
 
     const getValue = (el: HTMLElement | null): string => {
@@ -104,6 +106,7 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
     const generatedId = useId();
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       itemEl.current = e.currentTarget;
+      play("expand");
       toggle(getValue(e.currentTarget));
     };
 

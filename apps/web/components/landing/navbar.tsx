@@ -15,7 +15,7 @@ const LOGO_VARIANTS = [
 
 const NAV_LINKS = [
   { label: "Manifesto", href: "/manifesto", icon: <Flame size={14} /> },
-  { label: "Docs", href: "#", icon: <BookOpen size={14} /> },
+  { label: "Docs", href: "/docs", icon: <BookOpen size={14} /> },
   { label: "Components", href: "#components", icon: <LayoutGrid size={14} /> },
   { label: "Presets", href: "#presets", icon: <Palette size={14} /> },
   { label: "GitHub", href: "https://github.com/Kevin-Liu-01/sigil-ui", external: true, icon: <ExternalLink size={14} /> },

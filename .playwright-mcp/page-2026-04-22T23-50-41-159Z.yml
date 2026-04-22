@@ -1,0 +1,93 @@
+- generic:
+  - generic [active]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - navigation [ref=e6]:
+            - button "previous" [disabled] [ref=e7]:
+              - img "previous" [ref=e8]
+            - generic [ref=e10]:
+              - generic [ref=e11]: 1/
+              - text: "1"
+            - button "next" [disabled] [ref=e12]:
+              - img "next" [ref=e13]
+          - img
+        - generic [ref=e15]:
+          - generic [ref=e16]:
+            - img [ref=e17]
+            - generic "Latest available version is detected (16.2.4)." [ref=e19]: Next.js 16.2.4
+            - generic [ref=e20]: Turbopack
+          - img
+      - dialog "Build Error" [ref=e22]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - generic [ref=e27]:
+              - generic [ref=e29]: Build Error
+              - generic [ref=e30]:
+                - button "Copy Error Info" [ref=e31] [cursor=pointer]:
+                  - img [ref=e32]
+                - link "Go to related documentation" [ref=e34] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/api-reference/directives/use-client
+                  - img [ref=e35]
+                - button "Attach Node.js inspector" [ref=e37] [cursor=pointer]:
+                  - img [ref=e38]
+            - generic [ref=e47]: "You're importing a module that depends on `createContext` into a React Server Component module. This API is only available in Client Components. To fix, mark the file (or its parent) with the `\"use client\"` directive."
+          - generic [ref=e49]:
+            - generic [ref=e51]:
+              - img [ref=e53]
+              - generic [ref=e55]: ./packages/components/dist/index.js (3:22)
+              - button "Open in editor" [ref=e56] [cursor=pointer]:
+                - img [ref=e58]
+            - generic [ref=e61]:
+              - generic [ref=e62]:
+                - text: "You're importing a module that depends on `createContext` into a React Server Component module. This API is only available in Client Components. To fix, mark the file (or its parent) with the `\"use client\"` directive. Learn more:"
+                - link "https://nextjs.org/docs/app/api-reference/directives/use-client" [ref=e63] [cursor=pointer]:
+                  - /url: https://nextjs.org/docs/app/api-reference/directives/use-client
+              - generic [ref=e64]: 1 |
+              - text: import
+              - generic [ref=e65]: "{ clsx }"
+              - text: from 'clsx'
+              - generic [ref=e66]: ;
+              - generic [ref=e67]: 2 |
+              - text: import
+              - generic [ref=e68]: "{ twMerge }"
+              - text: from 'tailwind-merge'
+              - generic [ref=e69]: ;
+              - text: ">"
+              - generic [ref=e70]: 3 |
+              - text: import
+              - generic [ref=e71]: "{ forwardRef, createContext, useCallback, useId, useState, useRef, useReducer, useEffect, u..."
+              - generic [ref=e72]: "|"
+              - text: ^^^^^^^^^^^^^
+              - generic [ref=e73]: 4 |
+              - text: import
+              - generic [ref=e74]: "{ jsx, jsxs,"
+              - text: Fragment
+              - generic [ref=e75]: "}"
+              - text: from 'react/jsx-runtime'
+              - generic [ref=e76]: ;
+              - generic [ref=e77]: 5 |
+              - text: import
+              - generic [ref=e78]: "{"
+              - text: Delaunay
+              - generic [ref=e79]: "}"
+              - text: from 'd3-delaunay'
+              - generic [ref=e80]: ;
+              - generic [ref=e81]: 6 |
+              - text: import
+              - generic [ref=e82]: "{"
+              - text: Slot
+              - generic [ref=e83]: "}"
+              - text: from '@radix-ui/react-slot'
+              - generic [ref=e84]: "; Ecmascript file had an error Import trace: Server Component: ./packages/components/dist/index.js ./apps/web/app/demos/[slug]/page.tsx"
+        - generic [ref=e85]: "1"
+        - generic [ref=e86]: "2"
+    - generic [ref=e91] [cursor=pointer]:
+      - button "Open Next.js Dev Tools" [ref=e92]:
+        - img [ref=e93]
+      - button "Open issues overlay" [ref=e97]:
+        - generic [ref=e98]:
+          - generic [ref=e99]: "0"
+          - generic [ref=e100]: "1"
+        - generic [ref=e101]: Issue
+  - alert [ref=e102]

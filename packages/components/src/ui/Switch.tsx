@@ -2,6 +2,7 @@
 
 import { forwardRef, useId, type InputHTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Label text next to the switch. */
@@ -10,9 +11,10 @@ export interface SwitchProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 
 /** Toggle switch built on a styled checkbox. */
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
-  { label, className, id, ...rest },
+  { label, className, id, onChange, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   const generatedId = useId();
   const inputId = id ?? generatedId;
 
@@ -31,7 +33,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
           className,
         )}
       >
-        <input ref={ref} type="checkbox" id={inputId} className="sr-only peer" {...rest} />
+        <input ref={ref} type="checkbox" id={inputId} className="sr-only peer" onChange={(e) => { play("toggle"); onChange?.(e); }} {...rest} />
         <span
           className={cn(
             "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm",

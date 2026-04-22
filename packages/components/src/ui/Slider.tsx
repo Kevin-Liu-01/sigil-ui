@@ -2,6 +2,7 @@
 
 import { forwardRef, type InputHTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
   /** Show the current value label. */
@@ -10,14 +11,16 @@ export interface SliderProps extends Omit<InputHTMLAttributes<HTMLInputElement>,
 
 /** Range slider input. */
 export const Slider = forwardRef<HTMLInputElement, SliderProps>(function Slider(
-  { showValue, className, ...rest },
+  { showValue, className, onInput, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   return (
     <div className="w-full">
       <input
         ref={ref}
         type="range"
+        onInput={(e) => { play("slide"); onInput?.(e); }}
         className={cn(
           "w-full h-2 rounded-full appearance-none cursor-pointer",
           "bg-[var(--s-border)]",

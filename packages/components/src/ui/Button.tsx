@@ -3,6 +3,7 @@
 import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   /** Visual variant. @default "primary" */
@@ -51,9 +52,10 @@ const sizeStyles: Record<string, string> = {
 
 /** Multi-variant button with Radix Slot support for polymorphic rendering. */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = "primary", size = "md", asChild = false, className, children, ...rest },
+  { variant = "primary", size = "md", asChild = false, className, children, onClick, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   const Component = asChild ? Slot : "button";
 
   return (
@@ -69,6 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         sizeStyles[size],
         className,
       )}
+      onClick={(e) => { play("tap"); onClick?.(e); }}
       {...rest}
     >
       {children}

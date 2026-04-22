@@ -4,6 +4,16 @@
 export { cn } from "./utils";
 
 // ---------------------------------------------------------------------------
+// Sound
+// ---------------------------------------------------------------------------
+export {
+  SigilSoundContext,
+  useSigilSound,
+  type SigilSoundName,
+  type SigilSoundContextValue,
+} from "./sound-context";
+
+// ---------------------------------------------------------------------------
 // Layout primitives
 // ---------------------------------------------------------------------------
 export { Stack, type StackProps } from "./layout/Stack";
