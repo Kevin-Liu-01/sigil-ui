@@ -675,24 +675,27 @@ body::after {
   bottom: 0;
   width: 0.5px;
   background: var(--s-border-muted);
-  opacity: 0.4;
+  opacity: calc(var(--s-align-rail-visible, 0) * 0.4);
   z-index: 9998;
   pointer-events: none;
+  transition: left 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              right 400ms cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body::before {
-  left: 24px;
+  left: var(--s-align-rail-margin, 24px);
 }
 
 body::after {
-  right: 24px;
+  right: var(--s-align-rail-margin, 24px);
 }
 
 /* Dot grid background on page */
 body {
   background-image: radial-gradient(circle, var(--s-border-muted) 0.5px, transparent 0.5px);
-  background-size: 48px 48px;
-  background-position: 24px 24px;
+  background-size: var(--s-grid-cell, 48px) var(--s-grid-cell, 48px);
+  background-position: var(--s-align-rail-margin, 24px) var(--s-align-rail-margin, 24px);
 }
 
 /* Figure numbering */
@@ -816,9 +819,9 @@ body {
 .s-section {
   padding-top: var(--s-section-padding-y, 64px);
   padding-bottom: var(--s-section-padding-y, 64px);
-  padding-left: var(--s-section-padding-x, 24px);
-  padding-right: var(--s-section-padding-x, 24px);
-  max-width: var(--s-section-max-width, 1200px);
+  padding-left: var(--s-align-rail-margin, 24px);
+  padding-right: var(--s-align-rail-margin, 24px);
+  max-width: var(--s-align-rail-width, 1200px);
   margin: 0 auto;
 }
 

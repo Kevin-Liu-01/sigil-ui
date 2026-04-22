@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Stack, Margin, Button, Cross } from "@sigil-ui/components";
 import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
 const NAV_LINKS = [
@@ -31,71 +30,124 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all"
+      className="fixed top-0 left-0 right-0 z-50"
       style={{
         backdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
         backgroundColor: scrolled ? "color-mix(in oklch, var(--s-bg) 80%, transparent)" : "transparent",
         borderBottom: scrolled ? "1px solid var(--s-border-muted)" : "1px solid transparent",
-        transitionDuration: "var(--s-duration-normal)",
-        transitionTimingFunction: "var(--s-ease-out)",
+        transition: "all 400ms cubic-bezier(0.16, 1, 0.3, 1)",
       }}
     >
-      <Margin size="md">
-        <Stack
-          as="nav"
-          direction="row"
-          align="center"
-          justify="between"
-          style={{ maxWidth: "var(--s-content-max)", margin: "0 auto", padding: "var(--s-space-4) 0" }}
+      <nav
+        style={{
+          maxWidth: "var(--s-align-rail-width, 1200px)",
+          margin: "0 auto",
+          padding: "0 var(--s-align-rail-margin, 24px)",
+          height: "var(--s-nav-navbar-height, 56px)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          transition: "max-width 400ms cubic-bezier(0.16, 1, 0.3, 1), padding 400ms cubic-bezier(0.16, 1, 0.3, 1), height 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        {/* Logo */}
+        <a
+          href="/"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 8,
+            textDecoration: "none",
+            color: "var(--s-text)",
+          }}
         >
-          {/* Logo */}
-          <a
-            href="/"
-            className="flex items-center gap-2 no-underline"
-            style={{ color: "var(--s-text)" }}
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="1.5" />
+            <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+          <span
+            style={{
+              fontFamily: "var(--s-font-mono)",
+              fontWeight: 600,
+              fontSize: 15,
+              letterSpacing: "-0.01em",
+            }}
           >
-            <Cross size={16} strokeWidth={1.5} style={{ color: "var(--s-text)" }} />
-            <span
-              className="r-mono font-semibold tracking-tight"
-              style={{ fontSize: "15px" }}
-            >
-              sigil
-            </span>
-          </a>
+            sigil
+          </span>
+        </a>
 
-          {/* Links */}
-          <Stack direction="row" gap={24} align="center" className="hidden md:flex">
-            {NAV_LINKS.map((link) => (
-              <Button key={link.label} variant="ghost" size="sm" asChild>
-                <a
-                  href={link.href}
-                  className="r-mono no-underline flex items-center gap-1.5"
-                  style={{ fontSize: "13px" }}
-                  {...("external" in link && link.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                >
-                  {link.icon}
-                  {link.label}
-                </a>
-              </Button>
-            ))}
-
-            {/* Theme toggle */}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className="w-8 h-8"
-              style={{ color: "var(--s-text-muted)" }}
+        {/* Links */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 24,
+          }}
+        >
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+                fontFamily: "var(--s-font-mono)",
+                fontSize: 12,
+                fontWeight: 500,
+                letterSpacing: "0.04em",
+                textTransform: "uppercase" as const,
+                textDecoration: "none",
+                color: "var(--s-text-muted)",
+                transition: "color 150ms ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--s-text)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--s-text-muted)";
+              }}
+              {...("external" in link && link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
             >
-              {isDark ? <SunIcon /> : <MoonIcon />}
-            </Button>
-          </Stack>
-        </Stack>
-      </Margin>
+              {link.icon}
+              {link.label}
+            </a>
+          ))}
+
+          {/* Theme toggle */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: 32,
+              height: 32,
+              padding: 0,
+              border: "none",
+              background: "none",
+              color: "var(--s-text-muted)",
+              cursor: "pointer",
+              borderRadius: "var(--s-radius-sm, 0px)",
+              transition: "color 150ms ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--s-text)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "var(--s-text-muted)";
+            }}
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+          </button>
+        </div>
+      </nav>
     </header>
   );
 }

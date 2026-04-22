@@ -36,7 +36,12 @@ function ContentWrap({
   return (
     <div
       className={className}
-      style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", ...style }}
+      style={{
+        maxWidth: "var(--s-align-rail-width, 1200px)",
+        margin: "0 auto",
+        padding: "0 var(--s-align-rail-margin, 24px)",
+        ...style,
+      }}
     >
       {children}
     </div>
@@ -918,7 +923,7 @@ function Footer() {
               >
                 {col.group}
               </span>
-              <Stack gap={12}>
+              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 {col.links.map((link) => (
                   <a
                     key={link.label}
@@ -940,7 +945,7 @@ function Footer() {
                     {link.label}
                   </a>
                 ))}
-              </Stack>
+              </div>
             </div>
           ))}
         </div>
