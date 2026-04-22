@@ -276,7 +276,7 @@ export function ManifestoContent() {
               </PullQuote>
               <BulletList
                 items={[
-                  "An agent can switch from "warm editorial" to "cold industrial" by swapping a preset, not rewriting components",
+                  "An agent can switch from 'warm editorial' to 'cold industrial' by swapping a preset, not rewriting components",
                   "A designer can lock down the token spec and hand it to an agent with confidence",
                   "Two projects using Sigil can look nothing alike, because the system was designed for divergence, not convergence",
                   "The agent has a legible, structured interface to the entire visual system — not scattered Tailwind classes across hundreds of files",

@@ -673,9 +673,9 @@ body::after {
   position: fixed;
   top: 0;
   bottom: 0;
-  width: 0.5px;
-  background: var(--s-border-muted);
-  opacity: calc(var(--s-align-rail-visible, 0) * 0.4);
+  width: 1px;
+  background: var(--s-border, rgba(255,255,255,0.12));
+  opacity: calc(var(--s-align-rail-visible, 0) * 0.7);
   z-index: 9998;
   pointer-events: none;
   transition: left 400ms cubic-bezier(0.16, 1, 0.3, 1),
