@@ -37,7 +37,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
         aria-valuemin={0}
         aria-valuemax={max}
         className={cn(
-          "relative w-full overflow-hidden rounded-full bg-[var(--s-surface)]",
+          "relative w-full overflow-hidden rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)]",
           sizeMap[size],
           className,
         )}
@@ -46,7 +46,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(function Progr
         <div
           data-slot="progress-indicator"
           className={cn(
-            "h-full bg-[var(--s-primary)] transition-all duration-500",
+            "h-full bg-[var(--s-primary)] transition-all duration-300",
             indeterminate && "animate-progress-indeterminate w-1/3",
           )}
           style={indeterminate ? undefined : { width: `${pct}%` }}

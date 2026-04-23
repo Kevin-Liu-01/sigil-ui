@@ -126,12 +126,31 @@ Switching presets changes ALL 259 tokens at once. Six categories:
 | `sigil diff` | Show token CSS changes since last sync |
 | `sigil doctor` | Validate project health (config, tokens, components, deps, CSS import, preset) |
 
+## Design System Rules
+
+**Read `.cursor/rules/sigil-design-system.mdc` before writing any component.** It contains enforced rules imported from Kevin's wiki covering:
+
+- Color rules (OKLCH, token-only, no hardcoded hex)
+- Typography rules (font triad, balanced wrapping, tabular-nums)
+- Spacing rules (4/8px grid, canonical ladder, no arbitrary values)
+- Radius rules (concentric nesting, preset families)
+- Shadow rules (token variables only, layered formula)
+- Border rules (preset-driven style via `var(--s-border-style)`)
+- Motion rules (purpose-driven, speed limits, seven rules, enter/exit asymmetry)
+- Component token consumption table (what to use vs what's banned)
+- Pre-ship checklist
+
 ## Component Rules
 
 Components are downstream consumers. They:
 - Use `forwardRef` and accept `className`
 - Prefix CSS classes with `sigil-`
 - Reference ONLY `var(--s-*)` for visual properties — never hardcoded hex, px, or font names
+- Shadows use `shadow-[var(--s-shadow-*)]`, never Tailwind `shadow-sm`
+- Durations use `duration-[var(--s-duration-*)]`, never hardcoded `duration-150`
+- Border styles use `border-[style:var(--s-border-style,solid)]`, never implicit solid
+- Radii use `rounded-[var(--s-radius-*)]`, never `rounded-lg`
+- Input heights use `h-[var(--s-input-height,*)]`, never `h-10`
 - Use `clsx` + `tailwind-merge` for class composition
 - Expose variants as typed props (`variant`, `size`, `intent`)
 

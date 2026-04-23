@@ -149,7 +149,7 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
       <div
         ref={trackRef}
         data-slot="slider-track"
-        className="relative h-2 w-full grow overflow-hidden rounded-full bg-[var(--s-surface)]"
+        className="relative h-1.5 w-full grow overflow-hidden rounded-full bg-[var(--s-surface)]"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
       >
@@ -168,12 +168,12 @@ export const Slider = forwardRef<HTMLDivElement, SliderProps>(function Slider(
         aria-valuenow={current}
         aria-disabled={disabled || undefined}
         className={cn(
-          "absolute block size-5 rounded-full border-2 border-[var(--s-primary)] bg-[var(--s-background)] shadow-sm",
+          "absolute block size-4 rounded-full border-2 border-[var(--s-primary)] bg-[var(--s-background)] shadow-sm",
           "transition-colors",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
           "disabled:pointer-events-none",
         )}
-        style={{ left: `calc(${pct}% - 0.625rem)` }}
+        style={{ left: `calc(${pct}% - 0.5rem)` }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onKeyDown={onKeyDown}

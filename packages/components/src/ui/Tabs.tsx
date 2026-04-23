@@ -73,7 +73,7 @@ export const TabsList = forwardRef<
       role="tablist"
       data-slot="tabs-list"
       className={cn(
-        "inline-flex h-10 items-center justify-center rounded-[var(--s-radius-md,2px)] bg-[var(--s-surface)] p-1 text-[var(--s-text-muted)]",
+        "inline-flex h-9 items-center justify-center gap-1 rounded-[var(--s-radius-md,0px)] bg-[var(--s-surface)] p-1 text-[var(--s-text-muted)]",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
         className,
       )}
@@ -115,7 +115,7 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
           setActiveTab(value);
         }}
         className={cn(
-          "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--s-radius-sm,0px)] px-3 py-1.5 text-sm font-medium",
+          "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--s-radius-sm,0px)] px-3 py-1 text-sm font-medium",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
           "disabled:pointer-events-none disabled:opacity-50",

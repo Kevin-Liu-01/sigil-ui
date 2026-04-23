@@ -213,6 +213,8 @@ export function FooterLogo() {
 }
 
 export function NavbarLogo() {
+  const r = 5;
+  const g = 24;
   return (
     <svg
       viewBox="0 0 120 120"
@@ -220,12 +222,22 @@ export function NavbarLogo() {
       width={18}
       height={18}
     >
-      <line x1="60" y1="4" x2="60" y2="116" stroke="currentColor" strokeWidth="2" />
-      <line x1="4" y1="60" x2="116" y2="60" stroke="currentColor" strokeWidth="2" />
-      <circle cx="30" cy="30" r="14" fill="#6366f1" />
-      <circle cx="90" cy="30" r="14" fill="#ea580c" />
-      <circle cx="30" cy="90" r="14" fill="#22c55e" />
-      <circle cx="90" cy="90" r="14" fill="#d946ef" />
+      <line x1="60" y1="0" x2="60" y2="120" stroke="currentColor" strokeWidth="3" />
+      <line x1="0" y1="60" x2="120" y2="60" stroke="currentColor" strokeWidth="3" />
+      {/* TL: 4 dots — 2×2 */}
+      <circle cx={30 - g/2} cy={30 - g/2} r={r} fill="#818cf8" />
+      <circle cx={30 + g/2} cy={30 - g/2} r={r} fill="#a5b4fc" />
+      <circle cx={30 - g/2} cy={30 + g/2} r={r} fill="#6366f1" />
+      <circle cx={30 + g/2} cy={30 + g/2} r={r} fill="#4f46e5" />
+      {/* TR: 2 dots — top row of 2×2 */}
+      <circle cx={90 - g/2} cy={30 - g/2} r={r} fill="#ea580c" />
+      <circle cx={90 + g/2} cy={30 - g/2} r={r} fill="#f97316" />
+      {/* BL: 1 dot — top-left of 2×2 */}
+      <circle cx={30 - g/2} cy={90 - g/2} r={r} fill="#22c55e" />
+      {/* BR: 3 dots — L-shape of 2×2 */}
+      <circle cx={90 - g/2} cy={90 - g/2} r={r} fill="#e879f9" />
+      <circle cx={90 - g/2} cy={90 + g/2} r={r} fill="#d946ef" />
+      <circle cx={90 + g/2} cy={90 + g/2} r={r} fill="#a855f7" />
     </svg>
   );
 }

@@ -23,12 +23,12 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         data-slot="select"
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-input,2px)] border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-2 text-sm",
+          "flex h-9 w-full items-center justify-between rounded-[var(--s-radius-input,0px)] border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-1 text-sm",
           "text-[var(--s-text)]",
           "appearance-none cursor-pointer",
           "pr-10",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+          "focus-visible:outline-none focus-visible:border-[var(--s-primary)] focus-visible:ring-1 focus-visible:ring-[var(--s-primary)]/20",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",
           "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
           hasError
@@ -42,7 +42,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         {children}
       </select>
       <svg
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)]"
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] opacity-50"
         xmlns="http://www.w3.org/2000/svg"
         width="16"
         height="16"

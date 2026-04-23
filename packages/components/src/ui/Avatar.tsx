@@ -36,7 +36,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       ref={ref}
       data-slot="avatar"
       className={cn(
-        "relative flex shrink-0 overflow-hidden rounded-full",
+        "relative flex shrink-0 overflow-hidden rounded-[var(--s-radius-avatar,9999px)]",
         sizeMap[size],
         className,
       )}
@@ -53,7 +53,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
       ) : (
         <span
           data-slot="avatar-fallback"
-          className="flex size-full items-center justify-center rounded-full bg-[var(--s-surface)] text-[var(--s-text-muted)] text-sm font-medium select-none"
+          className="flex size-full items-center justify-center bg-[var(--s-surface)] text-[var(--s-text-muted)] text-sm font-medium select-none"
         >
           {fallback ?? alt?.charAt(0)?.toUpperCase() ?? "?"}
         </span>

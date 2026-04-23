@@ -124,7 +124,7 @@ export const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(
           onClick={toggle}
           className={cn(
             "peer inline-flex size-4 shrink-0 items-center justify-center rounded-[var(--s-radius-sm,0px)]",
-            "border border-[var(--s-border)] bg-transparent",
+            "border border-[var(--s-border)] bg-[var(--s-background)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
             "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:text-white data-[state=checked]:border-[var(--s-primary)]",
             "data-[state=indeterminate]:bg-[var(--s-primary)] data-[state=indeterminate]:text-white data-[state=indeterminate]:border-[var(--s-primary)]",

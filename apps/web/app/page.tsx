@@ -18,7 +18,7 @@ import { LiveComponentGrid } from "@/components/landing/live-component";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
-import { SigilPageGrid, SigilSection } from "@sigil-ui/components";
+import { SigilPageGrid, SigilSection, SigilFrame as SigilFrameBase } from "@sigil-ui/components";
 import type { GutterPattern } from "@sigil-ui/tokens";
 import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
@@ -75,13 +75,13 @@ function LandingNavbar() {
         <NavbarLogo />
         <span
           style={{
-            fontFamily: "var(--s-font-mono)",
-            fontWeight: 600,
-            fontSize: 15,
-            letterSpacing: "-0.01em",
+            fontFamily: "var(--s-font-display, 'Inter', system-ui, sans-serif)",
+            fontWeight: 700,
+            fontSize: 16,
+            letterSpacing: "-0.03em",
           }}
         >
-          sigil
+          sigil<span style={{ opacity: 0.4, fontWeight: 400 }}>/</span><span style={{ fontWeight: 500, fontSize: 13 }}>UI</span>
         </span>
       </a>
 
@@ -957,14 +957,14 @@ function SigilFrame({ children }: { children: React.ReactNode }) {
   } catch { /* no provider */ }
 
   return (
-    <SigilPageGrid
+    <SigilFrameBase
       showGutterGrid
       showMarginLines
       gutterPattern={gutterPattern}
       marginPattern={marginPattern}
     >
       {children}
-    </SigilPageGrid>
+    </SigilFrameBase>
   );
 }
 

@@ -1,7 +1,7 @@
 ---
-name: sigil-component
+
+## name: sigil-component
 trigger: when creating, modifying, or reviewing a Sigil UI component
----
 
 # Sigil Component
 
@@ -101,7 +101,7 @@ export { MyComponent } from "./my-component.js";
 6. **Slot pattern** — use `@radix-ui/react-slot` with an `asChild` prop when the component should render as a different element.
 7. **No inline styles for tokens** — all token-dependent styling goes through CSS classes that reference custom properties.
 8. **All colors in OKLCH** — the token system uses OKLCH exclusively. Never use hex/rgb/hsl in component CSS.
-9. **Respect motion tokens** — all transitions use `--sigil-duration-*` and `--sigil-easing-*`.
+9. **Respect motion tokens** — all transitions use `--sigil-duration-`* and `--sigil-easing-*`.
 10. **Barrel export** — every component must be exported from `packages/components/src/index.ts`.
 
 ## Examples
@@ -149,3 +149,4 @@ The `sigil-grid`, `sigil-cross`, and `sigil-rail` components use tokens from the
   --stroke: var(--sigil-cross-stroke);
 }
 ```
+

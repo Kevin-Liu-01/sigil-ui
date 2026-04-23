@@ -30,11 +30,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         data-slot="input"
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex h-10 w-full rounded-[var(--s-radius-input,6px)] border px-3 py-2 text-sm",
+          "flex h-9 w-full rounded-[var(--s-radius-input,0px)] border px-3 py-1 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)]",
-          "placeholder:text-[var(--s-text-subtle)]",
+          "placeholder:text-[var(--s-text-muted)]",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+          "focus-visible:outline-none focus-visible:border-[var(--s-primary)] focus-visible:ring-1 focus-visible:ring-[var(--s-primary)]/20",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--s-text)]",
           "autofill:shadow-[inset_0_0_0px_1000px_var(--s-surface)]",

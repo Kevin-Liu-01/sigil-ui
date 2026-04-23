@@ -1,0 +1,179 @@
+# Sigil Design System — Enforced Rules
+
+> Imported from Kevin's wiki: design-system, design-tokens, aesthetic-systems, design-and-animation, frontier-stack-2026, react, typescript. These rules are non-negotiable when writing or reviewing Sigil code.
+
+## Color Rules
+
+- OKLCH for all authored palettes. Use `oklch(L C H)` — L=lightness (0-1), C=chroma (0-0.37), H=hue (0-360).
+- At most 3 active colors plus neutrals per preset.
+- Rich Black (oklch ~0.08) for dark mode page backgrounds, never pure #000000.
+- Five text hierarchy levels: `--s-text`, `--s-text-secondary`, `--s-text-muted`, `--s-text-subtle`, `--s-text-disabled`. Always use the right level.
+- Four border levels: `--s-border`, `--s-border-muted`, `--s-border-strong`, `--s-border-interactive`.
+- BANNED: Hardcoded hex colors in components. All colors must reference `var(--s-*)` tokens.
+- BANNED: Gradients with no material logic. Every gradient must have a reason (glow, light, depth, brand).
+
+## Typography Rules
+
+- Font triad: display face for headlines only, body face for everything else, mono for code/labels/data.
+- Do not let all three compete equally in a single view.
+- `text-wrap: balance` on all short headings and marketing copy.
+- `-webkit-font-smoothing: antialiased` is set globally — never override to `auto`.
+- `font-variant-numeric: tabular-nums` for all changing/comparative numeric UI (counters, KPIs, prices, dates, timers).
+- Avoid Inter/Roboto when creating a new visual language — use the self-hosted PP Pangram collection.
+
+## Spacing Rules
+
+- 4px granularity for component internals (padding, gaps within a component).
+- 8px granularity for layout rhythm (section spacing, card grids, page margins).
+- Canonical ladder: 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 96.
+- BANNED: Arbitrary spacing like `37px`, `13px`, `7px`. Every value must be on the scale or derived from a token.
+
+## Radius Rules
+
+- Concentric rule: outer radius = inner radius + padding. When nesting rounded elements, the outer must be larger by exactly the padding amount.
+- Choose one radius family per preset and stay consistent: brutalist (0-4px), structural (4-8px), editorial (6-12px), premium (12-20px), playful (20-28px).
+- BANNED: `rounded-lg`, `rounded-xl` Tailwind classes. Use `rounded-[var(--s-radius-md)]` etc.
+
+## Depth Strategy
+
+- Primary structural cue: borders. Grid lines, cross marks, and rail marks make the layout visible.
+- Secondary: layered shadows for elevation. Use the `--s-shadow-*` scale.
+- Low-opacity edge outlines on images/media: `outline: 1px solid rgb(0 0 0 / 0.1); outline-offset: -1px`.
+- BANNED: Fake 3D from stacking drop shadows. BANNED: Glassmorphism on white for no reason.
+
+## Shadow Rules
+
+- All shadows must use token variables: `shadow-[var(--s-shadow-sm)]`, never Tailwind `shadow-sm`.
+- Prefer subtle layered shadows over hard borders when the goal is depth.
+- Shadow formula for elevated surfaces:
+  ```
+  0 0 0 1px rgb(0 0 0 / 0.06),
+  0 1px 2px -1px rgb(0 0 0 / 0.06),
+  0 2px 4px 0 rgb(0 0 0 / 0.04)
+  ```
+
+## Border Rules
+
+- All border styles must use `border-[style:var(--s-border-style,solid)]` — never hardcode `solid`.
+- All border widths must use token variables: `var(--s-border-thin)`, `var(--s-border-medium)`, `var(--s-border-thick)`.
+- Border style is preset-driven: solid, dashed, dotted, double, or none. Components must read the token.
+
+## Motion Rules
+
+- Every animation must have a purpose: feedback, spatial consistency, explanation, or delight.
+- If an animation has no purpose, delete it.
+- UI animations: under 300ms. Interactive elements: 150-200ms. Larger transitions: 250-300ms.
+- High-frequency interactions (command palettes, keyboard nav): ZERO animation.
+- Litmus test: will the user see this animation >10 times per session? If yes, make it instant.
+- All durations must use token variables: `duration-[var(--s-duration-fast,150ms)]`, never `duration-150`.
+
+### Seven Motion Rules
+
+1. Scale buttons on press: `scale(0.97)` on `:active`. Instant on press, optional short transition on release.
+2. Never animate from `scale(0)`. Use `scale(0.93)` minimum.
+3. Skip delay on subsequent tooltips — once any tooltip is open, adjacent ones open instantly.
+4. Use ease-out for entering/exiting. Built-in CSS easings are too subtle; use custom cubic-bezier.
+5. Set `transform-origin` to the trigger's position, not center. Center is wrong for anchored elements.
+6. Shorten duration before tweaking easing.
+7. Use `blur(2px)` to mask crossfade imperfections.
+
+### Enter/Exit Asymmetry
+
+- Enters are chunked and staggered (60-100ms between sections).
+- Exits have reduced travel distance compared to enters.
+- Exits are faster than enters.
+
+## Component Token Consumption
+
+Every component MUST read from token CSS variables. Hardcoded values are banned:
+
+| Property | Must Use | Banned |
+|----------|----------|--------|
+| Colors | `var(--s-*)` | `#hex`, `rgb()`, Tailwind color classes |
+| Shadows | `shadow-[var(--s-shadow-*)]` | `shadow-sm`, `shadow-md` |
+| Duration | `duration-[var(--s-duration-*)]` | `duration-150`, `duration-200` |
+| Border style | `border-[style:var(--s-border-style,solid)]` | `border` (implies solid) |
+| Radius | `rounded-[var(--s-radius-*)]` | `rounded-lg`, `rounded-xl` |
+| Height (inputs) | `h-[var(--s-input-height,*)]` | `h-10`, `h-12` |
+| Navbar height | `h-[var(--s-navbar-height,*)]` | `h-16`, `h-14` |
+| Sidebar width | `w-[var(--s-sidebar-width,*)]` | `w-[280px]` |
+
+## Token Architecture (Three Layers)
+
+1. **Primitive**: `color.gray.950`, `space.4`, `radius.12`, `font.display`, `shadow.xl`, `ease.fluid`.
+2. **Semantic**: `color.surface.page`, `color.text.primary`, `motion.duration.fast`.
+3. **Component**: Only when truly needed: `button.primary.bg`, `card.hero.radius`.
+
+Tokenize: colors, spacing, radii, typography, shadow, blur, border widths, z-index, motion durations, easings. Anything repeatedly hardcoded is a system failure.
+
+## Aesthetic Direction
+
+The Sigil aesthetic: structural visibility inspired by engineering instruments. Grid lines, margin rails, cross marks at intersections make the underlying layout visible as a design element.
+
+### Style Variables (lock before designing any preset)
+
+- Contrast level: low / medium / high
+- Depth level: flat / layered / scene-led
+- Type voice: engineered / editorial / luxurious / brutal
+- Surface finish: paper / glass / metal / grain / plastic / shader
+- Motion appetite: restrained / assertive / theatrical
+- Density: open / balanced / packed
+
+### Composition Rules
+
+- Hero must have one primary focal object.
+- Supporting objects frame the focal point or reinforce scale.
+- Repeat a visual angle consistently.
+- If using glow, pair it with darkness and empty space.
+- Let logos, proof bars, and stats inherit the same spacing logic as the hero.
+- A strong motif must repeat with variation, not appear once and disappear.
+- Most premium pages are built on restraint, not abundance.
+
+### Things Banned by Default
+
+- Random gradients with no material logic
+- Generic centered hero + dashboard + blur blobs
+- Too many font families (max: the triad)
+- Pill buttons everywhere with no hierarchy
+- Glassmorphism on white for no reason
+- Fake 3D from stacking drop shadows
+
+## React Rules
+
+- Hooks at top level only — never inside conditions, loops, or callbacks.
+- Exhaustive dependency arrays — never suppress `react-hooks/exhaustive-deps`.
+- `forwardRef` on every component that wraps a DOM element.
+- Accept `className` prop on every component for Tailwind overrides.
+- Use `cn()` from utils for class merging (clsx + tailwind-merge).
+- Named exports, never default exports for components.
+- Self-closing components: `<Foo />` not `<Foo></Foo>`.
+
+## TypeScript Rules
+
+- `type` over `interface` unless declaration merging is needed.
+- `unknown` over `any`. If `any` is unavoidable, add justification comment.
+- Use `satisfies` to validate shapes without widening.
+- Import types with `import type`.
+- Derive types from values with `as const`.
+- Early returns over deeply nested conditionals.
+- No ternaries for control flow — only for value selection.
+
+## Pre-Ship Checklist
+
+Before shipping any component or page:
+
+- [ ] Colors use tokens, not hardcoded hex
+- [ ] Spacing is on the 4/8px grid
+- [ ] Nested radii are concentric
+- [ ] Shadows use `var(--s-shadow-*)`, not Tailwind classes
+- [ ] Durations use `var(--s-duration-*)`, not hardcoded ms
+- [ ] Border styles use `var(--s-border-style)` token
+- [ ] Headings use balanced wrapping (`text-wrap: balance`)
+- [ ] Numbers that update are tabular (`tabular-nums`)
+- [ ] Icons are optically aligned
+- [ ] Images have subtle edges when needed
+- [ ] Interactive animations can be interrupted
+- [ ] Enters are staggered, exits are softer
+- [ ] No animation without a purpose
+- [ ] High-frequency interactions have zero animation
+- [ ] Component reads from preset tokens, not hardcoded values

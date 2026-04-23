@@ -18,7 +18,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       ref={ref}
       data-slot="card"
       className={cn(
-        "flex flex-col gap-6 rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] py-6 text-[var(--s-text)] shadow-[var(--s-shadow-sm,none)]",
+        "flex flex-col gap-4 rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-0 text-[var(--s-text)] shadow-sm",
         hoverable && "transition-all duration-[var(--s-duration-normal,200ms)] hover:shadow-[var(--s-shadow-md)] hover:-translate-y-0.5",
         className,
       )}
@@ -36,7 +36,7 @@ export const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
         ref={ref}
         data-slot="card-header"
         className={cn(
-          "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6",
+          "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 p-6 pb-0",
           "has-data-[slot=card-action]:grid-cols-[1fr_auto]",
           "[.border-b]:pb-6",
           className,
@@ -53,7 +53,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadi
       <h3
         ref={ref}
         data-slot="card-title"
-        className={cn("text-lg font-semibold leading-none tracking-tight", className)}
+        className={cn("text-lg font-semibold leading-none tracking-tight text-[var(--s-text)]", className)}
         {...rest}
       >
         {children}
@@ -90,7 +90,7 @@ export const CardAction = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
 
 export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function CardContent({ className, ...rest }, ref) {
-    return <div ref={ref} data-slot="card-content" className={cn("px-6", className)} {...rest} />;
+    return <div ref={ref} data-slot="card-content" className={cn("p-6 pt-4", className)} {...rest} />;
   },
 );
 
@@ -100,7 +100,7 @@ export const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
       <div
         ref={ref}
         data-slot="card-footer"
-        className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
+        className={cn("flex items-center p-6 pt-0 [.border-t]:pt-6", className)}
         {...rest}
       />
     );

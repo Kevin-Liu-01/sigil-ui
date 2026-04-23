@@ -58,7 +58,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       role="alert"
       data-slot="alert"
       className={cn(
-        "relative w-full rounded-[var(--s-radius-md,2px)] border border-[var(--s-border)] px-4 py-3 text-sm",
+        "relative w-full rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] p-4 text-sm",
         "[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-current [&:has(svg)]:pl-11",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
         variantStyles[variant],

@@ -200,7 +200,7 @@ export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps
         {...rest}
       >
         <div className="overflow-hidden">
-          <div className="pb-4 text-sm text-[var(--s-text-secondary)]">{children}</div>
+          <div className="pb-4 text-sm text-[var(--s-text-muted)]">{children}</div>
         </div>
       </div>
     );

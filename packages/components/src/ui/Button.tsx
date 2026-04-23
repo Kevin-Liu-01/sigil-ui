@@ -35,10 +35,10 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: [
-    "bg-[var(--s-primary)] text-white",
+    "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
     "hover:bg-[var(--s-primary-hover)]",
     "active:brightness-90 active:scale-[var(--s-button-active-scale,0.97)]",
-    "shadow-[var(--s-shadow-sm)]",
+    "shadow-sm",
   ].join(" "),
   secondary: [
     "bg-[var(--s-surface)] text-[var(--s-text)]",
@@ -55,7 +55,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     "hover:bg-[var(--s-surface)]",
   ].join(" "),
   destructive: [
-    "bg-[var(--s-error)] text-white",
+    "bg-[var(--s-error)] text-[var(--s-primary-contrast,#fff)]",
     "hover:brightness-110",
     "active:brightness-90",
   ].join(" "),
@@ -63,14 +63,14 @@ const variantStyles: Record<ButtonVariant, string> = {
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  xs: "h-7 px-2 text-xs rounded-[var(--s-radius-sm,4px)]",
-  sm: "h-8 px-3 text-xs rounded-[var(--s-radius-sm,4px)]",
-  md: "h-10 px-4 text-sm rounded-[var(--s-radius-md,6px)]",
-  lg: "h-12 px-6 text-base rounded-[var(--s-radius-md,6px)]",
-  "icon-xs": "h-7 w-7 rounded-[var(--s-radius-md,6px)] p-0 inline-flex items-center justify-center",
-  "icon-sm": "h-8 w-8 rounded-[var(--s-radius-md,6px)] p-0 inline-flex items-center justify-center",
-  icon: "h-10 w-10 rounded-[var(--s-radius-md,6px)] p-0 inline-flex items-center justify-center",
-  "icon-lg": "h-12 w-12 rounded-[var(--s-radius-md,6px)] p-0 inline-flex items-center justify-center",
+  xs: "h-7 px-2 text-xs rounded-[var(--s-radius-sm,0px)]",
+  sm: "h-8 px-3 text-xs rounded-[var(--s-radius-sm,0px)]",
+  md: "h-9 px-4 text-sm rounded-[var(--s-radius-md,0px)]",
+  lg: "h-11 px-6 text-base rounded-[var(--s-radius-md,0px)]",
+  "icon-xs": "h-7 w-7 rounded-[var(--s-radius-md,0px)] p-0 inline-flex items-center justify-center",
+  "icon-sm": "h-8 w-8 rounded-[var(--s-radius-md,0px)] p-0 inline-flex items-center justify-center",
+  icon: "h-9 w-9 rounded-[var(--s-radius-md,0px)] p-0 inline-flex items-center justify-center",
+  "icon-lg": "h-11 w-11 rounded-[var(--s-radius-md,0px)] p-0 inline-flex items-center justify-center",
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -87,7 +87,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       data-variant={variant}
       data-size={size}
       className={cn(
-        "inline-flex items-center justify-center gap-2 font-medium",
+        "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap",
         "cursor-pointer select-none",
         "transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",

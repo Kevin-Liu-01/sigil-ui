@@ -90,8 +90,8 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
         data-side={side}
         className={cn(
           "absolute z-50 pointer-events-none whitespace-nowrap",
-          "overflow-hidden rounded-[var(--s-radius-sm,2px)]",
-          "border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-1.5 text-sm shadow-md",
+          "overflow-hidden rounded-[var(--s-radius-sm,0px)]",
+          "border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-1.5 text-xs shadow-md",
           "text-[var(--s-text)]",
           "transition-all duration-150",
           originMap[side],

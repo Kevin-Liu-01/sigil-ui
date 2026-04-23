@@ -1,5 +1,7 @@
 # Sigil UI Development Conventions
 
+> Also read `sigil-design-system.mdc` for the full enforced design rules (color, typography, spacing, motion, etc.).
+
 ## Token Variable Prefix
 All CSS variables use the `--s-` prefix: `var(--s-primary)`, `var(--s-surface)`, etc.
 
