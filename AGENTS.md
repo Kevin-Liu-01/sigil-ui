@@ -68,12 +68,18 @@ apps/
   landing/           Marketing site
   demos/             10 template demos (ai-saas, dev-docs, dashboard, portfolio, ecommerce, blog, agency, cli-tool, startup, playground)
 
+style/               Design language and engineering philosophy (from Dedalus)
+  design.md          Design & animation guide: when to animate, speed, seven rules, enter/exit
+  ux-principles.md   Product UX rules: 100ms budget, three-click nav, visual design, interaction
+  style.md           Engineering philosophy: code quality, YAGNI, hard limits, React/TS rules
+
 skills/              Agent skills for specific workflows
   sigil-tokens/      Edit/extend tokens
   sigil-preset/      Create/modify presets
   sigil-component/   Create/modify components
   sigil-layout/      Page layout with grid system
   sigil-migration/   Migrate from shadcn/ui
+  sigil-polish/      Interface polish: typography, surfaces, animations, performance (5 files)
 ```
 
 ## Token System (259 Configurable Fields)
@@ -128,7 +134,7 @@ Switching presets changes ALL 259 tokens at once. Six categories:
 
 ## Design System Rules
 
-**Read `.cursor/rules/sigil-design-system.mdc` before writing any component.** It contains enforced rules imported from Kevin's wiki covering:
+**Read `.cursor/rules/sigil-design-system.mdc` before writing any component.** It contains enforced rules covering:
 
 - Color rules (OKLCH, token-only, no hardcoded hex)
 - Typography rules (font triad, balanced wrapping, tabular-nums)
@@ -139,6 +145,21 @@ Switching presets changes ALL 259 tokens at once. Six categories:
 - Motion rules (purpose-driven, speed limits, seven rules, enter/exit asymmetry)
 - Component token consumption table (what to use vs what's banned)
 - Pre-ship checklist
+
+### Extended Design References
+
+The `style/` directory contains the full design language (ported from the Dedalus aesthetic):
+
+- **`style/design.md`** — Complete motion and animation guide. When to animate, when not to, speed limits, seven practical rules, enter/exit asymmetry, compound effects. Inspired by Emil Kowalski.
+- **`style/ux-principles.md`** — Product-level UX rules. 100ms interaction budget, three-click navigation, three-color maximum, optical alignment, larger hit targets, persistent state.
+- **`style/style.md`** — Engineering philosophy. Hard limits (70-line functions, 500-line files), YAGNI, token-first principle, post-LLM principles, React/TS rules.
+
+The `skills/sigil-polish/` skill provides deep-dive reference files for interface polish:
+
+- **`typography.md`** — Text wrapping (`balance` vs `pretty`), font smoothing, tabular numbers, font stack rules.
+- **`surfaces.md`** — Concentric border radius, optical alignment, shadows over borders, image outlines, hit areas.
+- **`animations.md`** — Interruptible animations, split/stagger enters, subtle exits, contextual icon animations, scale on press.
+- **`performance.md`** — Transition specificity, `will-change` usage, GPU compositing.
 
 ## Component Rules
 
@@ -208,6 +229,7 @@ Read the relevant skill file before starting a task:
 | Create/modify components | `skills/sigil-component/SKILL.md` |
 | Page layout with grid | `skills/sigil-layout/SKILL.md` |
 | Migrate from shadcn | `skills/sigil-migration/SKILL.md` |
+| Polish UI details | `skills/sigil-polish/SKILL.md` |
 
 ## Build System
 

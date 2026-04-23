@@ -30,7 +30,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
               <div className="w-3 h-3 rounded-full bg-[var(--s-primary)] shrink-0" />
               <div className="w-px h-6 bg-[var(--s-border)]" />
               <div className="mt-2">
-                <span className="text-xs font-mono text-[var(--s-text-muted)] block">{entry.date}</span>
+                <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] block">{entry.date}</span>
                 <h4 className="text-sm font-medium text-[var(--s-text)] mt-1">{entry.title}</h4>
                 {entry.description && (
                   <p className="text-xs text-[var(--s-text-muted)] mt-1 max-w-[180px]">
@@ -55,7 +55,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
               <div className="w-3 h-3 rounded-full bg-[var(--s-primary)] relative z-[1]" />
             </div>
             <div className="flex-1 pb-2">
-              <span className="text-xs font-mono text-[var(--s-text-muted)] block">{entry.date}</span>
+              <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] block">{entry.date}</span>
               <h4 className="text-sm font-medium text-[var(--s-text)] mt-0.5">{entry.title}</h4>
               {entry.description && (
                 <p className="text-sm text-[var(--s-text-muted)] mt-1">{entry.description}</p>

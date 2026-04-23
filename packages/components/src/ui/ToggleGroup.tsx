@@ -3,6 +3,7 @@
 import { forwardRef, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export type ToggleGroupProps = {
   /** Selection mode. */
@@ -30,7 +31,8 @@ const sizeStyles: Record<string, string> = {
 
 /** Connected row of toggle buttons — supports single or multiple selection. */
 export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
-  function ToggleGroup({ className, size = "md", children, ...rest }, ref) {
+  function ToggleGroup({ className, size = "md", children, onValueChange, ...rest }, ref) {
+    const { play } = useSigilSound();
     return (
       <ToggleGroupPrimitive.Root
         ref={ref}
@@ -40,6 +42,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           className,
         )}
+        onValueChange={(value: any) => { play("toggle"); onValueChange?.(value); }}
         {...(rest as any)}
       >
         {children}

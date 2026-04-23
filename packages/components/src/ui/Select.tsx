@@ -3,10 +3,20 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as SelectPrimitive from "@radix-ui/react-select";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 /* ---------------------------------- Root ---------------------------------- */
 
-export const Select = SelectPrimitive.Root;
+export function Select({ onOpenChange, ...props }: ComponentPropsWithoutRef<typeof SelectPrimitive.Root>) {
+  const { play } = useSigilSound();
+  return (
+    <SelectPrimitive.Root
+      onOpenChange={(open) => { if (open) play("open"); onOpenChange?.(open); }}
+      {...props}
+    />
+  );
+}
+
 export const SelectGroup = SelectPrimitive.Group;
 export const SelectValue = SelectPrimitive.Value;
 

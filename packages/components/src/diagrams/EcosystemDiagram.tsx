@@ -37,7 +37,7 @@ export const EcosystemDiagram = forwardRef<HTMLDivElement, EcosystemDiagramProps
         >
           <circle cx={cx} cy={cy} r={radius} fill="none" stroke="var(--s-border-muted)" strokeWidth="1" strokeDasharray="4 4" />
           {ring.map((_, i) => {
-            const angle = (i / ring.length) * Math.PI * 2 - Math.PI / 2;
+            const angle = (i / (ring.length || 1)) * Math.PI * 2 - Math.PI / 2;
             const nx = cx + radius * Math.cos(angle);
             const ny = cy + radius * Math.sin(angle);
             return (
@@ -62,7 +62,7 @@ export const EcosystemDiagram = forwardRef<HTMLDivElement, EcosystemDiagramProps
         </div>
 
         {ring.map((node, i) => {
-          const angle = (i / ring.length) * Math.PI * 2 - Math.PI / 2;
+          const angle = (i / (ring.length || 1)) * Math.PI * 2 - Math.PI / 2;
           const nx = cx + radius * Math.cos(angle);
           const ny = cy + radius * Math.sin(angle);
           return (

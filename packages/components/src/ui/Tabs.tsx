@@ -3,10 +3,19 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cn } from "../utils";
-
-export const Tabs = TabsPrimitive.Root;
+import { useSigilSound } from "../sound-context";
 
 export type TabsProps = ComponentPropsWithoutRef<typeof TabsPrimitive.Root>;
+
+export function Tabs({ onValueChange, ...props }: TabsProps) {
+  const { play } = useSigilSound();
+  return (
+    <TabsPrimitive.Root
+      onValueChange={(value) => { play("nav"); onValueChange?.(value); }}
+      {...props}
+    />
+  );
+}
 
 export const TabsList = forwardRef<
   HTMLDivElement,

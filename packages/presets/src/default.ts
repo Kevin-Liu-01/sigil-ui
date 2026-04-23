@@ -47,9 +47,9 @@ export const defaultPreset: SigilPreset = {
       glow: "rgba(24, 24, 27, 0.15)",
     },
     typography: {
-      "font-display": "system-ui, -apple-system, 'Segoe UI', sans-serif",
-      "font-body": "system-ui, -apple-system, 'Segoe UI', sans-serif",
-      "font-mono": "'JetBrains Mono', 'Fira Code', ui-monospace, monospace",
+      "font-display": "'PP Mori', system-ui, sans-serif",
+      "font-body": "'PP Mori', system-ui, sans-serif",
+      "font-mono": "'PP Fraktion Mono', ui-monospace, monospace",
       "size-xs": "0.75rem",
       "size-sm": "0.875rem",
       "size-base": "0.875rem",
@@ -77,7 +77,7 @@ export const defaultPreset: SigilPreset = {
       "heading-weight": "600",
       "heading-tracking": "-0.025em",
       "heading-transform": "none",
-      "heading-family": "system-ui, -apple-system, 'Segoe UI', sans-serif",
+      "heading-family": "'PP Mori', system-ui, sans-serif",
     },
     spacing: {
       scale: [4, 8, 12, 16, 20, 24, 32, 48, 64, 80],
@@ -265,7 +265,7 @@ export const defaultPreset: SigilPreset = {
       "section-divider": "line",
     },
     code: {
-      "font-family": "'JetBrains Mono', 'Fira Code', ui-monospace, monospace",
+      "font-family": "'PP Fraktion Mono', ui-monospace, monospace",
       "font-size": "0.8125rem",
       "line-height": "1.6",
       bg: "var(--s-surface)",

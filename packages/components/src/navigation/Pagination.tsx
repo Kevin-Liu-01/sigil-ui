@@ -2,6 +2,7 @@
 
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface PaginationProps extends HTMLAttributes<HTMLElement> {
   /** Current active page (1-indexed). */
@@ -45,7 +46,10 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   { currentPage, totalPages, onPageChange, siblingCount = 1, className, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
   const pages = usePaginationRange(currentPage, totalPages, siblingCount);
+
+  const handlePageChange = (page: number) => { play("nav"); onPageChange?.(page); };
 
   const buttonBase = cn(
     "inline-flex items-center justify-center h-8 min-w-8 px-2 text-sm rounded-[var(--s-radius-sm,4px)]",
@@ -59,7 +63,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
       <button
         type="button"
         disabled={currentPage <= 1}
-        onClick={() => onPageChange?.(currentPage - 1)}
+        onClick={() => handlePageChange(currentPage - 1)}
         className={cn(buttonBase, "text-[var(--s-text-muted)] hover:bg-[var(--s-surface)]")}
         aria-label="Previous page"
       >
@@ -75,7 +79,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
           <button
             key={page}
             type="button"
-            onClick={() => onPageChange?.(page)}
+            onClick={() => handlePageChange(page)}
             aria-current={page === currentPage ? "page" : undefined}
             className={cn(
               buttonBase,
@@ -92,7 +96,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
       <button
         type="button"
         disabled={currentPage >= totalPages}
-        onClick={() => onPageChange?.(currentPage + 1)}
+        onClick={() => handlePageChange(currentPage + 1)}
         className={cn(buttonBase, "text-[var(--s-text-muted)] hover:bg-[var(--s-surface)]")}
         aria-label="Next page"
       >

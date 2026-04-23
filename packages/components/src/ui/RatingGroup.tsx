@@ -2,6 +2,7 @@
 
 import { forwardRef, useState, type HTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface RatingGroupProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number;
@@ -18,12 +19,14 @@ export const RatingGroup = forwardRef<HTMLDivElement, RatingGroupProps>(function
   { value: controlledValue, defaultValue = 0, onChange, max = 5, disabled, size = "md", className, ...props },
   ref,
 ) {
+  const { play } = useSigilSound();
   const [internalValue, setInternalValue] = useState(defaultValue);
   const [hovered, setHovered] = useState(0);
   const rating = controlledValue ?? internalValue;
 
   const update = (next: number) => {
     if (disabled) return;
+    play("tap");
     if (!controlledValue) setInternalValue(next);
     onChange?.(next);
   };

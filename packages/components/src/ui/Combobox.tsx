@@ -9,6 +9,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface ComboboxOption {
   value: string;
@@ -38,11 +39,20 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   },
   ref,
 ) {
+  const { play } = useSigilSound();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+
+  const setOpenWithSound = useCallback((nextOrFn: boolean | ((prev: boolean) => boolean)) => {
+    setOpen((prev) => {
+      const next = typeof nextOrFn === "function" ? nextOrFn(prev) : nextOrFn;
+      if (next !== prev) play(next ? "open" : "close");
+      return next;
+    });
+  }, [play]);
 
   const filtered = options.filter((o) =>
     o.label.toLowerCase().includes(query.toLowerCase()),
@@ -53,11 +63,11 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   const select = useCallback(
     (val: string) => {
       onValueChange?.(val);
-      setOpen(false);
+      setOpenWithSound(false);
       setQuery("");
       setActiveIndex(-1);
     },
-    [onValueChange],
+    [onValueChange, setOpenWithSound],
   );
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -73,7 +83,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
       const item = enabledItems[activeIndex];
       if (item) select(item.value);
     } else if (e.key === "Escape") {
-      setOpen(false);
+      setOpenWithSound(false);
       setQuery("");
     }
   };
@@ -83,7 +93,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
     const handler = (e: MouseEvent) => {
       const root = (ref as React.RefObject<HTMLDivElement>)?.current ?? inputRef.current?.parentElement;
       if (root && !root.contains(e.target as Node)) {
-        setOpen(false);
+        setOpenWithSound(false);
         setQuery("");
       }
     };
@@ -106,7 +116,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
         aria-expanded={open}
         aria-haspopup="listbox"
         onClick={() => {
-          setOpen((o) => !o);
+          setOpenWithSound((o) => !o);
           setTimeout(() => inputRef.current?.focus(), 0);
         }}
         className={cn(

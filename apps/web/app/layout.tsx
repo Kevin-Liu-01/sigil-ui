@@ -3,6 +3,8 @@ import { Roboto_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SigilShell } from "@/components/sigil-shell";
+import { ThemeProvider } from "@/components/theme-provider";
+import { DocSearchPalette } from "@/components/doc-search-palette";
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -89,14 +91,12 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body style={{ paddingBottom: 40 }} suppressHydrationWarning>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("sigil-theme")||"dark";document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.classList.add("dark");document.documentElement.setAttribute("data-theme","dark")}})()`,
-          }}
-        />
-        <SigilShell>
-          {children}
-        </SigilShell>
+        <ThemeProvider>
+          <SigilShell>
+            {children}
+            <DocSearchPalette />
+          </SigilShell>
+        </ThemeProvider>
       </body>
     </html>
   );

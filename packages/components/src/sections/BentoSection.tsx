@@ -12,7 +12,7 @@ export interface BentoCell {
   className?: string;
 }
 
-export interface BentoSectionProps extends HTMLAttributes<HTMLElement> {
+export interface BentoSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   label?: string;
   title?: ReactNode;
   description?: string;

@@ -1,0 +1,70 @@
+---
+title: Page Shell
+description: Top-level main wrapper with narrow and inset layout modes.
+---
+
+# Page Shell
+
+> A `<main>` element that centers content with token-driven max-width. Use `inset` for full-bleed tool layouts inside an AppShell.
+
+## Installation
+
+```bash
+npx sigil add page-shell
+```
+
+## Import
+
+```tsx
+import { PageShell } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<PageShell>
+  <h1>My Page</h1>
+  <p>Content is centered with responsive padding.</p>
+</PageShell>
+```
+
+## Examples
+
+### Narrow mode
+
+For reading-optimized layouts like blog posts or documentation.
+
+```tsx
+<PageShell narrow>
+  <article>
+    <h1>Blog Post Title</h1>
+    <p>Narrower content width for readability.</p>
+  </article>
+</PageShell>
+```
+
+### Inset mode
+
+Full-width layout inside an AppShell — no outer padding, fills parent with flex-1.
+
+```tsx
+<AppShell>
+  <PageShell inset>
+    <div>Full-bleed tool layout</div>
+  </PageShell>
+</AppShell>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `narrow` | `boolean` | `false` | Constrain to narrower reading width |
+| `inset` | `boolean` | `false` | Full-width, no padding, flex-1 fill |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Page content |
+
+## Tokens
+
+- `--s-content-max-width` — maximum width for default mode (fallback: 1180px)
+- `--s-content-narrow-width` — maximum width for narrow mode (fallback: 720px)

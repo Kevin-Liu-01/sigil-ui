@@ -4,6 +4,7 @@ import { forwardRef, useId, type ComponentPropsWithoutRef } from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { Check, Minus } from "lucide-react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface CheckboxProps
   extends ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> {
@@ -13,9 +14,10 @@ export interface CheckboxProps
 export const Checkbox = forwardRef<
   React.ComponentRef<typeof CheckboxPrimitive.Root>,
   CheckboxProps
->(function Checkbox({ className, checked, label, id: idProp, ...props }, ref) {
+>(function Checkbox({ className, checked, label, id: idProp, onCheckedChange, ...props }, ref) {
   const autoId = useId();
   const id = idProp ?? autoId;
+  const { play } = useSigilSound();
 
   const box = (
     <CheckboxPrimitive.Root
@@ -23,6 +25,7 @@ export const Checkbox = forwardRef<
       id={id}
       data-slot="checkbox"
       checked={checked}
+      onCheckedChange={(val) => { play("toggle"); onCheckedChange?.(val); }}
       className={cn(
         "peer size-4 shrink-0 border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-background)]",
         "rounded-[var(--s-radius-sm,0px)]",

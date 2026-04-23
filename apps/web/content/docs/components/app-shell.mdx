@@ -1,0 +1,49 @@
+---
+title: AppShell
+description: Full-page layout shell with header, sidebar, main content, and footer slots via CSS grid.
+---
+
+## Import
+
+```tsx
+import { AppShell } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<AppShell
+  header={<header>App Header</header>}
+  sidebar={<nav>Sidebar</nav>}
+  footer={<footer>Footer</footer>}
+>
+  <main>Main content</main>
+</AppShell>
+```
+
+## Right sidebar
+
+```tsx
+<AppShell sidebar={<nav>Panel</nav>} sidebarPosition="right" sidebarWidth={300}>
+  Content
+</AppShell>
+```
+
+## Without sidebar
+
+```tsx
+<AppShell header={<header>Header</header>}>
+  Full-width content area
+</AppShell>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `header` | `ReactNode` | — | Header content (spans full width) |
+| `sidebar` | `ReactNode` | — | Sidebar content |
+| `footer` | `ReactNode` | — | Footer content (spans full width) |
+| `sidebarWidth` | `number \| string` | `256` | Sidebar width (number = px) |
+| `sidebarPosition` | `"left" \| "right"` | `"left"` | Which side the sidebar appears on |
+| `className` | `string` | — | Additional CSS classes |

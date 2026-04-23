@@ -38,7 +38,7 @@ export const KPI = forwardRef<HTMLDivElement, KPIProps>(function KPI(
       className={cn("flex flex-col gap-1 p-4 border", className)}
       style={{
         borderRadius: "var(--s-radius-card, 0px)",
-        borderColor: "var(--s-border-muted)",
+        borderColor: "var(--s-border)",
         borderStyle: "var(--s-border-style, solid)",
         backgroundColor: "var(--s-background)",
         boxShadow: "var(--s-shadow-sm)",
@@ -49,7 +49,7 @@ export const KPI = forwardRef<HTMLDivElement, KPIProps>(function KPI(
       <span className="text-xs font-medium uppercase tracking-wider" style={{ color: "var(--s-text-muted)" }}>
         {label}
       </span>
-      <span className="text-2xl font-semibold font-mono tabular-nums" style={{ color: "var(--s-text)" }}>
+      <span className="text-2xl font-semibold tabular-nums" style={{ color: "var(--s-text)" }}>
         {value}
       </span>
       {change && (

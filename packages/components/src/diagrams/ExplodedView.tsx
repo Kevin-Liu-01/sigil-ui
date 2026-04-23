@@ -54,7 +54,7 @@ export const ExplodedView = forwardRef<HTMLDivElement, ExplodedViewProps>(functi
               />
             )}
             <div className="relative z-[1]">
-              <span className="inline-block text-[10px] font-mono uppercase tracking-wider text-[var(--s-text-muted)] mb-1">
+              <span className="inline-block text-[10px] font-[family-name:var(--s-font-mono)] uppercase tracking-wider text-[var(--s-text-muted)] mb-1">
                 {layer.label}
               </span>
               {layer.children}

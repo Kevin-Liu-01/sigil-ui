@@ -3,6 +3,7 @@
 import { forwardRef, useId, type ComponentPropsWithoutRef } from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 const sizeMap = {
   sm: {
@@ -28,16 +29,18 @@ export interface SwitchProps
 export const Switch = forwardRef<
   React.ComponentRef<typeof SwitchPrimitive.Root>,
   SwitchProps
->(function Switch({ className, size = "md", label, id: idProp, ...props }, ref) {
+>(function Switch({ className, size = "md", label, id: idProp, onCheckedChange, ...props }, ref) {
   const autoId = useId();
   const id = idProp ?? autoId;
   const s = sizeMap[size];
+  const { play } = useSigilSound();
 
   const toggle = (
     <SwitchPrimitive.Root
       ref={ref}
       id={id}
       data-slot="switch"
+      onCheckedChange={(checked) => { play("toggle"); onCheckedChange?.(checked); }}
       className={cn(
         "peer inline-flex shrink-0 cursor-pointer items-center rounded-[var(--s-radius-full,9999px)]",
         "border-2 border-transparent",

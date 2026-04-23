@@ -8,8 +8,9 @@ import {
   type ReactNode,
 } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
-export interface ClipboardProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ClipboardProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
   value: string;
   /** Time in ms before resetting to idle state. @default 2000 */
   timeout?: number;
@@ -20,15 +21,17 @@ export const Clipboard = forwardRef<HTMLButtonElement, ClipboardProps>(function 
   { value, timeout = 2000, children, className, onClick, ...props },
   ref,
 ) {
+  const { play } = useSigilSound();
   const [copied, setCopied] = useState(false);
 
   const copy = useCallback(async () => {
     try {
       await navigator.clipboard.writeText(value);
+      play("success");
       setCopied(true);
       setTimeout(() => setCopied(false), timeout);
     } catch { /* noop */ }
-  }, [value, timeout]);
+  }, [value, timeout, play]);
 
   if (children) {
     return <>{children({ copied, copy })}</>;

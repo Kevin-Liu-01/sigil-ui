@@ -59,6 +59,13 @@
     "toggle",
     "toggle-group",
     "toolbar",
-    "tooltip"
+    "tooltip",
+    "panel",
+    "braille-spinner",
+    "accessible-icon",
+    "visually-hidden",
+    "segmented-control",
+    "circular-progress",
+    "password-input"
   ]
 }

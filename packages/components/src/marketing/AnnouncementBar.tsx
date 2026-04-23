@@ -46,9 +46,9 @@ export const AnnouncementBar = forwardRef<HTMLDivElement, AnnouncementBarProps>(
     return (
       <div
         ref={ref}
-        className={cn("relative flex items-center", className)}
+        className={cn("relative flex items-center", dismissible && "pr-10", className)}
         style={{
-          padding: "8px 16px",
+          padding: "var(--s-space-2, 8px) var(--s-space-4, 16px)",
           borderBottom: "1px solid var(--s-border-muted)",
           borderBottomStyle: "var(--s-border-style, solid)" as any,
           background: "var(--s-surface)",

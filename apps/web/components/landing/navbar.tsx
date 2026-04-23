@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
 import { NavbarLogo } from "@/components/landing/hero-logo-field";
 import { BookOpen, LayoutGrid, Palette, Flame, Play, Star, PanelsTopLeft } from "lucide-react";
 
@@ -8,7 +9,6 @@ const NAV_LINKS = [
   { label: "Components", href: "/components", icon: <LayoutGrid size={14} /> },
   { label: "Presets", href: "/presets", icon: <Palette size={14} /> },
   { label: "Demos", href: "/demos", icon: <Play size={14} /> },
-  { label: "Sandbox", href: "/sandbox", icon: <PanelsTopLeft size={14} /> },
   { label: "Docs", href: "/docs", icon: <BookOpen size={14} /> },
 ] as const;
 
@@ -76,14 +76,14 @@ function MoonIcon() {
 export { LandingNavbar as Navbar };
 
 export function LandingNavbar() {
-  const [isDark, setIsDark] = useState(true);
+  const { resolvedTheme, setTheme } = useTheme();
   const stars = useGitHubStars();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  const isDark = resolvedTheme === "dark";
 
   function toggleTheme() {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
+    setTheme(isDark ? "light" : "dark");
   }
 
   return (
@@ -107,6 +107,31 @@ export function LandingNavbar() {
             {link.label}
           </a>
         ))}
+
+        {/* Search docs button */}
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new Event("sigil:open-search"))}
+          className="hidden md:inline-flex items-center gap-2 h-7 px-2.5 border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-sm,4px)] bg-transparent text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
+        >
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" className="shrink-0" aria-hidden>
+            <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
+            <path d="M11 11l3 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+          <span className="font-[family-name:var(--s-font-mono)] text-[11px]">Search</span>
+          <kbd className="ml-0.5 font-[family-name:var(--s-font-mono)] text-[10px] leading-none px-1 py-0.5 rounded-[2px] border border-[var(--s-border)] bg-[var(--s-surface)] opacity-60">
+            {"\u2318K"}
+          </kbd>
+        </button>
+
+        {/* Sandbox button */}
+        <a
+          href="/sandbox"
+          className="hidden md:inline-flex items-center gap-1.5 h-7 px-3 rounded-[var(--s-radius-sm,4px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] no-underline font-[family-name:var(--s-font-mono)] text-[11px] font-semibold tracking-[0.04em] uppercase hover:opacity-90 transition-opacity duration-[var(--s-duration-fast,150ms)]"
+        >
+          <PanelsTopLeft size={13} />
+          Sandbox
+        </a>
 
         {/* GitHub star button */}
         <a
@@ -137,7 +162,7 @@ export function LandingNavbar() {
           aria-label="Toggle theme"
           className="flex items-center justify-center w-8 h-8 p-0 border-none bg-transparent text-[var(--s-text-muted)] hover:text-[var(--s-text)] cursor-pointer rounded-[var(--s-radius-sm,0px)] transition-colors duration-[var(--s-duration-fast,150ms)]"
         >
-          {isDark ? <SunIcon /> : <MoonIcon />}
+          {mounted ? (isDark ? <SunIcon /> : <MoonIcon />) : <span className="w-4 h-4" />}
         </button>
       </div>
     </nav>

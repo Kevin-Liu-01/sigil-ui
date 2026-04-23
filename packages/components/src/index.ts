@@ -34,6 +34,18 @@ export { HRule, type HRuleProps } from "./layout/HRule";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";
 export { LayoutControls, type LayoutControlsProps } from "./layout/LayoutControls";
 export { SectionDivider, type SectionDividerProps, type SectionDividerPattern } from "./layout/SectionDivider";
+export { Box, type BoxProps } from "./layout/Box";
+export { Container, type ContainerProps } from "./layout/Container";
+export { Flex, type FlexProps } from "./layout/Flex";
+export { SimpleGrid, type SimpleGridProps } from "./layout/SimpleGrid";
+export { Center, type CenterProps } from "./layout/Center";
+export { Spacer, type SpacerProps } from "./layout/Spacer";
+export { AppShell, type AppShellProps } from "./layout/AppShell";
+export { Main, type MainProps } from "./layout/Main";
+export { Aside, type AsideProps } from "./layout/Aside";
+export { Header, type HeaderProps } from "./layout/Header";
+export { Banner, type BannerProps, type BannerVariant } from "./layout/Banner";
+export { PageShell, type PageShellProps } from "./layout/PageShell";
 
 // ---------------------------------------------------------------------------
 // Core UI
@@ -82,7 +94,7 @@ export {
   type FormControlProps, type FormDescriptionProps, type FormMessageProps,
 } from "./ui/Form";
 export { Combobox, type ComboboxProps, type ComboboxOption } from "./ui/Combobox";
-export { Calendar, type CalendarProps } from "./ui/Calendar";
+export { Calendar, CalendarDayButton, type CalendarProps } from "./ui/Calendar";
 export {
   Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
   type CarouselProps, type CarouselContentProps, type CarouselItemProps, type CarouselButtonProps,
@@ -102,6 +114,10 @@ export { ChartContainer, ChartTooltip, ChartLegend } from "./ui/Chart";
 export { Field, Fieldset, FieldLabel, FieldDescription, FieldError } from "./ui/Field";
 export { CheckboxGroup, CheckboxGroupItem, type CheckboxGroupProps } from "./ui/CheckboxGroup";
 export { Stepper, type StepperProps, type StepperStepConfig } from "./ui/Stepper";
+export {
+  ResizablePanelGroup, ResizablePanel, ResizableHandle,
+  type ResizablePanelGroupProps, type ResizablePanelProps, type ResizableHandleProps,
+} from "./ui/ResizablePanel";
 export { SplitButton, type SplitButtonProps } from "./ui/SplitButton";
 export { Item, ItemGroup, type ItemProps, type ItemGroupProps } from "./ui/Item";
 export {
@@ -124,6 +140,13 @@ export { TreeView, type TreeViewProps, type TreeNode } from "./ui/TreeView";
 export { Editable, type EditableProps } from "./ui/Editable";
 export { RatingGroup, type RatingGroupProps } from "./ui/RatingGroup";
 export { SignaturePad, type SignaturePadProps } from "./ui/SignaturePad";
+export { Panel, PanelHead, type PanelProps, type PanelHeadProps } from "./ui/Panel";
+export { BrailleSpinner, type BrailleSpinnerProps, type BrailleSpinnerName } from "./ui/BrailleSpinner";
+export { AccessibleIcon, type AccessibleIconProps } from "./ui/AccessibleIcon";
+export { VisuallyHidden, type VisuallyHiddenProps } from "./ui/VisuallyHidden";
+export { SegmentedControl, SegmentedControlItem, type SegmentedControlProps, type SegmentedControlItemProps } from "./ui/SegmentedControl";
+export { CircularProgress, type CircularProgressProps } from "./ui/CircularProgress";
+export { PasswordInput, type PasswordInputProps } from "./ui/PasswordInput";
 
 // ---------------------------------------------------------------------------
 // Navigation
@@ -259,6 +282,7 @@ export { FeatureGrid, type FeatureGridProps, type FeatureRow } from "./marketing
 export { Pattern, type PatternProps, type PatternVariant } from "./patterns/Pattern";
 export { Cross, type CrossProps } from "./patterns/Cross";
 export { Tessellation, type TessellationProps, type TessellationVariant } from "./patterns/Tessellation";
+export { GrainGradient, type GrainGradientProps, type GrainTint, type GrainIntensity } from "./patterns/GrainGradient";
 
 // ---------------------------------------------------------------------------
 // Sections
@@ -266,13 +290,13 @@ export { Tessellation, type TessellationProps, type TessellationVariant } from "
 export { SectionHeading, type SectionHeadingProps } from "./sections/SectionHeading";
 export { HeroSection, type HeroSectionProps } from "./sections/HeroSection";
 export { FeatureSection, type FeatureSectionProps, type FeatureItem } from "./sections/FeatureSection";
-export { CTASection, type CTASectionProps, type CTAAction } from "./sections/CTASection";
+export { CTASection, type CTASectionProps, type CTAAction as CTASectionAction } from "./sections/CTASection";
 export { FAQSection, type FAQSectionProps, type FAQItem } from "./sections/FAQSection";
 export { StatsSection, type StatsSectionProps, type StatItem } from "./sections/StatsSection";
 export { BentoSection, type BentoSectionProps, type BentoCell } from "./sections/BentoSection";
 export { TestimonialsSection, type TestimonialsSectionProps, type TestimonialItem } from "./sections/TestimonialsSection";
 export { LogoCloudSection, type LogoCloudSectionProps, type LogoCloudItem } from "./sections/LogoCloudSection";
-export { ComparisonSection, type ComparisonSectionProps, type ComparisonFeature } from "./sections/ComparisonSection";
+export { ComparisonSection, type ComparisonSectionProps, type ComparisonFeature as ComparisonSectionFeature } from "./sections/ComparisonSection";
 export { CodeShowcaseSection, type CodeShowcaseSectionProps, type CodeTab } from "./sections/CodeShowcaseSection";
 export { TeamSection, type TeamSectionProps, type TeamMember } from "./sections/TeamSection";
 export { TimelineSection, type TimelineSectionProps, type TimelineEvent } from "./sections/TimelineSection";

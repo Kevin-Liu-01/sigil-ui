@@ -32,8 +32,8 @@ export const HubSpokeDiagram = forwardRef<HTMLDivElement, HubSpokeDiagramProps>(
               {spoke.icon}
               {spoke.label}
             </div>
-            <svg width="40" height="2" viewBox="0 0 40 2" className="shrink-0" aria-hidden>
-              <line x1="0" y1="1" x2="40" y2="1" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" {...dashProps} />
+            <svg width="40" height="4" viewBox="0 0 40 4" className="shrink-0" aria-hidden>
+              <line x1="0" y1="2" x2="40" y2="2" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" {...dashProps} />
             </svg>
           </div>
         ))}

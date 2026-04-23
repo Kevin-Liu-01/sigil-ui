@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../../../packages";
+@source "../../../../apps";
 
 :root,
 [data-theme="sigil"] {

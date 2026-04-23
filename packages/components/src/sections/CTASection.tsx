@@ -10,7 +10,7 @@ export interface CTAAction {
   variant?: "primary" | "secondary";
 }
 
-export interface CTASectionProps extends HTMLAttributes<HTMLElement> {
+export interface CTASectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   title: ReactNode;
   description?: ReactNode;
   actions?: CTAAction[];

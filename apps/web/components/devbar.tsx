@@ -58,7 +58,7 @@ const FONT_OPTIONS = [
 ];
 
 const GUTTER_PATTERNS: GutterPattern[] = [
-  "grid", "dots", "crosshatch", "diagonal", "diamond", "horizontal",
+  "grid", "dots", "crosshatch", "diagonal", "diamond", "horizontal", "horizontal-wide",
   "hexagon", "triangle", "zigzag", "checker", "plus", "brick", "wave", "none",
 ];
 

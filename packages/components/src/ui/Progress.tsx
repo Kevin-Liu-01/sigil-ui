@@ -44,7 +44,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           />
         </ProgressPrimitive.Root>
         {label && !indeterminate && (
-          <p className="text-right font-mono text-xs tabular-nums text-[var(--s-text-muted)]">
+          <p className="text-right font-[family-name:var(--s-font-mono)] text-xs tabular-nums text-[var(--s-text-muted)]">
             {Math.round(value ?? 0)}%
           </p>
         )}

@@ -1,0 +1,57 @@
+---
+title: Braille Spinner
+description: Unicode Braille-grid loading spinner with 6 animation variants.
+---
+
+# Braille Spinner
+
+> Distinctive Unicode Braille-grid loading animation — no SVG, no CSS keyframes, pure character animation.
+
+## Installation
+
+```bash
+npx sigil add braille-spinner
+```
+
+## Import
+
+```tsx
+import { BrailleSpinner } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<BrailleSpinner />
+```
+
+## Examples
+
+### With label
+
+```tsx
+<BrailleSpinner label="Loading..." />
+```
+
+### Variants
+
+```tsx
+<BrailleSpinner name="orbit" label="Orbit" />
+<BrailleSpinner name="scan" label="Scan" />
+<BrailleSpinner name="breathe" label="Breathe" />
+<BrailleSpinner name="cascade" label="Cascade" />
+<BrailleSpinner name="helix" label="Helix" />
+<BrailleSpinner name="sparkle" label="Sparkle" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `name` | `"orbit" \| "scan" \| "breathe" \| "cascade" \| "helix" \| "sparkle"` | `"orbit"` | Animation variant |
+| `label` | `string` | — | Text label shown next to the spinner |
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+This component uses `font-mono` for the monospaced Braille characters. No token variables are consumed directly — the spinner is character-based.

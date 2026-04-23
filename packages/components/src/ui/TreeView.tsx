@@ -10,7 +10,7 @@ export interface TreeNode {
   icon?: ReactNode;
 }
 
-export interface TreeViewProps extends HTMLAttributes<HTMLDivElement> {
+export interface TreeViewProps extends Omit<HTMLAttributes<HTMLDivElement>, "onSelect"> {
   data: TreeNode[];
   defaultExpanded?: string[];
   onSelect?: (id: string) => void;

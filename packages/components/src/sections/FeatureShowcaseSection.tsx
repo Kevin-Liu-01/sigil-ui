@@ -12,7 +12,7 @@ export interface FeatureShowcaseRow {
   actions?: { label: string; href?: string }[];
 }
 
-export interface FeatureShowcaseSectionProps extends HTMLAttributes<HTMLElement> {
+export interface FeatureShowcaseSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   label?: string;
   title?: ReactNode;
   description?: string;

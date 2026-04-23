@@ -24,17 +24,17 @@ export const LogoBar = forwardRef<HTMLDivElement, LogoBarProps>(function LogoBar
       data-slot="logo-bar"
       className={cn(
         "flex flex-wrap items-center justify-center gap-8 md:gap-12 py-8 px-6",
-        "opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300",
+        "opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-[var(--s-duration-normal,250ms)]",
         className,
       )}
       {...rest}
     >
       {logos.map((logo) => (
         <img
-          key={logo.alt}
+          key={logo.src}
           src={logo.src}
           alt={logo.alt}
-          className="h-8 md:h-10 w-auto object-contain"
+          className="h-10 md:h-12 w-auto object-contain"
           loading="lazy"
         />
       ))}

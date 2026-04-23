@@ -29,10 +29,10 @@ export const OrbitDiagram = forwardRef<HTMLDivElement, OrbitDiagramProps>(
         style={{ width: size, height: size }}
         {...props}
       >
-        <svg width={size} height={size} className="absolute inset-0" aria-hidden>
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="absolute inset-0" aria-hidden>
           <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--s-border-muted)" strokeWidth={1} strokeDasharray="4 3" />
           {nodes.map((_, i) => {
-            const angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
+            const angle = (i / (nodes.length || 1)) * Math.PI * 2 - Math.PI / 2;
             const nx = cx + r * Math.cos(angle);
             const ny = cy + r * Math.sin(angle);
             return <line key={i} x1={cx} y1={cy} x2={nx} y2={ny} stroke="var(--s-border-muted)" strokeWidth={1} strokeDasharray="3 3" />;
@@ -45,7 +45,7 @@ export const OrbitDiagram = forwardRef<HTMLDivElement, OrbitDiagramProps>(
         </div>
 
         {nodes.map((node, i) => {
-          const angle = (i / nodes.length) * Math.PI * 2 - Math.PI / 2;
+          const angle = (i / (nodes.length || 1)) * Math.PI * 2 - Math.PI / 2;
           const nx = cx + r * Math.cos(angle);
           const ny = cy + r * Math.sin(angle);
           return (

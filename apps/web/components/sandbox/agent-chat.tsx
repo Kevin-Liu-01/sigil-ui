@@ -36,9 +36,16 @@ type ParsedAction =
   | RemoveComponentAction
   | ClearCanvasAction;
 
+type TokenDiff = {
+  varName: string;
+  oldValue: string;
+  newValue: string;
+};
+
 type AppliedChange = {
   type: "patch" | "addComponent" | "setPreset" | "removeComponent" | "clearCanvas";
   summary: string;
+  diffs?: TokenDiff[];
 };
 
 type AgentChatProps = {
@@ -188,12 +195,23 @@ export function AgentChat({
 
         if ("patch" in action && action.patch) {
           const entries = flattenPatch(action.patch);
+          const diffs: TokenDiff[] = [];
           for (const { category, key, value } of entries) {
+            const catObj = tokens[category as keyof typeof tokens] as Record<string, unknown> | undefined;
+            const oldVal = catObj?.[key];
+            const oldStr = oldVal !== undefined ? String(oldVal) : "(unset)";
+            const newStr = String(value);
+            diffs.push({
+              varName: `--s-${category === "colors" || category === "typography" || category === "sigil" ? "" : category + "-"}${key}`,
+              oldValue: oldStr,
+              newValue: newStr,
+            });
             patchTokens(category as any, key, value);
           }
           changes.push({
             type: "patch",
             summary: `Applied ${entries.length} token change${entries.length !== 1 ? "s" : ""}`,
+            diffs,
           });
         }
 
@@ -427,8 +445,8 @@ export function AgentChat({
             }}
           >
             <span style={{ fontSize: "11px", lineHeight: "1.6" }}>
-              Ask the AI to modify tokens, switch presets, add or remove
-              components, and layout your page.
+              Describe your ideal design aesthetic. The agent will patch tokens
+              in real-time — try &ldquo;make it brutalist&rdquo; or &ldquo;warmer, rounder corners&rdquo;.
             </span>
           </div>
         )}
@@ -482,46 +500,83 @@ export function AgentChat({
                   <div
                     style={{
                       display: "flex",
-                      flexWrap: "wrap",
+                      flexDirection: "column",
                       gap: "4px",
                       marginTop: "6px",
                     }}
                   >
-                    {changes.map((c, i) => (
-                      <span
-                        key={i}
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "3px",
-                          padding: "2px 7px",
-                          borderRadius: "9999px",
-                          fontSize: "10px",
-                          fontWeight: 500,
-                          background:
-                            c.type === "patch"
-                              ? "var(--s-success-muted, oklch(0.65 0.17 160 / 0.15))"
-                              : c.type === "setPreset"
-                                ? "var(--s-info-muted, oklch(0.60 0.15 250 / 0.15))"
-                                : "var(--s-accent-muted, oklch(0.70 0.12 60 / 0.15))",
-                          color:
-                            c.type === "patch"
-                              ? "var(--s-success, oklch(0.65 0.17 160))"
-                              : c.type === "setPreset"
-                                ? "var(--s-info, oklch(0.60 0.15 250))"
-                                : "var(--s-accent, oklch(0.70 0.12 60))",
-                        }}
-                      >
-                        {c.type === "patch"
-                          ? "✓"
-                          : c.type === "setPreset"
-                            ? "◈"
-                            : c.type === "removeComponent" || c.type === "clearCanvas"
-                              ? "✕"
-                              : "+"}
-                        {c.summary}
-                      </span>
-                    ))}
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "4px" }}>
+                      {changes.map((c, i) => (
+                        <span
+                          key={i}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "3px",
+                            padding: "2px 7px",
+                            borderRadius: "9999px",
+                            fontSize: "10px",
+                            fontWeight: 500,
+                            background:
+                              c.type === "patch"
+                                ? "var(--s-success-muted, oklch(0.65 0.17 160 / 0.15))"
+                                : c.type === "setPreset"
+                                  ? "var(--s-info-muted, oklch(0.60 0.15 250 / 0.15))"
+                                  : "var(--s-accent-muted, oklch(0.70 0.12 60 / 0.15))",
+                            color:
+                              c.type === "patch"
+                                ? "var(--s-success, oklch(0.65 0.17 160))"
+                                : c.type === "setPreset"
+                                  ? "var(--s-info, oklch(0.60 0.15 250))"
+                                  : "var(--s-accent, oklch(0.70 0.12 60))",
+                          }}
+                        >
+                          {c.type === "patch"
+                            ? "✓"
+                            : c.type === "setPreset"
+                              ? "◈"
+                              : c.type === "removeComponent" || c.type === "clearCanvas"
+                                ? "✕"
+                                : "+"}
+                          {c.summary}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Token diff display */}
+                    {changes
+                      .filter((c) => c.diffs && c.diffs.length > 0)
+                      .map((c, ci) => (
+                        <div
+                          key={`diff-${ci}`}
+                          style={{
+                            padding: "6px 8px",
+                            borderRadius: "6px",
+                            border: "1px solid var(--s-border)",
+                            background: "var(--s-surface-sunken, var(--s-surface))",
+                            fontSize: "10px",
+                            fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
+                            lineHeight: "1.6",
+                            overflow: "auto",
+                            maxHeight: "120px",
+                          }}
+                        >
+                          {c.diffs!.map((d, di) => (
+                            <div key={di} style={{ display: "flex", gap: "6px", alignItems: "baseline" }}>
+                              <span style={{ color: "var(--s-text-muted)", minWidth: 0, flexShrink: 0 }}>
+                                {d.varName}
+                              </span>
+                              <span style={{ color: "var(--s-error, oklch(0.60 0.20 25))", textDecoration: "line-through", opacity: 0.7 }}>
+                                {d.oldValue}
+                              </span>
+                              <span style={{ color: "var(--s-text-muted)" }}>→</span>
+                              <span style={{ color: "var(--s-success, oklch(0.65 0.17 160))", fontWeight: 600 }}>
+                                {d.newValue}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      ))}
                   </div>
                 )}
               </div>

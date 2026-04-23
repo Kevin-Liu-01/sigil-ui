@@ -156,7 +156,7 @@ export const InlineCode = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
         data-slot="inline-code"
         className={cn(
           "relative rounded-[var(--s-radius-sm,3px)] bg-[var(--s-surface)] px-[0.3rem] py-[0.2rem]",
-          "font-mono text-sm font-semibold text-[var(--s-text)]",
+          "font-[family-name:var(--s-font-mono)] text-sm font-semibold text-[var(--s-text)]",
           className,
         )}
         {...props}

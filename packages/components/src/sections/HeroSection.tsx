@@ -10,7 +10,7 @@ export interface HeroAction {
   variant?: "primary" | "secondary";
 }
 
-export interface HeroSectionProps extends HTMLAttributes<HTMLElement> {
+export interface HeroSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   badge?: ReactNode;
   title: ReactNode;
   description?: ReactNode;

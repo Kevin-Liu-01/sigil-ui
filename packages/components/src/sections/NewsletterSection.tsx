@@ -3,7 +3,7 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../utils";
 
-export interface NewsletterSectionProps extends HTMLAttributes<HTMLElement> {
+export interface NewsletterSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title" | "onSubmit"> {
   title?: string;
   description?: string;
   placeholder?: string;

@@ -79,7 +79,7 @@ export const ArchitectureDiagram = forwardRef<HTMLDivElement, ArchitectureDiagra
                 />
               )}
               <div className="relative z-[1] flex items-center justify-between gap-4">
-                <span className="text-xs font-mono text-[var(--s-text-muted)] uppercase tracking-wider shrink-0">
+                <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] uppercase tracking-wider shrink-0">
                   {layer.label}
                 </span>
                 <div className="flex-1">{layer.children}</div>

@@ -23,9 +23,8 @@ export const UnitPricing = forwardRef<HTMLDivElement, UnitPricingProps>(
       <div ref={ref} className={cn("flex flex-col gap-4", className)} {...rest}>
         {toggle && <div className="flex justify-center">{toggle}</div>}
         <div
-          className="grid gap-0"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0"
           style={{
-            gridTemplateColumns: `repeat(${units.length}, 1fr)`,
             border: "1px solid var(--s-border)",
             borderStyle: "var(--s-border-style, solid)" as any,
             borderRadius: "var(--s-radius-md, 6px)",
@@ -43,7 +42,7 @@ export const UnitPricing = forwardRef<HTMLDivElement, UnitPricingProps>(
               }}
             >
               <div className="flex items-center gap-2 mb-3">
-                {u.icon && <span style={{ color: "var(--s-text-muted)", opacity: 0.6 }}>{u.icon}</span>}
+                {u.icon && <span style={{ color: "var(--s-text-muted)", opacity: 0.8 }}>{u.icon}</span>}
                 <span
                   className="text-[11px] font-semibold uppercase tracking-wider font-[family:var(--s-font-mono)]"
                   style={{ color: "var(--s-text-muted)" }}

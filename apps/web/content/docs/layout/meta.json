@@ -10,6 +10,7 @@
     "gutter",
     "divider",
     "h-rule",
-    "voronoi-bento"
+    "voronoi-bento",
+    "page-shell"
   ]
 }

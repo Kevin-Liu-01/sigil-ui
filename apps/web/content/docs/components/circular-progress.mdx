@@ -1,0 +1,70 @@
+---
+title: Circular Progress
+description: Circular progress indicator with determinate and indeterminate modes.
+---
+
+# Circular Progress
+
+> SVG-based circular progress ring — provide a value for determinate mode, or omit for an animated spinner.
+
+## Installation
+
+```bash
+npx sigil add circular-progress
+```
+
+## Import
+
+```tsx
+import { CircularProgress } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<CircularProgress value={65} />
+```
+
+## Examples
+
+### Determinate
+
+```tsx
+<CircularProgress value={25} />
+<CircularProgress value={50} />
+<CircularProgress value={75} />
+<CircularProgress value={100} />
+```
+
+### Indeterminate
+
+```tsx
+<CircularProgress />
+```
+
+### Custom size
+
+```tsx
+<CircularProgress value={60} size={64} strokeWidth={6} />
+```
+
+### Small
+
+```tsx
+<CircularProgress value={80} size={24} strokeWidth={3} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | — | Progress 0–100. Omit for indeterminate |
+| `size` | `number` | `40` | Diameter in pixels |
+| `strokeWidth` | `number` | `4` | Stroke width in pixels |
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+- `--s-primary` — progress arc color
+- `--s-border` — track color
+- `--s-duration-normal` — animation duration for value transitions

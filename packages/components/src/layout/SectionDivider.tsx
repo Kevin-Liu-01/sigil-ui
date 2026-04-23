@@ -193,7 +193,7 @@ export const SectionDivider = forwardRef<HTMLDivElement, SectionDividerProps>(
 
         {label && (
           <div className="absolute inset-0 flex items-center justify-center z-[2]">
-            <span className="px-3 py-0.5 text-xs font-mono text-[var(--s-text-muted)] bg-[var(--s-background,#fff)]">
+            <span className="px-3 py-0.5 text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] bg-[var(--s-background,#fff)]">
               {label}
             </span>
           </div>

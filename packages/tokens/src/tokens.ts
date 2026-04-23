@@ -70,9 +70,9 @@ export const defaultTokens: SigilTokens = {
   },
 
   typography: {
-    "font-display": '"Nacelle", system-ui, sans-serif',
-    "font-body": "system-ui, -apple-system, sans-serif",
-    "font-mono": '"Roboto Mono", ui-monospace, monospace',
+    "font-display": '"PP Mori", system-ui, sans-serif',
+    "font-body": '"PP Mori", system-ui, sans-serif',
+    "font-mono": '"PP Fraktion Mono", ui-monospace, monospace',
   },
 
   spacing: {

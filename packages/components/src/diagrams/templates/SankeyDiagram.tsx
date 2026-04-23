@@ -29,8 +29,8 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
     const pad = 40;
     const innerH = h - pad * 2;
 
-    const srcTotal = sources.reduce((s, n) => s + n.value, 0);
-    const tgtTotal = targets.reduce((s, n) => s + n.value, 0);
+    const srcTotal = sources.reduce((s, n) => s + n.value, 0) || 1;
+    const tgtTotal = targets.reduce((s, n) => s + n.value, 0) || 1;
 
     let srcY = pad;
     const srcPositions = sources.map(n => {
@@ -73,7 +73,7 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
               key={i}
               d={`M ${x1} ${y1 - bandH / 2} C ${mx} ${y1 - bandH / 2}, ${mx} ${y2 - bandH / 2}, ${x2} ${y2 - bandH / 2} L ${x2} ${y2 + bandH / 2} C ${mx} ${y2 + bandH / 2}, ${mx} ${y1 + bandH / 2}, ${x1} ${y1 + bandH / 2} Z`}
               fill={sources[link.source]?.color ?? "var(--s-primary)"}
-              opacity={0.2}
+              opacity={0.35}
             />
           );
         })}

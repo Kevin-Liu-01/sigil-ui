@@ -18,7 +18,7 @@ export interface FeatureGridProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const FeatureGrid = forwardRef<HTMLDivElement, FeatureGridProps>(
-  function FeatureGrid({ rows, gap = "0", rowMinHeight = 320, className, ...rest }, ref) {
+  function FeatureGrid({ rows, gap = "0", rowMinHeight = 240, className, ...rest }, ref) {
     return (
       <div ref={ref} className={cn("flex flex-col", className)} style={{ gap }} {...rest}>
         {rows.map((row, i) => {

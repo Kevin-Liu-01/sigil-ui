@@ -17,8 +17,6 @@ export interface VoronoiBentoProps {
   height?: number;
   className?: string;
   children?: ReactNode;
-  /** Reserved for future hover animation of seed points. */
-  animate?: boolean;
 }
 
 function seededRandom(seed: number) {
@@ -111,7 +109,6 @@ export function VoronoiBento({
   height = 500,
   className,
   children,
-  animate: _animate,
 }: VoronoiBentoProps) {
   const childArray = Children.toArray(children);
   const containerWidth = width ?? 0;

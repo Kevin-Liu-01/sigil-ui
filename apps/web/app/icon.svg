@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <style>
+    .q { fill: #000 }
+    @media (prefers-color-scheme: dark) { .q { fill: #fff } }
+  </style>
+  <polygon points="0,0 56,0 56,32 40,40 40,56 0,56" class="q"/>
+  <polygon points="120,0 120,56 88,56 80,40 64,40 64,0" class="q"/>
+  <polygon points="0,120 0,64 32,64 40,80 56,80 56,120" class="q"/>
+  <polygon points="120,120 64,120 64,88 80,80 80,64 120,64" fill="#6366f1"/>
+</svg>

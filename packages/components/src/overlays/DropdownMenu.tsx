@@ -3,8 +3,18 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
-export const DropdownMenu = DropdownMenuPrimitive.Root;
+export function DropdownMenu({ onOpenChange, ...props }: ComponentPropsWithoutRef<typeof DropdownMenuPrimitive.Root>) {
+  const { play } = useSigilSound();
+  return (
+    <DropdownMenuPrimitive.Root
+      onOpenChange={(open) => { if (open) play("open"); onOpenChange?.(open); }}
+      {...props}
+    />
+  );
+}
+
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger;
 export const DropdownMenuGroup = DropdownMenuPrimitive.Group;
 export const DropdownMenuSub = DropdownMenuPrimitive.Sub;

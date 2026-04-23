@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type SVGAttributes, type ReactNode } from "react";
+import { forwardRef, type SVGAttributes } from "react";
 import { cn } from "../../utils";
 
 export interface IsoStackLayer {
@@ -11,7 +11,6 @@ export interface IsoStackLayer {
 
 export interface IsometricStackDiagramProps extends Omit<SVGAttributes<SVGSVGElement>, "width" | "height"> {
   layers: IsoStackLayer[];
-  logo?: ReactNode;
   width?: number;
   layerHeight?: number;
   gap?: number;
@@ -22,9 +21,8 @@ function iso(x: number, y: number, z: number): [number, number] {
 }
 
 export const IsometricStackDiagram = forwardRef<SVGSVGElement, IsometricStackDiagramProps>(
-  function IsometricStackDiagram({ layers, logo, width: w = 120, layerHeight: lh = 20, gap = 4, className, ...props }, ref) {
+  function IsometricStackDiagram({ layers, width: w = 120, layerHeight: lh = 20, gap = 4, className, ...props }, ref) {
     const d = w;
-    const totalH = layers.length * (lh + gap);
     const margin = 40;
 
     const allPts: [number, number][] = [];
@@ -66,8 +64,8 @@ export const IsometricStackDiagram = forwardRef<SVGSVGElement, IsometricStackDia
 
           return (
             <g key={i}>
-              <polygon points={l.map(pt).join(" ")} fill={color} opacity={0.7} stroke="var(--s-border)" strokeWidth={0.5} />
-              <polygon points={r.map(pt).join(" ")} fill={color} opacity={0.5} stroke="var(--s-border)" strokeWidth={0.5} />
+              <polygon points={l.map(pt).join(" ")} fill={color} opacity={0.85} stroke="var(--s-border)" strokeWidth={0.5} />
+              <polygon points={r.map(pt).join(" ")} fill={color} opacity={0.7} stroke="var(--s-border)" strokeWidth={0.5} />
               <polygon points={t.map(pt).join(" ")} fill={color} stroke="var(--s-border)" strokeWidth={0.5} />
               {layer.hatched && (
                 <polygon points={t.map(pt).join(" ")} fill="url(#iso-hatch)" opacity={0.15} />
@@ -88,7 +86,7 @@ export const IsometricStackDiagram = forwardRef<SVGSVGElement, IsometricStackDia
         })}
         <defs>
           <pattern id="iso-hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="6" stroke="currentColor" strokeWidth="0.5" />
+            <line x1="0" y1="0" x2="0" y2="6" stroke="currentColor" strokeWidth="1" />
           </pattern>
         </defs>
       </svg>

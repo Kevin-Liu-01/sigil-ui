@@ -1,0 +1,52 @@
+---
+title: Visually Hidden
+description: Hides content visually while keeping it accessible to screen readers.
+---
+
+# Visually Hidden
+
+> Renders content that is invisible on screen but remains in the accessibility tree for screen readers.
+
+## Installation
+
+```bash
+npx sigil add visually-hidden
+```
+
+## Import
+
+```tsx
+import { VisuallyHidden } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<VisuallyHidden>This text is only for screen readers</VisuallyHidden>
+```
+
+## Examples
+
+### Form label
+
+```tsx
+<label>
+  <VisuallyHidden>Email address</VisuallyHidden>
+  <Input type="email" placeholder="email@example.com" />
+</label>
+```
+
+### Dialog title
+
+```tsx
+<DialogTitle>
+  <VisuallyHidden>Confirm deletion</VisuallyHidden>
+</DialogTitle>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content to hide visually |

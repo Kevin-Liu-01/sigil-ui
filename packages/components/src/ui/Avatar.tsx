@@ -39,14 +39,14 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       ref={ref}
       data-slot="avatar"
       className={cn(
-        "relative inline-flex shrink-0 items-center justify-center border",
+        "relative inline-flex shrink-0 items-center justify-center",
         sizeMap[size],
         className,
       )}
       style={{
         borderRadius: "9999px",
         overflow: "hidden",
-        borderColor: "var(--s-border-muted)",
+        aspectRatio: "1 / 1",
         ...style,
       }}
       {...props}
@@ -57,10 +57,11 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
           src={src}
           alt={resolvedAlt}
           style={{
+            position: "absolute",
+            inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            borderRadius: "9999px",
           }}
         />
       )}
@@ -96,17 +97,20 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
       <div
         ref={ref}
         data-slot="avatar-group"
-        className={cn("flex -space-x-3", className)}
+        className={cn("flex", className)}
+        style={{ gap: 0 }}
         {...rest}
       >
         {visible.map((child, i) => (
           <div
             key={i}
             style={{
+              display: "flex",
               position: "relative",
               borderRadius: "9999px",
-              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-surface))",
+              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-background))",
               zIndex: visible.length - i,
+              marginLeft: i === 0 ? 0 : "-0.5rem",
             }}
           >
             {child}
@@ -121,12 +125,12 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
             style={{
               borderRadius: "9999px",
               overflow: "hidden",
-              aspectRatio: "1 / 1",
               backgroundColor: "var(--s-surface-elevated, var(--s-surface))",
               color: "var(--s-text-muted)",
               fontWeight: 500,
-              border: "1px solid var(--s-border-muted)",
-              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-surface))",
+              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-background))",
+              marginLeft: "-0.5rem",
+              zIndex: 0,
             }}
           >
             +{overflow}

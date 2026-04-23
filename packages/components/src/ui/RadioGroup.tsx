@@ -3,18 +3,21 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface RadioGroupProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> {}
 export interface RadioGroupItemProps extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {}
 
 /** Vertical radio button group. */
 export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
-  function RadioGroup({ className, ...rest }, ref) {
+  function RadioGroup({ className, onValueChange, ...rest }, ref) {
+    const { play } = useSigilSound();
     return (
       <RadioGroupPrimitive.Root
         ref={ref}
         data-slot="radio-group"
         className={cn("flex flex-col gap-2", className)}
+        onValueChange={(value) => { play("tap"); onValueChange?.(value); }}
         {...rest}
       />
     );

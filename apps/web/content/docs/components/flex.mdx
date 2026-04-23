@@ -1,0 +1,51 @@
+---
+title: Flex
+description: Flexbox layout container with shorthand props for direction, alignment, gap, and wrapping.
+---
+
+## Import
+
+```tsx
+import { Flex } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Flex gap={8} align="center">
+  <span>A</span>
+  <span>B</span>
+  <span>C</span>
+</Flex>
+```
+
+## Column direction
+
+```tsx
+<Flex direction="column" gap={16}>
+  <div>First</div>
+  <div>Second</div>
+  <div>Third</div>
+</Flex>
+```
+
+## Justify and wrap
+
+```tsx
+<Flex justify="between" wrap gap={12}>
+  <div>Left</div>
+  <div>Right</div>
+</Flex>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `"row" \| "column" \| "row-reverse" \| "column-reverse"` | `"row"` | Flex direction |
+| `align` | `"start" \| "center" \| "end" \| "stretch" \| "baseline"` | — | Align items |
+| `justify` | `"start" \| "center" \| "end" \| "between" \| "around" \| "evenly"` | — | Justify content |
+| `wrap` | `boolean \| "wrap" \| "nowrap" \| "wrap-reverse"` | — | Flex wrap behavior |
+| `gap` | `number \| string` | — | Gap between items (number = px) |
+| `inline` | `boolean` | `false` | Use `inline-flex` instead of `flex` |
+| `className` | `string` | — | Additional CSS classes |

@@ -24,9 +24,8 @@ export const PricingTiers = forwardRef<HTMLDivElement, PricingTiersProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid gap-0", className)}
+        className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0", className)}
         style={{
-          gridTemplateColumns: `repeat(${tiers.length}, 1fr)`,
           border: "1px solid var(--s-border)",
           borderStyle: "var(--s-border-style, solid)" as any,
           borderRadius: "var(--s-radius-md, 6px)",

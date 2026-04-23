@@ -12,6 +12,7 @@ import {
 } from "react";
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 /* -------------------------------- Context -------------------------------- */
 
@@ -55,11 +56,12 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carou
     ...opts,
   });
 
+  const { play } = useSigilSound();
   const [canScrollPrev, setCanScrollPrev] = useState(false);
   const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const scrollPrev = useCallback(() => api?.scrollPrev(), [api]);
-  const scrollNext = useCallback(() => api?.scrollNext(), [api]);
+  const scrollPrev = useCallback(() => { play("nav"); api?.scrollPrev(); }, [api, play]);
+  const scrollNext = useCallback(() => { play("nav"); api?.scrollNext(); }, [api, play]);
 
   const onSelect = useCallback(() => {
     if (!api) return;

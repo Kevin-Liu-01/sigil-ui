@@ -2,6 +2,7 @@
 
 import { forwardRef, useCallback, type HTMLAttributes } from "react";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 export interface NumberFieldProps extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   value?: number;
@@ -16,13 +17,15 @@ export const NumberField = forwardRef<HTMLDivElement, NumberFieldProps>(function
   { value = 0, onValueChange, min = -Infinity, max = Infinity, step = 1, disabled, className, ...rest },
   ref,
 ) {
+  const { play } = useSigilSound();
+
   const clamp = useCallback(
     (v: number) => Math.min(max, Math.max(min, v)),
     [min, max],
   );
 
-  const decrement = () => onValueChange?.(clamp(value - step));
-  const increment = () => onValueChange?.(clamp(value + step));
+  const decrement = () => { play("tap"); onValueChange?.(clamp(value - step)); };
+  const increment = () => { play("tap"); onValueChange?.(clamp(value + step)); };
 
   const btnBase = cn(
     "inline-flex h-full w-10 cursor-pointer items-center justify-center shrink-0",

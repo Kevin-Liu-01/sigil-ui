@@ -17,13 +17,17 @@ export interface GlobeDiagramProps extends Omit<SVGAttributes<SVGSVGElement>, "w
   rotation?: number;
 }
 
+function round4(n: number): number {
+  return Math.round(n * 1e4) / 1e4;
+}
+
 function project(lat: number, lon: number, r: number, rot: number): [number, number, boolean] {
   const phi = (lat * Math.PI) / 180;
   const lambda = ((lon + rot) * Math.PI) / 180;
   const x = r * Math.cos(phi) * Math.sin(lambda);
   const y = -r * Math.sin(phi);
   const z = r * Math.cos(phi) * Math.cos(lambda);
-  return [x, y, z > 0];
+  return [round4(x), round4(y), z > 0];
 }
 
 export const GlobeDiagram = forwardRef<SVGSVGElement, GlobeDiagramProps>(
@@ -66,7 +70,7 @@ export const GlobeDiagram = forwardRef<SVGSVGElement, GlobeDiagramProps>(
         <circle cx={cx} cy={cy} r={r} fill="none" stroke="var(--s-border-muted)" strokeWidth={1} />
 
         {dots.map((d, i) => (
-          <circle key={i} cx={d.x} cy={d.y} r={0.8} fill={dc} opacity={0.4} />
+          <circle key={i} cx={d.x} cy={d.y} r={Math.max(1, size / 160)} fill={dc} opacity={0.4} />
         ))}
 
         {cityPts.length >= 2 && (

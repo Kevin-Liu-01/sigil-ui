@@ -16,6 +16,7 @@ export const FeatureMiniDiagram = forwardRef<SVGSVGElement, FeatureMiniDiagramPr
     const accent = accentColor ?? "var(--s-primary)";
     const muted = "var(--s-border)";
     const text = "var(--s-text-muted)";
+    const fs = Math.max(5, size * 0.06);
 
     return (
       <svg
@@ -29,48 +30,63 @@ export const FeatureMiniDiagram = forwardRef<SVGSVGElement, FeatureMiniDiagramPr
       >
         {variant === "timeline-bars" && (
           <>
-            {[0, 1, 2, 3].map(i => (
-              <g key={i}>
-                <rect x={10} y={15 + i * 25} width={size * 0.3 + i * 15} height={12} rx={2} fill={i === 0 ? accent : muted} opacity={i === 0 ? 0.8 : 0.3} />
-                <text x={6} y={24 + i * 25} fontSize={7} fill={text} textAnchor="end">{i * 50}ms</text>
-              </g>
-            ))}
-            <line x1={10} y1={10} x2={10} y2={size - 10} stroke={muted} strokeWidth={1} />
+            {[0, 1, 2, 3].map(i => {
+              const barY = size * 0.12 + i * size * 0.2;
+              const barW = size * 0.25 + i * size * 0.13;
+              const barH = size * 0.1;
+              return (
+                <g key={i}>
+                  <rect x={size * 0.15} y={barY} width={barW} height={barH} rx={2} fill={i === 0 ? accent : muted} opacity={i === 0 ? 0.8 : 0.3} />
+                  {size >= 80 && <text x={size * 0.12} y={barY + barH * 0.7} fontSize={fs} fill={text} textAnchor="end">{i * 50}ms</text>}
+                </g>
+              );
+            })}
+            <line x1={size * 0.15} y1={size * 0.08} x2={size * 0.15} y2={size * 0.92} stroke={muted} strokeWidth={1} />
           </>
         )}
 
-        {variant === "wave-state" && (
-          <>
-            <path d={`M 10 ${size / 2} Q 30 ${size / 2 - 20} 50 ${size / 2} Q 70 ${size / 2 + 20} 90 ${size / 2} Q 110 ${size / 2 - 15} ${size - 10} ${size / 2}`} fill="none" stroke={accent} strokeWidth={2} opacity={0.6} />
-            {[25, 60, 95].map((x, i) => (
-              <g key={i}>
-                <rect x={x - 12} y={size / 2 + 15} width={24} height={16} rx={3} fill={i === 1 ? accent : muted} opacity={i === 1 ? 0.7 : 0.2} />
-                <text x={x} y={size / 2 + 26} fontSize={7} fill="var(--s-text)" textAnchor="middle">{["Sleep", "Active", "Sleep"][i]}</text>
-              </g>
-            ))}
-          </>
-        )}
+        {variant === "wave-state" && (() => {
+          const m = size * 0.08;
+          const mid = size / 2;
+          const amp = size * 0.16;
+          const step = (size - m * 2) / 4;
+          const positions = [m + step * 0.5, m + step * 2, m + step * 3.5];
+          const boxW = size * 0.2;
+          const boxH = size * 0.13;
+          return (
+            <>
+              <path d={`M ${m} ${mid} Q ${m + step} ${mid - amp} ${m + step * 2} ${mid} Q ${m + step * 3} ${mid + amp} ${size - m} ${mid}`} fill="none" stroke={accent} strokeWidth={2} opacity={0.6} />
+              {positions.map((x, i) => (
+                <g key={i}>
+                  <rect x={x - boxW / 2} y={mid + size * 0.12} width={boxW} height={boxH} rx={3} fill={i === 1 ? accent : muted} opacity={i === 1 ? 0.7 : 0.2} />
+                  {size >= 80 && <text x={x} y={mid + size * 0.12 + boxH * 0.7} fontSize={fs} fill="var(--s-text)" textAnchor="middle">{["Sleep", "Active", "Sleep"][i]}</text>}
+                </g>
+              ))}
+            </>
+          );
+        })()}
 
         {variant === "layer-stack" && (
           <>
             {[0, 1, 2].map(i => {
-              const y = 20 + i * 30;
+              const y = size * 0.15 + i * size * 0.25;
+              const h = size * 0.18;
               return (
                 <g key={i}>
-                  <rect x={15} y={y} width={size - 30} height={22} rx={3} fill={i === 2 ? accent : "var(--s-surface)"} stroke={muted} strokeWidth={1} opacity={i === 2 ? 0.7 : 1} />
-                  <text x={size / 2} y={y + 14} fontSize={8} fill={i === 2 ? "var(--s-primary-contrast, #fff)" : text} textAnchor="middle">{["App", "Runtime", "Hardware"][i]}</text>
+                  <rect x={size * 0.12} y={y} width={size * 0.76} height={h} rx={3} fill={i === 2 ? accent : "var(--s-surface)"} stroke={muted} strokeWidth={1} opacity={i === 2 ? 0.7 : 1} />
+                  {size >= 60 && <text x={size / 2} y={y + h * 0.65} fontSize={fs} fill={i === 2 ? "var(--s-primary-contrast, #fff)" : text} textAnchor="middle">{["App", "Runtime", "HW"][i]}</text>}
                 </g>
               );
             })}
-            <line x1={size / 2} y1={42} x2={size / 2} y2={50} stroke={muted} strokeWidth={1} strokeDasharray="2 2" />
-            <line x1={size / 2} y1={72} x2={size / 2} y2={80} stroke={muted} strokeWidth={1} strokeDasharray="2 2" />
+            <line x1={size / 2} y1={size * 0.15 + size * 0.18} x2={size / 2} y2={size * 0.15 + size * 0.25} stroke={muted} strokeWidth={1} strokeDasharray="2 2" />
+            <line x1={size / 2} y1={size * 0.15 + size * 0.43} x2={size / 2} y2={size * 0.15 + size * 0.5} stroke={muted} strokeWidth={1} strokeDasharray="2 2" />
           </>
         )}
 
         {variant === "hub-spoke" && (
           <>
             <circle cx={size / 2} cy={size / 2} r={size * 0.3} fill="none" stroke={muted} strokeWidth={1} strokeDasharray="3 3" />
-            <circle cx={size / 2} cy={size / 2} r={14} fill={accent} opacity={0.8} />
+            <circle cx={size / 2} cy={size / 2} r={size * 0.11} fill={accent} opacity={0.8} />
             {[0, 1, 2, 3, 4].map(i => {
               const angle = (i / 5) * Math.PI * 2 - Math.PI / 2;
               const r2 = size * 0.3;
@@ -79,7 +95,7 @@ export const FeatureMiniDiagram = forwardRef<SVGSVGElement, FeatureMiniDiagramPr
               return (
                 <g key={i}>
                   <line x1={size / 2} y1={size / 2} x2={x} y2={y} stroke={muted} strokeWidth={1} strokeDasharray="2 2" />
-                  <circle cx={x} cy={y} r={6} fill="var(--s-surface)" stroke={muted} strokeWidth={1} />
+                  <circle cx={x} cy={y} r={size * 0.05} fill="var(--s-surface)" stroke={muted} strokeWidth={1} />
                 </g>
               );
             })}

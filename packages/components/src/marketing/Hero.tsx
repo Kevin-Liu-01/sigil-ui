@@ -21,7 +21,7 @@ export type HeroProps = Omit<HTMLAttributes<HTMLElement>, "title"> & {
 
 const actionVariantStyles: Record<string, string> = {
   primary:
-    "bg-[var(--s-primary)] text-white hover:bg-[var(--s-primary-hover)] shadow-[var(--s-shadow-sm)]",
+    "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:bg-[var(--s-primary-hover)] shadow-[var(--s-shadow-sm)]",
   secondary:
     "bg-[var(--s-surface)] text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)]",
   ghost: "bg-transparent text-[var(--s-text)] hover:bg-[var(--s-surface)]",

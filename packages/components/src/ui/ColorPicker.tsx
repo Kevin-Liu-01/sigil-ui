@@ -66,7 +66,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
           disabled={disabled}
           data-slot="color-picker-input"
           className={cn(
-            "h-[var(--s-input-height,36px)] w-28 px-3 text-sm font-mono",
+            "h-[var(--s-input-height,36px)] w-28 px-3 text-sm font-[family-name:var(--s-font-mono)]",
             "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
             "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "bg-[var(--s-background)] text-[var(--s-text)]",

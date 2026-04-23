@@ -1,0 +1,76 @@
+---
+title: Grain Gradient
+description: CSS noise overlay with tint presets and intensity levels.
+---
+
+# Grain Gradient
+
+> Absolutely-positioned grain noise + tinted gradient overlay. Drop inside any `relative overflow-hidden` container for a textured surface effect.
+
+## Installation
+
+```bash
+npx sigil add grain-gradient
+```
+
+## Import
+
+```tsx
+import { GrainGradient } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<div className="relative overflow-hidden h-64 rounded-lg">
+  <GrainGradient tint="accent" intensity="medium" />
+  <div className="relative z-10 p-6">Content on top</div>
+</div>
+```
+
+## Examples
+
+### Accent tint
+
+```tsx
+<div className="relative overflow-hidden h-40">
+  <GrainGradient tint="accent" intensity="medium" />
+</div>
+```
+
+### Warm tint
+
+```tsx
+<div className="relative overflow-hidden h-40">
+  <GrainGradient tint="warm" intensity="subtle" />
+</div>
+```
+
+### Strong noise
+
+```tsx
+<div className="relative overflow-hidden h-40">
+  <GrainGradient tint="neutral" intensity="strong" />
+</div>
+```
+
+### No tint (noise only)
+
+```tsx
+<div className="relative overflow-hidden h-40">
+  <GrainGradient tint="none" intensity="medium" />
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `tint` | `"accent" \| "warm" \| "neutral" \| "none"` | `"accent"` | Gradient tint color |
+| `intensity` | `"subtle" \| "medium" \| "strong"` | `"medium"` | Noise intensity |
+| `className` | `string` | — | Additional CSS classes |
+
+## Tokens
+
+- `--s-primary` — accent tint derives its gradient from the primary color
+- `--s-text` — neutral tint uses text color at low opacity

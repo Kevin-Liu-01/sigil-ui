@@ -10,7 +10,7 @@ export interface FeatureItem {
   description: string;
 }
 
-export interface FeatureSectionProps extends HTMLAttributes<HTMLElement> {
+export interface FeatureSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   label?: string;
   title: ReactNode;
   description?: ReactNode;

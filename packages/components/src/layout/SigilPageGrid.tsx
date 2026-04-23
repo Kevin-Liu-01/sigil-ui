@@ -88,14 +88,16 @@ function patternStyles(
 ): { backgroundImage: string; backgroundSize: string; backgroundPosition?: string } | null {
   const C = COLOR;
   switch (pattern) {
-    case "grid":
+    case "grid": {
+      const mid = Math.floor(cell / 2);
       return {
         backgroundImage: [
-          `linear-gradient(to right, ${C} 1px, transparent 1px)`,
-          `linear-gradient(to bottom, transparent ${cell - 1}px, ${C} ${cell - 1}px)`,
+          `linear-gradient(to right, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         ].join(", "),
         backgroundSize: `${cell}px ${cell}px`,
       };
+    }
     case "dots":
       return {
         backgroundImage: `radial-gradient(circle, ${C} 1.2px, transparent 1.2px)`,
@@ -127,9 +129,16 @@ function patternStyles(
     }
     case "horizontal":
       return {
-        backgroundImage: `linear-gradient(to bottom, transparent ${cell - 1}px, ${C} ${cell - 1}px)`,
+        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${cell}px`,
       };
+    case "horizontal-wide": {
+      const wide = cell * 3;
+      return {
+        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+        backgroundSize: `100% ${wide}px`,
+      };
+    }
     case "hexagon": {
       const s = Math.round(cell * 0.5);
       const w = Math.round(s * 1.732);
@@ -401,8 +410,9 @@ export interface SigilFrameProps extends SigilPageGridProps {
  * ```
  */
 export function SigilFrame({
-  as: _as,
+  as: Tag = "div",
+  children,
   ...props
 }: SigilFrameProps) {
-  return <SigilPageGrid {...props} />;
+  return <SigilPageGrid {...props}>{children}</SigilPageGrid>;
 }

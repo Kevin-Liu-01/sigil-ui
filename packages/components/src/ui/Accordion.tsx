@@ -3,10 +3,19 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cn } from "../utils";
-
-export const Accordion = AccordionPrimitive.Root;
+import { useSigilSound } from "../sound-context";
 
 export type AccordionProps = ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>;
+
+export function Accordion({ onValueChange, ...props }: AccordionProps) {
+  const { play } = useSigilSound();
+  return (
+    <AccordionPrimitive.Root
+      onValueChange={(value: string | string[]) => { play("expand"); onValueChange?.(value as any); }}
+      {...props}
+    />
+  );
+}
 
 export const AccordionItem = forwardRef<
   HTMLDivElement,

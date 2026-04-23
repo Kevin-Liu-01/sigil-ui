@@ -11,7 +11,7 @@ export interface StatItem {
   trend?: ReactNode;
 }
 
-export interface StatsSectionProps extends HTMLAttributes<HTMLElement> {
+export interface StatsSectionProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   label?: string;
   title?: ReactNode;
   description?: string;

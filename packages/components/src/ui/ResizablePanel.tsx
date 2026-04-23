@@ -3,19 +3,18 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import {
   Panel,
-  PanelGroup,
-  PanelResizeHandle,
-  type ImperativePanelHandle,
+  Group as PanelGroup,
+  Separator as PanelResizeHandle,
+  type PanelImperativeHandle,
 } from "react-resizable-panels";
 import { cn } from "../utils";
 
 export interface ResizablePanelGroupProps extends ComponentPropsWithoutRef<typeof PanelGroup> {}
 
 export const ResizablePanelGroup = forwardRef<HTMLDivElement, ResizablePanelGroupProps>(
-  function ResizablePanelGroup({ className, ...rest }, ref) {
+  function ResizablePanelGroup({ className, ...rest }, _ref) {
     return (
       <PanelGroup
-        ref={ref as React.Ref<HTMLDivElement>}
         data-slot="resizable-panel-group"
         className={cn(
           "flex h-full w-full data-[panel-group-direction=vertical]:flex-col",
@@ -29,9 +28,9 @@ export const ResizablePanelGroup = forwardRef<HTMLDivElement, ResizablePanelGrou
 
 export interface ResizablePanelProps extends ComponentPropsWithoutRef<typeof Panel> {}
 
-export const ResizablePanel = forwardRef<ImperativePanelHandle, ResizablePanelProps>(
-  function ResizablePanel(props, ref) {
-    return <Panel ref={ref} data-slot="resizable-panel" {...props} />;
+export const ResizablePanel = forwardRef<PanelImperativeHandle, ResizablePanelProps>(
+  function ResizablePanel(props, _ref) {
+    return <Panel data-slot="resizable-panel" {...props} />;
   },
 );
 
@@ -40,10 +39,9 @@ export interface ResizableHandleProps extends ComponentPropsWithoutRef<typeof Pa
 }
 
 export const ResizableHandle = forwardRef<HTMLDivElement, ResizableHandleProps>(
-  function ResizableHandle({ withHandle, className, ...rest }, ref) {
+  function ResizableHandle({ withHandle, className, ...rest }, _ref) {
     return (
       <PanelResizeHandle
-        ref={ref as React.Ref<HTMLDivElement>}
         data-slot="resizable-handle"
         className={cn(
           "relative flex w-px items-center justify-center",

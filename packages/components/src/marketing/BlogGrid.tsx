@@ -88,9 +88,9 @@ function BlogCard({ post, large = false }: { post: BlogPost; large?: boolean }) 
           </p>
         )}
         {(post.author || post.date) && (
-          <div className="flex items-center justify-between text-[11px] font-[family:var(--s-font-mono)]" style={{ color: "var(--s-text-subtle)" }}>
-            {post.author && <span>{post.author}</span>}
-            {post.date && <span className="tabular-nums">{post.date}</span>}
+          <div className="flex items-center justify-between gap-2 text-[11px] font-[family:var(--s-font-mono)]" style={{ color: "var(--s-text-subtle)" }}>
+            {post.author && <span className="truncate min-w-0">{post.author}</span>}
+            {post.date && <span className="tabular-nums shrink-0">{post.date}</span>}
           </div>
         )}
       </div>
@@ -104,11 +104,11 @@ export const BlogGrid = forwardRef<HTMLDivElement, BlogGridProps>(
       return (
         <div
           ref={ref}
-          className={cn("grid gap-4", className)}
-          style={{ gridTemplateColumns: "1fr 1fr", gridTemplateRows: "1fr 1fr" }}
+          className={cn("grid grid-cols-1 md:grid-cols-2 gap-4", className)}
+          style={{ gridTemplateRows: undefined }}
           {...rest}
         >
-          <div style={{ gridRow: "1 / 3" }}>
+          <div className="md:row-span-2">
             <BlogCard post={posts[0]!} large />
           </div>
           <BlogCard post={posts[1]!} />
@@ -120,8 +120,7 @@ export const BlogGrid = forwardRef<HTMLDivElement, BlogGridProps>(
     return (
       <div
         ref={ref}
-        className={cn("grid gap-4", className)}
-        style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}
+        className={cn("grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4", className)}
         {...rest}
       >
         {posts.map((post, i) => (

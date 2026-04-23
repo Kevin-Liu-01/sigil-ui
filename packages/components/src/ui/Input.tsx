@@ -21,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className="relative w-full">
       {iconLeft && (
-        <span className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-9 text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
+        <span className="absolute left-2.5 top-0 bottom-0 flex items-center text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconLeft}
         </span>
       )}
@@ -48,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {...rest}
       />
       {iconRight && (
-        <span className="absolute right-0 top-0 bottom-0 flex items-center justify-center w-9 text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
+        <span className="absolute right-2.5 top-0 bottom-0 flex items-center text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconRight}
         </span>
       )}

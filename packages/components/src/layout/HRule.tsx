@@ -56,7 +56,7 @@ export const HRule = forwardRef<HTMLDivElement, HRuleProps>(function HRule(
       {showCross && <CrossMark />}
       <div className="flex-1 h-px bg-[var(--s-border)]" />
       {label && (
-        <span className="text-xs font-mono text-[var(--s-text-muted)] px-2 shrink-0">
+        <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] px-2 shrink-0">
           {label}
         </span>
       )}

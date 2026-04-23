@@ -3,7 +3,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils";
 
-export interface ItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface ItemProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   media?: ReactNode;
   title?: ReactNode;
   description?: ReactNode;

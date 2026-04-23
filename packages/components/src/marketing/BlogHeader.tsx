@@ -36,9 +36,9 @@ export const BlogHeader = forwardRef<HTMLDivElement, BlogHeaderProps>(
               <span style={{ color: "var(--s-primary)", fontStyle: "italic" }}>
                 {accent}
               </span>
-              {icon && <span className="inline-block ml-2 align-middle">{icon}</span>}
             </>
           )}
+          {icon && <span className="inline-block ml-2 align-middle">{icon}</span>}
         </h2>
 
         {subtitle && (
@@ -49,7 +49,7 @@ export const BlogHeader = forwardRef<HTMLDivElement, BlogHeaderProps>(
 
         {categories && categories.length > 0 && (
           <div className="flex flex-wrap gap-0 mt-4" style={{ border: "1px solid var(--s-border)", borderStyle: "var(--s-border-style, solid)" as any }}>
-            {categories.map((cat) => (
+            {categories.map((cat, catIdx) => (
               <button
                 key={cat}
                 type="button"
@@ -59,7 +59,7 @@ export const BlogHeader = forwardRef<HTMLDivElement, BlogHeaderProps>(
                   color: activeCategory === cat ? "var(--s-text)" : "var(--s-text-muted)",
                   background: activeCategory === cat ? "var(--s-surface-elevated)" : "transparent",
                   border: "none",
-                  borderRight: "1px solid var(--s-border)",
+                  borderRight: catIdx < categories!.length - 1 ? "1px solid var(--s-border)" : "none",
                   transition: `all var(--s-duration-fast, 150ms)`,
                 }}
               >

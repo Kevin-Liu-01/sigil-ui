@@ -163,9 +163,7 @@ export function SigilShell({ children }: { children: ReactNode }) {
     <SigilTokensProvider>
       <SigilSoundProvider>
         <TokenStyleInjector />
-        <div className="s-transition-all">
-          {children}
-        </div>
+        {children}
         <SigilDevBar />
       </SigilSoundProvider>
     </SigilTokensProvider>

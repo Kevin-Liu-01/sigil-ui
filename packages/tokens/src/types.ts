@@ -207,6 +207,7 @@ export type GutterPattern =
   | "diagonal"
   | "diamond"
   | "horizontal"
+  | "horizontal-wide"
   | "hexagon"
   | "triangle"
   | "zigzag"

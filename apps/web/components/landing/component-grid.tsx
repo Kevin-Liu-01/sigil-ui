@@ -150,7 +150,7 @@ const CELLS: CellDef[] = [
     importCode: 'import { Accordion } from "@sigil-ui/components"',
     tokens: "--s-border, --s-text, --s-text-secondary",
     render: () => (
-      <Accordion defaultValue="first" className="w-full">
+      <Accordion type="single" defaultValue="first" className="w-full">
         <AccordionItem value="first">
           <AccordionTrigger className="text-xs py-2">What is Sigil?</AccordionTrigger>
           <AccordionContent className="text-xs">A token-driven design system.</AccordionContent>

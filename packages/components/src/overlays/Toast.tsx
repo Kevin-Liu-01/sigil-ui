@@ -10,6 +10,7 @@ import {
 } from "react";
 import * as ToastPrimitive from "@radix-ui/react-toast";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 type ToastVariant = "default" | "success" | "error" | "warning" | "info";
 type ToastFill = "outline" | "filled" | "soft";
@@ -82,15 +83,19 @@ export const Toaster = forwardRef<HTMLOListElement, ToasterProps>(function Toast
   { position = "bottom-right", className, ...props },
   ref,
 ) {
+  const { play } = useSigilSound();
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   useEffect(() => {
-    const handler = (t: ToastItem) => setToasts((prev) => [...prev, t]);
+    const handler = (t: ToastItem) => {
+      play("notify");
+      setToasts((prev) => [...prev, t]);
+    };
     listeners.push(handler);
     return () => {
       listeners = listeners.filter((fn) => fn !== handler);
     };
-  }, []);
+  }, [play]);
 
   const remove = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));

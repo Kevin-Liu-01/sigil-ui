@@ -3,12 +3,20 @@
 import { forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 import { cn } from "../utils";
+import { useSigilSound } from "../sound-context";
 
 /** Expandable/collapsible container — controls open state. */
 export const Collapsible = Object.assign(
-  (props: ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>) => (
-    <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />
-  ),
+  ({ onOpenChange, ...props }: ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>) => {
+    const { play } = useSigilSound();
+    return (
+      <CollapsiblePrimitive.Root
+        data-slot="collapsible"
+        onOpenChange={(open) => { play("expand"); onOpenChange?.(open); }}
+        {...props}
+      />
+    );
+  },
   { displayName: "Collapsible" },
 );
 

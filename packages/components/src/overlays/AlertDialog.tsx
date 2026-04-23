@@ -19,7 +19,8 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
       <AlertDialogPrimitive.Portal>
         <AlertDialogPrimitive.Overlay
           className={cn(
-            "fixed inset-0 z-50 bg-[var(--s-overlay,rgba(0,0,0,0.5))] backdrop-blur-sm",
+            "fixed inset-0 z-50",
+            "bg-[var(--s-overlay-bg,rgba(0,0,0,0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
             "data-[state=open]:animate-[fadeIn_150ms_ease-out] data-[state=closed]:animate-[fadeIn_150ms_ease-out_reverse]",
           )}
         />
@@ -29,7 +30,9 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
             "w-full max-w-[500px] mx-4 p-6 rounded-[var(--s-card-radius,8px)]",
-            "bg-[var(--s-background)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] shadow-[var(--s-shadow-lg)]",
+            "bg-[var(--s-background)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+            "shadow-[var(--s-dialog-shadow,0_16px_48px_-8px_rgba(0,0,0,0.35),0_4px_16px_-4px_rgba(0,0,0,0.2))]",
+            "ring-1 ring-[var(--s-text)]/[0.04]",
             "data-[state=open]:animate-[dialogIn_200ms_ease-out]",
             className,
           )}

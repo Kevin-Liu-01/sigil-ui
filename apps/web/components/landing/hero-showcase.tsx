@@ -318,8 +318,8 @@ function ActivityFeed() {
     <Card className="w-full">
       <CardContent className="p-4 flex flex-col gap-3">
         {[
-          { src: "https://i.pravatar.cc/64?u=kevpush", name: "Kevin", text: "Kevin pushed 3 commits to main", time: "2m ago" },
-          { src: "https://i.pravatar.cc/64?u=cibuild", name: "CI", text: "Build #847 deployed to production", time: "5m ago" },
+          { src: "/avatars/kevin.png", name: "Kevin", text: "Kevin pushed 3 commits to main", time: "2m ago" },
+          { src: "/avatars/ci.png", name: "CI", text: "Build #847 deployed to production", time: "5m ago" },
         ].map((item) => (
           <div key={item.text} className="flex items-start gap-2">
             <Avatar src={item.src} name={item.name} size="sm" />
@@ -405,9 +405,9 @@ function InviteCard() {
         </div>
         <div className="flex items-center gap-2">
           <AvatarGroup>
-            <Avatar src="https://i.pravatar.cc/64?u=kl2" name="Kevin" size="sm" />
-            <Avatar src="https://i.pravatar.cc/64?u=jd2" name="Jane" size="sm" />
-            <Avatar src="https://i.pravatar.cc/64?u=ar2" name="Alex" size="sm" />
+            <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" />
+            <Avatar src="https://github.com/leerob.png" name="Lee Robinson" size="sm" />
+            <Avatar src="https://github.com/rauchg.png" name="Guillermo Rauch" size="sm" />
           </AvatarGroup>
           <span className="text-[9px] text-[var(--s-text-muted)]">+2 more invited</span>
         </div>
@@ -558,12 +558,12 @@ function AvatarStackRow() {
   return (
     <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <AvatarGroup max={4}>
-        <Avatar src="https://i.pravatar.cc/64?u=kl" name="Kevin L" size="sm" />
-        <Avatar src="https://i.pravatar.cc/64?u=jd" name="Jane D" size="sm" />
-        <Avatar src="https://i.pravatar.cc/64?u=ar" name="Alex R" size="sm" />
-        <Avatar src="https://i.pravatar.cc/64?u=ms" name="Maya S" size="sm" />
-        <Avatar src="https://i.pravatar.cc/64?u=tw" name="Tom W" size="sm" />
-        <Avatar src="https://i.pravatar.cc/64?u=rk" name="Raj K" size="sm" />
+        <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" />
+        <Avatar src="https://github.com/rauchg.png" name="Guillermo Rauch" size="sm" />
+        <Avatar src="https://github.com/leerob.png" name="Lee Robinson" size="sm" />
+        <Avatar src="https://github.com/t3dotgg.png" name="Theo" size="sm" />
+        <Avatar src="https://github.com/kentcdodds.png" name="Kent C. Dodds" size="sm" />
+        <Avatar src="https://github.com/gaearon.png" name="Dan Abramov" size="sm" />
       </AvatarGroup>
       <span className="text-[9px] text-[var(--s-text-muted)]">6 online</span>
     </div>
@@ -836,7 +836,7 @@ function AiChatRow() {
 function MentionRow() {
   return (
     <div className="flex items-center gap-2 h-9 px-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <span className="flex-1 text-[11px] text-[var(--s-text)]">@shadcn</span>
+      <a href="https://x.com/kevskgs" className="flex-1 text-[11px] text-[var(--s-text)]">@kevskgs</a>
       <CircleCheckBig size={14} className="text-[var(--s-text)] shrink-0" />
     </div>
   );

@@ -1,6 +1,8 @@
 # Sigil Design System — Enforced Rules
 
-> Imported from Kevin's wiki: design-system, design-tokens, aesthetic-systems, design-and-animation, frontier-stack-2026, react, typescript. These rules are non-negotiable when writing or reviewing Sigil code.
+> Imported from Kevin's wiki and the Dedalus design language. These rules are non-negotiable when writing or reviewing Sigil code.
+>
+> **Full references:** [style/design.md](../../style/design.md) (motion guide) | [style/ux-principles.md](../../style/ux-principles.md) (product UX) | [style/style.md](../../style/style.md) (engineering philosophy) | [skills/sigil-polish/](../../skills/sigil-polish/SKILL.md) (interface polish skill with typography, surfaces, animations, performance deep-dives)
 
 ## Color Rules
 

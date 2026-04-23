@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@source "../../../packages";
+@source "../../../apps";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
