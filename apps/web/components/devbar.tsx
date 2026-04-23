@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef, type ReactNode } from "react";
-import { Stack, Divider, Badge, Button, Frame } from "@sigil-ui/components";
+import { Stack, Divider, Badge, Button, Frame, SigilGutter } from "@sigil-ui/components";
 import { Palette, Paintbrush, Type, LayoutGrid, Blocks, Volume2, VolumeX, Settings, Shuffle } from "lucide-react";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
 import { ControlPanel } from "./control-panel";
-import type { SigilTokens } from "@sigil-ui/tokens";
+import type { SigilTokens, GutterPattern } from "@sigil-ui/tokens";
 
 const PRESET_DATA = [
   { name: "sigil", mood: "structural", colors: ["#9b99e8", "#0a0a0f", "#fafafa", "#141419"] },
@@ -181,6 +181,16 @@ export function SigilDevBar() {
     { id: "components", label: "Components", icon: <Blocks size={12} /> },
   ];
 
+  let gutterPattern: GutterPattern = "grid";
+  try {
+    const sigil = tokens.sigil as Record<string, unknown>;
+    if (sigil?.["gutter-pattern"]) gutterPattern = sigil["gutter-pattern"] as GutterPattern;
+  } catch { /* */ }
+
+  const railGap = 24;
+  const contentMax = 1200;
+  const gridCols = `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`;
+
   return (
     <>
     <div
@@ -194,20 +204,28 @@ export function SigilDevBar() {
         transform: open ? "translateY(0)" : "translateY(calc(100% - 40px))",
       }}
     >
-      {/* Toggle bar */}
+      {/* Toggle bar — 5-column grid */}
       <div
         style={{
-          height: 40,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 16px",
-          background: "var(--s-surface)",
+          display: "grid",
+          gridTemplateColumns: gridCols,
           borderTop: "1px solid var(--s-border)",
-          cursor: "pointer",
         }}
-        onClick={() => setOpen((v) => !v)}
       >
+        <div aria-hidden="true" />
+        <SigilGutter showGrid pattern={gutterPattern} side="left" />
+        <div
+          style={{
+            height: 40,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0 20px",
+            background: "var(--s-surface)",
+            cursor: "pointer",
+          }}
+          onClick={() => setOpen((v) => !v)}
+        >
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" style={{ opacity: 0.5 }}>
             <line x1="6" y1="1" x2="6" y2="11" stroke="currentColor" strokeWidth="1.5" />
@@ -267,18 +285,29 @@ export function SigilDevBar() {
             {open ? "▼" : "▲"}
           </span>
         </div>
+        </div>
+        <SigilGutter showGrid pattern={gutterPattern} side="right" />
+        <div aria-hidden="true" />
       </div>
 
-      {/* Panel */}
+      {/* Panel — 5-column grid */}
       <div
         style={{
-          height: 240,
-          background: "var(--s-surface)",
+          display: "grid",
+          gridTemplateColumns: gridCols,
           borderTop: "1px solid var(--s-border)",
-          display: "flex",
-          flexDirection: "column",
         }}
       >
+        <div aria-hidden="true" style={{ background: "var(--s-surface)" }} />
+        <SigilGutter showGrid pattern={gutterPattern} side="left" />
+        <div
+          style={{
+            height: 240,
+            background: "var(--s-surface)",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
         {/* Tab bar */}
         <div
           style={{
@@ -493,6 +522,9 @@ export function SigilDevBar() {
             </div>
           )}
         </div>
+        </div>
+        <SigilGutter showGrid pattern={gutterPattern} side="right" />
+        <div aria-hidden="true" style={{ background: "var(--s-surface)" }} />
       </div>
     </div>
     <ControlPanel open={panelOpen} onClose={() => setPanelOpen(false)} />

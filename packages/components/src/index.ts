@@ -24,8 +24,8 @@ export { PageGrid, type PageGridProps } from "./layout/PageGrid";
 export { Margin, type MarginProps } from "./layout/Margin";
 export { Gutter, type GutterProps } from "./layout/Gutter";
 export {
-  SigilPageGrid, SigilGutter, useIsInsidePageGrid, usePageGridConfig,
-  type SigilPageGridProps, type PageGridConfig, type SigilGutterProps,
+  SigilPageGrid, SigilFrame, SigilGutter, useIsInsidePageGrid, usePageGridConfig,
+  type SigilPageGridProps, type SigilFrameProps, type PageGridConfig, type SigilGutterProps,
 } from "./layout/SigilPageGrid";
 export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
 export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
@@ -52,7 +52,7 @@ export { Switch, type SwitchProps } from "./ui/Switch";
 export { Slider, type SliderProps } from "./ui/Slider";
 export { Progress, type ProgressProps } from "./ui/Progress";
 export { Separator, type SeparatorProps } from "./ui/Separator";
-export { Avatar, type AvatarProps } from "./ui/Avatar";
+export { Avatar, AvatarGroup, type AvatarProps, type AvatarGroupProps } from "./ui/Avatar";
 export { Skeleton, type SkeletonProps } from "./ui/Skeleton";
 export {
   Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption,

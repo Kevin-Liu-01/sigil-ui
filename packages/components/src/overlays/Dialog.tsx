@@ -39,8 +39,12 @@ export interface DialogProps {
   children: ReactNode;
 }
 
-/** Modal dialog provider. */
-export function Dialog({ open: controlledOpen, onOpenChange, defaultOpen = false, children }: DialogProps) {
+export function Dialog({
+  open: controlledOpen,
+  onOpenChange,
+  defaultOpen = false,
+  children,
+}: DialogProps) {
   const [internalOpen, setInternalOpen] = useState(defaultOpen);
   const baseId = useId();
   const { play } = useSigilSound();
@@ -56,42 +60,69 @@ export function Dialog({ open: controlledOpen, onOpenChange, defaultOpen = false
   );
 
   return (
-    <DialogContext.Provider value={{ open: isOpen, setOpen, titleId: `${baseId}-title`, descId: `${baseId}-desc` }}>
+    <DialogContext.Provider
+      value={{
+        open: isOpen,
+        setOpen,
+        titleId: `${baseId}-title`,
+        descId: `${baseId}-desc`,
+      }}
+    >
       {children}
     </DialogContext.Provider>
   );
 }
 
-export interface DialogTriggerProps extends HTMLAttributes<HTMLButtonElement> {
+export interface DialogTriggerProps
+  extends HTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-/** Button that opens the dialog. */
-export const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>(
-  function DialogTrigger({ className, children, onClick, ...rest }, ref) {
-    const { setOpen } = useDialogContext();
-    return (
-      <button
-        ref={ref}
-        type="button"
-        onClick={(e) => {
-          setOpen(true);
-          onClick?.(e);
-        }}
-        className={className}
-        {...rest}
-      >
-        {children}
-      </button>
-    );
-  },
-);
+export const DialogTrigger = forwardRef<
+  HTMLButtonElement,
+  DialogTriggerProps
+>(function DialogTrigger({ className, children, onClick, ...rest }, ref) {
+  const { setOpen } = useDialogContext();
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={(e) => {
+        setOpen(true);
+        onClick?.(e);
+      }}
+      className={className}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+});
 
-export interface DialogContentProps extends HTMLAttributes<HTMLDivElement> {
+function XIcon() {
+  return (
+    <svg
+      data-icon
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="size-4"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+export interface DialogContentProps
+  extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-/** Dialog content overlay with backdrop. */
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
   function DialogContent({ className, children, ...rest }, ref) {
     const { open, setOpen, titleId, descId } = useDialogContext();
@@ -112,100 +143,138 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
     if (!open) return null;
 
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div className="fixed inset-0 z-50">
+        {/* Overlay */}
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm animate-[fadeIn_150ms_ease-out]"
+          data-state="open"
+          className={cn(
+            "fixed inset-0 z-50 bg-black/80",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out",
+            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+          )}
           onClick={() => setOpen(false)}
           aria-hidden
         />
+
+        {/* Content */}
         <div
           ref={ref}
           role="dialog"
           aria-modal
           aria-labelledby={titleId}
           aria-describedby={descId}
+          data-slot="dialog"
+          data-state="open"
           className={cn(
-            "relative z-10 w-full max-w-lg mx-4 p-6 rounded-[var(--s-card-radius,8px)]",
-            "bg-[var(--s-background)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
-            "shadow-[var(--s-shadow-lg)]",
-            "animate-[dialogIn_200ms_ease-out]",
+            "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
+            "gap-4 border border-[var(--s-border)] bg-[var(--s-surface)] p-6 shadow-lg",
+            "rounded-[var(--s-card-radius,8px)]",
+            "duration-200",
+            "data-[state=open]:animate-in data-[state=closed]:animate-out",
+            "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+            "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
+            "data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]",
+            "data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%]",
+            "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
             className,
           )}
-          style={{
-            // @ts-expect-error -- CSS keyframes injected via style
-            "--dialog-in": "dialogIn",
-          }}
           {...rest}
         >
           {children}
+
+          <button
+            type="button"
+            onClick={() => setOpen(false)}
+            className={cn(
+              "absolute right-4 top-4 rounded-[var(--s-radius-sm,0px)] opacity-70",
+              "transition-opacity hover:opacity-100",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+              "disabled:pointer-events-none",
+            )}
+          >
+            <XIcon />
+            <span className="sr-only">Close</span>
+          </button>
         </div>
-        <style>{`
-          @keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
-          @keyframes dialogIn {
-            from { opacity: 0; transform: scale(0.95) translateY(8px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-          }
-        `}</style>
       </div>
     );
   },
 );
 
-/** Dialog header section. */
-export const DialogHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  function DialogHeader({ className, ...rest }, ref) {
-    return <div ref={ref} className={cn("flex flex-col gap-1.5 mb-4", className)} {...rest} />;
-  },
-);
+export const DialogHeader = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogHeader({ className, ...rest }, ref) {
+  return (
+    <div
+      ref={ref}
+      data-slot="dialog-header"
+      className={cn(
+        "flex flex-col gap-2 text-center sm:text-left",
+        className,
+      )}
+      {...rest}
+    />
+  );
+});
 
-/** Dialog title. */
-export const DialogTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
-  function DialogTitle({ className, ...rest }, ref) {
-    const { titleId } = useDialogContext();
-    return (
-      <h2
-        ref={ref}
-        id={titleId}
-        className={cn("text-lg font-semibold text-[var(--s-text)]", className)}
-        {...rest}
-      />
-    );
-  },
-);
+export const DialogTitle = forwardRef<
+  HTMLHeadingElement,
+  HTMLAttributes<HTMLHeadingElement>
+>(function DialogTitle({ className, ...rest }, ref) {
+  const { titleId } = useDialogContext();
+  return (
+    <h2
+      ref={ref}
+      id={titleId}
+      data-slot="dialog-title"
+      className={cn(
+        "text-lg font-semibold leading-none tracking-tight text-[var(--s-text)]",
+        className,
+      )}
+      {...rest}
+    />
+  );
+});
 
-/** Dialog description. */
-export const DialogDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  function DialogDescription({ className, ...rest }, ref) {
-    const { descId } = useDialogContext();
-    return (
-      <p
-        ref={ref}
-        id={descId}
-        className={cn("text-sm text-[var(--s-text-muted)]", className)}
-        {...rest}
-      />
-    );
-  },
-);
+export const DialogDescription = forwardRef<
+  HTMLParagraphElement,
+  HTMLAttributes<HTMLParagraphElement>
+>(function DialogDescription({ className, ...rest }, ref) {
+  const { descId } = useDialogContext();
+  return (
+    <p
+      ref={ref}
+      id={descId}
+      data-slot="dialog-description"
+      className={cn("text-sm text-[var(--s-text-muted)]", className)}
+      {...rest}
+    />
+  );
+});
 
-/** Dialog footer for action buttons. */
-export const DialogFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  function DialogFooter({ className, ...rest }, ref) {
-    return (
-      <div
-        ref={ref}
-        className={cn("flex items-center justify-end gap-2 mt-6", className)}
-        {...rest}
-      />
-    );
-  },
-);
+export const DialogFooter = forwardRef<
+  HTMLDivElement,
+  HTMLAttributes<HTMLDivElement>
+>(function DialogFooter({ className, ...rest }, ref) {
+  return (
+    <div
+      ref={ref}
+      data-slot="dialog-footer"
+      className={cn(
+        "flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+        className,
+      )}
+      {...rest}
+    />
+  );
+});
 
-export interface DialogCloseProps extends HTMLAttributes<HTMLButtonElement> {
+export interface DialogCloseProps
+  extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-/** Button that closes the dialog. */
 export const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
   function DialogClose({ className, children, onClick, ...rest }, ref) {
     const { setOpen } = useDialogContext();
@@ -220,9 +289,7 @@ export const DialogClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
         className={className}
         {...rest}
       >
-        {children ?? (
-          <span className="sr-only">Close</span>
-        )}
+        {children ?? <span className="sr-only">Close</span>}
       </button>
     );
   },

@@ -12,7 +12,6 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   iconRight?: ReactNode;
 }
 
-/** Styled text input with error state and icon slots. */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   { error, iconLeft, iconRight, className, ...rest },
   ref,
@@ -22,23 +21,26 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className="relative w-full">
       {iconLeft && (
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] pointer-events-none">
+        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconLeft}
         </span>
       )}
       <input
         ref={ref}
+        data-slot="input"
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex h-[var(--s-input-height,40px)] w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
+          "flex h-10 w-full rounded-[var(--s-radius-input,6px)] border px-3 py-2 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)]",
-          "placeholder:text-[var(--s-text-muted)]",
-          "transition-colors duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-[var(--s-input-focus-ring-offset,1px)]",
+          "placeholder:text-[var(--s-text-subtle)]",
+          "transition-all duration-[var(--s-duration-fast,150ms)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          hasError
-            ? "border-[var(--s-error)] focus-visible:ring-[var(--s-error)]"
-            : "border-[var(--s-border)]",
+          "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--s-text)]",
+          "autofill:shadow-[inset_0_0_0px_1000px_var(--s-surface)]",
+          "aria-invalid:border-[var(--s-error)] aria-invalid:ring-[var(--s-error)]/20",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
+          hasError ? "border-[var(--s-error)]" : "border-[var(--s-border)]",
           iconLeft && "pl-10",
           iconRight && "pr-10",
           className,
@@ -46,7 +48,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         {...rest}
       />
       {iconRight && (
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)]">
+        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconRight}
         </span>
       )}

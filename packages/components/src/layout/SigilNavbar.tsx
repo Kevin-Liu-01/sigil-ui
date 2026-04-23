@@ -2,6 +2,8 @@
 
 import { type ReactNode, type CSSProperties } from "react";
 import { cn } from "../utils";
+import { SigilGutter } from "./SigilPageGrid";
+import type { GutterPattern } from "@sigil-ui/tokens";
 
 const DEFAULTS = {
   railGap: 24,
@@ -26,33 +28,29 @@ export interface SigilNavbarProps {
    * @default "full"
    */
   variant?: "full" | "inline";
-  /** Content max width. @default 1200 */
   contentMax?: number;
-  /** Rail gap. @default 24 */
   railGap?: number;
-  /** Fix the navbar to the viewport top. @default true */
+  gridCell?: number;
   fixed?: boolean;
-  /** Style applied to the outer element (header or nav). */
+  gutterPattern?: GutterPattern;
+  marginPattern?: GutterPattern;
+  showGutterGrid?: boolean;
+  showMarginLines?: boolean;
   style?: CSSProperties;
 }
 
-/**
- * Navbar aligned to the 5-column page grid.
- *
- * The **full** variant renders a `<header>` containing its own
- * `margin | gutter | nav | gutter | margin` grid so gutter borders
- * line up perfectly with SigilPageGrid.
- *
- * The **inline** variant renders a `<nav>` with a bottom border,
- * designed for use inside a SigilPageGrid content column.
- */
 export function SigilNavbar({
   children,
   className,
   variant = "full",
   contentMax = DEFAULTS.contentMax,
   railGap = DEFAULTS.railGap,
+  gridCell = 48,
   fixed = true,
+  gutterPattern = "grid",
+  marginPattern = "horizontal",
+  showGutterGrid = true,
+  showMarginLines = true,
   style,
 }: SigilNavbarProps) {
   if (variant === "inline") {
@@ -63,7 +61,7 @@ export function SigilNavbar({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          height: "var(--s-nav-navbar-height, 56px)",
+          height: "var(--s-navbar-height, 56px)",
           borderBottom: "1px solid var(--s-border)",
           ...style,
         }}
@@ -77,6 +75,30 @@ export function SigilNavbar({
     gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
   };
 
+  const marginCell = Math.round(gridCell / 3);
+
+  function marginBg(side: "left" | "right"): CSSProperties {
+    if (!showMarginLines || marginPattern === "none") return {};
+    const angle = side === "left" ? 45 : -45;
+    const C = "var(--s-border-muted)";
+    if (marginPattern === "horizontal") {
+      return {
+        backgroundImage: `linear-gradient(to bottom, transparent ${marginCell - 1}px, ${C} ${marginCell - 1}px)`,
+        backgroundSize: `100% ${marginCell}px`,
+      };
+    }
+    if (marginPattern === "dots") {
+      return {
+        backgroundImage: `radial-gradient(circle, ${C} 0.75px, transparent 0.75px)`,
+        backgroundSize: `${marginCell}px ${marginCell}px`,
+      };
+    }
+    return {
+      backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${marginCell - 1}px, ${C} ${marginCell - 1}px, ${C} ${marginCell}px)`,
+      backgroundSize: `${Math.round(marginCell * 1.414)}px ${Math.round(marginCell * 1.414)}px`,
+    };
+  }
+
   return (
     <header
       className={cn(
@@ -87,37 +109,20 @@ export function SigilNavbar({
       style={style}
     >
       <div className="grid" style={gridCols}>
-        {/* Left margin */}
-        <div aria-hidden="true" />
-
-        {/* Left gutter */}
-        <div
-          aria-hidden="true"
-          style={{
-            borderLeft: "1px solid var(--s-border)",
-            borderRight: "1px solid var(--s-border)",
-          }}
-        />
-
-        {/* Content — nav */}
+        <div aria-hidden="true" style={marginBg("left")} />
+        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" />
         <nav
           className="flex items-center justify-between"
-          style={{ height: "var(--s-nav-navbar-height, 56px)" }}
+          style={{
+            height: "var(--s-navbar-height, 56px)",
+            padding: "0 20px",
+            background: "var(--s-background)",
+          }}
         >
           {children}
         </nav>
-
-        {/* Right gutter */}
-        <div
-          aria-hidden="true"
-          style={{
-            borderLeft: "1px solid var(--s-border)",
-            borderRight: "1px solid var(--s-border)",
-          }}
-        />
-
-        {/* Right margin */}
-        <div aria-hidden="true" />
+        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" />
+        <div aria-hidden="true" style={marginBg("right")} />
       </div>
     </header>
   );

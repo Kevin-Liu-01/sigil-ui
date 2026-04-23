@@ -7,6 +7,7 @@ import {
   SigilGutter,
   type PageGridConfig,
 } from "./SigilPageGrid";
+import type { GutterPattern } from "@sigil-ui/tokens";
 
 /* ------------------------------------------------------------------ */
 /* Cross mark SVG                                                       */
@@ -117,6 +118,14 @@ export interface SigilSectionProps {
   contentMax?: number;
   /** Rail gap for standalone mode (outside SigilPageGrid). */
   railGap?: number;
+  /** Gutter pattern for standalone mode. */
+  gutterPattern?: GutterPattern;
+  /** Margin pattern for standalone mode. */
+  marginPattern?: GutterPattern;
+  /** Show gutter grid in standalone mode. @default true */
+  showGutterGrid?: boolean;
+  /** Show margin lines in standalone mode. @default true */
+  showMarginLines?: boolean;
 }
 
 /**
@@ -142,6 +151,10 @@ export function SigilSection({
   padding = "80px 20px",
   contentMax = 1200,
   railGap = 24,
+  gutterPattern = "grid",
+  marginPattern = "horizontal",
+  showGutterGrid = true,
+  showMarginLines = true,
 }: SigilSectionProps) {
   const gridConfig = usePageGridConfig();
 
@@ -175,6 +188,10 @@ export function SigilSection({
       padding={padding}
       contentMax={contentMax}
       railGap={railGap}
+      gutterPattern={gutterPattern}
+      marginPattern={marginPattern}
+      showGutterGrid={showGutterGrid}
+      showMarginLines={showMarginLines}
     >
       {children}
     </StandaloneSection>
@@ -258,6 +275,10 @@ function StandaloneSection({
   padding,
   contentMax,
   railGap,
+  gutterPattern = "grid",
+  marginPattern = "horizontal",
+  showGutterGrid = true,
+  showMarginLines = true,
 }: {
   children: ReactNode;
   className?: string;
@@ -270,6 +291,10 @@ function StandaloneSection({
   padding: string;
   contentMax: number;
   railGap: number;
+  gutterPattern?: GutterPattern;
+  marginPattern?: GutterPattern;
+  showGutterGrid?: boolean;
+  showMarginLines?: boolean;
 }) {
   const gridCols: CSSProperties = {
     gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
@@ -278,7 +303,7 @@ function StandaloneSection({
   return (
     <Tag id={id} className={cn("grid", className)} style={{ ...gridCols, ...style }}>
       <div aria-hidden="true" />
-      <SigilGutter showGrid={false} />
+      <SigilGutter showGrid={showGutterGrid} pattern={gutterPattern} side="left" />
       <div
         className="relative"
         style={{
@@ -300,7 +325,7 @@ function StandaloneSection({
           <CrossRow position="bottom" railGap={railGap} crossStroke={1.5} />
         )}
       </div>
-      <SigilGutter showGrid={false} />
+      <SigilGutter showGrid={showGutterGrid} pattern={gutterPattern} side="right" />
       <div aria-hidden="true" />
     </Tag>
   );

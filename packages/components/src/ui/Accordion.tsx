@@ -11,9 +11,13 @@ import {
   type HTMLAttributes,
   type ReactNode,
 } from "react";
+import { ChevronDown } from "lucide-react";
 import { cn } from "../utils";
 import { useSigilSound } from "../sound-context";
 
+// ---------------------------------------------------------------------------
+// Context
+// ---------------------------------------------------------------------------
 interface AccordionContextValue {
   openItems: Set<string>;
   toggle: (value: string) => void;
@@ -27,6 +31,9 @@ function useAccordionContext() {
   return ctx;
 }
 
+// ---------------------------------------------------------------------------
+// Accordion (root)
+// ---------------------------------------------------------------------------
 export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   /** Allow multiple items open at once. @default false */
   multiple?: boolean;
@@ -35,7 +42,6 @@ export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-/** Expandable accordion container. */
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion(
   { multiple = false, defaultValue, className, children, ...rest },
   ref,
@@ -63,103 +69,107 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
 
   return (
     <AccordionContext.Provider value={{ openItems, toggle }}>
-      <div ref={ref} className={cn("w-full divide-y divide-[var(--s-border)] divide-[style:var(--s-border-style,solid)]", className)} {...rest}>
+      <div
+        ref={ref}
+        data-slot="accordion"
+        className={cn("w-full", className)}
+        {...rest}
+      >
         {children}
       </div>
     </AccordionContext.Provider>
   );
 });
 
+// ---------------------------------------------------------------------------
+// AccordionItem
+// ---------------------------------------------------------------------------
 export interface AccordionItemProps extends HTMLAttributes<HTMLDivElement> {
-  /** Unique value for this item. */
   value: string;
   children?: ReactNode;
 }
 
-/** Single accordion item wrapper. */
 export const AccordionItem = forwardRef<HTMLDivElement, AccordionItemProps>(
   function AccordionItem({ value, className, children, ...rest }, ref) {
+    const { openItems } = useAccordionContext();
+
     return (
-      <div ref={ref} data-value={value} className={cn("py-0", className)} {...rest}>
+      <div
+        ref={ref}
+        data-slot="accordion-item"
+        data-value={value}
+        data-state={openItems.has(value) ? "open" : "closed"}
+        className={cn("border-b border-[var(--s-border)]", className)}
+        {...rest}
+      >
         {children}
       </div>
     );
   },
 );
 
+// ---------------------------------------------------------------------------
+// AccordionTrigger
+// ---------------------------------------------------------------------------
 export interface AccordionTriggerProps extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
 }
 
-/** Accordion item trigger button. Must be a child of AccordionItem. */
 export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   function AccordionTrigger({ className, children, ...rest }, ref) {
     const { openItems, toggle } = useAccordionContext();
     const { play } = useSigilSound();
     const itemEl = useRef<HTMLElement | null>(null);
+    const generatedId = useId();
 
     const getValue = (el: HTMLElement | null): string => {
       const item = el?.closest("[data-value]") as HTMLElement | null;
       return item?.dataset.value ?? "";
     };
 
-    const generatedId = useId();
     const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
       itemEl.current = e.currentTarget;
       play("expand");
       toggle(getValue(e.currentTarget));
     };
 
+    const isOpen = openItems.has(getValue(itemEl.current));
+
     return (
       <h3 className="flex">
         <button
           ref={ref}
           type="button"
-          aria-expanded={openItems.has(getValue(itemEl.current))}
+          data-slot="accordion-trigger"
+          data-state={isOpen ? "open" : "closed"}
+          aria-expanded={isOpen}
           id={generatedId}
           onClick={handleClick}
           className={cn(
             "flex flex-1 items-center justify-between py-4 text-sm font-medium",
-            "transition-all duration-[var(--s-duration-fast,150ms)] hover:underline",
             "text-[var(--s-text)]",
-            "[&>svg]:transition-transform [&>svg]:duration-[var(--s-duration-fast,150ms)]",
+            "transition-all duration-200 hover:underline",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+            "[&[data-state=open]>svg]:rotate-180",
             className,
           )}
           {...rest}
         >
           {children}
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            className={cn(
-              "shrink-0 text-[var(--s-text-muted)]",
-              "transition-transform duration-[var(--s-duration-fast,150ms)]",
-            )}
-            style={{
-              transform: openItems.has(getValue(itemEl.current)) ? "rotate(180deg)" : "rotate(0deg)",
-            }}
-          >
-            <path
-              d="M4 6l4 4 4-4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ChevronDown className="size-4 shrink-0 text-[var(--s-text-muted)] transition-transform duration-200" />
         </button>
       </h3>
     );
   },
 );
 
+// ---------------------------------------------------------------------------
+// AccordionContent
+// ---------------------------------------------------------------------------
 export interface AccordionContentProps extends HTMLAttributes<HTMLDivElement> {
   children?: ReactNode;
 }
 
-/** Accordion item content panel with expand/collapse animation. Must be child of AccordionItem. */
 export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   function AccordionContent({ className, children, ...rest }, ref) {
     const { openItems } = useAccordionContext();
@@ -179,9 +189,11 @@ export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps
           if (typeof ref === "function") ref(el);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
         }}
+        data-slot="accordion-content"
+        data-state={isOpen ? "open" : "closed"}
         role="region"
         className={cn(
-          "overflow-hidden transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
+          "overflow-hidden transition-all duration-200 ease-out",
           isOpen ? "grid grid-rows-[1fr] opacity-100" : "grid grid-rows-[0fr] opacity-0",
           className,
         )}

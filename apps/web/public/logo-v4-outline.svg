@@ -1,20 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <line x1="60" y1="2" x2="60" y2="118" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <line x1="2" y1="60" x2="118" y2="60" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <!-- Backslash (\) divider -->
+  <line x1="10" y1="10" x2="110" y2="110" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <circle cx="22" cy="22" r="10" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="3 2"/>
-  <circle cx="44" cy="22" r="10" stroke="#a5b4fc" stroke-width="0.25" stroke-dasharray="3 2"/>
-  <circle cx="22" cy="44" r="10" stroke="#818cf8" stroke-width="0.25" stroke-dasharray="3 2"/>
-  <circle cx="44" cy="44" r="10" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="4 2"/>
+  <!-- Upper-left half -->
+  <circle cx="22" cy="24" r="10" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="42" cy="20" r="8" stroke="#a5b4fc" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="28" cy="44" r="12" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="28" cy="44" r="17" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="1.5 3" opacity="0.4"/>
+  <circle cx="50" cy="38" r="5" stroke="#818cf8" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <circle cx="84" cy="28" r="14" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="100" cy="44" r="9" stroke="#f97316" stroke-width="0.25" stroke-dasharray="1.5 2.5"/>
-
-  <circle cx="30" cy="88" r="16" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <path d="M 30 72 A 16 16 0 0 1 30 104" stroke="#16a34a" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="30" cy="88" r="20" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 3" opacity="0.5"/>
-
-  <circle cx="90" cy="90" r="22" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="90" cy="90" r="15" stroke="#ec4899" stroke-width="0.25" stroke-dasharray="3 3"/>
-  <circle cx="90" cy="90" r="7" stroke="#f472b6" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <!-- Lower-right half -->
+  <circle cx="90" cy="80" r="18" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="90" cy="80" r="24" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="1.5 3" opacity="0.4"/>
+  <circle cx="76" cy="96" r="8" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="100" cy="102" r="6" stroke="#f97316" stroke-width="0.25" stroke-dasharray="2 2"/>
 </svg>

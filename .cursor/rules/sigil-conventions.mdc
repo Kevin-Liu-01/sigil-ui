@@ -1,7 +1,7 @@
-# Reticle UI Development Conventions
+# Sigil UI Development Conventions
 
 ## Token Variable Prefix
-All CSS variables use the `--r-` prefix: `var(--r-primary)`, `var(--r-surface)`, etc.
+All CSS variables use the `--s-` prefix: `var(--s-primary)`, `var(--s-surface)`, etc.
 
 ## Component Rules
 - Every component is a "use client" component if it uses hooks or interactivity
@@ -9,9 +9,12 @@ All CSS variables use the `--r-` prefix: `var(--r-primary)`, `var(--r-surface)`,
 - Use `cn()` from utils for class merging (clsx + tailwind-merge)
 - All colors reference CSS variables, never hardcoded hex
 - All spacing uses the token scale (4, 8, 12, 16, 24, 32, 48, 64, 80, 96)
-- Components use `var(--r-*)` tokens, not Tailwind color classes directly
+- Components use `var(--s-*)` tokens, not Tailwind color classes directly
 - All interactive components must be keyboard-accessible
 - All components include JSDoc comments
+- Shadows use `shadow-[var(--s-shadow-*)]`, never Tailwind `shadow-sm` etc.
+- Motion uses `duration-[var(--s-duration-*)]`, never hardcoded `duration-150`
+- Borders use `border-[style:var(--s-border-style,solid)]` for preset-driven styles
 
 ## File Structure
 - Layout primitives: `packages/components/src/layout/`
@@ -29,8 +32,9 @@ All CSS variables use the `--r-` prefix: `var(--r-primary)`, `var(--r-surface)`,
 - Component files: PascalCase (Button.tsx, Card3D.tsx)
 - Utility files: camelCase (utils.ts, animate.ts)
 - Export components as named exports, not default
-- Prefix Reticle-specific layout components with nothing (Stack, Grid, Section — clean names)
+- Sigil layout primitives use clean names (Stack, Grid, Section)
+- The page-level frame is `SigilPageGrid` (5-column: margin | gutter | content | gutter | margin)
 
 ## Presets
-Each preset provides a complete ReticleTokens object. Presets live in `packages/presets/src/`.
-The canonical preset list: reticle, midnight, editorial, brutalist, soft.
+Each preset provides a complete SigilTokens object. Presets live in `packages/presets/src/`.
+31 presets across 6 categories: structural, minimal, dark, colorful, editorial, industrial.

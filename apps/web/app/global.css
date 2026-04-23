@@ -191,7 +191,12 @@
   --s-primary: #9b99e8;
   --s-primary-hover: #8280d4;
   --s-primary-muted: rgba(155, 153, 232, 0.15);
+  --s-primary-contrast: #ffffff;
   --s-secondary: #da8325;
+
+  /* Focus ring */
+  --s-ring: var(--s-primary);
+  --s-ring-offset: var(--s-background);
 
   /* Text hierarchy */
   --s-text: #0a0a0f;
@@ -663,7 +668,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ================================================================== */
-/* Structural Visibility — Reticle Aesthetic                           */
+/* Structural Visibility — Sigil Frame                                 */
 /* ================================================================== */
 
 /* Visible margin rail lines */

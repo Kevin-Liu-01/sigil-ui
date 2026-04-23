@@ -9,7 +9,6 @@ export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   error?: string | boolean;
 }
 
-/** Styled native select wrapper. */
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select(
   { error, className, children, onChange, ...rest },
   ref,
@@ -18,20 +17,20 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
   const hasError = Boolean(error);
 
   return (
-    <div className="w-full">
+    <div className="relative w-full">
       <select
         ref={ref}
+        data-slot="select"
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex h-[var(--s-input-height,40px)] w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
-          "bg-[var(--s-background)] text-[var(--s-text)]",
+          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-input,2px)] border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-2 text-sm",
+          "text-[var(--s-text)]",
           "appearance-none cursor-pointer",
-          "bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M6%208L1%203h10z%22%2F%3E%3C%2Fsvg%3E')]",
-          "bg-[length:12px] bg-[right_12px_center] bg-no-repeat",
           "pr-10",
-          "transition-colors duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
-          "disabled:cursor-not-allowed disabled:opacity-50",
+          "transition-all duration-[var(--s-duration-fast,150ms)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+          "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",
+          "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
           hasError
             ? "border-[var(--s-error)] focus-visible:ring-[var(--s-error)]"
             : "border-[var(--s-border)]",
@@ -42,6 +41,21 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
       >
         {children}
       </select>
+      <svg
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)]"
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        data-icon
+      >
+        <path d="m6 9 6 6 6-6" />
+      </svg>
       {typeof error === "string" && error && (
         <p className="mt-1 text-xs text-[var(--s-error)]" role="alert">
           {error}

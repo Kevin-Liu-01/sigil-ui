@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
-import { HeroLogoField } from "@/components/landing/hero-logo-field";
+import { HeroLogoField, NavbarLogo, FooterLogo } from "@/components/landing/hero-logo-field";
 import { PresetShowcase } from "@/components/landing/preset-showcase";
 import { PresetTable } from "@/components/landing/preset-table";
 import { Terminal } from "@/components/landing/terminal";
@@ -18,7 +18,7 @@ import { LiveComponentGrid } from "@/components/landing/live-component";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
-import { SigilPageGrid, SigilSection, SigilNavbar } from "@sigil-ui/components";
+import { SigilPageGrid, SigilSection } from "@sigil-ui/components";
 import type { GutterPattern } from "@sigil-ui/tokens";
 import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
@@ -35,14 +35,7 @@ const NAV_LINKS = [
 ] as const;
 
 function LandingNavbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   function toggleTheme() {
     const next = !isDark;
@@ -52,18 +45,20 @@ function LandingNavbar() {
   }
 
   return (
-    <SigilNavbar
-      variant="full"
+    <nav
       style={{
-        backdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(12px) saturate(1.4)" : "none",
-        backgroundColor: scrolled
-          ? "color-mix(in oklch, var(--s-background) 80%, transparent)"
-          : "transparent",
-        borderBottom: scrolled
-          ? "1px solid var(--s-border-muted)"
-          : "1px solid transparent",
-        transition: "all 400ms cubic-bezier(0.16, 1, 0.3, 1)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: "var(--s-navbar-height, 56px)",
+        padding: "0 20px",
+        borderBottom: "1px solid var(--s-border-muted)",
+        position: "sticky",
+        top: 0,
+        zIndex: 50,
+        background: "var(--s-background)",
+        backdropFilter: "blur(12px) saturate(1.4)",
+        WebkitBackdropFilter: "blur(12px) saturate(1.4)",
       }}
     >
       {/* Logo */}
@@ -77,10 +72,7 @@ function LandingNavbar() {
           color: "var(--s-text)",
         }}
       >
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <line x1="8" y1="0" x2="8" y2="16" stroke="currentColor" strokeWidth="1.5" />
-          <line x1="0" y1="8" x2="16" y2="8" stroke="currentColor" strokeWidth="1.5" />
-        </svg>
+        <NavbarLogo />
         <span
           style={{
             fontFamily: "var(--s-font-mono)",
@@ -147,7 +139,7 @@ function LandingNavbar() {
           {isDark ? <SunIcon /> : <MoonIcon />}
         </button>
       </div>
-    </SigilNavbar>
+    </nav>
   );
 }
 
@@ -922,8 +914,9 @@ function Footer() {
       >
         <span
           className="s-mono"
-          style={{ fontSize: 12, color: "var(--s-text-muted)" }}
+          style={{ fontSize: 12, color: "var(--s-text-muted)", display: "flex", alignItems: "center", gap: 10 }}
         >
+          <FooterLogo />
           © 2026 Sigil UI. MIT License.
         </span>
         <span
@@ -953,7 +946,7 @@ function Footer() {
 /* Page                                                              */
 /* ================================================================ */
 
-function ReticleGrid({ children }: { children: React.ReactNode }) {
+function SigilFrame({ children }: { children: React.ReactNode }) {
   let gutterPattern: GutterPattern = "grid";
   let marginPattern: GutterPattern = "horizontal";
   try {
@@ -977,19 +970,15 @@ function ReticleGrid({ children }: { children: React.ReactNode }) {
 
 export default function LandingPage() {
   return (
-    <>
+    <SigilFrame>
       <LandingNavbar />
-      <main>
-        <ReticleGrid>
-          <Hero />
-          <TokenSystem />
-          <Components />
-          <Presets />
-          <DemoSites />
-          <CLISection />
-        </ReticleGrid>
-      </main>
+      <Hero />
+      <TokenSystem />
+      <Components />
+      <Presets />
+      <DemoSites />
+      <CLISection />
       <Footer />
-    </>
+    </SigilFrame>
   );
 }

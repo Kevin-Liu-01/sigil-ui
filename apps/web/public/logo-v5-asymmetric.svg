@@ -1,24 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <line x1="60" y1="2" x2="60" y2="118" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <line x1="2" y1="60" x2="118" y2="60" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <!-- Y trisection divider -->
+  <line x1="60" y1="60" x2="60" y2="4" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <line x1="60" y1="60" x2="11.5" y2="88" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <line x1="60" y1="60" x2="108.5" y2="88" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <circle cx="18" cy="18" r="8" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="18" cy="18" r="13" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="1.5 2.5" opacity="0.4"/>
-  <circle cx="36" cy="16" r="6" stroke="#a5b4fc" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="48" cy="26" r="5" stroke="#818cf8" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="20" cy="38" r="9" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="20" cy="38" r="14" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="1.5 2.5" opacity="0.35"/>
-  <circle cx="42" cy="46" r="4" stroke="#4f46e5" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <!-- Top sector -->
+  <circle cx="40" cy="20" r="10" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="40" cy="20" r="15" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="1.5 2.5" opacity="0.4"/>
+  <circle cx="80" cy="20" r="8" stroke="#a5b4fc" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="60" cy="36" r="6" stroke="#818cf8" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <circle cx="90" cy="30" r="18" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="90" cy="30" r="26" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="1 4" opacity="0.35"/>
+  <!-- Bottom-left sector -->
+  <circle cx="24" cy="86" r="12" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="40" cy="100" r="8" stroke="#16a34a" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <circle cx="28" cy="78" r="10" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="40" cy="100" r="13" stroke="#059669" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <line x1="28" y1="88" x2="40" y2="87" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 3" opacity="0.4"/>
-
-  <circle cx="76" cy="76" r="12" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="94" cy="90" r="8" stroke="#ec4899" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <circle cx="106" cy="104" r="6" stroke="#f472b6" stroke-width="0.25" stroke-dasharray="2 2"/>
-  <line x1="76" y1="76" x2="106" y2="104" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="1.5 3" opacity="0.3"/>
+  <!-- Bottom-right sector -->
+  <circle cx="90" cy="82" r="14" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="90" cy="82" r="20" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="1 4" opacity="0.35"/>
+  <circle cx="100" cy="100" r="6" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="2 2"/>
 </svg>
