@@ -16,7 +16,7 @@ const posts = [
     date: "2026-04-20",
     title: "Why Presets Beat Themes",
     excerpt:
-      "shadcn gives you components. Sigil gives you components plus a complete visual identity you can swap in one command. Here's why that matters.",
+      "Traditional libraries give you components. Sigil gives you components plus a complete visual identity you can swap in one command. Here's why that matters.",
   },
   {
     date: "2026-04-18",

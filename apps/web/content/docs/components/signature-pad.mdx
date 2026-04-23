@@ -1,0 +1,79 @@
+---
+title: SignaturePad
+description: Canvas-based signature capture with mouse and touch support, clear action, and data URL output.
+---
+
+## Import
+
+```tsx
+import { SignaturePad } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<SignaturePad onChange={(dataUrl) => console.log(dataUrl)} />
+```
+
+## Custom dimensions and stroke
+
+```tsx
+<SignaturePad
+  width={600}
+  height={300}
+  strokeWidth={3}
+  strokeColor="#1e40af"
+  onChange={(dataUrl) => setSig(dataUrl)}
+/>
+```
+
+## In a form
+
+```tsx
+import { useState } from "react";
+import { Button } from "@sigil-ui/components";
+
+function SignatureForm() {
+  const [sig, setSig] = useState<string | null>(null);
+
+  return (
+    <form>
+      <SignaturePad onChange={setSig} />
+      <Button type="submit" disabled={!sig}>
+        Submit
+      </Button>
+    </form>
+  );
+}
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-radius-md` | Canvas container radius |
+| `--s-border` | Canvas border |
+| `--s-border-style` | Border style |
+| `--s-background` | Canvas background |
+| `--s-text` | Default stroke color (when `strokeColor` is not set) |
+| `--s-text-muted` | "Sign here" placeholder and clear button text |
+| `--s-duration-fast` | Clear button hover transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `width` | `number` | `400` | Canvas width in pixels |
+| `height` | `number` | `200` | Canvas height in pixels |
+| `strokeColor` | `string` | `var(--s-text)` | Pen stroke color |
+| `strokeWidth` | `number` | `2` | Pen stroke width in pixels |
+| `onChange` | `(dataUrl: string \| null) => void` | — | Called with a PNG data URL after each stroke, or `null` on clear |
+| `disabled` | `boolean` | `false` | Disable drawing and clear |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Canvas uses `cursor-crosshair` to indicate draw mode
+- "Sign here" placeholder text is visible when the pad is empty
+- Clear button is disabled when the pad is already empty
+- Supports touch events for mobile signature capture

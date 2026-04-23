@@ -19,7 +19,7 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
       <AlertDialogPrimitive.Portal>
         <AlertDialogPrimitive.Overlay
           className={cn(
-            "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
+            "fixed inset-0 z-50 bg-[var(--s-overlay,rgba(0,0,0,0.5))] backdrop-blur-sm",
             "data-[state=open]:animate-[fadeIn_150ms_ease-out] data-[state=closed]:animate-[fadeIn_150ms_ease-out_reverse]",
           )}
         />
@@ -97,7 +97,7 @@ export const AlertDialogAction = forwardRef<HTMLButtonElement, ComponentPropsWit
         ref={ref}
         className={cn(
           "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)] px-4 py-2 text-sm font-medium",
-          "bg-[var(--s-primary)] text-white hover:opacity-90",
+          "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] hover:opacity-90",
           "transition-opacity duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
           className,

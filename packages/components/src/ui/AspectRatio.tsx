@@ -1,25 +1,8 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes } from "react";
-import { cn } from "../utils";
+import { type ComponentPropsWithoutRef } from "react";
+import * as AspectRatioPrimitive from "@radix-ui/react-aspect-ratio";
 
-export interface AspectRatioProps extends HTMLAttributes<HTMLDivElement> {
-  ratio?: number;
-}
+export interface AspectRatioProps extends ComponentPropsWithoutRef<typeof AspectRatioPrimitive.Root> {}
 
-export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(function AspectRatio(
-  { ratio = 16 / 9, className, style, children, ...rest },
-  ref,
-) {
-  return (
-    <div
-      ref={ref}
-      data-slot="aspect-ratio"
-      className={cn("relative w-full overflow-hidden", className)}
-      style={{ paddingBottom: `${(1 / ratio) * 100}%`, ...style }}
-      {...rest}
-    >
-      <div className="absolute inset-0">{children}</div>
-    </div>
-  );
-});
+export const AspectRatio = AspectRatioPrimitive.Root;

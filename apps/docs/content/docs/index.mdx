@@ -12,15 +12,15 @@ Change a border radius? Hunt through every component. Update a color? Grep and p
 
 Every component reads from a single token object. Colors, spacing, radii, shadows, motion — all derived from one source. Change once, update everywhere.
 
-### How it compares to shadcn
+### How it compares to traditional component libraries
 
-| | shadcn/ui | Sigil UI |
+| | Radix, Chakra, MUI, etc. | Sigil UI |
 |---|---|---|
-| Theming | Edit `tailwind.config.ts` + CSS variables + component files | Edit one token file |
-| Agent workflow | Agent modifies scattered Tailwind classes | Your agent edits one file |
-| Presets | Copy a Tailwind config from a blog post | `npx sigil init --preset minimal` |
+| Theming | Edit config files + CSS variables + component files | Edit one token file |
+| Agent workflow | Agent modifies scattered Tailwind classes or style props | Your agent edits one file |
+| Presets | Copy a config from a blog post | `npx sigil init --preset minimal` |
 | Token system | CSS variables, manually maintained | Three-layer architecture: primitive → semantic → component |
-| Shipping themes | "Just change the CSS variables" | Ship a preset, not a Tailwind config |
+| Shipping themes | "Just change the CSS variables" | Ship a preset, not a config file |
 
 ### Quick start
 

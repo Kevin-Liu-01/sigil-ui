@@ -45,7 +45,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(function Footer(
                   <li key={link.href}>
                     <a
                       href={link.href}
-                      className="text-sm text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors"
+                      className="text-sm text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]"
                     >
                       {link.label}
                     </a>

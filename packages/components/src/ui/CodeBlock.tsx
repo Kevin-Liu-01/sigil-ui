@@ -34,7 +34,7 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function Cod
       ref={ref}
       data-slot="code-block"
       className={cn(
-        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
+        "rounded-[var(--s-radius-card,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
         "bg-[var(--s-code-bg,var(--s-background))] font-[family:var(--s-code-font-family,ui-monospace,SFMono-Regular,monospace)] text-sm",
         className,
       )}
@@ -48,7 +48,7 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function Cod
         <button
           type="button"
           onClick={handleCopy}
-          className="text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors px-2 py-1 rounded-[var(--s-radius-sm,4px)]"
+          className="text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)] px-2 py-1 rounded-[var(--s-radius-sm,4px)]"
           aria-label="Copy code"
         >
           {copied ? "Copied!" : "Copy"}

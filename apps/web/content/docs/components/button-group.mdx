@@ -1,0 +1,50 @@
+---
+title: ButtonGroup
+description: Groups buttons into a single visual unit with connected borders and shared radius.
+---
+
+## Import
+
+```tsx
+import { ButtonGroup } from "@sigil-ui/components";
+import { Button } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ButtonGroup>
+  <Button variant="outline">Left</Button>
+  <Button variant="outline">Center</Button>
+  <Button variant="outline">Right</Button>
+</ButtonGroup>
+```
+
+## Vertical
+
+```tsx
+<ButtonGroup orientation="vertical">
+  <Button variant="outline">Top</Button>
+  <Button variant="outline">Middle</Button>
+  <Button variant="outline">Bottom</Button>
+</ButtonGroup>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-radius-md` | First/last child corner radius |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Button elements |
+
+## Accessibility
+
+- Renders `role="group"` for assistive technology
+- Sets `data-orientation` for CSS hooks

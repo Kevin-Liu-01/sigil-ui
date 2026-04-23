@@ -22,19 +22,19 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles: Record<BadgeVariant, string> = {
   default:
-    "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] border-transparent",
   secondary:
     "bg-[var(--s-surface)] text-[var(--s-text-secondary)] border-transparent",
   outline:
     "bg-transparent text-[var(--s-text)] border border-[var(--s-border)]",
   destructive:
-    "bg-[var(--s-error)] text-white border-transparent",
+    "bg-[var(--s-error)] text-[var(--s-primary-contrast)] border-transparent",
   success:
-    "bg-[var(--s-success)] text-white border-transparent",
+    "bg-[var(--s-success)] text-[var(--s-primary-contrast)] border-transparent",
   warning:
-    "bg-[var(--s-warning)] text-white border-transparent",
+    "bg-[var(--s-warning)] text-[var(--s-primary-contrast)] border-transparent",
   info:
-    "bg-[var(--s-info)] text-white border-transparent",
+    "bg-[var(--s-info)] text-[var(--s-primary-contrast)] border-transparent",
 };
 
 const sizeStyles: Record<string, string> = {
@@ -52,7 +52,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
       data-slot="badge"
       data-variant={variant}
       className={cn(
-        "inline-flex items-center rounded-[var(--s-radius-badge,2px)] border px-2.5 py-0.5 text-xs font-semibold",
+        "inline-flex items-center rounded-[var(--s-radius-badge,2px)] border border-[style:var(--s-border-style,solid)] px-2.5 py-0.5 text-xs font-semibold",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-3",

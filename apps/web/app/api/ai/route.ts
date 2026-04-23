@@ -20,18 +20,22 @@ const PRESET_NAMES = [
 ] as const;
 
 const COMPONENT_NAMES = [
-  "Stack", "SigilGrid", "Section", "Frame", "PageGrid", "Margin", "Gutter",
-  "Divider", "HRule", "Button", "Badge", "Card", "Label", "Input", "Textarea",
-  "Select", "Checkbox", "Switch", "Slider", "Progress", "Separator", "Avatar",
-  "Skeleton", "Table", "Tabs", "Accordion", "Tooltip", "ScrollArea", "KPI",
-  "Terminal", "CodeBlock", "LoadingSpinner", "Navbar", "Footer", "Breadcrumb",
-  "Pagination", "Dialog", "Sheet", "Popover", "Toast", "Shape", "Diamond",
-  "Hexagon", "Triangle", "Diagonal", "Box3D", "Box3DGrid", "Card3D",
-  "FloatingUI", "IsometricView", "Diagram", "ExplodedView", "FlowDiagram",
-  "Timeline", "ComparisonTable", "ArchitectureDiagram", "Hero", "FeatureFrame",
-  "Pricing", "CTA", "LogoBar", "TestimonialCard", "Pattern", "Cross",
-  "AnimateOnScroll",
+  "Hero", "CTA", "Pricing", "FeatureFrame", "TestimonialCard", "LogoBar",
+  "Button", "Card", "Badge", "Input", "Tabs", "Accordion", "Table",
+  "KPI", "Terminal", "CodeBlock", "Timeline", "Progress",
+  "Grid", "Stack", "Navbar", "Footer", "Separator",
+  "Diamond", "Hexagon", "Triangle", "Box3D", "Card3D",
+  "LoadingSpinner", "Avatar",
 ] as const;
+
+const PRESET_CATEGORIES: Record<string, string[]> = {
+  "Structural (engineering precision)": ["sigil", "kova", "cobalt", "helix", "hex"],
+  "Minimal (clean, whitespace)": ["crux", "axiom", "arc", "mono"],
+  "Dark (cinematic, dramatic)": ["basalt", "onyx", "fang", "obsid", "cipher", "noir"],
+  "Colorful (gradients, vibrant)": ["flux", "shard", "prism", "vex", "dsgn", "dusk"],
+  "Editorial (typography-forward)": ["etch", "rune", "strata", "glyph", "mrkr"],
+  "Industrial (metallic, utilitarian)": ["alloy", "forge", "anvil", "rivet", "brass"],
+};
 
 function truncateTokensForPrompt(tokens: Record<string, unknown>): string {
   const keys = [
@@ -47,56 +51,100 @@ function truncateTokensForPrompt(tokens: Record<string, unknown>): string {
   return json.length > 6000 ? json.slice(0, 6000) + "\n... (truncated)" : json;
 }
 
+type CanvasEntry = {
+  id: string;
+  component: string;
+  colSpan: number;
+  order: number;
+};
+
 function buildSystemPrompt(
   currentTokens: Record<string, unknown>,
-  canvasItems: unknown[],
+  canvasItems: CanvasEntry[],
 ): string {
   const tokenBlock = truncateTokensForPrompt(currentTokens);
 
-  return `You are a design system AI for Sigil UI.
+  const canvasBlock =
+    canvasItems.length > 0
+      ? canvasItems
+          .sort((a, b) => a.order - b.order)
+          .map(
+            (item) =>
+              `  [${item.order}] ${item.component} — colSpan ${item.colSpan}/12 (id: ${item.id})`,
+          )
+          .join("\n")
+      : "  (empty)";
 
-You help users customize design tokens, switch presets, and add components to a live sandbox canvas.
+  const presetBlock = Object.entries(PRESET_CATEGORIES)
+    .map(([cat, names]) => `  ${cat}: ${names.join(", ")}`)
+    .join("\n");
 
-## Current Token State
+  return `You are a design system AI for Sigil UI — a token-driven component sandbox.
+
+You help users build page layouts, customize design tokens, switch presets, and manage components on a live canvas.
+
+## Canvas Layout System
+
+The canvas uses a 5-column structural grid: margin | gutter | content (12-col) | gutter | margin.
+Inside the content area, components are placed in a 12-column CSS grid.
+Each component has a \`colSpan\` (1–12) that determines its width:
+- 12 = full width
+- 6 = half width (two items per row)
+- 4 = one-third (three items per row)
+- 3 = one-quarter (four items per row)
+Components flow left-to-right, wrapping to the next row when a row's total colSpan exceeds 12.
+
+## Current Canvas
+${canvasBlock}
+
+## Current Tokens
 \`\`\`json
 ${tokenBlock}
 \`\`\`
 
 ## Available Presets (${PRESET_NAMES.length})
-${PRESET_NAMES.join(", ")}
+${presetBlock}
 
 ## Available Components (${COMPONENT_NAMES.length})
 ${COMPONENT_NAMES.join(", ")}
 
-## Current Canvas
-${canvasItems.length > 0 ? JSON.stringify(canvasItems, null, 2) : "Empty canvas — no components placed yet."}
+## Actions (use JSON code blocks)
 
-## Response Format
-
-Respond with natural language explanation combined with structured commands in JSON code blocks.
-
-### Token Patch — modify design tokens
+### 1. Patch Tokens — modify design variables
 \`\`\`json
-{"patch": {"colors": {"primary": "oklch(0.65 0.20 300)"}, "typography": {"font-display": "'Inter', sans-serif"}}}
+{"patch": {"colors": {"primary": "oklch(0.65 0.20 300)"}, "radius": {"md": "12px"}}}
 \`\`\`
 
-### Add Component — place a component on the canvas
+### 2. Add Component — place on canvas with optional colSpan
 \`\`\`json
-{"addComponent": {"component": "Hero", "props": {"title": "Welcome", "subtitle": "Build something great"}}}
+{"addComponent": {"component": "Hero", "props": {"title": "Welcome"}, "colSpan": 12}}
 \`\`\`
 
-### Switch Preset — apply a named preset
+### 3. Switch Preset — apply a complete visual identity
 \`\`\`json
 {"setPreset": "noir"}
 \`\`\`
 
-Rules:
-- All color values must be in oklch() format when patching tokens.
-- You may combine multiple commands in one response by using multiple JSON code blocks.
-- Always explain what you're changing and why before providing the JSON block.
-- When the user asks for a mood or aesthetic, translate that into concrete token changes.
-- Preset names are case-sensitive and must match exactly.
-- Component names must match the registry exactly (PascalCase).`;
+### 4. Remove Component — remove by ID
+\`\`\`json
+{"removeComponent": "<item-id>"}
+\`\`\`
+
+### 5. Clear Canvas
+\`\`\`json
+{"clearCanvas": true}
+\`\`\`
+
+## Rules
+- All colors must be oklch() format.
+- Preset names are case-sensitive.
+- Component names are PascalCase and must match exactly.
+- colSpan defaults to 12 if omitted.
+- When building a page layout, think about visual hierarchy: Hero at 12, cards at 4 or 6, KPIs at 4, etc.
+- When the user asks for an aesthetic, translate it into concrete token patches and/or a matching preset.
+- Always explain what you're changing before the JSON block.
+- You can combine multiple JSON blocks in one response.
+- For "build me a landing page" type requests, add multiple components with appropriate colSpans.`;
 }
 
 export async function POST(request: Request) {
@@ -105,7 +153,7 @@ export async function POST(request: Request) {
     messages: { role: "user" | "assistant"; content: string }[];
     model: string;
     currentTokens: Record<string, unknown>;
-    canvasItems: unknown[];
+    canvasItems: CanvasEntry[];
   };
 
   const modelKey = VALID_MODELS.has(model) ? model : "gpt-5.4-mini";

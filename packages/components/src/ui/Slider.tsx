@@ -35,7 +35,7 @@ export const Slider = forwardRef<
       <SliderPrimitive.Thumb
         data-slot="slider-thumb"
         className={cn(
-          "block size-4 border-2 border-[var(--s-primary)] bg-[var(--s-background)] shadow-sm",
+          "block size-4 border-2 border-[style:var(--s-border-style,solid)] border-[var(--s-primary)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)]",
           "rounded-[var(--s-radius-full,9999px)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",

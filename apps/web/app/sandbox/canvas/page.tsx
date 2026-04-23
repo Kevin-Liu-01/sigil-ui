@@ -31,12 +31,14 @@ function nextId(): string {
 function createCanvasItem(
   component: string,
   order: number,
+  colSpan: number = 12,
 ): CanvasItemData {
   return {
     id: nextId(),
     component,
     props: COMPONENT_REGISTRY[component]?.defaultProps ?? {},
     order,
+    colSpan,
   };
 }
 
@@ -136,6 +138,12 @@ function FullCanvasInner() {
     setSelectedId(id);
   }, []);
 
+  const handleResize = useCallback((id: string, colSpan: number) => {
+    setItems((prev) =>
+      prev.map((i) => (i.id === id ? { ...i, colSpan } : i)),
+    );
+  }, []);
+
   if (!currentPreset) {
     return (
       <div className="h-dvh flex items-center justify-center bg-[#0a0a0a] text-[#666]">
@@ -171,6 +179,7 @@ function FullCanvasInner() {
             onReorder={handleReorder}
             onRemove={handleRemove}
             onSelect={handleSelect}
+            onResize={handleResize}
             selectedId={selectedId}
           />
         </div>

@@ -24,7 +24,7 @@ import {
   Tabs,
   TabsList,
   TabsTrigger,
-  Select,
+  Select, SelectTrigger, SelectContent, SelectItem, SelectValue,
 } from "@sigil-ui/components";
 import { Copy, Check } from "lucide-react";
 
@@ -93,10 +93,15 @@ const COMPONENT_MAP: Record<string, () => ReactNode> = {
     </Tabs>
   ),
   Select: () => (
-    <Select>
-      <option>React</option>
-      <option>Vue</option>
-      <option>Svelte</option>
+    <Select defaultValue="react">
+      <SelectTrigger>
+        <SelectValue placeholder="Select framework" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="react">React</SelectItem>
+        <SelectItem value="vue">Vue</SelectItem>
+        <SelectItem value="svelte">Svelte</SelectItem>
+      </SelectContent>
     </Select>
   ),
   Calendar: () => (
@@ -200,7 +205,7 @@ const DEFAULT_CODES: Record<string, string> = {
   Spinner: `<LoadingSpinner\n  variant="braille"\n  size="lg"\n/>`,
   Separator: `<Separator />`,
   Tabs: `<Tabs defaultValue="tab1">\n  <TabsList>\n    <TabsTrigger value="tab1">\n      Tab 1\n    </TabsTrigger>\n    <TabsTrigger value="tab2">\n      Tab 2\n    </TabsTrigger>\n  </TabsList>\n</Tabs>`,
-  Select: `<Select>\n  <option>React</option>\n  <option>Vue</option>\n  <option>Svelte</option>\n</Select>`,
+  Select: `<Select defaultValue="react">\n  <SelectTrigger>\n    <SelectValue />\n  </SelectTrigger>\n  <SelectContent>\n    <SelectItem value="react">React</SelectItem>\n    <SelectItem value="vue">Vue</SelectItem>\n    <SelectItem value="svelte">Svelte</SelectItem>\n  </SelectContent>\n</Select>`,
   Calendar: `{days.map(d => (\n  <span\n    style={{\n      background: d === 6\n        ? "var(--s-primary)"\n        : "transparent",\n    }}\n  >\n    {d}\n  </span>\n))}`,
   DataTable: `<table>\n  <thead>\n    <tr>\n      <th>name</th>\n      <th>status</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>alpha</td>\n      <td>ok</td>\n    </tr>\n  </tbody>\n</table>`,
   Dialog: `<Dialog>\n  <DialogTrigger asChild>\n    <Button>Open</Button>\n  </DialogTrigger>\n  <DialogContent>\n    <DialogTitle>Title</DialogTitle>\n  </DialogContent>\n</Dialog>`,

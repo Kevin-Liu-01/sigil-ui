@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { NativeSelect } from "@sigil-ui/components";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
 
@@ -133,23 +134,17 @@ function Segmented<T extends string>({ options, value, onChange }: {
   );
 }
 
-function Select({ value, options, onChange }: {
+function SelectField({ value, options, onChange }: {
   value: string; options: readonly string[]; onChange: (v: string) => void;
 }) {
   return (
-    <select
+    <NativeSelect
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      style={{
-        width: "100%", padding: "4px 6px", fontSize: 11,
-        fontFamily: "var(--s-font-mono)",
-        border: "1px solid var(--s-border)", borderRadius: 4,
-        background: "var(--s-background)", color: "var(--s-text)",
-        cursor: "pointer",
-      }}
+      className="h-auto py-0.5 font-[family-name:var(--s-font-mono)] text-[11px]"
     >
       {options.map((o) => <option key={o} value={o}>{o}</option>)}
-    </select>
+    </NativeSelect>
   );
 }
 
@@ -364,21 +359,21 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           {/* 2. Typography */}
           <Section title="Typography">
             <Row label="display font">
-              <Select
+              <SelectField
                 value={readStr(t, "font-display", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")}
                 options={DISPLAY_FONTS}
                 onChange={(v) => patch("typography", "font-display", `"${v}", system-ui, sans-serif`)}
               />
             </Row>
             <Row label="body font">
-              <Select
+              <SelectField
                 value={readStr(t, "font-body", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")}
                 options={DISPLAY_FONTS}
                 onChange={(v) => patch("typography", "font-body", `"${v}", system-ui, sans-serif`)}
               />
             </Row>
             <Row label="mono font">
-              <Select
+              <SelectField
                 value={readStr(t, "font-mono", "PP Fraktion Mono").split(",")[0]!.replace(/['"]/g, "")}
                 options={MONO_FONTS}
                 onChange={(v) => patch("typography", "font-mono", `"${v}", ui-monospace, monospace`)}
@@ -485,7 +480,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           {/* 6. Shadows */}
           <Section title="Shadows">
             <Row label="card shadow">
-              <Select
+              <SelectField
                 value={readStr(cards, "shadow", "md")}
                 options={SHADOW_OPTIONS}
                 onChange={(v) => patch("cards", "shadow", v)}

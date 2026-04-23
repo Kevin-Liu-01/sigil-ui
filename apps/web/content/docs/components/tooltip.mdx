@@ -6,7 +6,7 @@ description: A brief text label that appears on hover or focus. Built on Radix T
 ## Import
 
 ```tsx
-import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@sigil-ui/components";
+import { Tooltip, TooltipProvider } from "@sigil-ui/components";
 ```
 
 ## Setup
@@ -21,33 +21,31 @@ Wrap your app in `<TooltipProvider>`:
 
 ## Usage
 
+`Tooltip` is a wrapper component. Pass `content` for the tooltip text and a **single element** as children (rendered with `asChild`):
+
 ```tsx
-<Tooltip>
-  <TooltipTrigger asChild>
-    <Button variant="ghost" size="sm">
-      <InfoIcon className="size-4" />
-    </Button>
-  </TooltipTrigger>
-  <TooltipContent>More information</TooltipContent>
+<Tooltip content="More information">
+  <Button variant="ghost" size="sm">
+    <InfoIcon className="size-4" />
+  </Button>
 </Tooltip>
 ```
 
 ## Placement
 
 ```tsx
-<TooltipContent side="top">Above</TooltipContent>
-<TooltipContent side="right">Right</TooltipContent>
-<TooltipContent side="bottom">Below</TooltipContent>
-<TooltipContent side="left">Left</TooltipContent>
+<Tooltip content="Above" side="top"><Button>Top</Button></Tooltip>
+<Tooltip content="Right" side="right"><Button>Right</Button></Tooltip>
+<Tooltip content="Below" side="bottom"><Button>Bottom</Button></Tooltip>
+<Tooltip content="Left" side="left"><Button>Left</Button></Tooltip>
 ```
 
 ## Custom delay
 
 ```tsx
 <TooltipProvider delayDuration={0}>
-  <Tooltip>
-    <TooltipTrigger>Instant tooltip</TooltipTrigger>
-    <TooltipContent>No delay</TooltipContent>
+  <Tooltip content="No delay">
+    <Button>Instant tooltip</Button>
   </Tooltip>
 </TooltipProvider>
 ```
@@ -65,15 +63,14 @@ Wrap your app in `<TooltipProvider>`:
 
 ## Props
 
-### TooltipContent
+### Tooltip
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `content` | `string` | — | Tooltip text |
 | `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side |
-| `align` | `"start" \| "center" \| "end"` | `"center"` | Alignment |
-| `sideOffset` | `number` | `4` | Offset from trigger in px |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Tooltip text |
+| `delayDuration` | `number` | `200` | Open delay in ms |
+| `children` | `ReactNode` | — | Single trigger element (rendered via `asChild`) |
 
 ### TooltipProvider
 
@@ -86,4 +83,5 @@ Wrap your app in `<TooltipProvider>`:
 - Tooltip appears on both hover and focus
 - Content is linked via `aria-describedby`
 - Escape closes the tooltip
+- Children must be a single element (required by `asChild`)
 - Follows WAI-ARIA Tooltip pattern

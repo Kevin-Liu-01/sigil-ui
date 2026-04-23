@@ -35,6 +35,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, HTMLAttributes<HTMLLabelE
     return (
       <label
         ref={ref}
+        data-slot="field-label"
         htmlFor={id}
         className={cn("text-sm font-medium text-[var(--s-text)]", className)}
         {...rest}
@@ -46,7 +47,7 @@ export const FieldLabel = forwardRef<HTMLLabelElement, HTMLAttributes<HTMLLabelE
 export const FieldDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   function FieldDescription({ className, ...rest }, ref) {
     return (
-      <p ref={ref} className={cn("text-xs text-[var(--s-text-muted)]", className)} {...rest} />
+      <p ref={ref} data-slot="field-description" className={cn("text-xs text-[var(--s-text-muted)]", className)} {...rest} />
     );
   },
 );
@@ -58,6 +59,7 @@ export const FieldError = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLPa
     return (
       <p
         ref={ref}
+        data-slot="field-error"
         role="alert"
         className={cn("text-xs font-medium text-[var(--s-error)]", className)}
         {...rest}

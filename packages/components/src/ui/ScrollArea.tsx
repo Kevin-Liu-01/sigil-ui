@@ -1,39 +1,50 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 import { cn } from "../utils";
 
-export interface ScrollAreaProps extends HTMLAttributes<HTMLDivElement> {
-  /** Max height before scrolling activates. */
-  maxHeight?: string | number;
-  children?: ReactNode;
+export interface ScrollAreaProps extends ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root> {
+  /** Orientation of the scrollbar. @default "vertical" */
+  orientation?: "vertical" | "horizontal";
 }
 
-/** Custom scrollbar styling wrapper. */
-export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function ScrollArea(
-  { maxHeight, className, style, children, ...rest },
-  ref,
-) {
+export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(
+  function ScrollArea({ className, children, orientation = "vertical", ...props }, ref) {
+    return (
+      <ScrollAreaPrimitive.Root
+        ref={ref}
+        data-slot="scroll-area"
+        className={cn("relative overflow-hidden", className)}
+        {...props}
+      >
+        <ScrollAreaPrimitive.Viewport className="size-full rounded-[inherit]">
+          {children}
+        </ScrollAreaPrimitive.Viewport>
+        <ScrollBar orientation={orientation} />
+        <ScrollAreaPrimitive.Corner />
+      </ScrollAreaPrimitive.Root>
+    );
+  },
+);
+
+const ScrollBar = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Scrollbar>
+>(function ScrollBar({ className, orientation = "vertical", ...props }, ref) {
   return (
-    <div
+    <ScrollAreaPrimitive.Scrollbar
       ref={ref}
-      data-slot="scroll-area"
+      orientation={orientation}
       className={cn(
-        "overflow-auto",
-        "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2",
-        "[&::-webkit-scrollbar-track]:bg-transparent",
-        "[&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[var(--s-border)]",
-        "[&::-webkit-scrollbar-thumb]:hover:bg-[var(--s-border-strong)]",
-        "scrollbar-thin scrollbar-thumb-[var(--s-border)] scrollbar-track-transparent",
+        "flex touch-none select-none transition-colors duration-[var(--s-duration-fast,150ms)]",
+        orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-px",
+        orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-px",
         className,
       )}
-      style={{
-        maxHeight: typeof maxHeight === "number" ? `${maxHeight}px` : maxHeight,
-        ...style,
-      }}
-      {...rest}
+      {...props}
     >
-      {children}
-    </div>
+      <ScrollAreaPrimitive.Thumb className="relative flex-1 rounded-full bg-[var(--s-border)]" />
+    </ScrollAreaPrimitive.Scrollbar>
   );
 });

@@ -1,0 +1,51 @@
+---
+title: Direction
+description: RTL/LTR context provider and hook for bidirectional layout support.
+---
+
+## Import
+
+```tsx
+import { DirectionProvider, useDirection } from "@sigil-ui/components";
+```
+
+## Usage
+
+Wrap your app (or a subtree) with `DirectionProvider` to set the text direction:
+
+```tsx
+<DirectionProvider dir="rtl">
+  <App />
+</DirectionProvider>
+```
+
+## Reading direction in components
+
+```tsx
+function MyComponent() {
+  const dir = useDirection();
+
+  return (
+    <div className={dir === "rtl" ? "text-right" : "text-left"}>
+      Current direction: {dir}
+    </div>
+  );
+}
+```
+
+## Props
+
+### DirectionProvider
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `dir` | `"ltr" \| "rtl"` | — | Text direction for the subtree |
+| `children` | `ReactNode` | — | Child elements |
+
+### useDirection
+
+```tsx
+function useDirection(): "ltr" | "rtl";
+```
+
+Returns the current direction from the nearest `DirectionProvider`. Defaults to `"ltr"` when no provider is present.

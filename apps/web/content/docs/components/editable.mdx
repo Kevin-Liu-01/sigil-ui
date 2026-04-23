@@ -1,0 +1,62 @@
+---
+title: Editable
+description: Inline-editable text that toggles between a read-only display and a text input on click.
+---
+
+## Import
+
+```tsx
+import { Editable } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Editable defaultValue="Click me to edit" />
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function EditableTitle() {
+  const [title, setTitle] = useState("Untitled");
+
+  return <Editable value={title} onChange={setTitle} />;
+}
+```
+
+## Custom placeholder
+
+```tsx
+<Editable placeholder="Enter a name..." />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Display and input text |
+| `--s-text-muted` | Placeholder text |
+| `--s-border` | Hover underline |
+| `--s-primary` | Active edit underline and focus ring |
+| `--s-radius-sm` | Focus outline radius |
+| `--s-duration-fast` | Hover transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled text value |
+| `defaultValue` | `string` | `""` | Initial value (uncontrolled) |
+| `onChange` | `(value: string) => void` | — | Called when editing is committed |
+| `placeholder` | `string` | `"Click to edit..."` | Shown when value is empty |
+| `disabled` | `boolean` | `false` | Prevent editing |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Press **Enter** to commit; **Escape** to cancel
+- Blur commits the current value
+- Focus-visible ring on the display button for keyboard users

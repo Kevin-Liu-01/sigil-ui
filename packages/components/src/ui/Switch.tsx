@@ -39,7 +39,7 @@ export const Switch = forwardRef<
       id={id}
       data-slot="switch"
       className={cn(
-        "peer inline-flex shrink-0 cursor-pointer items-center rounded-full",
+        "peer inline-flex shrink-0 cursor-pointer items-center rounded-[var(--s-radius-full,9999px)]",
         "border-2 border-transparent",
         "bg-[var(--s-border)] data-[state=checked]:bg-[var(--s-primary)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
@@ -53,7 +53,7 @@ export const Switch = forwardRef<
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          "pointer-events-none block rounded-full bg-[var(--s-background)] shadow-sm ring-0",
+          "pointer-events-none block rounded-[var(--s-radius-full,9999px)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)] ring-0",
           "transition-transform duration-[var(--s-duration-fast,150ms)]",
           "data-[state=unchecked]:translate-x-0",
           s.thumb,

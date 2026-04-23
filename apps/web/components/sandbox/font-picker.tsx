@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { NativeSelect } from "@sigil-ui/components";
 
 type FontCategory = "display" | "body" | "mono";
 
@@ -98,28 +99,17 @@ function FontRow({
       >
         {label}
       </div>
-      <select
+      <NativeSelect
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          width: "100%",
-          padding: "6px 8px",
-          fontSize: 12,
-          border: "1px solid var(--s-border)",
-          borderRadius: 6,
-          background: "var(--s-surface)",
-          color: "var(--s-text)",
-          cursor: "pointer",
-          outline: "none",
-          fontFamily: "var(--s-font-body)",
-        }}
+        className="text-xs"
       >
         {options.map((opt) => (
           <option key={opt.name} value={opt.family}>
             {opt.name} {opt.category !== "sans" ? `(${opt.category})` : ""}
           </option>
         ))}
-      </select>
+      </NativeSelect>
       <div
         style={{
           marginTop: 6,

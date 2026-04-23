@@ -28,7 +28,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
         data-slot="date-picker"
         className={cn(
           "inline-flex h-10 w-[240px] cursor-pointer items-center justify-between px-3",
-          "rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
+          "rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           "bg-[var(--s-surface)] text-sm text-[var(--s-text)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:border-[var(--s-border-strong)]",

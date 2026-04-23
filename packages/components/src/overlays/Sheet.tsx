@@ -1,195 +1,116 @@
 "use client";
 
-import {
-  createContext,
-  forwardRef,
-  useCallback,
-  useContext,
-  useEffect,
-  useId,
-  useState,
-  type HTMLAttributes,
-  type ReactNode,
-} from "react";
+import { forwardRef, type ComponentPropsWithoutRef, type HTMLAttributes } from "react";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { cn } from "../utils";
 
-type SheetSide = "left" | "right" | "top" | "bottom";
+export const Sheet = SheetPrimitive.Root;
+export const SheetTrigger = SheetPrimitive.Trigger;
+export const SheetClose = SheetPrimitive.Close;
 
-interface SheetContextValue {
-  open: boolean;
-  setOpen: (v: boolean) => void;
-  side: SheetSide;
-  titleId: string;
-  descId: string;
-}
+export type SheetProps = ComponentPropsWithoutRef<typeof SheetPrimitive.Root>;
+export type SheetTriggerProps = ComponentPropsWithoutRef<typeof SheetPrimitive.Trigger>;
 
-const SheetContext = createContext<SheetContextValue | null>(null);
-
-function useSheetContext() {
-  const ctx = useContext(SheetContext);
-  if (!ctx) throw new Error("Sheet compound components must be used within <Sheet>");
-  return ctx;
-}
-
-export interface SheetProps {
-  /** Controlled open state. */
-  open?: boolean;
-  /** Callback when open state changes. */
-  onOpenChange?: (open: boolean) => void;
-  /** Which side the sheet slides from. @default "right" */
-  side?: SheetSide;
-  children: ReactNode;
-}
-
-/** Slide-out panel (side drawer) provider. */
-export function Sheet({ open: controlledOpen, onOpenChange, side = "right", children }: SheetProps) {
-  const [internalOpen, setInternalOpen] = useState(false);
-  const baseId = useId();
-  const isOpen = controlledOpen ?? internalOpen;
-
-  const setOpen = useCallback(
-    (v: boolean) => {
-      if (controlledOpen === undefined) setInternalOpen(v);
-      onOpenChange?.(v);
-    },
-    [controlledOpen, onOpenChange],
-  );
-
+const SheetOverlay = forwardRef<
+  HTMLDivElement,
+  ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
+>(function SheetOverlay({ className, ...props }, ref) {
   return (
-    <SheetContext.Provider value={{ open: isOpen, setOpen, side, titleId: `${baseId}-title`, descId: `${baseId}-desc` }}>
-      {children}
-    </SheetContext.Provider>
+    <SheetPrimitive.Overlay
+      ref={ref}
+      className={cn(
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out",
+        "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        className,
+      )}
+      {...props}
+    />
   );
+});
+
+const sideVariants = {
+  right: "inset-y-0 right-0 h-full w-3/4 max-w-sm border-l data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right",
+  left: "inset-y-0 left-0 h-full w-3/4 max-w-sm border-r data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left",
+  top: "inset-x-0 top-0 w-full max-h-[50vh] border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
+  bottom: "inset-x-0 bottom-0 w-full max-h-[50vh] border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
+} as const;
+
+export interface SheetContentProps
+  extends ComponentPropsWithoutRef<typeof SheetPrimitive.Content> {
+  side?: keyof typeof sideVariants;
 }
 
-export interface SheetTriggerProps extends HTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
-}
-
-/** Button that opens the sheet. */
-export const SheetTrigger = forwardRef<HTMLButtonElement, SheetTriggerProps>(
-  function SheetTrigger({ className, children, onClick, ...rest }, ref) {
-    const { setOpen } = useSheetContext();
-    return (
-      <button
-        ref={ref}
-        type="button"
-        onClick={(e) => {
-          setOpen(true);
-          onClick?.(e);
-        }}
-        className={className}
-        {...rest}
-      >
-        {children}
-      </button>
-    );
-  },
-);
-
-const slideTransforms: Record<SheetSide, { open: string; closed: string }> = {
-  right: { open: "translateX(0)", closed: "translateX(100%)" },
-  left: { open: "translateX(0)", closed: "translateX(-100%)" },
-  top: { open: "translateY(0)", closed: "translateY(-100%)" },
-  bottom: { open: "translateY(0)", closed: "translateY(100%)" },
-};
-
-const sidePositions: Record<SheetSide, string> = {
-  right: "right-0 top-0 bottom-0 h-full w-full max-w-sm",
-  left: "left-0 top-0 bottom-0 h-full w-full max-w-sm",
-  top: "top-0 left-0 right-0 w-full max-h-[50vh]",
-  bottom: "bottom-0 left-0 right-0 w-full max-h-[50vh]",
-};
-
-export interface SheetContentProps extends HTMLAttributes<HTMLDivElement> {
-  children: ReactNode;
-}
-
-/** Sheet content panel. */
 export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
-  function SheetContent({ className, children, ...rest }, ref) {
-    const { open, setOpen, side, titleId, descId } = useSheetContext();
-    const transforms = slideTransforms[side];
-
-    useEffect(() => {
-      if (!open) return;
-      const handleEsc = (e: KeyboardEvent) => {
-        if (e.key === "Escape") setOpen(false);
-      };
-      document.addEventListener("keydown", handleEsc);
-      document.body.style.overflow = "hidden";
-      return () => {
-        document.removeEventListener("keydown", handleEsc);
-        document.body.style.overflow = "";
-      };
-    }, [open, setOpen]);
-
-    if (!open) return null;
-
+  function SheetContent({ side = "right", className, children, ...props }, ref) {
     return (
-      <div className="fixed inset-0 z-50">
-        <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-[var(--s-duration-normal,200ms)]"
-          onClick={() => setOpen(false)}
-          aria-hidden
-        />
-        <div
+      <SheetPrimitive.Portal>
+        <SheetOverlay />
+        <SheetPrimitive.Content
           ref={ref}
           data-slot="sheet"
-          role="dialog"
-          aria-modal
-          aria-labelledby={titleId}
-          aria-describedby={descId}
           className={cn(
-            "fixed z-10 p-6 bg-[var(--s-background)] border-[var(--s-border)] border-[style:var(--s-border-style,solid)] shadow-[var(--s-shadow-lg)]",
+            "fixed z-50 flex flex-col gap-4 p-6",
+            "bg-[var(--s-background)] border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "shadow-[var(--s-shadow-lg)]",
             "transition-transform duration-[var(--s-duration-normal,200ms)] ease-out",
-            side === "left" || side === "right" ? "border-x" : "border-y",
-            sidePositions[side],
+            "data-[state=open]:animate-in data-[state=closed]:animate-out",
+            sideVariants[side],
             className,
           )}
-          style={{ transform: open ? transforms.open : transforms.closed }}
-          {...rest}
+          {...props}
         >
-          <button
-            type="button"
-            onClick={() => setOpen(false)}
-            className="absolute top-4 right-4 text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors"
-            aria-label="Close"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
           {children}
-        </div>
-      </div>
+          <SheetPrimitive.Close
+            className={cn(
+              "absolute right-4 top-4 rounded-[var(--s-radius-sm,0px)] opacity-70",
+              "transition-opacity hover:opacity-100",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+            )}
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
+              <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="sr-only">Close</span>
+          </SheetPrimitive.Close>
+        </SheetPrimitive.Content>
+      </SheetPrimitive.Portal>
     );
   },
 );
 
-/** Sheet header section. */
 export const SheetHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  function SheetHeader({ className, ...rest }, ref) {
-    return <div ref={ref} className={cn("flex flex-col gap-1.5 mb-4", className)} {...rest} />;
-  },
-);
-
-/** Sheet title. */
-export const SheetTitle = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingElement>>(
-  function SheetTitle({ className, ...rest }, ref) {
-    const { titleId } = useSheetContext();
+  function SheetHeader({ className, ...props }, ref) {
     return (
-      <h2 ref={ref} id={titleId} className={cn("text-lg font-semibold text-[var(--s-text)]", className)} {...rest} />
+      <div ref={ref} data-slot="sheet-header" className={cn("flex flex-col gap-1.5", className)} {...props} />
     );
   },
 );
 
-/** Sheet description. */
-export const SheetDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
-  function SheetDescription({ className, ...rest }, ref) {
-    const { descId } = useSheetContext();
-    return (
-      <p ref={ref} id={descId} className={cn("text-sm text-[var(--s-text-muted)]", className)} {...rest} />
-    );
-  },
-);
+export const SheetTitle = forwardRef<
+  HTMLHeadingElement,
+  ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
+>(function SheetTitle({ className, ...props }, ref) {
+  return (
+    <SheetPrimitive.Title
+      ref={ref}
+      data-slot="sheet-title"
+      className={cn("text-lg font-semibold text-[var(--s-text)]", className)}
+      {...props}
+    />
+  );
+});
+
+export const SheetDescription = forwardRef<
+  HTMLParagraphElement,
+  ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
+>(function SheetDescription({ className, ...props }, ref) {
+  return (
+    <SheetPrimitive.Description
+      ref={ref}
+      data-slot="sheet-description"
+      className={cn("text-sm text-[var(--s-text-muted)]", className)}
+      {...props}
+    />
+  );
+});

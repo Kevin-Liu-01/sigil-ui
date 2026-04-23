@@ -11,7 +11,7 @@ An opinionated design language and token-driven component system. 70+ components
 Every AI-coded site looks the same — and it's because design systems give agents components without opinions. Sigil is different: visual identity is a first-class primitive, encoded in a structured token spec that agents can read, reason about, and modify. The agent doesn't need taste. The preset has taste.
 
 ```
-shadcn:   copy components → manually edit each one → drift → everything looks the same
+others:   copy components → manually edit each one → drift → everything looks the same
 Sigil:    install preset → all components inherit → agent edits token doc → distinct visual identity
 ```
 

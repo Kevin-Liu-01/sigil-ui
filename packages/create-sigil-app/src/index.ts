@@ -106,7 +106,7 @@ program
       projectDir = name;
     }
 
-    const projectPath = path.resolve(projectDir);
+    const projectPath = path.resolve(projectDir!);
     const projectName = path.basename(projectPath);
 
     if (fs.existsSync(projectPath) && fs.readdirSync(projectPath).length > 0) {

@@ -20,7 +20,7 @@ export const SocialIcons = forwardRef<HTMLDivElement, SocialIconsProps>(
   function SocialIcons({ links, size = "md", className, ...rest }, ref) {
     const s = sizes[size];
     return (
-      <div ref={ref} className={cn("flex items-center gap-2", className)} {...rest}>
+      <div ref={ref} data-slot="social-icons" className={cn("flex items-center gap-2", className)} {...rest}>
         {links.map((link) => (
           <a
             key={link.label}

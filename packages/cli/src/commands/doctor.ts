@@ -26,7 +26,7 @@ export const doctorCommand = new Command("doctor")
     results.push(checkComponentsDir(cwd));
     results.push(await checkComponentDeps(cwd));
     results.push(checkCssImport(cwd));
-    results.push(checkPreset(cwd));
+    results.push(await checkPreset(cwd));
 
     const passes = results.filter((r) => r.status === "pass");
     const warns = results.filter((r) => r.status === "warn");
@@ -187,7 +187,7 @@ function checkCssImport(cwd: string): DiagnosticResult {
   };
 }
 
-function checkPreset(cwd: string): DiagnosticResult {
+async function checkPreset(cwd: string): Promise<DiagnosticResult> {
   const config = readConfig(cwd);
   if (!config) {
     return { label: "Preset", status: "fail", message: "No config" };

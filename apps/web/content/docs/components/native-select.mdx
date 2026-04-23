@@ -1,0 +1,81 @@
+---
+title: NativeSelect
+description: Styled native HTML select element with error state support. Lightweight alternative to the Radix-based Select.
+---
+
+## Import
+
+```tsx
+import { NativeSelect } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<NativeSelect>
+  <option value="">Choose a plan</option>
+  <option value="free">Free</option>
+  <option value="pro">Pro</option>
+  <option value="enterprise">Enterprise</option>
+</NativeSelect>
+```
+
+## With error
+
+```tsx
+<NativeSelect error="Please select a plan">
+  <option value="">Choose a plan</option>
+  <option value="free">Free</option>
+  <option value="pro">Pro</option>
+</NativeSelect>
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function PlanSelect() {
+  const [plan, setPlan] = useState("");
+
+  return (
+    <NativeSelect value={plan} onChange={(e) => setPlan(e.target.value)}>
+      <option value="">Choose a plan</option>
+      <option value="free">Free</option>
+      <option value="pro">Pro</option>
+    </NativeSelect>
+  );
+}
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-input-height` | Select height |
+| `--s-radius-input` / `--s-radius-md` | Border radius |
+| `--s-border` | Default border |
+| `--s-border-style` | Border style |
+| `--s-background` | Select background |
+| `--s-surface` | Disabled background |
+| `--s-text` | Selected text |
+| `--s-text-muted` | Chevron and disabled text |
+| `--s-primary` | Focus ring and border |
+| `--s-error` | Error border, ring, and message |
+| `--s-duration-fast` | Focus transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `error` | `string \| boolean` | — | Error message string or boolean flag. Renders `aria-invalid` and an error `<p>` when a string is provided. |
+| `disabled` | `boolean` | `false` | Disable the select |
+| `children` | `ReactNode` | — | `<option>` and `<optgroup>` elements |
+| `className` | `string` | — | Additional CSS classes |
+
+Extends all native `<select>` attributes.
+
+## Accessibility
+
+- Sets `aria-invalid` when `error` is truthy
+- Error message uses `role="alert"` for screen reader announcements

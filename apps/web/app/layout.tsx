@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "ai agents",
     "presets",
     "token-driven",
-    "shadcn alternative",
+    "component library",
   ],
   authors: [{ name: "Kevin Liu", url: "https://kevinliu.me" }],
   creator: "Kevin Liu",

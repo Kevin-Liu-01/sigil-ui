@@ -34,7 +34,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
       ref={ref}
       data-slot="terminal"
       className={cn(
-        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
+        "rounded-[var(--s-radius-card,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
         "bg-[var(--s-background)] font-[family:var(--s-code-font-family,ui-monospace,SFMono-Regular,monospace)] text-sm",
         className,
       )}
@@ -43,9 +43,9 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
       <div className="flex items-center justify-between px-4 py-2 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-            <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
-            <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+            <span className="w-3 h-3 rounded-full bg-[var(--s-error)]" />
+            <span className="w-3 h-3 rounded-full bg-[var(--s-warning)]" />
+            <span className="w-3 h-3 rounded-full bg-[var(--s-success)]" />
           </div>
           <span className="text-xs text-[var(--s-text-muted)] ml-2">{title}</span>
         </div>
@@ -53,7 +53,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
           <button
             type="button"
             onClick={handleCopy}
-            className="cursor-pointer text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors px-2 py-1 rounded-[var(--s-radius-sm,4px)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]"
+            className="cursor-pointer text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)] px-2 py-1 rounded-[var(--s-radius-sm,4px)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]"
             aria-label="Copy to clipboard"
           >
             {copied ? "Copied!" : "Copy"}

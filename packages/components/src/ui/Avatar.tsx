@@ -1,11 +1,9 @@
 "use client";
 
-import { forwardRef, useState, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cn } from "../utils";
 
-// ---------------------------------------------------------------------------
-// Size map
-// ---------------------------------------------------------------------------
 const sizeMap = {
   sm: "size-8 text-xs",
   md: "size-10 text-sm",
@@ -13,13 +11,9 @@ const sizeMap = {
   xl: "size-16 text-lg",
 } as const;
 
-// ---------------------------------------------------------------------------
-// Avatar
-// ---------------------------------------------------------------------------
-export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
+export interface AvatarProps extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root> {
   src?: string;
   alt?: string;
-  /** Full name — used to derive initials and as default alt text. */
   name?: string;
   fallback?: string;
   /** @default "md" */
@@ -32,18 +26,16 @@ function getInitials(name: string): string {
   return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
 }
 
-export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
-  { src, alt, name, fallback, size = "md", className, ...rest },
+export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
+  { src, alt, name, fallback, size = "md", className, ...props },
   ref,
 ) {
-  const [imgError, setImgError] = useState(false);
-  const showImage = src && !imgError;
   const resolvedAlt = alt ?? name ?? "";
   const resolvedFallback =
     fallback ?? (name ? getInitials(name) : alt?.charAt(0)?.toUpperCase() ?? "?");
 
   return (
-    <div
+    <AvatarPrimitive.Root
       ref={ref}
       data-slot="avatar"
       className={cn(
@@ -51,37 +43,30 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
         sizeMap[size],
         className,
       )}
-      {...rest}
+      {...props}
     >
-      {showImage ? (
-        <img
+      {src && (
+        <AvatarPrimitive.Image
           data-slot="avatar-image"
           src={src}
           alt={resolvedAlt}
-          onError={() => setImgError(true)}
           className="aspect-square size-full object-cover"
         />
-      ) : (
-        <span
-          data-slot="avatar-fallback"
-          className="flex size-full items-center justify-center bg-[var(--s-surface)] text-[var(--s-text-muted)] text-sm font-medium select-none"
-        >
-          {resolvedFallback}
-        </span>
       )}
-    </div>
+      <AvatarPrimitive.Fallback
+        data-slot="avatar-fallback"
+        className="flex size-full items-center justify-center bg-[var(--s-surface)] text-[var(--s-text-muted)] font-medium select-none"
+      >
+        {resolvedFallback}
+      </AvatarPrimitive.Fallback>
+    </AvatarPrimitive.Root>
   );
 });
 
-// ---------------------------------------------------------------------------
-// AvatarGroup
-// ---------------------------------------------------------------------------
-export interface AvatarGroupProps extends HTMLAttributes<HTMLDivElement> {
-  /** Max avatars to show before "+N" overflow badge. -1 = show all. @default -1 */
+export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
   max?: number;
-  /** Size passed to child Avatars for the overflow badge. @default "md" */
   size?: keyof typeof sizeMap;
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(

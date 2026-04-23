@@ -164,9 +164,9 @@ export const CarouselPrevious = forwardRef<HTMLButtonElement, CarouselButtonProp
         disabled={!canScrollPrev}
         onClick={scrollPrev}
         className={cn(
-          "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-full",
+          "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-[var(--s-radius-full,9999px)]",
           "border border-[var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
-          "shadow-[var(--s-shadow-sm)] transition-colors duration-150",
+          "shadow-[var(--s-shadow-sm)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-primary)]/10 disabled:opacity-40 disabled:pointer-events-none",
           orientation === "vertical"
             ? "-top-10 left-1/2 -translate-x-1/2"
@@ -200,9 +200,9 @@ export const CarouselNext = forwardRef<HTMLButtonElement, CarouselButtonProps>(
         disabled={!canScrollNext}
         onClick={scrollNext}
         className={cn(
-          "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-full",
+          "absolute z-10 inline-flex h-8 w-8 items-center justify-center rounded-[var(--s-radius-full,9999px)]",
           "border border-[var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
-          "shadow-[var(--s-shadow-sm)] transition-colors duration-150",
+          "shadow-[var(--s-shadow-sm)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-primary)]/10 disabled:opacity-40 disabled:pointer-events-none",
           orientation === "vertical"
             ? "-bottom-10 left-1/2 -translate-x-1/2"

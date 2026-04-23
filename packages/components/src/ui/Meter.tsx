@@ -39,7 +39,7 @@ export const Meter = forwardRef<HTMLDivElement, MeterProps>(function Meter(
         className="relative h-2.5 w-full overflow-hidden rounded-full bg-[var(--s-border)]"
       >
         <div
-          className={cn("h-full rounded-full transition-[width] duration-300 ease-out", fill)}
+          className={cn("h-full rounded-full transition-[width] duration-[var(--s-duration-normal,300ms)] ease-out", fill)}
           style={{ width: `${pct}%` }}
         />
       </div>

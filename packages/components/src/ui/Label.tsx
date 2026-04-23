@@ -1,21 +1,19 @@
 "use client";
 
-import { forwardRef, type LabelHTMLAttributes, type ReactNode } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import * as LabelPrimitive from "@radix-ui/react-label";
 import { cn } from "../utils";
 
-export interface LabelProps extends LabelHTMLAttributes<HTMLLabelElement> {
-  /** Show a required asterisk indicator. */
+export interface LabelProps extends ComponentPropsWithoutRef<typeof LabelPrimitive.Root> {
   required?: boolean;
-  children?: ReactNode;
 }
 
-/** Form label with optional required indicator. */
 export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
-  { required, className, children, ...rest },
+  { required, className, children, ...props },
   ref,
 ) {
   return (
-    <label
+    <LabelPrimitive.Root
       ref={ref}
       data-slot="label"
       className={cn(
@@ -23,7 +21,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
         "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
         className,
       )}
-      {...rest}
+      {...props}
     >
       {children}
       {required && (
@@ -31,6 +29,6 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
           *
         </span>
       )}
-    </label>
+    </LabelPrimitive.Root>
   );
 });

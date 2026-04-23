@@ -24,8 +24,9 @@ export const CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentP
     return (
       <CollapsiblePrimitive.Content
         ref={ref}
+        data-slot="collapsible-content"
         className={cn(
-          "overflow-hidden",
+          "overflow-hidden text-[var(--s-text)]",
           "data-[state=open]:animate-[collapsibleOpen_200ms_ease-out]",
           "data-[state=closed]:animate-[collapsibleClose_200ms_ease-out]",
           className,

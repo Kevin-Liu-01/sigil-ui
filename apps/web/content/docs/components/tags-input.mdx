@@ -1,0 +1,68 @@
+---
+title: TagsInput
+description: Multi-value text input that converts typed entries into removable tags. Supports controlled and uncontrolled modes.
+---
+
+## Import
+
+```tsx
+import { TagsInput } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<TagsInput placeholder="Add a tag..." />
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function SkillTags() {
+  const [tags, setTags] = useState(["React", "TypeScript"]);
+
+  return <TagsInput value={tags} onChange={setTags} />;
+}
+```
+
+## With max limit
+
+```tsx
+<TagsInput defaultValue={["alpha"]} max={5} placeholder="Max 5 tags" />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-input-height` | Minimum container height |
+| `--s-radius-input` / `--s-radius-md` | Container border radius |
+| `--s-radius-sm` | Individual tag radius |
+| `--s-border` | Container and tag borders |
+| `--s-border-style` | Border style |
+| `--s-background` | Container background |
+| `--s-surface` | Tag background |
+| `--s-text` | Input and tag text |
+| `--s-text-muted` | Placeholder and remove button |
+| `--s-primary` | Focus ring and border |
+| `--s-duration-fast` | Focus transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string[]` | — | Controlled tag list |
+| `defaultValue` | `string[]` | `[]` | Initial tags (uncontrolled) |
+| `onChange` | `(tags: string[]) => void` | — | Called when tags change |
+| `placeholder` | `string` | `"Add tag..."` | Input placeholder (shown when empty) |
+| `disabled` | `boolean` | `false` | Disable input and tag removal |
+| `max` | `number` | — | Maximum number of tags |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Tags are removable via their close button with an `aria-label` of "Remove {tag}"
+- Pressing **Enter** or **,** adds a tag; **Backspace** on an empty input removes the last tag
+- Clicking anywhere in the container focuses the input

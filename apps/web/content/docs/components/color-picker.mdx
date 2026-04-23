@@ -1,0 +1,74 @@
+---
+title: ColorPicker
+description: Color selector with a hex text input, color preview swatch, and optional preset palette.
+---
+
+## Import
+
+```tsx
+import { ColorPicker } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ColorPicker />
+```
+
+## Controlled
+
+```tsx
+import { useState } from "react";
+
+function BrandColor() {
+  const [color, setColor] = useState("#8b5cf6");
+
+  return <ColorPicker value={color} onChange={setColor} />;
+}
+```
+
+## Custom swatches
+
+```tsx
+<ColorPicker
+  swatches={["#0f172a", "#1e293b", "#334155", "#64748b", "#94a3b8"]}
+/>
+```
+
+## No swatches
+
+```tsx
+<ColorPicker swatches={[]} />
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-radius-md` | Color preview swatch radius |
+| `--s-radius-sm` | Swatch button radius |
+| `--s-radius-input` | Text input radius |
+| `--s-input-height` | Text input height |
+| `--s-border` | Preview and input borders |
+| `--s-border-style` | Border style |
+| `--s-background` | Input background |
+| `--s-text` | Input text |
+| `--s-primary` | Focus ring, selected swatch ring |
+| `--s-duration-fast` | Hover and focus transitions |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Controlled color value (hex string) |
+| `defaultValue` | `string` | `"#3b82f6"` | Initial color (uncontrolled) |
+| `onChange` | `(color: string) => void` | — | Called on color change |
+| `swatches` | `string[]` | 10 default colors | Preset color palette |
+| `disabled` | `boolean` | `false` | Disable all interactions |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Each swatch button has an `aria-label` with its hex value
+- Active swatch is visually highlighted with a ring
+- Focus-visible ring on swatch buttons for keyboard navigation

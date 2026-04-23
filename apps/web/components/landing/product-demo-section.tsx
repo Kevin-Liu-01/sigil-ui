@@ -305,10 +305,10 @@ function DemoFeatureGrid() {
               <div className="mt-4">
                 <ComparisonTable
                   features={[
-                    { name: "Full isolation", values: [true, false, false] },
-                    { name: "Root access", values: [true, false, false] },
-                    { name: "GPU support", values: [true, true, false] },
-                    { name: "Custom kernel", values: [true, false, false] },
+                    { name: "Full isolation", values: { "Sigil VM": true, "Docker": false, "V8": false } },
+                    { name: "Root access", values: { "Sigil VM": true, "Docker": false, "V8": false } },
+                    { name: "GPU support", values: { "Sigil VM": true, "Docker": true, "V8": false } },
+                    { name: "Custom kernel", values: { "Sigil VM": true, "Docker": false, "V8": false } },
                   ]}
                   columns={["Sigil VM", "Docker", "V8"]}
                 />

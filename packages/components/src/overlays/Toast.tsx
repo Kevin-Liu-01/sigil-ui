@@ -1,15 +1,14 @@
 "use client";
 
 import {
-  createContext,
   forwardRef,
   useCallback,
-  useContext,
   useEffect,
   useState,
+  type ComponentPropsWithoutRef,
   type HTMLAttributes,
-  type ReactNode,
 } from "react";
+import * as ToastPrimitive from "@radix-ui/react-toast";
 import { cn } from "../utils";
 
 type ToastVariant = "default" | "success" | "error" | "warning" | "info";
@@ -24,17 +23,9 @@ interface ToastItem {
   duration: number;
 }
 
-interface ToastContextValue {
-  toasts: ToastItem[];
-  addToast: (toast: Omit<ToastItem, "id">) => void;
-  removeToast: (id: string) => void;
-}
+let listeners: Array<(t: ToastItem) => void> = [];
+let idCounter = 0;
 
-const ToastContext = createContext<ToastContextValue | null>(null);
-
-let globalAddToast: ToastContextValue["addToast"] | null = null;
-
-/** Imperative toast function — call from anywhere after mounting <Toaster>. */
 export function toast(options: {
   title: string;
   description?: string;
@@ -42,79 +33,16 @@ export function toast(options: {
   fill?: ToastFill;
   duration?: number;
 }) {
-  globalAddToast?.({
+  const item: ToastItem = {
+    id: `toast-${++idCounter}`,
     title: options.title,
     description: options.description,
     variant: options.variant ?? "default",
     fill: options.fill ?? "outline",
     duration: options.duration ?? 4000,
-  });
+  };
+  listeners.forEach((fn) => fn(item));
 }
-
-let idCounter = 0;
-
-export interface ToasterProps extends HTMLAttributes<HTMLDivElement> {
-  /** Position of the toast stack. @default "bottom-right" */
-  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center" | "bottom-center";
-}
-
-const positionStyles: Record<string, string> = {
-  "top-right": "top-4 right-4",
-  "top-left": "top-4 left-4",
-  "bottom-right": "bottom-4 right-4",
-  "bottom-left": "bottom-4 left-4",
-  "top-center": "top-4 left-1/2 -translate-x-1/2",
-  "bottom-center": "bottom-4 left-1/2 -translate-x-1/2",
-};
-
-/** Toast notification container — mount once at the root of your app. */
-export const Toaster = forwardRef<HTMLDivElement, ToasterProps>(function Toaster(
-  { position = "bottom-right", className, ...rest },
-  ref,
-) {
-  const [toasts, setToasts] = useState<ToastItem[]>([]);
-
-  const addToast = useCallback((t: Omit<ToastItem, "id">) => {
-    const id = `toast-${++idCounter}`;
-    setToasts((prev) => [...prev, { ...t, fill: t.fill ?? "outline", id }]);
-  }, []);
-
-  const removeToast = useCallback((id: string) => {
-    setToasts((prev) => prev.filter((t) => t.id !== id));
-  }, []);
-
-  useEffect(() => {
-    globalAddToast = addToast;
-    return () => {
-      globalAddToast = null;
-    };
-  }, [addToast]);
-
-  return (
-    <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
-      <div
-        ref={ref}
-        data-slot="toast"
-        className={cn("fixed z-[100] flex flex-col gap-2 pointer-events-none", positionStyles[position], className)}
-        {...rest}
-      >
-        {toasts.map((t) => (
-          <ToastNotification key={t.id} toast={t} onRemove={removeToast} />
-        ))}
-      </div>
-      <style>{`
-        @keyframes toastIn {
-          from { opacity: 0; transform: translateY(8px) scale(0.95); }
-          to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes toastOut {
-          from { opacity: 1; transform: translateY(0) scale(1); }
-          to { opacity: 0; transform: translateY(-8px) scale(0.95); }
-        }
-      `}</style>
-    </ToastContext.Provider>
-  );
-});
 
 const variantColors: Record<ToastVariant, string> = {
   default: "var(--s-border)",
@@ -124,7 +52,7 @@ const variantColors: Record<ToastVariant, string> = {
   info: "var(--s-info)",
 };
 
-function toastFillStyle(variant: ToastVariant, fill: ToastFill): React.CSSProperties {
+function toastStyle(variant: ToastVariant, fill: ToastFill): React.CSSProperties {
   const c = variantColors[variant];
   switch (fill) {
     case "filled":
@@ -137,55 +65,83 @@ function toastFillStyle(variant: ToastVariant, fill: ToastFill): React.CSSProper
   }
 }
 
-function ToastNotification({
-  toast: t,
-  onRemove,
-}: {
-  toast: ToastItem;
-  onRemove: (id: string) => void;
-}) {
-  const [leaving, setLeaving] = useState(false);
+export interface ToasterProps extends HTMLAttributes<HTMLOListElement> {
+  position?: "top-right" | "top-left" | "bottom-right" | "bottom-left" | "top-center" | "bottom-center";
+}
+
+const positionStyles: Record<string, string> = {
+  "top-right": "top-0 right-0",
+  "top-left": "top-0 left-0",
+  "bottom-right": "bottom-0 right-0",
+  "bottom-left": "bottom-0 left-0",
+  "top-center": "top-0 left-1/2 -translate-x-1/2",
+  "bottom-center": "bottom-0 left-1/2 -translate-x-1/2",
+};
+
+export const Toaster = forwardRef<HTMLOListElement, ToasterProps>(function Toaster(
+  { position = "bottom-right", className, ...props },
+  ref,
+) {
+  const [toasts, setToasts] = useState<ToastItem[]>([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLeaving(true), t.duration);
-    return () => clearTimeout(timer);
-  }, [t.duration]);
+    const handler = (t: ToastItem) => setToasts((prev) => [...prev, t]);
+    listeners.push(handler);
+    return () => {
+      listeners = listeners.filter((fn) => fn !== handler);
+    };
+  }, []);
 
-  useEffect(() => {
-    if (leaving) {
-      const timer = setTimeout(() => onRemove(t.id), 200);
-      return () => clearTimeout(timer);
-    }
-  }, [leaving, onRemove, t.id]);
+  const remove = useCallback((id: string) => {
+    setToasts((prev) => prev.filter((t) => t.id !== id));
+  }, []);
 
   return (
-    <div
-      role="alert"
-      className={cn(
-        "pointer-events-auto w-80 rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] p-4",
-        "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
-        leaving ? "animate-[toastOut_200ms_ease-in_forwards]" : "animate-[toastIn_200ms_ease-out]",
-      )}
-      style={toastFillStyle(t.variant, t.fill)}
-    >
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex-1">
-          <p className="text-sm font-medium text-[var(--s-text)]">{t.title}</p>
-          {t.description && (
-            <p className="mt-1 text-xs text-[var(--s-text-muted)]">{t.description}</p>
+    <ToastPrimitive.Provider swipeDirection="right">
+      {toasts.map((t) => (
+        <ToastPrimitive.Root
+          key={t.id}
+          duration={t.duration}
+          onOpenChange={(open) => { if (!open) remove(t.id); }}
+          data-slot="toast"
+          className={cn(
+            "group pointer-events-auto relative flex w-full items-center justify-between gap-2 overflow-hidden",
+            "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] p-4",
+            "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
+            "data-[state=open]:animate-in data-[state=open]:slide-in-from-top-full data-[state=open]:fade-in-0",
+            "data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full",
+            "data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)]",
+            "data-[swipe=end]:animate-out data-[swipe=end]:slide-out-to-right-full",
+            "transition-all",
           )}
-        </div>
-        <button
-          type="button"
-          onClick={() => setLeaving(true)}
-          className="shrink-0 text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors"
-          aria-label="Dismiss"
+          style={toastStyle(t.variant, t.fill)}
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </button>
-      </div>
-    </div>
+          <div className="flex-1">
+            <p className="text-sm font-medium text-[var(--s-text)]">{t.title}</p>
+            {t.description && (
+              <p className="mt-1 text-xs text-[var(--s-text-muted)]">{t.description}</p>
+            )}
+          </div>
+          <ToastPrimitive.Close
+            className="shrink-0 text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors"
+            aria-label="Dismiss"
+          >
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+              <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            </svg>
+          </ToastPrimitive.Close>
+        </ToastPrimitive.Root>
+      ))}
+      <ToastPrimitive.Viewport
+        ref={ref}
+        data-slot="toast-viewport"
+        className={cn(
+          "fixed z-[100] flex max-h-screen w-full flex-col-reverse gap-2 p-4 sm:max-w-[420px]",
+          positionStyles[position],
+          className,
+        )}
+        {...props}
+      />
+    </ToastPrimitive.Provider>
   );
-}
+});

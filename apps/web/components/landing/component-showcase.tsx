@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import {
-  Button, Badge, Input, Select, Checkbox, Switch, Slider, Progress,
+  Button, Badge, Input, Select, SelectTrigger, SelectContent, SelectItem, SelectValue, Checkbox, Switch, Slider, Progress,
   Toggle, ToggleGroup, ToggleGroupItem,
   Avatar, AvatarGroup, KPI, Alert, AlertTitle, AlertDescription,
   Skeleton, LoadingSpinner, Textarea, NumberField, Label, Separator,
@@ -11,26 +11,44 @@ import {
   Tabs, TabsList, TabsTrigger, TabsContent,
   Collapsible, CollapsibleTrigger, CollapsibleContent,
   ScrollArea, AspectRatio, CodeBlock, Terminal,
-  Breadcrumb, Pagination, Toolbar, ToolbarButton, ToolbarSeparator,
+  Breadcrumb, Pagination, Toolbar, ToolbarButton, ToolbarSeparator, SplitButton,
   Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
   Timeline, Stepper, Meter, DatePicker, Calendar,
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
   RadioGroup, RadioGroupItem, CheckboxGroup, CheckboxGroupItem, Combobox,
   InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator,
   Field, Fieldset, FieldLabel, FieldDescription,
   Diamond, Hexagon, Triangle, Diagonal, Shape, Cross,
   VoronoiBento, Tessellation, Pattern,
-  Box3D, Card3D, FloatingUI,
-  Diagram, FlowDiagram, ComparisonTable,
-  Hero, CTA, Pricing, FeatureGrid, LogoBar,
+  Box3D, Card3D, FloatingUI, IsometricView,
+  Diagram, FlowDiagram, ComparisonTable, ExplodedView, ArchitectureDiagram,
+  Hero, CTA, Pricing, FeatureGrid, LogoBar, PricingTiers, CostCalculator,
   TestimonialCard, AnnouncementBar, BlogGrid,
   Divider, HRule, SectionDivider,
   AnimateOnScroll,
+  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle,
+  Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,
+  Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle,
+  Popover, PopoverTrigger, PopoverContent,
+  HoverCard, HoverCardTrigger, HoverCardContent,
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem,
+  ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem,
+  Command, CommandInput,
+  AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
+  AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
+  toast,
+  Kbd, Empty, NativeSelect, Clipboard,
+  TagsInput, ColorPicker, Editable, RatingGroup,
+  TreeView, ButtonGroup,
+  InputGroup, InputGroupAddon, InputGroupInput,
+  FileUpload, SignaturePad,
 } from "@sigil-ui/components";
 import { TechFrame } from "./tech-frame";
 import {
   Search, Star, Heart, Bold, Italic, Underline,
   AlignLeft, AlignCenter, AlignRight,
   Layers, ArrowRight, Zap, Shield, Globe, Cpu, Code,
+  Calendar as CalendarIcon, ChevronDown, Upload, Folder, File,
 } from "lucide-react";
 
 type ComponentCell = {
@@ -70,10 +88,15 @@ const CELLS: ComponentCell[] = [
     <Textarea rows={2} placeholder="Write something..." className="text-xs min-h-0 w-full" />
   )},
   { name: "Select", category: "UI", variants: 2, render: () => (
-    <Select className="h-8 text-xs w-full" defaultValue="react">
-      <option value="react">React</option>
-      <option value="vue">Vue</option>
-      <option value="svelte">Svelte</option>
+    <Select defaultValue="react">
+      <SelectTrigger className="h-8 text-xs w-full">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="react">React</SelectItem>
+        <SelectItem value="vue">Vue</SelectItem>
+        <SelectItem value="svelte">Svelte</SelectItem>
+      </SelectContent>
     </Select>
   )},
   { name: "Checkbox", category: "UI", variants: 2, render: () => (
@@ -186,6 +209,22 @@ const CELLS: ComponentCell[] = [
       <Terminal lines={["$ npx sigil init", "✓ Done in 1.2s"]} title="zsh" />
     </div>
   )},
+  { name: "Kbd", category: "UI", variants: 1, render: () => (
+    <div className="flex items-center gap-1"><Kbd>⌘</Kbd><Kbd>K</Kbd></div>
+  )},
+  { name: "Empty", category: "UI", variants: 1, render: () => (
+    <Empty title="No results" description="Try a different search" className="py-4 [&_h3]:text-[10px] [&_p]:text-[9px]" />
+  )},
+  { name: "NativeSelect", category: "UI", variants: 1, render: () => (
+    <NativeSelect className="h-8 text-xs w-full">
+      <option value="react">React</option>
+      <option value="vue">Vue</option>
+      <option value="svelte">Svelte</option>
+    </NativeSelect>
+  )},
+  { name: "Clipboard", category: "UI", variants: 1, render: () => (
+    <Clipboard value="npx sigil init" />
+  )},
 
   /* ================================================================ */
   /* Layout                                                            */
@@ -251,6 +290,13 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "HRule", category: "Layout", variants: 1, render: () => <HRule className="w-full" /> },
+  { name: "ButtonGroup", category: "Layout", variants: 1, render: () => (
+    <ButtonGroup>
+      <Button size="sm" variant="outline" className="text-xs">Left</Button>
+      <Button size="sm" variant="outline" className="text-xs">Mid</Button>
+      <Button size="sm" variant="outline" className="text-xs">Right</Button>
+    </ButtonGroup>
+  )},
   { name: "VoronoiBento", category: "Layout", variants: 1, render: () => (
     <VoronoiBento seeds={4} height={80} gap={4} className="w-full">
       {[0, 1, 2, 3].map((i) => (
@@ -276,39 +322,81 @@ const CELLS: ComponentCell[] = [
       <ToolbarButton><Code size={14} /></ToolbarButton>
     </Toolbar>
   )},
+  { name: "SplitButton", category: "Navigation", variants: 1, render: () => (
+    <SplitButton icon={<CalendarIcon size={13} />}>Copilot</SplitButton>
+  )},
 
   /* ================================================================ */
   /* Overlays                                                          */
   /* ================================================================ */
   { name: "Dialog", category: "Overlays", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Modal dialog with header, body, footer. Accessible focus trap.</span>
+    <Dialog>
+      <DialogTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Dialog</Button></DialogTrigger>
+      <DialogContent><DialogHeader><DialogTitle>Title</DialogTitle></DialogHeader></DialogContent>
+    </Dialog>
   )},
   { name: "Drawer", category: "Overlays", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Slide-in panel from any edge. Mobile-first with drag-to-close.</span>
+    <Drawer>
+      <DrawerTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Drawer</Button></DrawerTrigger>
+      <DrawerContent><DrawerHeader><DrawerTitle>Drawer</DrawerTitle></DrawerHeader></DrawerContent>
+    </Drawer>
   )},
   { name: "Sheet", category: "Overlays", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Side panel overlay. Header, content, close button.</span>
+    <Sheet>
+      <SheetTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Sheet</Button></SheetTrigger>
+      <SheetContent side="right"><SheetHeader><SheetTitle>Settings</SheetTitle></SheetHeader></SheetContent>
+    </Sheet>
   )},
   { name: "Popover", category: "Overlays", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Floating content triggered by click. Auto-positioned.</span>
+    <Popover>
+      <PopoverTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Popover</Button></PopoverTrigger>
+      <PopoverContent className="w-48 p-3"><p className="text-[10px]" style={{ color: "var(--s-text-muted)" }}>Popover content here</p></PopoverContent>
+    </Popover>
   )},
   { name: "HoverCard", category: "Overlays", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Rich preview on hover. Delays for smooth UX.</span>
+    <HoverCard>
+      <HoverCardTrigger asChild><Button size="sm" variant="ghost" className="text-xs underline">Hover me</Button></HoverCardTrigger>
+      <HoverCardContent className="w-48 p-3"><p className="text-[10px]" style={{ color: "var(--s-text-muted)" }}>Rich preview on hover</p></HoverCardContent>
+    </HoverCard>
   )},
   { name: "DropdownMenu", category: "Overlays", variants: 3, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Menu with items, checkboxes, sub-menus, separators.</span>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild><Button size="sm" variant="outline" className="text-xs">Menu <ChevronDown size={12} /></Button></DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem className="text-xs">Profile</DropdownMenuItem>
+        <DropdownMenuItem className="text-xs">Settings</DropdownMenuItem>
+        <DropdownMenuItem className="text-xs">Logout</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )},
   { name: "ContextMenu", category: "Overlays", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Right-click context menu. Full keyboard navigation.</span>
+    <ContextMenu>
+      <ContextMenuTrigger>
+        <div className="flex items-center justify-center h-16 w-full border border-dashed border-[var(--s-border-muted)] rounded text-[10px]" style={{ color: "var(--s-text-muted)" }}>Right-click here</div>
+      </ContextMenuTrigger>
+      <ContextMenuContent>
+        <ContextMenuItem className="text-xs">Cut</ContextMenuItem>
+        <ContextMenuItem className="text-xs">Copy</ContextMenuItem>
+        <ContextMenuItem className="text-xs">Paste</ContextMenuItem>
+      </ContextMenuContent>
+    </ContextMenu>
   )},
   { name: "Command", category: "Overlays", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Command palette (Cmd+K). Search, groups, keyboard nav.</span>
+    <Command className="w-full border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)]">
+      <CommandInput placeholder="Type a command..." className="h-8 text-xs" />
+    </Command>
   )},
   { name: "AlertDialog", category: "Overlays", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Confirmation dialog with cancel/confirm actions.</span>
+    <AlertDialog>
+      <AlertDialogTrigger asChild><Button size="sm" variant="outline" className="text-xs">Delete</Button></AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader><AlertDialogTitle>Are you sure?</AlertDialogTitle><AlertDialogDescription className="text-xs">This action cannot be undone.</AlertDialogDescription></AlertDialogHeader>
+        <AlertDialogFooter><AlertDialogCancel className="text-xs">Cancel</AlertDialogCancel><AlertDialogAction className="text-xs">Confirm</AlertDialogAction></AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )},
   { name: "Toast", category: "Overlays", variants: 4, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Notification toasts. Auto-dismiss, action buttons, stacking.</span>
+    <Button size="sm" variant="outline" className="text-xs" onClick={() => toast({ title: "Saved!", description: "Changes applied." })}>Show Toast</Button>
   )},
 
   /* ================================================================ */
@@ -329,7 +417,15 @@ const CELLS: ComponentCell[] = [
     </Table>
   )},
   { name: "DataTable", category: "Data", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Sortable, filterable data table with column controls.</span>
+    <Table className="w-full">
+      <TableHeader>
+        <TableRow><TableHead className="text-[10px] p-1.5">Component</TableHead><TableHead className="text-[10px] p-1.5">Downloads</TableHead></TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow><TableCell className="text-[10px] p-1.5">Button</TableCell><TableCell className="text-[10px] p-1.5 tabular-nums">12.4k</TableCell></TableRow>
+        <TableRow><TableCell className="text-[10px] p-1.5">Card</TableCell><TableCell className="text-[10px] p-1.5 tabular-nums">9.1k</TableCell></TableRow>
+      </TableBody>
+    </Table>
   )},
   { name: "Timeline", category: "Data", variants: 1, render: () => (
     <Timeline entries={[{ date: "Jan", title: "Created", description: "Project started" }, { date: "Feb", title: "Deployed", description: "v1.0 shipped" }]} />
@@ -339,13 +435,37 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Meter", category: "Data", variants: 1, render: () => <Meter value={68} max={100} label="CPU Usage" /> },
   { name: "Calendar", category: "Data", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Month grid calendar with selection, ranges, and disabled dates.</span>
+    <div className="w-full flex justify-center [&_table]:text-[10px] [&_button]:h-6 [&_button]:w-6 [&_th]:w-6 [&_th]:text-[9px]">
+      <Calendar className="p-1" />
+    </div>
   )},
   { name: "DatePicker", category: "Data", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Date input with popover calendar. Range and single modes.</span>
+    <div className="w-full"><DatePicker /></div>
   )},
   { name: "Carousel", category: "Data", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Swipeable carousel with prev/next controls and dot indicators.</span>
+    <Carousel className="w-full max-w-[160px]">
+      <CarouselContent>
+        {["--s-primary", "--s-success", "--s-warning"].map((c, i) => (
+          <CarouselItem key={i}>
+            <div className="flex items-center justify-center h-16 rounded text-[10px] font-mono text-white" style={{ background: `var(${c})` }}>{i + 1}</div>
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="h-6 w-6 -left-3" />
+      <CarouselNext className="h-6 w-6 -right-3" />
+    </Carousel>
+  )},
+  { name: "TreeView", category: "Data", variants: 1, render: () => (
+    <TreeView
+      data={[
+        { id: "src", label: "src", icon: <Folder size={12} />, children: [
+          { id: "app", label: "app.tsx", icon: <File size={12} /> },
+          { id: "index", label: "index.ts", icon: <File size={12} /> },
+        ]},
+      ]}
+      defaultExpanded={["src"]}
+      className="w-full text-[10px]"
+    />
   )},
 
   /* ================================================================ */
@@ -373,10 +493,21 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "InputOTP", category: "Forms", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>One-time password input with slot groups and separators.</span>
+    <InputOTP maxLength={6}>
+      <InputOTPGroup>
+        <InputOTPSlot index={0} /><InputOTPSlot index={1} /><InputOTPSlot index={2} />
+      </InputOTPGroup>
+      <InputOTPSeparator />
+      <InputOTPGroup>
+        <InputOTPSlot index={3} /><InputOTPSlot index={4} /><InputOTPSlot index={5} />
+      </InputOTPGroup>
+    </InputOTP>
   )},
   { name: "Form", category: "Forms", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Form with validation, field labels, descriptions, error messages.</span>
+    <div className="flex flex-col gap-2 w-full">
+      <Input placeholder="Email" className="h-7 text-[10px]" />
+      <Button size="sm" className="text-xs w-full h-7">Submit</Button>
+    </div>
   )},
   { name: "Field", category: "Forms", variants: 1, render: () => (
     <div className="flex flex-col gap-1 w-full">
@@ -385,27 +516,73 @@ const CELLS: ComponentCell[] = [
       <FieldDescription className="text-[9px]">Your public display name</FieldDescription>
     </div>
   )},
+  { name: "TagsInput", category: "Forms", variants: 1, render: () => (
+    <TagsInput defaultValue={["React", "Sigil"]} className="w-full" />
+  )},
+  { name: "ColorPicker", category: "Forms", variants: 1, render: () => (
+    <ColorPicker defaultValue="#3b82f6" swatches={["#ef4444", "#22c55e", "#3b82f6", "#8b5cf6"]} />
+  )},
+  { name: "Editable", category: "Forms", variants: 1, render: () => (
+    <Editable defaultValue="Click to edit" />
+  )},
+  { name: "RatingGroup", category: "Forms", variants: 1, render: () => (
+    <RatingGroup defaultValue={3} size="sm" />
+  )},
+  { name: "InputGroup", category: "Forms", variants: 1, render: () => (
+    <InputGroup className="w-full">
+      <InputGroupAddon>$</InputGroupAddon>
+      <InputGroupInput placeholder="0.00" />
+    </InputGroup>
+  )},
+  { name: "FileUpload", category: "Forms", variants: 1, render: () => (
+    <FileUpload className="w-full [&>div]:py-4 [&>div]:px-3">
+      <div className="flex flex-col items-center gap-1">
+        <Upload size={14} style={{ color: "var(--s-text-muted)" }} />
+        <span className="text-[10px]" style={{ color: "var(--s-text-muted)" }}>Drop files here</span>
+      </div>
+    </FileUpload>
+  )},
+  { name: "SignaturePad", category: "Forms", variants: 1, render: () => (
+    <SignaturePad width={160} height={60} className="w-full" />
+  )},
 
   /* ================================================================ */
   /* Marketing                                                         */
   /* ================================================================ */
   { name: "Hero", category: "Marketing", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Full-width hero with heading, body, CTA buttons, and badge.</span>
+    <div className="flex flex-col items-center gap-1 text-center w-full">
+      <Badge size="sm" className="text-[9px]">New</Badge>
+      <span className="text-xs font-bold" style={{ color: "var(--s-text)" }}>Ship faster</span>
+      <span className="text-[9px]" style={{ color: "var(--s-text-muted)" }}>Token-driven design system</span>
+    </div>
   )},
   { name: "CTA", category: "Marketing", variants: 2, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Call-to-action banner with heading, description, and action buttons.</span>
+    <div className="flex flex-col items-center gap-2 w-full">
+      <span className="text-xs font-semibold" style={{ color: "var(--s-text)" }}>Ready to start?</span>
+      <Button size="sm" className="text-xs h-7">Get Started</Button>
+    </div>
   )},
   { name: "Pricing", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Pricing card with tier name, price, features list, and CTA.</span>
+    <Pricing name="Pro" price="$19" period="/mo" features={["Unlimited", "Priority"]} className="w-full p-3 text-[10px] [&_h3]:text-[10px] [&_p]:text-xs [&_li]:text-[10px]" />
   )},
   { name: "PricingTiers", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Multi-tier pricing comparison with feature table.</span>
+    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>See Pricing page</span>
   )},
   { name: "FeatureGrid", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Grid of feature rows with icons, titles, and descriptions.</span>
+    <FeatureGrid rows={[
+      { heading: "Fast", visual: <Zap size={16} style={{ color: "var(--s-primary)" }} /> },
+      { heading: "Secure", visual: <Shield size={16} style={{ color: "var(--s-primary)" }} /> },
+    ]} className="w-full [&_h3]:text-[10px] [&>div]:min-h-0 [&>div]:py-2" />
   )},
   { name: "ComparisonTable", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Side-by-side feature comparison with check/cross markers.</span>
+    <ComparisonTable
+      columns={["Sigil", "Other"]}
+      features={[
+        { name: "Tokens", values: { Sigil: true, Other: false } },
+        { name: "Presets", values: { Sigil: true, Other: false } },
+      ]}
+      className="w-full text-[10px] [&_th]:text-[10px] [&_th]:py-1 [&_th]:px-2 [&_td]:text-[10px] [&_td]:py-1 [&_td]:px-2"
+    />
   )},
   { name: "TestimonialCard", category: "Marketing", variants: 1, render: () => (
     <TestimonialCard
@@ -416,16 +593,21 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "LogoBar", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Horizontal logo strip for social proof. Auto-scroll option.</span>
+    <div className="flex items-center justify-center gap-4 w-full opacity-60">
+      <Globe size={16} /><Cpu size={16} /><Code size={16} /><Zap size={16} />
+    </div>
   )},
   { name: "AnnouncementBar", category: "Marketing", variants: 1, render: () => (
     <AnnouncementBar message="New: Sigil v2.0 is here" badge="NEW" className="w-full" />
   )},
   { name: "BlogGrid", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Blog post grid with thumbnails, titles, dates, and excerpts.</span>
+    <BlogGrid
+      posts={[{ title: "Getting Started with Sigil", date: "Apr 2026", excerpt: "A quick intro." }]}
+      className="w-full [&_h3]:text-[10px] [&_p]:text-[9px] [&_span]:text-[9px]"
+    />
   )},
   { name: "CostCalculator", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Interactive pricing calculator with sliders and live estimates.</span>
+    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Interactive calculator</span>
   )},
 
   /* ================================================================ */
@@ -474,32 +656,70 @@ const CELLS: ComponentCell[] = [
     </Box3D>
   )},
   { name: "Card3D", category: "3D", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>3D card with parallax tilt on hover. Depth and perspective tokens.</span>
+    <Card3D className="w-[80px] h-[60px] rounded border border-[var(--s-border)] bg-[var(--s-surface)] flex items-center justify-center">
+      <span className="font-mono text-[10px]" style={{ color: "var(--s-text-muted)" }}>Tilt me</span>
+    </Card3D>
   )},
   { name: "FloatingUI", category: "3D", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Floating element with gentle bobbing animation and shadow.</span>
+    <FloatingUI
+      layers={[
+        <div key="a" className="w-16 h-8 rounded bg-[var(--s-surface)] border border-[var(--s-border)] flex items-center justify-center text-[9px]" style={{ color: "var(--s-text-muted)" }}>A</div>,
+        <div key="b" className="w-16 h-8 rounded bg-[var(--s-surface)] border border-[var(--s-border)] flex items-center justify-center text-[9px]" style={{ color: "var(--s-text-muted)" }}>B</div>,
+      ]}
+      offset={12}
+      shadowDepth="sm"
+      className="h-[60px]"
+    />
   )},
   { name: "IsometricView", category: "3D", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Isometric projection wrapper. CSS 3D transform with token depth.</span>
+    <IsometricView angle={25} className="w-[64px] h-[64px]">
+      <div className="w-full h-full rounded bg-[var(--s-primary)] opacity-80 flex items-center justify-center text-white text-[10px]">ISO</div>
+    </IsometricView>
   )},
   { name: "ExplodedView", category: "3D", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Exploded diagram with stacked layers that spread on hover.</span>
+    <ExplodedView
+      gap="0.5rem"
+      layers={[
+        { label: "UI", children: <div className="text-[9px] text-center" style={{ color: "var(--s-text-muted)" }}>Frontend</div> },
+        { label: "API", children: <div className="text-[9px] text-center" style={{ color: "var(--s-text-muted)" }}>Backend</div>, hatched: true },
+      ]}
+      className="w-full [&>div>div]:p-2"
+    />
   )},
 
   /* ================================================================ */
   /* Diagrams                                                          */
   /* ================================================================ */
   { name: "Diagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>SVG diagram with nodes, edges, and auto-layout. Token-colored.</span>
+    <Diagram showGrid gridSize={16} className="w-full p-3" style={{ minHeight: 60 }}>
+      <div className="flex items-center justify-center gap-2">
+        {["A", "B", "C"].map((n) => (
+          <div key={n} className="px-2 py-1 rounded border border-[var(--s-border)] bg-[var(--s-surface)] text-[9px] font-mono" style={{ color: "var(--s-text-muted)" }}>{n}</div>
+        ))}
+      </div>
+    </Diagram>
   )},
   { name: "FlowDiagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Directional flow chart with typed nodes and connections.</span>
+    <FlowDiagram
+      nodes={[{ id: "1", label: "Start" }, { id: "2", label: "End" }]}
+      connections={[{ from: "1", to: "2" }]}
+      className="w-full text-[10px] [&_span]:text-[10px]"
+    />
   )},
   { name: "ArchitectureDiagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Layered architecture diagram. Frontend, API, DB, infra layers.</span>
+    <ArchitectureDiagram
+      gap="0.4rem"
+      layers={[
+        { label: "UI", children: <span className="text-[9px]">React</span> },
+        { label: "API", children: <span className="text-[9px]">REST</span>, hatched: true },
+      ]}
+      className="w-full p-3 [&_h3]:text-[9px] [&_h3]:mb-2 [&>div>div>div>div]:p-1.5 [&_span]:text-[9px]"
+    />
   )},
   { name: "AnimateOnScroll", category: "Diagrams", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Wrapper that animates children on scroll intersection.</span>
+    <AnimateOnScroll preset="fadeUp">
+      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up on scroll</div>
+    </AnimateOnScroll>
   )},
 ];
 
@@ -576,10 +796,9 @@ export function ComponentShowcase() {
             <TechFrame variant="brackets" extend={12} opacity={0.2} padding={4}>
               <div className="grid gap-2" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(192px, 1fr))" }}>
                 {catCells.map((cell) => (
-                  <a
+                  <div
                     key={cell.name}
-                    href={`/docs/components/${cell.name.toLowerCase()}`}
-                    className="group flex flex-col no-underline text-inherit"
+                    className="group flex flex-col"
                     style={CELL_STYLE}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.borderColor = "var(--s-border-strong)";
@@ -593,13 +812,24 @@ export function ComponentShowcase() {
                     <div className="flex items-center justify-center flex-1 w-full">
                       {cell.render()}
                     </div>
-                    <div className="flex items-baseline gap-1.5 mt-2 pt-1.5" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
-                      <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] leading-none">{cell.name}</span>
+                    <div className="flex items-center gap-1.5 mt-2 pt-1.5" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
+                      <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] leading-none flex-1">{cell.name}</span>
                       {cell.variants && (
                         <span className="font-[family-name:var(--s-font-mono)] text-[9px] text-[var(--s-text-subtle)] leading-none">{cell.variants}v</span>
                       )}
+                      <a
+                        href={`/docs/components/${cell.name.toLowerCase().replace(/\s+/g, "-")}`}
+                        onClick={(e) => e.stopPropagation()}
+                        className="opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity ml-1"
+                        aria-label={`${cell.name} docs`}
+                      >
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+                          <path d="M4.5 2.5h5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M9.5 2.5L2.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </a>
                     </div>
-                  </a>
+                  </div>
                 ))}
               </div>
             </TechFrame>

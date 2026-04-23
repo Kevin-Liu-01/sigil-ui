@@ -82,7 +82,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
 export const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarHeader({ className, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("flex items-center gap-2 px-4 py-4 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-header" className={cn("flex items-center gap-2 px-4 py-4 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
     );
   },
 );
@@ -92,7 +92,7 @@ export const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEl
 export const SidebarContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarContent({ className, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("flex-1 overflow-y-auto px-2 py-2", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-content" className={cn("flex-1 overflow-y-auto px-2 py-2", className)} {...rest} />
     );
   },
 );
@@ -102,7 +102,7 @@ export const SidebarContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivE
 export const SidebarFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarFooter({ className, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("border-t border-[var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-3", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-footer" className={cn("border-t border-[var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-3", className)} {...rest} />
     );
   },
 );
@@ -115,7 +115,7 @@ export interface SidebarGroupProps extends HTMLAttributes<HTMLDivElement> {
 
 export const SidebarGroup = forwardRef<HTMLDivElement, SidebarGroupProps>(
   function SidebarGroup({ className, ...rest }, ref) {
-    return <div ref={ref} className={cn("py-2", className)} {...rest} />;
+    return <div ref={ref} data-slot="sidebar-group" className={cn("py-2", className)} {...rest} />;
   },
 );
 
@@ -134,6 +134,7 @@ export const SidebarGroupLabel = forwardRef<HTMLDivElement, SidebarGroupLabelPro
     return (
       <div
         ref={ref}
+        data-slot="sidebar-group-label"
         className={cn("px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--s-text-muted)]", className)}
         {...rest}
       >
@@ -161,6 +162,7 @@ export const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
       <button
         ref={ref}
         type="button"
+        data-slot="sidebar-item"
         aria-current={active ? "page" : undefined}
         className={cn(
           "flex w-full items-center gap-3 rounded-[var(--s-radius-md,6px)] px-3 py-2 text-sm font-medium",

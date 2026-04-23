@@ -24,7 +24,7 @@ export const Checkbox = forwardRef<
       data-slot="checkbox"
       checked={checked}
       className={cn(
-        "peer size-4 shrink-0 border border-[var(--s-border)] bg-[var(--s-background)]",
+        "peer size-4 shrink-0 border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-background)]",
         "rounded-[var(--s-radius-sm,0px)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
         "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:border-[var(--s-primary)] data-[state=checked]:text-[var(--s-primary-contrast,#fff)]",

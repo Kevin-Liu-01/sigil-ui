@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { forwardRef, type ReactNode } from "react";
 import {
   Table,
   TableHeader,
@@ -26,16 +26,19 @@ export interface DataTableProps<T> {
   rowClassName?: string | ((row: T, index: number) => string);
 }
 
-export function DataTable<T extends Record<string, unknown>>({
-  columns,
-  data,
-  className,
-  emptyMessage = "No results.",
-  onRowClick,
-  rowClassName,
-}: DataTableProps<T>) {
+function DataTableInner<T extends Record<string, unknown>>(
+  {
+    columns,
+    data,
+    className,
+    emptyMessage = "No results.",
+    onRowClick,
+    rowClassName,
+  }: DataTableProps<T>,
+  ref: React.ForwardedRef<HTMLTableElement>,
+) {
   return (
-    <Table data-slot="data-table" className={className}>
+    <Table ref={ref} data-slot="data-table" className={className}>
       <TableHeader>
         <TableRow>
           {columns.map((col) => (
@@ -84,3 +87,7 @@ export function DataTable<T extends Record<string, unknown>>({
     </Table>
   );
 }
+
+export const DataTable = forwardRef(DataTableInner) as <T extends Record<string, unknown>>(
+  props: DataTableProps<T> & { ref?: React.Ref<HTMLTableElement> },
+) => React.ReactElement | null;

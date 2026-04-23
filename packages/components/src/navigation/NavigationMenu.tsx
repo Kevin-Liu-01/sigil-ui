@@ -25,6 +25,7 @@ export const NavigationMenuList = forwardRef<HTMLUListElement, ComponentPropsWit
     return (
       <NavPrimitive.List
         ref={ref}
+        data-slot="navigation-menu-list"
         className={cn("group flex flex-1 list-none items-center justify-center gap-1", className)}
         {...rest}
       />
@@ -49,11 +50,11 @@ const triggerStyle = cn(
 export const NavigationMenuTrigger = forwardRef<HTMLButtonElement, ComponentPropsWithoutRef<typeof NavPrimitive.Trigger>>(
   function NavigationMenuTrigger({ className, children, ...rest }, ref) {
     return (
-      <NavPrimitive.Trigger ref={ref} className={cn(triggerStyle, "group", className)} {...rest}>
+      <NavPrimitive.Trigger ref={ref} data-slot="navigation-menu-trigger" className={cn(triggerStyle, "group", className)} {...rest}>
         {children}
         <svg
           width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden
-          className="ml-1 h-3 w-3 transition-transform duration-200 group-data-[state=open]:rotate-180"
+          className="ml-1 h-3 w-3 transition-transform duration-[var(--s-duration-fast,150ms)] group-data-[state=open]:rotate-180"
         >
           <path d="M1 1l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -67,6 +68,7 @@ export const NavigationMenuContent = forwardRef<HTMLDivElement, ComponentPropsWi
     return (
       <NavPrimitive.Content
         ref={ref}
+        data-slot="navigation-menu-content"
         className={cn(
           "left-0 top-0 w-full md:absolute md:w-auto",
           "data-[motion^=from-]:animate-in data-[motion^=to-]:animate-out",
@@ -84,7 +86,7 @@ export const NavigationMenuContent = forwardRef<HTMLDivElement, ComponentPropsWi
 export const NavigationMenuLink = forwardRef<HTMLAnchorElement, ComponentPropsWithoutRef<typeof NavPrimitive.Link>>(
   function NavigationMenuLink({ className, ...rest }, ref) {
     return (
-      <NavPrimitive.Link ref={ref} className={cn(triggerStyle, className)} {...rest} />
+      <NavPrimitive.Link ref={ref} data-slot="navigation-menu-link" className={cn(triggerStyle, className)} {...rest} />
     );
   },
 );
@@ -97,7 +99,7 @@ function NavigationMenuViewport() {
           "origin-top-center relative mt-1.5 w-full overflow-hidden",
           "h-[var(--radix-navigation-menu-viewport-height)]",
           "w-[var(--radix-navigation-menu-viewport-width)]",
-          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
           "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-90",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95",

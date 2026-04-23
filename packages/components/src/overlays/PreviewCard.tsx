@@ -48,7 +48,7 @@ export const PreviewCardContent = forwardRef<HTMLDivElement, PreviewCardContentP
           sideOffset={sideOffset}
           className={cn(
             "z-50 w-72 overflow-hidden",
-            "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+            "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
             "bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
             "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
             "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",

@@ -1,6 +1,14 @@
 "use client";
 
-import { type MouseEvent, type ReactNode, lazy, Suspense } from "react";
+import {
+  type MouseEvent,
+  type ReactNode,
+  type RefObject,
+  lazy,
+  Suspense,
+  useCallback,
+  useState,
+} from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { CanvasItemData } from "./canvas";
@@ -494,6 +502,79 @@ export const COMPONENT_REGISTRY: Record<string, RegistryEntry> = {
 export const REGISTRY_NAMES = Object.keys(COMPONENT_REGISTRY);
 
 // ---------------------------------------------------------------------------
+// Resize hook
+// ---------------------------------------------------------------------------
+
+const INNER_GAP = 16;
+
+function useResizeHandle(
+  itemId: string,
+  colSpan: number,
+  onResize: (id: string, span: number) => void,
+  contentRef: RefObject<HTMLDivElement | null>,
+) {
+  const [resizing, setResizing] = useState(false);
+
+  const onMouseDown = useCallback(
+    (e: MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const contentEl = contentRef.current;
+      if (!contentEl) return;
+
+      const contentW = contentEl.getBoundingClientRect().width;
+      const colW = (contentW - 11 * INNER_GAP) / 12;
+      const itemEl = (e.target as HTMLElement).closest(
+        "[data-canvas-item]",
+      ) as HTMLElement | null;
+      if (!itemEl) return;
+
+      const contentLeft = contentEl.getBoundingClientRect().left;
+      const itemLeft = itemEl.getBoundingClientRect().left;
+      const startCol = Math.round((itemLeft - contentLeft) / (colW + INNER_GAP));
+
+      setResizing(true);
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
+
+      const move = (ev: globalThis.MouseEvent) => {
+        const relX = ev.clientX - contentLeft;
+        const endCol = Math.round(relX / (colW + INNER_GAP));
+        const span = Math.max(1, Math.min(12 - startCol, endCol - startCol));
+        if (span !== colSpan) onResize(itemId, span);
+      };
+
+      const up = () => {
+        setResizing(false);
+        document.body.style.cursor = "";
+        document.body.style.userSelect = "";
+        document.removeEventListener("mousemove", move);
+        document.removeEventListener("mouseup", up);
+      };
+
+      document.addEventListener("mousemove", move);
+      document.addEventListener("mouseup", up);
+    },
+    [itemId, colSpan, onResize, contentRef],
+  );
+
+  return { resizing, onMouseDown };
+}
+
+// ---------------------------------------------------------------------------
+// Span presets
+// ---------------------------------------------------------------------------
+
+const SPAN_OPTIONS = [
+  { span: 12, label: "Full" },
+  { span: 8, label: "2/3" },
+  { span: 6, label: "1/2" },
+  { span: 4, label: "1/3" },
+  { span: 3, label: "1/4" },
+] as const;
+
+// ---------------------------------------------------------------------------
 // CanvasItem
 // ---------------------------------------------------------------------------
 
@@ -502,9 +583,18 @@ type CanvasItemProps = {
   selected: boolean;
   onSelect: (id: string) => void;
   onRemove: (id: string) => void;
+  onResize: (id: string, colSpan: number) => void;
+  contentRef: RefObject<HTMLDivElement | null>;
 };
 
-export function CanvasItem({ item, selected, onSelect, onRemove }: CanvasItemProps) {
+export function CanvasItem({
+  item,
+  selected,
+  onSelect,
+  onRemove,
+  onResize,
+  contentRef,
+}: CanvasItemProps) {
   const {
     attributes,
     listeners,
@@ -514,11 +604,19 @@ export function CanvasItem({ item, selected, onSelect, onRemove }: CanvasItemPro
     isDragging,
   } = useSortable({ id: item.id });
 
+  const { resizing, onMouseDown: onResizeMouseDown } = useResizeHandle(
+    item.id,
+    item.colSpan,
+    onResize,
+    contentRef,
+  );
+
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
-    opacity: isDragging ? 0.5 : 1,
+    transition: resizing ? "none" : transition,
+    opacity: isDragging ? 0.4 : 1,
     zIndex: isDragging ? 50 : "auto",
+    gridColumn: `span ${item.colSpan}`,
   } as const;
 
   const entry = COMPONENT_REGISTRY[item.component];
@@ -538,27 +636,31 @@ export function CanvasItem({ item, selected, onSelect, onRemove }: CanvasItemPro
   return (
     <div
       ref={setNodeRef}
+      data-canvas-item
       style={style}
       onClick={handleClick}
       className={[
-        "group relative rounded-lg border transition-colors",
+        "group relative rounded-lg border transition-all duration-150",
         "bg-[var(--s-surface)]",
         selected
-          ? "border-[var(--s-primary)] ring-2 ring-[var(--s-primary)]/30"
+          ? "border-[var(--s-primary)] ring-1 ring-[var(--s-primary)]/20"
           : "border-[var(--s-border)] hover:border-[var(--s-border-strong)]",
+        resizing ? "ring-2 ring-[var(--s-primary)]/30" : "",
       ].join(" ")}
     >
-      {/* Top bar */}
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-[var(--s-border)]">
-        <div className="flex items-center gap-2">
-          {/* Drag handle */}
+      {/* Header bar */}
+      <div
+        className="flex items-center justify-between px-2.5 py-1 border-b"
+        style={{ borderColor: "var(--s-border)" }}
+      >
+        <div className="flex items-center gap-1.5">
           <button
             {...attributes}
             {...listeners}
             className="cursor-grab active:cursor-grabbing p-0.5 rounded hover:bg-[var(--s-surface-elevated)] text-[var(--s-text-muted)]"
             aria-label="Drag to reorder"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <circle cx="4" cy="3" r="1" fill="currentColor" />
               <circle cx="10" cy="3" r="1" fill="currentColor" />
               <circle cx="4" cy="7" r="1" fill="currentColor" />
@@ -567,21 +669,58 @@ export function CanvasItem({ item, selected, onSelect, onRemove }: CanvasItemPro
               <circle cx="10" cy="11" r="1" fill="currentColor" />
             </svg>
           </button>
-          <span className="text-xs font-medium text-[var(--s-text-muted)] select-none">
+          <span className="text-[11px] font-medium text-[var(--s-text-muted)] select-none">
             {entry?.label ?? item.component}
           </span>
         </div>
 
-        {/* Delete */}
-        <button
-          onClick={handleRemove}
-          className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded hover:bg-[var(--s-error)]/10 text-[var(--s-text-muted)] hover:text-[var(--s-error)]"
-          aria-label="Remove component"
-        >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <path d="M3.5 3.5l7 7M10.5 3.5l-7 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-1">
+          {/* Span selector (visible when selected) */}
+          {selected && (
+            <div className="flex items-center gap-0.5 mr-1">
+              {SPAN_OPTIONS.map((opt) => (
+                <button
+                  key={opt.span}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onResize(item.id, opt.span);
+                  }}
+                  className={[
+                    "text-[9px] px-1.5 py-0.5 rounded transition-colors",
+                    item.colSpan === opt.span
+                      ? "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]"
+                      : "text-[var(--s-text-subtle)] hover:text-[var(--s-text)] hover:bg-[var(--s-surface-elevated)]",
+                  ].join(" ")}
+                >
+                  {opt.label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Span badge */}
+          {!selected && item.colSpan < 12 && (
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--s-surface-elevated)] text-[var(--s-text-subtle)] select-none">
+              {item.colSpan}/12
+            </span>
+          )}
+
+          {/* Remove */}
+          <button
+            onClick={handleRemove}
+            className="opacity-0 group-hover:opacity-100 transition-opacity p-0.5 rounded hover:bg-[var(--s-error)]/10 text-[var(--s-text-muted)] hover:text-[var(--s-error)]"
+            aria-label="Remove component"
+          >
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+              <path
+                d="M3.5 3.5l7 7M10.5 3.5l-7 7"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Component render area */}
@@ -590,10 +729,23 @@ export function CanvasItem({ item, selected, onSelect, onRemove }: CanvasItemPro
           <entry.component {...mergedProps} />
         ) : (
           <div className="p-4 text-sm text-[var(--s-text-muted)]">
-            Unknown component: {item.component}
+            Unknown: {item.component}
           </div>
         )}
       </div>
+
+      {/* Right-edge resize handle */}
+      <div
+        onMouseDown={onResizeMouseDown}
+        className={[
+          "absolute top-0 right-0 w-2 h-full cursor-col-resize z-10",
+          "after:absolute after:top-1/2 after:-translate-y-1/2 after:right-0",
+          "after:w-1 after:h-8 after:rounded-full after:transition-opacity",
+          selected || resizing
+            ? "after:bg-[var(--s-primary)] after:opacity-80"
+            : "after:bg-[var(--s-border-strong)] after:opacity-0 group-hover:after:opacity-40",
+        ].join(" ")}
+      />
     </div>
   );
 }

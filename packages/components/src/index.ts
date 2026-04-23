@@ -47,7 +47,11 @@ export {
 export { Label, type LabelProps } from "./ui/Label";
 export { Input, type InputProps } from "./ui/Input";
 export { Textarea, type TextareaProps } from "./ui/Textarea";
-export { Select, type SelectProps } from "./ui/Select";
+export {
+  Select, SelectTrigger, SelectContent, SelectItem,
+  SelectGroup, SelectLabel, SelectValue, SelectSeparator,
+  type SelectProps, type SelectTriggerProps,
+} from "./ui/Select";
 export { Checkbox, type CheckboxProps } from "./ui/Checkbox";
 export { Switch, type SwitchProps } from "./ui/Switch";
 export { Slider, type SliderProps } from "./ui/Slider";
@@ -66,7 +70,7 @@ export {
   Accordion, AccordionItem, AccordionTrigger, AccordionContent,
   type AccordionProps, type AccordionItemProps, type AccordionTriggerProps, type AccordionContentProps,
 } from "./ui/Accordion";
-export { Tooltip, type TooltipProps } from "./ui/Tooltip";
+export { Tooltip, TooltipProvider, type TooltipProps } from "./ui/Tooltip";
 export { ScrollArea, type ScrollAreaProps } from "./ui/ScrollArea";
 export { KPI, type KPIProps } from "./ui/KPI";
 export { Terminal, type TerminalProps } from "./ui/Terminal";
@@ -98,6 +102,27 @@ export { ChartContainer, ChartTooltip, ChartLegend } from "./ui/Chart";
 export { Field, Fieldset, FieldLabel, FieldDescription, FieldError } from "./ui/Field";
 export { CheckboxGroup, CheckboxGroupItem, type CheckboxGroupProps } from "./ui/CheckboxGroup";
 export { Stepper, type StepperProps, type StepperStepConfig } from "./ui/Stepper";
+export { SplitButton, type SplitButtonProps } from "./ui/SplitButton";
+export {
+  InputGroup, InputGroupInput, InputGroupTextarea, InputGroupAddon, InputGroupButton, InputGroupText,
+  type InputGroupProps, type InputGroupInputProps, type InputGroupTextareaProps, type InputGroupAddonProps, type InputGroupButtonProps,
+} from "./ui/InputGroup";
+export { ButtonGroup, type ButtonGroupProps } from "./ui/ButtonGroup";
+export { Kbd, KbdGroup, type KbdProps, type KbdGroupProps } from "./ui/Kbd";
+export { Empty, type EmptyProps } from "./ui/Empty";
+export { NativeSelect, type NativeSelectProps } from "./ui/NativeSelect";
+export {
+  H1, H2, H3, H4, Paragraph, Lead, Large, Small, Muted, InlineCode, Blockquote,
+} from "./ui/Typography";
+export { DirectionProvider, useDirection, type DirectionProviderProps } from "./ui/Direction";
+export { Clipboard, type ClipboardProps } from "./ui/Clipboard";
+export { TagsInput, type TagsInputProps } from "./ui/TagsInput";
+export { ColorPicker, type ColorPickerProps } from "./ui/ColorPicker";
+export { FileUpload, type FileUploadProps } from "./ui/FileUpload";
+export { TreeView, type TreeViewProps, type TreeNode } from "./ui/TreeView";
+export { Editable, type EditableProps } from "./ui/Editable";
+export { RatingGroup, type RatingGroupProps } from "./ui/RatingGroup";
+export { SignaturePad, type SignaturePadProps } from "./ui/SignaturePad";
 
 // ---------------------------------------------------------------------------
 // Navigation
@@ -119,7 +144,7 @@ export {
 export {
   Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator,
 } from "./navigation/Menubar";
-export { Toolbar, ToolbarButton, ToolbarSeparator } from "./navigation/Toolbar";
+export { Toolbar, ToolbarButton, ToolbarSeparator, ToolbarToggleGroup, ToolbarToggleItem, ToolbarLink, type ToolbarProps } from "./navigation/Toolbar";
 export { SocialIcons, type SocialIconsProps, type SocialLink } from "./navigation/SocialIcons";
 
 // ---------------------------------------------------------------------------

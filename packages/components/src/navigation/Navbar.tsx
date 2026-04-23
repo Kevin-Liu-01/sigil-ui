@@ -43,7 +43,7 @@ export interface NavbarLogoProps extends HTMLAttributes<HTMLDivElement> {
 export const NavbarLogo = forwardRef<HTMLDivElement, NavbarLogoProps>(
   function NavbarLogo({ className, children, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("flex items-center gap-2 font-semibold text-[var(--s-text)]", className)} {...rest}>
+      <div ref={ref} data-slot="navbar-logo" className={cn("flex items-center gap-2 font-semibold text-[var(--s-text)]", className)} {...rest}>
         {children}
       </div>
     );
@@ -58,7 +58,7 @@ export interface NavbarLinksProps extends HTMLAttributes<HTMLDivElement> {
 export const NavbarLinks = forwardRef<HTMLDivElement, NavbarLinksProps>(
   function NavbarLinks({ className, children, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("hidden md:flex items-center gap-6", className)} {...rest}>
+      <div ref={ref} data-slot="navbar-links" className={cn("hidden md:flex items-center gap-6", className)} {...rest}>
         {children}
       </div>
     );
@@ -73,7 +73,7 @@ export interface NavbarActionsProps extends HTMLAttributes<HTMLDivElement> {
 export const NavbarActions = forwardRef<HTMLDivElement, NavbarActionsProps>(
   function NavbarActions({ className, children, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("flex items-center gap-3", className)} {...rest}>
+      <div ref={ref} data-slot="navbar-actions" className={cn("flex items-center gap-3", className)} {...rest}>
         {children}
       </div>
     );

@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from "react";
 import type { SigilTokens } from "@sigil-ui/tokens";
+import { NativeSelect } from "@sigil-ui/components";
 import { useSigilTokens } from "./token-provider";
 
 /* ------------------------------------------------------------------ */
@@ -135,26 +136,17 @@ function SelectControl({
       <span style={{ color: "var(--s-text-muted)", minWidth: 80, flexShrink: 0 }}>
         {label}
       </span>
-      <select
+      <NativeSelect
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{
-          flex: 1,
-          padding: "3px 6px",
-          fontSize: 11,
-          background: "var(--s-surface)",
-          color: "var(--s-text)",
-          border: "1px solid var(--s-border)",
-          borderRadius: 4,
-          fontFamily: "inherit",
-        }}
+        className="h-auto flex-1 py-0.5 text-[11px]"
       >
         {options.map((o) => (
           <option key={o} value={o}>
             {o}
           </option>
         ))}
-      </select>
+      </NativeSelect>
     </label>
   );
 }

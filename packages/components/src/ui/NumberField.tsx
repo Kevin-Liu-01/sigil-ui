@@ -37,7 +37,7 @@ export const NumberField = forwardRef<HTMLDivElement, NumberFieldProps>(function
       data-slot="number-field"
       className={cn(
         "inline-flex h-10 items-center overflow-hidden",
-        "rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
+        "rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
         "bg-[var(--s-surface)] text-sm",
         "focus-within:ring-2 focus-within:ring-[var(--s-ring,var(--s-primary))]",
         className,

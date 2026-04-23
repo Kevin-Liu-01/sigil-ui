@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Card,
@@ -17,7 +17,7 @@ import {
   Progress,
   Avatar,
   AvatarGroup,
-  Select,
+  Select, SelectTrigger, SelectContent, SelectItem, SelectValue,
   Separator,
   RadioGroup,
   RadioGroupItem,
@@ -25,6 +25,23 @@ import {
   Meter,
   Stepper,
   NumberField,
+  Toolbar,
+  ToolbarButton,
+  ToolbarSeparator,
+  Pagination,
+  SplitButton,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
+  Breadcrumb,
+  Skeleton,
+  Alert,
+  AlertTitle,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  LoadingSpinner,
+  Textarea,
 } from "@sigil-ui/components";
 
 import {
@@ -54,6 +71,31 @@ import {
   ChevronRight,
   CheckCircle2,
   Paintbrush,
+  ArrowLeft,
+  Archive,
+  MoreHorizontal,
+  Calendar,
+  Bold,
+  Italic,
+  Underline,
+  AlignLeft,
+  AlignCenter,
+  AlignRight,
+  Search,
+  Volume2,
+  Bell,
+  Star,
+  Wifi,
+  Zap,
+  Info,
+  AudioLines,
+  ArrowUp,
+  RefreshCw,
+  Link,
+  AtSign,
+  CircleCheckBig,
+  Send,
+  Loader2,
 } from "lucide-react";
 
 const EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
@@ -170,10 +212,15 @@ function TokenEditorCard() {
         </div>
         <div className="flex flex-col gap-1">
           <Label className="text-[10px]">Display Font</Label>
-          <Select className="h-8 text-[11px]" defaultValue="monument">
-            <option value="monument">Monument Grotesk</option>
-            <option value="inter">Inter</option>
-            <option value="geist">Geist</option>
+          <Select defaultValue="monument">
+            <SelectTrigger className="h-8 text-[11px]">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="monument">Monument Grotesk</SelectItem>
+              <SelectItem value="inter">Inter</SelectItem>
+              <SelectItem value="geist">Geist</SelectItem>
+            </SelectContent>
           </Select>
         </div>
         <div className="flex flex-col gap-1">
@@ -375,6 +422,59 @@ function InviteCard() {
 /*  Standalone micro-components (no card wrapper)                     */
 /* ================================================================ */
 
+function ToolbarRow() {
+  return (
+    <Toolbar className="w-full">
+      <ToolbarButton aria-label="Go back"><ArrowLeft size={14} /></ToolbarButton>
+      <ToolbarSeparator />
+      <ToolbarButton className="text-[11px]">Archive</ToolbarButton>
+      <ToolbarButton className="text-[11px]">Report</ToolbarButton>
+      <ToolbarButton className="text-[11px]">Snooze</ToolbarButton>
+      <ToolbarSeparator />
+      <ToolbarButton aria-label="More"><MoreHorizontal size={14} /></ToolbarButton>
+    </Toolbar>
+  );
+}
+
+function ToggleGroupRow() {
+  return (
+    <ToggleGroup type="single" defaultValue="left">
+      <ToggleGroupItem value="bold" size="sm"><Bold size={14} /></ToggleGroupItem>
+      <ToggleGroupItem value="italic" size="sm"><Italic size={14} /></ToggleGroupItem>
+      <ToggleGroupItem value="underline" size="sm"><Underline size={14} /></ToggleGroupItem>
+      <ToggleGroupItem value="left" size="sm"><AlignLeft size={14} /></ToggleGroupItem>
+      <ToggleGroupItem value="center" size="sm"><AlignCenter size={14} /></ToggleGroupItem>
+      <ToggleGroupItem value="right" size="sm"><AlignRight size={14} /></ToggleGroupItem>
+    </ToggleGroup>
+  );
+}
+
+function BadgeRow() {
+  return (
+    <div className="flex flex-wrap gap-1.5 p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Badge size="sm">Stable</Badge>
+      <Badge size="sm" variant="secondary">Beta</Badge>
+      <Badge size="sm" variant="outline">v2.4.1</Badge>
+      <Badge size="sm" variant="destructive">Breaking</Badge>
+    </div>
+  );
+}
+
+function SliderRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between">
+        <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+          <Volume2 size={13} className="text-[var(--s-text-muted)]" />
+          Volume
+        </span>
+        <span className="text-[10px] tabular-nums text-[var(--s-text-muted)]">72%</span>
+      </div>
+      <Slider defaultValue={[72]} />
+    </div>
+  );
+}
+
 function VerifiedRow() {
   return (
     <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
@@ -383,6 +483,40 @@ function VerifiedRow() {
         Your profile has been verified.
       </span>
       <ChevronRight size={13} className="text-[var(--s-text-muted)]" />
+    </div>
+  );
+}
+
+function CheckboxRow() {
+  return (
+    <div className="p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Checkbox label="I agree to the terms and conditions" defaultChecked />
+    </div>
+  );
+}
+
+function TabsRow() {
+  return (
+    <Tabs defaultValue="overview">
+      <TabsList className="h-7 p-0.5 w-full">
+        <TabsTrigger value="overview" className="text-[10px] px-2 py-0.5 h-6 flex-1">Overview</TabsTrigger>
+        <TabsTrigger value="analytics" className="text-[10px] px-2 py-0.5 h-6 flex-1">Analytics</TabsTrigger>
+        <TabsTrigger value="reports" className="text-[10px] px-2 py-0.5 h-6 flex-1">Reports</TabsTrigger>
+      </TabsList>
+    </Tabs>
+  );
+}
+
+function SkeletonRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center gap-2">
+        <Skeleton variant="avatar" className="h-7 w-7" />
+        <div className="flex-1 flex flex-col gap-1.5">
+          <Skeleton variant="text" className="w-3/4" />
+          <Skeleton variant="text" className="w-1/2" />
+        </div>
+      </div>
     </div>
   );
 }
@@ -399,6 +533,77 @@ function TwoFactorRow() {
   );
 }
 
+function ProgressRow() {
+  return (
+    <div className="flex flex-col gap-1.5 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-baseline justify-between">
+        <span className="text-[10px] text-[var(--s-text)]">Uploading assets...</span>
+        <span className="text-[10px] tabular-nums text-[var(--s-text-muted)]">68%</span>
+      </div>
+      <Progress value={68} className="h-1.5" />
+    </div>
+  );
+}
+
+function PaginationRow() {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <Pagination currentPage={1} totalPages={3} siblingCount={1} />
+      <SplitButton icon={<Calendar size={13} />}>Copilot</SplitButton>
+    </div>
+  );
+}
+
+function AvatarStackRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <AvatarGroup max={4}>
+        <Avatar fallback="KL" size="sm" />
+        <Avatar fallback="JD" size="sm" />
+        <Avatar fallback="AR" size="sm" />
+        <Avatar fallback="MS" size="sm" />
+        <Avatar fallback="TW" size="sm" />
+        <Avatar fallback="RK" size="sm" />
+      </AvatarGroup>
+      <span className="text-[9px] text-[var(--s-text-muted)]">6 online</span>
+    </div>
+  );
+}
+
+function BreadcrumbRow() {
+  return (
+    <div className="p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Breadcrumb items={[{ label: "Home", href: "#" }, { label: "Settings", href: "#" }, { label: "Tokens" }]} />
+    </div>
+  );
+}
+
+function SearchRow() {
+  return (
+    <Input
+      placeholder="Search components..."
+      className="h-8 text-[11px]"
+      iconLeft={<Search size={13} className="text-[var(--s-text-muted)]" />}
+    />
+  );
+}
+
+function GPUCounterRow() {
+  return (
+    <div className="flex flex-col gap-3">
+      <Separator />
+      <div className="flex items-center justify-between">
+        <div>
+          <span className="text-[11px] font-medium text-[var(--s-text)]">Number of GPUs</span>
+          <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">You can add more later.</p>
+        </div>
+        <NumberField value={8} min={1} max={64} />
+      </div>
+      <Separator />
+    </div>
+  );
+}
+
 function TintingRow() {
   return (
     <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
@@ -410,6 +615,270 @@ function TintingRow() {
         <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5 ml-[21px]">Allow the wallpaper to be tinted.</p>
       </div>
       <Switch defaultChecked />
+    </div>
+  );
+}
+
+function NotificationsRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Bell size={13} className="text-[var(--s-text-muted)]" />
+        Push notifications
+      </span>
+      <Switch defaultChecked />
+    </div>
+  );
+}
+
+function WifiRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Wifi size={13} className="text-[var(--s-text-muted)]" />
+        Auto-connect to Wi-Fi
+      </span>
+      <Switch />
+    </div>
+  );
+}
+
+function AlertRow() {
+  return (
+    <Alert variant="info" className="p-2.5">
+      <AlertTitle className="text-[10px] flex items-center gap-1.5">
+        <Info size={12} />
+        New deployment pipeline available.
+      </AlertTitle>
+    </Alert>
+  );
+}
+
+function ButtonRow() {
+  return (
+    <div className="flex gap-1.5">
+      <Button size="sm" className="flex-1 text-[10px]">Save</Button>
+      <Button size="sm" variant="outline" className="flex-1 text-[10px]">Discard</Button>
+      <Button size="sm" variant="ghost" className="text-[10px]">Reset</Button>
+    </div>
+  );
+}
+
+function StarRatingRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)]">Rate this component</span>
+      <div className="flex gap-0.5">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Star key={i} size={14} className={i <= 4 ? "text-[var(--s-warning)] fill-[var(--s-warning)]" : "text-[var(--s-text-muted)]"} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const SHOWCASE_SPINNERS: { variant: string; label: string }[] = [
+  { variant: "braille", label: "braille" },
+  { variant: "dots2", label: "dots2" },
+  { variant: "arc", label: "arc" },
+  { variant: "triangle", label: "triangle" },
+  { variant: "snake", label: "snake" },
+  { variant: "wave", label: "wave" },
+  { variant: "noise", label: "noise" },
+  { variant: "sparkle", label: "sparkle" },
+  { variant: "moon", label: "moon" },
+  { variant: "clock", label: "clock" },
+  { variant: "grow_horizontal", label: "grow" },
+  { variant: "circle_halves", label: "halves" },
+  { variant: "rain", label: "rain" },
+  { variant: "bar", label: "bar" },
+  { variant: "helix", label: "helix" },
+  { variant: "square_corners", label: "square" },
+];
+
+function SpinnersShowcase() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Animated Spinners</span>
+        <span className="text-[9px] text-[var(--s-text-muted)]">55+ variants</span>
+      </div>
+      <div className="grid grid-cols-4 gap-1.5">
+        {SHOWCASE_SPINNERS.map((s) => (
+          <div key={s.variant} className="flex flex-col items-center gap-1 py-1.5" style={{ background: "var(--s-surface-sunken, var(--s-background))", borderRadius: "var(--s-radius-sm, 4px)" }}>
+            <span className="inline-block text-base leading-none text-[var(--s-primary)]" aria-hidden>
+              <AnimatedSpinnerFrame variant={s.variant} />
+            </span>
+            <span className="font-mono text-[7px] text-[var(--s-text-muted)] leading-none">{s.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function AnimatedSpinnerFrame({ variant }: { variant: string }) {
+  const [frame, setFrame] = useState(0);
+  const [frames, setFrames] = useState<string[]>([]);
+  const [ms, setMs] = useState(80);
+
+  useEffect(() => {
+    const SPINNERS: Record<string, { frames: string[]; interval: number }> = {
+      braille:   { frames: ["⠋","⠙","⠹","⠸","⠼","⠴","⠦","⠧","⠇","⠏"], interval: 80 },
+      dots2:     { frames: ["⣾","⣽","⣻","⢿","⡿","⣟","⣯","⣷"], interval: 80 },
+      arc:       { frames: ["◜","◠","◝","◞","◡","◟"], interval: 100 },
+      triangle:  { frames: ["◢","◣","◤","◥"], interval: 50 },
+      snake:     { frames: ["⠏","⠛","⠹","⢸","⣰","⣤","⣆","⡇"], interval: 80 },
+      wave:      { frames: ["⠁⠂⠄⡀","⠂⠄⡀⢀","⠄⡀⢀⠠","⡀⢀⠠⠐","⢀⠠⠐⠈","⠠⠐⠈⠁","⠐⠈⠁⠂","⠈⠁⠂⠄"], interval: 100 },
+      noise:     { frames: ["▓","▒","░","▒"], interval: 100 },
+      sparkle:   { frames: ["✶","✷","✸","✹","✺","✹","✷"], interval: 120 },
+      moon:      { frames: ["🌑","🌒","🌓","🌔","🌕","🌖","🌗","🌘"], interval: 150 },
+      clock:     { frames: ["🕐","🕑","🕒","🕓","🕔","🕕","🕖","🕗","🕘","🕙","🕚","🕛"], interval: 100 },
+      grow_horizontal: { frames: ["▏","▎","▍","▌","▋","▊","▉","█","▉","▊","▋","▌","▍","▎"], interval: 80 },
+      circle_halves:   { frames: ["◐","◓","◑","◒"], interval: 120 },
+      rain:      { frames: ["⠁","⠂","⠄","⡀","⡈","⡐","⡠","⣀","⣁","⣂","⣄","⣌","⣔","⣤","⣥","⣦","⣮","⣶","⣷","⣿","⡿","⠿","⢟","⠟","⠏","⠇","⠃","⠁"], interval: 50 },
+      bar:       { frames: ["|","/","—","\\"], interval: 100 },
+      helix:     { frames: ["⠋⠁","⠙⠂","⠹⠄","⢸⡀","⣰⢀","⣤⠠","⣆⠐","⡇⠈"], interval: 80 },
+      square_corners: { frames: ["◰","◳","◲","◱"], interval: 120 },
+    };
+    const s = SPINNERS[variant] ?? SPINNERS.braille;
+    setFrames(s.frames);
+    setMs(s.interval);
+  }, [variant]);
+
+  useEffect(() => {
+    if (frames.length === 0) return;
+    const id = setInterval(() => setFrame((f) => (f + 1) % frames.length), ms);
+    return () => clearInterval(id);
+  }, [frames, ms]);
+
+  if (frames.length === 0) return null;
+  return <>{frames[frame % frames.length]}</>;
+}
+
+function StatusBadgesRow() {
+  return (
+    <div className="flex gap-1.5">
+      <Badge size="sm" className="gap-1 text-[10px]"><Loader2 size={10} className="animate-spin" />Syncing</Badge>
+      <Badge size="sm" variant="outline" className="gap-1 text-[10px]"><RefreshCw size={10} />Updating</Badge>
+      <Badge size="sm" variant="outline" className="gap-1 text-[10px]"><Loader2 size={10} className="animate-spin" />Indexing</Badge>
+    </div>
+  );
+}
+
+function ChatInputRow() {
+  return (
+    <div className="flex items-center gap-2 p-1.5 pl-1" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <button type="button" className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]" style={{ border: "1px solid var(--s-border)" }}>
+        <Plus size={14} />
+      </button>
+      <span className="flex-1 text-[11px] text-[var(--s-text-muted)]">Send a message...</span>
+      <button type="button" className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]">
+        <AudioLines size={14} />
+      </button>
+    </div>
+  );
+}
+
+function PriceRangeRow() {
+  return (
+    <div className="flex flex-col gap-2">
+      <div>
+        <span className="text-[11px] font-semibold text-[var(--s-text)]">Price Range</span>
+        <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">Set your budget range ($200 – $800).</p>
+      </div>
+      <Slider defaultValue={[200, 800]} min={0} max={1000} step={50} />
+    </div>
+  );
+}
+
+function SearchCountRow() {
+  return (
+    <div className="flex items-center gap-2 h-9 px-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Search size={13} className="text-[var(--s-text-muted)] shrink-0" />
+      <span className="flex-1 text-[11px] text-[var(--s-text-muted)]">Search...</span>
+      <span className="text-[10px] tabular-nums text-[var(--s-text-muted)] shrink-0">12 results</span>
+    </div>
+  );
+}
+
+function UrlInputRow() {
+  return (
+    <div className="flex items-center gap-2 h-9 px-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text-muted)] shrink-0">https://</span>
+      <span className="flex-1 text-[11px] text-[var(--s-text)]">example.com</span>
+      <Link size={13} className="text-[var(--s-text-muted)] shrink-0" />
+    </div>
+  );
+}
+
+function AiChatRow() {
+  return (
+    <div className="flex flex-col" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)", overflow: "hidden" }}>
+      <div className="p-2.5 pb-4">
+        <span className="text-[11px] text-[var(--s-text-muted)]">Ask, Search or Chat...</span>
+      </div>
+      <div className="flex items-center gap-2 px-2.5 pb-2">
+        <button type="button" className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full text-[var(--s-text-muted)]" style={{ border: "1px solid var(--s-border)" }}>
+          <Plus size={12} />
+        </button>
+        <Badge size="sm" variant="outline" className="text-[9px]">Auto</Badge>
+        <span className="flex-1" />
+        <span className="text-[9px] tabular-nums text-[var(--s-text-muted)]">52% used</span>
+        <button type="button" className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-[var(--s-text)] text-[var(--s-background)]">
+          <ArrowUp size={12} />
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function MentionRow() {
+  return (
+    <div className="flex items-center gap-2 h-9 px-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="flex-1 text-[11px] text-[var(--s-text)]">@shadcn</span>
+      <CircleCheckBig size={14} className="text-[var(--s-text)] shrink-0" />
+    </div>
+  );
+}
+
+function DateRangeRow() {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5 h-8 px-2.5 flex-1 text-[10px]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+        <CalendarDays size={12} className="text-[var(--s-text-muted)] shrink-0" />
+        <span className="text-[var(--s-text)]">Apr 1</span>
+        <span className="text-[var(--s-text-muted)]">–</span>
+        <span className="text-[var(--s-text)]">Apr 22</span>
+      </div>
+      <Button size="sm" variant="outline" className="text-[10px] h-8 shrink-0">Apply</Button>
+    </div>
+  );
+}
+
+function TagInputRow() {
+  return (
+    <div className="flex items-center gap-1.5 h-9 px-2" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Badge size="sm" variant="secondary" className="text-[9px] gap-0.5 shrink-0">react <span className="text-[var(--s-text-muted)] ml-0.5 cursor-pointer">&times;</span></Badge>
+      <Badge size="sm" variant="secondary" className="text-[9px] gap-0.5 shrink-0">typescript <span className="text-[var(--s-text-muted)] ml-0.5 cursor-pointer">&times;</span></Badge>
+      <span className="flex-1 text-[10px] text-[var(--s-text-muted)] px-1">Add tag...</span>
+    </div>
+  );
+}
+
+function KeyValueRow() {
+  return (
+    <div className="flex flex-col gap-1.5">
+      {[
+        { key: "Status", value: "Active" },
+        { key: "Region", value: "us-east-1" },
+        { key: "Latency", value: "12ms" },
+      ].map((item) => (
+        <div key={item.key} className="flex items-center justify-between text-[10px] px-2.5 py-1" style={{ borderBottom: "1px solid var(--s-border-muted)" }}>
+          <span className="text-[var(--s-text-muted)]">{item.key}</span>
+          <span className="font-mono tabular-nums text-[var(--s-text)]">{item.value}</span>
+        </div>
+      ))}
     </div>
   );
 }
@@ -442,25 +911,55 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
           {/* Col 1 — Deploy */}
           <div className="flex flex-col gap-3">
             <DeployCard />
+            <ToolbarRow />
             <BuildStatus />
+            <StatusBadgesRow />
+            <ChatInputRow />
+            <SliderRow />
+            <BadgeRow />
+            <VerifiedRow />
+            <ToggleGroupRow />
+            <MentionRow />
           </div>
           {/* Col 2 — Tokens */}
           <div className="flex flex-col gap-3">
             <TokenEditorCard />
             <TokenPreviewCard />
+            <GPUCounterRow />
             <TintingRow />
+            <PriceRangeRow />
+            <SpinnersShowcase />
+            <BreadcrumbRow />
+            <UrlInputRow />
           </div>
           {/* Col 3 — Analytics */}
           <div className="flex flex-col gap-3">
             <AnalyticsKPIs />
+            <CheckboxRow />
+            <TabsRow />
             <AnalyticsTable />
+            <SearchCountRow />
+            <SkeletonRow />
             <ActivityFeed />
+            <TwoFactorRow />
+            <ProgressRow />
+            <TagInputRow />
+            <SearchRow />
+            <ButtonRow />
           </div>
           {/* Col 4 — Onboarding */}
           <div className="flex flex-col gap-3">
             <OnboardingStepper />
             <PlanSelector />
+            <PaginationRow />
+            <AiChatRow />
+            <AvatarStackRow />
             <InviteCard />
+            <NotificationsRow />
+            <DateRangeRow />
+            <AlertRow />
+            <StarRatingRow />
+            <KeyValueRow />
           </div>
         </div>
         <PresetDots />

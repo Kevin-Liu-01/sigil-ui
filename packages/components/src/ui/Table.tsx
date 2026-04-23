@@ -55,7 +55,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
         ref={ref}
         data-slot="table-row"
         className={cn(
-          "border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] transition-colors",
+          "border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface-elevated)]",
           "data-[state=selected]:bg-[var(--s-surface-elevated)]",
           className,

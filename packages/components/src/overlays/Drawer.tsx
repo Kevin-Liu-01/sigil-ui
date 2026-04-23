@@ -43,7 +43,7 @@ export const DrawerContent = forwardRef<
 >(function DrawerContent({ className, children, ...rest }, ref) {
   return (
     <DrawerPrimitive.Portal>
-      <DrawerPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
+      <DrawerPrimitive.Overlay className="fixed inset-0 z-50 bg-[var(--s-overlay,rgba(0,0,0,0.5))] backdrop-blur-sm" />
       <DrawerPrimitive.Content
         ref={ref}
         data-slot="drawer"
@@ -56,7 +56,7 @@ export const DrawerContent = forwardRef<
         )}
         {...rest}
       >
-        <div className="mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-full bg-[var(--s-border)]" />
+        <div className="mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border)]" />
         {children}
       </DrawerPrimitive.Content>
     </DrawerPrimitive.Portal>

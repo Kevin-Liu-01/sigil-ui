@@ -1,0 +1,60 @@
+---
+title: Empty
+description: Placeholder state for empty lists, searches, or data views with optional icon, title, description, and action.
+---
+
+## Import
+
+```tsx
+import { Empty } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Empty
+  title="No results"
+  description="Try a different search term."
+/>
+```
+
+## With icon and action
+
+```tsx
+import { Button } from "@sigil-ui/components";
+
+<Empty
+  icon={<InboxIcon />}
+  title="No messages"
+  description="Your inbox is empty."
+  action={<Button size="sm">Compose</Button>}
+/>
+```
+
+## Custom children
+
+```tsx
+<Empty icon={<SearchIcon />} title="No matches">
+  <p className="text-sm text-[var(--s-text-muted)]">
+    We couldn't find anything for "quantum flux".
+  </p>
+</Empty>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Title text |
+| `--s-text-muted` | Icon color and description text |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `icon` | `ReactNode` | — | Icon displayed above the title |
+| `title` | `string` | — | Heading text |
+| `description` | `string` | — | Supporting description |
+| `action` | `ReactNode` | — | CTA element rendered below content |
+| `children` | `ReactNode` | — | Custom body content between description and action |
+| `className` | `string` | — | Additional CSS classes |

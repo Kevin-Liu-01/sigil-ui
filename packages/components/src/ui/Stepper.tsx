@@ -73,7 +73,7 @@ function StepperStep({ index, label, description, state, isLast, orientation }: 
           className={cn(
             "flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-semibold",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
-            state === "completed" && "bg-[var(--s-primary)] text-white",
+            state === "completed" && "bg-[var(--s-primary)] text-[var(--s-on-primary,#fff)]",
             state === "current" && "border-2 border-[var(--s-primary)] text-[var(--s-primary)]",
             state === "upcoming" && "border-2 border-[var(--s-border)] text-[var(--s-text-muted)]",
           )}

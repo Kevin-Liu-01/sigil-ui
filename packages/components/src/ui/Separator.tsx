@@ -1,33 +1,27 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import * as SeparatorPrimitive from "@radix-ui/react-separator";
 import { cn } from "../utils";
 
-export interface SeparatorProps extends HTMLAttributes<HTMLDivElement> {
-  /** Separator orientation. @default "horizontal" */
-  orientation?: "horizontal" | "vertical";
-  /** If decorative, hides from assistive technology. @default true */
-  decorative?: boolean;
-}
+export interface SeparatorProps extends ComponentPropsWithoutRef<typeof SeparatorPrimitive.Root> {}
 
-/** Visual separator — horizontal or vertical hairline. */
 export const Separator = forwardRef<HTMLDivElement, SeparatorProps>(function Separator(
-  { orientation = "horizontal", decorative = true, className, ...rest },
+  { className, orientation = "horizontal", decorative = true, ...props },
   ref,
 ) {
   return (
-    <div
+    <SeparatorPrimitive.Root
       ref={ref}
       data-slot="separator"
-      role={decorative ? "none" : "separator"}
-      aria-orientation={decorative ? undefined : orientation}
-      aria-hidden={decorative || undefined}
+      decorative={decorative}
+      orientation={orientation}
       className={cn(
         "shrink-0 bg-[var(--s-border)]",
         orientation === "horizontal" ? "h-px w-full" : "w-px h-full self-stretch",
         className,
       )}
-      {...rest}
+      {...props}
     />
   );
 });

@@ -44,7 +44,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
               ) : (
                 <a
                   href={item.href}
-                  className="text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors"
+                  className="text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]"
                 >
                   {item.label}
                 </a>

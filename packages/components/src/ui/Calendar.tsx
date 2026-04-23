@@ -24,12 +24,12 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
           nav: "flex items-center gap-1",
           button_previous: cn(
             "absolute left-1 inline-flex h-7 w-7 items-center justify-center rounded-[var(--s-radius-sm,4px)]",
-            "text-[var(--s-text-muted)] transition-colors duration-150",
+            "text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10 hover:text-[var(--s-text)]",
           ),
           button_next: cn(
             "absolute right-1 inline-flex h-7 w-7 items-center justify-center rounded-[var(--s-radius-sm,4px)]",
-            "text-[var(--s-text-muted)] transition-colors duration-150",
+            "text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10 hover:text-[var(--s-text)]",
           ),
           month_grid: "w-full border-collapse",
@@ -38,7 +38,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
           week: "flex w-full mt-1",
           day: cn(
             "relative flex h-9 w-9 items-center justify-center rounded-[var(--s-radius-sm,4px)] p-0 text-sm",
-            "text-[var(--s-text)] transition-colors duration-100",
+            "text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
             "aria-selected:opacity-100",
@@ -48,9 +48,9 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
             "cursor-pointer bg-transparent p-0 text-sm font-normal",
           ),
           selected: cn(
-            "bg-[var(--s-primary)] text-white",
-            "hover:bg-[var(--s-primary)] hover:text-white",
-            "focus:bg-[var(--s-primary)] focus:text-white",
+            "bg-[var(--s-primary)] text-[var(--s-primary-foreground,white)]",
+            "hover:bg-[var(--s-primary)] hover:text-[var(--s-primary-foreground,white)]",
+            "focus:bg-[var(--s-primary)] focus:text-[var(--s-primary-foreground,white)]",
           ),
           today: "ring-1 ring-[var(--s-primary)]/40",
           outside: "text-[var(--s-text-muted)] opacity-50",

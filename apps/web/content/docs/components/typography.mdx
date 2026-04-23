@@ -1,0 +1,80 @@
+---
+title: Typography
+description: Semantic text primitives — headings, paragraphs, and inline elements — driven entirely by token variables.
+---
+
+## Import
+
+```tsx
+import {
+  H1, H2, H3, H4,
+  Paragraph, Lead, Large, Small, Muted,
+  InlineCode, Blockquote,
+} from "@sigil-ui/components";
+```
+
+## Headings
+
+```tsx
+<H1>The quick brown fox</H1>
+<H2>The quick brown fox</H2>
+<H3>The quick brown fox</H3>
+<H4>The quick brown fox</H4>
+```
+
+## Body text
+
+```tsx
+<Paragraph>
+  A paragraph of body text with comfortable leading and automatic top margin
+  between siblings.
+</Paragraph>
+<Lead>A larger introductory paragraph in muted text.</Lead>
+<Large>Large semibold text.</Large>
+<Small>Small medium text.</Small>
+<Muted>Small muted supporting text.</Muted>
+```
+
+## Inline elements
+
+```tsx
+<Paragraph>
+  Run <InlineCode>sigil preset list</InlineCode> to see all presets.
+</Paragraph>
+<Blockquote>
+  "Edit the token spec. Not the components."
+</Blockquote>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-font-display` | Heading font family |
+| `--s-heading-h1-size` / `weight` / `leading` / `tracking` | H1 typography |
+| `--s-heading-h2-size` / `weight` / `leading` / `tracking` | H2 typography |
+| `--s-heading-h3-size` / `weight` / `leading` / `tracking` | H3 typography |
+| `--s-heading-h4-size` / `weight` / `leading` / `tracking` | H4 typography |
+| `--s-text` | Text color for all elements |
+| `--s-text-muted` | Lead, Muted, and Blockquote text |
+| `--s-border` | H2 bottom border, Blockquote left border |
+| `--s-surface` | InlineCode background |
+| `--s-radius-sm` | InlineCode border radius |
+
+## Props
+
+All typography components extend their native HTML element attributes and accept `className` for overrides. They use `forwardRef` for ref forwarding.
+
+| Component | Element | Notes |
+|---|---|---|
+| `H1` | `<h1>` | Display font, text-balance |
+| `H2` | `<h2>` | Includes bottom border separator |
+| `H3` | `<h3>` | — |
+| `H4` | `<h4>` | — |
+| `Paragraph` | `<p>` | Auto top margin between siblings |
+| `Lead` | `<p>` | `text-xl`, muted color |
+| `Large` | `<div>` | `text-lg`, semibold |
+| `Small` | `<small>` | `text-sm`, medium weight |
+| `Muted` | `<p>` | `text-sm`, muted color |
+| `InlineCode` | `<code>` | Monospace, surface background |
+| `Blockquote` | `<blockquote>` | Left border, italic, muted |

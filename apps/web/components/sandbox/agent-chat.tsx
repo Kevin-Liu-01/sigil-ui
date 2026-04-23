@@ -10,6 +10,7 @@ import {
 } from "react";
 import { useSigilTokens } from "./token-provider";
 import { ModelSelector, type ModelId } from "./model-selector";
+import type { CanvasItemData } from "./canvas";
 
 type Message = {
   id: string;
@@ -19,18 +20,36 @@ type Message = {
 
 type PatchAction = { patch: Record<string, unknown> };
 type AddComponentAction = {
-  addComponent: { component: string; props: Record<string, unknown> };
+  addComponent: {
+    component: string;
+    props?: Record<string, unknown>;
+    colSpan?: number;
+  };
 };
 type SetPresetAction = { setPreset: string };
-type ParsedAction = PatchAction | AddComponentAction | SetPresetAction;
+type RemoveComponentAction = { removeComponent: string };
+type ClearCanvasAction = { clearCanvas: true };
+type ParsedAction =
+  | PatchAction
+  | AddComponentAction
+  | SetPresetAction
+  | RemoveComponentAction
+  | ClearCanvasAction;
 
 type AppliedChange = {
-  type: "patch" | "addComponent" | "setPreset";
+  type: "patch" | "addComponent" | "setPreset" | "removeComponent" | "clearCanvas";
   summary: string;
 };
 
 type AgentChatProps = {
-  onAddComponent: (component: string, props: Record<string, unknown>) => void;
+  onAddComponent: (
+    component: string,
+    props?: Record<string, unknown>,
+    colSpan?: number,
+  ) => void;
+  onRemoveComponent: (id: string) => void;
+  onClearCanvas: () => void;
+  canvasItems: CanvasItemData[];
   className?: string;
 };
 
@@ -45,11 +64,17 @@ function extractJsonBlocks(text: string): ParsedAction[] {
   while ((match = regex.exec(text)) !== null) {
     try {
       const parsed = JSON.parse(match[1].trim());
-      if (parsed.patch || parsed.addComponent || parsed.setPreset) {
+      if (
+        parsed.patch ||
+        parsed.addComponent ||
+        parsed.setPreset ||
+        parsed.removeComponent ||
+        parsed.clearCanvas
+      ) {
         actions.push(parsed as ParsedAction);
       }
     } catch {
-      // skip malformed JSON
+      /* skip */
     }
   }
   return actions;
@@ -82,7 +107,6 @@ function renderContentWithCodeBlocks(content: string) {
     parts.push({ type: "json", value: match[1].trim() });
     lastIndex = match.index + match[0].length;
   }
-
   if (lastIndex < content.length) {
     parts.push({ type: "text", value: content.slice(lastIndex) });
   }
@@ -118,7 +142,13 @@ function renderContentWithCodeBlocks(content: string) {
   });
 }
 
-export function AgentChat({ onAddComponent, className }: AgentChatProps) {
+export function AgentChat({
+  onAddComponent,
+  onRemoveComponent,
+  onClearCanvas,
+  canvasItems,
+  className,
+}: AgentChatProps) {
   const { tokens, patchTokens, setPreset, activePreset } = useSigilTokens();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -161,19 +191,18 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
           for (const { category, key, value } of entries) {
             patchTokens(category as any, key, value);
           }
-          const keyCount = entries.length;
           changes.push({
             type: "patch",
-            summary: `Applied ${keyCount} token change${keyCount !== 1 ? "s" : ""}`,
+            summary: `Applied ${entries.length} token change${entries.length !== 1 ? "s" : ""}`,
           });
         }
 
         if ("addComponent" in action && action.addComponent) {
-          const { component, props } = action.addComponent;
-          onAddComponent(component, props ?? {});
+          const { component, props, colSpan } = action.addComponent;
+          onAddComponent(component, props ?? {}, colSpan);
           changes.push({
             type: "addComponent",
-            summary: `Added ${component}`,
+            summary: `Added ${component}${colSpan ? ` (${colSpan}/12)` : ""}`,
           });
         }
 
@@ -184,18 +213,33 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
             summary: `Switched to "${action.setPreset}"`,
           });
         }
+
+        if ("removeComponent" in action && typeof action.removeComponent === "string") {
+          onRemoveComponent(action.removeComponent);
+          changes.push({
+            type: "removeComponent",
+            summary: "Removed component",
+          });
+        }
+
+        if ("clearCanvas" in action && action.clearCanvas) {
+          onClearCanvas();
+          changes.push({
+            type: "clearCanvas",
+            summary: "Cleared canvas",
+          });
+        }
       }
 
       if (changes.length > 0) {
         setAppliedChanges((prev) => {
           const next = new Map(prev);
-          const existing = next.get(messageId) ?? [];
-          next.set(messageId, [...existing, ...changes]);
+          next.set(messageId, [...(next.get(messageId) ?? []), ...changes]);
           return next;
         });
       }
     },
-    [patchTokens, setPreset, onAddComponent],
+    [patchTokens, setPreset, onAddComponent, onRemoveComponent, onClearCanvas],
   );
 
   const handleSubmit = useCallback(
@@ -235,7 +279,12 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
             })),
             model,
             currentTokens: tokens,
-            canvasItems: [],
+            canvasItems: canvasItems.map((item) => ({
+              id: item.id,
+              component: item.component,
+              colSpan: item.colSpan,
+              order: item.order,
+            })),
           }),
           signal: controller.signal,
         });
@@ -267,7 +316,6 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
           if (done) break;
 
           accumulated += decoder.decode(value, { stream: true });
-
           const current = accumulated;
           setMessages((prev) =>
             prev.map((m) =>
@@ -292,7 +340,7 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
         abortRef.current = null;
       }
     },
-    [input, isStreaming, messages, model, tokens, applyActions],
+    [input, isStreaming, messages, model, tokens, canvasItems, applyActions],
   );
 
   const handleStop = useCallback(() => {
@@ -322,6 +370,35 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
         fontFamily: "var(--s-font-body, system-ui, sans-serif)",
       }}
     >
+      {/* Header */}
+      <div
+        style={{
+          padding: "10px 14px",
+          borderBottom: "1px solid var(--s-border)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: "var(--s-surface)",
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <div
+            style={{
+              width: "6px",
+              height: "6px",
+              borderRadius: "50%",
+              background: isStreaming ? "var(--s-warning, orange)" : "var(--s-success, green)",
+            }}
+          />
+          <span style={{ fontSize: "12px", fontWeight: 600 }}>Agent</span>
+        </div>
+        <span
+          style={{ fontSize: "10px", color: "var(--s-text-subtle)" }}
+        >
+          {canvasItems.length} component{canvasItems.length !== 1 ? "s" : ""}
+        </span>
+      </div>
+
       {/* Message list */}
       <div
         ref={scrollRef}
@@ -339,15 +416,20 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
             style={{
               flex: 1,
               display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              gap: "8px",
               color: "var(--s-text-muted)",
               fontSize: "13px",
               textAlign: "center",
               padding: "24px",
             }}
           >
-            Ask the AI to modify tokens, switch presets, or add components.
+            <span style={{ fontSize: "11px", lineHeight: "1.6" }}>
+              Ask the AI to modify tokens, switch presets, add or remove
+              components, and layout your page.
+            </span>
           </div>
         )}
 
@@ -365,7 +447,7 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
             >
               <div
                 style={{
-                  maxWidth: "85%",
+                  maxWidth: "88%",
                   padding: "8px 12px",
                   borderRadius: "10px",
                   fontSize: "13px",
@@ -376,9 +458,7 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
                   color: isUser
                     ? "var(--s-primary-contrast, #fff)"
                     : "var(--s-text)",
-                  border: isUser
-                    ? "none"
-                    : "1px solid var(--s-border)",
+                  border: isUser ? "none" : "1px solid var(--s-border)",
                 }}
               >
                 {isUser ? (
@@ -413,8 +493,8 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
                         style={{
                           display: "inline-flex",
                           alignItems: "center",
-                          gap: "4px",
-                          padding: "2px 8px",
+                          gap: "3px",
+                          padding: "2px 7px",
                           borderRadius: "9999px",
                           fontSize: "10px",
                           fontWeight: 500,
@@ -436,7 +516,9 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
                           ? "✓"
                           : c.type === "setPreset"
                             ? "◈"
-                            : "+"}
+                            : c.type === "removeComponent" || c.type === "clearCanvas"
+                              ? "✕"
+                              : "+"}
                         {c.summary}
                       </span>
                     ))}
@@ -456,7 +538,8 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
                 borderRadius: "6px",
                 fontSize: "11px",
                 fontWeight: 500,
-                background: "var(--s-error-muted, oklch(0.60 0.20 25 / 0.15))",
+                background:
+                  "var(--s-error-muted, oklch(0.60 0.20 25 / 0.15))",
                 color: "var(--s-error, oklch(0.60 0.20 25))",
                 border: "none",
                 cursor: "pointer",
@@ -485,7 +568,7 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Ask the AI to change tokens, switch presets, add components..."
+            placeholder="Describe what to build…"
             rows={1}
             style={{
               flex: 1,
@@ -503,9 +586,9 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
               maxHeight: "120px",
             }}
             onInput={(e) => {
-              const target = e.currentTarget;
-              target.style.height = "auto";
-              target.style.height = `${Math.min(target.scrollHeight, 120)}px`;
+              const t = e.currentTarget;
+              t.style.height = "auto";
+              t.style.height = `${Math.min(t.scrollHeight, 120)}px`;
             }}
           />
           <button
@@ -538,12 +621,7 @@ export function AgentChat({ onAddComponent, className }: AgentChatProps) {
           }}
         >
           <ModelSelector value={model} onChange={setModel} />
-          <span
-            style={{
-              fontSize: "10px",
-              color: "var(--s-text-muted)",
-            }}
-          >
+          <span style={{ fontSize: "10px", color: "var(--s-text-muted)" }}>
             Shift+Enter for newline
           </span>
         </div>

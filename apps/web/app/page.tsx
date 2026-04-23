@@ -31,13 +31,11 @@ import { SigilSection, SectionDivider } from "@sigil-ui/components";
 
 function SectionHeader({
   label,
-  fig,
   heading,
   description,
   maxDescWidth = 576,
 }: {
   label: string;
-  fig?: string;
   heading: string;
   description?: string;
   maxDescWidth?: number;
@@ -46,7 +44,6 @@ function SectionHeader({
     <div className="mb-10">
       <div className="flex items-baseline justify-between mb-4">
         <span className="s-label">/ {label}</span>
-        {fig && <span className="s-fig">{fig}</span>}
       </div>
       <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-3">
         {heading}
@@ -98,9 +95,8 @@ function Hero() {
 
   return (
     <SigilSection borderTop padding="96px 24px 48px">
-      <HeroLogoField />
-
       <div className="relative z-[1] mb-12">
+        <HeroLogoField />
         <span className="s-label block mb-4">/ sigil ui</span>
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
@@ -144,7 +140,6 @@ function Hero() {
       <SectionDivider pattern="dots" size="xs" opacity={0.1} showBorders={false} fadeEdges={false} className="my-6" />
 
       <div className="relative z-[1]">
-        <span className="s-fig block mb-2">Fig. 01</span>
         <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
           <div className="s-transition-all">
             <HeroShowcase />
@@ -164,7 +159,6 @@ function TokenSystem() {
     <SigilSection borderTop>
       <SectionHeader
         label="Token System"
-        fig="Fig. 02"
         heading="One file compiles to everything."
         description="Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly."
       />
@@ -178,7 +172,6 @@ function TokenSystem() {
       <SectionDivider pattern="hatch" size="xs" opacity={0.08} showBorders={false} fadeEdges={false} className="my-12" />
 
       <div className="mt-12">
-        <span className="s-fig block mb-4">Fig. 02a — Preset comparison</span>
         <TechFrame variant="crosshair" extend={12} opacity={0.3} padding={12}>
           <PresetTransitionDemo />
         </TechFrame>
@@ -232,7 +225,6 @@ function Components() {
     <SigilSection id="components" borderTop>
       <SectionHeader
         label="Components"
-        fig="Fig. 03"
         heading="100+ token-driven components."
         description="Every component reads from var(--s-*) tokens. Switch presets and the entire library updates."
       />
@@ -277,7 +269,6 @@ function Shapes() {
     <SigilSection borderTop>
       <SectionHeader
         label="Shapes & Patterns"
-        fig="Fig. 04"
         heading="Geometric primitives."
         description="Decorative shapes, tessellations, and pattern fills — all driven by tokens."
       />
@@ -295,7 +286,6 @@ function Presets() {
     <SigilSection id="presets" borderTop>
       <SectionHeader
         label="Presets"
-        fig="Fig. 05"
         heading="31 curated presets."
         description="One command switches all 259 tokens at once. Six aesthetic families."
       />
@@ -337,7 +327,6 @@ function DemoSites() {
     <SigilSection borderTop>
       <SectionHeader
         label="Demos"
-        fig="Fig. 06"
         heading="10 production templates."
         description="Real sites built with Sigil. Each uses a different preset."
       />
@@ -391,7 +380,6 @@ function CLISection() {
     <SigilSection borderTop>
       <SectionHeader
         label="CLI"
-        fig="Fig. 07"
         heading="One command."
         description="Interactive setup. Detects your framework, recommends presets, generates everything."
       />
@@ -414,23 +402,23 @@ export default function LandingPage() {
 
       <Hero />
 
-      <SectionDivider pattern="crosshatch" size="md" />
+      <SectionDivider pattern="crosshatch" size="md" showBorders />
 
       <TokenSystem />
 
-      <SectionDivider pattern="dots" size="sm" />
+      <SectionDivider pattern="dots" size="sm" showBorders />
 
       <Components />
 
-      <SectionDivider pattern="diagonal" size="lg" />
+      <SectionDivider pattern="diagonal" size="lg" showBorders />
 
       <Shapes />
 
-      <SectionDivider pattern="grid" size="md" />
+      <SectionDivider pattern="grid" size="md" showBorders />
 
       <Presets />
 
-      <SectionDivider pattern="diamond" size="sm" />
+      <SectionDivider pattern="diamond" size="sm" showBorders />
 
       <DemoSites />
 
@@ -438,7 +426,7 @@ export default function LandingPage() {
         <ProductDemo />
       </SigilSection>
 
-      <SectionDivider pattern="hatch" size="md" />
+      <SectionDivider pattern="hatch" size="md" showBorders />
 
       <CLISection />
 

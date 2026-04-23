@@ -1,0 +1,65 @@
+---
+title: Clipboard
+description: Copy-to-clipboard button with automatic "Copied" feedback and render-prop support.
+---
+
+## Import
+
+```tsx
+import { Clipboard } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Clipboard value="npm install @sigil-ui/components" />
+```
+
+## Custom timeout
+
+```tsx
+<Clipboard value="secret-token-abc" timeout={5000} />
+```
+
+## Render prop
+
+Use the `children` render prop for full control over the UI:
+
+```tsx
+<Clipboard value="npx sigil init">
+  {({ copied, copy }) => (
+    <button onClick={copy}>
+      {copied ? "Copied!" : "Copy command"}
+    </button>
+  )}
+</Clipboard>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-radius-sm` | Button border radius |
+| `--s-border` | Button border |
+| `--s-border-style` | Border style |
+| `--s-surface` | Button background |
+| `--s-surface-elevated` | Hover background |
+| `--s-text-muted` | Button text |
+| `--s-primary` | Focus ring |
+| `--s-duration-fast` | Hover transition |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Text to copy to clipboard |
+| `timeout` | `number` | `2000` | Time in ms before resetting from "Copied" to idle |
+| `children` | `(state: { copied: boolean; copy: () => void }) => ReactNode` | — | Render prop for custom UI. When omitted, renders the default button. |
+| `className` | `string` | — | Additional CSS classes |
+
+Extends all native `<button>` attributes.
+
+## Accessibility
+
+- Default button includes visual icon state change (clipboard → checkmark)
+- Uses `focus-visible` ring for keyboard navigation

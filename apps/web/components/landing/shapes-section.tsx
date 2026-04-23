@@ -15,20 +15,93 @@ import { TechFrame } from "./tech-frame";
 
 const TRANSITION = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-const PATTERNS: { name: string; bg: (c: string, cell: number) => string; size: string }[] = [
-  { name: "grid", bg: (c, s) => `linear-gradient(to right, ${c} 1px, transparent 1px), linear-gradient(to bottom, transparent ${s - 1}px, ${c} ${s - 1}px)`, size: "12px 12px" },
-  { name: "dots", bg: (c, s) => `radial-gradient(circle, ${c} 0.75px, transparent 0.75px)`, size: "10px 10px" },
-  { name: "crosshatch", bg: (c, s) => `linear-gradient(45deg, ${c} 0.5px, transparent 0.5px), linear-gradient(-45deg, ${c} 0.5px, transparent 0.5px)`, size: "10px 10px" },
-  { name: "diagonal", bg: (c, s) => `repeating-linear-gradient(45deg, transparent, transparent ${s - 1}px, ${c} ${s - 1}px, ${c} ${s}px)`, size: "14px 14px" },
-  { name: "diamond", bg: (c, s) => `linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%), linear-gradient(-45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%)`, size: "6px 6px" },
-  { name: "hexagon", bg: (c) => `radial-gradient(circle farthest-side at 0% 50%, ${c} 23%, transparent 24%), radial-gradient(circle farthest-side at 100% 50%, ${c} 23%, transparent 24%), radial-gradient(circle farthest-side at 50% 0%, ${c} 23%, transparent 24%), radial-gradient(circle farthest-side at 50% 100%, ${c} 23%, transparent 24%)`, size: "10px 12px" },
-  { name: "triangle", bg: (c, s) => `linear-gradient(60deg, ${c} 0.5px, transparent 0.5px), linear-gradient(-60deg, ${c} 0.5px, transparent 0.5px), linear-gradient(to bottom, transparent ${s - 1}px, ${c} ${s - 1}px)`, size: "12px 12px" },
-  { name: "zigzag", bg: (c, s) => `linear-gradient(135deg, ${c} 25%, transparent 25%), linear-gradient(225deg, ${c} 25%, transparent 25%), linear-gradient(315deg, ${c} 25%, transparent 25%), linear-gradient(45deg, ${c} 25%, transparent 25%)`, size: "10px 10px" },
-  { name: "checker", bg: (c) => `linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%), linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%)`, size: "12px 12px" },
-  { name: "plus", bg: (c, s) => `linear-gradient(to right, transparent 5px, ${c} 5px, ${c} 7px, transparent 7px), linear-gradient(to bottom, transparent 5px, ${c} 5px, ${c} 7px, transparent 7px)`, size: "12px 12px" },
-  { name: "brick", bg: (c, s) => `linear-gradient(to right, ${c} 1px, transparent 1px), linear-gradient(to bottom, transparent ${s - 1}px, ${c} ${s - 1}px)`, size: "14px 7px" },
-  { name: "wave", bg: (c, s) => `repeating-linear-gradient(30deg, transparent, transparent ${s - 1}px, ${c} ${s - 1}px, ${c} ${s}px)`, size: "14px 12px" },
-];
+const SVG_C = "rgba(128,128,128,0.22)";
+
+function previewHexSvg(cell: number): string {
+  const s = Math.round(cell * 0.5);
+  const w = Math.round(s * 1.732);
+  const tileH = s * 3;
+  const halfS = Math.round(s / 2);
+  const threeHalfS = Math.round(s * 1.5);
+  const lines = [
+    [w / 2, 0, w, halfS],
+    [w, halfS, w, threeHalfS],
+    [w, threeHalfS, w / 2, s * 2],
+    [w / 2, s * 2, 0, threeHalfS],
+    [0, threeHalfS, 0, halfS],
+    [0, halfS, w / 2, 0],
+    [w / 2, s * 2, w / 2, tileH],
+  ];
+  return `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${tileH}'>${lines.map(([x1, y1, x2, y2]) => `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_C}' stroke-width='1'/>`).join("")}</svg>`,
+  )}")`;
+}
+
+function previewTriangleSvg(cell: number): string {
+  const side = cell;
+  const h = Math.round(side * 0.866);
+  const half = Math.round(side / 2);
+  const tileH = h * 2;
+  const lines = [
+    [0, 0, side, 0], [0, h, side, h], [0, tileH, side, tileH],
+    [0, 0, half, h], [half, h, 0, tileH],
+    [half, h, side, tileH], [side, 0, half, h],
+  ];
+  return `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${side}' height='${tileH}'>${lines.map(([x1, y1, x2, y2]) => `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_C}' stroke-width='1'/>`).join("")}</svg>`,
+  )}")`;
+}
+
+function previewBrickSvg(cell: number): string {
+  const rowH = Math.round(cell / 2);
+  const half = Math.round(cell / 2);
+  const lines = [
+    [0, rowH, cell, rowH], [0, rowH * 2, cell, rowH * 2],
+    [0, 0, 0, rowH], [half, rowH, half, rowH * 2],
+  ];
+  return `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${cell}' height='${rowH * 2}'>${lines.map(([x1, y1, x2, y2]) => `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_C}' stroke-width='1'/>`).join("")}</svg>`,
+  )}")`;
+}
+
+function previewWaveSvg(cell: number): string {
+  const w = cell;
+  const h = cell;
+  const a = h * 0.35;
+  const mid = h / 2;
+  const pts: string[] = [];
+  const steps = 40;
+  for (let i = 0; i <= steps; i++) {
+    const x = (i / steps) * w;
+    const y = mid + a * Math.sin((i / steps) * Math.PI * 2);
+    pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`);
+  }
+  return `url("data:image/svg+xml,${encodeURIComponent(
+    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'><path d='${pts.join(" ")}' fill='none' stroke='${SVG_C}' stroke-width='1'/></svg>`,
+  )}")`;
+}
+
+type PatternDef = { name: string; bg: string; size: string; pos?: string };
+
+function buildPatterns(color: string, cell: number): PatternDef[] {
+  const c = color;
+  const s = cell;
+  const mid = Math.floor(s / 2);
+  return [
+    { name: "grid", bg: `linear-gradient(to right, ${c} 1px, transparent 1px), linear-gradient(to bottom, transparent ${s - 1}px, ${c} ${s - 1}px)`, size: `${s}px ${s}px` },
+    { name: "dots", bg: `radial-gradient(circle, ${c} 1.2px, transparent 1.2px)`, size: `${s}px ${s}px`, pos: `${s / 2}px ${s / 2}px` },
+    { name: "crosshatch", bg: `repeating-linear-gradient(45deg, transparent, transparent ${s - 1}px, ${c} ${s - 1}px, ${c} ${s}px), repeating-linear-gradient(-45deg, transparent, transparent ${s - 1}px, ${c} ${s - 1}px, ${c} ${s}px)`, size: "100% 100%, 100% 100%" },
+    { name: "diagonal", bg: `repeating-linear-gradient(45deg, transparent, transparent ${s - 1}px, ${c} ${s - 1}px, ${c} ${s}px)`, size: "100% 100%" },
+    { name: "diamond", bg: `linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%), linear-gradient(-45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%)`, size: `${s / 2}px ${s / 2}px` },
+    { name: "hexagon", bg: previewHexSvg(s), size: `${Math.round(Math.round(s * 0.5) * 1.732)}px ${Math.round(s * 0.5) * 3}px` },
+    { name: "triangle", bg: previewTriangleSvg(s), size: `${s}px ${Math.round(s * 0.866) * 2}px` },
+    { name: "zigzag", bg: `linear-gradient(135deg, ${c} 25%, transparent 25%), linear-gradient(225deg, ${c} 25%, transparent 25%), linear-gradient(315deg, ${c} 25%, transparent 25%), linear-gradient(45deg, ${c} 25%, transparent 25%)`, size: `${s}px ${s}px` },
+    { name: "checker", bg: `linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%), linear-gradient(45deg, ${c} 25%, transparent 25%, transparent 75%, ${c} 75%)`, size: `${s}px ${s}px`, pos: `0 0, ${s / 2}px ${s / 2}px` },
+    { name: "plus", bg: `linear-gradient(to right, transparent ${mid}px, ${c} ${mid}px, ${c} ${mid + 1}px, transparent ${mid + 1}px), linear-gradient(to bottom, transparent ${mid}px, ${c} ${mid}px, ${c} ${mid + 1}px, transparent ${mid + 1}px)`, size: `${s}px ${s}px` },
+    { name: "brick", bg: previewBrickSvg(s), size: `${s}px ${Math.round(s / 2) * 2}px` },
+    { name: "wave", bg: previewWaveSvg(s), size: `${s}px ${s}px` },
+  ];
+}
 
 function ShapeCard({ name, children }: { name: string; children: React.ReactNode }) {
   return (
@@ -65,7 +138,7 @@ function ShapeCard({ name, children }: { name: string; children: React.ReactNode
   );
 }
 
-function PatternCard({ name, bgImage, bgSize }: { name: string; bgImage: string; bgSize: string }) {
+function PatternCard({ name, bgImage, bgSize, bgPos }: { name: string; bgImage: string; bgSize: string; bgPos?: string }) {
   return (
     <div
       className="flex flex-col items-center gap-2"
@@ -82,6 +155,7 @@ function PatternCard({ name, bgImage, bgSize }: { name: string; bgImage: string;
           height: 48,
           backgroundImage: bgImage,
           backgroundSize: bgSize,
+          ...(bgPos ? { backgroundPosition: bgPos } : {}),
           opacity: 0.5,
         }}
       />
@@ -182,9 +256,6 @@ export function ShapesAndPatterns() {
 
       {/* Voronoi Bento */}
       <div>
-        <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>
-          Fig. 03 — Voronoi bento layout
-        </span>
         <TechFrame variant="overshoot" extend={16} opacity={0.3} padding={8}>
           <div className="s-transition-all">
             <VoronoiShowcase />
@@ -221,12 +292,13 @@ export function ShapesAndPatterns() {
         </span>
         <TechFrame variant="ticks" extend={6} opacity={0.2}>
           <div className="grid grid-cols-4 sm:grid-cols-6 lg:grid-cols-12 gap-2">
-            {PATTERNS.map((p) => (
+            {buildPatterns(color, 12).map((p) => (
               <PatternCard
                 key={p.name}
                 name={p.name}
-                bgImage={p.bg(color, 12)}
+                bgImage={p.bg}
                 bgSize={p.size}
+                bgPos={p.pos}
               />
             ))}
           </div>
