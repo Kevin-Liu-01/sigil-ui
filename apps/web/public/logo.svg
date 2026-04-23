@@ -1,23 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
-  <!-- Plus divider -->
-  <line x1="60" y1="4" x2="60" y2="116" stroke="currentColor" stroke-width="2.5"/>
-  <line x1="4" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="2.5"/>
+  <line x1="60" y1="4" x2="60" y2="116" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <line x1="4" y1="60" x2="116" y2="60" stroke="currentColor" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <!-- Top-left: 4 small circles (2x2) -->
-  <circle cx="24" cy="24" r="10" fill="#9b99e8"/>
-  <circle cx="46" cy="24" r="10" fill="#7c7ce0"/>
-  <circle cx="24" cy="46" r="10" fill="#6366f1"/>
-  <circle cx="46" cy="46" r="10" fill="#4f46e5"/>
+  <circle cx="22" cy="22" r="10" stroke="#c7d2fe" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="44" cy="22" r="10" stroke="#a5b4fc" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="22" cy="44" r="10" stroke="#818cf8" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="44" cy="44" r="10" stroke="#6366f1" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <!-- Top-right: 1 large circle + 1 small arc -->
-  <circle cx="88" cy="32" r="18" fill="none" stroke="#ea580c" stroke-width="2.5"/>
-  <circle cx="76" cy="48" r="5" fill="#f97316"/>
+  <circle cx="82" cy="26" r="16" stroke="#ea580c" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="100" cy="44" r="6" stroke="#f97316" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <!-- Bottom-left: 2 medium circles + 1 small -->
-  <circle cx="24" cy="82" r="12" fill="#22c55e"/>
-  <circle cx="46" cy="90" r="9" fill="#16a34a"/>
-  <circle cx="30" cy="104" r="5" fill="#15803d"/>
+  <circle cx="24" cy="80" r="12" stroke="#22c55e" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="42" cy="92" r="8" stroke="#16a34a" stroke-width="0.25" stroke-dasharray="2 2"/>
+  <circle cx="32" cy="108" r="5" stroke="#15803d" stroke-width="0.25" stroke-dasharray="2 2"/>
 
-  <!-- Bottom-right: 1 giant circle -->
-  <circle cx="90" cy="90" r="24" fill="#d946ef"/>
+  <circle cx="90" cy="90" r="22" stroke="#d946ef" stroke-width="0.25" stroke-dasharray="2 2"/>
 </svg>

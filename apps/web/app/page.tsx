@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
+import { HeroLogoField } from "@/components/landing/hero-logo-field";
 import { PresetShowcase } from "@/components/landing/preset-showcase";
 import { PresetTable } from "@/components/landing/preset-table";
 import { Terminal } from "@/components/landing/terminal";
@@ -13,10 +14,12 @@ import {
   CodeExample,
   ParallaxSection,
 } from "@/components/landing/interactive-diagrams";
+import { LiveComponentGrid } from "@/components/landing/live-component";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
 import { SigilPageGrid, SigilSection, SigilNavbar } from "@sigil-ui/components";
+import type { GutterPattern } from "@sigil-ui/tokens";
 import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
 
 /* ================================================================ */
@@ -211,8 +214,9 @@ function Hero() {
   };
 
   return (
-    <SigilSection borderTop showCrosses padding="100px 0 64px">
-      <div style={{ marginBottom: 48 }}>
+    <SigilSection borderTop showCrosses padding="100px 20px 64px">
+      <HeroLogoField />
+      <div style={{ marginBottom: 48, position: "relative", zIndex: 1 }}>
         <span className="s-label" style={{ display: "block", marginBottom: 16 }}>/ sigil ui</span>
 
         <h1
@@ -305,7 +309,7 @@ function Hero() {
         </div>
       </div>
 
-      <div>
+      <div style={{ position: "relative", zIndex: 1 }}>
         <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>Fig. 01</span>
         <div className="s-transition-all">
           <HeroShowcase />
@@ -625,40 +629,7 @@ function Components() {
         ))}
       </div>
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 0,
-        }}
-      >
-        {COMPONENT_CELLS.map((cell) => (
-          <div
-            key={cell.name}
-            style={{
-              border: "1px solid var(--s-border)",
-              borderRadius: 0,
-              padding: 20,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              minHeight: 120,
-              gap: 12,
-              marginRight: -1,
-              marginBottom: -1,
-            }}
-          >
-            <MiniComponentRender name={cell.name} />
-            <span
-              className="s-mono"
-              style={{ fontSize: 11, color: "var(--s-text-muted)" }}
-            >
-              {cell.name} — {cell.vars} vars
-            </span>
-          </div>
-        ))}
-      </div>
+      <LiveComponentGrid />
 
       <a
         href="/docs/components/button"
@@ -892,7 +863,7 @@ const FOOTER_COLS = [
 
 function Footer() {
   return (
-    <SigilSection as="footer" borderTop showCrosses padding="64px 0 32px">
+    <SigilSection as="footer" borderTop showCrosses padding="64px 20px 32px">
       <div
         style={{
           display: "grid",
@@ -982,19 +953,41 @@ function Footer() {
 /* Page                                                              */
 /* ================================================================ */
 
+function ReticleGrid({ children }: { children: React.ReactNode }) {
+  let gutterPattern: GutterPattern = "grid";
+  let marginPattern: GutterPattern = "horizontal";
+  try {
+    const { tokens } = useSigilTokens();
+    const sigil = tokens.sigil as Record<string, unknown>;
+    if (sigil?.["gutter-pattern"]) gutterPattern = sigil["gutter-pattern"] as GutterPattern;
+    if (sigil?.["margin-pattern"]) marginPattern = sigil["margin-pattern"] as GutterPattern;
+  } catch { /* no provider */ }
+
+  return (
+    <SigilPageGrid
+      showGutterGrid
+      showMarginLines
+      gutterPattern={gutterPattern}
+      marginPattern={marginPattern}
+    >
+      {children}
+    </SigilPageGrid>
+  );
+}
+
 export default function LandingPage() {
   return (
     <>
       <LandingNavbar />
       <main>
-        <SigilPageGrid showGutterGrid showMarginLines>
+        <ReticleGrid>
           <Hero />
           <TokenSystem />
           <Components />
           <Presets />
           <DemoSites />
           <CLISection />
-        </SigilPageGrid>
+        </ReticleGrid>
       </main>
       <Footer />
     </>

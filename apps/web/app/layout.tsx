@@ -85,11 +85,15 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`dark ${robotoMono.variable}`}
-      data-theme="dark"
+      className={robotoMono.variable}
       suppressHydrationWarning
     >
       <body style={{ paddingBottom: 40 }} suppressHydrationWarning>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem("sigil-theme")||"dark";document.documentElement.classList.toggle("dark",t==="dark");document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.classList.add("dark");document.documentElement.setAttribute("data-theme","dark")}})()`,
+          }}
+        />
         <SigilShell>
           {children}
         </SigilShell>

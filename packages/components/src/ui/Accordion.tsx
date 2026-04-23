@@ -63,7 +63,7 @@ export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Acc
 
   return (
     <AccordionContext.Provider value={{ openItems, toggle }}>
-      <div ref={ref} className={cn("w-full divide-y divide-[var(--s-border)]", className)} {...rest}>
+      <div ref={ref} className={cn("w-full divide-y divide-[var(--s-border)] divide-[style:var(--s-border-style,solid)]", className)} {...rest}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -120,9 +120,9 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
           onClick={handleClick}
           className={cn(
             "flex flex-1 items-center justify-between py-4 text-sm font-medium",
-            "transition-all duration-150 hover:underline",
+            "transition-all duration-[var(--s-duration-fast,150ms)] hover:underline",
             "text-[var(--s-text)]",
-            "[&>svg]:transition-transform [&>svg]:duration-200",
+            "[&>svg]:transition-transform [&>svg]:duration-[var(--s-duration-fast,150ms)]",
             className,
           )}
           {...rest}
@@ -135,7 +135,7 @@ export const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerPr
             fill="none"
             className={cn(
               "shrink-0 text-[var(--s-text-muted)]",
-              "transition-transform duration-200",
+              "transition-transform duration-[var(--s-duration-fast,150ms)]",
             )}
             style={{
               transform: openItems.has(getValue(itemEl.current)) ? "rotate(180deg)" : "rotate(0deg)",
@@ -181,7 +181,7 @@ export const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps
         }}
         role="region"
         className={cn(
-          "overflow-hidden transition-all duration-200 ease-out",
+          "overflow-hidden transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
           isOpen ? "grid grid-rows-[1fr] opacity-100" : "grid grid-rows-[0fr] opacity-0",
           className,
         )}

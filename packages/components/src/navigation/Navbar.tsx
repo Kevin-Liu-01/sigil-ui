@@ -20,11 +20,11 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
     <nav
       ref={ref}
       className={cn(
-        "w-full z-50 flex items-center justify-between px-6 h-16",
+        "w-full z-50 flex items-center justify-between px-6 h-[var(--s-navbar-height,64px)]",
         sticky && "sticky top-0",
         transparent
           ? "bg-transparent"
-          : "bg-[var(--s-background)]/95 backdrop-blur-sm border-b border-[var(--s-border)]",
+          : "bg-[var(--s-background)]/95 backdrop-blur-[var(--s-navbar-backdrop-blur,12px)] border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
         className,
       )}
       {...rest}

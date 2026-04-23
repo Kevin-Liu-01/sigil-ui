@@ -30,7 +30,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
       ref={ref}
       role="alert"
       className={cn(
-        "relative flex gap-3 w-full rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-l-4 p-4",
+        "relative flex gap-3 w-full rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] border-l-4 p-4",
         "text-sm text-[var(--s-text)]",
         variantStyles[variant],
         className,

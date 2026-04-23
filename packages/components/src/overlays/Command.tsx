@@ -28,7 +28,7 @@ export const CommandInput = forwardRef<
   ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(function CommandInput({ className, ...rest }, ref) {
   return (
-    <div className="flex items-center gap-2 border-b border-[var(--s-border)] px-3">
+    <div className="flex items-center gap-2 border-b border-[style:var(--s-border-style,solid)] border-[var(--s-border)] px-3">
       <svg
         width="16"
         height="16"

@@ -18,10 +18,10 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
     <div
       ref={ref}
       className={cn(
-        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-card-border-style,solid)]",
         "bg-[var(--s-surface)] text-[var(--s-text)]",
         "shadow-[var(--s-shadow-sm)]",
-        hoverable && "transition-all duration-200 hover:shadow-[var(--s-shadow-md)] hover:-translate-y-0.5",
+        hoverable && "transition-all duration-[var(--s-duration-normal,200ms)] hover:shadow-[var(--s-shadow-md)] hover:-translate-y-0.5",
         className,
       )}
       {...rest}
@@ -65,7 +65,7 @@ export const CardDescription = forwardRef<HTMLParagraphElement, HTMLAttributes<H
 /** Card body content area. */
 export const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function CardContent({ className, ...rest }, ref) {
-    return <div ref={ref} className={cn("p-6 pt-0", className)} {...rest} />;
+    return <div ref={ref} className={cn("p-[var(--s-card-padding,24px)] pt-0", className)} {...rest} />;
   },
 );
 

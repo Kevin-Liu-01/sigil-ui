@@ -36,11 +36,19 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("sigil-theme");
+      if (saved) setIsDark(saved === "dark");
+    } catch {}
+  }, []);
+
   function toggleTheme() {
     const next = !isDark;
     setIsDark(next);
     document.documentElement.classList.toggle("dark", next);
     document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
+    try { localStorage.setItem("sigil-theme", next ? "dark" : "light"); } catch {}
   }
 
   return (

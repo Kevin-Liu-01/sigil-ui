@@ -110,9 +110,9 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
           setTimeout(() => inputRef.current?.focus(), 0);
         }}
         className={cn(
-          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-md,6px)] border px-3 py-2 text-sm",
+          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)] border-[var(--s-border)]",
-          "transition-colors duration-150",
+          "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
         )}
       >
@@ -126,7 +126,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
 
       {open && (
         <div className={cn(
-          "absolute z-50 mt-1 w-full rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
+          "absolute z-50 mt-1 w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           "bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
         )}>
           <div className="p-2">
@@ -143,7 +143,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
               }}
               onKeyDown={handleKeyDown}
               className={cn(
-                "flex h-8 w-full rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border)] px-2 text-sm",
+                "flex h-8 w-full rounded-[var(--s-radius-sm,4px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] px-2 text-sm",
                 "bg-[var(--s-background)] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)]",
                 "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--s-primary)]",
               )}
@@ -168,7 +168,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
                     onMouseEnter={() => !option.disabled && setActiveIndex(i)}
                     className={cn(
                       "flex cursor-pointer items-center justify-between rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-sm",
-                      "transition-colors duration-100",
+                      "transition-colors duration-[var(--s-duration-fast,150ms)]",
                       option.disabled && "cursor-not-allowed opacity-50",
                       isActive && "bg-[var(--s-primary)]/10 text-[var(--s-text)]",
                       !isActive && "text-[var(--s-text)] hover:bg-[var(--s-primary)]/5",

@@ -689,7 +689,6 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
     <div className={className} style={style}>
       <style dangerouslySetInnerHTML={{ __html: TRANSITION_CSS }} />
       <div className="hero-transition-wrapper">
-        <span className="s-fig">Fig. 01</span>
         <HeroCompositions />
         <DenseComponentGrid />
         <PresetDots />

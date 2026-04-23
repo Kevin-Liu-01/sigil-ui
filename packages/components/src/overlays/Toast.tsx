@@ -144,7 +144,7 @@ function ToastNotification({
     <div
       role="alert"
       className={cn(
-        "pointer-events-auto w-80 rounded-[var(--s-card-radius,8px)] border p-4",
+        "pointer-events-auto w-80 rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] p-4",
         "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
         variantStyles[t.variant],
         leaving ? "animate-[toastOut_200ms_ease-in_forwards]" : "animate-[toastIn_200ms_ease-out]",

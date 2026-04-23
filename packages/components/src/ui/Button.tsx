@@ -19,8 +19,8 @@ const variantStyles: Record<string, string> = {
   primary: [
     "bg-[var(--s-primary)] text-white",
     "hover:bg-[var(--s-primary-hover)]",
-    "active:brightness-90",
-    "shadow-sm",
+    "active:brightness-90 active:scale-[var(--s-button-active-scale,0.97)]",
+    "shadow-[var(--s-shadow-sm)]",
   ].join(" "),
   secondary: [
     "bg-[var(--s-surface)] text-[var(--s-text)]",
@@ -63,7 +63,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       ref={ref}
       className={cn(
         "inline-flex items-center justify-center gap-2 font-medium",
-        "transition-all duration-150 ease-out",
+        "transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
         "disabled:opacity-50 disabled:pointer-events-none",
         "select-none cursor-pointer",

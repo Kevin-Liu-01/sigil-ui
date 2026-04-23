@@ -13,8 +13,8 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles: Record<string, string> = {
   default: "bg-[var(--s-primary)] text-white",
-  secondary: "bg-[var(--s-surface-elevated)] text-[var(--s-text-secondary)] border border-[var(--s-border)]",
-  outline: "bg-transparent text-[var(--s-text)] border border-[var(--s-border)]",
+  secondary: "bg-[var(--s-surface-elevated)] text-[var(--s-text-secondary)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+  outline: "bg-transparent text-[var(--s-text)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
   destructive: "bg-[var(--s-error)] text-white",
 };
 

@@ -23,8 +23,8 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(function Footer(
     <footer
       ref={ref}
       className={cn(
-        "w-full border-t border-[var(--s-border)] bg-[var(--s-surface)]",
-        "px-6 py-12",
+        "w-full border-t border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]",
+        "px-6 py-[var(--s-footer-py,48px)]",
         className,
       )}
       {...rest}

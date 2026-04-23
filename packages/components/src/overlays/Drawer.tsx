@@ -26,7 +26,7 @@ export const DrawerContent = forwardRef<
         className={cn(
           "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
           "rounded-t-[var(--s-card-radius,8px)]",
-          "border border-b-0 border-[var(--s-border)]",
+          "border border-b-0 border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-background)] shadow-[var(--s-shadow-lg)]",
           className,
         )}

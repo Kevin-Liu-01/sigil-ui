@@ -139,7 +139,7 @@ export function useSigilSound(): SoundControlValue {
 // ---------------------------------------------------------------------------
 
 export function SigilSoundProvider({ children }: { children: ReactNode }) {
-  const [enabled, setEnabled] = useState(false);
+  const [enabled, setEnabled] = useState(true);
   const [activePreset, setActivePreset] = useState("sigil");
 
   const compiledSounds = useMemo(() => {

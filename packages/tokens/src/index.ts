@@ -21,6 +21,7 @@ export type {
   CssCompileOptions,
   DividerStyleTokens,
   GridVisualTokens,
+  GutterPattern,
   MotionDurations,
   MotionEasings,
   MotionTokens,

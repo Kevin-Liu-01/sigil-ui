@@ -1,0 +1,459 @@
+[     202ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     214ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   40548ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[   93896ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   94033ms] [LOG] [Fast Refresh] done in 237ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  123120ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  123196ms] [LOG] [Fast Refresh] done in 177ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  129382ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  129523ms] [LOG] [Fast Refresh] done in 242ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  130534ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  131823ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/?_rsc=wnywt:0
+[  132357ms] [LOG] [Fast Refresh] done in 1687ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  132650ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  132690ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  139155ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  139163ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  149417ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  149424ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  149591ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  149606ms] [LOG] [Fast Refresh] done in 48ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  156932ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  157007ms] [LOG] [Fast Refresh] done in 93ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  193563ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  197532ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  197938ms] [LOG] [Fast Refresh] done in 508ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  204454ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  204539ms] [LOG] [Fast Refresh] done in 187ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  211614ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  211700ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  211838ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  211850ms] [LOG] [Fast Refresh] done in 112ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  212356ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  212382ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  218790ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  219635ms] [LOG] [Fast Refresh] done in 962ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234163ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  234182ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  241400ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  241414ms] [LOG] [Fast Refresh] done in 115ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  242555ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  243840ms] [LOG] [Fast Refresh] done in 1091ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  244422ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  244465ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  285143ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  505049ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  505065ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  508545ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/demos:0
+[  508557ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  508564ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  511193ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  511205ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  511860ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  511883ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  644389ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  644412ms] [LOG] [Fast Refresh] done in 105ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  644662ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  644757ms] [LOG] [Fast Refresh] done in 171ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  645838ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  648859ms] [ERROR] ./apps/web/components/sound-provider.tsx:6:1
+Module not found: Can't resolve '@sigil-ui/components'
+  4 | import { defineSound } from "@web-kits/audio";
+  5 | // @ts-expect-error — dts not generated for workspace package; resolves at bundle time
+> 6 | import { SigilSoundContext } from "@sigil-ui/components";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | // ---------------------------------------------------------------------------
+  9 | // Sound types (mirrored from @sigil-ui/components/src/sound-context)
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/sound-provider.tsx [Client Component Browser]
+    ./apps/web/components/sigil-shell.tsx [Client Component Browser]
+    ./apps/web/components/sigil-shell.tsx [Server Component]
+    ./apps/web/app/layout.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/sound-provider.tsx [Client Component SSR]
+    ./apps/web/components/sigil-shell.tsx [Client Component SSR]
+    ./apps/web/components/sigil-shell.tsx [Server Component]
+    ./apps/web/app/layout.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  648883ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648906ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648921ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648953ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648966ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648982ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  648992ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649001ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649010ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649018ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649027ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649035ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649044ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649052ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649059ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649067ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649077ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649094ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649109ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649127ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649149ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649172ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649190ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649211ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649232ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649247ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649263ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649283ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649292ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649301ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649313ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649328ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649344ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649358ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649373ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649390ms] Error: Internal Next.js error: Router action dispatched before initialization.
+    at dispatchAppRouterAction (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:916:37)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11800:61
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at Object.hmrRefresh (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:11799:40)
+    at http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13967:64
+    at startTransition (http://localhost:3000/_next/static/chunks/10zw_next_dist_compiled_0mu0jk-._.js:1279:31)
+    at processMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13966:44)
+    at WebSocket.handleMessage (http://localhost:3000/_next/static/chunks/10zw_next_dist_client_0ii3he1._.js:13335:52)
+[  649569ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  649591ms] [LOG] [Fast Refresh] done in 123ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  649701ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  650015ms] [LOG] [Fast Refresh] done in 415ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  650165ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  650223ms] [LOG] [Fast Refresh] done in 160ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  650287ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  650305ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

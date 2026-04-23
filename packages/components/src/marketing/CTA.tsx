@@ -33,7 +33,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(function CTA(
       ref={ref}
       className={cn(
         "w-full px-6 py-16 md:py-20",
-        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+        "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
         "bg-[var(--s-surface)]",
         isSplit ? "flex flex-col md:flex-row items-center justify-between gap-8" : "text-center",
         className,
@@ -59,7 +59,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(function CTA(
               onClick={action.onClick}
               className={cn(
                 "inline-flex items-center justify-center h-11 px-6 rounded-[var(--s-radius-md,6px)]",
-                "text-sm font-medium transition-all duration-150",
+                "text-sm font-medium transition-all duration-[var(--s-duration-fast,150ms)]",
                 "bg-[var(--s-primary)] text-white hover:bg-[var(--s-primary-hover)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
               )}

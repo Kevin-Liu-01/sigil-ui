@@ -135,7 +135,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
         }}
         className={cn(
           "absolute z-50 min-w-[8rem] p-4",
-          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
           "animate-[popoverIn_150ms_ease-out]",
           side === "bottom" ? "top-full mt-2" : "bottom-full mb-2",

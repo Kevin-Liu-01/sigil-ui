@@ -57,13 +57,20 @@ export function SigilTokensProvider({
 
   const patchTokens = useCallback(
     (category: keyof SigilTokens, key: string, value: unknown) => {
-      setTokens((prev) => ({
-        ...prev,
-        [category]: {
-          ...(prev[category] as Record<string, unknown>),
-          [key]: value,
-        },
-      }));
+      setTokens((prev) => {
+        const cat = { ...(prev[category] as Record<string, unknown>) };
+        if (key.includes(".")) {
+          const [parent, ...rest] = key.split(".");
+          const child = rest.join(".");
+          cat[parent!] = {
+            ...((cat[parent!] as Record<string, unknown>) ?? {}),
+            [child]: value,
+          };
+        } else {
+          cat[key] = value;
+        }
+        return { ...prev, [category]: cat };
+      });
       setActivePreset((prev) => (prev.endsWith("*") ? prev : `${prev}*`));
     },
     [],

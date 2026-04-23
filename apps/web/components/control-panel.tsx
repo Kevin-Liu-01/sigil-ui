@@ -219,8 +219,10 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
   const sp = tokens.spacing as Record<string, unknown> | undefined;
   const r = tokens.radius as Record<string, unknown> | undefined;
   const b = tokens.borders as Record<string, unknown> | undefined;
+  const bw = (b?.["width"] && typeof b["width"] === "object" ? b["width"] : {}) as Record<string, unknown>;
   const sh = tokens.shadows as Record<string, unknown> | undefined;
   const m = tokens.motion as Record<string, unknown> | undefined;
+  const md = (m?.["duration"] && typeof m["duration"] === "object" ? m["duration"] : {}) as Record<string, unknown>;
   const cards = tokens.cards as Record<string, unknown> | undefined;
   const buttons = tokens.buttons as Record<string, unknown> | undefined;
   const grid = tokens.sigil as Record<string, unknown> | undefined;
@@ -452,8 +454,8 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
 
           {/* 5. Borders */}
           <Section title="Borders">
-            <Row label="width" value={`${readNum(b, "width", 1)}px`}>
-              <Slider value={readNum(b, "width", 1)} min={0} max={4} step={0.5} onChange={(v) => patch("borders", "width", `${v}px`)} />
+            <Row label="width" value={`${readNum(bw, "thin", 1)}px`}>
+              <Slider value={readNum(bw, "thin", 1)} min={0} max={4} step={0.5} onChange={(v) => patch("borders", "width.thin", `${v}px`)} />
             </Row>
             <Row label="style">
               <Segmented
@@ -504,17 +506,17 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
 
           {/* 7. Motion */}
           <Section title="Motion">
-            <Row label="fast" value={`${readNum(m, "duration-fast", 150)}ms`}>
-              <Slider value={readNum(m, "duration-fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration-fast", `${v}ms`)} />
+            <Row label="fast" value={`${readNum(md, "fast", 150)}ms`}>
+              <Slider value={readNum(md, "fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration.fast", `${v}ms`)} />
             </Row>
-            <Row label="normal" value={`${readNum(m, "duration-normal", 250)}ms`}>
-              <Slider value={readNum(m, "duration-normal", 250)} min={100} max={500} step={10} onChange={(v) => patch("motion", "duration-normal", `${v}ms`)} />
+            <Row label="normal" value={`${readNum(md, "normal", 250)}ms`}>
+              <Slider value={readNum(md, "normal", 250)} min={100} max={500} step={10} onChange={(v) => patch("motion", "duration.normal", `${v}ms`)} />
             </Row>
             <Row label="hover scale" value={readNum(m, "hover-scale", 1.02).toFixed(2)}>
-              <Slider value={readNum(m, "hover-scale", 1.02)} min={1.0} max={1.1} step={0.01} onChange={(v) => patch("motion", "hover-scale", v)} />
+              <Slider value={readNum(m, "hover-scale", 1.02)} min={1.0} max={1.1} step={0.01} onChange={(v) => patch("motion", "hover-scale", String(v))} />
             </Row>
             <Row label="press scale" value={readNum(m, "press-scale", 0.97).toFixed(2)}>
-              <Slider value={readNum(m, "press-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("motion", "press-scale", v)} />
+              <Slider value={readNum(m, "press-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("motion", "press-scale", String(v))} />
             </Row>
           </Section>
 

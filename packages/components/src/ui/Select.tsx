@@ -23,13 +23,13 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(function Select
         ref={ref}
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex h-10 w-full rounded-[var(--s-radius-md,6px)] border px-3 py-2 text-sm",
+          "flex h-[var(--s-input-height,40px)] w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)]",
           "appearance-none cursor-pointer",
           "bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%236b7280%22%20d%3D%22M6%208L1%203h10z%22%2F%3E%3C%2Fsvg%3E')]",
           "bg-[length:12px] bg-[right_12px_center] bg-no-repeat",
           "pr-10",
-          "transition-colors duration-150",
+          "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
           "disabled:cursor-not-allowed disabled:opacity-50",
           hasError

@@ -21,10 +21,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
         ref={ref}
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex min-h-[80px] w-full rounded-[var(--s-radius-md,6px)] border px-3 py-2 text-sm",
+          "flex min-h-[80px] w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)]",
           "placeholder:text-[var(--s-text-muted)]",
-          "transition-colors duration-150 resize-y",
+          "transition-colors duration-[var(--s-duration-fast,150ms)] resize-y",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
           "disabled:cursor-not-allowed disabled:opacity-50",
           hasError

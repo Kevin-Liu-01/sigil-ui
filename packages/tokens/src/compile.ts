@@ -106,9 +106,145 @@ export function compileToCss(
     lightVars.push(`${cssVar(prefix, "ease", key)}: ${value};`);
   }
 
-  // Borders
+  // Borders — widths
   for (const [key, value] of Object.entries(tokens.borders.width)) {
     lightVars.push(`${cssVar(prefix, "border", key)}: ${value};`);
+  }
+  // Borders — style + per-component
+  if (tokens.borders.style) lightVars.push(`${cssVar(prefix, "border-style")}: ${tokens.borders.style};`);
+  if (tokens.borders["card-border"]) lightVars.push(`${cssVar(prefix, "card-border")}: ${tokens.borders["card-border"]};`);
+  if (tokens.borders["card-border-hover"]) lightVars.push(`${cssVar(prefix, "card-border-hover")}: ${tokens.borders["card-border-hover"]};`);
+  if (tokens.borders["button-border"]) lightVars.push(`${cssVar(prefix, "button-border")}: ${tokens.borders["button-border"]};`);
+  if (tokens.borders["input-border"]) lightVars.push(`${cssVar(prefix, "input-border")}: ${tokens.borders["input-border"]};`);
+  if (tokens.borders["divider-style"]) lightVars.push(`${cssVar(prefix, "divider-style")}: ${tokens.borders["divider-style"]};`);
+  if (tokens.borders["divider-width"]) lightVars.push(`${cssVar(prefix, "divider-width")}: ${tokens.borders["divider-width"]};`);
+
+  // Buttons
+  if (tokens.buttons) {
+    for (const [key, value] of Object.entries(tokens.buttons)) {
+      lightVars.push(`${cssVar(prefix, "button", key)}: ${value};`);
+    }
+  }
+
+  // Cards
+  if (tokens.cards) {
+    for (const [key, value] of Object.entries(tokens.cards)) {
+      if (typeof value === "boolean") {
+        lightVars.push(`${cssVar(prefix, "card", key)}: ${value ? "1" : "0"};`);
+      } else {
+        lightVars.push(`${cssVar(prefix, "card", key)}: ${value};`);
+      }
+    }
+  }
+
+  // Headings
+  if (tokens.headings) {
+    for (const [key, value] of Object.entries(tokens.headings)) {
+      lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+    }
+  }
+
+  // Navigation
+  if (tokens.navigation) {
+    for (const [key, value] of Object.entries(tokens.navigation)) {
+      lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+    }
+  }
+
+  // Inputs
+  if (tokens.inputs) {
+    for (const [key, value] of Object.entries(tokens.inputs)) {
+      lightVars.push(`${cssVar(prefix, "input", key)}: ${value};`);
+    }
+  }
+
+  // Code
+  if (tokens.code) {
+    for (const [key, value] of Object.entries(tokens.code)) {
+      lightVars.push(`${cssVar(prefix, "code", key)}: ${value};`);
+    }
+  }
+
+  // Backgrounds
+  if (tokens.backgrounds) {
+    for (const [key, value] of Object.entries(tokens.backgrounds)) {
+      if (typeof value === "boolean") {
+        lightVars.push(`${cssVar(prefix, "bg", key)}: ${value ? "1" : "0"};`);
+      } else {
+        lightVars.push(`${cssVar(prefix, "bg", key)}: ${value};`);
+      }
+    }
+  }
+
+  // Spacing — non-scale fields
+  for (const [key, value] of Object.entries(tokens.spacing)) {
+    if (key === "scale" || key === "unit") continue;
+    lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+  }
+
+  // Motion — non-duration/easing fields
+  for (const [key, value] of Object.entries(tokens.motion)) {
+    if (key === "duration" || key === "easing") continue;
+    if (value !== undefined) lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+  }
+
+  // Layout
+  if (tokens.layout) {
+    for (const [key, value] of Object.entries(tokens.layout)) {
+      lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+    }
+  }
+
+  // Alignment
+  if (tokens.alignment) {
+    for (const [key, value] of Object.entries(tokens.alignment)) {
+      if (value !== undefined) {
+        if (typeof value === "boolean") {
+          lightVars.push(`${cssVar(prefix, "align", key)}: ${value ? "1" : "0"};`);
+        } else {
+          lightVars.push(`${cssVar(prefix, "align", key)}: ${value};`);
+        }
+      }
+    }
+  }
+
+  // Sections
+  if (tokens.sections) {
+    for (const [key, value] of Object.entries(tokens.sections)) {
+      if (value !== undefined) {
+        if (typeof value === "boolean") {
+          lightVars.push(`${cssVar(prefix, "section", key)}: ${value ? "1" : "0"};`);
+        } else {
+          lightVars.push(`${cssVar(prefix, "section", key)}: ${value};`);
+        }
+      }
+    }
+  }
+
+  // Dividers
+  if (tokens.dividers) {
+    for (const [key, value] of Object.entries(tokens.dividers)) {
+      if (value !== undefined) {
+        if (typeof value === "boolean") {
+          lightVars.push(`${cssVar(prefix, "divider", key)}: ${value ? "1" : "0"};`);
+        } else {
+          lightVars.push(`${cssVar(prefix, "divider", key)}: ${value};`);
+        }
+      }
+    }
+  }
+
+  // Grid visuals
+  if (tokens.gridVisuals) {
+    for (const [key, value] of Object.entries(tokens.gridVisuals)) {
+      if (value !== undefined) {
+        if (typeof value === "boolean") {
+          lightVars.push(`${cssVar(prefix, "grid", key)}: ${value ? "1" : "0"};`);
+        } else {
+          lightVars.push(`${cssVar(prefix, "grid", key)}: ${value};`);
+        }
+      }
+    }
   }
 
   // Assemble

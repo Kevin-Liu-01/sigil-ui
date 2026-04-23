@@ -14,7 +14,7 @@ export interface ToggleProps extends ComponentPropsWithoutRef<typeof TogglePrimi
 
 const variantStyles: Record<string, string> = {
   default: "bg-transparent hover:bg-[var(--s-surface-elevated)] data-[state=on]:bg-[var(--s-surface)] data-[state=on]:border-[var(--s-border-strong)]",
-  outline: "border border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)] data-[state=on]:bg-[var(--s-surface)] data-[state=on]:border-[var(--s-border-strong)]",
+  outline: "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)] data-[state=on]:bg-[var(--s-surface)] data-[state=on]:border-[var(--s-border-strong)]",
 };
 
 const sizeStyles: Record<string, string> = {

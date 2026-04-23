@@ -126,7 +126,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
           aria-describedby={descId}
           className={cn(
             "relative z-10 w-full max-w-lg mx-4 p-6 rounded-[var(--s-card-radius,8px)]",
-            "bg-[var(--s-background)] border border-[var(--s-border)]",
+            "bg-[var(--s-background)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "shadow-[var(--s-shadow-lg)]",
             "animate-[dialogIn_200ms_ease-out]",
             className,

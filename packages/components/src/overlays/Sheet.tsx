@@ -129,7 +129,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
     return (
       <div className="fixed inset-0 z-50">
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-200"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-[var(--s-duration-normal,200ms)]"
           onClick={() => setOpen(false)}
           aria-hidden
         />
@@ -140,8 +140,8 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
           aria-labelledby={titleId}
           aria-describedby={descId}
           className={cn(
-            "fixed z-10 p-6 bg-[var(--s-background)] border-[var(--s-border)] shadow-[var(--s-shadow-lg)]",
-            "transition-transform duration-300 ease-out",
+            "fixed z-10 p-6 bg-[var(--s-background)] border-[var(--s-border)] border-[style:var(--s-border-style,solid)] shadow-[var(--s-shadow-lg)]",
+            "transition-transform duration-[var(--s-duration-normal,200ms)] ease-out",
             side === "left" || side === "right" ? "border-x" : "border-y",
             sidePositions[side],
             className,

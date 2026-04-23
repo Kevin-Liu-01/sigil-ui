@@ -103,11 +103,11 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         onClick={() => { play("tap"); setActiveTab(value); }}
         className={cn(
           "inline-flex items-center justify-center whitespace-nowrap rounded-[var(--s-radius-sm,4px)] px-3 py-1.5 text-sm font-medium",
-          "transition-all duration-150",
+          "transition-all duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
           "disabled:pointer-events-none disabled:opacity-50",
           isActive
-            ? "bg-[var(--s-background)] text-[var(--s-text)] shadow-sm"
+            ? "bg-[var(--s-background)] text-[var(--s-text)] shadow-[var(--s-shadow-sm)]"
             : "text-[var(--s-text-muted)] hover:text-[var(--s-text)]",
           className,
         )}

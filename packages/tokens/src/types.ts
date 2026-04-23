@@ -200,12 +200,30 @@ export type LayoutTokens = {
 // Sigil grid tokens (structural-visibility system)
 // ---------------------------------------------------------------------------
 
+export type GutterPattern =
+  | "grid"
+  | "dots"
+  | "crosshatch"
+  | "diagonal"
+  | "diamond"
+  | "horizontal"
+  | "hexagon"
+  | "triangle"
+  | "zigzag"
+  | "checker"
+  | "plus"
+  | "brick"
+  | "wave"
+  | "none";
+
 export type SigilGridTokens = {
   readonly "grid-cell": string;
   readonly "cross-arm": string;
   readonly "cross-stroke": string;
   readonly "rail-gap": string;
   readonly "card-radius": string;
+  readonly "gutter-pattern"?: GutterPattern;
+  readonly "margin-pattern"?: GutterPattern;
 };
 
 // ---------------------------------------------------------------------------
@@ -394,7 +412,7 @@ export type NavigationTokens = {
 // ---------------------------------------------------------------------------
 
 export type BackgroundTokens = {
-  readonly pattern: "none" | "dots" | "grid" | "crosshatch" | "diagonal" | "diamond" | "hexagon" | "triangle";
+  readonly pattern: "none" | "dots" | "grid" | "crosshatch" | "diagonal" | "diamond" | "hexagon" | "triangle" | "zigzag" | "checker" | "plus" | "brick" | "wave";
   readonly "pattern-opacity": string;
   readonly "pattern-scale": string;
   readonly noise: boolean;

@@ -21,7 +21,7 @@ export type HeroProps = Omit<HTMLAttributes<HTMLElement>, "title"> & {
 
 const actionVariantStyles: Record<string, string> = {
   primary:
-    "bg-[var(--s-primary)] text-white hover:bg-[var(--s-primary-hover)] shadow-sm",
+    "bg-[var(--s-primary)] text-white hover:bg-[var(--s-primary-hover)] shadow-[var(--s-shadow-sm)]",
   secondary:
     "bg-[var(--s-surface)] text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)]",
   ghost: "bg-transparent text-[var(--s-text)] hover:bg-[var(--s-surface)]",
@@ -59,7 +59,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               onClick={action.onClick}
               className={cn(
                 "inline-flex items-center justify-center h-11 px-6 rounded-[var(--s-radius-md,6px)]",
-                "text-sm font-medium transition-all duration-150",
+                "text-sm font-medium transition-all duration-[var(--s-duration-fast,150ms)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
                 actionVariantStyles[action.variant ?? "primary"],
               )}

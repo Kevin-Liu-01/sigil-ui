@@ -1,45 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { SigilTokensProvider, useSigilTokens } from "./sandbox/token-provider";
 import { SigilDevBar } from "./devbar";
 import { SigilSoundProvider } from "./sound-provider";
-import type { SigilTokens } from "@sigil-ui/tokens";
-
-function useIsDark() {
-  const [isDark, setIsDark] = useState(true);
-  useEffect(() => {
-    const root = document.documentElement;
-    const check = () => {
-      setIsDark(
-        root.classList.contains("dark") ||
-        root.getAttribute("data-theme") === "dark"
-      );
-    };
-    check();
-    const observer = new MutationObserver(check);
-    observer.observe(root, { attributes: true, attributeFilter: ["class", "data-theme"] });
-    return () => observer.disconnect();
-  }, []);
-  return isDark;
-}
 
 function TokenStyleInjector() {
   const { tokens } = useSigilTokens();
-  const isDark = useIsDark();
   const styleRef = useRef<HTMLStyleElement | null>(null);
 
   useEffect(() => {
     if (!styleRef.current) {
-      styleRef.current = document.createElement("style");
-      styleRef.current.setAttribute("data-sigil-tokens", "true");
-      document.head.appendChild(styleRef.current);
+      styleRef.current =
+        (document.querySelector("style[data-sigil-tokens]") as HTMLStyleElement) ?? null;
+      if (!styleRef.current) {
+        styleRef.current = document.createElement("style");
+        styleRef.current.setAttribute("data-sigil-tokens", "true");
+        document.head.appendChild(styleRef.current);
+      }
     }
 
-    const vars: string[] = [];
+    const lightVars: string[] = [];
+    const darkVars: string[] = [];
 
     function addVar(name: string, value: string) {
-      vars.push(`${name}: ${value} !important;`);
+      lightVars.push(`${name}: ${value} !important;`);
     }
 
     function addThemed(key: string, value: unknown) {
@@ -50,10 +35,17 @@ function TokenStyleInjector() {
         "dark" in (value as Record<string, unknown>)
       ) {
         const themed = value as { light: string; dark: string };
-        addVar(`--s-${key}`, isDark ? themed.dark : themed.light);
+        lightVars.push(`--s-${key}: ${themed.light} !important;`);
+        darkVars.push(`--s-${key}: ${themed.dark} !important;`);
       } else if (typeof value === "string") {
         addVar(`--s-${key}`, value);
       }
+    }
+
+    function addPrimitive(name: string, value: unknown) {
+      if (typeof value === "string") addVar(name, value);
+      else if (typeof value === "boolean") addVar(name, value ? "1" : "0");
+      else if (typeof value === "number") addVar(name, String(value));
     }
 
     // Colors (ThemedColor-aware)
@@ -66,9 +58,7 @@ function TokenStyleInjector() {
     // Typography
     if (tokens.typography) {
       for (const [key, value] of Object.entries(tokens.typography)) {
-        if (typeof value === "string") {
-          addVar(`--s-${key}`, value);
-        }
+        if (typeof value === "string") addVar(`--s-${key}`, value);
       }
     }
 
@@ -92,29 +82,38 @@ function TokenStyleInjector() {
     // Sigil grid
     if (tokens.sigil) {
       for (const [key, value] of Object.entries(tokens.sigil)) {
-        if (typeof value === "string") addVar(`--s-${key}`, value);
+        addPrimitive(`--s-${key}`, value);
       }
     }
 
-    // Motion (nested: duration.*, easing.*)
+    // Motion — nested duration/easing objects + flat top-level keys
     if (tokens.motion) {
-      if (tokens.motion.duration) {
-        for (const [key, value] of Object.entries(tokens.motion.duration)) {
-          if (typeof value === "string") addVar(`--s-duration-${key}`, value);
-        }
-      }
-      if (tokens.motion.easing) {
-        for (const [key, value] of Object.entries(tokens.motion.easing)) {
-          if (typeof value === "string") addVar(`--s-ease-${key}`, value);
+      const motion = tokens.motion as Record<string, unknown>;
+      for (const [key, value] of Object.entries(motion)) {
+        if (key === "duration" && value && typeof value === "object") {
+          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+            if (typeof v === "string") addVar(`--s-duration-${k}`, v);
+          }
+        } else if (key === "easing" && value && typeof value === "object") {
+          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+            if (typeof v === "string") addVar(`--s-ease-${k}`, v);
+          }
+        } else {
+          addPrimitive(`--s-motion-${key}`, value);
         }
       }
     }
 
-    // Borders (nested: width.*)
+    // Borders — nested width object + flat keys
     if (tokens.borders) {
-      if (tokens.borders.width) {
-        for (const [key, value] of Object.entries(tokens.borders.width)) {
-          if (typeof value === "string") addVar(`--s-border-width-${key}`, value);
+      const borders = tokens.borders as Record<string, unknown>;
+      for (const [key, value] of Object.entries(borders)) {
+        if (key === "width" && value && typeof value === "object") {
+          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+            if (typeof v === "string") addVar(`--s-border-width-${k}`, v);
+          }
+        } else if (typeof value === "string") {
+          addVar(`--s-border-${key}`, value);
         }
       }
     }
@@ -132,27 +131,29 @@ function TokenStyleInjector() {
       { key: "sections", prefix: "section-" },
       { key: "dividers", prefix: "divider-" },
       { key: "gridVisuals", prefix: "grid-" },
+      { key: "code", prefix: "code-" },
+      { key: "inputs", prefix: "input-" },
     ];
 
     for (const { key, prefix } of prefixedCategories) {
       const obj = tokens[key as keyof typeof tokens];
       if (obj && typeof obj === "object") {
         for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
-          if (typeof v === "string") addVar(`--s-${prefix}${k}`, v);
-          else if (typeof v === "boolean") addVar(`--s-${prefix}${k}`, v ? "1" : "0");
-          else if (typeof v === "number") addVar(`--s-${prefix}${k}`, String(v));
+          addPrimitive(`--s-${prefix}${k}`, v);
         }
       }
     }
 
-    const css = `:root {\n${vars.join("\n")}\n}`;
-    styleRef.current.textContent = css;
+    const blocks = [`:root {\n${lightVars.join("\n")}\n}`];
+    if (darkVars.length > 0) {
+      blocks.push(`.dark, [data-theme="dark"] {\n${darkVars.join("\n")}\n}`);
+    }
+    styleRef.current.textContent = blocks.join("\n");
 
-    // Force body font-family directly for immediate effect
     if (tokens.typography?.["font-body"]) {
       document.body.style.fontFamily = tokens.typography["font-body"] as string;
     }
-  }, [tokens, isDark]);
+  }, [tokens]);
 
   return null;
 }

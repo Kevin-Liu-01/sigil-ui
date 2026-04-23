@@ -32,7 +32,7 @@ export const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(function Toolti
           "absolute z-50 pointer-events-none whitespace-nowrap",
           "rounded-[var(--s-radius-sm,4px)] px-2 py-1 text-xs",
           "bg-[var(--s-text)] text-[var(--s-background)]",
-          "opacity-0 scale-95 transition-all duration-150",
+          "opacity-0 scale-95 transition-all duration-[var(--s-duration-fast,150ms)]",
           "group-hover:opacity-100 group-hover:scale-100",
           "group-focus-within:opacity-100 group-focus-within:scale-100",
           positionStyles[side],

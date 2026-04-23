@@ -26,7 +26,7 @@ export const HoverCardContent = forwardRef<
         sideOffset={sideOffset}
         className={cn(
           "z-50 w-80 p-4",
-          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-md)]",
           "outline-none",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",

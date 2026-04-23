@@ -28,7 +28,7 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
             "w-full max-w-[500px] mx-4 p-6 rounded-[var(--s-card-radius,8px)]",
-            "bg-[var(--s-background)] border border-[var(--s-border)] shadow-[var(--s-shadow-lg)]",
+            "bg-[var(--s-background)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] shadow-[var(--s-shadow-lg)]",
             "data-[state=open]:animate-[dialogIn_200ms_ease-out]",
             className,
           )}
@@ -115,7 +115,7 @@ export const AlertDialogCancel = forwardRef<HTMLButtonElement, ComponentPropsWit
         ref={ref}
         className={cn(
           "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)] px-4 py-2 text-sm font-medium",
-          "border border-[var(--s-border)] bg-transparent text-[var(--s-text)]",
+          "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-transparent text-[var(--s-text)]",
           "hover:bg-[var(--s-surface-elevated)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",

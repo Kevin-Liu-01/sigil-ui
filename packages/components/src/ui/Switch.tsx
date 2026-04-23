@@ -25,7 +25,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         className={cn(
           "relative inline-flex items-center h-6 w-11 shrink-0 cursor-pointer rounded-full",
           "border-2 border-transparent",
-          "transition-colors duration-200",
+          "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "bg-[var(--s-border)]",
           "has-[:checked]:bg-[var(--s-primary)]",
           "has-[:disabled]:opacity-50 has-[:disabled]:cursor-not-allowed",
@@ -36,8 +36,8 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         <input ref={ref} type="checkbox" id={inputId} className="sr-only peer" onChange={(e) => { play("toggle"); onChange?.(e); }} {...rest} />
         <span
           className={cn(
-            "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-sm",
-            "transition-transform duration-200",
+            "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow-[var(--s-shadow-sm)]",
+            "transition-transform duration-[var(--s-duration-fast,150ms)]",
             "translate-x-0 peer-checked:translate-x-5",
           )}
         />
