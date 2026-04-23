@@ -5,7 +5,7 @@ import { OTPInput, OTPInputContext } from "input-otp";
 import { useContext } from "react";
 import { cn } from "../utils";
 
-export interface InputOTPProps extends ComponentPropsWithoutRef<typeof OTPInput> {}
+export type InputOTPProps = ComponentPropsWithoutRef<typeof OTPInput>;
 
 export const InputOTP = forwardRef<ElementRef<typeof OTPInput>, InputOTPProps>(
   function InputOTP({ className, containerClassName, ...rest }, ref) {

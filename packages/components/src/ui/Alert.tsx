@@ -3,9 +3,14 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils";
 
+export type AlertVariant = "default" | "destructive" | "success" | "warning" | "info";
+export type AlertFill = "outline" | "filled" | "soft";
+
 export interface AlertProps extends HTMLAttributes<HTMLDivElement> {
   /** Visual variant controlling accent color and background. @default "default" */
-  variant?: "default" | "destructive" | "success" | "warning" | "info";
+  variant?: AlertVariant;
+  /** Fill style. "outline" = border only, "filled" = solid bg, "soft" = tinted bg. @default "outline" */
+  fill?: AlertFill;
   /** Callback to render a close button. When provided, an X button appears. */
   onClose?: () => void;
   children?: ReactNode;
@@ -17,17 +22,35 @@ export interface AlertTitleProps
 export interface AlertDescriptionProps
   extends HTMLAttributes<HTMLParagraphElement> {}
 
-const variantStyles: Record<string, string> = {
-  default:
-    "border-[var(--s-border)] text-[var(--s-text)] [&>svg]:text-[var(--s-text)]",
-  destructive:
-    "border-[var(--s-error)]/50 text-[var(--s-error)] [&>svg]:text-[var(--s-error)]",
-  success:
-    "border-[var(--s-success)]/50 text-[var(--s-success)] [&>svg]:text-[var(--s-success)]",
-  warning:
-    "border-[var(--s-warning)]/50 text-[var(--s-warning)] [&>svg]:text-[var(--s-warning)]",
-  info: "border-[var(--s-info)]/50 text-[var(--s-info)] [&>svg]:text-[var(--s-info)]",
+const colorMap: Record<AlertVariant, { border: string; text: string; bg: string; softBg: string }> = {
+  default:     { border: "var(--s-border)",      text: "var(--s-text)",    bg: "var(--s-surface)",              softBg: "var(--s-surface)" },
+  destructive: { border: "var(--s-error)",        text: "var(--s-error)",   bg: "var(--s-error)",                softBg: "color-mix(in oklch, var(--s-error) 8%, transparent)" },
+  success:     { border: "var(--s-success)",      text: "var(--s-success)", bg: "var(--s-success)",              softBg: "color-mix(in oklch, var(--s-success) 8%, transparent)" },
+  warning:     { border: "var(--s-warning)",      text: "var(--s-warning)", bg: "var(--s-warning)",              softBg: "color-mix(in oklch, var(--s-warning) 8%, transparent)" },
+  info:        { border: "var(--s-info)",         text: "var(--s-info)",    bg: "var(--s-info)",                 softBg: "color-mix(in oklch, var(--s-info) 8%, transparent)" },
 };
+
+function alertStyles(variant: AlertVariant, fill: AlertFill): { className: string; style: Record<string, string> } {
+  const c = colorMap[variant];
+  switch (fill) {
+    case "filled":
+      return {
+        className: "[&>svg]:text-[var(--s-primary-contrast,#fff)]",
+        style: { borderColor: c.bg, backgroundColor: c.bg, color: "var(--s-primary-contrast, #fff)" },
+      };
+    case "soft":
+      return {
+        className: `[&>svg]:text-[${c.text}]`,
+        style: { borderColor: "transparent", backgroundColor: c.softBg, color: c.text },
+      };
+    case "outline":
+    default:
+      return {
+        className: `[&>svg]:text-[${c.text}]`,
+        style: { borderColor: c.border, color: c.text },
+      };
+  }
+}
 
 function XIcon() {
   return (
@@ -49,22 +72,27 @@ function XIcon() {
 }
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  { variant = "default", onClose, className, children, ...rest },
+  { variant = "default", fill = "outline", onClose, className, children, style: styleProp, ...rest },
   ref,
 ) {
+  const { className: variantClass, style: variantStyle } = alertStyles(variant, fill);
+
   return (
     <div
       ref={ref}
       role="alert"
       data-slot="alert"
+      data-variant={variant}
+      data-fill={fill}
       className={cn(
-        "relative w-full rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] p-4 text-sm",
+        "relative w-full rounded-[var(--s-radius-md,0px)] border border-[style:var(--s-border-style,solid)] p-4 text-sm",
         "[&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-current [&:has(svg)]:pl-11",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
-        variantStyles[variant],
+        variantClass,
         onClose && "pr-10",
         className,
       )}
+      style={{ ...variantStyle, ...styleProp }}
       {...rest}
     >
       {children}

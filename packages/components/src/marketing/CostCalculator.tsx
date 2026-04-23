@@ -1,0 +1,177 @@
+"use client";
+
+import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { cn } from "../utils";
+
+export interface CostSlider {
+  label: string;
+  value: number;
+  unit: string;
+  min?: number;
+  max?: number;
+  step?: number;
+  onChange?: (value: number) => void;
+}
+
+export interface CostEstimate {
+  brandName: string;
+  brandCost: number;
+  competitorName?: string;
+  competitorCost?: number;
+  savingsNote?: string;
+}
+
+export interface CostCalculatorProps extends HTMLAttributes<HTMLDivElement> {
+  sliders: CostSlider[];
+  estimate: CostEstimate;
+  sliderRenderer?: (slider: CostSlider) => ReactNode;
+}
+
+export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
+  function CostCalculator({ sliders, estimate, sliderRenderer, className, ...rest }, ref) {
+    const savings = estimate.competitorCost
+      ? estimate.competitorCost - estimate.brandCost
+      : 0;
+    const savingsPct = estimate.competitorCost
+      ? Math.round((savings / estimate.competitorCost) * 100)
+      : 0;
+    const maxCost = Math.max(estimate.brandCost, estimate.competitorCost ?? 0);
+
+    return (
+      <div
+        ref={ref}
+        className={cn("grid grid-cols-1 md:grid-cols-2 gap-0", className)}
+        style={{
+          border: "1px solid var(--s-border)",
+          borderStyle: "var(--s-border-style, solid)" as any,
+          borderRadius: "var(--s-radius-md, 6px)",
+          overflow: "hidden",
+        }}
+        {...rest}
+      >
+        {/* Configure panel */}
+        <div style={{ padding: "var(--s-card-padding, 24px)", background: "var(--s-surface)" }}>
+          <fieldset style={{ border: "1px solid var(--s-border-muted)", padding: "16px", margin: 0 }}>
+            <legend
+              className="text-[11px] font-semibold uppercase tracking-wider font-[family:var(--s-font-mono)] px-2"
+              style={{ color: "var(--s-text-muted)" }}
+            >
+              Configure
+            </legend>
+            <div className="flex flex-col gap-4">
+              {sliders.map((s) => (
+                sliderRenderer ? sliderRenderer(s) : (
+                  <div key={s.label} className="flex items-center gap-3">
+                    <span className="text-[13px] font-[family:var(--s-font-mono)] w-24 shrink-0" style={{ color: "var(--s-text-secondary)" }}>
+                      {s.label}
+                    </span>
+                    <input
+                      type="range"
+                      min={s.min ?? 0}
+                      max={s.max ?? 100}
+                      step={s.step ?? 1}
+                      value={s.value}
+                      onChange={(e) => s.onChange?.(Number(e.target.value))}
+                      className="flex-1 h-1.5 accent-[var(--s-primary)] cursor-pointer"
+                    />
+                    <span
+                      className="text-[13px] font-[family:var(--s-font-mono)] w-20 text-right font-semibold tabular-nums"
+                      style={{ color: "var(--s-text)" }}
+                    >
+                      {s.value} {s.unit}
+                    </span>
+                  </div>
+                )
+              ))}
+            </div>
+          </fieldset>
+        </div>
+
+        {/* Estimate panel */}
+        <div style={{ padding: "var(--s-card-padding, 24px)", background: "var(--s-surface)", borderLeft: "1px solid var(--s-border)" }}>
+          <fieldset style={{ border: "1px solid var(--s-border-muted)", padding: "16px", margin: 0 }}>
+            <legend
+              className="text-[11px] font-semibold uppercase tracking-wider font-[family:var(--s-font-mono)] px-2"
+              style={{ color: "var(--s-text-muted)" }}
+            >
+              Monthly Estimate
+            </legend>
+            <div className="flex flex-col gap-4">
+              {/* Brand bar */}
+              <div>
+                <div className="flex justify-between text-[13px] font-[family:var(--s-font-mono)] mb-1">
+                  <span style={{ color: "var(--s-text-secondary)" }}>{estimate.brandName}</span>
+                  <span className="font-bold tabular-nums" style={{ color: "var(--s-text)" }}>
+                    ${estimate.brandCost.toFixed(2)}
+                  </span>
+                </div>
+                <div
+                  className="h-2 rounded-full"
+                  style={{
+                    width: maxCost > 0 ? `${(estimate.brandCost / maxCost) * 100}%` : "0%",
+                    background: "var(--s-primary)",
+                  }}
+                />
+              </div>
+
+              {/* Competitor bar */}
+              {estimate.competitorCost != null && (
+                <div>
+                  <div className="flex justify-between text-[13px] font-[family:var(--s-font-mono)] mb-1">
+                    <span style={{ color: "var(--s-text-muted)" }}>{estimate.competitorName ?? "Competitor"}</span>
+                    <span className="font-bold tabular-nums" style={{ color: "var(--s-text-muted)" }}>
+                      ${estimate.competitorCost.toFixed(2)}
+                    </span>
+                  </div>
+                  <div
+                    className="h-2 rounded-full"
+                    style={{ width: "100%", background: "var(--s-error)" }}
+                  />
+                </div>
+              )}
+
+              {/* Savings note */}
+              {estimate.savingsNote && (
+                <div
+                  className="text-[12px] font-[family:var(--s-font-mono)] p-3"
+                  style={{
+                    background: "color-mix(in oklch, var(--s-success) 8%, transparent)",
+                    color: "var(--s-success)",
+                    border: "1px solid color-mix(in oklch, var(--s-success) 20%, transparent)",
+                  }}
+                >
+                  <div className="text-[10px] font-semibold uppercase tracking-wider mb-1">Idle Savings</div>
+                  {estimate.savingsNote}
+                </div>
+              )}
+
+              {/* Total savings */}
+              {savings > 0 && (
+                <div
+                  className="p-3 text-center"
+                  style={{
+                    background: "color-mix(in oklch, var(--s-success) 6%, transparent)",
+                    border: "1px solid color-mix(in oklch, var(--s-success) 15%, transparent)",
+                  }}
+                >
+                  <div className="text-[10px] font-[family:var(--s-font-mono)] font-semibold uppercase tracking-wider mb-1" style={{ color: "var(--s-text-muted)" }}>
+                    You Save
+                  </div>
+                  <span
+                    className="font-[family:var(--s-font-mono)] tabular-nums"
+                    style={{ fontSize: 28, fontWeight: 700, color: "var(--s-success)" }}
+                  >
+                    ${savings.toFixed(2)}
+                  </span>
+                  <span className="ml-2 text-[12px] font-[family:var(--s-font-mono)]" style={{ color: "var(--s-success)" }}>
+                    {savingsPct}% /mo
+                  </span>
+                </div>
+              )}
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    );
+  },
+);

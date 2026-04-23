@@ -7,9 +7,12 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "clean": "turbo clean",
-    "typecheck": "turbo typecheck"
+    "typecheck": "turbo typecheck",
+    "audit:contrast": "tsx scripts/audit-contrast.ts"
   },
   "devDependencies": {
+    "culori": "^4.0.2",
+    "tsx": "^4.21.0",
     "turbo": "^2.4.0",
     "typescript": "^5.8.0"
   }

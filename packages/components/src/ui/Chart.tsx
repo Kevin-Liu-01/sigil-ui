@@ -29,7 +29,7 @@ export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
         )}
         {...rest}
       >
-        <ResponsiveContainer width="100%" height={height}>
+        <ResponsiveContainer width="100%" height={height as number}>
           {children as React.ReactElement}
         </ResponsiveContainer>
       </div>
@@ -56,7 +56,7 @@ export function ChartTooltip({ className, ...rest }: ChartTooltipProps) {
       }}
       labelStyle={{ color: "var(--s-text-muted)", marginBottom: 4, fontWeight: 500 }}
       itemStyle={{ color: "var(--s-text)", padding: "1px 0" }}
-      {...rest}
+      {...(rest as Record<string, unknown>)}
     />
   );
 }

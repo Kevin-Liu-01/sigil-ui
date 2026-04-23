@@ -12,6 +12,27 @@
 - BANNED: Hardcoded hex colors in components. All colors must reference `var(--s-*)` tokens.
 - BANNED: Gradients with no material logic. Every gradient must have a reason (glow, light, depth, brand).
 
+## Contrast Rules (WCAG AA)
+
+All presets MUST pass WCAG 2.0 AA contrast requirements. Run `pnpm audit:contrast` before shipping any preset change.
+
+| Pair | Minimum Ratio | WCAG Category |
+|------|:---:|---|
+| Normal text on background/surface | 4.5:1 | AA normal text |
+| Large text (>= 18pt) on background | 3:1 | AA large text |
+| UI components (borders, icons, form controls) on background | 3:1 | AA UI components |
+| Button text (`primary-contrast`) on `primary` | 4.5:1 | AA normal text |
+| Status colors (success/warning/error/info) on background | 3:1 | AA UI components |
+
+Rules:
+- `text-muted` on `background` must have >= 4.5:1 contrast ratio in BOTH light and dark modes.
+- `text-subtle` is decorative/large text — >= 3:1 minimum.
+- `border` and `border-strong` on `background` must have >= 3:1 for visibility.
+- When `primary` is light (L > 0.55 in OKLCH), `primary-contrast` MUST be black (`oklch(0 0 0)` or `#000000`).
+- When `primary` is dark (L <= 0.55), `primary-contrast` MUST be white (`oklch(1 0 0)` or `#ffffff`).
+- Never assume white text on colored backgrounds — always check the contrast ratio.
+- The audit script checks 30 color pairs per preset across both modes (930 checks total).
+
 ## Typography Rules
 
 - Font triad: display face for headlines only, body face for everything else, mono for code/labels/data.

@@ -2,7 +2,6 @@
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import { defineSound } from "@web-kits/audio";
-// @ts-expect-error — dts not generated for workspace package; resolves at bundle time
 import { SigilSoundContext } from "@sigil-ui/components";
 
 // ---------------------------------------------------------------------------
@@ -71,6 +70,7 @@ function buildPatch(p: SonicProfile): SoundPatch {
 
 const PATCHES: Record<string, SoundPatch> = {
   // Structural: clean sine/triangle, precise, short decay
+  default: buildPatch({ wave: "sine",    alt: "triangle", freq: 500, vol: 0.22, speed: 1.0, atk: 0 }),
   sigil:  buildPatch({ wave: "sine",     alt: "triangle", freq: 500, vol: 0.22, speed: 1.0, atk: 0 }),
   kova:   buildPatch({ wave: "triangle", alt: "sine",     freq: 460, vol: 0.18, speed: 0.9, atk: 0.01 }),
   cobalt: buildPatch({ wave: "sine",     alt: "triangle", freq: 540, vol: 0.20, speed: 0.8, atk: 0 }),

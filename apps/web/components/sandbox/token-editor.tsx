@@ -345,7 +345,7 @@ const DISPLAY_FONTS = [
 function TypographyPanel() {
   const { tokens, patchTokens } = useSigilTokens();
   const typo = tokens.typography;
-  const basePx = parseNumericValue(typo["size-base"]);
+  const basePx = parseNumericValue(typo["size-base"] ?? "16px");
 
   return (
     <>
@@ -391,7 +391,7 @@ function SpacingPanel() {
   ];
 
   const layoutSliders: {
-    key: keyof SigilTokens["layout"];
+    key: keyof NonNullable<SigilTokens["layout"]>;
     label: string;
     max: number;
   }[] = [
@@ -415,22 +415,24 @@ function SpacingPanel() {
           />
         );
       })}
-      {layoutSliders.map(({ key, label, max }) => {
-        const { num } = parseNumericValue(
-          String(tokens.layout[key]),
-        );
-        return (
-          <SliderControl
-            key={key}
-            label={label}
-            value={num}
-            min={0}
-            max={max}
-            unit="px"
-            onChange={(v) => patchTokens("layout", key, `${v}px`)}
-          />
-        );
-      })}
+      {(() => {
+        const layout = tokens.layout;
+        if (!layout) return null;
+        return layoutSliders.map(({ key, label, max }) => {
+          const { num } = parseNumericValue(String(layout[key]));
+          return (
+            <SliderControl
+              key={key}
+              label={label}
+              value={num}
+              min={0}
+              max={max}
+              unit="px"
+              onChange={(v) => patchTokens("layout", key, `${v}px`)}
+            />
+          );
+        });
+      })()}
     </>
   );
 }
@@ -444,7 +446,7 @@ function RadiusPanel() {
   return (
     <>
       {keys.map((key) => {
-        const { num } = parseNumericValue(r[key]);
+        const { num } = parseNumericValue(r[key] ?? "0px");
         return (
           <SliderControl
             key={key}
@@ -488,7 +490,7 @@ function BordersPanel() {
       />
       <SelectControl
         label="Style"
-        value={b.style}
+        value={b.style ?? "solid"}
         options={["solid", "dashed", "dotted", "double", "none"]}
         onChange={(v) => patchTokens("borders", "style", v)}
       />
@@ -509,7 +511,7 @@ function MotionPanel() {
   return (
     <>
       {durations.map(({ key, max }) => {
-        const { num } = parseNumericValue(m.duration[key]);
+        const { num } = parseNumericValue(m.duration[key] ?? "200ms");
         return (
           <SliderControl
             key={key}
@@ -555,6 +557,7 @@ function MotionPanel() {
 function ButtonsPanel() {
   const { tokens, patchTokens } = useSigilTokens();
   const b = tokens.buttons;
+  if (!b) return null;
 
   return (
     <>
@@ -583,6 +586,7 @@ function ButtonsPanel() {
 function CardsPanel() {
   const { tokens, patchTokens } = useSigilTokens();
   const c = tokens.cards;
+  if (!c) return null;
 
   return (
     <>
@@ -605,6 +609,7 @@ function CardsPanel() {
 function BackgroundsPanel() {
   const { tokens, patchTokens } = useSigilTokens();
   const bg = tokens.backgrounds;
+  if (!bg) return null;
 
   return (
     <>

@@ -30,7 +30,7 @@ export const ArchitectureDiagram = forwardRef<HTMLDivElement, ArchitectureDiagra
         data-slot="architecture-diagram"
         className={cn(
           "relative w-full p-8 rounded-[var(--s-card-radius,8px)]",
-          "border border-[var(--s-border)] bg-[var(--s-surface)]",
+          "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-sm)]",
           className,
         )}
         style={{
@@ -56,8 +56,8 @@ export const ArchitectureDiagram = forwardRef<HTMLDivElement, ArchitectureDiagra
             <div
               key={i}
               className={cn(
-                "w-full rounded-[var(--s-radius-md,6px)] border p-4 relative overflow-hidden",
-                "transition-all duration-200 hover:shadow-[var(--s-shadow-md)]",
+                "w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] p-4 relative overflow-hidden",
+                "transition-all duration-[var(--s-duration-fast,150ms)] hover:shadow-[var(--s-shadow-md)]",
                 layer.hatched
                   ? "border-[var(--s-border-strong)] bg-[var(--s-surface-elevated)]"
                   : "border-[var(--s-border)] bg-[var(--s-background)]",

@@ -16,681 +16,453 @@ import {
   Slider,
   Progress,
   Avatar,
+  AvatarGroup,
   Select,
   Separator,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
   RadioGroup,
   RadioGroupItem,
-  Toggle,
-  LoadingSpinner,
-  Skeleton,
-  Alert,
-  AlertTitle,
   KPI,
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-  Textarea,
+  Meter,
+  Stepper,
   NumberField,
 } from "@sigil-ui/components";
+
 import {
-  CreditCard,
-  Lock,
-  Send,
-  Search,
+  Rocket,
+  GitBranch,
+  GitCommitHorizontal,
+  CircleCheck,
+  Clock,
+  Palette,
+  Moon,
+  Layers,
+  BarChart3,
+  CalendarDays,
   Globe,
-  Users,
-  UserPlus,
-  MessageSquare,
-  Bookmark,
-  Shield,
-  CheckCircle,
-  Cpu,
-  Paintbrush,
+  FileText,
+  ArrowUpRight,
+  Building2,
+  Mail,
   Plus,
   Sparkles,
-  Archive,
-  Flag,
-  Bell,
-  MoreHorizontal,
-  ChevronLeft,
+  Crown,
+  Check,
+  Server,
+  Eye,
+  Radio,
+  Shield,
   ChevronRight,
-  Bot,
-  Loader2,
-  MousePointer,
-  LayoutGrid,
-  Columns,
-  AlertTriangle,
+  CheckCircle2,
+  Paintbrush,
 } from "lucide-react";
 
-const TRANSITION_EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
+const EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
 
-const compositionStyle: React.CSSProperties = {
-  background: "var(--s-surface)",
-  border: "1px solid var(--s-border)",
-  borderRadius: 0,
-  padding: 24,
-  maxWidth: 280,
-  width: "100%",
-};
-
-/* ------------------------------------------------------------------ */
-/*  Composition 1 — Payment Form                                      */
-/* ------------------------------------------------------------------ */
-function PaymentForm() {
-  return (
-    <div style={compositionStyle} className="flex flex-col gap-4">
-      <div className="flex flex-col gap-1">
-        <div className="flex items-center gap-1.5">
-          <CreditCard size={16} style={{ color: "var(--s-text-muted)" }} />
-          <h3
-            className="text-base font-semibold"
-            style={{ color: "var(--s-text)" }}
-          >
-            Payment Method
-          </h3>
-        </div>
-        <p className="flex items-center gap-1 text-xs" style={{ color: "var(--s-text-muted)" }}>
-          <Lock size={12} style={{ color: "var(--s-text-subtle)" }} />
-          All transactions are encrypted and secure.
-        </p>
-      </div>
-
-      <Separator />
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Name on Card</Label>
-        <Input
-          defaultValue="John Doe"
-          className="h-8 text-xs"
-        />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Card Number</Label>
-        <div className="flex gap-2">
-          <Input
-            defaultValue="1234 5678 9012 3456"
-            className="h-8 text-xs flex-1"
-          />
-          <Input
-            defaultValue="123"
-            placeholder="CVV"
-            className="h-8 text-xs w-16"
-          />
-        </div>
-      </div>
-
-      <div className="flex gap-2">
-        <div className="flex flex-col gap-1.5 flex-1">
-          <Label className="text-xs">Month</Label>
-          <Select className="h-8 text-xs" defaultValue="12">
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="06">06</option>
-            <option value="12">12</option>
-          </Select>
-        </div>
-        <div className="flex flex-col gap-1.5 flex-1">
-          <Label className="text-xs">Year</Label>
-          <Select className="h-8 text-xs" defaultValue="2027">
-            <option value="2026">2026</option>
-            <option value="2027">2027</option>
-            <option value="2028">2028</option>
-            <option value="2029">2029</option>
-          </Select>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Label className="text-xs font-semibold">Billing Address</Label>
-        <Checkbox label="Same as shipping" defaultChecked />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Comments</Label>
-        <Textarea
-          rows={2}
-          placeholder="Additional notes..."
-          className="text-xs min-h-0"
-        />
-      </div>
-
-      <div className="flex gap-2 pt-1">
-        <Button size="sm" className="flex-1 text-xs">
-          <Send size={14} style={{ color: "var(--s-primary)" }} />
-          Submit
-        </Button>
-        <Button size="sm" variant="outline" className="text-xs">
-          Cancel
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Composition 2 — Team & Notifications                               */
-/* ------------------------------------------------------------------ */
-function TeamNotifications() {
-  return (
-    <div style={compositionStyle} className="flex flex-col gap-4">
-      <Card className="w-full">
-        <CardHeader className="p-3 pb-2">
-          <CardTitle className="text-sm">
-            <span className="flex items-center gap-1.5">
-              <Users size={16} style={{ color: "var(--s-text-muted)" }} />
-              Team Members
-            </span>
-          </CardTitle>
-          <CardDescription className="text-xs">
-            No pending invitations
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="p-3 pt-0">
-          <div className="flex -space-x-2 mb-3">
-            <Avatar fallback="KL" size="sm" />
-            <Avatar fallback="JD" size="sm" />
-            <Avatar fallback="AR" size="sm" />
-          </div>
-          <Button size="sm" variant="outline" className="w-full text-xs">
-            <UserPlus size={14} style={{ color: "var(--s-primary)" }} />
-            Invite Members
-          </Button>
-        </CardContent>
-      </Card>
-
-      <div className="flex gap-1.5 flex-wrap">
-        <Badge size="sm">Syncing</Badge>
-        <Badge size="sm" variant="secondary">Updating</Badge>
-        <Badge size="sm" variant="outline">Loading</Badge>
-      </div>
-
-      <Input
-        placeholder="Send a message..."
-        className="h-8 text-xs"
-        iconLeft={<MessageSquare size={14} style={{ color: "var(--s-text-muted)" }} />}
-      />
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Price Range</Label>
-        <Slider defaultValue={40} />
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <div className="flex items-center justify-between">
-          <Input
-            placeholder="Search components..."
-            className="h-8 text-xs flex-1"
-            iconLeft={<Search size={12} style={{ color: "var(--s-text-muted)" }} />}
-          />
-        </div>
-        <span className="text-[10px]" style={{ color: "var(--s-text-muted)" }}>
-          12 results found
-        </span>
-      </div>
-
-      <Input
-        defaultValue="https://example.com"
-        className="h-8 text-xs"
-      />
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Composition 3 — Settings Panel                                     */
-/* ------------------------------------------------------------------ */
-function SettingsPanel() {
-  const [gpuCount, setGpuCount] = useState(8);
-
-  return (
-    <div style={compositionStyle} className="flex flex-col gap-4">
-      <div
-        className="flex items-center gap-2 px-3 py-1.5 text-xs"
-        style={{
-          background: "var(--s-background)",
-          border: "1px solid var(--s-border)",
-          borderRadius: 0,
-          color: "var(--s-text-muted)",
-        }}
-      >
-        <Globe size={14} style={{ color: "var(--s-text-muted)" }} />
-        <span style={{ color: "var(--s-text-muted)" }}>https://</span>
-        <span className="flex-1 truncate" style={{ color: "var(--s-text)" }}>
-          app.sigil-ui.dev/settings
-        </span>
-        <Bookmark size={14} style={{ color: "var(--s-text-muted)" }} />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <Label className="text-xs flex items-center gap-1.5">
-          <Shield size={14} style={{ color: "var(--s-text-muted)" }} />
-          Two-Factor Auth
-        </Label>
-        <Button size="sm" variant="outline" className="text-xs h-7 px-2">
-          Enable
-        </Button>
-      </div>
-
-      <div className="flex items-center gap-2">
-        <CheckCircle size={14} style={{ color: "var(--s-success)" }} />
-        <span className="text-xs" style={{ color: "var(--s-text)" }}>
-          Profile verified
-        </span>
-      </div>
-
-      <Separator />
-
-      <span
-        className="text-xs font-semibold uppercase tracking-wider"
-        style={{ color: "var(--s-text-muted)" }}
-      >
-        Appearance Settings
-      </span>
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Compute Environment</Label>
-        <RadioGroup defaultValue="k8s" className="gap-3">
-          <div className="flex items-start gap-2">
-            <RadioGroupItem value="k8s" className="mt-0.5" />
-            <div className="flex flex-col">
-              <Label className="text-xs cursor-pointer flex items-center gap-1">
-                <Cpu size={14} style={{ color: "var(--s-text-muted)" }} />
-                Kubernetes
-              </Label>
-              <span
-                className="text-[10px]"
-                style={{ color: "var(--s-text-muted)" }}
-              >
-                Auto-scaling container orchestration
-              </span>
-            </div>
-          </div>
-          <div className="flex items-start gap-2 opacity-50">
-            <RadioGroupItem value="vm" disabled className="mt-0.5" />
-            <div className="flex flex-col">
-              <Label className="text-xs">Virtual Machine</Label>
-              <span
-                className="text-[10px]"
-                style={{ color: "var(--s-text-muted)" }}
-              >
-                Coming soon
-              </span>
-            </div>
-          </div>
-        </RadioGroup>
-      </div>
-
-      <div className="flex flex-col gap-1.5">
-        <Label className="text-xs">Number of GPUs</Label>
-        <NumberField
-          value={gpuCount}
-          onValueChange={setGpuCount}
-          min={1}
-          max={64}
-          step={1}
-        />
-      </div>
-
-      <div className="flex items-center justify-between">
-        <Label className="text-xs flex items-center gap-1.5">
-          <Paintbrush size={14} style={{ color: "var(--s-text-muted)" }} />
-          Wallpaper Tinting
-        </Label>
-        <Switch defaultChecked />
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Composition 4 — AI Context Panel                                   */
-/* ------------------------------------------------------------------ */
-function AIContextPanel() {
-  return (
-    <div style={compositionStyle} className="flex flex-col gap-3">
-      <Button size="sm" variant="outline" className="w-full text-xs">
-        <Plus size={14} style={{ color: "var(--s-primary)" }} />
-        Add context
-      </Button>
-
-      <Input
-        placeholder="Ask, search, or make anything..."
-        className="h-8 text-xs"
-        iconLeft={<Sparkles size={14} style={{ color: "var(--s-primary)" }} />}
-      />
-
-      <div className="flex gap-1">
-        <Badge size="sm" variant="secondary">Auto</Badge>
-        <Badge size="sm" variant="outline">All Sources</Badge>
-      </div>
-
-      <div className="flex gap-1.5 flex-wrap">
-        <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
-          <Archive size={14} style={{ color: "var(--s-text-muted)" }} />
-          Archive
-        </Button>
-        <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
-          <Flag size={14} style={{ color: "var(--s-text-muted)" }} />
-          Report
-        </Button>
-        <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
-          <Bell size={14} style={{ color: "var(--s-text-muted)" }} />
-          Snooze
-        </Button>
-        <Button size="sm" variant="ghost" className="h-7 px-2 text-[10px]">
-          <MoreHorizontal size={14} style={{ color: "var(--s-text-muted)" }} />
-        </Button>
-      </div>
-
-      <Checkbox label="I agree to the terms and conditions" />
-
-      <div className="flex items-center gap-1.5">
-        {[1, 2, 3].map((n) => (
-          <Button
-            key={n}
-            size="sm"
-            variant={n === 1 ? "primary" : "ghost"}
-            className="h-7 w-7 p-0 text-[10px]"
-          >
-            {n}
-          </Button>
-        ))}
-        <Button size="sm" variant="ghost" className="h-7 px-1 text-[10px]">
-          <ChevronLeft size={14} style={{ color: "var(--s-text-muted)" }} />
-        </Button>
-        <Button size="sm" variant="ghost" className="h-7 px-1 text-[10px]">
-          <ChevronRight size={14} style={{ color: "var(--s-text-muted)" }} />
-        </Button>
-        <div className="flex-1" />
-        <Button size="sm" variant="secondary" className="h-7 text-[10px]">
-          <Bot size={14} style={{ color: "var(--s-primary)" }} />
-          Copilot
-        </Button>
-      </div>
-
-      <Separator />
-
-      <Card className="w-full">
-        <CardHeader className="p-3 pb-1">
-          <CardTitle className="text-xs">How did you hear about us?</CardTitle>
-        </CardHeader>
-        <CardContent className="p-3 pt-2">
-          <RadioGroup defaultValue="social" className="gap-2">
-            {[
-              { value: "social", label: "Social Media" },
-              { value: "search", label: "Search Engine" },
-              { value: "referral", label: "Referral" },
-              { value: "other", label: "Other" },
-            ].map((item) => (
-              <div key={item.value} className="flex items-center gap-2">
-                <RadioGroupItem value={item.value} />
-                <Label className="text-[11px] cursor-pointer">
-                  {item.label}
-                </Label>
-              </div>
-            ))}
-          </RadioGroup>
-        </CardContent>
-      </Card>
-
-      <div
-        className="flex items-center gap-3 p-3"
-        style={{
-          background: "var(--s-surface-elevated)",
-          border: "1px solid var(--s-border)",
-          borderRadius: 0,
-        }}
-      >
-        <LoadingSpinner variant="braille" size="sm" />
-        <div className="flex flex-col flex-1 gap-0.5">
-          <span className="flex items-center gap-1.5 text-xs" style={{ color: "var(--s-text)" }}>
-            <Loader2 size={14} className="animate-spin" style={{ color: "var(--s-text-muted)" }} />
-            Processing your request
-          </span>
-          <Progress value={65} className="h-1" />
-        </div>
-        <Button size="sm" variant="ghost" className="h-6 px-2 text-[10px]">
-          Cancel
-        </Button>
-      </div>
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Part 1 — Hero Compositions (4 columns)                            */
-/* ------------------------------------------------------------------ */
-function HeroCompositions() {
-  return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 justify-items-center">
-      <PaymentForm />
-      <TeamNotifications />
-      <SettingsPanel />
-      <AIContextPanel />
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Part 2 — Dense Component Grid  (6 cols × 4 rows = 24 cells)      */
-/* ------------------------------------------------------------------ */
-
-type GridCell = {
-  name: string;
-  render: () => React.ReactNode;
-  icon?: React.ReactNode;
-};
-
-const GRID_CELLS: GridCell[] = [
-  /* Row 1 */
-  { name: "Button", render: () => <Button size="sm">Primary</Button>, icon: <MousePointer size={10} /> },
-  { name: "Secondary", render: () => <Button size="sm" variant="secondary">Secondary</Button> },
-  { name: "Ghost", render: () => <Button size="sm" variant="ghost">Ghost</Button> },
-  { name: "Badge", render: () => <Badge>New</Badge> },
-  { name: "Badge outline", render: () => <Badge variant="outline">v2.0</Badge> },
-  { name: "Avatar", render: () => <Avatar fallback="SG" size="md" /> },
-
-  /* Row 2 */
-  { name: "Input", render: () => <Input placeholder="Email..." className="h-7 text-[10px] w-full" /> },
-  { name: "Textarea", render: () => <Textarea rows={2} placeholder="Write..." className="text-[10px] min-h-0 w-full" /> },
-  {
-    name: "Select",
-    render: () => (
-      <Select className="h-7 text-[10px] w-full" defaultValue="react">
-        <option value="react">React</option>
-        <option value="vue">Vue</option>
-        <option value="svelte">Svelte</option>
-      </Select>
-    ),
-  },
-  { name: "Checkbox", render: () => <Checkbox label="Accept" /> },
-  { name: "Switch", render: () => <Switch label="On" defaultChecked /> },
-  { name: "Toggle", render: () => <Toggle size="sm" variant="outline" defaultPressed>Bold</Toggle> },
-
-  /* Row 3 */
-  { name: "Slider", render: () => <Slider defaultValue={50} className="w-full" /> },
-  { name: "Progress", render: () => <Progress value={60} className="w-full" /> },
-  {
-    name: "RadioGroup",
-    render: () => (
-      <RadioGroup defaultValue="a" className="gap-1">
-        <div className="flex items-center gap-1.5">
-          <RadioGroupItem value="a" />
-          <Label className="text-[10px] cursor-pointer">Alpha</Label>
-        </div>
-        <div className="flex items-center gap-1.5">
-          <RadioGroupItem value="b" />
-          <Label className="text-[10px] cursor-pointer">Beta</Label>
-        </div>
-      </RadioGroup>
-    ),
-  },
-  { name: "KPI", render: () => <KPI label="Revenue" value="$4.2k" change="+8%" trend="up" className="p-1.5 text-[10px] border-0" /> },
-  { name: "Separator", render: () => (
-    <div className="flex flex-col gap-2 w-full items-center">
-      <Separator />
-      <span className="text-[9px]" style={{ color: "var(--s-text-muted)" }}>or</span>
-      <Separator />
-    </div>
-  )},
-  { name: "Alert", render: () => <Alert variant="info" className="p-2"><AlertTitle className="text-[10px]">Info alert</AlertTitle></Alert>, icon: <AlertTriangle size={10} /> },
-
-  /* Row 4 */
-  { name: "Skeleton text", render: () => (
-    <div className="flex flex-col gap-1.5 w-full">
-      <Skeleton variant="text" className="w-full" />
-      <Skeleton variant="text" className="w-2/3" />
-    </div>
-  )},
-  { name: "Skeleton avatar", render: () => (
-    <div className="flex items-center gap-2">
-      <Skeleton variant="avatar" />
-      <div className="flex flex-col gap-1 flex-1">
-        <Skeleton variant="text" className="w-16" />
-        <Skeleton variant="text" className="w-10" />
-      </div>
-    </div>
-  )},
-  { name: "Spinner", render: () => <LoadingSpinner variant="braille" size="lg" /> },
-  {
-    name: "Accordion",
-    render: () => (
-      <Accordion className="w-full">
-        <AccordionItem value="faq">
-          <AccordionTrigger className="text-[10px] py-1">FAQ item</AccordionTrigger>
-          <AccordionContent className="text-[10px]">Answer here.</AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    ),
-  },
-  {
-    name: "Tabs",
-    icon: <Columns size={10} />,
-    render: () => (
-      <Tabs defaultValue="code" className="w-full">
-        <TabsList className="h-7 p-0.5">
-          <TabsTrigger value="code" className="text-[10px] px-2 py-0.5 h-6">Code</TabsTrigger>
-          <TabsTrigger value="preview" className="text-[10px] px-2 py-0.5 h-6">Preview</TabsTrigger>
-        </TabsList>
-      </Tabs>
-    ),
-  },
-  {
-    name: "Card",
-    icon: <LayoutGrid size={10} />,
-    render: () => (
-      <Card className="w-full">
-        <CardHeader className="p-2">
-          <CardTitle className="text-[10px]">Mini Card</CardTitle>
-          <CardDescription className="text-[9px]">Compact layout</CardDescription>
-        </CardHeader>
-      </Card>
-    ),
-  },
-];
-
-function DenseComponentGrid() {
-  return (
-    <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-2 mt-6">
-      {GRID_CELLS.map((cell) => (
-        <div
-          key={cell.name}
-          className="group flex flex-col items-center justify-center"
-          style={{
-            minHeight: 80,
-            padding: "10px 8px 6px",
-            borderRadius: 0,
-            border: "1px solid var(--s-border-muted)",
-            background: "var(--s-surface)",
-            transition: `transform 200ms ${TRANSITION_EASING}, border-color 200ms ${TRANSITION_EASING}`,
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = "scale(1.03)";
-            e.currentTarget.style.borderColor = "var(--s-border-strong)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = "scale(1)";
-            e.currentTarget.style.borderColor = "var(--s-border-muted)";
-          }}
-        >
-          <div className="flex items-center justify-center flex-1 w-full">
-            {cell.render()}
-          </div>
-          <span
-            className="mt-1.5 font-mono leading-none select-none flex items-center gap-0.5"
-            style={{
-              fontSize: 9,
-              color: "var(--s-text-muted)",
-              letterSpacing: "0.02em",
-            }}
-          >
-            {cell.icon}
-            {cell.name}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Preset Dots (visual only — switching handled by parent)           */
-/* ------------------------------------------------------------------ */
-function PresetDots() {
-  const dots = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"];
-
-  return (
-    <div className="flex items-center justify-center gap-2.5 mt-6">
-      {dots.map((color, i) => (
-        <div
-          key={i}
-          className="rounded-full"
-          style={{
-            width: 10,
-            height: 10,
-            background: color,
-            opacity: i === 0 ? 1 : 0.4,
-            transition: `opacity 300ms ${TRANSITION_EASING}`,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/*  Transition style tag — applies smooth transitions to all children */
-/* ------------------------------------------------------------------ */
 const TRANSITION_CSS = `
-.hero-transition-wrapper,
-.hero-transition-wrapper * {
+.hero-gallery, .hero-gallery * {
   transition:
-    background-color 400ms ${TRANSITION_EASING},
-    border-color 400ms ${TRANSITION_EASING},
-    color 400ms ${TRANSITION_EASING},
-    box-shadow 400ms ${TRANSITION_EASING},
-    border-radius 400ms ${TRANSITION_EASING},
-    transform 200ms ${TRANSITION_EASING};
+    background-color 400ms ${EASING},
+    border-color 400ms ${EASING},
+    color 400ms ${EASING},
+    box-shadow 400ms ${EASING},
+    border-radius 400ms ${EASING},
+    transform 200ms ${EASING};
 }
 `;
 
-/* ------------------------------------------------------------------ */
-/*  Export                                                             */
-/* ------------------------------------------------------------------ */
+/* ================================================================ */
+/*  Deploy cards                                                      */
+/* ================================================================ */
+
+function DeployCard() {
+  return (
+    <Card className="w-full">
+      <CardHeader className="p-4 pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xs flex items-center gap-1.5">
+            <Rocket size={14} className="text-[var(--s-primary)]" />
+            Deploy to Production
+          </CardTitle>
+          <Badge size="sm" className="gap-1"><Radio size={9} />Live</Badge>
+        </div>
+        <CardDescription className="text-[10px]">Select the target for this deployment.</CardDescription>
+      </CardHeader>
+      <CardContent className="p-4 pt-0 flex flex-col gap-3">
+        <RadioGroup defaultValue="production" className="gap-1.5">
+          {[
+            { value: "production", label: "Production", desc: "Public-facing. Requires approval.", icon: <Globe size={12} className="text-[var(--s-text-muted)]" /> },
+            { value: "staging", label: "Staging", desc: "Internal testing environment.", icon: <Eye size={12} className="text-[var(--s-text-muted)]" /> },
+            { value: "preview", label: "Preview", desc: "Ephemeral per-PR deployment.", icon: <Server size={12} className="text-[var(--s-text-muted)]" /> },
+          ].map((env) => (
+            <label key={env.value} className="flex items-start gap-2.5 p-2 cursor-pointer" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+              <div className="flex-1">
+                <span className="text-[11px] font-medium text-[var(--s-text)] flex items-center gap-1">{env.icon}{env.label}</span>
+                <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5 ml-4">{env.desc}</p>
+              </div>
+              <RadioGroupItem value={env.value} className="mt-0.5" />
+            </label>
+          ))}
+        </RadioGroup>
+      </CardContent>
+    </Card>
+  );
+}
+
+function BuildStatus() {
+  return (
+    <Card className="w-full">
+      <CardContent className="p-4 flex flex-col gap-3">
+        <Input defaultValue="main" className="h-8 text-xs font-mono" iconLeft={<GitBranch size={13} className="text-[var(--s-text-muted)]" />} />
+        <div className="flex items-center gap-2 px-2 py-1.5 text-[9px] font-mono text-[var(--s-text-muted)]" style={{ border: "1px solid var(--s-border-muted)", borderRadius: "var(--s-radius-md, 6px)" }}>
+          <GitCommitHorizontal size={12} className="shrink-0" />
+          <span className="truncate">a3f9c2d — fix: token compiler edge case</span>
+        </div>
+        <div className="flex items-center gap-3">
+          {["Types", "Lint", "Tests"].map((c) => (
+            <span key={c} className="flex items-center gap-1 text-[10px] text-[var(--s-text)]">
+              <CircleCheck size={11} className="text-[var(--s-success)]" />{c}
+            </span>
+          ))}
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between mb-1">
+            <span className="text-[10px] text-[var(--s-text)]">Build complete</span>
+            <span className="text-[10px] text-[var(--s-success)]">100%</span>
+          </div>
+          <Progress value={100} className="h-1" />
+        </div>
+        <div className="flex gap-2">
+          <Button size="sm" className="flex-1 text-xs"><Rocket size={13} />Deploy Now</Button>
+          <Button size="sm" variant="outline" className="text-xs">Cancel</Button>
+        </div>
+        <p className="text-[9px] text-[var(--s-text-muted)] flex items-center gap-1"><Clock size={9} />Last deployed 4m ago</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ================================================================ */
+/*  Token cards                                                       */
+/* ================================================================ */
+
+function TokenEditorCard() {
+  const [radius, setRadius] = useState(8);
+  const [spacing, setSpacing] = useState(4);
+
+  return (
+    <Card className="w-full">
+      <CardHeader className="p-4 pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xs flex items-center gap-1.5">
+            <Palette size={14} className="text-[var(--s-primary)]" />
+            Edit Tokens
+          </CardTitle>
+          <Badge size="sm" variant="secondary" className="font-mono text-[8px]">sigil.tokens.md</Badge>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4 pt-0 flex flex-col gap-3">
+        <div className="flex flex-col gap-1">
+          <Label className="text-[10px]">Primary Color</Label>
+          <div className="relative">
+            <Input defaultValue="oklch(0.65 0.18 275)" className="h-8 text-[11px] font-mono pl-7" />
+            <div className="absolute left-2 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full" style={{ background: "var(--s-primary)", border: "1px solid var(--s-border)" }} />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1">
+          <Label className="text-[10px]">Display Font</Label>
+          <Select className="h-8 text-[11px]" defaultValue="monument">
+            <option value="monument">Monument Grotesk</option>
+            <option value="inter">Inter</option>
+            <option value="geist">Geist</option>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-baseline justify-between">
+            <Label className="text-[10px]">Card Radius</Label>
+            <Badge size="sm" variant="outline" className="text-[8px] font-mono tabular-nums">{radius}px</Badge>
+          </div>
+          <Slider defaultValue={[8]} min={0} max={24} step={1} onValueChange={(v: number[]) => setRadius(v[0])} />
+        </div>
+        <div className="flex flex-col gap-1">
+          <Label className="text-[10px]">Base Spacing</Label>
+          <NumberField value={spacing} onValueChange={setSpacing} min={2} max={12} step={1} />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TokenPreviewCard() {
+  return (
+    <Card className="w-full">
+      <CardContent className="p-4 flex flex-col gap-3">
+        <div className="flex items-center justify-between">
+          <Label className="text-[10px] flex items-center gap-1.5">
+            <Moon size={12} className="text-[var(--s-text-muted)]" />
+            Dark Mode
+          </Label>
+          <Switch defaultChecked />
+        </div>
+        <Separator />
+        <div className="p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)", background: "var(--s-surface)" }}>
+          <span className="text-[11px] font-medium text-[var(--s-text)] flex items-center gap-1.5">
+            <Layers size={12} className="text-[var(--s-text-muted)]" />
+            Preview
+          </span>
+          <p className="text-[9px] text-[var(--s-text-muted)] mt-1">Token-driven styling. Changes apply everywhere.</p>
+        </div>
+        <KPI label="Tokens compiled" value="259" change="All passing" trend="up" className="text-xs" />
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ================================================================ */
+/*  Analytics cards                                                   */
+/* ================================================================ */
+
+function AnalyticsKPIs() {
+  return (
+    <Card className="w-full">
+      <CardHeader className="p-4 pb-3">
+        <div className="flex items-center justify-between">
+          <CardTitle className="text-xs flex items-center gap-1.5">
+            <BarChart3 size={14} className="text-[var(--s-primary)]" />
+            Project Analytics
+          </CardTitle>
+          <Badge size="sm" variant="outline" className="gap-1 text-[8px]"><CalendarDays size={9} />Last 7 days</Badge>
+        </div>
+      </CardHeader>
+      <CardContent className="p-4 pt-0 flex flex-col gap-3">
+        <div className="grid grid-cols-2 gap-2">
+          <KPI label="Visitors" value="12.4k" change="+14%" trend="up" className="text-xs" />
+          <KPI label="Conversion" value="3.2%" change="+0.8%" trend="up" className="text-xs" />
+        </div>
+        <Meter value={7200} max={10000} label="API Usage" className="text-xs" />
+        <p className="text-[9px] text-[var(--s-text-muted)] -mt-1">7,200 / 10,000 requests this cycle.</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+function AnalyticsTable() {
+  return (
+    <Card className="w-full overflow-hidden">
+      <div className="grid grid-cols-3 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-wider text-[var(--s-text-muted)]" style={{ borderBottom: "1px solid var(--s-border-muted)", background: "var(--s-surface)" }}>
+        <span>Page</span><span className="text-right">Views</span><span className="text-right">Bounce</span>
+      </div>
+      {[
+        { page: "/", views: "4,821", bounce: "32%" },
+        { page: "/docs", views: "3,104", bounce: "18%" },
+        { page: "/pricing", views: "1,247", bounce: "45%" },
+      ].map((row) => (
+        <div key={row.page} className="grid grid-cols-3 px-3 py-1.5 text-[10px]" style={{ borderBottom: "1px solid var(--s-border-muted)" }}>
+          <span className="font-mono text-[var(--s-text)]">{row.page}</span>
+          <span className="text-right tabular-nums text-[var(--s-text)]">{row.views}</span>
+          <span className="text-right tabular-nums text-[var(--s-text-muted)]">{row.bounce}</span>
+        </div>
+      ))}
+    </Card>
+  );
+}
+
+function ActivityFeed() {
+  return (
+    <Card className="w-full">
+      <CardContent className="p-4 flex flex-col gap-3">
+        {[
+          { initials: "KL", text: "Kevin pushed 3 commits to main", time: "2m ago" },
+          { initials: "CI", text: "Build #847 deployed to production", time: "5m ago" },
+        ].map((item) => (
+          <div key={item.text} className="flex items-start gap-2">
+            <Avatar fallback={item.initials} size="sm" />
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] text-[var(--s-text)] leading-snug">{item.text}</p>
+              <span className="text-[9px] text-[var(--s-text-muted)]">{item.time}</span>
+            </div>
+          </div>
+        ))}
+        <Button size="sm" variant="outline" className="w-full text-[10px] gap-1">
+          <FileText size={12} />View Full Report<ArrowUpRight size={10} className="text-[var(--s-text-muted)] ml-auto" />
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ================================================================ */
+/*  Onboarding cards                                                  */
+/* ================================================================ */
+
+function OnboardingStepper() {
+  return (
+    <Card className="w-full">
+      <CardContent className="p-4 flex flex-col gap-3">
+        <Stepper
+          steps={[
+            { label: "Account", description: "Created" },
+            { label: "Workspace", description: "Configure" },
+            { label: "Invite", description: "Team" },
+          ]}
+          currentStep={1}
+          orientation="horizontal"
+          className="text-[9px]"
+        />
+        <div className="flex flex-col gap-1">
+          <Label className="text-[10px]">Workspace Name</Label>
+          <Input defaultValue="acme-design" className="h-8 text-[11px] font-mono" iconLeft={<Building2 size={13} className="text-[var(--s-text-muted)]" />} />
+          <p className="text-[9px] text-[var(--s-text-muted)]">This will be your team URL slug.</p>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function PlanSelector() {
+  return (
+    <Card className="w-full">
+      <CardHeader className="p-4 pb-2">
+        <CardTitle className="text-xs">Plan</CardTitle>
+        <CardDescription className="text-[9px]">Choose the plan that fits your needs.</CardDescription>
+      </CardHeader>
+      <CardContent className="p-4 pt-0 flex flex-col gap-3">
+        <div className="grid grid-cols-2 gap-2">
+          <button type="button" className="flex flex-col items-start p-2.5 text-left cursor-pointer bg-transparent" style={{ border: "1px solid var(--s-border-muted)", borderRadius: "var(--s-radius-md, 6px)" }}>
+            <span className="text-[11px] font-medium text-[var(--s-text)]">Free</span>
+            <span className="text-[9px] text-[var(--s-text-muted)]">5 components</span>
+          </button>
+          <button type="button" className="flex flex-col items-start p-2.5 text-left cursor-pointer bg-transparent relative" style={{ border: "2px solid var(--s-primary)", borderRadius: "var(--s-radius-md, 6px)" }}>
+            <Badge size="sm" className="absolute -top-2 right-1.5 text-[7px] gap-0.5 px-1"><Crown size={7} />Rec</Badge>
+            <span className="text-[11px] font-medium text-[var(--s-text)] flex items-center gap-1"><Sparkles size={11} className="text-[var(--s-primary)]" />Pro</span>
+            <span className="text-[9px] text-[var(--s-text-muted)]">Unlimited everything</span>
+          </button>
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <Checkbox label="Unlimited components" defaultChecked />
+          <Checkbox label="Custom presets" defaultChecked />
+          <Checkbox label="Priority support" />
+        </div>
+      </CardContent>
+    </Card>
+  );
+}
+
+function InviteCard() {
+  return (
+    <Card className="w-full">
+      <CardContent className="p-4 flex flex-col gap-3">
+        <Label className="text-[10px]">Invite Teammates</Label>
+        <div className="flex gap-2">
+          <Input placeholder="colleague@company.com" className="h-8 text-[11px] flex-1" iconLeft={<Mail size={12} className="text-[var(--s-text-muted)]" />} />
+          <Button size="sm" variant="outline" className="text-[10px] h-8 shrink-0"><Plus size={13} />Add</Button>
+        </div>
+        <div className="flex items-center gap-2">
+          <AvatarGroup>
+            <Avatar fallback="KL" size="sm" />
+            <Avatar fallback="JD" size="sm" />
+            <Avatar fallback="AR" size="sm" />
+          </AvatarGroup>
+          <span className="text-[9px] text-[var(--s-text-muted)]">+2 more invited</span>
+        </div>
+        <Button size="sm" className="w-full text-xs"><Check size={13} />Complete Setup</Button>
+        <p className="text-[9px] text-[var(--s-text-muted)] text-center">You can change these settings later.</p>
+      </CardContent>
+    </Card>
+  );
+}
+
+/* ================================================================ */
+/*  Standalone micro-components (no card wrapper)                     */
+/* ================================================================ */
+
+function VerifiedRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <CheckCircle2 size={13} className="text-[var(--s-success)]" />
+        Your profile has been verified.
+      </span>
+      <ChevronRight size={13} className="text-[var(--s-text-muted)]" />
+    </div>
+  );
+}
+
+function TwoFactorRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Shield size={13} className="text-[var(--s-text-muted)]" />
+        Two-factor authentication
+      </span>
+      <Button size="sm" variant="outline" className="text-[10px] h-6 px-2">Enable</Button>
+    </div>
+  );
+}
+
+function TintingRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div>
+        <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+          <Paintbrush size={13} className="text-[var(--s-text-muted)]" />
+          Wallpaper Tinting
+        </span>
+        <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5 ml-[21px]">Allow the wallpaper to be tinted.</p>
+      </div>
+      <Switch defaultChecked />
+    </div>
+  );
+}
+
+/* ================================================================ */
+/*  Preset dots                                                       */
+/* ================================================================ */
+
+function PresetDots() {
+  const dots = ["#6366f1", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6", "#06b6d4"];
+  return (
+    <div className="flex items-center justify-center gap-2.5 mt-6">
+      {dots.map((color, i) => (
+        <div key={i} className="rounded-full" style={{ width: 10, height: 10, background: color, opacity: i === 0 ? 1 : 0.4, transition: `opacity 300ms ${EASING}` }} />
+      ))}
+    </div>
+  );
+}
+
+/* ================================================================ */
+/*  Export — masonry-style 4-column grid of discrete cards             */
+/* ================================================================ */
+
 export function HeroShowcase({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div className={className} style={style}>
       <style dangerouslySetInnerHTML={{ __html: TRANSITION_CSS }} />
-      <div className="hero-transition-wrapper">
-        <HeroCompositions />
-        <DenseComponentGrid />
+      <div className="hero-gallery">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start">
+          {/* Col 1 — Deploy */}
+          <div className="flex flex-col gap-3">
+            <DeployCard />
+            <BuildStatus />
+          </div>
+          {/* Col 2 — Tokens */}
+          <div className="flex flex-col gap-3">
+            <TokenEditorCard />
+            <TokenPreviewCard />
+            <TintingRow />
+          </div>
+          {/* Col 3 — Analytics */}
+          <div className="flex flex-col gap-3">
+            <AnalyticsKPIs />
+            <AnalyticsTable />
+            <ActivityFeed />
+          </div>
+          {/* Col 4 — Onboarding */}
+          <div className="flex flex-col gap-3">
+            <OnboardingStepper />
+            <PlanSelector />
+            <InviteCard />
+          </div>
+        </div>
         <PresetDots />
       </div>
     </div>

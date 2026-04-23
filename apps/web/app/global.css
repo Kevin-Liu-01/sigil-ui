@@ -191,7 +191,7 @@
   --s-primary: #9b99e8;
   --s-primary-hover: #8280d4;
   --s-primary-muted: rgba(155, 153, 232, 0.15);
-  --s-primary-contrast: #ffffff;
+  --s-primary-contrast: #000000;
   --s-secondary: #da8325;
 
   /* Focus ring */
@@ -261,7 +261,7 @@
   --s-cross-arm: 10px;
   --s-cross-stroke: 1.5px;
   --s-rail-gap: 24px;
-  --s-content-max: 1280px;
+  --s-content-max: 1200px;
 
   /* Border widths */
   --s-border-width-thin: 1px;
@@ -809,6 +809,74 @@ body {
 .s-transition-all *:focus,
 .s-transition-all *:active {
   transition-duration: 100ms;
+}
+
+/* ================================================================== */
+/* Component Animations                                                */
+/* ================================================================== */
+
+@keyframes progress-indeterminate {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes accordion-down {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zoom-in-95 {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes zoom-out-95 {
+  from { transform: scale(1); opacity: 1; }
+  to { transform: scale(0.95); opacity: 0; }
+}
+
+.animate-progress-indeterminate {
+  animation: progress-indeterminate 1.5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.animate-accordion-down {
+  animation: accordion-down 200ms ease-out;
+}
+
+.animate-accordion-up {
+  animation: accordion-up 200ms ease-out;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 200ms ease-out;
+}
+
+.animate-zoom-in-95 {
+  animation: zoom-in-95 200ms ease-out;
 }
 
 /* ================================================================== */

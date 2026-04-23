@@ -112,7 +112,7 @@ export interface SigilSectionProps {
   borderBottom?: boolean;
   /** Render cross marks at the 4 gutter intersections of each visible border. */
   showCrosses?: boolean;
-  /** CSS padding string. @default "80px 20px" */
+  /** CSS padding string. Uses `var(--s-section-py)` and `var(--s-page-margin)` by default. */
   padding?: string;
   /** Content max width for standalone mode (outside SigilPageGrid). */
   contentMax?: number;
@@ -148,7 +148,7 @@ export function SigilSection({
   borderTop = false,
   borderBottom = false,
   showCrosses = false,
-  padding = "80px 20px",
+  padding = "var(--s-section-py, 96px) var(--s-page-margin, 24px)",
   contentMax = 1200,
   railGap = 24,
   gutterPattern = "grid",

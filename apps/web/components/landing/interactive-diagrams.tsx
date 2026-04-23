@@ -19,7 +19,7 @@ const TOKEN_LINES = [
   { category: "Colors", token: "surface", value: "#141419", affects: ["surface"] },
   { category: "Typography", token: "display", value: 'ABC Monument Grotesk', affects: ["font"] },
   { category: "Radius", token: "card", value: "0px", affects: ["radius"] },
-] as const;
+] satisfies readonly { category: string; token: string; value: string; affects: readonly string[] }[];
 
 const CSS_LINES: { prop: string; value: string; tags: readonly string[] }[] = [
   { prop: "--s-primary", value: "oklch(0.65 0.18 275)", tags: ["primary"] },
@@ -85,7 +85,7 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
               background: "var(--s-surface-sunken)",
               border: "1px solid var(--s-border)",
               borderRadius: 0,
-              padding: "12px 14px",
+              padding: "12px 12px",
             }}
           >
             {TOKEN_LINES.map((line, i) => {
@@ -154,7 +154,7 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
               background: "var(--s-surface-sunken)",
               border: "1px solid var(--s-border)",
               borderRadius: 0,
-              padding: "12px 14px",
+              padding: "12px 12px",
             }}
           >
             {CSS_LINES.map((line, i) => {
@@ -319,7 +319,7 @@ const UI_CELLS: ShowcaseCell[] = [
     variants: 3,
     render: () => (
       <div className="flex flex-col gap-3 w-full">
-        <Slider defaultValue={65} className="w-full" />
+        <Slider defaultValue={[65]} className="w-full" />
         <Progress value={40} className="w-full" />
       </div>
     ),

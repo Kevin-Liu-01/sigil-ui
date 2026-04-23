@@ -9,6 +9,7 @@ import { ControlPanel } from "./control-panel";
 import type { SigilTokens } from "@sigil-ui/tokens";
 
 const PRESET_DATA = [
+  { name: "default", mood: "neutral", colors: ["#18181b", "#ffffff", "#0a0a0f", "#fafafa"] },
   { name: "sigil", mood: "structural", colors: ["#9b99e8", "#0a0a0f", "#fafafa", "#141419"] },
   { name: "crux", mood: "minimal", colors: ["#dc2626", "#ffffff", "#000000", "#f5f5f5"] },
   { name: "alloy", mood: "industrial", colors: ["#b87333", "#f5f4f0", "#1c1c1c", "#e8e6e0"] },
@@ -218,7 +219,7 @@ export function SigilDevBar() {
           <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600, color: "var(--s-text-secondary)" }}>
             sigil devbar
           </span>
-          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)", padding: "1px 6px", borderRadius: 4, background: "var(--s-primary-muted, rgba(155,153,232,0.15))", color: "var(--s-primary)" }}>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, padding: "1px 6px", borderRadius: 4, background: "var(--s-primary-muted, rgba(155,153,232,0.15))", color: "var(--s-primary)" }}>
             {activePreset}
           </span>
           {dragMessage && (
@@ -399,80 +400,86 @@ export function SigilDevBar() {
           )}
 
           {tab === "layout" && (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 16 }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <div style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, fontWeight: 600, color: "var(--s-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>
-                  Page Structure
+                  Frame
+                </div>
+                <TokenSlider
+                  label="content-max"
+                  value={parseInt((tokens.layout?.["content-max"] as string) ?? "1200")}
+                  min={768} max={1600} step={40} unit="px"
+                  onChange={(v) => patchTokens("layout", "content-max", `${v}px`)}
+                />
+                <TokenSlider
+                  label="rail-gap"
+                  value={parseInt((tokens.sigil?.["rail-gap"] as string) ?? "24")}
+                  min={8} max={48} step={4} unit="px"
+                  onChange={(v) => patchTokens("sigil", "rail-gap", `${v}px`)}
+                />
+                <TokenSlider
+                  label="grid-cell"
+                  value={parseInt((tokens.sigil?.["grid-cell"] as string) ?? "48")}
+                  min={16} max={80} step={4} unit="px"
+                  onChange={(v) => patchTokens("sigil", "grid-cell", `${v}px`)}
+                />
+                <TokenSlider
+                  label="cross-stroke"
+                  value={parseFloat((tokens.sigil?.["cross-stroke"] as string) ?? "1.5")}
+                  min={0} max={4} step={0.5} unit="px"
+                  onChange={(v) => patchTokens("sigil", "cross-stroke", `${v}px`)}
+                />
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                <div style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, fontWeight: 600, color: "var(--s-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>
+                  Spacing
                 </div>
                 <TokenSlider
                   label="navbar-h"
-                  value={parseInt((tokens.layout?.["navbar-height"] as string) ?? "64")}
-                  min={48} max={96} step={4} unit="px"
-                  onChange={(v) => patchTokens("layout", "navbar-height", `${v}px`)}
+                  value={parseInt((tokens.spacing?.["navbar-height"] as string) ?? "56")}
+                  min={36} max={96} step={4} unit="px"
+                  onChange={(v) => patchTokens("spacing", "navbar-height", `${v}px`)}
+                />
+                <TokenSlider
+                  label="section-py"
+                  value={parseInt((tokens.spacing?.["section-py"] as string) ?? "80")}
+                  min={24} max={160} step={8} unit="px"
+                  onChange={(v) => patchTokens("spacing", "section-py", `${v}px`)}
+                />
+                <TokenSlider
+                  label="footer-py"
+                  value={parseInt((tokens.spacing?.["footer-py"] as string) ?? "48")}
+                  min={16} max={96} step={8} unit="px"
+                  onChange={(v) => patchTokens("spacing", "footer-py", `${v}px`)}
                 />
                 <TokenSlider
                   label="page-margin"
-                  value={parseInt((tokens.layout?.["page-margin"] as string) ?? "24")}
+                  value={parseInt((tokens.layout?.["page-margin"] as string) ?? "20")}
                   min={8} max={64} step={4} unit="px"
                   onChange={(v) => patchTokens("layout", "page-margin", `${v}px`)}
                 />
-                <TokenSlider
-                  label="gutter"
-                  value={parseInt((tokens.layout?.gutter as string) ?? "16")}
-                  min={8} max={48} step={4} unit="px"
-                  onChange={(v) => patchTokens("layout", "gutter", `${v}px`)}
-                />
-                <TokenSlider
-                  label="section-py"
-                  value={parseInt((tokens.spacing?.["section-py"] as string) ?? "64")}
-                  min={24} max={128} step={8} unit="px"
-                  onChange={(v) => patchTokens("spacing", "section-py", `${v}px`)}
-                />
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                 <div style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, fontWeight: 600, color: "var(--s-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>
-                  Grid & Bento
+                  Components
                 </div>
+                <TokenSlider
+                  label="card-pad"
+                  value={parseInt((tokens.spacing?.["card-padding"] as string) ?? "20")}
+                  min={8} max={48} step={4} unit="px"
+                  onChange={(v) => patchTokens("spacing", "card-padding", `${v}px`)}
+                />
                 <TokenSlider
                   label="bento-gap"
                   value={parseInt((tokens.layout?.["bento-gap"] as string) ?? "12")}
-                  min={4} max={32} step={2} unit="px"
+                  min={2} max={32} step={2} unit="px"
                   onChange={(v) => patchTokens("layout", "bento-gap", `${v}px`)}
                 />
                 <TokenSlider
-                  label="bento-r"
-                  value={parseInt((tokens.layout?.["bento-radius"] as string) ?? "12")}
-                  min={0} max={32} step={2} unit="px"
-                  onChange={(v) => patchTokens("layout", "bento-radius", `${v}px`)}
-                />
-                <TokenSlider
-                  label="content-max"
-                  value={parseInt((tokens.layout?.["content-max"] as string) ?? "1280")}
-                  min={768} max={1920} step={64} unit="px"
-                  onChange={(v) => patchTokens("layout", "content-max", `${v}px`)}
-                />
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <div style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, fontWeight: 600, color: "var(--s-text-muted)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 2 }}>
-                  Alignment Rails
-                </div>
-                <TokenSlider
-                  label="rail-margin"
-                  value={parseInt((tokens.alignment?.["rail-margin"] as string) ?? "24")}
-                  min={8} max={64} step={4} unit="px"
-                  onChange={(v) => patchTokens("alignment" as any, "rail-margin", `${v}px`)}
-                />
-                <TokenSlider
-                  label="section-py"
-                  value={parseInt((tokens.sections?.["padding-y"] as string) ?? "64")}
-                  min={24} max={160} step={8} unit="px"
-                  onChange={(v) => patchTokens("sections" as any, "padding-y", `${v}px`)}
-                />
-                <TokenSlider
-                  label="hero-py"
-                  value={parseInt((tokens.sections?.["padding-y-hero"] as string) ?? "120")}
-                  min={64} max={240} step={16} unit="px"
-                  onChange={(v) => patchTokens("sections" as any, "padding-y-hero", `${v}px`)}
+                  label="btn-px"
+                  value={parseInt((tokens.spacing?.["button-px"] as string) ?? "20")}
+                  min={8} max={40} step={4} unit="px"
+                  onChange={(v) => patchTokens("spacing", "button-px", `${v}px`)}
                 />
                 <TokenSlider
                   label="divider-w"

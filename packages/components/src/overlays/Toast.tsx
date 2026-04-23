@@ -13,12 +13,14 @@ import {
 import { cn } from "../utils";
 
 type ToastVariant = "default" | "success" | "error" | "warning" | "info";
+type ToastFill = "outline" | "filled" | "soft";
 
 interface ToastItem {
   id: string;
   title: string;
   description?: string;
   variant: ToastVariant;
+  fill: ToastFill;
   duration: number;
 }
 
@@ -37,12 +39,14 @@ export function toast(options: {
   title: string;
   description?: string;
   variant?: ToastVariant;
+  fill?: ToastFill;
   duration?: number;
 }) {
   globalAddToast?.({
     title: options.title,
     description: options.description,
     variant: options.variant ?? "default",
+    fill: options.fill ?? "outline",
     duration: options.duration ?? 4000,
   });
 }
@@ -72,7 +76,7 @@ export const Toaster = forwardRef<HTMLDivElement, ToasterProps>(function Toaster
 
   const addToast = useCallback((t: Omit<ToastItem, "id">) => {
     const id = `toast-${++idCounter}`;
-    setToasts((prev) => [...prev, { ...t, id }]);
+    setToasts((prev) => [...prev, { ...t, fill: t.fill ?? "outline", id }]);
   }, []);
 
   const removeToast = useCallback((id: string) => {
@@ -112,13 +116,26 @@ export const Toaster = forwardRef<HTMLDivElement, ToasterProps>(function Toaster
   );
 });
 
-const variantStyles: Record<ToastVariant, string> = {
-  default: "border-[var(--s-border)]",
-  success: "border-[var(--s-success)]",
-  error: "border-[var(--s-error)]",
-  warning: "border-[var(--s-warning)]",
-  info: "border-[var(--s-info)]",
+const variantColors: Record<ToastVariant, string> = {
+  default: "var(--s-border)",
+  success: "var(--s-success)",
+  error: "var(--s-error)",
+  warning: "var(--s-warning)",
+  info: "var(--s-info)",
 };
+
+function toastFillStyle(variant: ToastVariant, fill: ToastFill): React.CSSProperties {
+  const c = variantColors[variant];
+  switch (fill) {
+    case "filled":
+      return { borderColor: c, backgroundColor: c, color: "var(--s-primary-contrast, #fff)" };
+    case "soft":
+      return { borderColor: "transparent", backgroundColor: `color-mix(in oklch, ${c} 10%, var(--s-background))`, color: c };
+    case "outline":
+    default:
+      return { borderColor: c };
+  }
+}
 
 function ToastNotification({
   toast: t,
@@ -147,9 +164,9 @@ function ToastNotification({
       className={cn(
         "pointer-events-auto w-80 rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] p-4",
         "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
-        variantStyles[t.variant],
         leaving ? "animate-[toastOut_200ms_ease-in_forwards]" : "animate-[toastIn_200ms_ease-out]",
       )}
+      style={toastFillStyle(t.variant, t.fill)}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="flex-1">

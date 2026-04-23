@@ -64,7 +64,7 @@ const COMPONENT_MAP: Record<string, () => ReactNode> = {
       <Label>Accept terms</Label>
     </div>
   ),
-  Slider: () => <Slider defaultValue={65} />,
+  Slider: () => <Slider defaultValue={[65]} />,
   Progress: () => <Progress value={60} />,
   Avatar: () => <Avatar fallback="KL" />,
   KPI: () => <KPI label="Revenue" value="$4.2k" change="+8%" trend="up" />,

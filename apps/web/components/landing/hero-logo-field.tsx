@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, cloneElement } from "react";
+import React, { useEffect, useState, cloneElement } from "react";
 import type { ReactElement } from "react";
 
 const CYCLE_MS = 4200;
@@ -146,7 +146,7 @@ export function HeroLogoField() {
       <style dangerouslySetInnerHTML={{ __html: DRAW_CSS }} />
       <svg
         key={idx}
-        viewBox="0 0 120 120"
+        viewBox="-12 -12 144 144"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{
@@ -159,8 +159,14 @@ export function HeroLogoField() {
           color: "var(--s-text-muted)",
         }}
       >
+        {/* Registration-mark frame — edges overshoot corners */}
+        <line x1={-8} y1={0} x2={128} y2={0} stroke="currentColor" strokeWidth={0.25} opacity={0.6} />
+        <line x1={-8} y1={120} x2={128} y2={120} stroke="currentColor" strokeWidth={0.25} opacity={0.6} />
+        <line x1={0} y1={-8} x2={0} y2={128} stroke="currentColor" strokeWidth={0.25} opacity={0.6} />
+        <line x1={120} y1={-8} x2={120} y2={128} stroke="currentColor" strokeWidth={0.25} opacity={0.6} />
+
         {variant.map((el, i) =>
-          cloneElement(el, {
+          cloneElement(el as React.ReactElement<React.SVGProps<SVGElement>>, {
             style: {
               strokeDasharray: 1,
               strokeDashoffset: 1,
@@ -199,7 +205,7 @@ export function FooterLogo() {
         aria-hidden="true"
       >
         {variant.map((el, i) =>
-          cloneElement(el, {
+          cloneElement(el as React.ReactElement<React.SVGProps<SVGElement>>, {
             style: {
               strokeDasharray: 1,
               strokeDashoffset: 1,
@@ -213,8 +219,6 @@ export function FooterLogo() {
 }
 
 export function NavbarLogo() {
-  const r = 5;
-  const g = 24;
   return (
     <svg
       viewBox="0 0 120 120"
@@ -222,22 +226,11 @@ export function NavbarLogo() {
       width={18}
       height={18}
     >
-      <line x1="60" y1="0" x2="60" y2="120" stroke="currentColor" strokeWidth="3" />
-      <line x1="0" y1="60" x2="120" y2="60" stroke="currentColor" strokeWidth="3" />
-      {/* TL: 4 dots — 2×2 */}
-      <circle cx={30 - g/2} cy={30 - g/2} r={r} fill="#818cf8" />
-      <circle cx={30 + g/2} cy={30 - g/2} r={r} fill="#a5b4fc" />
-      <circle cx={30 - g/2} cy={30 + g/2} r={r} fill="#6366f1" />
-      <circle cx={30 + g/2} cy={30 + g/2} r={r} fill="#4f46e5" />
-      {/* TR: 2 dots — top row of 2×2 */}
-      <circle cx={90 - g/2} cy={30 - g/2} r={r} fill="#ea580c" />
-      <circle cx={90 + g/2} cy={30 - g/2} r={r} fill="#f97316" />
-      {/* BL: 1 dot — top-left of 2×2 */}
-      <circle cx={30 - g/2} cy={90 - g/2} r={r} fill="#22c55e" />
-      {/* BR: 3 dots — L-shape of 2×2 */}
-      <circle cx={90 - g/2} cy={90 - g/2} r={r} fill="#e879f9" />
-      <circle cx={90 - g/2} cy={90 + g/2} r={r} fill="#d946ef" />
-      <circle cx={90 + g/2} cy={90 + g/2} r={r} fill="#a855f7" />
+      {/* TL — stepped edge, rotated cut */}
+      <polygon points="0,0 56,0 56,32 40,40 40,56 0,56" fill="currentColor" />
+      <polygon points="120,0 120,56 88,56 80,40 64,40 64,0" fill="currentColor" />
+      <polygon points="0,120 0,64 32,64 40,80 56,80 56,120" fill="currentColor" />
+      <polygon points="120,120 64,120 64,88 80,80 80,64 120,64" fill="#6366f1" />
     </svg>
   );
 }

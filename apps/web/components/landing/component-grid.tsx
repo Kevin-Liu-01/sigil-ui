@@ -100,7 +100,7 @@ const CELLS: CellDef[] = [
     tokens: "--s-primary, --s-border, --s-duration-slow",
     render: () => (
       <div className="flex flex-col gap-3 w-full">
-        <Slider defaultValue={65} />
+        <Slider defaultValue={[65]} />
         <Progress value={40} />
       </div>
     ),

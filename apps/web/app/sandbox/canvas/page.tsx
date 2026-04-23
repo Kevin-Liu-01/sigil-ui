@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { Suspense, useState, useCallback, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import {
   DndContext,
@@ -62,6 +62,20 @@ const INITIAL_ITEMS: CanvasItemData[] = [
 // ---------------------------------------------------------------------------
 
 export default function FullCanvasPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="h-dvh flex items-center justify-center bg-[#0a0a0a] text-[#666] text-sm">
+          Loading…
+        </div>
+      }
+    >
+      <FullCanvasInner />
+    </Suspense>
+  );
+}
+
+function FullCanvasInner() {
   const searchParams = useSearchParams();
   const initialPreset = (searchParams.get("preset") as PresetName) || "sigil";
 

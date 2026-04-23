@@ -1,10 +1,12 @@
 "use client";
 
+import React from "react";
 import dynamic from "next/dynamic";
 
 const ShaderComponent = dynamic(
   () =>
-    import("shaders/react").then((mod) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (import("shaders/react") as Promise<any>).then((mod: any) => {
       const {
         Shader,
         Aurora,
@@ -23,14 +25,11 @@ const ShaderComponent = dynamic(
         HexGrid,
         FlowingGradient,
         FilmGrain,
-        Dither,
-        Noise,
         Neon,
-        ContourLines,
       } = mod;
 
       function ShaderBg({ preset = "sigil" }: { preset?: string }) {
-        const configs: Record<string, JSX.Element> = {
+        const configs: Record<string, React.ReactNode> = {
           sigil: (
             <>
               <DotGrid colorA="#9b99e8" colorB="#4f46e5" dotSize={2} spacing={24} />

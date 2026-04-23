@@ -27,8 +27,8 @@ function useTabsContext() {
 }
 
 export interface TabsProps extends HTMLAttributes<HTMLDivElement> {
-  /** Default active tab value. */
-  defaultValue: string;
+  /** Default active tab value (required for uncontrolled, optional for controlled). */
+  defaultValue?: string;
   /** Controlled active tab value. */
   value?: string;
   /** Callback when active tab changes. */
@@ -40,7 +40,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(
   { defaultValue, value, onValueChange, className, children, ...rest },
   ref,
 ) {
-  const [internalValue, setInternalValue] = useState(defaultValue);
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const baseId = useId();
 
   const activeTab = value ?? internalValue;

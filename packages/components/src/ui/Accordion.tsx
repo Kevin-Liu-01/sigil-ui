@@ -37,15 +37,20 @@ function useAccordionContext() {
 export interface AccordionProps extends HTMLAttributes<HTMLDivElement> {
   /** Allow multiple items open at once. @default false */
   multiple?: boolean;
+  /** Radix-compatible: "single" | "multiple". Maps to `multiple`. */
+  type?: "single" | "multiple";
+  /** Radix-compatible: allow collapsing all. (Accepted but unused — always collapsible.) */
+  collapsible?: boolean;
   /** Default open item value(s). */
   defaultValue?: string | string[];
   children?: ReactNode;
 }
 
 export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(function Accordion(
-  { multiple = false, defaultValue, className, children, ...rest },
+  { multiple: multipleProp, type, collapsible: _collapsible, defaultValue, className, children, ...rest },
   ref,
 ) {
+  const multiple = multipleProp ?? (type === "multiple");
   const [openItems, setOpenItems] = useState<Set<string>>(() => {
     if (!defaultValue) return new Set();
     return new Set(Array.isArray(defaultValue) ? defaultValue : [defaultValue]);

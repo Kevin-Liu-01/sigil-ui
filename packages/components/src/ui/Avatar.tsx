@@ -19,17 +19,28 @@ const sizeMap = {
 export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   src?: string;
   alt?: string;
+  /** Full name — used to derive initials and as default alt text. */
+  name?: string;
   fallback?: string;
   /** @default "md" */
   size?: keyof typeof sizeMap;
 }
 
+function getInitials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+}
+
 export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
-  { src, alt, fallback, size = "md", className, ...rest },
+  { src, alt, name, fallback, size = "md", className, ...rest },
   ref,
 ) {
   const [imgError, setImgError] = useState(false);
   const showImage = src && !imgError;
+  const resolvedAlt = alt ?? name ?? "";
+  const resolvedFallback =
+    fallback ?? (name ? getInitials(name) : alt?.charAt(0)?.toUpperCase() ?? "?");
 
   return (
     <div
@@ -46,7 +57,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
         <img
           data-slot="avatar-image"
           src={src}
-          alt={alt ?? ""}
+          alt={resolvedAlt}
           onError={() => setImgError(true)}
           className="aspect-square size-full object-cover"
         />
@@ -55,7 +66,7 @@ export const Avatar = forwardRef<HTMLDivElement, AvatarProps>(function Avatar(
           data-slot="avatar-fallback"
           className="flex size-full items-center justify-center bg-[var(--s-surface)] text-[var(--s-text-muted)] text-sm font-medium select-none"
         >
-          {fallback ?? alt?.charAt(0)?.toUpperCase() ?? "?"}
+          {resolvedFallback}
         </span>
       )}
     </div>

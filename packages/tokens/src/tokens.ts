@@ -3,6 +3,7 @@ import type { SigilTokens } from "./types";
 /**
  * Default Sigil token values.
  * All colors are in OKLCH for perceptual uniformity and wide-gamut support.
+ * Includes all optional token categories so components work without a preset.
  */
 export const defaultTokens: SigilTokens = {
   colors: {
@@ -34,7 +35,7 @@ export const defaultTokens: SigilTokens = {
     },
     "text-muted": {
       light: "oklch(0.55 0 0)",
-      dark: "oklch(0.55 0 0)",
+      dark: "oklch(0.45 0 0)",
     },
     "text-subtle": {
       light: "oklch(0.70 0 0)",
@@ -77,6 +78,31 @@ export const defaultTokens: SigilTokens = {
   spacing: {
     scale: [4, 8, 12, 16, 24, 32, 48, 64, 80, 96],
     unit: "px",
+  },
+
+  layout: {
+    "content-max": "1200px",
+    "content-max-narrow": "768px",
+    "content-max-wide": "1440px",
+    "page-margin": "24px",
+    "page-margin-sm": "16px",
+    "page-margin-lg": "48px",
+    gutter: "24px",
+    "gutter-sm": "16px",
+    "gutter-lg": "32px",
+    "grid-columns": "12",
+    "grid-gap": "24px",
+    "bento-gap": "16px",
+    "bento-radius": "0px",
+    "bento-min-height": "200px",
+    "section-gap": "32px",
+    "sidebar-width": "280px",
+    "sidebar-collapsed": "64px",
+    "footer-columns": "4",
+    "stack-gap": "16px",
+    "stack-gap-sm": "8px",
+    "stack-gap-lg": "24px",
+    "prose-max": "65ch",
   },
 
   sigil: {
@@ -128,5 +154,108 @@ export const defaultTokens: SigilTokens = {
       medium: "1.5px",
       thick: "2px",
     },
+  },
+
+  buttons: {
+    "font-weight": "500",
+    "text-transform": "none" as const,
+    "letter-spacing": "0em",
+    "font-family": "inherit",
+    "border-width": "1px",
+    "hover-effect": "darken" as const,
+    "active-scale": "0.97",
+    "icon-gap": "8px",
+    "min-width": "0px",
+  },
+
+  cards: {
+    "border-style": "solid" as const,
+    "border-width": "1px",
+    "hover-effect": "border" as const,
+    "hover-border-color": "var(--s-border-strong)",
+    padding: "24px",
+    "header-padding": "24px 24px 0",
+    "footer-padding": "0 24px 24px",
+    "title-size": "1.125rem",
+    "title-weight": "600",
+    "description-size": "0.875rem",
+  },
+
+  headings: {
+    "h1-size": "2.25rem",
+    "h1-weight": "700",
+    "h1-tracking": "-0.025em",
+    "h1-leading": "1.2",
+    "h2-size": "1.875rem",
+    "h2-weight": "600",
+    "h2-tracking": "-0.02em",
+    "h3-size": "1.5rem",
+    "h3-weight": "600",
+    "h4-size": "1.25rem",
+    "h4-weight": "600",
+    "display-size": "3.75rem",
+    "display-weight": "700",
+    "display-tracking": "-0.03em",
+    "display-leading": "1.08",
+  },
+
+  navigation: {
+    "navbar-height": "56px",
+    "navbar-backdrop-blur": "12px",
+    "navbar-border": "1px solid",
+    "navbar-bg-opacity": "0.8",
+    "nav-link-weight": "500",
+    "nav-link-size": "0.875rem",
+    "nav-link-hover": "color" as const,
+    "breadcrumb-separator": "/",
+    "pagination-radius": "0px",
+    "sidebar-width": "280px",
+    "sidebar-item-radius": "0px",
+    "sidebar-item-padding": "8px 12px",
+  },
+
+  backgrounds: {
+    pattern: "none" as const,
+    "pattern-opacity": "0.05",
+    "pattern-scale": "1",
+    noise: false,
+    "noise-opacity": "0.03",
+    "gradient-angle": "135deg",
+    "gradient-type": "none" as const,
+    "hero-pattern": "none" as const,
+    "section-divider": "none" as const,
+  },
+
+  code: {
+    "font-family": "var(--s-font-mono)",
+    "font-size": "0.875rem",
+    "line-height": "1.7",
+    bg: "var(--s-surface-sunken, var(--s-surface))",
+    border: "1px solid var(--s-border)",
+    "border-radius": "0px",
+    padding: "16px",
+    "tab-size": "2",
+    "selection-bg": "var(--s-primary-muted)",
+    "comment-color": "var(--s-text-muted)",
+    "keyword-color": "var(--s-primary)",
+    "string-color": "var(--s-success)",
+    "number-color": "var(--s-warning)",
+    "function-color": "var(--s-info)",
+  },
+
+  inputs: {
+    height: "36px",
+    "height-sm": "32px",
+    "height-lg": "44px",
+    "border-width": "1px",
+    "focus-ring-width": "2px",
+    "focus-ring-color": "var(--s-primary)",
+    "focus-ring-offset": "2px",
+    "placeholder-color": "var(--s-text-muted)",
+    "error-border-color": "var(--s-error)",
+    "label-size": "0.875rem",
+    "label-weight": "500",
+    "label-spacing": "8px",
+    "helper-size": "0.8125rem",
   },
 } as const;

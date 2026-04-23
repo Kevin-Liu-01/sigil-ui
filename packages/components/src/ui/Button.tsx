@@ -11,6 +11,9 @@ export type ButtonVariant =
   | "ghost"
   | "outline"
   | "destructive"
+  | "success"
+  | "warning"
+  | "soft"
   | "link";
 
 export type ButtonSize =
@@ -38,7 +41,7 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
     "hover:bg-[var(--s-primary-hover)]",
     "active:brightness-90 active:scale-[var(--s-button-active-scale,0.97)]",
-    "shadow-sm",
+    "shadow-[var(--s-shadow-sm)]",
   ].join(" "),
   secondary: [
     "bg-[var(--s-surface)] text-[var(--s-text)]",
@@ -58,6 +61,21 @@ const variantStyles: Record<ButtonVariant, string> = {
     "bg-[var(--s-error)] text-[var(--s-primary-contrast,#fff)]",
     "hover:brightness-110",
     "active:brightness-90",
+  ].join(" "),
+  success: [
+    "bg-[var(--s-success)] text-[var(--s-primary-contrast,#fff)]",
+    "hover:brightness-110",
+    "active:brightness-90",
+  ].join(" "),
+  warning: [
+    "bg-[var(--s-warning)] text-[var(--s-primary-contrast,#fff)]",
+    "hover:brightness-110",
+    "active:brightness-90",
+  ].join(" "),
+  soft: [
+    "bg-[color-mix(in_oklch,var(--s-primary)_12%,transparent)] text-[var(--s-primary)]",
+    "hover:bg-[color-mix(in_oklch,var(--s-primary)_20%,transparent)]",
+    "active:bg-[color-mix(in_oklch,var(--s-primary)_28%,transparent)]",
   ].join(" "),
   link: "text-[var(--s-primary)] underline-offset-4 hover:underline bg-transparent p-0 h-auto font-medium",
 };

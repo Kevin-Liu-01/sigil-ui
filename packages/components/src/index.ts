@@ -83,7 +83,7 @@ export {
   Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
   type CarouselProps, type CarouselContentProps, type CarouselItemProps, type CarouselButtonProps,
 } from "./ui/Carousel";
-export { Alert, AlertTitle, AlertDescription, type AlertProps, type AlertTitleProps, type AlertDescriptionProps } from "./ui/Alert";
+export { Alert, AlertTitle, AlertDescription, type AlertProps, type AlertTitleProps, type AlertDescriptionProps, type AlertVariant, type AlertFill } from "./ui/Alert";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent, type CollapsibleContentProps } from "./ui/Collapsible";
 export { RadioGroup, RadioGroupItem, type RadioGroupProps, type RadioGroupItemProps } from "./ui/RadioGroup";
 export { Toggle, type ToggleProps } from "./ui/Toggle";
@@ -120,6 +120,7 @@ export {
   Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, MenubarSeparator,
 } from "./navigation/Menubar";
 export { Toolbar, ToolbarButton, ToolbarSeparator } from "./navigation/Toolbar";
+export { SocialIcons, type SocialIconsProps, type SocialLink } from "./navigation/SocialIcons";
 
 // ---------------------------------------------------------------------------
 // Overlays
@@ -196,6 +197,13 @@ export { Pricing, type PricingProps } from "./marketing/Pricing";
 export { CTA, type CTAProps, type CTAAction } from "./marketing/CTA";
 export { LogoBar, type LogoBarProps, type LogoBarItem } from "./marketing/LogoBar";
 export { TestimonialCard, type TestimonialCardProps } from "./marketing/TestimonialCard";
+export { AnnouncementBar, type AnnouncementBarProps } from "./marketing/AnnouncementBar";
+export { PricingTiers, type PricingTiersProps, type PricingTier } from "./marketing/PricingTiers";
+export { UnitPricing, type UnitPricingProps, type PricingUnit } from "./marketing/UnitPricing";
+export { CostCalculator, type CostCalculatorProps, type CostSlider, type CostEstimate } from "./marketing/CostCalculator";
+export { BlogGrid, type BlogGridProps, type BlogPost } from "./marketing/BlogGrid";
+export { BlogHeader, type BlogHeaderProps } from "./marketing/BlogHeader";
+export { FeatureGrid, type FeatureGridProps, type FeatureRow } from "./marketing/FeatureGrid";
 
 // ---------------------------------------------------------------------------
 // Patterns

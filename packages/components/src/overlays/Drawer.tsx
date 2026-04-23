@@ -1,22 +1,45 @@
 "use client";
 
-import { forwardRef, type ComponentPropsWithoutRef, type HTMLAttributes } from "react";
+import {
+  forwardRef,
+  type ButtonHTMLAttributes,
+  type HTMLAttributes,
+  type ReactNode,
+} from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "../utils";
+
+export interface DrawerProps {
+  shouldScaleBackground?: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  children?: ReactNode;
+}
 
 export const Drawer = ({
   shouldScaleBackground = true,
   ...rest
-}: ComponentPropsWithoutRef<typeof DrawerPrimitive.Root>) => (
+}: DrawerProps) => (
   <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...rest} />
 );
 
-export const DrawerTrigger = DrawerPrimitive.Trigger;
-export const DrawerClose = DrawerPrimitive.Close;
+export const DrawerTrigger = forwardRef<
+  HTMLButtonElement,
+  ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
+>(function DrawerTrigger(props, ref) {
+  return <DrawerPrimitive.Trigger ref={ref} {...props} />;
+});
+
+export const DrawerClose = forwardRef<
+  HTMLButtonElement,
+  ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
+>(function DrawerClose(props, ref) {
+  return <DrawerPrimitive.Close ref={ref} {...props} />;
+});
 
 export const DrawerContent = forwardRef<
   HTMLDivElement,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+  HTMLAttributes<HTMLDivElement>
 >(function DrawerContent({ className, children, ...rest }, ref) {
   return (
     <DrawerPrimitive.Portal>
@@ -66,7 +89,7 @@ export const DrawerFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEle
 
 export const DrawerTitle = forwardRef<
   HTMLHeadingElement,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
+  HTMLAttributes<HTMLHeadingElement>
 >(function DrawerTitle({ className, ...rest }, ref) {
   return (
     <DrawerPrimitive.Title
@@ -79,7 +102,7 @@ export const DrawerTitle = forwardRef<
 
 export const DrawerDescription = forwardRef<
   HTMLParagraphElement,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
+  HTMLAttributes<HTMLParagraphElement>
 >(function DrawerDescription({ className, ...rest }, ref) {
   return (
     <DrawerPrimitive.Description

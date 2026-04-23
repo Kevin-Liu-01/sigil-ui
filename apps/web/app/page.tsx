@@ -1,179 +1,70 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
-import { HeroLogoField, NavbarLogo, FooterLogo } from "@/components/landing/hero-logo-field";
+import { HeroLogoField } from "@/components/landing/hero-logo-field";
+import { LandingNavbar } from "@/components/landing/navbar";
+import { LandingFooter } from "@/components/landing/footer";
 import { PresetShowcase } from "@/components/landing/preset-showcase";
 import { PresetTable } from "@/components/landing/preset-table";
 import { Terminal } from "@/components/landing/terminal";
 import {
   TokenFlowDiagram,
-  ComponentShowcaseGrid,
   PresetTransitionDemo,
   CodeExample,
   ParallaxSection,
 } from "@/components/landing/interactive-diagrams";
 import { LiveComponentGrid } from "@/components/landing/live-component";
+import { ShapesAndPatterns } from "@/components/landing/shapes-section";
+import { ProductDemo } from "@/components/landing/product-demo-section";
+import { TechFrame } from "@/components/landing/tech-frame";
+import { SigilFrame } from "@/components/landing/sigil-frame";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 
-import { SigilPageGrid, SigilSection, SigilFrame as SigilFrameBase } from "@sigil-ui/components";
-import type { GutterPattern } from "@sigil-ui/tokens";
-import { BookOpen, LayoutGrid, Palette, ExternalLink, Flame } from "lucide-react";
+import { SigilSection, SectionDivider } from "@sigil-ui/components";
 
 /* ================================================================ */
-/* Navbar                                                            */
+/* Section Header — reusable pattern                                  */
 /* ================================================================ */
 
-const NAV_LINKS = [
-  { label: "Manifesto", href: "/manifesto", icon: <Flame size={14} /> },
-  { label: "Docs", href: "/docs", icon: <BookOpen size={14} /> },
-  { label: "Components", href: "#components", icon: <LayoutGrid size={14} /> },
-  { label: "Presets", href: "#presets", icon: <Palette size={14} /> },
-  { label: "GitHub", href: "https://github.com/Kevin-Liu-01/sigil-ui", external: true, icon: <ExternalLink size={14} /> },
-] as const;
-
-function LandingNavbar() {
-  const [isDark, setIsDark] = useState(true);
-
-  function toggleTheme() {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    document.documentElement.setAttribute("data-theme", next ? "dark" : "light");
-  }
-
+function SectionHeader({
+  label,
+  fig,
+  heading,
+  description,
+  maxDescWidth = 576,
+}: {
+  label: string;
+  fig?: string;
+  heading: string;
+  description?: string;
+  maxDescWidth?: number;
+}) {
   return (
-    <nav
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        height: "var(--s-navbar-height, 56px)",
-        padding: "0 20px",
-        borderBottom: "1px solid var(--s-border-muted)",
-        position: "sticky",
-        top: 0,
-        zIndex: 50,
-        background: "var(--s-background)",
-        backdropFilter: "blur(12px) saturate(1.4)",
-        WebkitBackdropFilter: "blur(12px) saturate(1.4)",
-      }}
-    >
-      {/* Logo */}
-      <a
-        href="/"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          textDecoration: "none",
-          color: "var(--s-text)",
-        }}
-      >
-        <NavbarLogo />
-        <span
-          style={{
-            fontFamily: "var(--s-font-display, 'Inter', system-ui, sans-serif)",
-            fontWeight: 700,
-            fontSize: 16,
-            letterSpacing: "-0.03em",
-          }}
-        >
-          sigil<span style={{ opacity: 0.4, fontWeight: 400 }}>/</span><span style={{ fontWeight: 500, fontSize: 13 }}>UI</span>
-        </span>
-      </a>
-
-      {/* Links + theme toggle */}
-      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-        {NAV_LINKS.map((link) => (
-          <a
-            key={link.label}
-            href={link.href}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 12,
-              fontWeight: 500,
-              letterSpacing: "0.04em",
-              textTransform: "uppercase" as const,
-              textDecoration: "none",
-              color: "var(--s-text-muted)",
-              transition: "color 150ms ease",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
-            {...("external" in link && link.external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-          >
-            {link.icon}
-            {link.label}
-          </a>
-        ))}
-
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            width: 32,
-            height: 32,
-            padding: 0,
-            border: "none",
-            background: "none",
-            color: "var(--s-text-muted)",
-            cursor: "pointer",
-            borderRadius: "var(--s-radius-sm, 0px)",
-            transition: "color 150ms ease",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
-        >
-          {isDark ? <SunIcon /> : <MoonIcon />}
-        </button>
+    <div className="mb-10">
+      <div className="flex items-baseline justify-between mb-4">
+        <span className="s-label">/ {label}</span>
+        {fig && <span className="s-fig">{fig}</span>}
       </div>
-    </nav>
-  );
-}
-
-function SunIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="8" y1="1" x2="8" y2="3" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="1" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="13" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="3.05" y1="3.05" x2="4.46" y2="4.46" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="11.54" y1="11.54" x2="12.95" y2="12.95" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="3.05" y1="12.95" x2="4.46" y2="11.54" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="11.54" y1="4.46" x2="12.95" y2="3.05" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M13.5 9.5a5.5 5.5 0 01-7-7 5.5 5.5 0 107 7z"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-    </svg>
+      <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-3">
+        {heading}
+      </h2>
+      {description && (
+        <p
+          className="s-mono text-sm leading-relaxed text-[var(--s-text-muted)]"
+          style={{ maxWidth: maxDescWidth }}
+        >
+          {description}
+        </p>
+      )}
+    </div>
   );
 }
 
 /* ================================================================ */
-/* 1 — Hero                                                          */
+/* 1 — Hero                                                           */
 /* ================================================================ */
 
 const PRESET_DOTS: { name: string; color: string }[] = [
@@ -187,7 +78,7 @@ const PRESET_DOTS: { name: string; color: string }[] = [
 
 function Hero() {
   let setPreset: ((name: string) => Promise<void>) | null = null;
-  let sound: { play: (name: string) => void } = { play: () => {} };
+  let sound: ReturnType<typeof useSigilSound> = { play: () => {}, enabled: false, setEnabled: () => {}, activePreset: "sigil", setActivePreset: () => {} };
   try {
     const ctx = useSigilTokens();
     setPreset = ctx.setPreset;
@@ -206,147 +97,98 @@ function Hero() {
   };
 
   return (
-    <SigilSection borderTop showCrosses padding="100px 20px 64px">
+    <SigilSection borderTop padding="96px 24px 48px">
       <HeroLogoField />
-      <div style={{ marginBottom: 48, position: "relative", zIndex: 1 }}>
-        <span className="s-label" style={{ display: "block", marginBottom: 16 }}>/ sigil ui</span>
 
-        <h1
-          style={{
-            fontFamily: "var(--s-font-display)",
-            fontWeight: 700,
-            fontSize: "clamp(32px, 5vw, 56px)",
-            lineHeight: 1.08,
-            letterSpacing: "-0.03em",
-            color: "var(--s-text)",
-            margin: "0 0 16px 0",
-          }}
-        >
-          The Foundation for your Design System.
+      <div className="relative z-[1] mb-12">
+        <span className="s-label block mb-4">/ sigil ui</span>
+
+        <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
+          Design Systems That Live in One File.
         </h1>
 
-        <p
-          className="s-mono"
-          style={{
-            fontSize: 14,
-            lineHeight: 1.6,
-            color: "var(--s-text-secondary)",
-            margin: "0 0 24px 0",
-            maxWidth: 520,
-          }}
-        >
-          100+ components. 300+ tokens. 30 presets. One markdown file controls every color, radius, border, and sound.
+        <p className="s-mono text-sm leading-relaxed text-[var(--s-text-secondary)] mb-6 max-w-[528px]">
+          100+ components. 300+ tokens. 30 presets. One markdown file controls
+          every color, radius, border, and sound.
         </p>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+        <div className="flex items-center gap-3 flex-wrap">
           <a
             href="/docs"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "10px 20px",
-              background: "var(--s-primary)",
-              color: "var(--s-primary-contrast, #fff)",
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 13,
-              fontWeight: 600,
-              border: "1px solid var(--s-primary)",
-              textDecoration: "none",
-              transition: "all 200ms",
-            }}
+            className="inline-flex items-center px-5 py-2.5 bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] font-[family-name:var(--s-font-mono)] text-[13px] font-semibold border border-[var(--s-primary)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:brightness-110"
           >
             Get Started
           </a>
           <a
             href="/docs/components/button"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              padding: "10px 20px",
-              background: "transparent",
-              color: "var(--s-text)",
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 13,
-              fontWeight: 500,
-              border: "1px solid var(--s-border)",
-              textDecoration: "none",
-              transition: "all 200ms",
-            }}
+            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
           >
             View Components
           </a>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 20 }}>
+        <div className="flex items-center gap-2.5 mt-5">
           {PRESET_DOTS.map((p) => (
             <button
               key={p.name}
               type="button"
               title={p.name}
               onClick={() => handlePresetDot(p.name)}
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 0,
-                background: p.color,
-                border: "1px solid var(--s-border)",
-                cursor: "pointer",
-                padding: 0,
-                transition: "transform 150ms",
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.5)"; }}
-              onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+              className="w-2.5 h-2.5 border border-[var(--s-border)] p-0 cursor-pointer transition-transform duration-[var(--s-duration-fast,150ms)] hover:scale-150"
+              style={{ background: p.color }}
             />
           ))}
         </div>
       </div>
 
-      <div style={{ position: "relative", zIndex: 1 }}>
-        <span className="s-fig" style={{ display: "block", marginBottom: 8 }}>Fig. 01</span>
-        <div className="s-transition-all">
-          <HeroShowcase />
-        </div>
+      <SectionDivider pattern="dots" size="xs" opacity={0.1} showBorders={false} fadeEdges={false} className="my-6" />
+
+      <div className="relative z-[1]">
+        <span className="s-fig block mb-2">Fig. 01</span>
+        <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
+          <div className="s-transition-all">
+            <HeroShowcase />
+          </div>
+        </TechFrame>
       </div>
     </SigilSection>
   );
 }
 
 /* ================================================================ */
-/* 2 — Token System                                                  */
+/* 2 — Token System                                                   */
 /* ================================================================ */
 
 function TokenSystem() {
   return (
-    <SigilSection borderTop showCrosses>
-      <span className="s-label" style={{ display: "block", marginBottom: 12 }}>
-        / Token System
-      </span>
-
-      <h2 style={{
-        fontFamily: "var(--s-font-display)",
-        fontSize: "clamp(24px, 3vw, 36px)",
-        fontWeight: 700,
-        letterSpacing: "-0.02em",
-        color: "var(--s-text)",
-        margin: "0 0 12px 0",
-      }}>
-        One file compiles to everything.
-      </h2>
-      <p className="s-mono" style={{ fontSize: 14, color: "var(--s-text-muted)", marginBottom: 40, maxWidth: 560 }}>
-        Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly.
-      </p>
+    <SigilSection borderTop>
+      <SectionHeader
+        label="Token System"
+        fig="Fig. 02"
+        heading="One file compiles to everything."
+        description="Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly."
+      />
 
       <ParallaxSection speed={0.03}>
-        <TokenFlowDiagram />
+        <TechFrame variant="brackets" extend={12} opacity={0.4} padding={24}>
+          <TokenFlowDiagram />
+        </TechFrame>
       </ParallaxSection>
 
-      <div style={{ marginTop: 48 }}>
-        <span className="s-fig" style={{ display: "block", marginBottom: 16 }}>Fig. 02 — Preset comparison</span>
-        <PresetTransitionDemo />
+      <SectionDivider pattern="hatch" size="xs" opacity={0.08} showBorders={false} fadeEdges={false} className="my-12" />
+
+      <div className="mt-12">
+        <span className="s-fig block mb-4">Fig. 02a — Preset comparison</span>
+        <TechFrame variant="crosshair" extend={12} opacity={0.3} padding={12}>
+          <PresetTransitionDemo />
+        </TechFrame>
       </div>
 
-      <div style={{ marginTop: 48 }}>
-        <CodeExample
+      <SectionDivider pattern="diagonal" size="xs" opacity={0.08} showBorders={false} fadeEdges={false} className="my-12" />
+
+      <div className="mt-12">
+        <TechFrame variant="ticks" extend={8} opacity={0.25}>
+          <CodeExample
           filename="app/layout.tsx"
           language="tsx"
           code={`import { SigilShell } from "@sigil-ui/components";
@@ -362,13 +204,14 @@ export default function Layout({ children }) {
 }`}
           highlightLines={[1, 6]}
         />
+        </TechFrame>
       </div>
     </SigilSection>
   );
 }
 
 /* ================================================================ */
-/* 3 — Components                                                    */
+/* 3 — Components                                                     */
 /* ================================================================ */
 
 const COMPONENT_TABS = [
@@ -382,260 +225,42 @@ const COMPONENT_TABS = [
   "Marketing",
 ];
 
-const COMPONENT_CELLS = [
-  { name: "Button", vars: 5 },
-  { name: "Card", vars: 7 },
-  { name: "Input", vars: 6 },
-  { name: "Tabs", vars: 4 },
-  { name: "Dialog", vars: 5 },
-  { name: "Calendar", vars: 8 },
-  { name: "DataTable", vars: 9 },
-  { name: "Alert", vars: 3 },
-];
-
-function MiniComponentRender({ name }: { name: string }) {
-  const mono: React.CSSProperties = {
-    fontFamily: "var(--s-font-mono)",
-    fontSize: 10,
-    color: "var(--s-text-muted)",
-  };
-
-  switch (name) {
-    case "Button":
-      return (
-        <button
-          type="button"
-          style={{
-            background: "var(--s-primary)",
-            color: "#fff",
-            border: "none",
-            borderRadius: 0,
-            padding: "6px 16px",
-            fontSize: 12,
-            fontWeight: 500,
-            cursor: "default",
-          }}
-        >
-          Click me
-        </button>
-      );
-    case "Card":
-      return (
-        <div
-          style={{
-            padding: 12,
-            border: "1px solid var(--s-border)",
-            borderRadius: 0,
-            background: "var(--s-surface)",
-            width: "100%",
-          }}
-        >
-          <span style={mono}>Card content</span>
-        </div>
-      );
-    case "Input":
-      return (
-        <div
-          style={{
-            padding: "6px 10px",
-            border: "1px solid var(--s-border)",
-            borderRadius: 0,
-            background: "var(--s-background)",
-            width: "100%",
-            ...mono,
-          }}
-        >
-          Search...
-        </div>
-      );
-    case "Tabs":
-      return (
-        <div style={{ display: "flex", gap: 0, width: "100%" }}>
-          {["Tab 1", "Tab 2"].map((t, i) => (
-            <span
-              key={t}
-              style={{
-                ...mono,
-                padding: "4px 12px",
-                borderBottom:
-                  i === 0
-                    ? "2px solid var(--s-primary)"
-                    : "1px solid var(--s-border)",
-                color:
-                  i === 0 ? "var(--s-text)" : "var(--s-text-muted)",
-              }}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      );
-    case "Dialog":
-      return (
-        <div
-          style={{
-            padding: 10,
-            border: "1px solid var(--s-border)",
-            borderRadius: 0,
-            background: "var(--s-surface-elevated)",
-            width: "100%",
-          }}
-        >
-          <span style={{ ...mono, display: "block", textAlign: "center" }}>
-            [ Dialog ]
-          </span>
-        </div>
-      );
-    case "Calendar":
-      return (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(7, 1fr)",
-            gap: 2,
-            width: "100%",
-          }}
-        >
-          {Array.from({ length: 14 }, (_, i) => (
-            <span
-              key={i}
-              style={{
-                ...mono,
-                fontSize: 8,
-                textAlign: "center",
-                padding: 2,
-                color: i === 5 ? "var(--s-primary)" : "var(--s-text-muted)",
-                background: i === 5 ? "var(--s-primary-muted)" : "transparent",
-              }}
-            >
-              {i + 1}
-            </span>
-          ))}
-        </div>
-      );
-    case "DataTable":
-      return (
-        <div style={{ width: "100%", overflow: "hidden" }}>
-          <div
-            style={{
-              display: "flex",
-              borderBottom: "1px solid var(--s-border)",
-              paddingBottom: 2,
-              marginBottom: 4,
-            }}
-          >
-            <span style={{ ...mono, fontSize: 8, flex: 1 }}>name</span>
-            <span style={{ ...mono, fontSize: 8, flex: 1 }}>status</span>
-          </div>
-          {["alpha", "beta"].map((r) => (
-            <div
-              key={r}
-              style={{
-                display: "flex",
-                borderBottom: "1px solid var(--s-border-muted)",
-                paddingBottom: 2,
-                marginBottom: 2,
-              }}
-            >
-              <span style={{ ...mono, fontSize: 8, flex: 1, color: "var(--s-text-secondary)" }}>
-                {r}
-              </span>
-              <span style={{ ...mono, fontSize: 8, flex: 1, color: "var(--s-success)" }}>
-                ok
-              </span>
-            </div>
-          ))}
-        </div>
-      );
-    case "Alert":
-      return (
-        <div
-          style={{
-            padding: "6px 10px",
-            border: "1px solid var(--s-border)",
-            borderLeft: "3px solid var(--s-warning)",
-            borderRadius: 0,
-            background: "var(--s-surface)",
-            width: "100%",
-          }}
-        >
-          <span style={{ ...mono, fontSize: 9, color: "var(--s-text-secondary)" }}>
-            ⚠ Warning alert
-          </span>
-        </div>
-      );
-    default:
-      return null;
-  }
-}
-
 function Components() {
   const [activeTab, setActiveTab] = useState("UI");
 
   return (
-    <SigilSection id="components" borderTop showCrosses>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: 32,
-        }}
-      >
-        <span className="s-label">/ Components</span>
-        <span className="s-fig">Fig. 02</span>
-      </div>
+    <SigilSection id="components" borderTop>
+      <SectionHeader
+        label="Components"
+        fig="Fig. 03"
+        heading="100+ token-driven components."
+        description="Every component reads from var(--s-*) tokens. Switch presets and the entire library updates."
+      />
 
-      <div
-        style={{
-          display: "flex",
-          gap: 0,
-          borderBottom: "1px solid var(--s-border)",
-          marginBottom: 32,
-        }}
-      >
+      <div className="flex gap-0 border-b border-[var(--s-border)] mb-8 overflow-x-auto">
         {COMPONENT_TABS.map((tab) => (
           <button
             key={tab}
             type="button"
             onClick={() => setActiveTab(tab)}
-            className="s-mono"
-            style={{
-              background: "none",
-              border: "none",
-              borderBottom:
-                activeTab === tab
-                  ? "2px solid var(--s-primary)"
-                  : "2px solid transparent",
-              padding: "8px 16px",
-              fontSize: 12,
-              fontFamily: "var(--s-font-mono)",
-              color: activeTab === tab ? "var(--s-text)" : "var(--s-text-muted)",
-              cursor: "pointer",
-              letterSpacing: "0.02em",
-              transition: "color 150ms, border-color 150ms",
-            }}
+            className={`s-mono bg-transparent border-0 px-4 py-2 text-xs font-[family-name:var(--s-font-mono)] tracking-[0.02em] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)] shrink-0 ${
+              activeTab === tab
+                ? "text-[var(--s-text)] border-b-2 border-b-[var(--s-primary)]"
+                : "text-[var(--s-text-muted)] border-b-2 border-b-transparent hover:text-[var(--s-text)]"
+            }`}
           >
             {tab}
           </button>
         ))}
       </div>
 
-      <LiveComponentGrid />
+      <TechFrame variant="dimension" extend={12} opacity={0.3} padding={8}>
+        <LiveComponentGrid />
+      </TechFrame>
 
       <a
         href="/docs/components/button"
-        className="s-mono"
-        style={{
-          display: "inline-block",
-          marginTop: 24,
-          fontSize: 13,
-          color: "var(--s-text-muted)",
-          textDecoration: "none",
-          transition: "color 150ms",
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-primary)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
+        className="s-mono inline-block mt-6 text-[13px] text-[var(--s-text-muted)] no-underline hover:text-[var(--s-primary)] transition-colors duration-[var(--s-duration-fast,150ms)]"
       >
         79 more in /docs →
       </a>
@@ -644,35 +269,54 @@ function Components() {
 }
 
 /* ================================================================ */
-/* 4 — Presets                                                       */
+/* 4 — Shapes & Patterns                                              */
+/* ================================================================ */
+
+function Shapes() {
+  return (
+    <SigilSection borderTop>
+      <SectionHeader
+        label="Shapes & Patterns"
+        fig="Fig. 04"
+        heading="Geometric primitives."
+        description="Decorative shapes, tessellations, and pattern fills — all driven by tokens."
+      />
+      <ShapesAndPatterns />
+    </SigilSection>
+  );
+}
+
+/* ================================================================ */
+/* 5 — Presets                                                        */
 /* ================================================================ */
 
 function Presets() {
   return (
-    <SigilSection id="presets" borderTop showCrosses>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: 32,
-        }}
-      >
-        <span className="s-label">/ Presets</span>
-        <span className="s-fig">Fig. 03</span>
-      </div>
+    <SigilSection id="presets" borderTop>
+      <SectionHeader
+        label="Presets"
+        fig="Fig. 05"
+        heading="31 curated presets."
+        description="One command switches all 259 tokens at once. Six aesthetic families."
+      />
 
-      <PresetTable />
+      <TechFrame variant="ticks" extend={8} opacity={0.3}>
+        <PresetTable />
+      </TechFrame>
 
-      <div style={{ marginTop: 48 }}>
-        <PresetShowcase />
+      <SectionDivider pattern="grid" size="xs" opacity={0.08} showBorders={false} fadeEdges={false} className="my-12" />
+
+      <div className="mt-12">
+        <TechFrame variant="overshoot" extend={16} opacity={0.25} padding={12}>
+          <PresetShowcase />
+        </TechFrame>
       </div>
     </SigilSection>
   );
 }
 
 /* ================================================================ */
-/* 5 — Demo Sites                                                    */
+/* 6 — Demo Sites                                                     */
 /* ================================================================ */
 
 const DEMOS = [
@@ -690,83 +334,44 @@ const DEMOS = [
 
 function DemoSites() {
   return (
-    <SigilSection borderTop showCrosses>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "baseline",
-          marginBottom: 32,
-        }}
-      >
-        <span className="s-label">/ Demos</span>
-        <span className="s-fig">Fig. 04</span>
-      </div>
+    <SigilSection borderTop>
+      <SectionHeader
+        label="Demos"
+        fig="Fig. 06"
+        heading="10 production templates."
+        description="Real sites built with Sigil. Each uses a different preset."
+      />
 
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        {DEMOS.map((demo) => (
-          <a
-            key={demo.num}
-            href={demo.href}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "48px 1fr 1fr 32px",
-              alignItems: "center",
-              gap: 16,
-              padding: "14px 0",
-              borderBottom: "1px solid var(--s-border-muted)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "background 150ms",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "var(--s-surface)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; }}
-          >
-            <span
-              className="s-mono"
-              style={{
-                fontSize: 18,
-                fontWeight: 500,
-                color: "var(--s-text-muted)",
-                letterSpacing: "-0.02em",
-              }}
+      <TechFrame variant="brackets" extend={12} opacity={0.3} padding={8}>
+        <div className="flex flex-col">
+          {DEMOS.map((demo) => (
+            <a
+              key={demo.num}
+              href={demo.href}
+              className="group grid grid-cols-[48px_1fr_32px] md:grid-cols-[48px_1fr_1fr_32px] items-center gap-4 py-3.5 border-b border-[var(--s-border-muted)] no-underline text-inherit hover:bg-[var(--s-surface)] transition-colors duration-[var(--s-duration-fast,150ms)]"
             >
-              {demo.num}
-            </span>
-            <span
-              style={{
-                fontSize: 15,
-                fontWeight: 600,
-                color: "var(--s-text)",
-                fontFamily: "var(--s-font-body)",
-              }}
-            >
-              {demo.name}
-            </span>
-            <span
-              className="s-mono"
-              style={{ fontSize: 12, color: "var(--s-text-subtle)" }}
-            >
-              {demo.url}
-            </span>
-            <span
-              style={{
-                fontSize: 16,
-                color: "var(--s-text-muted)",
-                textAlign: "right",
-              }}
-            >
-              →
-            </span>
-          </a>
-        ))}
-      </div>
+              <span className="s-mono text-lg font-medium text-[var(--s-text-muted)] tracking-[-0.02em] tabular-nums">
+                {demo.num}
+              </span>
+              <span className="text-[15px] font-semibold text-[var(--s-text)] font-[family-name:var(--s-font-body)]">
+                {demo.name}
+              </span>
+              <span className="s-mono text-xs text-[var(--s-text-subtle)] hidden md:block">
+                {demo.url}
+              </span>
+              <span className="text-base text-[var(--s-text-muted)] text-right group-hover:text-[var(--s-primary)] transition-colors duration-[var(--s-duration-fast,150ms)]">
+                →
+              </span>
+            </a>
+          ))}
+        </div>
+      </TechFrame>
     </SigilSection>
   );
 }
 
 /* ================================================================ */
-/* 6 — CLI                                                           */
+/* 7 — CLI                                                            */
 /* ================================================================ */
 
 const CLI_LINES = [
@@ -783,202 +388,61 @@ const CLI_LINES = [
 
 function CLISection() {
   return (
-    <SigilSection borderTop showCrosses>
-      <div style={{ maxWidth: 720 }}>
-        <span
-          className="s-label"
-          style={{ display: "block", marginBottom: 24 }}
-        >
-          / CLI
-        </span>
+    <SigilSection borderTop>
+      <SectionHeader
+        label="CLI"
+        fig="Fig. 07"
+        heading="One command."
+        description="Interactive setup. Detects your framework, recommends presets, generates everything."
+      />
 
-        <h3
-          className="s-mono"
-          style={{
-            fontWeight: 700,
-            fontSize: "clamp(24px, 3vw, 36px)",
-            lineHeight: 1.15,
-            letterSpacing: "-0.02em",
-            color: "var(--s-text)",
-            margin: "0 0 24px 0",
-          }}
-        >
-          One command.
-        </h3>
-
+      <TechFrame variant="dimension" extend={12} opacity={0.3} className="max-w-[720px]">
         <Terminal lines={CLI_LINES} title="~/ — zsh" />
-      </div>
+      </TechFrame>
     </SigilSection>
   );
 }
 
 /* ================================================================ */
-/* 7 — Footer                                                        */
+/* Page                                                               */
 /* ================================================================ */
-
-const FOOTER_COLS = [
-  {
-    group: "Product",
-    links: [
-      { label: "Docs", href: "/docs" },
-      { label: "Components", href: "/docs/components/button" },
-      { label: "Presets", href: "/docs/presets" },
-      { label: "Sandbox", href: "/sandbox" },
-    ],
-  },
-  {
-    group: "Community",
-    links: [
-      { label: "GitHub", href: "https://github.com/sigil-ui/sigil" },
-      { label: "npm", href: "https://www.npmjs.com/package/@sigil-ui/components" },
-      { label: "Discord", href: "#" },
-    ],
-  },
-  {
-    group: "Resources",
-    links: [
-      { label: "Token Guide", href: "/docs/theming" },
-      { label: "Preset API", href: "/docs/cli" },
-      { label: "Agent Integration", href: "/docs" },
-    ],
-  },
-  {
-    group: "Company",
-    links: [
-      { label: "Manifesto", href: "/manifesto" },
-      { label: "About", href: "/about" },
-      { label: "Blog", href: "/blog" },
-      { label: "Contact", href: "mailto:hello@sigil-ui.dev" },
-    ],
-  },
-];
-
-function Footer() {
-  return (
-    <SigilSection as="footer" borderTop showCrosses padding="64px 20px 32px">
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 32,
-        }}
-      >
-        {FOOTER_COLS.map((col) => (
-          <div key={col.group}>
-            <span
-              className="s-mono"
-              style={{
-                fontSize: 10,
-                color: "var(--s-text-subtle)",
-                textTransform: "uppercase",
-                letterSpacing: "0.08em",
-                fontWeight: 600,
-                display: "block",
-                marginBottom: 16,
-              }}
-            >
-              {col.group}
-            </span>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {col.links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  className="s-mono"
-                  style={{
-                    fontSize: 12,
-                    color: "var(--s-text-muted)",
-                    textDecoration: "none",
-                    transition: "color var(--s-duration-fast)",
-                  }}
-                  onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginTop: 48,
-          paddingTop: 24,
-          borderTop: "1px solid var(--s-border-muted)",
-        }}
-      >
-        <span
-          className="s-mono"
-          style={{ fontSize: 12, color: "var(--s-text-muted)", display: "flex", alignItems: "center", gap: 10 }}
-        >
-          <FooterLogo />
-          © 2026 Sigil UI. MIT License.
-        </span>
-        <span
-          className="s-mono"
-          style={{ fontSize: 12, color: "var(--s-text-muted)" }}
-        >
-          Built by{" "}
-          <a
-            href="https://kevinliu.me"
-            style={{
-              color: "var(--s-text-muted)",
-              textDecoration: "none",
-              transition: "color var(--s-duration-fast)",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.color = "var(--s-text)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.color = "var(--s-text-muted)"; }}
-          >
-            Kevin Liu
-          </a>
-        </span>
-      </div>
-    </SigilSection>
-  );
-}
-
-/* ================================================================ */
-/* Page                                                              */
-/* ================================================================ */
-
-function SigilFrame({ children }: { children: React.ReactNode }) {
-  let gutterPattern: GutterPattern = "grid";
-  let marginPattern: GutterPattern = "horizontal";
-  try {
-    const { tokens } = useSigilTokens();
-    const sigil = tokens.sigil as Record<string, unknown>;
-    if (sigil?.["gutter-pattern"]) gutterPattern = sigil["gutter-pattern"] as GutterPattern;
-    if (sigil?.["margin-pattern"]) marginPattern = sigil["margin-pattern"] as GutterPattern;
-  } catch { /* no provider */ }
-
-  return (
-    <SigilFrameBase
-      showGutterGrid
-      showMarginLines
-      gutterPattern={gutterPattern}
-      marginPattern={marginPattern}
-    >
-      {children}
-    </SigilFrameBase>
-  );
-}
 
 export default function LandingPage() {
   return (
     <SigilFrame>
       <LandingNavbar />
+
       <Hero />
+
+      <SectionDivider pattern="crosshatch" size="md" />
+
       <TokenSystem />
+
+      <SectionDivider pattern="dots" size="sm" />
+
       <Components />
+
+      <SectionDivider pattern="diagonal" size="lg" />
+
+      <Shapes />
+
+      <SectionDivider pattern="grid" size="md" />
+
       <Presets />
+
+      <SectionDivider pattern="diamond" size="sm" />
+
       <DemoSites />
+
+      <SigilSection borderTop>
+        <ProductDemo />
+      </SigilSection>
+
+      <SectionDivider pattern="hatch" size="md" />
+
       <CLISection />
-      <Footer />
+
+      <LandingFooter />
     </SigilFrame>
   );
 }

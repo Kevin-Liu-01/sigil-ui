@@ -37,7 +37,7 @@ export function SigilTokensProvider({
   const resolvedName =
     typeof initialPreset === "string"
       ? initialPreset
-      : initialPreset?.name ?? "sigil";
+      : initialPreset?.name ?? "default";
 
   const resolvedTokens =
     initialTokens ??

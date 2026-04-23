@@ -19,7 +19,7 @@ export interface ComparisonTableProps extends HTMLAttributes<HTMLDivElement> {
 export const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
   function ComparisonTable({ features, columns, className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="comparison-table" className={cn("w-full overflow-auto", className)} {...rest}>
+      <div ref={ref} data-slot="comparison-table" className={cn("w-full overflow-auto border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] shadow-[var(--s-shadow-sm)]", className)} {...rest}>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b border-[var(--s-border)]">
@@ -35,7 +35,7 @@ export const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
             {features.map((feature) => (
               <tr
                 key={feature.name}
-                className="border-b border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)] transition-colors"
+                className="border-b border-[var(--s-border)] hover:bg-[var(--s-surface-elevated)] transition-colors duration-[var(--s-duration-fast,150ms)]"
               >
                 <td className="py-3 px-4 text-[var(--s-text)]">{feature.name}</td>
                 {columns.map((col) => {

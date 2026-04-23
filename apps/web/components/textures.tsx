@@ -211,7 +211,7 @@ type TextureBoxProps = {
   className?: string;
   children?: React.ReactNode;
   style?: React.CSSProperties;
-  as?: keyof JSX.IntrinsicElements;
+  as?: keyof React.JSX.IntrinsicElements;
 };
 
 export function TextureBox({
@@ -224,7 +224,6 @@ export function TextureBox({
   const texStyle = getTextureStyle(preset);
 
   return (
-    // @ts-expect-error dynamic tag
     <Tag
       className={className}
       style={{ ...texStyle, ...style }}

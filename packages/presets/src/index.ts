@@ -1,4 +1,5 @@
 export { presetCatalog, getCatalogEntry, type PresetCatalogEntry } from "./catalog";
+export { defaultPreset } from "./default";
 export { sigilPreset } from "./sigil";
 export { cruxPreset } from "./crux";
 export { alloyPreset } from "./alloy";
@@ -32,6 +33,7 @@ export { duskPreset } from "./dusk";
 export { monoPreset } from "./mono";
 
 export const presets = {
+  default: () => import("./default").then((m) => m.defaultPreset),
   sigil: () => import("./sigil").then((m) => m.sigilPreset),
   crux: () => import("./crux").then((m) => m.cruxPreset),
   alloy: () => import("./alloy").then((m) => m.alloyPreset),

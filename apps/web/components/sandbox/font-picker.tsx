@@ -64,7 +64,7 @@ const MONO_FONTS: FontOption[] = [
 const DISPLAY_BODY_OPTIONS = [...SANS_FONTS, ...SERIF_FONTS, ...DISPLAY_FONTS];
 
 type FontPickerProps = {
-  onFontChange: (category: FontCategory, family: string) => void;
+  onFontChange?: (category: FontCategory, family: string) => void;
   currentDisplay?: string;
   currentBody?: string;
   currentMono?: string;
@@ -154,7 +154,7 @@ export function FontPicker({
   const handleDisplay = useCallback(
     (family: string) => {
       setDisplay(family);
-      onFontChange("display", family);
+      onFontChange?.("display", family);
     },
     [onFontChange],
   );
@@ -162,7 +162,7 @@ export function FontPicker({
   const handleBody = useCallback(
     (family: string) => {
       setBody(family);
-      onFontChange("body", family);
+      onFontChange?.("body", family);
     },
     [onFontChange],
   );
@@ -170,7 +170,7 @@ export function FontPicker({
   const handleMono = useCallback(
     (family: string) => {
       setMono(family);
-      onFontChange("mono", family);
+      onFontChange?.("mono", family);
     },
     [onFontChange],
   );
