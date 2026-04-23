@@ -22,11 +22,22 @@ import {
   VoronoiBento, Tessellation, Pattern,
   Box3D, Card3D, FloatingUI, IsometricView,
   Diagram, FlowDiagram, ComparisonTable, ExplodedView, ArchitectureDiagram,
+  DiagramNode, DiagramConnector, DiagramLabel, CrossHatch, PipelineDiagram,
+  StackDiagram, HubSpokeDiagram, BeforeAfterDiagram, EcosystemDiagram,
+  HubRouteDiagram, GlobeDiagram, OrbitDiagram, StreamFlowDiagram,
+  IsometricStackDiagram, PlatformHubDiagram, FeatureMiniDiagram, SankeyDiagram,
+  IsometricPrism, IsometricCylinder, IsometricScene, Box3DGrid,
   Hero, CTA, Pricing, FeatureGrid, LogoBar, PricingTiers, CostCalculator,
   TestimonialCard, AnnouncementBar, BlogGrid,
+  LargeTextSection, FeatureShowcaseSection, InstallSection, GradientBannerSection,
+  FeatureFrame, UnitPricing, BlogHeader,
+  Navbar, NavbarLogo, NavbarLinks, NavbarActions,
+  Footer as SigilFooter, Sidebar, SidebarHeader, SidebarContent, SidebarItem,
+  NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink,
+  Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, SocialIcons,
   Divider, HRule, SectionDivider,
   AnimateOnScroll,
-  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle,
+  Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription,
   Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,
   Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle,
   Popover, PopoverTrigger, PopoverContent,
@@ -36,12 +47,17 @@ import {
   Command, CommandInput,
   AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogHeader, AlertDialogFooter,
   AlertDialogTitle, AlertDialogDescription, AlertDialogAction, AlertDialogCancel,
-  toast,
-  Kbd, Empty, NativeSelect, Clipboard,
+  toast, Toaster,
+  Kbd, Empty, NativeSelect, Clipboard, Tooltip, TooltipProvider,
   TagsInput, ColorPicker, Editable, RatingGroup,
   TreeView, ButtonGroup,
   InputGroup, InputGroupAddon, InputGroupInput,
   FileUpload, SignaturePad,
+  Item, Sonner,
+  SectionHeading, HeroSection, FeatureSection, CTASection,
+  FAQSection, StatsSection, BentoSection,
+  TestimonialsSection, LogoCloudSection, ComparisonSection,
+  CodeShowcaseSection, TeamSection, TimelineSection, NewsletterSection, FooterSection,
 } from "@sigil-ui/components";
 import { TechFrame } from "./tech-frame";
 import {
@@ -60,7 +76,7 @@ type ComponentCell = {
 
 const CATEGORIES = [
   "All", "UI", "Layout", "Navigation", "Overlays", "Data",
-  "Forms", "Marketing", "Shapes", "3D", "Diagrams", "Patterns",
+  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Patterns",
 ] as const;
 
 const CELLS: ComponentCell[] = [
@@ -68,9 +84,9 @@ const CELLS: ComponentCell[] = [
   /* UI                                                                */
   /* ================================================================ */
   { name: "Button", category: "UI", variants: 6, render: () => (
-    <div className="flex gap-2 flex-wrap">
+    <div className="flex gap-2 flex-wrap items-center">
       <Button size="sm">Primary</Button>
-      <Button size="sm" variant="secondary">Secondary</Button>
+      <Button size="sm" variant="outline">Outline</Button>
       <Button size="sm" variant="ghost">Ghost</Button>
     </div>
   )},
@@ -82,20 +98,21 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "Input", category: "UI", variants: 4, render: () => (
-    <Input placeholder="Search..." className="h-8 text-xs w-full" iconLeft={<Search size={12} style={{ color: "var(--s-text-muted)" }} />} />
+    <Input placeholder="Search components..." className="h-9 text-xs w-full" iconLeft={<Search size={14} />} />
   )},
   { name: "Textarea", category: "UI", variants: 1, render: () => (
-    <Textarea rows={2} placeholder="Write something..." className="text-xs min-h-0 w-full" />
+    <Textarea rows={3} placeholder="Write a message..." className="text-xs w-full" />
   )},
   { name: "Select", category: "UI", variants: 2, render: () => (
     <Select defaultValue="react">
-      <SelectTrigger className="h-8 text-xs w-full">
-        <SelectValue />
+      <SelectTrigger className="h-9 text-xs w-full">
+        <SelectValue placeholder="Select framework" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent className="min-w-[var(--radix-select-trigger-width)]">
         <SelectItem value="react">React</SelectItem>
         <SelectItem value="vue">Vue</SelectItem>
         <SelectItem value="svelte">Svelte</SelectItem>
+        <SelectItem value="angular">Angular</SelectItem>
       </SelectContent>
     </Select>
   )},
@@ -113,9 +130,9 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Slider", category: "UI", variants: 3, render: () => <Slider defaultValue={[65]} className="w-full" /> },
   { name: "Progress", category: "UI", variants: 2, render: () => (
-    <div className="flex flex-col gap-2 w-full">
-      <Progress value={72} className="w-full" />
-      <Progress value={35} className="w-full" />
+    <div className="flex flex-col gap-3 w-full">
+      <Progress value={72} size="lg" className="w-full" />
+      <Progress value={35} size="md" className="w-full" />
     </div>
   )},
   { name: "Toggle", category: "UI", variants: 3, render: () => (
@@ -133,20 +150,19 @@ const CELLS: ComponentCell[] = [
     </ToggleGroup>
   )},
   { name: "Avatar", category: "UI", variants: 3, render: () => (
-    <div className="flex -space-x-2">
-      <Avatar fallback="KL" size="sm" />
-      <Avatar fallback="JD" size="sm" />
-      <Avatar fallback="AR" size="sm" />
-      <Avatar fallback="+5" size="sm" />
+    <div className="flex gap-2">
+      <Avatar src="https://i.pravatar.cc/80?u=kevin" name="Kevin Liu" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=jane" name="Jane Doe" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=alex" name="Alex Rios" size="md" />
     </div>
   )},
   { name: "AvatarGroup", category: "UI", variants: 1, render: () => (
-    <AvatarGroup max={3}>
-      <Avatar fallback="A" size="sm" />
-      <Avatar fallback="B" size="sm" />
-      <Avatar fallback="C" size="sm" />
-      <Avatar fallback="D" size="sm" />
-      <Avatar fallback="E" size="sm" />
+    <AvatarGroup max={3} size="md">
+      <Avatar src="https://i.pravatar.cc/80?u=anna" name="Anna" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=ben" name="Ben" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=cal" name="Cal" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=dan" name="Dan" size="md" />
+      <Avatar src="https://i.pravatar.cc/80?u=eve" name="Eve" size="md" />
     </AvatarGroup>
   )},
   { name: "KPI", category: "UI", variants: 2, render: () => (
@@ -159,23 +175,30 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "Skeleton", category: "UI", variants: 3, render: () => (
-    <div className="flex flex-col gap-2 w-full">
-      <Skeleton variant="text" className="w-full" />
-      <Skeleton variant="text" className="w-2/3" />
-      <div className="flex items-center gap-2">
-        <Skeleton variant="avatar" />
-        <Skeleton variant="text" className="flex-1" />
+    <div className="flex flex-col gap-3 w-full">
+      <Skeleton className="h-4 w-full rounded-[var(--s-radius-sm,4px)]" />
+      <Skeleton className="h-4 w-3/4 rounded-[var(--s-radius-sm,4px)]" />
+      <div className="flex items-center gap-3">
+        <Skeleton className="h-10 w-10 rounded-full shrink-0" />
+        <div className="flex-1 flex flex-col gap-2">
+          <Skeleton className="h-3 w-full rounded-[var(--s-radius-sm,4px)]" />
+          <Skeleton className="h-3 w-2/3 rounded-[var(--s-radius-sm,4px)]" />
+        </div>
       </div>
     </div>
   )},
   { name: "LoadingSpinner", category: "UI", variants: 5, render: () => (
-    <div className="flex gap-4 items-center">
-      <LoadingSpinner variant="braille" size="sm" />
-      <LoadingSpinner variant="braille" size="md" />
-      <LoadingSpinner variant="braille" size="lg" />
+    <div className="flex gap-6 items-center">
+      <LoadingSpinner variant="dots2" size="sm" />
+      <LoadingSpinner variant="dots2" size="md" />
+      <LoadingSpinner variant="dots2" size="lg" />
     </div>
   )},
-  { name: "NumberField", category: "UI", variants: 1, render: () => <NumberField value={8} min={0} max={100} /> },
+  { name: "NumberField", category: "UI", variants: 1, render: () => (
+    <div className="w-full max-w-[160px]">
+      <NumberField value={8} min={0} max={100} />
+    </div>
+  )},
   { name: "Label", category: "UI", variants: 1, render: () => (
     <div className="flex flex-col gap-1.5 w-full">
       <Label className="text-xs">Email address</Label>
@@ -183,29 +206,33 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "Separator", category: "UI", variants: 1, render: () => (
-    <div className="flex flex-col gap-2 w-full">
-      <Separator />
-      <span className="text-[9px] text-center" style={{ color: "var(--s-text-muted)" }}>or continue with</span>
-      <Separator />
+    <div className="flex flex-col gap-3 w-full">
+      <div className="text-xs text-[var(--s-text)]">Account</div>
+      <Separator className="bg-[var(--s-border)]" />
+      <div className="text-xs text-[var(--s-text)]">Settings</div>
+      <Separator className="bg-[var(--s-border)]" />
+      <div className="text-xs text-[var(--s-text-muted)]">Logout</div>
     </div>
   )},
   { name: "Tooltip", category: "UI", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)]">Hover any button to see tooltips</span>
+    <Tooltip content="This is a tooltip" side="top">
+      <Button size="sm" variant="outline" className="text-xs">Hover me</Button>
+    </Tooltip>
   )},
   { name: "ScrollArea", category: "UI", variants: 1, render: () => (
-    <ScrollArea className="h-[80px] w-full" style={{ border: "1px solid var(--s-border-muted)", padding: 8 }}>
-      {Array.from({ length: 10 }, (_, i) => (
-        <div key={i} className="font-[family-name:var(--s-font-mono)] text-[10px] py-0.5" style={{ color: "var(--s-text-muted)" }}>Item {i + 1}</div>
+    <ScrollArea className="h-[90px] w-full border border-[var(--s-border-muted)] rounded-[var(--s-radius-md,6px)] p-3">
+      {Array.from({ length: 12 }, (_, i) => (
+        <div key={i} className="text-xs py-1 text-[var(--s-text-muted)]">Item {i + 1}</div>
       ))}
     </ScrollArea>
   )},
   { name: "CodeBlock", category: "UI", variants: 1, render: () => (
-    <div className="w-full" style={{ fontSize: 10 }}>
-      <CodeBlock language="tsx" code={'<Button>Click</Button>'} />
+    <div className="w-full [&_pre]:!p-2 [&_pre]:!text-[10px] [&_pre]:!leading-relaxed [&_button]:!top-1 [&_button]:!right-1 [&_button]:!h-5 [&_button]:!px-1.5 [&_button]:!text-[9px]">
+      <CodeBlock language="tsx" code={'<Button variant="primary">\n  Click me\n</Button>'} />
     </div>
   )},
   { name: "Terminal", category: "UI", variants: 1, render: () => (
-    <div className="w-full" style={{ fontSize: 10 }}>
+    <div className="w-full [&>div]:!text-[10px] [&_pre]:!text-[10px] [&_pre]:!p-2 [&_pre]:!leading-relaxed [&>div>div:first-child]:!py-1 [&>div>div:first-child]:!px-2 [&>div>div:first-child]:!text-[9px]">
       <Terminal lines={["$ npx sigil init", "✓ Done in 1.2s"]} title="zsh" />
     </div>
   )},
@@ -213,10 +240,10 @@ const CELLS: ComponentCell[] = [
     <div className="flex items-center gap-1"><Kbd>⌘</Kbd><Kbd>K</Kbd></div>
   )},
   { name: "Empty", category: "UI", variants: 1, render: () => (
-    <Empty title="No results" description="Try a different search" className="py-4 [&_h3]:text-[10px] [&_p]:text-[9px]" />
+    <Empty title="No results" description="Try a different search term" className="py-2 [&_h3]:text-xs [&_p]:text-[10px]" />
   )},
   { name: "NativeSelect", category: "UI", variants: 1, render: () => (
-    <NativeSelect className="h-8 text-xs w-full">
+    <NativeSelect defaultValue="react" className="text-xs w-full">
       <option value="react">React</option>
       <option value="vue">Vue</option>
       <option value="svelte">Svelte</option>
@@ -224,6 +251,14 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Clipboard", category: "UI", variants: 1, render: () => (
     <Clipboard value="npx sigil init" />
+  )},
+  { name: "Item", category: "UI", variants: 1, render: () => (
+    <Item
+      media={<div className="w-8 h-8 rounded-[var(--s-radius-md,0px)] bg-[var(--s-surface)] flex items-center justify-center"><File size={14} className="text-[var(--s-text-muted)]" /></div>}
+      title="document.pdf"
+      description="2.4 MB · Uploaded today"
+      className="w-full"
+    />
   )},
 
   /* ================================================================ */
@@ -243,12 +278,12 @@ const CELLS: ComponentCell[] = [
   { name: "Stack", category: "Layout", variants: 2, render: () => (
     <Stack gap={8} className="w-full">
       {[1, 2, 3].map((n) => (
-        <div key={n} style={{ height: 16, background: `color-mix(in oklch, var(--s-primary) ${30 + n * 15}%, transparent)`, border: "1px solid var(--s-border-muted)" }} />
+        <div key={n} className="rounded-[var(--s-radius-sm,4px)]" style={{ height: 20, background: `color-mix(in oklch, var(--s-primary) ${20 + n * 20}%, var(--s-surface))` }} />
       ))}
     </Stack>
   )},
   { name: "Accordion", category: "Layout", variants: 1, render: () => (
-    <Accordion className="w-full">
+    <Accordion type="single" collapsible defaultValue="a" className="w-full">
       <AccordionItem value="a">
         <AccordionTrigger className="text-xs py-1.5">What is Sigil?</AccordionTrigger>
         <AccordionContent className="text-[10px]">A token-driven design system.</AccordionContent>
@@ -261,35 +296,51 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Tabs", category: "Layout", variants: 2, render: () => (
     <Tabs defaultValue="code" className="w-full">
-      <TabsList className="h-7 p-0.5">
-        <TabsTrigger value="code" className="text-[10px] px-2 py-0.5 h-6">Code</TabsTrigger>
-        <TabsTrigger value="preview" className="text-[10px] px-2 py-0.5 h-6">Preview</TabsTrigger>
-        <TabsTrigger value="docs" className="text-[10px] px-2 py-0.5 h-6">Docs</TabsTrigger>
+      <TabsList className="h-8">
+        <TabsTrigger value="code" className="text-xs px-3">Code</TabsTrigger>
+        <TabsTrigger value="preview" className="text-xs px-3">Preview</TabsTrigger>
+        <TabsTrigger value="docs" className="text-xs px-3">Docs</TabsTrigger>
       </TabsList>
+      <TabsContent value="code" className="text-xs text-[var(--s-text-muted)] mt-2 p-3 border border-[var(--s-border-muted)] rounded-[var(--s-radius-sm,4px)] font-mono">
+        {'<Button>Click</Button>'}
+      </TabsContent>
+      <TabsContent value="preview" className="mt-2 p-3"><Button size="sm">Click</Button></TabsContent>
+      <TabsContent value="docs" className="text-xs text-[var(--s-text-muted)] mt-2 p-3">Button documentation</TabsContent>
     </Tabs>
   )},
   { name: "Collapsible", category: "Layout", variants: 1, render: () => (
-    <Collapsible className="w-full">
+    <Collapsible defaultOpen className="w-full">
       <CollapsibleTrigger asChild>
-        <Button size="sm" variant="ghost" className="w-full text-xs justify-between">Show details <ArrowRight size={12} /></Button>
+        <Button size="sm" variant="ghost" className="w-full text-xs justify-between">Toggle details <ArrowRight size={12} /></Button>
       </CollapsibleTrigger>
       <CollapsibleContent>
-        <div className="p-2 text-[10px]" style={{ color: "var(--s-text-muted)", border: "1px solid var(--s-border-muted)", marginTop: 4 }}>Expandable content area</div>
+        <div className="p-2 mt-1 text-[10px] rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border-muted)] text-[var(--s-text-muted)]">Hidden content is now visible. Click to collapse.</div>
       </CollapsibleContent>
     </Collapsible>
   )},
   { name: "AspectRatio", category: "Layout", variants: 1, render: () => (
-    <AspectRatio ratio={16 / 9} className="w-full" style={{ background: "var(--s-surface-sunken)", border: "1px dashed var(--s-border-muted)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>16:9</span>
-    </AspectRatio>
+    <div className="w-full overflow-hidden rounded-[var(--s-radius-md,6px)]">
+      <AspectRatio ratio={16 / 9}>
+        <div className="w-full h-full flex items-center justify-center bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]">
+          <span className="font-mono text-xs font-semibold">16 : 9</span>
+        </div>
+      </AspectRatio>
+    </div>
   )},
   { name: "Divider", category: "Layout", variants: 2, render: () => (
     <div className="flex flex-col gap-2 w-full">
+      <span className="text-[10px] text-[var(--s-text-muted)]">Section A</span>
       <Divider />
-      <Divider orientation="horizontal" />
+      <span className="text-[10px] text-[var(--s-text-muted)]">Section B</span>
     </div>
   )},
-  { name: "HRule", category: "Layout", variants: 1, render: () => <HRule className="w-full" /> },
+  { name: "HRule", category: "Layout", variants: 1, render: () => (
+    <div className="flex flex-col gap-2 w-full">
+      <span className="text-[10px] text-[var(--s-text-muted)]">Above</span>
+      <HRule className="w-full" />
+      <span className="text-[10px] text-[var(--s-text-muted)]">Below</span>
+    </div>
+  )},
   { name: "ButtonGroup", category: "Layout", variants: 1, render: () => (
     <ButtonGroup>
       <Button size="sm" variant="outline" className="text-xs">Left</Button>
@@ -325,6 +376,38 @@ const CELLS: ComponentCell[] = [
   { name: "SplitButton", category: "Navigation", variants: 1, render: () => (
     <SplitButton icon={<CalendarIcon size={13} />}>Copilot</SplitButton>
   )},
+  { name: "Navbar", category: "Navigation", variants: 1, render: () => (
+    <div className="flex items-center justify-between w-full px-2 py-1 border-b border-[var(--s-border-muted)]">
+      <span className="text-[10px] font-bold text-[var(--s-text)]">Logo</span>
+      <div className="flex gap-3 text-[9px] text-[var(--s-text-muted)]"><span>Home</span><span>About</span></div>
+    </div>
+  )},
+  { name: "Footer", category: "Navigation", variants: 1, render: () => (
+    <div className="w-full">
+      <div className="grid grid-cols-3 gap-2 text-[9px]">
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Product</div><div className="text-[var(--s-text-muted)]">Docs</div></div>
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Company</div><div className="text-[var(--s-text-muted)]">About</div></div>
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Legal</div><div className="text-[var(--s-text-muted)]">Privacy</div></div>
+      </div>
+    </div>
+  )},
+  { name: "Sidebar", category: "Navigation", variants: 1, render: () => (
+    <div className="w-full border border-[var(--s-border-muted)] rounded-[var(--s-radius-sm,0px)] p-2">
+      <div className="text-[10px] font-semibold text-[var(--s-text)] mb-2">Docs</div>
+      <div className="flex flex-col gap-1">
+        <div className="text-[9px] px-2 py-0.5 rounded-[var(--s-radius-sm,0px)] bg-[var(--s-primary-muted)] text-[var(--s-primary)] font-medium">Getting Started</div>
+        <div className="text-[9px] px-2 py-0.5 text-[var(--s-text-muted)]">Components</div>
+        <div className="text-[9px] px-2 py-0.5 text-[var(--s-text-muted)]">Presets</div>
+      </div>
+    </div>
+  )},
+  { name: "SocialIcons", category: "Navigation", variants: 1, render: () => (
+    <div className="flex gap-3 items-center">
+      <Globe size={14} className="text-[var(--s-text-muted)]" />
+      <Code size={14} className="text-[var(--s-text-muted)]" />
+      <Cpu size={14} className="text-[var(--s-text-muted)]" />
+    </div>
+  )},
 
   /* ================================================================ */
   /* Overlays                                                          */
@@ -332,7 +415,7 @@ const CELLS: ComponentCell[] = [
   { name: "Dialog", category: "Overlays", variants: 2, render: () => (
     <Dialog>
       <DialogTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Dialog</Button></DialogTrigger>
-      <DialogContent><DialogHeader><DialogTitle>Title</DialogTitle></DialogHeader></DialogContent>
+      <DialogContent><DialogHeader><DialogTitle>Confirm Action</DialogTitle><DialogDescription className="text-xs text-[var(--s-text-muted)]">Are you sure you want to proceed?</DialogDescription></DialogHeader></DialogContent>
     </Dialog>
   )},
   { name: "Drawer", category: "Overlays", variants: 2, render: () => (
@@ -372,7 +455,7 @@ const CELLS: ComponentCell[] = [
   { name: "ContextMenu", category: "Overlays", variants: 2, render: () => (
     <ContextMenu>
       <ContextMenuTrigger>
-        <div className="flex items-center justify-center h-16 w-full border border-dashed border-[var(--s-border-muted)] rounded text-[10px]" style={{ color: "var(--s-text-muted)" }}>Right-click here</div>
+        <div className="flex items-center justify-center h-16 w-full border-2 border-dashed border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] text-[10px] text-[var(--s-text-muted)] bg-[var(--s-background)] cursor-context-menu">Right-click here</div>
       </ContextMenuTrigger>
       <ContextMenuContent>
         <ContextMenuItem className="text-xs">Cut</ContextMenuItem>
@@ -435,24 +518,26 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Meter", category: "Data", variants: 1, render: () => <Meter value={68} max={100} label="CPU Usage" /> },
   { name: "Calendar", category: "Data", variants: 1, render: () => (
-    <div className="w-full flex justify-center [&_table]:text-[10px] [&_button]:h-6 [&_button]:w-6 [&_th]:w-6 [&_th]:text-[9px]">
-      <Calendar className="p-1" />
+    <div className="w-full flex justify-center [&_table]:text-[9px] [&_button]:h-5 [&_button]:w-5 [&_button]:text-[9px] [&_th]:w-5 [&_th]:text-[8px] [&_th]:pb-1 [&_.rdp-month_caption]:text-[10px] [&_.rdp-month_caption]:mb-1">
+      <Calendar className="p-0 scale-[0.85] origin-top" />
     </div>
   )},
   { name: "DatePicker", category: "Data", variants: 1, render: () => (
     <div className="w-full"><DatePicker /></div>
   )},
   { name: "Carousel", category: "Data", variants: 1, render: () => (
-    <Carousel className="w-full max-w-[160px]">
+    <Carousel className="w-full max-w-[200px] mx-auto">
       <CarouselContent>
-        {["--s-primary", "--s-success", "--s-warning"].map((c, i) => (
-          <CarouselItem key={i}>
-            <div className="flex items-center justify-center h-16 rounded text-[10px] font-mono text-white" style={{ background: `var(${c})` }}>{i + 1}</div>
+        {[1, 2, 3].map((n) => (
+          <CarouselItem key={n}>
+            <div className="flex items-center justify-center h-20 rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)] bg-[var(--s-background)] text-sm font-semibold text-[var(--s-text)]">
+              Slide {n}
+            </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="h-6 w-6 -left-3" />
-      <CarouselNext className="h-6 w-6 -right-3" />
+      <CarouselPrevious className="h-6 w-6 left-1" />
+      <CarouselNext className="h-6 w-6 right-1" />
     </Carousel>
   )},
   { name: "TreeView", category: "Data", variants: 1, render: () => (
@@ -486,27 +571,31 @@ const CELLS: ComponentCell[] = [
     </CheckboxGroup>
   )},
   { name: "Combobox", category: "Forms", variants: 1, render: () => (
-    <Combobox
-      options={[{ value: "react", label: "React" }, { value: "vue", label: "Vue" }, { value: "svelte", label: "Svelte" }]}
-      placeholder="Select framework..."
-      className="w-full"
-    />
+    <div className="w-full">
+      <Combobox
+        options={[{ value: "react", label: "React" }, { value: "vue", label: "Vue" }, { value: "svelte", label: "Svelte" }, { value: "solid", label: "SolidJS" }]}
+        placeholder="Search frameworks..."
+        className="w-full"
+      />
+    </div>
   )},
   { name: "InputOTP", category: "Forms", variants: 1, render: () => (
-    <InputOTP maxLength={6}>
-      <InputOTPGroup>
-        <InputOTPSlot index={0} /><InputOTPSlot index={1} /><InputOTPSlot index={2} />
-      </InputOTPGroup>
-      <InputOTPSeparator />
-      <InputOTPGroup>
-        <InputOTPSlot index={3} /><InputOTPSlot index={4} /><InputOTPSlot index={5} />
-      </InputOTPGroup>
-    </InputOTP>
+    <div className="flex justify-center w-full">
+      <InputOTP maxLength={4}>
+        <InputOTPGroup>
+          <InputOTPSlot index={0} />
+          <InputOTPSlot index={1} />
+          <InputOTPSlot index={2} />
+          <InputOTPSlot index={3} />
+        </InputOTPGroup>
+      </InputOTP>
+    </div>
   )},
   { name: "Form", category: "Forms", variants: 1, render: () => (
     <div className="flex flex-col gap-2 w-full">
-      <Input placeholder="Email" className="h-7 text-[10px]" />
-      <Button size="sm" className="text-xs w-full h-7">Submit</Button>
+      <Label className="text-[10px]">Email</Label>
+      <Input placeholder="you@example.com" className="h-7 text-[10px]" />
+      <Button size="sm" className="text-xs w-full">Submit</Button>
     </div>
   )},
   { name: "Field", category: "Forms", variants: 1, render: () => (
@@ -566,7 +655,20 @@ const CELLS: ComponentCell[] = [
     <Pricing name="Pro" price="$19" period="/mo" features={["Unlimited", "Priority"]} className="w-full p-3 text-[10px] [&_h3]:text-[10px] [&_p]:text-xs [&_li]:text-[10px]" />
   )},
   { name: "PricingTiers", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>See Pricing page</span>
+    <div className="flex gap-2 w-full">
+      <div className="flex-1 rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border-muted)] p-2 text-center">
+        <div className="text-[9px] text-[var(--s-text-muted)]">Free</div>
+        <div className="text-xs font-bold text-[var(--s-text)]">$0</div>
+      </div>
+      <div className="flex-1 rounded-[var(--s-radius-sm,4px)] border-2 border-[var(--s-primary)] p-2 text-center">
+        <div className="text-[9px] text-[var(--s-text-muted)]">Pro</div>
+        <div className="text-xs font-bold text-[var(--s-text)]">$19</div>
+      </div>
+      <div className="flex-1 rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border-muted)] p-2 text-center">
+        <div className="text-[9px] text-[var(--s-text-muted)]">Team</div>
+        <div className="text-xs font-bold text-[var(--s-text)]">$49</div>
+      </div>
+    </div>
   )},
   { name: "FeatureGrid", category: "Marketing", variants: 1, render: () => (
     <FeatureGrid rows={[
@@ -607,16 +709,200 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "CostCalculator", category: "Marketing", variants: 1, render: () => (
-    <span className="font-[family-name:var(--s-font-mono)] text-[10px]" style={{ color: "var(--s-text-muted)" }}>Interactive calculator</span>
+    <div className="flex flex-col gap-2 w-full">
+      <div className="flex justify-between text-[10px]">
+        <span className="text-[var(--s-text-muted)]">Users</span>
+        <span className="font-semibold text-[var(--s-text)]">~1,000</span>
+      </div>
+      <Slider defaultValue={[40]} className="w-full" />
+      <div className="text-right text-xs font-semibold text-[var(--s-text)]">$29/mo</div>
+    </div>
+  )},
+  { name: "FeatureFrame", category: "Marketing", variants: 1, render: () => (
+    <div className="flex items-start gap-2 w-full">
+      <div className="w-8 h-8 rounded-[var(--s-radius-md,0px)] bg-[var(--s-primary-muted)] flex items-center justify-center"><Zap size={14} className="text-[var(--s-primary)]" /></div>
+      <div><div className="text-[10px] font-semibold text-[var(--s-text)]">Fast</div><div className="text-[9px] text-[var(--s-text-muted)]">Sub-50ms builds</div></div>
+    </div>
+  )},
+  { name: "UnitPricing", category: "Marketing", variants: 1, render: () => (
+    <div className="grid grid-cols-2 gap-2 w-full text-center">
+      <div className="p-2 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)]"><div className="text-xs font-bold text-[var(--s-text)]">$0.01</div><div className="text-[9px] text-[var(--s-text-muted)]">per request</div></div>
+      <div className="p-2 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)]"><div className="text-xs font-bold text-[var(--s-text)]">$0.10</div><div className="text-[9px] text-[var(--s-text-muted)]">per minute</div></div>
+    </div>
+  )},
+  { name: "BlogHeader", category: "Marketing", variants: 1, render: () => (
+    <div className="w-full text-center">
+      <div className="text-xs font-bold text-[var(--s-text)]">Engineering Blog</div>
+      <div className="flex gap-2 justify-center mt-1">
+        <span className="text-[9px] text-[var(--s-primary)] font-medium">All</span>
+        <span className="text-[9px] text-[var(--s-text-muted)]">Design</span>
+        <span className="text-[9px] text-[var(--s-text-muted)]">Eng</span>
+      </div>
+    </div>
+  )},
+
+  /* ================================================================ */
+  /* Sections                                                          */
+  /* ================================================================ */
+  { name: "SectionHeading", category: "Sections", variants: 2, render: () => (
+    <div className="w-full">
+      <SectionHeading label="Features" title="Built for speed" description="Every component reads from tokens." className="mb-0 [&_h2]:text-base [&_p]:text-[10px] [&_p]:mt-1" />
+    </div>
+  )},
+  { name: "HeroSection", category: "Sections", variants: 3, render: () => (
+    <div className="w-full text-center">
+      <Badge className="text-[9px] mb-2">New</Badge>
+      <div className="text-sm font-bold text-[var(--s-text)]">Ship 10x faster</div>
+      <div className="text-[10px] text-[var(--s-text-muted)] mt-1">Token-driven components</div>
+      <div className="flex gap-2 justify-center mt-3">
+        <Button size="sm" className="text-[10px] h-6 px-3">Get Started</Button>
+        <Button size="sm" variant="outline" className="text-[10px] h-6 px-3">Docs</Button>
+      </div>
+    </div>
+  )},
+  { name: "FeatureSection", category: "Sections", variants: 2, render: () => (
+    <div className="grid grid-cols-2 gap-2 w-full">
+      {[{ t: "Fast", d: "Sub-50ms" }, { t: "Tokens", d: "259 fields" }, { t: "Presets", d: "31 themes" }, { t: "CLI", d: "One command" }].map((f) => (
+        <div key={f.t} className="p-2 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)] bg-[var(--s-background)]">
+          <div className="text-[10px] font-semibold text-[var(--s-text)]">{f.t}</div>
+          <div className="text-[9px] text-[var(--s-text-muted)]">{f.d}</div>
+        </div>
+      ))}
+    </div>
+  )},
+  { name: "CTASection", category: "Sections", variants: 2, render: () => (
+    <div className="w-full text-center">
+      <div className="text-sm font-bold text-[var(--s-text)]">Ready to start?</div>
+      <div className="text-[10px] text-[var(--s-text-muted)] mt-1">Deploy in under a minute.</div>
+      <Button size="sm" className="text-[10px] h-6 mt-3">Get Started</Button>
+    </div>
+  )},
+  { name: "FAQSection", category: "Sections", variants: 1, render: () => (
+    <Accordion type="single" collapsible defaultValue="q0" className="w-full">
+      <AccordionItem value="q0"><AccordionTrigger className="text-[10px] py-1">What is Sigil?</AccordionTrigger><AccordionContent className="text-[9px]">A token-driven design system.</AccordionContent></AccordionItem>
+      <AccordionItem value="q1"><AccordionTrigger className="text-[10px] py-1">How many presets?</AccordionTrigger><AccordionContent className="text-[9px]">31 curated presets.</AccordionContent></AccordionItem>
+    </Accordion>
+  )},
+  { name: "StatsSection", category: "Sections", variants: 3, render: () => (
+    <div className="grid grid-cols-3 gap-2 w-full text-center">
+      {[{ v: "103+", l: "Components" }, { v: "31", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
+        <div key={s.l} className="py-2">
+          <div className="text-base font-bold text-[var(--s-text)]">{s.v}</div>
+          <div className="text-[9px] text-[var(--s-text-muted)]">{s.l}</div>
+        </div>
+      ))}
+    </div>
+  )},
+  { name: "BentoSection", category: "Sections", variants: 1, render: () => (
+    <div className="grid grid-cols-3 grid-rows-2 gap-1.5 w-full h-[80px]">
+      <div className="col-span-2 rounded-[var(--s-radius-sm,0px)] bg-[var(--s-primary)] opacity-90" />
+      <div className="rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)] border border-[var(--s-border-muted)]" />
+      <div className="rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)] border border-[var(--s-border-muted)]" />
+      <div className="col-span-2 rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)] border border-[var(--s-border-muted)]" />
+    </div>
+  )},
+  { name: "TestimonialsSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full">
+      <div className="text-[10px] text-[var(--s-text-subtle)] mb-1">&ldquo;</div>
+      <div className="text-[10px] text-[var(--s-text)] leading-relaxed">Sigil changed how we build UIs.</div>
+      <div className="mt-2 text-[9px] font-medium text-[var(--s-text-muted)]">Jane D. &mdash; CTO</div>
+    </div>
+  )},
+  { name: "LogoCloudSection", category: "Sections", variants: 1, render: () => (
+    <div className="flex items-center justify-center gap-4 w-full opacity-50">
+      <Globe size={14} /><Cpu size={14} /><Code size={14} /><Zap size={14} /><Shield size={14} />
+    </div>
+  )},
+  { name: "ComparisonSection", category: "Sections", variants: 1, render: () => (
+    <Table className="w-full">
+      <TableHeader><TableRow><TableHead className="text-[9px] p-1">Feature</TableHead><TableHead className="text-[9px] p-1 text-center">Us</TableHead><TableHead className="text-[9px] p-1 text-center">Others</TableHead></TableRow></TableHeader>
+      <TableBody>
+        <TableRow><TableCell className="text-[9px] p-1">Tokens</TableCell><TableCell className="text-[9px] p-1 text-center text-[var(--s-success)]">✓</TableCell><TableCell className="text-[9px] p-1 text-center text-[var(--s-text-subtle)]">—</TableCell></TableRow>
+        <TableRow><TableCell className="text-[9px] p-1">Presets</TableCell><TableCell className="text-[9px] p-1 text-center text-[var(--s-success)]">✓</TableCell><TableCell className="text-[9px] p-1 text-center text-[var(--s-text-subtle)]">—</TableCell></TableRow>
+      </TableBody>
+    </Table>
+  )},
+  { name: "CodeShowcaseSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border)] overflow-hidden">
+      <div className="flex border-b border-[var(--s-border)] bg-[var(--s-surface)]">
+        <span className="px-2 py-1 text-[9px] font-mono text-[var(--s-text)] border-b-2 border-[var(--s-primary)]">TypeScript</span>
+        <span className="px-2 py-1 text-[9px] font-mono text-[var(--s-text-muted)]">Python</span>
+      </div>
+      <pre className="p-2 text-[9px] font-mono text-[var(--s-text)] bg-[var(--s-background)]">{'import { Button } from "@sigil-ui/components"'}</pre>
+    </div>
+  )},
+  { name: "TeamSection", category: "Sections", variants: 1, render: () => (
+    <div className="flex gap-4 justify-center w-full">
+      {["KL", "JD", "AR"].map((initials) => (
+        <div key={initials} className="flex flex-col items-center gap-1">
+          <div className="w-8 h-8 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-surface)] flex items-center justify-center text-[9px] font-semibold text-[var(--s-text-muted)]">{initials}</div>
+          <div className="text-[9px] text-[var(--s-text-muted)]">Engineer</div>
+        </div>
+      ))}
+    </div>
+  )},
+  { name: "TimelineSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full relative pl-6">
+      <div className="absolute left-2 top-0 bottom-0 w-px bg-[var(--s-border)]" />
+      {[{ d: "v2.0", t: "Sections" }, { d: "v1.5", t: "Presets" }, { d: "v1.0", t: "Launch" }].map((e) => (
+        <div key={e.d} className="relative mb-3 last:mb-0">
+          <div className="absolute -left-[17px] top-0.5 w-2 h-2 rounded-full bg-[var(--s-primary)]" />
+          <div className="text-[9px] font-mono text-[var(--s-text-muted)]">{e.d}</div>
+          <div className="text-[10px] font-semibold text-[var(--s-text)]">{e.t}</div>
+        </div>
+      ))}
+    </div>
+  )},
+  { name: "NewsletterSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full text-center">
+      <div className="text-xs font-semibold text-[var(--s-text)]">Stay updated</div>
+      <div className="flex gap-1.5 mt-2">
+        <Input placeholder="you@email.com" className="h-7 text-[10px] flex-1" />
+        <Button size="sm" className="text-[10px] h-7 px-3">Subscribe</Button>
+      </div>
+    </div>
+  )},
+  { name: "FooterSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full">
+      <div className="grid grid-cols-3 gap-2 text-[9px]">
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Product</div><div className="text-[var(--s-text-muted)]">Features</div><div className="text-[var(--s-text-muted)]">Pricing</div></div>
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Company</div><div className="text-[var(--s-text-muted)]">About</div><div className="text-[var(--s-text-muted)]">Blog</div></div>
+        <div><div className="font-semibold text-[var(--s-text)] mb-1">Legal</div><div className="text-[var(--s-text-muted)]">Privacy</div><div className="text-[var(--s-text-muted)]">Terms</div></div>
+      </div>
+    </div>
+  )},
+  { name: "LargeTextSection", category: "Sections", variants: 1, render: () => (
+    <div className="text-sm font-bold text-[var(--s-text)] leading-tight">
+      A <em className="text-[var(--s-primary)] not-italic">new species</em> of design system.
+    </div>
+  )},
+  { name: "FeatureShowcaseSection", category: "Sections", variants: 1, render: () => (
+    <div className="grid grid-cols-2 gap-2 w-full text-[9px]">
+      <div className="text-[var(--s-text)]"><div className="font-semibold">Feature A</div><div className="text-[var(--s-text-muted)]">Description</div></div>
+      <div className="h-10 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)] bg-[var(--s-background)]" />
+    </div>
+  )},
+  { name: "InstallSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full">
+      <div className="text-[10px] font-semibold text-[var(--s-text)] mb-1">Install</div>
+      <div className="flex gap-1.5">
+        <code className="text-[9px] font-mono px-2 py-1 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]">$ npm install</code>
+      </div>
+    </div>
+  )},
+  { name: "GradientBannerSection", category: "Sections", variants: 1, render: () => (
+    <div className="w-full h-12 rounded-[var(--s-radius-sm,0px)] flex items-center justify-center" style={{ background: "linear-gradient(135deg, var(--s-primary), var(--s-primary-muted))" }}>
+      <span className="text-[10px] font-bold text-[var(--s-primary-contrast,#fff)]">Brand Banner</span>
+    </div>
   )},
 
   /* ================================================================ */
   /* Shapes                                                            */
   /* ================================================================ */
-  { name: "Diamond", category: "Shapes", variants: 2, render: () => <Diamond size="md" style={{ background: "var(--s-primary)", opacity: 0.8 }} /> },
-  { name: "Hexagon", category: "Shapes", variants: 2, render: () => <Hexagon size="md" style={{ background: "var(--s-primary)", opacity: 0.8 }} /> },
-  { name: "Triangle", category: "Shapes", variants: 2, render: () => <Triangle size="md" style={{ background: "var(--s-primary)", opacity: 0.8 }} /> },
-  { name: "Diagonal", category: "Shapes", variants: 1, render: () => <Diagonal height={48} fill="var(--s-primary)" style={{ width: 80, opacity: 0.8 }} /> },
+  { name: "Diamond", category: "Shapes", variants: 2, render: () => <Diamond size="sm" className="!bg-[var(--s-primary)]" /> },
+  { name: "Hexagon", category: "Shapes", variants: 2, render: () => <Hexagon size="sm" className="!bg-[var(--s-primary)]" /> },
+  { name: "Triangle", category: "Shapes", variants: 2, render: () => <Triangle size="sm" className="!bg-[var(--s-primary)]" /> },
+  { name: "Diagonal", category: "Shapes", variants: 1, render: () => <Diagonal height={48} fill="var(--s-primary)" className="w-20" /> },
   { name: "Shape", category: "Shapes", variants: 6, render: () => (
     <div className="flex gap-3">
       <Shape variant="circle" size="sm" strokeWidth={1.5} />
@@ -686,6 +972,20 @@ const CELLS: ComponentCell[] = [
       className="w-full [&>div>div]:p-2"
     />
   )},
+  { name: "IsometricPrism", category: "3D", variants: 1, render: () => (
+    <IsometricPrism width={50} height={40} depth={50} topColor="var(--s-primary)" />
+  )},
+  { name: "IsometricCylinder", category: "3D", variants: 1, render: () => (
+    <IsometricCylinder radius={25} height={40} topColor="var(--s-primary)" />
+  )},
+  { name: "IsometricScene", category: "3D", variants: 1, render: () => (
+    <IsometricScene height={80} className="w-full">
+      <IsometricPrism width={40} height={30} depth={40} topColor="var(--s-primary)" />
+    </IsometricScene>
+  )},
+  { name: "Box3DGrid", category: "3D", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Grid of 3D boxes</span>
+  )},
 
   /* ================================================================ */
   /* Diagrams                                                          */
@@ -721,12 +1021,95 @@ const CELLS: ComponentCell[] = [
       <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up on scroll</div>
     </AnimateOnScroll>
   )},
+  { name: "DiagramNode", category: "Diagrams", variants: 4, render: () => (
+    <div className="flex gap-2 items-center">
+      <DiagramNode label="Default" size="sm" />
+      <DiagramNode label="Accent" size="sm" variant="accent" />
+      <DiagramNode label="Muted" size="sm" variant="muted" />
+    </div>
+  )},
+  { name: "DiagramConnector", category: "Diagrams", variants: 3, render: () => (
+    <div className="flex items-center gap-1">
+      <span className="text-[10px] text-[var(--s-text-muted)]">A</span>
+      <DiagramConnector variant="dashed-animated" direction="horizontal" length={80} />
+      <span className="text-[10px] text-[var(--s-text-muted)]">B</span>
+    </div>
+  )},
+  { name: "DiagramLabel", category: "Diagrams", variants: 3, render: () => (
+    <div className="flex gap-4 items-end">
+      <DiagramLabel text="Auth" variant="default" />
+      <DiagramLabel text="Error" variant="warn" />
+      <DiagramLabel text="API" variant="accent" />
+    </div>
+  )},
+  { name: "CrossHatch", category: "Diagrams", variants: 1, render: () => (
+    <div className="relative w-full h-16 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)] overflow-hidden">
+      <CrossHatch className="w-full h-full" />
+    </div>
+  )},
+  { name: "PipelineDiagram", category: "Diagrams", variants: 2, render: () => (
+    <PipelineDiagram
+      steps={[{ label: "Auth" }, { label: "Route" }, { label: "Run" }]}
+      connector="dashed-animated"
+      showNumbers={false}
+      className="scale-75 origin-center"
+    />
+  )},
+  { name: "StackDiagram", category: "Diagrams", variants: 2, render: () => (
+    <StackDiagram
+      layers={[{ label: "UI" }, { label: "API", hatched: true }, { label: "DB", accent: true }]}
+      gap="0.25rem"
+      className="w-full [&>div>div]:min-h-[32px]"
+    />
+  )},
+  { name: "HubSpokeDiagram", category: "Diagrams", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Hub + spoke layout</span>
+  )},
+  { name: "BeforeAfterDiagram", category: "Diagrams", variants: 1, render: () => (
+    <BeforeAfterDiagram
+      before={<div className="text-[9px] text-[var(--s-text-muted)]">Messy</div>}
+      after={<div className="text-[9px] text-[var(--s-text-muted)]">Clean</div>}
+      className="[&>div]:p-2 w-full"
+    />
+  )},
+  { name: "EcosystemDiagram", category: "Diagrams", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Radial ecosystem map</span>
+  )},
+  { name: "GlobeDiagram", category: "Diagrams", variants: 1, render: () => (
+    <GlobeDiagram size={100} cities={[{ lat: 40.7, lon: -74, label: "NYC" }, { lat: 51.5, lon: 0, label: "LON" }]} />
+  )},
+  { name: "OrbitDiagram", category: "Diagrams", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Orbit animation</span>
+  )},
+  { name: "StreamFlowDiagram", category: "Diagrams", variants: 1, render: () => (
+    <StreamFlowDiagram source={{ label: "LLM" }} tokens={["Hello", "World"]} className="w-full [&>div]:p-2 [&>div]:gap-2" />
+  )},
+  { name: "IsometricStackDiagram", category: "Diagrams", variants: 1, render: () => (
+    <IsometricStackDiagram layers={[{ label: "App" }, { label: "API", hatched: true }, { label: "Infra", color: "var(--s-primary)" }]} width={60} layerHeight={12} className="mx-auto" />
+  )},
+  { name: "FeatureMiniDiagram", category: "Diagrams", variants: 4, render: () => (
+    <div className="grid grid-cols-2 gap-1">
+      <FeatureMiniDiagram variant="timeline-bars" size={50} />
+      <FeatureMiniDiagram variant="wave-state" size={50} />
+      <FeatureMiniDiagram variant="layer-stack" size={50} />
+      <FeatureMiniDiagram variant="hub-spoke" size={50} />
+    </div>
+  )},
+  { name: "SankeyDiagram", category: "Diagrams", variants: 1, render: () => (
+    <SankeyDiagram
+      sources={[{ label: "A", value: 30 }, { label: "B", value: 20 }]}
+      targets={[{ label: "X", value: 25 }, { label: "Y", value: 25 }]}
+      links={[{ source: 0, target: 0, value: 20 }, { source: 0, target: 1, value: 10 }, { source: 1, target: 0, value: 5 }, { source: 1, target: 1, value: 15 }]}
+      width={200} height={100}
+    />
+  )},
 ];
 
 const CELL_STYLE: React.CSSProperties = {
-  minHeight: 120,
-  padding: "12px 12px 8px",
+  minHeight: 140,
+  padding: "16px 16px 10px",
   border: "1px solid var(--s-border-muted)",
+  borderRadius: "var(--s-radius-lg, 0px)",
   background: "var(--s-surface)",
   transition: "border-color 200ms ease, background 200ms ease",
 };
@@ -746,12 +1129,14 @@ export function ComponentShowcase() {
     : [activeCategory];
 
   return (
+    <TooltipProvider>
+    <Toaster position="bottom-right" />
     <div>
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <Input
           placeholder="Search components..."
-          className="h-8 text-xs flex-1 max-w-[288px]"
-          iconLeft={<Search size={12} style={{ color: "var(--s-text-muted)" }} />}
+          className="h-9 text-xs flex-1 max-w-[320px]"
+          iconLeft={<Search size={14} style={{ color: "var(--s-text-muted)" }} />}
           value={search}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)}
         />
@@ -794,7 +1179,7 @@ export function ComponentShowcase() {
               </div>
             )}
             <TechFrame variant="brackets" extend={12} opacity={0.2} padding={4}>
-              <div className="grid gap-2" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(192px, 1fr))" }}>
+              <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
                 {catCells.map((cell) => (
                   <div
                     key={cell.name}
@@ -843,5 +1228,6 @@ export function ComponentShowcase() {
         </div>
       )}
     </div>
+    </TooltipProvider>
   );
 }

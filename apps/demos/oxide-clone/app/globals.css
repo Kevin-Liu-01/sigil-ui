@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+:root {
+  --r-background: #0c0d0e;
+  --r-surface: #141516;
+  --r-primary: #10b981;
+  --r-primary-hover: #059669;
+  --r-text: #e4e4e7;
+  --r-text-muted: #71717a;
+  --r-border: #27272a;
+  --r-radius: 4px;
+  --r-radius-sm: 2px;
+  --r-radius-lg: 6px;
+  --r-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --r-font-sans: "IBM Plex Mono", ui-monospace, monospace;
+  --r-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --r-transition: 120ms ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--r-background);
+  color: var(--r-text);
+  font-family: var(--r-font-sans);
+  -webkit-font-smoothing: antialiased;
+}

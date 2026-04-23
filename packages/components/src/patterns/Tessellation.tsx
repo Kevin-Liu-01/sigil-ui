@@ -117,7 +117,7 @@ export const Tessellation = forwardRef<HTMLDivElement, TessellationProps>(
       <div
         ref={ref}
         data-slot="tessellation"
-        className={cn("absolute inset-0 pointer-events-none", className)}
+        className={cn("relative w-full h-full pointer-events-none", className)}
         style={{ opacity, ...getTessellationCSS(variant, scale), ...style }}
         aria-hidden
         {...rest}

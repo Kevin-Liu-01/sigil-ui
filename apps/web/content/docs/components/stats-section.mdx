@@ -1,0 +1,46 @@
+---
+title: StatsSection
+description: Stat counters in bordered, card, or inline layout with optional trend indicators.
+---
+
+## Import
+
+```tsx
+import { StatsSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<StatsSection
+  label="Traction"
+  title="Numbers that matter"
+  stats={[
+    { value: "10k+", label: "Developers" },
+    { value: "99.9%", label: "Uptime", trend: "+0.2%" },
+    { value: "50ms", label: "Avg latency" },
+  ]}
+/>
+```
+
+## Cards variant
+
+```tsx
+<StatsSection
+  stats={stats}
+  variant="cards"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Uppercase mono label |
+| `title` | `ReactNode` | — | Section heading (omit to show stats only) |
+| `description` | `string` | — | Supporting text |
+| `stats` | `StatItem[]` | **required** | Array of `{ value, label, description?, trend? }` |
+| `variant` | `"inline" \| "cards" \| "bordered"` | `"bordered"` | Visual treatment |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<section>` HTML attributes.

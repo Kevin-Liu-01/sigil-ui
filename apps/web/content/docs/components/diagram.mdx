@@ -1,0 +1,46 @@
+---
+title: Diagram
+description: A token-driven container with optional grid backgrounds for composing diagram layouts.
+---
+
+## Import
+
+```tsx
+import { Diagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Diagram showGrid>
+  {/* compose DiagramNode, DiagramConnector, etc. inside */}
+</Diagram>
+```
+
+## Grid variants
+
+```tsx
+<Diagram showGrid gridVariant="dots" />
+<Diagram showGrid gridVariant="lines" />
+<Diagram showGrid gridVariant="cross" />
+```
+
+## Custom grid size
+
+```tsx
+<Diagram showGrid gridSize={32}>
+  <p className="text-sm text-[var(--s-text-muted)]">32px grid</p>
+</Diagram>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `showGrid` | `boolean` | `false` | Render a background grid pattern |
+| `gridVariant` | `"dots" \| "lines" \| "cross" \| "none"` | `"dots"` | Grid pattern style |
+| `gridSize` | `number` | `24` | Grid cell size in pixels |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Diagram content |
+
+Plus all standard `<div>` HTML attributes.

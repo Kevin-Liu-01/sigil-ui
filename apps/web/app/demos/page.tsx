@@ -19,6 +19,13 @@ const DEMOS = [
   { num: "08", name: "Agency", slug: "agency", preset: "onyx", description: "Agency site with case studies, team section, and service offerings." },
   { num: "09", name: "CLI Tool", slug: "cli-tool", preset: "cipher", description: "Developer tool landing with terminal demo, installation guide, and API docs." },
   { num: "10", name: "Playground", slug: "playground", preset: "dsgn", description: "Interactive sandbox with drag-and-drop canvas and live code editing." },
+  { num: "11", name: "Linear Clone", slug: "linear-clone", preset: "onyx", description: "Dark B2B SaaS landing inspired by Linear. Hero, logo cloud, bento grid, and cinematic CTA." },
+  { num: "12", name: "Vercel Clone", slug: "vercel-clone", preset: "crux", description: "Developer platform marketing inspired by Vercel. Clean hero, feature rows, stats, and split CTA." },
+  { num: "13", name: "Dedalus Clone", slug: "dedalus-clone", preset: "basalt", description: "Dark developer tool landing inspired by Dedalus. Purple accent, install command, FAQ, and code tabs." },
+  { num: "14", name: "VoidZero Clone", slug: "voidzero-clone", preset: "prism", description: "Open source tooling site inspired by VoidZero. Gradient banner, accent headlines, and ecosystem diagram." },
+  { num: "15", name: "Oxide Clone", slug: "oxide-clone", preset: "forge", description: "Industrial hardware site inspired by Oxide. Green accent, terminal hero, monospace throughout." },
+  { num: "16", name: "Vite Clone", slug: "vite-clone", preset: "helix", description: "Build tool landing inspired by Vite. Tabbed install, logo cloud, feature cards, and dark theme." },
+  { num: "17", name: "VitePlus Clone", slug: "viteplus-clone", preset: "arc", description: "Unified toolchain site inspired by VitePlus. Light theme, terminal demo, install section, workflow tabs." },
 ];
 
 export default function DemosPage() {
@@ -33,7 +40,7 @@ export default function DemosPage() {
           </span>
 
           <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
-            10 Production Templates.
+            17 Production Templates.
           </h1>
 
           <p className="font-[family-name:var(--s-font-mono)] text-sm leading-relaxed text-[var(--s-text-secondary)] mb-6 max-w-[528px]">

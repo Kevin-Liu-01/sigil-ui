@@ -14,16 +14,24 @@ export const IsometricView = forwardRef<HTMLDivElement, IsometricViewProps>(func
   { angle = 30, className, style, children, ...rest },
   ref,
 ) {
-  const isoStyle: CSSProperties = {
-    transformStyle: "preserve-3d",
-    transform: `rotateX(${angle}deg) rotateZ(-45deg)`,
-    perspective: "1000px",
-    ...style,
-  };
-
   return (
-    <div ref={ref} data-slot="isometric-view" className={cn("inline-block", className)} style={isoStyle} {...rest}>
-      {children}
+    <div
+      ref={ref}
+      data-slot="isometric-view"
+      className={cn("inline-block", className)}
+      style={{ perspective: "1000px", ...style }}
+      {...rest}
+    >
+      <div
+        style={{
+          transformStyle: "preserve-3d",
+          transform: `rotateX(${angle}deg) rotateZ(-45deg)`,
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 });

@@ -26,7 +26,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           data-slot="progress"
           value={value}
           className={cn(
-            "relative w-full overflow-hidden rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)]",
+            "relative w-full overflow-hidden rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border-muted,var(--s-surface))]",
             sizeMap[size],
             className,
           )}

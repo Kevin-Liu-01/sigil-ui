@@ -21,7 +21,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   return (
     <div className="relative w-full">
       {iconLeft && (
-        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
+        <span className="absolute left-0 top-0 bottom-0 flex items-center justify-center w-9 text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconLeft}
         </span>
       )}
@@ -41,14 +41,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           "aria-invalid:border-[var(--s-error)] aria-invalid:ring-[var(--s-error)]/20",
           "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
           hasError ? "border-[var(--s-error)]" : "border-[var(--s-border)]",
-          iconLeft && "pl-10",
-          iconRight && "pr-10",
+          iconLeft && "pl-9",
+          iconRight && "pr-9",
           className,
         )}
         {...rest}
       />
       {iconRight && (
-        <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--s-text-muted)] [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
+        <span className="absolute right-0 top-0 bottom-0 flex items-center justify-center w-9 text-[var(--s-text-muted)] pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4">
           {iconRight}
         </span>
       )}

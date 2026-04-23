@@ -1,0 +1,49 @@
+---
+title: GlobeDiagram
+description: An SVG wireframe globe with city markers and arc connections for geographic visualizations.
+---
+
+## Import
+
+```tsx
+import { GlobeDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<GlobeDiagram
+  cities={[
+    { lat: 40.7, lon: -74, label: "NYC" },
+    { lat: 51.5, lon: 0, label: "London" },
+  ]}
+/>
+```
+
+## Custom colors and rotation
+
+```tsx
+<GlobeDiagram
+  size={300}
+  rotation={30}
+  dotColor="var(--s-text-muted)"
+  arcColor="var(--s-success)"
+  cities={[
+    { lat: 35.7, lon: 139.7, label: "Tokyo" },
+    { lat: -33.9, lon: 151.2, label: "Sydney" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `number` | `200` | Diameter in pixels |
+| `cities` | `GlobeCity[]` | `[]` | Array of `{ lat, lon, label? }` markers |
+| `dotColor` | `string` | `var(--s-text-muted)` | Color for wireframe dots |
+| `arcColor` | `string` | `var(--s-primary)` | Color for arcs and city markers |
+| `rotation` | `number` | `0` | Longitude rotation offset in degrees |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<svg>` HTML attributes.

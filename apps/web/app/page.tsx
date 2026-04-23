@@ -100,7 +100,7 @@ function Hero() {
         <span className="s-label block mb-4">/ sigil ui</span>
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
-          Design Systems That Live in One File.
+          Your Design Systems <br /> Live in One File.
         </h1>
 
         <p className="s-mono text-sm leading-relaxed text-[var(--s-text-secondary)] mb-6 max-w-[528px]">

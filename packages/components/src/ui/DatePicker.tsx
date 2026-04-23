@@ -57,7 +57,7 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
             onValueChange?.(day);
             setOpen(false);
           }}
-          initialFocus
+          autoFocus
         />
       </PopoverContent>
     </Popover>

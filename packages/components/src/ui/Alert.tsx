@@ -35,8 +35,8 @@ function alertStyles(variant: AlertVariant, fill: AlertFill): { className: strin
   switch (fill) {
     case "filled":
       return {
-        className: "[&>svg]:text-[var(--s-primary-contrast)]",
-        style: { borderColor: c.bg, backgroundColor: c.bg, color: "var(--s-primary-contrast)" },
+        className: "[&>svg]:text-[var(--s-primary-contrast,#fff)]",
+        style: { borderColor: c.bg, backgroundColor: c.bg, color: "var(--s-primary-contrast,#fff)" },
       };
     case "soft":
       return {

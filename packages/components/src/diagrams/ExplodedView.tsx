@@ -53,11 +53,13 @@ export const ExplodedView = forwardRef<HTMLDivElement, ExplodedViewProps>(functi
                 aria-hidden
               />
             )}
-            <div className="relative z-[1]">{layer.children}</div>
+            <div className="relative z-[1]">
+              <span className="inline-block text-[10px] font-mono uppercase tracking-wider text-[var(--s-text-muted)] mb-1">
+                {layer.label}
+              </span>
+              {layer.children}
+            </div>
           </div>
-          <span className="absolute -left-2 top-1/2 -translate-y-1/2 -translate-x-full text-xs font-mono text-[var(--s-text-muted)] whitespace-nowrap">
-            {layer.label}
-          </span>
           {i < layers.length - 1 && (
             <div className="flex justify-center" style={{ height: gap }}>
               <div className="w-px h-full border-l border-dashed border-[var(--s-border)]" />

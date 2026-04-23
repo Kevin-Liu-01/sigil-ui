@@ -25,7 +25,7 @@ export const Slider = forwardRef<
     >
       <SliderPrimitive.Track
         data-slot="slider-track"
-        className="relative h-1.5 w-full grow overflow-hidden rounded-[var(--s-radius-sm,0px)] bg-[var(--s-surface)]"
+        className="relative h-1.5 w-full grow overflow-hidden rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border-muted,var(--s-surface))]"
       >
         <SliderPrimitive.Range
           data-slot="slider-range"

@@ -1,0 +1,48 @@
+---
+title: CodeShowcaseSection
+description: Tabbed code block section for showcasing usage examples or config files.
+---
+
+## Import
+
+```tsx
+import { CodeShowcaseSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<CodeShowcaseSection
+  label="Quick start"
+  title="Get started in seconds"
+  description="Copy, paste, ship."
+  tabs={[
+    { label: "npm", language: "bash", code: "npm install @sigil-ui/components" },
+    { label: "pnpm", language: "bash", code: "pnpm add @sigil-ui/components" },
+    { label: "yarn", language: "bash", code: "yarn add @sigil-ui/components" },
+  ]}
+/>
+```
+
+## Single tab
+
+When only one tab is provided, the tab bar is hidden.
+
+```tsx
+<CodeShowcaseSection
+  title="Configuration"
+  tabs={[{ label: "sigil.config.ts", code: configExample }]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Uppercase mono label |
+| `title` | `string` | — | Section heading (omit to hide) |
+| `description` | `string` | — | Supporting text |
+| `tabs` | `CodeTab[]` | **required** | Array of `{ label, language?, code }` |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<section>` HTML attributes.

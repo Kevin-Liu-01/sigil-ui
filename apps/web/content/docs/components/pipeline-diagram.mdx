@@ -1,0 +1,59 @@
+---
+title: PipelineDiagram
+description: A step-by-step pipeline visualization with numbered nodes and animated connectors.
+---
+
+## Import
+
+```tsx
+import { PipelineDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<PipelineDiagram
+  steps={[
+    { label: "Ingest" },
+    { label: "Transform" },
+    { label: "Load" },
+  ]}
+/>
+```
+
+## Vertical direction
+
+```tsx
+<PipelineDiagram
+  direction="vertical"
+  steps={[
+    { label: "Source", description: "Pull from API" },
+    { label: "Validate", description: "Schema check" },
+    { label: "Store", description: "Write to DB" },
+  ]}
+/>
+```
+
+## With icons
+
+```tsx
+<PipelineDiagram
+  steps={[
+    { icon: <UploadIcon />, label: "Upload" },
+    { icon: <CpuIcon />, label: "Process" },
+    { icon: <CheckIcon />, label: "Done" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `steps` | `PipelineStep[]` | — | Array of `{ icon?, label, description? }` (required) |
+| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `connector` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed-animated"` | Connector line style |
+| `showNumbers` | `boolean` | `true` | Show step numbers |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.

@@ -1,0 +1,48 @@
+---
+title: CTASection
+description: Call-to-action section with centered or split layout, headline, and action buttons.
+---
+
+## Import
+
+```tsx
+import { CTASection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<CTASection
+  title="Ready to get started?"
+  description="Join thousands of teams shipping faster."
+  actions={[
+    { label: "Start free", href: "/signup" },
+    { label: "Talk to sales", href: "/contact", variant: "secondary" },
+  ]}
+/>
+```
+
+## Split layout with media
+
+```tsx
+<CTASection
+  variant="split"
+  title="See it in action"
+  description="Watch a 2-minute walkthrough."
+  actions={[{ label: "Watch demo", href: "/demo" }]}
+  media={<img src="/demo.png" alt="Demo" />}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `ReactNode` | **required** | Headline text |
+| `description` | `ReactNode` | — | Supporting paragraph |
+| `actions` | `CTAAction[]` | — | Buttons (`{ label, href?, onClick?, variant? }`) |
+| `variant` | `"centered" \| "split"` | `"centered"` | Layout mode |
+| `media` | `ReactNode` | — | Media element for split variant |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<section>` HTML attributes.

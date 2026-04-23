@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { Children, forwardRef, type ComponentPropsWithoutRef } from "react";
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cn } from "../utils";
 
@@ -27,7 +27,7 @@ function getInitials(name: string): string {
 }
 
 export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
-  { src, alt, name, fallback, size = "md", className, ...props },
+  { src, alt, name, fallback, size = "md", className, style, ...props },
   ref,
 ) {
   const resolvedAlt = alt ?? name ?? "";
@@ -39,10 +39,16 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
       ref={ref}
       data-slot="avatar"
       className={cn(
-        "relative flex shrink-0 overflow-hidden rounded-[var(--s-radius-avatar,9999px)]",
+        "relative inline-flex shrink-0 items-center justify-center border",
         sizeMap[size],
         className,
       )}
+      style={{
+        borderRadius: "9999px",
+        overflow: "hidden",
+        borderColor: "var(--s-border-muted)",
+        ...style,
+      }}
       {...props}
     >
       {src && (
@@ -50,12 +56,23 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
           data-slot="avatar-image"
           src={src}
           alt={resolvedAlt}
-          className="aspect-square size-full object-cover"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "9999px",
+          }}
         />
       )}
       <AvatarPrimitive.Fallback
         data-slot="avatar-fallback"
-        className="flex size-full items-center justify-center bg-[var(--s-surface)] text-[var(--s-text-muted)] font-medium select-none"
+        className="flex size-full items-center justify-center select-none"
+        style={{
+          backgroundColor: "var(--s-surface)",
+          color: "var(--s-text-muted)",
+          fontWeight: 500,
+          borderRadius: "9999px",
+        }}
       >
         {resolvedFallback}
       </AvatarPrimitive.Fallback>
@@ -71,7 +88,7 @@ export interface AvatarGroupProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
   function AvatarGroup({ max = -1, size = "md", className, children, ...rest }, ref) {
-    const childArray = Array.isArray(children) ? children : [children];
+    const childArray = Children.toArray(children);
     const visible = max > 0 ? childArray.slice(0, max) : childArray;
     const overflow = max > 0 ? childArray.length - max : 0;
 
@@ -83,17 +100,34 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
         {...rest}
       >
         {visible.map((child, i) => (
-          <div key={i} className="ring-2 ring-[var(--s-background)] rounded-full">
+          <div
+            key={i}
+            style={{
+              position: "relative",
+              borderRadius: "9999px",
+              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-surface))",
+              zIndex: visible.length - i,
+            }}
+          >
             {child}
           </div>
         ))}
         {overflow > 0 && (
           <div
             className={cn(
-              "relative flex shrink-0 items-center justify-center rounded-full",
-              "bg-[var(--s-surface)] text-[var(--s-text-muted)] font-medium ring-2 ring-[var(--s-background)]",
+              "relative inline-flex shrink-0 items-center justify-center",
               sizeMap[size],
             )}
+            style={{
+              borderRadius: "9999px",
+              overflow: "hidden",
+              aspectRatio: "1 / 1",
+              backgroundColor: "var(--s-surface-elevated, var(--s-surface))",
+              color: "var(--s-text-muted)",
+              fontWeight: 500,
+              border: "1px solid var(--s-border-muted)",
+              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-surface))",
+            }}
           >
             +{overflow}
           </div>

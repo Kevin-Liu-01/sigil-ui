@@ -1,0 +1,52 @@
+---
+title: Stepper
+description: Multi-step progress indicator with horizontal and vertical orientations.
+---
+
+## Import
+
+```tsx
+import { Stepper } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Stepper
+  steps={[{ label: "Account" }, { label: "Profile" }, { label: "Review" }]}
+  currentStep={1}
+/>
+```
+
+## With descriptions (vertical)
+
+```tsx
+<Stepper
+  orientation="vertical"
+  currentStep={2}
+  steps={[
+    { label: "Create account", description: "Enter your email and password" },
+    { label: "Set up profile", description: "Add your name and avatar" },
+    { label: "Review", description: "Confirm your details" },
+    { label: "Done", description: "You're all set" },
+  ]}
+/>
+```
+
+## Completed state
+
+```tsx
+<Stepper
+  steps={[{ label: "Upload" }, { label: "Process" }, { label: "Complete" }]}
+  currentStep={3}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `steps` | `StepperStepConfig[]` | — | Step definitions (`{ label, description? }`) |
+| `currentStep` | `number` | — | Zero-based index of the active step |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
+| `className` | `string` | — | Additional CSS classes |

@@ -1,0 +1,50 @@
+---
+title: FeatureSection
+description: Grid of feature cards with icon, title, and description.
+---
+
+## Import
+
+```tsx
+import { FeatureSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<FeatureSection
+  label="Features"
+  title="Built for developers"
+  description="Everything you need in one package."
+  features={[
+    { icon: <BoxIcon />, title: "Composable", description: "Mix and match any component." },
+    { icon: <ZapIcon />, title: "Fast", description: "Optimized for performance." },
+    { icon: <LockIcon />, title: "Accessible", description: "WCAG 2.1 compliant." },
+  ]}
+/>
+```
+
+## Two columns, centered
+
+```tsx
+<FeatureSection
+  title="Why Sigil?"
+  features={features}
+  columns={2}
+  align="center"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Uppercase mono label |
+| `title` | `ReactNode` | **required** | Section heading |
+| `description` | `ReactNode` | — | Supporting text |
+| `features` | `FeatureItem[]` | **required** | Array of `{ icon?, title, description }` |
+| `columns` | `2 \| 3 \| 4` | `3` | Grid column count |
+| `align` | `"left" \| "center"` | `"left"` | Heading alignment |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<section>` HTML attributes.

@@ -9,8 +9,8 @@ export function SigilFrame({ children }: { children: ReactNode }) {
   let gutterPattern: GutterPattern = "grid";
   let marginPattern: GutterPattern = "horizontal";
   let contentMax = 1200;
-  let railGap = 24;
-  let gridCell = 48;
+  let railGap = 48;
+  let gridCell = 16;
   let crossStroke = 1.5;
 
   try {

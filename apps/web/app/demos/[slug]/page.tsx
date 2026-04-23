@@ -205,6 +205,41 @@ const DEMOS: Record<string, DemoEntry> = {
     description: "Tabbed component showcase across all categories.",
     preset: presets.sigil,
   },
+  "linear-clone": {
+    title: "Linear Clone",
+    description: "Dark B2B SaaS landing inspired by Linear. Hero, logo cloud, bento grid, cinematic CTA.",
+    preset: presets.noir,
+  },
+  "vercel-clone": {
+    title: "Vercel Clone",
+    description: "Developer platform marketing inspired by Vercel. Clean hero, feature rows, stats, split CTA.",
+    preset: presets.kova,
+  },
+  "dedalus-clone": {
+    title: "Dedalus Clone",
+    description: "Dark developer tool landing inspired by Dedalus. Purple accent, install command, FAQ, code tabs.",
+    preset: presets.sigil,
+  },
+  "voidzero-clone": {
+    title: "VoidZero Clone",
+    description: "Open source tooling site inspired by VoidZero. Gradient banner, accent headlines, ecosystem diagram.",
+    preset: presets.shard,
+  },
+  "oxide-clone": {
+    title: "Oxide Clone",
+    description: "Industrial hardware site inspired by Oxide. Green accent, terminal hero, monospace design.",
+    preset: presets.forge,
+  },
+  "vite-clone": {
+    title: "Vite Clone",
+    description: "Build tool landing inspired by Vite. Tabbed install, logo cloud, feature cards, dark theme.",
+    preset: presets.cipher,
+  },
+  "viteplus-clone": {
+    title: "VitePlus Clone",
+    description: "Unified toolchain site inspired by VitePlus. Light theme, terminal demo, install section.",
+    preset: presets.etch,
+  },
 };
 
 const SLUGS = Object.keys(DEMOS);
@@ -307,6 +342,14 @@ function DemoContent({ slug, demo }: { slug: string; demo: DemoEntry }) {
       return <>{back}<CliToolDemo /></>;
     case "playground":
       return <>{back}<PlaygroundDemo /></>;
+    case "linear-clone":
+    case "vercel-clone":
+    case "dedalus-clone":
+    case "voidzero-clone":
+    case "oxide-clone":
+    case "vite-clone":
+    case "viteplus-clone":
+      return <>{back}<CloneDemo slug={slug} demo={demo} /></>;
     default:
       notFound();
   }
@@ -1273,6 +1316,83 @@ function PlaygroundDemo() {
           </div>
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  Clone demos (standalone apps)                                               */
+/* -------------------------------------------------------------------------- */
+
+const CLONE_PORTS: Record<string, number> = {
+  "linear-clone": 3020,
+  "vercel-clone": 3021,
+  "dedalus-clone": 3022,
+  "voidzero-clone": 3023,
+  "oxide-clone": 3024,
+  "vite-clone": 3025,
+  "viteplus-clone": 3026,
+};
+
+const CLONE_SOURCES: Record<string, string> = {
+  "linear-clone": "linear.app",
+  "vercel-clone": "vercel.com",
+  "dedalus-clone": "dedaluslabs.ai",
+  "voidzero-clone": "voidzero.dev",
+  "oxide-clone": "oxide.computer",
+  "vite-clone": "vite.dev",
+  "viteplus-clone": "viteplus.dev",
+};
+
+function CloneDemo({ slug, demo }: { slug: string; demo: DemoEntry }) {
+  const port = CLONE_PORTS[slug] ?? 3020;
+  const source = CLONE_SOURCES[slug] ?? "";
+
+  return (
+    <div style={{ padding: "80px 24px 64px", maxWidth: 640, margin: "0 auto" }}>
+      <div style={{ marginBottom: 32 }}>
+        <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase" as const, color: "var(--s-text-muted)" }}>
+          Reference Clone
+        </span>
+        <h1 style={{ fontFamily: "var(--s-font-display)", fontSize: 32, fontWeight: 700, marginTop: 8, lineHeight: 1.1, letterSpacing: "-0.025em" }}>
+          {demo.title}
+        </h1>
+        <p style={{ fontSize: 14, lineHeight: 1.6, color: "var(--s-text-muted)", marginTop: 12 }}>
+          {demo.description}
+        </p>
+      </div>
+
+      <div style={{ display: "flex", flexDirection: "column" as const, gap: 12 }}>
+        <div style={{ padding: 16, border: "1px solid var(--s-border)", background: "var(--s-surface)" }}>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)", display: "block", marginBottom: 8 }}>
+            Inspired by
+          </span>
+          <a href={`https://${source}`} target="_blank" rel="noopener noreferrer" style={{ fontSize: 14, fontWeight: 500, color: "var(--s-primary)", textDecoration: "none" }}>
+            {source} ↗
+          </a>
+        </div>
+
+        <div style={{ padding: 16, border: "1px solid var(--s-border)", background: "var(--s-surface)" }}>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)", display: "block", marginBottom: 8 }}>
+            Run locally
+          </span>
+          <code style={{ fontFamily: "var(--s-font-mono)", fontSize: 13 }}>
+            pnpm --filter @sigil-ui/demo-{slug} dev
+          </code>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-subtle)", display: "block", marginTop: 4 }}>
+            Opens at localhost:{port}
+          </span>
+        </div>
+
+        <div style={{ padding: 16, border: "1px solid var(--s-border)", background: "var(--s-surface)" }}>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)", display: "block", marginBottom: 8 }}>
+            Source
+          </span>
+          <code style={{ fontFamily: "var(--s-font-mono)", fontSize: 13 }}>
+            apps/demos/{slug}/app/page.tsx
+          </code>
+        </div>
+      </div>
     </div>
   );
 }

@@ -86,7 +86,7 @@ export const Pattern = forwardRef<HTMLDivElement, PatternProps>(function Pattern
     <div
       ref={ref}
       data-slot="pattern"
-      className={cn("absolute inset-0 pointer-events-none", className)}
+      className={cn("relative w-full h-full pointer-events-none", className)}
       style={{ opacity, ...getPatternCSS(variant, scale), ...style }}
       aria-hidden
       {...rest}

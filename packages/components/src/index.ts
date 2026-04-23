@@ -75,7 +75,7 @@ export { ScrollArea, type ScrollAreaProps } from "./ui/ScrollArea";
 export { KPI, type KPIProps } from "./ui/KPI";
 export { Terminal, type TerminalProps } from "./ui/Terminal";
 export { CodeBlock, type CodeBlockProps } from "./ui/CodeBlock";
-export { LoadingSpinner, SPINNER_NAMES, type LoadingSpinnerProps, type SpinnerVariant } from "./ui/LoadingSpinner";
+export { LoadingSpinner, LoadingSpinner as Spinner, SPINNER_NAMES, type LoadingSpinnerProps, type LoadingSpinnerProps as SpinnerProps, type SpinnerVariant } from "./ui/LoadingSpinner";
 export {
   Form, FormField, FormItem, FormLabel, FormControl, FormDescription, FormMessage,
   type FormProps, type FormFieldProps, type FormItemProps, type FormLabelProps,
@@ -103,6 +103,7 @@ export { Field, Fieldset, FieldLabel, FieldDescription, FieldError } from "./ui/
 export { CheckboxGroup, CheckboxGroupItem, type CheckboxGroupProps } from "./ui/CheckboxGroup";
 export { Stepper, type StepperProps, type StepperStepConfig } from "./ui/Stepper";
 export { SplitButton, type SplitButtonProps } from "./ui/SplitButton";
+export { Item, ItemGroup, type ItemProps, type ItemGroupProps } from "./ui/Item";
 export {
   InputGroup, InputGroupInput, InputGroupTextarea, InputGroupAddon, InputGroupButton, InputGroupText,
   type InputGroupProps, type InputGroupInputProps, type InputGroupTextareaProps, type InputGroupAddonProps, type InputGroupButtonProps,
@@ -183,6 +184,7 @@ export {
   Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription, DrawerClose,
 } from "./overlays/Drawer";
 export { HoverCard, HoverCardTrigger, HoverCardContent } from "./overlays/HoverCard";
+export { Sonner, sonnerToast, type SonnerProps } from "./overlays/Sonner";
 export { PreviewCard, PreviewCardTrigger, PreviewCardContent } from "./overlays/PreviewCard";
 
 // ---------------------------------------------------------------------------
@@ -202,16 +204,37 @@ export { Box3DGrid, type Box3DGridProps, type Box3DGridItem } from "./3d/Box3DGr
 export { Card3D, type Card3DProps } from "./3d/Card3D";
 export { FloatingUI, type FloatingUIProps } from "./3d/FloatingUI";
 export { IsometricView, type IsometricViewProps } from "./3d/IsometricView";
+export { IsometricPrism, type IsometricPrismProps } from "./3d/IsometricPrism";
+export { IsometricCylinder, type IsometricCylinderProps } from "./3d/IsometricCylinder";
+export { IsometricScene, type IsometricSceneProps } from "./3d/IsometricScene";
 
 // ---------------------------------------------------------------------------
 // Diagrams
 // ---------------------------------------------------------------------------
-export { Diagram, type DiagramProps } from "./diagrams/Diagram";
+export { Diagram, type DiagramProps, type DiagramGridVariant } from "./diagrams/Diagram";
 export { ExplodedView, type ExplodedViewProps, type ExplodedViewLayer } from "./diagrams/ExplodedView";
 export { FlowDiagram, type FlowDiagramProps, type FlowNode, type FlowConnection } from "./diagrams/FlowDiagram";
 export { Timeline, type TimelineProps, type TimelineEntry } from "./diagrams/Timeline";
 export { ComparisonTable, type ComparisonTableProps, type ComparisonFeature } from "./diagrams/ComparisonTable";
 export { ArchitectureDiagram, type ArchitectureDiagramProps, type ArchitectureLayer } from "./diagrams/ArchitectureDiagram";
+export { DiagramNode, type DiagramNodeProps, type DiagramNodeVariant, type DiagramNodeSize } from "./diagrams/DiagramNode";
+export { DiagramConnector, type DiagramConnectorProps, type ConnectorVariant, type ConnectorDirection } from "./diagrams/DiagramConnector";
+export { DiagramLabel, type DiagramLabelProps } from "./diagrams/DiagramLabel";
+export { CrossHatch, type CrossHatchProps } from "./diagrams/CrossHatch";
+export { PipelineDiagram, type PipelineDiagramProps, type PipelineStep } from "./diagrams/PipelineDiagram";
+export { StackDiagram, type StackDiagramProps, type StackLayer } from "./diagrams/StackDiagram";
+export { HubSpokeDiagram, type HubSpokeDiagramProps, type SpokeNode } from "./diagrams/HubSpokeDiagram";
+export { BeforeAfterDiagram, type BeforeAfterDiagramProps } from "./diagrams/BeforeAfterDiagram";
+export { EcosystemDiagram, type EcosystemDiagramProps, type EcosystemNode } from "./diagrams/EcosystemDiagram";
+export { HubRouteDiagram, type HubRouteDiagramProps } from "./diagrams/templates/HubRouteDiagram";
+export { GlobeDiagram, type GlobeDiagramProps, type GlobeCity } from "./diagrams/templates/GlobeDiagram";
+export { OrbitDiagram, type OrbitDiagramProps } from "./diagrams/templates/OrbitDiagram";
+export { StreamFlowDiagram, type StreamFlowDiagramProps } from "./diagrams/templates/StreamFlowDiagram";
+export { IsometricStackDiagram, type IsometricStackDiagramProps, type IsoStackLayer } from "./diagrams/templates/IsometricStackDiagram";
+export { PlatformHubDiagram, type PlatformHubDiagramProps } from "./diagrams/templates/PlatformHubDiagram";
+export { FeatureMiniDiagram, type FeatureMiniDiagramProps, type FeatureMiniVariant } from "./diagrams/templates/FeatureMiniDiagram";
+export { SankeyDiagram, type SankeyDiagramProps } from "./diagrams/templates/SankeyDiagram";
+export { MermaidDiagram, type MermaidDiagramProps } from "./diagrams/templates/MermaidDiagram";
 
 // ---------------------------------------------------------------------------
 // Marketing
@@ -236,6 +259,29 @@ export { FeatureGrid, type FeatureGridProps, type FeatureRow } from "./marketing
 export { Pattern, type PatternProps, type PatternVariant } from "./patterns/Pattern";
 export { Cross, type CrossProps } from "./patterns/Cross";
 export { Tessellation, type TessellationProps, type TessellationVariant } from "./patterns/Tessellation";
+
+// ---------------------------------------------------------------------------
+// Sections
+// ---------------------------------------------------------------------------
+export { SectionHeading, type SectionHeadingProps } from "./sections/SectionHeading";
+export { HeroSection, type HeroSectionProps } from "./sections/HeroSection";
+export { FeatureSection, type FeatureSectionProps, type FeatureItem } from "./sections/FeatureSection";
+export { CTASection, type CTASectionProps, type CTAAction } from "./sections/CTASection";
+export { FAQSection, type FAQSectionProps, type FAQItem } from "./sections/FAQSection";
+export { StatsSection, type StatsSectionProps, type StatItem } from "./sections/StatsSection";
+export { BentoSection, type BentoSectionProps, type BentoCell } from "./sections/BentoSection";
+export { TestimonialsSection, type TestimonialsSectionProps, type TestimonialItem } from "./sections/TestimonialsSection";
+export { LogoCloudSection, type LogoCloudSectionProps, type LogoCloudItem } from "./sections/LogoCloudSection";
+export { ComparisonSection, type ComparisonSectionProps, type ComparisonFeature } from "./sections/ComparisonSection";
+export { CodeShowcaseSection, type CodeShowcaseSectionProps, type CodeTab } from "./sections/CodeShowcaseSection";
+export { TeamSection, type TeamSectionProps, type TeamMember } from "./sections/TeamSection";
+export { TimelineSection, type TimelineSectionProps, type TimelineEvent } from "./sections/TimelineSection";
+export { NewsletterSection, type NewsletterSectionProps } from "./sections/NewsletterSection";
+export { FooterSection, type FooterSectionProps, type FooterLinkGroup } from "./sections/FooterSection";
+export { LargeTextSection, type LargeTextSectionProps } from "./sections/LargeTextSection";
+export { FeatureShowcaseSection, type FeatureShowcaseSectionProps, type FeatureShowcaseRow } from "./sections/FeatureShowcaseSection";
+export { InstallSection, type InstallSectionProps, type InstallCommand } from "./sections/InstallSection";
+export { GradientBannerSection, type GradientBannerSectionProps } from "./sections/GradientBannerSection";
 
 // ---------------------------------------------------------------------------
 // Animation

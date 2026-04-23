@@ -236,9 +236,9 @@ export interface PageGridConfig {
 }
 
 const DEFAULTS: PageGridConfig = {
-  railGap: 24,
+  railGap: 48,
   contentMax: 1200,
-  gridCell: 48,
+  gridCell: 16,
   crossStroke: 1.5,
 };
 
@@ -333,7 +333,7 @@ export function SigilPageGrid({
     gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
   };
 
-  const marginCell = Math.round(gridCell / 3);
+  const marginCell = gridCell;
   const marginCssL = showMarginLines
     ? patternStyles(marginPattern, marginCell, "left")
     : null;

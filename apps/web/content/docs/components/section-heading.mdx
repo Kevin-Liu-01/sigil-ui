@@ -1,0 +1,42 @@
+---
+title: SectionHeading
+description: Reusable heading block with label, title, and description for page sections.
+---
+
+## Import
+
+```tsx
+import { SectionHeading } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<SectionHeading
+  label="Features"
+  title="Everything you need"
+  description="A complete toolkit for building modern interfaces."
+/>
+```
+
+## Centered
+
+```tsx
+<SectionHeading
+  label="About"
+  title="Why teams choose us"
+  align="center"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Uppercase mono label above the title |
+| `title` | `ReactNode` | **required** | Section heading text |
+| `description` | `ReactNode` | — | Supporting paragraph below the title |
+| `align` | `"left" \| "center"` | `"left"` | Text alignment and max-width behavior |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.

@@ -1,0 +1,42 @@
+---
+title: BeforeAfterDiagram
+description: A side-by-side comparison with color-coded before (error) and after (success) panels.
+---
+
+## Import
+
+```tsx
+import { BeforeAfterDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<BeforeAfterDiagram
+  before={<p>Manual deploys, 2-hour rollbacks</p>}
+  after={<p>CI/CD pipeline, 30-second rollbacks</p>}
+/>
+```
+
+## Custom titles
+
+```tsx
+<BeforeAfterDiagram
+  beforeTitle="Legacy"
+  afterTitle="Modern"
+  before={<p>Monolith on bare metal</p>}
+  after={<p>Microservices on Kubernetes</p>}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `beforeTitle` | `string` | `"Without"` | Label for the before panel |
+| `afterTitle` | `string` | `"With"` | Label for the after panel |
+| `before` | `ReactNode` | — | Content for the before panel (required) |
+| `after` | `ReactNode` | — | Content for the after panel (required) |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.

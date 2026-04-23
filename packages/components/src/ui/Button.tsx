@@ -38,7 +38,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: [
-    "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
+    "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
     "hover:bg-[var(--s-primary-hover)]",
     "active:brightness-90 active:scale-[var(--s-button-active-scale,0.97)]",
     "shadow-[var(--s-shadow-sm)]",
@@ -58,17 +58,17 @@ const variantStyles: Record<ButtonVariant, string> = {
     "hover:bg-[var(--s-surface)]",
   ].join(" "),
   destructive: [
-    "bg-[var(--s-error)] text-[var(--s-primary-contrast)]",
+    "bg-[var(--s-error)] text-[var(--s-primary-contrast,#fff)]",
     "hover:brightness-110",
     "active:brightness-90",
   ].join(" "),
   success: [
-    "bg-[var(--s-success)] text-[var(--s-primary-contrast)]",
+    "bg-[var(--s-success)] text-[var(--s-primary-contrast,#fff)]",
     "hover:brightness-110",
     "active:brightness-90",
   ].join(" "),
   warning: [
-    "bg-[var(--s-warning)] text-[var(--s-primary-contrast)]",
+    "bg-[var(--s-warning)] text-[var(--s-primary-contrast,#fff)]",
     "hover:brightness-110",
     "active:brightness-90",
   ].join(" "),

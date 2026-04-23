@@ -7,78 +7,109 @@ export interface FlowNode {
   id: string;
   label: string;
   children?: ReactNode;
+  variant?: "default" | "highlighted" | "accent";
 }
 
 export interface FlowConnection {
   from: string;
   to: string;
+  label?: string;
 }
 
 export interface FlowDiagramProps extends HTMLAttributes<HTMLDivElement> {
-  /** Nodes in the flow. */
   nodes: FlowNode[];
-  /** Connections between nodes. */
   connections: FlowConnection[];
-  /** Flow direction. @default "horizontal" */
   direction?: "horizontal" | "vertical";
+  connector?: "solid" | "dashed" | "dashed-animated";
 }
 
-/** Flow diagram with connected nodes. Renders nodes inline with arrow connectors. */
+const nodeVariantStyles = {
+  default: "border-[var(--s-border)] bg-[var(--s-surface)]",
+  highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] ring-1 ring-[var(--s-primary)]/20",
+  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
+};
+
 export const FlowDiagram = forwardRef<HTMLDivElement, FlowDiagramProps>(function FlowDiagram(
-  { nodes, connections: _connections, direction = "horizontal", className, ...rest },
+  { nodes, connections, direction = "horizontal", connector = "dashed-animated", className, ...rest },
   ref,
 ) {
-  const isHorizontal = direction === "horizontal";
+  const isH = direction === "horizontal";
+
+  const connectedPairs = new Set<string>();
+  for (const c of connections) {
+    connectedPairs.add(`${c.from}→${c.to}`);
+  }
+
+  const orderedPairs: { from: string; to: string; label?: string }[] = [];
+  for (let i = 0; i < nodes.length - 1; i++) {
+    const key = `${nodes[i].id}→${nodes[i + 1].id}`;
+    const conn = connections.find(c => `${c.from}→${c.to}` === key);
+    orderedPairs.push({
+      from: nodes[i].id,
+      to: nodes[i + 1].id,
+      label: conn?.label,
+    });
+  }
+
+  const dashProps: Record<string, string | number> = {};
+  if (connector === "dashed" || connector === "dashed-animated") {
+    dashProps.strokeDasharray = "6 4";
+  }
 
   return (
     <div
       ref={ref}
       data-slot="flow-diagram"
-      className={cn(
-        "flex items-center gap-2",
-        isHorizontal ? "flex-row flex-wrap" : "flex-col",
-        className,
-      )}
+      className={cn("flex items-center gap-3", isH ? "flex-row flex-wrap" : "flex-col", className)}
       {...rest}
     >
+      {connector === "dashed-animated" && (
+        <style>{`@keyframes sigil-flow-dash{to{stroke-dashoffset:-20}}[data-slot="flow-diagram"] .flow-dash-anim{animation:sigil-flow-dash 1s linear infinite}`}</style>
+      )}
       {nodes.map((node, i) => (
-        <div
-          key={node.id}
-          className={cn(
-            "flex items-center gap-2",
-            isHorizontal ? "flex-row" : "flex-col",
-          )}
-        >
+        <div key={node.id} className={cn("flex items-center gap-3", isH ? "flex-row" : "flex-col")}>
           <div
             className={cn(
-              "rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
-              "bg-[var(--s-surface)] px-4 py-3 text-sm",
+              "rounded-[var(--s-radius-md,0px)] border px-4 py-3 text-sm",
+              nodeVariantStyles[node.variant ?? "default"],
             )}
           >
-            <div className="font-medium text-[var(--s-text)]">{node.label}</div>
-            {node.children && (
-              <div className="mt-1 text-[var(--s-text-muted)]">{node.children}</div>
-            )}
+            <div className={cn("font-medium", node.variant === "accent" ? "" : "text-[var(--s-text)]")}>{node.label}</div>
+            {node.children && <div className="mt-1 text-xs text-[var(--s-text-muted)]">{node.children}</div>}
           </div>
+
           {i < nodes.length - 1 && (
             <svg
-              className={cn("shrink-0 text-[var(--s-border)]")}
-              width={isHorizontal ? 24 : 16}
-              height={isHorizontal ? 16 : 24}
-              viewBox={isHorizontal ? "0 0 24 16" : "0 0 16 24"}
+              className="shrink-0"
+              width={isH ? 40 : 16}
+              height={isH ? 24 : 40}
+              viewBox={isH ? "0 0 40 24" : "0 0 16 40"}
               fill="none"
               aria-hidden
             >
-              {isHorizontal ? (
+              {isH ? (
                 <>
-                  <line x1="0" y1="8" x2="18" y2="8" stroke="currentColor" strokeWidth="1.5" />
-                  <polyline points="14,3 20,8 14,13" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <line x1="0" y1="12" x2="32" y2="12" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
+                  <polygon points="32,8 40,12 32,16" fill="var(--s-border-strong, var(--s-border))" />
                 </>
               ) : (
                 <>
-                  <line x1="8" y1="0" x2="8" y2="18" stroke="currentColor" strokeWidth="1.5" />
-                  <polyline points="3,14 8,20 13,14" stroke="currentColor" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                  <line x1="8" y1="0" x2="8" y2="32" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
+                  <polygon points="4,32 8,40 12,32" fill="var(--s-border-strong, var(--s-border))" />
                 </>
+              )}
+              {orderedPairs[i]?.label && (
+                <text
+                  x={isH ? 20 : 16}
+                  y={isH ? 8 : 20}
+                  textAnchor={isH ? "middle" : "start"}
+                  dominantBaseline={isH ? "auto" : "middle"}
+                  fill="var(--s-text-muted)"
+                  fontSize={9}
+                  fontFamily="var(--s-font-mono, monospace)"
+                >
+                  {orderedPairs[i].label}
+                </text>
               )}
             </svg>
           )}

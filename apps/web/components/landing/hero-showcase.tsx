@@ -318,11 +318,11 @@ function ActivityFeed() {
     <Card className="w-full">
       <CardContent className="p-4 flex flex-col gap-3">
         {[
-          { initials: "KL", text: "Kevin pushed 3 commits to main", time: "2m ago" },
-          { initials: "CI", text: "Build #847 deployed to production", time: "5m ago" },
+          { src: "https://i.pravatar.cc/64?u=kevpush", name: "Kevin", text: "Kevin pushed 3 commits to main", time: "2m ago" },
+          { src: "https://i.pravatar.cc/64?u=cibuild", name: "CI", text: "Build #847 deployed to production", time: "5m ago" },
         ].map((item) => (
           <div key={item.text} className="flex items-start gap-2">
-            <Avatar fallback={item.initials} size="sm" />
+            <Avatar src={item.src} name={item.name} size="sm" />
             <div className="flex-1 min-w-0">
               <p className="text-[10px] text-[var(--s-text)] leading-snug">{item.text}</p>
               <span className="text-[9px] text-[var(--s-text-muted)]">{item.time}</span>
@@ -405,9 +405,9 @@ function InviteCard() {
         </div>
         <div className="flex items-center gap-2">
           <AvatarGroup>
-            <Avatar fallback="KL" size="sm" />
-            <Avatar fallback="JD" size="sm" />
-            <Avatar fallback="AR" size="sm" />
+            <Avatar src="https://i.pravatar.cc/64?u=kl2" name="Kevin" size="sm" />
+            <Avatar src="https://i.pravatar.cc/64?u=jd2" name="Jane" size="sm" />
+            <Avatar src="https://i.pravatar.cc/64?u=ar2" name="Alex" size="sm" />
           </AvatarGroup>
           <span className="text-[9px] text-[var(--s-text-muted)]">+2 more invited</span>
         </div>
@@ -558,12 +558,12 @@ function AvatarStackRow() {
   return (
     <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <AvatarGroup max={4}>
-        <Avatar fallback="KL" size="sm" />
-        <Avatar fallback="JD" size="sm" />
-        <Avatar fallback="AR" size="sm" />
-        <Avatar fallback="MS" size="sm" />
-        <Avatar fallback="TW" size="sm" />
-        <Avatar fallback="RK" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=kl" name="Kevin L" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=jd" name="Jane D" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=ar" name="Alex R" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=ms" name="Maya S" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=tw" name="Tom W" size="sm" />
+        <Avatar src="https://i.pravatar.cc/64?u=rk" name="Raj K" size="sm" />
       </AvatarGroup>
       <span className="text-[9px] text-[var(--s-text-muted)]">6 online</span>
     </div>

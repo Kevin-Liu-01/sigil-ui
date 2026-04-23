@@ -25,6 +25,7 @@ interface CarouselContextValue {
   scrollPrev: () => void;
   scrollNext: () => void;
   orientation: "horizontal" | "vertical";
+  tilt: boolean;
 }
 
 const CarouselContext = createContext<CarouselContextValue | null>(null);
@@ -40,11 +41,13 @@ function useCarousel() {
 export interface CarouselProps extends HTMLAttributes<HTMLDivElement> {
   orientation?: "horizontal" | "vertical";
   opts?: Parameters<typeof useEmblaCarousel>[0];
+  /** Enable 3D tilt perspective on slides. */
+  tilt?: boolean;
   children?: ReactNode;
 }
 
 export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carousel(
-  { orientation = "horizontal", opts, className, children, ...rest },
+  { orientation = "horizontal", opts, tilt = false, className, children, ...rest },
   ref,
 ) {
   const [emblaRef, api] = useEmblaCarousel({
@@ -77,7 +80,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carou
 
   return (
     <CarouselContext.Provider
-      value={{ emblaRef, api, canScrollPrev, canScrollNext, scrollPrev, scrollNext, orientation }}
+      value={{ emblaRef, api, canScrollPrev, canScrollNext, scrollPrev, scrollNext, orientation, tilt }}
     >
       <div
         ref={ref}
@@ -102,17 +105,19 @@ export interface CarouselContentProps extends HTMLAttributes<HTMLDivElement> {
 
 export const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
   function CarouselContent({ className, ...rest }, ref) {
-    const { emblaRef, orientation } = useCarousel();
+    const { emblaRef, orientation, tilt: isTilt } = useCarousel();
 
     return (
-      <div ref={emblaRef} className="overflow-hidden">
+      <div ref={emblaRef} className="overflow-hidden" style={isTilt ? { perspective: "800px" } : undefined}>
         <div
           ref={ref}
           className={cn(
             "flex",
             orientation === "vertical" ? "flex-col" : "-ml-4",
+            isTilt && "[&>div]:transition-transform [&>div]:duration-300",
             className,
           )}
+          style={isTilt ? { transformStyle: "preserve-3d" } : undefined}
           {...rest}
         />
       </div>

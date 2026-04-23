@@ -13,10 +13,12 @@ export interface FeatureRow {
 export interface FeatureGridProps extends HTMLAttributes<HTMLDivElement> {
   rows: FeatureRow[];
   gap?: string;
+  /** Min-height for each row in px. @default 320 */
+  rowMinHeight?: number;
 }
 
 export const FeatureGrid = forwardRef<HTMLDivElement, FeatureGridProps>(
-  function FeatureGrid({ rows, gap = "0", className, ...rest }, ref) {
+  function FeatureGrid({ rows, gap = "0", rowMinHeight = 320, className, ...rest }, ref) {
     return (
       <div ref={ref} className={cn("flex flex-col", className)} style={{ gap }} {...rest}>
         {rows.map((row, i) => {
@@ -28,7 +30,7 @@ export const FeatureGrid = forwardRef<HTMLDivElement, FeatureGridProps>(
               style={{
                 borderTop: "1px solid var(--s-border-muted)",
                 borderTopStyle: "var(--s-border-style, solid)" as any,
-                minHeight: 320,
+                minHeight: rowMinHeight,
               }}
             >
               <div

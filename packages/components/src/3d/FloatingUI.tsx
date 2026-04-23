@@ -30,7 +30,7 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
       className={cn("relative", className)}
       style={{
         width: "100%",
-        height: `calc(100% + ${(layers.length - 1) * offset}px)`,
+        minHeight: `${(layers.length - 1) * offset + 60}px`,
         ...style,
       }}
       {...rest}

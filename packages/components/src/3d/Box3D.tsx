@@ -64,11 +64,9 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
       style={containerStyle}
       {...rest}
     >
+      <div className={cn("relative w-full h-full", hoverLift && "hover:-translate-y-1 transition-transform")}>
       <div
-        className={cn(
-          "relative w-full h-full",
-          hoverLift && "hover:translate-y-[-4px]",
-        )}
+        className="relative w-full h-full"
         style={cubeStyle}
       >
         {/* Front face */}
@@ -123,6 +121,7 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
             transformOrigin: "center bottom",
           }}
         />
+      </div>
       </div>
     </div>
   );

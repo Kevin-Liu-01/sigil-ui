@@ -1,0 +1,45 @@
+---
+title: NewsletterSection
+description: Centered email signup form with customizable title, description, and submit handler.
+---
+
+## Import
+
+```tsx
+import { NewsletterSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<NewsletterSection
+  title="Stay updated"
+  description="Get the latest news delivered to your inbox."
+  onSubmit={(email) => console.log("Subscribed:", email)}
+/>
+```
+
+## Custom labels
+
+```tsx
+<NewsletterSection
+  title="Join the waitlist"
+  description="Be the first to know when we launch."
+  placeholder="Enter your email"
+  buttonLabel="Join"
+  onSubmit={handleWaitlist}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `title` | `string` | `"Stay updated"` | Heading text |
+| `description` | `string` | `"Get the latest news delivered to your inbox."` | Supporting text |
+| `placeholder` | `string` | `"you@example.com"` | Input placeholder |
+| `buttonLabel` | `string` | `"Subscribe"` | Submit button text |
+| `onSubmit` | `(email: string) => void` | — | Callback with the email value |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<section>` HTML attributes.
