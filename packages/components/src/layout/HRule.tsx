@@ -47,6 +47,7 @@ export const HRule = forwardRef<HTMLDivElement, HRuleProps>(function HRule(
   return (
     <div
       ref={ref}
+      data-slot="h-rule"
       role="none"
       aria-hidden
       className={cn("flex items-center gap-2 w-full", className)}

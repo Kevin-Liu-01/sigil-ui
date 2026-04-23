@@ -33,6 +33,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle
   return (
     <TogglePrimitive.Root
       ref={ref}
+      data-slot="toggle"
       className={cn(
         "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)]",
         "font-medium text-[var(--s-text-secondary)]",

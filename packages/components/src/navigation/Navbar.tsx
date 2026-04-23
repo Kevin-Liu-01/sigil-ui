@@ -19,6 +19,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
   return (
     <nav
       ref={ref}
+      data-slot="navbar"
       className={cn(
         "w-full z-50 flex items-center justify-between px-6 h-[var(--s-navbar-height,64px)]",
         sticky && "sticky top-0",

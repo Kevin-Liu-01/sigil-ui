@@ -14,6 +14,7 @@ export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(function Toolbar
   return (
     <div
       ref={ref}
+      data-slot="toolbar"
       role="toolbar"
       aria-orientation={orientation}
       className={cn(

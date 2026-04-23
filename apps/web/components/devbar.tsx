@@ -321,7 +321,7 @@ export function SigilDevBar() {
         {/* Tab content */}
         <div style={{ flex: 1, overflow: "auto", padding: 12 }}>
           {tab === "presets" && (
-            <div style={{ display: "flex", gap: 8, overflowX: "auto", scrollSnapType: "x mandatory", paddingBottom: 8 }}>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8, paddingBottom: 8 }}>
               {PRESET_DATA.map((p) => (
                 <PresetChip
                   key={p.name}

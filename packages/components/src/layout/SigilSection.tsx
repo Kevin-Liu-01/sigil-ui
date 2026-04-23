@@ -228,7 +228,7 @@ function InnerSection({
   return (
     <Tag
       id={id}
-      className={cn("relative", className)}
+      data-slot="sigilsection" className={cn("relative", className)}
       style={{
         padding,
         borderTop: borderTop
@@ -301,7 +301,7 @@ function StandaloneSection({
   };
 
   return (
-    <Tag id={id} className={cn("grid", className)} style={{ ...gridCols, ...style }}>
+    <Tag id={id} data-slot="sigilsection" className={cn("grid", className)} style={{ ...gridCols, ...style }}>
       <div aria-hidden="true" />
       <SigilGutter showGrid={showGutterGrid} pattern={gutterPattern} side="left" />
       <div

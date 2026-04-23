@@ -99,7 +99,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   }, [activeIndex, open]);
 
   return (
-    <div ref={ref} className={cn("relative w-full", className)}>
+    <div ref={ref} data-slot="combobox" className={cn("relative w-full", className)}>
       <button
         type="button"
         role="combobox"
@@ -113,7 +113,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
           "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
           "bg-[var(--s-background)] text-[var(--s-text)] border-[var(--s-border)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+          "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
         )}
       >
         <span className={value ? "" : "text-[var(--s-text-muted)]"}>
@@ -145,7 +145,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
               className={cn(
                 "flex h-8 w-full rounded-[var(--s-radius-sm,4px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] px-2 text-sm",
                 "bg-[var(--s-background)] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)]",
-                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--s-primary)]",
+                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
               )}
             />
           </div>

@@ -20,6 +20,7 @@ export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
     return (
       <div
         ref={ref}
+        data-slot="testimonial-card"
         className={cn(
           "flex flex-col gap-4 p-6 rounded-[var(--s-card-radius,8px)]",
           "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-sm)]",

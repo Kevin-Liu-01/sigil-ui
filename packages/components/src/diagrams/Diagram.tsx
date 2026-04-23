@@ -19,6 +19,7 @@ export const Diagram = forwardRef<HTMLDivElement, DiagramProps>(function Diagram
   return (
     <div
       ref={ref}
+      data-slot="diagram"
       className={cn(
         "relative w-full overflow-hidden rounded-[var(--s-card-radius,8px)]",
         "border border-[var(--s-border)] bg-[var(--s-surface)] p-6",

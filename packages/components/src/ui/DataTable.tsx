@@ -35,7 +35,7 @@ export function DataTable<T extends Record<string, unknown>>({
   rowClassName,
 }: DataTableProps<T>) {
   return (
-    <Table className={className}>
+    <Table data-slot="data-table" className={className}>
       <TableHeader>
         <TableRow>
           {columns.map((col) => (

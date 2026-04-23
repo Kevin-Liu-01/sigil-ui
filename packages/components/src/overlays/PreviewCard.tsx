@@ -44,6 +44,7 @@ export const PreviewCardContent = forwardRef<HTMLDivElement, PreviewCardContentP
       <HoverCardPrimitive.Portal>
         <HoverCardPrimitive.Content
           ref={ref}
+          data-slot="preview-card"
           sideOffset={sideOffset}
           className={cn(
             "z-50 w-72 overflow-hidden",

@@ -125,6 +125,7 @@ export function VoronoiBento({
 
   return (
     <div
+      data-slot="voronoi-bento"
       className={cn("relative overflow-hidden", className)}
       style={{
         width: width ? `${width}px` : "100%",

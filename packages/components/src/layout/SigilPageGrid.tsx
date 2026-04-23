@@ -194,7 +194,7 @@ export function SigilGutter({
   return (
     <div
       aria-hidden="true"
-      className={cn("relative overflow-hidden", className)}
+      data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
       style={{
         borderLeft: "1px solid var(--s-border)",
         borderRight: "1px solid var(--s-border)",
@@ -266,7 +266,7 @@ export function SigilPageGrid({
 
   return (
     <PageGridContext.Provider value={config}>
-      <div className={cn("grid min-h-screen", className)} style={gridCols}>
+      <div data-slot="sigilpagegrid" className={cn("grid min-h-screen", className)} style={gridCols}>
         <div aria-hidden="true" style={marginStyleL} />
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" />
         <div

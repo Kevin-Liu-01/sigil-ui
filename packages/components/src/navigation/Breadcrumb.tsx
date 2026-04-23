@@ -21,7 +21,7 @@ export const Breadcrumb = forwardRef<HTMLElement, BreadcrumbProps>(function Brea
   ref,
 ) {
   return (
-    <nav ref={ref} aria-label="Breadcrumb" className={cn("flex items-center", className)} {...rest}>
+    <nav ref={ref} data-slot="breadcrumb" aria-label="Breadcrumb" className={cn("flex items-center", className)} {...rest}>
       <ol className="flex items-center gap-1.5 text-sm">
         {items.map((item, i) => {
           const isLast = i === items.length - 1;

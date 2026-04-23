@@ -32,6 +32,7 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function Cod
   return (
     <div
       ref={ref}
+      data-slot="code-block"
       className={cn(
         "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
         "bg-[var(--s-code-bg,var(--s-background))] font-[family:var(--s-code-font-family,ui-monospace,SFMono-Regular,monospace)] text-sm",

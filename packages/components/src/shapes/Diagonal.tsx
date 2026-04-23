@@ -26,6 +26,7 @@ export const Diagonal = forwardRef<HTMLDivElement, DiagonalProps>(function Diago
   return (
     <div
       ref={ref}
+      data-slot="diagonal"
       className={cn("w-full", className)}
       style={{
         height: `${height}px`,

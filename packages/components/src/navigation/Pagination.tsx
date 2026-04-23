@@ -55,7 +55,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   );
 
   return (
-    <nav ref={ref} aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...rest}>
+    <nav ref={ref} data-slot="pagination" aria-label="Pagination" className={cn("flex items-center gap-1", className)} {...rest}>
       <button
         type="button"
         disabled={currentPage <= 1}

@@ -35,6 +35,7 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
     return (
       <div
         ref={ref}
+        data-slot="skeleton"
         aria-hidden
         className={cn(
           "animate-pulse bg-[var(--s-surface)]",

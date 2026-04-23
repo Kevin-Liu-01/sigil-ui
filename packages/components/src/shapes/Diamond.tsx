@@ -24,6 +24,7 @@ export const Diamond = forwardRef<HTMLDivElement, DiamondProps>(function Diamond
   return (
     <div
       ref={ref}
+      data-slot="diamond"
       className={cn(
         "inline-flex items-center justify-center",
         "bg-[var(--s-surface)] border-[var(--s-border)]",

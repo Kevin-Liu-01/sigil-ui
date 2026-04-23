@@ -18,6 +18,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   return (
     <div
       ref={ref}
+      data-slot="divider"
       role={decorative ? "none" : "separator"}
       aria-orientation={decorative ? undefined : orientation}
       aria-hidden={decorative ? true : undefined}

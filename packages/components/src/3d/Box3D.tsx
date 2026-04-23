@@ -59,6 +59,7 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
   return (
     <div
       ref={ref}
+      data-slot="box-3d"
       className={cn("relative inline-block", className)}
       style={containerStyle}
       {...rest}

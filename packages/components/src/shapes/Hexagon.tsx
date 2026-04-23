@@ -24,6 +24,7 @@ export const Hexagon = forwardRef<HTMLDivElement, HexagonProps>(function Hexagon
   return (
     <div
       ref={ref}
+      data-slot="hexagon"
       className={cn(
         "inline-flex items-center justify-center",
         "bg-[var(--s-surface)]",

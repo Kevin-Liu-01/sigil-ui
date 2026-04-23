@@ -9,6 +9,7 @@ export const Menubar = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeo
     return (
       <MenubarPrimitive.Root
         ref={ref}
+        data-slot="menubar"
         className={cn(
           "flex h-10 items-center gap-1 rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
           "bg-[var(--s-surface)] px-1",

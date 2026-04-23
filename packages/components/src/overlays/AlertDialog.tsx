@@ -25,6 +25,7 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
         />
         <AlertDialogPrimitive.Content
           ref={ref}
+          data-slot="alert-dialog"
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
             "w-full max-w-[500px] mx-4 p-6 rounded-[var(--s-card-radius,8px)]",

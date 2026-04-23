@@ -15,6 +15,7 @@ export const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
       <div
         ref={ref}
         role="group"
+        data-slot="checkbox-group"
         className={cn("flex flex-col gap-2", className)}
         data-disabled={disabled || undefined}
         {...rest}
@@ -63,7 +64,7 @@ export const CheckboxGroupItem = forwardRef<HTMLLabelElement, CheckboxGroupItemP
           className={cn(
             "h-4 w-4 shrink-0 rounded-[var(--s-radius-sm,3px)]",
             "border border-[var(--s-border)] accent-[var(--s-primary)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-1",
           )}
         />
         <span className="text-sm text-[var(--s-text)]">{label}</span>

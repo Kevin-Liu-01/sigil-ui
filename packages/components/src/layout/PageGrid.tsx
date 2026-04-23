@@ -17,7 +17,7 @@ export const PageGrid = forwardRef<HTMLDivElement, PageGridProps>(function PageG
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("relative w-full min-h-screen", className)} {...rest}>
+    <div ref={ref} data-slot="page-grid" className={cn("relative w-full min-h-screen", className)} {...rest}>
       {showRails && (
         <>
           <div

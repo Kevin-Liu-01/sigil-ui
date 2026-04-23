@@ -16,6 +16,7 @@ export const ContextMenuContent = forwardRef<
     <ContextMenuPrimitive.Portal>
       <ContextMenuPrimitive.Content
         ref={ref}
+        data-slot="context-menu"
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",
           "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",

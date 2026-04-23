@@ -133,6 +133,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           if (typeof ref === "function") ref(el);
           else if (ref) (ref as React.MutableRefObject<HTMLDivElement | null>).current = el;
         }}
+        data-slot="popover"
         className={cn(
           "absolute z-50 min-w-[8rem] p-4",
           "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",

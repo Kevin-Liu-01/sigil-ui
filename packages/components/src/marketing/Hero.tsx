@@ -35,6 +35,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
   return (
     <section
       ref={ref}
+      data-slot="hero"
       className={cn(
         "relative flex flex-col items-center justify-center text-center",
         "py-20 md:py-32 px-6",

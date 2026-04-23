@@ -61,6 +61,7 @@ export const Shape = forwardRef<SVGSVGElement, ShapeProps>(function Shape(
   return (
     <svg
       ref={ref}
+      data-slot="shape"
       width={s}
       height={s}
       viewBox={`0 0 ${s} ${s}`}

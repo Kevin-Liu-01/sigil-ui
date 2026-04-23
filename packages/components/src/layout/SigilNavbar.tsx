@@ -56,7 +56,7 @@ export function SigilNavbar({
   if (variant === "inline") {
     return (
       <nav
-        className={cn("sigil-navbar", className)}
+        data-slot="sigilnavbar" className={cn("sigil-navbar", className)}
         style={{
           display: "flex",
           alignItems: "center",
@@ -101,7 +101,7 @@ export function SigilNavbar({
 
   return (
     <header
-      className={cn(
+      data-slot="sigilnavbar" className={cn(
         "sigil-navbar",
         fixed && "fixed top-0 left-0 right-0 z-50",
         className,

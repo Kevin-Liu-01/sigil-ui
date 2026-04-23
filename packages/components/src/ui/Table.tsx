@@ -10,6 +10,7 @@ export const Table = forwardRef<HTMLTableElement, HTMLAttributes<HTMLTableElemen
       <div className="relative w-full overflow-auto">
         <table
           ref={ref}
+          data-slot="table"
           className={cn("w-full caption-bottom text-sm border-collapse", className)}
           {...rest}
         />
@@ -24,6 +25,7 @@ export const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HT
     return (
       <thead
         ref={ref}
+        data-slot="table-header"
         className={cn("border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] [&_tr]:border-b [&_tr]:border-[style:var(--s-border-style,solid)]", className)}
         {...rest}
       />
@@ -37,6 +39,7 @@ export const TableBody = forwardRef<HTMLTableSectionElement, HTMLAttributes<HTML
     return (
       <tbody
         ref={ref}
+        data-slot="table-body"
         className={cn("[&_tr:last-child]:border-0", className)}
         {...rest}
       />
@@ -50,6 +53,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
     return (
       <tr
         ref={ref}
+        data-slot="table-row"
         className={cn(
           "border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] transition-colors",
           "hover:bg-[var(--s-surface-elevated)]",
@@ -68,6 +72,7 @@ export const TableHead = forwardRef<HTMLTableCellElement, ThHTMLAttributes<HTMLT
     return (
       <th
         ref={ref}
+        data-slot="table-head"
         className={cn(
           "h-10 px-3 text-left align-middle font-medium text-[var(--s-text-muted)]",
           "[&:has([role=checkbox])]:pr-0",
@@ -85,6 +90,7 @@ export const TableCell = forwardRef<HTMLTableCellElement, TdHTMLAttributes<HTMLT
     return (
       <td
         ref={ref}
+        data-slot="table-cell"
         className={cn(
           "p-3 align-middle text-[var(--s-text)] [&:has([role=checkbox])]:pr-0",
           className,
@@ -101,6 +107,7 @@ export const TableCaption = forwardRef<HTMLTableCaptionElement, HTMLAttributes<H
     return (
       <caption
         ref={ref}
+        data-slot="table-caption"
         className={cn("mt-4 text-sm text-[var(--s-text-muted)]", className)}
         {...rest}
       />

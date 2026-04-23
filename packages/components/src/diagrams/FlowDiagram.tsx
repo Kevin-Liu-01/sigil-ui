@@ -33,6 +33,7 @@ export const FlowDiagram = forwardRef<HTMLDivElement, FlowDiagramProps>(function
   return (
     <div
       ref={ref}
+      data-slot="flow-diagram"
       className={cn(
         "flex items-center gap-2",
         isHorizontal ? "flex-row flex-wrap" : "flex-col",

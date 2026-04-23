@@ -23,6 +23,7 @@ export const DrawerContent = forwardRef<
       <DrawerPrimitive.Overlay className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm" />
       <DrawerPrimitive.Content
         ref={ref}
+        data-slot="drawer"
         className={cn(
           "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
           "rounded-t-[var(--s-card-radius,8px)]",

@@ -34,6 +34,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     return (
       <ToggleGroupPrimitive.Root
         ref={ref}
+        data-slot="toggle-group"
         className={cn(
           "inline-flex items-center rounded-[var(--s-radius-md,6px)]",
           "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
@@ -53,14 +54,15 @@ export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProp
     return (
       <ToggleGroupPrimitive.Item
         ref={ref}
+        data-slot="toggle-group-item"
         className={cn(
-          "inline-flex items-center justify-center font-medium",
+          "inline-flex cursor-pointer items-center justify-center font-medium",
           "text-[var(--s-text-secondary)] bg-transparent",
           "border-r border-[style:var(--s-border-style,solid)] border-[var(--s-border)] last:border-r-0",
           "first:rounded-l-[var(--s-radius-md,6px)] last:rounded-r-[var(--s-radius-md,6px)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface-elevated)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2 focus-visible:z-10",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:z-10",
           "disabled:pointer-events-none disabled:opacity-50",
           "data-[state=on]:bg-[var(--s-surface)] data-[state=on]:text-[var(--s-text)]",
           sizeStyles[size],

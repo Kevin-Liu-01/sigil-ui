@@ -20,6 +20,7 @@ export const Cross = forwardRef<SVGSVGElement, CrossProps>(function Cross(
   return (
     <svg
       ref={ref}
+      data-slot="cross"
       width={size}
       height={size}
       viewBox={`0 0 ${size} ${size}`}

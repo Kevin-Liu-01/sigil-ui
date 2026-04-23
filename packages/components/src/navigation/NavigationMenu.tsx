@@ -9,6 +9,7 @@ export const NavigationMenu = forwardRef<HTMLElement, ComponentPropsWithoutRef<t
     return (
       <NavPrimitive.Root
         ref={ref}
+        data-slot="navigation-menu"
         className={cn("relative z-10 flex max-w-max flex-1 items-center justify-center", className)}
         {...rest}
       >

@@ -19,6 +19,7 @@ export const ChartContainer = forwardRef<HTMLDivElement, ChartContainerProps>(
     return (
       <div
         ref={ref}
+        data-slot="chart"
         className={cn(
           "w-full text-[var(--s-text-muted)] text-xs",
           "[&_.recharts-cartesian-axis-tick_text]:fill-[var(--s-text-muted)]",

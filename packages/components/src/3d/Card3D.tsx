@@ -50,6 +50,7 @@ export const Card3D = forwardRef<HTMLDivElement, Card3DProps>(function Card3D(
   return (
     <div
       ref={resolvedRef}
+      data-slot="card-3d"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(

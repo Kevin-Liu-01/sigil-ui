@@ -19,7 +19,7 @@ export interface ComparisonTableProps extends HTMLAttributes<HTMLDivElement> {
 export const ComparisonTable = forwardRef<HTMLDivElement, ComparisonTableProps>(
   function ComparisonTable({ features, columns, className, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("w-full overflow-auto", className)} {...rest}>
+      <div ref={ref} data-slot="comparison-table" className={cn("w-full overflow-auto", className)} {...rest}>
         <table className="w-full text-sm border-collapse">
           <thead>
             <tr className="border-b border-[var(--s-border)]">

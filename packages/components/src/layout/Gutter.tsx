@@ -21,5 +21,5 @@ export const Gutter = forwardRef<HTMLDivElement, GutterProps>(function Gutter(
   { size = "md", className, ...rest },
   ref,
 ) {
-  return <div ref={ref} className={cn(sizeMap[size], className)} aria-hidden {...rest} />;
+  return <div ref={ref} data-slot="gutter" className={cn(sizeMap[size], className)} aria-hidden {...rest} />;
 });

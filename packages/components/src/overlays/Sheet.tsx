@@ -135,6 +135,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
         />
         <div
           ref={ref}
+          data-slot="sheet"
           role="dialog"
           aria-modal
           aria-labelledby={titleId}

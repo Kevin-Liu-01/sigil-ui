@@ -90,6 +90,7 @@ export const Toaster = forwardRef<HTMLDivElement, ToasterProps>(function Toaster
     <ToastContext.Provider value={{ toasts, addToast, removeToast }}>
       <div
         ref={ref}
+        data-slot="toast"
         className={cn("fixed z-[100] flex flex-col gap-2 pointer-events-none", positionStyles[position], className)}
         {...rest}
       >

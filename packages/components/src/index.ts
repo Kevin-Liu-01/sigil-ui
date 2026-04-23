@@ -33,6 +33,7 @@ export { Divider, type DividerProps } from "./layout/Divider";
 export { HRule, type HRuleProps } from "./layout/HRule";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";
 export { LayoutControls, type LayoutControlsProps } from "./layout/LayoutControls";
+export { SectionDivider, type SectionDividerProps, type SectionDividerPattern } from "./layout/SectionDivider";
 
 // ---------------------------------------------------------------------------
 // Core UI

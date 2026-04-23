@@ -12,6 +12,7 @@ export const InputOTP = forwardRef<ElementRef<typeof OTPInput>, InputOTPProps>(
     return (
       <OTPInput
         ref={ref}
+        data-slot="input-otp"
         containerClassName={cn("flex items-center gap-2", containerClassName)}
         className={cn("disabled:cursor-not-allowed", className)}
         {...rest}
@@ -25,7 +26,7 @@ export interface InputOTPGroupProps extends ComponentPropsWithoutRef<"div"> {}
 export const InputOTPGroup = forwardRef<HTMLDivElement, InputOTPGroupProps>(
   function InputOTPGroup({ className, ...rest }, ref) {
     return (
-      <div ref={ref} className={cn("flex items-center", className)} {...rest} />
+      <div ref={ref} data-slot="input-otp-group" className={cn("flex items-center", className)} {...rest} />
     );
   },
 );
@@ -48,7 +49,7 @@ export const InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "first:rounded-l-[var(--s-radius-md,6px)] first:border-l",
           "last:rounded-r-[var(--s-radius-md,6px)]",
-          slot?.isActive && "z-10 ring-2 ring-[var(--s-primary)] ring-offset-1",
+          slot?.isActive && "z-10 ring-2 ring-[var(--s-ring,var(--s-primary))] ring-offset-1",
           className,
         )}
         {...rest}

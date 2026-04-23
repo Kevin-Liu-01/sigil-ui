@@ -102,6 +102,7 @@ export const LoadingSpinner = forwardRef<HTMLSpanElement, LoadingSpinnerProps>(
       <span
         ref={ref}
         role="status"
+        data-slot="spinner"
         aria-label={label ?? "Loading"}
         className={cn(
           "inline-block font-mono text-[var(--s-primary)]",

@@ -23,7 +23,7 @@ export const Meter = forwardRef<HTMLDivElement, MeterProps>(function Meter(
         : "bg-[var(--s-primary)]";
 
   return (
-    <div ref={ref} className={cn("w-full", className)} {...rest}>
+    <div ref={ref} data-slot="meter" className={cn("w-full", className)} {...rest}>
       {label && (
         <div className="mb-1 flex items-center justify-between text-sm">
           <span className="font-medium text-[var(--s-text)]">{label}</span>

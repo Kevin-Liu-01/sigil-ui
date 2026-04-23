@@ -41,6 +41,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
     <SidebarContext.Provider value={{ collapsed, setCollapsed }}>
       <aside
         ref={ref}
+        data-slot="sidebar"
         data-collapsed={collapsed || undefined}
         className={cn(
           "sticky top-0 flex h-screen flex-col border-r border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",

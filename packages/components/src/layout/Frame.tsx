@@ -23,6 +23,7 @@ export const Frame = forwardRef<HTMLDivElement, FrameProps>(function Frame(
   return (
     <div
       ref={ref}
+      data-slot="frame"
       className={cn(
         "border rounded-[var(--s-card-radius,6px)] p-4",
         variantStyles[variant],

@@ -25,13 +25,14 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(functio
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         ref={ref}
+        data-slot="date-picker"
         className={cn(
-          "inline-flex h-10 w-[240px] items-center justify-between px-3",
+          "inline-flex h-10 w-[240px] cursor-pointer items-center justify-between px-3",
           "rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
           "bg-[var(--s-surface)] text-sm text-[var(--s-text)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:border-[var(--s-border-strong)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
           !value && "text-[var(--s-text-muted)]",
           className,
         )}

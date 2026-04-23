@@ -60,6 +60,7 @@ export const LayoutControls = forwardRef<HTMLDivElement, LayoutControlsProps>(
     return (
       <div
         ref={ref}
+        data-slot="layout-controls"
         className={cn("grid grid-cols-2 gap-x-16 gap-y-2", className)}
       >
         {SLIDERS.map((def) => {

@@ -17,6 +17,7 @@ export const ScrollArea = forwardRef<HTMLDivElement, ScrollAreaProps>(function S
   return (
     <div
       ref={ref}
+      data-slot="scroll-area"
       className={cn(
         "overflow-auto",
         "[&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar]:h-2",

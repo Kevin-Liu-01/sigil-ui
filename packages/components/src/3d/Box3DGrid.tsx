@@ -30,6 +30,7 @@ export const Box3DGrid = forwardRef<HTMLDivElement, Box3DGridProps>(function Box
   return (
     <div
       ref={ref}
+      data-slot="box-3d-grid"
       className={cn("grid", className)}
       style={{
         gridTemplateColumns: `repeat(${columns}, 1fr)`,

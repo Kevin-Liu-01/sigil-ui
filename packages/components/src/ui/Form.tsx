@@ -37,7 +37,7 @@ export const Form = forwardRef<HTMLFormElement, FormProps>(function Form(
   { className, ...rest },
   ref,
 ) {
-  return <form ref={ref} className={cn("space-y-6", className)} {...rest} />;
+  return <form ref={ref} data-slot="form" className={cn("space-y-6", className)} {...rest} />;
 });
 
 /* ------------------------------ FormField -------------------------------- */
@@ -59,7 +59,7 @@ export const FormField = forwardRef<HTMLDivElement, FormFieldProps>(function For
 
   return (
     <FormFieldContext.Provider value={{ id, error }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...rest}>
+      <div ref={ref} data-slot="form-field" className={cn("space-y-2", className)} {...rest}>
         {children}
       </div>
     </FormFieldContext.Provider>
@@ -77,7 +77,7 @@ export const FormItem = forwardRef<HTMLDivElement, FormItemProps>(function FormI
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("flex flex-col gap-1.5", className)} {...rest} />
+    <div ref={ref} data-slot="form-item" className={cn("flex flex-col gap-1.5", className)} {...rest} />
   );
 });
 
@@ -96,6 +96,7 @@ export const FormLabel = forwardRef<HTMLLabelElement, FormLabelProps>(function F
   return (
     <label
       ref={ref}
+      data-slot="form-label"
       htmlFor={id}
       className={cn(
         "text-sm font-medium leading-none",
@@ -124,6 +125,7 @@ export const FormControl = forwardRef<HTMLDivElement, FormControlProps>(function
   return (
     <div
       ref={ref}
+      data-slot="form-control"
       className={cn("w-full", className)}
       role="group"
       aria-describedby={error ? `${descriptionId} ${messageId}` : descriptionId}
@@ -148,6 +150,7 @@ export const FormDescription = forwardRef<HTMLParagraphElement, FormDescriptionP
     return (
       <p
         ref={ref}
+        data-slot="form-description"
         id={`${id}-description`}
         className={cn("text-xs text-[var(--s-text-muted)]", className)}
         {...rest}
@@ -172,6 +175,7 @@ export const FormMessage = forwardRef<HTMLParagraphElement, FormMessageProps>(
     return (
       <p
         ref={ref}
+        data-slot="form-message"
         id={`${id}-message`}
         role="alert"
         className={cn("text-xs text-[var(--s-error)]", className)}

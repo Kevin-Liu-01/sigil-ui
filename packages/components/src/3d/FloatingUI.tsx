@@ -26,6 +26,7 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
   return (
     <div
       ref={ref}
+      data-slot="floating-ui"
       className={cn("relative", className)}
       style={{
         width: "100%",

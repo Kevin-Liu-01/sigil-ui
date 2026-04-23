@@ -22,7 +22,7 @@ export const Field = forwardRef<HTMLDivElement, FieldProps>(function Field(
   const id = useId();
   return (
     <FieldContext.Provider value={{ id, error }}>
-      <div ref={ref} className={cn("flex flex-col gap-1.5", className)} {...rest}>
+      <div ref={ref} data-slot="field" className={cn("flex flex-col gap-1.5", className)} {...rest}>
         {children}
       </div>
     </FieldContext.Provider>
@@ -77,6 +77,7 @@ export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     return (
       <fieldset
         ref={ref}
+        data-slot="fieldset"
         className={cn("flex flex-col gap-4 border-none p-0 m-0", className)}
         {...rest}
       >

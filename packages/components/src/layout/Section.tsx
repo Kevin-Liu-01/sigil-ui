@@ -28,7 +28,7 @@ export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
   return (
     <Component
       ref={ref}
-      className={cn("w-full mx-auto", gutterMap[gutter], className)}
+      data-slot="section" className={cn("w-full mx-auto", gutterMap[gutter], className)}
       style={{ maxWidth: maxWidth ?? "var(--s-content-max, 1200px)", ...style }}
       {...rest}
     >

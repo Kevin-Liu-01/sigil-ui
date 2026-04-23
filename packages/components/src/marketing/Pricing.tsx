@@ -26,6 +26,7 @@ export const Pricing = forwardRef<HTMLDivElement, PricingProps>(function Pricing
   return (
     <div
       ref={ref}
+      data-slot="pricing"
       className={cn(
         "flex flex-col rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] p-6",
         "bg-[var(--s-surface)]",

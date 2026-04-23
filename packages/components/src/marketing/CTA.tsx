@@ -31,6 +31,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(function CTA(
   return (
     <section
       ref={ref}
+      data-slot="cta"
       className={cn(
         "w-full px-6 py-16 md:py-20",
         "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",

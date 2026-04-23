@@ -16,13 +16,13 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
   const hasError = Boolean(error);
 
   return (
-    <div className="w-full">
+    <div data-slot="textarea" className="w-full">
       <textarea
         ref={ref}
         aria-invalid={hasError || undefined}
         className={cn(
-          "flex min-h-[80px] w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
-          "bg-[var(--s-background)] text-[var(--s-text)]",
+          "flex h-20 min-h-[80px] w-full rounded-[var(--s-radius-input,0px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
+          "border-[var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
           "placeholder:text-[var(--s-text-muted)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)] resize-y",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",

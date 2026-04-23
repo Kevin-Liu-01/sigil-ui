@@ -27,6 +27,7 @@ export const ArchitectureDiagram = forwardRef<HTMLDivElement, ArchitectureDiagra
     return (
       <div
         ref={ref}
+        data-slot="architecture-diagram"
         className={cn(
           "relative w-full p-8 rounded-[var(--s-card-radius,8px)]",
           "border border-[var(--s-border)] bg-[var(--s-surface)]",

@@ -5,7 +5,12 @@ import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 import { cn } from "../utils";
 
 /** Expandable/collapsible container — controls open state. */
-export const Collapsible = CollapsiblePrimitive.Root;
+export const Collapsible = Object.assign(
+  (props: ComponentPropsWithoutRef<typeof CollapsiblePrimitive.Root>) => (
+    <CollapsiblePrimitive.Root data-slot="collapsible" {...props} />
+  ),
+  { displayName: "Collapsible" },
+);
 
 /** Trigger that toggles the collapsible — unstyled, user provides their own button. */
 export const CollapsibleTrigger = CollapsiblePrimitive.Trigger;

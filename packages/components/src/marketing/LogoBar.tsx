@@ -21,6 +21,7 @@ export const LogoBar = forwardRef<HTMLDivElement, LogoBarProps>(function LogoBar
   return (
     <div
       ref={ref}
+      data-slot="logo-bar"
       className={cn(
         "flex flex-wrap items-center justify-center gap-8 md:gap-12 py-8 px-6",
         "opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300",

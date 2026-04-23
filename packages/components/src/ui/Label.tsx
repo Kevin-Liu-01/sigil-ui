@@ -17,6 +17,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(function Label(
   return (
     <label
       ref={ref}
+      data-slot="label"
       className={cn(
         "text-sm font-medium leading-none text-[var(--s-text)]",
         "peer-disabled:cursor-not-allowed peer-disabled:opacity-70",

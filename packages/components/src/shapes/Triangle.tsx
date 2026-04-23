@@ -33,6 +33,7 @@ export const Triangle = forwardRef<HTMLDivElement, TriangleProps>(function Trian
   return (
     <div
       ref={ref}
+      data-slot="triangle"
       className={cn(
         "inline-flex items-center justify-center",
         "bg-[var(--s-surface)]",

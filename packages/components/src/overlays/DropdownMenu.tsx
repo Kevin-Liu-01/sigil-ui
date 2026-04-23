@@ -17,6 +17,7 @@ export const DropdownMenuContent = forwardRef<
     <DropdownMenuPrimitive.Portal>
       <DropdownMenuPrimitive.Content
         ref={ref}
+        data-slot="dropdown-menu"
         sideOffset={sideOffset}
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",

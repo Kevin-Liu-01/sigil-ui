@@ -32,7 +32,7 @@ export const SigilGrid = forwardRef<HTMLDivElement, SigilGridProps>(function Sig
   return (
     <div
       ref={ref}
-      className={cn("grid relative", colMap[columns], className)}
+      data-slot="grid" className={cn("grid relative", colMap[columns], className)}
       style={{
         gap: resolvedGap,
         backgroundImage: `
@@ -59,7 +59,7 @@ export const SigilGridCell = forwardRef<HTMLDivElement, SigilGridCellProps>(
     return (
       <div
         ref={ref}
-        className={cn(
+        data-slot="grid" className={cn(
           "relative p-4 rounded-sm transition-colors duration-200",
           "hover:bg-[var(--s-surface-elevated)]",
           className,

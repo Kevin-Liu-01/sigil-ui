@@ -24,6 +24,7 @@ export const ExplodedView = forwardRef<HTMLDivElement, ExplodedViewProps>(functi
   return (
     <div
       ref={ref}
+      data-slot="exploded-view"
       className={cn("flex flex-col items-center w-full", className)}
       style={{ gap, ...style }}
       {...rest}

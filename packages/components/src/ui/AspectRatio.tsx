@@ -14,6 +14,7 @@ export const AspectRatio = forwardRef<HTMLDivElement, AspectRatioProps>(function
   return (
     <div
       ref={ref}
+      data-slot="aspect-ratio"
       className={cn("relative w-full overflow-hidden", className)}
       style={{ paddingBottom: `${(1 / ratio) * 100}%`, ...style }}
       {...rest}

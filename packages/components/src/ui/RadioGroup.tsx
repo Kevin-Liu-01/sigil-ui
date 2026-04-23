@@ -13,6 +13,7 @@ export const RadioGroup = forwardRef<HTMLDivElement, RadioGroupProps>(
     return (
       <RadioGroupPrimitive.Root
         ref={ref}
+        data-slot="radio-group"
         className={cn("flex flex-col gap-2", className)}
         {...rest}
       />

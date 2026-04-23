@@ -22,7 +22,7 @@ export const IsometricView = forwardRef<HTMLDivElement, IsometricViewProps>(func
   };
 
   return (
-    <div ref={ref} className={cn("inline-block", className)} style={isoStyle} {...rest}>
+    <div ref={ref} data-slot="isometric-view" className={cn("inline-block", className)} style={isoStyle} {...rest}>
       {children}
     </div>
   );

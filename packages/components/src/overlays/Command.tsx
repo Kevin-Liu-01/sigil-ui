@@ -12,6 +12,7 @@ export const Command = forwardRef<
   return (
     <CommandPrimitive
       ref={ref}
+      data-slot="command"
       className={cn(
         "flex h-full w-full flex-col overflow-hidden",
         "rounded-[var(--s-card-radius,8px)] bg-[var(--s-background)]",

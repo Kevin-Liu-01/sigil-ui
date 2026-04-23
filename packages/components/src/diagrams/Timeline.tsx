@@ -23,7 +23,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
 ) {
   if (variant === "horizontal") {
     return (
-      <div ref={ref} className={cn("w-full overflow-x-auto", className)} {...rest}>
+      <div ref={ref} data-slot="timeline" className={cn("w-full overflow-x-auto", className)} {...rest}>
         <div className="flex items-start gap-8 min-w-max px-4 py-6">
           {entries.map((entry, i) => (
             <div key={i} className="flex flex-col items-center text-center min-w-[140px]">
@@ -46,7 +46,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
   }
 
   return (
-    <div ref={ref} className={cn("relative", className)} {...rest}>
+    <div ref={ref} data-slot="timeline" className={cn("relative", className)} {...rest}>
       <div className="absolute left-[7px] top-0 bottom-0 w-px bg-[var(--s-border)]" />
       <div className="flex flex-col gap-6">
         {entries.map((entry, i) => (

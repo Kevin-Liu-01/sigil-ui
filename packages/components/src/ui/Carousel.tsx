@@ -81,6 +81,7 @@ export const Carousel = forwardRef<HTMLDivElement, CarouselProps>(function Carou
     >
       <div
         ref={ref}
+        data-slot="carousel"
         role="region"
         aria-roledescription="carousel"
         aria-label="Carousel"

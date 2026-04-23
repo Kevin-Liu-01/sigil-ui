@@ -32,6 +32,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
   return (
     <div
       ref={ref}
+      data-slot="terminal"
       className={cn(
         "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
         "bg-[var(--s-background)] font-[family:var(--s-code-font-family,ui-monospace,SFMono-Regular,monospace)] text-sm",
@@ -52,7 +53,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
           <button
             type="button"
             onClick={handleCopy}
-            className="text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors px-2 py-1 rounded-[var(--s-radius-sm,4px)]"
+            className="cursor-pointer text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors px-2 py-1 rounded-[var(--s-radius-sm,4px)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]"
             aria-label="Copy to clipboard"
           >
             {copied ? "Copied!" : "Copy"}

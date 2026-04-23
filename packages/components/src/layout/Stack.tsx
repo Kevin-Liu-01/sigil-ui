@@ -57,6 +57,7 @@ export const Stack = forwardRef<HTMLElement, StackProps>(function Stack(
   return (
     <Component
       ref={ref}
+      data-slot="stack"
       className={cn(
         "flex",
         direction === "column" ? "flex-col" : "flex-row",

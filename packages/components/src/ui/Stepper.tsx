@@ -21,6 +21,7 @@ export const Stepper = forwardRef<HTMLDivElement, StepperProps>(function Stepper
   return (
     <div
       ref={ref}
+      data-slot="stepper"
       role="list"
       className={cn(
         "flex gap-0",

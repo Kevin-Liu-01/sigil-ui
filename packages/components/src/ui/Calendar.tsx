@@ -13,7 +13,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("p-3", className)}>
+    <div ref={ref} data-slot="calendar" className={cn("p-3", className)}>
       <DayPicker
         showOutsideDays={showOutsideDays}
         classNames={{
@@ -40,7 +40,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
             "relative flex h-9 w-9 items-center justify-center rounded-[var(--s-radius-sm,4px)] p-0 text-sm",
             "text-[var(--s-text)] transition-colors duration-100",
             "hover:bg-[var(--s-primary)]/10",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
             "aria-selected:opacity-100",
           ),
           day_button: cn(

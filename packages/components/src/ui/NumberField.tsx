@@ -25,20 +25,21 @@ export const NumberField = forwardRef<HTMLDivElement, NumberFieldProps>(function
   const increment = () => onValueChange?.(clamp(value + step));
 
   const btnBase = cn(
-    "inline-flex h-full w-9 items-center justify-center shrink-0",
+    "inline-flex h-full w-9 cursor-pointer items-center justify-center shrink-0",
     "text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)]",
     "hover:bg-[var(--s-surface-elevated)] hover:text-[var(--s-text)]",
-    "disabled:pointer-events-none disabled:opacity-50",
+    "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
   );
 
   return (
     <div
       ref={ref}
+      data-slot="number-field"
       className={cn(
         "inline-flex h-10 items-center overflow-hidden",
         "rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
         "bg-[var(--s-surface)] text-sm",
-        "focus-within:ring-2 focus-within:ring-[var(--s-primary)]",
+        "focus-within:ring-2 focus-within:ring-[var(--s-ring,var(--s-primary))]",
         className,
       )}
       {...rest}

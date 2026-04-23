@@ -21,6 +21,7 @@ export const FeatureFrame = forwardRef<HTMLDivElement, FeatureFrameProps>(functi
   return (
     <div
       ref={ref}
+      data-slot="feature-frame"
       className={cn(
         "flex flex-col gap-3 p-6 rounded-[var(--s-card-radius,8px)]",
         "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)]",
