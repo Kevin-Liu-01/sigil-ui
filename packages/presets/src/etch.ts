@@ -140,6 +140,7 @@ export const etchPreset: SigilPreset = {
       "card-radius": "4px",
       "gutter-pattern": "horizontal",
       "margin-pattern": "plus",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

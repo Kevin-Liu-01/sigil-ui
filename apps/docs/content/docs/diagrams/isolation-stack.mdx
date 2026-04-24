@@ -1,0 +1,32 @@
+---
+title: IsolationStack
+description: "A layered isolation stack showing separated concerns or environments."
+---
+
+## Import
+
+```tsx
+import { IsolationStack } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <IsolationStack />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layers` | `IsolationLayer[]` | — | Stack layers |
+| `comparison` | `ComparisonColumn[]` | — | Comparison columns |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Layer borders |
+| `--s-surface` | Layer background |
+| `--s-text` | Labels |
+| `--s-text-muted` | Descriptions |

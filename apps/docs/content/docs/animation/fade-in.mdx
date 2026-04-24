@@ -1,0 +1,33 @@
+---
+title: FadeIn
+description: "A FadeIn component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { FadeIn } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<FadeIn>...</FadeIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `FadeDirection` | `up` | Direction to fade from. |
+| `offset` | `number` | `24` | Offset in pixels for the translate. |
+| `delay` | `number` | `0` | Delay before animation in ms. |
+| `trigger` | `"scroll" | "mount"` | `scroll` | Whether animation triggers on scroll (IntersectionObserver) or immediately on mount. |
+| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver options when trigger is "scroll". |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |

@@ -1,0 +1,40 @@
+---
+title: DiagramConnector
+description: "A line or arrow connector for linking diagram nodes together."
+---
+
+## Import
+
+```tsx
+import { DiagramConnector } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "flex", flexDirection: "column", gap: 8, padding: 16 }}>
+    <DiagramConnector direction="horizontal" variant="solid" />
+    <DiagramConnector direction="horizontal" variant="dashed" />
+    <DiagramConnector direction="horizontal" variant="arrow" />
+  </div>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DiagramConnector direction="horizontal" variant="arrow" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Connector direction |
+| `variant` | `"solid" \| "dashed" \| "arrow"` | `"solid"` | Line style |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Connector stroke |
+| `--s-border-strong` | Arrow fill |

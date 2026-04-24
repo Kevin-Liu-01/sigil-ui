@@ -137,6 +137,7 @@ export const forgePreset: SigilPreset = {
       "card-radius": "6px",
       "gutter-pattern": "crosshatch",
       "margin-pattern": "brick",
+      "margin-border": "2px solid",
     },
     radius: {
       none: "0px",

@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={robotoMono.variable}
       suppressHydrationWarning
     >
-      <body style={{ paddingBottom: 40 }} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <SigilShell>
             {children}

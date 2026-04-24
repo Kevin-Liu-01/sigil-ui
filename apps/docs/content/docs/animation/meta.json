@@ -1,0 +1,23 @@
+{
+  "title": "Animation",
+  "pages": [
+    "animate-on-mount",
+    "animate-on-scroll",
+    "blur-fade",
+    "fade-in",
+    "gradient-text",
+    "letter-pull-up",
+    "marquee",
+    "number-ticker",
+    "parallax-layer",
+    "pulse",
+    "ripple",
+    "scale-in",
+    "scroll-progress",
+    "slide-in",
+    "stagger",
+    "text-reveal",
+    "type-writer",
+    "word-rotate"
+  ]
+}

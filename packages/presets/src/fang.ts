@@ -140,6 +140,7 @@ export const fangPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "zigzag",
       "margin-pattern": "crosshatch",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

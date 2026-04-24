@@ -1,0 +1,46 @@
+---
+title: VoronoiBento
+description: "A VoronoiBento component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { VoronoiBento, VoronoiCell } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <VoronoiBento />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<VoronoiBento>...</VoronoiBento>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<VoronoiCell>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `seeds` | `number` | `8` | Number of Voronoi cells. |
+| `gap` | `number` | `8` | Gutter between cells in px. Falls back to --s-bento-gap. |
+| `rounded` | `number` | `0` | Border-radius on the outer container. |
+| `width` | `number` | — | Container width in px. Uses 100% when omitted. |
+| `height` | `number` | `500` | Container height in px. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-surface` | Surface |
+| `--s-bg-elevated` | Bg elevated |
+| `--s-border` | Border |

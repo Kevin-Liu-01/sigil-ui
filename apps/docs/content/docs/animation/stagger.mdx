@@ -1,0 +1,34 @@
+---
+title: Stagger
+description: "A Stagger component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Stagger } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Stagger>...</Stagger>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `interval` | `number` | `80` | Delay between each child in ms. |
+| `delay` | `number` | `0` | Base delay before the first child animates in ms. |
+| `yOffset` | `number` | `20` | Vertical offset for each child. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-ease-default` | Ease default |

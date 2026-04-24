@@ -134,8 +134,8 @@ export const SelectItem = forwardRef<
     <SelectPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex h-8 w-full cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 outline-none",
-        "transition-colors duration-[var(--s-duration-fast,100ms)]",
+        "relative flex h-8 w-full cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 text-sm outline-none",
+        "text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,100ms)]",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,

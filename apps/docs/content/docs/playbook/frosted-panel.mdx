@@ -1,0 +1,39 @@
+---
+title: FrostedPanel
+description: "A FrostedPanel component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { FrostedPanel } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <FrostedPanel>
+    FrostedPanel content
+  </FrostedPanel>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<FrostedPanel>FrostedPanel content</FrostedPanel>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `edge` | `FrostedPanelEdge` | `left` | Which edge gets a border. |
+| `variant` | `"frosted" | "solid"` | `frosted` | Use frosted glass (blur) or solid bg. |
+| `as` | `"div" | "aside" | "nav" | "header"` | `div` | Element type. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-background` | Background |

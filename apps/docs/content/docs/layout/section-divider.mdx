@@ -1,0 +1,48 @@
+---
+title: SectionDivider
+description: "A SectionDivider component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { SectionDivider } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <SectionDivider>
+    SectionDivider content
+  </SectionDivider>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<SectionDivider>SectionDivider content</SectionDivider>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `pattern` | `SectionDividerPattern` | `dots` | Pattern variant filling the divider band. |
+| `size` | `"xs" | "sm" | "md" | "lg" | "xl"` | `md` | Band height. |
+| `opacity` | `number` | `0.15` | Pattern opacity. |
+| `scale` | `number` | `1` | Pattern scale multiplier. |
+| `showBorders` | `boolean` | `true` | Show border lines on top and bottom edges. |
+| `showCross` | `boolean` | `false` | Show cross marks at left/right endpoints. |
+| `label` | `ReactNode` | — | Optional label rendered in the center. |
+| `fadeEdges` | `boolean` | `true` | Fade edges with a horizontal gradient mask. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border-muted` | Border muted |
+| `--s-border` | Border |
+| `--s-cross-stroke` | Cross stroke |
+| `--s-background` | Background |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

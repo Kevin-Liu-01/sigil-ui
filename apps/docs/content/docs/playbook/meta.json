@@ -1,0 +1,14 @@
+{
+  "title": "Playbook",
+  "pages": [
+    "gap-pixel-grid",
+    "mono-label",
+    "border-stack",
+    "accent-cta",
+    "tabular-value",
+    "featured-grid",
+    "density-text",
+    "frosted-panel",
+    "card-cell"
+  ]
+}

@@ -1,0 +1,66 @@
+---
+title: TreeDiagram
+description: "A hierarchical tree diagram showing parent-child relationships."
+---
+
+## Import
+
+```tsx
+import { TreeDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <TreeDiagram
+    root={{
+      id: "root",
+      label: "App",
+      variant: "accent",
+      children: [
+        { id: "api", label: "API", children: [
+          { id: "auth", label: "Auth" },
+          { id: "db", label: "Database" },
+        ]},
+        { id: "ui", label: "Frontend" },
+      ],
+    }}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<TreeDiagram
+  root={{
+    id: "root",
+    label: "App",
+    variant: "accent",
+    children: [
+      { id: "api", label: "API", children: [
+        { id: "auth", label: "Auth" },
+        { id: "db", label: "Database" },
+      ]},
+      { id: "ui", label: "Frontend" },
+    ],
+  }}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `root` | `TreeNode` | — | Root node of the tree |
+| `connector` | `"solid" \| "dashed"` | `"solid"` | Connector line style |
+| `compact` | `boolean` | `false` | Use smaller node sizing |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Connector lines and default node border |
+| `--s-surface` | Node background |
+| `--s-text` | Node label text |
+| `--s-primary` | Accent and highlighted node styles |
+| `--s-radius-md` | Node border radius |

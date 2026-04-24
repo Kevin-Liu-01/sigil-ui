@@ -1,0 +1,82 @@
+---
+title: GanttChart
+description: "A Gantt chart for project timelines with grouped tasks and milestones."
+---
+
+## Import
+
+```tsx
+import { GanttChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <GanttChart
+    totalUnits={6}
+    unitName="Sprint"
+    groups={[
+      {
+        label: "Backend",
+        tasks: [
+          { id: "api", label: "API Design", start: 0, end: 2 },
+          { id: "db", label: "Database", start: 1, end: 4 },
+        ],
+      },
+      {
+        label: "Frontend",
+        tasks: [
+          { id: "ui", label: "Components", start: 2, end: 5 },
+          { id: "launch", label: "Launch", start: 5, end: 6, milestone: true },
+        ],
+      },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<GanttChart
+  totalUnits={6}
+  unitName="Sprint"
+  groups={[
+    {
+      label: "Backend",
+      tasks: [
+        { id: "api", label: "API Design", start: 0, end: 2 },
+        { id: "db", label: "Database", start: 1, end: 4 },
+      ],
+    },
+    {
+      label: "Frontend",
+      tasks: [
+        { id: "ui", label: "Components", start: 2, end: 5 },
+        { id: "launch", label: "Launch", start: 5, end: 6, milestone: true },
+      ],
+    },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `groups` | `GanttGroup[]` | — | Task groups with label and tasks |
+| `totalUnits` | `number` | — | Total time units on x-axis |
+| `unitLabels` | `string[]` | — | Custom labels for each unit column |
+| `unitName` | `string` | `"Sprint"` | Header label for units |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Task bar and milestone color |
+| `--s-border` | Table borders |
+| `--s-surface` | Background |
+| `--s-surface-elevated` | Group header background |
+| `--s-text` | Task labels |
+| `--s-text-muted` | Column headers |
+| `--s-radius-card` | Outer container radius |
+| `--s-radius-sm` | Task bar radius |

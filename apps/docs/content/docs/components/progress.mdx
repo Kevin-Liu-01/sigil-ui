@@ -1,0 +1,42 @@
+---
+title: Progress
+description: "A Progress component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Progress } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Progress />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Progress>Progress content</Progress>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number` | — | Progress value (0–100). Omit for indeterminate. |
+| `label` | `boolean` | — | Show percentage label. |
+| `size` | `"sm" | "md" | "lg"` | `md` | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-full` | Radius full |
+| `--s-border-muted` | Border muted |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-duration-normal` | Duration normal |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

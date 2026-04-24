@@ -1,0 +1,57 @@
+---
+title: ActivityFeed
+description: "A timeline-style feed showing events with colored status indicators and timestamps."
+---
+
+## Import
+
+```tsx
+import { ActivityFeed } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ActivityFeed
+    entries={[
+      { id: "1", title: "Deployment succeeded", description: "v2.1.0 deployed to production", timestamp: "2m ago", variant: "success" },
+      { id: "2", title: "PR #142 merged", description: "Add radar chart component", timestamp: "15m ago", variant: "info" },
+      { id: "3", title: "Build failed", description: "Type error in BillingChart.tsx", timestamp: "1h ago", variant: "error" },
+      { id: "4", title: "New comment", description: "Alice commented on PR #140", timestamp: "3h ago", variant: "default" },
+      { id: "5", title: "Dependency update", description: "Bumped @sigil-ui/tokens to 1.4.0", timestamp: "5h ago", variant: "warning" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ActivityFeed
+  entries={[
+    { id: "1", title: "Deploy succeeded", timestamp: "2m ago", variant: "success" },
+    { id: "2", title: "Build failed", timestamp: "1h ago", variant: "error" },
+  ]}
+  maxEntries={10}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `entries` | `ActivityEntry[]` | — | Feed entries with title, description, timestamp, variant |
+| `maxEntries` | `number` | — | Truncate after N entries (shows "+X more") |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-success` | Success variant dot |
+| `--s-warning` | Warning variant dot |
+| `--s-error` | Error variant dot |
+| `--s-info` | Info variant dot |
+| `--s-border` | Timeline vertical line |
+| `--s-border-strong` | Default variant dot |
+| `--s-text` | Entry title |
+| `--s-text-muted` | Description, timestamp, icons |
+| `--s-font-mono` | Timestamp font family |

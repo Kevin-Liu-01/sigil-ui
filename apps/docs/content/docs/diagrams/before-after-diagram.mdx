@@ -1,0 +1,46 @@
+---
+title: BeforeAfterDiagram
+description: "A side-by-side before/after comparison diagram."
+---
+
+## Import
+
+```tsx
+import { BeforeAfterDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <BeforeAfterDiagram
+    before={{ title: "Before", children: "Manual CSS overrides, scattered Tailwind classes, no consistency" }}
+    after={{ title: "After", children: "Token-driven design, one preset change updates everything" }}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<BeforeAfterDiagram
+  before={{ title: "Before", children: "Manual edits" }}
+  after={{ title: "After", children: "Automated tokens" }}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `before` | `object` | — | Before panel with title and children |
+| `after` | `object` | — | After panel with title and children |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Panel borders |
+| `--s-surface` | Panel background |
+| `--s-error` | Before accent |
+| `--s-success` | After accent |
+| `--s-text` | Title and content |
+| `--s-radius-md` | Panel radius |

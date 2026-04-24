@@ -1,0 +1,75 @@
+---
+title: MatrixDiagram
+description: "A 2D matrix/quadrant diagram for categorization and positioning."
+---
+
+## Import
+
+```tsx
+import { MatrixDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MatrixDiagram
+    xAxisLabel="Effort →"
+    yAxisLabel="Impact →"
+    xLabels={["Low Effort", "High Effort"]}
+    yLabels={["High Impact", "Low Impact"]}
+    cells={[
+      [
+        { id: "quick", label: "Quick Wins", description: "Do first" },
+        { id: "major", label: "Major Projects", description: "Plan carefully" },
+      ],
+      [
+        { id: "fill", label: "Fill-ins", description: "Do if time" },
+        { id: "avoid", label: "Thankless Tasks", description: "Avoid" },
+      ],
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MatrixDiagram
+  xAxisLabel="Effort →"
+  yAxisLabel="Impact →"
+  xLabels={["Low Effort", "High Effort"]}
+  yLabels={["High Impact", "Low Impact"]}
+  cells={[
+    [
+      { id: "quick", label: "Quick Wins", description: "Do first" },
+      { id: "major", label: "Major Projects", description: "Plan carefully" },
+    ],
+    [
+      { id: "fill", label: "Fill-ins", description: "Do if time" },
+      { id: "avoid", label: "Thankless Tasks", description: "Avoid" },
+    ],
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `cells` | `MatrixCell[][]` | — | 2D array of cell content |
+| `xLabels` | `string[]` | — | Column labels |
+| `yLabels` | `string[]` | — | Row labels |
+| `xAxisLabel` | `string` | — | X-axis title |
+| `yAxisLabel` | `string` | — | Y-axis title |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Cell borders |
+| `--s-surface` | Cell background |
+| `--s-surface-elevated` | Cell hover background |
+| `--s-text` | Cell label text |
+| `--s-text-muted` | Axis labels and descriptions |
+| `--s-primary` | Icon color |
+| `--s-radius-md` | Cell border radius |
+| `--s-duration-fast` | Hover transition |

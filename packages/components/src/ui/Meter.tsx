@@ -36,10 +36,10 @@ export const Meter = forwardRef<HTMLDivElement, MeterProps>(function Meter(
         aria-valuemin={0}
         aria-valuemax={max}
         aria-label={label}
-        className="relative h-2.5 w-full overflow-hidden rounded-full bg-[var(--s-border)]"
+        className="relative h-2.5 w-full overflow-hidden rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border)]"
       >
         <div
-          className={cn("h-full rounded-full transition-[width] duration-[var(--s-duration-normal,300ms)] ease-out", fill)}
+          className={cn("h-full rounded-[var(--s-radius-full,9999px)] transition-[width] duration-[var(--s-duration-normal,300ms)] ease-out", fill)}
           style={{ width: `${pct}%` }}
         />
       </div>

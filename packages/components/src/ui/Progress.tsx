@@ -35,7 +35,7 @@ export const Progress = forwardRef<HTMLDivElement, ProgressProps>(
           <ProgressPrimitive.Indicator
             data-slot="progress-indicator"
             className={cn(
-              "h-full bg-[var(--s-primary)]",
+              "h-full rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)]",
               indeterminate
                 ? "w-1/3 animate-progress-indeterminate"
                 : "transition-all duration-[var(--s-duration-normal,300ms)]",

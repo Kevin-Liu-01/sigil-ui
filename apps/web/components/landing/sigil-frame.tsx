@@ -18,6 +18,7 @@ export function SigilFrame({ children }: { children: ReactNode }) {
   let railGap = 48;
   let gridCell = 16;
   let crossStroke = 1.5;
+  let marginBorder: string | undefined;
   let isEdgeless = false;
 
   try {
@@ -31,6 +32,7 @@ export function SigilFrame({ children }: { children: ReactNode }) {
     if (sigil?.["cross-stroke"]) crossStroke = parseFloat(sigil["cross-stroke"] as string) || crossStroke;
     if (sigil?.["rail-gap"]) railGap = parseInt(sigil["rail-gap"] as string) || railGap;
     if (layout?.["content-max"]) contentMax = parseInt(layout["content-max"] as string) || contentMax;
+    if (sigil?.["margin-border"]) marginBorder = sigil["margin-border"] as string;
 
     isEdgeless = sigil?.["gutter-visible"] === false
       || (gutterPattern === "none" && marginPattern === "none" && railGap === 0);
@@ -43,6 +45,7 @@ export function SigilFrame({ children }: { children: ReactNode }) {
         showMarginLines={!isEdgeless}
         gutterPattern={gutterPattern}
         marginPattern={marginPattern}
+        marginBorder={marginBorder}
         contentMax={contentMax}
         railGap={railGap}
         gridCell={gridCell}

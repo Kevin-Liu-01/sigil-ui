@@ -1,4 +1,13 @@
 {
   "title": "3D",
-  "pages": ["box3d", "card3d"]
+  "pages": [
+    "box3-d",
+    "box3-d-grid",
+    "card3-d",
+    "floating-ui",
+    "isometric-cylinder",
+    "isometric-prism",
+    "isometric-scene",
+    "isometric-view"
+  ]
 }

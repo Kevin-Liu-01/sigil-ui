@@ -227,6 +227,7 @@ export type SigilGridTokens = {
   readonly "gutter-pattern"?: GutterPattern;
   readonly "margin-pattern"?: GutterPattern;
   readonly "gutter-border"?: string;
+  readonly "margin-border"?: string;
   readonly "gutter-visible"?: boolean;
 };
 

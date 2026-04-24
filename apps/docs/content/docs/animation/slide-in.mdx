@@ -1,0 +1,35 @@
+---
+title: SlideIn
+description: "A SlideIn component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { SlideIn } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<SlideIn>...</SlideIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `SlideDirection` | `left` | Edge to slide from. |
+| `offset` | `number` | `60` | Slide distance in pixels. |
+| `delay` | `number` | `0` | Delay before animation in ms. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-slow` | Duration slow |
+| `--s-ease-default` | Ease default |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |

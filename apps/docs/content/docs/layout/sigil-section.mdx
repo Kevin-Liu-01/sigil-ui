@@ -1,0 +1,50 @@
+---
+title: SigilSection
+description: "A SigilSection component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { SigilSection } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <SigilSection>
+    SigilSection content
+  </SigilSection>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<SigilSection>SigilSection content</SigilSection>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `id` | `string` | — | — |
+| `as` | `ElementType` | `section` | Semantic element type. |
+| `borderTop` | `boolean` | — | Show a 1px top border along the section boundary. |
+| `borderBottom` | `boolean` | — | Show a 1px bottom border along the section boundary. |
+| `showCrosses` | `boolean` | — | Render cross marks at the 4 gutter intersections of each visible border. |
+| `padding` | `string` | — | CSS padding string. Uses `var(--s-section-py)` and `var(--s-page-margin)` by default. |
+| `contentMax` | `number` | — | Content max width for standalone mode (outside SigilPageGrid). |
+| `railGap` | `number` | — | Rail gap for standalone mode (outside SigilPageGrid). |
+| `gutterPattern` | `GutterPattern` | — | Gutter pattern for standalone mode. |
+| `marginPattern` | `GutterPattern` | — | Margin pattern for standalone mode. |
+| `showGutterGrid` | `boolean` | `true` | Show gutter grid in standalone mode. |
+| `showMarginLines` | `boolean` | `true` | Show margin lines in standalone mode. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-section-py` | Section py |
+| `--s-page-margin` | Page margin |
+| `--s-background` | Background |

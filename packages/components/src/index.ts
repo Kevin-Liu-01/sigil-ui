@@ -106,7 +106,7 @@ export { Collapsible, CollapsibleTrigger, CollapsibleContent, type CollapsibleCo
 export { RadioGroup, RadioGroupItem, type RadioGroupProps, type RadioGroupItemProps } from "./ui/RadioGroup";
 export { Toggle, type ToggleProps } from "./ui/Toggle";
 export { ToggleGroup, ToggleGroupItem, type ToggleGroupProps, type ToggleGroupItemProps } from "./ui/ToggleGroup";
-export { DatePicker, type DatePickerProps } from "./ui/DatePicker";
+export { DatePicker, DateRangePicker, type DatePickerProps, type DateRangePickerProps, type DateRange } from "./ui/DatePicker";
 export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator } from "./ui/InputOTP";
 export { NumberField, type NumberFieldProps } from "./ui/NumberField";
 export { Meter, type MeterProps } from "./ui/Meter";
@@ -273,6 +273,87 @@ export {
 export {
   StatePersistence, type StatePersistenceProps, type PersistenceActiveItem, type PersistedStateRow,
 } from "./diagrams/templates/StatePersistence";
+export {
+  RadarChart, type RadarChartProps, type RadarAxis, type RadarSeries,
+} from "./diagrams/templates/RadarChart";
+export {
+  TreeDiagram, type TreeDiagramProps, type TreeDiagramNode,
+} from "./diagrams/templates/TreeDiagram";
+export {
+  GanttChart, type GanttChartProps, type GanttTask, type GanttGroup,
+} from "./diagrams/templates/GanttChart";
+export {
+  FunnelChart, type FunnelChartProps, type FunnelStep,
+} from "./diagrams/templates/FunnelChart";
+export {
+  MatrixDiagram, type MatrixDiagramProps, type MatrixCell,
+} from "./diagrams/templates/MatrixDiagram";
+export {
+  DependencyGraph, type DependencyGraphProps, type DepNode, type DepEdge,
+} from "./diagrams/templates/DependencyGraph";
+export {
+  DonutChart, type DonutChartProps, type DonutSegment,
+} from "./diagrams/templates/DonutChart";
+export {
+  NetworkGraph, type NetworkGraphProps, type NetworkNode, type NetworkEdge,
+} from "./diagrams/templates/NetworkGraph";
+export {
+  HeatmapGrid, type HeatmapGridProps, type HeatmapCell,
+} from "./diagrams/templates/HeatmapGrid";
+export {
+  VennDiagram, type VennDiagramProps, type VennCircle,
+} from "./diagrams/templates/VennDiagram";
+export {
+  PricingTable, type PricingTableProps, type PricingColumn, type PricingFeature,
+} from "./diagrams/templates/PricingTable";
+export {
+  ChangelogTable, type ChangelogTableProps, type ChangelogRelease, type ChangelogEntry, type ChangelogEntryType,
+} from "./diagrams/templates/ChangelogTable";
+export {
+  StatusTable, type StatusTableProps, type ServiceEntry, type ServiceStatus,
+} from "./diagrams/templates/StatusTable";
+export {
+  SpecTable, type SpecTableProps, type SpecRow, type SpecGroup,
+} from "./diagrams/templates/SpecTable";
+export {
+  LeaderboardTable, type LeaderboardTableProps, type LeaderboardRow,
+} from "./diagrams/templates/LeaderboardTable";
+export {
+  BarChart, type BarChartProps, type BarChartBar, type BarChartGroup,
+} from "./diagrams/templates/BarChart";
+export {
+  PieChart, type PieChartProps, type PieSlice,
+} from "./diagrams/templates/PieChart";
+export {
+  LineChart, type LineChartProps, type LineChartSeries, type LineChartPoint,
+} from "./diagrams/templates/LineChart";
+export {
+  AreaChart, type AreaChartProps, type AreaChartSeries, type AreaChartPoint,
+} from "./diagrams/templates/AreaChart";
+export {
+  CommitGrid, type CommitGridProps, type CommitDay,
+} from "./diagrams/templates/CommitGrid";
+export {
+  SparkLine, type SparkLineProps,
+} from "./diagrams/templates/SparkLine";
+export {
+  UsageGauge, type UsageGaugeProps,
+} from "./diagrams/templates/UsageGauge";
+export {
+  BillingChart, type BillingChartProps, type BillingPeriod,
+} from "./diagrams/templates/BillingChart";
+export {
+  ProgressRing, type ProgressRingProps, type ProgressRingTrack,
+} from "./diagrams/templates/ProgressRing";
+export {
+  MetricCard, type MetricCardProps,
+} from "./diagrams/templates/MetricCard";
+export {
+  ActivityFeed, type ActivityFeedProps, type ActivityEntry, type ActivityEntryVariant,
+} from "./diagrams/templates/ActivityFeed";
+export {
+  MiniBarList, type MiniBarListProps, type MiniBarItem,
+} from "./diagrams/templates/MiniBarList";
 
 // ---------------------------------------------------------------------------
 // Marketing

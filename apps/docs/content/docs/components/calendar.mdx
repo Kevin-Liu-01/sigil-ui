@@ -1,0 +1,45 @@
+---
+title: Calendar
+description: "A date calendar with month/year dropdown navigation and stable height."
+---
+
+## Import
+
+```tsx
+import { Calendar } from "@sigil-ui/components";
+```
+
+## Usage
+
+<Calendar mode="single" />
+
+### With dropdown navigation (default)
+
+The calendar defaults to `captionLayout="dropdown"` with a 100-year range, letting users jump to any month or year quickly.
+
+<Calendar mode="single" />
+
+### Label-only caption
+
+<Calendar mode="single" captionLayout="label" />
+
+### Fixed height
+
+The calendar uses `fixedWeeks` by default — it always renders 6 rows so height never shifts when navigating between months.
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-background` | Background |
+| `--s-radius-sm` | Radius sm |
+| `--s-text-muted` | Text muted |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |

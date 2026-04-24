@@ -42,6 +42,15 @@ import {
   TabsTrigger,
   LoadingSpinner,
   Textarea,
+  Calendar as SigilCalendar,
+  DatePicker,
+  DateRangePicker,
+  Kbd,
+  RatingGroup,
+  type DateRange,
+  SparkLine,
+  AreaChart,
+  CommitGrid,
 } from "@sigil-ui/components";
 
 import {
@@ -84,7 +93,6 @@ import {
   Search,
   Volume2,
   Bell,
-  Star,
   Wifi,
   Zap,
   Info,
@@ -216,10 +224,10 @@ function TokenEditorCard() {
             <SelectTrigger className="h-8 text-[11px]">
               <SelectValue />
             </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="monument">Monument Grotesk</SelectItem>
-              <SelectItem value="inter">Inter</SelectItem>
-              <SelectItem value="geist">Geist</SelectItem>
+            <SelectContent className="min-w-[var(--radix-select-trigger-width)]">
+              <SelectItem value="monument" className="text-[11px]">Monument Grotesk</SelectItem>
+              <SelectItem value="inter" className="text-[11px]">Inter</SelectItem>
+              <SelectItem value="geist" className="text-[11px]">Geist</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -396,7 +404,7 @@ function PlanSelector() {
 
 function InviteCard() {
   return (
-    <Card className="w-full">
+    <Card className="w-full" style={{ "--avatar-group-ring": "var(--s-surface, var(--s-background))" } as React.CSSProperties}>
       <CardContent className="p-4 flex flex-col gap-3">
         <Label className="text-[10px]">Invite Teammates</Label>
         <div className="flex gap-2">
@@ -461,6 +469,7 @@ function BadgeRow() {
 }
 
 function SliderRow() {
+  const [vol, setVol] = useState(72);
   return (
     <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <div className="flex items-center justify-between">
@@ -468,9 +477,9 @@ function SliderRow() {
           <Volume2 size={13} className="text-[var(--s-text-muted)]" />
           Volume
         </span>
-        <span className="text-[10px] tabular-nums text-[var(--s-text-muted)]">72%</span>
+        <span className="text-[10px] tabular-nums text-[var(--s-text-muted)]">{vol}%</span>
       </div>
-      <Slider defaultValue={[72]} />
+      <Slider defaultValue={[72]} onValueChange={(v: number[]) => setVol(v[0])} />
     </div>
   );
 }
@@ -556,7 +565,7 @@ function PaginationRow() {
 
 function AvatarStackRow() {
   return (
-    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+    <div className="flex items-center justify-between p-3 bg-[var(--s-background)]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <AvatarGroup max={4}>
         <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" />
         <Avatar src="https://github.com/rauchg.png" name="Guillermo Rauch" size="sm" />
@@ -645,8 +654,8 @@ function WifiRow() {
 
 function AlertRow() {
   return (
-    <Alert variant="info" className="p-2.5">
-      <AlertTitle className="text-[10px] flex items-center gap-1.5">
+    <Alert variant="info" className="p-2.5 [&>svg~*]:pl-0 [&:has(svg)]:pl-2.5">
+      <AlertTitle className="text-[10px] flex items-center gap-1.5 mb-0">
         <Info size={12} />
         New deployment pipeline available.
       </AlertTitle>
@@ -668,11 +677,7 @@ function StarRatingRow() {
   return (
     <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <span className="text-[11px] text-[var(--s-text)]">Rate this component</span>
-      <div className="flex gap-0.5">
-        {[1, 2, 3, 4, 5].map((i) => (
-          <Star key={i} size={14} className={i <= 4 ? "text-[var(--s-warning)] fill-[var(--s-warning)]" : "text-[var(--s-text-muted)]"} />
-        ))}
-      </div>
+      <RatingGroup defaultValue={4} size="sm" />
     </div>
   );
 }
@@ -781,13 +786,14 @@ function ChatInputRow() {
 }
 
 function PriceRangeRow() {
+  const [range, setRange] = useState([200, 800]);
   return (
     <div className="flex flex-col gap-2">
       <div>
         <span className="text-[11px] font-semibold text-[var(--s-text)]">Price Range</span>
-        <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">Set your budget range ($200 – $800).</p>
+        <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">Set your budget range (${range[0]} – ${range[1]}).</p>
       </div>
-      <Slider defaultValue={[200, 800]} min={0} max={1000} step={50} />
+      <Slider defaultValue={[200, 800]} min={0} max={1000} step={50} onValueChange={(v: number[]) => setRange(v)} />
     </div>
   );
 }
@@ -843,16 +849,14 @@ function MentionRow() {
 }
 
 function DateRangeRow() {
+  const [range, setRange] = useState<DateRange | undefined>(undefined);
   return (
-    <div className="flex items-center gap-2">
-      <div className="flex items-center gap-1.5 h-8 px-2.5 flex-1 text-[10px]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-        <CalendarDays size={12} className="text-[var(--s-text-muted)] shrink-0" />
-        <span className="text-[var(--s-text)]">Apr 1</span>
-        <span className="text-[var(--s-text-muted)]">–</span>
-        <span className="text-[var(--s-text)]">Apr 22</span>
-      </div>
-      <Button size="sm" variant="outline" className="text-[10px] h-8 shrink-0">Apply</Button>
-    </div>
+    <DateRangePicker
+      value={range}
+      onValueChange={setRange}
+      numberOfMonths={1}
+      className="w-full h-8 text-[10px]"
+    />
   );
 }
 
@@ -883,6 +887,451 @@ function KeyValueRow() {
   );
 }
 
+function MeterRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Meter value={82} max={100} label="Memory" className="text-xs" />
+      <Meter value={34} max={100} label="CPU" className="text-xs" />
+    </div>
+  );
+}
+
+function CalendarCard() {
+  const [selected, setSelected] = useState<Date | undefined>(new Date());
+  return (
+    <div className="w-full overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <SigilCalendar
+        mode="single"
+        selected={selected}
+        onSelect={setSelected}
+        captionLayout="dropdown"
+        className="p-2 w-full [--cell-size:1.5rem] [&_table]:w-full [&_table]:text-[10px] [&_button]:text-[10px] [&_th]:text-[8px] [&_td]:p-0.5 [&_select]:text-[10px] [&_.rdp-dropdowns]:text-[10px] [&_.rdp-dropdown_root]:text-[10px] [&_.rdp-caption_label]:text-[10px]"
+      />
+    </div>
+  );
+}
+
+function DatePickerRow() {
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  return (
+    <div className="flex flex-col gap-1.5">
+      <Label className="text-[10px] flex items-center gap-1.5">
+        <CalendarDays size={12} className="text-[var(--s-text-muted)]" />
+        Deploy Date
+      </Label>
+      <DatePicker value={date} onValueChange={setDate} className="w-full h-8 text-[10px]" />
+    </div>
+  );
+}
+
+function RatingRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)]">Design quality</span>
+      <RatingGroup defaultValue={4} size="sm" />
+    </div>
+  );
+}
+
+function KbdShortcutRow() {
+  return (
+    <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[10px] text-[var(--s-text-muted)]">Quick search</span>
+      <div className="flex items-center gap-0.5"><Kbd className="text-[9px] h-5 min-w-[20px]">⌘</Kbd><Kbd className="text-[9px] h-5 min-w-[20px]">K</Kbd></div>
+    </div>
+  );
+}
+
+function UptimeRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Uptime — 30d</span>
+        <span className="text-[9px] font-mono tabular-nums text-[var(--s-success)]">99.98%</span>
+      </div>
+      <div className="flex gap-px">
+        {Array.from({ length: 30 }, (_, i) => (
+          <div key={i} className="flex-1 h-3 rounded-[1px]" style={{ background: i === 17 ? "var(--s-warning)" : "var(--s-success)", opacity: i === 17 ? 1 : 0.7 }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LatencyRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Zap size={13} className="text-[var(--s-success)]" />
+        p99 Latency
+      </span>
+      <span className="text-[10px] font-mono tabular-nums text-[var(--s-text)]">12ms</span>
+    </div>
+  );
+}
+
+function ErrorRateRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Shield size={13} className="text-[var(--s-text-muted)]" />
+        Error rate
+      </span>
+      <span className="text-[10px] font-mono tabular-nums text-[var(--s-success)]">0.02%</span>
+    </div>
+  );
+}
+
+function CacheHitRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-baseline justify-between">
+        <span className="text-[10px] text-[var(--s-text)]">Cache Hit Rate</span>
+        <span className="text-[9px] font-mono tabular-nums text-[var(--s-success)]">94%</span>
+      </div>
+      <Progress value={94} className="h-1.5" />
+    </div>
+  );
+}
+
+function LatencyBuildRow() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      <div className="flex flex-col items-center justify-center p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+        <span className="text-[9px] text-[var(--s-text-muted)] flex items-center gap-1"><Zap size={10} />p99</span>
+        <span className="text-sm font-mono tabular-nums font-semibold text-[var(--s-text)]">12ms</span>
+      </div>
+      <div className="flex flex-col items-center justify-center p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+        <span className="text-[9px] text-[var(--s-text-muted)] flex items-center gap-1"><Rocket size={10} />Builds</span>
+        <span className="text-sm font-mono tabular-nums font-semibold text-[var(--s-text)]">47</span>
+      </div>
+    </div>
+  );
+}
+
+function VoronoiRow() {
+  return (
+    <div className="w-full overflow-hidden flex-1 min-h-[52px]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="grid grid-cols-5 grid-rows-3 gap-px h-full" style={{ background: "var(--s-border)" }}>
+        <div className="col-span-2 row-span-3" style={{ background: "var(--s-primary)", opacity: 0.8 }} />
+        <div className="col-span-2 row-span-2" style={{ background: "var(--s-surface)" }} />
+        <div className="row-span-3" style={{ background: "color-mix(in oklch, var(--s-primary) 20%, var(--s-surface))" }} />
+        <div style={{ background: "var(--s-surface)" }} />
+        <div style={{ background: "color-mix(in oklch, var(--s-primary) 40%, var(--s-surface))" }} />
+      </div>
+    </div>
+  );
+}
+
+function FontStackRow() {
+  return (
+    <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Palette size={12} className="text-[var(--s-text-muted)]" />
+        Font triad
+      </span>
+      <span className="text-[9px] font-mono text-[var(--s-text-muted)] truncate ml-2">Inter · Mono · Display</span>
+    </div>
+  );
+}
+
+function ErrorActiveRow() {
+  return (
+    <div className="grid grid-cols-2 gap-2">
+      <div className="flex flex-col items-center justify-center p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+        <span className="text-[9px] text-[var(--s-text-muted)] flex items-center gap-1"><Shield size={10} />Errors</span>
+        <span className="text-sm font-mono tabular-nums font-semibold text-[var(--s-success)]">0.02%</span>
+      </div>
+      <div className="flex flex-col items-center justify-center p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+        <span className="text-[9px] text-[var(--s-text-muted)] flex items-center gap-1"><Eye size={10} />Active</span>
+        <span className="text-sm font-mono tabular-nums font-semibold text-[var(--s-text)]">1,247</span>
+      </div>
+    </div>
+  );
+}
+
+function SkeletonCardRow() {
+  return (
+    <div className="flex flex-col gap-2.5 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center gap-2.5">
+        <Skeleton className="h-8 w-8 rounded-full shrink-0" />
+        <div className="flex-1 flex flex-col gap-1.5">
+          <Skeleton className="h-2.5 w-3/4" />
+          <Skeleton className="h-2.5 w-1/2" />
+        </div>
+      </div>
+      <Skeleton className="h-2 w-full" />
+      <Skeleton className="h-2 w-5/6" />
+    </div>
+  );
+}
+
+function RadiusPreviewRow() {
+  return (
+    <div className="flex items-center gap-2 p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[9px] text-[var(--s-text-muted)]">Radius</span>
+      {[0, 4, 8, 16, 9999].map((r) => (
+        <div key={r} className="w-5 h-5 bg-[var(--s-primary)]" style={{ borderRadius: r, opacity: r === 8 ? 1 : 0.3 }} />
+      ))}
+      <span className="text-[8px] font-mono text-[var(--s-text-muted)] ml-auto">8px</span>
+    </div>
+  );
+}
+
+function SpacingScaleRow() {
+  return (
+    <div className="flex flex-col gap-2 p-2.5 flex-1" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[9px] text-[var(--s-text-muted)]">Spacing Scale</span>
+      <div className="flex items-end gap-1 w-full flex-1">
+        {[4, 8, 12, 16, 24, 32].map((s) => (
+          <div key={s} className="flex-1 bg-[var(--s-primary)]" style={{ minHeight: s, opacity: 0.6, borderRadius: 1 }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SessionCountRow() {
+  return (
+    <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Globe size={12} className="text-[var(--s-primary)]" />
+        Sessions today
+      </span>
+      <span className="text-[10px] font-mono tabular-nums font-semibold text-[var(--s-text)]">3,842</span>
+    </div>
+  );
+}
+
+function RegionBadgesRow() {
+  return (
+    <div className="flex flex-wrap gap-1.5 p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      {["us-east-1", "eu-west-1", "ap-south-1"].map((r) => (
+        <Badge key={r} size="sm" variant="outline" className="text-[8px] font-mono gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-[var(--s-success)]" />{r}
+        </Badge>
+      ))}
+    </div>
+  );
+}
+
+function AlertSuccessRow() {
+  return (
+    <Alert variant="success" className="p-2.5 [&>svg~*]:pl-0 [&:has(svg)]:pl-2.5">
+      <AlertTitle className="text-[10px] flex items-center gap-1.5 mb-0">
+        <CircleCheck size={12} />
+        All checks passed — ready to merge.
+      </AlertTitle>
+    </Alert>
+  );
+}
+
+function AlertWarningRow() {
+  return (
+    <Alert variant="warning" fill="soft" className="p-2.5 [&>svg~*]:pl-0 [&:has(svg)]:pl-2.5">
+      <AlertTitle className="text-[10px] flex items-center gap-1.5 mb-0">
+        <Zap size={12} />
+        Token cache expires in 2 hours.
+      </AlertTitle>
+    </Alert>
+  );
+}
+
+function ConnectedRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <span className="w-2 h-2 rounded-full bg-[var(--s-success)] animate-pulse" />
+        Connected to production
+      </span>
+      <span className="text-[9px] font-mono tabular-nums text-[var(--s-text-muted)]">ws://</span>
+    </div>
+  );
+}
+
+function HotkeyRow() {
+  return (
+    <div className="flex flex-col justify-between gap-2 p-3 flex-1" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[10px] font-medium text-[var(--s-text)]">Keyboard Shortcuts</span>
+      {[
+        { keys: ["⌘", "K"], action: "Command palette" },
+        { keys: ["⌘", "B"], action: "Toggle sidebar" },
+        { keys: ["⌘", "⇧", "P"], action: "Deploy" },
+      ].map((s) => (
+        <div key={s.action} className="flex items-center justify-between">
+          <span className="text-[9px] text-[var(--s-text-muted)]">{s.action}</span>
+          <div className="flex gap-0.5">
+            {s.keys.map((k) => (
+              <span key={k} className="inline-flex items-center justify-center h-4 min-w-[16px] px-1 rounded-[3px] text-[8px] font-mono text-[var(--s-text-muted)]" style={{ border: "1px solid var(--s-border)", background: "var(--s-surface)" }}>{k}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function QuickActionsRow() {
+  return (
+    <div className="grid grid-cols-3 gap-1.5">
+      <Button size="sm" variant="outline" className="text-[9px] h-7 gap-1"><Zap size={10} />Deploy</Button>
+      <Button size="sm" variant="outline" className="text-[9px] h-7 gap-1"><Eye size={10} />Preview</Button>
+      <Button size="sm" variant="outline" className="text-[9px] h-7 gap-1"><Globe size={10} />Visit</Button>
+    </div>
+  );
+}
+
+function TokenPreviewStrip() {
+  const colors = [
+    { label: "primary", color: "var(--s-primary)" },
+    { label: "success", color: "var(--s-success)" },
+    { label: "warning", color: "var(--s-warning)" },
+    { label: "error", color: "var(--s-error)" },
+    { label: "info", color: "var(--s-info)" },
+  ];
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Color Tokens</span>
+        <span className="text-[9px] text-[var(--s-text-muted)]">5 active</span>
+      </div>
+      <div className="flex gap-1.5">
+        {colors.map((c) => (
+          <div key={c.label} className="flex flex-col items-center gap-1 flex-1">
+            <div className="w-full h-5 rounded-sm" style={{ background: c.color }} />
+            <span className="text-[7px] font-mono text-[var(--s-text-muted)] uppercase">{c.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function MiniSparkline() {
+  return (
+    <div className="flex flex-col flex-1 overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between px-3 pt-3 pb-1">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Requests / min</span>
+        <span className="text-[9px] tabular-nums text-[var(--s-success)]">↑ 23%</span>
+      </div>
+      <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={120} filled className="w-full h-full flex-1" style={{ display: "block" }} />
+    </div>
+  );
+}
+
+function TrafficCommitRow() {
+  const days: { date: string; count: number }[] = [];
+  const now = new Date();
+  for (let i = 139; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(d.getDate() - i);
+    days.push({ date: d.toISOString().split("T")[0], count: Math.floor(Math.random() * 10 * (1 + Math.sin(i / 7))) });
+  }
+  return (
+    <div className="flex flex-col gap-2 p-3 overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Traffic</span>
+        <span className="text-[9px] tabular-nums text-[var(--s-text-muted)]">20 weeks</span>
+      </div>
+      <CommitGrid data={days} weeks={20} cellSize={8} gap={2} showDayLabels={false} showMonthLabels={false} color="var(--s-primary)" />
+    </div>
+  );
+}
+
+function LatencyAreaRow() {
+  return (
+    <div className="flex flex-col flex-1 overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-center justify-between px-3 pt-3 pb-1">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">Latency (p95)</span>
+        <span className="text-[9px] tabular-nums text-[var(--s-warning)]">↓ 8ms</span>
+      </div>
+      <AreaChart
+        series={[{
+          label: "p95",
+          points: [
+            { label: "Mon", value: 120 },
+            { label: "Tue", value: 98 },
+            { label: "Wed", value: 140 },
+            { label: "Thu", value: 105 },
+            { label: "Fri", value: 88 },
+            { label: "Sat", value: 72 },
+            { label: "Sun", value: 64 },
+          ],
+          color: "var(--s-warning)",
+        }]}
+        width={400}
+        height={120}
+        showGrid
+        className="w-full h-full flex-1"
+        style={{ display: "block" }}
+      />
+    </div>
+  );
+}
+
+function EnvironmentRow() {
+  return (
+    <div className="flex items-center justify-between p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[11px] text-[var(--s-text)] flex items-center gap-1.5">
+        <Layers size={13} className="text-[var(--s-text-muted)]" />
+        Environment
+      </span>
+      <Select defaultValue="prod">
+        <SelectTrigger className="h-6 text-[9px] w-24 px-2">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent className="min-w-[var(--radix-select-trigger-width)]">
+          <SelectItem value="prod" className="h-6 text-[10px] pl-6">Production</SelectItem>
+          <SelectItem value="staging" className="h-6 text-[10px] pl-6">Staging</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+function CommitMessageRow() {
+  return (
+    <div className="flex flex-col gap-1.5 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <Label className="text-[10px] flex items-center gap-1.5"><GitCommitHorizontal size={12} className="text-[var(--s-text-muted)]" />Commit Message</Label>
+      <Textarea rows={3} placeholder="fix: resolve token compilation edge case when oklch values exceed gamut boundary" className="text-[10px] w-full" />
+    </div>
+  );
+}
+
+function DeployHistoryRow() {
+  return (
+    <div className="flex flex-col gap-1 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <span className="text-[10px] font-medium text-[var(--s-text)] mb-1">Recent Deploys</span>
+      {[
+        { hash: "a3f9c2d", env: "prod", time: "4m", ok: true },
+        { hash: "e1b7f3a", env: "staging", time: "22m", ok: true },
+        { hash: "7d2c91b", env: "preview", time: "1h", ok: false },
+      ].map((d) => (
+        <div key={d.hash} className="flex items-center justify-between text-[9px] py-1" style={{ borderBottom: "1px solid var(--s-border-muted)" }}>
+          <span className="font-mono text-[var(--s-text-muted)]">{d.hash}</span>
+          <div className="flex items-center gap-2">
+            <Badge size="sm" variant="outline" className="text-[7px] px-1 py-0">{d.env}</Badge>
+            <span className="text-[var(--s-text-muted)]">{d.time}</span>
+            {d.ok ? <CircleCheck size={10} className="text-[var(--s-success)]" /> : <span className="text-[var(--s-error)] text-[8px]">✕</span>}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function StorageMeterRow() {
+  return (
+    <div className="flex flex-col gap-2 p-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+      <div className="flex items-baseline justify-between">
+        <span className="text-[10px] text-[var(--s-text)]">Storage</span>
+        <span className="text-[9px] tabular-nums text-[var(--s-text-muted)]">4.2 / 10 GB</span>
+      </div>
+      <Progress value={42} className="h-1.5" />
+    </div>
+  );
+}
+
 /* ================================================================ */
 /*  Preset dots                                                       */
 /* ================================================================ */
@@ -907,7 +1356,7 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
     <div className={className} style={style}>
       <style dangerouslySetInnerHTML={{ __html: TRANSITION_CSS }} />
       <div className="hero-gallery">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-3">
           {/* Col 1 — Deploy */}
           <div className="flex flex-col gap-3">
             <DeployCard />
@@ -920,6 +1369,23 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <VerifiedRow />
             <ToggleGroupRow />
             <MentionRow />
+            <ConnectedRow />
+            <MeterRow />
+            <EnvironmentRow />
+            <DatePickerRow />
+            <CommitMessageRow />
+            <UptimeRow />
+            <LatencyBuildRow />
+            <VoronoiRow />
+            <TrafficCommitRow />
+            <div className="grid grid-cols-2 gap-3">
+              <SessionCountRow />
+              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><CircleCheck size={12} className="text-[var(--s-success)]" />Pipeline healthy</span>
+                <span className="text-[9px] font-mono text-[var(--s-text-muted)]">0 failures</span>
+              </div>
+            </div>
+            <div className="flex-1 flex flex-col justify-end"><QuickActionsRow /></div>
           </div>
           {/* Col 2 — Tokens */}
           <div className="flex flex-col gap-3">
@@ -931,6 +1397,12 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <SpinnersShowcase />
             <BreadcrumbRow />
             <UrlInputRow />
+            <CalendarCard />
+            <AlertWarningRow />
+            <FontStackRow />
+            <RadiusPreviewRow />
+            <TokenPreviewStrip />
+            <SpacingScaleRow />
           </div>
           {/* Col 3 — Analytics */}
           <div className="flex flex-col gap-3">
@@ -946,6 +1418,27 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <TagInputRow />
             <SearchRow />
             <ButtonRow />
+            <DeployHistoryRow />
+            <RatingRow />
+            <AlertSuccessRow />
+            <KbdShortcutRow />
+            <ErrorActiveRow />
+            <SkeletonCardRow />
+            <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+              <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><BarChart3 size={12} className="text-[var(--s-primary)]" />Avg response</span>
+              <span className="text-[10px] font-mono tabular-nums text-[var(--s-text)]">240ms</span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><RefreshCw size={12} className="text-[var(--s-text-muted)]" />Last sync</span>
+                <span className="text-[9px] font-mono tabular-nums text-[var(--s-text-muted)]">2m ago</span>
+              </div>
+              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><Sparkles size={12} className="text-[var(--s-warning)]" />Plan usage</span>
+                <span className="text-[9px] font-mono tabular-nums text-[var(--s-text-muted)]">82%</span>
+              </div>
+            </div>
+            <MiniSparkline />
           </div>
           {/* Col 4 — Onboarding */}
           <div className="flex flex-col gap-3">
@@ -960,6 +1453,16 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <AlertRow />
             <StarRatingRow />
             <KeyValueRow />
+            <WifiRow />
+            <StorageMeterRow />
+            <RegionBadgesRow />
+            <CacheHitRow />
+            <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+              <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><Check size={12} className="text-[var(--s-success)]" />SSO enabled</span>
+              <Badge size="sm" variant="outline" className="text-[8px]">SAML</Badge>
+            </div>
+            <HotkeyRow />
+            <LatencyAreaRow />
           </div>
         </div>
         <PresetDots />

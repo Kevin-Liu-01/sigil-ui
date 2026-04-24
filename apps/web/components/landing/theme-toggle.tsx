@@ -21,14 +21,12 @@ function MoonIcon({ visible }: { visible: boolean }) {
         transform: visible ? "rotate(0deg) scale(1)" : "rotate(-90deg) scale(0.5)",
         transition: `opacity 200ms ${SMOOTH}, transform 350ms ${SPRING}`,
         willChange: "transform, opacity",
-        color: "oklch(0.45 0.12 260)",
+        color: "var(--s-text)",
       }}
     >
       <path
         d="M13.5 9.5a5.5 5.5 0 01-7-7 5.5 5.5 0 107 7z"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
+        fill="currentColor"
       />
     </svg>
   );
@@ -58,7 +56,7 @@ function SunIcon({ visible }: { visible: boolean }) {
         transform: visible ? "rotate(0deg) scale(1)" : "rotate(90deg) scale(0.5)",
         transition: `opacity 200ms ${SMOOTH}, transform 350ms ${SPRING}`,
         willChange: "transform, opacity",
-        color: "oklch(0.55 0.18 50)",
+        color: "var(--s-text)",
       }}
     >
       <circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.3" />

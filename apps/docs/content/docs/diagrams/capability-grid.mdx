@@ -1,0 +1,34 @@
+---
+title: CapabilityGrid
+description: "A grid layout showing categorized capabilities or features with optional callouts."
+---
+
+## Import
+
+```tsx
+import { CapabilityGrid } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <CapabilityGrid />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `categories` | `CapabilityCategory[]` | — | Categories with items |
+| `callout` | `CapabilityCallout` | — | Optional callout section |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Callout accent |
+| `--s-border` | Grid borders |
+| `--s-surface` | Card background |
+| `--s-text` | Item labels |
+| `--s-text-muted` | Descriptions |
+| `--s-radius-md` | Card radius |

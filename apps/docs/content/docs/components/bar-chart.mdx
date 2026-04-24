@@ -1,0 +1,82 @@
+---
+title: BarChart
+description: "A grouped bar chart with vertical or horizontal layout, gridlines, and value labels."
+---
+
+## Import
+
+```tsx
+import { BarChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <BarChart
+    groups={[
+      { label: "Jan", bars: [{ label: "Revenue", value: 42 }, { label: "Cost", value: 28 }] },
+      { label: "Feb", bars: [{ label: "Revenue", value: 58 }, { label: "Cost", value: 31 }] },
+      { label: "Mar", bars: [{ label: "Revenue", value: 75 }, { label: "Cost", value: 35 }] },
+      { label: "Apr", bars: [{ label: "Revenue", value: 63 }, { label: "Cost", value: 29 }] },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<BarChart
+  direction="vertical"
+  groups={[
+    {
+      label: "Q1",
+      bars: [
+        { label: "Revenue", value: 120 },
+        { label: "Cost", value: 80 },
+      ],
+    },
+    {
+      label: "Q2",
+      bars: [
+        { label: "Revenue", value: 150, color: "var(--s-success)" },
+        { label: "Cost", value: 90, color: "var(--s-error)" },
+      ],
+    },
+  ]}
+  showValues
+  showGrid
+  maxBarSize={200}
+/>
+```
+
+## Horizontal variant
+
+```tsx
+<BarChart direction="horizontal" groups={groups} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `groups` | `BarChartGroup[]` | — | Array of bar groups, each with a label and bars |
+| `direction` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
+| `showValues` | `boolean` | `true` | Show numeric value labels on each bar |
+| `showGrid` | `boolean` | `true` | Show background gridlines |
+| `maxBarSize` | `number` | `200` | Maximum bar height (vertical) or width (horizontal) in px |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default first bar color |
+| `--s-success` | Default second bar color |
+| `--s-warning` | Default third bar color |
+| `--s-border` | Gridline stroke |
+| `--s-surface-elevated` | Horizontal bar track background |
+| `--s-text` | Value labels |
+| `--s-text-muted` | Group labels and axis text |
+| `--s-primary-contrast` | Text on horizontal bars |
+| `--s-font-mono` | Label and value font |
+| `--s-radius-sm` | Bar corner radius |
+| `--s-duration-normal` | Bar transition animation |

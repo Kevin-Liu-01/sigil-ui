@@ -140,6 +140,7 @@ export const rivetPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "triangle",
       "margin-pattern": "grid",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

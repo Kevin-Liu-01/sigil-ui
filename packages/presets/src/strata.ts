@@ -139,6 +139,7 @@ export const strataPreset: SigilPreset = {
       "card-radius": "14px",
       "gutter-pattern": "diagonal",
       "margin-pattern": "triangle",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

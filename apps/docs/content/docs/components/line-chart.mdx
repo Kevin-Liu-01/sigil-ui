@@ -1,0 +1,78 @@
+---
+title: LineChart
+description: "A multi-series line chart with data point nodes, grid, and axis labels."
+---
+
+## Import
+
+```tsx
+import { LineChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <LineChart
+    series={[
+      {
+        label: "Users",
+        points: [
+          { label: "Mon", value: 120 },
+          { label: "Tue", value: 180 },
+          { label: "Wed", value: 150 },
+          { label: "Thu", value: 220 },
+          { label: "Fri", value: 310 },
+          { label: "Sat", value: 280 },
+          { label: "Sun", value: 190 },
+        ],
+      },
+      {
+        label: "Sessions",
+        points: [
+          { label: "Mon", value: 200 },
+          { label: "Tue", value: 240 },
+          { label: "Wed", value: 180 },
+          { label: "Thu", value: 290 },
+          { label: "Fri", value: 350 },
+          { label: "Sat", value: 300 },
+          { label: "Sun", value: 250 },
+        ],
+        color: "var(--s-success, #22c55e)",
+      },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<LineChart
+  series={[{ label: "Users", points: [{ label: "Mon", value: 120 }, ...] }]}
+  showDots
+  showGrid
+  filled={false}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `series` | `LineChartSeries[]` | — | One or more data series to plot |
+| `width` | `number` | `500` | SVG width |
+| `height` | `number` | `250` | SVG height |
+| `showDots` | `boolean` | `true` | Show circular nodes at each data point |
+| `showGrid` | `boolean` | `true` | Show horizontal grid lines |
+| `showXLabels` | `boolean` | `true` | Show x-axis labels |
+| `showYLabels` | `boolean` | `true` | Show y-axis value labels |
+| `filled` | `boolean` | `false` | Fill the area under the line |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default line and dot color |
+| `--s-border` | Grid lines |
+| `--s-surface` | Dot fill (white center) |
+| `--s-text-muted` | Axis labels |
+| `--s-font-mono` | Label font family |

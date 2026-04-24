@@ -1,0 +1,59 @@
+---
+title: MetricCard
+description: "A dashboard stat card with value, delta, and inline sparkline."
+---
+
+## Import
+
+```tsx
+import { MetricCard } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, maxWidth: 480 }}>
+    <MetricCard
+      label="Total Revenue"
+      value="$24.5K"
+      delta="+12.3%"
+      deltaLabel="vs last month"
+      sparkData={[18, 22, 19, 25, 28, 24, 30, 35, 32, 38]}
+    />
+    <MetricCard
+      label="Active Users"
+      value="1,284"
+      delta="-3.1%"
+      deltaLabel="vs last week"
+      sparkData={[40, 38, 42, 35, 30, 33, 28, 25, 22, 20]}
+      sparkColor="var(--s-error, #ef4444)"
+    />
+  </div>
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Metric label |
+| `value` | `string \| number` | — | Main display value |
+| `delta` | `string` | — | Change indicator (prefix with + or -) |
+| `deltaLabel` | `string` | — | Context for the delta |
+| `icon` | `ReactNode` | — | Optional icon |
+| `sparkData` | `number[]` | — | Mini sparkline data |
+| `sparkColor` | `string` | `var(--s-primary)` | Sparkline color |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default sparkline color |
+| `--s-success` | Positive delta color |
+| `--s-error` | Negative delta color |
+| `--s-border` | Card border |
+| `--s-surface` | Card background |
+| `--s-text` | Value text |
+| `--s-text-muted` | Label and delta label |
+| `--s-font-mono` | Value and delta font |
+| `--s-radius-card` | Card radius |
+| `--s-shadow-sm` | Card shadow |

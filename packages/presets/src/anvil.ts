@@ -140,6 +140,7 @@ export const anvilPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "plus",
       "margin-pattern": "diamond",
+      "margin-border": "2px solid",
     },
     radius: {
       none: "0px",

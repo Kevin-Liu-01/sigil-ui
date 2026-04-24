@@ -1,0 +1,46 @@
+---
+title: DatePicker
+description: "Pick a single date or a date range from a popover calendar."
+---
+
+## Import
+
+```tsx
+import { DatePicker, DateRangePicker } from "@sigil-ui/components";
+```
+
+## Single date
+
+<DatePicker />
+
+## Date range
+
+Pick two dates to define a range. The popover auto-closes when both dates are selected.
+
+<DateRangePicker />
+
+## Props — DatePicker
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `Date` | — | The selected date |
+| `onValueChange` | `(date: Date \| undefined) => void` | — | Called when a date is selected |
+| `placeholder` | `string` | `"Pick a date"` | Placeholder text when no date is selected |
+
+## Props — DateRangePicker
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `DateRange` | — | The selected range (`{ from?: Date; to?: Date }`) |
+| `onValueChange` | `(range: DateRange \| undefined) => void` | — | Called when the range changes |
+| `placeholder` | `string` | `"Pick a date range"` | Placeholder text |
+| `numberOfMonths` | `number` | `2` | Number of calendar months shown side-by-side |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |
+| `--s-primary` | Selected date background |
+| `--s-primary-contrast` | Selected date text |
+| `--s-surface` | Range middle background |

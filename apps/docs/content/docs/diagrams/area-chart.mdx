@@ -1,0 +1,50 @@
+---
+title: AreaChart
+description: "A filled area chart with gradient shading and smooth curves."
+---
+
+## Import
+
+```tsx
+import { AreaChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <AreaChart
+    series={[
+      {
+        label: "Revenue",
+        points: [
+          { label: "Jan", value: 40 },
+          { label: "Feb", value: 55 },
+          { label: "Mar", value: 48 },
+          { label: "Apr", value: 72 },
+          { label: "May", value: 85 },
+          { label: "Jun", value: 95 },
+        ],
+      },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `series` | `AreaChartSeries[]` | — | Data series |
+| `width` | `number` | `500` | SVG width |
+| `height` | `number` | `250` | SVG height |
+| `stacked` | `boolean` | `false` | Stack areas |
+| `showGrid` | `boolean` | `true` | Show grid lines |
+| `curve` | `"smooth" \| "linear"` | `"smooth"` | Line interpolation |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default area color |
+| `--s-border` | Grid lines |
+| `--s-text-muted` | Axis labels |
+| `--s-font-mono` | Label font |

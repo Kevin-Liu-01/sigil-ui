@@ -11,15 +11,30 @@ export type CalendarProps = ComponentProps<typeof DayPicker> & {
 };
 
 export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calendar(
-  { className, classNames, showOutsideDays = true, captionLayout = "label", components, ...rest },
+  {
+    className,
+    classNames,
+    showOutsideDays = true,
+    fixedWeeks = true,
+    captionLayout = "dropdown",
+    startMonth,
+    endMonth,
+    components,
+    ...rest
+  },
   _ref,
 ) {
   const defaultClassNames = getDefaultClassNames();
+  const defaultStart = startMonth ?? new Date(new Date().getFullYear() - 100, 0);
+  const defaultEnd = endMonth ?? new Date(new Date().getFullYear() + 10, 11);
 
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
+      fixedWeeks={fixedWeeks}
       captionLayout={captionLayout}
+      startMonth={defaultStart}
+      endMonth={defaultEnd}
       className={cn(
         "group/calendar bg-[var(--s-background)] p-3 [--cell-size:2rem]",
         className,

@@ -139,6 +139,7 @@ export const brassPreset: SigilPreset = {
       "card-radius": "10px",
       "gutter-pattern": "zigzag",
       "margin-pattern": "horizontal",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

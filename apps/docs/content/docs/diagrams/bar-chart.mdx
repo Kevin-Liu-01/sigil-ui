@@ -1,0 +1,44 @@
+---
+title: BarChart
+description: "A bar chart with vertical or horizontal orientation and grouped bars."
+---
+
+## Import
+
+```tsx
+import { BarChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <BarChart
+    groups={[
+      { label: "Jan", bars: [{ label: "Revenue", value: 42 }, { label: "Cost", value: 28 }] },
+      { label: "Feb", bars: [{ label: "Revenue", value: 58 }, { label: "Cost", value: 31 }] },
+      { label: "Mar", bars: [{ label: "Revenue", value: 75 }, { label: "Cost", value: 35 }] },
+      { label: "Apr", bars: [{ label: "Revenue", value: 63 }, { label: "Cost", value: 29 }] },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `groups` | `BarChartGroup[]` | — | Grouped bar data |
+| `direction` | `"vertical" \| "horizontal"` | `"vertical"` | Bar orientation |
+| `showValues` | `boolean` | `true` | Show value labels |
+| `showGrid` | `boolean` | `true` | Show gridlines |
+| `maxBarSize` | `number` | `200` | Maximum bar size in px |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default first bar color |
+| `--s-border` | Grid lines |
+| `--s-text-muted` | Labels |
+| `--s-font-mono` | Value and label font |
+| `--s-radius-sm` | Bar corner radius |
+| `--s-duration-normal` | Bar transition |

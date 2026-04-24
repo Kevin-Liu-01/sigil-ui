@@ -1,0 +1,56 @@
+---
+title: Alert
+description: "A Alert component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Alert, AlertTitle, AlertDescription } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <Alert>
+    Alert content
+  </Alert>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Alert>...</Alert>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<AlertTitle>`
+- `<AlertDescription>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `AlertVariant` | `default` | Visual variant controlling accent color and background. |
+| `fill` | `AlertFill` | `outline` | Fill style. "outline" = border only, "filled" = solid bg, "soft" = tinted bg. |
+| `onClose` | `() => void` | — | Callback to render a close button. When provided, an X button appears. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-text` | Text |
+| `--s-surface` | Surface |
+| `--s-error` | Error |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-radius-md` | Radius md |
+| `--s-border-style` | Border style |
+| `--s-radius-sm` | Radius sm |
+| `--s-ring` | Ring |

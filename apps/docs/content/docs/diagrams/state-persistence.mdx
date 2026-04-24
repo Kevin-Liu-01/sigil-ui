@@ -1,0 +1,33 @@
+---
+title: StatePersistence
+description: "A state persistence diagram showing how application state flows through storage layers."
+---
+
+## Import
+
+```tsx
+import { StatePersistence } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <StatePersistence />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `activeItems` | `PersistenceActiveItem[]` | — | Active state items |
+| `rows` | `PersistedStateRow[]` | — | Persisted state rows |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Active state color |
+| `--s-border` | Table borders |
+| `--s-surface` | Background |
+| `--s-text` | Labels |
+| `--s-text-muted` | Descriptions |

@@ -1,0 +1,35 @@
+---
+title: LetterPullUp
+description: "A LetterPullUp component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { LetterPullUp } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<LetterPullUp>...</LetterPullUp>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `text` | `string` | — | The text to animate. |
+| `interval` | `number` | `30` | Stagger between letters in ms. |
+| `delay` | `number` | `0` | Base delay in ms. |
+| `pullDistance` | `number` | `24` | Pull distance in pixels. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-fast` | Duration fast |
+| `--s-ease-default` | Ease default |
+| `--s-duration-normal` | Duration normal |

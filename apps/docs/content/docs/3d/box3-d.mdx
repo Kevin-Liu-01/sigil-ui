@@ -1,0 +1,42 @@
+---
+title: Box3D
+description: "A Box3D component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Box3D } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Box3D />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Box3D>Box3D content</Box3D>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `depth` | `number` | `20` | Depth of the box in px. |
+| `tiltX` | `number` | `-10` | X-axis tilt in degrees. |
+| `tiltY` | `number` | `20` | Y-axis tilt in degrees. |
+| `perspective` | `number` | `800` | Perspective distance in px. |
+| `variant` | `"container" | "card" | "panel"` | `container` | Preset variant. |
+| `hoverLift` | `boolean` | `false` | Lift on hover. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-shadow-md` | Shadow md |
+| `--s-border-strong` | Border strong |
+| `--s-surface` | Surface |

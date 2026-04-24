@@ -135,10 +135,11 @@ export const helixPreset: SigilPreset = {
       "grid-cell": "44px",
       "cross-arm": "8px",
       "cross-stroke": "1px",
-      "rail-gap": "16px",
+      "rail-gap": "0px",
       "card-radius": "12px",
-      "gutter-pattern": "diagonal",
+      "gutter-pattern": "none",
       "margin-pattern": "hexagon",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

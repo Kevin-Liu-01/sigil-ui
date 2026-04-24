@@ -1,0 +1,17 @@
+{
+  "title": "Overlays",
+  "pages": [
+    "alert-dialog",
+    "command",
+    "context-menu",
+    "dialog",
+    "drawer",
+    "dropdown-menu",
+    "hover-card",
+    "popover",
+    "preview-card",
+    "sheet",
+    "sonner",
+    "toaster"
+  ]
+}

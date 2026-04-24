@@ -133,10 +133,11 @@ export const alloyPreset: SigilPreset = {
       "grid-cell": "56px",
       "cross-arm": "10px",
       "cross-stroke": "2px",
-      "rail-gap": "32px",
+      "rail-gap": "0px",
       "card-radius": "8px",
-      "gutter-pattern": "grid",
+      "gutter-pattern": "none",
       "margin-pattern": "hexagon",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

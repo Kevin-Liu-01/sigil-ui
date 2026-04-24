@@ -595,12 +595,12 @@ const CELLS: ComponentCell[] = [
   { name: "Meter", category: "Data", variants: 1, render: () => <Meter value={68} max={100} label="CPU Usage" /> },
   { name: "Calendar", category: "Data", variants: 1, render: () => (
     <div className="w-full flex justify-center overflow-hidden">
-      <Calendar className="p-0" />
+      <Calendar mode="single" selected={new Date()} className="p-0" />
     </div>
   )},
   { name: "DatePicker", category: "Data", variants: 1, render: () => (
     <div className="w-full flex flex-col gap-2 items-start">
-      <DatePicker className="w-full" />
+      <DatePicker value={new Date()} className="w-full" />
     </div>
   )},
   { name: "Carousel", category: "Data", variants: 1, span: 2, render: () => (

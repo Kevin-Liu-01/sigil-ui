@@ -1,0 +1,38 @@
+---
+title: Section
+description: "A Section component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Section } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <Section>
+    Section content
+  </Section>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Section>Section content</Section>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `gutter` | `"none" | "sm" | "md" | "lg"` | `md` | Horizontal padding / gutter. |
+| `maxWidth` | `string` | — | Max width constraint. |
+| `as` | `ElementType` | `section` | Render as a different element. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-content-max` | Content max |

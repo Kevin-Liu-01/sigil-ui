@@ -1,0 +1,50 @@
+---
+title: Drawer
+description: "A Drawer component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Drawer>...</Drawer>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<DrawerTrigger>`
+- `<DrawerClose>`
+- `<DrawerContent>`
+- `<DrawerHeader>`
+- `<DrawerFooter>`
+- `<DrawerTitle>`
+- `<DrawerDescription>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `shouldScaleBackground` | `boolean` | — | — |
+| `open` | `boolean` | — | — |
+| `onOpenChange` | `(open: boolean) => void` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-overlay` | Overlay |
+| `--s-card-radius` | Card radius |
+| `--s-border` | Border |
+| `--s-border-style` | Border style |
+| `--s-background` | Background |
+| `--s-shadow-lg` | Shadow lg |
+| `--s-radius-full` | Radius full |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |

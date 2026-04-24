@@ -1,0 +1,45 @@
+---
+title: UsageGauge
+description: "A semicircular gauge for displaying usage or capacity."
+---
+
+## Import
+
+```tsx
+import { UsageGauge } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "flex", gap: 24 }}>
+    <UsageGauge value={42} max={100} label="Storage" />
+    <UsageGauge value={78} max={100} label="CPU" />
+    <UsageGauge value={95} max={100} label="Memory" />
+  </div>
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number` | — | Current value |
+| `max` | `number` | `100` | Maximum value |
+| `label` | `string` | — | Label below percentage |
+| `unit` | `string` | — | Unit shown on scale |
+| `width` | `number` | `160` | SVG width |
+| `height` | `number` | `120` | SVG height |
+| `color` | `string` | — | Override arc color |
+| `autoColor` | `boolean` | `true` | Auto-color by threshold |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Normal usage color |
+| `--s-warning` | Warning threshold (>70%) |
+| `--s-error` | Critical threshold (>90%) |
+| `--s-border` | Track background |
+| `--s-text` | Percentage text |
+| `--s-text-muted` | Label and scale text |
+| `--s-font-mono` | Value font |

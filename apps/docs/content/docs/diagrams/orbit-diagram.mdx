@@ -1,0 +1,38 @@
+---
+title: OrbitDiagram
+description: "A concentric orbit diagram with items positioned on orbital rings around a center."
+---
+
+## Import
+
+```tsx
+import { OrbitDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <OrbitDiagram
+    center="Core"
+    orbits={[
+      { items: ["Auth", "API", "DB"] },
+      { items: ["CDN", "Cache", "Queue", "Search"] },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `center` | `string` | — | Center node label |
+| `orbits` | `object[]` | — | Array of orbit rings with items |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Center node color |
+| `--s-border` | Orbit ring stroke |
+| `--s-surface` | Node background |
+| `--s-text` | Node labels |

@@ -1,0 +1,55 @@
+---
+title: HubSpokeDiagram
+description: "A hub-and-spoke diagram with a central node connected to surrounding nodes."
+---
+
+## Import
+
+```tsx
+import { HubSpokeDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <HubSpokeDiagram
+    hub="Core API"
+    spokes={[
+      { label: "Auth" },
+      { label: "Billing" },
+      { label: "Search" },
+      { label: "Notifications" },
+      { label: "Analytics" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<HubSpokeDiagram
+  hub="Core API"
+  spokes={[
+    { label: "Auth" },
+    { label: "Billing" },
+    { label: "Search" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `hub` | `string` | — | Central hub label |
+| `spokes` | `SpokeNode[]` | — | Surrounding spoke nodes |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Hub node color |
+| `--s-border` | Spoke connections and node borders |
+| `--s-surface` | Node background |
+| `--s-text` | Node labels |
+| `--s-radius-md` | Node border radius |

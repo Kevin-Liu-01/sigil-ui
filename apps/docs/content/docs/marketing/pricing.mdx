@@ -1,0 +1,47 @@
+---
+title: Pricing
+description: "A Pricing component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Pricing } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Pricing />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Pricing>Pricing content</Pricing>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `name` | `string` | — | Plan name. |
+| `price` | `string` | — | Price display (e.g. "$19"). |
+| `period` | `string` | — | Billing period (e.g. "/mo"). |
+| `features` | `string[]` | — | Feature list. |
+| `cta` | `ReactNode` | — | CTA button content. |
+| `highlighted` | `boolean` | — | Highlight this card as recommended. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-card-radius` | Card radius |
+| `--s-border-style` | Border style |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-shadow-lg` | Shadow lg |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-success` | Success |

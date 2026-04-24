@@ -1,0 +1,18 @@
+{
+  "title": "Marketing",
+  "pages": [
+    "announcement-bar",
+    "blog-grid",
+    "blog-header",
+    "cta",
+    "cost-calculator",
+    "feature-frame",
+    "feature-grid",
+    "hero",
+    "logo-bar",
+    "pricing",
+    "pricing-tiers",
+    "testimonial-card",
+    "unit-pricing"
+  ]
+}

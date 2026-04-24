@@ -25,11 +25,17 @@ import {
   MessageSquare,
   Send,
   Square,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import {
   Slider as SigilSlider,
   Switch as SigilSwitch,
-  NativeSelect,
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
   SegmentedControl,
   SegmentedControlItem,
 } from "@sigil-ui/components";
@@ -79,8 +85,10 @@ export function DevBarProvider({ children }: { children: ReactNode }) {
 /* ================================================================== */
 
 const SIDEBAR_W = 260;
+const SIDEBAR_W_MOBILE = 280;
 const AGENT_W = 340;
-const TOOLBAR_H = 38;
+const TOOLBAR_H = 44;
+const MOBILE_BP = 768;
 
 const PRESET_DATA = [
   { name: "default", mood: "neutral", colors: ["#18181b", "#ffffff", "#0a0a0f", "#fafafa"] },
@@ -148,6 +156,22 @@ const COMPONENT_LIST = [
   "Box3D", "Card3D", "Pricing", "CTA", "FeatureFrame", "Timeline",
   "Accordion", "Table", "Tabs", "LoadingSpinner", "Avatar", "Progress",
 ];
+
+/* ================================================================== */
+/*  Mobile detection                                                   */
+/* ================================================================== */
+
+function useIsMobile(breakpoint = MOBILE_BP) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 /* ================================================================== */
 /*  Custom Preset Persistence                                          */
@@ -269,7 +293,7 @@ function Section({ title, defaultOpen, children }: {
 }) {
   const [open, setOpen] = useState(defaultOpen ?? false);
   return (
-    <div style={{ borderBottom: "1px solid var(--db-border)", padding: "0 12px" }}>
+    <div style={{ borderBottom: "1px solid var(--db-border)", padding: "0 16px" }}>
       <SectionHeader title={title} open={open} onToggle={() => setOpen(v => !v)} />
       <div style={{
         overflow: "hidden", maxHeight: open ? 600 : 0, opacity: open ? 1 : 0,
@@ -319,11 +343,51 @@ function Segmented<T extends string>({ options, value, onChange }: { options: re
   );
 }
 
-function SelectField({ value, options, onChange }: { value: string; options: readonly string[]; onChange: (v: string) => void }) {
+function useDevbarPortalStyle(): React.CSSProperties {
+  const root = typeof document !== "undefined" ? document.querySelector(".devbar-root") : null;
+  const isDark = root?.closest(".dark") || root?.closest("[data-theme='dark']");
+  return {
+    ["--s-primary" as string]: isDark ? "#e4e4e7" : "#18181b",
+    ["--s-background" as string]: isDark ? "#0a0a0f" : "#ffffff",
+    ["--s-surface" as string]: isDark ? "#141419" : "#f8f8fa",
+    ["--s-border" as string]: isDark ? "#2c2c3c" : "#d0d0d8",
+    ["--s-border-style" as string]: "solid",
+    ["--s-text" as string]: isDark ? "#fafafa" : "#0a0a0f",
+    ["--s-text-muted" as string]: isDark ? "#8888a0" : "#8a8a95",
+    ["--s-radius-md" as string]: "6px",
+    ["--s-card-radius" as string]: "6px",
+    ["--s-shadow-lg" as string]: isDark ? "0 4px 20px rgba(0,0,0,0.4)" : "0 4px 16px rgba(0,0,0,0.12)",
+    ["--s-duration-fast" as string]: "150ms",
+    background: isDark ? "#141419" : "#f8f8fa",
+    borderColor: isDark ? "#2c2c3c" : "#d0d0d8",
+    color: isDark ? "#fafafa" : "#0a0a0f",
+    zIndex: 10002,
+  };
+}
+
+function SelectField({ value, options, onChange, showFont }: { value: string; options: readonly string[]; onChange: (v: string) => void; showFont?: boolean }) {
+  const portalStyle = useDevbarPortalStyle();
   return (
-    <NativeSelect value={value} onChange={(e) => onChange(e.target.value)} className="h-7 py-0.5 text-[11px]">
-      {options.map((o) => <option key={o} value={o}>{o}</option>)}
-    </NativeSelect>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger
+        className="h-7 text-[11px] px-2"
+        style={showFont ? { fontFamily: `"${value}", system-ui, sans-serif` } : undefined}
+      >
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent className="max-h-[200px]" style={portalStyle}>
+        {options.map((o) => (
+          <SelectItem
+            key={o}
+            value={o}
+            className="text-[11px] pl-6"
+            style={showFont ? { fontFamily: `"${o}", system-ui, sans-serif` } : undefined}
+          >
+            {o}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }
 
@@ -349,7 +413,7 @@ function PresetStrip({ activePreset, onSelect, onRandomize, customPresets, onDel
   customPresets: CustomPreset[]; onDeleteCustom: (name: string) => void;
 }) {
   return (
-    <div style={{ padding: "8px 12px 6px" }}>
+    <div style={{ padding: "8px 16px 0" }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
         <span style={{ fontFamily: FONT_DISPLAY, fontSize: 9, fontWeight: 600, color: "var(--db-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Presets</span>
         <button type="button" onClick={onRandomize} title="Random preset" style={{
@@ -358,22 +422,22 @@ function PresetStrip({ activePreset, onSelect, onRandomize, customPresets, onDel
           fontFamily: FONT, fontSize: 8, fontWeight: 500, cursor: "pointer", transition: "all 120ms ease",
         }}><Shuffle size={8} />random</button>
       </div>
-      <div className="devbar-scroll" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, maxHeight: 160, overflowY: "auto", paddingBottom: 2 }}>
+      <div className="devbar-scroll" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, maxHeight: 280, overflowY: "auto", marginBottom: 8 }}>
         {PRESET_DATA.map((p) => {
           const active = activePreset.replace("*", "") === p.name;
           return (
             <button key={p.name} type="button" onClick={() => onSelect(p.name)} style={{
-              padding: "5px 6px 4px", borderRadius: 5, textAlign: "left",
+              padding: "6px 7px 5px", borderRadius: 5, textAlign: "left",
               border: active ? "1.5px solid var(--db-accent)" : "1px solid var(--db-border)",
               background: active ? "var(--db-accent-dim)" : "transparent",
               cursor: "pointer", transition: "all 120ms ease",
             }}>
               <div style={{ display: "flex", gap: 2, marginBottom: 3 }}>
-                {p.colors.map((c, i) => <div key={i} style={{ width: 8, height: 8, borderRadius: 2, background: c, border: "0.5px solid rgba(128,128,128,0.12)" }} />)}
+                {p.colors.map((c, i) => <div key={i} style={{ width: 10, height: 10, borderRadius: 2, background: c, border: "0.5px solid rgba(128,128,128,0.12)" }} />)}
               </div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
                 <span style={{ fontFamily: FONT, fontSize: 9, fontWeight: active ? 700 : 500, color: active ? "var(--db-accent)" : "var(--db-text)", lineHeight: 1.2 }}>{p.name}</span>
-                <span style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", lineHeight: 1, opacity: 0.6 }}>{p.mood}</span>
+                <span style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", opacity: 0.6 }}>{p.mood}</span>
               </div>
             </button>
           );
@@ -383,24 +447,25 @@ function PresetStrip({ activePreset, onSelect, onRandomize, customPresets, onDel
           return (
             <div key={cp.name} style={{ position: "relative" }}>
               <button type="button" onClick={() => onSelect(cp.name)} style={{
-                width: "100%", padding: "5px 6px 4px", borderRadius: 5, textAlign: "left",
+                width: "100%", padding: "6px 7px 5px", borderRadius: 5, textAlign: "left",
                 border: active ? "1.5px solid var(--db-accent)" : "1px solid var(--db-border)",
                 background: active ? "var(--db-accent-dim)" : "transparent",
                 cursor: "pointer", transition: "all 120ms ease",
               }}>
-                <div style={{ fontFamily: FONT, fontSize: 9, fontWeight: active ? 700 : 500, color: active ? "var(--db-accent)" : "var(--db-text)", lineHeight: 1.2 }}>{cp.name}</div>
-                <div style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", lineHeight: 1, marginTop: 1, opacity: 0.6 }}>custom</div>
+                <span style={{ fontFamily: FONT, fontSize: 9, fontWeight: active ? 700 : 500, color: active ? "var(--db-accent)" : "var(--db-text)", lineHeight: 1.2 }}>{cp.name}</span>
+                <span style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", opacity: 0.6, marginLeft: 4 }}>custom</span>
               </button>
               <button type="button" onClick={(e) => { e.stopPropagation(); onDeleteCustom(cp.name); }} style={{
-                position: "absolute", top: 2, right: 2, width: 12, height: 12, borderRadius: 6,
+                position: "absolute", top: 3, right: 3, width: 14, height: 14, borderRadius: 7,
                 background: "var(--db-surface)", border: "1px solid var(--db-border)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 cursor: "pointer", color: "var(--db-muted)", padding: 0,
-              }}><X size={6} /></button>
+              }}><X size={7} /></button>
             </div>
           );
         })}
       </div>
+      <div style={{ height: 1, background: "var(--db-border)", marginLeft: -16, marginRight: -16 }} />
     </div>
   );
 }
@@ -510,9 +575,9 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
 
   const typographyContent = (
     <>
-      <Row label="display"><SelectField value={readStr(t, "font-display", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-display", `"${v}", system-ui, sans-serif`)} /></Row>
-      <Row label="body"><SelectField value={readStr(t, "font-body", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-body", `"${v}", system-ui, sans-serif`)} /></Row>
-      <Row label="mono"><SelectField value={readStr(t, "font-mono", "PP Fraktion Mono").split(",")[0]!.replace(/['"]/g, "")} options={MONO_FONTS} onChange={(v) => patch("typography", "font-mono", `"${v}", ui-monospace, monospace`)} /></Row>
+      <Row label="display"><SelectField showFont value={readStr(t, "font-display", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-display", `"${v}", system-ui, sans-serif`)} /></Row>
+      <Row label="body"><SelectField showFont value={readStr(t, "font-body", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-body", `"${v}", system-ui, sans-serif`)} /></Row>
+      <Row label="mono"><SelectField showFont value={readStr(t, "font-mono", "PP Fraktion Mono").split(",")[0]!.replace(/['"]/g, "")} options={MONO_FONTS} onChange={(v) => patch("typography", "font-mono", `"${v}", ui-monospace, monospace`)} /></Row>
       <Row label="heading wt" value={String(readNum(t, "heading-weight", 700))}><Slider value={readNum(t, "heading-weight", 700)} min={300} max={900} step={100} onChange={(v) => patch("typography", "heading-weight", v)} /></Row>
       <Row label="heading trk" value={`${readNum(t, "heading-tracking", -0.02).toFixed(3)}em`}><Slider value={readNum(t, "heading-tracking", -0.02)} min={-0.06} max={0.02} step={0.002} onChange={(v) => patch("typography", "heading-tracking", v)} /></Row>
       <Row label="base size" value={`${readNum(t, "base-size", 16)}px`}><Slider value={readNum(t, "base-size", 16)} min={14} max={20} step={1} onChange={(v) => patch("typography", "base-size", `${v}px`)} /></Row>
@@ -600,7 +665,7 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
       {/* Header */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 12px", flexShrink: 0, borderBottom: "1px solid var(--db-border)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "10px 16px", flexShrink: 0, borderBottom: "1px solid var(--db-border)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           <Grid3X3 size={12} style={{ color: "var(--db-accent)" }} />
           <span style={{ fontFamily: FONT_DISPLAY, fontSize: 10, fontWeight: 700, color: "var(--db-text)" }}>Studio</span>
@@ -616,7 +681,7 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
 
       {/* Save name input */}
       {savingName !== null && (
-        <div style={{ display: "flex", gap: 4, padding: "6px 12px", borderBottom: "1px solid var(--db-border)", background: "var(--db-accent-dim)" }}>
+        <div style={{ display: "flex", gap: 4, padding: "6px 16px", borderBottom: "1px solid var(--db-border)", background: "var(--db-accent-dim)" }}>
           <input
             autoFocus value={savingName}
             onChange={(e) => setSavingName(e.target.value)}
@@ -651,10 +716,10 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
 /*  Toolbar                                                            */
 /* ================================================================== */
 
-function Toolbar() {
+function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const devbar = useDevBar();
   const { activePreset, setPreset } = useSigilTokens();
-  const { play, setActivePreset: setSoundPreset } = useSigilSound();
+  const { play, enabled: soundEnabled, setEnabled: setSoundEnabled, setActivePreset: setSoundPreset } = useSigilSound();
 
   if (!devbar) return null;
   const { sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, dock, setDock, agentOpen, setAgentOpen } = devbar;
@@ -666,58 +731,83 @@ function Toolbar() {
     play("preset");
   };
 
+  const handlePresetClick = (name: string) => {
+    setPreset(name);
+    setSoundPreset(name);
+    play("preset");
+  };
+
+  const tbtn = (icon: ReactNode, onClick: () => void, active: boolean, label?: string) => (
+    <button type="button" onClick={onClick} style={{
+      display: "flex", alignItems: "center", gap: 4,
+      padding: label ? "5px 10px 5px 7px" : "5px 7px",
+      borderRadius: 6,
+      background: active ? "var(--db-accent-dim)" : "transparent",
+      border: "none",
+      fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 500,
+      color: active ? "var(--db-accent)" : "var(--db-muted)",
+      cursor: "pointer", transition: "all 120ms ease-out", flexShrink: 0,
+    }}>{icon}{label && <span>{label}</span>}</button>
+  );
+
+  const divider = <div style={{ width: 1, height: 16, background: "var(--db-border)", flexShrink: 0, opacity: 0.6 }} />;
+
   return (
     <div className="devbar-chrome" style={{
-      height: TOOLBAR_H, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "space-between",
-      padding: "0 12px", background: "var(--db-surface)",
+      height: TOOLBAR_H, flexShrink: 0, display: "flex", alignItems: "center",
+      padding: "0 6px", background: "var(--db-surface)",
       borderTop: canvasMode ? "none" : "1px solid var(--db-border)",
       backdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
       WebkitBackdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
-      zIndex: 10001,
+      zIndex: 10001, gap: 2,
     }}>
-      {/* Left: brand + preset */}
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <button type="button" onClick={() => setSidebarOpen(!sidebarOpen)} style={{
-          display: "flex", alignItems: "center", gap: 6, padding: "4px 10px 4px 6px", borderRadius: 5,
-          border: sidebarOpen ? "1px solid var(--db-accent)" : "1px solid var(--db-border)",
-          background: sidebarOpen ? "var(--db-accent-dim)" : "transparent", cursor: "pointer", transition: "all 150ms ease-out",
-        }}>
-          <div style={{ width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3, background: "var(--db-accent-mid)" }}>
-            <Grid3X3 size={9} style={{ color: "var(--db-accent)" }} />
+      {/* Sigil button */}
+      {tbtn(<Grid3X3 size={11} style={{ color: "var(--db-accent)" }} />, () => { if (canvasMode) { setCanvasMode(false); setSidebarOpen(false); setAgentOpen(false); } else { setCanvasMode(true); setSidebarOpen(true); } }, canvasMode, isMobile ? undefined : "Studio")}
+
+      {/* Preset strip (hidden in canvas mode) */}
+      {!canvasMode && (
+        <>
+          {divider}
+          <div className="devbar-preset-strip" style={{
+            flex: 1, display: "flex", gap: 1, overflowX: "auto", overflowY: "hidden",
+            minWidth: 0, padding: "2px 4px",
+          } as React.CSSProperties}>
+            {PRESET_DATA.map((p) => {
+              const active = activePreset.replace("*", "") === p.name;
+              return (
+                <button key={p.name} type="button" onClick={() => handlePresetClick(p.name)} style={{
+                  flexShrink: 0, display: "flex", alignItems: "center", gap: 4,
+                  padding: "4px 8px 4px 6px", borderRadius: 5,
+                  background: active ? "var(--db-accent-dim)" : "transparent",
+                  border: "none",
+                  fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 400,
+                  color: active ? "var(--db-accent)" : "var(--db-muted)",
+                  cursor: "pointer", transition: "all 100ms ease", whiteSpace: "nowrap",
+                }}>
+                  <div style={{ width: 8, height: 8, borderRadius: 2, background: p.colors[0], border: "0.5px solid rgba(128,128,128,0.15)", flexShrink: 0 }} />
+                  {p.name}
+                </button>
+              );
+            })}
           </div>
-          <span style={{ fontFamily: FONT_DISPLAY, fontSize: 10, fontWeight: 700, color: sidebarOpen ? "var(--db-accent)" : "var(--db-text2)", letterSpacing: "0.02em" }}>sigil</span>
-        </button>
-        <span style={{ fontFamily: FONT, fontSize: 9.5, fontWeight: 600, padding: "2px 8px", borderRadius: 4, background: "var(--db-accent-dim)", color: "var(--db-accent)" }}>{activePreset}</span>
-      </div>
+          {divider}
+        </>
+      )}
 
-      {/* Center: mode toggles */}
-      <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-        <ToolbarButton icon={<Monitor size={11} />} label="Canvas" active={canvasMode} onClick={() => { const next = !canvasMode; setCanvasMode(next); if (next) { setSidebarOpen(true); } else { setSidebarOpen(false); setAgentOpen(false); } }} />
-        {canvasMode && (
-          <>
-            <ToolbarButton icon={dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />} label={dock} active={false} onClick={() => setDock(dock === "left" ? "right" : "left")} />
-            <ToolbarButton icon={<MessageSquare size={11} />} label="Agent" active={agentOpen} onClick={() => setAgentOpen(!agentOpen)} />
-          </>
-        )}
-      </div>
+      {/* Spacer in canvas mode */}
+      {canvasMode && <div style={{ flex: 1 }} />}
 
-      {/* Right: actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-        <ToolbarButton icon={<Shuffle size={11} />} label="Random" active={false} onClick={handleRandomize} />
+      {/* Controls */}
+      <div style={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
+        {tbtn(<Shuffle size={11} />, handleRandomize, false)}
+        {divider}
+        {tbtn(<Monitor size={11} />, () => { const next = !canvasMode; setCanvasMode(next); if (next) setSidebarOpen(true); else { setSidebarOpen(false); setAgentOpen(false); } }, canvasMode, isMobile ? undefined : "Canvas")}
+        {canvasMode && !isMobile && tbtn(dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />, () => setDock(dock === "left" ? "right" : "left"), false)}
+        {canvasMode && tbtn(<MessageSquare size={11} />, () => setAgentOpen(!agentOpen), agentOpen, isMobile ? undefined : "Agent")}
+        {divider}
+        {tbtn(soundEnabled ? <Volume2 size={11} /> : <VolumeX size={11} />, () => setSoundEnabled(!soundEnabled), soundEnabled)}
       </div>
     </div>
-  );
-}
-
-function ToolbarButton({ icon, label, active, onClick }: { icon: ReactNode; label: string; active: boolean; onClick: () => void }) {
-  return (
-    <button type="button" onClick={onClick} style={{
-      display: "flex", alignItems: "center", gap: 4, padding: "4px 8px", borderRadius: 4,
-      border: active ? "1px solid var(--db-accent)" : "1px solid var(--db-border)",
-      background: active ? "var(--db-accent-dim)" : "transparent",
-      fontFamily: FONT, fontSize: 9.5, fontWeight: active ? 600 : 500,
-      color: active ? "var(--db-accent)" : "var(--db-muted)", cursor: "pointer", transition: "all 120ms ease-out",
-    }}>{icon}{label}</button>
   );
 }
 
@@ -780,21 +870,38 @@ function CollapsedTab({ dock, onOpen }: { dock: DockPosition; onOpen: () => void
 }
 
 /* ================================================================== */
-/*  Canvas Viewport                                                    */
+/*  Content Area (unified for both modes, transitions in place)        */
 /* ================================================================== */
 
-function CanvasViewport({ children }: { children: ReactNode }) {
+function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolean }) {
+  const isMobile = useIsMobile();
+  const showFrame = canvas && !isMobile;
+
+  const devbar = useDevBar();
+  const dock = devbar?.dock ?? "left";
+  const sidebarOpen = devbar?.sidebarOpen ?? false;
+  const agentOpen = devbar?.agentOpen ?? false;
+  const bothHidden = !sidebarOpen && !agentOpen;
+
   return (
-    <div className="devbar-canvas-outer" style={{
-      flex: 1, minWidth: 0, minHeight: 0, display: "flex", alignItems: "stretch", justifyContent: "center",
-      padding: 12, background: "var(--db-surface)", transition: `padding ${DUR} ${EASE_SPRING}`,
+    <div style={{
+      flex: 1, minWidth: 0, minHeight: 0, display: "flex", alignItems: "stretch",
+      paddingTop: showFrame ? 8 : 0,
+      paddingBottom: 0,
+      paddingLeft: showFrame ? (dock === "right" || bothHidden ? 8 : 0) : 0,
+      paddingRight: showFrame ? (dock === "left" || bothHidden ? 8 : 0) : 0,
+      transition: `padding ${DUR} ${EASE_SPRING}`,
     }}>
-      <div className="devbar-canvas-frame" style={{
-        width: "100%", borderRadius: 8,
-        border: "1px solid var(--db-border)",
-        overflowX: "hidden", overflowY: "auto", transition: `border-radius ${DUR} ${EASE_SPRING}`,
+      <div style={{
+        width: "100%",
+        borderRadius: showFrame ? 8 : 0,
+        border: showFrame ? "1px solid var(--db-border)" : "none",
+        overflow: "hidden",
+        transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>
-        {children}
+        <div style={{ width: "100%", height: "100%", overflowX: "hidden", overflowY: "auto" }}>
+          {children}
+        </div>
       </div>
     </div>
   );
@@ -1009,7 +1116,35 @@ function StudioAgentChat() {
 /*  Agent Panel (right side in canvas mode)                            */
 /* ================================================================== */
 
-function AgentPanel({ open }: { open: boolean }) {
+function AgentPanel({ open, isMobile }: { open: boolean; isMobile: boolean }) {
+  if (isMobile) {
+    return (
+      <>
+        {open && (
+          <div
+            onClick={() => {/* handled by parent setAgentOpen */}}
+            style={{
+              position: "fixed", inset: 0, zIndex: 9999,
+              background: "rgba(0,0,0,0.4)",
+            }}
+          />
+        )}
+        <div className="devbar-chrome" style={{
+          position: "fixed", zIndex: 10000,
+          top: 0, right: 0, bottom: 0,
+          width: `min(${AGENT_W}px, 90vw)`,
+          background: "var(--db-surface)",
+          borderLeft: "1px solid var(--db-border)",
+          transform: open ? "translateX(0)" : "translateX(100%)",
+          transition: `transform ${DUR} ${EASE_SPRING}`,
+          willChange: "transform",
+        }}>
+          <StudioAgentChat />
+        </div>
+      </>
+    );
+  }
+
   return (
     <div className="devbar-chrome" style={{
       width: open ? AGENT_W : 0, flexShrink: 0, overflow: "hidden",
@@ -1027,17 +1162,18 @@ function AgentPanel({ open }: { open: boolean }) {
 /*  Sidebar Panel                                                      */
 /* ================================================================== */
 
-function SidebarPanel({ mode, dock, open }: { mode: "canvas" | "normal"; dock: DockPosition; open: boolean }) {
+function SidebarPanel({ mode, dock, open, isMobile }: { mode: "canvas" | "normal"; dock: DockPosition; open: boolean; isMobile: boolean }) {
   const { setSidebarOpen } = useDevBar()!;
+  const w = isMobile ? SIDEBAR_W_MOBILE : SIDEBAR_W;
 
-  if (mode === "canvas") {
+  if (mode === "canvas" && !isMobile) {
     return (
       <div className="devbar-chrome" style={{
-        position: "relative", width: open ? SIDEBAR_W : 0, flexShrink: 0,
+        position: "relative", width: open ? w : 0, flexShrink: 0,
         overflow: open ? "visible" : "hidden", background: "var(--db-surface)",
         transition: `width ${DUR} ${EASE_SPRING}`, willChange: "width",
       }}>
-        <div style={{ width: SIDEBAR_W, height: "100%", opacity: open ? 1 : 0, transition: `opacity ${open ? "250ms 80ms" : "120ms"} ease` }}>
+        <div style={{ width: w, height: "100%", opacity: open ? 1 : 0, transition: `opacity ${open ? "250ms 80ms" : "120ms"} ease` }}>
           <SidebarContent onClose={() => setSidebarOpen(false)} />
         </div>
         {open && <EdgeHandle dock={dock} open={open} onToggle={() => setSidebarOpen(!open)} />}
@@ -1045,25 +1181,70 @@ function SidebarPanel({ mode, dock, open }: { mode: "canvas" | "normal"; dock: D
     );
   }
 
-  /* Normal mode: fixed sidebar that slides in/out */
+  /* Mobile canvas mode + normal mode: fixed overlay sidebar that slides in/out */
   return (
-    <div className="devbar-chrome" style={{
-      position: "fixed", zIndex: 10000,
-      top: 0, bottom: TOOLBAR_H, width: SIDEBAR_W,
-      ...(dock === "left"
-        ? { left: 0, borderRight: "1px solid var(--db-border)" }
-        : { right: 0, borderLeft: "1px solid var(--db-border)" }),
-      background: "var(--db-surface)",
-      backdropFilter: "blur(20px) saturate(1.5)",
-      WebkitBackdropFilter: "blur(20px) saturate(1.5)",
-      transform: open
-        ? "translateX(0)"
-        : dock === "left" ? `translateX(-${SIDEBAR_W}px)` : `translateX(${SIDEBAR_W}px)`,
-      transition: `transform ${DUR} ${EASE_SPRING}`,
-      willChange: "transform",
-      overflow: "hidden",
+    <>
+      {/* Backdrop for mobile */}
+      {isMobile && open && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(0,0,0,0.4)",
+            transition: `opacity 200ms ease`,
+          }}
+        />
+      )}
+      <div className="devbar-chrome" style={{
+        position: "fixed", zIndex: 10000,
+        top: 0, bottom: mode === "canvas" ? 0 : TOOLBAR_H,
+        width: isMobile ? `min(${w}px, 85vw)` : w,
+        ...(dock === "left"
+          ? { left: 0, borderRight: "1px solid var(--db-border)" }
+          : { right: 0, borderLeft: "1px solid var(--db-border)" }),
+        background: "var(--db-surface)",
+        backdropFilter: "blur(20px) saturate(1.5)",
+        WebkitBackdropFilter: "blur(20px) saturate(1.5)",
+        transform: open
+          ? "translateX(0)"
+          : dock === "left" ? `translateX(-100%)` : `translateX(100%)`,
+        transition: `transform ${DUR} ${EASE_SPRING}`,
+        willChange: "transform",
+        overflow: "hidden",
+      }}>
+        <SidebarContent onClose={() => setSidebarOpen(false)} />
+      </div>
+    </>
+  );
+}
+
+/* ================================================================== */
+/*  Canvas Viewport                                                    */
+/* ================================================================== */
+
+function CanvasViewport({ children, dock }: { children: ReactNode; dock: DockPosition }) {
+  const isMobile = useIsMobile();
+  const oppositeSide = dock === "left" ? "right" : "left";
+
+  return (
+    <div className="devbar-canvas-outer" style={{
+      flex: 1, minWidth: 0, minHeight: 0, display: "flex", alignItems: "stretch", justifyContent: "center",
+      ...(isMobile
+        ? { padding: 0 }
+        : {
+            paddingTop: 12, paddingBottom: 0,
+            paddingLeft: oppositeSide === "left" ? 12 : 0,
+            paddingRight: oppositeSide === "right" ? 12 : 0,
+          }),
+      background: "var(--db-surface)", transition: `padding ${DUR} ${EASE_SPRING}`,
     }}>
-      <SidebarContent onClose={() => setSidebarOpen(false)} />
+      <div className="devbar-canvas-frame" style={{
+        width: "100%", borderRadius: isMobile ? 0 : 8,
+        border: isMobile ? "none" : "1px solid var(--db-border)",
+        overflowX: "hidden", overflowY: "auto", transition: `border-radius ${DUR} ${EASE_SPRING}`,
+      }}>
+        {children}
+      </div>
     </div>
   );
 }
@@ -1074,39 +1255,62 @@ function SidebarPanel({ mode, dock, open }: { mode: "canvas" | "normal"; dock: D
 
 export function SigilDevBar({ children }: { children: ReactNode }) {
   const devbar = useDevBar();
+  const isMobile = useIsMobile();
   if (!devbar) return <>{children}</>;
 
-  const { sidebarOpen, setSidebarOpen, canvasMode, dock, agentOpen } = devbar;
-
-  if (canvasMode) {
-    const isLeftDock = dock === "left";
-
-    return (
-      <div className="devbar-root" style={{
-        position: "fixed", inset: 0, display: "flex", flexDirection: "column",
-        background: "var(--db-bg)", zIndex: 9998,
-      }}>
-        <style>{DEVBAR_STYLES}</style>
-
-        <div style={{ flex: 1, display: "flex", flexDirection: "row", minHeight: 0, minWidth: 0, overflow: "hidden", position: "relative" }}>
-          {isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} />}
-          <CanvasViewport>{children}</CanvasViewport>
-          {!isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} />}
-          <AgentPanel open={agentOpen} />
-          {!sidebarOpen && <CollapsedTab dock={dock} onOpen={() => setSidebarOpen(true)} />}
-        </div>
-
-        <Toolbar />
-      </div>
-    );
-  }
+  const { sidebarOpen, setSidebarOpen, canvasMode, dock, agentOpen, setAgentOpen } = devbar;
+  const isLeftDock = dock === "left";
+  const showInFlowSidebar = canvasMode && !isMobile;
+  const showInFlowAgent = canvasMode && !isMobile;
 
   return (
-    <div className="devbar-root">
+    <div className="devbar-root" style={{
+      position: canvasMode ? "fixed" : "relative",
+      inset: canvasMode ? 0 : undefined,
+      display: "flex", flexDirection: "column",
+      background: canvasMode ? "var(--db-surface)" : undefined,
+      zIndex: canvasMode ? 9998 : undefined,
+      minHeight: canvasMode ? undefined : "100dvh",
+      transition: `background ${DUR} ${EASE_SPRING}`,
+    }}>
       <style>{DEVBAR_STYLES}</style>
-      <div style={{ paddingBottom: TOOLBAR_H, minHeight: "100dvh" }}>{children}</div>
-      <SidebarPanel mode="normal" dock={dock} open={sidebarOpen} />
-      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}><Toolbar /></div>
+
+      {/* Main row: sidebar + content + agent */}
+      <div style={{
+        flex: 1, display: "flex", flexDirection: "row",
+        minHeight: 0, minWidth: 0, overflow: "hidden", position: "relative",
+        paddingBottom: canvasMode ? 0 : TOOLBAR_H,
+      }}>
+        {/* In-flow sidebar (canvas desktop only) */}
+        {showInFlowSidebar && isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} isMobile={false} />}
+
+        <ContentArea canvas={canvasMode}>{children}</ContentArea>
+
+        {showInFlowSidebar && !isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} isMobile={false} />}
+
+        {/* In-flow agent panel (canvas desktop only) */}
+        {showInFlowAgent && <AgentPanel open={agentOpen} isMobile={false} />}
+
+        {/* Collapsed tab (canvas desktop, sidebar closed) */}
+      </div>
+
+      {/* Toolbar: fixed in normal mode, in-flow in canvas mode */}
+      {canvasMode ? (
+        <Toolbar isMobile={isMobile} />
+      ) : (
+        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}>
+          <Toolbar isMobile={isMobile} />
+        </div>
+      )}
+
+      {/* Overlay sidebar (normal mode + mobile canvas) */}
+      {(!canvasMode || isMobile) && <SidebarPanel mode="normal" dock={dock} open={sidebarOpen} isMobile={isMobile} />}
+
+      {/* Mobile overlay agent */}
+      {isMobile && canvasMode && <AgentPanel open={agentOpen} isMobile={true} />}
+      {isMobile && canvasMode && agentOpen && (
+        <div onClick={() => setAgentOpen(false)} style={{ position: "fixed", inset: 0, zIndex: 9998 }} />
+      )}
     </div>
   );
 }
@@ -1161,14 +1365,11 @@ const DEVBAR_STYLES = `
     --s-error: #dc2626;
     font-family: ${FONT_BODY};
   }
-  .devbar-canvas-frame {
-    animation: devbar-canvas-enter ${DUR} ${EASE_SPRING} both;
+  .devbar-preset-strip { scrollbar-width: none; }
+  .devbar-preset-strip::-webkit-scrollbar { display: none; }
+  .devbar-scroll { scrollbar-width: none; }
+  .devbar-scroll::-webkit-scrollbar { display: none; }
+  @media (max-width: ${MOBILE_BP}px) {
+    .devbar-canvas-frame { border-radius: 0 !important; border: none !important; }
   }
-  @keyframes devbar-canvas-enter {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-  }
-  .devbar-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
-  .devbar-scroll::-webkit-scrollbar-track { background: transparent; }
-  .devbar-scroll::-webkit-scrollbar-thumb { background: var(--db-border); border-radius: 2px; }
 `;

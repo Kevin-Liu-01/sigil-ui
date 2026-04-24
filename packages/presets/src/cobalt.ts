@@ -140,6 +140,7 @@ export const cobaltPreset: SigilPreset = {
       "card-radius": "10px",
       "gutter-pattern": "triangle",
       "margin-pattern": "diagonal",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

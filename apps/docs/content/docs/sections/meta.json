@@ -1,0 +1,26 @@
+{
+  "title": "Sections",
+  "pages": [
+    "bento-section",
+    "blueprint-grid-section",
+    "cta-section",
+    "code-showcase-section",
+    "comparison-section",
+    "faq-section",
+    "feature-frame-section",
+    "feature-section",
+    "feature-showcase-section",
+    "footer-section",
+    "gradient-banner-section",
+    "hero-section",
+    "install-section",
+    "large-text-section",
+    "logo-cloud-section",
+    "newsletter-section",
+    "section-heading",
+    "stats-section",
+    "team-section",
+    "testimonials-section",
+    "timeline-section"
+  ]
+}

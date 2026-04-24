@@ -137,6 +137,7 @@ export const basaltPreset: SigilPreset = {
       "card-radius": "16px",
       "gutter-pattern": "crosshatch",
       "margin-pattern": "zigzag",
+      "margin-border": "1px solid",
     },
     radius: {
       none: "0px",

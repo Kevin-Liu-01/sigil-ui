@@ -337,6 +337,8 @@ export interface SigilPageGridProps {
   showMarginLines?: boolean;
   gutterPattern?: GutterPattern;
   marginPattern?: GutterPattern;
+  /** Border on the margin columns' inner edges where they meet the content area. */
+  marginBorder?: string;
   /** Strip all gutter/margin decoration — gutters become invisible empty space. */
   edgeless?: boolean;
 }
@@ -352,6 +354,7 @@ export function SigilPageGrid({
   showMarginLines = true,
   gutterPattern = "grid",
   marginPattern = "horizontal",
+  marginBorder,
   edgeless = false,
 }: SigilPageGridProps) {
   const effectiveRailGap = edgeless ? 0 : railGap;
@@ -375,6 +378,12 @@ export function SigilPageGrid({
     ? patternStyles(marginPattern, marginCell, "right")
     : null;
 
+  const gutterVisible = !edgeless && effectiveRailGap > 0;
+
+  const marginBorderVal = !edgeless && marginBorder && !gutterVisible
+    ? `${marginBorder} var(--s-border)`
+    : undefined;
+
   const marginStyleL: CSSProperties = {
     backgroundColor: "var(--s-background)",
     ...(marginCssL
@@ -384,6 +393,7 @@ export function SigilPageGrid({
           ...(marginCssL.backgroundPosition ? { backgroundPosition: marginCssL.backgroundPosition } : {}),
         }
       : {}),
+    ...(marginBorderVal ? { borderRight: marginBorderVal } : {}),
   };
   const marginStyleR: CSSProperties = {
     backgroundColor: "var(--s-background)",
@@ -394,9 +404,8 @@ export function SigilPageGrid({
           ...(marginCssR.backgroundPosition ? { backgroundPosition: marginCssR.backgroundPosition } : {}),
         }
       : {}),
+    ...(marginBorderVal ? { borderLeft: marginBorderVal } : {}),
   };
-
-  const gutterVisible = !edgeless;
 
   return (
     <PageGridContext.Provider value={config}>
@@ -424,6 +433,7 @@ export interface SigilFrameProps extends SigilPageGridProps {
   /** HTML element for the outer wrapper. @default "div" */
   as?: "div" | "main" | "article";
 }
+
 
 /**
  * Top-level page frame that wraps all content in the 5-column

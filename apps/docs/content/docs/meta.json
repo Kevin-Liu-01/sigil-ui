@@ -10,9 +10,25 @@
     "...components",
     "---Layout---",
     "...layout",
+    "---Navigation---",
+    "...navigation",
+    "---Overlays---",
+    "...overlays",
     "---Shapes---",
     "...shapes",
     "---3D---",
-    "...3d"
+    "...3d",
+    "---Diagrams---",
+    "...diagrams",
+    "---Marketing---",
+    "...marketing",
+    "---Patterns---",
+    "...patterns",
+    "---Sections---",
+    "...sections",
+    "---Playbook---",
+    "...playbook",
+    "---Animation---",
+    "...animation"
   ]
 }
