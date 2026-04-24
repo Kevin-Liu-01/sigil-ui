@@ -4,8 +4,12 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "node:path";
 import { execSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { printIntro, symbols, withSpinner } from "./terminal.js";
 import { generateRequiredSkillsSection, installSigilAgentAssets } from "./skills.js";
+
+const SIGIL_PACKAGE_VERSION = readPackageVersion();
+const SIGIL_PACKAGE_RANGE = `^${SIGIL_PACKAGE_VERSION}`;
 
 const TEMPLATES = [
   { value: "ai-saas", label: "AI SaaS", description: "Dashboard + AI features, dark mode, charts" },
@@ -307,9 +311,9 @@ ${fontOverride}`;
     if (fs.existsSync(pkgPath)) {
       const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
       pkg.dependencies = pkg.dependencies ?? {};
-      pkg.dependencies["@sigil-ui/tokens"] = "latest";
-      pkg.dependencies["@sigil-ui/components"] = "latest";
-      pkg.dependencies["@sigil-ui/presets"] = "latest";
+      pkg.dependencies["@sigil-ui/tokens"] = SIGIL_PACKAGE_RANGE;
+      pkg.dependencies["@sigil-ui/components"] = SIGIL_PACKAGE_RANGE;
+      pkg.dependencies["@sigil-ui/presets"] = SIGIL_PACKAGE_RANGE;
       pkg.dependencies["clsx"] = "latest";
       pkg.dependencies["tailwind-merge"] = "latest";
 
@@ -324,7 +328,7 @@ ${fontOverride}`;
       }
 
       pkg.devDependencies = pkg.devDependencies ?? {};
-      pkg.devDependencies["@sigil-ui/cli"] = "latest";
+      pkg.devDependencies["@sigil-ui/cli"] = SIGIL_PACKAGE_RANGE;
 
       fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n", "utf-8");
       console.log(`  ${symbols.success} Updated package.json with Sigil dependencies`);
@@ -551,3 +555,23 @@ function abort(): void {
 }
 
 program.parse();
+
+function readPackageVersion(): string {
+  const dirname = path.dirname(fileURLToPath(import.meta.url));
+  const candidates = [
+    path.join(dirname, "..", "package.json"),
+    path.join(dirname, "..", "..", "package.json"),
+  ];
+
+  for (const candidate of candidates) {
+    if (!fs.existsSync(candidate)) continue;
+    try {
+      const pkg = JSON.parse(fs.readFileSync(candidate, "utf-8")) as { version?: string };
+      if (pkg.version) return pkg.version;
+    } catch {
+      // Fall through to the next candidate.
+    }
+  }
+
+  return "0.1.0";
+}

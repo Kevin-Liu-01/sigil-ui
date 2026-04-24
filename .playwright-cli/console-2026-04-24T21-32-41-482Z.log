@@ -14439,3 +14439,5 @@ It can also happen if the client has a browser extension installed which messes 
  @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
 [ 6874181ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
 [ 6875059ms] [LOG] [Fast Refresh] done in 980ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[ 7009909ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[ 7010091ms] [LOG] [Fast Refresh] done in 202ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
