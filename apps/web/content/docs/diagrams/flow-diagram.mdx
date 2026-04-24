@@ -6,17 +6,24 @@ description: A directional flow chart with auto-layout, branching, and animated 
 ## Import
 
 ```tsx
-import { FlowDiagram, FlowStep, FlowBranch } from "@sigil-ui/components";
+import { FlowDiagram } from "@sigil-ui/components";
 ```
 
 ## Usage
 
 ```tsx
-<FlowDiagram direction="horizontal">
-  <FlowStep id="start" label="User visits" />
-  <FlowStep id="auth" label="Authenticate" />
-  <FlowStep id="dashboard" label="Dashboard" />
-</FlowDiagram>
+<FlowDiagram
+  direction="horizontal"
+  nodes={[
+    { id: "start", label: "User visits" },
+    { id: "auth", label: "Authenticate" },
+    { id: "dashboard", label: "Dashboard", variant: "accent" },
+  ]}
+  connections={[
+    { from: "start", to: "auth" },
+    { from: "auth", to: "dashboard" },
+  ]}
+/>
 ```
 
 Steps are automatically connected with directional arrows.
@@ -24,35 +31,47 @@ Steps are automatically connected with directional arrows.
 ## Branching
 
 ```tsx
-<FlowDiagram direction="vertical">
-  <FlowStep id="input" label="Request" />
-  <FlowBranch label="Valid?">
-    <FlowStep id="success" label="Process" />
-    <FlowStep id="error" label="Return error" />
-  </FlowBranch>
-  <FlowStep id="response" label="Send response" />
-</FlowDiagram>
+<FlowDiagram
+  direction="vertical"
+  nodes={[
+    { id: "input", label: "Request" },
+    { id: "validate", label: "Validate", variant: "highlighted" },
+    { id: "response", label: "Send response" },
+  ]}
+  connections={[
+    { from: "input", to: "validate", label: "valid?" },
+    { from: "validate", to: "response" },
+  ]}
+/>
 ```
 
 ## Animated edges
 
 ```tsx
-<FlowDiagram animated>
-  <FlowStep id="a" label="Fetch data" />
-  <FlowStep id="b" label="Transform" />
-  <FlowStep id="c" label="Render" />
-</FlowDiagram>
+<FlowDiagram
+  connector="dashed-animated"
+  nodes={[
+    { id: "a", label: "Fetch data" },
+    { id: "b", label: "Transform" },
+    { id: "c", label: "Render" },
+  ]}
+  connections={[
+    { from: "a", to: "b" },
+    { from: "b", to: "c" },
+  ]}
+/>
 ```
 
 Dashed edges animate to show flow direction.
 
-## Step variants
+## Node variants
 
 ```tsx
-<FlowStep id="start" label="Start" variant="circle" />
-<FlowStep id="process" label="Process" variant="rectangle" />
-<FlowStep id="decision" label="Decide" variant="diamond" />
-<FlowStep id="end" label="End" variant="circle" />
+const nodes = [
+  { id: "start", label: "Start" },
+  { id: "process", label: "Process", variant: "highlighted" },
+  { id: "end", label: "End", variant: "accent" },
+];
 ```
 
 ## Token integration
@@ -73,27 +92,22 @@ Dashed edges animate to show flow direction.
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
+| `nodes` | `FlowNode[]` | — | Ordered nodes to render |
+| `connections` | `FlowConnection[]` | — | Directed edges between nodes |
 | `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Flow direction |
-| `animated` | `boolean` | `false` | Animate edge flow |
+| `connector` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed-animated"` | Edge style |
 | `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Steps and branches |
 
-### FlowStep
+### FlowNode
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `id` | `string` | — | Unique step identifier |
 | `label` | `string` | — | Step label |
-| `variant` | `"rectangle" \| "circle" \| "diamond"` | `"rectangle"` | Step shape |
-
-### FlowBranch
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `label` | `string` | — | Branch condition label |
-| `children` | `ReactNode` | — | Branch paths (2+ FlowSteps) |
+| `children` | `ReactNode` | — | Optional secondary text |
+| `variant` | `"default" \| "highlighted" \| "accent"` | `"default"` | Node treatment |
 
 ## Accessibility
 
 - SVG edges have `aria-hidden="true"`
-- Steps are focusable with `role="listitem"` inside a `role="list"` container
+- Node labels render as text inside token-styled cards

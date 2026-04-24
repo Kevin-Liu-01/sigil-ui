@@ -12,14 +12,26 @@ import { StreamFlowDiagram } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <StreamFlowDiagram />
+  <StreamFlowDiagram
+    source={{ label: "Prompt" }}
+    tokens={["tokens", "compile", "render"]}
+    output="UI"
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<StreamFlowDiagram source={{ label: "Prompt" }} tokens={["tokens", "compile"]} output="UI" />
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| Standard HTML div attributes inherited. | | | |
+| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
+| `tokens` | `string[]` | `["Hello", "World", "!"]` | Streamed tokens |
+| `output` | `string` | — | Optional output node |
 
 ## Token integration
 

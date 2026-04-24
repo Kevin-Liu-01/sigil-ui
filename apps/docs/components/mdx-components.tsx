@@ -1,6 +1,8 @@
 "use client";
 
-export { ComponentPreview } from "./component-preview";
+import { ComponentPreview } from "./component-preview";
+
+export { ComponentPreview };
 
 export {
   AccentActive, AccentCTA, AccessibleIcon, Accordion, AccordionContent, AccordionItem,

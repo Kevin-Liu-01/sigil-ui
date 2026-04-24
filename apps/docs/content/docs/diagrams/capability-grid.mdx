@@ -12,8 +12,25 @@ import { CapabilityGrid } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <CapabilityGrid />
+  <CapabilityGrid
+    categories={[
+      { label: "Core", items: [{ name: "Tokens" }, { name: "Presets" }, { name: "CLI" }] },
+      { label: "Surface", items: [{ name: "Components" }, { name: "Layouts" }, { name: "Docs" }] },
+    ]}
+    callout={{ label: "Still manual", items: ["one-off CSS", "theme drift"], variant: "warning" }}
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<CapabilityGrid
+  categories={[
+    { label: "Core", items: [{ name: "Tokens" }, { name: "Presets" }] },
+    { label: "Surface", items: [{ name: "Components" }, { name: "Docs" }] },
+  ]}
+/>
+```
 
 ## Props
 

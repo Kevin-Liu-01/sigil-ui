@@ -12,15 +12,40 @@ import { StatePersistence } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <StatePersistence />
+  <StatePersistence
+    activeItem={{ label: "Theme", sublabel: "active", value: "saved", valueLabel: "local", variant: "success" }}
+    competitors={[
+      { label: "Draft", value: "syncing", variant: "muted" },
+      { label: "Session", value: "expired", variant: "danger" },
+    ]}
+    persistedState={[
+      { label: "Preset", status: "restored" },
+      { label: "Density", status: "restored" },
+    ]}
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<StatePersistence
+  activeItem={{ label: "Theme", value: "saved", variant: "success" }}
+  persistedState={[
+    { label: "Preset", status: "restored" },
+    { label: "Density", status: "restored" },
+  ]}
+/>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `activeItems` | `PersistenceActiveItem[]` | — | Active state items |
-| `rows` | `PersistedStateRow[]` | — | Persisted state rows |
+| `activeItem` | `PersistenceActiveItem` | — | Primary active state item |
+| `competitors` | `PersistenceActiveItem[]` | `[]` | Optional comparison items |
+| `persistedState` | `PersistedStateRow[]` | `[]` | Persisted state rows |
+| `activeLabel` | `string` | `"Status"` | Active section label |
+| `stateLabel` | `string` | `"Preserved state"` | State section label |
 
 ## Token integration
 

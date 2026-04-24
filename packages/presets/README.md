@@ -1,6 +1,6 @@
 # @sigil-ui/presets
 
-31 curated design system presets for Sigil UI. Each preset controls **everything** about a project's visual identity — colors, fonts, spacing, radius, shadows, motion, buttons, cards, headings, navigation, backgrounds, and code blocks — through a single `SigilPreset` object.
+44 curated design system presets for Sigil UI. Each preset controls **everything** about a project's visual identity — colors, fonts, spacing, radius, shadows, motion, buttons, cards, headings, navigation, backgrounds, and code blocks — through a single `SigilPreset` object.
 
 ## The Core Principle
 
@@ -18,7 +18,7 @@ Right:  edit the preset's tokens.radius.md from "8px" to "0px"   (every rounded 
 pnpm add @sigil-ui/presets
 ```
 
-## 31 Presets in 6 Categories
+## 44 Presets in 7 Categories
 
 ### Structural / Precision
 | Preset | Mood | Display Font | Hue |
@@ -74,6 +74,23 @@ pnpm add @sigil-ui/presets
 | `anvil` | heavy, foundational | Space Grotesk | Iron |
 | `rivet` | mechanical, utilitarian | Inter | Amber |
 | `brass` | warm, vintage | Fraunces | Gold |
+
+### Edgeless / Atmospheric
+| Preset | Mood | Display Font | Hue |
+|--------|------|-------------|-----|
+| `vast` | expansive, warm, editorial | Fraunces | Terracotta |
+| `aura` | ethereal, luminous, ambient | General Sans | Violet |
+| `field` | open, functional, utilitarian | Space Grotesk | Green |
+| `clay` | warm, earthy, handcrafted | DM Serif Display | Terracotta |
+| `sage` | botanical, calm, natural | Libre Baskerville | Green |
+| `ink` | creative, deep, immersive | Plus Jakarta Sans | Indigo |
+| `sand` | warm, sunny, inviting | Instrument Serif | Amber |
+| `plum` | luxurious, rich, dramatic | Playfair Display | Magenta |
+| `moss` | forest, deep, organic-tech | Space Grotesk | Green |
+| `coral` | warm, friendly, approachable | Outfit | Coral |
+| `dune` | warm, golden, vast-feeling | Instrument Serif | Amber |
+| `ocean` | deep, calming, oceanic | General Sans | Teal |
+| `rose` | elegant, feminine, refined | Fraunces | Rose |
 
 ## Usage
 

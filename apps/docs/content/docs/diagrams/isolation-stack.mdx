@@ -12,15 +12,34 @@ import { IsolationStack } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <IsolationStack />
+  <IsolationStack
+    layers={[
+      { label: "Browser", width: "100%" },
+      { label: "Sandbox", width: "82%" },
+      { label: "Agent", width: "64%", accent: true },
+    ]}
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<IsolationStack
+  layers={[
+    { label: "Browser", width: "100%" },
+    { label: "Sandbox", width: "82%" },
+    { label: "Agent", width: "64%", accent: true },
+  ]}
+/>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `layers` | `IsolationLayer[]` | — | Stack layers |
-| `comparison` | `ComparisonColumn[]` | — | Comparison columns |
+| `columns` | `ComparisonColumn[]` | — | Optional comparison columns |
+| `rows` | `ComparisonRow[]` | — | Optional comparison rows |
 
 ## Token integration
 

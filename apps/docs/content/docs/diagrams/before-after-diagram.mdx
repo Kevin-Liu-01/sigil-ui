@@ -13,8 +13,10 @@ import { BeforeAfterDiagram } from "@sigil-ui/components";
 
 <ComponentPreview>
   <BeforeAfterDiagram
-    before={{ title: "Before", children: "Manual CSS overrides, scattered Tailwind classes, no consistency" }}
-    after={{ title: "After", children: "Token-driven design, one preset change updates everything" }}
+    beforeTitle="Before"
+    afterTitle="After"
+    before="Manual CSS overrides, scattered Tailwind classes, no consistency"
+    after="Token-driven design, one preset change updates everything"
   />
 </ComponentPreview>
 
@@ -22,8 +24,10 @@ import { BeforeAfterDiagram } from "@sigil-ui/components";
 
 ```tsx
 <BeforeAfterDiagram
-  before={{ title: "Before", children: "Manual edits" }}
-  after={{ title: "After", children: "Automated tokens" }}
+  beforeTitle="Before"
+  afterTitle="After"
+  before="Manual edits"
+  after="Automated tokens"
 />
 ```
 
@@ -31,8 +35,10 @@ import { BeforeAfterDiagram } from "@sigil-ui/components";
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `before` | `object` | — | Before panel with title and children |
-| `after` | `object` | — | After panel with title and children |
+| `beforeTitle` | `string` | `"Without"` | Before panel label |
+| `afterTitle` | `string` | `"With"` | After panel label |
+| `before` | `ReactNode` | — | Before panel content |
+| `after` | `ReactNode` | — | After panel content |
 
 ## Token integration
 

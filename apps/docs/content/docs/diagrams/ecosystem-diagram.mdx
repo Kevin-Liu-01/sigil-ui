@@ -13,8 +13,8 @@ import { EcosystemDiagram } from "@sigil-ui/components";
 
 <ComponentPreview>
   <EcosystemDiagram
-    center="Sigil UI"
-    nodes={[
+    center={{ label: "Sigil UI", sublabel: "system" }}
+    ring={[
       { label: "Tokens" },
       { label: "Presets" },
       { label: "Components" },
@@ -27,15 +27,16 @@ import { EcosystemDiagram } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<EcosystemDiagram center="Your Product" nodes={[{ label: "API" }, { label: "SDK" }]} />
+<EcosystemDiagram center={{ label: "Your Product" }} ring={[{ label: "API" }, { label: "SDK" }]} />
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `center` | `string` | — | Center hub label |
-| `nodes` | `EcosystemNode[]` | — | Surrounding ecosystem nodes |
+| `center` | `{ label: string; icon?: ReactNode; sublabel?: string }` | — | Center hub |
+| `ring` | `EcosystemNode[]` | — | Surrounding ecosystem nodes |
+| `size` | `number` | `280` | Diagram size in pixels |
 
 ## Token integration
 

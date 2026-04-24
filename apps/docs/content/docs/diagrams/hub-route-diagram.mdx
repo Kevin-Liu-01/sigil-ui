@@ -12,14 +12,45 @@ import { HubRouteDiagram } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <HubRouteDiagram />
+  <HubRouteDiagram
+    source={{ label: "App" }}
+    hub={{
+      label: "Sigil",
+      layers: [
+        { label: "Tokens" },
+        { label: "Presets" },
+        { label: "Primitives" },
+        { label: "Components" },
+      ],
+    }}
+    leftLabel="Inputs"
+    rightLabel="Outputs"
+    leftTargets={[{ label: "Theme" }, { label: "Docs" }]}
+    rightTargets={[{ label: "CSS" }, { label: "UI" }]}
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<HubRouteDiagram
+  source={{ label: "App" }}
+  hub={{ label: "Sigil", layers: [{ label: "Tokens" }, { label: "Components" }] }}
+  leftTargets={[{ label: "Theme" }]}
+  rightTargets={[{ label: "UI" }]}
+/>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| Standard HTML div attributes inherited. | | | |
+| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
+| `hub` | `{ label: string; layers: HubRouteLayer[] }` | — | Central hub and layers |
+| `leftTargets` | `HubRouteNode[]` | — | Left target group |
+| `rightTargets` | `HubRouteNode[]` | — | Right target group |
+| `leftLabel` | `string` | — | Optional left group label |
+| `rightLabel` | `string` | — | Optional right group label |
 
 ## Token integration
 

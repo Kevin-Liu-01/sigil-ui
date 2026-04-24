@@ -13,11 +13,14 @@ import { OrbitDiagram } from "@sigil-ui/components";
 
 <ComponentPreview>
   <OrbitDiagram
-    center="Core"
-    orbits={[
-      { items: ["Auth", "API", "DB"] },
-      { items: ["CDN", "Cache", "Queue", "Search"] },
+    center={{ label: "Core" }}
+    nodes={[
+      { label: "Auth" },
+      { label: "API" },
+      { label: "DB" },
+      { label: "Cache" },
     ]}
+    labels={["runtime", "data"]}
   />
 </ComponentPreview>
 
@@ -25,8 +28,10 @@ import { OrbitDiagram } from "@sigil-ui/components";
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `center` | `string` | — | Center node label |
-| `orbits` | `object[]` | — | Array of orbit rings with items |
+| `center` | `{ label: string; icon?: ReactNode }` | — | Center node |
+| `nodes` | `OrbitNode[]` | — | Orbiting nodes |
+| `size` | `number` | `260` | Diagram size in pixels |
+| `labels` | `string[]` | `[]` | Optional labels inside the orbit |
 
 ## Token integration
 

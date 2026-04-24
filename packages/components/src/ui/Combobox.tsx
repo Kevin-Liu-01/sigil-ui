@@ -57,6 +57,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   const filtered = options.filter((o) =>
     o.label.toLowerCase().includes(query.toLowerCase()),
   );
+  const enabledIndexes = filtered.flatMap((option, index) => option.disabled ? [] : [index]);
 
   const selectedLabel = options.find((o) => o.value === value)?.label ?? "";
 
@@ -71,16 +72,15 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   );
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const enabledItems = filtered.filter((o) => !o.disabled);
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActiveIndex((i) => Math.min(i + 1, enabledItems.length - 1));
+      setActiveIndex((i) => enabledIndexes[Math.min(enabledIndexes.indexOf(i) + 1, enabledIndexes.length - 1)] ?? -1);
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setActiveIndex((i) => Math.max(i - 1, 0));
+      setActiveIndex((i) => enabledIndexes[Math.max(enabledIndexes.indexOf(i) - 1, 0)] ?? -1);
     } else if (e.key === "Enter" && activeIndex >= 0) {
       e.preventDefault();
-      const item = enabledItems[activeIndex];
+      const item = filtered[activeIndex];
       if (item) select(item.value);
     } else if (e.key === "Escape") {
       setOpenWithSound(false);

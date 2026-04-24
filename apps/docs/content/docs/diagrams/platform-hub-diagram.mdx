@@ -12,14 +12,33 @@ import { PlatformHubDiagram } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <PlatformHubDiagram />
+  <PlatformHubDiagram
+    left={[{ label: "Inputs", items: [{ label: "Tokens" }, { label: "Presets" }] }]}
+    center={{
+      label: "Platform",
+      items: [{ label: "CLI" }, { label: "Docs" }],
+    }}
+    right={[{ label: "Outputs", items: [{ label: "CSS" }, { label: "Components" }] }]}
+  />
 </ComponentPreview>
+
+## Usage
+
+```tsx
+<PlatformHubDiagram
+  left={[{ label: "Inputs", items: [{ label: "Tokens" }] }]}
+  center={{ label: "Platform" }}
+  right={[{ label: "Outputs", items: [{ label: "Components" }] }]}
+/>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| Standard HTML div attributes inherited. | | | |
+| `left` | `PlatformGroup[]` | — | Left-side groups |
+| `center` | `{ label: string; icon?: ReactNode; items?: PlatformItem[] }` | — | Central hub |
+| `right` | `PlatformGroup[]` | — | Right-side groups |
 
 ## Token integration
 

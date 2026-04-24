@@ -1,7 +1,7 @@
 {
   "name": "@sigil-ui/presets",
   "version": "0.1.0",
-  "description": "Built-in presets for Sigil UI — 31 curated token sheets with font pairings",
+  "description": "Built-in presets for Sigil UI — 44 curated token sheets with font pairings",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -18,142 +18,6 @@
         "default": "./dist/index.cjs"
       }
     },
-    "./sigil": {
-      "import": "./dist/sigil.js",
-      "require": "./dist/sigil.cjs"
-    },
-    "./crux": {
-      "import": "./dist/crux.js",
-      "require": "./dist/crux.cjs"
-    },
-    "./alloy": {
-      "import": "./dist/alloy.js",
-      "require": "./dist/alloy.cjs"
-    },
-    "./basalt": {
-      "import": "./dist/basalt.js",
-      "require": "./dist/basalt.cjs"
-    },
-    "./forge": {
-      "import": "./dist/forge.js",
-      "require": "./dist/forge.cjs"
-    },
-    "./onyx": {
-      "import": "./dist/onyx.js",
-      "require": "./dist/onyx.cjs"
-    },
-    "./flux": {
-      "import": "./dist/flux.js",
-      "require": "./dist/flux.cjs"
-    },
-    "./kova": {
-      "import": "./dist/kova.js",
-      "require": "./dist/kova.cjs"
-    },
-    "./etch": {
-      "import": "./dist/etch.js",
-      "require": "./dist/etch.cjs"
-    },
-    "./anvil": {
-      "import": "./dist/anvil.js",
-      "require": "./dist/anvil.cjs"
-    },
-    "./rivet": {
-      "import": "./dist/rivet.js",
-      "require": "./dist/rivet.cjs"
-    },
-    "./shard": {
-      "import": "./dist/shard.js",
-      "require": "./dist/shard.cjs"
-    },
-    "./rune": {
-      "import": "./dist/rune.js",
-      "require": "./dist/rune.cjs"
-    },
-    "./fang": {
-      "import": "./dist/fang.js",
-      "require": "./dist/fang.cjs"
-    },
-    "./cobalt": {
-      "import": "./dist/cobalt.js",
-      "require": "./dist/cobalt.cjs"
-    },
-    "./strata": {
-      "import": "./dist/strata.js",
-      "require": "./dist/strata.cjs"
-    },
-    "./brass": {
-      "import": "./dist/brass.js",
-      "require": "./dist/brass.cjs"
-    },
-    "./obsid": {
-      "import": "./dist/obsid.js",
-      "require": "./dist/obsid.cjs"
-    },
-    "./axiom": {
-      "import": "./dist/axiom.js",
-      "require": "./dist/axiom.cjs"
-    },
-    "./glyph": {
-      "import": "./dist/glyph.js",
-      "require": "./dist/glyph.cjs"
-    },
-    "./cipher": {
-      "import": "./dist/cipher.js",
-      "require": "./dist/cipher.cjs"
-    },
-    "./prism": {
-      "import": "./dist/prism.js",
-      "require": "./dist/prism.cjs"
-    },
-    "./helix": {
-      "import": "./dist/helix.js",
-      "require": "./dist/helix.cjs"
-    },
-    "./hex": {
-      "import": "./dist/hex.js",
-      "require": "./dist/hex.cjs"
-    },
-    "./vex": {
-      "import": "./dist/vex.js",
-      "require": "./dist/vex.cjs"
-    },
-    "./arc": {
-      "import": "./dist/arc.js",
-      "require": "./dist/arc.cjs"
-    },
-    "./dsgn": {
-      "import": "./dist/dsgn.js",
-      "require": "./dist/dsgn.cjs"
-    },
-    "./mrkr": {
-      "import": "./dist/mrkr.js",
-      "require": "./dist/mrkr.cjs"
-    },
-    "./noir": {
-      "import": "./dist/noir.js",
-      "require": "./dist/noir.cjs"
-    },
-    "./dusk": {
-      "import": "./dist/dusk.js",
-      "require": "./dist/dusk.cjs"
-    },
-    "./mono": {
-      "import": "./dist/mono.js",
-      "require": "./dist/mono.cjs"
-    },
-    "./vast": {
-      "import": "./dist/vast.js",
-      "require": "./dist/vast.cjs"
-    },
-    "./aura": {
-      "import": "./dist/aura.js",
-      "require": "./dist/aura.cjs"
-    },
-    "./field": {
-      "import": "./dist/field.js",
-      "require": "./dist/field.cjs"
-    },
     "./catalog": {
       "import": {
         "types": "./dist/catalog.d.ts",
@@ -162,6 +26,16 @@
       "require": {
         "types": "./dist/catalog.d.cts",
         "default": "./dist/catalog.cjs"
+      }
+    },
+    "./*": {
+      "import": {
+        "types": "./dist/*.d.ts",
+        "default": "./dist/*.js"
+      },
+      "require": {
+        "types": "./dist/*.d.cts",
+        "default": "./dist/*.cjs"
       }
     }
   },
