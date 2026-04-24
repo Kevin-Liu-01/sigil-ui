@@ -6,3 +6,6 @@ dist/
 *.tsbuildinfo
 .env
 .env.local
+.playwright-cli/
+.playwright-mcp/
+output/playwright/
