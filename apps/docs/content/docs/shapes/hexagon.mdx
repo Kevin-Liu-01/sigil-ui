@@ -39,8 +39,8 @@ Renders a regular hexagon using a CSS `clip-path: polygon(...)`. Default size is
 ## Colors
 
 ```tsx
-<Hexagon color="var(--r-primary)" />
-<Hexagon color="var(--r-secondary)" />
+<Hexagon color="var(--s-primary)" />
+<Hexagon color="var(--s-secondary)" />
 <Hexagon color="oklch(0.65 0.17 160)" />
 ```
 
@@ -49,13 +49,13 @@ Renders a regular hexagon using a CSS `clip-path: polygon(...)`. Default size is
 ### Filled
 
 ```tsx
-<Hexagon variant="filled" color="var(--r-primary)" />
+<Hexagon variant="filled" color="var(--s-primary)" />
 ```
 
 ### Outlined
 
 ```tsx
-<Hexagon variant="outlined" color="var(--r-primary)" />
+<Hexagon variant="outlined" color="var(--s-primary)" />
 ```
 
 ### Gradient
@@ -63,8 +63,8 @@ Renders a regular hexagon using a CSS `clip-path: polygon(...)`. Default size is
 ```tsx
 <Hexagon
   variant="gradient"
-  gradientFrom="var(--r-primary)"
-  gradientTo="var(--r-secondary)"
+  gradientFrom="var(--s-primary)"
+  gradientTo="var(--s-secondary)"
 />
 ```
 
@@ -85,7 +85,7 @@ Clip an image into a hexagon:
 ## Badge pattern
 
 ```tsx
-<Hexagon size={40} color="var(--r-primary)">
+<Hexagon size={40} color="var(--s-primary)">
   <span className="text-white text-sm font-bold">3</span>
 </Hexagon>
 ```
@@ -97,7 +97,7 @@ Combine with CSS grid for a honeycomb layout:
 ```tsx
 <div className="grid grid-cols-4 gap-2">
   {items.map((item) => (
-    <Hexagon key={item.id} size={64} color="var(--r-surface-elevated)">
+    <Hexagon key={item.id} size={64} color="var(--s-surface-elevated)">
       <item.icon className="size-6" />
     </Hexagon>
   ))}
@@ -107,27 +107,27 @@ Combine with CSS grid for a honeycomb layout:
 ## Animation
 
 ```tsx
-<Hexagon animated="pulse" color="var(--r-primary)" />
-<Hexagon animated="spin" color="var(--r-secondary)" />
-<Hexagon animated="float" color="var(--r-primary-muted)" />
+<Hexagon animated="pulse" color="var(--s-primary)" />
+<Hexagon animated="spin" color="var(--s-secondary)" />
+<Hexagon animated="float" color="var(--s-primary-muted)" />
 ```
 
 ## Token integration
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-primary` | Default fill color |
-| `--r-border` | Outlined variant stroke |
-| `--r-surface-elevated` | Subtle background variant |
-| `--r-duration-slow` | Animation duration |
-| `--r-ease-spring` | Animation easing |
+| `--s-primary` | Default fill color |
+| `--s-border` | Outlined variant stroke |
+| `--s-surface-elevated` | Subtle background variant |
+| `--s-duration-slow` | Animation duration |
+| `--s-ease-spring` | Animation easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `size` | `number \| string` | `48` | Width and height |
-| `color` | `string` | `var(--r-primary)` | Fill or stroke color |
+| `color` | `string` | `var(--s-primary)` | Fill or stroke color |
 | `variant` | `"filled" \| "outlined" \| "gradient"` | `"filled"` | Visual variant |
 | `orientation` | `"flat" \| "pointy"` | `"flat"` | Hexagon orientation |
 | `gradientFrom` | `string` | — | Gradient start color |

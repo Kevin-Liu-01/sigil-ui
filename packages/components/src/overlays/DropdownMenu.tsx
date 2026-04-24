@@ -53,7 +53,7 @@ export const DropdownMenuItem = forwardRef<
     <DropdownMenuPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex h-8 cursor-default select-none items-center gap-2 rounded-[var(--s-radius-sm,4px)] px-2 text-sm outline-none",
+        "relative flex h-8 cursor-default select-none items-center gap-2 rounded-[var(--s-radius-sm,4px)] px-2 outline-none",
         "transition-colors duration-[var(--s-duration-fast,100ms)]",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
@@ -73,7 +73,7 @@ export const DropdownMenuCheckboxItem = forwardRef<
     <DropdownMenuPrimitive.CheckboxItem
       ref={ref}
       className={cn(
-        "relative flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 text-sm outline-none",
+        "relative flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 outline-none",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
@@ -101,7 +101,7 @@ export const DropdownMenuRadioItem = forwardRef<
     <DropdownMenuPrimitive.RadioItem
       ref={ref}
       className={cn(
-        "relative flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 text-sm outline-none",
+        "relative flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 outline-none",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
         className,
@@ -158,7 +158,7 @@ export const DropdownMenuSubTrigger = forwardRef<
     <DropdownMenuPrimitive.SubTrigger
       ref={ref}
       className={cn(
-        "flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] px-2 text-sm outline-none",
+        "flex h-8 cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] px-2 outline-none",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[state=open]:bg-[var(--s-background)]",
         inset && "pl-8",

@@ -1,92 +1,236 @@
-import type { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-  title: "Blog — Sigil UI",
-  description: "Updates, thinking, and technical writing from the Sigil UI team.",
-};
+import {
+  SigilSection,
+  SectionDivider,
+  GapPixelGrid,
+  GapPixelCell,
+  MonoLabel,
+  TabularValue,
+  DensityText,
+  AccentCTA,
+  CardCell,
+  FeaturedGrid,
+  BorderStack,
+  Input,
+  cn,
+} from "@sigil-ui/components";
+import { LandingNavbar } from "@/components/landing/navbar";
+import { LandingFooter } from "@/components/landing/footer";
+import { SigilFrame } from "@/components/landing/sigil-frame";
 
 const posts = [
   {
     date: "2026-04-22",
     title: "Introducing Sigil UI",
+    category: "Launch",
     excerpt:
       "The token-driven design system that replaces scattered Tailwind overrides with a single source of truth. One file, 300+ variables, 30 presets.",
   },
   {
     date: "2026-04-20",
     title: "Why Presets Beat Themes",
+    category: "Design",
     excerpt:
-      "Traditional libraries give you components. Sigil gives you components plus a complete visual identity you can swap in one command. Here's why that matters.",
+      "Traditional libraries give you components. Sigil gives you components plus a complete visual identity you can swap in one command.",
   },
   {
     date: "2026-04-18",
     title: "The Alignment Rail System",
+    category: "Architecture",
     excerpt:
-      "How margins, gutters, and content widths compose into a structural grid that adapts from mobile to ultrawide without breakpoint spaghetti.",
+      "How margins, gutters, and content widths compose into a structural grid that adapts from mobile to ultrawide.",
+  },
+  {
+    date: "2026-04-15",
+    title: "Migrating from shadcn/ui",
+    category: "Guide",
+    excerpt:
+      "A step-by-step guide to moving from shadcn/ui to Sigil. Keep your components, gain token control.",
+  },
+  {
+    date: "2026-04-12",
+    title: "Building with Agents",
+    category: "AI",
+    excerpt:
+      "How AI agents use sigil.tokens.md as a contract. One file, deterministic visual output, no drift.",
+  },
+  {
+    date: "2026-04-10",
+    title: "The OKLCH Color System",
+    category: "Design",
+    excerpt:
+      "Why we chose OKLCH for all 35 color tokens. Perceptual uniformity, P3 gamut, and predictable dark mode.",
+  },
+  {
+    date: "2026-04-08",
+    title: "Anatomy of a Preset",
+    category: "Deep Dive",
+    excerpt:
+      "What goes into a preset's 259 tokens across 16 categories. From colors to motion to code block syntax highlighting.",
+  },
+  {
+    date: "2026-04-05",
+    title: "The Playbook Pattern",
+    category: "Architecture",
+    excerpt:
+      "Ten compositional rules that make any page 'just work'. Gap-pixel grids, mono labels, border stacks, and density DNA.",
   },
 ];
 
+const featured = posts.slice(0, 2);
+const grid = posts.slice(2);
+
 export default function BlogPage() {
   return (
-    <div style={{ padding: "120px 24px 80px", maxWidth: 720, margin: "0 auto" }}>
-      <h1
-        style={{
-          fontFamily: "var(--s-font-display)",
-          fontSize: 40,
-          fontWeight: 700,
-          marginBottom: 48,
-          color: "var(--s-text)",
-        }}
-      >
-        Blog
-      </h1>
+    <SigilFrame>
+      <BorderStack as="main">
+        <LandingNavbar />
 
-      {posts.map((post) => (
-        <article
-          key={post.title}
-          style={{
-            marginBottom: 48,
-            borderBottom: "1px solid var(--s-border-muted)",
-            paddingBottom: 32,
-          }}
-        >
-          <time
-            style={{
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 12,
-              color: "var(--s-text-muted)",
-              letterSpacing: "0.04em",
-            }}
-          >
-            {post.date}
-          </time>
-          <h2
-            style={{
-              margin: "8px 0",
-              fontSize: 24,
-              fontWeight: 600,
-              fontFamily: "var(--s-font-display)",
-              color: "var(--s-text)",
-            }}
-          >
-            {post.title}
-          </h2>
-          <p style={{ color: "var(--s-text-secondary)", lineHeight: 1.7 }}>
-            {post.excerpt}
-          </p>
-        </article>
-      ))}
+        {/* ── Hero ── */}
+        <SigilSection borderTop>
+          <div className="flex flex-col gap-4 max-w-[640px]">
+            <MonoLabel variant="accent">/ Blog</MonoLabel>
+            <h1
+              className={cn(
+                "font-[family-name:var(--s-font-display)]",
+                "text-[clamp(2rem,5vw,3.5rem)] font-[var(--s-heading-weight,700)]",
+                "leading-[1.1] tracking-[var(--s-heading-tracking,-0.025em)]",
+                "text-[var(--s-text)]",
+              )}
+            >
+              Updates &amp; Thinking
+            </h1>
+            <DensityText role="body" as="p" muted>
+              Technical writing, design decisions, and release notes from the
+              Sigil UI team. How tokens, presets, and compositional rules produce
+              consistent interfaces at any scale.
+            </DensityText>
+          </div>
+        </SigilSection>
 
-      <a
-        href="/"
-        style={{
-          color: "var(--s-primary)",
-          fontFamily: "var(--s-font-mono)",
-          fontSize: 14,
-        }}
-      >
-        ← Back home
-      </a>
-    </div>
+        <SectionDivider />
+
+        {/* ── Featured ── */}
+        <SigilSection>
+          <FeaturedGrid>
+            {/* Primary featured card */}
+            <GapPixelCell className="flex flex-col">
+              <div
+                className="h-1.5 w-full"
+                style={{
+                  background:
+                    "linear-gradient(90deg, var(--s-primary), var(--s-primary-hover, var(--s-primary)))",
+                }}
+              />
+              <div
+                className="flex flex-1 flex-col justify-between gap-4"
+                style={{ padding: "var(--s-card-padding, 24px)" }}
+              >
+                <div className="flex flex-col gap-3">
+                  <MonoLabel variant="accent">{featured[0].category}</MonoLabel>
+                  <DensityText
+                    role="nav"
+                    as="h2"
+                    className="text-lg font-semibold leading-tight"
+                  >
+                    {featured[0].title}
+                  </DensityText>
+                  <DensityText role="body" as="p" muted>
+                    {featured[0].excerpt}
+                  </DensityText>
+                </div>
+                <TabularValue as="time" muted size="xs">
+                  {featured[0].date}
+                </TabularValue>
+              </div>
+            </GapPixelCell>
+
+            {/* Secondary featured card */}
+            <GapPixelCell className="flex flex-col">
+              <div
+                className="flex flex-1 flex-col justify-between gap-4"
+                style={{ padding: "var(--s-card-padding, 24px)" }}
+              >
+                <div className="flex flex-col gap-3">
+                  <MonoLabel variant="accent">{featured[1].category}</MonoLabel>
+                  <DensityText
+                    role="nav"
+                    as="h2"
+                    className="text-base font-semibold leading-tight"
+                  >
+                    {featured[1].title}
+                  </DensityText>
+                  <DensityText role="body" as="p" muted>
+                    {featured[1].excerpt}
+                  </DensityText>
+                </div>
+                <TabularValue as="time" muted size="xs">
+                  {featured[1].date}
+                </TabularValue>
+              </div>
+            </GapPixelCell>
+          </FeaturedGrid>
+        </SigilSection>
+
+        <SectionDivider />
+
+        {/* ── Post Grid ── */}
+        <SigilSection>
+          <GapPixelGrid columns={{ md: 3 }}>
+            {grid.map((post) => (
+              <GapPixelCell
+                key={post.title}
+                className="flex flex-col"
+                style={{ padding: "var(--s-card-padding, 20px)" }}
+              >
+                <div className="flex flex-1 flex-col gap-3">
+                  <MonoLabel variant="accent">{post.category}</MonoLabel>
+                  <DensityText
+                    role="nav"
+                    as="h2"
+                    className="font-semibold leading-tight"
+                  >
+                    {post.title}
+                  </DensityText>
+                  <DensityText role="body" as="p" muted>
+                    {post.excerpt}
+                  </DensityText>
+                </div>
+                <div
+                  className="mt-4 border-t pt-3"
+                  style={{ borderColor: "var(--s-border)" }}
+                >
+                  <TabularValue as="time" muted size="xs">
+                    {post.date}
+                  </TabularValue>
+                </div>
+              </GapPixelCell>
+            ))}
+          </GapPixelGrid>
+        </SigilSection>
+
+        <SectionDivider />
+
+        {/* ── Newsletter CTA ── */}
+        <SigilSection>
+          <div className="mx-auto flex max-w-[480px] flex-col items-center gap-4 text-center">
+            <DensityText role="headline" as="h2">
+              Stay in the loop.
+            </DensityText>
+            <DensityText role="body" as="p" muted>
+              New presets, components, and design thinking — delivered when we
+              ship, not on a schedule.
+            </DensityText>
+            <div className="flex w-full items-center gap-2 pt-2">
+              <Input placeholder="you@company.com" className="flex-1" />
+              <AccentCTA>Subscribe</AccentCTA>
+            </div>
+          </div>
+        </SigilSection>
+
+        <LandingFooter />
+      </BorderStack>
+    </SigilFrame>
   );
 }

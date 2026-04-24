@@ -1,0 +1,39 @@
+---
+title: SlideIn
+description: Slide-in animation from any edge with spring-like easing and scroll or mount trigger.
+---
+
+## Import
+
+```tsx
+import { SlideIn } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<SlideIn direction="left">
+  <Card>Slides in from the left</Card>
+</SlideIn>
+```
+
+## Directions
+
+```tsx
+<SlideIn direction="left">From left</SlideIn>
+<SlideIn direction="right">From right</SlideIn>
+<SlideIn direction="up">From above</SlideIn>
+<SlideIn direction="down">From below</SlideIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `"up" \| "down" \| "left" \| "right"` | `"left"` | Slide edge |
+| `offset` | `number` | `60` | Slide distance in px |
+| `delay` | `number` | `0` | Delay in ms |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+
+Respects `prefers-reduced-motion`.

@@ -78,6 +78,7 @@ skills/              Agent skills for specific workflows
   sigil-preset/      Create/modify presets
   sigil-component/   Create/modify components
   sigil-layout/      Page layout with grid system
+  sigil-playbook/    Page composition (10 rules from Reticle design language)
   sigil-migration/   Migrate from shadcn/ui
   sigil-polish/      Interface polish: typography, surfaces, animations, performance (5 files)
 ```
@@ -228,6 +229,7 @@ Read the relevant skill file before starting a task:
 | Create/modify presets | `skills/sigil-preset/SKILL.md` |
 | Create/modify components | `skills/sigil-component/SKILL.md` |
 | Page layout with grid | `skills/sigil-layout/SKILL.md` |
+| Build pages (10 composition rules) | `skills/sigil-playbook/SKILL.md` |
 | Migrate from shadcn | `skills/sigil-migration/SKILL.md` |
 | Polish UI details | `skills/sigil-polish/SKILL.md` |
 

@@ -194,7 +194,10 @@
   --s-primary-hover: #27272a;
   --s-primary-muted: rgba(24, 24, 27, 0.1);
   --s-primary-contrast: #ffffff;
-  --s-secondary: #52525b;
+  --s-secondary: #f4f4f5;
+  --s-secondary-hover: #e4e4e7;
+  --s-accent: #f4f4f5;
+  --s-accent-hover: #e4e4e7;
 
   /* Focus ring */
   --s-ring: var(--s-primary);
@@ -232,8 +235,8 @@
   --s-accent-rose: #dc2626;
 
   /* Typography */
-  --s-font-display: "ABC Monument Grotesk", "PP Neue Montreal", system-ui, sans-serif;
-  --s-font-body: "ABC Monument Grotesk", "PP Neue Montreal", system-ui, sans-serif;
+  --s-font-display: "PP Mori", system-ui, sans-serif;
+  --s-font-body: "PP Telegraf", "PP Mori", system-ui, sans-serif;
   --s-font-mono: "PP Fraktion Mono", "JetBrains Mono", ui-monospace, monospace;
 
   /* Spacing */
@@ -248,14 +251,14 @@
   --s-space-20: 80px;
   --s-space-24: 96px;
 
-  /* Radius */
+  /* Radius — all 0px for the default's sharp structural aesthetic */
   --s-radius-none: 0px;
   --s-radius-sm: 0px;
-  --s-radius-md: 2px;
-  --s-radius-lg: 2px;
-  --s-radius-xl: 16px;
-  --s-radius-2xl: 24px;
-  --s-radius-full: 9999px;
+  --s-radius-md: 0px;
+  --s-radius-lg: 0px;
+  --s-radius-xl: 0px;
+  --s-radius-2xl: 0px;
+  --s-radius-full: 0px;
   --s-card-radius: 0px;
 
   /* Sigil grid */
@@ -285,14 +288,199 @@
   /* Motion */
   --s-duration-instant: 0ms;
   --s-duration-fast: 150ms;
-  --s-duration-normal: 250ms;
-  --s-duration-slow: 400ms;
-  --s-duration-slower: 600ms;
+  --s-duration-normal: 200ms;
+  --s-duration-slow: 300ms;
+  --s-duration-slower: 500ms;
   --s-ease-default: cubic-bezier(0.16, 1, 0.3, 1);
   --s-ease-in: cubic-bezier(0.55, 0, 1, 0.45);
   --s-ease-out: cubic-bezier(0, 0.55, 0.45, 1);
   --s-ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
   --s-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Typography scale */
+  --s-size-xs: 0.75rem;
+  --s-size-sm: 0.875rem;
+  --s-size-base: 0.875rem;
+  --s-size-lg: 1rem;
+  --s-size-xl: 1.125rem;
+  --s-size-2xl: 1.5rem;
+  --s-size-3xl: 1.875rem;
+  --s-size-4xl: 2.25rem;
+  --s-size-5xl: 3rem;
+  --s-size-6xl: 3.75rem;
+  --s-weight-normal: 400;
+  --s-weight-medium: 500;
+  --s-weight-semibold: 600;
+  --s-weight-bold: 700;
+  --s-weight-extrabold: 800;
+  --s-leading-tight: 1.25;
+  --s-leading-normal: 1.5;
+  --s-leading-relaxed: 1.625;
+  --s-leading-loose: 2;
+  --s-tracking-tighter: -0.04em;
+  --s-tracking-tight: -0.025em;
+  --s-tracking-normal: 0em;
+  --s-tracking-wide: 0.025em;
+  --s-tracking-wider: 0.05em;
+  --s-heading-weight: 600;
+  --s-heading-tracking: -0.025em;
+  --s-heading-transform: none;
+  --s-heading-family: "PP Mori", system-ui, sans-serif;
+
+  /* Headings */
+  --s-heading-h1-size: 2.25rem;
+  --s-heading-h1-weight: 700;
+  --s-heading-h1-tracking: -0.025em;
+  --s-heading-h1-leading: 1.1;
+  --s-heading-h2-size: 1.875rem;
+  --s-heading-h2-weight: 600;
+  --s-heading-h2-tracking: -0.02em;
+  --s-heading-h3-size: 1.5rem;
+  --s-heading-h3-weight: 600;
+  --s-heading-h4-size: 1.25rem;
+  --s-heading-h4-weight: 600;
+  --s-heading-display-size: 3.75rem;
+  --s-heading-display-weight: 800;
+  --s-heading-display-tracking: -0.03em;
+  --s-heading-display-leading: 1.05;
+
+  /* Buttons */
+  --s-btn-font-weight: 500;
+  --s-btn-text-transform: none;
+  --s-btn-letter-spacing: 0em;
+  --s-btn-font-family: inherit;
+  --s-btn-border-width: 1px;
+  --s-btn-hover-effect: darken;
+  --s-btn-active-scale: 0.98;
+  --s-btn-icon-gap: 8px;
+  --s-btn-min-width: 0px;
+
+  /* Cards */
+  --s-card-border-style: solid;
+  --s-card-border-width: 1px;
+  --s-card-hover-effect: lift;
+  --s-card-hover-border-color: var(--s-border-strong);
+  --s-card-padding: 24px;
+  --s-card-header-padding: 24px 24px 0;
+  --s-card-footer-padding: 0 24px 24px;
+  --s-card-title-size: 1rem;
+  --s-card-title-weight: 600;
+  --s-card-description-size: 0.875rem;
+
+  /* Navigation */
+  --s-nav-navbar-height: 56px;
+  --s-nav-navbar-backdrop-blur: 12px;
+  --s-nav-navbar-border: 1px solid;
+  --s-nav-navbar-bg-opacity: 0.8;
+  --s-nav-nav-link-weight: 500;
+  --s-nav-nav-link-size: 0.875rem;
+  --s-nav-nav-link-hover: color;
+  --s-nav-breadcrumb-separator: " / ";
+  --s-nav-pagination-radius: 0px;
+  --s-nav-sidebar-width: 256px;
+  --s-nav-sidebar-item-radius: 0px;
+  --s-nav-sidebar-item-padding: 8px 12px;
+
+  /* Backgrounds */
+  --s-bg-pattern: none;
+  --s-bg-pattern-opacity: 0.03;
+  --s-bg-pattern-scale: 1;
+  --s-bg-gradient-angle: 0deg;
+  --s-bg-gradient-type: none;
+  --s-bg-hero-pattern: none;
+  --s-bg-section-divider: line;
+
+  /* Inputs */
+  --s-input-height: 36px;
+  --s-input-height-sm: 32px;
+  --s-input-height-lg: 44px;
+  --s-input-border-width: 1px;
+  --s-input-focus-ring-width: 2px;
+  --s-input-focus-ring-color: var(--s-primary);
+  --s-input-focus-ring-offset: 1px;
+  --s-input-placeholder-color: var(--s-text-muted);
+  --s-input-error-border-color: var(--s-error);
+  --s-input-label-size: 0.875rem;
+  --s-input-label-weight: 500;
+  --s-input-label-spacing: 6px;
+  --s-input-helper-size: 0.75rem;
+
+  /* Code */
+  --s-code-font-family: "PP Fraktion Mono", "JetBrains Mono", ui-monospace, monospace;
+  --s-code-font-size: 0.8125rem;
+  --s-code-line-height: 1.6;
+  --s-code-bg: var(--s-surface);
+  --s-code-border: 1px solid var(--s-border);
+  --s-code-border-radius: 0px;
+  --s-code-padding: 16px;
+  --s-code-tab-size: 2;
+  --s-code-selection-bg: rgba(59, 130, 246, 0.2);
+  --s-code-comment-color: var(--s-text-muted);
+  --s-code-keyword-color: #a855f7;
+  --s-code-string-color: #22c55e;
+  --s-code-number-color: #eab308;
+  --s-code-function-color: #3b82f6;
+
+  /* Spacing detail */
+  --s-button-px: 16px;
+  --s-button-py: 8px;
+  --s-button-px-sm: 12px;
+  --s-button-py-sm: 6px;
+  --s-button-px-lg: 24px;
+  --s-button-py-lg: 10px;
+  --s-card-padding: 24px;
+  --s-card-padding-sm: 16px;
+  --s-card-padding-lg: 32px;
+  --s-input-px: 12px;
+  --s-input-py: 8px;
+  --s-badge-px: 10px;
+  --s-badge-py: 2px;
+  --s-section-py: 64px;
+  --s-section-py-lg: 96px;
+  --s-navbar-height: 56px;
+  --s-navbar-px: 20px;
+  --s-footer-py: 48px;
+  --s-modal-padding: 24px;
+  --s-popover-padding: 16px;
+  --s-tooltip-padding: 6px 12px;
+  --s-table-cell-px: 16px;
+  --s-table-cell-py: 12px;
+
+  /* Layout detail */
+  --s-content-max-narrow: 680px;
+  --s-content-max-wide: 1400px;
+  --s-page-margin: 24px;
+  --s-page-margin-sm: 16px;
+  --s-page-margin-lg: 40px;
+  --s-gutter: 24px;
+  --s-gutter-sm: 16px;
+  --s-gutter-lg: 32px;
+  --s-grid-columns: 12;
+  --s-grid-gap: 24px;
+  --s-bento-gap: 16px;
+  --s-bento-radius: 0px;
+  --s-bento-min-height: 180px;
+  --s-section-gap: 24px;
+  --s-sidebar-width: 256px;
+  --s-sidebar-collapsed: 48px;
+  --s-footer-columns: 4;
+  --s-stack-gap: 16px;
+  --s-stack-gap-sm: 8px;
+  --s-stack-gap-lg: 24px;
+  --s-prose-max: 65ch;
+
+  /* Borders detail */
+  --s-border-style: solid;
+  --s-border-card-border: 1px solid;
+  --s-border-card-border-hover: 1px solid;
+  --s-border-button-border: 1px solid;
+  --s-border-input-border: 1px solid;
+  --s-border-divider-style: solid;
+  --s-border-divider-width: 1px;
+
+  /* Sigil grid detail */
+  --s-gutter-pattern: none;
+  --s-margin-pattern: none;
 }
 
 /* ================================================================== */
@@ -310,21 +498,22 @@ html[data-theme="dark"],
 
   --s-text: #fafafa;
   --s-text-secondary: #a0a0aa;
-  --s-text-muted: #68687a;
-  --s-text-subtle: #4a4a55;
+  --s-text-muted: #8888a0;
+  --s-text-subtle: #646470;
   --s-text-disabled: #3a3a44;
 
   --s-primary: #e4e4e7;
   --s-primary-hover: #d4d4d8;
   --s-primary-muted: rgba(228, 228, 231, 0.1);
   --s-primary-contrast: #0a0a0f;
-  --s-border: rgba(255, 255, 255, 0.12);
-  --s-border-muted: rgba(255, 255, 255, 0.06);
-  --s-border-strong: rgba(255, 255, 255, 0.2);
+  --s-secondary: #27272a;
+  --s-secondary-hover: #3f3f46;
+  --s-accent: #27272a;
+  --s-accent-hover: #3f3f46;
+  --s-border: #2c2c3c;
+  --s-border-muted: #1f1f2d;
+  --s-border-strong: #3c3c50;
   --s-border-interactive: #e4e4e7;
-
-  --s-text-muted: #8888a0;
-  --s-text-subtle: #646470;
 
   --s-success-muted: #052e16;
   --s-warning-muted: #451a03;
@@ -681,38 +870,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Structural Visibility — Sigil Frame                                 */
 /* ================================================================== */
 
-/* Visible margin rail lines */
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--s-border, rgba(255,255,255,0.12));
-  opacity: calc(var(--s-align-rail-visible, 0) * 0.7);
-  z-index: 9998;
-  pointer-events: none;
-  transition: left 400ms cubic-bezier(0.16, 1, 0.3, 1),
-              right 400ms cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 400ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body::before {
-  left: var(--s-align-rail-margin, 24px);
-}
-
-body::after {
-  right: var(--s-align-rail-margin, 24px);
-}
-
-/* Dot grid background on page */
-body {
-  background-image: radial-gradient(circle, var(--s-border-muted) 0.5px, transparent 0.5px);
-  background-size: var(--s-grid-cell, 48px) var(--s-grid-cell, 48px);
-  background-position: var(--s-align-rail-margin, 24px) var(--s-align-rail-margin, 24px);
-}
-
 /* Figure numbering */
 .s-fig {
   font-family: var(--s-font-mono);
@@ -797,6 +954,21 @@ body {
 
 .s-data-table tr:hover td {
   background: var(--s-surface);
+}
+
+/* ================================================================== */
+/* Theme-switch transition kill                                        */
+/* ================================================================== */
+/* During light ↔ dark toggle, ThemeProvider sets                      */
+/* data-switching-theme on <html>. This zeroes transition-duration on  */
+/* everything except interactive primitives ([data-slot]) so colors    */
+/* snap instantly. Non-color properties (transform, opacity) aren't    */
+/* changing during theme switch, so the zero duration is invisible.    */
+
+html[data-switching-theme] *:not([data-slot]),
+html[data-switching-theme] *:not([data-slot])::before,
+html[data-switching-theme] *:not([data-slot])::after {
+  transition-duration: 0s !important;
 }
 
 /* ================================================================== */

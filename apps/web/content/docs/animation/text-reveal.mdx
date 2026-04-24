@@ -1,0 +1,34 @@
+---
+title: TextReveal
+description: Word-by-word or character-by-character staggered text reveal with blur and opacity transitions.
+---
+
+## Import
+
+```tsx
+import { TextReveal } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<TextReveal text="Token-driven design system" />
+```
+
+## By character
+
+```tsx
+<TextReveal text="Sigil UI" by="char" interval={30} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `text` | `string` | — | Text to reveal |
+| `by` | `"word" \| "char"` | `"word"` | Reveal unit |
+| `interval` | `number` | `60` | Stagger between units in ms |
+| `delay` | `number` | `0` | Base delay in ms |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+
+Accessible: renders full text in `aria-label`, individual units marked `aria-hidden`.

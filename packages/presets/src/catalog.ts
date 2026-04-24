@@ -8,7 +8,7 @@ export type PresetCatalogEntry = {
   readonly name: string;
   readonly label: string;
   readonly description: string;
-  readonly category: "structural" | "minimal" | "dark" | "colorful" | "editorial" | "industrial";
+  readonly category: "structural" | "minimal" | "dark" | "colorful" | "editorial" | "industrial" | "edgeless";
   readonly mood: string;
   readonly primaryHue: string;
   readonly fonts: {
@@ -50,6 +50,19 @@ export const presetCatalog: readonly PresetCatalogEntry[] = [
   { name: "noir", label: "Noir", description: "Film noir, cinematic dark, warm amber highlights", category: "dark", mood: "cinematic, dramatic", primaryHue: "amber", fonts: { display: "GT America", body: "system-ui", mono: "JetBrains Mono" } },
   { name: "dusk", label: "Dusk", description: "Twilight gradient, warm-to-cool transition, sunset", category: "colorful", mood: "twilight, warm-cool", primaryHue: "rose-violet", fonts: { display: "Satoshi", body: "Inter", mono: "Fira Code" } },
   { name: "mono", label: "Mono", description: "Monochrome monospace, terminal aesthetic, zero decoration", category: "minimal", mood: "monochrome, terminal", primaryHue: "neutral", fonts: { display: "Space Mono", body: "Space Mono", mono: "Space Mono" } },
+  { name: "vast", label: "Vast", description: "Expansive open space, warm editorial tones, generous whitespace", category: "edgeless", mood: "expansive, warm, editorial", primaryHue: "terracotta", fonts: { display: "Fraunces", body: "Source Sans 3", mono: "IBM Plex Mono" } },
+  { name: "aura", label: "Aura", description: "Ethereal dark with luminous violet glow, ambient gradients", category: "edgeless", mood: "ethereal, luminous, ambient", primaryHue: "violet", fonts: { display: "General Sans", body: "General Sans", mono: "JetBrains Mono" } },
+  { name: "field", label: "Field", description: "Clean utilitarian open space, forest green, monospace-forward", category: "edgeless", mood: "open, functional, utilitarian", primaryHue: "green", fonts: { display: "Space Grotesk", body: "Inter", mono: "Space Mono" } },
+  { name: "clay", label: "Clay", description: "Warm terracotta clay with earthy tones, handcrafted feel, tinted surfaces", category: "edgeless", mood: "warm, earthy, handcrafted", primaryHue: "terracotta", fonts: { display: "DM Serif Display", body: "DM Sans", mono: "IBM Plex Mono" } },
+  { name: "sage", label: "Sage", description: "Botanical sage green, calm natural tones, understated elegance", category: "edgeless", mood: "botanical, calm, natural", primaryHue: "green", fonts: { display: "Libre Baskerville", body: "Source Sans 3", mono: "Fira Code" } },
+  { name: "ink", label: "Ink", description: "Deep indigo immersion, creative energy, lavender-tinted surfaces", category: "edgeless", mood: "creative, deep, immersive", primaryHue: "indigo", fonts: { display: "Plus Jakarta Sans", body: "Inter", mono: "JetBrains Mono" } },
+  { name: "sand", label: "Sand", description: "Warm golden sand, desert warmth, inviting amber tones", category: "edgeless", mood: "warm, sunny, inviting", primaryHue: "amber", fonts: { display: "Instrument Serif", body: "Inter", mono: "IBM Plex Mono" } },
+  { name: "plum", label: "Plum", description: "Luxurious deep plum, rich mauve surfaces, dramatic magenta accents", category: "edgeless", mood: "luxurious, rich, dramatic", primaryHue: "magenta", fonts: { display: "Playfair Display", body: "Inter", mono: "Fira Code" } },
+  { name: "moss", label: "Moss", description: "Dark forest green with organic-tech energy, green-tinted glows", category: "edgeless", mood: "forest, deep, organic-tech", primaryHue: "green", fonts: { display: "Space Grotesk", body: "Inter", mono: "JetBrains Mono" } },
+  { name: "coral", label: "Coral", description: "Soft coral pink, warm and friendly with rounded surfaces", category: "edgeless", mood: "warm, friendly, approachable", primaryHue: "coral", fonts: { display: "Outfit", body: "Outfit", mono: "Fira Code" } },
+  { name: "dune", label: "Dune", description: "Golden desert warmth, sharp edges, serif display, vast feeling", category: "edgeless", mood: "warm, golden, vast-feeling", primaryHue: "amber", fonts: { display: "Instrument Serif", body: "DM Sans", mono: "IBM Plex Mono" } },
+  { name: "ocean", label: "Ocean", description: "Deep teal ocean, calming depth, teal-tinted glows, fluid radii", category: "edgeless", mood: "deep, calming, oceanic", primaryHue: "teal", fonts: { display: "General Sans", body: "Inter", mono: "JetBrains Mono" } },
+  { name: "rose", label: "Rose", description: "Dusty rose elegance, refined serif type, blush-tinted surfaces", category: "edgeless", mood: "elegant, feminine, refined", primaryHue: "rose", fonts: { display: "Fraunces", body: "Source Sans 3", mono: "IBM Plex Mono" } },
 ] as const;
 
 export function getCatalogEntry(name: string): PresetCatalogEntry | undefined {

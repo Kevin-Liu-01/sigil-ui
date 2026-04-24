@@ -1,0 +1,438 @@
+- main [ref=e2]:
+  - generic:
+    - button "Collapse Sidebar":
+      - img
+    - button "Open Search":
+      - img
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "sigil/UI" [ref=e6] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e7]:
+            - img [ref=e8]
+            - generic [ref=e13]: sigil/UI
+        - button "Collapse Sidebar" [ref=e14]:
+          - img [ref=e15]
+      - button "Search ⌘ K" [ref=e17]:
+        - img [ref=e18]
+        - text: Search
+        - generic [ref=e21]:
+          - generic [ref=e22]: ⌘
+          - generic [ref=e23]: K
+    - generic [ref=e26]:
+      - paragraph [ref=e27]: Getting Started
+      - link "Getting Started" [ref=e28] [cursor=pointer]:
+        - /url: /docs
+      - link "Installation" [ref=e29] [cursor=pointer]:
+        - /url: /docs/installation
+      - link "Theming" [ref=e30] [cursor=pointer]:
+        - /url: /docs/theming
+      - link "CLI Reference" [ref=e31] [cursor=pointer]:
+        - /url: /docs/cli
+      - paragraph [ref=e32]: Components
+      - link "Button" [ref=e33] [cursor=pointer]:
+        - /url: /docs/components/button
+      - link "Card" [ref=e34] [cursor=pointer]:
+        - /url: /docs/components/card
+      - link "Input" [ref=e35] [cursor=pointer]:
+        - /url: /docs/components/input
+      - paragraph [ref=e36]: Layout
+      - link "Stack" [ref=e37] [cursor=pointer]:
+        - /url: /docs/layout/stack
+      - link "SigilGrid" [ref=e38] [cursor=pointer]:
+        - /url: /docs/layout/grid
+      - paragraph [ref=e39]: Shapes
+      - link "Diamond" [ref=e40] [cursor=pointer]:
+        - /url: /docs/shapes/diamond
+      - link "Hexagon" [ref=e41] [cursor=pointer]:
+        - /url: /docs/shapes/hexagon
+      - paragraph [ref=e42]: 3D
+      - link "Box3D" [ref=e43] [cursor=pointer]:
+        - /url: /docs/3d/box3d
+      - link "Card3D" [ref=e44] [cursor=pointer]:
+        - /url: /docs/3d/card3d
+    - button "Toggle Theme" [ref=e47]:
+      - img [ref=e48]
+      - img [ref=e54]
+  - generic [ref=e56]:
+    - article [ref=e57]:
+      - heading "Card" [level=1] [ref=e58]
+      - paragraph [ref=e59]: A composable card with header, content, and footer slots. Reads radius, shadow, and surface color from your token file.
+      - generic [ref=e60]:
+        - heading "Import Link to section" [level=2] [ref=e61]:
+          - link "Import" [ref=e62] [cursor=pointer]:
+            - /url: "#import"
+          - img "Link to section" [ref=e63]
+        - figure [ref=e66]:
+          - button "Copy Text" [ref=e68]:
+            - img [ref=e69]
+          - code [ref=e74]:
+            - generic [ref=e75]: "import {"
+            - generic [ref=e76]: Card,
+            - generic [ref=e77]: CardHeader,
+            - generic [ref=e78]: CardTitle,
+            - generic [ref=e79]: CardDescription,
+            - generic [ref=e80]: CardContent,
+            - generic [ref=e81]: CardFooter,
+            - generic [ref=e82]: "} from \"@sigil-ui/components\";"
+        - heading "Preview Link to section" [level=2] [ref=e83]:
+          - link "Preview" [ref=e84] [cursor=pointer]:
+            - /url: "#preview"
+          - img "Link to section" [ref=e85]
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - heading "Card title" [level=3] [ref=e91]
+            - paragraph [ref=e92]: Card description with supporting text.
+          - paragraph [ref=e94]:
+            - text: This card reads radius, shadow, and surface color from your token file. Change
+            - code [ref=e95]: "--s-surface"
+            - text: and every Card updates.
+          - button "Action" [ref=e97] [cursor=pointer]
+        - heading "Usage Link to section" [level=2] [ref=e98]:
+          - link "Usage" [ref=e99] [cursor=pointer]:
+            - /url: "#usage"
+          - img "Link to section" [ref=e100]
+        - figure [ref=e103]:
+          - button "Copy Text" [ref=e105]:
+            - img [ref=e106]
+          - code [ref=e111]:
+            - generic [ref=e112]: <Card>
+            - generic [ref=e113]: <CardHeader>
+            - generic [ref=e114]: <CardTitle>Card title</CardTitle>
+            - generic [ref=e115]: <CardDescription>Supporting description.</CardDescription>
+            - generic [ref=e116]: </CardHeader>
+            - generic [ref=e117]: <CardContent>
+            - generic [ref=e118]: <p>Card body content goes here.</p>
+            - generic [ref=e119]: </CardContent>
+            - generic [ref=e120]: <CardFooter>
+            - generic [ref=e121]: <Button variant="primary">Action</Button>
+            - generic [ref=e122]: </CardFooter>
+            - generic [ref=e123]: </Card>
+        - heading "Hoverable Link to section" [level=2] [ref=e124]:
+          - link "Hoverable" [ref=e125] [cursor=pointer]:
+            - /url: "#hoverable"
+          - img "Link to section" [ref=e126]
+        - paragraph [ref=e129]:
+          - text: Add
+          - code [ref=e130]: hoverable
+          - text: to enable a lift effect on hover.
+        - generic [ref=e132]:
+          - generic [ref=e133]:
+            - heading "Hoverable card" [level=3] [ref=e134]
+            - paragraph [ref=e135]: Hover for elevation shift.
+          - paragraph [ref=e137]: Try hovering over this card.
+        - figure [ref=e138]:
+          - button "Copy Text" [ref=e140]:
+            - img [ref=e141]
+          - code [ref=e146]:
+            - generic [ref=e147]: <Card hoverable>
+            - generic [ref=e148]: <CardContent>Hover me for an elevation shift.</CardContent>
+            - generic [ref=e149]: </Card>
+        - heading "Composable slots Link to section" [level=2] [ref=e150]:
+          - link "Composable slots" [ref=e151] [cursor=pointer]:
+            - /url: "#composable-slots"
+          - img "Link to section" [ref=e152]
+        - paragraph [ref=e155]: "Cards are built from composable sub-components. Use only the slots you need:"
+        - generic [ref=e156]:
+          - generic [ref=e158]: Content only — no header or footer.
+          - generic [ref=e159]:
+            - heading "Header + content" [level=3] [ref=e161]
+            - generic [ref=e162]: Body text here.
+        - figure [ref=e163]:
+          - button "Copy Text" [ref=e165]:
+            - img [ref=e166]
+          - code [ref=e171]:
+            - generic [ref=e172]: "{/* Content only */}"
+            - generic [ref=e173]: <Card>
+            - generic [ref=e174]: <CardContent>Content only — no header or footer.</CardContent>
+            - generic [ref=e175]: </Card>
+            - generic [ref=e177]: "{/* Header + content */}"
+            - generic [ref=e178]: <Card>
+            - generic [ref=e179]: <CardHeader>
+            - generic [ref=e180]: <CardTitle>Title only</CardTitle>
+            - generic [ref=e181]: </CardHeader>
+            - generic [ref=e182]: <CardContent>Body text here.</CardContent>
+            - generic [ref=e183]: </Card>
+        - heading "Token integration Link to section" [level=2] [ref=e184]:
+          - link "Token integration" [ref=e185] [cursor=pointer]:
+            - /url: "#token-integration"
+          - img "Link to section" [ref=e186]
+        - table [ref=e190]:
+          - rowgroup [ref=e191]:
+            - row "CSS Variable Used for" [ref=e192]:
+              - columnheader "CSS Variable" [ref=e193]
+              - columnheader "Used for" [ref=e194]
+          - rowgroup [ref=e195]:
+            - row "--s-surface Card background" [ref=e196]:
+              - cell "--s-surface" [ref=e197]:
+                - code [ref=e198]: "--s-surface"
+              - cell "Card background" [ref=e199]
+            - row "--s-surface-elevated Hover state background" [ref=e200]:
+              - cell "--s-surface-elevated" [ref=e201]:
+                - code [ref=e202]: "--s-surface-elevated"
+              - cell "Hover state background" [ref=e203]
+            - row "--s-text Card text color" [ref=e204]:
+              - cell "--s-text" [ref=e205]:
+                - code [ref=e206]: "--s-text"
+              - cell "Card text color" [ref=e207]
+            - row "--s-text-muted Description text color" [ref=e208]:
+              - cell "--s-text-muted" [ref=e209]:
+                - code [ref=e210]: "--s-text-muted"
+              - cell "Description text color" [ref=e211]
+            - row "--s-border Card border color" [ref=e212]:
+              - cell "--s-border" [ref=e213]:
+                - code [ref=e214]: "--s-border"
+              - cell "Card border color" [ref=e215]
+            - row "--s-border-style Border style (solid, dashed, etc.)" [ref=e216]:
+              - cell "--s-border-style" [ref=e217]:
+                - code [ref=e218]: "--s-border-style"
+              - cell "Border style (solid, dashed, etc.)" [ref=e219]
+            - row "--s-radius-card Border radius" [ref=e220]:
+              - cell "--s-radius-card" [ref=e221]:
+                - code [ref=e222]: "--s-radius-card"
+              - cell "Border radius" [ref=e223]
+            - row "--s-shadow-sm Default elevation" [ref=e224]:
+              - cell "--s-shadow-sm" [ref=e225]:
+                - code [ref=e226]: "--s-shadow-sm"
+              - cell "Default elevation" [ref=e227]
+            - row "--s-shadow-md Hover state elevation" [ref=e228]:
+              - cell "--s-shadow-md" [ref=e229]:
+                - code [ref=e230]: "--s-shadow-md"
+              - cell "Hover state elevation" [ref=e231]
+            - row "--s-duration-normal Hover transition duration" [ref=e232]:
+              - cell "--s-duration-normal" [ref=e233]:
+                - code [ref=e234]: "--s-duration-normal"
+              - cell "Hover transition duration" [ref=e235]
+        - heading "Props Link to section" [level=2] [ref=e236]:
+          - link "Props" [ref=e237] [cursor=pointer]:
+            - /url: "#props"
+          - img "Link to section" [ref=e238]
+        - heading "Card Link to section" [level=3] [ref=e241]:
+          - link "Card" [ref=e242] [cursor=pointer]:
+            - /url: "#card"
+          - img "Link to section" [ref=e243]
+        - table [ref=e247]:
+          - rowgroup [ref=e248]:
+            - row "Prop Type Default Description" [ref=e249]:
+              - columnheader "Prop" [ref=e250]
+              - columnheader "Type" [ref=e251]
+              - columnheader "Default" [ref=e252]
+              - columnheader "Description" [ref=e253]
+          - rowgroup [ref=e254]:
+            - row "hoverable boolean false Enable hover lift effect" [ref=e255]:
+              - cell "hoverable" [ref=e256]:
+                - code [ref=e257]: hoverable
+              - cell "boolean" [ref=e258]:
+                - code [ref=e259]: boolean
+              - cell "false" [ref=e260]:
+                - code [ref=e261]: "false"
+              - cell "Enable hover lift effect" [ref=e262]
+            - row "className string — Additional CSS classes" [ref=e263]:
+              - cell "className" [ref=e264]:
+                - code [ref=e265]: className
+              - cell "string" [ref=e266]:
+                - code [ref=e267]: string
+              - cell "—" [ref=e268]
+              - cell "Additional CSS classes" [ref=e269]
+            - row "children ReactNode — Card content" [ref=e270]:
+              - cell "children" [ref=e271]:
+                - code [ref=e272]: children
+              - cell "ReactNode" [ref=e273]:
+                - code [ref=e274]: ReactNode
+              - cell "—" [ref=e275]
+              - cell "Card content" [ref=e276]
+        - heading "CardHeader Link to section" [level=3] [ref=e277]:
+          - link "CardHeader" [ref=e278] [cursor=pointer]:
+            - /url: "#cardheader"
+          - img "Link to section" [ref=e279]
+        - table [ref=e283]:
+          - rowgroup [ref=e284]:
+            - row "Prop Type Default Description" [ref=e285]:
+              - columnheader "Prop" [ref=e286]
+              - columnheader "Type" [ref=e287]
+              - columnheader "Default" [ref=e288]
+              - columnheader "Description" [ref=e289]
+          - rowgroup [ref=e290]:
+            - row "className string — Additional CSS classes" [ref=e291]:
+              - cell "className" [ref=e292]:
+                - code [ref=e293]: className
+              - cell "string" [ref=e294]:
+                - code [ref=e295]: string
+              - cell "—" [ref=e296]
+              - cell "Additional CSS classes" [ref=e297]
+            - row "children ReactNode — Header content (use with CardTitle, CardDescription)" [ref=e298]:
+              - cell "children" [ref=e299]:
+                - code [ref=e300]: children
+              - cell "ReactNode" [ref=e301]:
+                - code [ref=e302]: ReactNode
+              - cell "—" [ref=e303]
+              - cell "Header content (use with CardTitle, CardDescription)" [ref=e304]
+        - heading "CardTitle Link to section" [level=3] [ref=e305]:
+          - link "CardTitle" [ref=e306] [cursor=pointer]:
+            - /url: "#cardtitle"
+          - img "Link to section" [ref=e307]
+        - table [ref=e311]:
+          - rowgroup [ref=e312]:
+            - row "Prop Type Default Description" [ref=e313]:
+              - columnheader "Prop" [ref=e314]
+              - columnheader "Type" [ref=e315]
+              - columnheader "Default" [ref=e316]
+              - columnheader "Description" [ref=e317]
+          - rowgroup [ref=e318]:
+            - row "className string — Additional CSS classes" [ref=e319]:
+              - cell "className" [ref=e320]:
+                - code [ref=e321]: className
+              - cell "string" [ref=e322]:
+                - code [ref=e323]: string
+              - cell "—" [ref=e324]
+              - cell "Additional CSS classes" [ref=e325]
+            - row "children ReactNode — Title text" [ref=e326]:
+              - cell "children" [ref=e327]:
+                - code [ref=e328]: children
+              - cell "ReactNode" [ref=e329]:
+                - code [ref=e330]: ReactNode
+              - cell "—" [ref=e331]
+              - cell "Title text" [ref=e332]
+        - heading "CardDescription Link to section" [level=3] [ref=e333]:
+          - link "CardDescription" [ref=e334] [cursor=pointer]:
+            - /url: "#carddescription"
+          - img "Link to section" [ref=e335]
+        - table [ref=e339]:
+          - rowgroup [ref=e340]:
+            - row "Prop Type Default Description" [ref=e341]:
+              - columnheader "Prop" [ref=e342]
+              - columnheader "Type" [ref=e343]
+              - columnheader "Default" [ref=e344]
+              - columnheader "Description" [ref=e345]
+          - rowgroup [ref=e346]:
+            - row "className string — Additional CSS classes" [ref=e347]:
+              - cell "className" [ref=e348]:
+                - code [ref=e349]: className
+              - cell "string" [ref=e350]:
+                - code [ref=e351]: string
+              - cell "—" [ref=e352]
+              - cell "Additional CSS classes" [ref=e353]
+            - row "children ReactNode — Description text" [ref=e354]:
+              - cell "children" [ref=e355]:
+                - code [ref=e356]: children
+              - cell "ReactNode" [ref=e357]:
+                - code [ref=e358]: ReactNode
+              - cell "—" [ref=e359]
+              - cell "Description text" [ref=e360]
+        - heading "CardContent Link to section" [level=3] [ref=e361]:
+          - link "CardContent" [ref=e362] [cursor=pointer]:
+            - /url: "#cardcontent"
+          - img "Link to section" [ref=e363]
+        - table [ref=e367]:
+          - rowgroup [ref=e368]:
+            - row "Prop Type Default Description" [ref=e369]:
+              - columnheader "Prop" [ref=e370]
+              - columnheader "Type" [ref=e371]
+              - columnheader "Default" [ref=e372]
+              - columnheader "Description" [ref=e373]
+          - rowgroup [ref=e374]:
+            - row "className string — Additional CSS classes" [ref=e375]:
+              - cell "className" [ref=e376]:
+                - code [ref=e377]: className
+              - cell "string" [ref=e378]:
+                - code [ref=e379]: string
+              - cell "—" [ref=e380]
+              - cell "Additional CSS classes" [ref=e381]
+            - row "children ReactNode — Body content" [ref=e382]:
+              - cell "children" [ref=e383]:
+                - code [ref=e384]: children
+              - cell "ReactNode" [ref=e385]:
+                - code [ref=e386]: ReactNode
+              - cell "—" [ref=e387]
+              - cell "Body content" [ref=e388]
+        - heading "CardFooter Link to section" [level=3] [ref=e389]:
+          - link "CardFooter" [ref=e390] [cursor=pointer]:
+            - /url: "#cardfooter"
+          - img "Link to section" [ref=e391]
+        - table [ref=e395]:
+          - rowgroup [ref=e396]:
+            - row "Prop Type Default Description" [ref=e397]:
+              - columnheader "Prop" [ref=e398]
+              - columnheader "Type" [ref=e399]
+              - columnheader "Default" [ref=e400]
+              - columnheader "Description" [ref=e401]
+          - rowgroup [ref=e402]:
+            - row "className string — Additional CSS classes" [ref=e403]:
+              - cell "className" [ref=e404]:
+                - code [ref=e405]: className
+              - cell "string" [ref=e406]:
+                - code [ref=e407]: string
+              - cell "—" [ref=e408]
+              - cell "Additional CSS classes" [ref=e409]
+            - row "children ReactNode — Footer content" [ref=e410]:
+              - cell "children" [ref=e411]:
+                - code [ref=e412]: children
+              - cell "ReactNode" [ref=e413]:
+                - code [ref=e414]: ReactNode
+              - cell "—" [ref=e415]
+              - cell "Footer content" [ref=e416]
+        - heading "Accessibility Link to section" [level=2] [ref=e417]:
+          - link "Accessibility" [ref=e418] [cursor=pointer]:
+            - /url: "#accessibility"
+          - img "Link to section" [ref=e419]
+        - list [ref=e422]:
+          - listitem [ref=e423]:
+            - text: Renders as a
+            - code [ref=e424]: <div>
+            - text: by default with no implicit role
+          - listitem [ref=e425]:
+            - text: For interactive cards, wrap content in a semantic element like
+            - code [ref=e426]: <a>
+            - text: or
+            - code [ref=e427]: <button>
+          - listitem [ref=e428]:
+            - text: Focus ring uses
+            - code [ref=e429]: "--s-ring"
+            - text: for keyboard navigation
+      - generic [ref=e430]:
+        - link "Button A polymorphic button with token-driven variants, sizes, and states. Supports asChild via Radix Slot." [ref=e431] [cursor=pointer]:
+          - /url: /docs/components/button
+          - generic [ref=e432]:
+            - img [ref=e433]
+            - paragraph [ref=e435]: Button
+          - paragraph [ref=e436]: A polymorphic button with token-driven variants, sizes, and states. Supports asChild via Radix Slot.
+        - link "Input A styled text input that reads border, radius, and focus tokens from your token file." [ref=e437] [cursor=pointer]:
+          - /url: /docs/components/input
+          - generic [ref=e438]:
+            - img [ref=e439]
+            - paragraph [ref=e441]: Input
+          - paragraph [ref=e442]: A styled text input that reads border, radius, and focus tokens from your token file.
+    - generic [ref=e444]:
+      - heading "On this page" [level=3] [ref=e445]:
+        - img [ref=e446]
+        - text: On this page
+      - generic [ref=e448]:
+        - link "Import" [ref=e449] [cursor=pointer]:
+          - /url: "#import"
+        - link "Preview" [ref=e450] [cursor=pointer]:
+          - /url: "#preview"
+        - link "Usage" [ref=e451] [cursor=pointer]:
+          - /url: "#usage"
+        - link "Hoverable" [ref=e452] [cursor=pointer]:
+          - /url: "#hoverable"
+        - link "Composable slots" [ref=e453] [cursor=pointer]:
+          - /url: "#composable-slots"
+        - link "Token integration" [ref=e454] [cursor=pointer]:
+          - /url: "#token-integration"
+        - link "Props" [ref=e455] [cursor=pointer]:
+          - /url: "#props"
+        - link "Card" [ref=e456] [cursor=pointer]:
+          - /url: "#card"
+        - link "CardHeader" [ref=e457] [cursor=pointer]:
+          - /url: "#cardheader"
+        - link "CardTitle" [ref=e458] [cursor=pointer]:
+          - /url: "#cardtitle"
+        - link "CardDescription" [ref=e459] [cursor=pointer]:
+          - /url: "#carddescription"
+        - link "CardContent" [ref=e460] [cursor=pointer]:
+          - /url: "#cardcontent"
+        - link "CardFooter" [ref=e461] [cursor=pointer]:
+          - /url: "#cardfooter"
+        - link "Accessibility" [ref=e462] [cursor=pointer]:
+          - /url: "#accessibility"

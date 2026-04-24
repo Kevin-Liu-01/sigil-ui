@@ -1,0 +1,34 @@
+---
+title: LetterPullUp
+description: Letter-by-letter pull-up animation. Each character translates upward with staggered timing for dramatic headlines.
+---
+
+## Import
+
+```tsx
+import { LetterPullUp } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<LetterPullUp text="Hello World" className="text-4xl font-bold" />
+```
+
+## Custom timing
+
+```tsx
+<LetterPullUp text="Sigil UI" interval={40} pullDistance={32} delay={200} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `text` | `string` | — | Text to animate |
+| `interval` | `number` | `30` | Delay between letters in ms |
+| `delay` | `number` | `0` | Base delay in ms |
+| `pullDistance` | `number` | `24` | Pull distance in px |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+
+Uses `--s-ease-default` (expo-style) for natural deceleration.

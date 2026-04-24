@@ -1,14 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
 import { NavbarLogo } from "@/components/landing/hero-logo-field";
-import { BookOpen, LayoutGrid, Palette, Flame, Play, Star, PanelsTopLeft } from "lucide-react";
+import { BookOpen, LayoutGrid, Palette, Play, Star, PanelsTopLeft, Footprints } from "lucide-react";
+import { SigilThemeToggle } from "./theme-toggle";
+import { useIsEdgeless } from "./sigil-frame";
 
 const NAV_LINKS = [
   { label: "Components", href: "/components", icon: <LayoutGrid size={14} /> },
   { label: "Presets", href: "/presets", icon: <Palette size={14} /> },
   { label: "Demos", href: "/demos", icon: <Play size={14} /> },
+  { label: "Walkthrough", href: "/walkthrough", icon: <Footprints size={14} /> },
   { label: "Docs", href: "/docs", icon: <BookOpen size={14} /> },
 ] as const;
 
@@ -44,50 +46,16 @@ function useGitHubStars(): number | null {
   return stars;
 }
 
-function SunIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="8" cy="8" r="3" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="8" y1="1" x2="8" y2="3" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="8" y1="13" x2="8" y2="15" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="1" y1="8" x2="3" y2="8" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="13" y1="8" x2="15" y2="8" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="3.05" y1="3.05" x2="4.46" y2="4.46" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="11.54" y1="11.54" x2="12.95" y2="12.95" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="3.05" y1="12.95" x2="4.46" y2="11.54" stroke="currentColor" strokeWidth="1.2" />
-      <line x1="11.54" y1="4.46" x2="12.95" y2="3.05" stroke="currentColor" strokeWidth="1.2" />
-    </svg>
-  );
-}
-
-function MoonIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M13.5 9.5a5.5 5.5 0 01-7-7 5.5 5.5 0 107 7z"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 export { LandingNavbar as Navbar };
 
-export function LandingNavbar() {
-  const { resolvedTheme, setTheme } = useTheme();
+export function LandingNavbar({ fullBleed = false }: { fullBleed?: boolean }) {
   const stars = useGitHubStars();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  const isDark = resolvedTheme === "dark";
+  let edgeless = false;
+  try { edgeless = useIsEdgeless(); } catch { /* outside provider */ }
 
-  function toggleTheme() {
-    setTheme(isDark ? "light" : "dark");
-  }
-
-  return (
-    <nav className="flex items-center justify-between h-[var(--s-navbar-height,56px)] px-6 border-b border-[var(--s-border-muted)] sticky top-0 z-50 bg-[var(--s-background)] backdrop-blur-xl backdrop-saturate-[1.4]">
+  const navContent = (
+    <>
       <a href="/" className="flex items-center gap-2 no-underline text-[var(--s-text)]">
         <NavbarLogo />
         <span className="font-[family-name:var(--s-font-display)] font-bold text-base tracking-[-0.03em]">
@@ -108,7 +76,6 @@ export function LandingNavbar() {
           </a>
         ))}
 
-        {/* Search docs button */}
         <button
           type="button"
           onClick={() => window.dispatchEvent(new Event("sigil:open-search"))}
@@ -124,7 +91,6 @@ export function LandingNavbar() {
           </kbd>
         </button>
 
-        {/* Sandbox button */}
         <a
           href="/sandbox"
           className="hidden md:inline-flex items-center gap-1.5 h-7 px-3 rounded-[var(--s-radius-sm,4px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] no-underline font-[family-name:var(--s-font-mono)] text-[11px] font-semibold tracking-[0.04em] uppercase hover:opacity-90 transition-opacity duration-[var(--s-duration-fast,150ms)]"
@@ -133,7 +99,6 @@ export function LandingNavbar() {
           Sandbox
         </a>
 
-        {/* GitHub star button */}
         <a
           href="https://github.com/Kevin-Liu-01/sigil-ui"
           target="_blank"
@@ -156,15 +121,32 @@ export function LandingNavbar() {
           )}
         </a>
 
-        <button
-          type="button"
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className="flex items-center justify-center w-8 h-8 p-0 border-none bg-transparent text-[var(--s-text-muted)] hover:text-[var(--s-text)] cursor-pointer rounded-[var(--s-radius-sm,0px)] transition-colors duration-[var(--s-duration-fast,150ms)]"
-        >
-          {mounted ? (isDark ? <SunIcon /> : <MoonIcon />) : <span className="w-4 h-4" />}
-        </button>
+        <SigilThemeToggle />
       </div>
+    </>
+  );
+
+  const borderClass = edgeless ? "" : "border-b border-[var(--s-border)]";
+
+  if (fullBleed) {
+    return (
+      <nav className={`w-full sticky top-0 z-50 bg-[var(--s-background)] ${borderClass} backdrop-blur-xl backdrop-saturate-[1.4]`}>
+        <div
+          className="mx-auto flex items-center justify-between h-[var(--s-navbar-height,56px)] w-full"
+          style={{
+            maxWidth: "var(--s-content-max, 1200px)",
+            padding: "0 var(--s-page-margin, 24px)",
+          }}
+        >
+          {navContent}
+        </div>
+      </nav>
+    );
+  }
+
+  return (
+    <nav className={`flex items-center justify-between h-[var(--s-navbar-height,56px)] px-6 ${borderClass} sticky top-0 z-50 bg-[var(--s-background)] backdrop-blur-xl backdrop-saturate-[1.4]`}>
+      {navContent}
     </nav>
   );
 }

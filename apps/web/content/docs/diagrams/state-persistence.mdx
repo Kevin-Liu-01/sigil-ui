@@ -1,0 +1,47 @@
+---
+title: StatePersistence
+description: Sleep/wake state comparison diagram with animated active item, competitor grid, and persisted state rows.
+---
+
+## Import
+
+```tsx
+import { StatePersistence } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<StatePersistence
+  activeItem={{
+    label: "Machine",
+    sublabel: "Awake",
+    value: "Free",
+    valueLabel: "when idle",
+    variant: "success",
+  }}
+  competitors={[
+    { label: "sandbox-a", sublabel: "Asleep", value: "$0.09/hr", variant: "danger" },
+    { label: "sandbox-b", sublabel: "Asleep", value: "$0.08/hr", variant: "danger" },
+  ]}
+  persistedState={[
+    { label: "/home/machine/*", status: "intact" },
+    { label: "Installed packages", status: "intact" },
+    { label: "Environment vars", status: "intact" },
+  ]}
+  activeLabel="Idle compute"
+  stateLabel="Preserved while sleeping"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `activeItem` | `PersistenceActiveItem` | — | Primary highlighted item |
+| `competitors` | `PersistenceActiveItem[]` | `[]` | Comparison items |
+| `persistedState` | `PersistedStateRow[]` | `[]` | State rows |
+| `activeLabel` | `string` | `"Status"` | First section label |
+| `stateLabel` | `string` | `"Preserved state"` | Second section label |
+
+Active item uses spring scale-in. Competitors and state rows stagger in sequence.

@@ -15,6 +15,7 @@ type SigilTokensContextValue = {
   tokens: SigilTokens;
   activePreset: string;
   setPreset: (name: string) => Promise<void>;
+  setTokens: (tokens: SigilTokens, name?: string) => void;
   patchTokens: (
     category: keyof SigilTokens,
     key: string,
@@ -54,6 +55,14 @@ export function SigilTokensProvider({
     setActivePreset(name);
   }, []);
 
+  const setTokensDirect = useCallback(
+    (next: SigilTokens, name?: string) => {
+      setTokens(next);
+      setActivePreset(name ?? "custom");
+    },
+    [],
+  );
+
   const patchTokens = useCallback(
     (category: keyof SigilTokens, key: string, value: unknown) => {
       setTokens((prev) => {
@@ -76,8 +85,8 @@ export function SigilTokensProvider({
   );
 
   const ctx = useMemo<SigilTokensContextValue>(
-    () => ({ tokens, activePreset, setPreset, patchTokens }),
-    [tokens, activePreset, setPreset, patchTokens],
+    () => ({ tokens, activePreset, setPreset, setTokens: setTokensDirect, patchTokens }),
+    [tokens, activePreset, setPreset, setTokensDirect, patchTokens],
   );
 
   return (

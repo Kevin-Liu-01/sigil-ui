@@ -1,0 +1,35 @@
+---
+title: Pulse
+description: Breathing scale pulse animation. Wraps children with a continuous, gentle scale oscillation.
+---
+
+## Import
+
+```tsx
+import { Pulse } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Pulse>
+  <div className="w-12 h-12 rounded-full bg-primary" />
+</Pulse>
+```
+
+## Custom scale and speed
+
+```tsx
+<Pulse duration={3} scale={1.08}>
+  <Badge>Live</Badge>
+</Pulse>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `duration` | `number` | `2` | Pulse cycle in seconds |
+| `scale` | `number` | `1.04` | Maximum scale |
+
+Respects `prefers-reduced-motion`.

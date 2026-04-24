@@ -196,7 +196,7 @@ async function checkPreset(cwd: string): Promise<DiagnosticResult> {
   const { PRESET_NAMES } = await import("../utils/presets.js");
   const builtins = PRESET_NAMES;
 
-  if (builtins.includes(config.preset)) {
+  if (builtins.includes(config.preset as (typeof builtins)[number])) {
     return { label: "Preset", status: "pass", message: `Built-in preset: ${config.preset}` };
   }
 

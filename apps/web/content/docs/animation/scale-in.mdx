@@ -1,0 +1,37 @@
+---
+title: ScaleIn
+description: Scale-up reveal animation with spring easing. Animates from a smaller initial scale to full size.
+---
+
+## Import
+
+```tsx
+import { ScaleIn } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ScaleIn>
+  <Card>Scales into view</Card>
+</ScaleIn>
+```
+
+## Custom initial scale
+
+```tsx
+<ScaleIn initialScale={0.8} delay={100}>
+  <img src="/hero.png" alt="Hero" />
+</ScaleIn>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `initialScale` | `number` | `0.92` | Starting scale factor |
+| `delay` | `number` | `0` | Delay in ms |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+
+Uses `--s-ease-spring` for natural spring easing. Respects `prefers-reduced-motion`.

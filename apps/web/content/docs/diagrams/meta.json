@@ -6,6 +6,10 @@
     "flow-diagram",
     "timeline",
     "comparison-table",
-    "architecture-diagram"
+    "architecture-diagram",
+    "waterfall-chart",
+    "capability-grid",
+    "isolation-stack",
+    "state-persistence"
   ]
 }

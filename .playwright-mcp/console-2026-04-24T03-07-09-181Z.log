@@ -1,0 +1,36 @@
+[   10303ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  999383ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  999993ms] [LOG] [Fast Refresh] done in 611ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1000682ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1000896ms] [LOG] [Fast Refresh] done in 215ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1000969ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1001174ms] [LOG] [Fast Refresh] done in 205ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1101195ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1101772ms] [LOG] [Fast Refresh] done in 576ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1101907ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1102288ms] [ERROR] ../../packages/components/dist/index.js
+Error: 
+
+Caused by:
+    0: Failed to read source code from /Users/kevinliu/Documents/GitHub/reticle-ui/packages/components/dist/index.js
+    1: No such file or directory (os error 2)
+
+Import trace for requested module:
+../../packages/components/dist/index.js
+./components/mdx-components.tsx @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1102300ms] [LOG] {file: Object} @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/compiled/next-devtools/index.js:1630
+[ 1102587ms] [ERROR] ../../packages/components/dist/index.js
+Error: 
+
+Caused by:
+    0: Failed to read source code from /Users/kevinliu/Documents/GitHub/reticle-ui/packages/components/dist/index.js
+    1: No such file or directory (os error 2)
+
+Import trace for requested module:
+../../packages/components/dist/index.js
+./components/mdx-components.tsx @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[ 1102587ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1105400ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[ 1106018ms] [LOG] [Fast Refresh] done in 619ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1106173ms] [LOG] [Fast Refresh] done in 774ms @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[ 1180797ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/../../node_modules/.pnpm/next@15.5.15_@opentelemetry+api@1.9.0_react-dom@19.2.5_react@19.2.5__react@19.2.5/node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630

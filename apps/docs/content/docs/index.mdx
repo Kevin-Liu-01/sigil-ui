@@ -48,17 +48,17 @@ export default function App() {
 Sigil uses a three-layer token system:
 
 1. **Primitive** — raw values like `oklch(0.65 0.15 280)` or `8px`
-2. **Semantic** — purpose-driven aliases like `--r-primary` or `--r-radius-md`
-3. **Component** — scoped tokens like `--r-card-radius` consumed by individual components
+2. **Semantic** — purpose-driven aliases like `--s-primary` or `--s-radius-md`
+3. **Component** — scoped tokens like `--s-card-radius` consumed by individual components
 
-Every layer compiles to CSS custom properties with the `--r-` prefix. Components only read variables — they never hardcode values.
+Every layer compiles to CSS custom properties with the `--s-` prefix. Components only read variables — they never hardcode values.
 
 ```css
 /* Your token file controls everything */
 :root {
-  --r-primary: oklch(0.65 0.15 280);
-  --r-radius-md: 8px;
-  --r-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), ...;
+  --s-primary: oklch(0.65 0.15 280);
+  --s-radius-md: 8px;
+  --s-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), ...;
 }
 ```
 

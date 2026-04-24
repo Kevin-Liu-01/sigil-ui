@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import { SigilTokensProvider, useSigilTokens } from "./sandbox/token-provider";
-import { SigilDevBar } from "./devbar";
+import { SigilDevBar, DevBarProvider } from "./devbar";
 import { SigilSoundProvider } from "./sound-provider";
 
 function TokenStyleInjector() {
@@ -48,21 +48,18 @@ function TokenStyleInjector() {
       else if (typeof value === "number") addVar(name, String(value));
     }
 
-    // Colors (ThemedColor-aware)
     if (tokens.colors) {
       for (const [key, value] of Object.entries(tokens.colors)) {
         addThemed(key, value);
       }
     }
 
-    // Typography
     if (tokens.typography) {
       for (const [key, value] of Object.entries(tokens.typography)) {
         if (typeof value === "string") addVar(`--s-${key}`, value);
       }
     }
 
-    // Radius — set both --s-radius-{key} and --s-card-radius for compat
     if (tokens.radius) {
       for (const [key, value] of Object.entries(tokens.radius)) {
         if (typeof value === "string") {
@@ -72,21 +69,18 @@ function TokenStyleInjector() {
       }
     }
 
-    // Shadows
     if (tokens.shadows) {
       for (const [key, value] of Object.entries(tokens.shadows)) {
         if (typeof value === "string") addVar(`--s-shadow-${key}`, value);
       }
     }
 
-    // Sigil grid
     if (tokens.sigil) {
       for (const [key, value] of Object.entries(tokens.sigil)) {
         addPrimitive(`--s-${key}`, value);
       }
     }
 
-    // Motion — nested duration/easing objects + flat top-level keys
     if (tokens.motion) {
       const motion = tokens.motion as Record<string, unknown>;
       for (const [key, value] of Object.entries(motion)) {
@@ -104,7 +98,6 @@ function TokenStyleInjector() {
       }
     }
 
-    // Borders — nested width object + flat keys
     if (tokens.borders) {
       const borders = tokens.borders as Record<string, unknown>;
       for (const [key, value] of Object.entries(borders)) {
@@ -118,7 +111,6 @@ function TokenStyleInjector() {
       }
     }
 
-    // Prefixed flat categories
     const prefixedCategories: { key: string; prefix: string }[] = [
       { key: "layout", prefix: "" },
       { key: "spacing", prefix: "" },
@@ -162,9 +154,12 @@ export function SigilShell({ children }: { children: ReactNode }) {
   return (
     <SigilTokensProvider>
       <SigilSoundProvider>
-        <TokenStyleInjector />
-        {children}
-        <SigilDevBar />
+        <DevBarProvider>
+          <TokenStyleInjector />
+          <SigilDevBar>
+            {children}
+          </SigilDevBar>
+        </DevBarProvider>
       </SigilSoundProvider>
     </SigilTokensProvider>
   );

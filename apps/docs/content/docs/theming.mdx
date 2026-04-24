@@ -5,7 +5,7 @@ description: "Change once, update everywhere. Sigil's three-layer token system m
 
 ## How tokens work
 
-Every visual property in Sigil flows through CSS custom properties prefixed with `--r-`. Components never hardcode colors, spacing, or radii — they read from variables.
+Every visual property in Sigil flows through CSS custom properties prefixed with `--s-`. Components never hardcode colors, spacing, or radii — they read from variables.
 
 This means a single edit to your token file cascades through every component that references it. No grep-and-replace. No stale overrides.
 
@@ -13,7 +13,7 @@ This means a single edit to your token file cascades through every component tha
 ┌────────────────────────────────────────────────────┐
 │  tokens.ts (or preset)                             │
 │  ↓ compile                                         │
-│  :root { --r-primary: oklch(0.65 0.15 280); ... }  │
+│  :root { --s-primary: oklch(0.65 0.15 280); ... }  │
 │  ↓ consumed by                                     │
 │  <Button /> <Card /> <Input /> ...                  │
 └────────────────────────────────────────────────────┘
@@ -24,10 +24,10 @@ This means a single edit to your token file cascades through every component tha
 | Layer | Purpose | Example |
 |---|---|---|
 | **Primitive** | Raw values | `oklch(0.65 0.15 280)`, `8px`, `150ms` |
-| **Semantic** | Meaning-driven aliases | `--r-primary`, `--r-radius-md`, `--r-duration-fast` |
-| **Component** | Scoped to a specific component | `--r-card-radius`, `--r-grid-cell` |
+| **Semantic** | Meaning-driven aliases | `--s-primary`, `--s-radius-md`, `--s-duration-fast` |
+| **Component** | Scoped to a specific component | `--s-card-radius`, `--s-grid-cell` |
 
-Higher layers reference lower ones. A component token like `--r-card-radius` defaults to a semantic token like `--r-radius-lg`, which resolves to the primitive `12px`.
+Higher layers reference lower ones. A component token like `--s-card-radius` defaults to a semantic token like `--s-radius-lg`, which resolves to the primitive `12px`.
 
 ## Creating a preset
 
@@ -120,7 +120,7 @@ Use the CLI to compile your preset to CSS:
 npx sigil compile ./presets/brand.ts --out ./public/brand.css
 ```
 
-This generates a CSS file with all `--r-*` variables set to your preset values, including light/dark mode support.
+This generates a CSS file with all `--s-*` variables set to your preset values, including light/dark mode support.
 
 ## Applying a preset at runtime
 
@@ -133,7 +133,7 @@ Load the compiled CSS dynamically or swap the `<link>` tag:
 Or override variables in a scoped container:
 
 ```tsx
-<div style={{ "--r-primary": "oklch(0.55 0.20 145)" } as React.CSSProperties}>
+<div style={{ "--s-primary": "oklch(0.55 0.20 145)" } as React.CSSProperties}>
   <Button variant="primary">Themed button</Button>
 </div>
 ```
@@ -164,58 +164,58 @@ No searching through component files. No stale overrides. No Tailwind config wre
 
 | Token | Light | Dark |
 |---|---|---|
-| `--r-background` | `oklch(0.99 0 0)` | `oklch(0.07 0.01 280)` |
-| `--r-surface` | `oklch(0.97 0 0)` | `oklch(0.12 0.01 280)` |
-| `--r-surface-elevated` | `oklch(0.98 0 0)` | `oklch(0.15 0.01 280)` |
-| `--r-primary` | `oklch(0.65 0.15 280)` | — |
-| `--r-primary-hover` | `oklch(0.60 0.18 280)` | — |
-| `--r-primary-muted` | `oklch(0.90 0.04 280)` | — |
-| `--r-secondary` | `oklch(0.70 0.12 60)` | — |
-| `--r-text` | `oklch(0.15 0 0)` | `oklch(0.93 0 0)` |
-| `--r-text-secondary` | `oklch(0.40 0 0)` | `oklch(0.70 0 0)` |
-| `--r-border` | `oklch(0.90 0 0)` | `oklch(0.22 0 0)` |
+| `--s-background` | `oklch(0.99 0 0)` | `oklch(0.07 0.01 280)` |
+| `--s-surface` | `oklch(0.97 0 0)` | `oklch(0.12 0.01 280)` |
+| `--s-surface-elevated` | `oklch(0.98 0 0)` | `oklch(0.15 0.01 280)` |
+| `--s-primary` | `oklch(0.65 0.15 280)` | — |
+| `--s-primary-hover` | `oklch(0.60 0.18 280)` | — |
+| `--s-primary-muted` | `oklch(0.90 0.04 280)` | — |
+| `--s-secondary` | `oklch(0.70 0.12 60)` | — |
+| `--s-text` | `oklch(0.15 0 0)` | `oklch(0.93 0 0)` |
+| `--s-text-secondary` | `oklch(0.40 0 0)` | `oklch(0.70 0 0)` |
+| `--s-border` | `oklch(0.90 0 0)` | `oklch(0.22 0 0)` |
 
 ### Spacing
 
 | Token | Value |
 |---|---|
-| `--r-space-0` | `4px` |
-| `--r-space-1` | `8px` |
-| `--r-space-2` | `12px` |
-| `--r-space-3` | `16px` |
-| `--r-space-4` | `24px` |
-| `--r-space-5` | `32px` |
-| `--r-space-6` | `48px` |
-| `--r-space-7` | `64px` |
-| `--r-space-8` | `80px` |
-| `--r-space-9` | `96px` |
+| `--s-space-0` | `4px` |
+| `--s-space-1` | `8px` |
+| `--s-space-2` | `12px` |
+| `--s-space-3` | `16px` |
+| `--s-space-4` | `24px` |
+| `--s-space-5` | `32px` |
+| `--s-space-6` | `48px` |
+| `--s-space-7` | `64px` |
+| `--s-space-8` | `80px` |
+| `--s-space-9` | `96px` |
 
 ### Radius
 
 | Token | Value |
 |---|---|
-| `--r-radius-none` | `0px` |
-| `--r-radius-sm` | `4px` |
-| `--r-radius-md` | `8px` |
-| `--r-radius-lg` | `12px` |
-| `--r-radius-xl` | `16px` |
-| `--r-radius-2xl` | `24px` |
-| `--r-radius-full` | `9999px` |
+| `--s-radius-none` | `0px` |
+| `--s-radius-sm` | `4px` |
+| `--s-radius-md` | `8px` |
+| `--s-radius-lg` | `12px` |
+| `--s-radius-xl` | `16px` |
+| `--s-radius-2xl` | `24px` |
+| `--s-radius-full` | `9999px` |
 
 ### Motion
 
 | Duration token | Value |
 |---|---|
-| `--r-duration-instant` | `0ms` |
-| `--r-duration-fast` | `150ms` |
-| `--r-duration-normal` | `250ms` |
-| `--r-duration-slow` | `400ms` |
-| `--r-duration-slower` | `600ms` |
+| `--s-duration-instant` | `0ms` |
+| `--s-duration-fast` | `150ms` |
+| `--s-duration-normal` | `250ms` |
+| `--s-duration-slow` | `400ms` |
+| `--s-duration-slower` | `600ms` |
 
 | Easing token | Value |
 |---|---|
-| `--r-ease-default` | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| `--r-ease-in` | `cubic-bezier(0.55, 0, 1, 0.45)` |
-| `--r-ease-out` | `cubic-bezier(0, 0.55, 0.45, 1)` |
-| `--r-ease-in-out` | `cubic-bezier(0.45, 0, 0.55, 1)` |
-| `--r-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
+| `--s-ease-default` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+| `--s-ease-in` | `cubic-bezier(0.55, 0, 1, 0.45)` |
+| `--s-ease-out` | `cubic-bezier(0, 0.55, 0.45, 1)` |
+| `--s-ease-in-out` | `cubic-bezier(0.45, 0, 0.55, 1)` |
+| `--s-ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |

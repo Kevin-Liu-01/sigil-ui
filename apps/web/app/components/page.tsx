@@ -1,43 +1,109 @@
 "use client";
 
+import { useState } from "react";
+import {
+  SigilSection,
+  SectionDivider,
+  GapPixelGrid,
+  GapPixelCell,
+  MonoLabel,
+  TabularValue,
+  DensityText,
+  AccentCTA,
+  CardCell,
+  FeaturedGrid,
+  Button,
+  Badge,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  Input,
+  Switch,
+  Checkbox,
+  Slider,
+  Progress,
+  Separator,
+  Avatar,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Tooltip,
+  TooltipProvider,
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@sigil-ui/components";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
 import { ComponentShowcase } from "@/components/landing/component-showcase";
-import { TechFrame } from "@/components/landing/tech-frame";
+import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
 
-import { SigilSection, SectionDivider } from "@sigil-ui/components";
+const STATS = [
+  { value: "100+", label: "Components" },
+  { value: "14", label: "Categories" },
+  { value: "259", label: "Tokens" },
+  { value: "31", label: "Presets" },
+] as const;
+
+const TOKEN_CARDS = [
+  {
+    title: "No hardcoded values",
+    body: "Components read var(--s-*) tokens for every visual property — colors, spacing, radius, shadows. Never hex codes, never magic numbers.",
+  },
+  {
+    title: "One preset, everything updates",
+    body: "Switch presets and all 100+ components change simultaneously. One command, zero prop drilling, zero theme objects.",
+  },
+  {
+    title: "Agent-friendly",
+    body: "AI agents edit tokens.md — a single markdown file. Components respond deterministically. No ambiguity, no hunting through files.",
+  },
+] as const;
 
 export default function ComponentsPage() {
   return (
     <SigilFrame>
       <LandingNavbar />
 
+      {/* ── Hero ── */}
       <SigilSection borderTop padding="96px 24px 48px">
-        <div className="mb-12">
-          <span className="font-[family-name:var(--s-font-mono)] text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--s-primary)] block mb-4">
+        <div className="mb-12 max-w-3xl">
+          <MonoLabel variant="accent" className="mb-4 block">
             / Components
-          </span>
+          </MonoLabel>
 
-          <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
+          <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
             100+ Token-Driven Components.
           </h1>
 
-          <p className="font-[family-name:var(--s-font-mono)] text-sm leading-relaxed text-[var(--s-text-secondary)] mb-6 max-w-[528px]">
-            Every component reads from <code className="text-[var(--s-primary)]">var(--s-*)</code> tokens.
-            Switch presets and the entire library updates instantly. No prop drilling, no theme objects.
-          </p>
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="mb-6 max-w-[528px] leading-relaxed"
+          >
+            Every component reads from{" "}
+            <code className="text-[var(--s-primary)]">var(--s-*)</code> tokens.
+            Switch presets and the entire library updates instantly — no prop
+            drilling, no theme objects, no manual overrides.
+          </DensityText>
 
-          <div className="flex gap-3">
-            <a
-              href="/docs/components/button"
-              className="inline-flex items-center px-5 py-2.5 bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] font-[family-name:var(--s-font-mono)] text-[13px] font-semibold border border-[var(--s-primary)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:brightness-110"
-            >
-              View Docs
-            </a>
+          <div className="flex gap-3 flex-wrap">
+            <AccentCTA asChild>
+              <a href="/docs/components/button">View Docs</a>
+            </AccentCTA>
             <a
               href="/sandbox"
-              className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+              className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)] uppercase tracking-[0.08em]"
             >
               Open Sandbox
             </a>
@@ -45,12 +111,98 @@ export default function ComponentsPage() {
         </div>
       </SigilSection>
 
-      <SectionDivider pattern="crosshatch" size="sm" />
+      <SectionDivider />
 
-      <SigilSection>
-        <TechFrame variant="overshoot" extend={16} opacity={0.2} padding={16}>
-          <ComponentShowcase />
-        </TechFrame>
+      {/* ── Stats bar ── */}
+      <SigilSection padding="0">
+        <GapPixelGrid columns={{ sm: 2, md: 4 }}>
+          {STATS.map((stat) => (
+            <GapPixelCell
+              key={stat.label}
+              className="flex flex-col items-center justify-center py-10 px-6"
+            >
+              <TabularValue size="xl" className="font-bold">
+                {stat.value}
+              </TabularValue>
+              <MonoLabel className="mt-2">{stat.label}</MonoLabel>
+            </GapPixelCell>
+          ))}
+        </GapPixelGrid>
+      </SigilSection>
+
+      <SectionDivider />
+
+      {/* ── Component Showcase ── */}
+      <SigilSection padding="48px 24px">
+        <ComponentShowcase />
+      </SigilSection>
+
+      <SectionDivider />
+
+      {/* ── Component Anatomy ── */}
+      <SigilSection padding="64px 24px">
+        <div className="mb-10 max-w-2xl">
+          <MonoLabel variant="accent" className="mb-4 block">
+            HOW TOKENS FLOW
+          </MonoLabel>
+
+          <DensityText
+            role="headline"
+            as="h2"
+            className="mb-4"
+          >
+            Every component reads from tokens.
+          </DensityText>
+
+          <DensityText role="body" as="p" muted className="leading-relaxed">
+            Colors, radius, shadows, motion, typography — all resolved at
+            runtime from CSS custom properties. Change a token, every consumer
+            updates. No imports, no build step, no prop drilling.
+          </DensityText>
+        </div>
+
+        <ComponentAnatomyDiagram />
+      </SigilSection>
+
+      <SectionDivider />
+
+      {/* ── Build with tokens ── */}
+      <SigilSection padding="64px 24px">
+        <div className="mb-10 max-w-2xl">
+          <MonoLabel variant="accent" className="mb-4 block">
+            WHY TOKENS
+          </MonoLabel>
+
+          <DensityText role="headline" as="h2" className="mb-4">
+            Build with tokens, not overrides.
+          </DensityText>
+        </div>
+
+        <GapPixelGrid columns={{ md: 3 }}>
+          {TOKEN_CARDS.map((card) => (
+            <CardCell
+              key={card.title}
+              title={card.title}
+              footer={
+                <MonoLabel size="xs">var(--s-*)</MonoLabel>
+              }
+            >
+              {card.body}
+            </CardCell>
+          ))}
+        </GapPixelGrid>
+
+        <div className="flex gap-3 flex-wrap mt-10">
+          <AccentCTA asChild>
+            <a href="/docs">Get Started</a>
+          </AccentCTA>
+          <a
+            href="/docs/theming"
+            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)] uppercase tracking-[0.08em]"
+          >
+            Read the Docs
+          </a>
+        </div>
       </SigilSection>
 
       <LandingFooter />

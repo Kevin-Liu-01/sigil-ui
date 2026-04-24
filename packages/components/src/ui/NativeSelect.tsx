@@ -21,7 +21,7 @@ export const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             "flex h-[var(--s-input-height,36px)] w-full appearance-none items-center justify-between",
             "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
             "border border-[style:var(--s-border-style,solid)] bg-[var(--s-background)]",
-            "px-3 py-1 pr-8 text-sm text-[var(--s-text)]",
+            "px-3 py-1 pr-8",
             "transition-all duration-[var(--s-duration-fast,150ms)]",
             "focus:outline-none focus:ring-1",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",

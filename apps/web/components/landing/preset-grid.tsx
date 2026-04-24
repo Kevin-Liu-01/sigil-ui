@@ -7,7 +7,7 @@ import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 import { Check } from "lucide-react";
 
-const CATEGORY_ORDER = ["structural", "minimal", "dark", "colorful", "editorial", "industrial"] as const;
+const CATEGORY_ORDER = ["structural", "minimal", "dark", "colorful", "editorial", "industrial", "edgeless"] as const;
 type Category = (typeof CATEGORY_ORDER)[number];
 
 const CATEGORY_LABELS: Record<Category, string> = {
@@ -17,6 +17,7 @@ const CATEGORY_LABELS: Record<Category, string> = {
   colorful: "Colorful",
   editorial: "Editorial",
   industrial: "Industrial",
+  edgeless: "Edgeless",
 };
 
 function PresetCard({ preset, isActive, onApply }: { preset: PresetCatalogEntry; isActive: boolean; onApply: () => void }) {
@@ -108,7 +109,7 @@ export function PresetGrid() {
   };
 
   const grouped: Record<Category, PresetCatalogEntry[]> = {
-    structural: [], minimal: [], dark: [], colorful: [], editorial: [], industrial: [],
+    structural: [], minimal: [], dark: [], colorful: [], editorial: [], industrial: [], edgeless: [],
   };
   for (const p of presetCatalog) {
     grouped[p.category].push(p);

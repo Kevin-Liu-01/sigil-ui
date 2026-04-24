@@ -1,0 +1,40 @@
+---
+title: NumberTicker
+description: Animated counting number with easeOutExpo curve. Supports locale formatting, decimals, prefix, and suffix.
+---
+
+## Import
+
+```tsx
+import { NumberTicker } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<NumberTicker value={259} />
+```
+
+## With formatting
+
+```tsx
+<NumberTicker value={99.9} decimals={1} suffix="%" />
+<NumberTicker value={42000} prefix="$" />
+<NumberTicker value={1500} from={0} duration={2000} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number` | — | Target value |
+| `from` | `number` | `0` | Starting value |
+| `duration` | `number` | `1200` | Animation duration in ms |
+| `delay` | `number` | `0` | Base delay in ms |
+| `decimals` | `number` | `0` | Decimal places |
+| `prefix` | `string` | `""` | Prefix (e.g. "$") |
+| `suffix` | `string` | `""` | Suffix (e.g. "%") |
+| `formatNumber` | `boolean` | `true` | Locale number formatting |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+
+Uses `tabular-nums` for stable width during animation.

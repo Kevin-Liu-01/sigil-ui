@@ -1,0 +1,38 @@
+---
+title: Ripple
+description: Expanding concentric ring animation. Decorative element for hero sections, status indicators, or background effects.
+---
+
+## Import
+
+```tsx
+import { Ripple } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Ripple />
+```
+
+## Custom colors and sizing
+
+```tsx
+<Ripple
+  rings={5}
+  size={300}
+  duration={3}
+  color="var(--s-primary)"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `rings` | `number` | `3` | Number of concentric rings |
+| `duration` | `number` | `2.5` | Ring expansion duration in seconds |
+| `color` | `string` | `"var(--s-primary)"` | Ring border color |
+| `size` | `number` | `200` | Container size in px |
+
+Renders `aria-hidden` for accessibility. Respects `prefers-reduced-motion`.

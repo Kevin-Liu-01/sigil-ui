@@ -31,6 +31,19 @@ export { mrkrPreset } from "./mrkr";
 export { noirPreset } from "./noir";
 export { duskPreset } from "./dusk";
 export { monoPreset } from "./mono";
+export { vastPreset } from "./vast";
+export { auraPreset } from "./aura";
+export { fieldPreset } from "./field";
+export { clayPreset } from "./clay";
+export { sagePreset } from "./sage";
+export { inkPreset } from "./ink";
+export { sandPreset } from "./sand";
+export { plumPreset } from "./plum";
+export { mossPreset } from "./moss";
+export { coralPreset } from "./coral";
+export { dunePreset } from "./dune";
+export { oceanPreset } from "./ocean";
+export { rosePreset } from "./rose";
 
 export const presets = {
   default: () => import("./default").then((m) => m.defaultPreset),
@@ -65,6 +78,19 @@ export const presets = {
   noir: () => import("./noir").then((m) => m.noirPreset),
   dusk: () => import("./dusk").then((m) => m.duskPreset),
   mono: () => import("./mono").then((m) => m.monoPreset),
+  vast: () => import("./vast").then((m) => m.vastPreset),
+  aura: () => import("./aura").then((m) => m.auraPreset),
+  field: () => import("./field").then((m) => m.fieldPreset),
+  clay: () => import("./clay").then((m) => m.clayPreset),
+  sage: () => import("./sage").then((m) => m.sagePreset),
+  ink: () => import("./ink").then((m) => m.inkPreset),
+  sand: () => import("./sand").then((m) => m.sandPreset),
+  plum: () => import("./plum").then((m) => m.plumPreset),
+  moss: () => import("./moss").then((m) => m.mossPreset),
+  coral: () => import("./coral").then((m) => m.coralPreset),
+  dune: () => import("./dune").then((m) => m.dunePreset),
+  ocean: () => import("./ocean").then((m) => m.oceanPreset),
+  rose: () => import("./rose").then((m) => m.rosePreset),
 } as const;
 
 export type PresetName = keyof typeof presets;

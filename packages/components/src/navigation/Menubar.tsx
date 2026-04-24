@@ -21,7 +21,7 @@ export const Menubar = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeo
   },
 );
 
-export const MenubarMenu = MenubarPrimitive.Menu;
+export const MenubarMenu: typeof MenubarPrimitive.Menu = MenubarPrimitive.Menu;
 
 export const MenubarTrigger = forwardRef<HTMLButtonElement, ComponentPropsWithoutRef<typeof MenubarPrimitive.Trigger>>(
   function MenubarTrigger({ className, ...rest }, ref) {

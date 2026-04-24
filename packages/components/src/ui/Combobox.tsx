@@ -120,8 +120,8 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
           setTimeout(() => inputRef.current?.focus(), 0);
         }}
         className={cn(
-          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
-          "bg-[var(--s-background)] text-[var(--s-text)] border-[var(--s-border)]",
+          "flex h-10 w-full items-center justify-between rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] px-3 py-2",
+          "bg-[var(--s-background)] border-[var(--s-border)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
         )}
@@ -177,7 +177,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
                     onClick={() => !option.disabled && select(option.value)}
                     onMouseEnter={() => !option.disabled && setActiveIndex(i)}
                     className={cn(
-                      "flex cursor-pointer items-center justify-between rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-sm",
+                      "flex cursor-pointer items-center justify-between rounded-[var(--s-radius-sm,4px)] px-3 py-2",
                       "transition-colors duration-[var(--s-duration-fast,150ms)]",
                       option.disabled && "cursor-not-allowed opacity-50",
                       isActive && "bg-[var(--s-primary)]/10 text-[var(--s-text)]",

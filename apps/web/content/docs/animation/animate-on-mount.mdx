@@ -1,0 +1,42 @@
+---
+title: AnimateOnMount
+description: Mount animation wrapper using the existing GSAP animation presets as CSS transitions. Lighter alternative to AnimateOnScroll for mount-only reveals.
+---
+
+## Import
+
+```tsx
+import { AnimateOnMount } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<AnimateOnMount preset="fadeUp">
+  <Card>Appears on mount</Card>
+</AnimateOnMount>
+```
+
+## Presets
+
+All presets from the core GSAP `PRESETS` are supported:
+
+```tsx
+<AnimateOnMount preset="fadeUp">Fade up</AnimateOnMount>
+<AnimateOnMount preset="fadeDown">Fade down</AnimateOnMount>
+<AnimateOnMount preset="fadeIn">Fade in</AnimateOnMount>
+<AnimateOnMount preset="scaleIn">Scale in</AnimateOnMount>
+<AnimateOnMount preset="slideLeft">Slide left</AnimateOnMount>
+<AnimateOnMount preset="slideRight">Slide right</AnimateOnMount>
+<AnimateOnMount preset="blurIn">Blur in</AnimateOnMount>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `preset` | `PresetName` | `"fadeUp"` | Animation preset |
+| `delay` | `number` | `0` | Delay in ms |
+| `duration` | `number` | `400` | Duration in ms |
+
+Respects `prefers-reduced-motion`.

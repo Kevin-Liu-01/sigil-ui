@@ -1,0 +1,59 @@
+---
+title: WaterfallChart
+description: Animated comparison waterfall with staggered bar segments, row reveals, and optional badge. Inspired by Dedalus' cold-start comparison.
+---
+
+## Import
+
+```tsx
+import { WaterfallChart } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<WaterfallChart
+  rows={[
+    {
+      label: "Traditional",
+      steps: [
+        { label: "Pull image", duration: 500, color: "#6b6b73" },
+        { label: "Start runtime", duration: 500, color: "#56565e" },
+        { label: "Install deps", duration: 1000, color: "#47474f" },
+      ],
+    },
+    {
+      label: "Sigil",
+      steps: [{ label: "Restore", duration: 50, color: "var(--s-primary)" }],
+      accent: true,
+    },
+  ]}
+  badge="~50x faster"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `rows` | `WaterfallRow[]` | — | Waterfall rows with steps |
+| `unit` | `string` | `"ms"` | Unit label for totals |
+| `badge` | `string` | — | Badge text below chart |
+
+### WaterfallRow
+
+| Field | Type | Description |
+|---|---|---|
+| `label` | `string` | Row label |
+| `steps` | `WaterfallStep[]` | Bar segments |
+| `accent` | `boolean` | Highlight row |
+
+### WaterfallStep
+
+| Field | Type | Description |
+|---|---|---|
+| `label` | `string` | Segment label |
+| `duration` | `number` | Segment value |
+| `color` | `string` | Segment color |
+
+Scroll-triggered with staggered bar expansion via `scaleX` transitions.

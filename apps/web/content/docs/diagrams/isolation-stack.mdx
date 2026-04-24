@@ -1,0 +1,42 @@
+---
+title: IsolationStack
+description: Animated nested isolation layer diagram with optional comparison matrix. Layers expand from center with scaleX animation.
+---
+
+## Import
+
+```tsx
+import { IsolationStack } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<IsolationStack
+  layers={[
+    { label: "Hardware", width: "100%" },
+    { label: "Kernel", width: "78%" },
+    { label: "VM", width: "56%", accent: true },
+    { label: "Agent", width: "36%", accent: true },
+  ]}
+  columns={[
+    { key: "ours", label: "Ours", accent: true },
+    { key: "docker", label: "Docker" },
+  ]}
+  rows={[
+    { label: "Kernel isolation", values: { ours: "full", docker: "none" } },
+    { label: "Memory boundary", values: { ours: "full", docker: "partial" } },
+    { label: "Root access", values: { ours: "full", docker: "partial" } },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layers` | `IsolationLayer[]` | — | Stack layers (outer to inner) |
+| `columns` | `ComparisonColumn[]` | — | Matrix column headers |
+| `rows` | `ComparisonRow[]` | — | Matrix rows with status values |
+
+Layers animate with `scaleX(0.4→1)`. Matrix rows slide in from the left.

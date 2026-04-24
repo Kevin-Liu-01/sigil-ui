@@ -48,7 +48,7 @@ npx sigil init --cwd ./apps/web
 
 ### 1. Import token CSS
 
-Add the Sigil token stylesheet to your root layout or entry point. This injects all `--r-*` CSS custom properties.
+Add the Sigil token stylesheet to your root layout or entry point. This injects all `--s-*` CSS custom properties.
 
 ```tsx title="app/layout.tsx"
 import "@sigil-ui/tokens/css";
@@ -86,8 +86,8 @@ Override any token by redefining CSS variables. You can do this in a global styl
 
 ```css title="app/globals.css"
 :root {
-  --r-primary: oklch(0.55 0.20 145);
-  --r-card-radius: 16px;
+  --s-primary: oklch(0.55 0.20 145);
+  --s-card-radius: 16px;
 }
 ```
 

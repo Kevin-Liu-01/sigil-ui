@@ -1,0 +1,336 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic:
+      - button "Collapse Sidebar":
+        - img
+      - button "Open Search":
+        - img
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - link "sigil/UI" [ref=e6] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e7]:
+              - img [ref=e8]
+              - generic [ref=e13]: sigil/UI
+          - button "Collapse Sidebar" [ref=e14]:
+            - img [ref=e15]
+        - button "Search ⌘ K" [ref=e17]:
+          - img [ref=e18]
+          - text: Search
+          - generic [ref=e21]:
+            - generic [ref=e22]: ⌘
+            - generic [ref=e23]: K
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Getting Started
+        - link "Getting Started" [ref=e28] [cursor=pointer]:
+          - /url: /docs
+        - link "Installation" [ref=e29] [cursor=pointer]:
+          - /url: /docs/installation
+        - link "Theming" [ref=e30] [cursor=pointer]:
+          - /url: /docs/theming
+        - link "CLI Reference" [ref=e31] [cursor=pointer]:
+          - /url: /docs/cli
+        - paragraph [ref=e32]: Components
+        - link "Button" [ref=e33] [cursor=pointer]:
+          - /url: /docs/components/button
+        - link "Card" [ref=e34] [cursor=pointer]:
+          - /url: /docs/components/card
+        - link "Input" [ref=e35] [cursor=pointer]:
+          - /url: /docs/components/input
+        - paragraph [ref=e36]: Layout
+        - link "Stack" [ref=e37] [cursor=pointer]:
+          - /url: /docs/layout/stack
+        - link "SigilGrid" [ref=e38] [cursor=pointer]:
+          - /url: /docs/layout/grid
+        - paragraph [ref=e39]: Shapes
+        - link "Diamond" [ref=e40] [cursor=pointer]:
+          - /url: /docs/shapes/diamond
+        - link "Hexagon" [ref=e41] [cursor=pointer]:
+          - /url: /docs/shapes/hexagon
+        - paragraph [ref=e42]: 3D
+        - link "Box3D" [ref=e43] [cursor=pointer]:
+          - /url: /docs/3d/box3d
+        - link "Card3D" [ref=e44] [cursor=pointer]:
+          - /url: /docs/3d/card3d
+      - button "Toggle Theme" [ref=e47]:
+        - img [ref=e48]
+        - img [ref=e54]
+    - generic [ref=e56]:
+      - article [ref=e57]:
+        - heading "Input" [level=1] [ref=e58]
+        - paragraph [ref=e59]: A styled text input that reads border, radius, and focus tokens from your token file.
+        - generic [ref=e60]:
+          - heading "Import Link to section" [level=2] [ref=e61]:
+            - link "Import" [ref=e62] [cursor=pointer]:
+              - /url: "#import"
+            - img "Link to section" [ref=e63]
+          - figure [ref=e66]:
+            - button "Copy Text" [ref=e68]:
+              - img [ref=e69]
+            - code [ref=e74]:
+              - generic [ref=e75]: "import { Input } from \"@sigil-ui/components\";"
+          - heading "Preview Link to section" [level=2] [ref=e76]:
+            - link "Preview" [ref=e77] [cursor=pointer]:
+              - /url: "#preview"
+            - img "Link to section" [ref=e78]
+          - generic [ref=e81]:
+            - textbox "Enter your email" [ref=e83]
+            - generic [ref=e84]:
+              - textbox "With error" [ref=e85]
+              - alert [ref=e86]: Please enter a valid email
+          - heading "Usage Link to section" [level=2] [ref=e87]:
+            - link "Usage" [ref=e88] [cursor=pointer]:
+              - /url: "#usage"
+            - img "Link to section" [ref=e89]
+          - figure [ref=e92]:
+            - button "Copy Text" [ref=e94]:
+              - img [ref=e95]
+            - code [ref=e100]:
+              - generic [ref=e101]: <Input placeholder="Enter your email" />
+          - heading "With label Link to section" [level=2] [ref=e102]:
+            - link "With label" [ref=e103] [cursor=pointer]:
+              - /url: "#with-label"
+            - img "Link to section" [ref=e104]
+          - paragraph [ref=e107]:
+            - text: Pair with a
+            - code [ref=e108]: <label>
+            - text: or the
+            - code [ref=e109]: Label
+            - text: "component for accessibility:"
+          - generic [ref=e111]:
+            - generic [ref=e112]: Full name
+            - textbox "Full name" [ref=e114]:
+              - /placeholder: Jane Doe
+          - figure [ref=e115]:
+            - button "Copy Text" [ref=e117]:
+              - img [ref=e118]
+            - code [ref=e123]:
+              - generic [ref=e124]: "import { Input, Label, Stack } from \"@sigil-ui/components\";"
+              - generic [ref=e126]: "<Stack gap={8}>"
+              - generic [ref=e127]: <Label htmlFor="name">Full name</Label>
+              - generic [ref=e128]: <Input id="name" placeholder="Jane Doe" />
+              - generic [ref=e129]: </Stack>
+          - heading "With icons Link to section" [level=2] [ref=e130]:
+            - link "With icons" [ref=e131] [cursor=pointer]:
+              - /url: "#with-icons"
+            - img "Link to section" [ref=e132]
+          - paragraph [ref=e135]:
+            - text: Use
+            - code [ref=e136]: iconLeft
+            - text: and
+            - code [ref=e137]: iconRight
+            - text: to render elements inside the input.
+          - figure [ref=e138]:
+            - button "Copy Text" [ref=e140]:
+              - img [ref=e141]
+            - code [ref=e146]:
+              - generic [ref=e147]: "import { Search, Eye } from \"lucide-react\";"
+              - generic [ref=e149]: "<Input iconLeft={<Search className=\"size-4\" />} placeholder=\"Search...\" />"
+              - generic [ref=e150]: "<Input iconRight={<Eye className=\"size-4\" />} placeholder=\"Password\" type=\"password\" />"
+          - heading "Error state Link to section" [level=2] [ref=e151]:
+            - link "Error state" [ref=e152] [cursor=pointer]:
+              - /url: "#error-state"
+            - img "Link to section" [ref=e153]
+          - paragraph [ref=e156]:
+            - text: Pass a string to
+            - code [ref=e157]: error
+            - text: to show both the error styling and an error message. Pass
+            - code [ref=e158]: "true"
+            - text: for styling only.
+          - generic [ref=e159]:
+            - generic [ref=e160]:
+              - textbox "you@example.com" [ref=e161]
+              - alert [ref=e162]: Please enter a valid email address
+            - textbox "Error styling only" [ref=e164]
+          - figure [ref=e165]:
+            - button "Copy Text" [ref=e167]:
+              - img [ref=e168]
+            - code [ref=e173]:
+              - generic [ref=e174]: <Input error="Please enter a valid email address" placeholder="you@example.com" />
+              - generic [ref=e175]: "<Input error={true} placeholder=\"Error styling, no message\" />"
+          - heading "Disabled Link to section" [level=2] [ref=e176]:
+            - link "Disabled" [ref=e177] [cursor=pointer]:
+              - /url: "#disabled"
+            - img "Link to section" [ref=e178]
+          - textbox "Disabled input" [disabled] [ref=e183]
+          - figure [ref=e184]:
+            - button "Copy Text" [ref=e186]:
+              - img [ref=e187]
+            - code [ref=e192]:
+              - generic [ref=e193]: <Input disabled placeholder="Disabled input" />
+          - heading "Token integration Link to section" [level=2] [ref=e194]:
+            - link "Token integration" [ref=e195] [cursor=pointer]:
+              - /url: "#token-integration"
+            - img "Link to section" [ref=e196]
+          - paragraph [ref=e199]: "Input reads these CSS variables from your token file:"
+          - table [ref=e201]:
+            - rowgroup [ref=e202]:
+              - row "CSS Variable Used for" [ref=e203]:
+                - columnheader "CSS Variable" [ref=e204]
+                - columnheader "Used for" [ref=e205]
+            - rowgroup [ref=e206]:
+              - row "--s-background Input background" [ref=e207]:
+                - cell "--s-background" [ref=e208]:
+                  - code [ref=e209]: "--s-background"
+                - cell "Input background" [ref=e210]
+              - row "--s-text Input text color" [ref=e211]:
+                - cell "--s-text" [ref=e212]:
+                  - code [ref=e213]: "--s-text"
+                - cell "Input text color" [ref=e214]
+              - row "--s-text-muted Placeholder color" [ref=e215]:
+                - cell "--s-text-muted" [ref=e216]:
+                  - code [ref=e217]: "--s-text-muted"
+                - cell "Placeholder color" [ref=e218]
+              - row "--s-border Default border" [ref=e219]:
+                - cell "--s-border" [ref=e220]:
+                  - code [ref=e221]: "--s-border"
+                - cell "Default border" [ref=e222]
+              - row "--s-border-style Border style" [ref=e223]:
+                - cell "--s-border-style" [ref=e224]:
+                  - code [ref=e225]: "--s-border-style"
+                - cell "Border style" [ref=e226]
+              - row "--s-primary Focus border and ring" [ref=e227]:
+                - cell "--s-primary" [ref=e228]:
+                  - code [ref=e229]: "--s-primary"
+                - cell "Focus border and ring" [ref=e230]
+              - row "--s-error Error state border and message" [ref=e231]:
+                - cell "--s-error" [ref=e232]:
+                  - code [ref=e233]: "--s-error"
+                - cell "Error state border and message" [ref=e234]
+              - row "--s-radius-input Border radius" [ref=e235]:
+                - cell "--s-radius-input" [ref=e236]:
+                  - code [ref=e237]: "--s-radius-input"
+                - cell "Border radius" [ref=e238]
+              - row "--s-duration-fast Focus transition" [ref=e239]:
+                - cell "--s-duration-fast" [ref=e240]:
+                  - code [ref=e241]: "--s-duration-fast"
+                - cell "Focus transition" [ref=e242]
+          - heading "Props Link to section" [level=2] [ref=e243]:
+            - link "Props" [ref=e244] [cursor=pointer]:
+              - /url: "#props"
+            - img "Link to section" [ref=e245]
+          - table [ref=e249]:
+            - rowgroup [ref=e250]:
+              - row "Prop Type Default Description" [ref=e251]:
+                - columnheader "Prop" [ref=e252]
+                - columnheader "Type" [ref=e253]
+                - columnheader "Default" [ref=e254]
+                - columnheader "Description" [ref=e255]
+            - rowgroup [ref=e256]:
+              - row "error string | boolean — Error state. String shows a message below the input." [ref=e257]:
+                - cell "error" [ref=e258]:
+                  - code [ref=e259]: error
+                - cell "string | boolean" [ref=e260]:
+                  - code [ref=e261]: string | boolean
+                - cell "—" [ref=e262]
+                - cell "Error state. String shows a message below the input." [ref=e263]
+              - row "iconLeft ReactNode — Icon or element on the left" [ref=e264]:
+                - cell "iconLeft" [ref=e265]:
+                  - code [ref=e266]: iconLeft
+                - cell "ReactNode" [ref=e267]:
+                  - code [ref=e268]: ReactNode
+                - cell "—" [ref=e269]
+                - cell "Icon or element on the left" [ref=e270]
+              - row "iconRight ReactNode — Icon or element on the right" [ref=e271]:
+                - cell "iconRight" [ref=e272]:
+                  - code [ref=e273]: iconRight
+                - cell "ReactNode" [ref=e274]:
+                  - code [ref=e275]: ReactNode
+                - cell "—" [ref=e276]
+                - cell "Icon or element on the right" [ref=e277]
+              - row "disabled boolean false Disable interactions" [ref=e278]:
+                - cell "disabled" [ref=e279]:
+                  - code [ref=e280]: disabled
+                - cell "boolean" [ref=e281]:
+                  - code [ref=e282]: boolean
+                - cell "false" [ref=e283]:
+                  - code [ref=e284]: "false"
+                - cell "Disable interactions" [ref=e285]
+              - row "className string — Additional CSS classes" [ref=e286]:
+                - cell "className" [ref=e287]:
+                  - code [ref=e288]: className
+                - cell "string" [ref=e289]:
+                  - code [ref=e290]: string
+                - cell "—" [ref=e291]
+                - cell "Additional CSS classes" [ref=e292]
+          - paragraph [ref=e293]:
+            - text: Plus all standard
+            - code [ref=e294]: <input>
+            - text: HTML attributes (
+            - code [ref=e295]: type
+            - text: ","
+            - code [ref=e296]: placeholder
+            - text: ","
+            - code [ref=e297]: value
+            - text: ","
+            - code [ref=e298]: onChange
+            - text: ", etc.)."
+          - heading "Accessibility Link to section" [level=2] [ref=e299]:
+            - link "Accessibility" [ref=e300] [cursor=pointer]:
+              - /url: "#accessibility"
+            - img "Link to section" [ref=e301]
+          - list [ref=e304]:
+            - listitem [ref=e305]:
+              - text: Uses native
+              - code [ref=e306]: <input>
+              - text: element
+            - listitem [ref=e307]:
+              - text: Pair with
+              - code [ref=e308]: <label>
+              - text: using matching
+              - code [ref=e309]: htmlFor
+              - text: /
+              - code [ref=e310]: id
+              - text: for screen reader support
+            - listitem [ref=e311]:
+              - text: Error state adds
+              - code [ref=e312]: aria-invalid="true"
+            - listitem [ref=e313]:
+              - text: Error message renders with
+              - code [ref=e314]: role="alert"
+            - listitem [ref=e315]:
+              - text: Disabled state uses the native
+              - code [ref=e316]: disabled
+              - text: attribute
+        - generic [ref=e317]:
+          - link "Card A composable card with header, content, and footer slots. Reads radius, shadow, and surface color from your token file." [ref=e318] [cursor=pointer]:
+            - /url: /docs/components/card
+            - generic [ref=e319]:
+              - img [ref=e320]
+              - paragraph [ref=e322]: Card
+            - paragraph [ref=e323]: A composable card with header, content, and footer slots. Reads radius, shadow, and surface color from your token file.
+          - link "Stack A flex container for vertical or horizontal stacking with configurable gap, alignment, and polymorphic rendering." [ref=e324] [cursor=pointer]:
+            - /url: /docs/layout/stack
+            - generic [ref=e325]:
+              - img [ref=e326]
+              - paragraph [ref=e328]: Stack
+            - paragraph [ref=e329]: A flex container for vertical or horizontal stacking with configurable gap, alignment, and polymorphic rendering.
+      - generic [ref=e331]:
+        - heading "On this page" [level=3] [ref=e332]:
+          - img [ref=e333]
+          - text: On this page
+        - generic [ref=e335]:
+          - link "Import" [ref=e336] [cursor=pointer]:
+            - /url: "#import"
+          - link "Preview" [ref=e337] [cursor=pointer]:
+            - /url: "#preview"
+          - link "Usage" [ref=e338] [cursor=pointer]:
+            - /url: "#usage"
+          - link "With label" [ref=e339] [cursor=pointer]:
+            - /url: "#with-label"
+          - link "With icons" [ref=e340] [cursor=pointer]:
+            - /url: "#with-icons"
+          - link "Error state" [ref=e341] [cursor=pointer]:
+            - /url: "#error-state"
+          - link "Disabled" [ref=e342] [cursor=pointer]:
+            - /url: "#disabled"
+          - link "Token integration" [ref=e343] [cursor=pointer]:
+            - /url: "#token-integration"
+          - link "Props" [ref=e344] [cursor=pointer]:
+            - /url: "#props"
+          - link "Accessibility" [ref=e345] [cursor=pointer]:
+            - /url: "#accessibility"
+  - button "Open Next.js Dev Tools" [ref=e351] [cursor=pointer]:
+    - img [ref=e352]
+  - alert [ref=e355]

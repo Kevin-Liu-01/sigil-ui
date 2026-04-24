@@ -547,7 +547,7 @@ function ProgressRow() {
 
 function PaginationRow() {
   return (
-    <div className="flex items-center justify-between gap-3">
+    <div className="flex flex-col gap-3">
       <Pagination currentPage={1} totalPages={3} siblingCount={1} />
       <SplitButton icon={<Calendar size={13} />}>Copilot</SplitButton>
     </div>

@@ -232,10 +232,10 @@ function InnerSection({
       style={{
         padding,
         borderTop: borderTop
-          ? "1px solid var(--s-border-muted)"
+          ? "1px solid var(--s-border)"
           : undefined,
         borderBottom: borderBottom
-          ? "1px solid var(--s-border-muted)"
+          ? "1px solid var(--s-border)"
           : undefined,
         ...style,
       }}
@@ -309,10 +309,10 @@ function StandaloneSection({
         style={{
           padding,
           borderTop: borderTop
-            ? "1px solid var(--s-border-muted)"
+            ? "1px solid var(--s-border)"
             : undefined,
           borderBottom: borderBottom
-            ? "1px solid var(--s-border-muted)"
+            ? "1px solid var(--s-border)"
             : undefined,
           background: "var(--s-background)",
         }}

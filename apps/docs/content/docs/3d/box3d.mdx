@@ -39,13 +39,13 @@ Each face can be styled independently, or use a single color that shifts lightne
 
 ```tsx
 {/* Uniform color with automatic face shading */}
-<Box3D color="var(--r-primary)" />
+<Box3D color="var(--s-primary)" />
 
 {/* Per-face colors */}
 <Box3D
   faces={{
-    front: "var(--r-primary)",
-    back: "var(--r-primary-muted)",
+    front: "var(--s-primary)",
+    back: "var(--s-primary-muted)",
     left: "oklch(0.60 0.15 280)",
     right: "oklch(0.70 0.15 280)",
     top: "oklch(0.75 0.10 280)",
@@ -96,10 +96,10 @@ Render content on any face:
 ## Wireframe mode
 
 ```tsx
-<Box3D variant="wireframe" color="var(--r-border)" />
+<Box3D variant="wireframe" color="var(--s-border)" />
 ```
 
-Renders only edges — no filled faces. Uses `--r-border` for line color and `--r-border-width-thin` for stroke.
+Renders only edges — no filled faces. Uses `--s-border` for line color and `--s-border-width-thin` for stroke.
 
 ## Glass mode
 
@@ -113,15 +113,15 @@ Semi-transparent faces with `backdrop-filter: blur()` for a frosted-glass cube.
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-primary` | Default face color |
-| `--r-surface` | Wireframe face background |
-| `--r-border` | Wireframe edge color |
-| `--r-border-width-thin` | Wireframe stroke |
-| `--r-shadow-lg` | Drop shadow beneath the box |
-| `--r-duration-normal` | Hover transition |
-| `--r-duration-slower` | Auto-rotate cycle |
-| `--r-ease-default` | Rotation easing |
-| `--r-ease-spring` | Interactive hover spring |
+| `--s-primary` | Default face color |
+| `--s-surface` | Wireframe face background |
+| `--s-border` | Wireframe edge color |
+| `--s-border-width-thin` | Wireframe stroke |
+| `--s-shadow-lg` | Drop shadow beneath the box |
+| `--s-duration-normal` | Hover transition |
+| `--s-duration-slower` | Auto-rotate cycle |
+| `--s-ease-default` | Rotation easing |
+| `--s-ease-spring` | Interactive hover spring |
 
 ## Props
 
@@ -131,7 +131,7 @@ Semi-transparent faces with `backdrop-filter: blur()` for a frosted-glass cube.
 | `width` | `number` | — | Box width (overrides `size`) |
 | `height` | `number` | — | Box height (overrides `size`) |
 | `depth` | `number` | — | Box depth (overrides `size`) |
-| `color` | `string` | `var(--r-primary)` | Face color |
+| `color` | `string` | `var(--s-primary)` | Face color |
 | `faces` | `Record<Face, string>` | — | Per-face color map |
 | `variant` | `"solid" \| "wireframe" \| "glass"` | `"solid"` | Rendering mode |
 | `interactive` | `boolean` | `false` | Follow cursor on hover |

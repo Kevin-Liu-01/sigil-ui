@@ -1,109 +1,210 @@
 "use client";
 
+import {
+  SigilSection,
+  SectionDivider,
+  GapPixelGrid,
+  GapPixelCell,
+  MonoLabel,
+  TabularValue,
+  DensityText,
+  AccentCTA,
+  FeaturedGrid,
+  Badge,
+} from "@sigil-ui/components";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
-import { TechFrame } from "@/components/landing/tech-frame";
-
-import { SigilSection, SectionDivider, Badge } from "@sigil-ui/components";
-import { ArrowUpRight } from "lucide-react";
 
 const DEMOS = [
-  { num: "01", name: "AI SaaS Landing", slug: "ai-saas", preset: "sigil", description: "Modern AI product landing with gradient hero, feature grid, and pricing tiers." },
-  { num: "02", name: "Dashboard", slug: "dashboard", preset: "cobalt", description: "Analytics dashboard with KPIs, charts, sidebar navigation, and data tables." },
-  { num: "03", name: "E-commerce", slug: "ecommerce", preset: "kova", description: "Product catalog with filters, cart, checkout flow, and order tracking." },
-  { num: "04", name: "Developer Docs", slug: "dev-docs", preset: "etch", description: "Documentation site with sidebar nav, code blocks, and API reference." },
-  { num: "05", name: "Startup", slug: "startup", preset: "flux", description: "Startup landing page with hero, testimonials, and CTA sections." },
-  { num: "06", name: "Portfolio", slug: "portfolio", preset: "noir", description: "Creative portfolio with project grid, about section, and contact form." },
-  { num: "07", name: "Blog", slug: "blog", preset: "strata", description: "Editorial blog with article grid, categories, and reading progress." },
-  { num: "08", name: "Agency", slug: "agency", preset: "onyx", description: "Agency site with case studies, team section, and service offerings." },
-  { num: "09", name: "CLI Tool", slug: "cli-tool", preset: "cipher", description: "Developer tool landing with terminal demo, installation guide, and API docs." },
-  { num: "10", name: "Playground", slug: "playground", preset: "dsgn", description: "Interactive sandbox with drag-and-drop canvas and live code editing." },
-  { num: "11", name: "Linear Clone", slug: "linear-clone", preset: "onyx", description: "Dark B2B SaaS landing inspired by Linear. Hero, logo cloud, bento grid, and cinematic CTA." },
-  { num: "12", name: "Vercel Clone", slug: "vercel-clone", preset: "crux", description: "Developer platform marketing inspired by Vercel. Clean hero, feature rows, stats, and split CTA." },
-  { num: "13", name: "Dedalus Clone", slug: "dedalus-clone", preset: "basalt", description: "Dark developer tool landing inspired by Dedalus. Purple accent, install command, FAQ, and code tabs." },
-  { num: "14", name: "VoidZero Clone", slug: "voidzero-clone", preset: "prism", description: "Open source tooling site inspired by VoidZero. Gradient banner, accent headlines, and ecosystem diagram." },
-  { num: "15", name: "Oxide Clone", slug: "oxide-clone", preset: "forge", description: "Industrial hardware site inspired by Oxide. Green accent, terminal hero, monospace throughout." },
-  { num: "16", name: "Vite Clone", slug: "vite-clone", preset: "helix", description: "Build tool landing inspired by Vite. Tabbed install, logo cloud, feature cards, and dark theme." },
-  { num: "17", name: "VitePlus Clone", slug: "viteplus-clone", preset: "arc", description: "Unified toolchain site inspired by VitePlus. Light theme, terminal demo, install section, workflow tabs." },
+  { num: "01", name: "AI SaaS Landing", slug: "ai-saas", preset: "sigil", description: "Modern AI product landing with gradient hero, feature grid, and pricing tiers.", color: "#9b99e8" },
+  { num: "02", name: "Dashboard", slug: "dashboard", preset: "cobalt", description: "Analytics dashboard with KPIs, charts, sidebar navigation, and data tables.", color: "#3b82f6" },
+  { num: "03", name: "E-commerce", slug: "ecommerce", preset: "kova", description: "Product catalog with filters, cart, checkout flow, and order tracking.", color: "#60a5fa" },
+  { num: "04", name: "Developer Docs", slug: "dev-docs", preset: "etch", description: "Documentation site with sidebar nav, code blocks, and API reference.", color: "#92400e" },
+  { num: "05", name: "Startup", slug: "startup", preset: "flux", description: "Startup landing page with hero, testimonials, and CTA sections.", color: "#ec4899" },
+  { num: "06", name: "Portfolio", slug: "portfolio", preset: "noir", description: "Creative portfolio with project grid, about section, and contact form.", color: "#d97706" },
+  { num: "07", name: "Blog", slug: "blog", preset: "strata", description: "Editorial blog with article grid, categories, and reading progress.", color: "#0f766e" },
+  { num: "08", name: "Agency", slug: "agency", preset: "onyx", description: "Agency site with case studies, team section, and service offerings.", color: "#f97316" },
+  { num: "09", name: "CLI Tool", slug: "cli-tool", preset: "cipher", description: "Developer tool landing with terminal demo, installation guide, and API docs.", color: "#22c55e" },
+  { num: "10", name: "Playground", slug: "playground", preset: "dsgn", description: "Interactive sandbox with drag-and-drop canvas and live code editing.", color: "#06b6d4" },
+  { num: "11", name: "Linear Clone", slug: "linear-clone", preset: "onyx", description: "Dark B2B SaaS landing inspired by Linear. Hero, logo cloud, bento grid, and cinematic CTA.", color: "#f97316" },
+  { num: "12", name: "Vercel Clone", slug: "vercel-clone", preset: "crux", description: "Developer platform marketing inspired by Vercel. Clean hero, feature rows, stats.", color: "#171717" },
+  { num: "13", name: "Dedalus Clone", slug: "dedalus-clone", preset: "basalt", description: "Dark developer tool landing inspired by Dedalus. Purple accent, install command.", color: "#a78bfa" },
+  { num: "14", name: "VoidZero Clone", slug: "voidzero-clone", preset: "prism", description: "Open source tooling site inspired by VoidZero. Gradient banner, accent headlines.", color: "#8b5cf6" },
+  { num: "15", name: "Oxide Clone", slug: "oxide-clone", preset: "forge", description: "Industrial hardware site inspired by Oxide. Green accent, terminal hero.", color: "#ea580c" },
+  { num: "16", name: "Vite Clone", slug: "vite-clone", preset: "helix", description: "Build tool landing inspired by Vite. Tabbed install, logo cloud.", color: "#06b6d4" },
+  { num: "17", name: "VitePlus Clone", slug: "viteplus-clone", preset: "arc", description: "Unified toolchain site inspired by VitePlus. Light theme, terminal demo.", color: "#7c3aed" },
 ];
 
+const INFO_CARDS = [
+  {
+    label: "Built with Sigil",
+    body: "Real components, not mockups. Every demo is a working app assembled from the same primitives you ship with.",
+  },
+  {
+    label: "One preset each",
+    body: "Each demo uses a different aesthetic preset — same components, completely different visual identity.",
+  },
+  {
+    label: "Open source",
+    body: "Every template is MIT licensed. Clone, customize, and deploy without restrictions.",
+  },
+];
+
+function DemoCard({ demo }: { demo: (typeof DEMOS)[number] }) {
+  return (
+    <a href={`/demos/${demo.slug}`} className="no-underline text-inherit">
+      <GapPixelCell className="group flex flex-col gap-3 p-5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]">
+        <div
+          className="w-full rounded-[2px]"
+          style={{ height: 8, background: demo.color }}
+        />
+
+        <TabularValue size="lg" muted>
+          {demo.num}
+        </TabularValue>
+
+        <DensityText role="nav" as="div" className="font-semibold">
+          {demo.name}
+        </DensityText>
+
+        <DensityText role="body" as="p" muted className="m-0 leading-relaxed">
+          {demo.description}
+        </DensityText>
+
+        <div className="flex items-center gap-2 mt-auto pt-3" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
+          <MonoLabel variant="accent" size="xs">
+            {demo.preset}
+          </MonoLabel>
+          <TabularValue size="xs" muted>
+            /demos/{demo.slug}
+          </TabularValue>
+        </div>
+      </GapPixelCell>
+    </a>
+  );
+}
+
+function FeaturedCard({ demo }: { demo: (typeof DEMOS)[number] }) {
+  return (
+    <a href={`/demos/${demo.slug}`} className="no-underline text-inherit">
+      <GapPixelCell className="group flex flex-col gap-4 p-8 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)] h-full">
+        <div
+          className="w-full rounded-[2px]"
+          style={{ height: 12, background: `linear-gradient(135deg, ${demo.color}, ${demo.color}88)` }}
+        />
+
+        <TabularValue size="xl" muted>
+          {demo.num}
+        </TabularValue>
+
+        <DensityText role="headline" as="h3" className="m-0">
+          {demo.name}
+        </DensityText>
+
+        <DensityText role="body" as="p" muted className="m-0 leading-relaxed max-w-md">
+          {demo.description}
+        </DensityText>
+
+        <div className="mt-auto pt-4">
+          <Badge size="sm" variant="outline">
+            {demo.preset}
+          </Badge>
+        </div>
+      </GapPixelCell>
+    </a>
+  );
+}
+
+function SideCard({ demo }: { demo: (typeof DEMOS)[number] }) {
+  return (
+    <a href={`/demos/${demo.slug}`} className="no-underline text-inherit">
+      <GapPixelCell className="group flex flex-col gap-3 p-6 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)] h-full">
+        <div
+          className="w-full rounded-[2px]"
+          style={{ height: 8, background: demo.color }}
+        />
+
+        <TabularValue size="lg" muted>
+          {demo.num}
+        </TabularValue>
+
+        <DensityText role="nav" as="h3" className="font-semibold m-0">
+          {demo.name}
+        </DensityText>
+
+        <DensityText role="body" as="p" muted className="m-0 leading-relaxed">
+          {demo.description}
+        </DensityText>
+
+        <div className="mt-auto pt-3">
+          <Badge size="sm" variant="outline">
+            {demo.preset}
+          </Badge>
+        </div>
+      </GapPixelCell>
+    </a>
+  );
+}
+
 export default function DemosPage() {
+  const [featured, side, ...remaining] = DEMOS;
+
   return (
     <SigilFrame>
       <LandingNavbar />
 
+      {/* Hero */}
       <SigilSection borderTop padding="96px 24px 48px">
-        <div className="mb-12">
-          <span className="font-[family-name:var(--s-font-mono)] text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--s-primary)] block mb-4">
+        <div className="mb-6">
+          <MonoLabel variant="accent" className="block mb-4">
             / Demos
-          </span>
+          </MonoLabel>
 
           <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
             17 Production Templates.
           </h1>
 
-          <p className="font-[family-name:var(--s-font-mono)] text-sm leading-relaxed text-[var(--s-text-secondary)] mb-6 max-w-[528px]">
-            Real sites built with Sigil. Each uses a different preset and demonstrates
-            how token-driven components adapt to any visual identity.
-          </p>
+          <DensityText role="body" as="p" muted className="max-w-[528px] leading-relaxed m-0">
+            Real sites built with Sigil. Each uses a different preset and
+            demonstrates how token-driven components adapt to any visual identity.
+          </DensityText>
         </div>
       </SigilSection>
 
-      <SectionDivider pattern="grid" size="sm" />
+      <SectionDivider pattern="grid" />
 
+      {/* Featured demos */}
       <SigilSection>
-        <TechFrame variant="brackets" extend={12} opacity={0.2} padding={8}>
-          <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(288px, 1fr))" }}>
-            {DEMOS.map((demo) => (
-              <a
-                key={demo.slug}
-                href={`/demos/${demo.slug}`}
-                className="group flex flex-col gap-3 p-6 no-underline text-inherit transition-all duration-200"
-                style={{
-                  border: "1px solid var(--s-border-muted)",
-                  background: "var(--s-surface)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = "var(--s-border-strong)";
-                  e.currentTarget.style.background = "var(--s-surface-elevated)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = "var(--s-border-muted)";
-                  e.currentTarget.style.background = "var(--s-surface)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                }}
-              >
-                <div className="flex items-start justify-between">
-                  <span className="font-[family-name:var(--s-font-mono)] text-2xl font-bold text-[var(--s-text-subtle)] tabular-nums tracking-[-0.02em]">
-                    {demo.num}
-                  </span>
-                  <ArrowUpRight
-                    size={16}
-                    className="text-[var(--s-text-muted)] group-hover:text-[var(--s-primary)] transition-colors"
-                  />
-                </div>
+        <FeaturedGrid featuredRatio="2fr" columns={3}>
+          <FeaturedCard demo={featured} />
+          <SideCard demo={side} />
+          {remaining.map((demo) => (
+            <DemoCard key={demo.slug} demo={demo} />
+          ))}
+        </FeaturedGrid>
+      </SigilSection>
 
-                <div>
-                  <span className="font-[family-name:var(--s-font-display)] text-base font-bold text-[var(--s-text)] block mb-1">
-                    {demo.name}
-                  </span>
-                  <p className="font-[family-name:var(--s-font-mono)] text-[11px] leading-relaxed text-[var(--s-text-muted)] m-0">
-                    {demo.description}
-                  </p>
-                </div>
+      <SectionDivider />
 
-                <div className="flex items-center gap-2 mt-auto pt-2" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
-                  <Badge size="sm" variant="outline">{demo.preset}</Badge>
-                  <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-subtle)]">
-                    {demo.slug}.sigil-ui.dev
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        </TechFrame>
+      {/* Info + CTA */}
+      <SigilSection padding="64px 24px">
+        <GapPixelGrid columns={{ md: 3 }}>
+          {INFO_CARDS.map((card) => (
+            <GapPixelCell key={card.label} className="p-6 flex flex-col gap-3">
+              <MonoLabel variant="accent">{card.label}</MonoLabel>
+              <DensityText role="body" as="p" muted className="m-0 leading-relaxed">
+                {card.body}
+              </DensityText>
+            </GapPixelCell>
+          ))}
+        </GapPixelGrid>
+
+        <div className="flex justify-center mt-12">
+          <AccentCTA size="lg" asChild>
+            <a href="/docs">Get Started with Sigil</a>
+          </AccentCTA>
+        </div>
       </SigilSection>
 
       <LandingFooter />

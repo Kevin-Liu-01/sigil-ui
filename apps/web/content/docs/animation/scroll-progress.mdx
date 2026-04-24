@@ -1,0 +1,38 @@
+---
+title: ScrollProgress
+description: Fixed progress bar that tracks page scroll position. Token-colored, accessible, and configurable.
+---
+
+## Import
+
+```tsx
+import { ScrollProgress } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ScrollProgress />
+```
+
+## Bottom position
+
+```tsx
+<ScrollProgress position="bottom" height={4} />
+```
+
+## Sticky (non-fixed)
+
+```tsx
+<ScrollProgress fixed={false} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `"top" \| "bottom"` | `"top"` | Bar position |
+| `height` | `number` | `3` | Bar height in px |
+| `fixed` | `boolean` | `true` | Use fixed positioning |
+
+Uses `var(--s-primary)` for the bar color. Accessible with `role="progressbar"` and `aria-valuenow`.

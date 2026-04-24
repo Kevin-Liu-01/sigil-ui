@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useId, type ComponentPropsWithoutRef } from "react";
+import { forwardRef, useId, type ComponentPropsWithoutRef, type ReactNode } from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { cn } from "../utils";
 import { useSigilSound } from "../sound-context";
@@ -24,12 +24,16 @@ export interface SwitchProps
   extends ComponentPropsWithoutRef<typeof SwitchPrimitive.Root> {
   size?: "sm" | "md" | "lg";
   label?: string;
+  /** Content rendered inside the thumb (e.g. an icon). */
+  thumbIcon?: ReactNode;
+  /** Additional classes applied to the thumb element. */
+  thumbClassName?: string;
 }
 
 export const Switch = forwardRef<
   React.ComponentRef<typeof SwitchPrimitive.Root>,
   SwitchProps
->(function Switch({ className, size = "md", label, id: idProp, onCheckedChange, ...props }, ref) {
+>(function Switch({ className, size = "md", label, id: idProp, onCheckedChange, thumbIcon, thumbClassName, ...props }, ref) {
   const autoId = useId();
   const id = idProp ?? autoId;
   const s = sizeMap[size];
@@ -56,12 +60,16 @@ export const Switch = forwardRef<
       <SwitchPrimitive.Thumb
         data-slot="switch-thumb"
         className={cn(
-          "pointer-events-none block rounded-[var(--s-radius-full,9999px)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)] ring-0",
+          "pointer-events-none rounded-[var(--s-radius-full,9999px)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)] ring-0",
           "transition-transform duration-[var(--s-duration-fast,150ms)]",
           "data-[state=unchecked]:translate-x-0",
+          thumbIcon != null ? "relative flex items-center justify-center" : "block",
           s.thumb,
+          thumbClassName,
         )}
-      />
+      >
+        {thumbIcon}
+      </SwitchPrimitive.Thumb>
     </SwitchPrimitive.Root>
   );
 

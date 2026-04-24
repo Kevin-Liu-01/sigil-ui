@@ -117,7 +117,7 @@ Card3D inherits Card's visual variants:
 ```tsx
 <Card3D glare maxTilt={10} scale={1.02}>
   <Stack gap={16} align="center" className="p-8">
-    <Diamond size={16} color="var(--r-primary)" />
+    <Diamond size={16} color="var(--s-primary)" />
     <h3 className="text-xl font-semibold">Pro</h3>
     <p className="text-4xl font-bold">$29<span className="text-base">/mo</span></p>
     <Stack gap={8}>
@@ -134,16 +134,16 @@ Card3D inherits Card's visual variants:
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-surface` | Card background |
-| `--r-surface-elevated` | Hover surface shift |
-| `--r-border` | Outlined variant border |
-| `--r-card-radius` | Border radius |
-| `--r-shadow-lg` | Resting elevation |
-| `--r-shadow-xl` | Hover elevation |
-| `--r-duration-fast` | Scale transition |
-| `--r-duration-normal` | Tilt reset transition |
-| `--r-ease-spring` | Tilt interpolation |
-| `--r-ease-default` | Reset easing |
+| `--s-surface` | Card background |
+| `--s-surface-elevated` | Hover surface shift |
+| `--s-border` | Outlined variant border |
+| `--s-card-radius` | Border radius |
+| `--s-shadow-lg` | Resting elevation |
+| `--s-shadow-xl` | Hover elevation |
+| `--s-duration-fast` | Scale transition |
+| `--s-duration-normal` | Tilt reset transition |
+| `--s-ease-spring` | Tilt interpolation |
+| `--s-ease-default` | Reset easing |
 
 ## Props
 
@@ -175,5 +175,5 @@ Requires `perspective` and `transform-style: preserve-3d` (all modern browsers).
 
 - `prefers-reduced-motion` disables tilt animation and holds the card flat
 - Content inside remains fully accessible regardless of tilt state
-- Focus ring renders at `--r-border-interactive` when focused via keyboard
+- Focus ring renders at `--s-border-interactive` when focused via keyboard
 - Keyboard users are not affected by the tilt effect

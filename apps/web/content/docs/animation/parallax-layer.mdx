@@ -1,0 +1,43 @@
+---
+title: ParallaxLayer
+description: Parallax offset wrapper that moves children at a different speed than the scroll. Creates depth and layered scroll effects.
+---
+
+## Import
+
+```tsx
+import { ParallaxLayer } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<ParallaxLayer speed={0.3}>
+  <img src="/bg.png" alt="" />
+</ParallaxLayer>
+```
+
+## Speed values
+
+- `speed={0.3}` — moves slower (background feel)
+- `speed={-0.2}` — moves faster (foreground feel)
+- `speed={0}` — no parallax
+
+```tsx
+<div className="relative">
+  <ParallaxLayer speed={0.5}>
+    <div className="absolute inset-0 bg-gradient-to-b from-primary/10" />
+  </ParallaxLayer>
+  <ParallaxLayer speed={-0.1}>
+    <h1>Foreground text</h1>
+  </ParallaxLayer>
+</div>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `speed` | `number` | `0.3` | Parallax multiplier |
+
+Uses `requestAnimationFrame` for smooth performance. Respects `prefers-reduced-motion`.

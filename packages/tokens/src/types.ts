@@ -35,16 +35,16 @@ export type ColorTokens = {
   readonly "surface-elevated": ThemedColor;
   readonly "surface-sunken"?: ThemedColor;
 
-  readonly primary: ColorValue;
-  readonly "primary-hover": ColorValue;
-  readonly "primary-muted": ColorValue;
-  readonly "primary-contrast"?: ColorValue;
-  readonly secondary: ColorValue;
-  readonly "secondary-hover"?: ColorValue;
-  readonly "secondary-muted"?: ColorValue;
-  readonly accent?: ColorValue;
-  readonly "accent-hover"?: ColorValue;
-  readonly "accent-muted"?: ColorValue;
+  readonly primary: ColorValue | ThemedColor;
+  readonly "primary-hover": ColorValue | ThemedColor;
+  readonly "primary-muted": ColorValue | ThemedColor;
+  readonly "primary-contrast"?: ColorValue | ThemedColor;
+  readonly secondary: ColorValue | ThemedColor;
+  readonly "secondary-hover"?: ColorValue | ThemedColor;
+  readonly "secondary-muted"?: ColorValue | ThemedColor;
+  readonly accent?: ColorValue | ThemedColor;
+  readonly "accent-hover"?: ColorValue | ThemedColor;
+  readonly "accent-muted"?: ColorValue | ThemedColor;
 
   readonly text: ThemedColor;
   readonly "text-secondary": ThemedColor;
@@ -59,17 +59,17 @@ export type ColorTokens = {
   readonly "border-interactive": ThemedColor;
 
   readonly success: ColorValue;
-  readonly "success-muted"?: ColorValue;
+  readonly "success-muted"?: ColorValue | ThemedColor;
   readonly warning: ColorValue;
-  readonly "warning-muted"?: ColorValue;
+  readonly "warning-muted"?: ColorValue | ThemedColor;
   readonly error: ColorValue;
-  readonly "error-muted"?: ColorValue;
+  readonly "error-muted"?: ColorValue | ThemedColor;
   readonly info: ColorValue;
-  readonly "info-muted"?: ColorValue;
+  readonly "info-muted"?: ColorValue | ThemedColor;
 
-  readonly "gradient-start"?: ColorValue;
-  readonly "gradient-end"?: ColorValue;
-  readonly glow?: ColorValue;
+  readonly "gradient-start"?: ColorValue | ThemedColor;
+  readonly "gradient-end"?: ColorValue | ThemedColor;
+  readonly glow?: ColorValue | ThemedColor;
 };
 
 // ---------------------------------------------------------------------------
@@ -207,6 +207,7 @@ export type GutterPattern =
   | "diagonal"
   | "diamond"
   | "horizontal"
+  | "horizontal-thin"
   | "horizontal-wide"
   | "hexagon"
   | "triangle"
@@ -225,6 +226,8 @@ export type SigilGridTokens = {
   readonly "card-radius": string;
   readonly "gutter-pattern"?: GutterPattern;
   readonly "margin-pattern"?: GutterPattern;
+  readonly "gutter-border"?: string;
+  readonly "gutter-visible"?: boolean;
 };
 
 // ---------------------------------------------------------------------------

@@ -56,6 +56,7 @@ const FOOTER_COLS = [
   {
     group: "Resources",
     links: [
+      { label: "Walkthrough", href: "/walkthrough" },
       { label: "Token Guide", href: "/docs/theming" },
       { label: "Preset API", href: "/docs/cli" },
       { label: "Agent Integration", href: "/docs" },
@@ -79,11 +80,10 @@ const SOCIAL_LINKS = [
   { icon: <DiscordIcon />, href: "#", label: "Discord" },
 ];
 
-export function LandingFooter() {
-  return (
-    <SigilSection as="footer" borderTop showCrosses padding="48px 24px 48px">
+export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
+  const footerContent = (
+    <>
       <div className="grid grid-cols-2 md:grid-cols-6 gap-12">
-        {/* Brand column */}
         <div className="col-span-2">
           <div className="flex items-center gap-2 mb-3">
             <NavbarLogo />
@@ -110,7 +110,6 @@ export function LandingFooter() {
           </div>
         </div>
 
-        {/* Link columns */}
         {FOOTER_COLS.map((col) => (
           <div key={col.group}>
             <span className="s-mono block text-[10px] font-semibold uppercase tracking-[0.08em] text-[var(--s-text-subtle)] mb-4">
@@ -131,7 +130,7 @@ export function LandingFooter() {
         ))}
       </div>
 
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-12 pt-6 border-t border-[var(--s-border-muted)]">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-12 pt-6 border-t border-[var(--s-border)]">
         <span className="s-mono text-[11px] text-[var(--s-text-subtle)]">
           &copy; 2026 Sigil UI. MIT License.
         </span>
@@ -145,6 +144,28 @@ export function LandingFooter() {
           </a>
         </span>
       </div>
+    </>
+  );
+
+  if (fullBleed) {
+    return (
+      <footer className="w-full border-t border-[var(--s-border)] bg-[var(--s-surface)]">
+        <div
+          className="mx-auto w-full"
+          style={{
+            maxWidth: "var(--s-content-max, 1200px)",
+            padding: "var(--s-footer-py, 48px) var(--s-page-margin, 24px)",
+          }}
+        >
+          {footerContent}
+        </div>
+      </footer>
+    );
+  }
+
+  return (
+    <SigilSection as="footer" borderTop showCrosses padding="48px 24px 48px">
+      {footerContent}
     </SigilSection>
   );
 }

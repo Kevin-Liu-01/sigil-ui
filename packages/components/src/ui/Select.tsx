@@ -40,7 +40,7 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
           "flex h-[var(--s-input-height,36px)] w-full items-center justify-between gap-2",
           "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
           "border bg-[var(--s-background)]",
-          "px-3 text-sm text-[var(--s-text)]",
+          "px-3",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "focus:outline-none focus:ring-1",
           "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",
@@ -134,7 +134,7 @@ export const SelectItem = forwardRef<
     <SelectPrimitive.Item
       ref={ref}
       className={cn(
-        "relative flex h-8 w-full cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 text-sm outline-none",
+        "relative flex h-8 w-full cursor-default select-none items-center rounded-[var(--s-radius-sm,4px)] pl-8 pr-2 outline-none",
         "transition-colors duration-[var(--s-duration-fast,100ms)]",
         "focus:bg-[var(--s-background)] focus:text-[var(--s-text)]",
         "data-[disabled]:pointer-events-none data-[disabled]:opacity-50",

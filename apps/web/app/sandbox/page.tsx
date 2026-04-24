@@ -61,7 +61,7 @@ export default function SandboxPage() {
   if (!currentPreset) {
     return (
       <div className="h-dvh flex items-center justify-center bg-[var(--s-background)] text-[var(--s-text-muted)]">
-        <div className="flex items-center gap-2 text-sm font-mono">
+        <div className="flex flex-col items-center gap-3">
           <svg className="animate-spin w-4 h-4" viewBox="0 0 16 16" fill="none">
             <circle
               cx="8"
@@ -73,7 +73,9 @@ export default function SandboxPage() {
               strokeDashoffset="7"
             />
           </svg>
-          Loading preset...
+          <span className="font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.2em] text-[var(--s-text-muted)]">
+            Loading preset...
+          </span>
         </div>
       </div>
     );

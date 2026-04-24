@@ -9,6 +9,53 @@ import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
 
+import {
+  ComponentPreview,
+  Button,
+  Input,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Badge,
+  Switch,
+  Checkbox,
+  Label,
+  Separator,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Avatar,
+  Stack,
+} from "@/components/mdx-components";
+
+const mdxComponents = {
+  ...defaultMdxComponents,
+  ComponentPreview,
+  Button,
+  Input,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+  Badge,
+  Switch,
+  Checkbox,
+  Label,
+  Separator,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Avatar,
+  Stack,
+};
+
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
 }) {
@@ -25,7 +72,7 @@ export default async function Page(props: {
       <DocsTitle>{data.title}</DocsTitle>
       <DocsDescription>{data.description}</DocsDescription>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX components={mdxComponents} />
       </DocsBody>
     </DocsPage>
   );

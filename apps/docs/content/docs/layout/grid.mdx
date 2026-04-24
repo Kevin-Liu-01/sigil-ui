@@ -22,7 +22,7 @@ import { SigilGrid, SigilGridCell } from "@sigil-ui/components";
 </SigilGrid>
 ```
 
-The grid renders a subtle dot pattern at cell intersections using the `--r-border` color. This is the signature visual of Sigil UI — a calibration-grid aesthetic that emerges from the token system.
+The grid renders a subtle dot pattern at cell intersections using the `--s-border` color. This is the signature visual of Sigil UI — a calibration-grid aesthetic that emerges from the token system.
 
 ## Columns
 
@@ -41,14 +41,14 @@ The grid renders a subtle dot pattern at cell intersections using the `--r-borde
 <SigilGrid columns={3} gap={32}>...</SigilGrid>
 
 {/* CSS variable */}
-<SigilGrid columns={3} gap="var(--r-rail-gap)">...</SigilGrid>
+<SigilGrid columns={3} gap="var(--s-rail-gap)">...</SigilGrid>
 ```
 
-When no `gap` is specified, the grid uses `--r-grid-cell` (default `48px`).
+When no `gap` is specified, the grid uses `--s-grid-cell` (default `48px`).
 
 ## Cell hover
 
-`SigilGridCell` includes a built-in hover effect that highlights the cell with `--r-surface-elevated`:
+`SigilGridCell` includes a built-in hover effect that highlights the cell with `--s-surface-elevated`:
 
 ```tsx
 <SigilGrid columns={3}>
@@ -71,7 +71,7 @@ A common layout for landing pages:
 <SigilGrid columns={3} gap={24}>
   <SigilGridCell>
     <Stack gap={8}>
-      <TokensIcon className="size-6 text-[var(--r-primary)]" />
+      <TokensIcon className="size-6 text-[var(--s-primary)]" />
       <h3>One token file</h3>
       <p>Change once, update everywhere. Every component reads
       from the same source.</p>
@@ -79,7 +79,7 @@ A common layout for landing pages:
   </SigilGridCell>
   <SigilGridCell>
     <Stack gap={8}>
-      <AgentIcon className="size-6 text-[var(--r-primary)]" />
+      <AgentIcon className="size-6 text-[var(--s-primary)]" />
       <h3>Agent-friendly</h3>
       <p>Your agent edits one file. No scattered Tailwind
       classes to hunt down.</p>
@@ -87,7 +87,7 @@ A common layout for landing pages:
   </SigilGridCell>
   <SigilGridCell>
     <Stack gap={8}>
-      <PresetIcon className="size-6 text-[var(--r-primary)]" />
+      <PresetIcon className="size-6 text-[var(--s-primary)]" />
       <h3>Ship a preset</h3>
       <p>Ship a preset, not a Tailwind config. Share complete
       themes as typed objects.</p>
@@ -113,12 +113,12 @@ You can use `SigilGrid` alone as a CSS Grid without the cell hover wrapper:
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-grid-cell` | Default gap value |
-| `--r-border` | Dot pattern color |
-| `--r-surface-elevated` | Cell hover background |
-| `--r-cross-arm` | Cross mark arm length (for custom sigil overlays) |
-| `--r-cross-stroke` | Cross mark stroke width |
-| `--r-rail-gap` | Alternative gap value for rail-aligned layouts |
+| `--s-grid-cell` | Default gap value |
+| `--s-border` | Dot pattern color |
+| `--s-surface-elevated` | Cell hover background |
+| `--s-cross-arm` | Cross mark arm length (for custom sigil overlays) |
+| `--s-cross-stroke` | Cross mark stroke width |
+| `--s-rail-gap` | Alternative gap value for rail-aligned layouts |
 
 ## Props
 
@@ -127,7 +127,7 @@ You can use `SigilGrid` alone as a CSS Grid without the cell hover wrapper:
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `columns` | `2 \| 3 \| 4 \| 5 \| 6` | `3` | Number of grid columns |
-| `gap` | `string \| number` | `var(--r-grid-cell)` | Gap between cells |
+| `gap` | `string \| number` | `var(--s-grid-cell)` | Gap between cells |
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `ReactNode` | — | Grid content |
 
@@ -146,4 +146,4 @@ Plus all standard `<div>` HTML attributes.
 
 - Semantic `<div>` elements — add `role="list"` and `role="listitem"` if the grid represents a list
 - Keyboard focus follows natural document order
-- Hover effect uses `transition-colors` with `--r-duration-normal` for reduced-motion compliance
+- Hover effect uses `transition-colors` with `--s-duration-normal` for reduced-motion compliance

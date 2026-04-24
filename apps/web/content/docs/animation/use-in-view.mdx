@@ -1,0 +1,49 @@
+---
+title: useInView
+description: Lightweight IntersectionObserver hook. Returns a ref and visibility boolean for scroll-triggered animations.
+---
+
+## Import
+
+```tsx
+import { useInView } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+function MyComponent() {
+  const { ref, inView } = useInView();
+
+  return (
+    <div ref={ref} style={{ opacity: inView ? 1 : 0 }}>
+      {inView ? "Visible!" : "Not visible"}
+    </div>
+  );
+}
+```
+
+## Options
+
+```tsx
+const { ref, inView } = useInView({
+  threshold: 0.25,
+  rootMargin: "0px 0px -100px 0px",
+  once: false,
+});
+```
+
+## Options
+
+| Option | Type | Default | Description |
+|---|---|---|---|
+| `threshold` | `number` | `0.15` | Visibility threshold (0–1) |
+| `rootMargin` | `string` | `"0px 0px -60px 0px"` | Observer root margin |
+| `once` | `boolean` | `true` | Stay visible after first trigger |
+
+## Returns
+
+| Property | Type | Description |
+|---|---|---|
+| `ref` | `RefObject<T>` | Attach to target element |
+| `inView` | `boolean` | Whether element is in viewport |

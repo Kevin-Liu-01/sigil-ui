@@ -48,15 +48,15 @@ export const defaultTokens: SigilTokens = {
 
     border: {
       light: "oklch(0.90 0 0)",
-      dark: "oklch(0.22 0 0)",
+      dark: "oklch(0.25 0.01 280)",
     },
     "border-muted": {
       light: "oklch(0.94 0 0)",
-      dark: "oklch(0.18 0 0)",
+      dark: "oklch(0.20 0.01 280)",
     },
     "border-strong": {
       light: "oklch(0.80 0 0)",
-      dark: "oklch(0.35 0 0)",
+      dark: "oklch(0.35 0.01 280)",
     },
     "border-interactive": {
       light: "oklch(0.65 0.15 280)",
@@ -111,6 +111,8 @@ export const defaultTokens: SigilTokens = {
     "cross-stroke": "1.5px",
     "rail-gap": "24px",
     "card-radius": "10px",
+    "gutter-border": "1px solid",
+    "gutter-visible": true,
   },
 
   radius: {

@@ -1,21 +1,278 @@
-# Sigil UI
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/logo-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset=".github/logo-light.svg">
+    <img alt="Sigil UI" src=".github/logo-light.svg" width="80">
+  </picture>
+</p>
 
-> Change the tokens. Everything updates.
+<h1 align="center">Sigil UI</h1>
 
-An opinionated design language and token-driven component system. 70+ components. 31 presets. One markdown file controls your entire visual identity. Built for AI agents — because they're building the UI whether we like it or not.
+<p align="center">
+  <strong>Change the tokens. Everything updates.</strong>
+</p>
 
-**[Read the Manifesto →](MANIFESTO.md)**
+<p align="center">
+  A token-driven design system where visual identity is a first-class primitive.<br>
+  150+ components. 34 presets. 259 configurable tokens.<br>
+  One file controls your entire visual identity — and AI agents can read, reason about, and modify it.
+</p>
 
-## Why Sigil?
+<p align="center">
+  <a href="MANIFESTO.md"><strong>Read the Manifesto →</strong></a>
+</p>
 
-Every AI-coded site looks the same — and it's because design systems give agents components without opinions. Sigil is different: visual identity is a first-class primitive, encoded in a structured token spec that agents can read, reason about, and modify. The agent doesn't need taste. The preset has taste.
+---
+
+## The Problem
+
+Every AI-coded site looks the same. Agents copy components, apply defaults, produce the median. Design systems give agents *components* without *opinions*. The result: a thousand sites that all feel like "AI-generated startup template #4."
 
 ```
-others:   copy components → manually edit each one → drift → everything looks the same
-Sigil:    install preset → all components inherit → agent edits token doc → distinct visual identity
+The status quo                              Sigil
+─────────────                               ─────
+copy components                             install preset
+  ↓                                           ↓
+manually edit each one                      all 150+ components inherit identity
+  ↓                                           ↓
+drift, inconsistency                        agent edits ONE token file
+  ↓                                           ↓
+everything looks the same                   distinct visual identity
 ```
 
-**The core innovation:** a single `sigil.tokens.md` file that an AI agent can read and edit. 259 configurable tokens across 16 categories. All components consume tokens from this file. Swap presets, and every component updates — not a theme toggle, a different design language.
+**The core innovation:** a single `sigil.tokens.md` file that both humans and AI agents can read and edit. 259 tokens across 20 categories. Every component reads from this file. Swap presets, and every component updates — not a theme toggle, a different *design language*.
+
+---
+
+## How It Works
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                                                                     │
+│   sigil.tokens.md              Human or AI agent edits this file    │
+│   (markdown)                   259 tokens, 20 categories            │
+│                                                                     │
+│         │  parseMarkdownTokens()                                    │
+│         ▼                                                           │
+│                                                                     │
+│   SigilTokens                  TypeScript object with full types    │
+│   (typed object)               Validated, exhaustive, composable    │
+│                                                                     │
+│         │  compileToCss() / compileToTailwind()                     │
+│         ▼                                                           │
+│                                                                     │
+│   CSS Custom Properties        --s-primary, --s-radius-md, ...     │
+│   (:root + .dark)              Light + dark mode, OKLCH colors     │
+│                                                                     │
+│         │  consumed by                                              │
+│         ▼                                                           │
+│                                                                     │
+│   150+ Components              Read var(--s-*), never hardcode     │
+│   (React + Tailwind v4)        Identity flows DOWN, never UP       │
+│                                                                     │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+To change the visual output, edit the **top** of this chain — never the bottom.
+
+---
+
+## Sigil vs. Everything Else
+
+### Architecture Comparison
+
+| | shadcn/ui | Chakra UI | Radix Themes | MUI | **Sigil UI** |
+|---|---|---|---|---|---|
+| **Identity model** | None (copy-paste) | Theme object | Theme config | Theme provider | **Token-driven presets** |
+| **Agent interface** | None | None | None | None | **`sigil.tokens.md`** |
+| **Change primary color** | Edit every file | Edit theme | Edit config | Edit theme | **Edit 1 token** |
+| **Complete visual overhaul** | Rewrite everything | Painful | Partial | Painful | **`sigil preset noir`** |
+| **Curated identities** | 0 | 0 | 0 | 0 | **34 presets** |
+| **Configurable tokens** | ~0 | ~40 | ~30 | ~50 | **259** |
+| **Token categories** | 0 | 5 | 4 | 6 | **20** |
+| **Per-component tokens** | No | Partial | No | Partial | **Yes (buttons, cards, inputs, nav, code, ...)** |
+| **Motion tokens** | No | No | No | No | **Yes (durations, easings, scales, staggers)** |
+| **Background/pattern tokens** | No | No | No | No | **Yes (dots, grid, noise, gradients, ...)** |
+| **Color space** | Hex/HSL | Hex | P3 | Hex | **OKLCH** |
+| **Diagram components** | 0 | 0 | 0 | 0 | **28** |
+| **3D components** | 0 | 0 | 0 | 0 | **8** |
+| **Animation components** | 0 | 2 | 0 | 2 | **20** |
+
+### What "Token-Driven" Actually Means
+
+Other systems call themselves "themeable." Here's the difference:
+
+```
+shadcn/ui: "Change your primary color"
+  → Find bg-primary in 40+ files
+  → Hope you got them all
+  → Dark mode? Do it again
+  → Hover states? Again
+  → Focus rings? Again
+
+Sigil: "Change your primary color"
+  → --s-primary: oklch(0.65 0.25 275)
+  → Done. Buttons, links, focus rings, badges,
+    gradients, glows — all updated. Light + dark.
+```
+
+```
+Other systems: "I want a brutalist aesthetic"
+  → Spend 2 days rewriting components
+  → Adjust radius (every file), borders (every file),
+    shadows (every file), fonts (every file), spacing...
+  → Result: still looks like the old system with sharp corners
+
+Sigil: "I want a brutalist aesthetic"
+  → npx sigil preset anvil
+  → 259 tokens change: radius → 0, borders → thick,
+    shadows → harsh, fonts → Space Grotesk, spacing → dense,
+    motion → snappy, patterns → grid lines
+  → Result: genuinely different visual identity
+```
+
+### Component Coverage
+
+| Category | Count | Highlights |
+|----------|-------|------------|
+| **Layout** | 27 | AppShell, PageGrid, VoronoiBento, SigilGrid, SectionDivider, Banner |
+| **Core UI** | 65 | DataTable, Stepper, ColorPicker, TreeView, SignaturePad, RatingGroup |
+| **Overlays** | 12 | Command palette, Drawer, ContextMenu, HoverCard, PreviewCard |
+| **Navigation** | 9 | Sidebar, NavigationMenu, Menubar, Toolbar, SocialIcons |
+| **Diagrams** | 28 | Sankey, Mermaid, Globe, Isometric, Pipeline, HubSpoke, Waterfall |
+| **Sections** | 21 | Hero, Features, Pricing, FAQ, Bento, CodeShowcase, Blueprint |
+| **Marketing** | 13 | PricingTiers, CostCalculator, BlogGrid, FeatureGrid, LogoBar |
+| **Animation** | 20 | TextReveal, WordRotate, TypeWriter, Marquee, Parallax, BlurFade |
+| **3D** | 8 | IsometricScene, Card3D, FloatingUI, Box3DGrid |
+| **Shapes** | 5 | Hexagon, Diamond, Triangle, Diagonal |
+| **Patterns** | 4 | Tessellation, GrainGradient, Cross, Pattern (14 variants) |
+| **Playbook** | 9 | GapPixelGrid, FrostedPanel, AccentCTA, DensityText, BorderStack |
+| **Total** | **150+** | |
+
+---
+
+## Token System (259 Fields, 20 Categories)
+
+Every visual property in the system is a token. No exceptions.
+
+```
+Token Coverage Map
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ colors          ████████████████████████████████████  35 fields
+ typography      ███████████████████████████████       31
+ spacing         █████████████████████████             25
+ layout          ██████████████████████                22
+ headings        ███████████████                       15
+ radius          ████████████████                      16
+ shadows         ██████████████                        14
+ motion          ██████████████████                    18
+ code            ██████████████                        14
+ inputs          █████████████                         13
+ navigation      ████████████                          12
+ borders         ███████████                           11
+ cards           ██████████                            10
+ buttons         █████████                              9
+ backgrounds     █████████                              9
+ sigil grid      █████                                  5
+ alignment       varies                              ext.
+ sections        varies                              ext.
+ dividers        varies                              ext.
+ grid visuals    varies                              ext.
+                                                  ──────
+                                                  259 fields
+```
+
+| Category | Fields | Controls |
+|----------|--------|----------|
+| `colors` | 35 | Backgrounds, surfaces, text (5 levels), borders (4 levels), brand, status, gradients, glow |
+| `typography` | 31 | Font stacks (display/body/mono), size scale (xs→6xl), weight scale, leading, tracking |
+| `spacing` | 25 | Base scale, per-component padding (button, card, input, badge, section, navbar, modal, tooltip) |
+| `layout` | 22 | Content widths (narrow/default/wide), page margins, gutters, grid, bento, sidebar, stack gaps |
+| `headings` | 15 | h1–h4 + display: size, weight, tracking, leading for each |
+| `radius` | 16 | Scale (none → full) + per-component (button, card, input, badge, modal, popover, tooltip, image) |
+| `shadows` | 14 | Scale + glow, colored, inner, per-component (card, button, dropdown, modal) |
+| `motion` | 18 | Duration scale (instant→slowest), easing curves (5), hover/press scale, stagger intervals |
+| `code` | 14 | Font, sizing, colors for syntax highlighting (comments, keywords, strings, numbers, functions) |
+| `inputs` | 13 | Heights (sm/md/lg), focus ring, placeholder, error state, labels, helpers |
+| `navigation` | 12 | Navbar (height, blur, border, opacity), link style, breadcrumb, sidebar, pagination |
+| `borders` | 11 | Width scale (none→thick), style, per-component (card, button, input, divider) |
+| `cards` | 10 | Border style/width, hover effect, padding, title/description sizing, background, shadow |
+| `buttons` | 9 | Font weight/transform/spacing, hover effect, active scale, icon gap, min-width |
+| `backgrounds` | 9 | Pattern (14 types), opacity, noise, gradient (type/angle), hero pattern, section divider |
+| `sigil` | 5 | Grid cell, cross arm/stroke, rail gap, card radius |
+
+All colors use **OKLCH** — perceptually uniform, P3-gamut-ready: `oklch(L C H)`.
+
+---
+
+## Preset System (34 Presets)
+
+One command changes all 259 tokens at once. Not a theme toggle — a different *design language*.
+
+### Structural / Precision
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **sigil** | Cross marks, grid lines, engineered | Nacelle | Indigo |
+| **kova** | Hard-forged clarity, disciplined | Inter | Teal |
+| **cobalt** | Blue metallic, chemical precision | Inter | Cobalt |
+| **helix** | DNA spiral, biological precision | Inter | Teal |
+| **hex** | Hexagonal grid, geometric | Space Grotesk | Amber |
+
+### Minimal / Clean
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **crux** | Maximum whitespace, decisive | Nacelle | Neutral |
+| **axiom** | Mathematical purity | Inter | Blue |
+| **arc** | Smooth arcs, flowing forms | Satoshi | Sky |
+| **mono** | Terminal aesthetic, zero decoration | Space Mono | Neutral |
+
+### Dark / Cinematic
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **basalt** | Volcanic dark stone | Inter | Slate |
+| **onyx** | Ultra-dark premium | GT America | Purple |
+| **fang** | Aggressive contrast, fierce | Space Grotesk | Red |
+| **obsid** | Volcanic glass, mirror-dark | GT America | Slate |
+| **cipher** | Encrypted aesthetic, crypto-noir | Space Grotesk | Green |
+| **noir** | Film noir, warm amber highlights | GT America | Amber |
+
+### Colorful / Expressive
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **flux** | Dynamic gradients, energetic | Satoshi | Blue-Purple |
+| **shard** | Crystalline fragments | Satoshi | Cyan |
+| **prism** | Rainbow celebration, playful | Satoshi | Rainbow |
+| **vex** | Puzzle-like, intricate | Satoshi | Fuchsia |
+| **dsgn** | Design tool, Figma-inspired | Inter | Purple |
+| **dusk** | Twilight, warm-to-cool sunset | Satoshi | Rose-Violet |
+
+### Editorial / Typographic
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **etch** | Acid-etched, engraved | Söhne | Emerald |
+| **rune** | Mystical marks, arcane | Fraunces | Violet |
+| **strata** | Geological layers, earthy | Söhne | Amber |
+| **glyph** | Letterform-focused | Söhne | Indigo |
+| **mrkr** | Hand-drawn, sketch aesthetic | Fraunces | Black |
+
+### Industrial / Technical
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **alloy** | Fused metals, warm steel | Space Grotesk | Copper |
+| **forge** | Molten heat, industrial craft | Space Grotesk | Orange |
+| **anvil** | Heavy, weighty foundations | Space Grotesk | Iron |
+| **rivet** | Mechanical, utilitarian | Inter | Amber |
+| **brass** | Vintage instrument, patina | Fraunces | Gold |
+
+### Edgeless / Open
+| Preset | Mood | Display Font | Primary |
+|--------|------|-------------|---------|
+| **vast** | Expansive open space, warm editorial | Fraunces | Terracotta |
+| **aura** | Ethereal dark, luminous violet glow | General Sans | Violet |
+| **field** | Clean utilitarian, monospace-forward | Space Grotesk | Green |
+
+---
 
 ## Quick Start
 
@@ -25,180 +282,128 @@ Sigil:    install preset → all components inherit → agent edits token doc �
 npx create-sigil-app
 ```
 
-Interactive bootstrapper that walks you through:
-1. **Template** — AI SaaS, docs, dashboard, portfolio, ecommerce, blog, agency, startup, or minimal
-2. **Preset** — Browse 31 curated presets organized by category
-3. **Fonts** — Customize display, body, and mono fonts
-4. **Features** — GSAP, Motion, Radix primitives, Sigil Grid
-5. **Agent instructions** — Generate `.sigil/AGENTS.md` for AI coding agents
-
-Creates a Next.js app with Sigil pre-configured, dependencies installed, git initialized.
+Interactive bootstrapper: pick a template (AI SaaS, docs, dashboard, portfolio, ecommerce, blog, agency, startup), choose a preset, customize fonts, select features, generate agent instructions. Creates a Next.js app with Sigil pre-configured.
 
 ### Existing project
 
 ```bash
-npx sigil init
-```
-
-Rich interactive questionnaire that:
-- Detects your framework (Next.js, Remix, Vite, Astro), package manager, TypeScript, and Tailwind
-- Asks what you're building (SaaS, marketing, docs, blog, portfolio, etc.)
-- Recommends presets based on your project type
-- Lets you customize fonts and primary color
-- Selects features and starter components
-- Generates AI agent instructions
-
-```bash
+npx sigil init          # Interactive setup — detects framework, recommends presets
 npx sigil add button card input dialog
+npx sigil preset noir   # Swap visual identity in one command
 ```
 
-Copy components into your project. They automatically consume your tokens.
+---
 
-```bash
-npx sigil preset noir
-```
+## CLI
 
-Swap your entire visual identity in one command.
+| Command | What it does |
+|---------|-------------|
+| `sigil init` | Interactive setup: detects framework, asks about use case, recommends presets, generates agent instructions |
+| `sigil add <components>` | Copy components into your project (they read from tokens automatically) |
+| `sigil add --all` | Add all available components |
+| `sigil preset list` | Browse all 34 presets by category |
+| `sigil preset <name>` | Switch to a different preset (regenerates token CSS) |
+| `sigil preset create` | Scaffold a custom preset with base selection, color, and font prompts |
+| `sigil diff` | Show token changes since last sync |
+| `sigil doctor` | Validate project health (config, tokens, components, deps, CSS import, preset) |
+
+---
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| `@sigil-ui/tokens` | Design token system — the core differentiator |
-| `@sigil-ui/components` | 70+ styled components consuming tokens |
-| `@sigil-ui/primitives` | Headless behavior layer (Radix-based) |
-| `@sigil-ui/presets` | 31 curated preset bundles |
-| `@sigil-ui/cli` | CLI for init, add, preset management |
-| `create-sigil-app` | Project bootstrapper |
+| `@sigil-ui/tokens` | Token system — types, defaults, compiler, markdown parser. The core differentiator. |
+| `@sigil-ui/components` | 150+ styled components consuming tokens via CSS custom properties |
+| `@sigil-ui/primitives` | Headless behavior layer (Radix-based, 16 primitives) |
+| `@sigil-ui/presets` | 34 curated preset bundles (259 tokens each) |
+| `@sigil-ui/cli` | CLI for init, add, preset management, diff, doctor |
+| `create-sigil-app` | Project bootstrapper with template selection |
 
-## Presets (31)
+---
 
-Organized into 6 categories:
+## Agent-First Design
 
-### Structural / Precision
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **sigil** | Cross marks, grid lines, engineered | Nacelle | Indigo |
-| **kova** | Hard-forged clarity, disciplined | Inter | Teal |
-| **cobalt** | Blue metallic, chemical precision | Inter | Cobalt |
-| **helix** | DNA spiral, biological precision | Inter | Teal |
-| **hex** | Hexagonal grid, geometric | Space Grotesk | Amber |
+Sigil is built for AI agents to operate. Not agent-compatible. Agent-native.
 
-### Minimal / Clean
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **crux** | Maximum whitespace, decisive | Nacelle | Neutral |
-| **axiom** | Mathematical purity | Inter | Blue |
-| **arc** | Smooth arcs, flowing forms | Satoshi | Sky |
-| **mono** | Terminal aesthetic, zero decoration | Space Mono | Neutral |
+| Feature | Purpose |
+|---------|---------|
+| `sigil.tokens.md` | Markdown file agents can read, reason about, and edit |
+| `AGENTS.md` | Comprehensive agent instructions at repo root |
+| `.sigil/AGENTS.md` | Project-specific agent instructions (generated by `sigil init`) |
+| Agent skills | Pre-built skills for Cursor, Claude Code, and Codex |
+| `sigil docs <component>` | Component docs as agent-readable markdown |
 
-### Dark / Cinematic
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **basalt** | Volcanic dark stone | Inter | Slate |
-| **onyx** | Ultra-dark premium | GT America | Purple |
-| **fang** | Aggressive contrast, fierce | Space Grotesk | Red |
-| **obsid** | Volcanic glass, mirror-dark | GT America | Slate |
-| **cipher** | Encrypted aesthetic, crypto-noir | Space Grotesk | Green |
-| **noir** | Film noir, warm amber highlights | GT America | Amber |
+### Why agents build faster with Sigil
 
-### Colorful / Expressive
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **flux** | Dynamic gradients, energetic | Satoshi | Blue-Purple |
-| **shard** | Crystalline fragments | Satoshi | Cyan |
-| **prism** | Rainbow celebration, playful | Satoshi | Rainbow |
-| **vex** | Puzzle-like, intricate | Satoshi | Fuchsia |
-| **dsgn** | Design tool, Figma-inspired | Inter | Purple |
-| **dusk** | Twilight, warm-to-cool sunset | Satoshi | Rose-Violet |
+```
+Task: "Make the site feel more premium"
 
-### Editorial / Typographic
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **etch** | Acid-etched, engraved | Söhne | Emerald |
-| **rune** | Mystical marks, arcane | Fraunces | Violet |
-| **strata** | Geological layers, earthy | Söhne | Amber |
-| **glyph** | Letterform-focused | Söhne | Indigo |
-| **mrkr** | Hand-drawn, sketch aesthetic | Fraunces | Black |
+Without Sigil (agent touches 40+ files):
+  Button.tsx    → find bg-*, change colors, add shadow, adjust radius
+  Card.tsx      → find border-*, add subtle gradient, change padding
+  Input.tsx     → find focus ring, change border color, adjust height
+  Navbar.tsx    → change backdrop blur, border, height
+  Hero.tsx      → rewrite gradient, adjust typography
+  ... 35 more files
 
-### Industrial / Technical
-| Preset | Vibe | Display Font | Primary Hue |
-|--------|------|-------------|-------------|
-| **alloy** | Fused metals, warm steel | Space Grotesk | Copper |
-| **forge** | Molten heat, industrial craft | Space Grotesk | Orange |
-| **anvil** | Heavy, weighty foundations | Space Grotesk | Iron |
-| **rivet** | Mechanical, utilitarian | Inter | Amber |
-| **brass** | Vintage instrument, patina | Fraunces | Gold |
-
-## CLI Commands
-
-```bash
-sigil init              # Interactive setup questionnaire
-sigil add <components>  # Add components to your project
-sigil add --all         # Add all available components
-sigil preset            # Show current preset info
-sigil preset list       # Browse all 31 presets by category
-sigil preset <name>     # Switch to a different preset
-sigil preset create     # Scaffold a custom preset file
-sigil diff              # Show token changes since last sync
-sigil doctor            # Validate project health
+With Sigil (agent touches 1 file):
+  sigil.tokens.md →
+    shadows: deeper
+    radius: softer
+    motion: smoother
+    borders: subtle
+    colors: richer contrast
+    typography: tighter tracking
+  → ALL components update. Every one.
 ```
 
-## Components
-
-### Layout
-Stack, Grid, Section, Frame, PageGrid, Margin, Gutter, Divider, HRule
-
-### UI
-Button, Badge, Card, Label, Input, Textarea, Select, Checkbox, Switch, Slider, Progress, Separator, Avatar, Skeleton, Table, Tabs, Accordion, Tooltip, ScrollArea, KPI, Terminal, CodeBlock, LoadingSpinner
-
-### Navigation
-Navbar, Footer, Breadcrumb, Pagination
-
-### Overlays
-Dialog, Sheet, Popover, Toast
-
-### Shapes
-Shape, Diamond, Hexagon, Triangle, Diagonal
-
-### 3D
-Box3D, Box3DGrid, Card3D, FloatingUI, IsometricView
-
-### Diagrams
-Diagram, ExplodedView, FlowDiagram, Timeline, ComparisonTable, ArchitectureDiagram
-
-### Marketing
-Hero, FeatureFrame, Pricing, CTA, LogoBar, TestimonialCard
-
-### Patterns
-Pattern (dots, hatch, diagonal, diamond, hexagon, triangle, crosshatch), Cross
-
-## Agent-Friendly
-
-Sigil is designed for AI agents to work with:
-
-- **`sigil.tokens.md`** — A markdown file agents can read and edit
-- **`AGENTS.md`** — Comprehensive agent instructions at repo root
-- **`.sigil/AGENTS.md`** — Project-specific agent instructions (generated by `sigil init`)
-- **Agent skills** — Pre-built skills for Cursor, Claude Code, and Codex
-- **`npx sigil docs <component>`** — Component docs as markdown
-
-When you run `sigil init`, it generates `.sigil/AGENTS.md` with project-specific instructions telling AI agents:
-- Which preset is active and its mood/aesthetic
-- Where components and tokens live
-- Which features are enabled
-- Token naming conventions and rules
-- Available CLI commands
+---
 
 ## Tech Stack
 
-- React 18/19
-- Tailwind CSS v4 with `@theme` integration
-- OKLCH color values
-- GSAP + ScrollTrigger for animation
-- Motion (Framer Motion) for interactions
-- Radix primitives for accessible behavior
-- Pretext for text animation
+- **React 18/19** — Components use `forwardRef`, accept `className`
+- **Tailwind CSS v4** — `@theme` integration, token-aware utilities
+- **OKLCH colors** — Perceptually uniform, P3-gamut-ready
+- **GSAP + ScrollTrigger** — Scroll-driven animations, parallax, reveals
+- **Motion** (Framer Motion) — Spring physics, layout animations, gestures
+- **Radix primitives** — Accessible behavior layer (keyboard, screen reader, focus)
+
+---
+
+## Repository Structure
+
+```
+packages/
+  tokens/           @sigil-ui/tokens      Source of truth: types, compiler, markdown parser
+  presets/           @sigil-ui/presets     34 curated preset bundles (259 tokens each)
+  components/        @sigil-ui/components  150+ styled React components
+  primitives/        @sigil-ui/primitives  16 Radix-based headless behavior primitives
+  cli/               @sigil-ui/cli        CLI: init, add, preset, diff, doctor
+  create-sigil-app/                       npx create-sigil-app bootstrapper
+
+apps/
+  web/               Product site + sandbox (live preset switching)
+  docs/              Documentation (Fumadocs)
+  landing/           Marketing site
+  demos/             10 template demos (ai-saas, dev-docs, dashboard, portfolio, ...)
+
+style/               Design language and engineering philosophy
+  design.md          Motion/animation guide (7 rules, speed limits, enter/exit)
+  ux-principles.md   Product UX rules (100ms budget, three-click nav)
+  style.md           Engineering philosophy (YAGNI, hard limits, React/TS rules)
+
+skills/              Agent skills for specific workflows
+  sigil-tokens/      Edit/extend tokens
+  sigil-preset/      Create/modify presets
+  sigil-component/   Create/modify components
+  sigil-layout/      Page layout with grid system
+  sigil-playbook/    Page composition (10 composition rules)
+  sigil-migration/   Migrate from shadcn/ui
+  sigil-polish/      Interface polish (typography, surfaces, animations, performance)
+```
+
+---
 
 ## License
 

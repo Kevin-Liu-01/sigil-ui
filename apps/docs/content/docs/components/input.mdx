@@ -9,6 +9,13 @@ description: A styled text input that reads border, radius, and focus tokens fro
 import { Input } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Input placeholder="Enter your email" />
+  <Input placeholder="With error" error="Please enter a valid email" />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
@@ -17,16 +24,14 @@ import { Input } from "@sigil-ui/components";
 
 ## With label
 
-Pair with a `<label>` element for accessibility:
+Pair with a `<label>` or the `Label` component for accessibility:
 
-```tsx
-<div>
-  <label htmlFor="email">Email address</label>
-  <Input id="email" type="email" placeholder="you@example.com" />
-</div>
-```
-
-Or use the `Label` component from the library with Stack for layout:
+<ComponentPreview vertical>
+  <Stack gap={8}>
+    <Label htmlFor="demo-name">Full name</Label>
+    <Input id="demo-name" placeholder="Jane Doe" />
+  </Stack>
+</ComponentPreview>
 
 ```tsx
 import { Input, Label, Stack } from "@sigil-ui/components";
@@ -37,109 +42,64 @@ import { Input, Label, Stack } from "@sigil-ui/components";
 </Stack>
 ```
 
-## Sizes
+## With icons
+
+Use `iconLeft` and `iconRight` to render elements inside the input.
 
 ```tsx
-<Input size="sm" placeholder="Small" />
-<Input size="md" placeholder="Medium" />
-<Input size="lg" placeholder="Large" />
+import { Search, Eye } from "lucide-react";
+
+<Input iconLeft={<Search className="size-4" />} placeholder="Search..." />
+<Input iconRight={<Eye className="size-4" />} placeholder="Password" type="password" />
 ```
 
-## Variants
+## Error state
 
-### Outline (default)
+Pass a string to `error` to show both the error styling and an error message. Pass `true` for styling only.
+
+<ComponentPreview vertical>
+  <Input error="Please enter a valid email address" placeholder="you@example.com" />
+  <Input error={true} placeholder="Error styling only" />
+</ComponentPreview>
 
 ```tsx
-<Input variant="outline" placeholder="Bordered input" />
+<Input error="Please enter a valid email address" placeholder="you@example.com" />
+<Input error={true} placeholder="Error styling, no message" />
 ```
 
-### Filled
+## Disabled
 
-```tsx
-<Input variant="filled" placeholder="Filled background" />
-```
-
-### Flush
-
-```tsx
-<Input variant="flush" placeholder="No border, just a line" />
-```
-
-## States
-
-### Disabled
+<ComponentPreview>
+  <Input disabled placeholder="Disabled input" />
+</ComponentPreview>
 
 ```tsx
 <Input disabled placeholder="Disabled input" />
 ```
 
-### Error
-
-```tsx
-<Input error placeholder="Invalid email" />
-<Input error errorMessage="Please enter a valid email address" />
-```
-
-### With prefix/suffix
-
-```tsx
-<Input prefix="$" placeholder="0.00" />
-<Input suffix=".com" placeholder="yoursite" />
-<Input prefix={<SearchIcon className="size-4" />} placeholder="Search..." />
-```
-
-## Full width
-
-```tsx
-<Input fullWidth placeholder="Takes full container width" />
-```
-
-## Controlled
-
-```tsx
-import { useState } from "react";
-
-function SearchInput() {
-  const [value, setValue] = useState("");
-
-  return (
-    <Input
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      placeholder="Search..."
-    />
-  );
-}
-```
-
 ## Token integration
+
+Input reads these CSS variables from your token file:
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-surface` | Filled variant background |
-| `--r-text` | Input text color |
-| `--r-text-muted` | Placeholder color |
-| `--r-text-disabled` | Disabled text color |
-| `--r-border` | Default border |
-| `--r-border-interactive` | Focus border / focus ring |
-| `--r-border-strong` | Hover border |
-| `--r-error` | Error state border and message color |
-| `--r-radius-md` | Border radius |
-| `--r-duration-fast` | Focus transition |
-| `--r-ease-default` | Transition easing |
-| `--r-font-body` | Font family |
+| `--s-background` | Input background |
+| `--s-text` | Input text color |
+| `--s-text-muted` | Placeholder color |
+| `--s-border` | Default border |
+| `--s-border-style` | Border style |
+| `--s-primary` | Focus border and ring |
+| `--s-error` | Error state border and message |
+| `--s-radius-input` | Border radius |
+| `--s-duration-fast` | Focus transition |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"outline" \| "filled" \| "flush"` | `"outline"` | Visual variant |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Input size |
-| `error` | `boolean` | `false` | Show error state |
-| `errorMessage` | `string` | — | Error message displayed below input |
-| `prefix` | `ReactNode` | — | Content before the input |
-| `suffix` | `ReactNode` | — | Content after the input |
-| `fullWidth` | `boolean` | `false` | Expand to container width |
+| `error` | `string \| boolean` | — | Error state. String shows a message below the input. |
+| `iconLeft` | `ReactNode` | — | Icon or element on the left |
+| `iconRight` | `ReactNode` | — | Icon or element on the right |
 | `disabled` | `boolean` | `false` | Disable interactions |
 | `className` | `string` | — | Additional CSS classes |
 
@@ -149,6 +109,6 @@ Plus all standard `<input>` HTML attributes (`type`, `placeholder`, `value`, `on
 
 - Uses native `<input>` element
 - Pair with `<label>` using matching `htmlFor`/`id` for screen reader support
-- Error state adds `aria-invalid="true"` and `aria-describedby` linking to the error message
+- Error state adds `aria-invalid="true"`
+- Error message renders with `role="alert"`
 - Disabled state uses the native `disabled` attribute
-- Focus ring is clearly visible with `--r-border-interactive`

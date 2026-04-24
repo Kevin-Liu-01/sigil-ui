@@ -1,11 +1,86 @@
 "use client";
 
-import { useState, useCallback, useRef, type ReactNode } from "react";
-import { Palette, Paintbrush, Type, LayoutGrid, Blocks, Volume2, VolumeX, Settings, Shuffle, ChevronUp, Grid3X3 } from "lucide-react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  type ReactNode,
+} from "react";
+import {
+  Shuffle,
+  ChevronDown,
+  Grid3X3,
+  Monitor,
+  PanelLeft,
+  PanelRight,
+  X,
+  RotateCcw,
+  Download,
+  Save,
+  Trash2,
+  MessageSquare,
+  Send,
+  Square,
+} from "lucide-react";
+import {
+  Slider as SigilSlider,
+  Switch as SigilSwitch,
+  NativeSelect,
+  SegmentedControl,
+  SegmentedControlItem,
+} from "@sigil-ui/components";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
-import { ControlPanel } from "./control-panel";
 import type { SigilTokens, GutterPattern } from "@sigil-ui/tokens";
+
+/* ================================================================== */
+/*  Devbar State Context                                               */
+/* ================================================================== */
+
+export type DockPosition = "left" | "right";
+
+type DevBarState = {
+  sidebarOpen: boolean;
+  setSidebarOpen: (v: boolean) => void;
+  canvasMode: boolean;
+  setCanvasMode: (v: boolean) => void;
+  dock: DockPosition;
+  setDock: (d: DockPosition) => void;
+  agentOpen: boolean;
+  setAgentOpen: (v: boolean) => void;
+};
+
+const DevBarContext = createContext<DevBarState | null>(null);
+
+export function useDevBar() {
+  return useContext(DevBarContext);
+}
+
+export function DevBarProvider({ children }: { children: ReactNode }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [canvasMode, setCanvasMode] = useState(false);
+  const [dock, setDock] = useState<DockPosition>("left");
+  const [agentOpen, setAgentOpen] = useState(false);
+
+  const ctx = useMemo<DevBarState>(
+    () => ({ sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, dock, setDock, agentOpen, setAgentOpen }),
+    [sidebarOpen, canvasMode, dock, agentOpen],
+  );
+
+  return <DevBarContext.Provider value={ctx}>{children}</DevBarContext.Provider>;
+}
+
+/* ================================================================== */
+/*  Constants                                                          */
+/* ================================================================== */
+
+const SIDEBAR_W = 260;
+const AGENT_W = 340;
+const TOOLBAR_H = 38;
 
 const PRESET_DATA = [
   { name: "default", mood: "neutral", colors: ["#18181b", "#ffffff", "#0a0a0f", "#fafafa"] },
@@ -40,7 +115,32 @@ const PRESET_DATA = [
   { name: "noir", mood: "cinematic", colors: ["#d97706", "#000000", "#e8e8e8", "#0a0a0a"] },
   { name: "dusk", mood: "twilight", colors: ["#a78bfa", "#1a1625", "#f5f3ff", "#2a2035"] },
   { name: "mono", mood: "monochrome", colors: ["#525252", "#ffffff", "#000000", "#f5f5f5"] },
+  { name: "vast", mood: "editorial", colors: ["#a0522d", "#faf6f0", "#2c1810", "#f0e8df"] },
+  { name: "aura", mood: "ethereal", colors: ["#8b5cf6", "#0f0a1e", "#e8e0f8", "#1a1030"] },
+  { name: "field", mood: "utilitarian", colors: ["#15803d", "#ffffff", "#0a1a10", "#f0f4f0"] },
 ];
+
+const DISPLAY_FONTS = [
+  "ABC Monument Grotesk", "PP Neue Montreal", "PP Mori", "Apfel Grotezk",
+  "Nacelle", "Vulf Sans", "PP Editorial New", "PP Eiko", "PP Hatton",
+  "PP Monument Extended", "PP Neue Machina", "PP Telegraf", "PP Gosha Sans",
+  "PP Radio Grotesk", "PP Pangram Sans", "PP Supply Sans",
+];
+
+const MONO_FONTS = ["PP Fraktion Mono", "PP Supply Mono", "PP Neue Bit"];
+
+const GUTTER_PATTERNS: GutterPattern[] = [
+  "grid", "dots", "crosshatch", "diagonal", "diamond", "horizontal",
+  "horizontal-thin", "horizontal-wide", "hexagon", "triangle", "zigzag",
+  "checker", "plus", "brick", "wave", "none",
+];
+
+const SHADOW_OPTIONS = ["none", "sm", "md", "lg", "xl"] as const;
+const BORDER_STYLES = ["solid", "dashed", "dotted", "none"] as const;
+const CELL_BG_OPTIONS = ["none", "surface", "alternate"] as const;
+const CONTENT_ALIGN = ["center", "left", "wide"] as const;
+const HERO_ALIGN = ["center", "left", "full-bleed"] as const;
+const NAVBAR_ALIGN = ["full", "content", "inset"] as const;
 
 const COMPONENT_LIST = [
   "Hero", "Button", "Card", "Badge", "Input", "KPI", "Terminal",
@@ -49,644 +149,1026 @@ const COMPONENT_LIST = [
   "Accordion", "Table", "Tabs", "LoadingSpinner", "Avatar", "Progress",
 ];
 
-const FONT_OPTIONS = [
-  "PP Neue Montreal", "PP Mori", "PP Telegraf", "PP Gosha Sans",
-  "PP Radio Grotesk", "PP Pangram Sans", "PP Supply Sans",
-  "PP Editorial New", "PP Eiko", "PP Hatton", "PP Cirka",
-  "PP Monument Extended", "PP Neue Machina", "PP Stellar",
-  "PP Fraktion Mono", "PP Supply Mono", "PP Neue Bit",
-];
+/* ================================================================== */
+/*  Custom Preset Persistence                                          */
+/* ================================================================== */
 
-const GUTTER_PATTERNS: GutterPattern[] = [
-  "grid", "dots", "crosshatch", "diagonal", "diamond", "horizontal", "horizontal-wide",
-  "hexagon", "triangle", "zigzag", "checker", "plus", "brick", "wave", "none",
-];
+type CustomPreset = { name: string; tokens: SigilTokens; createdAt: number };
 
-type Tab = "presets" | "tokens" | "fonts" | "layout" | "components";
+const STORAGE_KEY = "sigil-custom-presets";
 
-/* ------------------------------------------------------------------ */
-/* Sub-components                                                       */
-/* ------------------------------------------------------------------ */
+function loadCustomPresets(): CustomPreset[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as CustomPreset[]) : [];
+  } catch { return []; }
+}
 
-function PresetChip({ name, mood, colors, active, onClick }: {
-  name: string; mood: string; colors: string[]; active: boolean; onClick: () => void;
+function saveCustomPresetsToStorage(presets: CustomPreset[]) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(presets)); } catch { /* quota */ }
+}
+
+/* ================================================================== */
+/*  Token Helpers                                                      */
+/* ================================================================== */
+
+function readStr(obj: Record<string, unknown> | undefined, key: string, fallback: string): string {
+  const v = obj?.[key];
+  if (typeof v === "string") return v;
+  if (v && typeof v === "object" && "dark" in (v as Record<string, unknown>))
+    return String((v as Record<string, string>).dark);
+  return fallback;
+}
+
+function readNum(obj: Record<string, unknown> | undefined, key: string, fallback: number): number {
+  const raw = obj?.[key];
+  if (typeof raw === "number") return raw;
+  if (typeof raw === "string") return parseFloat(raw) || fallback;
+  return fallback;
+}
+
+function readBool(obj: Record<string, unknown> | undefined, key: string, fallback: boolean): boolean {
+  const raw = obj?.[key];
+  if (typeof raw === "boolean") return raw;
+  if (typeof raw === "string") return raw === "true" || raw === "1";
+  return fallback;
+}
+
+function toCssColor(value: unknown): string {
+  if (typeof value === "string") return value;
+  if (value && typeof value === "object") {
+    const obj = value as Record<string, unknown>;
+    if ("dark" in obj && typeof obj.dark === "string") return obj.dark;
+    if ("light" in obj && typeof obj.light === "string") return obj.light;
+  }
+  return "#888888";
+}
+
+let _hexCanvas: HTMLCanvasElement | null = null;
+function cssToHex(css: string): string {
+  if (css.startsWith("#") && (css.length === 4 || css.length === 7 || css.length === 9)) return css;
+  if (typeof document === "undefined") return "#888888";
+  if (!_hexCanvas) _hexCanvas = document.createElement("canvas");
+  const ctx = _hexCanvas.getContext("2d");
+  if (!ctx) return "#888888";
+  ctx.fillStyle = "#000000";
+  ctx.fillStyle = css;
+  const parsed = ctx.fillStyle;
+  if (parsed.startsWith("#")) return parsed;
+  const m = parsed.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+  if (m) {
+    const [, r, g, b] = m;
+    return `#${[r, g, b].map(x => Number(x).toString(16).padStart(2, "0")).join("")}`;
+  }
+  return "#888888";
+}
+
+/* ================================================================== */
+/*  Micro Controls                                                     */
+/* ================================================================== */
+
+const FONT_BODY = '"PP Telegraf", "PP Mori", system-ui, sans-serif';
+const FONT_DISPLAY = '"PP Mori", system-ui, sans-serif';
+const FONT_MONO = '"PP Fraktion Mono", ui-monospace, monospace';
+const FONT = FONT_BODY;
+
+function SectionHeader({ title, open, onToggle }: {
+  title: string; open: boolean; onToggle: () => void;
 }) {
   return (
     <button
-      type="button"
-      onClick={onClick}
-      className="group flex-shrink-0 cursor-pointer"
+      type="button" onClick={onToggle}
       style={{
-        width: 116,
-        padding: "10px 10px 8px",
-        borderRadius: "var(--s-radius-sm, 6px)",
-        border: active ? "1.5px solid var(--s-primary)" : "1px solid color-mix(in oklch, var(--s-border) 60%, transparent)",
-        background: active
-          ? "color-mix(in oklch, var(--s-primary) 6%, var(--s-surface))"
-          : "var(--s-surface)",
-        transition: "all 180ms cubic-bezier(0.16, 1, 0.3, 1)",
-        boxShadow: active
-          ? "0 0 0 1px color-mix(in oklch, var(--s-primary) 20%, transparent)"
-          : "none",
+        width: "100%", display: "flex", alignItems: "center",
+        justifyContent: "space-between", padding: "8px 0",
+        background: "none", border: "none", cursor: "pointer",
       }}
     >
-      <div style={{ display: "flex", gap: 3, marginBottom: 6 }}>
-        {colors.map((c, i) => (
-          <div key={i} style={{
-            width: 12, height: 12, borderRadius: 2,
-            background: c,
-            border: "0.5px solid rgba(128,128,128,0.15)",
-          }} />
-        ))}
-      </div>
-      <div style={{
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 10.5, fontWeight: 600,
-        color: active ? "var(--s-primary)" : "var(--s-text)",
-        textAlign: "left", lineHeight: 1.2,
-      }}>
-        {name}
-      </div>
-      <div style={{
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 9, color: "var(--s-text-muted)",
-        textAlign: "left", marginTop: 1, lineHeight: 1,
-      }}>
-        {mood}
-      </div>
-    </button>
-  );
-}
-
-function TokenSlider({ label, value, min, max, step, unit, onChange }: {
-  label: string; value: number; min: number; max: number; step: number; unit: string;
-  onChange: (v: number) => void;
-}) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-      <label style={{
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 10, fontWeight: 500,
-        color: "var(--s-text-muted)",
-        width: 80, flexShrink: 0,
-        letterSpacing: "0.01em",
-      }}>
-        {label}
-      </label>
-      <div style={{ flex: 1, position: "relative", display: "flex", alignItems: "center" }}>
-        <input
-          type="range" min={min} max={max} step={step} value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className="devbar-slider"
-          style={{ width: "100%", height: 3, accentColor: "var(--s-primary)" }}
-        />
-      </div>
       <span style={{
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 10, fontWeight: 500,
-        color: "var(--s-text-secondary)",
-        width: 42, textAlign: "right",
-        fontVariantNumeric: "tabular-nums",
+        fontFamily: FONT_DISPLAY, fontSize: 10, fontWeight: 600,
+        color: "var(--db-text2)", textTransform: "uppercase",
+        letterSpacing: "0.08em",
       }}>
-        {value}{unit}
+        {title}
       </span>
-    </div>
-  );
-}
-
-function ColorSwatch({ label, value, onChange }: {
-  label: string; value: string; onChange: (v: string) => void;
-}) {
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-      <input
-        type="color" value={value.startsWith("#") ? value : "#9b99e8"}
-        onChange={(e) => onChange(e.target.value)}
+      <ChevronDown
+        size={10}
         style={{
-          width: 22, height: 22, border: "1px solid var(--s-border)",
-          borderRadius: "var(--s-radius-sm, 4px)", cursor: "pointer", padding: 0,
+          color: "var(--db-muted)",
+          transition: "transform 200ms cubic-bezier(0.16, 1, 0.3, 1)",
+          transform: open ? "rotate(180deg)" : "rotate(0deg)",
         }}
       />
-      <span style={{
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 10, color: "var(--s-text-muted)", fontWeight: 500,
-      }}>
-        {label}
-      </span>
-    </div>
+    </button>
   );
 }
 
-function SectionLabel({ children }: { children: ReactNode }) {
+function Section({ title, defaultOpen, children }: {
+  title: string; defaultOpen?: boolean; children: ReactNode;
+}) {
+  const [open, setOpen] = useState(defaultOpen ?? false);
   return (
-    <div style={{
-      fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-      fontSize: 9, fontWeight: 600,
-      color: "var(--s-text-muted)",
-      textTransform: "uppercase" as const,
-      letterSpacing: "0.1em",
-      marginBottom: 6,
-      paddingBottom: 4,
-      borderBottom: "1px solid color-mix(in oklch, var(--s-border) 40%, transparent)",
-    }}>
-      {children}
+    <div style={{ borderBottom: "1px solid var(--db-border)", padding: "0 12px" }}>
+      <SectionHeader title={title} open={open} onToggle={() => setOpen(v => !v)} />
+      <div style={{
+        overflow: "hidden", maxHeight: open ? 600 : 0, opacity: open ? 1 : 0,
+        transition: "max-height 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 200ms ease",
+        paddingBottom: open ? 10 : 0,
+      }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>{children}</div>
+      </div>
     </div>
   );
 }
 
-function PatternChip({ pattern, active, onClick }: {
-  pattern: GutterPattern; active: boolean; onClick: () => void;
+function Row({ label, value, children }: { label: string; value?: string; children: ReactNode }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 8, minHeight: 26 }}>
+      <span style={{ fontFamily: FONT, fontSize: 9.5, fontWeight: 500, color: "var(--db-muted)", width: 72, flexShrink: 0, letterSpacing: "0.02em" }}>{label}</span>
+      <div style={{ flex: 1, minWidth: 0 }}>{children}</div>
+      {value && <span style={{ fontFamily: FONT_MONO, fontSize: 9.5, fontWeight: 500, color: "var(--db-text2)", width: 44, textAlign: "right", flexShrink: 0, fontVariantNumeric: "tabular-nums" }}>{value}</span>}
+    </div>
+  );
+}
+
+function Slider({ value, min, max, step, onChange }: { value: number; min: number; max: number; step: number; onChange: (v: number) => void }) {
+  return <SigilSlider value={[value]} min={min} max={max} step={step} onValueChange={([v]) => { if (v !== undefined) onChange(v); }} className="w-full" />;
+}
+
+function ColorInput({ value, onChange }: { value: unknown; onChange: (v: string) => void }) {
+  const css = toCssColor(value);
+  const hex = cssToHex(css);
+  return (
+    <div style={{ position: "relative", width: 24, height: 24, flexShrink: 0 }}>
+      <div style={{ width: 24, height: 24, borderRadius: 4, background: css, border: "1px solid var(--db-border)", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.06)" }} />
+      <input type="color" value={hex} onChange={(e) => onChange(e.target.value)} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", opacity: 0, cursor: "pointer", border: "none", padding: 0 }} />
+    </div>
+  );
+}
+
+function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean) => void }) {
+  return <SigilSwitch size="sm" checked={checked} onCheckedChange={onChange} />;
+}
+
+function Segmented<T extends string>({ options, value, onChange }: { options: readonly T[]; value: T; onChange: (v: T) => void }) {
+  return (
+    <SegmentedControl value={value} onValueChange={(v) => onChange(v as T)} className="w-full text-xs">
+      {options.map((opt) => <SegmentedControlItem key={opt} value={opt} className="text-[10px] px-2 py-0.5">{opt}</SegmentedControlItem>)}
+    </SegmentedControl>
+  );
+}
+
+function SelectField({ value, options, onChange }: { value: string; options: readonly string[]; onChange: (v: string) => void }) {
+  return (
+    <NativeSelect value={value} onChange={(e) => onChange(e.target.value)} className="h-7 py-0.5 text-[11px]">
+      {options.map((o) => <option key={o} value={o}>{o}</option>)}
+    </NativeSelect>
+  );
+}
+
+function ChipButton({ label, active, onClick }: { label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} style={{
+      padding: "3px 8px", borderRadius: 4,
+      border: active ? "1px solid var(--db-accent)" : "1px solid var(--db-border)",
+      background: active ? "var(--db-accent-dim)" : "transparent",
+      fontFamily: FONT, fontSize: 9, fontWeight: active ? 600 : 400,
+      color: active ? "var(--db-accent)" : "var(--db-muted)",
+      cursor: "pointer", transition: "all 120ms ease-out", lineHeight: 1.4,
+    }}>{label}</button>
+  );
+}
+
+/* ================================================================== */
+/*  Preset Strip (with custom presets)                                 */
+/* ================================================================== */
+
+function PresetStrip({ activePreset, onSelect, onRandomize, customPresets, onDeleteCustom }: {
+  activePreset: string; onSelect: (name: string) => void; onRandomize: () => void;
+  customPresets: CustomPreset[]; onDeleteCustom: (name: string) => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      style={{
-        padding: "3px 8px",
-        borderRadius: "var(--s-radius-sm, 4px)",
-        border: active
-          ? "1px solid var(--s-primary)"
-          : "1px solid color-mix(in oklch, var(--s-border) 50%, transparent)",
-        background: active
-          ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-surface))"
-          : "transparent",
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 9.5, fontWeight: active ? 600 : 400,
-        color: active ? "var(--s-primary)" : "var(--s-text-muted)",
-        cursor: "pointer",
-        transition: "all 120ms ease-out",
-        lineHeight: 1.4,
-      }}
-    >
-      {pattern}
-    </button>
+    <div style={{ padding: "8px 12px 6px" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 6 }}>
+        <span style={{ fontFamily: FONT_DISPLAY, fontSize: 9, fontWeight: 600, color: "var(--db-muted)", textTransform: "uppercase", letterSpacing: "0.08em" }}>Presets</span>
+        <button type="button" onClick={onRandomize} title="Random preset" style={{
+          display: "flex", alignItems: "center", gap: 3, padding: "2px 6px", borderRadius: 4,
+          border: "1px solid var(--db-border)", background: "none", color: "var(--db-muted)",
+          fontFamily: FONT, fontSize: 8, fontWeight: 500, cursor: "pointer", transition: "all 120ms ease",
+        }}><Shuffle size={8} />random</button>
+      </div>
+      <div className="devbar-scroll" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4, maxHeight: 160, overflowY: "auto", paddingBottom: 2 }}>
+        {PRESET_DATA.map((p) => {
+          const active = activePreset.replace("*", "") === p.name;
+          return (
+            <button key={p.name} type="button" onClick={() => onSelect(p.name)} style={{
+              padding: "5px 6px 4px", borderRadius: 5, textAlign: "left",
+              border: active ? "1.5px solid var(--db-accent)" : "1px solid var(--db-border)",
+              background: active ? "var(--db-accent-dim)" : "transparent",
+              cursor: "pointer", transition: "all 120ms ease",
+            }}>
+              <div style={{ display: "flex", gap: 2, marginBottom: 3 }}>
+                {p.colors.map((c, i) => <div key={i} style={{ width: 8, height: 8, borderRadius: 2, background: c, border: "0.5px solid rgba(128,128,128,0.12)" }} />)}
+              </div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+                <span style={{ fontFamily: FONT, fontSize: 9, fontWeight: active ? 700 : 500, color: active ? "var(--db-accent)" : "var(--db-text)", lineHeight: 1.2 }}>{p.name}</span>
+                <span style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", lineHeight: 1, opacity: 0.6 }}>{p.mood}</span>
+              </div>
+            </button>
+          );
+        })}
+        {customPresets.map((cp) => {
+          const active = activePreset.replace("*", "") === cp.name;
+          return (
+            <div key={cp.name} style={{ position: "relative" }}>
+              <button type="button" onClick={() => onSelect(cp.name)} style={{
+                width: "100%", padding: "5px 6px 4px", borderRadius: 5, textAlign: "left",
+                border: active ? "1.5px solid var(--db-accent)" : "1px solid var(--db-border)",
+                background: active ? "var(--db-accent-dim)" : "transparent",
+                cursor: "pointer", transition: "all 120ms ease",
+              }}>
+                <div style={{ fontFamily: FONT, fontSize: 9, fontWeight: active ? 700 : 500, color: active ? "var(--db-accent)" : "var(--db-text)", lineHeight: 1.2 }}>{cp.name}</div>
+                <div style={{ fontFamily: FONT, fontSize: 7, color: "var(--db-muted)", lineHeight: 1, marginTop: 1, opacity: 0.6 }}>custom</div>
+              </button>
+              <button type="button" onClick={(e) => { e.stopPropagation(); onDeleteCustom(cp.name); }} style={{
+                position: "absolute", top: 2, right: 2, width: 12, height: 12, borderRadius: 6,
+                background: "var(--db-surface)", border: "1px solid var(--db-border)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                cursor: "pointer", color: "var(--db-muted)", padding: 0,
+              }}><X size={6} /></button>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
-function ComponentChip({ name, onDrop }: { name: string; onDrop: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onDrop}
-      className="cursor-pointer"
-      style={{
-        padding: "3px 10px",
-        borderRadius: "var(--s-radius-sm, 4px)",
-        border: "1px solid color-mix(in oklch, var(--s-border) 50%, transparent)",
-        background: "transparent",
-        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-        fontSize: 10.5, fontWeight: 500,
-        color: "var(--s-text-secondary)",
-        cursor: "pointer",
-        transition: "all 120ms ease-out",
-      }}
-    >
-      {name}
-    </button>
-  );
-}
+/* ================================================================== */
+/*  Sidebar Content                                                    */
+/* ================================================================== */
 
-/* ------------------------------------------------------------------ */
-/* Main devbar                                                          */
-/* ------------------------------------------------------------------ */
-
-export function SigilDevBar() {
-  const { tokens, activePreset, setPreset, patchTokens } = useSigilTokens();
+function SidebarContent({ onClose }: { onClose: () => void }) {
+  const { tokens, activePreset, setPreset, setTokens, patchTokens } = useSigilTokens();
   const { enabled: soundEnabled, setEnabled: setSoundEnabled, play, setActivePreset: setSoundPreset } = useSigilSound();
-  const [open, setOpen] = useState(false);
-  const [tab, setTab] = useState<Tab>("presets");
-  const [dragMessage, setDragMessage] = useState<string | null>(null);
-  const [panelOpen, setPanelOpen] = useState(false);
+
+  const [customPresets, setCustomPresets] = useState<CustomPreset[]>([]);
+  const [savingName, setSavingName] = useState<string | null>(null);
+
+  useEffect(() => { setCustomPresets(loadCustomPresets()); }, []);
 
   const handlePreset = useCallback((name: string) => {
-    setPreset(name);
+    const custom = customPresets.find(cp => cp.name === name);
+    if (custom) {
+      setTokens(custom.tokens, custom.name);
+    } else {
+      setPreset(name);
+    }
     setSoundPreset(name);
     play("preset");
-  }, [setPreset, setSoundPreset, play]);
+  }, [setPreset, setTokens, setSoundPreset, play, customPresets]);
 
-  const handleComponentDrop = useCallback((name: string) => {
-    setDragMessage(`Added <${name} />`);
-    setTimeout(() => setDragMessage(null), 2000);
-  }, []);
+  const handleReset = useCallback(() => {
+    setPreset(activePreset.replace("*", ""));
+    play("preset");
+  }, [activePreset, setPreset, play]);
 
-  const handleRandomize = useCallback(() => {
-    const randomPreset = PRESET_DATA[Math.floor(Math.random() * PRESET_DATA.length)]!;
-    setPreset(randomPreset.name);
-  }, [setPreset]);
+  const handleExport = useCallback(() => {
+    const css = document.querySelector("style[data-sigil-tokens]")?.textContent;
+    if (css) navigator.clipboard.writeText(css);
+    play("success");
+  }, [play]);
+
+  const handleSave = useCallback(() => {
+    if (savingName === null) { setSavingName(activePreset.replace("*", "") + "-custom"); return; }
+    const name = savingName.trim();
+    if (!name) return;
+    const next = [...customPresets.filter(p => p.name !== name), { name, tokens, createdAt: Date.now() }];
+    saveCustomPresetsToStorage(next);
+    setCustomPresets(next);
+    setSavingName(null);
+    play("success");
+  }, [savingName, customPresets, tokens, activePreset, play]);
+
+  const handleDeleteCustom = useCallback((name: string) => {
+    const next = customPresets.filter(p => p.name !== name);
+    saveCustomPresetsToStorage(next);
+    setCustomPresets(next);
+  }, [customPresets]);
+
+  const patch = useCallback(
+    (cat: string, key: string, value: unknown) => patchTokens(cat as keyof SigilTokens, key, value),
+    [patchTokens],
+  );
+
+  const c = tokens.colors as Record<string, unknown> | undefined;
+  const t = tokens.typography as Record<string, unknown> | undefined;
+  const sp = tokens.spacing as Record<string, unknown> | undefined;
+  const r = tokens.radius as Record<string, unknown> | undefined;
+  const b = tokens.borders as Record<string, unknown> | undefined;
+  const bw = (b?.["width"] && typeof b["width"] === "object" ? b["width"] : {}) as Record<string, unknown>;
+  const sh = tokens.shadows as Record<string, unknown> | undefined;
+  const m = tokens.motion as Record<string, unknown> | undefined;
+  const md = (m?.["duration"] && typeof m["duration"] === "object" ? m["duration"] : {}) as Record<string, unknown>;
+  const cards = tokens.cards as Record<string, unknown> | undefined;
+  const buttons = tokens.buttons as Record<string, unknown> | undefined;
+  const grid = tokens.sigil as Record<string, unknown> | undefined;
+  const layout = tokens.layout as Record<string, unknown> | undefined;
+  const nav = tokens.navigation as Record<string, unknown> | undefined;
+  const align = (tokens as Record<string, unknown>).alignment as Record<string, unknown> | undefined;
 
   const currentGutterPattern = (tokens.sigil?.["gutter-pattern"] as GutterPattern) ?? "grid";
   const currentMarginPattern = (tokens.sigil?.["margin-pattern"] as GutterPattern) ?? "horizontal";
 
-  const tabs: { id: Tab; label: string; icon: React.ReactNode }[] = [
-    { id: "presets", label: "Presets", icon: <Palette size={11} /> },
-    { id: "tokens", label: "Tokens", icon: <Paintbrush size={11} /> },
-    { id: "fonts", label: "Fonts", icon: <Type size={11} /> },
-    { id: "layout", label: "Layout", icon: <LayoutGrid size={11} /> },
-    { id: "components", label: "Components", icon: <Blocks size={11} /> },
-  ];
+  const colorSwatch = (label: string, key: string) => (
+    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <ColorInput value={c?.[key]} onChange={(v) => patch("colors", key, v)} />
+      <span style={{ fontFamily: FONT, fontSize: 9, color: "var(--db-muted)", fontWeight: 500 }}>{label}</span>
+    </div>
+  );
 
-  return (
+  const colorsContent = (
     <>
-      {/* Inline styles for slider and scrollbar */}
-      <style>{`
-        .devbar-slider { appearance: none; -webkit-appearance: none; background: transparent; cursor: pointer; }
-        .devbar-slider::-webkit-slider-runnable-track { height: 2px; background: color-mix(in oklch, var(--s-border) 80%, transparent); border-radius: 1px; }
-        .devbar-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%; background: var(--s-primary); margin-top: -4px; border: 1.5px solid var(--s-surface); box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 30%, transparent); }
-        .devbar-slider::-moz-range-track { height: 2px; background: color-mix(in oklch, var(--s-border) 80%, transparent); border-radius: 1px; border: none; }
-        .devbar-slider::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%; background: var(--s-primary); border: 1.5px solid var(--s-surface); box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 30%, transparent); }
-        .devbar-scroll::-webkit-scrollbar { height: 3px; }
-        .devbar-scroll::-webkit-scrollbar-track { background: transparent; }
-        .devbar-scroll::-webkit-scrollbar-thumb { background: color-mix(in oklch, var(--s-border) 50%, transparent); border-radius: 2px; }
-      `}</style>
-
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 9999,
-          transition: "transform 300ms cubic-bezier(0.16, 1, 0.3, 1)",
-          transform: open ? "translateY(0)" : "translateY(calc(100% - 36px))",
-        }}
-      >
-        {/* ── Toggle bar ────────────────────────────────────── */}
-        <div
-          style={{
-            height: 36,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            padding: "0 16px",
-            maxWidth: 1200,
-            margin: "0 auto",
-            background: "color-mix(in oklch, var(--s-surface) 92%, var(--s-background))",
-            borderTop: "1px solid var(--s-border)",
-            backdropFilter: "blur(12px) saturate(1.4)",
-            WebkitBackdropFilter: "blur(12px) saturate(1.4)",
-            cursor: "pointer",
-          }}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {/* Left */}
-          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{
-              width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center",
-              borderRadius: 3,
-              background: "color-mix(in oklch, var(--s-primary) 12%, transparent)",
-            }}>
-              <Grid3X3 size={10} style={{ color: "var(--s-primary)" }} />
-            </div>
-            <span style={{
-              fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-              fontSize: 10.5, fontWeight: 600,
-              color: "var(--s-text-secondary)",
-              letterSpacing: "0.02em",
-            }}>
-              sigil
-            </span>
-            <span style={{
-              fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-              fontSize: 9.5, fontWeight: 600,
-              padding: "1px 7px",
-              borderRadius: "var(--s-radius-sm, 3px)",
-              background: "color-mix(in oklch, var(--s-primary) 10%, transparent)",
-              color: "var(--s-primary)",
-              letterSpacing: "0.02em",
-            }}>
-              {activePreset}
-            </span>
-            {dragMessage && (
-              <span style={{
-                fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-                fontSize: 9.5, color: "var(--s-success)",
-                fontWeight: 500,
-              }}>
-                {dragMessage}
-              </span>
-            )}
-          </div>
-
-          {/* Right */}
-          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-            {([
-              {
-                label: soundEnabled ? "Sound" : "Muted",
-                icon: soundEnabled ? <Volume2 size={10} /> : <VolumeX size={10} />,
-                active: soundEnabled,
-                onClick: (e: React.MouseEvent) => { e.stopPropagation(); setSoundEnabled(!soundEnabled); },
-              },
-              {
-                label: "Customize",
-                icon: <Settings size={10} />,
-                active: false,
-                onClick: (e: React.MouseEvent) => { e.stopPropagation(); setPanelOpen(true); play("tap"); },
-              },
-              {
-                label: "Random",
-                icon: <Shuffle size={10} />,
-                active: false,
-                onClick: (e: React.MouseEvent) => { e.stopPropagation(); handleRandomize(); play("preset"); },
-              },
-            ] as const).map((btn) => (
-              <button
-                key={btn.label}
-                type="button"
-                onClick={btn.onClick}
-                style={{
-                  display: "flex", alignItems: "center", gap: 4,
-                  padding: "3px 8px",
-                  borderRadius: "var(--s-radius-sm, 3px)",
-                  border: "1px solid color-mix(in oklch, var(--s-border) 50%, transparent)",
-                  background: btn.active
-                    ? "color-mix(in oklch, var(--s-primary) 10%, transparent)"
-                    : "transparent",
-                  fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-                  fontSize: 9.5, fontWeight: 500,
-                  color: btn.active ? "var(--s-primary)" : "var(--s-text-muted)",
-                  cursor: "pointer",
-                  transition: "all 120ms ease-out",
-                }}
-              >
-                {btn.icon}{btn.label}
-              </button>
-            ))}
-            <ChevronUp
-              size={12}
-              style={{
-                color: "var(--s-text-muted)",
-                marginLeft: 4,
-                transition: "transform 300ms cubic-bezier(0.16, 1, 0.3, 1)",
-                transform: open ? "rotate(180deg)" : "rotate(0deg)",
-              }}
-            />
-          </div>
-        </div>
-
-        {/* ── Panel ─────────────────────────────────────────── */}
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            height: 260,
-            background: "color-mix(in oklch, var(--s-surface) 95%, var(--s-background))",
-            borderTop: "1px solid color-mix(in oklch, var(--s-border) 60%, transparent)",
-            backdropFilter: "blur(16px) saturate(1.4)",
-            WebkitBackdropFilter: "blur(16px) saturate(1.4)",
-            display: "flex",
-            flexDirection: "column" as const,
-          }}
-        >
-          {/* ── Tab bar ──── */}
-          <div
-            style={{
-              display: "flex",
-              gap: 0,
-              borderBottom: "1px solid color-mix(in oklch, var(--s-border) 40%, transparent)",
-              flexShrink: 0,
-              padding: "0 4px",
-            }}
-          >
-            {tabs.map((t) => {
-              const isActive = tab === t.id;
-              return (
-                <button
-                  key={t.id}
-                  type="button"
-                  onClick={() => setTab(t.id)}
-                  style={{
-                    position: "relative" as const,
-                    display: "flex", alignItems: "center", gap: 5,
-                    padding: "7px 14px",
-                    fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-                    fontSize: 10, fontWeight: isActive ? 600 : 400,
-                    letterSpacing: "0.02em",
-                    color: isActive ? "var(--s-primary)" : "var(--s-text-muted)",
-                    background: "transparent",
-                    border: "none",
-                    borderBottom: isActive
-                      ? "1.5px solid var(--s-primary)"
-                      : "1.5px solid transparent",
-                    cursor: "pointer",
-                    transition: "all 150ms ease-out",
-                  }}
-                >
-                  {t.icon}
-                  {t.label}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ── Tab content ── */}
-          <div className="devbar-scroll" style={{ flex: 1, overflow: "auto", padding: "10px 14px 14px" }}>
-
-            {/* ═══ Presets ═══ */}
-            {tab === "presets" && (
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, paddingBottom: 8 }}>
-                {PRESET_DATA.map((p) => (
-                  <PresetChip
-                    key={p.name}
-                    {...p}
-                    active={activePreset.replace("*", "") === p.name}
-                    onClick={() => handlePreset(p.name)}
-                  />
-                ))}
-              </div>
-            )}
-
-            {/* ═══ Tokens ═══ */}
-            {tab === "tokens" && (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <SectionLabel>Colors</SectionLabel>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-                    <ColorSwatch label="primary" value={(tokens.colors?.primary as string) ?? "#9b99e8"} onChange={(v) => patchTokens("colors", "primary", v)} />
-                    <ColorSwatch label="secondary" value={(tokens.colors?.secondary as string) ?? "#da8325"} onChange={(v) => patchTokens("colors", "secondary", v)} />
-                    <ColorSwatch label="success" value={(tokens.colors?.success as string) ?? "#10b981"} onChange={(v) => patchTokens("colors", "success", v)} />
-                    <ColorSwatch label="error" value={(tokens.colors?.error as string) ?? "#ef4444"} onChange={(v) => patchTokens("colors", "error", v)} />
-                  </div>
-                </div>
-                <div>
-                  <SectionLabel>Radius & Spacing</SectionLabel>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                    <TokenSlider label="card-radius" value={parseInt((tokens.radius?.lg as string) ?? "12")} min={0} max={32} step={1} unit="px" onChange={(v) => patchTokens("radius", "lg", `${v}px`)} />
-                    <TokenSlider label="button-r" value={parseInt((tokens.radius?.md as string) ?? "8")} min={0} max={24} step={1} unit="px" onChange={(v) => patchTokens("radius", "md", `${v}px`)} />
-                    <TokenSlider label="grid-cell" value={parseInt((tokens.sigil?.["grid-cell"] as string) ?? "48")} min={24} max={96} step={4} unit="px" onChange={(v) => patchTokens("sigil", "grid-cell", `${v}px`)} />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ═══ Fonts ═══ */}
-            {tab === "fonts" && (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 14 }}>
-                {(["display", "body", "mono"] as const).map((role) => (
-                  <div key={role}>
-                    <SectionLabel>{role}</SectionLabel>
-                    <select
-                      value={(tokens.typography?.[`font-${role}` as keyof typeof tokens.typography] as string)?.split(",")[0]?.replace(/['"]/g, "") ?? "PP Neue Montreal"}
-                      onChange={(e) => {
-                        const family = `"${e.target.value}", system-ui, sans-serif`;
-                        patchTokens("typography", `font-${role}`, role === "mono" ? `"${e.target.value}", ui-monospace, monospace` : family);
-                      }}
-                      style={{
-                        width: "100%", padding: "5px 8px", fontSize: 10.5,
-                        fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-                        border: "1px solid color-mix(in oklch, var(--s-border) 60%, transparent)",
-                        borderRadius: "var(--s-radius-sm, 4px)",
-                        background: "var(--s-background)", color: "var(--s-text)",
-                        cursor: "pointer",
-                      }}
-                    >
-                      {FONT_OPTIONS.map((f) => (
-                        <option key={f} value={f}>{f}</option>
-                      ))}
-                    </select>
-                    <div style={{
-                      marginTop: 6, padding: "5px 8px",
-                      borderRadius: "var(--s-radius-sm, 4px)",
-                      background: "color-mix(in oklch, var(--s-surface) 60%, var(--s-background))",
-                      fontFamily: `"${(tokens.typography?.[`font-${role}` as keyof typeof tokens.typography] as string)?.split(",")[0]?.replace(/['"]/g, "") ?? "PP Neue Montreal"}", system-ui`,
-                      fontSize: 13, color: "var(--s-text-secondary)",
-                      whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
-                    }}>
-                      The quick brown fox
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* ═══ Layout ═══ */}
-            {tab === "layout" && (
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                {/* Left column: sliders */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  {/* Frame */}
-                  <div>
-                    <SectionLabel>Frame</SectionLabel>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                      <TokenSlider
-                        label="content-max"
-                        value={parseInt((tokens.layout?.["content-max"] as string) ?? "1200")}
-                        min={768} max={1600} step={40} unit="px"
-                        onChange={(v) => patchTokens("layout", "content-max", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="rail-gap"
-                        value={parseInt((tokens.sigil?.["rail-gap"] as string) ?? "24")}
-                        min={8} max={48} step={4} unit="px"
-                        onChange={(v) => patchTokens("sigil", "rail-gap", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="grid-cell"
-                        value={parseInt((tokens.sigil?.["grid-cell"] as string) ?? "48")}
-                        min={16} max={80} step={4} unit="px"
-                        onChange={(v) => patchTokens("sigil", "grid-cell", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="cross-stroke"
-                        value={parseFloat((tokens.sigil?.["cross-stroke"] as string) ?? "1.5")}
-                        min={0} max={4} step={0.5} unit="px"
-                        onChange={(v) => patchTokens("sigil", "cross-stroke", `${v}px`)}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Spacing */}
-                  <div>
-                    <SectionLabel>Spacing</SectionLabel>
-                    <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                      <TokenSlider
-                        label="page-margin"
-                        value={parseInt((tokens.layout?.["page-margin"] as string) ?? "20")}
-                        min={8} max={64} step={4} unit="px"
-                        onChange={(v) => patchTokens("layout", "page-margin", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="gutter"
-                        value={parseInt((tokens.layout?.gutter as string) ?? "20")}
-                        min={8} max={48} step={4} unit="px"
-                        onChange={(v) => patchTokens("layout", "gutter", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="navbar-h"
-                        value={parseInt((tokens.spacing?.["navbar-height"] as string) ?? "56")}
-                        min={36} max={96} step={4} unit="px"
-                        onChange={(v) => patchTokens("spacing", "navbar-height", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="section-py"
-                        value={parseInt((tokens.spacing?.["section-py"] as string) ?? "80")}
-                        min={24} max={160} step={8} unit="px"
-                        onChange={(v) => patchTokens("spacing", "section-py", `${v}px`)}
-                      />
-                      <TokenSlider
-                        label="bento-gap"
-                        value={parseInt((tokens.layout?.["bento-gap"] as string) ?? "12")}
-                        min={2} max={32} step={2} unit="px"
-                        onChange={(v) => patchTokens("layout", "bento-gap", `${v}px`)}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right column: pattern selectors */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                  {/* Gutter pattern */}
-                  <div>
-                    <SectionLabel>Gutter Pattern</SectionLabel>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                      {GUTTER_PATTERNS.map((p) => (
-                        <PatternChip
-                          key={p}
-                          pattern={p}
-                          active={currentGutterPattern === p}
-                          onClick={() => patchTokens("sigil", "gutter-pattern", p)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Margin pattern */}
-                  <div>
-                    <SectionLabel>Margin Pattern</SectionLabel>
-                    <div style={{ display: "flex", flexWrap: "wrap", gap: 4 }}>
-                      {GUTTER_PATTERNS.map((p) => (
-                        <PatternChip
-                          key={p}
-                          pattern={p}
-                          active={currentMarginPattern === p}
-                          onClick={() => patchTokens("sigil", "margin-pattern", p)}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* ═══ Components ═══ */}
-            {tab === "components" && (
-              <div>
-                <div style={{
-                  fontFamily: "var(--s-font-mono, ui-monospace, monospace)",
-                  fontSize: 10, color: "var(--s-text-muted)", marginBottom: 8, fontWeight: 500,
-                }}>
-                  Click a component to preview it on the page
-                </div>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
-                  {COMPONENT_LIST.map((name) => (
-                    <ComponentChip key={name} name={name} onDrop={() => handleComponentDrop(name)} />
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 12px" }}>
+        {colorSwatch("primary", "primary")}
+        {colorSwatch("secondary", "secondary")}
+        {colorSwatch("background", "background")}
+        {colorSwatch("surface", "surface")}
+        {colorSwatch("text", "text")}
+        {colorSwatch("border", "border")}
+        {colorSwatch("accent", "accent")}
       </div>
-      <ControlPanel open={panelOpen} onClose={() => setPanelOpen(false)} />
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 12px", marginTop: 4 }}>
+        {colorSwatch("success", "success")}
+        {colorSwatch("warning", "warning")}
+        {colorSwatch("error", "error")}
+        {colorSwatch("info", "info")}
+      </div>
     </>
   );
+
+  const typographyContent = (
+    <>
+      <Row label="display"><SelectField value={readStr(t, "font-display", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-display", `"${v}", system-ui, sans-serif`)} /></Row>
+      <Row label="body"><SelectField value={readStr(t, "font-body", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")} options={DISPLAY_FONTS} onChange={(v) => patch("typography", "font-body", `"${v}", system-ui, sans-serif`)} /></Row>
+      <Row label="mono"><SelectField value={readStr(t, "font-mono", "PP Fraktion Mono").split(",")[0]!.replace(/['"]/g, "")} options={MONO_FONTS} onChange={(v) => patch("typography", "font-mono", `"${v}", ui-monospace, monospace`)} /></Row>
+      <Row label="heading wt" value={String(readNum(t, "heading-weight", 700))}><Slider value={readNum(t, "heading-weight", 700)} min={300} max={900} step={100} onChange={(v) => patch("typography", "heading-weight", v)} /></Row>
+      <Row label="heading trk" value={`${readNum(t, "heading-tracking", -0.02).toFixed(3)}em`}><Slider value={readNum(t, "heading-tracking", -0.02)} min={-0.06} max={0.02} step={0.002} onChange={(v) => patch("typography", "heading-tracking", v)} /></Row>
+      <Row label="base size" value={`${readNum(t, "base-size", 16)}px`}><Slider value={readNum(t, "base-size", 16)} min={14} max={20} step={1} onChange={(v) => patch("typography", "base-size", `${v}px`)} /></Row>
+    </>
+  );
+
+  const spacingContent = (<>
+    <Row label="page margin" value={`${readNum(layout, "page-margin", 24)}px`}><Slider value={readNum(layout, "page-margin", 24)} min={8} max={64} step={4} onChange={(v) => patch("layout", "page-margin", `${v}px`)} /></Row>
+    <Row label="section pad" value={`${readNum(sp, "section-py", 64)}px`}><Slider value={readNum(sp, "section-py", 64)} min={24} max={160} step={8} onChange={(v) => patch("spacing", "section-py", `${v}px`)} /></Row>
+    <Row label="card pad" value={`${readNum(sp, "card-padding", 24)}px`}><Slider value={readNum(sp, "card-padding", 24)} min={8} max={48} step={4} onChange={(v) => patch("spacing", "card-padding", `${v}px`)} /></Row>
+    <Row label="grid gap" value={`${readNum(layout, "gutter", 16)}px`}><Slider value={readNum(layout, "gutter", 16)} min={4} max={48} step={4} onChange={(v) => patch("layout", "gutter", `${v}px`)} /></Row>
+    <Row label="stack gap" value={`${readNum(sp, "stack-gap", 12)}px`}><Slider value={readNum(sp, "stack-gap", 12)} min={4} max={32} step={2} onChange={(v) => patch("spacing", "stack-gap", `${v}px`)} /></Row>
+  </>);
+
+  const radiusContent = (<>
+    <Row label="global" value={`${readNum(r, "md", 8)}px`}><Slider value={readNum(r, "md", 8)} min={0} max={32} step={1} onChange={(v) => patch("radius", "md", `${v}px`)} /></Row>
+    <Row label="button" value={`${readNum(r, "button", 8)}px`}><Slider value={readNum(r, "button", 8)} min={0} max={24} step={1} onChange={(v) => patch("radius", "button", `${v}px`)} /></Row>
+    <Row label="card" value={`${readNum(r, "lg", 12)}px`}><Slider value={readNum(r, "lg", 12)} min={0} max={32} step={1} onChange={(v) => patch("radius", "lg", `${v}px`)} /></Row>
+    <Row label="input" value={`${readNum(r, "input", 6)}px`}><Slider value={readNum(r, "input", 6)} min={0} max={16} step={1} onChange={(v) => patch("radius", "input", `${v}px`)} /></Row>
+  </>);
+
+  const bordersContent = (<>
+    <Row label="border w" value={`${readNum(bw, "thin", 1)}px`}><Slider value={readNum(bw, "thin", 1)} min={0} max={4} step={0.5} onChange={(v) => patch("borders", "width.thin", `${v}px`)} /></Row>
+    <Row label="style"><Segmented options={BORDER_STYLES} value={readStr(b, "style", "solid") as typeof BORDER_STYLES[number]} onChange={(v) => patch("borders", "style", v)} /></Row>
+    <Row label="card border"><Toggle checked={readBool(cards, "border", true)} onChange={(v) => patch("cards", "border", v)} /></Row>
+    <Row label="card shadow"><SelectField value={readStr(cards, "shadow", "md")} options={SHADOW_OPTIONS} onChange={(v) => patch("cards", "shadow", v)} /></Row>
+    <Row label="btn shadow"><Toggle checked={readBool(buttons, "shadow", false)} onChange={(v) => patch("buttons", "shadow", v)} /></Row>
+    <Row label="glow"><div style={{ display: "flex", alignItems: "center", gap: 8 }}><Toggle checked={readBool(sh, "glow", false)} onChange={(v) => patch("shadows", "glow", v)} />{readBool(sh, "glow", false) && <ColorInput value={sh?.["glow-color"]} onChange={(v) => patch("shadows", "glow-color", v)} />}</div></Row>
+  </>);
+
+  const motionContent = (<>
+    <Row label="fast" value={`${readNum(md, "fast", 150)}ms`}><Slider value={readNum(md, "fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration.fast", `${v}ms`)} /></Row>
+    <Row label="normal" value={`${readNum(md, "normal", 250)}ms`}><Slider value={readNum(md, "normal", 250)} min={100} max={500} step={10} onChange={(v) => patch("motion", "duration.normal", `${v}ms`)} /></Row>
+    <Row label="hover scale" value={readNum(m, "hover-scale", 1.02).toFixed(2)}><Slider value={readNum(m, "hover-scale", 1.02)} min={1.0} max={1.1} step={0.01} onChange={(v) => patch("motion", "hover-scale", String(v))} /></Row>
+    <Row label="press scale" value={readNum(m, "press-scale", 0.97).toFixed(2)}><Slider value={readNum(m, "press-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("motion", "press-scale", String(v))} /></Row>
+  </>);
+
+  const gridLayoutContent = (<>
+    <Row label="content-max" value={`${readNum(layout, "content-max", 1200)}px`}><Slider value={readNum(layout, "content-max", 1200)} min={768} max={1600} step={40} onChange={(v) => patch("layout", "content-max", `${v}px`)} /></Row>
+    <Row label="rail-gap" value={`${readNum(grid, "rail-gap", 24)}px`}><Slider value={readNum(grid, "rail-gap", 24)} min={8} max={48} step={4} onChange={(v) => patch("sigil", "rail-gap", `${v}px`)} /></Row>
+    <Row label="grid-cell" value={`${readNum(grid, "grid-cell", 48)}px`}><Slider value={readNum(grid, "grid-cell", 48)} min={16} max={80} step={4} onChange={(v) => patch("sigil", "grid-cell", `${v}px`)} /></Row>
+    <Row label="cross-stroke" value={`${readNum(grid, "cross-stroke", 1.5)}px`}><Slider value={readNum(grid, "cross-stroke", 1.5)} min={0} max={4} step={0.5} onChange={(v) => patch("sigil", "cross-stroke", `${v}px`)} /></Row>
+    <Row label="navbar-h" value={`${readNum(sp, "navbar-height", 56)}px`}><Slider value={readNum(sp, "navbar-height", 56)} min={36} max={96} step={4} onChange={(v) => patch("spacing", "navbar-height", `${v}px`)} /></Row>
+    <Row label="bento-gap" value={`${readNum(layout, "bento-gap", 12)}px`}><Slider value={readNum(layout, "bento-gap", 12)} min={2} max={32} step={2} onChange={(v) => patch("layout", "bento-gap", `${v}px`)} /></Row>
+    <Row label="grid lines"><Toggle checked={readBool(grid, "show-grid", true)} onChange={(v) => patch("sigil", "show-grid", v)} /></Row>
+    <Row label="dots"><Toggle checked={readBool(grid, "show-dots", false)} onChange={(v) => patch("sigil", "show-dots", v)} /></Row>
+    <Row label="cell borders"><Toggle checked={readBool(grid, "cell-borders", false)} onChange={(v) => patch("sigil", "cell-borders", v)} /></Row>
+    <Row label="cell bg"><Segmented options={CELL_BG_OPTIONS} value={readStr(grid, "cell-bg", "none") as typeof CELL_BG_OPTIONS[number]} onChange={(v) => patch("sigil", "cell-bg", v)} /></Row>
+  </>);
+
+  const patternsContent = (<>
+    <div style={{ marginBottom: 4 }}>
+      <span style={{ fontFamily: FONT, fontSize: 9, color: "var(--db-muted)", fontWeight: 500 }}>Gutter</span>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 4 }}>
+        {GUTTER_PATTERNS.map(p => <ChipButton key={p} label={p} active={currentGutterPattern === p} onClick={() => patch("sigil", "gutter-pattern", p)} />)}
+      </div>
+    </div>
+    <div>
+      <span style={{ fontFamily: FONT, fontSize: 9, color: "var(--db-muted)", fontWeight: 500 }}>Margin</span>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 3, marginTop: 4 }}>
+        {GUTTER_PATTERNS.map(p => <ChipButton key={p} label={p} active={currentMarginPattern === p} onClick={() => patch("sigil", "margin-pattern", p)} />)}
+      </div>
+    </div>
+  </>);
+
+  const alignmentContent = (<>
+    <Row label="content"><Segmented options={CONTENT_ALIGN} value={readStr(align, "content-align", "center") as typeof CONTENT_ALIGN[number]} onChange={(v) => patch("alignment" as keyof SigilTokens, "content-align", v)} /></Row>
+    <Row label="hero"><Segmented options={HERO_ALIGN} value={readStr(align, "hero-align", "center") as typeof HERO_ALIGN[number]} onChange={(v) => patch("alignment" as keyof SigilTokens, "hero-align", v)} /></Row>
+    <Row label="navbar"><Segmented options={NAVBAR_ALIGN} value={readStr(nav, "navbar-align", "full") as typeof NAVBAR_ALIGN[number]} onChange={(v) => patch("navigation", "navbar-align", v)} /></Row>
+    <Row label="rail visible"><Toggle checked={readBool(align, "rail-visible", false)} onChange={(v) => patch("alignment" as keyof SigilTokens, "rail-visible", v)} /></Row>
+  </>);
+
+  const handleRandomize = useCallback(() => {
+    const p = PRESET_DATA[Math.floor(Math.random() * PRESET_DATA.length)]!;
+    handlePreset(p.name);
+  }, [handlePreset]);
+
+  const iconBtn = (icon: ReactNode, onClick: () => void, title: string) => (
+    <button type="button" onClick={onClick} title={title} style={{
+      width: 24, height: 24, display: "flex", alignItems: "center", justifyContent: "center",
+      borderRadius: 4, border: "1px solid var(--db-border)", background: "none", color: "var(--db-muted)", cursor: "pointer",
+    }}>{icon}</button>
+  );
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 12px", flexShrink: 0, borderBottom: "1px solid var(--db-border)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <Grid3X3 size={12} style={{ color: "var(--db-accent)" }} />
+          <span style={{ fontFamily: FONT_DISPLAY, fontSize: 10, fontWeight: 700, color: "var(--db-text)" }}>Studio</span>
+          <span style={{ fontFamily: FONT_MONO, fontSize: 8, fontWeight: 600, padding: "1px 5px", borderRadius: 3, background: "var(--db-accent-dim)", color: "var(--db-accent)" }}>{activePreset}</span>
+        </div>
+        <div style={{ display: "flex", gap: 3 }}>
+          {iconBtn(<Save size={10} />, handleSave, "Save preset")}
+          {iconBtn(<RotateCcw size={10} />, handleReset, "Reset")}
+          {iconBtn(<Download size={10} />, handleExport, "Export CSS")}
+          {iconBtn(<X size={10} />, onClose, "Close")}
+        </div>
+      </div>
+
+      {/* Save name input */}
+      {savingName !== null && (
+        <div style={{ display: "flex", gap: 4, padding: "6px 12px", borderBottom: "1px solid var(--db-border)", background: "var(--db-accent-dim)" }}>
+          <input
+            autoFocus value={savingName}
+            onChange={(e) => setSavingName(e.target.value)}
+            onKeyDown={(e) => { if (e.key === "Enter") handleSave(); if (e.key === "Escape") setSavingName(null); }}
+            placeholder="preset name"
+            style={{ flex: 1, padding: "3px 6px", fontSize: 10, fontFamily: FONT, borderRadius: 3, border: "1px solid var(--db-border)", background: "var(--db-bg)", color: "var(--db-text)", outline: "none" }}
+          />
+          <button type="button" onClick={handleSave} style={{ padding: "3px 8px", fontSize: 9, fontFamily: FONT, fontWeight: 600, borderRadius: 3, border: "none", background: "var(--db-accent)", color: "var(--db-bg)", cursor: "pointer" }}>Save</button>
+          <button type="button" onClick={() => setSavingName(null)} style={{ padding: "3px 6px", fontSize: 9, fontFamily: FONT, borderRadius: 3, border: "1px solid var(--db-border)", background: "none", color: "var(--db-muted)", cursor: "pointer" }}>Cancel</button>
+        </div>
+      )}
+
+      <PresetStrip activePreset={activePreset} onSelect={handlePreset} onRandomize={handleRandomize} customPresets={customPresets} onDeleteCustom={handleDeleteCustom} />
+
+      <div className="devbar-scroll" style={{ flex: 1, overflowY: "auto", overflowX: "hidden" }}>
+        <Section title="Colors" defaultOpen>{colorsContent}</Section>
+        <Section title="Typography">{typographyContent}</Section>
+        <Section title="Spacing">{spacingContent}</Section>
+        <Section title="Radius">{radiusContent}</Section>
+        <Section title="Borders & Shadows">{bordersContent}</Section>
+        <Section title="Motion">{motionContent}</Section>
+        <Section title="Grid & Layout">{gridLayoutContent}</Section>
+        <Section title="Patterns">{patternsContent}</Section>
+        <Section title="Alignment">{alignmentContent}</Section>
+        <Section title="Sound"><Row label="enabled"><Toggle checked={soundEnabled} onChange={setSoundEnabled} /></Row></Section>
+      </div>
+    </div>
+  );
 }
+
+/* ================================================================== */
+/*  Toolbar                                                            */
+/* ================================================================== */
+
+function Toolbar() {
+  const devbar = useDevBar();
+  const { activePreset, setPreset } = useSigilTokens();
+  const { play, setActivePreset: setSoundPreset } = useSigilSound();
+
+  if (!devbar) return null;
+  const { sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, dock, setDock, agentOpen, setAgentOpen } = devbar;
+
+  const handleRandomize = () => {
+    const p = PRESET_DATA[Math.floor(Math.random() * PRESET_DATA.length)]!;
+    setPreset(p.name);
+    setSoundPreset(p.name);
+    play("preset");
+  };
+
+  return (
+    <div className="devbar-chrome" style={{
+      height: TOOLBAR_H, flexShrink: 0, display: "flex", alignItems: "center", justifyContent: "space-between",
+      padding: "0 12px", background: "var(--db-surface)",
+      borderTop: canvasMode ? "none" : "1px solid var(--db-border)",
+      backdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
+      WebkitBackdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
+      zIndex: 10001,
+    }}>
+      {/* Left: brand + preset */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        <button type="button" onClick={() => setSidebarOpen(!sidebarOpen)} style={{
+          display: "flex", alignItems: "center", gap: 6, padding: "4px 10px 4px 6px", borderRadius: 5,
+          border: sidebarOpen ? "1px solid var(--db-accent)" : "1px solid var(--db-border)",
+          background: sidebarOpen ? "var(--db-accent-dim)" : "transparent", cursor: "pointer", transition: "all 150ms ease-out",
+        }}>
+          <div style={{ width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center", borderRadius: 3, background: "var(--db-accent-mid)" }}>
+            <Grid3X3 size={9} style={{ color: "var(--db-accent)" }} />
+          </div>
+          <span style={{ fontFamily: FONT_DISPLAY, fontSize: 10, fontWeight: 700, color: sidebarOpen ? "var(--db-accent)" : "var(--db-text2)", letterSpacing: "0.02em" }}>sigil</span>
+        </button>
+        <span style={{ fontFamily: FONT, fontSize: 9.5, fontWeight: 600, padding: "2px 8px", borderRadius: 4, background: "var(--db-accent-dim)", color: "var(--db-accent)" }}>{activePreset}</span>
+      </div>
+
+      {/* Center: mode toggles */}
+      <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+        <ToolbarButton icon={<Monitor size={11} />} label="Canvas" active={canvasMode} onClick={() => { const next = !canvasMode; setCanvasMode(next); if (next) { setSidebarOpen(true); } else { setSidebarOpen(false); setAgentOpen(false); } }} />
+        {canvasMode && (
+          <>
+            <ToolbarButton icon={dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />} label={dock} active={false} onClick={() => setDock(dock === "left" ? "right" : "left")} />
+            <ToolbarButton icon={<MessageSquare size={11} />} label="Agent" active={agentOpen} onClick={() => setAgentOpen(!agentOpen)} />
+          </>
+        )}
+      </div>
+
+      {/* Right: actions */}
+      <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
+        <ToolbarButton icon={<Shuffle size={11} />} label="Random" active={false} onClick={handleRandomize} />
+      </div>
+    </div>
+  );
+}
+
+function ToolbarButton({ icon, label, active, onClick }: { icon: ReactNode; label: string; active: boolean; onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick} style={{
+      display: "flex", alignItems: "center", gap: 4, padding: "4px 8px", borderRadius: 4,
+      border: active ? "1px solid var(--db-accent)" : "1px solid var(--db-border)",
+      background: active ? "var(--db-accent-dim)" : "transparent",
+      fontFamily: FONT, fontSize: 9.5, fontWeight: active ? 600 : 500,
+      color: active ? "var(--db-accent)" : "var(--db-muted)", cursor: "pointer", transition: "all 120ms ease-out",
+    }}>{icon}{label}</button>
+  );
+}
+
+/* ================================================================== */
+/*  Animation helpers                                                  */
+/* ================================================================== */
+
+const EASE_SPRING = "cubic-bezier(0.32, 0.72, 0, 1)";
+const DUR = "380ms";
+
+/* ================================================================== */
+/*  Edge Toggle Handle                                                 */
+/* ================================================================== */
+
+function EdgeHandle({ dock, open, onToggle }: { dock: DockPosition; open: boolean; onToggle: () => void }) {
+  const chevronRotation = open
+    ? (dock === "left" ? 180 : 0)
+    : (dock === "left" ? 0 : 180);
+
+  return (
+    <button type="button" onClick={onToggle} style={{
+      position: "absolute", top: "50%", transform: "translateY(-50%)", width: 20, height: 48,
+      ...(dock === "left" ? { right: -20 } : { left: -20 }),
+      zIndex: 2, display: "flex", alignItems: "center", justifyContent: "center",
+      borderRadius: dock === "left" ? "0 6px 6px 0" : "6px 0 0 6px",
+      background: "var(--db-surface)", border: "1px solid var(--db-border)",
+      ...(dock === "left" ? { borderLeft: "none" } : { borderRight: "none" }),
+      cursor: "pointer", padding: 0, color: "var(--db-muted)", transition: `all ${DUR} ${EASE_SPRING}`, opacity: 0.7,
+    }}
+      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.color = "var(--db-accent)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.color = "var(--db-muted)"; }}
+    >
+      <ChevronDown size={11} style={{ transform: `rotate(${chevronRotation}deg)`, transition: `transform ${DUR} ${EASE_SPRING}` }} />
+    </button>
+  );
+}
+
+/* ================================================================== */
+/*  Collapsed Tab                                                      */
+/* ================================================================== */
+
+function CollapsedTab({ dock, onOpen }: { dock: DockPosition; onOpen: () => void }) {
+  return (
+    <button type="button" onClick={onOpen} style={{
+      position: "absolute", zIndex: 2,
+      ...(dock === "left" ? { left: 0, top: "50%", transform: "translateY(-50%)" } : { right: 0, top: "50%", transform: "translateY(-50%)" }),
+      display: "flex", alignItems: "center", gap: 6, padding: "10px 8px", flexDirection: "column",
+      borderRadius: dock === "left" ? "0 8px 8px 0" : "8px 0 0 8px",
+      background: "var(--db-surface)", border: "1px solid var(--db-border)",
+      ...(dock === "left" ? { borderLeft: "none" } : { borderRight: "none" }),
+      cursor: "pointer", color: "var(--db-muted)", transition: "all 200ms ease", boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+    }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--db-accent)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--db-muted)"; }}
+    >
+      <Grid3X3 size={12} style={{ color: "inherit" }} />
+      <span style={{ fontFamily: FONT_DISPLAY, fontSize: 9, fontWeight: 600, letterSpacing: "0.04em", writingMode: "vertical-lr", textOrientation: "mixed" }}>Studio</span>
+    </button>
+  );
+}
+
+/* ================================================================== */
+/*  Canvas Viewport                                                    */
+/* ================================================================== */
+
+function CanvasViewport({ children }: { children: ReactNode }) {
+  return (
+    <div className="devbar-canvas-outer" style={{
+      flex: 1, minWidth: 0, minHeight: 0, display: "flex", alignItems: "stretch", justifyContent: "center",
+      padding: 12, background: "var(--db-surface)", transition: `padding ${DUR} ${EASE_SPRING}`,
+    }}>
+      <div className="devbar-canvas-frame" style={{
+        width: "100%", borderRadius: 8,
+        border: "1px solid var(--db-border)",
+        overflowX: "hidden", overflowY: "auto", transition: `border-radius ${DUR} ${EASE_SPRING}`,
+      }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Studio Agent Chat                                                  */
+/* ================================================================== */
+
+type StudioMessage = { id: string; role: "user" | "assistant"; content: string };
+
+function generateId() {
+  return Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+}
+
+function extractActions(text: string) {
+  const actions: Record<string, unknown>[] = [];
+  const regex = /```json\s*\n([\s\S]*?)```/g;
+  let match: RegExpExecArray | null;
+  while ((match = regex.exec(text)) !== null) {
+    try { const p = JSON.parse(match[1].trim()); if (p && typeof p === "object") actions.push(p); } catch { /* skip */ }
+  }
+  return actions;
+}
+
+function StudioAgentChat() {
+  const { tokens, patchTokens, setPreset, setTokens } = useSigilTokens();
+  const [messages, setMessages] = useState<StudioMessage[]>([]);
+  const [input, setInput] = useState("");
+  const [isStreaming, setIsStreaming] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+  const processedRef = useRef(new Set<string>());
+
+  const scrollToBottom = useCallback(() => {
+    const el = scrollRef.current;
+    if (el) requestAnimationFrame(() => { el.scrollTop = el.scrollHeight; });
+  }, []);
+
+  useEffect(() => { scrollToBottom(); }, [messages, scrollToBottom]);
+
+  const applyActions = useCallback((msgId: string, content: string) => {
+    const actions = extractActions(content);
+    for (const action of actions) {
+      const key = `${msgId}:${JSON.stringify(action)}`;
+      if (processedRef.current.has(key)) continue;
+      processedRef.current.add(key);
+
+      if ("patch" in action && action.patch && typeof action.patch === "object") {
+        for (const [cat, val] of Object.entries(action.patch as Record<string, unknown>)) {
+          if (typeof val === "object" && val !== null) {
+            for (const [k, v] of Object.entries(val as Record<string, unknown>)) {
+              patchTokens(cat as keyof SigilTokens, k, v);
+            }
+          }
+        }
+      }
+      if ("setPreset" in action && typeof action.setPreset === "string") {
+        setPreset(action.setPreset);
+      }
+      if ("savePreset" in action && action.savePreset && typeof action.savePreset === "object") {
+        const sp = action.savePreset as Record<string, unknown>;
+        const name = typeof sp.name === "string" ? sp.name : "agent-preset";
+        const existing = loadCustomPresets();
+        const next = [...existing.filter(p => p.name !== name), { name, tokens, createdAt: Date.now() }];
+        saveCustomPresetsToStorage(next);
+      }
+    }
+  }, [patchTokens, setPreset, setTokens, tokens]);
+
+  const handleSubmit = useCallback(async () => {
+    const trimmed = input.trim();
+    if (!trimmed || isStreaming) return;
+
+    const userMsg: StudioMessage = { id: generateId(), role: "user", content: trimmed };
+    const assistantMsg: StudioMessage = { id: generateId(), role: "assistant", content: "" };
+    const allMessages = [...messages, userMsg];
+    setMessages([...allMessages, assistantMsg]);
+    setInput("");
+    setIsStreaming(true);
+
+    const controller = new AbortController();
+    abortRef.current = controller;
+
+    try {
+      const res = await fetch("/api/ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: allMessages.map(m => ({ role: m.role, content: m.content })),
+          model: "gpt-5.4-mini",
+          currentTokens: tokens,
+          canvasItems: [],
+          mode: "studio",
+        }),
+        signal: controller.signal,
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        setMessages(prev => prev.map(m => m.id === assistantMsg.id ? { ...m, content: `Error: ${err}` } : m));
+        setIsStreaming(false);
+        return;
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) { setIsStreaming(false); return; }
+
+      const decoder = new TextDecoder();
+      let accumulated = "";
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        accumulated += decoder.decode(value, { stream: true });
+        const current = accumulated;
+        setMessages(prev => prev.map(m => m.id === assistantMsg.id ? { ...m, content: current } : m));
+      }
+
+      applyActions(assistantMsg.id, accumulated);
+    } catch (err) {
+      if ((err as Error).name !== "AbortError") {
+        setMessages(prev => prev.map(m => m.id === assistantMsg.id ? { ...m, content: `Error: ${(err as Error).message}` } : m));
+      }
+    } finally {
+      setIsStreaming(false);
+      abortRef.current = null;
+    }
+  }, [input, isStreaming, messages, tokens, applyActions]);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", height: "100%", color: "var(--db-text)" }}>
+      {/* Header */}
+      <div style={{
+        padding: "10px 14px", borderBottom: "1px solid var(--db-border)", display: "flex", alignItems: "center", gap: 6,
+        background: "var(--db-surface)",
+      }}>
+        <div style={{ width: 6, height: 6, borderRadius: "50%", background: isStreaming ? "#d97706" : "#059669" }} />
+        <span style={{ fontFamily: FONT_DISPLAY, fontSize: 11, fontWeight: 700, color: "var(--db-text)" }}>Preset Agent</span>
+      </div>
+
+      {/* Messages */}
+      <div ref={scrollRef} className="devbar-scroll" style={{ flex: 1, overflow: "auto", padding: 12, display: "flex", flexDirection: "column", gap: 8 }}>
+        {messages.length === 0 && (
+          <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8, color: "var(--db-muted)", fontSize: 12, textAlign: "center", padding: 24 }}>
+            <span style={{ fontSize: 11, lineHeight: 1.6, fontFamily: FONT }}>
+              Describe your ideal aesthetic. The agent will create and apply token changes in real-time.
+            </span>
+          </div>
+        )}
+        {messages.map((msg) => {
+          const isUser = msg.role === "user";
+          return (
+            <div key={msg.id} style={{ display: "flex", justifyContent: isUser ? "flex-end" : "flex-start" }}>
+              <div style={{
+                maxWidth: "88%", padding: "8px 12px", borderRadius: 10, fontSize: 12, lineHeight: 1.5, fontFamily: FONT,
+                background: isUser ? "var(--db-accent)" : "var(--db-surface)",
+                color: isUser ? "var(--db-bg)" : "var(--db-text)",
+                border: isUser ? "none" : "1px solid var(--db-border)",
+                whiteSpace: "pre-wrap", wordBreak: "break-word",
+              }}>
+                {msg.content || <span style={{ display: "inline-block", width: 6, height: 14, background: "var(--db-muted)", borderRadius: 1, animation: "sigil-blink 1s step-end infinite" }} />}
+              </div>
+            </div>
+          );
+        })}
+        {isStreaming && (
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <button onClick={() => { abortRef.current?.abort(); setIsStreaming(false); }} style={{
+              padding: "4px 10px", borderRadius: 6, fontSize: 10, fontWeight: 500, fontFamily: FONT,
+              background: "rgba(220,38,38,0.1)", color: "#dc2626", border: "none", cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 4,
+            }}><Square size={8} /> Stop</button>
+          </div>
+        )}
+      </div>
+
+      {/* Input */}
+      <div style={{ borderTop: "1px solid var(--db-border)", padding: "8px 12px", display: "flex", gap: 6, alignItems: "flex-end", background: "var(--db-surface)" }}>
+        <textarea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); handleSubmit(); } }}
+          placeholder="Describe an aesthetic..."
+          rows={1}
+          style={{
+            flex: 1, resize: "none", padding: "8px 10px", borderRadius: 8,
+            border: "1px solid var(--db-border)", background: "var(--db-bg)", color: "var(--db-text)",
+            fontSize: 12, lineHeight: 1.4, fontFamily: FONT, outline: "none", minHeight: 36, maxHeight: 120,
+          }}
+          onInput={(e) => { const t = e.currentTarget; t.style.height = "auto"; t.style.height = `${Math.min(t.scrollHeight, 120)}px`; }}
+        />
+        <button
+          onClick={handleSubmit}
+          disabled={isStreaming || !input.trim()}
+          style={{
+            padding: "8px 12px", borderRadius: 8, border: "none", background: "var(--db-accent)", color: "var(--db-bg)",
+            fontSize: 12, fontWeight: 500, fontFamily: FONT,
+            cursor: isStreaming || !input.trim() ? "not-allowed" : "pointer",
+            opacity: isStreaming || !input.trim() ? 0.5 : 1, whiteSpace: "nowrap", height: 36,
+            display: "flex", alignItems: "center", gap: 4,
+          }}
+        ><Send size={12} /></button>
+      </div>
+
+      <style>{`@keyframes sigil-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }`}</style>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Agent Panel (right side in canvas mode)                            */
+/* ================================================================== */
+
+function AgentPanel({ open }: { open: boolean }) {
+  return (
+    <div className="devbar-chrome" style={{
+      width: open ? AGENT_W : 0, flexShrink: 0, overflow: "hidden",
+      background: "var(--db-surface)",
+      transition: `width ${DUR} ${EASE_SPRING}`, willChange: "width",
+    }}>
+      <div style={{ width: AGENT_W, height: "100%", opacity: open ? 1 : 0, transition: `opacity ${open ? "250ms 80ms" : "120ms"} ease` }}>
+        <StudioAgentChat />
+      </div>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Sidebar Panel                                                      */
+/* ================================================================== */
+
+function SidebarPanel({ mode, dock, open }: { mode: "canvas" | "normal"; dock: DockPosition; open: boolean }) {
+  const { setSidebarOpen } = useDevBar()!;
+
+  if (mode === "canvas") {
+    return (
+      <div className="devbar-chrome" style={{
+        position: "relative", width: open ? SIDEBAR_W : 0, flexShrink: 0,
+        overflow: open ? "visible" : "hidden", background: "var(--db-surface)",
+        transition: `width ${DUR} ${EASE_SPRING}`, willChange: "width",
+      }}>
+        <div style={{ width: SIDEBAR_W, height: "100%", opacity: open ? 1 : 0, transition: `opacity ${open ? "250ms 80ms" : "120ms"} ease` }}>
+          <SidebarContent onClose={() => setSidebarOpen(false)} />
+        </div>
+        {open && <EdgeHandle dock={dock} open={open} onToggle={() => setSidebarOpen(!open)} />}
+      </div>
+    );
+  }
+
+  /* Normal mode: fixed sidebar that slides in/out */
+  return (
+    <div className="devbar-chrome" style={{
+      position: "fixed", zIndex: 10000,
+      top: 0, bottom: TOOLBAR_H, width: SIDEBAR_W,
+      ...(dock === "left"
+        ? { left: 0, borderRight: "1px solid var(--db-border)" }
+        : { right: 0, borderLeft: "1px solid var(--db-border)" }),
+      background: "var(--db-surface)",
+      backdropFilter: "blur(20px) saturate(1.5)",
+      WebkitBackdropFilter: "blur(20px) saturate(1.5)",
+      transform: open
+        ? "translateX(0)"
+        : dock === "left" ? `translateX(-${SIDEBAR_W}px)` : `translateX(${SIDEBAR_W}px)`,
+      transition: `transform ${DUR} ${EASE_SPRING}`,
+      willChange: "transform",
+      overflow: "hidden",
+    }}>
+      <SidebarContent onClose={() => setSidebarOpen(false)} />
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Main DevBar                                                        */
+/* ================================================================== */
+
+export function SigilDevBar({ children }: { children: ReactNode }) {
+  const devbar = useDevBar();
+  if (!devbar) return <>{children}</>;
+
+  const { sidebarOpen, setSidebarOpen, canvasMode, dock, agentOpen } = devbar;
+
+  if (canvasMode) {
+    const isLeftDock = dock === "left";
+
+    return (
+      <div className="devbar-root" style={{
+        position: "fixed", inset: 0, display: "flex", flexDirection: "column",
+        background: "var(--db-bg)", zIndex: 9998,
+      }}>
+        <style>{DEVBAR_STYLES}</style>
+
+        <div style={{ flex: 1, display: "flex", flexDirection: "row", minHeight: 0, minWidth: 0, overflow: "hidden", position: "relative" }}>
+          {isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} />}
+          <CanvasViewport>{children}</CanvasViewport>
+          {!isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} />}
+          <AgentPanel open={agentOpen} />
+          {!sidebarOpen && <CollapsedTab dock={dock} onOpen={() => setSidebarOpen(true)} />}
+        </div>
+
+        <Toolbar />
+      </div>
+    );
+  }
+
+  return (
+    <div className="devbar-root">
+      <style>{DEVBAR_STYLES}</style>
+      <div style={{ paddingBottom: TOOLBAR_H, minHeight: "100dvh" }}>{children}</div>
+      <SidebarPanel mode="normal" dock={dock} open={sidebarOpen} />
+      <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}><Toolbar /></div>
+    </div>
+  );
+}
+
+/* ================================================================== */
+/*  Shared styles                                                      */
+/* ================================================================== */
+
+const DEVBAR_STYLES = `
+  .devbar-root {
+    --db-bg: #ffffff;
+    --db-surface: #f8f8fa;
+    --db-border: #d0d0d8;
+    --db-text: #0a0a0f;
+    --db-text2: #4a4a55;
+    --db-muted: #8a8a95;
+    --db-accent: #18181b;
+    --db-accent-dim: rgba(24,24,27,0.06);
+    --db-accent-mid: rgba(24,24,27,0.10);
+    color: var(--db-text);
+  }
+  .dark .devbar-root, [data-theme="dark"] .devbar-root {
+    --db-bg: #0a0a0f;
+    --db-surface: #141419;
+    --db-border: #2c2c3c;
+    --db-text: #fafafa;
+    --db-text2: #a0a0aa;
+    --db-muted: #8888a0;
+    --db-accent: #e4e4e7;
+    --db-accent-dim: rgba(228,228,231,0.06);
+    --db-accent-mid: rgba(228,228,231,0.10);
+  }
+  .devbar-chrome {
+    --s-primary: var(--db-accent);
+    --s-primary-hover: var(--db-accent);
+    --s-background: var(--db-bg);
+    --s-surface: var(--db-surface);
+    --s-surface-sunken: var(--db-surface);
+    --s-border: var(--db-border);
+    --s-border-style: solid;
+    --s-text: var(--db-text);
+    --s-text-secondary: var(--db-text2);
+    --s-text-muted: var(--db-muted);
+    --s-ring: var(--db-accent);
+    --s-ring-offset: var(--db-bg);
+    --s-shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --s-radius-md: 6px;
+    --s-radius-input: 6px;
+    --s-radius-full: 9999px;
+    --s-duration-fast: 150ms;
+    --s-input-height: 28px;
+    --s-error: #dc2626;
+    font-family: ${FONT_BODY};
+  }
+  .devbar-canvas-frame {
+    animation: devbar-canvas-enter ${DUR} ${EASE_SPRING} both;
+  }
+  @keyframes devbar-canvas-enter {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .devbar-scroll::-webkit-scrollbar { width: 4px; height: 4px; }
+  .devbar-scroll::-webkit-scrollbar-track { background: transparent; }
+  .devbar-scroll::-webkit-scrollbar-thumb { background: var(--db-border); border-radius: 2px; }
+`;

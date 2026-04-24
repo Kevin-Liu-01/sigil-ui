@@ -1,0 +1,42 @@
+---
+title: Stagger
+description: Auto-staggers children with configurable interval, delay, and offset. Each child animates in sequence on scroll or mount.
+---
+
+## Import
+
+```tsx
+import { Stagger } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Stagger interval={80}>
+  <Card>First</Card>
+  <Card>Second</Card>
+  <Card>Third</Card>
+</Stagger>
+```
+
+## Custom timing
+
+```tsx
+<Stagger interval={120} delay={200} yOffset={30} trigger="mount">
+  {items.map((item) => (
+    <div key={item.id}>{item.name}</div>
+  ))}
+</Stagger>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `interval` | `number` | `80` | Delay between children in ms |
+| `delay` | `number` | `0` | Base delay before first child |
+| `yOffset` | `number` | `20` | Vertical offset in px |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+
+Respects `prefers-reduced-motion`.

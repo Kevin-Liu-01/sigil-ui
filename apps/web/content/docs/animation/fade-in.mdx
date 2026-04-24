@@ -1,0 +1,66 @@
+---
+title: FadeIn
+description: Directional fade-in wrapper with scroll or mount trigger. Supports up, down, left, right, and none directions.
+---
+
+## Import
+
+```tsx
+import { FadeIn } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<FadeIn>
+  <p>Fades up into view on scroll</p>
+</FadeIn>
+```
+
+## Directions
+
+```tsx
+<FadeIn direction="up">Fade up (default)</FadeIn>
+<FadeIn direction="down">Fade down</FadeIn>
+<FadeIn direction="left">Fade from left</FadeIn>
+<FadeIn direction="right">Fade from right</FadeIn>
+<FadeIn direction="none">Fade only (no translate)</FadeIn>
+```
+
+## Mount trigger
+
+By default, FadeIn uses IntersectionObserver (scroll trigger). To animate immediately on mount:
+
+```tsx
+<FadeIn trigger="mount">
+  <p>Visible immediately</p>
+</FadeIn>
+```
+
+## Custom offset and delay
+
+```tsx
+<FadeIn direction="up" offset={40} delay={200}>
+  <p>40px offset, 200ms delay</p>
+</FadeIn>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-duration-normal` | Transition duration |
+| `--s-ease-out` | Transition easing |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `direction` | `"up" \| "down" \| "left" \| "right" \| "none"` | `"up"` | Fade direction |
+| `offset` | `number` | `24` | Translation distance in px |
+| `delay` | `number` | `0` | Delay in ms |
+| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Animation trigger mode |
+| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+| `children` | `ReactNode` | — | Content to animate |
+
+Respects `prefers-reduced-motion`.

@@ -1,17 +1,24 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { SigilFrame as SigilFrameBase } from "@sigil-ui/components";
 import type { GutterPattern } from "@sigil-ui/tokens";
 
+const EdgelessContext = createContext(false);
+
+export function useIsEdgeless(): boolean {
+  return useContext(EdgelessContext);
+}
+
 export function SigilFrame({ children }: { children: ReactNode }) {
-  let gutterPattern: GutterPattern = "grid";
-  let marginPattern: GutterPattern = "horizontal";
+  let gutterPattern: GutterPattern = "none";
+  let marginPattern: GutterPattern = "none";
   let contentMax = 1200;
   let railGap = 48;
   let gridCell = 16;
   let crossStroke = 1.5;
+  let isEdgeless = false;
 
   try {
     const { tokens } = useSigilTokens();
@@ -24,20 +31,25 @@ export function SigilFrame({ children }: { children: ReactNode }) {
     if (sigil?.["cross-stroke"]) crossStroke = parseFloat(sigil["cross-stroke"] as string) || crossStroke;
     if (sigil?.["rail-gap"]) railGap = parseInt(sigil["rail-gap"] as string) || railGap;
     if (layout?.["content-max"]) contentMax = parseInt(layout["content-max"] as string) || contentMax;
+
+    isEdgeless = sigil?.["gutter-visible"] === false
+      || (gutterPattern === "none" && marginPattern === "none" && railGap === 0);
   } catch { /* no provider */ }
 
   return (
-    <SigilFrameBase
-      showGutterGrid
-      showMarginLines
-      gutterPattern={gutterPattern}
-      marginPattern={marginPattern}
-      contentMax={contentMax}
-      railGap={railGap}
-      gridCell={gridCell}
-      crossStroke={crossStroke}
-    >
-      {children}
-    </SigilFrameBase>
+    <EdgelessContext.Provider value={isEdgeless}>
+      <SigilFrameBase
+        showGutterGrid={!isEdgeless}
+        showMarginLines={!isEdgeless}
+        gutterPattern={gutterPattern}
+        marginPattern={marginPattern}
+        contentMax={contentMax}
+        railGap={railGap}
+        gridCell={gridCell}
+        crossStroke={crossStroke}
+      >
+        {children}
+      </SigilFrameBase>
+    </EdgelessContext.Provider>
   );
 }

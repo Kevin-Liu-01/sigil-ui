@@ -36,25 +36,25 @@ Or use a string for CSS units:
 
 ```tsx
 {/* Token-driven (default) */}
-<Diamond color="var(--r-primary)" />
+<Diamond color="var(--s-primary)" />
 
 {/* Direct color */}
 <Diamond color="oklch(0.65 0.17 160)" />
 
 {/* Semantic token */}
-<Diamond color="var(--r-success)" />
-<Diamond color="var(--r-error)" />
-<Diamond color="var(--r-warning)" />
+<Diamond color="var(--s-success)" />
+<Diamond color="var(--s-error)" />
+<Diamond color="var(--s-warning)" />
 ```
 
 ## Filled vs outlined
 
 ```tsx
 {/* Filled (default) */}
-<Diamond variant="filled" color="var(--r-primary)" />
+<Diamond variant="filled" color="var(--s-primary)" />
 
 {/* Outlined */}
-<Diamond variant="outlined" color="var(--r-primary)" />
+<Diamond variant="outlined" color="var(--s-primary)" />
 <Diamond variant="outlined" strokeWidth={2} />
 ```
 
@@ -63,23 +63,23 @@ Or use a string for CSS units:
 ### Pulse
 
 ```tsx
-<Diamond animated="pulse" color="var(--r-success)" />
+<Diamond animated="pulse" color="var(--s-success)" />
 ```
 
-A gentle scale pulse using `--r-duration-slow` and `--r-ease-spring`.
+A gentle scale pulse using `--s-duration-slow` and `--s-ease-spring`.
 
 ### Spin
 
 ```tsx
-<Diamond animated="spin" color="var(--r-primary)" />
+<Diamond animated="spin" color="var(--s-primary)" />
 ```
 
-Continuous rotation using `--r-duration-slower`.
+Continuous rotation using `--s-duration-slower`.
 
 ### Float
 
 ```tsx
-<Diamond animated="float" color="var(--r-secondary)" />
+<Diamond animated="float" color="var(--s-secondary)" />
 ```
 
 Subtle vertical float for decorative use.
@@ -88,17 +88,17 @@ Subtle vertical float for decorative use.
 
 ```tsx
 <Stack direction="row" gap={8} align="center">
-  <Diamond size={8} color="var(--r-success)" />
+  <Diamond size={8} color="var(--s-success)" />
   <span>Online</span>
 </Stack>
 
 <Stack direction="row" gap={8} align="center">
-  <Diamond size={8} color="var(--r-error)" />
+  <Diamond size={8} color="var(--s-error)" />
   <span>Offline</span>
 </Stack>
 
 <Stack direction="row" gap={8} align="center">
-  <Diamond size={8} color="var(--r-warning)" animated="pulse" />
+  <Diamond size={8} color="var(--s-warning)" animated="pulse" />
   <span>Connecting...</span>
 </Stack>
 ```
@@ -107,9 +107,9 @@ Subtle vertical float for decorative use.
 
 ```tsx
 <div className="relative h-64">
-  <Diamond size={48} color="var(--r-primary-muted)" className="absolute top-4 left-8" />
-  <Diamond size={24} color="var(--r-primary)" className="absolute top-12 right-16" />
-  <Diamond size={32} color="var(--r-secondary)" className="absolute bottom-8 left-1/2" />
+  <Diamond size={48} color="var(--s-primary-muted)" className="absolute top-4 left-8" />
+  <Diamond size={24} color="var(--s-primary)" className="absolute top-12 right-16" />
+  <Diamond size={32} color="var(--s-secondary)" className="absolute bottom-8 left-1/2" />
 </div>
 ```
 
@@ -117,19 +117,19 @@ Subtle vertical float for decorative use.
 
 | CSS Variable | Used for |
 |---|---|
-| `--r-primary` | Default fill color |
-| `--r-border` | Outlined variant stroke |
-| `--r-duration-slow` | Pulse animation duration |
-| `--r-duration-slower` | Spin animation duration |
-| `--r-ease-spring` | Pulse easing |
-| `--r-ease-default` | Float easing |
+| `--s-primary` | Default fill color |
+| `--s-border` | Outlined variant stroke |
+| `--s-duration-slow` | Pulse animation duration |
+| `--s-duration-slower` | Spin animation duration |
+| `--s-ease-spring` | Pulse easing |
+| `--s-ease-default` | Float easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `size` | `number \| string` | `24` | Width and height |
-| `color` | `string` | `var(--r-primary)` | Fill or stroke color |
+| `color` | `string` | `var(--s-primary)` | Fill or stroke color |
 | `variant` | `"filled" \| "outlined"` | `"filled"` | Visual variant |
 | `strokeWidth` | `number` | `1.5` | Stroke width for outlined variant |
 | `animated` | `"pulse" \| "spin" \| "float" \| false` | `false` | Animation type |

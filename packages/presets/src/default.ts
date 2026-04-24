@@ -1,55 +1,72 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
 
+/**
+ * Default preset — the authoritative neutral zinc theme.
+ *
+ * Design intent: sharp (0px radius), structural, engineering-precision feel.
+ * Uses { light, dark } for primary/contrast colors because zinc neutrals
+ * must flip between near-black and near-white across modes. Other presets
+ * use single OKLCH values with moderate lightness that work in both modes.
+ *
+ * global.css must mirror these values so there's no flash on initial load.
+ */
 export const defaultPreset: SigilPreset = {
   name: "default",
   metadata: {
     description:
-      "A polished neutral zinc theme. Modern radii, balanced contrast, ready for production.",
+      "A polished neutral zinc theme. Sharp radii, balanced contrast, ready for production.",
     mood: "clean, modern, professional",
     tags: ["default", "neutral", "zinc", "modern"],
   },
   tokens: {
     colors: {
-      background: { light: "#ffffff", dark: "#09090b" },
-      surface: { light: "#f4f4f5", dark: "#18181b" },
-      "surface-elevated": { light: "#ffffff", dark: "#27272a" },
-      "surface-sunken": { light: "#f4f4f5", dark: "#09090b" },
-      primary: "#18181b",
-      "primary-hover": "#27272a",
-      "primary-muted": "rgba(24, 24, 27, 0.08)",
-      "primary-contrast": "#ffffff",
-      secondary: "#f4f4f5",
-      "secondary-hover": "#e4e4e7",
-      "secondary-muted": "rgba(244, 244, 245, 0.6)",
-      accent: "#f4f4f5",
-      "accent-hover": "#e4e4e7",
-      "accent-muted": "rgba(244, 244, 245, 0.6)",
-      text: { light: "#09090b", dark: "#fafafa" },
-      "text-secondary": { light: "#3f3f46", dark: "#a1a1aa" },
-      "text-muted": { light: "#71717a", dark: "#a1a1aa" },
-      "text-subtle": { light: "#a1a1aa", dark: "#71717a" },
-      "text-disabled": { light: "#d4d4d8", dark: "#3f3f46" },
-      "text-inverse": { light: "#fafafa", dark: "#09090b" },
-      border: { light: "#e4e4e7", dark: "#27272a" },
-      "border-muted": { light: "#f4f4f5", dark: "#18181b" },
-      "border-strong": { light: "#d4d4d8", dark: "#3f3f46" },
-      "border-interactive": { light: "#18181b", dark: "#fafafa" },
-      success: "#22c55e",
-      "success-muted": "#f0fdf4",
-      warning: "#eab308",
-      "warning-muted": "#fefce8",
-      error: "#ef4444",
-      "error-muted": "#fef2f2",
-      info: "#3b82f6",
-      "info-muted": "#eff6ff",
+      background: { light: "#ffffff", dark: "#0a0a0f" },
+      surface: { light: "#f8f8fa", dark: "#141419" },
+      "surface-elevated": { light: "#ffffff", dark: "#1a1a22" },
+      "surface-sunken": { light: "#f0f0f4", dark: "#06060a" },
+
+      primary: { light: "#18181b", dark: "#e4e4e7" },
+      "primary-hover": { light: "#27272a", dark: "#d4d4d8" },
+      "primary-muted": { light: "rgba(24, 24, 27, 0.1)", dark: "rgba(228, 228, 231, 0.1)" },
+      "primary-contrast": { light: "#ffffff", dark: "#0a0a0f" },
+
+      secondary: { light: "#f4f4f5", dark: "#27272a" },
+      "secondary-hover": { light: "#e4e4e7", dark: "#3f3f46" },
+      "secondary-muted": { light: "rgba(244, 244, 245, 0.6)", dark: "rgba(39, 39, 42, 0.6)" },
+
+      accent: { light: "#f4f4f5", dark: "#27272a" },
+      "accent-hover": { light: "#e4e4e7", dark: "#3f3f46" },
+      "accent-muted": { light: "rgba(244, 244, 245, 0.6)", dark: "rgba(39, 39, 42, 0.6)" },
+
+      text: { light: "#0a0a0f", dark: "#fafafa" },
+      "text-secondary": { light: "#4a4a55", dark: "#a0a0aa" },
+      "text-muted": { light: "#8a8a95", dark: "#8888a0" },
+      "text-subtle": { light: "#a8a8b3", dark: "#646470" },
+      "text-disabled": { light: "#c8c8d0", dark: "#3a3a44" },
+      "text-inverse": { light: "#fafafa", dark: "#0a0a0f" },
+
+      border: { light: "#8a8a98", dark: "#2c2c3c" },
+      "border-muted": { light: "#d0d0d8", dark: "#1f1f2d" },
+      "border-strong": { light: "#808090", dark: "#3c3c50" },
+      "border-interactive": { light: "#18181b", dark: "#e4e4e7" },
+
+      success: "#059669",
+      "success-muted": { light: "#ecfdf5", dark: "#052e16" },
+      warning: "#d97706",
+      "warning-muted": { light: "#fffbeb", dark: "#451a03" },
+      error: "#dc2626",
+      "error-muted": { light: "#fef2f2", dark: "#450a0a" },
+      info: "#2563eb",
+      "info-muted": { light: "#eff6ff", dark: "#172554" },
+
       "gradient-start": "#18181b",
       "gradient-end": "#71717a",
       glow: "rgba(24, 24, 27, 0.15)",
     },
     typography: {
-      "font-display": "'PP Mori', system-ui, sans-serif",
-      "font-body": "'PP Mori', system-ui, sans-serif",
-      "font-mono": "'PP Fraktion Mono', ui-monospace, monospace",
+      "font-display": '"PP Mori", system-ui, sans-serif',
+      "font-body": '"PP Telegraf", "PP Mori", system-ui, sans-serif',
+      "font-mono": '"PP Fraktion Mono", "JetBrains Mono", ui-monospace, monospace',
       "size-xs": "0.75rem",
       "size-sm": "0.875rem",
       "size-base": "0.875rem",
@@ -77,7 +94,7 @@ export const defaultPreset: SigilPreset = {
       "heading-weight": "600",
       "heading-tracking": "-0.025em",
       "heading-transform": "none",
-      "heading-family": "'PP Mori', system-ui, sans-serif",
+      "heading-family": '"PP Mori", system-ui, sans-serif',
     },
     spacing: {
       scale: [4, 8, 12, 16, 20, 24, 32, 48, 64, 80],
@@ -131,12 +148,12 @@ export const defaultPreset: SigilPreset = {
       "prose-max": "65ch",
     },
     sigil: {
-      "grid-cell": "16px",
+      "grid-cell": "48px",
       "cross-arm": "10px",
       "cross-stroke": "1.5px",
-      "rail-gap": "48px",
+      "rail-gap": "24px",
       "card-radius": "0px",
-      "gutter-pattern": "grid",
+      "gutter-pattern": "horizontal-thin",
       "margin-pattern": "horizontal",
     },
     radius: {
@@ -265,7 +282,7 @@ export const defaultPreset: SigilPreset = {
       "section-divider": "line",
     },
     code: {
-      "font-family": "'PP Fraktion Mono', ui-monospace, monospace",
+      "font-family": '"PP Fraktion Mono", "JetBrains Mono", ui-monospace, monospace',
       "font-size": "0.8125rem",
       "line-height": "1.6",
       bg: "var(--s-surface)",

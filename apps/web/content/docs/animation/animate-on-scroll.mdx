@@ -1,0 +1,39 @@
+---
+title: AnimateOnScroll
+description: GSAP-powered scroll-triggered animation wrapper. Uses ScrollTrigger for viewport-based reveals with configurable presets.
+---
+
+## Import
+
+```tsx
+import { AnimateOnScroll } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<AnimateOnScroll preset="fadeUp">
+  <Card>Reveals on scroll</Card>
+</AnimateOnScroll>
+```
+
+## Presets
+
+```tsx
+<AnimateOnScroll preset="fadeUp">Fade up</AnimateOnScroll>
+<AnimateOnScroll preset="fadeDown">Fade down</AnimateOnScroll>
+<AnimateOnScroll preset="scaleIn">Scale in</AnimateOnScroll>
+<AnimateOnScroll preset="blurIn">Blur in</AnimateOnScroll>
+<AnimateOnScroll preset="slideLeft">Slide left</AnimateOnScroll>
+<AnimateOnScroll preset="slideRight">Slide right</AnimateOnScroll>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `preset` | `PresetName` | `"fadeUp"` | Animation preset |
+| `delay` | `number` | `0` | Delay in seconds |
+| `duration` | `number` | `0.6` | Duration in seconds |
+
+Uses GSAP ScrollTrigger under the hood. For a lighter, CSS-only alternative, use `FadeIn`, `SlideIn`, `ScaleIn`, or `BlurFade`.

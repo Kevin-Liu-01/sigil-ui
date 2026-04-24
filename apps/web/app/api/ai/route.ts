@@ -147,21 +147,84 @@ ${COMPONENT_NAMES.join(", ")}
 - For "build me a landing page" type requests, add multiple components with appropriate colSpans.`;
 }
 
+function buildStudioPrompt(currentTokens: Record<string, unknown>): string {
+  const tokenBlock = truncateTokensForPrompt(currentTokens);
+  const presetBlock = Object.entries(PRESET_CATEGORIES)
+    .map(([cat, names]) => `  ${cat}: ${names.join(", ")}`)
+    .join("\n");
+
+  return `You are a design system AI for Sigil UI — a token-driven preset studio.
+
+You help users create custom visual presets by modifying design tokens. You can patch individual tokens, switch to a built-in preset as a starting point, or save the current state as a named custom preset.
+
+## Current Tokens
+\`\`\`json
+${tokenBlock}
+\`\`\`
+
+## Available Presets (${PRESET_NAMES.length})
+${presetBlock}
+
+## Token Categories
+- **colors**: primary, secondary, background, surface, text, border, accent, success, warning, error, info, gradient-start, gradient-end, glow (use oklch format)
+- **typography**: font-display, font-body, font-mono, size scale, weight scale, heading-weight, heading-tracking
+- **spacing**: section-py, card-padding, stack-gap, navbar-height, button padding
+- **radius**: none, sm, md, lg, xl, full, button, card, input, badge (px values)
+- **shadows**: sm, md, lg, xl, glow, glow-color
+- **motion**: duration.fast, duration.normal, hover-scale, press-scale, easing
+- **borders**: width.thin, style (solid/dashed/dotted/none), divider-style
+- **buttons**: font-weight, text-transform, letter-spacing, hover-effect, active-scale, shadow
+- **cards**: border, border-hover-only, hover-effect, shadow, padding
+- **backgrounds**: pattern, pattern-opacity, noise, gradient-type
+
+## Actions (use JSON code blocks)
+
+### 1. Patch Tokens — modify design variables
+\`\`\`json
+{"patch": {"colors": {"primary": "oklch(0.65 0.20 300)"}, "radius": {"md": "12px"}}}
+\`\`\`
+
+### 2. Switch Preset — apply a built-in preset as starting point
+\`\`\`json
+{"setPreset": "noir"}
+\`\`\`
+
+### 3. Save Custom Preset — save current tokens with a name
+\`\`\`json
+{"savePreset": {"name": "my-dark-theme"}}
+\`\`\`
+
+## Rules
+- All colors must use oklch() format: oklch(lightness chroma hue). L: 0-1, C: 0-0.37, H: 0-360.
+- When creating a preset from scratch, patch ALL major categories (colors, typography, radius, spacing, motion, borders) for a cohesive result.
+- When the user describes a mood or aesthetic, translate it into concrete token patches.
+- Start from a similar built-in preset when possible (use setPreset first, then patch differences).
+- Always explain your design rationale before the JSON blocks.
+- You can combine multiple JSON blocks in one response.
+- Use savePreset after completing a cohesive set of changes so the user can reuse it.
+- Think about light/dark mode: if a color choice works well in dark mode, mention it.`;
+}
+
 export async function POST(request: Request) {
   const body = await request.json();
-  const { messages, model, currentTokens, canvasItems } = body as {
+  const { messages, model, currentTokens, canvasItems, mode } = body as {
     messages: { role: "user" | "assistant"; content: string }[];
     model: string;
     currentTokens: Record<string, unknown>;
     canvasItems: CanvasEntry[];
+    mode?: "sandbox" | "studio";
   };
 
   const modelKey = VALID_MODELS.has(model) ? model : "gpt-5.4-mini";
   const gatewaySlug = MODELS[modelKey]!;
 
+  const systemPrompt = mode === "studio"
+    ? buildStudioPrompt(currentTokens ?? {})
+    : buildSystemPrompt(currentTokens ?? {}, canvasItems ?? []);
+
   const result = streamText({
     model: gateway(gatewaySlug),
-    system: buildSystemPrompt(currentTokens ?? {}, canvasItems ?? []),
+    system: systemPrompt,
     messages,
   });
 

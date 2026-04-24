@@ -24,8 +24,10 @@ export { PageGrid, type PageGridProps } from "./layout/PageGrid";
 export { Margin, type MarginProps } from "./layout/Margin";
 export { Gutter, type GutterProps } from "./layout/Gutter";
 export {
-  SigilPageGrid, SigilFrame, SigilGutter, useIsInsidePageGrid, usePageGridConfig,
-  type SigilPageGridProps, type SigilFrameProps, type PageGridConfig, type SigilGutterProps,
+  SigilPageGrid, SigilFrame, SigilGutter, SigilFullBleed,
+  useIsInsidePageGrid, usePageGridConfig,
+  type SigilPageGridProps, type SigilFrameProps, type SigilFullBleedProps,
+  type PageGridConfig, type SigilGutterProps,
 } from "./layout/SigilPageGrid";
 export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
 export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
@@ -258,6 +260,19 @@ export { PlatformHubDiagram, type PlatformHubDiagramProps } from "./diagrams/tem
 export { FeatureMiniDiagram, type FeatureMiniDiagramProps, type FeatureMiniVariant } from "./diagrams/templates/FeatureMiniDiagram";
 export { SankeyDiagram, type SankeyDiagramProps } from "./diagrams/templates/SankeyDiagram";
 export { MermaidDiagram, type MermaidDiagramProps } from "./diagrams/templates/MermaidDiagram";
+export {
+  WaterfallChart, type WaterfallChartProps, type WaterfallStep, type WaterfallRow,
+} from "./diagrams/templates/WaterfallChart";
+export {
+  CapabilityGrid, type CapabilityGridProps, type CapabilityItem, type CapabilityCategory, type CapabilityCallout,
+} from "./diagrams/templates/CapabilityGrid";
+export {
+  IsolationStack, type IsolationStackProps, type IsolationLayer,
+  type ComparisonColumn, type ComparisonRow as IsolationComparisonRow,
+} from "./diagrams/templates/IsolationStack";
+export {
+  StatePersistence, type StatePersistenceProps, type PersistenceActiveItem, type PersistedStateRow,
+} from "./diagrams/templates/StatePersistence";
 
 // ---------------------------------------------------------------------------
 // Marketing
@@ -306,10 +321,62 @@ export { LargeTextSection, type LargeTextSectionProps } from "./sections/LargeTe
 export { FeatureShowcaseSection, type FeatureShowcaseSectionProps, type FeatureShowcaseRow } from "./sections/FeatureShowcaseSection";
 export { InstallSection, type InstallSectionProps, type InstallCommand } from "./sections/InstallSection";
 export { GradientBannerSection, type GradientBannerSectionProps } from "./sections/GradientBannerSection";
+export {
+  FeatureFrameSection, type FeatureFrameSectionProps, type FeatureFrameRowProps,
+} from "./sections/FeatureFrameSection";
+export {
+  BlueprintGridSection, type BlueprintGridSectionProps, type BlueprintCardData, type BlueprintSpecRow,
+} from "./sections/BlueprintGridSection";
+
+// ---------------------------------------------------------------------------
+// Playbook — compositional moves from the Reticle design language
+// ---------------------------------------------------------------------------
+export {
+  GapPixelGrid, GapPixelCell, type GapPixelGridProps, type GapPixelCellProps,
+  MonoLabel, type MonoLabelProps, type MonoLabelVariant, type MonoLabelSize,
+  BorderStack, type BorderStackProps,
+  AccentCTA, AccentActive, type AccentCTAProps, type AccentCTASize, type AccentActiveProps,
+  TabularValue, type TabularValueProps, type TabularValueSize,
+  FeaturedGrid, type FeaturedGridProps,
+  DensityText, type DensityTextProps, type DensityRole,
+  FrostedPanel, type FrostedPanelProps, type FrostedPanelEdge,
+  CardCell, type CardCellProps,
+} from "./playbook";
 
 // ---------------------------------------------------------------------------
 // Animation
 // ---------------------------------------------------------------------------
+
+// Core GSAP
 export { gsap, ScrollTrigger, PRESETS, animateElement, type AnimationPreset, type PresetName } from "./animation/animate";
 export { useSigilAnimate, type UseSigilAnimateConfig } from "./animation/useSigilAnimate";
 export { AnimateOnScroll, type AnimateOnScrollProps } from "./animation/AnimateOnScroll";
+
+// Hooks
+export { useInView, type UseInViewOptions } from "./animation/useInView";
+export { useReducedMotion } from "./animation/useReducedMotion";
+
+// Reveal wrappers
+export { FadeIn, type FadeInProps } from "./animation/FadeIn";
+export { SlideIn, type SlideInProps } from "./animation/SlideIn";
+export { ScaleIn, type ScaleInProps } from "./animation/ScaleIn";
+export { BlurFade, type BlurFadeProps } from "./animation/BlurFade";
+export { Stagger, type StaggerProps } from "./animation/Stagger";
+export { AnimateOnMount, type AnimateOnMountProps } from "./animation/AnimateOnMount";
+
+// Text animations
+export { TextReveal, type TextRevealProps } from "./animation/TextReveal";
+export { LetterPullUp, type LetterPullUpProps } from "./animation/LetterPullUp";
+export { WordRotate, type WordRotateProps } from "./animation/WordRotate";
+export { TypeWriter, type TypeWriterProps } from "./animation/TypeWriter";
+export { NumberTicker, type NumberTickerProps } from "./animation/NumberTicker";
+export { GradientText, type GradientTextProps } from "./animation/GradientText";
+
+// Scroll-driven
+export { ScrollProgress, type ScrollProgressProps } from "./animation/ScrollProgress";
+export { ParallaxLayer, type ParallaxLayerProps } from "./animation/ParallaxLayer";
+
+// Decorative
+export { Marquee, type MarqueeProps } from "./animation/Marquee";
+export { Ripple, type RippleProps } from "./animation/Ripple";
+export { Pulse, type PulseProps } from "./animation/Pulse";

@@ -38,6 +38,12 @@ import {
   Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, SocialIcons,
   Divider, HRule, SectionDivider,
   AnimateOnScroll,
+  FadeIn, SlideIn, ScaleIn, BlurFade, Stagger, AnimateOnMount,
+  TextReveal, LetterPullUp, WordRotate, TypeWriter, NumberTicker, GradientText,
+  ScrollProgress, ParallaxLayer,
+  Marquee, Ripple, Pulse,
+  WaterfallChart, CapabilityGrid, IsolationStack, StatePersistence,
+  FeatureFrameSection, BlueprintGridSection,
   Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription,
   Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,
   Sheet, SheetTrigger, SheetContent, SheetHeader, SheetTitle,
@@ -62,6 +68,10 @@ import {
   FAQSection, StatsSection, BentoSection,
   TestimonialsSection, LogoCloudSection, ComparisonSection,
   CodeShowcaseSection, TeamSection, TimelineSection, NewsletterSection, FooterSection,
+  H1, H2, H3, H4, Lead, Muted, InlineCode, Blockquote,
+  ResizablePanelGroup, ResizablePanel as ResizablePanelComp, ResizableHandle,
+  PreviewCard, PreviewCardTrigger, PreviewCardContent,
+  GapPixelGrid, GapPixelCell, MonoLabel, BorderStack, AccentCTA, TabularValue, DensityText, FrostedPanel, CardCell,
 } from "@sigil-ui/components";
 import { TechFrame } from "./tech-frame";
 import {
@@ -82,7 +92,7 @@ type ComponentCell = {
 
 const CATEGORIES = [
   "All", "UI", "Layout", "Navigation", "Overlays", "Data",
-  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Patterns",
+  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Patterns", "Playbook",
 ] as const;
 
 const CELLS: ComponentCell[] = [
@@ -1134,7 +1144,7 @@ const CELLS: ComponentCell[] = [
       className="w-full p-3 [&_h3]:text-[9px] [&_h3]:mb-2 [&>div>div>div>div]:p-1.5 [&_span]:text-[9px]"
     />
   )},
-  { name: "AnimateOnScroll", category: "Diagrams", variants: 1, render: () => (
+  { name: "AnimateOnScroll", category: "Animation", variants: 1, render: () => (
     <AnimateOnScroll preset="fadeUp">
       <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up on scroll</div>
     </AnimateOnScroll>
@@ -1220,6 +1230,247 @@ const CELLS: ComponentCell[] = [
       links={[{ source: 0, target: 0, value: 20 }, { source: 0, target: 1, value: 10 }, { source: 1, target: 0, value: 5 }, { source: 1, target: 1, value: 15 }]}
       width={200} height={100}
     />
+  )},
+  { name: "WaterfallChart", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <WaterfallChart
+      rows={[
+        { label: "Traditional", steps: [{ label: "Pull", duration: 500 }, { label: "Start", duration: 500 }, { label: "Install", duration: 1000 }] },
+        { label: "Sigil", steps: [{ label: "Restore", duration: 50, color: "var(--s-primary)" }], accent: true },
+      ]}
+      badge="~40x faster"
+    />
+  )},
+  { name: "CapabilityGrid", category: "Diagrams", variants: 1, render: () => (
+    <CapabilityGrid
+      categories={[
+        { label: "Runtimes", items: [{ name: "Node" }, { name: "Python" }, { name: "Rust" }] },
+        { label: "System", items: [{ name: "Root", color: "var(--s-success,#22c55e)" }, { name: "GPU", color: "var(--s-success,#22c55e)" }] },
+      ]}
+    />
+  )},
+  { name: "IsolationStack", category: "Diagrams", variants: 1, render: () => (
+    <IsolationStack
+      layers={[
+        { label: "Hardware", width: "100%" },
+        { label: "Kernel", width: "78%" },
+        { label: "VM", width: "56%", accent: true },
+      ]}
+    />
+  )},
+  { name: "StatePersistence", category: "Diagrams", variants: 1, render: () => (
+    <StatePersistence
+      activeItem={{ label: "Active", value: "Free", variant: "success" }}
+      competitors={[{ label: "competitor-a", value: "$0.09/hr", variant: "danger" }]}
+    />
+  )},
+
+  /* ================================================================ */
+  /* Animation                                                         */
+  /* ================================================================ */
+  { name: "FadeIn", category: "Animation", variants: 5, render: () => (
+    <FadeIn trigger="mount" direction="up">
+      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up</div>
+    </FadeIn>
+  )},
+  { name: "SlideIn", category: "Animation", variants: 4, render: () => (
+    <SlideIn trigger="mount" direction="left" offset={40}>
+      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Slide from left</div>
+    </SlideIn>
+  )},
+  { name: "ScaleIn", category: "Animation", variants: 1, render: () => (
+    <ScaleIn trigger="mount">
+      <div className="px-3 py-2 border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] text-xs font-semibold" style={{ color: "var(--s-text)" }}>Scale in</div>
+    </ScaleIn>
+  )},
+  { name: "BlurFade", category: "Animation", variants: 1, render: () => (
+    <BlurFade trigger="mount">
+      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur + fade</div>
+    </BlurFade>
+  )},
+  { name: "Stagger", category: "Animation", variants: 1, render: () => (
+    <Stagger trigger="mount" interval={100}>
+      {["One", "Two", "Three"].map((t) => (
+        <div key={t} className="px-2 py-1 border border-[var(--s-border)] text-[10px] font-mono mb-1" style={{ color: "var(--s-text)" }}>{t}</div>
+      ))}
+    </Stagger>
+  )},
+  { name: "AnimateOnMount", category: "Animation", variants: 7, render: () => (
+    <AnimateOnMount preset="blurIn" duration={500}>
+      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur in on mount</div>
+    </AnimateOnMount>
+  )},
+  { name: "TextReveal", category: "Animation", variants: 2, span: 2, render: () => (
+    <TextReveal text="Token-driven animation suite" by="word" trigger="mount" className="text-sm font-semibold text-center" style={{ color: "var(--s-text)" }} />
+  )},
+  { name: "LetterPullUp", category: "Animation", variants: 1, render: () => (
+    <LetterPullUp text="Sigil UI" trigger="mount" className="text-lg font-bold text-center" style={{ color: "var(--s-text)" }} />
+  )},
+  { name: "WordRotate", category: "Animation", variants: 1, render: () => (
+    <div className="text-sm text-center" style={{ color: "var(--s-text)" }}>
+      Build with <WordRotate words={["speed", "style", "tokens", "presets"]} duration={2000} className="font-bold text-[var(--s-primary)]" />
+    </div>
+  )},
+  { name: "TypeWriter", category: "Animation", variants: 1, render: () => (
+    <TypeWriter words={["npx sigil init", "sigil preset cobalt", "sigil add button"]} speed={50} className="font-mono text-xs" style={{ color: "var(--s-primary)" }} />
+  )},
+  { name: "NumberTicker", category: "Animation", variants: 1, render: () => (
+    <div className="text-center">
+      <NumberTicker value={259} trigger="mount" className="text-3xl font-bold" style={{ color: "var(--s-text)" }} />
+      <div className="text-[10px] font-mono mt-1" style={{ color: "var(--s-text-muted)" }}>tokens</div>
+    </div>
+  )},
+  { name: "GradientText", category: "Animation", variants: 1, render: () => (
+    <GradientText className="text-lg font-bold">Sigil UI</GradientText>
+  )},
+  { name: "ScrollProgress", category: "Animation", variants: 1, render: () => (
+    <div className="relative w-full h-8 border border-[var(--s-border)] rounded-[var(--s-radius-sm,2px)] overflow-hidden">
+      <div className="h-[3px] w-[60%] bg-[var(--s-primary)]" />
+      <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono" style={{ color: "var(--s-text-muted)" }}>60% scrolled</div>
+    </div>
+  )},
+  { name: "Marquee", category: "Animation", variants: 4, span: 2, render: () => (
+    <Marquee duration={12} gap="1.5rem" className="py-1">
+      {["React", "Tokens", "Presets", "OKLCH", "Tailwind", "Radix"].map((t) => (
+        <span key={t} className="px-2 py-1 border border-[var(--s-border)] font-mono text-[10px] whitespace-nowrap" style={{ color: "var(--s-text-muted)" }}>{t}</span>
+      ))}
+    </Marquee>
+  )},
+  { name: "Ripple", category: "Animation", variants: 1, render: () => (
+    <Ripple size={80} rings={3} duration={2} />
+  )},
+  { name: "Pulse", category: "Animation", variants: 1, render: () => (
+    <Pulse duration={2} scale={1.06}>
+      <div className="w-10 h-10 rounded-full bg-[var(--s-primary)] flex items-center justify-center">
+        <Zap size={16} color="white" />
+      </div>
+    </Pulse>
+  )},
+  { name: "ParallaxLayer", category: "Animation", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Parallax offset on scroll</span>
+  )},
+  { name: "FeatureFrameSection", category: "Sections", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Bordered copy|diagram rows</span>
+  )},
+  { name: "BlueprintGridSection", category: "Sections", variants: 1, render: () => (
+    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Staggered blueprint cards</span>
+  )},
+
+  /* ================================================================ */
+  /* Playbook — the 10 compositional moves                             */
+  /* ================================================================ */
+  { name: "GapPixelGrid", category: "Playbook", variants: 2, span: 2, render: () => (
+    <GapPixelGrid columns={{ md: 3 }} className="w-full">
+      {[1, 2, 3, 4, 5, 6].map((n) => (
+        <GapPixelCell key={n} className="p-3 flex items-center justify-center">
+          <span className="text-[10px] font-mono text-[var(--s-text-muted)]">Cell {n}</span>
+        </GapPixelCell>
+      ))}
+    </GapPixelGrid>
+  )},
+  { name: "MonoLabel", category: "Playbook", variants: 3, render: () => (
+    <div className="flex flex-col gap-3">
+      <MonoLabel variant="muted">Infrastructure</MonoLabel>
+      <MonoLabel variant="accent">FAQ</MonoLabel>
+      <MonoLabel variant="inverse" size="sm">Ships Immediately</MonoLabel>
+    </div>
+  )},
+  { name: "BorderStack", category: "Playbook", variants: 2, render: () => (
+    <BorderStack className="w-full">
+      {["Nav", "Hero", "Features", "Footer"].map((s) => (
+        <div key={s} className="py-2 px-3 text-[10px] text-[var(--s-text-muted)]">{s}</div>
+      ))}
+    </BorderStack>
+  )},
+  { name: "AccentCTA", category: "Playbook", variants: 3, render: () => (
+    <div className="flex gap-2 items-center flex-wrap">
+      <AccentCTA size="sm">Get Started</AccentCTA>
+      <AccentCTA size="sm" glow={false} className="bg-transparent !text-[var(--s-primary)] border border-[var(--s-primary)]">Docs</AccentCTA>
+    </div>
+  )},
+  { name: "TabularValue", category: "Playbook", variants: 5, render: () => (
+    <div className="flex flex-col gap-2 w-full">
+      <div className="flex justify-between items-center">
+        <span className="text-[10px] text-[var(--s-text-muted)]">Revenue</span>
+        <TabularValue size="md">$24,800.00</TabularValue>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-[10px] text-[var(--s-text-muted)]">Users</span>
+        <TabularValue size="md">1,247</TabularValue>
+      </div>
+      <div className="flex justify-between items-center">
+        <span className="text-[10px] text-[var(--s-text-muted)]">Uptime</span>
+        <TabularValue size="md" muted>99.98%</TabularValue>
+      </div>
+    </div>
+  )},
+  { name: "DensityText", category: "Playbook", variants: 7, render: () => (
+    <div className="flex flex-col gap-1.5 w-full">
+      <DensityText role="chrome">Chrome · 10px</DensityText>
+      <DensityText role="counter">Counter · 11px</DensityText>
+      <DensityText role="detail">Detail · 12px</DensityText>
+      <DensityText role="nav">Nav · 13px</DensityText>
+      <DensityText role="body">Body · 14px</DensityText>
+      <DensityText role="base">Base · 16px</DensityText>
+    </div>
+  )},
+  { name: "FrostedPanel", category: "Playbook", variants: 2, render: () => (
+    <div className="flex gap-2 w-full h-20">
+      <FrostedPanel edge="right" className="flex-1 p-3 flex items-center justify-center">
+        <span className="text-[10px] text-[var(--s-text-muted)]">Frosted</span>
+      </FrostedPanel>
+      <FrostedPanel edge="left" variant="solid" className="flex-1 p-3 flex items-center justify-center">
+        <span className="text-[10px] text-[var(--s-text-muted)]">Solid</span>
+      </FrostedPanel>
+    </div>
+  )},
+  { name: "CardCell", category: "Playbook", variants: 1, render: () => (
+    <CardCell
+      title="Edge Compute"
+      footer={<MonoLabel size="xs">12 regions</MonoLabel>}
+      padding="12px"
+      className="w-full border border-[var(--s-border)]"
+    >
+      Deploy at the edge with sub-50ms cold starts.
+    </CardCell>
+  )},
+
+  /* ================================================================ */
+  /* Additional UI                                                     */
+  /* ================================================================ */
+  { name: "Typography", category: "UI", variants: 10, render: () => (
+    <div className="flex flex-col gap-1 w-full overflow-hidden">
+      <H3 className="!text-sm !border-0 !pb-0">Heading 3</H3>
+      <H4 className="!text-xs">Heading 4</H4>
+      <Lead className="!text-[11px]">Lead paragraph text</Lead>
+      <Muted className="!text-[10px]">Muted secondary text</Muted>
+      <InlineCode className="!text-[10px] w-fit">inline code</InlineCode>
+    </div>
+  )},
+  { name: "Blockquote", category: "UI", variants: 1, render: () => (
+    <Blockquote className="text-[11px] !pl-3">
+      Design is not just what it looks like — design is how it works.
+    </Blockquote>
+  )},
+  { name: "ResizablePanel", category: "UI", variants: 2, render: () => (
+    <div className="w-full border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] overflow-hidden" style={{ height: 80 }}>
+      <ResizablePanelGroup>
+        <ResizablePanelComp defaultSize={50}>
+          <div className="flex items-center justify-center h-full text-[10px] text-[var(--s-text-muted)]">Left</div>
+        </ResizablePanelComp>
+        <ResizableHandle withHandle />
+        <ResizablePanelComp defaultSize={50}>
+          <div className="flex items-center justify-center h-full text-[10px] text-[var(--s-text-muted)]">Right</div>
+        </ResizablePanelComp>
+      </ResizablePanelGroup>
+    </div>
+  )},
+  { name: "PreviewCard", category: "Overlays", variants: 1, render: () => (
+    <PreviewCard>
+      <PreviewCardTrigger asChild>
+        <button type="button" className="text-xs underline text-[var(--s-primary)] bg-transparent border-0 cursor-pointer">Hover for preview</button>
+      </PreviewCardTrigger>
+      <PreviewCardContent title="Sigil UI" description="A token-driven design system with 31 presets." />
+    </PreviewCard>
   )},
 ];
 

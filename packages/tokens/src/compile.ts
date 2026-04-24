@@ -83,7 +83,11 @@ export function compileToCss(
 
   // Sigil grid
   for (const [key, value] of Object.entries(tokens.sigil)) {
-    lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+    if (typeof value === "boolean") {
+      lightVars.push(`${cssVar(prefix, key)}: ${value ? "1" : "0"};`);
+    } else {
+      lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+    }
   }
 
   // Radius

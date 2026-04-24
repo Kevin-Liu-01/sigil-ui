@@ -17,7 +17,7 @@ const COLOR = "var(--s-border-muted)";
 
 type PatternSide = "left" | "right";
 
-const SVG_STROKE = "rgba(128,128,128,0.18)";
+const SVG_STROKE = "rgba(140,140,155,0.24)";
 
 function buildHexSvg(cell: number): string {
   const s = Math.round(cell * 0.5);
@@ -132,6 +132,13 @@ function patternStyles(
         backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${cell}px`,
       };
+    case "horizontal-thin": {
+      const thin = Math.round(cell / 3);
+      return {
+        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+        backgroundSize: `100% ${thin}px`,
+      };
+    }
     case "horizontal-wide": {
       const wide = cell * 3;
       return {
@@ -242,6 +249,7 @@ export interface PageGridConfig {
   contentMax: number;
   gridCell: number;
   crossStroke: number;
+  edgeless: boolean;
 }
 
 const DEFAULTS: PageGridConfig = {
@@ -249,6 +257,7 @@ const DEFAULTS: PageGridConfig = {
   contentMax: 1200,
   gridCell: 16,
   crossStroke: 1.5,
+  edgeless: false,
 };
 
 const PageGridContext = createContext<PageGridConfig | null>(null);
@@ -270,6 +279,7 @@ export interface SigilGutterProps {
   gridCell?: number;
   pattern?: GutterPattern;
   side?: PatternSide;
+  visible?: boolean;
   className?: string;
 }
 
@@ -278,8 +288,13 @@ export function SigilGutter({
   gridCell,
   pattern = "grid",
   side = "left",
+  visible = true,
   className,
 }: SigilGutterProps) {
+  if (!visible) {
+    return <div aria-hidden="true" />;
+  }
+
   const cell = gridCell ?? DEFAULTS.gridCell;
   const patternCss = showGrid ? patternStyles(pattern, cell, side) : null;
 
@@ -288,8 +303,8 @@ export function SigilGutter({
       aria-hidden="true"
       data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
       style={{
-        borderLeft: "1px solid var(--s-border)",
-        borderRight: "1px solid var(--s-border)",
+        borderLeft: "var(--s-gutter-border, 1px solid) var(--s-border)",
+        borderRight: "var(--s-gutter-border, 1px solid) var(--s-border)",
         background: "var(--s-background)",
       }}
     >
@@ -322,6 +337,8 @@ export interface SigilPageGridProps {
   showMarginLines?: boolean;
   gutterPattern?: GutterPattern;
   marginPattern?: GutterPattern;
+  /** Strip all gutter/margin decoration — gutters become invisible empty space. */
+  edgeless?: boolean;
 }
 
 export function SigilPageGrid({
@@ -335,48 +352,64 @@ export function SigilPageGrid({
   showMarginLines = true,
   gutterPattern = "grid",
   marginPattern = "horizontal",
+  edgeless = false,
 }: SigilPageGridProps) {
-  const config: PageGridConfig = { railGap, contentMax, gridCell, crossStroke };
+  const effectiveRailGap = edgeless ? 0 : railGap;
+  const config: PageGridConfig = {
+    railGap: effectiveRailGap,
+    contentMax,
+    gridCell,
+    crossStroke,
+    edgeless,
+  };
 
   const gridCols: CSSProperties = {
-    gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
+    gridTemplateColumns: `1fr ${effectiveRailGap}px minmax(0, ${contentMax}px) ${effectiveRailGap}px 1fr`,
   };
 
   const marginCell = gridCell;
-  const marginCssL = showMarginLines
+  const marginCssL = !edgeless && showMarginLines
     ? patternStyles(marginPattern, marginCell, "left")
     : null;
-  const marginCssR = showMarginLines
+  const marginCssR = !edgeless && showMarginLines
     ? patternStyles(marginPattern, marginCell, "right")
     : null;
 
-  const marginStyleL: CSSProperties = marginCssL
-    ? {
-        backgroundImage: marginCssL.backgroundImage,
-        backgroundSize: marginCssL.backgroundSize,
-        ...(marginCssL.backgroundPosition ? { backgroundPosition: marginCssL.backgroundPosition } : {}),
-      }
-    : {};
-  const marginStyleR: CSSProperties = marginCssR
-    ? {
-        backgroundImage: marginCssR.backgroundImage,
-        backgroundSize: marginCssR.backgroundSize,
-        ...(marginCssR.backgroundPosition ? { backgroundPosition: marginCssR.backgroundPosition } : {}),
-      }
-    : {};
+  const marginStyleL: CSSProperties = {
+    backgroundColor: "var(--s-background)",
+    ...(marginCssL
+      ? {
+          backgroundImage: marginCssL.backgroundImage,
+          backgroundSize: marginCssL.backgroundSize,
+          ...(marginCssL.backgroundPosition ? { backgroundPosition: marginCssL.backgroundPosition } : {}),
+        }
+      : {}),
+  };
+  const marginStyleR: CSSProperties = {
+    backgroundColor: "var(--s-background)",
+    ...(marginCssR
+      ? {
+          backgroundImage: marginCssR.backgroundImage,
+          backgroundSize: marginCssR.backgroundSize,
+          ...(marginCssR.backgroundPosition ? { backgroundPosition: marginCssR.backgroundPosition } : {}),
+        }
+      : {}),
+  };
+
+  const gutterVisible = !edgeless;
 
   return (
     <PageGridContext.Provider value={config}>
       <div data-slot="sigilpagegrid" className={cn("grid min-h-screen", className)} style={gridCols}>
         <div aria-hidden="true" style={marginStyleL} />
-        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" />
+        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" visible={gutterVisible} />
         <div
           className="flex min-w-0 flex-col"
           style={{ background: "var(--s-background)" }}
         >
           {children}
         </div>
-        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" />
+        <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" visible={gutterVisible} />
         <div aria-hidden="true" style={marginStyleR} />
       </div>
     </PageGridContext.Provider>
@@ -400,12 +433,18 @@ export interface SigilFrameProps extends SigilPageGridProps {
  * Place your navbar, sections, and footer as direct children —
  * they all render inside the content column between the gutters.
  *
+ * Pass `edgeless` to strip all gutter/margin decoration so
+ * gutters collapse to 0px and margins become empty space.
+ *
  * ```tsx
  * <SigilFrame>
  *   <MyNavbar />
  *   <SigilSection borderTop>...</SigilSection>
- *   <SigilSection borderTop>...</SigilSection>
  *   <MyFooter />
+ * </SigilFrame>
+ *
+ * <SigilFrame edgeless>
+ *   <SigilSection>...</SigilSection>
  * </SigilFrame>
  * ```
  */
@@ -415,4 +454,54 @@ export function SigilFrame({
   ...props
 }: SigilFrameProps) {
   return <SigilPageGrid {...props}>{children}</SigilPageGrid>;
+}
+
+/* ------------------------------------------------------------------ */
+/* SigilFullBleed — full-viewport child with content-max constraint    */
+/* ------------------------------------------------------------------ */
+
+export interface SigilFullBleedProps {
+  children: ReactNode;
+  className?: string;
+  /** Background applied to the full-width outer wrapper. */
+  background?: string;
+  /** Override the inner content max-width. Uses --s-content-max by default. */
+  contentMax?: string;
+  /** Horizontal padding inside the max-width container. */
+  padding?: string;
+}
+
+/**
+ * Full-viewport-width wrapper that constrains inner content
+ * to `content-max`. Use for navbars and footers that need a
+ * full-bleed background but centered content.
+ *
+ * Works both inside and outside `SigilPageGrid`.
+ * Inside the grid it breaks out via `100vw` + negative margin.
+ * Outside the grid it simply fills its parent width.
+ */
+export function SigilFullBleed({
+  children,
+  className,
+  background,
+  contentMax,
+  padding = "0 var(--s-page-margin, 24px)",
+}: SigilFullBleedProps) {
+  return (
+    <div
+      data-slot="sigil-fullbleed"
+      className={cn("w-screen relative left-1/2 -translate-x-1/2", className)}
+      style={{ background }}
+    >
+      <div
+        className="mx-auto w-full"
+        style={{
+          maxWidth: contentMax ?? "var(--s-content-max, 1200px)",
+          padding,
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
