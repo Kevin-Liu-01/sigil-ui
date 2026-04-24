@@ -1,6 +1,6 @@
 ---
 title: Divider
-description: "A Divider component from the Sigil design system."
+description: "A patterned horizontal or vertical divider band for separating sections and panes."
 ---
 
 ## Import
@@ -11,25 +11,46 @@ import { Divider } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <Divider />
+<ComponentPreview vertical>
+  <Divider pattern="vertical" size="md" />
+  <Divider pattern="diagonal" size="sm" />
+  <div style={{ display: "flex", gap: 16, height: 96 }}>
+    <div style={{ flex: 1 }}>Left pane</div>
+    <Divider orientation="vertical" pattern="diagonal" size="sm" />
+    <div style={{ flex: 1 }}>Right pane</div>
+  </div>
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Divider>Divider content</Divider>
+<Divider pattern="vertical" size="md" />
+<Divider pattern="diagonal" size="sm" />
+<Divider orientation="vertical" pattern="diagonal" size="md" />
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `orientation` | `"horizontal" | "vertical"` | `horizontal` | Divider orientation. |
+| `orientation` | `"horizontal" \| "vertical"` | `horizontal` | Divider orientation. |
+| `pattern` | `"vertical" \| "diagonal"` | `vertical` | Pattern variant filling the divider band. |
+| `size` | `"xs" \| "sm" \| "md" \| "lg" \| "xl"` | `md` | Band thickness. |
+| `opacity` | `number` | `0.15` | Pattern opacity. |
+| `scale` | `number` | `1` | Pattern scale multiplier. |
+| `showBorders` | `boolean` | `true` | Show border lines on the band edges. |
+| `showCross` | `boolean` | `false` | Show cross marks at endpoints. |
+| `label` | `ReactNode` | — | Optional label rendered in the center. |
+| `fadeEdges` | `boolean` | `true` | Fade the pattern near the endpoints with a mask. |
 | `decorative` | `boolean` | `true` | If true, this is purely decorative (aria-hidden). |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
+| `--s-border-muted` | Pattern and edge border color |
 | `--s-border` | Border |
+| `--s-cross-stroke` | Cross stroke |
+| `--s-background` | Label background |
+| `--s-font-mono` | Label font |
+| `--s-text-muted` | Label text |

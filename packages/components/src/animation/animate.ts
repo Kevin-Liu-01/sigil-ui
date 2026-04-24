@@ -66,7 +66,7 @@ export function animateElement(
       : scrollTrigger
     : undefined;
 
-  gsap.fromTo(
+  return gsap.fromTo(
     element,
     { ...p.from, ...from },
     {

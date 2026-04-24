@@ -470,6 +470,52 @@ export type InputTokens = {
 };
 
 // ---------------------------------------------------------------------------
+// Cursor tokens — opt-in custom pointer system
+// ---------------------------------------------------------------------------
+
+export type CursorVariant = "sigil" | "ring" | "dot" | "crosshair";
+
+export type CursorTokens = {
+  readonly variant?: CursorVariant;
+  readonly size?: string;
+  readonly "dot-size"?: string;
+  readonly "stroke-width"?: string;
+  readonly "tick-size"?: string;
+  readonly gap?: string;
+  readonly radius?: string;
+  readonly color?: string;
+  readonly "ring-color"?: string;
+  readonly "dot-color"?: string;
+  readonly glow?: string;
+  readonly opacity?: string;
+  readonly "blend-mode"?: string;
+  readonly "z-index"?: string;
+  readonly "hide-native"?: boolean;
+};
+
+// ---------------------------------------------------------------------------
+// Scrollbar tokens — native and Radix ScrollArea styling
+// ---------------------------------------------------------------------------
+
+export type ScrollbarVisibility = "auto" | "stable" | "hidden";
+
+export type ScrollbarTokens = {
+  readonly width?: string;
+  readonly height?: string;
+  readonly padding?: string;
+  readonly radius?: string;
+  readonly track?: string;
+  readonly thumb?: string;
+  readonly "thumb-hover"?: string;
+  readonly "thumb-active"?: string;
+  readonly corner?: string;
+  readonly border?: string;
+  readonly "firefox-width"?: "auto" | "thin" | "none";
+  readonly gutter?: "auto" | "stable" | "stable both-edges";
+  readonly visibility?: ScrollbarVisibility;
+};
+
+// ---------------------------------------------------------------------------
 // Alignment rail tokens — unified grid system for page-level alignment
 // ---------------------------------------------------------------------------
 
@@ -562,6 +608,8 @@ export type SigilTokens = {
   readonly backgrounds?: BackgroundTokens;
   readonly code?: CodeTokens;
   readonly inputs?: InputTokens;
+  readonly cursor?: CursorTokens;
+  readonly scrollbar?: ScrollbarTokens;
   readonly alignment?: AlignmentTokens;
   readonly sections?: SectionStyleTokens;
   readonly dividers?: DividerStyleTokens;

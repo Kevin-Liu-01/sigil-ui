@@ -1,48 +1,25 @@
 ---
 title: SectionDivider
-description: "A SectionDivider component from the Sigil design system."
+description: "Deprecated alias for Divider. Use Divider for patterned section bands."
 ---
 
 ## Import
 
 ```tsx
-import { SectionDivider } from "@sigil-ui/components";
+import { Divider } from "@sigil-ui/components";
 ```
 
-## Preview
+## Use Divider
 
 <ComponentPreview vertical>
-  <SectionDivider>
-    SectionDivider content
-  </SectionDivider>
+  <Divider pattern="vertical" size="md" />
+  <Divider pattern="diagonal" size="sm" />
 </ComponentPreview>
 
-## Usage
+`SectionDivider` remains available as a compatibility alias, but new code should use `Divider`.
 
 ```tsx
-<SectionDivider>SectionDivider content</SectionDivider>
+<Divider pattern="vertical" size="md" />
+<Divider pattern="diagonal" size="sm" />
+<Divider orientation="vertical" pattern="diagonal" />
 ```
-
-## Props
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `pattern` | `SectionDividerPattern` | `dots` | Pattern variant filling the divider band. |
-| `size` | `"xs" | "sm" | "md" | "lg" | "xl"` | `md` | Band height. |
-| `opacity` | `number` | `0.15` | Pattern opacity. |
-| `scale` | `number` | `1` | Pattern scale multiplier. |
-| `showBorders` | `boolean` | `true` | Show border lines on top and bottom edges. |
-| `showCross` | `boolean` | `false` | Show cross marks at left/right endpoints. |
-| `label` | `ReactNode` | — | Optional label rendered in the center. |
-| `fadeEdges` | `boolean` | `true` | Fade edges with a horizontal gradient mask. |
-
-## Token integration
-
-| CSS Variable | Purpose |
-|---|---|
-| `--s-border-muted` | Border muted |
-| `--s-border` | Border |
-| `--s-cross-stroke` | Cross stroke |
-| `--s-background` | Background |
-| `--s-font-mono` | Font mono |
-| `--s-text-muted` | Text muted |

@@ -25,7 +25,7 @@ const variantStyles: Record<string, string> = {
   panel: "border-[var(--s-border-strong)]",
 };
 
-/** CSS 3D-transform box with 6 visible faces. */
+/** Token-driven projected box with attached front, top, and side faces. */
 export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
   {
     depth = 20,
@@ -41,20 +41,18 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
   },
   ref,
 ) {
-  const half = depth / 2;
+  const projectionX = Math.max(1, Math.abs(depth));
+  const projectionY = Math.max(1, Math.round(Math.abs(depth) * 0.58));
 
   const containerStyle: CSSProperties = {
+    "--box-3d-depth-x": `${projectionX}px`,
+    "--box-3d-depth-y": `${projectionY}px`,
     perspective: `${perspective}px`,
     ...style,
-  };
+  } as CSSProperties;
 
-  const cubeStyle: CSSProperties = {
-    transformStyle: "preserve-3d",
-    transform: `rotateX(${tiltX}deg) rotateY(${tiltY}deg)`,
-    transition: hoverLift ? "transform 0.3s ease" : undefined,
-  };
-
-  const faceBase = "absolute inset-0 border bg-[var(--s-surface)]";
+  const faceBase = "border border-[var(--s-border)] bg-[var(--s-surface)]";
+  const sideFace = cn("pointer-events-none absolute", faceBase, "bg-[var(--s-surface-elevated,var(--s-surface))]");
 
   return (
     <div
@@ -64,64 +62,47 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
       style={containerStyle}
       {...rest}
     >
-      <div className={cn("relative w-full h-full", hoverLift && "hover:-translate-y-1 transition-transform")}>
       <div
-        className="relative w-full h-full"
-        style={cubeStyle}
+        className={cn(
+          "relative inline-block pr-[var(--box-3d-depth-x)] pt-[var(--box-3d-depth-y)] align-middle",
+          "transition-transform duration-[var(--s-duration-fast,160ms)] ease-[var(--s-easing-standard,ease-out)]",
+          hoverLift && "hover:-translate-y-1",
+        )}
+        style={{ transform: `rotateX(${tiltX * 0.04}deg) rotateY(${tiltY * 0.04}deg)` }}
       >
-        {/* Front face */}
         <div
-          className={cn(faceBase, variantStyles[variant])}
-          style={{ transform: `translateZ(${half}px)` }}
+          aria-hidden="true"
+          className={sideFace}
+          style={{
+            clipPath:
+              "polygon(0 100%, var(--box-3d-depth-x) 0, 100% 0, calc(100% - var(--box-3d-depth-x)) 100%)",
+            height: "var(--box-3d-depth-y)",
+            insetInline: 0,
+            top: 0,
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className={sideFace}
+          style={{
+            bottom: 0,
+            clipPath:
+              "polygon(0 var(--box-3d-depth-y), 100% 0, 100% calc(100% - var(--box-3d-depth-y)), 0 100%)",
+            right: 0,
+            top: 0,
+            width: "var(--box-3d-depth-x)",
+          }}
+        />
+        <div
+          className={cn(
+            "relative z-10 flex min-h-[var(--s-box-3d-min-height,5rem)] min-w-[var(--s-box-3d-min-width,5rem)]",
+            "items-center justify-center",
+            faceBase,
+            variantStyles[variant],
+          )}
         >
           {children}
         </div>
-        {/* Back face */}
-        <div
-          className={cn(faceBase, "opacity-60", variantStyles[variant])}
-          style={{ transform: `translateZ(-${half}px) rotateY(180deg)` }}
-        />
-        {/* Left face */}
-        <div
-          className={cn(faceBase, "opacity-70", variantStyles[variant])}
-          style={{
-            width: `${depth}px`,
-            transform: `translateX(-${half}px) rotateY(-90deg)`,
-            transformOrigin: "left center",
-          }}
-        />
-        {/* Right face */}
-        <div
-          className={cn(faceBase, "opacity-70", variantStyles[variant])}
-          style={{
-            width: `${depth}px`,
-            right: 0,
-            left: "auto",
-            transform: `translateX(${half}px) rotateY(90deg)`,
-            transformOrigin: "right center",
-          }}
-        />
-        {/* Top face */}
-        <div
-          className={cn(faceBase, "opacity-80", variantStyles[variant])}
-          style={{
-            height: `${depth}px`,
-            transform: `translateY(-${half}px) rotateX(90deg)`,
-            transformOrigin: "center top",
-          }}
-        />
-        {/* Bottom face */}
-        <div
-          className={cn(faceBase, "opacity-50", variantStyles[variant])}
-          style={{
-            height: `${depth}px`,
-            bottom: 0,
-            top: "auto",
-            transform: `translateY(${half}px) rotateX(-90deg)`,
-            transformOrigin: "center bottom",
-          }}
-        />
-      </div>
       </div>
     </div>
   );

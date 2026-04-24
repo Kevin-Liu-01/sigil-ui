@@ -604,7 +604,7 @@ function DevDocsDemo() {
               <div className="font-[family-name:var(--s-font-mono)] text-[13px] leading-relaxed text-[var(--s-text-muted)]">
                 <div>$ npx create-sigil-app my-app</div>
                 <div>$ cd my-app</div>
-                <div>$ npx sigil preset cobalt</div>
+                <div>$ npx @sigil-ui/cli preset cobalt</div>
                 <div>$ npm run dev</div>
               </div>
             </CardCell>

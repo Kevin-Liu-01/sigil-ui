@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { Fragment, forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../../utils";
 
 export interface SpecRow {
@@ -70,7 +70,7 @@ export const SpecTable = forwardRef<HTMLDivElement, SpecTableProps>(
             {rows && rows.map(renderRow)}
             {groups &&
               groups.map((group) => (
-                <>
+                <Fragment key={group.title}>
                   <tr key={`g-${group.title}`}>
                     <td
                       colSpan={2}
@@ -80,7 +80,7 @@ export const SpecTable = forwardRef<HTMLDivElement, SpecTableProps>(
                     </td>
                   </tr>
                   {group.rows.map(renderRow)}
-                </>
+                </Fragment>
               ))}
           </tbody>
         </table>

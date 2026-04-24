@@ -47,6 +47,7 @@
     "select",
     "separator",
     "sheet",
+    "sigil-cursor",
     "sidebar",
     "skeleton",
     "slider",

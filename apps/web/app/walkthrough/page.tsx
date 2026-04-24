@@ -13,7 +13,7 @@ import { MarkdownEditorPreview } from "@/components/landing/markdown-editor";
 
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -231,7 +231,7 @@ export default function WalkthroughPage() {
         </GapPixelGrid>
       </SigilSection>
 
-      <SectionDivider pattern="crosshatch" size="md" showBorders />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* ---- Step 1: Install ---- */}
       <Step
@@ -263,7 +263,7 @@ export default function WalkthroughPage() {
         </GapPixelGrid>
       </Step>
 
-      <SectionDivider pattern="dots" size="sm" showBorders />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ---- Step 2: Understand the system ---- */}
       <Step
@@ -285,7 +285,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <SectionDivider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ---- Step 3: Define your preset ---- */}
       <Step
@@ -424,7 +424,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <SectionDivider pattern="grid" size="sm" showBorders />
+      <Divider pattern="vertical" size="sm" showBorders />
 
       {/* ---- Step 4: Add components ---- */}
       <Step
@@ -473,7 +473,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <SectionDivider pattern="diamond" size="sm" showBorders />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ---- Step 5: Edit tokens ---- */}
       <Step
@@ -509,7 +509,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <SectionDivider pattern="crosshatch" size="sm" showBorders />
+      <Divider pattern="vertical" size="sm" showBorders />
 
       {/* ---- Step 6: Build pages ---- */}
       <Step
@@ -596,7 +596,7 @@ export default function PricingPage() {
         </DensityText>
       </Step>
 
-      <SectionDivider pattern="dots" size="sm" showBorders />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ---- Step 7: Ship ---- */}
       <Step
@@ -660,7 +660,7 @@ export default function PricingPage() {
         </GapPixelGrid>
       </Step>
 
-      <SectionDivider pattern="hatch" size="md" showBorders />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* Final CTA */}
       <SigilSection borderTop padding="80px 24px">

@@ -70,7 +70,7 @@ Map shadcn CSS variables to Sigil equivalents:
 
 ```bash
 pnpm add @sigil-ui/tokens @sigil-ui/cli
-npx sigil init
+npx @sigil-ui/cli convert
 ```
 
 #### Step 2: Create compatibility layer
@@ -113,7 +113,7 @@ Create `src/styles/shadcn-compat.css` to bridge shadcn variables to Sigil tokens
 
 For each shadcn component:
 
-1. Copy the Sigil version: `npx sigil add button`
+1. Copy the Sigil version: `npx @sigil-ui/cli add button`
 2. Update imports in consuming code
 3. Remove the old shadcn component file
 4. Test
@@ -169,7 +169,7 @@ If the project uses Tailwind alongside Sigil, keep `tailwind-merge`. If not, `cl
 For projects that just want Sigil's color system without changing components:
 
 ```bash
-npx sigil init --preset sigil --yes
+npx @sigil-ui/cli convert --preset sigil --yes
 ```
 
 Then add the compat layer and import it before shadcn's globals:

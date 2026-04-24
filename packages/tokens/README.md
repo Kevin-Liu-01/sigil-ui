@@ -64,6 +64,8 @@ Four compile targets from the same `SigilTokens` object:
 | TypeScript | `compileToTs(tokens)` | `export const tokens: SigilTokens = { ... }` |
 | JSON | `compileToJson(tokens)` | JSON file for tooling |
 
+`compileInteractionCss(options?)` emits opt-in native helpers for `sigil-scrollbar`, `data-sigil-scrollbar`, and `data-sigil-cursor`.
+
 ### Markdown Parser (`compile.ts`)
 
 `parseMarkdownTokens(markdown)` — reads `sigil.tokens.md` back into a `SigilTokens` object. This closes the agent editing loop: agent edits the markdown, parser reads it back, compiler outputs CSS/Tailwind/TS.
@@ -106,7 +108,7 @@ When an agent needs to change how a Sigil project looks:
 2. **Edit `sigil.tokens.md`** or the token CSS file — change values at the semantic level
 3. **Never edit component files to change colors/spacing/fonts** — components read from CSS variables
 4. **Use OKLCH for all colors** — no hex, no rgb, no hsl
-5. **Run `npx sigil doctor`** after changes to validate
+5. **Run `npx @sigil-ui/cli doctor`** after changes to validate
 
 The token system is designed so that a single edit propagates everywhere. An agent changing `--sigil-primary` from indigo to emerald updates buttons, links, focus rings, gradients, glows, and badges — without touching any component file.
 

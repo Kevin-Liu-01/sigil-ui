@@ -5,24 +5,82 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
+  validate:
+    name: Validate
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    permissions:
+      contents: read
 
-      - uses: pnpm/action-setup@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
           version: 9
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
 
-      - run: pnpm build
+      - name: Build packages and apps
+        run: pnpm build
 
-      - run: pnpm typecheck
+      - name: Typecheck
+        run: pnpm typecheck
+
+  package-smoke:
+    name: Package Smoke
+    runs-on: ubuntu-latest
+    needs: validate
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - packages/tokens
+          - packages/primitives
+          - packages/components
+          - packages/presets
+          - packages/cli
+          - packages/create-sigil-app
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build target package
+        run: pnpm --filter ./${{ matrix.package }}... build
+
+      - name: Verify npm package contents
+        working-directory: ${{ matrix.package }}
+        run: npm pack --dry-run

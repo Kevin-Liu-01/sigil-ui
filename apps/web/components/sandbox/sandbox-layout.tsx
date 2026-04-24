@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, type ReactNode } from "react";
-import { Divider, NativeSelect } from "@sigil-ui/components";
+import { NativeSelect, Separator } from "@sigil-ui/components";
 
 type SandboxLayoutProps = {
   /** Live component preview panel. */
@@ -125,7 +125,7 @@ export function SandboxLayout({
             />
           </div>
 
-          <Divider orientation="vertical" style={{ height: "20px" }} />
+          <Separator orientation="vertical" style={{ height: "20px" }} />
 
           {onReset && (
             <HeaderButton onClick={onReset} label="Reset">
@@ -143,7 +143,7 @@ export function SandboxLayout({
             </HeaderButton>
           )}
 
-          <Divider orientation="vertical" style={{ height: "20px" }} />
+          <Separator orientation="vertical" style={{ height: "20px" }} />
 
           <HeaderButton
             onClick={toggleChat}
@@ -198,7 +198,7 @@ export function SandboxLayout({
           transition: "width 200ms ease, visibility 200ms ease",
         }}
       >
-        <Divider orientation="vertical" />
+        <Separator orientation="vertical" />
         <div
           className="flex-1 overflow-hidden flex flex-col"
           style={{ background: "var(--s-surface)" }}

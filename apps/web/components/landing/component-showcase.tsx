@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import {
   Button, Badge, Input, Select, SelectTrigger, SelectContent, SelectItem, SelectValue, Checkbox, Switch, Slider, Progress,
   Toggle, ToggleGroup, ToggleGroupItem,
@@ -12,8 +12,8 @@ import {
   Collapsible, CollapsibleTrigger, CollapsibleContent,
   ScrollArea, AspectRatio, CodeBlock, Terminal,
   Breadcrumb, Pagination, Toolbar, ToolbarButton, ToolbarSeparator, SplitButton,
-  Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
-  Timeline, Stepper, Meter, DatePicker, Calendar,
+  Table, TableBody, TableCell, TableHead, TableHeader, TableRow, DataTable,
+  Timeline, Stepper, Meter, DatePicker, DateRangePicker, Calendar,
   Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
   RadioGroup, RadioGroupItem, CheckboxGroup, CheckboxGroupItem, Combobox,
   InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator,
@@ -36,13 +36,19 @@ import {
   Footer as SigilFooter, Sidebar, SidebarHeader, SidebarContent, SidebarItem,
   NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink,
   Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, SocialIcons,
-  Divider, HRule, SectionDivider,
+  Divider, HRule,
   AnimateOnScroll,
   FadeIn, SlideIn, ScaleIn, BlurFade, Stagger, AnimateOnMount,
   TextReveal, LetterPullUp, WordRotate, TypeWriter, NumberTicker, GradientText,
   ScrollProgress, ParallaxLayer,
   Marquee, Ripple, Pulse,
   WaterfallChart, CapabilityGrid, IsolationStack, StatePersistence,
+  RadarChart, TreeDiagram, GanttChart, FunnelChart, MatrixDiagram,
+  DependencyGraph, DonutChart, NetworkGraph, HeatmapGrid, VennDiagram,
+  PricingTable, ChangelogTable, StatusTable, SpecTable, LeaderboardTable,
+  BarChart, PieChart, LineChart, AreaChart, CommitGrid, SparkLine,
+  UsageGauge, BillingChart, ProgressRing, MetricCard, ActivityFeed, MiniBarList,
+  MermaidDiagram,
   FeatureFrameSection, BlueprintGridSection,
   Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription,
   Drawer, DrawerTrigger, DrawerContent, DrawerHeader, DrawerTitle,
@@ -60,7 +66,7 @@ import {
   TreeView, ButtonGroup,
   InputGroup, InputGroupAddon, InputGroupInput,
   FileUpload, SignaturePad,
-  Item, Sonner,
+  Item, Sonner, sonnerToast,
   Panel, PanelHead, BrailleSpinner, GrainGradient, PageShell,
   AccessibleIcon, VisuallyHidden,
   SegmentedControl, SegmentedControlItem, CircularProgress, PasswordInput,
@@ -74,6 +80,7 @@ import {
   GapPixelGrid, GapPixelCell, MonoLabel, BorderStack, AccentCTA, TabularValue, DensityText, FrostedPanel, CardCell,
 } from "@sigil-ui/components";
 import { TechFrame } from "./tech-frame";
+import { FooterLogo } from "./hero-logo-field";
 import {
   Search, Star, Heart, Bold, Italic, Underline,
   AlignLeft, AlignCenter, AlignRight,
@@ -85,6 +92,7 @@ type ComponentCell = {
   name: string;
   category: string;
   variants?: number;
+  docPath?: string | null;
   /** Number of grid columns to span. @default 1 */
   span?: number;
   render: () => ReactNode;
@@ -92,8 +100,212 @@ type ComponentCell = {
 
 const CATEGORIES = [
   "All", "UI", "Layout", "Navigation", "Overlays", "Data",
-  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Patterns", "Playbook",
+  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Pretext", "Patterns", "Playbook",
 ] as const;
+
+const DOC_SECTION_BY_CATEGORY: Record<string, string> = {
+  "3D": "components",
+  Animation: "animation",
+  Diagrams: "components",
+  Layout: "components",
+  Marketing: "components",
+  Navigation: "components",
+  Overlays: "components",
+  Patterns: "patterns",
+  Playbook: "playbook",
+  Pretext: "components",
+  Sections: "components",
+  Shapes: "components",
+  UI: "components",
+  Data: "components",
+  Forms: "components",
+};
+
+const DOC_PATH_OVERRIDES: Record<string, string | null> = {
+  AccessibleIcon: "/docs/components/accessible-icon",
+  AccentCTA: null,
+  AppShell: "/docs/components/app-shell",
+  ArchitectureDiagram: "/docs/diagrams/architecture-diagram",
+  AspectRatio: "/docs/components/aspect-ratio",
+  ActivityFeed: null,
+  AreaChart: null,
+  AvatarGroup: "/docs/components/avatar",
+  BarChart: null,
+  BillingChart: null,
+  BlogGrid: null,
+  BlogHeader: null,
+  Blockquote: null,
+  BorderStack: null,
+  Box3D: "/docs/components/box-3d",
+  Box3DGrid: null,
+  BlueprintGridSection: null,
+  ButtonGroup: "/docs/components/button-group",
+  CapabilityGrid: "/docs/diagrams/capability-grid",
+  Card3D: "/docs/3d/card3d",
+  CardCell: null,
+  ChartContainer: "/docs/components/chart",
+  CodeBlock: "/docs/components/code-block",
+  CommitGrid: null,
+  ChangelogTable: null,
+  ComparisonTable: "/docs/diagrams/comparison-table",
+  Cross: "/docs/patterns/cross",
+  CrossHatch: null,
+  Diagonal: "/docs/shapes/diagonal",
+  DatePicker: "/docs/components/date-picker",
+  DateRangePicker: "/docs/components/date-picker",
+  DensityText: null,
+  DependencyGraph: null,
+  DonutChart: null,
+  DiagramLabel: null,
+  DiagramConnector: "/docs/components/diagram-connector",
+  DiagramNode: "/docs/components/diagram-node",
+  Divider: "/docs/layout/divider",
+  ExplodedView: "/docs/diagrams/exploded-view",
+  FeatureFrame: "/docs/marketing/feature-frame",
+  FeatureFrameSection: null,
+  FeatureMiniDiagram: null,
+  FlowDiagram: "/docs/diagrams/flow-diagram",
+  Footer: null,
+  FloatingUI: "/docs/3d/floating-ui",
+  FunnelChart: null,
+  FrostedPanel: null,
+  GapPixelGrid: null,
+  GrainGradient: "/docs/patterns/grain-gradient",
+  GanttChart: null,
+  HeatmapGrid: null,
+  HRule: "/docs/layout/h-rule",
+  Hexagon: "/docs/shapes/hexagon",
+  InputGroup: "/docs/components/input-group",
+  InputOTP: "/docs/components/input-otp",
+  IsolationStack: "/docs/diagrams/isolation-stack",
+  IsometricView: "/docs/3d/isometric-view",
+  LeaderboardTable: null,
+  LineChart: null,
+  LoadingSpinner: "/docs/components/loading-spinner",
+  MatrixDiagram: null,
+  MermaidDiagram: null,
+  MetricCard: null,
+  MiniBarList: null,
+  MonoLabel: null,
+  NativeSelect: "/docs/components/native-select",
+  NetworkGraph: null,
+  Navbar: null,
+  NumberField: "/docs/components/number-field",
+  PieChart: null,
+  PricingTable: null,
+  PricingTiers: null,
+  PlatformHubDiagram: null,
+  PipelineDiagram: "/docs/components/pipeline-diagram",
+  PageShell: "/docs/layout/page-shell",
+  "Page Shell": "/docs/layout/page-shell",
+  ProgressRing: null,
+  RadioGroup: "/docs/components/radio-group",
+  RadarChart: null,
+  ScrollArea: "/docs/components/scroll-area",
+  SegmentedControl: "/docs/components/segmented-control",
+  SocialIcons: null,
+  SimpleGrid: "/docs/components/simple-grid",
+  Stack: "/docs/layout/stack",
+  StackDiagram: "/docs/components/stack-diagram",
+  SparkLine: null,
+  StatusTable: null,
+  StatePersistence: "/docs/diagrams/state-persistence",
+  SpecTable: null,
+  WaterfallChart: "/docs/diagrams/waterfall-chart",
+  TabularValue: null,
+  TagsInput: "/docs/components/tags-input",
+  Timeline: "/docs/diagrams/timeline",
+  ToggleGroup: "/docs/components/toggle-group",
+  TreeView: "/docs/components/tree-view",
+  TreeDiagram: null,
+  Triangle: "/docs/shapes/triangle",
+  TypeWriter: "/docs/animation/typewriter",
+  UnitPricing: null,
+  UsageGauge: null,
+  VennDiagram: null,
+  VoronoiBento: "/docs/layout/voronoi-bento",
+};
+
+function componentSlug(name: string) {
+  return name
+    .replace(/3D/g, "3-d")
+    .replace(/OTP/g, "-otp")
+    .replace(/CTA/g, "-cta")
+    .replace(/KPI/g, "kpi")
+    .replace(/UI/g, "-ui")
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/([A-Z]+)([A-Z][a-z])/g, "$1-$2")
+    .replace(/\s+/g, "-")
+    .replace(/^-/, "")
+    .toLowerCase();
+}
+
+function getDocsHref(cell: ComponentCell) {
+  if (cell.docPath !== undefined) return cell.docPath;
+  if (cell.name in DOC_PATH_OVERRIDES) return DOC_PATH_OVERRIDES[cell.name];
+  const section = DOC_SECTION_BY_CATEGORY[cell.category] ?? "components";
+  return `/docs/${section}/${componentSlug(cell.name)}`;
+}
+
+function ControlledCombobox() {
+  const [framework, setFramework] = useState("react");
+  return (
+    <Combobox
+      options={[
+        { value: "react", label: "React" },
+        { value: "vue", label: "Vue" },
+        { value: "svelte", label: "Svelte" },
+        { value: "solid", label: "SolidJS" },
+      ]}
+      value={framework}
+      onValueChange={setFramework}
+      placeholder="Search frameworks..."
+      className="w-full"
+    />
+  );
+}
+
+function ReplayPreview({
+  children,
+  interval = 2600,
+}: {
+  children: (cycle: number) => ReactNode;
+  interval?: number;
+}) {
+  const [cycle, setCycle] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setCycle((current) => current + 1), interval);
+    return () => window.clearInterval(timer);
+  }, [interval]);
+
+  return (
+    <div key={cycle} className="flex h-full w-full items-center justify-center">
+      {children(cycle)}
+    </div>
+  );
+}
+
+function AnimatedScrollProgressPreview() {
+  const [progress, setProgress] = useState(12);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setProgress((current) => (current >= 92 ? 12 : current + 16));
+    }, 500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="relative h-8 w-full overflow-hidden rounded-[var(--s-radius-sm,2px)] border border-[var(--s-border)]">
+      <ScrollProgress fixed={false} value={progress} className="!absolute" />
+      <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono text-[var(--s-text-muted)]">
+        {progress}% scrolled
+      </div>
+    </div>
+  );
+}
 
 const CELLS: ComponentCell[] = [
   /* ================================================================ */
@@ -221,13 +433,15 @@ const CELLS: ComponentCell[] = [
       <Input placeholder="you@example.com" className="h-8 text-xs" />
     </div>
   )},
-  { name: "Separator", category: "UI", variants: 1, render: () => (
-    <div className="flex flex-col gap-3 w-full">
-      <div className="text-xs text-[var(--s-text)]">Account</div>
-      <Separator className="bg-[var(--s-border)]" />
-      <div className="text-xs text-[var(--s-text)]">Settings</div>
-      <Separator className="bg-[var(--s-border)]" />
-      <div className="text-xs text-[var(--s-text-muted)]">Logout</div>
+  { name: "Separator", category: "UI", variants: 2, render: () => (
+    <div className="flex w-full items-center gap-3">
+      <div className="flex flex-1 flex-col gap-2">
+        <div className="text-xs text-[var(--s-text)]">Account</div>
+        <Separator />
+        <div className="text-xs text-[var(--s-text-muted)]">Settings</div>
+      </div>
+      <Separator orientation="vertical" className="h-12" />
+      <div className="text-xs text-[var(--s-text-muted)]">Plain line</div>
     </div>
   )},
   { name: "Tooltip", category: "UI", variants: 1, render: () => (
@@ -249,7 +463,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Terminal", category: "UI", variants: 1, render: () => (
     <div className="w-full [&>div]:!text-[10px] [&_pre]:!text-[10px] [&_pre]:!p-2 [&_pre]:!leading-relaxed [&>div>div:first-child]:!py-1 [&>div>div:first-child]:!px-2 [&>div>div:first-child]:!text-[9px]">
-      <Terminal lines={["$ npx sigil init", "✓ Done in 1.2s"]} title="zsh" />
+      <Terminal lines={["$ npx @sigil-ui/cli convert", "✓ Done in 1.2s"]} title="zsh" />
     </div>
   )},
   { name: "Kbd", category: "UI", variants: 1, render: () => (
@@ -266,7 +480,7 @@ const CELLS: ComponentCell[] = [
     </NativeSelect>
   )},
   { name: "Clipboard", category: "UI", variants: 1, render: () => (
-    <Clipboard value="npx sigil init" />
+    <Clipboard value="npx @sigil-ui/cli convert" />
   )},
   { name: "Item", category: "UI", variants: 1, render: () => (
     <Item
@@ -306,7 +520,7 @@ const CELLS: ComponentCell[] = [
       </AccordionItem>
       <AccordionItem value="b">
         <AccordionTrigger className="text-xs py-1.5">How many presets?</AccordionTrigger>
-        <AccordionContent className="text-[10px]">31 curated presets.</AccordionContent>
+        <AccordionContent className="text-[10px]">44 curated presets.</AccordionContent>
       </AccordionItem>
     </Accordion>
   )},
@@ -344,10 +558,13 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "Divider", category: "Layout", variants: 2, render: () => (
-    <div className="flex flex-col gap-2 w-full">
-      <span className="text-[10px] text-[var(--s-text-muted)]">Section A</span>
-      <Divider />
-      <span className="text-[10px] text-[var(--s-text-muted)]">Section B</span>
+    <div className="flex w-full items-stretch gap-3">
+      <div className="flex flex-1 flex-col gap-1">
+        <Divider pattern="vertical" size="xs" />
+        <Divider pattern="diagonal" size="xs" />
+        <Divider pattern="vertical" size="xs" />
+      </div>
+      <Divider orientation="vertical" pattern="diagonal" size="sm" />
     </div>
   )},
   { name: "HRule", category: "Layout", variants: 1, render: () => (
@@ -484,6 +701,29 @@ const CELLS: ComponentCell[] = [
       <Cpu size={14} className="text-[var(--s-text-muted)]" />
     </div>
   )},
+  { name: "NavigationMenu", category: "Navigation", variants: 1, render: () => (
+    <NavigationMenu>
+      <NavigationMenuList>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#" className="text-[10px] text-[var(--s-text)]">Docs</NavigationMenuLink>
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <NavigationMenuLink href="#" className="text-[10px] text-[var(--s-text-muted)]">Components</NavigationMenuLink>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
+  )},
+  { name: "Menubar", category: "Navigation", variants: 1, render: () => (
+    <Menubar>
+      <MenubarMenu>
+        <MenubarTrigger className="text-[10px]">File</MenubarTrigger>
+        <MenubarContent>
+          <MenubarItem className="text-xs">New</MenubarItem>
+          <MenubarItem className="text-xs">Export</MenubarItem>
+        </MenubarContent>
+      </MenubarMenu>
+    </Menubar>
+  )},
 
   /* ================================================================ */
   /* Overlays                                                          */
@@ -557,6 +797,9 @@ const CELLS: ComponentCell[] = [
   { name: "Toast", category: "Overlays", variants: 4, render: () => (
     <Button size="sm" variant="outline" className="text-xs" onClick={() => toast({ title: "Saved!", description: "Changes applied." })}>Show Toast</Button>
   )},
+  { name: "Sonner", category: "Overlays", variants: 1, render: () => (
+    <Button size="sm" variant="outline" className="text-xs" onClick={() => sonnerToast.success("Synced", { description: "Preset state saved." })}>Show Sonner</Button>
+  )},
 
   /* ================================================================ */
   /* Data                                                              */
@@ -576,15 +819,17 @@ const CELLS: ComponentCell[] = [
     </Table>
   )},
   { name: "DataTable", category: "Data", variants: 1, span: 2, render: () => (
-    <Table className="w-full">
-      <TableHeader>
-        <TableRow><TableHead className="text-[10px] p-1.5">Component</TableHead><TableHead className="text-[10px] p-1.5">Downloads</TableHead></TableRow>
-      </TableHeader>
-      <TableBody>
-        <TableRow><TableCell className="text-[10px] p-1.5">Button</TableCell><TableCell className="text-[10px] p-1.5 tabular-nums">12.4k</TableCell></TableRow>
-        <TableRow><TableCell className="text-[10px] p-1.5">Card</TableCell><TableCell className="text-[10px] p-1.5 tabular-nums">9.1k</TableCell></TableRow>
-      </TableBody>
-    </Table>
+    <DataTable
+      className="w-full [&_th]:text-[10px] [&_th]:p-1.5 [&_td]:text-[10px] [&_td]:p-1.5"
+      columns={[
+        { key: "component", header: "Component" },
+        { key: "downloads", header: "Downloads", cell: (row) => <span className="tabular-nums">{row.downloads as string}</span> },
+      ]}
+      data={[
+        { component: "Button", downloads: "12.4k" },
+        { component: "Card", downloads: "9.1k" },
+      ]}
+    />
   )},
   { name: "Timeline", category: "Data", variants: 1, render: () => (
     <Timeline entries={[{ date: "Jan", title: "Created", description: "Project started" }, { date: "Feb", title: "Deployed", description: "v1.0 shipped" }]} />
@@ -601,6 +846,14 @@ const CELLS: ComponentCell[] = [
   { name: "DatePicker", category: "Data", variants: 1, render: () => (
     <div className="w-full flex flex-col gap-2 items-start">
       <DatePicker value={new Date()} className="w-full" />
+    </div>
+  )},
+  { name: "DateRangePicker", category: "Data", variants: 1, docPath: "/docs/components/date-picker", render: () => (
+    <div className="w-full flex flex-col gap-2 items-start">
+      <DateRangePicker
+        value={{ from: new Date(2026, 3, 20), to: new Date(2026, 3, 24) }}
+        className="w-full text-[10px]"
+      />
     </div>
   )},
   { name: "Carousel", category: "Data", variants: 1, span: 2, render: () => (
@@ -650,11 +903,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Combobox", category: "Forms", variants: 1, render: () => (
     <div className="w-full">
-      <Combobox
-        options={[{ value: "react", label: "React" }, { value: "vue", label: "Vue" }, { value: "svelte", label: "Svelte" }, { value: "solid", label: "SolidJS" }]}
-        placeholder="Search frameworks..."
-        className="w-full"
-      />
+      <ControlledCombobox />
     </div>
   )},
   { name: "InputOTP", category: "Forms", variants: 1, render: () => (
@@ -840,7 +1089,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "FeatureSection", category: "Sections", variants: 2, render: () => (
     <div className="grid grid-cols-2 gap-2 w-full">
-      {[{ t: "Fast", d: "Sub-50ms" }, { t: "Tokens", d: "259 fields" }, { t: "Presets", d: "31 themes" }, { t: "CLI", d: "One command" }].map((f) => (
+      {[{ t: "Fast", d: "Sub-50ms" }, { t: "Tokens", d: "259 fields" }, { t: "Presets", d: "44 themes" }, { t: "CLI", d: "One command" }].map((f) => (
         <div key={f.t} className="p-2 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)] bg-[var(--s-background)]">
           <div className="text-[10px] font-semibold text-[var(--s-text)]">{f.t}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{f.d}</div>
@@ -858,12 +1107,12 @@ const CELLS: ComponentCell[] = [
   { name: "FAQSection", category: "Sections", variants: 1, render: () => (
     <Accordion type="single" collapsible defaultValue="q0" className="w-full">
       <AccordionItem value="q0"><AccordionTrigger className="text-[10px] py-1">What is Sigil?</AccordionTrigger><AccordionContent className="text-[9px]">A token-driven design system.</AccordionContent></AccordionItem>
-      <AccordionItem value="q1"><AccordionTrigger className="text-[10px] py-1">How many presets?</AccordionTrigger><AccordionContent className="text-[9px]">31 curated presets.</AccordionContent></AccordionItem>
+      <AccordionItem value="q1"><AccordionTrigger className="text-[10px] py-1">How many presets?</AccordionTrigger><AccordionContent className="text-[9px]">44 curated presets.</AccordionContent></AccordionItem>
     </Accordion>
   )},
   { name: "StatsSection", category: "Sections", variants: 3, render: () => (
     <div className="grid grid-cols-3 gap-2 w-full text-center">
-      {[{ v: "103+", l: "Components" }, { v: "31", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
+      {[{ v: "200+", l: "Components" }, { v: "44", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
         <div key={s.l} className="py-2">
           <div className="text-base font-bold text-[var(--s-text)]">{s.v}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{s.l}</div>
@@ -1049,12 +1298,6 @@ const CELLS: ComponentCell[] = [
   { name: "Tessellation", category: "Patterns", variants: 7, render: () => (
     <Tessellation variant="zigzag" className="w-full" style={{ height: 48 }} opacity={0.4} />
   )},
-  { name: "SectionDivider", category: "Patterns", variants: 6, render: () => (
-    <div className="flex flex-col gap-1 w-full">
-      <SectionDivider pattern="dots" size="xs" />
-      <SectionDivider pattern="crosshatch" size="xs" />
-    </div>
-  )},
   { name: "Grain Gradient", category: "Patterns", variants: 4, render: () => (
     <div className="relative overflow-hidden rounded-md w-full" style={{ height: 48, background: "var(--s-surface)" }}>
       <GrainGradient tint="accent" intensity="medium" />
@@ -1112,7 +1355,19 @@ const CELLS: ComponentCell[] = [
     </IsometricScene>
   )},
   { name: "Box3DGrid", category: "3D", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Grid of 3D boxes</span>
+    <Box3DGrid
+      columns={3}
+      gap={8}
+      className="w-full max-w-[150px]"
+      items={[1, 2, 3].map((n) => ({
+        key: String(n),
+        depth: 12,
+        tiltX: -10,
+        tiltY: 18,
+        className: "h-10",
+        children: <span className="text-[9px] font-mono text-[var(--s-text-muted)]">{n}</span>,
+      }))}
+    />
   )},
 
   /* ================================================================ */
@@ -1126,6 +1381,28 @@ const CELLS: ComponentCell[] = [
         ))}
       </div>
     </Diagram>
+  )},
+  { name: "Sigil Diagram Mark", category: "Diagrams", variants: 12, render: () => (
+    <div
+      className="relative flex h-24 w-full items-center justify-center overflow-hidden"
+      style={{
+        border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
+        borderRadius: "var(--s-radius-md,8px)",
+        background:
+          "linear-gradient(var(--s-border-muted) 1px, transparent 1px), linear-gradient(90deg, var(--s-border-muted) 1px, transparent 1px)",
+        backgroundSize: "24px 24px",
+      }}
+    >
+      <div className="scale-[2.4]" style={{ color: "var(--s-primary)" }}>
+        <FooterLogo />
+      </div>
+      <span
+        className="absolute bottom-2 left-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]"
+        style={{ color: "var(--s-text-muted)" }}
+      >
+        legacy rotating diagrams
+      </span>
+    </div>
   )},
   { name: "FlowDiagram", category: "Diagrams", variants: 1, render: () => (
     <FlowDiagram
@@ -1145,9 +1422,13 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "AnimateOnScroll", category: "Animation", variants: 1, render: () => (
-    <AnimateOnScroll preset="fadeUp">
-      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up on scroll</div>
-    </AnimateOnScroll>
+    <ReplayPreview interval={3000}>
+      {() => (
+        <AnimateOnScroll preset="fadeUp">
+          <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up on scroll</div>
+        </AnimateOnScroll>
+      )}
+    </ReplayPreview>
   )},
   { name: "DiagramNode", category: "Diagrams", variants: 4, render: () => (
     <div className="flex gap-2 items-center">
@@ -1191,7 +1472,16 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "HubSpokeDiagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Hub + spoke layout</span>
+    <HubSpokeDiagram
+      hub={{ label: "Core" }}
+      spokes={[
+        { id: "tokens", label: "Tokens", side: "left" },
+        { id: "cli", label: "CLI", side: "left" },
+        { id: "docs", label: "Docs", side: "right" },
+        { id: "ui", label: "UI", side: "right" },
+      ]}
+      className="scale-75"
+    />
   )},
   { name: "BeforeAfterDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
     <BeforeAfterDiagram
@@ -1201,16 +1491,42 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "EcosystemDiagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Radial ecosystem map</span>
+    <EcosystemDiagram
+      center={{ label: "Sigil" }}
+      ring={[{ label: "Tokens" }, { label: "Presets" }, { label: "Docs" }, { label: "CLI" }]}
+      size={150}
+    />
   )},
   { name: "GlobeDiagram", category: "Diagrams", variants: 1, render: () => (
     <GlobeDiagram size={100} cities={[{ lat: 40.7, lon: -74, label: "NYC" }, { lat: 51.5, lon: 0, label: "LON" }]} />
   )},
   { name: "OrbitDiagram", category: "Diagrams", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Orbit animation</span>
+    <OrbitDiagram
+      center={{ label: "Core" }}
+      nodes={[{ label: "A" }, { label: "B" }, { label: "C" }, { label: "D" }]}
+      labels={["token", "ui"]}
+      size={150}
+    />
   )},
   { name: "StreamFlowDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
     <StreamFlowDiagram source={{ label: "LLM" }} tokens={["Hello", "World"]} className="w-full [&>div]:p-2 [&>div]:gap-2" />
+  )},
+  { name: "HubRouteDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <HubRouteDiagram
+      source={{ label: "App" }}
+      hub={{ label: "Sigil", layers: [{ label: "Tokens" }, { label: "UI" }] }}
+      leftTargets={[{ label: "Docs" }]}
+      rightTargets={[{ label: "CSS" }, { label: "React" }]}
+      className="w-full p-3 [&_*]:text-[9px]"
+    />
+  )},
+  { name: "PlatformHubDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <PlatformHubDiagram
+      left={[{ label: "Inputs", items: [{ label: "Tokens" }, { label: "Presets" }] }]}
+      center={{ label: "Platform", items: [{ label: "CLI" }] }}
+      right={[{ label: "Outputs", items: [{ label: "CSS" }, { label: "Components" }] }]}
+      className="w-full p-3 [&_*]:text-[9px]"
+    />
   )},
   { name: "IsometricStackDiagram", category: "Diagrams", variants: 1, render: () => (
     <IsometricStackDiagram layers={[{ label: "App" }, { label: "API", hatched: true }, { label: "Infra", color: "var(--s-primary)" }]} width={60} layerHeight={12} className="mx-auto" />
@@ -1263,47 +1579,199 @@ const CELLS: ComponentCell[] = [
       competitors={[{ label: "competitor-a", value: "$0.09/hr", variant: "danger" }]}
     />
   )},
+  { name: "MermaidDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <MermaidDiagram
+      chart={"flowchart LR\n  A[Tokens] --> B[CSS]\n  B --> C[Components]"}
+      className="max-h-[120px] p-2 text-[10px]"
+    />
+  )},
+  { name: "BarChart", category: "Diagrams", variants: 1, render: () => (
+    <BarChart groups={[{ label: "Q1", bars: [{ label: "UI", value: 42 }, { label: "Docs", value: 28 }] }]} maxBarSize={80} />
+  )},
+  { name: "PieChart", category: "Diagrams", variants: 1, render: () => (
+    <PieChart slices={[{ label: "UI", value: 45 }, { label: "Docs", value: 35 }, { label: "CLI", value: 20 }]} width={160} height={120} />
+  )},
+  { name: "DonutChart", category: "Diagrams", variants: 1, render: () => (
+    <DonutChart segments={[{ label: "Used", value: 68 }, { label: "Free", value: 32 }]} centerValue="68%" width={160} height={120} />
+  )},
+  { name: "LineChart", category: "Diagrams", variants: 1, render: () => (
+    <LineChart series={[{ label: "Builds", points: [{ label: "Mon", value: 12 }, { label: "Tue", value: 18 }, { label: "Wed", value: 15 }, { label: "Thu", value: 28 }] }]} width={180} height={110} showYLabels={false} />
+  )},
+  { name: "AreaChart", category: "Diagrams", variants: 1, render: () => (
+    <AreaChart series={[{ label: "Usage", points: [{ label: "Mon", value: 20 }, { label: "Tue", value: 32 }, { label: "Wed", value: 28 }, { label: "Thu", value: 44 }] }]} width={180} height={110} />
+  )},
+  { name: "RadarChart", category: "Diagrams", variants: 1, render: () => (
+    <RadarChart axes={[{ label: "DX" }, { label: "A11y" }, { label: "Motion" }, { label: "Theme" }]} series={[{ label: "Sigil", values: [92, 84, 78, 96] }]} width={160} height={140} />
+  )},
+  { name: "FunnelChart", category: "Diagrams", variants: 1, render: () => (
+    <FunnelChart steps={[{ label: "Visit", value: 1200 }, { label: "Install", value: 640 }, { label: "Ship", value: 320 }]} />
+  )},
+  { name: "HeatmapGrid", category: "Diagrams", variants: 1, render: () => (
+    <HeatmapGrid
+      data={[[{ value: 1 }, { value: 3 }, { value: 5 }], [{ value: 2 }, { value: 4 }, { value: 6 }]]}
+      cellSize={28}
+      xLabels={["A", "B", "C"]}
+      yLabels={["1", "2"]}
+    />
+  )},
+  { name: "MatrixDiagram", category: "Diagrams", variants: 1, render: () => (
+    <MatrixDiagram
+      cells={[[{ id: "a", label: "Fast" }, { id: "b", label: "Typed" }], [{ id: "c", label: "Token" }, { id: "d", label: "A11y" }]]}
+      className="scale-75"
+    />
+  )},
+  { name: "TreeDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <TreeDiagram
+      compact
+      root={{ id: "root", label: "Sigil", variant: "accent", children: [{ id: "tokens", label: "Tokens" }, { id: "components", label: "Components" }] }}
+    />
+  )},
+  { name: "GanttChart", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <GanttChart
+      totalUnits={4}
+      unitLabels={["W1", "W2", "W3", "W4"]}
+      groups={[{ label: "Build", tasks: [{ id: "docs", label: "Docs", start: 0, end: 2 }, { id: "ui", label: "UI", start: 1, end: 4, color: "var(--s-primary)" }] }]}
+    />
+  )},
+  { name: "DependencyGraph", category: "Diagrams", variants: 1, render: () => (
+    <DependencyGraph
+      width={180}
+      height={120}
+      nodes={[{ id: "tokens", label: "Tokens", x: 40, y: 60 }, { id: "css", label: "CSS", x: 100, y: 35 }, { id: "ui", label: "UI", x: 145, y: 80 }]}
+      edges={[{ from: "tokens", to: "css" }, { from: "css", to: "ui" }]}
+    />
+  )},
+  { name: "NetworkGraph", category: "Diagrams", variants: 1, render: () => (
+    <NetworkGraph
+      width={180}
+      height={120}
+      nodes={[{ id: "a", label: "A", x: 40, y: 60 }, { id: "b", label: "B", x: 100, y: 35 }, { id: "c", label: "C", x: 145, y: 80 }]}
+      edges={[{ source: "a", target: "b" }, { source: "b", target: "c" }]}
+    />
+  )},
+  { name: "VennDiagram", category: "Diagrams", variants: 1, render: () => (
+    <VennDiagram circles={[{ label: "Tokens" }, { label: "UI" }]} intersectionLabel="Sigil" width={170} height={120} />
+  )},
+  { name: "PricingTable", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <PricingTable
+      columns={[{ name: "Free", price: "$0" }, { name: "Pro", price: "$19", highlighted: true }]}
+      features={[{ name: "Tokens", values: { Free: true, Pro: true } }, { name: "Support", values: { Free: false, Pro: true } }]}
+      className="w-full text-[10px]"
+    />
+  )},
+  { name: "ChangelogTable", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <ChangelogTable releases={[{ version: "2.0", date: "Apr 2026", entries: [{ type: "added", description: "44 presets" }, { type: "fixed", description: "Docs links" }] }]} />
+  )},
+  { name: "StatusTable", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <StatusTable title="Status" services={[{ name: "API", status: "operational", uptime: "99.9%" }, { name: "Docs", status: "degraded", lastIncident: "1h ago" }]} />
+  )},
+  { name: "SpecTable", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <SpecTable title="Spec" rows={[{ label: "Tokens", value: "259" }, { label: "Presets", value: "44", highlight: true }]} />
+  )},
+  { name: "LeaderboardTable", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <LeaderboardTable title="Usage" rows={[{ label: "Button", value: 12400, highlight: true }, { label: "Card", value: 9100 }]} />
+  )},
+  { name: "CommitGrid", category: "Diagrams", variants: 1, span: 2, render: () => (
+    <CommitGrid
+      weeks={8}
+      cellSize={8}
+      data={Array.from({ length: 56 }, (_, i) => ({ date: `2026-04-${String((i % 28) + 1).padStart(2, "0")}`, count: i % 5 }))}
+    />
+  )},
+  { name: "SparkLine", category: "Diagrams", variants: 1, render: () => (
+    <SparkLine data={[3, 5, 4, 8, 7, 11, 14]} width={160} height={60} />
+  )},
+  { name: "UsageGauge", category: "Diagrams", variants: 1, render: () => (
+    <UsageGauge value={72} label="Usage" width={160} height={100} />
+  )},
+  { name: "BillingChart", category: "Diagrams", variants: 1, render: () => (
+    <BillingChart periods={[{ label: "Jan", segments: [{ label: "CPU", value: 24 }, { label: "Storage", value: 12 }] }, { label: "Feb", segments: [{ label: "CPU", value: 28 }, { label: "Storage", value: 16 }] }]} width={180} height={120} />
+  )},
+  { name: "ProgressRing", category: "Diagrams", variants: 1, render: () => (
+    <ProgressRing tracks={[{ label: "CPU", value: 72 }, { label: "Mem", value: 48 }]} width={150} height={120} />
+  )},
+  { name: "MetricCard", category: "Diagrams", variants: 1, render: () => (
+    <MetricCard label="Latency" value="42ms" delta="-12%" deltaLabel="week" sparkData={[8, 7, 6, 5, 4, 4, 3]} />
+  )},
+  { name: "ActivityFeed", category: "Diagrams", variants: 1, render: () => (
+    <ActivityFeed maxEntries={2} entries={[{ id: "1", title: "Preset synced", timestamp: "now", variant: "success" }, { id: "2", title: "Docs rebuilt", timestamp: "1m", variant: "info" }]} />
+  )},
+  { name: "MiniBarList", category: "Diagrams", variants: 1, render: () => (
+    <MiniBarList items={[{ label: "Button", value: 42 }, { label: "Card", value: 28 }, { label: "Input", value: 21 }]} />
+  )},
 
   /* ================================================================ */
   /* Animation                                                         */
   /* ================================================================ */
   { name: "FadeIn", category: "Animation", variants: 5, render: () => (
-    <FadeIn trigger="mount" direction="up">
-      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up</div>
-    </FadeIn>
+    <ReplayPreview>
+      {() => (
+        <FadeIn trigger="mount" direction="up">
+          <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Fade up</div>
+        </FadeIn>
+      )}
+    </ReplayPreview>
   )},
   { name: "SlideIn", category: "Animation", variants: 4, render: () => (
-    <SlideIn trigger="mount" direction="left" offset={40}>
-      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Slide from left</div>
-    </SlideIn>
+    <ReplayPreview>
+      {() => (
+        <SlideIn trigger="mount" direction="left" offset={40}>
+          <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Slide from left</div>
+        </SlideIn>
+      )}
+    </ReplayPreview>
   )},
   { name: "ScaleIn", category: "Animation", variants: 1, render: () => (
-    <ScaleIn trigger="mount">
-      <div className="px-3 py-2 border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] text-xs font-semibold" style={{ color: "var(--s-text)" }}>Scale in</div>
-    </ScaleIn>
+    <ReplayPreview>
+      {() => (
+        <ScaleIn trigger="mount">
+          <div className="px-3 py-2 border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] text-xs font-semibold" style={{ color: "var(--s-text)" }}>Scale in</div>
+        </ScaleIn>
+      )}
+    </ReplayPreview>
   )},
   { name: "BlurFade", category: "Animation", variants: 1, render: () => (
-    <BlurFade trigger="mount">
-      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur + fade</div>
-    </BlurFade>
+    <ReplayPreview>
+      {() => (
+        <BlurFade trigger="mount">
+          <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur + fade</div>
+        </BlurFade>
+      )}
+    </ReplayPreview>
   )},
   { name: "Stagger", category: "Animation", variants: 1, render: () => (
-    <Stagger trigger="mount" interval={100}>
-      {["One", "Two", "Three"].map((t) => (
-        <div key={t} className="px-2 py-1 border border-[var(--s-border)] text-[10px] font-mono mb-1" style={{ color: "var(--s-text)" }}>{t}</div>
-      ))}
-    </Stagger>
+    <ReplayPreview interval={3000}>
+      {() => (
+        <Stagger trigger="mount" interval={100}>
+          {["One", "Two", "Three"].map((t) => (
+            <div key={t} className="px-2 py-1 border border-[var(--s-border)] text-[10px] font-mono mb-1" style={{ color: "var(--s-text)" }}>{t}</div>
+          ))}
+        </Stagger>
+      )}
+    </ReplayPreview>
   )},
   { name: "AnimateOnMount", category: "Animation", variants: 7, render: () => (
-    <AnimateOnMount preset="blurIn" duration={500}>
-      <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur in on mount</div>
-    </AnimateOnMount>
+    <ReplayPreview interval={3000}>
+      {() => (
+        <AnimateOnMount preset="blurIn" duration={500}>
+          <div className="text-xs font-semibold text-center" style={{ color: "var(--s-text)" }}>Blur in on mount</div>
+        </AnimateOnMount>
+      )}
+    </ReplayPreview>
   )},
   { name: "TextReveal", category: "Animation", variants: 2, span: 2, render: () => (
-    <TextReveal text="Token-driven animation suite" by="word" trigger="mount" className="text-sm font-semibold text-center" style={{ color: "var(--s-text)" }} />
+    <ReplayPreview interval={3200}>
+      {() => (
+        <TextReveal text="Token-driven animation suite" by="word" trigger="mount" className="text-sm font-semibold text-center" style={{ color: "var(--s-text)" }} />
+      )}
+    </ReplayPreview>
   )},
   { name: "LetterPullUp", category: "Animation", variants: 1, render: () => (
-    <LetterPullUp text="Sigil UI" trigger="mount" className="text-lg font-bold text-center" style={{ color: "var(--s-text)" }} />
+    <ReplayPreview interval={3000}>
+      {() => (
+        <LetterPullUp text="Sigil UI" trigger="mount" className="text-lg font-bold text-center" style={{ color: "var(--s-text)" }} />
+      )}
+    </ReplayPreview>
   )},
   { name: "WordRotate", category: "Animation", variants: 1, render: () => (
     <div className="text-sm text-center" style={{ color: "var(--s-text)" }}>
@@ -1311,22 +1779,23 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "TypeWriter", category: "Animation", variants: 1, render: () => (
-    <TypeWriter words={["npx sigil init", "sigil preset cobalt", "sigil add button"]} speed={50} className="font-mono text-xs" style={{ color: "var(--s-primary)" }} />
+    <TypeWriter words={["npx @sigil-ui/cli convert", "sigil preset cobalt", "sigil add button"]} speed={50} className="font-mono text-xs" style={{ color: "var(--s-primary)" }} />
   )},
   { name: "NumberTicker", category: "Animation", variants: 1, render: () => (
-    <div className="text-center">
-      <NumberTicker value={259} trigger="mount" className="text-3xl font-bold" style={{ color: "var(--s-text)" }} />
-      <div className="text-[10px] font-mono mt-1" style={{ color: "var(--s-text-muted)" }}>tokens</div>
-    </div>
+    <ReplayPreview interval={3400}>
+      {() => (
+        <div className="text-center">
+          <NumberTicker value={259} trigger="mount" className="text-3xl font-bold" style={{ color: "var(--s-text)" }} />
+          <div className="text-[10px] font-mono mt-1" style={{ color: "var(--s-text-muted)" }}>tokens</div>
+        </div>
+      )}
+    </ReplayPreview>
   )},
   { name: "GradientText", category: "Animation", variants: 1, render: () => (
     <GradientText className="text-lg font-bold">Sigil UI</GradientText>
   )},
   { name: "ScrollProgress", category: "Animation", variants: 1, render: () => (
-    <div className="relative w-full h-8 border border-[var(--s-border)] rounded-[var(--s-radius-sm,2px)] overflow-hidden">
-      <div className="h-[3px] w-[60%] bg-[var(--s-primary)]" />
-      <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono" style={{ color: "var(--s-text-muted)" }}>60% scrolled</div>
-    </div>
+    <AnimatedScrollProgressPreview />
   )},
   { name: "Marquee", category: "Animation", variants: 4, span: 2, render: () => (
     <Marquee duration={12} gap="1.5rem" className="py-1">
@@ -1346,13 +1815,99 @@ const CELLS: ComponentCell[] = [
     </Pulse>
   )},
   { name: "ParallaxLayer", category: "Animation", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Parallax offset on scroll</span>
+    <div className="relative h-16 w-full overflow-hidden rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border)]">
+      <ParallaxLayer speed={0.25} className="absolute inset-0 flex items-center justify-center">
+        <span className="rounded-[var(--s-radius-sm,4px)] bg-[var(--s-primary)] px-3 py-1 font-mono text-[10px] text-[var(--s-primary-contrast,#fff)]">
+          Parallax
+        </span>
+      </ParallaxLayer>
+    </div>
+  )},
+
+  /* ================================================================ */
+  /* Pretext                                                           */
+  /* ================================================================ */
+  { name: "PretextMeasure", category: "Pretext", variants: 1, docPath: null, render: () => (
+    <ReplayPreview interval={3200}>
+      {() => (
+        <div className="w-full space-y-2">
+          <style>{`@keyframes sigil-pretext-fill { 0% { transform: translateX(-100%); } 45%, 65% { transform: translateX(0); } 100% { transform: translateX(100%); } }`}</style>
+          <div className="flex items-center justify-between font-mono text-[9px] text-[var(--s-text-muted)]">
+            <span>measure()</span>
+            <span>12.4ms</span>
+          </div>
+          <TextReveal
+            text="Canvas-backed text metrics"
+            by="word"
+            trigger="mount"
+            interval={70}
+            className="text-center text-xs font-semibold text-[var(--s-text)]"
+          />
+          <div className="h-1 w-full overflow-hidden rounded-full bg-[var(--s-border)]">
+            <div
+              className="h-full w-3/4 bg-[var(--s-primary)]"
+              style={{ animation: "sigil-pretext-fill 1.4s var(--s-ease-default,ease-out) infinite" }}
+            />
+          </div>
+        </div>
+      )}
+    </ReplayPreview>
+  )},
+  { name: "PretextLines", category: "Pretext", variants: 1, docPath: null, render: () => (
+    <ReplayPreview interval={3400}>
+      {() => (
+        <div className="grid w-full grid-cols-3 gap-1.5">
+          {["Token", "driven", "typeset"].map((word, index) => (
+            <FadeIn key={word} trigger="mount" delay={index * 120} direction="up" offset={12}>
+              <div className="border border-[var(--s-border)] px-2 py-2 text-center font-mono text-[10px] text-[var(--s-text-muted)]">
+                {word}
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      )}
+    </ReplayPreview>
+  )},
+  { name: "PretextLayout", category: "Pretext", variants: 1, docPath: null, render: () => (
+    <ReplayPreview interval={3600}>
+      {() => (
+        <div className="w-full space-y-1.5">
+          {["balanced rag", "line boxes", "no reflow"].map((line, index) => (
+            <SlideIn key={line} trigger="mount" direction="left" offset={20} delay={index * 110}>
+              <div
+                className="h-6 border border-[var(--s-border)] bg-[var(--s-surface)] px-2 font-mono text-[10px] leading-6 text-[var(--s-text-muted)]"
+                style={{ width: `${92 - index * 14}%` }}
+              >
+                {line}
+              </div>
+            </SlideIn>
+          ))}
+        </div>
+      )}
+    </ReplayPreview>
   )},
   { name: "FeatureFrameSection", category: "Sections", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Bordered copy|diagram rows</span>
+    <FeatureFrameSection
+      features={[{
+        label: "FRAME",
+        headline: "Copy plus diagram",
+        points: ["Token border", "Responsive rows"],
+        diagram: <FeatureMiniDiagram variant="layer-stack" size={70} />,
+      }]}
+      className="w-full !px-0 !py-0 [&>div]:!max-w-none [&_.grid]:!grid-cols-1 [&_h3]:!text-xs [&_li]:!text-[9px] [&_.relative.flex]:!min-h-[80px] [&_.p-6]:!p-3"
+    />
   )},
   { name: "BlueprintGridSection", category: "Sections", variants: 1, render: () => (
-    <span className="text-[10px] text-[var(--s-text-muted)] font-mono">Staggered blueprint cards</span>
+    <BlueprintGridSection
+      cards={[{
+        title: "Blueprint",
+        subtitle: "Staggered card",
+        diagram: <FeatureMiniDiagram variant="hub-spoke" size={64} />,
+        specRows: [{ label: "TOKENS", value: "259" }],
+        callouts: ["typed"],
+      }]}
+      className="w-full !px-0 !py-0 [&>div]:!max-w-none [&_.grid]:!grid-cols-1 [&_.p-5]:!p-3"
+    />
   )},
 
   /* ================================================================ */
@@ -1469,7 +2024,7 @@ const CELLS: ComponentCell[] = [
       <PreviewCardTrigger asChild>
         <button type="button" className="text-xs underline text-[var(--s-primary)] bg-transparent border-0 cursor-pointer">Hover for preview</button>
       </PreviewCardTrigger>
-      <PreviewCardContent title="Sigil UI" description="A token-driven design system with 31 presets." />
+      <PreviewCardContent title="Sigil UI" description="A token-driven design system with 44 presets." />
     </PreviewCard>
   )},
 ];
@@ -1500,6 +2055,7 @@ export function ComponentShowcase() {
   return (
     <TooltipProvider>
     <Toaster position="bottom-right" />
+    <Sonner position="bottom-right" />
     <div>
       <div className="flex flex-col sm:flex-row gap-4 mb-8">
         <Input
@@ -1549,42 +2105,47 @@ export function ComponentShowcase() {
             )}
             <TechFrame variant="brackets" extend={12} opacity={0.2} padding={4}>
               <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
-                {catCells.map((cell) => (
-                  <div
-                    key={cell.name}
-                    className="group flex flex-col"
-                    style={{ ...CELL_STYLE, ...(cell.span && cell.span > 1 ? { gridColumn: `span ${cell.span}` } : {}) }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = "var(--s-border-strong)";
-                      e.currentTarget.style.background = "var(--s-surface)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = "var(--s-border-muted)";
-                      e.currentTarget.style.background = "var(--s-background)";
-                    }}
-                  >
-                    <div className="flex items-center justify-center flex-1 w-full">
-                      {cell.render()}
+                {catCells.map((cell) => {
+                  const docsHref = getDocsHref(cell);
+                  return (
+                    <div
+                      key={cell.name}
+                      className="group flex flex-col"
+                      style={{ ...CELL_STYLE, ...(cell.span && cell.span > 1 ? { gridColumn: `span ${cell.span}` } : {}) }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = "var(--s-border-strong)";
+                        e.currentTarget.style.background = "var(--s-surface)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "var(--s-border-muted)";
+                        e.currentTarget.style.background = "var(--s-background)";
+                      }}
+                    >
+                      <div className="flex items-center justify-center flex-1 w-full">
+                        {cell.render()}
+                      </div>
+                      <div className="flex items-center gap-1.5 mt-2 pt-1.5" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
+                        <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] leading-none flex-1">{cell.name}</span>
+                        {cell.variants && (
+                          <span className="font-[family-name:var(--s-font-mono)] text-[9px] text-[var(--s-text-subtle)] leading-none">{cell.variants}v</span>
+                        )}
+                        {docsHref && (
+                          <a
+                            href={docsHref}
+                            onClick={(e) => e.stopPropagation()}
+                            className="opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity ml-1"
+                            aria-label={`${cell.name} docs`}
+                          >
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
+                              <path d="M4.5 2.5h5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M9.5 2.5L2.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </a>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-1.5 mt-2 pt-1.5" style={{ borderTop: "1px solid var(--s-border-muted)" }}>
-                      <span className="font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] leading-none flex-1">{cell.name}</span>
-                      {cell.variants && (
-                        <span className="font-[family-name:var(--s-font-mono)] text-[9px] text-[var(--s-text-subtle)] leading-none">{cell.variants}v</span>
-                      )}
-                      <a
-                        href={`/docs/components/${cell.name.toLowerCase().replace(/\s+/g, "-")}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="opacity-0 group-hover:opacity-60 hover:!opacity-100 transition-opacity ml-1"
-                        aria-label={`${cell.name} docs`}
-                      >
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden>
-                          <path d="M4.5 2.5h5v5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                          <path d="M9.5 2.5L2.5 9.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </a>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </TechFrame>
           </div>

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -48,10 +48,10 @@ import { ComponentShowcase } from "@/components/landing/component-showcase";
 import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
 
 const STATS = [
-  { value: "100+", label: "Components" },
+  { value: "200+", label: "Components" },
   { value: "14", label: "Categories" },
   { value: "259", label: "Tokens" },
-  { value: "31", label: "Presets" },
+  { value: "44", label: "Presets" },
 ] as const;
 
 const TOKEN_CARDS = [
@@ -61,7 +61,7 @@ const TOKEN_CARDS = [
   },
   {
     title: "One preset, everything updates",
-    body: "Switch presets and all 100+ components change simultaneously. One command, zero prop drilling, zero theme objects.",
+    body: "Switch presets and all 200+ components change simultaneously. One command, zero prop drilling, zero theme objects.",
   },
   {
     title: "Agent-friendly",
@@ -111,7 +111,7 @@ export default function ComponentsPage() {
         </div>
       </SigilSection>
 
-      <SectionDivider />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* ── Stats bar ── */}
       <SigilSection padding="0">
@@ -130,14 +130,14 @@ export default function ComponentsPage() {
         </GapPixelGrid>
       </SigilSection>
 
-      <SectionDivider />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ── Component Showcase ── */}
       <SigilSection padding="48px 24px">
         <ComponentShowcase />
       </SigilSection>
 
-      <SectionDivider />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* ── Component Anatomy ── */}
       <SigilSection padding="64px 24px">
@@ -164,7 +164,7 @@ export default function ComponentsPage() {
         <ComponentAnatomyDiagram />
       </SigilSection>
 
-      <SectionDivider />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ── Build with tokens ── */}
       <SigilSection padding="64px 24px">
@@ -204,6 +204,8 @@ export default function ComponentsPage() {
           </a>
         </div>
       </SigilSection>
+
+      <Divider pattern="vertical" size="md" showBorders />
 
       <LandingFooter />
     </SigilFrame>

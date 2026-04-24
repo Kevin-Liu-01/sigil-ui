@@ -62,8 +62,8 @@ export const IsometricPrism = forwardRef<SVGSVGElement, IsometricPrismProps>(
     const pt = (p: [number, number]) => `${p[0] + ox},${p[1] + oy}`;
 
     const topFace = [top0, top1, top2, top3].map(pt).join(" ");
-    const leftFace = [top0, top3, bot3, bot0].map(pt).join(" ");
-    const rightFace = [top3, top2, bot2, bot3].map(pt).join(" ");
+    const frontFace = [top0, top1, bot1, bot0].map(pt).join(" ");
+    const rightFace = [top1, top2, bot2, bot1].map(pt).join(" ");
 
     return (
       <svg
@@ -75,7 +75,7 @@ export const IsometricPrism = forwardRef<SVGSVGElement, IsometricPrismProps>(
         className={cn("shrink-0", className)}
         {...props}
       >
-        <polygon points={leftFace} fill={leftColor} stroke={strokeColor} strokeWidth={sw} strokeLinejoin="round" rx={r} />
+        <polygon points={frontFace} fill={leftColor} stroke={strokeColor} strokeWidth={sw} strokeLinejoin="round" />
         <polygon points={rightFace} fill={rightColor} stroke={strokeColor} strokeWidth={sw} strokeLinejoin="round" />
         <polygon points={topFace} fill={topColor} stroke={strokeColor} strokeWidth={sw} strokeLinejoin="round" />
         {children && (

@@ -1,12 +1,8 @@
 import { Command } from "commander";
 import prompts from "prompts";
 import chalk from "chalk";
-import fs from "fs-extra";
-import path from "node:path";
 import {
   configExists,
-  writeConfig,
-  writeTokensCss,
   DEFAULT_CONFIG,
   type SigilConfig,
 } from "../utils/config.js";
@@ -23,10 +19,14 @@ import {
 import {
   detectProject,
   FRAMEWORK_LABELS,
-  PM_INSTALL,
   type ProjectDetection,
 } from "../utils/detect.js";
-import { generateAgentInstructions } from "../utils/agents.js";
+import {
+  printInstallHint,
+  type CustomOverrides,
+  writeSigilSetup,
+} from "../utils/setup.js";
+import { printIntro, printSuccess } from "../utils/terminal.js";
 
 export const initCommand = new Command("init")
   .description("Initialize Sigil UI in the current project")
@@ -34,13 +34,15 @@ export const initCommand = new Command("init")
   .option("-d, --dir <dir>", "components directory")
   .option("-y, --yes", "skip prompts, use defaults")
   .option("--no-agent", "skip generating agent instructions")
+  .option("--install", "install dependencies after writing files")
+  .option("--no-install", "skip dependency installation")
+  .option("--inject-css", "inject token import into detected global CSS")
+  .option("--no-inject-css", "skip global CSS import injection")
+  .option("--dry-run", "print planned changes without writing files")
   .action(async (opts) => {
     const cwd = process.cwd();
 
-    console.log();
-    console.log(chalk.bold("  ◇ Sigil UI"));
-    console.log(chalk.dim("  Structural-visibility design system"));
-    console.log();
+    printIntro("Sigil UI", "Structural-visibility design system");
 
     // Detect project environment
     const detection = detectProject(cwd);
@@ -62,7 +64,7 @@ export const initCommand = new Command("init")
 
     if (opts.yes) {
       const config = buildDefaultConfig(opts, detection);
-      await writeAll(config, cwd, detection, [], opts.agent !== false);
+      await writeAll(config, cwd, detection, [], opts.agent !== false, {}, [], opts);
       return;
     }
 
@@ -163,7 +165,7 @@ export const initCommand = new Command("init")
       typescript: detection.hasTypescript,
     };
 
-    await writeAll(config, cwd, detection, features, generateAgent, customOverrides, starterComponents);
+    await writeAll(config, cwd, detection, features, generateAgent, customOverrides, starterComponents, opts);
   });
 
 // ---------------------------------------------------------------------------
@@ -241,13 +243,6 @@ function suggestPresetsForProject(projectType: string): PresetInfo[] {
 // ---------------------------------------------------------------------------
 // Customization prompts
 // ---------------------------------------------------------------------------
-
-type CustomOverrides = {
-  primaryColor?: string;
-  displayFont?: string;
-  bodyFont?: string;
-  monoFont?: string;
-};
 
 async function askCustomizations(preset: PresetInfo): Promise<CustomOverrides> {
   const { wantCustom } = await prompts({
@@ -339,64 +334,35 @@ async function writeAll(
   generateAgent: boolean,
   customOverrides: CustomOverrides = {},
   starterComponents: string[] = [],
+  opts: { install?: boolean; injectCss?: boolean; dryRun?: boolean } = {},
 ): Promise<void> {
   console.log();
 
-  // 1. Write config
-  writeConfig(config, cwd);
-  console.log(chalk.green("  ✓"), "Created sigil.config.ts");
-
-  // 2. Write tokens CSS
-  const componentsDir = path.join(cwd, config.componentsDir);
-  fs.ensureDirSync(componentsDir);
-  console.log(chalk.green("  ✓"), `Created ${config.componentsDir}/`);
-
-  const tokensCss = generateTokensCss(config.preset, customOverrides);
-  writeTokensCss(tokensCss, config.tokensPath, cwd);
-  console.log(chalk.green("  ✓"), `Created ${config.tokensPath}`);
-
-  // 3. Write agent instructions
-  if (generateAgent) {
-    const preset = getPresetInfo(config.preset);
-    const agentContent = generateAgentInstructions(config, preset, detection, features);
-    const agentPath = path.join(cwd, ".sigil", "AGENTS.md");
-    fs.ensureDirSync(path.dirname(agentPath));
-    fs.writeFileSync(agentPath, agentContent, "utf-8");
-    console.log(chalk.green("  ✓"), "Created .sigil/AGENTS.md");
-  }
-
-  // 4. Add starter components (scaffold stubs)
-  if (starterComponents.length > 0) {
-    for (const comp of starterComponents) {
-      const fileName = `${comp}.tsx`;
-      const destPath = path.join(componentsDir, fileName);
-      if (!fs.existsSync(destPath)) {
-        const stub = generateComponentStub(comp);
-        fs.writeFileSync(destPath, stub, "utf-8");
-      }
-    }
-    console.log(chalk.green("  ✓"), `Added ${starterComponents.length} starter component(s)`);
-  }
+  const result = await writeSigilSetup({
+    cwd,
+    config,
+    detection,
+    features,
+    generateAgent,
+    customOverrides,
+    starterComponents,
+    install: opts.install === true,
+    injectCss: opts.injectCss === true,
+    dryRun: opts.dryRun === true,
+    generator: "sigil init",
+  });
 
   // Print summary
-  console.log();
-  console.log(chalk.bold("  Sigil UI initialized."));
-  console.log();
-  console.log(`  Preset      ${chalk.cyan(config.preset)}`);
-  console.log(`  Components  ${chalk.cyan(config.componentsDir)}`);
-  console.log(`  Tokens      ${chalk.cyan(config.tokensPath)}`);
-  if (features.length > 0) {
-    console.log(`  Features    ${chalk.cyan(features.join(", "))}`);
-  }
-  console.log();
+  printSuccess("Sigil UI initialized.", [
+    ["Preset", config.preset],
+    ["Components", config.componentsDir],
+    ["Tokens", config.tokensPath],
+    ["Features", features.length > 0 ? features.join(", ") : undefined],
+  ]);
 
   // Print deps to install
-  const depsToInstall = buildDependencyList(features);
-  if (depsToInstall.length > 0) {
-    const pm = PM_INSTALL[detection.packageManager];
-    console.log(chalk.bold("  Install dependencies:"));
-    console.log(`  ${chalk.cyan(`${pm} ${depsToInstall.join(" ")}`)}`);
-    console.log();
+  if (!opts.install) {
+    printInstallHint(detection, result.depsToInstall);
   }
 
   // Print next steps
@@ -405,9 +371,9 @@ async function writeAll(
   console.log(`  ${chalk.gray("1.")} Import tokens in your global CSS:`);
   console.log(`     ${chalk.cyan(`@import "${config.tokensPath}";`)}`);
   console.log(`  ${chalk.gray("2.")} Add more components:`);
-  console.log(`     ${chalk.cyan("npx sigil add button card dialog")}`);
+  console.log(`     ${chalk.cyan("npx @sigil-ui/cli add button card dialog")}`);
   console.log(`  ${chalk.gray("3.")} Validate your setup:`);
-  console.log(`     ${chalk.cyan("npx sigil doctor")}`);
+  console.log(`     ${chalk.cyan("npx @sigil-ui/cli doctor")}`);
   console.log();
 }
 
@@ -426,91 +392,6 @@ function printDetection(d: ProjectDetection): void {
     console.log(chalk.dim(`  Detected: ${items.join(" · ")}`));
     console.log();
   }
-}
-
-// ---------------------------------------------------------------------------
-// CSS generation
-// ---------------------------------------------------------------------------
-
-function generateTokensCss(presetName: string, overrides: CustomOverrides = {}): string {
-  const overrideLines: string[] = [];
-
-  if (overrides.primaryColor) {
-    overrideLines.push(`  --sigil-primary: ${overrides.primaryColor};`);
-  }
-  if (overrides.displayFont) {
-    overrideLines.push(`  --sigil-font-display: "${overrides.displayFont}", system-ui, sans-serif;`);
-  }
-  if (overrides.bodyFont) {
-    overrideLines.push(`  --sigil-font-body: "${overrides.bodyFont}", system-ui, sans-serif;`);
-  }
-  if (overrides.monoFont) {
-    overrideLines.push(`  --sigil-font-mono: "${overrides.monoFont}", ui-monospace, monospace;`);
-  }
-
-  const overrideBlock =
-    overrideLines.length > 0
-      ? `\n:root {\n${overrideLines.join("\n")}\n}\n`
-      : `\n/* Override tokens here:\n:root {\n  --sigil-primary: oklch(0.65 0.15 280);\n}\n*/\n`;
-
-  return `/* Sigil UI tokens — generated by \`sigil init\`
- * Preset: ${presetName}
- * Edit this file to customize tokens, or run \`sigil preset <name>\` to swap.
- */
-
-@import "@sigil-ui/tokens/css";
-@import "@sigil-ui/presets/${presetName}";
-${overrideBlock}`;
-}
-
-// ---------------------------------------------------------------------------
-// Dependency builder
-// ---------------------------------------------------------------------------
-
-function buildDependencyList(features: string[]): string[] {
-  const deps = ["@sigil-ui/tokens", "@sigil-ui/components"];
-
-  if (features.includes("gsap")) deps.push("gsap");
-  if (features.includes("motion")) deps.push("motion");
-  if (features.includes("primitives")) {
-    deps.push("@radix-ui/react-slot", "@radix-ui/react-dialog", "@radix-ui/react-dropdown-menu", "@radix-ui/react-tabs", "@radix-ui/react-tooltip");
-  }
-  if (features.includes("pretext")) deps.push("pretext");
-
-  return deps;
-}
-
-// ---------------------------------------------------------------------------
-// Component stub generator
-// ---------------------------------------------------------------------------
-
-function generateComponentStub(name: string): string {
-  const pascalName = name
-    .split("-")
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join("");
-
-  return `import { forwardRef, type ComponentPropsWithoutRef } from "react";
-import { clsx } from "clsx";
-
-type ${pascalName}Props = ComponentPropsWithoutRef<"div">;
-
-export const ${pascalName} = forwardRef<HTMLDivElement, ${pascalName}Props>(
-  ({ className, children, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={clsx("sigil-${name}", className)}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  },
-);
-
-${pascalName}.displayName = "${pascalName}";
-`;
 }
 
 function abort(): undefined {

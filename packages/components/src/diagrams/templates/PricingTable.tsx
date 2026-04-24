@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes } from "react";
+import { Fragment, forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../utils";
 
 export interface PricingFeature {
@@ -74,7 +74,7 @@ export const PricingTable = forwardRef<HTMLDivElement, PricingTableProps>(
           </thead>
           <tbody>
             {features.map((feature, fi) => (
-              <>
+              <Fragment key={feature.name}>
                 {catMap.has(fi) && (
                   <tr key={`cat-${fi}`}>
                     <td
@@ -113,7 +113,7 @@ export const PricingTable = forwardRef<HTMLDivElement, PricingTableProps>(
                     );
                   })}
                 </tr>
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>

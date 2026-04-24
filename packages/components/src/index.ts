@@ -31,7 +31,7 @@ export {
 } from "./layout/SigilPageGrid";
 export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
 export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
-export { Divider, type DividerProps } from "./layout/Divider";
+export { Divider, type DividerPattern, type DividerProps } from "./layout/Divider";
 export { HRule, type HRuleProps } from "./layout/HRule";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";
 export { LayoutControls, type LayoutControlsProps } from "./layout/LayoutControls";
@@ -86,6 +86,7 @@ export {
 } from "./ui/Accordion";
 export { Tooltip, TooltipProvider, type TooltipProps } from "./ui/Tooltip";
 export { ScrollArea, type ScrollAreaProps } from "./ui/ScrollArea";
+export { SigilCursor, type SigilCursorProps, type SigilCursorVariant } from "./ui/SigilCursor";
 export { KPI, type KPIProps } from "./ui/KPI";
 export { Terminal, type TerminalProps } from "./ui/Terminal";
 export { CodeBlock, type CodeBlockProps } from "./ui/CodeBlock";
@@ -227,6 +228,7 @@ export { Diagonal, type DiagonalProps } from "./shapes/Diagonal";
 export { Box3D, type Box3DProps } from "./3d/Box3D";
 export { Box3DGrid, type Box3DGridProps, type Box3DGridItem } from "./3d/Box3DGrid";
 export { Card3D, type Card3DProps } from "./3d/Card3D";
+export { ExplodedBox3D, type ExplodedBox3DProps } from "./3d/ExplodedBox3D";
 export { FloatingUI, type FloatingUIProps } from "./3d/FloatingUI";
 export { IsometricView, type IsometricViewProps } from "./3d/IsometricView";
 export { IsometricPrism, type IsometricPrismProps } from "./3d/IsometricPrism";
@@ -244,6 +246,7 @@ export { ComparisonTable, type ComparisonTableProps, type ComparisonFeature } fr
 export { ArchitectureDiagram, type ArchitectureDiagramProps, type ArchitectureLayer } from "./diagrams/ArchitectureDiagram";
 export { DiagramNode, type DiagramNodeProps, type DiagramNodeVariant, type DiagramNodeSize } from "./diagrams/DiagramNode";
 export { DiagramConnector, type DiagramConnectorProps, type ConnectorVariant, type ConnectorDirection } from "./diagrams/DiagramConnector";
+export { DiagramCalloutLine, type DiagramCalloutLineProps } from "./diagrams/DiagramCalloutLine";
 export { DiagramLabel, type DiagramLabelProps } from "./diagrams/DiagramLabel";
 export { CrossHatch, type CrossHatchProps } from "./diagrams/CrossHatch";
 export { PipelineDiagram, type PipelineDiagramProps, type PipelineStep } from "./diagrams/PipelineDiagram";

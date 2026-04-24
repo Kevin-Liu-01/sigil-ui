@@ -1114,3 +1114,46 @@ html[data-switching-theme] *:not([data-slot])::after {
   padding: var(--s-card-padding, 24px);
   box-shadow: var(--s-card-shadow, none);
 }
+
+/* ================================================================== */
+/* Landing Token Pipeline                                              */
+/* ================================================================== */
+
+@keyframes sigil-token-orbit {
+  from {
+    transform: rotate(var(--angle)) translateX(var(--distance))
+      rotate(calc(var(--angle) * -1));
+  }
+
+  to {
+    transform: rotate(calc(var(--angle) + 360deg)) translateX(var(--distance))
+      rotate(calc((var(--angle) + 360deg) * -1));
+  }
+}
+
+@keyframes sigil-token-scan {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(-12%);
+  }
+
+  18%,
+  70% {
+    opacity: 1;
+  }
+
+  88% {
+    opacity: 0;
+    transform: translateY(112%);
+  }
+}
+
+[data-slot="token-pipeline"] .sigil-token-orbit-node {
+  animation: sigil-token-orbit 18s linear infinite;
+  transform-origin: center;
+}
+
+[data-slot="token-pipeline"] .sigil-token-scan {
+  animation: sigil-token-scan 3s ease-in-out infinite;
+}

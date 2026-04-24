@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes } from "react";
+import { Fragment, forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../utils";
 
 export interface GanttTask {
@@ -61,7 +61,7 @@ export const GanttChart = forwardRef<HTMLDivElement, GanttChartProps>(
           </thead>
           <tbody>
             {groups.map((group) => (
-              <>
+              <Fragment key={group.label}>
                 <tr key={`g-${group.label}`}>
                   <td
                     colSpan={totalUnits + 1}
@@ -102,7 +102,7 @@ export const GanttChart = forwardRef<HTMLDivElement, GanttChartProps>(
                     })}
                   </tr>
                 ))}
-              </>
+              </Fragment>
             ))}
           </tbody>
         </table>

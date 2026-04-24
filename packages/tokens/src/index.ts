@@ -1,4 +1,5 @@
 export {
+  compileInteractionCss,
   compileToCss,
   compileToJson,
   compileToTailwind,
@@ -19,6 +20,8 @@ export type {
   ColorTokens,
   ColorValue,
   CssCompileOptions,
+  CursorTokens,
+  CursorVariant,
   DividerStyleTokens,
   GridVisualTokens,
   GutterPattern,
@@ -27,6 +30,8 @@ export type {
   MotionTokens,
   PresetMetadata,
   RadiusTokens,
+  ScrollbarTokens,
+  ScrollbarVisibility,
   SectionStyleTokens,
   SigilGridTokens,
   SigilPreset,

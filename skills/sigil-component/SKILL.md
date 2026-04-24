@@ -1,7 +1,7 @@
 ---
-
-## name: sigil-component
+name: sigil-component
 trigger: when creating, modifying, or reviewing a Sigil UI component
+---
 
 # Sigil Component
 

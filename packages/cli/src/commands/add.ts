@@ -3,12 +3,15 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "node:path";
 import { readConfig, configExists } from "../utils/config.js";
+import { detectProject, PM_INSTALL } from "../utils/detect.js";
 import {
   getComponent,
   getAllComponents,
+  ensureComponentSupportFiles,
   listComponentNames,
   resolveComponentSource,
 } from "../utils/registry.js";
+import { printIntro, symbols } from "../utils/terminal.js";
 
 export const addCommand = new Command("add")
   .description("Add Sigil components to your project")
@@ -18,10 +21,11 @@ export const addCommand = new Command("add")
   .option("-d, --dir <dir>", "override components directory")
   .action(async (componentNames: string[], opts) => {
     const cwd = process.cwd();
+    printIntro("Sigil Add", "Copy token-driven components into your project");
 
     if (!configExists(cwd)) {
       console.log(
-        chalk.red("✗"),
+        symbols.error,
         "No sigil.config.ts found. Run",
         chalk.cyan("sigil init"),
         "first.",
@@ -30,6 +34,7 @@ export const addCommand = new Command("add")
     }
 
     const config = readConfig(cwd)!;
+    const detection = detectProject(cwd);
     const componentsDir = path.join(cwd, opts.dir ?? config.componentsDir);
 
     if (opts.all) {
@@ -59,7 +64,7 @@ export const addCommand = new Command("add")
     for (const name of resolveWithDependencies(componentNames)) {
       const entry = getComponent(name);
       if (!entry) {
-        console.log(chalk.red("✗"), `Unknown component: ${chalk.bold(name)}`);
+        console.log(symbols.error, `Unknown component: ${chalk.bold(name)}`);
         failed.push(name);
         continue;
       }
@@ -68,20 +73,22 @@ export const addCommand = new Command("add")
         const destPath = path.join(componentsDir, file);
 
         if (fs.existsSync(destPath) && !opts.overwrite) {
-          console.log(chalk.yellow("↗"), `${file} already exists (use --overwrite to replace)`);
+          console.log(symbols.skip, `${file} already exists (use --overwrite to replace)`);
           skipped.push(name);
           continue;
         }
 
-        const sourcePath = resolveComponentSource(name, file);
+        const sourcePath = resolveComponentSource(name, file, cwd);
 
         if (fs.existsSync(sourcePath)) {
+          const sourceContent = fs.readFileSync(sourcePath, "utf-8");
+          ensureComponentSupportFiles(componentsDir, sourceContent);
           fs.copySync(sourcePath, destPath);
-          console.log(chalk.green("✓"), `Added ${file}`);
+          console.log(symbols.success, `Added ${file}`);
         } else {
           const stub = generateComponentStub(name, file);
           fs.writeFileSync(destPath, stub, "utf-8");
-          console.log(chalk.green("✓"), `Created ${file} (scaffold)`);
+          console.log(symbols.warning, `Created ${file} (source not found; scaffolded fallback)`);
         }
 
         added.push(name);
@@ -93,9 +100,10 @@ export const addCommand = new Command("add")
     }
 
     if (depsToInstall.size > 0) {
+      const pm = PM_INSTALL[detection.packageManager];
       console.log();
       console.log(chalk.bold("Install required dependencies:"));
-      console.log(`  ${chalk.cyan(`pnpm add ${[...depsToInstall].join(" ")}`)}`);
+      console.log(`  ${chalk.cyan(`${pm} ${[...depsToInstall].join(" ")}`)}`);
     }
 
     console.log();

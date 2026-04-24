@@ -1,0 +1,3441 @@
+- generic [ref=e2]:
+  - generic [ref=e11]:
+    - navigation [ref=e12]:
+      - link "sigil/UI" [ref=e13] [cursor=pointer]:
+        - /url: /
+        - img [ref=e14]
+        - generic [ref=e19]: sigil/UI
+      - generic [ref=e20]:
+        - link "Components" [ref=e21] [cursor=pointer]:
+          - /url: /components
+          - img [ref=e22]
+          - text: Components
+        - link "Presets" [ref=e27] [cursor=pointer]:
+          - /url: /presets
+          - img [ref=e28]
+          - text: Presets
+        - link "Demos" [ref=e34] [cursor=pointer]:
+          - /url: /demos
+          - img [ref=e35]
+          - text: Demos
+        - link "Walkthrough" [ref=e37] [cursor=pointer]:
+          - /url: /walkthrough
+          - img [ref=e38]
+          - text: Walkthrough
+        - link "Docs" [ref=e41] [cursor=pointer]:
+          - /url: /docs
+          - img [ref=e42]
+          - text: Docs
+        - button "Search ⌘K" [ref=e44] [cursor=pointer]:
+          - img [ref=e45]
+          - generic [ref=e48]: Search
+          - generic [ref=e49]: ⌘K
+        - link "Sandbox" [ref=e50] [cursor=pointer]:
+          - /url: /sandbox
+          - img [ref=e51]
+          - text: Sandbox
+        - link "Star" [ref=e53] [cursor=pointer]:
+          - /url: https://github.com/Kevin-Liu-01/sigil-ui
+          - img [ref=e54]
+          - generic [ref=e56]: Star
+    - generic [ref=e59]:
+      - generic [ref=e60]: / Components
+      - heading "100+ Token-Driven Components." [level=1] [ref=e61]
+      - paragraph [ref=e62]:
+        - text: Every component reads from
+        - code [ref=e63]: var(--s-*)
+        - text: tokens. Switch presets and the entire library updates instantly — no prop drilling, no theme objects, no manual overrides.
+      - generic [ref=e64]:
+        - link "View Docs" [ref=e65] [cursor=pointer]:
+          - /url: /docs/components/button
+        - link "Open Sandbox" [ref=e66] [cursor=pointer]:
+          - /url: /sandbox
+    - generic [ref=e74]:
+      - generic [ref=e75]:
+        - generic [ref=e76]: 100+
+        - generic [ref=e77]: Components
+      - generic [ref=e78]:
+        - generic [ref=e79]: "14"
+        - generic [ref=e80]: Categories
+      - generic [ref=e81]:
+        - generic [ref=e82]: "259"
+        - generic [ref=e83]: Tokens
+      - generic [ref=e84]:
+        - generic [ref=e85]: "31"
+        - generic [ref=e86]: Presets
+    - generic [ref=e93]:
+      - region "Notifications (F8)":
+        - list
+      - generic [ref=e94]:
+        - generic [ref=e95]:
+          - generic [ref=e96]:
+            - generic:
+              - img
+            - textbox "Search components..." [ref=e97]
+          - generic [ref=e98]:
+            - button "All" [ref=e99] [cursor=pointer]
+            - button "UI" [ref=e100] [cursor=pointer]
+            - button "Layout" [ref=e101] [cursor=pointer]
+            - button "Navigation" [ref=e102] [cursor=pointer]
+            - button "Overlays" [ref=e103] [cursor=pointer]
+            - button "Data" [ref=e104] [cursor=pointer]
+            - button "Forms" [ref=e105] [cursor=pointer]
+            - button "Marketing" [ref=e106] [cursor=pointer]
+            - button "Sections" [ref=e107] [cursor=pointer]
+            - button "Shapes" [ref=e108] [cursor=pointer]
+            - button "3D" [ref=e109] [cursor=pointer]
+            - button "Diagrams" [ref=e110] [cursor=pointer]
+            - button "Animation" [ref=e111] [cursor=pointer]
+            - button "Patterns" [ref=e112] [cursor=pointer]
+            - button "Playbook" [ref=e113] [cursor=pointer]
+        - generic [ref=e114]: 200 components
+        - generic [ref=e115]:
+          - generic [ref=e116]:
+            - generic [ref=e117]: UI
+            - generic [ref=e118]: 37 components
+          - generic [ref=e119]:
+            - img
+            - generic [ref=e120]:
+              - generic [ref=e121]:
+                - generic [ref=e123]:
+                  - button "Primary" [ref=e124] [cursor=pointer]
+                  - button "Outline" [ref=e125] [cursor=pointer]
+                  - button "Ghost" [ref=e126] [cursor=pointer]
+                - generic [ref=e127]:
+                  - generic [ref=e128]: Button
+                  - generic [ref=e129]: 6v
+                  - link "Button docs" [ref=e130] [cursor=pointer]:
+                    - /url: /docs/components/button
+                    - img [ref=e131]
+              - generic [ref=e134]:
+                - generic [ref=e136]:
+                  - generic [ref=e137]: Default
+                  - generic [ref=e138]: Secondary
+                  - generic [ref=e139]: Outline
+                - generic [ref=e140]:
+                  - generic [ref=e141]: Badge
+                  - generic [ref=e142]: 4v
+                  - link "Badge docs" [ref=e143] [cursor=pointer]:
+                    - /url: /docs/components/badge
+                    - img [ref=e144]
+              - generic [ref=e147]:
+                - generic [ref=e149]:
+                  - generic:
+                    - img
+                  - textbox "Search components..." [ref=e150]
+                - generic [ref=e151]:
+                  - generic [ref=e152]: Input
+                  - generic [ref=e153]: 4v
+                  - link "Input docs" [ref=e154] [cursor=pointer]:
+                    - /url: /docs/components/input
+                    - img [ref=e155]
+              - generic [ref=e158]:
+                - textbox "Write a message..." [ref=e161]
+                - generic [ref=e162]:
+                  - generic [ref=e163]: Textarea
+                  - generic [ref=e164]: 1v
+                  - link "Textarea docs" [ref=e165] [cursor=pointer]:
+                    - /url: /docs/components/textarea
+                    - img [ref=e166]
+              - generic [ref=e169]:
+                - generic [ref=e170]:
+                  - combobox [ref=e171] [cursor=pointer]:
+                    - img [ref=e172]
+                  - combobox [ref=e174]
+                - generic [ref=e175]:
+                  - generic [ref=e176]: Select
+                  - generic [ref=e177]: 2v
+                  - link "Select docs" [ref=e178] [cursor=pointer]:
+                    - /url: /docs/components/select
+                    - img [ref=e179]
+              - generic [ref=e182]:
+                - generic [ref=e184]:
+                  - generic [ref=e185]:
+                    - checkbox "Accept terms" [checked] [ref=e186] [cursor=pointer]:
+                      - generic:
+                        - img
+                    - checkbox [checked]
+                    - generic [ref=e187] [cursor=pointer]: Accept terms
+                  - generic [ref=e188]:
+                    - checkbox "Subscribe to updates" [ref=e189] [cursor=pointer]
+                    - checkbox
+                    - generic [ref=e190] [cursor=pointer]: Subscribe to updates
+                - generic [ref=e191]:
+                  - generic [ref=e192]: Checkbox
+                  - generic [ref=e193]: 2v
+                  - link "Checkbox docs" [ref=e194] [cursor=pointer]:
+                    - /url: /docs/components/checkbox
+                    - img [ref=e195]
+              - generic [ref=e198]:
+                - generic [ref=e200]:
+                  - generic [ref=e201]:
+                    - switch [checked] [ref=e202] [cursor=pointer]
+                    - checkbox [checked]
+                    - generic [ref=e203]: Dark mode
+                  - generic [ref=e204]:
+                    - switch [ref=e205] [cursor=pointer]
+                    - checkbox
+                    - generic [ref=e206]: Notifications
+                - generic [ref=e207]:
+                  - generic [ref=e208]: Switch
+                  - generic [ref=e209]: 2v
+                  - link "Switch docs" [ref=e210] [cursor=pointer]:
+                    - /url: /docs/components/switch
+                    - img [ref=e211]
+              - generic [ref=e219]:
+                - generic [ref=e220]: Slider
+                - generic [ref=e221]: 3v
+                - link "Slider docs" [ref=e222] [cursor=pointer]:
+                  - /url: /docs/components/slider
+                  - img [ref=e223]
+              - generic [ref=e226]:
+                - generic [ref=e228]:
+                  - progressbar [ref=e230]
+                  - progressbar [ref=e233]
+                - generic [ref=e235]:
+                  - generic [ref=e236]: Progress
+                  - generic [ref=e237]: 2v
+                  - link "Progress docs" [ref=e238] [cursor=pointer]:
+                    - /url: /docs/components/progress
+                    - img [ref=e239]
+              - generic [ref=e242]:
+                - generic [ref=e244]:
+                  - button [pressed] [ref=e245]:
+                    - img [ref=e246]
+                  - button [ref=e248]:
+                    - img [ref=e249]
+                  - button [ref=e251]:
+                    - img [ref=e252]
+                - generic [ref=e254]:
+                  - generic [ref=e255]: Toggle
+                  - generic [ref=e256]: 3v
+                  - link "Toggle docs" [ref=e257] [cursor=pointer]:
+                    - /url: /docs/components/toggle
+                    - img [ref=e258]
+              - generic [ref=e261]:
+                - group [ref=e263]:
+                  - radio [checked] [ref=e264] [cursor=pointer]:
+                    - img [ref=e265]
+                  - radio [ref=e266] [cursor=pointer]:
+                    - img [ref=e267]
+                  - radio [ref=e268] [cursor=pointer]:
+                    - img [ref=e269]
+                - generic [ref=e270]:
+                  - generic [ref=e271]: ToggleGroup
+                  - generic [ref=e272]: 2v
+                  - link "ToggleGroup docs" [ref=e273] [cursor=pointer]:
+                    - /url: /docs/components/togglegroup
+                    - img [ref=e274]
+              - generic [ref=e277]:
+                - generic [ref=e279]:
+                  - generic [ref=e281]: KL
+                  - generic [ref=e283]: S
+                  - generic [ref=e285]: GR
+                - generic [ref=e286]:
+                  - generic [ref=e287]: Avatar
+                  - generic [ref=e288]: 3v
+                  - link "Avatar docs" [ref=e289] [cursor=pointer]:
+                    - /url: /docs/components/avatar
+                    - img [ref=e290]
+              - generic [ref=e293]:
+                - generic [ref=e295]:
+                  - generic [ref=e298]: S
+                  - generic [ref=e301]: LR
+                  - generic [ref=e304]: GR
+                  - generic [ref=e305]: "+2"
+                - generic [ref=e306]:
+                  - generic [ref=e307]: AvatarGroup
+                  - generic [ref=e308]: 1v
+                  - link "AvatarGroup docs" [ref=e309] [cursor=pointer]:
+                    - /url: /docs/components/avatargroup
+                    - img [ref=e310]
+              - generic [ref=e313]:
+                - generic [ref=e315]:
+                  - generic [ref=e316]: Revenue
+                  - generic [ref=e317]: $4.2k
+                  - generic [ref=e318]:
+                    - generic [ref=e319]: ↑
+                    - text: +8%
+                - generic [ref=e320]:
+                  - generic [ref=e321]: KPI
+                  - generic [ref=e322]: 2v
+                  - link "KPI docs" [ref=e323] [cursor=pointer]:
+                    - /url: /docs/components/kpi
+                    - img [ref=e324]
+              - generic [ref=e327]:
+                - generic [ref=e329]:
+                  - alert [ref=e330]:
+                    - heading "Info" [level=5] [ref=e331]
+                  - alert [ref=e332]:
+                    - heading "Warning" [level=5] [ref=e333]
+                - generic [ref=e334]:
+                  - generic [ref=e335]: Alert
+                  - generic [ref=e336]: 4v
+                  - link "Alert docs" [ref=e337] [cursor=pointer]:
+                    - /url: /docs/components/alert
+                    - img [ref=e338]
+              - generic [ref=e351]:
+                - generic [ref=e352]: Skeleton
+                - generic [ref=e353]: 3v
+                - link "Skeleton docs" [ref=e354] [cursor=pointer]:
+                  - /url: /docs/components/skeleton
+                  - img [ref=e355]
+              - generic [ref=e358]:
+                - generic [ref=e360]:
+                  - status "Loading" [ref=e361]:
+                    - text: ⣾
+                    - generic [ref=e362]: Loading…
+                  - status "Loading" [ref=e363]:
+                    - text: ⣾
+                    - generic [ref=e364]: Loading…
+                  - status "Loading" [ref=e365]:
+                    - text: ⣾
+                    - generic [ref=e366]: Loading…
+                - generic [ref=e367]:
+                  - generic [ref=e368]: LoadingSpinner
+                  - generic [ref=e369]: 5v
+                  - link "LoadingSpinner docs" [ref=e370] [cursor=pointer]:
+                    - /url: /docs/components/loadingspinner
+                    - img [ref=e371]
+              - generic [ref=e374]:
+                - generic [ref=e377]:
+                  - button "Decrease" [ref=e378] [cursor=pointer]:
+                    - img [ref=e379]
+                  - generic [ref=e381]: "8"
+                  - button "Increase" [ref=e382] [cursor=pointer]:
+                    - img [ref=e383]
+                - generic [ref=e386]:
+                  - generic [ref=e387]: NumberField
+                  - generic [ref=e388]: 1v
+                  - link "NumberField docs" [ref=e389] [cursor=pointer]:
+                    - /url: /docs/components/numberfield
+                    - img [ref=e390]
+              - generic [ref=e393]:
+                - generic [ref=e395]:
+                  - generic [ref=e396]: Email address
+                  - textbox "you@example.com" [ref=e398]
+                - generic [ref=e399]:
+                  - generic [ref=e400]: Label
+                  - generic [ref=e401]: 1v
+                  - link "Label docs" [ref=e402] [cursor=pointer]:
+                    - /url: /docs/components/label
+                    - img [ref=e403]
+              - generic [ref=e406]:
+                - generic [ref=e408]:
+                  - generic [ref=e409]: Account
+                  - generic [ref=e410]: Settings
+                  - generic [ref=e411]: Logout
+                - generic [ref=e412]:
+                  - generic [ref=e413]: Separator
+                  - generic [ref=e414]: 1v
+                  - link "Separator docs" [ref=e415] [cursor=pointer]:
+                    - /url: /docs/components/separator
+                    - img [ref=e416]
+              - generic [ref=e419]:
+                - button "Hover me" [ref=e421] [cursor=pointer]
+                - generic [ref=e422]:
+                  - generic [ref=e423]: Tooltip
+                  - generic [ref=e424]: 1v
+                  - link "Tooltip docs" [ref=e425] [cursor=pointer]:
+                    - /url: /docs/components/tooltip
+                    - img [ref=e426]
+              - generic [ref=e429]:
+                - generic [ref=e433]:
+                  - generic [ref=e434]: Item 1
+                  - generic [ref=e435]: Item 2
+                  - generic [ref=e436]: Item 3
+                  - generic [ref=e437]: Item 4
+                  - generic [ref=e438]: Item 5
+                  - generic [ref=e439]: Item 6
+                  - generic [ref=e440]: Item 7
+                  - generic [ref=e441]: Item 8
+                  - generic [ref=e442]: Item 9
+                  - generic [ref=e443]: Item 10
+                  - generic [ref=e444]: Item 11
+                  - generic [ref=e445]: Item 12
+                - generic [ref=e446]:
+                  - generic [ref=e447]: ScrollArea
+                  - generic [ref=e448]: 1v
+                  - link "ScrollArea docs" [ref=e449] [cursor=pointer]:
+                    - /url: /docs/components/scrollarea
+                    - img [ref=e450]
+              - generic [ref=e453]:
+                - generic [ref=e456]:
+                  - generic [ref=e457]:
+                    - generic [ref=e459]: tsx
+                    - button "Copy code" [ref=e460]: Copy
+                  - code [ref=e463]:
+                    - generic [ref=e464]:
+                      - generic [ref=e465]: "1"
+                      - generic [ref=e466]: <Button variant="primary">
+                    - generic [ref=e467]:
+                      - generic [ref=e468]: "2"
+                      - generic [ref=e469]: Click me
+                    - generic [ref=e470]:
+                      - generic [ref=e471]: "3"
+                      - generic [ref=e472]: </Button>
+                - generic [ref=e473]:
+                  - generic [ref=e474]: CodeBlock
+                  - generic [ref=e475]: 1v
+                  - link "CodeBlock docs" [ref=e476] [cursor=pointer]:
+                    - /url: /docs/components/codeblock
+                    - img [ref=e477]
+              - generic [ref=e480]:
+                - generic [ref=e483]:
+                  - generic [ref=e484]:
+                    - generic [ref=e490]: zsh
+                    - button "Copy to clipboard" [ref=e491] [cursor=pointer]: Copy
+                  - code [ref=e494]:
+                    - generic [ref=e495]:
+                      - generic [ref=e496]: "1"
+                      - generic [ref=e497]: $ npx sigil init
+                    - generic [ref=e498]:
+                      - generic [ref=e499]: "2"
+                      - generic [ref=e500]: ✓ Done in 1.2s
+                - generic [ref=e501]:
+                  - generic [ref=e502]: Terminal
+                  - generic [ref=e503]: 1v
+                  - link "Terminal docs" [ref=e504] [cursor=pointer]:
+                    - /url: /docs/components/terminal
+                    - img [ref=e505]
+              - generic [ref=e508]:
+                - generic [ref=e510]:
+                  - generic [ref=e511]: ⌘
+                  - generic [ref=e512]: K
+                - generic [ref=e513]:
+                  - generic [ref=e514]: Kbd
+                  - generic [ref=e515]: 1v
+                  - link "Kbd docs" [ref=e516] [cursor=pointer]:
+                    - /url: /docs/components/kbd
+                    - img [ref=e517]
+              - generic [ref=e520]:
+                - generic [ref=e522]:
+                  - heading "No results" [level=3] [ref=e523]
+                  - paragraph [ref=e524]: Try a different search term
+                - generic [ref=e525]:
+                  - generic [ref=e526]: Empty
+                  - generic [ref=e527]: 1v
+                  - link "Empty docs" [ref=e528] [cursor=pointer]:
+                    - /url: /docs/components/empty
+                    - img [ref=e529]
+              - generic [ref=e532]:
+                - generic [ref=e534]:
+                  - combobox [ref=e535] [cursor=pointer]:
+                    - option "React" [selected]
+                    - option "Vue"
+                    - option "Svelte"
+                  - img
+                - generic [ref=e536]:
+                  - generic [ref=e537]: NativeSelect
+                  - generic [ref=e538]: 1v
+                  - link "NativeSelect docs" [ref=e539] [cursor=pointer]:
+                    - /url: /docs/components/nativeselect
+                    - img [ref=e540]
+              - generic [ref=e543]:
+                - button "Copy" [ref=e545]:
+                  - img [ref=e546]
+                  - text: Copy
+                - generic [ref=e549]:
+                  - generic [ref=e550]: Clipboard
+                  - generic [ref=e551]: 1v
+                  - link "Clipboard docs" [ref=e552] [cursor=pointer]:
+                    - /url: /docs/components/clipboard
+                    - img [ref=e553]
+              - generic [ref=e556]:
+                - generic [ref=e558]:
+                  - img [ref=e561]
+                  - generic [ref=e564]:
+                    - generic [ref=e565]: document.pdf
+                    - generic [ref=e566]: 2.4 MB · Uploaded today
+                - generic [ref=e567]:
+                  - generic [ref=e568]: Item
+                  - generic [ref=e569]: 1v
+                  - link "Item docs" [ref=e570] [cursor=pointer]:
+                    - /url: /docs/components/item
+                    - img [ref=e571]
+              - generic [ref=e574]:
+                - generic [ref=e576]:
+                  - generic [ref=e577]:
+                    - generic [ref=e578]: Settings
+                    - generic [ref=e579]: "3"
+                  - paragraph [ref=e580]: Token-driven content panel
+                - generic [ref=e581]:
+                  - generic [ref=e582]: Panel
+                  - generic [ref=e583]: 3v
+                  - link "Panel docs" [ref=e584] [cursor=pointer]:
+                    - /url: /docs/components/panel
+                    - img [ref=e585]
+              - generic [ref=e588]:
+                - generic [ref=e590]:
+                  - status "Loading" [ref=e591]:
+                    - generic [ref=e592]: ⠇⠀
+                  - status "Loading" [ref=e593]:
+                    - generic [ref=e594]: ⡇⠀
+                  - status "Loading" [ref=e595]:
+                    - generic [ref=e596]: ⠀⠀
+                  - status "Loading" [ref=e597]:
+                    - generic [ref=e598]: ⠑⢄
+                - generic [ref=e599]:
+                  - generic [ref=e600]: Braille Spinner
+                  - generic [ref=e601]: 6v
+                  - link "Braille Spinner docs" [ref=e602] [cursor=pointer]:
+                    - /url: /docs/components/braille-spinner
+                    - img [ref=e603]
+              - generic [ref=e606]:
+                - generic [ref=e608]:
+                  - generic [ref=e609]:
+                    - generic [ref=e610]: Favorite
+                    - img [ref=e612]
+                  - generic [ref=e614]: a11y wrapper
+                - generic [ref=e615]:
+                  - generic [ref=e616]: Accessible Icon
+                  - generic [ref=e617]: 1v
+                  - link "Accessible Icon docs" [ref=e618] [cursor=pointer]:
+                    - /url: /docs/components/accessible-icon
+                    - img [ref=e619]
+              - generic [ref=e622]:
+                - radiogroup [ref=e624]:
+                  - radio "Grid" [checked] [ref=e625]
+                  - radio "List" [ref=e626]
+                - generic [ref=e627]:
+                  - generic [ref=e628]: Segmented Control
+                  - generic [ref=e629]: 1v
+                  - link "Segmented Control docs" [ref=e630] [cursor=pointer]:
+                    - /url: /docs/components/segmented-control
+                    - img [ref=e631]
+              - generic [ref=e634]:
+                - generic [ref=e636]:
+                  - progressbar [ref=e637]:
+                    - img [ref=e638]
+                  - progressbar [ref=e641]:
+                    - img [ref=e642]
+                  - progressbar [ref=e645]:
+                    - img [ref=e646]
+                - generic [ref=e649]:
+                  - generic [ref=e650]: Circular Progress
+                  - generic [ref=e651]: 2v
+                  - link "Circular Progress docs" [ref=e652] [cursor=pointer]:
+                    - /url: /docs/components/circular-progress
+                    - img [ref=e653]
+              - generic [ref=e656]:
+                - generic [ref=e658]:
+                  - heading "Heading 3" [level=3] [ref=e659]
+                  - heading "Heading 4" [level=4] [ref=e660]
+                  - paragraph [ref=e661]: Lead paragraph text
+                  - paragraph [ref=e662]: Muted secondary text
+                  - code [ref=e663]: inline code
+                - generic [ref=e664]:
+                  - generic [ref=e665]: Typography
+                  - generic [ref=e666]: 10v
+                  - link "Typography docs" [ref=e667] [cursor=pointer]:
+                    - /url: /docs/components/typography
+                    - img [ref=e668]
+              - generic [ref=e671]:
+                - blockquote [ref=e673]: Design is not just what it looks like — design is how it works.
+                - generic [ref=e674]:
+                  - generic [ref=e675]: Blockquote
+                  - generic [ref=e676]: 1v
+                  - link "Blockquote docs" [ref=e677] [cursor=pointer]:
+                    - /url: /docs/components/blockquote
+                    - img [ref=e678]
+              - generic [ref=e681]:
+                - generic [ref=e684]:
+                  - generic [ref=e687]: Left
+                  - separator [ref=e688]:
+                    - img [ref=e690]
+                  - generic [ref=e694]: Right
+                - generic [ref=e695]:
+                  - generic [ref=e696]: ResizablePanel
+                  - generic [ref=e697]: 2v
+                  - link "ResizablePanel docs" [ref=e698] [cursor=pointer]:
+                    - /url: /docs/components/resizablepanel
+                    - img [ref=e699]
+        - generic [ref=e702]:
+          - generic [ref=e703]:
+            - generic [ref=e704]: Layout
+            - generic [ref=e705]: 19 components
+          - generic [ref=e706]:
+            - img
+            - generic [ref=e707]:
+              - generic [ref=e708]:
+                - generic [ref=e710]:
+                  - generic [ref=e711]:
+                    - heading "Dashboard" [level=3] [ref=e712]
+                    - paragraph [ref=e713]: Manage settings
+                  - button "Open" [ref=e715] [cursor=pointer]
+                - generic [ref=e716]:
+                  - generic [ref=e717]: Card
+                  - generic [ref=e718]: 3v
+                  - link "Card docs" [ref=e719] [cursor=pointer]:
+                    - /url: /docs/components/card
+                    - img [ref=e720]
+              - generic [ref=e729]:
+                - generic [ref=e730]: Stack
+                - generic [ref=e731]: 2v
+                - link "Stack docs" [ref=e732] [cursor=pointer]:
+                  - /url: /docs/components/stack
+                  - img [ref=e733]
+              - generic [ref=e736]:
+                - generic [ref=e738]:
+                  - generic [ref=e739]:
+                    - heading "What is Sigil?" [level=3] [ref=e740]:
+                      - button "What is Sigil?" [expanded] [ref=e741]:
+                        - text: What is Sigil?
+                        - img [ref=e742]
+                    - region "What is Sigil?" [ref=e744]:
+                      - generic [ref=e745]: A token-driven design system.
+                  - heading "How many presets?" [level=3] [ref=e747]:
+                    - button "How many presets?" [ref=e748]:
+                      - text: How many presets?
+                      - img [ref=e749]
+                - generic [ref=e751]:
+                  - generic [ref=e752]: Accordion
+                  - generic [ref=e753]: 1v
+                  - link "Accordion docs" [ref=e754] [cursor=pointer]:
+                    - /url: /docs/components/accordion
+                    - img [ref=e755]
+              - generic [ref=e758]:
+                - generic [ref=e760]:
+                  - tablist [ref=e761]:
+                    - tab "Code" [selected] [ref=e762]
+                    - tab "Preview" [ref=e763]
+                    - tab "Docs" [ref=e764]
+                  - tabpanel "Code" [ref=e765]: <Button>Click</Button>
+                - generic [ref=e766]:
+                  - generic [ref=e767]: Tabs
+                  - generic [ref=e768]: 2v
+                  - link "Tabs docs" [ref=e769] [cursor=pointer]:
+                    - /url: /docs/components/tabs
+                    - img [ref=e770]
+              - generic [ref=e773]:
+                - generic [ref=e775]:
+                  - button "Toggle details" [expanded] [ref=e776] [cursor=pointer]:
+                    - text: Toggle details
+                    - img
+                  - generic [ref=e777]: Hidden content is now visible. Click to collapse.
+                - generic [ref=e778]:
+                  - generic [ref=e779]: Collapsible
+                  - generic [ref=e780]: 1v
+                  - link "Collapsible docs" [ref=e781] [cursor=pointer]:
+                    - /url: /docs/components/collapsible
+                    - img [ref=e782]
+              - generic [ref=e785]:
+                - generic [ref=e791]: "16 : 9"
+                - generic [ref=e792]:
+                  - generic [ref=e793]: AspectRatio
+                  - generic [ref=e794]: 1v
+                  - link "AspectRatio docs" [ref=e795] [cursor=pointer]:
+                    - /url: /docs/components/aspectratio
+                    - img [ref=e796]
+              - generic [ref=e799]:
+                - generic [ref=e801]:
+                  - generic [ref=e802]: Section A
+                  - generic [ref=e804]: Section B
+                - generic [ref=e805]:
+                  - generic [ref=e806]: Divider
+                  - generic [ref=e807]: 2v
+                  - link "Divider docs" [ref=e808] [cursor=pointer]:
+                    - /url: /docs/components/divider
+                    - img [ref=e809]
+              - generic [ref=e812]:
+                - generic [ref=e814]:
+                  - generic [ref=e815]: Above
+                  - generic [ref=e818]: Below
+                - generic [ref=e819]:
+                  - generic [ref=e820]: HRule
+                  - generic [ref=e821]: 1v
+                  - link "HRule docs" [ref=e822] [cursor=pointer]:
+                    - /url: /docs/components/hrule
+                    - img [ref=e823]
+              - generic [ref=e826]:
+                - group [ref=e828]:
+                  - button "Left" [ref=e829] [cursor=pointer]
+                  - button "Mid" [ref=e830] [cursor=pointer]
+                  - button "Right" [ref=e831] [cursor=pointer]
+                - generic [ref=e832]:
+                  - generic [ref=e833]: ButtonGroup
+                  - generic [ref=e834]: 1v
+                  - link "ButtonGroup docs" [ref=e835] [cursor=pointer]:
+                    - /url: /docs/components/buttongroup
+                    - img [ref=e836]
+              - generic [ref=e854]:
+                - generic [ref=e855]: VoronoiBento
+                - generic [ref=e856]: 1v
+                - link "VoronoiBento docs" [ref=e857] [cursor=pointer]:
+                  - /url: /docs/components/voronoibento
+                  - img [ref=e858]
+              - generic [ref=e861]:
+                - generic [ref=e863]: Generic box
+                - generic [ref=e864]:
+                  - generic [ref=e865]: Box
+                  - generic [ref=e866]: 1v
+                  - link "Box docs" [ref=e867] [cursor=pointer]:
+                    - /url: /docs/components/box
+                    - img [ref=e868]
+              - generic [ref=e871]:
+                - generic [ref=e874]: max-width container
+                - generic [ref=e875]:
+                  - generic [ref=e876]: Container
+                  - generic [ref=e877]: 3v
+                  - link "Container docs" [ref=e878] [cursor=pointer]:
+                    - /url: /docs/components/container
+                    - img [ref=e879]
+              - generic [ref=e888]:
+                - generic [ref=e889]: Flex
+                - generic [ref=e890]: 1v
+                - link "Flex docs" [ref=e891] [cursor=pointer]:
+                  - /url: /docs/components/flex
+                  - img [ref=e892]
+              - generic [ref=e895]:
+                - generic [ref=e897]:
+                  - generic [ref=e898]: "1"
+                  - generic [ref=e899]: "2"
+                  - generic [ref=e900]: "3"
+                  - generic [ref=e901]: "4"
+                  - generic [ref=e902]: "5"
+                  - generic [ref=e903]: "6"
+                - generic [ref=e904]:
+                  - generic [ref=e905]: SimpleGrid
+                  - generic [ref=e906]: 1v
+                  - link "SimpleGrid docs" [ref=e907] [cursor=pointer]:
+                    - /url: /docs/components/simplegrid
+                    - img [ref=e908]
+              - generic [ref=e911]:
+                - generic [ref=e914]: Centered
+                - generic [ref=e915]:
+                  - generic [ref=e916]: Center
+                  - generic [ref=e917]: 1v
+                  - link "Center docs" [ref=e918] [cursor=pointer]:
+                    - /url: /docs/components/center
+                    - img [ref=e919]
+              - generic [ref=e928]:
+                - generic [ref=e929]: Spacer
+                - generic [ref=e930]: 1v
+                - link "Spacer docs" [ref=e931] [cursor=pointer]:
+                  - /url: /docs/components/spacer
+                  - img [ref=e932]
+              - generic [ref=e935]:
+                - generic [ref=e937]:
+                  - generic [ref=e938]: Header
+                  - generic [ref=e939]:
+                    - generic [ref=e940]: Side
+                    - generic [ref=e941]: Main
+                - generic [ref=e942]:
+                  - generic [ref=e943]: AppShell
+                  - generic [ref=e944]: 1v
+                  - link "AppShell docs" [ref=e945] [cursor=pointer]:
+                    - /url: /docs/components/appshell
+                    - img [ref=e946]
+              - generic [ref=e949]:
+                - generic [ref=e951]:
+                  - status [ref=e952]:
+                    - generic [ref=e953]: Info banner
+                  - status [ref=e954]:
+                    - generic [ref=e955]: Success
+                - generic [ref=e956]:
+                  - generic [ref=e957]: Banner
+                  - generic [ref=e958]: 4v
+                  - link "Banner docs" [ref=e959] [cursor=pointer]:
+                    - /url: /docs/components/banner
+                    - img [ref=e960]
+              - generic [ref=e963]:
+                - generic [ref=e966]: centered content
+                - generic [ref=e967]:
+                  - generic [ref=e968]: Page Shell
+                  - generic [ref=e969]: 2v
+                  - link "Page Shell docs" [ref=e970] [cursor=pointer]:
+                    - /url: /docs/components/page-shell
+                    - img [ref=e971]
+        - generic [ref=e974]:
+          - generic [ref=e975]:
+            - generic [ref=e976]: Navigation
+            - generic [ref=e977]: 8 components
+          - generic [ref=e978]:
+            - img
+            - generic [ref=e979]:
+              - generic [ref=e980]:
+                - navigation "Breadcrumb" [ref=e982]:
+                  - list [ref=e983]:
+                    - listitem [ref=e984]:
+                      - link "Home" [ref=e985] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e986]:
+                      - generic [ref=e987]: /
+                      - link "Components" [ref=e988] [cursor=pointer]:
+                        - /url: "#"
+                    - listitem [ref=e989]:
+                      - generic [ref=e990]: /
+                      - generic [ref=e991]: Button
+                - generic [ref=e992]:
+                  - generic [ref=e993]: Breadcrumb
+                  - generic [ref=e994]: 1v
+                  - link "Breadcrumb docs" [ref=e995] [cursor=pointer]:
+                    - /url: /docs/components/breadcrumb
+                    - img [ref=e996]
+              - generic [ref=e999]:
+                - navigation "Pagination" [ref=e1001]:
+                  - button "Previous page" [ref=e1002]: ← Prev
+                  - button "1" [ref=e1003]
+                  - button "2" [ref=e1004]
+                  - button "3" [ref=e1005]
+                  - button "4" [ref=e1006]
+                  - button "5" [ref=e1007]
+                  - generic [ref=e1008]: …
+                  - button "10" [ref=e1009]
+                  - button "Next page" [ref=e1010]: Next →
+                - generic [ref=e1011]:
+                  - generic [ref=e1012]: Pagination
+                  - generic [ref=e1013]: 1v
+                  - link "Pagination docs" [ref=e1014] [cursor=pointer]:
+                    - /url: /docs/components/pagination
+                    - img [ref=e1015]
+              - generic [ref=e1018]:
+                - toolbar [ref=e1020]:
+                  - button [ref=e1021]:
+                    - img [ref=e1022]
+                  - button [ref=e1024]:
+                    - img [ref=e1025]
+                  - separator [ref=e1027]
+                  - button [ref=e1028]:
+                    - img [ref=e1029]
+                - generic [ref=e1032]:
+                  - generic [ref=e1033]: Toolbar
+                  - generic [ref=e1034]: 1v
+                  - link "Toolbar docs" [ref=e1035] [cursor=pointer]:
+                    - /url: /docs/components/toolbar
+                    - img [ref=e1036]
+              - generic [ref=e1039]:
+                - generic [ref=e1041]:
+                  - button "Copilot" [ref=e1042]:
+                    - img [ref=e1043]
+                    - text: Copilot
+                  - button "More options" [ref=e1045]:
+                    - img [ref=e1046]
+                - generic [ref=e1048]:
+                  - generic [ref=e1049]: SplitButton
+                  - generic [ref=e1050]: 1v
+                  - link "SplitButton docs" [ref=e1051] [cursor=pointer]:
+                    - /url: /docs/components/splitbutton
+                    - img [ref=e1052]
+              - generic [ref=e1055]:
+                - generic [ref=e1057]:
+                  - generic [ref=e1058]: Logo
+                  - generic [ref=e1059]:
+                    - generic [ref=e1060]: Home
+                    - generic [ref=e1061]: About
+                - generic [ref=e1062]:
+                  - generic [ref=e1063]: Navbar
+                  - generic [ref=e1064]: 1v
+                  - link "Navbar docs" [ref=e1065] [cursor=pointer]:
+                    - /url: /docs/components/navbar
+                    - img [ref=e1066]
+              - generic [ref=e1069]:
+                - generic [ref=e1072]:
+                  - generic [ref=e1073]:
+                    - generic [ref=e1074]: Product
+                    - generic [ref=e1075]: Docs
+                  - generic [ref=e1076]:
+                    - generic [ref=e1077]: Company
+                    - generic [ref=e1078]: About
+                  - generic [ref=e1079]:
+                    - generic [ref=e1080]: Legal
+                    - generic [ref=e1081]: Privacy
+                - generic [ref=e1082]:
+                  - generic [ref=e1083]: Footer
+                  - generic [ref=e1084]: 1v
+                  - link "Footer docs" [ref=e1085] [cursor=pointer]:
+                    - /url: /docs/components/footer
+                    - img [ref=e1086]
+              - generic [ref=e1089]:
+                - generic [ref=e1091]:
+                  - generic [ref=e1092]: Docs
+                  - generic [ref=e1093]:
+                    - generic [ref=e1094]: Getting Started
+                    - generic [ref=e1095]: Components
+                    - generic [ref=e1096]: Presets
+                - generic [ref=e1097]:
+                  - generic [ref=e1098]: Sidebar
+                  - generic [ref=e1099]: 1v
+                  - link "Sidebar docs" [ref=e1100] [cursor=pointer]:
+                    - /url: /docs/components/sidebar
+                    - img [ref=e1101]
+              - generic [ref=e1104]:
+                - generic [ref=e1106]:
+                  - img [ref=e1107]
+                  - img [ref=e1110]
+                  - img [ref=e1113]
+                - generic [ref=e1116]:
+                  - generic [ref=e1117]: SocialIcons
+                  - generic [ref=e1118]: 1v
+                  - link "SocialIcons docs" [ref=e1119] [cursor=pointer]:
+                    - /url: /docs/components/socialicons
+                    - img [ref=e1120]
+        - generic [ref=e1123]:
+          - generic [ref=e1124]:
+            - generic [ref=e1125]: Overlays
+            - generic [ref=e1126]: 11 components
+          - generic [ref=e1127]:
+            - img
+            - generic [ref=e1128]:
+              - generic [ref=e1129]:
+                - button "Open Dialog" [ref=e1131] [cursor=pointer]
+                - generic [ref=e1132]:
+                  - generic [ref=e1133]: Dialog
+                  - generic [ref=e1134]: 2v
+                  - link "Dialog docs" [ref=e1135] [cursor=pointer]:
+                    - /url: /docs/components/dialog
+                    - img [ref=e1136]
+              - generic [ref=e1139]:
+                - button "Open Drawer" [ref=e1141] [cursor=pointer]
+                - generic [ref=e1142]:
+                  - generic [ref=e1143]: Drawer
+                  - generic [ref=e1144]: 2v
+                  - link "Drawer docs" [ref=e1145] [cursor=pointer]:
+                    - /url: /docs/components/drawer
+                    - img [ref=e1146]
+              - generic [ref=e1149]:
+                - button "Open Sheet" [ref=e1151] [cursor=pointer]
+                - generic [ref=e1152]:
+                  - generic [ref=e1153]: Sheet
+                  - generic [ref=e1154]: 2v
+                  - link "Sheet docs" [ref=e1155] [cursor=pointer]:
+                    - /url: /docs/components/sheet
+                    - img [ref=e1156]
+              - generic [ref=e1159]:
+                - button "Open Popover" [ref=e1161] [cursor=pointer]
+                - generic [ref=e1162]:
+                  - generic [ref=e1163]: Popover
+                  - generic [ref=e1164]: 1v
+                  - link "Popover docs" [ref=e1165] [cursor=pointer]:
+                    - /url: /docs/components/popover
+                    - img [ref=e1166]
+              - generic [ref=e1169]:
+                - button "Hover me" [ref=e1171] [cursor=pointer]
+                - generic [ref=e1172]:
+                  - generic [ref=e1173]: HoverCard
+                  - generic [ref=e1174]: 1v
+                  - link "HoverCard docs" [ref=e1175] [cursor=pointer]:
+                    - /url: /docs/components/hovercard
+                    - img [ref=e1176]
+              - generic [ref=e1179]:
+                - button "Menu" [ref=e1181] [cursor=pointer]:
+                  - text: Menu
+                  - img
+                - generic [ref=e1182]:
+                  - generic [ref=e1183]: DropdownMenu
+                  - generic [ref=e1184]: 3v
+                  - link "DropdownMenu docs" [ref=e1185] [cursor=pointer]:
+                    - /url: /docs/components/dropdownmenu
+                    - img [ref=e1186]
+              - generic [ref=e1189]:
+                - generic [ref=e1192]: Right-click here
+                - generic [ref=e1193]:
+                  - generic [ref=e1194]: ContextMenu
+                  - generic [ref=e1195]: 2v
+                  - link "ContextMenu docs" [ref=e1196] [cursor=pointer]:
+                    - /url: /docs/components/contextmenu
+                    - img [ref=e1197]
+              - generic [ref=e1200]:
+                - generic [ref=e1204]:
+                  - img [ref=e1205]
+                  - combobox [expanded] [ref=e1208]
+                - generic [ref=e1209]:
+                  - generic [ref=e1210]: Command
+                  - generic [ref=e1211]: 2v
+                  - link "Command docs" [ref=e1212] [cursor=pointer]:
+                    - /url: /docs/components/command
+                    - img [ref=e1213]
+              - generic [ref=e1216]:
+                - button "Delete" [ref=e1218] [cursor=pointer]
+                - generic [ref=e1219]:
+                  - generic [ref=e1220]: AlertDialog
+                  - generic [ref=e1221]: 1v
+                  - link "AlertDialog docs" [ref=e1222] [cursor=pointer]:
+                    - /url: /docs/components/alertdialog
+                    - img [ref=e1223]
+              - generic [ref=e1226]:
+                - button "Show Toast" [ref=e1228] [cursor=pointer]
+                - generic [ref=e1229]:
+                  - generic [ref=e1230]: Toast
+                  - generic [ref=e1231]: 4v
+                  - link "Toast docs" [ref=e1232] [cursor=pointer]:
+                    - /url: /docs/components/toast
+                    - img [ref=e1233]
+              - generic [ref=e1236]:
+                - button "Hover for preview" [ref=e1238] [cursor=pointer]
+                - generic [ref=e1239]:
+                  - generic [ref=e1240]: PreviewCard
+                  - generic [ref=e1241]: 1v
+                  - link "PreviewCard docs" [ref=e1242] [cursor=pointer]:
+                    - /url: /docs/components/previewcard
+                    - img [ref=e1243]
+        - generic [ref=e1246]:
+          - generic [ref=e1247]:
+            - generic [ref=e1248]: Data
+            - generic [ref=e1249]: 9 components
+          - generic [ref=e1250]:
+            - img
+            - generic [ref=e1251]:
+              - generic [ref=e1252]:
+                - table [ref=e1255]:
+                  - rowgroup [ref=e1256]:
+                    - row "Name Status" [ref=e1257]:
+                      - columnheader "Name" [ref=e1258]
+                      - columnheader "Status" [ref=e1259]
+                  - rowgroup [ref=e1260]:
+                    - row "Button Stable" [ref=e1261]:
+                      - cell "Button" [ref=e1262]
+                      - cell "Stable" [ref=e1263]:
+                        - generic [ref=e1264]: Stable
+                    - row "Calendar Beta" [ref=e1265]:
+                      - cell "Calendar" [ref=e1266]
+                      - cell "Beta" [ref=e1267]:
+                        - generic [ref=e1268]: Beta
+                - generic [ref=e1269]:
+                  - generic [ref=e1270]: Table
+                  - generic [ref=e1271]: 1v
+                  - link "Table docs" [ref=e1272] [cursor=pointer]:
+                    - /url: /docs/components/table
+                    - img [ref=e1273]
+              - generic [ref=e1276]:
+                - table [ref=e1279]:
+                  - rowgroup [ref=e1280]:
+                    - row "Component Downloads" [ref=e1281]:
+                      - columnheader "Component" [ref=e1282]
+                      - columnheader "Downloads" [ref=e1283]
+                  - rowgroup [ref=e1284]:
+                    - row "Button 12.4k" [ref=e1285]:
+                      - cell "Button" [ref=e1286]
+                      - cell "12.4k" [ref=e1287]
+                    - row "Card 9.1k" [ref=e1288]:
+                      - cell "Card" [ref=e1289]
+                      - cell "9.1k" [ref=e1290]
+                - generic [ref=e1291]:
+                  - generic [ref=e1292]: DataTable
+                  - generic [ref=e1293]: 1v
+                  - link "DataTable docs" [ref=e1294] [cursor=pointer]:
+                    - /url: /docs/components/datatable
+                    - img [ref=e1295]
+              - generic [ref=e1298]:
+                - generic [ref=e1302]:
+                  - generic [ref=e1306]:
+                    - generic [ref=e1307]: Jan
+                    - heading "Created" [level=4] [ref=e1308]
+                    - paragraph [ref=e1309]: Project started
+                  - generic [ref=e1313]:
+                    - generic [ref=e1314]: Feb
+                    - heading "Deployed" [level=4] [ref=e1315]
+                    - paragraph [ref=e1316]: v1.0 shipped
+                - generic [ref=e1317]:
+                  - generic [ref=e1318]: Timeline
+                  - generic [ref=e1319]: 1v
+                  - link "Timeline docs" [ref=e1320] [cursor=pointer]:
+                    - /url: /docs/components/timeline
+                    - img [ref=e1321]
+              - generic [ref=e1324]:
+                - list [ref=e1326]:
+                  - listitem [ref=e1327]:
+                    - img [ref=e1331]
+                    - paragraph [ref=e1334]: Setup
+                  - listitem [ref=e1335]:
+                    - generic [ref=e1338]: "2"
+                    - paragraph [ref=e1340]: Config
+                  - listitem [ref=e1341]:
+                    - generic [ref=e1344]: "3"
+                    - paragraph [ref=e1346]: Deploy
+                - generic [ref=e1347]:
+                  - generic [ref=e1348]: Stepper
+                  - generic [ref=e1349]: 1v
+                  - link "Stepper docs" [ref=e1350] [cursor=pointer]:
+                    - /url: /docs/components/stepper
+                    - img [ref=e1351]
+              - generic [ref=e1354]:
+                - generic [ref=e1356]:
+                  - generic [ref=e1357]:
+                    - generic [ref=e1358]: CPU Usage
+                    - generic [ref=e1359]: 68%
+                  - meter "CPU Usage" [ref=e1360]
+                - generic [ref=e1362]:
+                  - generic [ref=e1363]: Meter
+                  - generic [ref=e1364]: 1v
+                  - link "Meter docs" [ref=e1365] [cursor=pointer]:
+                    - /url: /docs/components/meter
+                    - img [ref=e1366]
+              - generic [ref=e1369]:
+                - generic [ref=e1373]:
+                  - navigation "Navigation bar" [ref=e1374]:
+                    - button "Go to the Previous Month" [ref=e1375]:
+                      - img [ref=e1376]
+                    - button "Go to the Next Month" [ref=e1378]:
+                      - img [ref=e1379]
+                  - generic [ref=e1381]:
+                    - generic [ref=e1383]:
+                      - generic [ref=e1384]:
+                        - combobox "Choose the Month" [ref=e1385]:
+                          - option "January"
+                          - option "February"
+                          - option "March"
+                          - option "April" [selected]
+                          - option "May"
+                          - option "June"
+                          - option "July"
+                          - option "August"
+                          - option "September"
+                          - option "October"
+                          - option "November"
+                          - option "December"
+                        - generic [ref=e1386]:
+                          - text: April
+                          - img [ref=e1387]
+                      - generic [ref=e1389]:
+                        - combobox "Choose the Year" [ref=e1390]:
+                          - option "1926"
+                          - option "1927"
+                          - option "1928"
+                          - option "1929"
+                          - option "1930"
+                          - option "1931"
+                          - option "1932"
+                          - option "1933"
+                          - option "1934"
+                          - option "1935"
+                          - option "1936"
+                          - option "1937"
+                          - option "1938"
+                          - option "1939"
+                          - option "1940"
+                          - option "1941"
+                          - option "1942"
+                          - option "1943"
+                          - option "1944"
+                          - option "1945"
+                          - option "1946"
+                          - option "1947"
+                          - option "1948"
+                          - option "1949"
+                          - option "1950"
+                          - option "1951"
+                          - option "1952"
+                          - option "1953"
+                          - option "1954"
+                          - option "1955"
+                          - option "1956"
+                          - option "1957"
+                          - option "1958"
+                          - option "1959"
+                          - option "1960"
+                          - option "1961"
+                          - option "1962"
+                          - option "1963"
+                          - option "1964"
+                          - option "1965"
+                          - option "1966"
+                          - option "1967"
+                          - option "1968"
+                          - option "1969"
+                          - option "1970"
+                          - option "1971"
+                          - option "1972"
+                          - option "1973"
+                          - option "1974"
+                          - option "1975"
+                          - option "1976"
+                          - option "1977"
+                          - option "1978"
+                          - option "1979"
+                          - option "1980"
+                          - option "1981"
+                          - option "1982"
+                          - option "1983"
+                          - option "1984"
+                          - option "1985"
+                          - option "1986"
+                          - option "1987"
+                          - option "1988"
+                          - option "1989"
+                          - option "1990"
+                          - option "1991"
+                          - option "1992"
+                          - option "1993"
+                          - option "1994"
+                          - option "1995"
+                          - option "1996"
+                          - option "1997"
+                          - option "1998"
+                          - option "1999"
+                          - option "2000"
+                          - option "2001"
+                          - option "2002"
+                          - option "2003"
+                          - option "2004"
+                          - option "2005"
+                          - option "2006"
+                          - option "2007"
+                          - option "2008"
+                          - option "2009"
+                          - option "2010"
+                          - option "2011"
+                          - option "2012"
+                          - option "2013"
+                          - option "2014"
+                          - option "2015"
+                          - option "2016"
+                          - option "2017"
+                          - option "2018"
+                          - option "2019"
+                          - option "2020"
+                          - option "2021"
+                          - option "2022"
+                          - option "2023"
+                          - option "2024"
+                          - option "2025"
+                          - option "2026" [selected]
+                          - option "2027"
+                          - option "2028"
+                          - option "2029"
+                          - option "2030"
+                          - option "2031"
+                          - option "2032"
+                          - option "2033"
+                          - option "2034"
+                          - option "2035"
+                          - option "2036"
+                        - generic [ref=e1391]:
+                          - text: "2026"
+                          - img [ref=e1392]
+                      - status [ref=e1394]: April 2026
+                    - grid "April 2026" [ref=e1395]:
+                      - rowgroup [ref=e1396]:
+                        - row [ref=e1397]:
+                          - columnheader [ref=e1398]: Su
+                          - columnheader [ref=e1399]: Mo
+                          - columnheader [ref=e1400]: Tu
+                          - columnheader [ref=e1401]: We
+                          - columnheader [ref=e1402]: Th
+                          - columnheader [ref=e1403]: Fr
+                          - columnheader [ref=e1404]: Sa
+                      - rowgroup [ref=e1405]:
+                        - row "Sunday, March 29th, 2026 Monday, March 30th, 2026 Tuesday, March 31st, 2026 Wednesday, April 1st, 2026 Thursday, April 2nd, 2026 Friday, April 3rd, 2026 Saturday, April 4th, 2026" [ref=e1406]:
+                          - gridcell "Sunday, March 29th, 2026" [ref=e1407]:
+                            - button "Sunday, March 29th, 2026" [ref=e1408] [cursor=pointer]: "29"
+                          - gridcell "Monday, March 30th, 2026" [ref=e1409]:
+                            - button "Monday, March 30th, 2026" [ref=e1410] [cursor=pointer]: "30"
+                          - gridcell "Tuesday, March 31st, 2026" [ref=e1411]:
+                            - button "Tuesday, March 31st, 2026" [ref=e1412] [cursor=pointer]: "31"
+                          - gridcell "Wednesday, April 1st, 2026" [ref=e1413]:
+                            - button "Wednesday, April 1st, 2026" [ref=e1414] [cursor=pointer]: "1"
+                          - gridcell "Thursday, April 2nd, 2026" [ref=e1415]:
+                            - button "Thursday, April 2nd, 2026" [ref=e1416] [cursor=pointer]: "2"
+                          - gridcell "Friday, April 3rd, 2026" [ref=e1417]:
+                            - button "Friday, April 3rd, 2026" [ref=e1418] [cursor=pointer]: "3"
+                          - gridcell "Saturday, April 4th, 2026" [ref=e1419]:
+                            - button "Saturday, April 4th, 2026" [ref=e1420] [cursor=pointer]: "4"
+                        - row "Sunday, April 5th, 2026 Monday, April 6th, 2026 Tuesday, April 7th, 2026 Wednesday, April 8th, 2026 Thursday, April 9th, 2026 Friday, April 10th, 2026 Saturday, April 11th, 2026" [ref=e1421]:
+                          - gridcell "Sunday, April 5th, 2026" [ref=e1422]:
+                            - button "Sunday, April 5th, 2026" [ref=e1423] [cursor=pointer]: "5"
+                          - gridcell "Monday, April 6th, 2026" [ref=e1424]:
+                            - button "Monday, April 6th, 2026" [ref=e1425] [cursor=pointer]: "6"
+                          - gridcell "Tuesday, April 7th, 2026" [ref=e1426]:
+                            - button "Tuesday, April 7th, 2026" [ref=e1427] [cursor=pointer]: "7"
+                          - gridcell "Wednesday, April 8th, 2026" [ref=e1428]:
+                            - button "Wednesday, April 8th, 2026" [ref=e1429] [cursor=pointer]: "8"
+                          - gridcell "Thursday, April 9th, 2026" [ref=e1430]:
+                            - button "Thursday, April 9th, 2026" [ref=e1431] [cursor=pointer]: "9"
+                          - gridcell "Friday, April 10th, 2026" [ref=e1432]:
+                            - button "Friday, April 10th, 2026" [ref=e1433] [cursor=pointer]: "10"
+                          - gridcell "Saturday, April 11th, 2026" [ref=e1434]:
+                            - button "Saturday, April 11th, 2026" [ref=e1435] [cursor=pointer]: "11"
+                        - row "Sunday, April 12th, 2026 Monday, April 13th, 2026 Tuesday, April 14th, 2026 Wednesday, April 15th, 2026 Thursday, April 16th, 2026 Friday, April 17th, 2026 Saturday, April 18th, 2026" [ref=e1436]:
+                          - gridcell "Sunday, April 12th, 2026" [ref=e1437]:
+                            - button "Sunday, April 12th, 2026" [ref=e1438] [cursor=pointer]: "12"
+                          - gridcell "Monday, April 13th, 2026" [ref=e1439]:
+                            - button "Monday, April 13th, 2026" [ref=e1440] [cursor=pointer]: "13"
+                          - gridcell "Tuesday, April 14th, 2026" [ref=e1441]:
+                            - button "Tuesday, April 14th, 2026" [ref=e1442] [cursor=pointer]: "14"
+                          - gridcell "Wednesday, April 15th, 2026" [ref=e1443]:
+                            - button "Wednesday, April 15th, 2026" [ref=e1444] [cursor=pointer]: "15"
+                          - gridcell "Thursday, April 16th, 2026" [ref=e1445]:
+                            - button "Thursday, April 16th, 2026" [ref=e1446] [cursor=pointer]: "16"
+                          - gridcell "Friday, April 17th, 2026" [ref=e1447]:
+                            - button "Friday, April 17th, 2026" [ref=e1448] [cursor=pointer]: "17"
+                          - gridcell "Saturday, April 18th, 2026" [ref=e1449]:
+                            - button "Saturday, April 18th, 2026" [ref=e1450] [cursor=pointer]: "18"
+                        - row "Sunday, April 19th, 2026 Monday, April 20th, 2026 Tuesday, April 21st, 2026 Wednesday, April 22nd, 2026 Thursday, April 23rd, 2026 Today, Friday, April 24th, 2026, selected Saturday, April 25th, 2026" [ref=e1451]:
+                          - gridcell "Sunday, April 19th, 2026" [ref=e1452]:
+                            - button "Sunday, April 19th, 2026" [ref=e1453] [cursor=pointer]: "19"
+                          - gridcell "Monday, April 20th, 2026" [ref=e1454]:
+                            - button "Monday, April 20th, 2026" [ref=e1455] [cursor=pointer]: "20"
+                          - gridcell "Tuesday, April 21st, 2026" [ref=e1456]:
+                            - button "Tuesday, April 21st, 2026" [ref=e1457] [cursor=pointer]: "21"
+                          - gridcell "Wednesday, April 22nd, 2026" [ref=e1458]:
+                            - button "Wednesday, April 22nd, 2026" [ref=e1459] [cursor=pointer]: "22"
+                          - gridcell "Thursday, April 23rd, 2026" [ref=e1460]:
+                            - button "Thursday, April 23rd, 2026" [ref=e1461] [cursor=pointer]: "23"
+                          - gridcell "Today, Friday, April 24th, 2026, selected" [selected] [ref=e1462]:
+                            - button "Today, Friday, April 24th, 2026, selected" [ref=e1463] [cursor=pointer]: "24"
+                          - gridcell "Saturday, April 25th, 2026" [ref=e1464]:
+                            - button "Saturday, April 25th, 2026" [ref=e1465] [cursor=pointer]: "25"
+                        - row "Sunday, April 26th, 2026 Monday, April 27th, 2026 Tuesday, April 28th, 2026 Wednesday, April 29th, 2026 Thursday, April 30th, 2026 Friday, May 1st, 2026 Saturday, May 2nd, 2026" [ref=e1466]:
+                          - gridcell "Sunday, April 26th, 2026" [ref=e1467]:
+                            - button "Sunday, April 26th, 2026" [ref=e1468] [cursor=pointer]: "26"
+                          - gridcell "Monday, April 27th, 2026" [ref=e1469]:
+                            - button "Monday, April 27th, 2026" [ref=e1470] [cursor=pointer]: "27"
+                          - gridcell "Tuesday, April 28th, 2026" [ref=e1471]:
+                            - button "Tuesday, April 28th, 2026" [ref=e1472] [cursor=pointer]: "28"
+                          - gridcell "Wednesday, April 29th, 2026" [ref=e1473]:
+                            - button "Wednesday, April 29th, 2026" [ref=e1474] [cursor=pointer]: "29"
+                          - gridcell "Thursday, April 30th, 2026" [ref=e1475]:
+                            - button "Thursday, April 30th, 2026" [ref=e1476] [cursor=pointer]: "30"
+                          - gridcell "Friday, May 1st, 2026" [ref=e1477]:
+                            - button "Friday, May 1st, 2026" [ref=e1478] [cursor=pointer]: "1"
+                          - gridcell "Saturday, May 2nd, 2026" [ref=e1479]:
+                            - button "Saturday, May 2nd, 2026" [ref=e1480] [cursor=pointer]: "2"
+                        - row "Sunday, May 3rd, 2026 Monday, May 4th, 2026 Tuesday, May 5th, 2026 Wednesday, May 6th, 2026 Thursday, May 7th, 2026 Friday, May 8th, 2026 Saturday, May 9th, 2026" [ref=e1481]:
+                          - gridcell "Sunday, May 3rd, 2026" [ref=e1482]:
+                            - button "Sunday, May 3rd, 2026" [ref=e1483] [cursor=pointer]: "3"
+                          - gridcell "Monday, May 4th, 2026" [ref=e1484]:
+                            - button "Monday, May 4th, 2026" [ref=e1485] [cursor=pointer]: "4"
+                          - gridcell "Tuesday, May 5th, 2026" [ref=e1486]:
+                            - button "Tuesday, May 5th, 2026" [ref=e1487] [cursor=pointer]: "5"
+                          - gridcell "Wednesday, May 6th, 2026" [ref=e1488]:
+                            - button "Wednesday, May 6th, 2026" [ref=e1489] [cursor=pointer]: "6"
+                          - gridcell "Thursday, May 7th, 2026" [ref=e1490]:
+                            - button "Thursday, May 7th, 2026" [ref=e1491] [cursor=pointer]: "7"
+                          - gridcell "Friday, May 8th, 2026" [ref=e1492]:
+                            - button "Friday, May 8th, 2026" [ref=e1493] [cursor=pointer]: "8"
+                          - gridcell "Saturday, May 9th, 2026" [ref=e1494]:
+                            - button "Saturday, May 9th, 2026" [ref=e1495] [cursor=pointer]: "9"
+                - generic [ref=e1496]:
+                  - generic [ref=e1497]: Calendar
+                  - generic [ref=e1498]: 1v
+                  - link "Calendar docs" [ref=e1499] [cursor=pointer]:
+                    - /url: /docs/components/calendar
+                    - img [ref=e1500]
+              - generic [ref=e1503]:
+                - button "Apr 24, 2026" [ref=e1506] [cursor=pointer]:
+                  - generic [ref=e1507]:
+                    - img
+                    - text: Apr 24, 2026
+                - generic [ref=e1508]:
+                  - generic [ref=e1509]: DatePicker
+                  - generic [ref=e1510]: 1v
+                  - link "DatePicker docs" [ref=e1511] [cursor=pointer]:
+                    - /url: /docs/components/datepicker
+                    - img [ref=e1512]
+              - generic [ref=e1515]:
+                - region "Carousel" [ref=e1517]:
+                  - generic [ref=e1519]:
+                    - group [ref=e1520]:
+                      - generic [ref=e1521]: Slide 1
+                    - group [ref=e1522]:
+                      - generic [ref=e1523]: Slide 2
+                    - group [ref=e1524]:
+                      - generic [ref=e1525]: Slide 3
+                  - button "Previous slide" [disabled]:
+                    - img
+                  - button "Next slide" [disabled]:
+                    - img
+                - generic [ref=e1526]:
+                  - generic [ref=e1527]: Carousel
+                  - generic [ref=e1528]: 1v
+                  - link "Carousel docs" [ref=e1529] [cursor=pointer]:
+                    - /url: /docs/components/carousel
+                    - img [ref=e1530]
+              - generic [ref=e1533]:
+                - tree [ref=e1535]:
+                  - treeitem "src" [expanded] [ref=e1536]:
+                    - button "src" [ref=e1537]:
+                      - img [ref=e1538]
+                      - img [ref=e1541]
+                      - generic [ref=e1543]: src
+                    - group [ref=e1544]:
+                      - treeitem "app.tsx" [ref=e1545]:
+                        - button "app.tsx" [ref=e1546]:
+                          - img [ref=e1548]
+                          - generic [ref=e1551]: app.tsx
+                      - treeitem "index.ts" [ref=e1552]:
+                        - button "index.ts" [ref=e1553]:
+                          - img [ref=e1555]
+                          - generic [ref=e1558]: index.ts
+                - generic [ref=e1559]:
+                  - generic [ref=e1560]: TreeView
+                  - generic [ref=e1561]: 1v
+                  - link "TreeView docs" [ref=e1562] [cursor=pointer]:
+                    - /url: /docs/components/treeview
+                    - img [ref=e1563]
+        - generic [ref=e1566]:
+          - generic [ref=e1567]:
+            - generic [ref=e1568]: Forms
+            - generic [ref=e1569]: 14 components
+          - generic [ref=e1570]:
+            - img
+            - generic [ref=e1571]:
+              - generic [ref=e1572]:
+                - radiogroup [ref=e1574]:
+                  - generic [ref=e1575]:
+                    - radio [checked] [ref=e1576]:
+                      - img [ref=e1578]
+                    - radio [checked]
+                    - generic [ref=e1580]: React
+                  - generic [ref=e1581]:
+                    - radio [ref=e1582]
+                    - radio
+                    - generic [ref=e1583]: Vue
+                  - generic [ref=e1584]:
+                    - radio [ref=e1585]
+                    - radio
+                    - generic [ref=e1586]: Svelte
+                - generic [ref=e1587]:
+                  - generic [ref=e1588]: RadioGroup
+                  - generic [ref=e1589]: 1v
+                  - link "RadioGroup docs" [ref=e1590] [cursor=pointer]:
+                    - /url: /docs/components/radiogroup
+                    - img [ref=e1591]
+              - generic [ref=e1594]:
+                - group [ref=e1596]:
+                  - generic [ref=e1597] [cursor=pointer]:
+                    - checkbox "TypeScript" [ref=e1598]
+                    - generic [ref=e1599]: TypeScript
+                  - generic [ref=e1600] [cursor=pointer]:
+                    - checkbox "JavaScript" [ref=e1601]
+                    - generic [ref=e1602]: JavaScript
+                  - generic [ref=e1603] [cursor=pointer]:
+                    - checkbox "Python" [ref=e1604]
+                    - generic [ref=e1605]: Python
+                - generic [ref=e1606]:
+                  - generic [ref=e1607]: CheckboxGroup
+                  - generic [ref=e1608]: 1v
+                  - link "CheckboxGroup docs" [ref=e1609] [cursor=pointer]:
+                    - /url: /docs/components/checkboxgroup
+                    - img [ref=e1610]
+              - generic [ref=e1613]:
+                - combobox [ref=e1617] [cursor=pointer]:
+                  - generic [ref=e1618]: Search frameworks...
+                  - img [ref=e1619]
+                - generic [ref=e1621]:
+                  - generic [ref=e1622]: Combobox
+                  - generic [ref=e1623]: 1v
+                  - link "Combobox docs" [ref=e1624] [cursor=pointer]:
+                    - /url: /docs/components/combobox
+                    - img [ref=e1625]
+              - generic [ref=e1628]:
+                - textbox [ref=e1631]
+                - generic [ref=e1632]:
+                  - generic [ref=e1633]: InputOTP
+                  - generic [ref=e1634]: 1v
+                  - link "InputOTP docs" [ref=e1635] [cursor=pointer]:
+                    - /url: /docs/components/inputotp
+                    - img [ref=e1636]
+              - generic [ref=e1639]:
+                - generic [ref=e1641]:
+                  - generic [ref=e1642]: Email
+                  - textbox "you@example.com" [ref=e1644]
+                  - button "Submit" [ref=e1645] [cursor=pointer]
+                - generic [ref=e1646]:
+                  - generic [ref=e1647]: Form
+                  - generic [ref=e1648]: 1v
+                  - link "Form docs" [ref=e1649] [cursor=pointer]:
+                    - /url: /docs/components/form
+                    - img [ref=e1650]
+              - generic [ref=e1653]:
+                - generic [ref=e1655]:
+                  - generic [ref=e1656]: Username
+                  - textbox "kevinliu" [ref=e1658]
+                  - paragraph [ref=e1659]: Your public display name
+                - generic [ref=e1660]:
+                  - generic [ref=e1661]: Field
+                  - generic [ref=e1662]: 1v
+                  - link "Field docs" [ref=e1663] [cursor=pointer]:
+                    - /url: /docs/components/field
+                    - img [ref=e1664]
+              - generic [ref=e1667]:
+                - generic [ref=e1669]:
+                  - generic [ref=e1670]:
+                    - text: React
+                    - button "Remove React" [ref=e1671]:
+                      - img [ref=e1672]
+                  - generic [ref=e1674]:
+                    - text: Sigil
+                    - button "Remove Sigil" [ref=e1675]:
+                      - img [ref=e1676]
+                  - textbox [ref=e1678]
+                - generic [ref=e1679]:
+                  - generic [ref=e1680]: TagsInput
+                  - generic [ref=e1681]: 1v
+                  - link "TagsInput docs" [ref=e1682] [cursor=pointer]:
+                    - /url: /docs/components/tagsinput
+                    - img [ref=e1683]
+              - generic [ref=e1686]:
+                - generic [ref=e1688]:
+                  - generic [ref=e1689]:
+                    - textbox: "#3b82f6"
+                    - textbox [ref=e1691]: "#3b82f6"
+                  - generic [ref=e1692]:
+                    - button "#ef4444" [ref=e1693]
+                    - button "#22c55e" [ref=e1694]
+                    - button "#3b82f6" [ref=e1695]
+                    - button "#8b5cf6" [ref=e1696]
+                - generic [ref=e1697]:
+                  - generic [ref=e1698]: ColorPicker
+                  - generic [ref=e1699]: 1v
+                  - link "ColorPicker docs" [ref=e1700] [cursor=pointer]:
+                    - /url: /docs/components/colorpicker
+                    - img [ref=e1701]
+              - generic [ref=e1704]:
+                - button "Click to edit" [ref=e1707]
+                - generic [ref=e1708]:
+                  - generic [ref=e1709]: Editable
+                  - generic [ref=e1710]: 1v
+                  - link "Editable docs" [ref=e1711] [cursor=pointer]:
+                    - /url: /docs/components/editable
+                    - img [ref=e1712]
+              - generic [ref=e1715]:
+                - radiogroup [ref=e1717]:
+                  - radio "1 star" [checked] [ref=e1718] [cursor=pointer]:
+                    - img [ref=e1719]
+                  - radio "2 stars" [checked] [ref=e1721] [cursor=pointer]:
+                    - img [ref=e1722]
+                  - radio "3 stars" [checked] [ref=e1724] [cursor=pointer]:
+                    - img [ref=e1725]
+                  - radio "4 stars" [ref=e1727] [cursor=pointer]:
+                    - img [ref=e1728]
+                  - radio "5 stars" [ref=e1730] [cursor=pointer]:
+                    - img [ref=e1731]
+                - generic [ref=e1733]:
+                  - generic [ref=e1734]: RatingGroup
+                  - generic [ref=e1735]: 1v
+                  - link "RatingGroup docs" [ref=e1736] [cursor=pointer]:
+                    - /url: /docs/components/ratinggroup
+                    - img [ref=e1737]
+              - generic [ref=e1740]:
+                - generic [ref=e1742]:
+                  - generic [ref=e1743]: $
+                  - textbox "0.00" [ref=e1744]
+                - generic [ref=e1745]:
+                  - generic [ref=e1746]: InputGroup
+                  - generic [ref=e1747]: 1v
+                  - link "InputGroup docs" [ref=e1748] [cursor=pointer]:
+                    - /url: /docs/components/inputgroup
+                    - img [ref=e1749]
+              - generic [ref=e1752]:
+                - generic [ref=e1754] [cursor=pointer]:
+                  - button "Choose File" [ref=e1755]
+                  - generic [ref=e1756]:
+                    - img [ref=e1757]
+                    - generic [ref=e1760]: Drop files here
+                - generic [ref=e1761]:
+                  - generic [ref=e1762]: FileUpload
+                  - generic [ref=e1763]: 1v
+                  - link "FileUpload docs" [ref=e1764] [cursor=pointer]:
+                    - /url: /docs/components/fileupload
+                    - img [ref=e1765]
+              - generic [ref=e1768]:
+                - generic [ref=e1770]:
+                  - generic [ref=e1771]:
+                    - paragraph: Sign here
+                  - button "Clear" [disabled] [ref=e1773]
+                - generic [ref=e1774]:
+                  - generic [ref=e1775]: SignaturePad
+                  - generic [ref=e1776]: 1v
+                  - link "SignaturePad docs" [ref=e1777] [cursor=pointer]:
+                    - /url: /docs/components/signaturepad
+                    - img [ref=e1778]
+              - generic [ref=e1781]:
+                - generic [ref=e1783]:
+                  - textbox "Enter password..." [ref=e1784]
+                  - button "Show password" [ref=e1785]:
+                    - img [ref=e1786]
+                - generic [ref=e1789]:
+                  - generic [ref=e1790]: Password Input
+                  - generic [ref=e1791]: 1v
+                  - link "Password Input docs" [ref=e1792] [cursor=pointer]:
+                    - /url: /docs/components/password-input
+                    - img [ref=e1793]
+        - generic [ref=e1796]:
+          - generic [ref=e1797]:
+            - generic [ref=e1798]: Marketing
+            - generic [ref=e1799]: 14 components
+          - generic [ref=e1800]:
+            - img
+            - generic [ref=e1801]:
+              - generic [ref=e1802]:
+                - generic [ref=e1804]:
+                  - generic [ref=e1805]: New
+                  - generic [ref=e1806]: Ship faster
+                  - generic [ref=e1807]: Token-driven design system
+                - generic [ref=e1808]:
+                  - generic [ref=e1809]: Hero
+                  - generic [ref=e1810]: 2v
+                  - link "Hero docs" [ref=e1811] [cursor=pointer]:
+                    - /url: /docs/components/hero
+                    - img [ref=e1812]
+              - generic [ref=e1815]:
+                - generic [ref=e1817]:
+                  - generic [ref=e1818]: Ready to start?
+                  - button "Get Started" [ref=e1819] [cursor=pointer]
+                - generic [ref=e1820]:
+                  - generic [ref=e1821]: CTA
+                  - generic [ref=e1822]: 2v
+                  - link "CTA docs" [ref=e1823] [cursor=pointer]:
+                    - /url: /docs/components/cta
+                    - img [ref=e1824]
+              - generic [ref=e1827]:
+                - generic [ref=e1829]:
+                  - heading "Pro" [level=3] [ref=e1830]
+                  - generic [ref=e1831]:
+                    - generic [ref=e1832]: $19
+                    - generic [ref=e1833]: /mo
+                  - list [ref=e1834]:
+                    - listitem [ref=e1835]:
+                      - img [ref=e1836]
+                      - text: Unlimited
+                    - listitem [ref=e1838]:
+                      - img [ref=e1839]
+                      - text: Priority
+                - generic [ref=e1841]:
+                  - generic [ref=e1842]: Pricing
+                  - generic [ref=e1843]: 1v
+                  - link "Pricing docs" [ref=e1844] [cursor=pointer]:
+                    - /url: /docs/components/pricing
+                    - img [ref=e1845]
+              - generic [ref=e1848]:
+                - generic [ref=e1850]:
+                  - generic [ref=e1851]:
+                    - generic [ref=e1852]: Free
+                    - generic [ref=e1853]: $0
+                  - generic [ref=e1854]:
+                    - generic [ref=e1855]: Pro
+                    - generic [ref=e1856]: $19
+                  - generic [ref=e1857]:
+                    - generic [ref=e1858]: Team
+                    - generic [ref=e1859]: $49
+                - generic [ref=e1860]:
+                  - generic [ref=e1861]: PricingTiers
+                  - generic [ref=e1862]: 1v
+                  - link "PricingTiers docs" [ref=e1863] [cursor=pointer]:
+                    - /url: /docs/components/pricingtiers
+                    - img [ref=e1864]
+              - generic [ref=e1867]:
+                - generic [ref=e1869]:
+                  - generic [ref=e1870]:
+                    - heading "Fast" [level=3] [ref=e1872]
+                    - img [ref=e1874]
+                  - generic [ref=e1876]:
+                    - heading "Secure" [level=3] [ref=e1878]
+                    - img [ref=e1880]
+                - generic [ref=e1882]:
+                  - generic [ref=e1883]: FeatureGrid
+                  - generic [ref=e1884]: 1v
+                  - link "FeatureGrid docs" [ref=e1885] [cursor=pointer]:
+                    - /url: /docs/components/featuregrid
+                    - img [ref=e1886]
+              - generic [ref=e1889]:
+                - table [ref=e1892]:
+                  - rowgroup [ref=e1893]:
+                    - row "Feature Sigil Other" [ref=e1894]:
+                      - columnheader "Feature" [ref=e1895]
+                      - columnheader "Sigil" [ref=e1896]
+                      - columnheader "Other" [ref=e1897]
+                  - rowgroup [ref=e1898]:
+                    - row "Tokens Yes No" [ref=e1899]:
+                      - cell "Tokens" [ref=e1900]
+                      - cell "Yes" [ref=e1901]: ✓
+                      - cell "No" [ref=e1902]: —
+                    - row "Presets Yes No" [ref=e1903]:
+                      - cell "Presets" [ref=e1904]
+                      - cell "Yes" [ref=e1905]: ✓
+                      - cell "No" [ref=e1906]: —
+                - generic [ref=e1907]:
+                  - generic [ref=e1908]: ComparisonTable
+                  - generic [ref=e1909]: 1v
+                  - link "ComparisonTable docs" [ref=e1910] [cursor=pointer]:
+                    - /url: /docs/components/comparisontable
+                    - img [ref=e1911]
+              - generic [ref=e1914]:
+                - generic [ref=e1916]:
+                  - img [ref=e1917]
+                  - blockquote [ref=e1919]: “Sigil completely changed how we build.”
+                  - generic [ref=e1921]:
+                    - generic [ref=e1922]: Jane Doe
+                    - generic [ref=e1923]: CTO
+                - generic [ref=e1924]:
+                  - generic [ref=e1925]: TestimonialCard
+                  - generic [ref=e1926]: 1v
+                  - link "TestimonialCard docs" [ref=e1927] [cursor=pointer]:
+                    - /url: /docs/components/testimonialcard
+                    - img [ref=e1928]
+              - generic [ref=e1931]:
+                - generic [ref=e1933]:
+                  - img [ref=e1934]
+                  - img [ref=e1937]
+                  - img [ref=e1940]
+                  - img [ref=e1943]
+                - generic [ref=e1945]:
+                  - generic [ref=e1946]: LogoBar
+                  - generic [ref=e1947]: 1v
+                  - link "LogoBar docs" [ref=e1948] [cursor=pointer]:
+                    - /url: /docs/components/logobar
+                    - img [ref=e1949]
+              - generic [ref=e1952]:
+                - generic [ref=e1954]:
+                  - generic [ref=e1955]:
+                    - generic [ref=e1956]: NEW
+                    - generic [ref=e1957]: "New: Sigil v2.0 is here"
+                  - button "Dismiss" [ref=e1958] [cursor=pointer]: ×
+                - generic [ref=e1959]:
+                  - generic [ref=e1960]: AnnouncementBar
+                  - generic [ref=e1961]: 1v
+                  - link "AnnouncementBar docs" [ref=e1962] [cursor=pointer]:
+                    - /url: /docs/components/announcementbar
+                    - img [ref=e1963]
+              - generic [ref=e1966]:
+                - generic [ref=e1970]:
+                  - heading "Getting Started with Sigil" [level=3] [ref=e1971]
+                  - paragraph [ref=e1972]: A quick intro.
+                  - generic [ref=e1974]: Apr 2026
+                - generic [ref=e1975]:
+                  - generic [ref=e1976]: BlogGrid
+                  - generic [ref=e1977]: 1v
+                  - link "BlogGrid docs" [ref=e1978] [cursor=pointer]:
+                    - /url: /docs/components/bloggrid
+                    - img [ref=e1979]
+              - generic [ref=e1982]:
+                - generic [ref=e1984]:
+                  - generic [ref=e1985]:
+                    - generic [ref=e1986]: Users
+                    - generic [ref=e1987]: ~1,000
+                  - generic [ref=e1991]: $29/mo
+                - generic [ref=e1992]:
+                  - generic [ref=e1993]: CostCalculator
+                  - generic [ref=e1994]: 1v
+                  - link "CostCalculator docs" [ref=e1995] [cursor=pointer]:
+                    - /url: /docs/components/costcalculator
+                    - img [ref=e1996]
+              - generic [ref=e1999]:
+                - generic [ref=e2001]:
+                  - img [ref=e2003]
+                  - generic [ref=e2005]:
+                    - generic [ref=e2006]: Fast
+                    - generic [ref=e2007]: Sub-50ms builds
+                - generic [ref=e2008]:
+                  - generic [ref=e2009]: FeatureFrame
+                  - generic [ref=e2010]: 1v
+                  - link "FeatureFrame docs" [ref=e2011] [cursor=pointer]:
+                    - /url: /docs/components/featureframe
+                    - img [ref=e2012]
+              - generic [ref=e2015]:
+                - generic [ref=e2017]:
+                  - generic [ref=e2018]:
+                    - generic [ref=e2019]: $0.01
+                    - generic [ref=e2020]: per request
+                  - generic [ref=e2021]:
+                    - generic [ref=e2022]: $0.10
+                    - generic [ref=e2023]: per minute
+                - generic [ref=e2024]:
+                  - generic [ref=e2025]: UnitPricing
+                  - generic [ref=e2026]: 1v
+                  - link "UnitPricing docs" [ref=e2027] [cursor=pointer]:
+                    - /url: /docs/components/unitpricing
+                    - img [ref=e2028]
+              - generic [ref=e2031]:
+                - generic [ref=e2033]:
+                  - generic [ref=e2034]: Engineering Blog
+                  - generic [ref=e2035]:
+                    - generic [ref=e2036]: All
+                    - generic [ref=e2037]: Design
+                    - generic [ref=e2038]: Eng
+                - generic [ref=e2039]:
+                  - generic [ref=e2040]: BlogHeader
+                  - generic [ref=e2041]: 1v
+                  - link "BlogHeader docs" [ref=e2042] [cursor=pointer]:
+                    - /url: /docs/components/blogheader
+                    - img [ref=e2043]
+        - generic [ref=e2046]:
+          - generic [ref=e2047]:
+            - generic [ref=e2048]: Sections
+            - generic [ref=e2049]: 21 components
+          - generic [ref=e2050]:
+            - img
+            - generic [ref=e2051]:
+              - generic [ref=e2052]:
+                - generic [ref=e2055]:
+                  - paragraph [ref=e2056]: Features
+                  - heading "Built for speed" [level=2] [ref=e2057]
+                  - paragraph [ref=e2058]: Every component reads from tokens.
+                - generic [ref=e2059]:
+                  - generic [ref=e2060]: SectionHeading
+                  - generic [ref=e2061]: 2v
+                  - link "SectionHeading docs" [ref=e2062] [cursor=pointer]:
+                    - /url: /docs/components/sectionheading
+                    - img [ref=e2063]
+              - generic [ref=e2066]:
+                - generic [ref=e2068]:
+                  - generic [ref=e2069]: New
+                  - generic [ref=e2070]: Ship 10x faster
+                  - generic [ref=e2071]: Token-driven components
+                  - generic [ref=e2072]:
+                    - button "Get Started" [ref=e2073] [cursor=pointer]
+                    - button "Docs" [ref=e2074] [cursor=pointer]
+                - generic [ref=e2075]:
+                  - generic [ref=e2076]: HeroSection
+                  - generic [ref=e2077]: 3v
+                  - link "HeroSection docs" [ref=e2078] [cursor=pointer]:
+                    - /url: /docs/components/herosection
+                    - img [ref=e2079]
+              - generic [ref=e2082]:
+                - generic [ref=e2084]:
+                  - generic [ref=e2085]:
+                    - generic [ref=e2086]: Fast
+                    - generic [ref=e2087]: Sub-50ms
+                  - generic [ref=e2088]:
+                    - generic [ref=e2089]: Tokens
+                    - generic [ref=e2090]: 259 fields
+                  - generic [ref=e2091]:
+                    - generic [ref=e2092]: Presets
+                    - generic [ref=e2093]: 31 themes
+                  - generic [ref=e2094]:
+                    - generic [ref=e2095]: CLI
+                    - generic [ref=e2096]: One command
+                - generic [ref=e2097]:
+                  - generic [ref=e2098]: FeatureSection
+                  - generic [ref=e2099]: 2v
+                  - link "FeatureSection docs" [ref=e2100] [cursor=pointer]:
+                    - /url: /docs/components/featuresection
+                    - img [ref=e2101]
+              - generic [ref=e2104]:
+                - generic [ref=e2106]:
+                  - generic [ref=e2107]: Ready to start?
+                  - generic [ref=e2108]: Deploy in under a minute.
+                  - button "Get Started" [ref=e2109] [cursor=pointer]
+                - generic [ref=e2110]:
+                  - generic [ref=e2111]: CTASection
+                  - generic [ref=e2112]: 2v
+                  - link "CTASection docs" [ref=e2113] [cursor=pointer]:
+                    - /url: /docs/components/ctasection
+                    - img [ref=e2114]
+              - generic [ref=e2117]:
+                - generic [ref=e2119]:
+                  - generic [ref=e2120]:
+                    - heading "What is Sigil?" [level=3] [ref=e2121]:
+                      - button "What is Sigil?" [expanded] [ref=e2122]:
+                        - text: What is Sigil?
+                        - img [ref=e2123]
+                    - region "What is Sigil?" [ref=e2125]:
+                      - generic [ref=e2126]: A token-driven design system.
+                  - heading "How many presets?" [level=3] [ref=e2128]:
+                    - button "How many presets?" [ref=e2129]:
+                      - text: How many presets?
+                      - img [ref=e2130]
+                - generic [ref=e2132]:
+                  - generic [ref=e2133]: FAQSection
+                  - generic [ref=e2134]: 1v
+                  - link "FAQSection docs" [ref=e2135] [cursor=pointer]:
+                    - /url: /docs/components/faqsection
+                    - img [ref=e2136]
+              - generic [ref=e2139]:
+                - generic [ref=e2141]:
+                  - generic [ref=e2142]:
+                    - generic [ref=e2143]: 103+
+                    - generic [ref=e2144]: Components
+                  - generic [ref=e2145]:
+                    - generic [ref=e2146]: "31"
+                    - generic [ref=e2147]: Presets
+                  - generic [ref=e2148]:
+                    - generic [ref=e2149]: "259"
+                    - generic [ref=e2150]: Tokens
+                - generic [ref=e2151]:
+                  - generic [ref=e2152]: StatsSection
+                  - generic [ref=e2153]: 3v
+                  - link "StatsSection docs" [ref=e2154] [cursor=pointer]:
+                    - /url: /docs/components/statssection
+                    - img [ref=e2155]
+              - generic [ref=e2165]:
+                - generic [ref=e2166]: BentoSection
+                - generic [ref=e2167]: 1v
+                - link "BentoSection docs" [ref=e2168] [cursor=pointer]:
+                  - /url: /docs/components/bentosection
+                  - img [ref=e2169]
+              - generic [ref=e2172]:
+                - generic [ref=e2174]:
+                  - generic [ref=e2175]: “
+                  - generic [ref=e2176]: Sigil changed how we build UIs.
+                  - generic [ref=e2177]: Jane D. — CTO
+                - generic [ref=e2178]:
+                  - generic [ref=e2179]: TestimonialsSection
+                  - generic [ref=e2180]: 1v
+                  - link "TestimonialsSection docs" [ref=e2181] [cursor=pointer]:
+                    - /url: /docs/components/testimonialssection
+                    - img [ref=e2182]
+              - generic [ref=e2185]:
+                - generic [ref=e2187]:
+                  - img [ref=e2188]
+                  - img [ref=e2191]
+                  - img [ref=e2194]
+                  - img [ref=e2197]
+                  - img [ref=e2199]
+                - generic [ref=e2201]:
+                  - generic [ref=e2202]: LogoCloudSection
+                  - generic [ref=e2203]: 1v
+                  - link "LogoCloudSection docs" [ref=e2204] [cursor=pointer]:
+                    - /url: /docs/components/logocloudsection
+                    - img [ref=e2205]
+              - generic [ref=e2208]:
+                - table [ref=e2211]:
+                  - rowgroup [ref=e2212]:
+                    - row "Feature Us Others" [ref=e2213]:
+                      - columnheader "Feature" [ref=e2214]
+                      - columnheader "Us" [ref=e2215]
+                      - columnheader "Others" [ref=e2216]
+                  - rowgroup [ref=e2217]:
+                    - row "Tokens ✓ —" [ref=e2218]:
+                      - cell "Tokens" [ref=e2219]
+                      - cell "✓" [ref=e2220]
+                      - cell "—" [ref=e2221]
+                    - row "Presets ✓ —" [ref=e2222]:
+                      - cell "Presets" [ref=e2223]
+                      - cell "✓" [ref=e2224]
+                      - cell "—" [ref=e2225]
+                - generic [ref=e2226]:
+                  - generic [ref=e2227]: ComparisonSection
+                  - generic [ref=e2228]: 1v
+                  - link "ComparisonSection docs" [ref=e2229] [cursor=pointer]:
+                    - /url: /docs/components/comparisonsection
+                    - img [ref=e2230]
+              - generic [ref=e2233]:
+                - generic [ref=e2235]:
+                  - generic [ref=e2236]:
+                    - generic [ref=e2237]: TypeScript
+                    - generic [ref=e2238]: Python
+                  - generic [ref=e2239]: "import { Button } from \"@sigil-ui/components\""
+                - generic [ref=e2240]:
+                  - generic [ref=e2241]: CodeShowcaseSection
+                  - generic [ref=e2242]: 1v
+                  - link "CodeShowcaseSection docs" [ref=e2243] [cursor=pointer]:
+                    - /url: /docs/components/codeshowcasesection
+                    - img [ref=e2244]
+              - generic [ref=e2247]:
+                - generic [ref=e2249]:
+                  - generic [ref=e2250]:
+                    - generic [ref=e2251]: KL
+                    - generic [ref=e2252]: Engineer
+                  - generic [ref=e2253]:
+                    - generic [ref=e2254]: JD
+                    - generic [ref=e2255]: Engineer
+                  - generic [ref=e2256]:
+                    - generic [ref=e2257]: AR
+                    - generic [ref=e2258]: Engineer
+                - generic [ref=e2259]:
+                  - generic [ref=e2260]: TeamSection
+                  - generic [ref=e2261]: 1v
+                  - link "TeamSection docs" [ref=e2262] [cursor=pointer]:
+                    - /url: /docs/components/teamsection
+                    - img [ref=e2263]
+              - generic [ref=e2266]:
+                - generic [ref=e2268]:
+                  - generic [ref=e2270]:
+                    - generic [ref=e2272]: v2.0
+                    - generic [ref=e2273]: Sections
+                  - generic [ref=e2274]:
+                    - generic [ref=e2276]: v1.5
+                    - generic [ref=e2277]: Presets
+                  - generic [ref=e2278]:
+                    - generic [ref=e2280]: v1.0
+                    - generic [ref=e2281]: Launch
+                - generic [ref=e2282]:
+                  - generic [ref=e2283]: TimelineSection
+                  - generic [ref=e2284]: 1v
+                  - link "TimelineSection docs" [ref=e2285] [cursor=pointer]:
+                    - /url: /docs/components/timelinesection
+                    - img [ref=e2286]
+              - generic [ref=e2289]:
+                - generic [ref=e2291]:
+                  - generic [ref=e2292]: Stay updated
+                  - generic [ref=e2293]:
+                    - textbox "you@email.com" [ref=e2295]
+                    - button "Subscribe" [ref=e2296] [cursor=pointer]
+                - generic [ref=e2297]:
+                  - generic [ref=e2298]: NewsletterSection
+                  - generic [ref=e2299]: 1v
+                  - link "NewsletterSection docs" [ref=e2300] [cursor=pointer]:
+                    - /url: /docs/components/newslettersection
+                    - img [ref=e2301]
+              - generic [ref=e2304]:
+                - generic [ref=e2307]:
+                  - generic [ref=e2308]:
+                    - generic [ref=e2309]: Product
+                    - generic [ref=e2310]: Features
+                    - generic [ref=e2311]: Pricing
+                  - generic [ref=e2312]:
+                    - generic [ref=e2313]: Company
+                    - generic [ref=e2314]: About
+                    - generic [ref=e2315]: Blog
+                  - generic [ref=e2316]:
+                    - generic [ref=e2317]: Legal
+                    - generic [ref=e2318]: Privacy
+                    - generic [ref=e2319]: Terms
+                - generic [ref=e2320]:
+                  - generic [ref=e2321]: FooterSection
+                  - generic [ref=e2322]: 1v
+                  - link "FooterSection docs" [ref=e2323] [cursor=pointer]:
+                    - /url: /docs/components/footersection
+                    - img [ref=e2324]
+              - generic [ref=e2327]:
+                - generic [ref=e2329]:
+                  - text: A
+                  - emphasis [ref=e2330]: new species
+                  - text: of design system.
+                - generic [ref=e2331]:
+                  - generic [ref=e2332]: LargeTextSection
+                  - generic [ref=e2333]: 1v
+                  - link "LargeTextSection docs" [ref=e2334] [cursor=pointer]:
+                    - /url: /docs/components/largetextsection
+                    - img [ref=e2335]
+              - generic [ref=e2338]:
+                - generic [ref=e2341]:
+                  - generic [ref=e2342]: Feature A
+                  - generic [ref=e2343]: Description
+                - generic [ref=e2345]:
+                  - generic [ref=e2346]: FeatureShowcaseSection
+                  - generic [ref=e2347]: 1v
+                  - link "FeatureShowcaseSection docs" [ref=e2348] [cursor=pointer]:
+                    - /url: /docs/components/featureshowcasesection
+                    - img [ref=e2349]
+              - generic [ref=e2352]:
+                - generic [ref=e2354]:
+                  - generic [ref=e2355]: Install
+                  - code [ref=e2357]: $ npm install
+                - generic [ref=e2358]:
+                  - generic [ref=e2359]: InstallSection
+                  - generic [ref=e2360]: 1v
+                  - link "InstallSection docs" [ref=e2361] [cursor=pointer]:
+                    - /url: /docs/components/installsection
+                    - img [ref=e2362]
+              - generic [ref=e2365]:
+                - generic [ref=e2368]: Brand Banner
+                - generic [ref=e2369]:
+                  - generic [ref=e2370]: GradientBannerSection
+                  - generic [ref=e2371]: 1v
+                  - link "GradientBannerSection docs" [ref=e2372] [cursor=pointer]:
+                    - /url: /docs/components/gradientbannersection
+                    - img [ref=e2373]
+              - generic [ref=e2376]:
+                - generic [ref=e2378]: Bordered copy|diagram rows
+                - generic [ref=e2379]:
+                  - generic [ref=e2380]: FeatureFrameSection
+                  - generic [ref=e2381]: 1v
+                  - link "FeatureFrameSection docs" [ref=e2382] [cursor=pointer]:
+                    - /url: /docs/components/featureframesection
+                    - img [ref=e2383]
+              - generic [ref=e2386]:
+                - generic [ref=e2388]: Staggered blueprint cards
+                - generic [ref=e2389]:
+                  - generic [ref=e2390]: BlueprintGridSection
+                  - generic [ref=e2391]: 1v
+                  - link "BlueprintGridSection docs" [ref=e2392] [cursor=pointer]:
+                    - /url: /docs/components/blueprintgridsection
+                    - img [ref=e2393]
+        - generic [ref=e2396]:
+          - generic [ref=e2397]:
+            - generic [ref=e2398]: Shapes
+            - generic [ref=e2399]: 6 components
+          - generic [ref=e2400]:
+            - img
+            - generic [ref=e2401]:
+              - generic [ref=e2405]:
+                - generic [ref=e2406]: Diamond
+                - generic [ref=e2407]: 2v
+                - link "Diamond docs" [ref=e2408] [cursor=pointer]:
+                  - /url: /docs/components/diamond
+                  - img [ref=e2409]
+              - generic [ref=e2415]:
+                - generic [ref=e2416]: Hexagon
+                - generic [ref=e2417]: 2v
+                - link "Hexagon docs" [ref=e2418] [cursor=pointer]:
+                  - /url: /docs/components/hexagon
+                  - img [ref=e2419]
+              - generic [ref=e2425]:
+                - generic [ref=e2426]: Triangle
+                - generic [ref=e2427]: 2v
+                - link "Triangle docs" [ref=e2428] [cursor=pointer]:
+                  - /url: /docs/components/triangle
+                  - img [ref=e2429]
+              - generic [ref=e2435]:
+                - generic [ref=e2436]: Diagonal
+                - generic [ref=e2437]: 1v
+                - link "Diagonal docs" [ref=e2438] [cursor=pointer]:
+                  - /url: /docs/components/diagonal
+                  - img [ref=e2439]
+              - generic [ref=e2442]:
+                - generic [ref=e2444]:
+                  - img [ref=e2445]
+                  - img [ref=e2447]
+                  - img [ref=e2449]
+                  - img [ref=e2451]
+                - generic [ref=e2453]:
+                  - generic [ref=e2454]: Shape
+                  - generic [ref=e2455]: 6v
+                  - link "Shape docs" [ref=e2456] [cursor=pointer]:
+                    - /url: /docs/components/shape
+                    - img [ref=e2457]
+              - generic [ref=e2460]:
+                - img [ref=e2462]
+                - generic [ref=e2463]:
+                  - generic [ref=e2464]: Cross
+                  - generic [ref=e2465]: 1v
+                  - link "Cross docs" [ref=e2466] [cursor=pointer]:
+                    - /url: /docs/components/cross
+                    - img [ref=e2467]
+        - generic [ref=e2470]:
+          - generic [ref=e2471]:
+            - generic [ref=e2472]: Patterns
+            - generic [ref=e2473]: 4 components
+          - generic [ref=e2474]:
+            - img
+            - generic [ref=e2475]:
+              - generic [ref=e2479]:
+                - generic [ref=e2480]: Pattern
+                - generic [ref=e2481]: 7v
+                - link "Pattern docs" [ref=e2482] [cursor=pointer]:
+                  - /url: /docs/components/pattern
+                  - img [ref=e2483]
+              - generic [ref=e2488]:
+                - generic [ref=e2489]: Tessellation
+                - generic [ref=e2490]: 7v
+                - link "Tessellation docs" [ref=e2491] [cursor=pointer]:
+                  - /url: /docs/components/tessellation
+                  - img [ref=e2492]
+              - generic [ref=e2510]:
+                - generic [ref=e2511]: SectionDivider
+                - generic [ref=e2512]: 6v
+                - link "SectionDivider docs" [ref=e2513] [cursor=pointer]:
+                  - /url: /docs/components/sectiondivider
+                  - img [ref=e2514]
+              - generic [ref=e2517]:
+                - generic [ref=e2519]:
+                  - generic:
+                    - img
+                - generic [ref=e2520]:
+                  - generic [ref=e2521]: Grain Gradient
+                  - generic [ref=e2522]: 4v
+                  - link "Grain Gradient docs" [ref=e2523] [cursor=pointer]:
+                    - /url: /docs/components/grain-gradient
+                    - img [ref=e2524]
+        - generic [ref=e2527]:
+          - generic [ref=e2528]:
+            - generic [ref=e2529]: 3D
+            - generic [ref=e2530]: 9 components
+          - generic [ref=e2531]:
+            - img
+            - generic [ref=e2532]:
+              - generic [ref=e2533]:
+                - generic [ref=e2539]: 3D
+                - generic [ref=e2545]:
+                  - generic [ref=e2546]: Box3D
+                  - generic [ref=e2547]: 2v
+                  - link "Box3D docs" [ref=e2548] [cursor=pointer]:
+                    - /url: /docs/components/box3d
+                    - img [ref=e2549]
+              - generic [ref=e2552]:
+                - generic [ref=e2555]: Tilt me
+                - generic [ref=e2556]:
+                  - generic [ref=e2557]: Card3D
+                  - generic [ref=e2558]: 1v
+                  - link "Card3D docs" [ref=e2559] [cursor=pointer]:
+                    - /url: /docs/components/card3d
+                    - img [ref=e2560]
+              - generic [ref=e2563]:
+                - generic [ref=e2565]:
+                  - generic [ref=e2567]: A
+                  - generic [ref=e2569]: B
+                - generic [ref=e2570]:
+                  - generic [ref=e2571]: FloatingUI
+                  - generic [ref=e2572]: 1v
+                  - link "FloatingUI docs" [ref=e2573] [cursor=pointer]:
+                    - /url: /docs/components/floatingui
+                    - img [ref=e2574]
+              - generic [ref=e2577]:
+                - generic [ref=e2581]: ISO
+                - generic [ref=e2582]:
+                  - generic [ref=e2583]: IsometricView
+                  - generic [ref=e2584]: 1v
+                  - link "IsometricView docs" [ref=e2585] [cursor=pointer]:
+                    - /url: /docs/components/isometricview
+                    - img [ref=e2586]
+              - generic [ref=e2589]:
+                - generic [ref=e2591]:
+                  - generic [ref=e2594]:
+                    - generic [ref=e2595]: UI
+                    - generic [ref=e2596]: Frontend
+                  - generic [ref=e2600]:
+                    - generic [ref=e2601]: API
+                    - generic [ref=e2602]: Backend
+                - generic [ref=e2603]:
+                  - generic [ref=e2604]: ExplodedView
+                  - generic [ref=e2605]: 1v
+                  - link "ExplodedView docs" [ref=e2606] [cursor=pointer]:
+                    - /url: /docs/components/explodedview
+                    - img [ref=e2607]
+              - generic [ref=e2610]:
+                - img [ref=e2612]
+                - generic [ref=e2616]:
+                  - generic [ref=e2617]: IsometricPrism
+                  - generic [ref=e2618]: 1v
+                  - link "IsometricPrism docs" [ref=e2619] [cursor=pointer]:
+                    - /url: /docs/components/isometricprism
+                    - img [ref=e2620]
+              - generic [ref=e2623]:
+                - img [ref=e2625]
+                - generic [ref=e2629]:
+                  - generic [ref=e2630]: IsometricCylinder
+                  - generic [ref=e2631]: 1v
+                  - link "IsometricCylinder docs" [ref=e2632] [cursor=pointer]:
+                    - /url: /docs/components/isometriccylinder
+                    - img [ref=e2633]
+              - generic [ref=e2636]:
+                - img [ref=e2639]
+                - generic [ref=e2643]:
+                  - generic [ref=e2644]: IsometricScene
+                  - generic [ref=e2645]: 1v
+                  - link "IsometricScene docs" [ref=e2646] [cursor=pointer]:
+                    - /url: /docs/components/isometricscene
+                    - img [ref=e2647]
+              - generic [ref=e2650]:
+                - generic [ref=e2652]: Grid of 3D boxes
+                - generic [ref=e2653]:
+                  - generic [ref=e2654]: Box3DGrid
+                  - generic [ref=e2655]: 1v
+                  - link "Box3DGrid docs" [ref=e2656] [cursor=pointer]:
+                    - /url: /docs/components/box3dgrid
+                    - img [ref=e2657]
+        - generic [ref=e2660]:
+          - generic [ref=e2661]:
+            - generic [ref=e2662]: Diagrams
+            - generic [ref=e2663]: 22 components
+          - generic [ref=e2664]:
+            - img
+            - generic [ref=e2665]:
+              - generic [ref=e2666]:
+                - generic [ref=e2669]:
+                  - generic [ref=e2670]: A
+                  - generic [ref=e2671]: B
+                  - generic [ref=e2672]: C
+                - generic [ref=e2673]:
+                  - generic [ref=e2674]: Diagram
+                  - generic [ref=e2675]: 1v
+                  - link "Diagram docs" [ref=e2676] [cursor=pointer]:
+                    - /url: /docs/components/diagram
+                    - img [ref=e2677]
+              - generic [ref=e2680]:
+                - generic [ref=e2682]:
+                  - generic [ref=e2683]:
+                    - generic [ref=e2685]: Start
+                    - img [ref=e2686]
+                  - generic [ref=e2690]: End
+                - generic [ref=e2691]:
+                  - generic [ref=e2692]: FlowDiagram
+                  - generic [ref=e2693]: 1v
+                  - link "FlowDiagram docs" [ref=e2694] [cursor=pointer]:
+                    - /url: /docs/components/flowdiagram
+                    - img [ref=e2695]
+              - generic [ref=e2698]:
+                - generic [ref=e2701]:
+                  - generic [ref=e2703]:
+                    - generic [ref=e2704]: UI
+                    - generic [ref=e2705]: React
+                  - generic [ref=e2707]:
+                    - generic [ref=e2708]: API
+                    - generic [ref=e2709]: REST
+                - generic [ref=e2710]:
+                  - generic [ref=e2711]: ArchitectureDiagram
+                  - generic [ref=e2712]: 1v
+                  - link "ArchitectureDiagram docs" [ref=e2713] [cursor=pointer]:
+                    - /url: /docs/components/architecturediagram
+                    - img [ref=e2714]
+              - generic [ref=e2717]:
+                - generic [ref=e2719]:
+                  - generic [ref=e2722]: Default
+                  - generic [ref=e2725]: Accent
+                  - generic [ref=e2728]: Muted
+                - generic [ref=e2729]:
+                  - generic [ref=e2730]: DiagramNode
+                  - generic [ref=e2731]: 4v
+                  - link "DiagramNode docs" [ref=e2732] [cursor=pointer]:
+                    - /url: /docs/components/diagramnode
+                    - img [ref=e2733]
+              - generic [ref=e2736]:
+                - generic [ref=e2738]:
+                  - generic [ref=e2739]: A
+                  - img [ref=e2740]
+                  - generic [ref=e2742]: B
+                - generic [ref=e2743]:
+                  - generic [ref=e2744]: DiagramConnector
+                  - generic [ref=e2745]: 3v
+                  - link "DiagramConnector docs" [ref=e2746] [cursor=pointer]:
+                    - /url: /docs/components/diagramconnector
+                    - img [ref=e2747]
+              - generic [ref=e2750]:
+                - generic [ref=e2752]:
+                  - generic [ref=e2756]: Auth
+                  - generic [ref=e2760]: Error
+                  - generic [ref=e2764]: API
+                - generic [ref=e2765]:
+                  - generic [ref=e2766]: DiagramLabel
+                  - generic [ref=e2767]: 3v
+                  - link "DiagramLabel docs" [ref=e2768] [cursor=pointer]:
+                    - /url: /docs/components/diagramlabel
+                    - img [ref=e2769]
+              - generic [ref=e2776]:
+                - generic [ref=e2777]: CrossHatch
+                - generic [ref=e2778]: 1v
+                - link "CrossHatch docs" [ref=e2779] [cursor=pointer]:
+                  - /url: /docs/components/crosshatch
+                  - img [ref=e2780]
+              - generic [ref=e2783]:
+                - generic [ref=e2785]:
+                  - generic [ref=e2786]:
+                    - generic [ref=e2789]: Auth
+                    - img [ref=e2790]
+                  - generic [ref=e2792]:
+                    - generic [ref=e2795]: Route
+                    - img [ref=e2796]
+                  - generic [ref=e2801]: Run
+                - generic [ref=e2802]:
+                  - generic [ref=e2803]: PipelineDiagram
+                  - generic [ref=e2804]: 2v
+                  - link "PipelineDiagram docs" [ref=e2805] [cursor=pointer]:
+                    - /url: /docs/components/pipelinediagram
+                    - img [ref=e2806]
+              - generic [ref=e2809]:
+                - generic [ref=e2812]:
+                  - generic [ref=e2813]:
+                    - generic [ref=e2815]: UI
+                    - generic [ref=e2817]: UI layer
+                  - generic [ref=e2818]:
+                    - generic [ref=e2820]: API
+                    - generic [ref=e2822]: API layer
+                  - generic [ref=e2823]:
+                    - generic [ref=e2825]: DB
+                    - generic [ref=e2827]: DB layer
+                - generic [ref=e2828]:
+                  - generic [ref=e2829]: StackDiagram
+                  - generic [ref=e2830]: 2v
+                  - link "StackDiagram docs" [ref=e2831] [cursor=pointer]:
+                    - /url: /docs/components/stackdiagram
+                    - img [ref=e2832]
+              - generic [ref=e2835]:
+                - generic [ref=e2837]: Hub + spoke layout
+                - generic [ref=e2838]:
+                  - generic [ref=e2839]: HubSpokeDiagram
+                  - generic [ref=e2840]: 1v
+                  - link "HubSpokeDiagram docs" [ref=e2841] [cursor=pointer]:
+                    - /url: /docs/components/hubspokediagram
+                    - img [ref=e2842]
+              - generic [ref=e2845]:
+                - generic [ref=e2847]:
+                  - generic [ref=e2848]:
+                    - generic [ref=e2849]:
+                      - img [ref=e2850]
+                      - generic [ref=e2853]: Without
+                    - generic [ref=e2855]: Messy
+                  - generic [ref=e2856]:
+                    - generic [ref=e2857]:
+                      - img [ref=e2858]
+                      - generic [ref=e2861]: With
+                    - generic [ref=e2863]: Clean
+                - generic [ref=e2864]:
+                  - generic [ref=e2865]: BeforeAfterDiagram
+                  - generic [ref=e2866]: 1v
+                  - link "BeforeAfterDiagram docs" [ref=e2867] [cursor=pointer]:
+                    - /url: /docs/components/beforeafterdiagram
+                    - img [ref=e2868]
+              - generic [ref=e2871]:
+                - generic [ref=e2873]: Radial ecosystem map
+                - generic [ref=e2874]:
+                  - generic [ref=e2875]: EcosystemDiagram
+                  - generic [ref=e2876]: 1v
+                  - link "EcosystemDiagram docs" [ref=e2877] [cursor=pointer]:
+                    - /url: /docs/components/ecosystemdiagram
+                    - img [ref=e2878]
+              - generic [ref=e2881]:
+                - img [ref=e2883]:
+                  - generic [ref=e3031]: NYC
+                  - generic [ref=e3035]: LON
+                - generic [ref=e3036]:
+                  - generic [ref=e3037]: GlobeDiagram
+                  - generic [ref=e3038]: 1v
+                  - link "GlobeDiagram docs" [ref=e3039] [cursor=pointer]:
+                    - /url: /docs/components/globediagram
+                    - img [ref=e3040]
+              - generic [ref=e3043]:
+                - generic [ref=e3045]: Orbit animation
+                - generic [ref=e3046]:
+                  - generic [ref=e3047]: OrbitDiagram
+                  - generic [ref=e3048]: 1v
+                  - link "OrbitDiagram docs" [ref=e3049] [cursor=pointer]:
+                    - /url: /docs/components/orbitdiagram
+                    - img [ref=e3050]
+              - generic [ref=e3053]:
+                - generic [ref=e3056]:
+                  - generic [ref=e3057]: LLM
+                  - img [ref=e3058]
+                  - generic [ref=e3060]:
+                    - generic [ref=e3061]: Hello
+                    - generic [ref=e3062]: World
+                - generic [ref=e3063]:
+                  - generic [ref=e3064]: StreamFlowDiagram
+                  - generic [ref=e3065]: 1v
+                  - link "StreamFlowDiagram docs" [ref=e3066] [cursor=pointer]:
+                    - /url: /docs/components/streamflowdiagram
+                    - img [ref=e3067]
+              - generic [ref=e3070]:
+                - img [ref=e3072]:
+                  - generic [ref=e3077]: App
+                  - generic [ref=e3083]: API
+                  - generic [ref=e3088]: Infra
+                - generic [ref=e3089]:
+                  - generic [ref=e3090]: IsometricStackDiagram
+                  - generic [ref=e3091]: 1v
+                  - link "IsometricStackDiagram docs" [ref=e3092] [cursor=pointer]:
+                    - /url: /docs/components/isometricstackdiagram
+                    - img [ref=e3093]
+              - generic [ref=e3096]:
+                - generic [ref=e3098]:
+                  - img [ref=e3099]
+                  - img [ref=e3108]
+                  - img [ref=e3116]
+                  - img [ref=e3123]
+                - generic [ref=e3140]:
+                  - generic [ref=e3141]: FeatureMiniDiagram
+                  - generic [ref=e3142]: 4v
+                  - link "FeatureMiniDiagram docs" [ref=e3143] [cursor=pointer]:
+                    - /url: /docs/components/featureminidiagram
+                    - img [ref=e3144]
+              - generic [ref=e3147]:
+                - img [ref=e3149]:
+                  - generic [ref=e3156]: A
+                  - generic [ref=e3159]: B
+                  - generic [ref=e3162]: X
+                  - generic [ref=e3165]: "Y"
+                - generic [ref=e3166]:
+                  - generic [ref=e3167]: SankeyDiagram
+                  - generic [ref=e3168]: 1v
+                  - link "SankeyDiagram docs" [ref=e3169] [cursor=pointer]:
+                    - /url: /docs/components/sankeydiagram
+                    - img [ref=e3170]
+              - generic [ref=e3173]:
+                - generic [ref=e3175]:
+                  - generic [ref=e3176]:
+                    - generic [ref=e3177]:
+                      - generic [ref=e3178]: Traditional
+                      - generic [ref=e3179]: 2.0s
+                    - generic [ref=e3181]:
+                      - generic:
+                        - generic: Pull
+                      - generic:
+                        - generic: Start
+                      - generic:
+                        - generic: Install
+                  - generic [ref=e3182]:
+                    - generic [ref=e3183]:
+                      - generic [ref=e3184]: Sigil
+                      - generic [ref=e3185]: 50ms
+                    - generic [ref=e3187]:
+                      - generic:
+                        - generic: Restore
+                  - generic [ref=e3189]: ~40x faster
+                - generic [ref=e3190]:
+                  - generic [ref=e3191]: WaterfallChart
+                  - generic [ref=e3192]: 1v
+                  - link "WaterfallChart docs" [ref=e3193] [cursor=pointer]:
+                    - /url: /docs/components/waterfallchart
+                    - img [ref=e3194]
+              - generic [ref=e3197]:
+                - generic [ref=e3199]:
+                  - generic [ref=e3200]:
+                    - generic [ref=e3202]: Runtimes
+                    - generic [ref=e3204]:
+                      - generic [ref=e3207]: Node
+                      - generic [ref=e3210]: Python
+                      - generic [ref=e3213]: Rust
+                  - generic [ref=e3214]:
+                    - generic [ref=e3216]: System
+                    - generic [ref=e3218]:
+                      - generic [ref=e3221]: Root
+                      - generic [ref=e3224]: GPU
+                - generic [ref=e3225]:
+                  - generic [ref=e3226]: CapabilityGrid
+                  - generic [ref=e3227]: 1v
+                  - link "CapabilityGrid docs" [ref=e3228] [cursor=pointer]:
+                    - /url: /docs/components/capabilitygrid
+                    - img [ref=e3229]
+              - generic [ref=e3232]:
+                - generic [ref=e3235]:
+                  - generic [ref=e3237]: Isolation model
+                  - generic [ref=e3239]:
+                    - generic [ref=e3241]: Hardware
+                    - generic [ref=e3243]: Kernel
+                    - generic [ref=e3245]: VM
+                - generic [ref=e3246]:
+                  - generic [ref=e3247]: IsolationStack
+                  - generic [ref=e3248]: 1v
+                  - link "IsolationStack docs" [ref=e3249] [cursor=pointer]:
+                    - /url: /docs/components/isolationstack
+                    - img [ref=e3250]
+              - generic [ref=e3253]:
+                - generic [ref=e3256]:
+                  - generic [ref=e3258]: Status
+                  - generic [ref=e3260]:
+                    - generic [ref=e3266]: Active
+                    - generic [ref=e3268]: Free
+                  - generic [ref=e3270]:
+                    - generic [ref=e3273]: competitor-a
+                    - generic [ref=e3274]: $0.09/hr
+                - generic [ref=e3275]:
+                  - generic [ref=e3276]: StatePersistence
+                  - generic [ref=e3277]: 1v
+                  - link "StatePersistence docs" [ref=e3278] [cursor=pointer]:
+                    - /url: /docs/components/statepersistence
+                    - img [ref=e3279]
+        - generic [ref=e3282]:
+          - generic [ref=e3283]:
+            - generic [ref=e3284]: Animation
+            - generic [ref=e3285]: 18 components
+          - generic [ref=e3286]:
+            - img
+            - generic [ref=e3287]:
+              - generic [ref=e3288]:
+                - generic [ref=e3291]: Fade up on scroll
+                - generic [ref=e3292]:
+                  - generic [ref=e3293]: AnimateOnScroll
+                  - generic [ref=e3294]: 1v
+                  - link "AnimateOnScroll docs" [ref=e3295] [cursor=pointer]:
+                    - /url: /docs/components/animateonscroll
+                    - img [ref=e3296]
+              - generic [ref=e3299]:
+                - generic [ref=e3302]: Fade up
+                - generic [ref=e3303]:
+                  - generic [ref=e3304]: FadeIn
+                  - generic [ref=e3305]: 5v
+                  - link "FadeIn docs" [ref=e3306] [cursor=pointer]:
+                    - /url: /docs/components/fadein
+                    - img [ref=e3307]
+              - generic [ref=e3310]:
+                - generic [ref=e3313]: Slide from left
+                - generic [ref=e3314]:
+                  - generic [ref=e3315]: SlideIn
+                  - generic [ref=e3316]: 4v
+                  - link "SlideIn docs" [ref=e3317] [cursor=pointer]:
+                    - /url: /docs/components/slidein
+                    - img [ref=e3318]
+              - generic [ref=e3321]:
+                - generic [ref=e3324]: Scale in
+                - generic [ref=e3325]:
+                  - generic [ref=e3326]: ScaleIn
+                  - generic [ref=e3327]: 1v
+                  - link "ScaleIn docs" [ref=e3328] [cursor=pointer]:
+                    - /url: /docs/components/scalein
+                    - img [ref=e3329]
+              - generic [ref=e3332]:
+                - generic [ref=e3335]: Blur + fade
+                - generic [ref=e3336]:
+                  - generic [ref=e3337]: BlurFade
+                  - generic [ref=e3338]: 1v
+                  - link "BlurFade docs" [ref=e3339] [cursor=pointer]:
+                    - /url: /docs/components/blurfade
+                    - img [ref=e3340]
+              - generic [ref=e3343]:
+                - generic [ref=e3345]:
+                  - generic [ref=e3346]: One
+                  - generic [ref=e3347]: Two
+                  - generic [ref=e3348]: Three
+                - generic [ref=e3349]:
+                  - generic [ref=e3350]: Stagger
+                  - generic [ref=e3351]: 1v
+                  - link "Stagger docs" [ref=e3352] [cursor=pointer]:
+                    - /url: /docs/components/stagger
+                    - img [ref=e3353]
+              - generic [ref=e3356]:
+                - generic [ref=e3359]: Blur in on mount
+                - generic [ref=e3360]:
+                  - generic [ref=e3361]: AnimateOnMount
+                  - generic [ref=e3362]: 7v
+                  - link "AnimateOnMount docs" [ref=e3363] [cursor=pointer]:
+                    - /url: /docs/components/animateonmount
+                    - img [ref=e3364]
+              - generic [ref=e3367]:
+                - generic "Token-driven animation suite" [ref=e3369]:
+                  - generic [ref=e3370]: Token-driven
+                  - generic [ref=e3371]: animation
+                  - generic [ref=e3372]: suite
+                - generic [ref=e3373]:
+                  - generic [ref=e3374]: TextReveal
+                  - generic [ref=e3375]: 2v
+                  - link "TextReveal docs" [ref=e3376] [cursor=pointer]:
+                    - /url: /docs/components/textreveal
+                    - img [ref=e3377]
+              - generic [ref=e3380]:
+                - generic "Sigil UI" [ref=e3382]:
+                  - generic [ref=e3383]:
+                    - generic [ref=e3384]: S
+                    - generic [ref=e3385]: i
+                    - generic [ref=e3386]: g
+                    - generic [ref=e3387]: i
+                    - generic [ref=e3388]: l
+                  - generic [ref=e3390]:
+                    - generic [ref=e3391]: U
+                    - generic [ref=e3392]: I
+                - generic [ref=e3393]:
+                  - generic [ref=e3394]: LetterPullUp
+                  - generic [ref=e3395]: 1v
+                  - link "LetterPullUp docs" [ref=e3396] [cursor=pointer]:
+                    - /url: /docs/components/letterpullup
+                    - img [ref=e3397]
+              - generic [ref=e3400]:
+                - generic [ref=e3402]:
+                  - text: Build with
+                  - generic [ref=e3404]: speed
+                - generic [ref=e3405]:
+                  - generic [ref=e3406]: WordRotate
+                  - generic [ref=e3407]: 1v
+                  - link "WordRotate docs" [ref=e3408] [cursor=pointer]:
+                    - /url: /docs/components/wordrotate
+                    - img [ref=e3409]
+              - generic [ref=e3412]:
+                - generic "npx sigil init" [ref=e3414]
+                - generic [ref=e3416]:
+                  - generic [ref=e3417]: TypeWriter
+                  - generic [ref=e3418]: 1v
+                  - link "TypeWriter docs" [ref=e3419] [cursor=pointer]:
+                    - /url: /docs/components/typewriter
+                    - img [ref=e3420]
+              - generic [ref=e3423]:
+                - generic [ref=e3425]:
+                  - text: "0"
+                  - generic [ref=e3426]: tokens
+                - generic [ref=e3427]:
+                  - generic [ref=e3428]: NumberTicker
+                  - generic [ref=e3429]: 1v
+                  - link "NumberTicker docs" [ref=e3430] [cursor=pointer]:
+                    - /url: /docs/components/numberticker
+                    - img [ref=e3431]
+              - generic [ref=e3434]:
+                - generic [ref=e3436]: Sigil UI
+                - generic [ref=e3437]:
+                  - generic [ref=e3438]: GradientText
+                  - generic [ref=e3439]: 1v
+                  - link "GradientText docs" [ref=e3440] [cursor=pointer]:
+                    - /url: /docs/components/gradienttext
+                    - img [ref=e3441]
+              - generic [ref=e3444]:
+                - generic [ref=e3448]: 60% scrolled
+                - generic [ref=e3449]:
+                  - generic [ref=e3450]: ScrollProgress
+                  - generic [ref=e3451]: 1v
+                  - link "ScrollProgress docs" [ref=e3452] [cursor=pointer]:
+                    - /url: /docs/components/scrollprogress
+                    - img [ref=e3453]
+              - generic [ref=e3456]:
+                - generic [ref=e3459]:
+                  - generic [ref=e3460]:
+                    - generic [ref=e3461]: React
+                    - generic [ref=e3462]: Tokens
+                    - generic [ref=e3463]: Presets
+                    - generic [ref=e3464]: OKLCH
+                    - generic [ref=e3465]: Tailwind
+                    - generic [ref=e3466]: Radix
+                  - generic [ref=e3467]:
+                    - generic [ref=e3468]: React
+                    - generic [ref=e3469]: Tokens
+                    - generic [ref=e3470]: Presets
+                    - generic [ref=e3471]: OKLCH
+                    - generic [ref=e3472]: Tailwind
+                    - generic [ref=e3473]: Radix
+                - generic [ref=e3474]:
+                  - generic [ref=e3475]: Marquee
+                  - generic [ref=e3476]: 4v
+                  - link "Marquee docs" [ref=e3477] [cursor=pointer]:
+                    - /url: /docs/components/marquee
+                    - img [ref=e3478]
+              - generic [ref=e3483]:
+                - generic [ref=e3484]: Ripple
+                - generic [ref=e3485]: 1v
+                - link "Ripple docs" [ref=e3486] [cursor=pointer]:
+                  - /url: /docs/components/ripple
+                  - img [ref=e3487]
+              - generic [ref=e3490]:
+                - img [ref=e3494]
+                - generic [ref=e3496]:
+                  - generic [ref=e3497]: Pulse
+                  - generic [ref=e3498]: 1v
+                  - link "Pulse docs" [ref=e3499] [cursor=pointer]:
+                    - /url: /docs/components/pulse
+                    - img [ref=e3500]
+              - generic [ref=e3503]:
+                - generic [ref=e3505]: Parallax offset on scroll
+                - generic [ref=e3506]:
+                  - generic [ref=e3507]: ParallaxLayer
+                  - generic [ref=e3508]: 1v
+                  - link "ParallaxLayer docs" [ref=e3509] [cursor=pointer]:
+                    - /url: /docs/components/parallaxlayer
+                    - img [ref=e3510]
+        - generic [ref=e3513]:
+          - generic [ref=e3514]:
+            - generic [ref=e3515]: Playbook
+            - generic [ref=e3516]: 8 components
+          - generic [ref=e3517]:
+            - img
+            - generic [ref=e3518]:
+              - generic [ref=e3519]:
+                - generic [ref=e3521]:
+                  - generic [ref=e3523]: Cell 1
+                  - generic [ref=e3525]: Cell 2
+                  - generic [ref=e3527]: Cell 3
+                  - generic [ref=e3529]: Cell 4
+                  - generic [ref=e3531]: Cell 5
+                  - generic [ref=e3533]: Cell 6
+                - generic [ref=e3534]:
+                  - generic [ref=e3535]: GapPixelGrid
+                  - generic [ref=e3536]: 2v
+                  - link "GapPixelGrid docs" [ref=e3537] [cursor=pointer]:
+                    - /url: /docs/components/gappixelgrid
+                    - img [ref=e3538]
+              - generic [ref=e3541]:
+                - generic [ref=e3543]:
+                  - generic [ref=e3544]: Infrastructure
+                  - generic [ref=e3545]: FAQ
+                  - generic [ref=e3546]: Ships Immediately
+                - generic [ref=e3547]:
+                  - generic [ref=e3548]: MonoLabel
+                  - generic [ref=e3549]: 3v
+                  - link "MonoLabel docs" [ref=e3550] [cursor=pointer]:
+                    - /url: /docs/components/monolabel
+                    - img [ref=e3551]
+              - generic [ref=e3554]:
+                - generic [ref=e3556]:
+                  - generic [ref=e3558]: Nav
+                  - generic [ref=e3560]: Hero
+                  - generic [ref=e3562]: Features
+                  - generic [ref=e3564]: Footer
+                - generic [ref=e3565]:
+                  - generic [ref=e3566]: BorderStack
+                  - generic [ref=e3567]: 2v
+                  - link "BorderStack docs" [ref=e3568] [cursor=pointer]:
+                    - /url: /docs/components/borderstack
+                    - img [ref=e3569]
+              - generic [ref=e3572]:
+                - generic [ref=e3574]:
+                  - button "Get Started" [ref=e3575] [cursor=pointer]
+                  - button "Docs" [ref=e3576] [cursor=pointer]
+                - generic [ref=e3577]:
+                  - generic [ref=e3578]: AccentCTA
+                  - generic [ref=e3579]: 3v
+                  - link "AccentCTA docs" [ref=e3580] [cursor=pointer]:
+                    - /url: /docs/components/accentcta
+                    - img [ref=e3581]
+              - generic [ref=e3584]:
+                - generic [ref=e3586]:
+                  - generic [ref=e3587]:
+                    - generic [ref=e3588]: Revenue
+                    - generic [ref=e3589]: $24,800.00
+                  - generic [ref=e3590]:
+                    - generic [ref=e3591]: Users
+                    - generic [ref=e3592]: 1,247
+                  - generic [ref=e3593]:
+                    - generic [ref=e3594]: Uptime
+                    - generic [ref=e3595]: 99.98%
+                - generic [ref=e3596]:
+                  - generic [ref=e3597]: TabularValue
+                  - generic [ref=e3598]: 5v
+                  - link "TabularValue docs" [ref=e3599] [cursor=pointer]:
+                    - /url: /docs/components/tabularvalue
+                    - img [ref=e3600]
+              - generic [ref=e3603]:
+                - generic [ref=e3605]:
+                  - generic [ref=e3606]: Chrome · 10px
+                  - generic [ref=e3607]: Counter · 11px
+                  - generic [ref=e3608]: Detail · 12px
+                  - generic [ref=e3609]: Nav · 13px
+                  - generic [ref=e3610]: Body · 14px
+                  - generic [ref=e3611]: Base · 16px
+                - generic [ref=e3612]:
+                  - generic [ref=e3613]: DensityText
+                  - generic [ref=e3614]: 7v
+                  - link "DensityText docs" [ref=e3615] [cursor=pointer]:
+                    - /url: /docs/components/densitytext
+                    - img [ref=e3616]
+              - generic [ref=e3619]:
+                - generic [ref=e3621]:
+                  - generic [ref=e3623]: Frosted
+                  - generic [ref=e3625]: Solid
+                - generic [ref=e3626]:
+                  - generic [ref=e3627]: FrostedPanel
+                  - generic [ref=e3628]: 2v
+                  - link "FrostedPanel docs" [ref=e3629] [cursor=pointer]:
+                    - /url: /docs/components/frostedpanel
+                    - img [ref=e3630]
+              - generic [ref=e3633]:
+                - generic [ref=e3635]:
+                  - generic [ref=e3636]:
+                    - heading "Edge Compute" [level=3] [ref=e3637]
+                    - generic [ref=e3638]: Deploy at the edge with sub-50ms cold starts.
+                  - generic [ref=e3640]: 12 regions
+                - generic [ref=e3641]:
+                  - generic [ref=e3642]: CardCell
+                  - generic [ref=e3643]: 1v
+                  - link "CardCell docs" [ref=e3644] [cursor=pointer]:
+                    - /url: /docs/components/cardcell
+                    - img [ref=e3645]
+    - generic [ref=e3654]:
+      - generic [ref=e3655]:
+        - generic [ref=e3656]: HOW TOKENS FLOW
+        - heading "Every component reads from tokens." [level=2] [ref=e3657]
+        - paragraph [ref=e3658]: Colors, radius, shadows, motion, typography — all resolved at runtime from CSS custom properties. Change a token, every consumer updates. No imports, no build step, no prop drilling.
+      - generic [ref=e3660]:
+        - generic [ref=e3662]:
+          - img:
+            - generic:
+              - generic: fill
+              - generic: "--s-primary"
+            - generic:
+              - generic: radius
+              - generic: "--s-radius-md"
+            - generic:
+              - generic: font
+              - generic: "--s-font-mono"
+            - generic:
+              - generic: speed
+              - generic: "--s-duration-fast"
+          - generic [ref=e3663]:
+            - button "Get Started" [ref=e3664] [cursor=pointer]
+            - generic [ref=e3666]: New
+        - generic [ref=e3668]:
+          - generic [ref=e3669]: TOKEN CONSUMPTION
+          - generic [ref=e3670]:
+            - generic [ref=e3671]:
+              - generic [ref=e3672]: FILL COLOR
+              - generic [ref=e3673]:
+                - generic [ref=e3674]: "--s-primary"
+                - generic [ref=e3675]: oklch(0.7 0.15 280)
+            - generic [ref=e3676]:
+              - generic [ref=e3677]: TEXT COLOR
+              - generic [ref=e3678]:
+                - generic [ref=e3679]: "--s-primary-contrast"
+                - generic [ref=e3680]: "#fff"
+            - generic [ref=e3681]:
+              - generic [ref=e3682]: CORNER RADIUS
+              - generic [ref=e3683]:
+                - generic [ref=e3684]: "--s-radius-md"
+                - generic [ref=e3685]: 6px
+            - generic [ref=e3686]:
+              - generic [ref=e3687]: FONT FAMILY
+              - generic [ref=e3688]:
+                - generic [ref=e3689]: "--s-font-mono"
+                - generic [ref=e3690]: "\"Roboto Mono\""
+            - generic [ref=e3691]:
+              - generic [ref=e3692]: TRANSITION
+              - generic [ref=e3693]:
+                - generic [ref=e3694]: "--s-duration-fast"
+                - generic [ref=e3695]: 150ms
+            - generic [ref=e3696]:
+              - generic [ref=e3697]: SHADOW
+              - generic [ref=e3698]:
+                - generic [ref=e3699]: "--s-shadow-sm"
+                - generic [ref=e3700]: 0 1px 2px...
+    - generic [ref=e3707]:
+      - generic [ref=e3708]:
+        - generic [ref=e3709]: WHY TOKENS
+        - heading "Build with tokens, not overrides." [level=2] [ref=e3710]
+      - generic [ref=e3711]:
+        - generic [ref=e3712]:
+          - generic [ref=e3713]:
+            - heading "No hardcoded values" [level=3] [ref=e3714]
+            - generic [ref=e3715]: Components read var(--s-*) tokens for every visual property — colors, spacing, radius, shadows. Never hex codes, never magic numbers.
+          - generic [ref=e3717]: var(--s-*)
+        - generic [ref=e3718]:
+          - generic [ref=e3719]:
+            - heading "One preset, everything updates" [level=3] [ref=e3720]
+            - generic [ref=e3721]: Switch presets and all 100+ components change simultaneously. One command, zero prop drilling, zero theme objects.
+          - generic [ref=e3723]: var(--s-*)
+        - generic [ref=e3724]:
+          - generic [ref=e3725]:
+            - heading "Agent-friendly" [level=3] [ref=e3726]
+            - generic [ref=e3727]: AI agents edit tokens.md — a single markdown file. Components respond deterministically. No ambiguity, no hunting through files.
+          - generic [ref=e3729]: var(--s-*)
+      - generic [ref=e3730]:
+        - link "Get Started" [ref=e3731] [cursor=pointer]:
+          - /url: /docs
+        - link "Read the Docs" [ref=e3732] [cursor=pointer]:
+          - /url: /docs/theming
+    - contentinfo [ref=e3733]:
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic:
+        - img
+      - generic [ref=e3734]:
+        - generic [ref=e3735]:
+          - generic [ref=e3736]:
+            - img [ref=e3737]
+            - generic [ref=e3742]: Sigil UI
+          - paragraph [ref=e3743]: The token-driven design system. 100+ components, 32 presets, one markdown file controls everything.
+          - generic [ref=e3744]:
+            - link "GitHub" [ref=e3745] [cursor=pointer]:
+              - /url: https://github.com/Kevin-Liu-01/sigil-ui
+              - img [ref=e3746]
+            - link "X" [ref=e3748] [cursor=pointer]:
+              - /url: https://x.com/kevinliu_01
+              - img [ref=e3749]
+            - link "LinkedIn" [ref=e3751] [cursor=pointer]:
+              - /url: https://linkedin.com/in/kevinliu01
+              - img [ref=e3752]
+            - link "Discord" [ref=e3754] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e3755]
+        - generic [ref=e3757]:
+          - generic [ref=e3758]: Product
+          - generic [ref=e3759]:
+            - link "Docs" [ref=e3760] [cursor=pointer]:
+              - /url: /docs
+            - link "Components" [ref=e3761] [cursor=pointer]:
+              - /url: /docs/components/button
+            - link "Presets" [ref=e3762] [cursor=pointer]:
+              - /url: /docs/presets
+            - link "Sandbox" [ref=e3763] [cursor=pointer]:
+              - /url: /sandbox
+        - generic [ref=e3764]:
+          - generic [ref=e3765]: Community
+          - generic [ref=e3766]:
+            - link "GitHub" [ref=e3767] [cursor=pointer]:
+              - /url: https://github.com/Kevin-Liu-01/sigil-ui
+            - link "npm" [ref=e3768] [cursor=pointer]:
+              - /url: https://www.npmjs.com/package/@sigil-ui/components
+            - link "Discord" [ref=e3769] [cursor=pointer]:
+              - /url: "#"
+        - generic [ref=e3770]:
+          - generic [ref=e3771]: Resources
+          - generic [ref=e3772]:
+            - link "Walkthrough" [ref=e3773] [cursor=pointer]:
+              - /url: /walkthrough
+            - link "Token Guide" [ref=e3774] [cursor=pointer]:
+              - /url: /docs/theming
+            - link "Preset API" [ref=e3775] [cursor=pointer]:
+              - /url: /docs/cli
+            - link "Agent Integration" [ref=e3776] [cursor=pointer]:
+              - /url: /docs
+        - generic [ref=e3777]:
+          - generic [ref=e3778]: Company
+          - generic [ref=e3779]:
+            - link "Manifesto" [ref=e3780] [cursor=pointer]:
+              - /url: /manifesto
+            - link "About" [ref=e3781] [cursor=pointer]:
+              - /url: /about
+            - link "Blog" [ref=e3782] [cursor=pointer]:
+              - /url: /blog
+            - link "Contact" [ref=e3783] [cursor=pointer]:
+              - /url: mailto:hello@sigil-ui.dev
+      - generic [ref=e3784]:
+        - generic [ref=e3785]: © 2026 Sigil UI. MIT License.
+        - generic [ref=e3786]:
+          - text: Built by
+          - link "Kevin Liu" [ref=e3787] [cursor=pointer]:
+            - /url: https://kevinliu.me
+  - generic [ref=e3792]:
+    - button "Studio" [ref=e3793] [cursor=pointer]:
+      - img [ref=e3794]
+      - generic [ref=e3796]: Studio
+    - generic [ref=e3798]:
+      - button "default" [ref=e3799] [cursor=pointer]: default
+      - button "sigil" [ref=e3801] [cursor=pointer]: sigil
+      - button "crux" [ref=e3803] [cursor=pointer]: crux
+      - button "alloy" [ref=e3805] [cursor=pointer]: alloy
+      - button "basalt" [ref=e3807] [cursor=pointer]: basalt
+      - button "forge" [ref=e3809] [cursor=pointer]: forge
+      - button "onyx" [ref=e3811] [cursor=pointer]: onyx
+      - button "flux" [ref=e3813] [cursor=pointer]: flux
+      - button "kova" [ref=e3815] [cursor=pointer]: kova
+      - button "etch" [ref=e3817] [cursor=pointer]: etch
+      - button "anvil" [ref=e3819] [cursor=pointer]: anvil
+      - button "rivet" [ref=e3821] [cursor=pointer]: rivet
+      - button "shard" [ref=e3823] [cursor=pointer]: shard
+      - button "rune" [ref=e3825] [cursor=pointer]: rune
+      - button "fang" [ref=e3827] [cursor=pointer]: fang
+      - button "cobalt" [ref=e3829] [cursor=pointer]: cobalt
+      - button "strata" [ref=e3831] [cursor=pointer]: strata
+      - button "brass" [ref=e3833] [cursor=pointer]: brass
+      - button "obsid" [ref=e3835] [cursor=pointer]: obsid
+      - button "axiom" [ref=e3837] [cursor=pointer]: axiom
+      - button "glyph" [ref=e3839] [cursor=pointer]: glyph
+      - button "cipher" [ref=e3841] [cursor=pointer]: cipher
+      - button "prism" [ref=e3843] [cursor=pointer]: prism
+      - button "helix" [ref=e3845] [cursor=pointer]: helix
+      - button "hex" [ref=e3847] [cursor=pointer]: hex
+      - button "vex" [ref=e3849] [cursor=pointer]: vex
+      - button "arc" [ref=e3851] [cursor=pointer]: arc
+      - button "dsgn" [ref=e3853] [cursor=pointer]: dsgn
+      - button "mrkr" [ref=e3855] [cursor=pointer]: mrkr
+      - button "noir" [ref=e3857] [cursor=pointer]: noir
+      - button "dusk" [ref=e3859] [cursor=pointer]: dusk
+      - button "mono" [ref=e3861] [cursor=pointer]: mono
+      - button "vast" [ref=e3863] [cursor=pointer]: vast
+      - button "aura" [ref=e3865] [cursor=pointer]: aura
+      - button "field" [ref=e3867] [cursor=pointer]: field
+    - generic [ref=e3870]:
+      - button [ref=e3871] [cursor=pointer]:
+        - img [ref=e3872]
+      - button "Canvas" [ref=e3879] [cursor=pointer]:
+        - img [ref=e3880]
+        - generic [ref=e3882]: Canvas
+      - button [ref=e3884] [cursor=pointer]:
+        - img [ref=e3885]
+  - generic [ref=e3890]:
+    - generic [ref=e3891]:
+      - generic [ref=e3892]:
+        - img [ref=e3893]
+        - generic [ref=e3895]: Studio
+        - generic [ref=e3896]: default
+      - generic [ref=e3897]:
+        - button "Save preset" [ref=e3898] [cursor=pointer]:
+          - img [ref=e3899]
+        - button "Reset" [ref=e3903] [cursor=pointer]:
+          - img [ref=e3904]
+        - button "Export CSS" [ref=e3907] [cursor=pointer]:
+          - img [ref=e3908]
+        - button "Close" [ref=e3911] [cursor=pointer]:
+          - img [ref=e3912]
+    - generic [ref=e3915]:
+      - generic [ref=e3916]:
+        - generic [ref=e3917]: Presets
+        - button "random" [ref=e3918] [cursor=pointer]:
+          - img [ref=e3919]
+          - text: random
+      - generic [ref=e3925]:
+        - button "default neutral" [ref=e3926] [cursor=pointer]:
+          - generic [ref=e3932]:
+            - generic [ref=e3933]: default
+            - generic [ref=e3934]: neutral
+        - button "sigil structural" [ref=e3935] [cursor=pointer]:
+          - generic [ref=e3941]:
+            - generic [ref=e3942]: sigil
+            - generic [ref=e3943]: structural
+        - button "crux minimal" [ref=e3944] [cursor=pointer]:
+          - generic [ref=e3950]:
+            - generic [ref=e3951]: crux
+            - generic [ref=e3952]: minimal
+        - button "alloy industrial" [ref=e3953] [cursor=pointer]:
+          - generic [ref=e3959]:
+            - generic [ref=e3960]: alloy
+            - generic [ref=e3961]: industrial
+        - button "basalt volcanic" [ref=e3962] [cursor=pointer]:
+          - generic [ref=e3968]:
+            - generic [ref=e3969]: basalt
+            - generic [ref=e3970]: volcanic
+        - button "forge fiery" [ref=e3971] [cursor=pointer]:
+          - generic [ref=e3977]:
+            - generic [ref=e3978]: forge
+            - generic [ref=e3979]: fiery
+        - button "onyx luxury" [ref=e3980] [cursor=pointer]:
+          - generic [ref=e3986]:
+            - generic [ref=e3987]: onyx
+            - generic [ref=e3988]: luxury
+        - button "flux dynamic" [ref=e3989] [cursor=pointer]:
+          - generic [ref=e3995]:
+            - generic [ref=e3996]: flux
+            - generic [ref=e3997]: dynamic
+        - button "kova nordic" [ref=e3998] [cursor=pointer]:
+          - generic [ref=e4004]:
+            - generic [ref=e4005]: kova
+            - generic [ref=e4006]: nordic
+        - button "etch engraved" [ref=e4007] [cursor=pointer]:
+          - generic [ref=e4013]:
+            - generic [ref=e4014]: etch
+            - generic [ref=e4015]: engraved
+        - button "anvil heavy" [ref=e4016] [cursor=pointer]:
+          - generic [ref=e4022]:
+            - generic [ref=e4023]: anvil
+            - generic [ref=e4024]: heavy
+        - button "rivet structural" [ref=e4025] [cursor=pointer]:
+          - generic [ref=e4031]:
+            - generic [ref=e4032]: rivet
+            - generic [ref=e4033]: structural
+        - button "shard angular" [ref=e4034] [cursor=pointer]:
+          - generic [ref=e4040]:
+            - generic [ref=e4041]: shard
+            - generic [ref=e4042]: angular
+        - button "rune ancient" [ref=e4043] [cursor=pointer]:
+          - generic [ref=e4049]:
+            - generic [ref=e4050]: rune
+            - generic [ref=e4051]: ancient
+        - button "fang predatory" [ref=e4052] [cursor=pointer]:
+          - generic [ref=e4058]:
+            - generic [ref=e4059]: fang
+            - generic [ref=e4060]: predatory
+        - button "cobalt metallic" [ref=e4061] [cursor=pointer]:
+          - generic [ref=e4067]:
+            - generic [ref=e4068]: cobalt
+            - generic [ref=e4069]: metallic
+        - button "strata geological" [ref=e4070] [cursor=pointer]:
+          - generic [ref=e4076]:
+            - generic [ref=e4077]: strata
+            - generic [ref=e4078]: geological
+        - button "brass vintage" [ref=e4079] [cursor=pointer]:
+          - generic [ref=e4085]:
+            - generic [ref=e4086]: brass
+            - generic [ref=e4087]: vintage
+        - button "obsid obsidian" [ref=e4088] [cursor=pointer]:
+          - generic [ref=e4094]:
+            - generic [ref=e4095]: obsid
+            - generic [ref=e4096]: obsidian
+        - button "axiom mathematical" [ref=e4097] [cursor=pointer]:
+          - generic [ref=e4103]:
+            - generic [ref=e4104]: axiom
+            - generic [ref=e4105]: mathematical
+        - button "glyph typographic" [ref=e4106] [cursor=pointer]:
+          - generic [ref=e4112]:
+            - generic [ref=e4113]: glyph
+            - generic [ref=e4114]: typographic
+        - button "cipher terminal" [ref=e4115] [cursor=pointer]:
+          - generic [ref=e4121]:
+            - generic [ref=e4122]: cipher
+            - generic [ref=e4123]: terminal
+        - button "prism spectral" [ref=e4124] [cursor=pointer]:
+          - generic [ref=e4130]:
+            - generic [ref=e4131]: prism
+            - generic [ref=e4132]: spectral
+        - button "helix biotech" [ref=e4133] [cursor=pointer]:
+          - generic [ref=e4139]:
+            - generic [ref=e4140]: helix
+            - generic [ref=e4141]: biotech
+        - button "hex geometric" [ref=e4142] [cursor=pointer]:
+          - generic [ref=e4148]:
+            - generic [ref=e4149]: hex
+            - generic [ref=e4150]: geometric
+        - button "vex punk" [ref=e4151] [cursor=pointer]:
+          - generic [ref=e4157]:
+            - generic [ref=e4158]: vex
+            - generic [ref=e4159]: punk
+        - button "arc flowing" [ref=e4160] [cursor=pointer]:
+          - generic [ref=e4166]:
+            - generic [ref=e4167]: arc
+            - generic [ref=e4168]: flowing
+        - button "dsgn wireframe" [ref=e4169] [cursor=pointer]:
+          - generic [ref=e4175]:
+            - generic [ref=e4176]: dsgn
+            - generic [ref=e4177]: wireframe
+        - button "mrkr annotated" [ref=e4178] [cursor=pointer]:
+          - generic [ref=e4184]:
+            - generic [ref=e4185]: mrkr
+            - generic [ref=e4186]: annotated
+        - button "noir cinematic" [ref=e4187] [cursor=pointer]:
+          - generic [ref=e4193]:
+            - generic [ref=e4194]: noir
+            - generic [ref=e4195]: cinematic
+        - button "dusk twilight" [ref=e4196] [cursor=pointer]:
+          - generic [ref=e4202]:
+            - generic [ref=e4203]: dusk
+            - generic [ref=e4204]: twilight
+        - button "mono monochrome" [ref=e4205] [cursor=pointer]:
+          - generic [ref=e4211]:
+            - generic [ref=e4212]: mono
+            - generic [ref=e4213]: monochrome
+        - button "vast editorial" [ref=e4214] [cursor=pointer]:
+          - generic [ref=e4220]:
+            - generic [ref=e4221]: vast
+            - generic [ref=e4222]: editorial
+        - button "aura ethereal" [ref=e4223] [cursor=pointer]:
+          - generic [ref=e4229]:
+            - generic [ref=e4230]: aura
+            - generic [ref=e4231]: ethereal
+        - button "field utilitarian" [ref=e4232] [cursor=pointer]:
+          - generic [ref=e4238]:
+            - generic [ref=e4239]: field
+            - generic [ref=e4240]: utilitarian
+    - generic [ref=e4242]:
+      - generic [ref=e4243]:
+        - button "Colors" [ref=e4244] [cursor=pointer]:
+          - generic [ref=e4245]: Colors
+          - img [ref=e4246]
+        - generic [ref=e4249]:
+          - generic [ref=e4250]:
+            - generic [ref=e4251]:
+              - textbox [ref=e4254] [cursor=pointer]: "#e4e4e7"
+              - generic [ref=e4255]: primary
+            - generic [ref=e4256]:
+              - textbox [ref=e4259] [cursor=pointer]: "#27272a"
+              - generic [ref=e4260]: secondary
+            - generic [ref=e4261]:
+              - textbox [ref=e4264] [cursor=pointer]: "#0a0a0f"
+              - generic [ref=e4265]: background
+            - generic [ref=e4266]:
+              - textbox [ref=e4269] [cursor=pointer]: "#141419"
+              - generic [ref=e4270]: surface
+            - generic [ref=e4271]:
+              - textbox [ref=e4274] [cursor=pointer]: "#fafafa"
+              - generic [ref=e4275]: text
+            - generic [ref=e4276]:
+              - textbox [ref=e4279] [cursor=pointer]: "#2c2c3c"
+              - generic [ref=e4280]: border
+            - generic [ref=e4281]:
+              - textbox [ref=e4284] [cursor=pointer]: "#27272a"
+              - generic [ref=e4285]: accent
+          - generic [ref=e4286]:
+            - generic [ref=e4287]:
+              - textbox [ref=e4290] [cursor=pointer]: "#059669"
+              - generic [ref=e4291]: success
+            - generic [ref=e4292]:
+              - textbox [ref=e4295] [cursor=pointer]: "#d97706"
+              - generic [ref=e4296]: warning
+            - generic [ref=e4297]:
+              - textbox [ref=e4300] [cursor=pointer]: "#dc2626"
+              - generic [ref=e4301]: error
+            - generic [ref=e4302]:
+              - textbox [ref=e4305] [cursor=pointer]: "#2563eb"
+              - generic [ref=e4306]: info
+      - generic [ref=e4307]:
+        - button "Typography" [ref=e4308] [cursor=pointer]:
+          - generic [ref=e4309]: Typography
+          - img [ref=e4310]
+        - generic [ref=e4312]:
+          - generic [ref=e4313]:
+            - generic [ref=e4314]: display
+            - generic [ref=e4315]:
+              - combobox [ref=e4316] [cursor=pointer]:
+                - img [ref=e4317]
+              - combobox [ref=e4319]
+          - generic [ref=e4320]:
+            - generic [ref=e4321]: body
+            - generic [ref=e4322]:
+              - combobox [ref=e4323] [cursor=pointer]:
+                - img [ref=e4324]
+              - combobox [ref=e4326]
+          - generic [ref=e4327]:
+            - generic [ref=e4328]: mono
+            - generic [ref=e4329]:
+              - combobox [ref=e4330] [cursor=pointer]:
+                - img [ref=e4331]
+              - combobox [ref=e4333]
+          - generic [ref=e4334]:
+            - generic [ref=e4335]: heading wt
+            - generic [ref=e4340]: "600"
+          - generic [ref=e4341]:
+            - generic [ref=e4342]: heading trk
+            - generic [ref=e4347]: "-0.025em"
+          - generic [ref=e4348]:
+            - generic [ref=e4349]: base size
+            - generic [ref=e4354]: 16px
+      - generic [ref=e4355]:
+        - button "Spacing" [ref=e4356] [cursor=pointer]:
+          - generic [ref=e4357]: Spacing
+          - img [ref=e4358]
+        - generic [ref=e4360]:
+          - generic [ref=e4361]:
+            - generic [ref=e4362]: page margin
+            - generic [ref=e4367]: 24px
+          - generic [ref=e4368]:
+            - generic [ref=e4369]: section pad
+            - generic [ref=e4374]: 64px
+          - generic [ref=e4375]:
+            - generic [ref=e4376]: card pad
+            - generic [ref=e4381]: 24px
+          - generic [ref=e4382]:
+            - generic [ref=e4383]: grid gap
+            - generic [ref=e4388]: 24px
+          - generic [ref=e4389]:
+            - generic [ref=e4390]: stack gap
+            - generic [ref=e4395]: 12px
+      - generic [ref=e4396]:
+        - button "Radius" [ref=e4397] [cursor=pointer]:
+          - generic [ref=e4398]: Radius
+          - img [ref=e4399]
+        - generic [ref=e4401]:
+          - generic [ref=e4402]:
+            - generic [ref=e4403]: global
+            - generic [ref=e4408]: 8px
+          - generic [ref=e4409]:
+            - generic [ref=e4410]: button
+            - generic [ref=e4415]: 8px
+          - generic [ref=e4416]:
+            - generic [ref=e4417]: card
+            - generic [ref=e4422]: 12px
+          - generic [ref=e4423]:
+            - generic [ref=e4424]: input
+            - generic [ref=e4429]: 6px
+      - generic [ref=e4430]:
+        - button "Borders & Shadows" [ref=e4431] [cursor=pointer]:
+          - generic [ref=e4432]: Borders & Shadows
+          - img [ref=e4433]
+        - generic [ref=e4435]:
+          - generic [ref=e4436]:
+            - generic [ref=e4437]: border w
+            - generic [ref=e4442]: 1px
+          - generic [ref=e4443]:
+            - generic [ref=e4444]: style
+            - radiogroup [ref=e4446]:
+              - radio "solid" [checked] [ref=e4447]
+              - radio "dashed" [ref=e4448]
+              - radio "dotted" [ref=e4449]
+              - radio "none" [ref=e4450]
+          - generic [ref=e4451]:
+            - generic [ref=e4452]: card border
+            - generic [ref=e4453]:
+              - switch [checked] [ref=e4454] [cursor=pointer]
+              - checkbox [checked]
+          - generic [ref=e4455]:
+            - generic [ref=e4456]: card shadow
+            - generic [ref=e4457]:
+              - combobox [ref=e4458] [cursor=pointer]:
+                - img [ref=e4459]
+              - combobox [ref=e4461]
+          - generic [ref=e4462]:
+            - generic [ref=e4463]: btn shadow
+            - generic [ref=e4464]:
+              - switch [ref=e4465] [cursor=pointer]
+              - checkbox
+          - generic [ref=e4466]:
+            - generic [ref=e4467]: glow
+            - generic [ref=e4469]:
+              - switch [ref=e4470] [cursor=pointer]
+              - checkbox
+      - generic [ref=e4471]:
+        - button "Motion" [ref=e4472] [cursor=pointer]:
+          - generic [ref=e4473]: Motion
+          - img [ref=e4474]
+        - generic [ref=e4476]:
+          - generic [ref=e4477]:
+            - generic [ref=e4478]: fast
+            - generic [ref=e4483]: 150ms
+          - generic [ref=e4484]:
+            - generic [ref=e4485]: normal
+            - generic [ref=e4490]: 200ms
+          - generic [ref=e4491]:
+            - generic [ref=e4492]: hover scale
+            - generic [ref=e4497]: "1.02"
+          - generic [ref=e4498]:
+            - generic [ref=e4499]: press scale
+            - generic [ref=e4504]: "0.98"
+      - generic [ref=e4505]:
+        - button "Grid & Layout" [ref=e4506] [cursor=pointer]:
+          - generic [ref=e4507]: Grid & Layout
+          - img [ref=e4508]
+        - generic [ref=e4510]:
+          - generic [ref=e4511]:
+            - generic [ref=e4512]: content-max
+            - generic [ref=e4517]: 1200px
+          - generic [ref=e4518]:
+            - generic [ref=e4519]: rail-gap
+            - generic [ref=e4524]: 24px
+          - generic [ref=e4525]:
+            - generic [ref=e4526]: grid-cell
+            - generic [ref=e4531]: 48px
+          - generic [ref=e4532]:
+            - generic [ref=e4533]: cross-stroke
+            - generic [ref=e4538]: 1.5px
+          - generic [ref=e4539]:
+            - generic [ref=e4540]: navbar-h
+            - generic [ref=e4545]: 56px
+          - generic [ref=e4546]:
+            - generic [ref=e4547]: bento-gap
+            - generic [ref=e4552]: 16px
+          - generic [ref=e4553]:
+            - generic [ref=e4554]: grid lines
+            - generic [ref=e4555]:
+              - switch [checked] [ref=e4556] [cursor=pointer]
+              - checkbox [checked]
+          - generic [ref=e4557]:
+            - generic [ref=e4558]: dots
+            - generic [ref=e4559]:
+              - switch [ref=e4560] [cursor=pointer]
+              - checkbox
+          - generic [ref=e4561]:
+            - generic [ref=e4562]: cell borders
+            - generic [ref=e4563]:
+              - switch [ref=e4564] [cursor=pointer]
+              - checkbox
+          - generic [ref=e4565]:
+            - generic [ref=e4566]: cell bg
+            - radiogroup [ref=e4568]:
+              - radio "none" [checked] [ref=e4569]
+              - radio "surface" [ref=e4570]
+              - radio "alternate" [ref=e4571]
+      - generic [ref=e4572]:
+        - button "Patterns" [ref=e4573] [cursor=pointer]:
+          - generic [ref=e4574]: Patterns
+          - img [ref=e4575]
+        - generic [ref=e4577]:
+          - generic [ref=e4578]:
+            - text: Gutter
+            - generic [ref=e4579]:
+              - button "grid" [ref=e4580] [cursor=pointer]
+              - button "dots" [ref=e4581] [cursor=pointer]
+              - button "crosshatch" [ref=e4582] [cursor=pointer]
+              - button "diagonal" [ref=e4583] [cursor=pointer]
+              - button "diamond" [ref=e4584] [cursor=pointer]
+              - button "horizontal" [ref=e4585] [cursor=pointer]
+              - button "horizontal-thin" [ref=e4586] [cursor=pointer]
+              - button "horizontal-wide" [ref=e4587] [cursor=pointer]
+              - button "hexagon" [ref=e4588] [cursor=pointer]
+              - button "triangle" [ref=e4589] [cursor=pointer]
+              - button "zigzag" [ref=e4590] [cursor=pointer]
+              - button "checker" [ref=e4591] [cursor=pointer]
+              - button "plus" [ref=e4592] [cursor=pointer]
+              - button "brick" [ref=e4593] [cursor=pointer]
+              - button "wave" [ref=e4594] [cursor=pointer]
+              - button "none" [ref=e4595] [cursor=pointer]
+          - generic [ref=e4596]:
+            - text: Margin
+            - generic [ref=e4597]:
+              - button "grid" [ref=e4598] [cursor=pointer]
+              - button "dots" [ref=e4599] [cursor=pointer]
+              - button "crosshatch" [ref=e4600] [cursor=pointer]
+              - button "diagonal" [ref=e4601] [cursor=pointer]
+              - button "diamond" [ref=e4602] [cursor=pointer]
+              - button "horizontal" [ref=e4603] [cursor=pointer]
+              - button "horizontal-thin" [ref=e4604] [cursor=pointer]
+              - button "horizontal-wide" [ref=e4605] [cursor=pointer]
+              - button "hexagon" [ref=e4606] [cursor=pointer]
+              - button "triangle" [ref=e4607] [cursor=pointer]
+              - button "zigzag" [ref=e4608] [cursor=pointer]
+              - button "checker" [ref=e4609] [cursor=pointer]
+              - button "plus" [ref=e4610] [cursor=pointer]
+              - button "brick" [ref=e4611] [cursor=pointer]
+              - button "wave" [ref=e4612] [cursor=pointer]
+              - button "none" [ref=e4613] [cursor=pointer]
+      - generic [ref=e4614]:
+        - button "Alignment" [ref=e4615] [cursor=pointer]:
+          - generic [ref=e4616]: Alignment
+          - img [ref=e4617]
+        - generic [ref=e4619]:
+          - generic [ref=e4620]:
+            - generic [ref=e4621]: content
+            - radiogroup [ref=e4623]:
+              - radio "center" [checked] [ref=e4624]
+              - radio "left" [ref=e4625]
+              - radio "wide" [ref=e4626]
+          - generic [ref=e4627]:
+            - generic [ref=e4628]: hero
+            - radiogroup [ref=e4630]:
+              - radio "center" [checked] [ref=e4631]
+              - radio "left" [ref=e4632]
+              - radio "full-bleed" [ref=e4633]
+          - generic [ref=e4634]:
+            - generic [ref=e4635]: navbar
+            - radiogroup [ref=e4637]:
+              - radio "full" [checked] [ref=e4638]
+              - radio "content" [ref=e4639]
+              - radio "inset" [ref=e4640]
+          - generic [ref=e4641]:
+            - generic [ref=e4642]: rail visible
+            - generic [ref=e4643]:
+              - switch [ref=e4644] [cursor=pointer]
+              - checkbox
+      - generic [ref=e4645]:
+        - button "Sound" [ref=e4646] [cursor=pointer]:
+          - generic [ref=e4647]: Sound
+          - img [ref=e4648]
+        - generic [ref=e4651]:
+          - generic [ref=e4652]: enabled
+          - generic [ref=e4653]:
+            - switch [checked] [ref=e4654] [cursor=pointer]
+            - checkbox [checked]

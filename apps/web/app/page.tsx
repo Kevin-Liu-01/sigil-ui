@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
-import { HeroLogoField } from "@/components/landing/hero-logo-field";
+import { FooterQuadrantDiagram, HeroLogoField } from "@/components/landing/hero-logo-field";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { Terminal } from "@/components/landing/terminal";
-import { LiveComponentGrid } from "@/components/landing/live-component";
-import { ShapesAndPatterns } from "@/components/landing/shapes-section";
+import { ComponentGalleryCTA, LiveComponentGrid } from "@/components/landing/live-component";
+import { ShapesAndPatterns, ThreeDShowcase } from "@/components/landing/shapes-section";
 import { TechFrame } from "@/components/landing/tech-frame";
 import { SigilFrame, useIsEdgeless } from "@/components/landing/sigil-frame";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
@@ -21,7 +21,7 @@ import { useSigilSound } from "@/components/sound-provider";
 
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -59,11 +59,11 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
   );
 }
 
-function LandingDivider(props: React.ComponentProps<typeof SectionDivider>) {
+function LandingDivider(props: React.ComponentProps<typeof Divider>) {
   let edgeless = false;
   try { edgeless = useIsEdgeless(); } catch { /* outside provider */ }
   if (edgeless) return null;
-  return <SectionDivider {...props} />;
+  return <Divider {...props} />;
 }
 
 /* ================================================================ */
@@ -173,15 +173,29 @@ function Hero() {
         </div>
       </div>
 
-      <SectionDivider pattern="dots" size="xs" opacity={0.1} showBorders={false} fadeEdges={false} className="my-6" />
+    </LandingSection>
+  );
+}
 
-      <div className="relative z-[1]">
-        <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
-          <div className="s-transition-all">
-            <HeroShowcase />
-          </div>
-        </TechFrame>
-      </div>
+function ProductSurfaceSection() {
+  return (
+    <LandingSection borderTop>
+      <MonoLabel variant="accent" className="block mb-4">PRODUCT SURFACE GENERATED FROM THE SAME TOKENS</MonoLabel>
+      <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
+        <div className="s-transition-all">
+          <HeroShowcase />
+        </div>
+      </TechFrame>
+    </LandingSection>
+  );
+}
+
+function ComponentGalleryBannerSection() {
+  return (
+    <LandingSection borderTop padding="0 24px 48px">
+      <TechFrame variant="dimension" extend={12} opacity={0.3} padding={8}>
+        <ComponentGalleryCTA />
+      </TechFrame>
     </LandingSection>
   );
 }
@@ -221,36 +235,10 @@ function MarkdownEditorSection() {
     <LandingSection borderTop>
       <SectionHeader
         label="Your Token File"
-        heading="Your file. Your rules. Your preset."
-        description="sigil.tokens.md is the single source of truth for your project's visual identity. Start from a curated preset or write every token from scratch — either way, you own the file and can change any of 259 fields at any time."
+        heading="Scroll the markdown. Click a token. Watch the system move."
+        description="sigil.tokens.md becomes an inspectable design surface: every line maps to a CSS variable, a tiny visualization, and a live component preview."
       />
       <MarkdownEditorPreview />
-
-      <div className="mt-12">
-        <GapPixelGrid columns={{ md: 3 }}>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="mb-3 block">YOUR BRAND COLORS</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              Set your exact brand colors in OKLCH. Perceptually uniform — lightness,
-              chroma, and hue stay consistent across light and dark modes.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="mb-3 block">YOUR FONTS</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              Display, body, and mono fonts configured once. Every heading, paragraph,
-              and code block follows your choices automatically.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="mb-3 block">SAVES AI TOKENS</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              Agents edit one markdown file instead of hunting through dozens of component
-              files. Fewer tokens spent, deterministic output, zero drift.
-            </DensityText>
-          </GapPixelCell>
-        </GapPixelGrid>
-      </div>
     </LandingSection>
   );
 }
@@ -340,35 +328,6 @@ function AgentFirstSection() {
         </GapPixelCell>
       </GapPixelGrid>
 
-      {/* Why this saves tokens */}
-      <div className="mt-12">
-        <GapPixelGrid columns={{ md: 3 }}>
-          <GapPixelCell className="p-6">
-            <TabularValue size="lg" className="block mb-2 font-bold">1 file</TabularValue>
-            <MonoLabel variant="accent" className="block mb-2">VS. 100+ COMPONENT FILES</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              Traditional approach: agent reads and edits dozens of component files to change a color.
-              Sigil: one markdown edit. Fewer LLM tokens, faster iteration.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <TabularValue size="lg" className="block mb-2 font-bold">0 drift</TabularValue>
-            <MonoLabel variant="accent" className="block mb-2">DETERMINISTIC OUTPUT</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              The compiler is a pure function. Same tokens.md always produces the same CSS.
-              No hallucinated styles, no inconsistent overrides, no entropy.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <TabularValue size="lg" className="block mb-2 font-bold">259 fields</TabularValue>
-            <MonoLabel variant="accent" className="block mb-2">COMPLETE VISUAL CONTROL</MonoLabel>
-            <DensityText role="body" as="p" muted>
-              Colors, fonts, spacing, radius, shadows, motion, borders — the full visual
-              identity in one structured file. The agent has total control without total access.
-            </DensityText>
-          </GapPixelCell>
-        </GapPixelGrid>
-      </div>
     </LandingSection>
   );
 }
@@ -395,24 +354,9 @@ function ComponentsSection() {
     <LandingSection id="components" borderTop>
       <SectionHeader
         label="Components"
-        heading="100+ token-driven components."
+        heading="Components that inherit the system."
         description="Every component reads from var(--s-*) tokens. Switch presets and the entire library updates."
       />
-
-      {/* Stats bar */}
-      <GapPixelGrid columns={{ sm: 2, md: 4 }} className="mb-10">
-        {[
-          { value: "100+", label: "Components" },
-          { value: "14", label: "Categories" },
-          { value: "31", label: "Presets" },
-          { value: "259", label: "Tokens" },
-        ].map((stat) => (
-          <GapPixelCell key={stat.label} className="p-5 text-center">
-            <TabularValue size="xl" className="block font-bold">{stat.value}</TabularValue>
-            <MonoLabel className="mt-1 block">{stat.label}</MonoLabel>
-          </GapPixelCell>
-        ))}
-      </GapPixelGrid>
 
       {/* Category tabs */}
       <div className="flex gap-0 border-b border-[var(--s-border)] mb-8 overflow-x-auto">
@@ -434,7 +378,7 @@ function ComponentsSection() {
 
       {/* Live component grid */}
       <TechFrame variant="dimension" extend={12} opacity={0.3} padding={8}>
-        <LiveComponentGrid />
+        <LiveComponentGrid showCta={false} />
       </TechFrame>
 
       {/* Component anatomy diagram */}
@@ -442,17 +386,204 @@ function ComponentsSection() {
         <MonoLabel variant="accent" className="block mb-4">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
         <ComponentAnatomyDiagram />
       </div>
+    </LandingSection>
+  );
+}
 
-      <div className="mt-8 flex gap-3">
-        <AccentCTA asChild>
-          <a href="/components" className="no-underline">Browse 100+ Components</a>
-        </AccentCTA>
-        <a
-          href="/docs/components/button"
-          className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
-        >
-          Read Docs
-        </a>
+const EVALUATION_CARDS = [
+  {
+    label: "contrast audit",
+    value: "AA",
+    title: "Readable by default",
+    body: "Every preset can be checked against text, surface, and action contrast before it ships.",
+    meter: 92,
+  },
+  {
+    label: "agent safety",
+    value: "1 file",
+    title: "Constrained edit surface",
+    body: "Agents change token fields and generated instructions instead of scattering style overrides.",
+    meter: 84,
+  },
+  {
+    label: "visual drift",
+    value: "0",
+    title: "Compiler-owned output",
+    body: "The same token spec always produces the same CSS variables, Tailwind theme, and component look.",
+    meter: 100,
+  },
+];
+
+const PRODUCT_FEATURES = [
+  {
+    title: "Token workbench",
+    label: "inspect",
+    body: "Trace a visual decision from markdown to CSS var to live component.",
+  },
+  {
+    title: "Preset switchboard",
+    label: "compose",
+    body: "Flip the entire visual language without touching page or component code.",
+  },
+  {
+    title: "Agent instructions",
+    label: "govern",
+    body: "Generated project guidance tells humans and AI where visual changes belong.",
+  },
+  {
+    title: "Component gallery",
+    label: "verify",
+    body: "Preview real UI under the active preset before adding it to an app.",
+  },
+];
+
+function MiniBlueprintPanel({ title, label }: { title: string; label: string }) {
+  return (
+    <div className="relative min-h-[150px] overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.08]"
+        style={{
+          backgroundImage:
+            "linear-gradient(var(--s-text) 1px, transparent 1px), linear-gradient(90deg, var(--s-text) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+      <div className="relative z-[1] flex items-center justify-between">
+        <MonoLabel variant="accent" size="xs">{label}</MonoLabel>
+        <span className="h-2 w-2 bg-[var(--s-primary)]" />
+      </div>
+      <div className="relative z-[1] mt-8">
+        <div className="mb-3 h-3 w-3/5 bg-[var(--s-text)]" />
+        <div className="mb-2 h-2 w-4/5 bg-[var(--s-border)]" />
+        <div className="h-2 w-1/2 bg-[var(--s-border)]" />
+      </div>
+      <DensityText role="detail" className="relative z-[1] mt-6 block font-semibold">
+        {title}
+      </DensityText>
+    </div>
+  );
+}
+
+function EvaluationProductSection() {
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Product System"
+        heading="Evaluate the system before it becomes UI."
+        description="Sigil treats design-system work like product infrastructure: inspectable, measurable, and safe for agents to operate."
+      />
+
+      <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
+          {EVALUATION_CARDS.map((card) => (
+            <div key={card.label} className="border border-[var(--s-border)] bg-[var(--s-surface)] p-5">
+              <div className="mb-5 flex items-start justify-between gap-4">
+                <MonoLabel variant="accent" size="xs">{card.label}</MonoLabel>
+                <TabularValue className="text-[clamp(22px,3vw,40px)] font-bold text-[var(--s-text)]">
+                  {card.value}
+                </TabularValue>
+              </div>
+              <DensityText role="headline" as="h3" className="mb-2 text-xl font-semibold">
+                {card.title}
+              </DensityText>
+              <DensityText role="body" as="p" muted className="mb-4 leading-relaxed">
+                {card.body}
+              </DensityText>
+              <Progress value={card.meter} />
+            </div>
+          ))}
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {PRODUCT_FEATURES.map((feature, index) => (
+            <div
+              key={feature.title}
+              className={index === 0 ? "md:col-span-2" : undefined}
+            >
+              <MiniBlueprintPanel title={feature.title} label={feature.label} />
+              <div className="border-x border-b border-[var(--s-border)] bg-[var(--s-surface)] p-4">
+                <DensityText role="body" as="p" muted>
+                  {feature.body}
+                </DensityText>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </LandingSection>
+  );
+}
+
+const COMMAND_CARDS = [
+  {
+    command: "npx create-sigil-app",
+    title: "Create a new app",
+    body: "Bootstraps project files, token CSS, base preset, docs links, and agent instructions.",
+    output: ["framework detected", "tokens written", "components ready"],
+  },
+  {
+    command: "sigil init",
+    title: "Install into an existing app",
+    body: "Detects your stack and wires Sigil into the current project without replacing your app.",
+    output: ["config created", "css imported", "doctor passing"],
+  },
+  {
+    command: "sigil add button card input",
+    title: "Add components",
+    body: "Copies token-bound components into your project so they inherit the active visual system.",
+    output: ["button.tsx", "card.tsx", "input.tsx"],
+  },
+  {
+    command: "sigil preset forge",
+    title: "Switch visual language",
+    body: "Writes a complete preset into the token file and refreshes the compiled CSS variables.",
+    output: ["259 fields", "css variables", "theme updated"],
+  },
+  {
+    command: "sigil diff",
+    title: "Review design changes",
+    body: "Shows token-level changes before you commit, so visual updates stay reviewable.",
+    output: ["colors changed", "radius changed", "motion unchanged"],
+  },
+  {
+    command: "sigil doctor",
+    title: "Validate the install",
+    body: "Checks config, token file, CSS import, component paths, dependencies, and preset health.",
+    output: ["config ok", "tokens ok", "components ok"],
+  },
+];
+
+function CommandSurfaceSection() {
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="CLI Surface"
+        heading="Every command maps to a product action."
+        description="The CLI is not just installation glue. It is the control plane for creating, changing, auditing, and validating your design system."
+      />
+
+      <div className="grid gap-0 border border-[var(--s-border)] md:grid-cols-2 lg:grid-cols-3">
+        {COMMAND_CARDS.map((card) => (
+          <div key={card.command} className="border-b border-r border-[var(--s-border)] bg-[var(--s-background)] p-5 last:border-r-0">
+            <div className="mb-4 border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
+              <span className="text-[var(--s-text-muted)]">$</span> {card.command}
+            </div>
+            <DensityText role="headline" as="h3" className="mb-2 text-xl font-semibold">
+              {card.title}
+            </DensityText>
+            <DensityText role="body" as="p" muted className="mb-5 leading-relaxed">
+              {card.body}
+            </DensityText>
+            <div className="grid gap-2">
+              {card.output.map((item) => (
+                <div key={item} className="flex items-center justify-between border border-[var(--s-border-muted)] px-2.5 py-1.5">
+                  <MonoLabel size="xs" className="normal-case tracking-normal">{item}</MonoLabel>
+                  <span className="h-1.5 w-1.5 bg-[var(--s-primary)]" />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </LandingSection>
   );
@@ -463,10 +594,23 @@ function ShapesSection() {
     <LandingSection borderTop>
       <SectionHeader
         label="Shapes & Patterns"
-        heading="Geometric primitives. Voronoi everything."
-        description="Every shape, pattern, and layout rendered inside Voronoi cells — organic tessellation powered by d3-delaunay, driven by your tokens."
+        heading="Voronoi bentos with actual content."
+        description="Irregular polygon cells that hold real shapes, stats, pattern fields, and product copy without cropping a rectangular layout."
       />
       <ShapesAndPatterns />
+    </LandingSection>
+  );
+}
+
+function ThreeDSection() {
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="3D Components"
+        heading="Projected UI without leaving CSS."
+        description="Isometric scenes, prisms, exploded boxes, tilt cards, and depth stacks all inherit the active token system."
+      />
+      <ThreeDShowcase />
     </LandingSection>
   );
 }
@@ -634,82 +778,155 @@ function DemoSitesSection() {
 /* ================================================================ */
 
 const CLI_LINES = [
-  { text: "npx sigil init", prefix: "$", color: "var(--s-text)", delay: 800 },
-  { text: "", delay: 300 },
-  { text: "Preset: sigil", prefix: "✓", color: "var(--s-success)", delay: 500 },
-  { text: "Created sigil.config.ts", prefix: "✓", color: "var(--s-success)", delay: 400 },
-  { text: "Created sigil.tokens.md", prefix: "✓", color: "var(--s-success)", delay: 400 },
-  { text: "Installed token CSS variables", prefix: "✓", color: "var(--s-success)", delay: 400 },
-  { text: "Ready to import components", prefix: "✓", color: "var(--s-success)", delay: 400 },
-  { text: "", delay: 200 },
-  { text: "Done in 1.2s", prefix: " ", color: "var(--s-text-muted)", delay: 300 },
+  { text: "npx create-sigil-app@latest acme-ui", prefix: "$", color: "var(--s-text)", delay: 650 },
+  { text: "", delay: 180 },
+  { text: "Detected Next.js + Tailwind", prefix: "→", color: "var(--s-text-muted)", delay: 320 },
+  { text: "Selected preset: sigil", prefix: "✓", color: "var(--s-success)", delay: 360 },
+  { text: "Created sigil.tokens.md", prefix: "✓", color: "var(--s-success)", delay: 340 },
+  { text: "Wrote token CSS variables", prefix: "✓", color: "var(--s-success)", delay: 340 },
+  { text: "Installed Button, Card, Input", prefix: "✓", color: "var(--s-success)", delay: 340 },
+  { text: "Generated .sigil/AGENTS.md", prefix: "✓", color: "var(--s-success)", delay: 340 },
+  { text: "", delay: 160 },
+  { text: "Ready in 00:28", prefix: " ", color: "var(--s-primary)", delay: 280 },
+];
+
+const QUICK_START_STEPS = [
+  {
+    time: "00-08s",
+    title: "Scaffold",
+    command: "npx create-sigil-app@latest",
+    body: "Detects your framework, package manager, Tailwind setup, and where token CSS should land.",
+  },
+  {
+    time: "08-18s",
+    title: "Pick a system",
+    command: "sigil preset sigil",
+    body: "Start from one of 31 presets or let the installer recommend one from your product type.",
+  },
+  {
+    time: "18-30s",
+    title: "Ship components",
+    command: "sigil add button card input",
+    body: "Components already read var(--s-*), so agents can change the system without touching React.",
+  },
+];
+
+const GENERATED_FILES = [
+  { path: "sigil.tokens.md", detail: "259 editable fields" },
+  { path: "app/sigil.css", detail: "300+ CSS vars" },
+  { path: ".sigil/AGENTS.md", detail: "agent instructions" },
+  { path: "components/ui/*", detail: "token-bound UI" },
 ];
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Quick Start"
-        heading="Get started in 30 seconds."
-        description="Three steps to a complete design system."
-      />
-
-      <GapPixelGrid columns={{ md: 3 }} className="mb-12">
-        <GapPixelCell className="p-6">
-          <MonoLabel variant="accent" className="block mb-3">01 INSTALL</MonoLabel>
-          <div
-            className="font-[family-name:var(--s-font-mono)] text-[13px] p-3 mb-3"
-            style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-          >
-            <span className="text-[var(--s-text-muted)]">$</span>{" "}
-            <span className="text-[var(--s-text)]">npx create-sigil-app</span>
-          </div>
-          <DensityText role="body" as="p" muted>
-            Interactive setup detects your framework, recommends presets, generates everything.
+    <LandingSection borderTop padding="88px 24px">
+      <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div>
+          <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
+          <h2 className="mb-4 max-w-[620px] font-[family-name:var(--s-font-display)] text-[clamp(36px,5vw,72px)] font-bold leading-[0.96] tracking-[-0.05em] text-[var(--s-text)]">
+            Get started in 30 seconds.
+          </h2>
+          <DensityText role="body" as="p" muted className="max-w-[600px] leading-relaxed">
+            One command creates the token file, installs the CSS variable pipeline,
+            drops in starter components, and writes the agent instructions your project needs.
           </DensityText>
-        </GapPixelCell>
+        </div>
 
-        <GapPixelCell className="p-6">
-          <MonoLabel variant="accent" className="block mb-3">02 DEFINE YOUR PRESET</MonoLabel>
+        <div className="grid grid-cols-3 border border-[var(--s-border)] bg-[var(--s-surface)]">
+          {[
+            ["00:30", "target setup"],
+            ["259", "token fields"],
+            ["100+", "components"],
+          ].map(([value, label]) => (
+            <div key={label} className="border-r border-[var(--s-border)] p-5 last:border-r-0">
+              <TabularValue className="block text-[clamp(24px,4vw,48px)] font-bold text-[var(--s-text)]">
+                {value}
+              </TabularValue>
+              <MonoLabel size="xs" variant="muted">{label}</MonoLabel>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+        <div className="relative overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)] p-4 sm:p-6">
           <div
-            className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3 leading-relaxed"
-            style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-          >
-            <div><span className="text-[var(--s-text-muted)]">$</span>{" "}<span className="text-[var(--s-text)]">sigil preset create</span></div>
-            <div className="text-[var(--s-text-muted)] text-[10px] mt-1">or start from one of 31 curated presets</div>
+            className="absolute inset-0 pointer-events-none opacity-[0.04]"
+            style={{
+              backgroundImage: "linear-gradient(var(--s-text) 1px, transparent 1px), linear-gradient(90deg, var(--s-text) 1px, transparent 1px)",
+              backgroundSize: "32px 32px",
+            }}
+          />
+          <div className="relative z-[1] mb-4 flex items-center justify-between gap-4">
+            <MonoLabel variant="accent">installer trace</MonoLabel>
+            <Badge variant="outline" className="font-[family-name:var(--s-font-mono)]">live output</Badge>
           </div>
-          <div className="flex gap-1.5 mb-3">
-            {PRESET_DOTS.map((p) => (
-              <span
-                key={p.name}
-                className="w-3 h-3 border border-[var(--s-border)]"
-                style={{ background: p.color }}
-              />
+          <div className="relative z-[1]">
+            <Terminal lines={CLI_LINES} title="create-sigil-app" />
+          </div>
+          <div className="relative z-[1] mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+            {GENERATED_FILES.map((file) => (
+              <div key={file.path} className="border border-[var(--s-border)] bg-[var(--s-surface)] p-3">
+                <MonoLabel size="xs" className="mb-2 block normal-case tracking-normal">
+                  {file.path}
+                </MonoLabel>
+                <DensityText role="chrome" muted>{file.detail}</DensityText>
+              </div>
             ))}
           </div>
-          <DensityText role="body" as="p" muted>
-            Create a custom preset from scratch, fork a curated one, or edit sigil.tokens.md directly. You own the file.
-          </DensityText>
-        </GapPixelCell>
+        </div>
 
-        <GapPixelCell className="p-6">
-          <MonoLabel variant="accent" className="block mb-3">03 BUILD</MonoLabel>
-          <div
-            className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3 leading-relaxed"
-            style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+        <div className="grid gap-3">
+          {QUICK_START_STEPS.map((step, index) => (
+            <div
+              key={step.title}
+              className="group relative overflow-hidden border border-[var(--s-border)] bg-[var(--s-surface)] p-5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
+            >
+              <div
+                className="absolute inset-y-0 left-0 w-1"
+                style={{ background: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color }}
+              />
+              <div className="mb-4 flex items-start justify-between gap-4">
+                <div>
+                  <MonoLabel variant="accent" size="xs" className="mb-2 block">
+                    {String(index + 1).padStart(2, "0")} / {step.time}
+                  </MonoLabel>
+                  <DensityText role="headline" as="h3" className="text-xl font-semibold tracking-tight">
+                    {step.title}
+                  </DensityText>
+                </div>
+                <TabularValue muted>{step.time.split("-")[1]}</TabularValue>
+              </div>
+              <div className="mb-4 overflow-x-auto whitespace-nowrap border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
+                <span className="text-[var(--s-text-muted)]">$</span> {step.command}
+              </div>
+              <DensityText role="body" as="p" muted className="leading-relaxed">
+                {step.body}
+              </DensityText>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-6 flex flex-col gap-3 border border-[var(--s-border)] bg-[color-mix(in_oklch,var(--s-primary)_5%,var(--s-background))] p-5 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <MonoLabel variant="accent" className="mb-1 block">ready for agents</MonoLabel>
+          <DensityText role="body" as="p" muted>
+            The generated project tells humans and AI the same rule: edit tokens, not component styling.
+          </DensityText>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          <AccentCTA asChild>
+            <a href="/docs" className="no-underline">Start Now</a>
+          </AccentCTA>
+          <a
+            href="/sandbox"
+            className="inline-flex items-center border border-[var(--s-border)] bg-transparent px-5 py-2.5 font-[family-name:var(--s-font-mono)] text-[13px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
           >
-            <div className="text-[var(--s-text-muted)]">{"import { Button } from"}</div>
-            <div className="text-[var(--s-primary)]">{"  \"@sigil-ui/components\";"}</div>
-          </div>
-          <DensityText role="body" as="p" muted>
-            100+ components that read from your tokens. No prop drilling, no theme objects.
-          </DensityText>
-        </GapPixelCell>
-      </GapPixelGrid>
-
-      <div className="max-w-[720px]">
-        <MonoLabel className="block mb-3">~/ — zsh</MonoLabel>
-        <Terminal lines={CLI_LINES} title="~/ — zsh" />
+            Try Sandbox
+          </a>
+        </div>
       </div>
     </LandingSection>
   );
@@ -718,24 +935,42 @@ function QuickStartSection() {
 function FinalCTA() {
   return (
     <LandingSection borderTop padding="80px 24px">
-      <div className="text-center mx-auto max-w-xl">
-        <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-4">
-          Start building.
-        </h2>
-        <DensityText role="body" as="p" muted className="mb-8 mx-auto max-w-md leading-relaxed">
-          One file. 259 tokens. 100+ components. 31 presets. The design system that
-          compiles from a single markdown file.
-        </DensityText>
-        <div className="flex items-center justify-center gap-3 flex-wrap">
-          <AccentCTA size="lg" asChild>
-            <a href="/docs" className="no-underline">Get Started</a>
-          </AccentCTA>
-          <a
-            href="/docs/components/button"
-            className="inline-flex items-center px-6 py-3 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[14px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
+        <div>
+          <h2 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-[var(--s-text)]">
+            Start building.
+          </h2>
+          <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
+            One file. 259 tokens. 100+ components. 31 presets. The design system that
+            compiles from a single markdown file.
+          </DensityText>
+          <div className="flex flex-wrap items-center gap-3">
+            <AccentCTA size="lg" asChild>
+              <a href="/docs" className="no-underline">Get Started</a>
+            </AccentCTA>
+            <a
+              href="/docs/components/button"
+              className="inline-flex items-center border border-[var(--s-border)] bg-transparent px-6 py-3 font-[family-name:var(--s-font-mono)] text-[14px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            >
+              Read the Docs
+            </a>
+          </div>
+        </div>
+        <div
+          className="relative hidden min-h-[320px] overflow-hidden border border-[var(--s-border)] md:block"
+          style={{
+            borderStyle: "var(--s-border-style, solid)",
+            borderRadius: "var(--s-radius-md, 8px)",
+            background: "var(--s-background)",
+          }}
+        >
+          <FooterQuadrantDiagram />
+          <div
+            className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
+            style={{ color: "var(--s-text-muted)" }}
           >
-            Read the Docs
-          </a>
+            blueprint variants / 20
+          </div>
         </div>
       </div>
     </LandingSection>
@@ -754,12 +989,20 @@ export default function LandingPage() {
       {/* Hero */}
       <Hero />
 
-      <LandingDivider pattern="crosshatch" size="md" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
+
+      <ProductSurfaceSection />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      <ComponentGalleryBannerSection />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
 
       {/* ACT 1 — What Is Sigil? */}
       <LayerSection />
 
-      <LandingDivider pattern="dots" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
 
       <TokenPipelineSection />
 
@@ -767,29 +1010,41 @@ export default function LandingPage() {
 
       <MarkdownEditorSection />
 
-      <LandingDivider pattern="grid" size="md" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       {/* Agent-First Design */}
       <AgentFirstSection />
 
-      <LandingDivider pattern="hatch" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
 
       {/* ACT 2 — How It Looks */}
       <ComponentsSection />
 
-      <LandingDivider pattern="diamond" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="sm" showBorders />
+
+      <EvaluationProductSection />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      <CommandSurfaceSection />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
+
+      <ThreeDSection />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
 
       <ShapesSection />
 
-      <LandingDivider pattern="crosshatch" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="sm" showBorders />
 
       <PresetsSection />
 
-      <LandingDivider pattern="dots" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
 
       <DemoSitesSection />
 
-      <LandingDivider pattern="hatch" size="md" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       {/* ACT 3 — How To Use It */}
       <QuickStartSection />

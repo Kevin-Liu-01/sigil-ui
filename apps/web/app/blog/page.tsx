@@ -2,7 +2,7 @@
 
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -109,7 +109,7 @@ export default function BlogPage() {
           </div>
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="vertical" size="md" showBorders />
 
         {/* ── Featured ── */}
         <SigilSection>
@@ -173,7 +173,7 @@ export default function BlogPage() {
           </FeaturedGrid>
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="diagonal" size="sm" showBorders />
 
         {/* ── Post Grid ── */}
         <SigilSection>
@@ -210,7 +210,7 @@ export default function BlogPage() {
           </GapPixelGrid>
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="vertical" size="sm" showBorders />
 
         {/* ── Newsletter CTA ── */}
         <SigilSection>
@@ -228,6 +228,8 @@ export default function BlogPage() {
             </div>
           </div>
         </SigilSection>
+
+        <Divider pattern="diagonal" size="md" showBorders />
 
         <LandingFooter />
       </BorderStack>

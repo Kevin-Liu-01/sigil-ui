@@ -27,7 +27,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node ../../scripts/copy-sigil-skills.mjs .",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
@@ -39,7 +39,8 @@
     "fs-extra": "^11.3.0",
     "glob": "^11.0.1",
     "@sigil-ui/tokens": "workspace:*",
-    "@sigil-ui/presets": "workspace:*"
+    "@sigil-ui/presets": "workspace:*",
+    "@sigil-ui/components": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

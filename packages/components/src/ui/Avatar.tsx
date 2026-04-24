@@ -97,7 +97,7 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
       <div
         ref={ref}
         data-slot="avatar-group"
-        className={cn("flex", className)}
+        className={cn("inline-flex items-center", className)}
         style={{ gap: 0 }}
         {...rest}
       >
@@ -105,7 +105,12 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
           <div
             key={i}
             style={{
-              display: "flex",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flex: "0 0 auto",
+              width: "fit-content",
+              height: "fit-content",
               position: "relative",
               borderRadius: "9999px",
               boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-background))",

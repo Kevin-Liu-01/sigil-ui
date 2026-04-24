@@ -3,15 +3,17 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "node:path";
 import { readConfig, configExists } from "../utils/config.js";
+import { printIntro, symbols } from "../utils/terminal.js";
 
 export const diffCommand = new Command("diff")
   .description("Show token changes since last sync")
   .action(async () => {
     const cwd = process.cwd();
+    printIntro("Sigil Diff", "Compare token CSS against the last snapshot");
 
     if (!configExists(cwd)) {
       console.log(
-        chalk.red("✗"),
+        symbols.error,
         "No sigil.config.ts found. Run",
         chalk.cyan("sigil init"),
         "first.",
@@ -24,7 +26,7 @@ export const diffCommand = new Command("diff")
     const snapshotPath = path.join(cwd, ".sigil", "tokens.snapshot.css");
 
     if (!fs.existsSync(tokensPath)) {
-      console.log(chalk.red("✗"), `Token file not found: ${config.tokensPath}`);
+      console.log(symbols.error, `Token file not found: ${config.tokensPath}`);
       return;
     }
 
@@ -33,7 +35,7 @@ export const diffCommand = new Command("diff")
     if (!fs.existsSync(snapshotPath)) {
       fs.ensureDirSync(path.dirname(snapshotPath));
       fs.writeFileSync(snapshotPath, currentContent, "utf-8");
-      console.log(chalk.green("✓"), "Created initial token snapshot.");
+      console.log(symbols.success, "Created initial token snapshot.");
       console.log(chalk.dim("  Run again after making changes to see a diff."));
       return;
     }
@@ -41,7 +43,7 @@ export const diffCommand = new Command("diff")
     const snapshotContent = fs.readFileSync(snapshotPath, "utf-8");
 
     if (currentContent === snapshotContent) {
-      console.log(chalk.green("✓"), "No token changes since last sync.");
+      console.log(symbols.success, "No token changes since last sync.");
       return;
     }
 

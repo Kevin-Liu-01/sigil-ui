@@ -48,7 +48,7 @@ To change the visual output, edit the top of this chain — not the bottom.
 | Change card hover effect | Preset: `cards.hover-effect: "glow"` | Card component file |
 | Change button press scale | Preset: `buttons.active-scale: "0.95"` | Button component file |
 | Change background pattern | Preset: `backgrounds.pattern: "dots"` | Layout files |
-| Complete visual overhaul | `npx sigil preset <name>` | Any component files |
+| Complete visual overhaul | `npx @sigil-ui/cli preset <name>` | Any component files |
 | Targeted brand update | Edit `sigil.tokens.md` or token CSS | Scattered Tailwind classes |
 
 ## Repository Structure
@@ -182,11 +182,11 @@ When creating new components, follow these same conventions. When modifying appe
 
 ### Setting up a new project
 ```
-1. npx create-sigil-app (or npx sigil init for existing projects)
+1. npx create-sigil-app (or npx @sigil-ui/cli convert for existing projects)
 2. Choose preset matching the desired aesthetic
 3. Read .sigil/AGENTS.md for project-specific instructions
-4. npx sigil add <components needed>
-5. npx sigil doctor to validate
+4. npx @sigil-ui/cli add <components needed>
+5. npx @sigil-ui/cli doctor to validate
 ```
 
 ### Making visual changes
@@ -196,7 +196,7 @@ When creating new components, follow these same conventions. When modifying appe
 3. If specific tokens → edit the token CSS file with :root { --sigil-*: value; }
 4. If a full custom aesthetic → sigil preset create, then edit the preset file
 5. NEVER edit component files for visual changes
-6. npx sigil doctor after changes
+6. npx @sigil-ui/cli doctor after changes
 ```
 
 ### Building new pages

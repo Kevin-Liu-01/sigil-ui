@@ -11,6 +11,7 @@
     "audit:contrast": "tsx scripts/audit-contrast.ts"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.31.0",
     "culori": "^4.0.2",
     "tsx": "^4.21.0",
     "turbo": "^2.4.0",

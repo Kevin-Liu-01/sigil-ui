@@ -1,0 +1,1868 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e8]:
+      - navigation [ref=e9]:
+        - link "sigil/UI" [ref=e10] [cursor=pointer]:
+          - /url: /
+          - img [ref=e11]
+          - generic [ref=e16]: sigil/UI
+        - generic [ref=e17]:
+          - link "Components" [ref=e18] [cursor=pointer]:
+            - /url: /components
+            - img [ref=e19]
+            - text: Components
+          - link "Presets" [ref=e24] [cursor=pointer]:
+            - /url: /presets
+            - img [ref=e25]
+            - text: Presets
+          - link "Demos" [ref=e31] [cursor=pointer]:
+            - /url: /demos
+            - img [ref=e32]
+            - text: Demos
+          - link "Walkthrough" [ref=e34] [cursor=pointer]:
+            - /url: /walkthrough
+            - img [ref=e35]
+            - text: Walkthrough
+          - link "Docs" [ref=e38] [cursor=pointer]:
+            - /url: /docs
+            - img [ref=e39]
+            - text: Docs
+          - button "Search ⌘K" [ref=e41] [cursor=pointer]:
+            - img [ref=e42]
+            - generic [ref=e45]: Search
+            - generic [ref=e46]: ⌘K
+          - link "Sandbox" [ref=e47] [cursor=pointer]:
+            - /url: /sandbox
+            - img [ref=e48]
+            - text: Sandbox
+          - link "Star" [ref=e50] [cursor=pointer]:
+            - /url: https://github.com/Kevin-Liu-01/sigil-ui
+            - img [ref=e51]
+            - generic [ref=e53]: Star
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic:
+            - img
+          - generic [ref=e57]: npm install
+          - heading "Your Design Systems Live in One File." [level=1] [ref=e58]:
+            - text: Your Design Systems
+            - text: Live in One File.
+          - paragraph [ref=e59]: The same Radix components you trust, with an agent-first token layer on top. 100+ components. 259 tokens. One markdown file that humans and AI agents both edit to control every color, font, radius, and animation.
+          - generic [ref=e60]:
+            - link "Get Started" [ref=e61] [cursor=pointer]:
+              - /url: /docs
+            - link "View Components" [ref=e62] [cursor=pointer]:
+              - /url: /docs/components/button
+          - generic [ref=e63]:
+            - button "sigil" [ref=e64] [cursor=pointer]
+            - button "noir" [ref=e65] [cursor=pointer]
+            - button "forge" [ref=e66] [cursor=pointer]
+            - button "vex" [ref=e67] [cursor=pointer]
+            - button "arc" [ref=e68] [cursor=pointer]
+            - button "cipher" [ref=e69] [cursor=pointer]
+        - generic [ref=e73]:
+          - img
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - generic [ref=e81]:
+                    - heading "Deploy to Production" [level=3] [ref=e82]:
+                      - img [ref=e83]
+                      - text: Deploy to Production
+                    - generic [ref=e88]:
+                      - img
+                      - text: Live
+                  - paragraph [ref=e89]: Select the target for this deployment.
+                - radiogroup [ref=e91]:
+                  - generic [ref=e92] [cursor=pointer]:
+                    - generic [ref=e93]:
+                      - generic [ref=e94]:
+                        - img [ref=e95]
+                        - text: Production
+                      - paragraph [ref=e98]: Public-facing. Requires approval.
+                    - radio "Production Public-facing. Requires approval." [checked] [ref=e99]:
+                      - img [ref=e101]
+                    - radio [checked]
+                  - generic [ref=e103] [cursor=pointer]:
+                    - generic [ref=e104]:
+                      - generic [ref=e105]:
+                        - img [ref=e106]
+                        - text: Staging
+                      - paragraph [ref=e109]: Internal testing environment.
+                    - radio "Staging Internal testing environment." [ref=e110]
+                    - radio
+                  - generic [ref=e111] [cursor=pointer]:
+                    - generic [ref=e112]:
+                      - generic [ref=e113]:
+                        - img [ref=e114]
+                        - text: Preview
+                      - paragraph [ref=e117]: Ephemeral per-PR deployment.
+                    - radio "Preview Ephemeral per-PR deployment." [ref=e118]
+                    - radio
+              - toolbar [ref=e119]:
+                - button "Go back" [ref=e120]:
+                  - img [ref=e121]
+                - separator [ref=e123]
+                - button "Archive" [ref=e124]
+                - button "Report" [ref=e125]
+                - button "Snooze" [ref=e126]
+                - separator [ref=e127]
+                - button "More" [ref=e128]:
+                  - img [ref=e129]
+              - generic [ref=e134]:
+                - generic [ref=e135]:
+                  - generic:
+                    - img
+                  - textbox [ref=e136]: main
+                - generic [ref=e137]:
+                  - img [ref=e138]
+                  - generic [ref=e140]: "a3f9c2d — fix: token compiler edge case"
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - img [ref=e143]
+                    - text: Types
+                  - generic [ref=e146]:
+                    - img [ref=e147]
+                    - text: Lint
+                  - generic [ref=e150]:
+                    - img [ref=e151]
+                    - text: Tests
+                - generic [ref=e154]:
+                  - generic [ref=e155]:
+                    - generic [ref=e156]: Build complete
+                    - generic [ref=e157]: 100%
+                  - progressbar [ref=e159]
+                - generic [ref=e161]:
+                  - button "Deploy Now" [ref=e162] [cursor=pointer]:
+                    - img
+                    - text: Deploy Now
+                  - button "Cancel" [ref=e163] [cursor=pointer]
+                - paragraph [ref=e164]:
+                  - img [ref=e165]
+                  - text: Last deployed 4m ago
+              - generic [ref=e168]:
+                - generic [ref=e169]:
+                  - img
+                  - text: Syncing
+                - generic [ref=e170]:
+                  - img
+                  - text: Updating
+                - generic [ref=e171]:
+                  - img
+                  - text: Indexing
+              - generic [ref=e172]:
+                - button [ref=e173]:
+                  - img [ref=e174]
+                - generic [ref=e175]: Send a message...
+                - button [ref=e176]:
+                  - img [ref=e177]
+              - generic [ref=e179]:
+                - generic [ref=e180]:
+                  - img [ref=e181]
+                  - text: Volume
+                - generic [ref=e185]: 72%
+              - generic [ref=e189]:
+                - generic [ref=e190]: Stable
+                - generic [ref=e191]: Beta
+                - generic [ref=e192]: v2.4.1
+                - generic [ref=e193]: Breaking
+              - generic [ref=e194]:
+                - generic [ref=e195]:
+                  - img [ref=e196]
+                  - text: Your profile has been verified.
+                - img [ref=e199]
+              - group [ref=e201]:
+                - radio [ref=e202] [cursor=pointer]:
+                  - img [ref=e203]
+                - radio [ref=e205] [cursor=pointer]:
+                  - img [ref=e206]
+                - radio [ref=e208] [cursor=pointer]:
+                  - img [ref=e209]
+                - radio [checked] [ref=e211] [cursor=pointer]:
+                  - img [ref=e212]
+                - radio [ref=e213] [cursor=pointer]:
+                  - img [ref=e214]
+                - radio [ref=e215] [cursor=pointer]:
+                  - img [ref=e216]
+              - generic [ref=e217]:
+                - link "@kevskgs" [ref=e218] [cursor=pointer]:
+                  - /url: https://x.com/kevskgs
+                - img [ref=e219]
+              - generic [ref=e222]:
+                - generic [ref=e223]: Connected to production
+                - generic [ref=e225]: ws://
+              - generic [ref=e226]:
+                - generic [ref=e227]:
+                  - generic [ref=e228]:
+                    - generic [ref=e229]: Memory
+                    - generic [ref=e230]: 82%
+                  - meter "Memory" [ref=e231]
+                - generic [ref=e233]:
+                  - generic [ref=e234]:
+                    - generic [ref=e235]: CPU
+                    - generic [ref=e236]: 34%
+                  - meter "CPU" [ref=e237]
+              - generic [ref=e239]:
+                - generic [ref=e240]:
+                  - img [ref=e241]
+                  - text: Commit Message
+                - 'textbox "fix: resolve token compilation..." [ref=e244]'
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - status "Loading" [ref=e247]:
+                    - text: ⣾
+                    - generic [ref=e248]: Loading…
+                  - generic [ref=e249]: Compiling tokens...
+                - generic [ref=e250]: 3/12
+              - generic [ref=e251]:
+                - button "Deploy" [ref=e252] [cursor=pointer]:
+                  - img
+                  - text: Deploy
+                - button "Preview" [ref=e253] [cursor=pointer]:
+                  - img
+                  - text: Preview
+                - button "Visit" [ref=e254] [cursor=pointer]:
+                  - img
+                  - text: Visit
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - generic [ref=e258]:
+                  - heading "Edit Tokens" [level=3] [ref=e259]:
+                    - img [ref=e260]
+                    - text: Edit Tokens
+                  - generic [ref=e266]: sigil.tokens.md
+                - generic [ref=e267]:
+                  - generic [ref=e268]:
+                    - generic [ref=e269]: Primary Color
+                    - textbox [ref=e272]: oklch(0.65 0.18 275)
+                  - generic [ref=e274]:
+                    - generic [ref=e275]: Display Font
+                    - combobox [ref=e276] [cursor=pointer]:
+                      - img [ref=e277]
+                    - combobox [ref=e279]
+                  - generic [ref=e281]:
+                    - generic [ref=e282]: Card Radius
+                    - generic [ref=e283]: 8px
+                  - generic [ref=e287]:
+                    - generic [ref=e288]: Base Spacing
+                    - generic [ref=e289]:
+                      - button "Decrease" [ref=e290] [cursor=pointer]:
+                        - img [ref=e291]
+                      - generic [ref=e293]: "4"
+                      - button "Increase" [ref=e294] [cursor=pointer]:
+                        - img [ref=e295]
+              - generic [ref=e299]:
+                - generic [ref=e300]:
+                  - generic [ref=e301]:
+                    - img [ref=e302]
+                    - text: Dark Mode
+                  - switch [checked] [ref=e304] [cursor=pointer]
+                  - checkbox [checked]
+                - generic [ref=e305]:
+                  - generic [ref=e306]:
+                    - img [ref=e307]
+                    - text: Preview
+                  - paragraph [ref=e311]: Token-driven styling. Changes apply everywhere.
+                - generic [ref=e312]:
+                  - generic [ref=e313]: Tokens compiled
+                  - generic [ref=e314]: "259"
+                  - generic [ref=e315]:
+                    - generic [ref=e316]: ↑
+                    - text: All passing
+              - generic [ref=e318]:
+                - generic [ref=e319]:
+                  - text: Number of GPUs
+                  - paragraph [ref=e320]: You can add more later.
+                - generic [ref=e321]:
+                  - button "Decrease" [ref=e322] [cursor=pointer]:
+                    - img [ref=e323]
+                  - generic [ref=e325]: "8"
+                  - button "Increase" [ref=e326] [cursor=pointer]:
+                    - img [ref=e327]
+              - generic [ref=e330]:
+                - generic [ref=e331]:
+                  - generic [ref=e332]:
+                    - img [ref=e333]
+                    - text: Wallpaper Tinting
+                  - paragraph [ref=e337]: Allow the wallpaper to be tinted.
+                - switch [checked] [ref=e338] [cursor=pointer]
+                - checkbox [checked]
+              - generic [ref=e340]:
+                - text: Price Range
+                - paragraph [ref=e341]: Set your budget range ($200 – $800).
+              - generic [ref=e345]:
+                - generic [ref=e346]:
+                  - generic [ref=e347]: Animated Spinners
+                  - generic [ref=e348]: 55+ variants
+                - generic [ref=e349]:
+                  - generic [ref=e351]: braille
+                  - generic [ref=e353]: dots2
+                  - generic [ref=e355]: arc
+                  - generic [ref=e357]: triangle
+                  - generic [ref=e359]: snake
+                  - generic [ref=e361]: wave
+                  - generic [ref=e363]: noise
+                  - generic [ref=e365]: sparkle
+                  - generic [ref=e367]: moon
+                  - generic [ref=e369]: clock
+                  - generic [ref=e371]: grow
+                  - generic [ref=e373]: halves
+                  - generic [ref=e375]: rain
+                  - generic [ref=e377]: bar
+                  - generic [ref=e379]: helix
+                  - generic [ref=e381]: square
+              - navigation "Breadcrumb" [ref=e383]:
+                - list [ref=e384]:
+                  - listitem [ref=e385]:
+                    - link "Home" [ref=e386] [cursor=pointer]:
+                      - /url: "#"
+                  - listitem [ref=e387]:
+                    - generic [ref=e388]: /
+                    - link "Settings" [ref=e389] [cursor=pointer]:
+                      - /url: "#"
+                  - listitem [ref=e390]:
+                    - generic [ref=e391]: /
+                    - generic [ref=e392]: Tokens
+              - generic [ref=e393]:
+                - generic [ref=e394]: https://
+                - generic [ref=e395]: example.com
+                - img [ref=e396]
+              - textbox "Describe the issue..." [ref=e400]
+              - alert [ref=e401]:
+                - heading "Token cache expires in 2 hours." [level=5] [ref=e402]:
+                  - img
+                  - text: Token cache expires in 2 hours.
+              - generic [ref=e403]:
+                - generic [ref=e404]:
+                  - status "Loading" [ref=e405]:
+                    - text: ⣾
+                    - generic [ref=e406]: Loading…
+                  - generic [ref=e407]: Compiling tokens...
+                - generic [ref=e408]: 3/12
+              - alert [ref=e409]:
+                - heading "All checks passed — ready to merge." [level=5] [ref=e410]:
+                  - img
+                  - text: All checks passed — ready to merge.
+            - generic [ref=e411]:
+              - generic [ref=e412]:
+                - generic [ref=e414]:
+                  - heading "Project Analytics" [level=3] [ref=e415]:
+                    - img [ref=e416]
+                    - text: Project Analytics
+                  - generic [ref=e418]:
+                    - img
+                    - text: Last 7 days
+                - generic [ref=e419]:
+                  - generic [ref=e420]:
+                    - generic [ref=e421]:
+                      - generic [ref=e422]: Visitors
+                      - generic [ref=e423]: 12.4k
+                      - generic [ref=e424]:
+                        - generic [ref=e425]: ↑
+                        - text: +14%
+                    - generic [ref=e426]:
+                      - generic [ref=e427]: Conversion
+                      - generic [ref=e428]: 3.2%
+                      - generic [ref=e429]:
+                        - generic [ref=e430]: ↑
+                        - text: +0.8%
+                  - generic [ref=e431]:
+                    - generic [ref=e432]:
+                      - generic [ref=e433]: API Usage
+                      - generic [ref=e434]: 72%
+                    - meter "API Usage" [ref=e435]
+                  - paragraph [ref=e437]: 7,200 / 10,000 requests this cycle.
+              - generic [ref=e439]:
+                - checkbox "I agree to the terms and conditions" [checked] [ref=e440] [cursor=pointer]:
+                  - generic:
+                    - img
+                - checkbox [checked]
+                - generic [ref=e441] [cursor=pointer]: I agree to the terms and conditions
+              - tablist [ref=e443]:
+                - tab "Overview" [selected] [ref=e444]
+                - tab "Analytics" [ref=e445]
+                - tab "Reports" [ref=e446]
+              - generic [ref=e447]:
+                - generic [ref=e448]:
+                  - generic [ref=e449]: Page
+                  - generic [ref=e450]: Views
+                  - generic [ref=e451]: Bounce
+                - generic [ref=e452]:
+                  - generic [ref=e453]: /
+                  - generic [ref=e454]: 4,821
+                  - generic [ref=e455]: 32%
+                - generic [ref=e456]:
+                  - generic [ref=e457]: /docs
+                  - generic [ref=e458]: 3,104
+                  - generic [ref=e459]: 18%
+                - generic [ref=e460]:
+                  - generic [ref=e461]: /pricing
+                  - generic [ref=e462]: 1,247
+                  - generic [ref=e463]: 45%
+              - generic [ref=e464]:
+                - img [ref=e465]
+                - generic [ref=e468]: Search...
+                - generic [ref=e469]: 12 results
+              - generic [ref=e477]:
+                - generic [ref=e478]:
+                  - generic [ref=e480]: K
+                  - generic [ref=e481]:
+                    - paragraph [ref=e482]: Kevin pushed 3 commits to main
+                    - text: 2m ago
+                - generic [ref=e483]:
+                  - generic [ref=e485]: C
+                  - generic [ref=e486]:
+                    - paragraph [ref=e487]: "Build #847 deployed to production"
+                    - text: 5m ago
+                - button "View Full Report" [ref=e488] [cursor=pointer]:
+                  - img
+                  - text: View Full Report
+                  - img
+              - generic [ref=e489]:
+                - generic [ref=e490]:
+                  - img [ref=e491]
+                  - text: Two-factor authentication
+                - button "Enable" [ref=e493] [cursor=pointer]
+              - generic [ref=e494]:
+                - generic [ref=e495]:
+                  - generic [ref=e496]: Uploading assets...
+                  - generic [ref=e497]: 68%
+                - progressbar [ref=e499]
+              - generic [ref=e501]:
+                - generic [ref=e502]:
+                  - text: react
+                  - generic [ref=e503] [cursor=pointer]: ×
+                - generic [ref=e504]:
+                  - text: typescript
+                  - generic [ref=e505] [cursor=pointer]: ×
+                - generic [ref=e506]: Add tag...
+              - generic [ref=e507]:
+                - generic:
+                  - img
+                - textbox "Search components..." [ref=e508]
+              - generic [ref=e509]:
+                - button "Save" [ref=e510] [cursor=pointer]
+                - button "Discard" [ref=e511] [cursor=pointer]
+                - button "Reset" [ref=e512] [cursor=pointer]
+              - generic [ref=e513]:
+                - generic [ref=e514]: Recent Deploys
+                - generic [ref=e515]:
+                  - generic [ref=e516]: a3f9c2d
+                  - generic [ref=e517]:
+                    - generic [ref=e518]: prod
+                    - generic [ref=e519]: 4m
+                    - img [ref=e520]
+                - generic [ref=e523]:
+                  - generic [ref=e524]: e1b7f3a
+                  - generic [ref=e525]:
+                    - generic [ref=e526]: staging
+                    - generic [ref=e527]: 22m
+                    - img [ref=e528]
+                - generic [ref=e531]:
+                  - generic [ref=e532]: 7d2c91b
+                  - generic [ref=e533]:
+                    - generic [ref=e534]: preview
+                    - generic [ref=e535]: 1h
+                    - generic [ref=e536]: ✕
+              - alert [ref=e537]:
+                - heading "All checks passed — ready to merge." [level=5] [ref=e538]:
+                  - img
+                  - text: All checks passed — ready to merge.
+              - alert [ref=e539]:
+                - heading "Token cache expires in 2 hours." [level=5] [ref=e540]:
+                  - img
+                  - text: Token cache expires in 2 hours.
+            - generic [ref=e541]:
+              - generic [ref=e543]:
+                - list [ref=e544]:
+                  - listitem [ref=e545]:
+                    - img [ref=e549]
+                    - paragraph [ref=e552]: Account
+                    - paragraph [ref=e553]: Created
+                  - listitem [ref=e554]:
+                    - generic [ref=e557]: "2"
+                    - paragraph [ref=e559]: Workspace
+                    - paragraph [ref=e560]: Configure
+                  - listitem [ref=e561]:
+                    - generic [ref=e564]: "3"
+                    - paragraph [ref=e566]: Invite
+                    - paragraph [ref=e567]: Team
+                - generic [ref=e568]:
+                  - generic [ref=e569]: Workspace Name
+                  - generic [ref=e570]:
+                    - generic:
+                      - img
+                    - textbox [ref=e571]: acme-design
+                  - paragraph [ref=e572]: This will be your team URL slug.
+              - generic [ref=e573]:
+                - generic [ref=e574]:
+                  - heading "Plan" [level=3] [ref=e575]
+                  - paragraph [ref=e576]: Choose the plan that fits your needs.
+                - generic [ref=e577]:
+                  - generic [ref=e578]:
+                    - button "Free 5 components" [ref=e579] [cursor=pointer]:
+                      - generic [ref=e580]: Free
+                      - generic [ref=e581]: 5 components
+                    - button "Rec Pro Unlimited everything" [ref=e582] [cursor=pointer]:
+                      - generic [ref=e583]:
+                        - img
+                        - text: Rec
+                      - generic [ref=e584]:
+                        - img [ref=e585]
+                        - text: Pro
+                      - generic [ref=e588]: Unlimited everything
+                  - generic [ref=e589]:
+                    - generic [ref=e590]:
+                      - checkbox "Unlimited components" [checked] [ref=e591] [cursor=pointer]:
+                        - generic:
+                          - img
+                      - checkbox [checked]
+                      - generic [ref=e592] [cursor=pointer]: Unlimited components
+                    - generic [ref=e593]:
+                      - checkbox "Custom presets" [checked] [ref=e594] [cursor=pointer]:
+                        - generic:
+                          - img
+                      - checkbox [checked]
+                      - generic [ref=e595] [cursor=pointer]: Custom presets
+                    - generic [ref=e596]:
+                      - checkbox "Priority support" [ref=e597] [cursor=pointer]
+                      - checkbox
+                      - generic [ref=e598] [cursor=pointer]: Priority support
+              - generic [ref=e599]:
+                - navigation "Pagination" [ref=e600]:
+                  - button "Previous page" [disabled]: ← Prev
+                  - button "1" [ref=e601]
+                  - button "2" [ref=e602]
+                  - button "3" [ref=e603]
+                  - button "Next page" [ref=e604]: Next →
+                - generic [ref=e605]:
+                  - button "Copilot" [ref=e606]:
+                    - img [ref=e607]
+                    - text: Copilot
+                  - button "More options" [ref=e609]:
+                    - img [ref=e610]
+              - generic [ref=e612]:
+                - generic [ref=e613]: Ask, Search or Chat...
+                - generic [ref=e614]:
+                  - button [ref=e615]:
+                    - img [ref=e616]
+                  - generic [ref=e617]: Auto
+                  - generic [ref=e618]: 52% used
+                  - button [ref=e619]:
+                    - img [ref=e620]
+              - generic [ref=e622]:
+                - generic [ref=e623]:
+                  - generic [ref=e626]: S
+                  - generic [ref=e629]: GR
+                  - generic [ref=e632]: LR
+                  - generic [ref=e635]: T
+                  - generic [ref=e636]: "+2"
+                - generic [ref=e637]: 6 online
+              - generic [ref=e639]:
+                - generic [ref=e640]: Invite Teammates
+                - generic [ref=e641]:
+                  - generic [ref=e642]:
+                    - generic:
+                      - img
+                    - textbox "colleague@company.com" [ref=e643]
+                  - button "Add" [ref=e644] [cursor=pointer]:
+                    - img
+                    - text: Add
+                - generic [ref=e645]:
+                  - generic [ref=e646]:
+                    - generic [ref=e649]: S
+                    - generic [ref=e652]: LR
+                    - generic [ref=e655]: GR
+                  - generic [ref=e656]: +2 more invited
+                - button "Complete Setup" [ref=e657] [cursor=pointer]:
+                  - img
+                  - text: Complete Setup
+                - paragraph [ref=e658]: You can change these settings later.
+              - generic [ref=e659]:
+                - generic [ref=e660]:
+                  - img [ref=e661]
+                  - text: Push notifications
+                - switch [checked] [ref=e664] [cursor=pointer]
+                - checkbox [checked]
+              - generic [ref=e665]:
+                - generic [ref=e666]:
+                  - img [ref=e667]
+                  - generic [ref=e669]: Apr 1
+                  - generic [ref=e670]: –
+                  - generic [ref=e671]: Apr 22
+                - button "Apply" [ref=e672] [cursor=pointer]
+              - alert [ref=e673]:
+                - heading "New deployment pipeline available." [level=5] [ref=e674]:
+                  - img
+                  - text: New deployment pipeline available.
+              - generic [ref=e675]:
+                - generic [ref=e676]: Rate this component
+                - generic [ref=e677]:
+                  - img [ref=e678]
+                  - img [ref=e680]
+                  - img [ref=e682]
+                  - img [ref=e684]
+                  - img [ref=e686]
+              - generic [ref=e688]:
+                - generic [ref=e689]:
+                  - generic [ref=e690]: Status
+                  - generic [ref=e691]: Active
+                - generic [ref=e692]:
+                  - generic [ref=e693]: Region
+                  - generic [ref=e694]: us-east-1
+                - generic [ref=e695]:
+                  - generic [ref=e696]: Latency
+                  - generic [ref=e697]: 12ms
+              - generic [ref=e698]:
+                - generic [ref=e699]:
+                  - img [ref=e700]
+                  - text: Auto-connect to Wi-Fi
+                - switch [ref=e704] [cursor=pointer]
+                - checkbox
+              - generic [ref=e705]:
+                - generic [ref=e706]:
+                  - generic [ref=e707]:
+                    - generic [ref=e708]: Memory
+                    - generic [ref=e709]: 82%
+                  - meter "Memory" [ref=e710]
+                - generic [ref=e712]:
+                  - generic [ref=e713]:
+                    - generic [ref=e714]: CPU
+                    - generic [ref=e715]: 34%
+                  - meter "CPU" [ref=e716]
+      - generic [ref=e731]:
+        - generic [ref=e732]:
+          - generic [ref=e734]: / Architecture
+          - heading "Four layers. One agent-editable surface." [level=2] [ref=e735]
+          - paragraph [ref=e736]: Tokens define the primitives. Presets bundle them. Components consume them. Pages compose them. The agent layer sits alongside — humans and AI both edit the same token file.
+        - generic [ref=e737]:
+          - generic [ref=e738]:
+            - 'img "Isometric layer stack: tokens, presets, components, pages" [ref=e740]':
+              - generic [ref=e741] [cursor=pointer]:
+                - generic [ref=e746]: "01"
+                - generic [ref=e747]: TOKENS
+              - generic [ref=e748] [cursor=pointer]:
+                - generic [ref=e757]: "02"
+                - generic [ref=e758]: PRESETS
+              - generic [ref=e759] [cursor=pointer]:
+                - generic [ref=e767]: "03"
+                - generic [ref=e768]: COMPONENTS
+              - generic [ref=e769] [cursor=pointer]:
+                - generic [ref=e775]: "04"
+                - generic [ref=e776]: PAGES
+              - generic [ref=e780]: AGENT LAYER
+            - generic [ref=e781]:
+              - generic [ref=e782]:
+                - button "01" [ref=e783] [cursor=pointer]
+                - button "02" [ref=e784] [cursor=pointer]
+                - button "03" [ref=e785] [cursor=pointer]
+                - button "04" [ref=e786] [cursor=pointer]
+              - generic [ref=e787]:
+                - generic [ref=e788]:
+                  - generic [ref=e789]: "01"
+                  - heading "TOKENS" [level=3] [ref=e790]
+                - paragraph [ref=e791]: The source of truth. 259 fields — colors, fonts, spacing, radius, shadows, motion — that define your entire design system. Edit one token and every component updates.
+                - generic [ref=e792]:
+                  - generic [ref=e793]:
+                    - generic [ref=e794]: "--s-primary"
+                    - generic [ref=e795]: oklch(0.7 0.15 280)
+                  - generic [ref=e796]:
+                    - generic [ref=e797]: "--s-radius-md"
+                    - generic [ref=e798]: 6px
+                  - generic [ref=e799]:
+                    - generic [ref=e800]: "--s-font-display"
+                    - generic [ref=e801]: "\"Inter\""
+                  - generic [ref=e802]:
+                    - generic [ref=e803]: "--s-duration-fast"
+                    - generic [ref=e804]: 150ms
+                - generic [ref=e805]: 259 configurable fields
+          - generic [ref=e806]:
+            - generic [ref=e807]:
+              - generic [ref=e808]: AGENT LAYER
+              - text: Human or AI — same interface
+            - generic [ref=e809]:
+              - generic [ref=e810]: AGENTS.md
+              - generic [ref=e811]: tokens.md
+              - generic [ref=e812]: compileToCss()
+              - generic [ref=e813]: sigil doctor
+            - generic [ref=e814]: Agents edit tokens, not components
+      - generic [ref=e821]:
+        - generic [ref=e822]:
+          - generic [ref=e824]: / Token System
+          - heading "One file compiles to everything." [level=2] [ref=e825]
+          - paragraph [ref=e826]: Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly.
+        - generic [ref=e827]:
+          - generic [ref=e828]:
+            - generic [ref=e830]:
+              - generic [ref=e831]: SIGIL.TOKENS.MD
+              - generic [ref=e832]:
+                - generic [ref=e833]:
+                  - text: "## Colors"
+                  - generic [ref=e834]: "primary: oklch(0.7 0.15 280)"
+                  - generic [ref=e835]: "background: oklch(0.13 0.01 260)"
+                  - generic [ref=e836]: "surface: oklch(0.17 0.01 260)"
+                  - generic [ref=e837]: "text: oklch(0.93 0.01 260)"
+                  - generic [ref=e838]: "border: oklch(0.25 0.02 260)"
+                - generic [ref=e839]:
+                  - text: "## Typography"
+                  - generic [ref=e840]: "font-display: \"PP Mori\""
+                  - generic [ref=e841]: "font-body: \"Inter\""
+                  - generic [ref=e842]: "font-mono: \"Berkeley Mono\""
+                  - generic [ref=e843]: "heading-weight: 600"
+                - generic [ref=e844]:
+                  - text: "## Spacing"
+                  - generic [ref=e845]: "base: 4px"
+                  - generic [ref=e846]: "section-py: 96px"
+                  - generic [ref=e847]: "card-padding: 24px"
+                  - generic [ref=e848]: "input-height: 40px"
+                - generic [ref=e849]:
+                  - text: "## Radius"
+                  - generic [ref=e850]: "radius-sm: 4px"
+                  - generic [ref=e851]: "radius-md: 8px"
+                  - generic [ref=e852]: "radius-lg: 12px"
+                  - generic [ref=e853]: "radius-full: 9999px"
+            - generic [ref=e855]:
+              - generic [ref=e856]: compileToCss()
+              - img [ref=e859]
+            - generic [ref=e862]:
+              - generic [ref=e863]: CSS VARIABLES
+              - generic [ref=e864]:
+                - generic [ref=e865]: ":root {"
+                - generic [ref=e866]:
+                  - generic [ref=e867]: "--s-primary: oklch(0.7 0.15 280);"
+                  - generic [ref=e868]: "--s-background: oklch(0.13 0.01 260);"
+                  - generic [ref=e869]: "--s-surface: oklch(0.17 0.01 260);"
+                  - generic [ref=e870]: "--s-text: oklch(0.93 0.01 260);"
+                  - generic [ref=e871]: "--s-border: oklch(0.25 0.02 260);"
+                - generic [ref=e872]:
+                  - generic [ref=e873]: "--s-font-display: \"PP Mori\", sans-serif;"
+                  - generic [ref=e874]: "--s-font-body: \"Inter\", sans-serif;"
+                  - generic [ref=e875]: "--s-font-mono: \"Berkeley Mono\", monospace;"
+                  - generic [ref=e876]: "--s-heading-weight: 600;"
+                - generic [ref=e877]:
+                  - generic [ref=e878]: "--s-spacing-base: 4px;"
+                  - generic [ref=e879]: "--s-section-py: 96px;"
+                  - generic [ref=e880]: "--s-card-padding: 24px;"
+                  - generic [ref=e881]: "--s-input-height: 40px;"
+                - generic [ref=e882]:
+                  - generic [ref=e883]: "--s-radius-sm: 4px;"
+                  - generic [ref=e884]: "--s-radius-md: 8px;"
+                  - generic [ref=e885]: "--s-radius-lg: 12px;"
+                  - generic [ref=e886]: "--s-radius-full: 9999px;"
+                - generic [ref=e887]: "}"
+              - generic [ref=e888]:
+                - generic [ref=e889]: 259 variables compiled
+                - generic [ref=e890]: v2.4
+            - generic [ref=e892]:
+              - generic [ref=e893]: var(--s-*)
+              - img [ref=e896]
+            - generic [ref=e899]:
+              - generic [ref=e900]: COMPONENTS
+              - generic [ref=e901]:
+                - generic [ref=e902]:
+                  - button "Deploy" [ref=e903] [cursor=pointer]
+                  - button "Cancel" [ref=e904] [cursor=pointer]
+                - generic [ref=e905]:
+                  - generic [ref=e906]: Stable
+                  - generic [ref=e907]: Beta
+                  - generic [ref=e908]: v2.4
+                - generic [ref=e909]:
+                  - heading "Edge Compute" [level=3] [ref=e911]
+                  - paragraph [ref=e913]: Deploy functions at the edge with sub-50ms cold starts across 12 regions.
+                - generic [ref=e914]:
+                  - generic [ref=e915]: Dark Mode
+                  - switch [checked] [ref=e916] [cursor=pointer]
+                  - checkbox [checked]
+                - textbox "Search tokens..." [ref=e918]
+                - generic [ref=e919]:
+                  - generic [ref=e920]:
+                    - generic [ref=e921]: Build progress
+                    - generic [ref=e922]: 100%
+                  - progressbar [ref=e924]
+          - generic [ref=e926]:
+            - button "colors" [ref=e927] [cursor=pointer]
+            - button "typography" [ref=e928] [cursor=pointer]
+            - button "spacing" [ref=e929] [cursor=pointer]
+            - button "radius" [ref=e930] [cursor=pointer]
+            - generic [ref=e932]: 1/4
+      - generic [ref=e939]:
+        - generic [ref=e940]:
+          - generic [ref=e942]: / Your Token File
+          - heading "Your file. Your rules. Your preset." [level=2] [ref=e943]
+          - paragraph [ref=e944]: sigil.tokens.md is the single source of truth for your project's visual identity. Start from a curated preset or write every token from scratch — either way, you own the file and can change any of 259 fields at any time.
+        - generic [ref=e946]:
+          - generic [ref=e947]:
+            - generic [ref=e948]: SIGIL.TOKENS.MD
+            - generic [ref=e949]:
+              - generic [ref=e950]: "## Colors"
+              - generic [ref=e951]:
+                - generic [ref=e952]: "primary:"
+                - generic [ref=e953]: oklch(0.7 0.15 280)
+              - generic [ref=e955]: "background: oklch(0.13 0.01 260)"
+              - generic [ref=e957]: "## Typography"
+              - generic [ref=e958]: "font-display: \"PP Mori\", sans-serif"
+              - generic [ref=e960]: "## Radius"
+              - generic [ref=e961]: "md: 6px"
+          - generic [ref=e962]:
+            - generic [ref=e963]: LIVE PREVIEW
+            - generic [ref=e964]:
+              - button "Get Started" [ref=e965] [cursor=pointer]
+              - generic [ref=e966]: New
+              - generic [ref=e967]:
+                - heading "Dashboard" [level=3] [ref=e969]
+                - generic [ref=e970]: Manage your workspace settings and team.
+              - generic [ref=e971]: "primary: purple"
+        - generic [ref=e973]:
+          - generic [ref=e974]:
+            - generic [ref=e975]: YOUR BRAND COLORS
+            - paragraph [ref=e976]: Set your exact brand colors in OKLCH. Perceptually uniform — lightness, chroma, and hue stay consistent across light and dark modes.
+          - generic [ref=e977]:
+            - generic [ref=e978]: YOUR FONTS
+            - paragraph [ref=e979]: Display, body, and mono fonts configured once. Every heading, paragraph, and code block follows your choices automatically.
+          - generic [ref=e980]:
+            - generic [ref=e981]: SAVES AI TOKENS
+            - paragraph [ref=e982]: Agents edit one markdown file instead of hunting through dozens of component files. Fewer tokens spent, deterministic output, zero drift.
+      - generic [ref=e989]:
+        - generic [ref=e990]:
+          - generic [ref=e992]: / Agent-First Design
+          - heading "Same components you trust. One file for agents to edit." [level=2] [ref=e993]
+          - paragraph [ref=e994]: Sigil's components are built on Radix primitives and the same patterns behind shadcn/ui — accessible, composable, production-grade. The token layer is the thin control surface that makes them agent-editable without touching component code.
+        - generic [ref=e995]:
+          - generic [ref=e996]:
+            - generic [ref=e997]: THE COMPONENTS YOU ALREADY TRUST
+            - generic [ref=e998]:
+              - generic [ref=e999]:
+                - generic [ref=e1000]: Radix Primitives
+                - text: Accessible, unstyled behavior layer — focus management, keyboard nav, ARIA
+              - generic [ref=e1001]:
+                - generic [ref=e1002]: forwardRef + className
+                - text: Standard React patterns. Slot composition. No proprietary abstractions
+              - generic [ref=e1003]:
+                - generic [ref=e1004]: Tailwind + clsx + twMerge
+                - text: The same class composition stack used across the React ecosystem
+              - generic [ref=e1005]:
+                - generic [ref=e1006]: 100+ Production Components
+                - text: Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested
+            - generic [ref=e1007]: Nothing proprietary. Standard React components.
+          - generic [ref=e1008]:
+            - generic [ref=e1009]: THE LAYER AGENTS EDIT
+            - generic [ref=e1010]:
+              - generic [ref=e1011]:
+                - generic [ref=e1012]: sigil.tokens.md
+                - text: One markdown file. 259 fields. Human-readable, agent-writable, git-diffable
+              - generic [ref=e1013]:
+                - generic [ref=e1014]: compileToCss()
+                - text: Deterministic compiler. Same input always produces same CSS output
+              - generic [ref=e1015]:
+                - generic [ref=e1016]: var(--s-*) variables
+                - text: 300+ CSS custom properties. Components read them — agents never touch components
+              - generic [ref=e1017]:
+                - generic [ref=e1018]: .sigil/AGENTS.md
+                - text: Auto-generated instructions for any AI agent — preset mood, token conventions, CLI commands
+            - generic [ref=e1019]: Thin control surface. Maximum leverage.
+        - generic [ref=e1020]: WHAT AN AGENT DOES WITH SIGIL
+        - generic [ref=e1021]:
+          - generic [ref=e1022]:
+            - generic [ref=e1023]: "01"
+            - generic [ref=e1024]: Reads AGENTS.md
+            - text: Learns the active preset, token naming, component conventions, and available CLI commands.
+          - generic [ref=e1025]:
+            - generic [ref=e1026]: "02"
+            - generic [ref=e1027]: Edits tokens.md
+            - text: Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through 100+ component files.
+          - generic [ref=e1028]:
+            - generic [ref=e1029]: "03"
+            - generic [ref=e1030]: CSS recompiles
+            - text: Deterministic output. Same tokens always produce the same 300+ CSS variables. No surprise side effects.
+          - generic [ref=e1031]:
+            - generic [ref=e1032]: "04"
+            - generic [ref=e1033]: Components update
+            - text: Every component reads var(--s-*). The agent never touches component code — the token layer is the only surface.
+        - generic [ref=e1035]:
+          - generic [ref=e1036]:
+            - generic [ref=e1037]: 1 file
+            - generic [ref=e1038]: VS. 100+ COMPONENT FILES
+            - paragraph [ref=e1039]: "Traditional approach: agent reads and edits dozens of component files to change a color. Sigil: one markdown edit. Fewer LLM tokens, faster iteration."
+          - generic [ref=e1040]:
+            - generic [ref=e1041]: 0 drift
+            - generic [ref=e1042]: DETERMINISTIC OUTPUT
+            - paragraph [ref=e1043]: The compiler is a pure function. Same tokens.md always produces the same CSS. No hallucinated styles, no inconsistent overrides, no entropy.
+          - generic [ref=e1044]:
+            - generic [ref=e1045]: 259 fields
+            - generic [ref=e1046]: COMPLETE VISUAL CONTROL
+            - paragraph [ref=e1047]: Colors, fonts, spacing, radius, shadows, motion, borders — the full visual identity in one structured file. The agent has total control without total access.
+      - generic [ref=e1054]:
+        - generic [ref=e1055]:
+          - generic [ref=e1057]: / Components
+          - heading "100+ token-driven components." [level=2] [ref=e1058]
+          - paragraph [ref=e1059]: Every component reads from var(--s-*) tokens. Switch presets and the entire library updates.
+        - generic [ref=e1060]:
+          - generic [ref=e1061]:
+            - generic [ref=e1062]: 100+
+            - generic [ref=e1063]: Components
+          - generic [ref=e1064]:
+            - generic [ref=e1065]: "14"
+            - generic [ref=e1066]: Categories
+          - generic [ref=e1067]:
+            - generic [ref=e1068]: "31"
+            - generic [ref=e1069]: Presets
+          - generic [ref=e1070]:
+            - generic [ref=e1071]: "259"
+            - generic [ref=e1072]: Tokens
+        - generic [ref=e1073]:
+          - button "Layout" [ref=e1074] [cursor=pointer]
+          - button "UI" [ref=e1075] [cursor=pointer]
+          - button "Navigation" [ref=e1076] [cursor=pointer]
+          - button "Overlays" [ref=e1077] [cursor=pointer]
+          - button "Shapes" [ref=e1078] [cursor=pointer]
+          - button "3D" [ref=e1079] [cursor=pointer]
+          - button "Diagrams" [ref=e1080] [cursor=pointer]
+          - button "Marketing" [ref=e1081] [cursor=pointer]
+        - generic [ref=e1082]:
+          - img
+          - generic [ref=e1083]:
+            - generic [ref=e1084]:
+              - button "Click me" [ref=e1086] [cursor=pointer]
+              - generic [ref=e1087]:
+                - generic [ref=e1088]: Button
+                - generic [ref=e1089]: 4 variants
+              - generic [ref=e1090]: <Button variant="primary"> Click me </Button>
+            - generic [ref=e1091]:
+              - generic [ref=e1093]:
+                - heading "Dashboard" [level=3] [ref=e1095]
+                - generic [ref=e1096]: Manage your workspace and team settings.
+              - generic [ref=e1097]:
+                - generic [ref=e1098]: Card
+                - generic [ref=e1099]: 2 variants
+              - generic [ref=e1100]: <Card> <CardHeader> <CardTitle>Dashboard</CardTitle> </CardHeader> <CardContent> Manage your workspace. </CardContent> </Card>
+            - generic [ref=e1101]:
+              - textbox "Search components..." [ref=e1104]
+              - generic [ref=e1105]:
+                - generic [ref=e1106]: Input
+                - generic [ref=e1107]: 3 variants
+              - generic [ref=e1108]: <Input placeholder="Search..." />
+            - generic [ref=e1109]:
+              - tablist [ref=e1112]:
+                - tab "Tab 1" [selected] [ref=e1113]
+                - tab "Tab 2" [ref=e1114]
+              - generic [ref=e1115]:
+                - generic [ref=e1116]: Tabs
+                - generic [ref=e1117]: 1 variant
+              - generic [ref=e1118]: <Tabs defaultValue="tab1"> <TabsList> <TabsTrigger value="tab1"> Tab 1 </TabsTrigger> <TabsTrigger value="tab2"> Tab 2 </TabsTrigger> </TabsList> </Tabs>
+            - generic [ref=e1119]:
+              - generic [ref=e1122]:
+                - generic [ref=e1123]: "1"
+                - generic [ref=e1124]: "2"
+                - generic [ref=e1125]: "3"
+                - generic [ref=e1126]: "4"
+                - generic [ref=e1127]: "5"
+                - generic [ref=e1128]: "6"
+                - generic [ref=e1129]: "7"
+                - generic [ref=e1130]: "8"
+                - generic [ref=e1131]: "9"
+                - generic [ref=e1132]: "10"
+                - generic [ref=e1133]: "11"
+                - generic [ref=e1134]: "12"
+                - generic [ref=e1135]: "13"
+                - generic [ref=e1136]: "14"
+              - generic [ref=e1137]:
+                - generic [ref=e1138]: Calendar
+                - generic [ref=e1139]: 1 variant
+              - generic [ref=e1140]: "{days.map(d => ( <span style={{ background: d === 6 ? \"var(--s-primary)\" : \"transparent\", }} > {d} </span> ))}"
+            - generic [ref=e1141]:
+              - table [ref=e1143]:
+                - rowgroup [ref=e1144]:
+                  - row "name status" [ref=e1145]:
+                    - columnheader "name" [ref=e1146]
+                    - columnheader "status" [ref=e1147]
+                - rowgroup [ref=e1148]:
+                  - row "alpha ok" [ref=e1149]:
+                    - cell "alpha" [ref=e1150]
+                    - cell "ok" [ref=e1151]
+                  - row "beta ok" [ref=e1152]:
+                    - cell "beta" [ref=e1153]
+                    - cell "ok" [ref=e1154]
+              - generic [ref=e1155]:
+                - generic [ref=e1156]: DataTable
+                - generic [ref=e1157]: 1 variant
+              - generic [ref=e1158]: <table> <thead> <tr> <th>name</th> <th>status</th> </tr> </thead> <tbody> <tr> <td>alpha</td> <td>ok</td> </tr> </tbody> </table>
+            - generic [ref=e1159]:
+              - alert [ref=e1161]:
+                - heading "Warning alert" [level=5] [ref=e1162]
+              - generic [ref=e1163]:
+                - generic [ref=e1164]: Alert
+                - generic [ref=e1165]: 3 variants
+              - generic [ref=e1166]: <Alert variant="warning"> <AlertTitle>Warning alert</AlertTitle> </Alert>
+            - generic [ref=e1167]:
+              - generic [ref=e1169]: "[Dialog]"
+              - generic [ref=e1170]:
+                - generic [ref=e1171]: Dialog
+                - generic [ref=e1172]: 2 variants
+              - generic [ref=e1173]: <Dialog> <DialogTrigger asChild> <Button>Open</Button> </DialogTrigger> <DialogContent> <DialogTitle>Title</DialogTitle> </DialogContent> </Dialog>
+        - generic [ref=e1174]:
+          - generic [ref=e1175]: HOW TOKENS FLOW INTO COMPONENTS
+          - generic [ref=e1177]:
+            - generic [ref=e1179]:
+              - img:
+                - generic:
+                  - generic: fill
+                  - generic: "--s-primary"
+                - generic:
+                  - generic: radius
+                  - generic: "--s-radius-md"
+                - generic:
+                  - generic: font
+                  - generic: "--s-font-mono"
+                - generic:
+                  - generic: speed
+                  - generic: "--s-duration-fast"
+              - generic [ref=e1180]:
+                - button "Get Started" [ref=e1181] [cursor=pointer]
+                - generic [ref=e1183]: New
+            - generic [ref=e1185]:
+              - generic [ref=e1186]: TOKEN CONSUMPTION
+              - generic [ref=e1187]:
+                - generic [ref=e1188]:
+                  - generic [ref=e1189]: FILL COLOR
+                  - generic [ref=e1190]:
+                    - generic [ref=e1191]: "--s-primary"
+                    - generic [ref=e1192]: oklch(0.7 0.15 280)
+                - generic [ref=e1193]:
+                  - generic [ref=e1194]: TEXT COLOR
+                  - generic [ref=e1195]:
+                    - generic [ref=e1196]: "--s-primary-contrast"
+                    - generic [ref=e1197]: "#fff"
+                - generic [ref=e1198]:
+                  - generic [ref=e1199]: CORNER RADIUS
+                  - generic [ref=e1200]:
+                    - generic [ref=e1201]: "--s-radius-md"
+                    - generic [ref=e1202]: 6px
+                - generic [ref=e1203]:
+                  - generic [ref=e1204]: FONT FAMILY
+                  - generic [ref=e1205]:
+                    - generic [ref=e1206]: "--s-font-mono"
+                    - generic [ref=e1207]: "\"Roboto Mono\""
+                - generic [ref=e1208]:
+                  - generic [ref=e1209]: TRANSITION
+                  - generic [ref=e1210]:
+                    - generic [ref=e1211]: "--s-duration-fast"
+                    - generic [ref=e1212]: 150ms
+                - generic [ref=e1213]:
+                  - generic [ref=e1214]: SHADOW
+                  - generic [ref=e1215]:
+                    - generic [ref=e1216]: "--s-shadow-sm"
+                    - generic [ref=e1217]: 0 1px 2px...
+        - generic [ref=e1218]:
+          - link "Browse 100+ Components" [ref=e1219] [cursor=pointer]:
+            - /url: /components
+          - link "Read Docs" [ref=e1220] [cursor=pointer]:
+            - /url: /docs/components/button
+      - generic [ref=e1227]:
+        - generic [ref=e1228]:
+          - generic [ref=e1230]: / Shapes & Patterns
+          - heading "Geometric primitives. Voronoi everything." [level=2] [ref=e1231]
+          - paragraph [ref=e1232]: Every shape, pattern, and layout rendered inside Voronoi cells — organic tessellation powered by d3-delaunay, driven by your tokens.
+        - generic [ref=e1233]:
+          - img
+          - generic [ref=e1234]:
+            - generic [ref=e1235]:
+              - generic [ref=e1238]:
+                - img [ref=e1240]
+                - generic [ref=e1242]: Voronoi
+                - generic [ref=e1243]: Organic cell layouts via d3-delaunay
+              - generic [ref=e1246]:
+                - generic [ref=e1249]: Diamond
+                - generic [ref=e1250]: Rotated square grids
+              - generic [ref=e1253]:
+                - generic [ref=e1256]: Hexagon
+                - generic [ref=e1257]: Honeycomb tessellation
+              - generic [ref=e1260]:
+                - generic [ref=e1263]: Triangle
+                - generic [ref=e1264]: Triangular fills
+              - generic [ref=e1267]:
+                - generic [ref=e1268]: TOKEN-DRIVEN
+                - generic [ref=e1269]: Every shape and pattern responds to your active preset.
+            - generic [ref=e1270]:
+              - generic [ref=e1273]:
+                - generic [ref=e1275]: Grid
+                - generic [ref=e1276]: pattern
+              - generic [ref=e1279]:
+                - generic [ref=e1281]: Dots
+                - generic [ref=e1282]: pattern
+              - generic [ref=e1285]:
+                - generic [ref=e1287]: Crosshatch
+                - generic [ref=e1288]: pattern
+              - generic [ref=e1291]:
+                - generic [ref=e1293]: Diagonal
+                - generic [ref=e1294]: Angular section cuts
+              - generic [ref=e1297]:
+                - img [ref=e1299]
+                - generic [ref=e1301]: Cross
+                - generic [ref=e1302]: Structural markers
+              - generic [ref=e1305]:
+                - generic [ref=e1306]: "7"
+                - generic [ref=e1307]: Shape types
+              - generic [ref=e1310]:
+                - generic [ref=e1322]: Box3D
+                - generic [ref=e1323]: CSS 3D transforms
+      - generic [ref=e1330]:
+        - generic [ref=e1331]:
+          - generic [ref=e1333]: / Presets
+          - heading "Start from 31 presets. Or build your own." [level=2] [ref=e1334]
+          - paragraph [ref=e1335]: Use a curated preset as-is, fork one as a starting point, or create a fully custom preset from scratch. Your project's sigil.tokens.md is the final authority — not a library.
+        - generic [ref=e1336]:
+          - generic [ref=e1337]:
+            - generic [ref=e1338]:
+              - generic [ref=e1339]:
+                - generic [ref=e1340]: Preset A
+                - generic [ref=e1341]: sigil
+              - generic [ref=e1349]:
+                - generic [ref=e1350]: Build faster.
+                - generic [ref=e1351]: Token-driven design system
+                - button "Get Started" [ref=e1352]
+            - generic [ref=e1366]:
+              - generic [ref=e1367]:
+                - generic [ref=e1368]: Preset B
+                - generic [ref=e1369]: crux
+              - generic [ref=e1377]:
+                - generic [ref=e1378]: Build faster.
+                - generic [ref=e1379]: Token-driven design system
+                - button "Get Started" [ref=e1380]
+          - generic [ref=e1394]:
+            - generic [ref=e1395]:
+              - generic [ref=e1396]: Preset A
+              - generic [ref=e1397]:
+                - button "sigil" [ref=e1398] [cursor=pointer]:
+                  - generic [ref=e1401]: sigil
+                - button "noir" [ref=e1402] [cursor=pointer]:
+                  - generic [ref=e1405]: noir
+                - button "forge" [ref=e1406] [cursor=pointer]:
+                  - generic [ref=e1409]: forge
+                - button "arc" [ref=e1410] [cursor=pointer]:
+                  - generic [ref=e1413]: arc
+                - button "crux" [ref=e1414] [cursor=pointer]:
+                  - generic [ref=e1417]: crux
+                - button "flux" [ref=e1418] [cursor=pointer]:
+                  - generic [ref=e1421]: flux
+            - generic [ref=e1422]:
+              - generic [ref=e1423]: Preset B
+              - generic [ref=e1424]:
+                - button "sigil" [ref=e1425] [cursor=pointer]:
+                  - generic [ref=e1428]: sigil
+                - button "noir" [ref=e1429] [cursor=pointer]:
+                  - generic [ref=e1432]: noir
+                - button "forge" [ref=e1433] [cursor=pointer]:
+                  - generic [ref=e1436]: forge
+                - button "arc" [ref=e1437] [cursor=pointer]:
+                  - generic [ref=e1440]: arc
+                - button "crux" [ref=e1441] [cursor=pointer]:
+                  - generic [ref=e1444]: crux
+                - button "flux" [ref=e1445] [cursor=pointer]:
+                  - generic [ref=e1448]: flux
+          - generic [ref=e1449]:
+            - generic [ref=e1450]: YOUR OWN PRESET
+            - generic [ref=e1451]:
+              - text: These are curated examples. Run
+              - code [ref=e1452]: sigil preset create
+              - text: to build a custom preset with your brand colors, fonts, and radius — then edit sigil.tokens.md for full control.
+        - generic [ref=e1454]:
+          - generic [ref=e1455]:
+            - generic [ref=e1456]: START FROM A PRESET
+            - generic [ref=e1457]: $ sigil preset noir
+            - paragraph [ref=e1458]: 31 curated bundles. One command writes all 259 tokens to your file. Use as-is or as a base to customize.
+          - generic [ref=e1459]:
+            - generic [ref=e1460]: CREATE YOUR OWN
+            - generic [ref=e1461]: $ sigil preset create
+            - paragraph [ref=e1462]: Interactive scaffolding. Pick a base, set your brand colors and fonts, and a custom preset is generated that you own and control.
+          - generic [ref=e1463]:
+            - generic [ref=e1464]: EDIT TOKENS DIRECTLY
+            - generic [ref=e1465]:
+              - generic [ref=e1466]: "## Colors"
+              - generic [ref=e1467]: "primary: oklch(0.65 0.2 150)"
+            - paragraph [ref=e1468]: Open sigil.tokens.md and change any of 259 fields. Your file is the source of truth — presets are just starting points.
+        - generic [ref=e1469]:
+          - link "Browse Presets" [ref=e1470] [cursor=pointer]:
+            - /url: /presets
+          - link "Create Custom Preset" [ref=e1471] [cursor=pointer]:
+            - /url: /sandbox
+      - generic [ref=e1478]:
+        - generic [ref=e1479]:
+          - generic [ref=e1481]: / Demos
+          - heading "17 production templates." [level=2] [ref=e1482]
+          - paragraph [ref=e1483]: Real sites built with Sigil. Each uses a different preset.
+        - generic [ref=e1484]:
+          - generic [ref=e1485]:
+            - link "AI SaaS Landing sigil preset Modern AI product landing with gradient hero, feature grid, and pricing tiers." [ref=e1487] [cursor=pointer]:
+              - /url: /demos/ai-saas
+              - generic [ref=e1489]:
+                - heading "AI SaaS Landing" [level=3] [ref=e1490]
+                - text: sigil preset
+              - paragraph [ref=e1492]: Modern AI product landing with gradient hero, feature grid, and pricing tiers.
+            - link "Dashboard cobalt Analytics dashboard with KPIs and data tables." [ref=e1494] [cursor=pointer]:
+              - /url: /demos/dashboard
+              - heading "Dashboard" [level=3] [ref=e1496]
+              - generic [ref=e1497]:
+                - generic [ref=e1498]: cobalt
+                - paragraph [ref=e1499]: Analytics dashboard with KPIs and data tables.
+          - generic [ref=e1500]:
+            - link "03 kova E-commerce Product catalog with filters, cart, checkout flow, and order tracking." [ref=e1502] [cursor=pointer]:
+              - /url: /demos/ecommerce
+              - generic [ref=e1503]:
+                - generic [ref=e1504]:
+                  - generic [ref=e1505]: "03"
+                  - generic [ref=e1506]: kova
+                - heading "E-commerce" [level=3] [ref=e1507]
+                - paragraph [ref=e1508]: Product catalog with filters, cart, checkout flow, and order tracking.
+            - link "04 etch Developer Docs Documentation site with sidebar nav, code blocks, and API reference." [ref=e1510] [cursor=pointer]:
+              - /url: /demos/dev-docs
+              - generic [ref=e1511]:
+                - generic [ref=e1512]:
+                  - generic [ref=e1513]: "04"
+                  - generic [ref=e1514]: etch
+                - heading "Developer Docs" [level=3] [ref=e1515]
+                - paragraph [ref=e1516]: Documentation site with sidebar nav, code blocks, and API reference.
+            - link "05 flux Startup Startup landing page with hero, testimonials, and CTA sections." [ref=e1518] [cursor=pointer]:
+              - /url: /demos/startup
+              - generic [ref=e1519]:
+                - generic [ref=e1520]:
+                  - generic [ref=e1521]: "05"
+                  - generic [ref=e1522]: flux
+                - heading "Startup" [level=3] [ref=e1523]
+                - paragraph [ref=e1524]: Startup landing page with hero, testimonials, and CTA sections.
+            - link "06 noir Portfolio Creative portfolio with project grid, about section, and contact form." [ref=e1526] [cursor=pointer]:
+              - /url: /demos/portfolio
+              - generic [ref=e1527]:
+                - generic [ref=e1528]:
+                  - generic [ref=e1529]: "06"
+                  - generic [ref=e1530]: noir
+                - heading "Portfolio" [level=3] [ref=e1531]
+                - paragraph [ref=e1532]: Creative portfolio with project grid, about section, and contact form.
+            - link "07 strata Blog Editorial blog with article grid, categories, and reading progress." [ref=e1534] [cursor=pointer]:
+              - /url: /demos/blog
+              - generic [ref=e1535]:
+                - generic [ref=e1536]:
+                  - generic [ref=e1537]: "07"
+                  - generic [ref=e1538]: strata
+                - heading "Blog" [level=3] [ref=e1539]
+                - paragraph [ref=e1540]: Editorial blog with article grid, categories, and reading progress.
+            - link "08 onyx Agency Agency site with case studies, team section, and service offerings." [ref=e1542] [cursor=pointer]:
+              - /url: /demos/agency
+              - generic [ref=e1543]:
+                - generic [ref=e1544]:
+                  - generic [ref=e1545]: "08"
+                  - generic [ref=e1546]: onyx
+                - heading "Agency" [level=3] [ref=e1547]
+                - paragraph [ref=e1548]: Agency site with case studies, team section, and service offerings.
+        - link "View All 17 Templates" [ref=e1550] [cursor=pointer]:
+          - /url: /demos
+      - generic [ref=e1557]:
+        - generic [ref=e1558]:
+          - generic [ref=e1560]: / Quick Start
+          - heading "Get started in 30 seconds." [level=2] [ref=e1561]
+          - paragraph [ref=e1562]: Three steps to a complete design system.
+        - generic [ref=e1563]:
+          - generic [ref=e1564]:
+            - generic [ref=e1565]: 01 INSTALL
+            - generic [ref=e1566]: $ npx create-sigil-app
+            - paragraph [ref=e1567]: Interactive setup detects your framework, recommends presets, generates everything.
+          - generic [ref=e1568]:
+            - generic [ref=e1569]: 02 DEFINE YOUR PRESET
+            - generic [ref=e1570]:
+              - generic [ref=e1571]: $ sigil preset create
+              - generic [ref=e1572]: or start from one of 31 curated presets
+            - paragraph [ref=e1580]: Create a custom preset from scratch, fork a curated one, or edit sigil.tokens.md directly. You own the file.
+          - generic [ref=e1581]:
+            - generic [ref=e1582]: 03 BUILD
+            - generic [ref=e1583]:
+              - generic [ref=e1584]: "import { Button } from"
+              - generic [ref=e1585]: "\"@sigil-ui/components\";"
+            - paragraph [ref=e1586]: 100+ components that read from your tokens. No prop drilling, no theme objects.
+        - generic [ref=e1587]:
+          - generic [ref=e1588]: ~/ — zsh
+          - generic [ref=e1589]:
+            - generic [ref=e1595]: ~/ — zsh
+            - generic [ref=e1597]: ▋
+      - generic [ref=e1599]:
+        - heading "Start building." [level=2] [ref=e1600]
+        - paragraph [ref=e1601]: One file. 259 tokens. 100+ components. 31 presets. The design system that compiles from a single markdown file.
+        - generic [ref=e1602]:
+          - link "Get Started" [ref=e1603] [cursor=pointer]:
+            - /url: /docs
+          - link "Read the Docs" [ref=e1604] [cursor=pointer]:
+            - /url: /docs/components/button
+      - contentinfo [ref=e1605]:
+        - generic:
+          - img
+        - generic:
+          - img
+        - generic:
+          - img
+        - generic:
+          - img
+        - generic [ref=e1606]:
+          - generic [ref=e1607]:
+            - generic [ref=e1608]:
+              - img [ref=e1609]
+              - generic [ref=e1614]: Sigil UI
+            - paragraph [ref=e1615]: The token-driven design system. 100+ components, 32 presets, one markdown file controls everything.
+            - generic [ref=e1616]:
+              - link "GitHub" [ref=e1617] [cursor=pointer]:
+                - /url: https://github.com/Kevin-Liu-01/sigil-ui
+                - img [ref=e1618]
+              - link "X" [ref=e1620] [cursor=pointer]:
+                - /url: https://x.com/kevinliu_01
+                - img [ref=e1621]
+              - link "LinkedIn" [ref=e1623] [cursor=pointer]:
+                - /url: https://linkedin.com/in/kevinliu01
+                - img [ref=e1624]
+              - link "Discord" [ref=e1626] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e1627]
+          - generic [ref=e1629]:
+            - generic [ref=e1630]: Product
+            - generic [ref=e1631]:
+              - link "Docs" [ref=e1632] [cursor=pointer]:
+                - /url: /docs
+              - link "Components" [ref=e1633] [cursor=pointer]:
+                - /url: /docs/components/button
+              - link "Presets" [ref=e1634] [cursor=pointer]:
+                - /url: /docs/presets
+              - link "Sandbox" [ref=e1635] [cursor=pointer]:
+                - /url: /sandbox
+          - generic [ref=e1636]:
+            - generic [ref=e1637]: Community
+            - generic [ref=e1638]:
+              - link "GitHub" [ref=e1639] [cursor=pointer]:
+                - /url: https://github.com/Kevin-Liu-01/sigil-ui
+              - link "npm" [ref=e1640] [cursor=pointer]:
+                - /url: https://www.npmjs.com/package/@sigil-ui/components
+              - link "Discord" [ref=e1641] [cursor=pointer]:
+                - /url: "#"
+          - generic [ref=e1642]:
+            - generic [ref=e1643]: Resources
+            - generic [ref=e1644]:
+              - link "Walkthrough" [ref=e1645] [cursor=pointer]:
+                - /url: /walkthrough
+              - link "Token Guide" [ref=e1646] [cursor=pointer]:
+                - /url: /docs/theming
+              - link "Preset API" [ref=e1647] [cursor=pointer]:
+                - /url: /docs/cli
+              - link "Agent Integration" [ref=e1648] [cursor=pointer]:
+                - /url: /docs
+          - generic [ref=e1649]:
+            - generic [ref=e1650]: Company
+            - generic [ref=e1651]:
+              - link "Manifesto" [ref=e1652] [cursor=pointer]:
+                - /url: /manifesto
+              - link "About" [ref=e1653] [cursor=pointer]:
+                - /url: /about
+              - link "Blog" [ref=e1654] [cursor=pointer]:
+                - /url: /blog
+              - link "Contact" [ref=e1655] [cursor=pointer]:
+                - /url: mailto:hello@sigil-ui.dev
+        - generic [ref=e1656]:
+          - generic [ref=e1657]: © 2026 Sigil UI. MIT License.
+          - generic [ref=e1658]:
+            - text: Built by
+            - link "Kevin Liu" [ref=e1659] [cursor=pointer]:
+              - /url: https://kevinliu.me
+    - generic [ref=e1664]:
+      - generic [ref=e1665]:
+        - generic [ref=e1666]:
+          - img [ref=e1667]
+          - generic [ref=e1669]: Studio
+          - generic [ref=e1670]: default
+        - generic [ref=e1671]:
+          - button "Save preset" [ref=e1672] [cursor=pointer]:
+            - img [ref=e1673]
+          - button "Reset" [ref=e1677] [cursor=pointer]:
+            - img [ref=e1678]
+          - button "Export CSS" [ref=e1681] [cursor=pointer]:
+            - img [ref=e1682]
+          - button "Close" [ref=e1685] [cursor=pointer]:
+            - img [ref=e1686]
+      - generic [ref=e1689]:
+        - generic [ref=e1690]:
+          - generic [ref=e1691]: Presets
+          - button "random" [ref=e1692] [cursor=pointer]:
+            - img [ref=e1693]
+            - text: random
+        - generic [ref=e1699]:
+          - button "default neutral" [ref=e1700] [cursor=pointer]:
+            - generic [ref=e1706]:
+              - generic [ref=e1707]: default
+              - generic [ref=e1708]: neutral
+          - button "sigil structural" [ref=e1709] [cursor=pointer]:
+            - generic [ref=e1715]:
+              - generic [ref=e1716]: sigil
+              - generic [ref=e1717]: structural
+          - button "crux minimal" [ref=e1718] [cursor=pointer]:
+            - generic [ref=e1724]:
+              - generic [ref=e1725]: crux
+              - generic [ref=e1726]: minimal
+          - button "alloy industrial" [ref=e1727] [cursor=pointer]:
+            - generic [ref=e1733]:
+              - generic [ref=e1734]: alloy
+              - generic [ref=e1735]: industrial
+          - button "basalt volcanic" [ref=e1736] [cursor=pointer]:
+            - generic [ref=e1742]:
+              - generic [ref=e1743]: basalt
+              - generic [ref=e1744]: volcanic
+          - button "forge fiery" [ref=e1745] [cursor=pointer]:
+            - generic [ref=e1751]:
+              - generic [ref=e1752]: forge
+              - generic [ref=e1753]: fiery
+          - button "onyx luxury" [ref=e1754] [cursor=pointer]:
+            - generic [ref=e1760]:
+              - generic [ref=e1761]: onyx
+              - generic [ref=e1762]: luxury
+          - button "flux dynamic" [ref=e1763] [cursor=pointer]:
+            - generic [ref=e1769]:
+              - generic [ref=e1770]: flux
+              - generic [ref=e1771]: dynamic
+          - button "kova nordic" [ref=e1772] [cursor=pointer]:
+            - generic [ref=e1778]:
+              - generic [ref=e1779]: kova
+              - generic [ref=e1780]: nordic
+          - button "etch engraved" [ref=e1781] [cursor=pointer]:
+            - generic [ref=e1787]:
+              - generic [ref=e1788]: etch
+              - generic [ref=e1789]: engraved
+          - button "anvil heavy" [ref=e1790] [cursor=pointer]:
+            - generic [ref=e1796]:
+              - generic [ref=e1797]: anvil
+              - generic [ref=e1798]: heavy
+          - button "rivet structural" [ref=e1799] [cursor=pointer]:
+            - generic [ref=e1805]:
+              - generic [ref=e1806]: rivet
+              - generic [ref=e1807]: structural
+          - button "shard angular" [ref=e1808] [cursor=pointer]:
+            - generic [ref=e1814]:
+              - generic [ref=e1815]: shard
+              - generic [ref=e1816]: angular
+          - button "rune ancient" [ref=e1817] [cursor=pointer]:
+            - generic [ref=e1823]:
+              - generic [ref=e1824]: rune
+              - generic [ref=e1825]: ancient
+          - button "fang predatory" [ref=e1826] [cursor=pointer]:
+            - generic [ref=e1832]:
+              - generic [ref=e1833]: fang
+              - generic [ref=e1834]: predatory
+          - button "cobalt metallic" [ref=e1835] [cursor=pointer]:
+            - generic [ref=e1841]:
+              - generic [ref=e1842]: cobalt
+              - generic [ref=e1843]: metallic
+          - button "strata geological" [ref=e1844] [cursor=pointer]:
+            - generic [ref=e1850]:
+              - generic [ref=e1851]: strata
+              - generic [ref=e1852]: geological
+          - button "brass vintage" [ref=e1853] [cursor=pointer]:
+            - generic [ref=e1859]:
+              - generic [ref=e1860]: brass
+              - generic [ref=e1861]: vintage
+          - button "obsid obsidian" [ref=e1862] [cursor=pointer]:
+            - generic [ref=e1868]:
+              - generic [ref=e1869]: obsid
+              - generic [ref=e1870]: obsidian
+          - button "axiom mathematical" [ref=e1871] [cursor=pointer]:
+            - generic [ref=e1877]:
+              - generic [ref=e1878]: axiom
+              - generic [ref=e1879]: mathematical
+          - button "glyph typographic" [ref=e1880] [cursor=pointer]:
+            - generic [ref=e1886]:
+              - generic [ref=e1887]: glyph
+              - generic [ref=e1888]: typographic
+          - button "cipher terminal" [ref=e1889] [cursor=pointer]:
+            - generic [ref=e1895]:
+              - generic [ref=e1896]: cipher
+              - generic [ref=e1897]: terminal
+          - button "prism spectral" [ref=e1898] [cursor=pointer]:
+            - generic [ref=e1904]:
+              - generic [ref=e1905]: prism
+              - generic [ref=e1906]: spectral
+          - button "helix biotech" [ref=e1907] [cursor=pointer]:
+            - generic [ref=e1913]:
+              - generic [ref=e1914]: helix
+              - generic [ref=e1915]: biotech
+          - button "hex geometric" [ref=e1916] [cursor=pointer]:
+            - generic [ref=e1922]:
+              - generic [ref=e1923]: hex
+              - generic [ref=e1924]: geometric
+          - button "vex punk" [ref=e1925] [cursor=pointer]:
+            - generic [ref=e1931]:
+              - generic [ref=e1932]: vex
+              - generic [ref=e1933]: punk
+          - button "arc flowing" [ref=e1934] [cursor=pointer]:
+            - generic [ref=e1940]:
+              - generic [ref=e1941]: arc
+              - generic [ref=e1942]: flowing
+          - button "dsgn wireframe" [ref=e1943] [cursor=pointer]:
+            - generic [ref=e1949]:
+              - generic [ref=e1950]: dsgn
+              - generic [ref=e1951]: wireframe
+          - button "mrkr annotated" [ref=e1952] [cursor=pointer]:
+            - generic [ref=e1958]:
+              - generic [ref=e1959]: mrkr
+              - generic [ref=e1960]: annotated
+          - button "noir cinematic" [ref=e1961] [cursor=pointer]:
+            - generic [ref=e1967]:
+              - generic [ref=e1968]: noir
+              - generic [ref=e1969]: cinematic
+          - button "dusk twilight" [ref=e1970] [cursor=pointer]:
+            - generic [ref=e1976]:
+              - generic [ref=e1977]: dusk
+              - generic [ref=e1978]: twilight
+          - button "mono monochrome" [ref=e1979] [cursor=pointer]:
+            - generic [ref=e1985]:
+              - generic [ref=e1986]: mono
+              - generic [ref=e1987]: monochrome
+          - button "vast editorial" [ref=e1988] [cursor=pointer]:
+            - generic [ref=e1994]:
+              - generic [ref=e1995]: vast
+              - generic [ref=e1996]: editorial
+          - button "aura ethereal" [ref=e1997] [cursor=pointer]:
+            - generic [ref=e2003]:
+              - generic [ref=e2004]: aura
+              - generic [ref=e2005]: ethereal
+          - button "field utilitarian" [ref=e2006] [cursor=pointer]:
+            - generic [ref=e2012]:
+              - generic [ref=e2013]: field
+              - generic [ref=e2014]: utilitarian
+      - generic [ref=e2015]:
+        - generic [ref=e2016]:
+          - button "Colors" [ref=e2017] [cursor=pointer]:
+            - generic [ref=e2018]: Colors
+            - img [ref=e2019]
+          - generic [ref=e2022]:
+            - generic [ref=e2023]:
+              - generic [ref=e2024]:
+                - textbox [ref=e2027] [cursor=pointer]: "#e4e4e7"
+                - generic [ref=e2028]: primary
+              - generic [ref=e2029]:
+                - textbox [ref=e2032] [cursor=pointer]: "#27272a"
+                - generic [ref=e2033]: secondary
+              - generic [ref=e2034]:
+                - textbox [ref=e2037] [cursor=pointer]: "#0a0a0f"
+                - generic [ref=e2038]: background
+              - generic [ref=e2039]:
+                - textbox [ref=e2042] [cursor=pointer]: "#141419"
+                - generic [ref=e2043]: surface
+              - generic [ref=e2044]:
+                - textbox [ref=e2047] [cursor=pointer]: "#fafafa"
+                - generic [ref=e2048]: text
+              - generic [ref=e2049]:
+                - textbox [ref=e2052] [cursor=pointer]: "#2c2c3c"
+                - generic [ref=e2053]: border
+              - generic [ref=e2054]:
+                - textbox [ref=e2057] [cursor=pointer]: "#27272a"
+                - generic [ref=e2058]: accent
+            - generic [ref=e2059]:
+              - generic [ref=e2060]:
+                - textbox [ref=e2063] [cursor=pointer]: "#059669"
+                - generic [ref=e2064]: success
+              - generic [ref=e2065]:
+                - textbox [ref=e2068] [cursor=pointer]: "#d97706"
+                - generic [ref=e2069]: warning
+              - generic [ref=e2070]:
+                - textbox [ref=e2073] [cursor=pointer]: "#dc2626"
+                - generic [ref=e2074]: error
+              - generic [ref=e2075]:
+                - textbox [ref=e2078] [cursor=pointer]: "#2563eb"
+                - generic [ref=e2079]: info
+        - generic [ref=e2080]:
+          - button "Typography" [ref=e2081] [cursor=pointer]:
+            - generic [ref=e2082]: Typography
+            - img [ref=e2083]
+          - generic [ref=e2085]:
+            - generic [ref=e2086]:
+              - generic [ref=e2087]: display
+              - generic [ref=e2089]:
+                - combobox [ref=e2090] [cursor=pointer]:
+                  - option "ABC Monument Grotesk"
+                  - option "PP Neue Montreal"
+                  - option "PP Mori" [selected]
+                  - option "Apfel Grotezk"
+                  - option "Nacelle"
+                  - option "Vulf Sans"
+                  - option "PP Editorial New"
+                  - option "PP Eiko"
+                  - option "PP Hatton"
+                  - option "PP Monument Extended"
+                  - option "PP Neue Machina"
+                  - option "PP Telegraf"
+                  - option "PP Gosha Sans"
+                  - option "PP Radio Grotesk"
+                  - option "PP Pangram Sans"
+                  - option "PP Supply Sans"
+                - img
+            - generic [ref=e2091]:
+              - generic [ref=e2092]: body
+              - generic [ref=e2094]:
+                - combobox [ref=e2095] [cursor=pointer]:
+                  - option "ABC Monument Grotesk"
+                  - option "PP Neue Montreal"
+                  - option "PP Mori"
+                  - option "Apfel Grotezk"
+                  - option "Nacelle"
+                  - option "Vulf Sans"
+                  - option "PP Editorial New"
+                  - option "PP Eiko"
+                  - option "PP Hatton"
+                  - option "PP Monument Extended"
+                  - option "PP Neue Machina"
+                  - option "PP Telegraf" [selected]
+                  - option "PP Gosha Sans"
+                  - option "PP Radio Grotesk"
+                  - option "PP Pangram Sans"
+                  - option "PP Supply Sans"
+                - img
+            - generic [ref=e2096]:
+              - generic [ref=e2097]: mono
+              - generic [ref=e2099]:
+                - combobox [ref=e2100] [cursor=pointer]:
+                  - option "PP Fraktion Mono" [selected]
+                  - option "PP Supply Mono"
+                  - option "PP Neue Bit"
+                - img
+            - generic [ref=e2101]:
+              - generic [ref=e2102]: heading wt
+              - generic [ref=e2107]: "600"
+            - generic [ref=e2108]:
+              - generic [ref=e2109]: heading trk
+              - generic [ref=e2114]: "-0.025em"
+            - generic [ref=e2115]:
+              - generic [ref=e2116]: base size
+              - generic [ref=e2121]: 16px
+        - generic [ref=e2122]:
+          - button "Spacing" [ref=e2123] [cursor=pointer]:
+            - generic [ref=e2124]: Spacing
+            - img [ref=e2125]
+          - generic [ref=e2127]:
+            - generic [ref=e2128]:
+              - generic [ref=e2129]: page margin
+              - generic [ref=e2134]: 24px
+            - generic [ref=e2135]:
+              - generic [ref=e2136]: section pad
+              - generic [ref=e2141]: 64px
+            - generic [ref=e2142]:
+              - generic [ref=e2143]: card pad
+              - generic [ref=e2148]: 24px
+            - generic [ref=e2149]:
+              - generic [ref=e2150]: grid gap
+              - generic [ref=e2155]: 24px
+            - generic [ref=e2156]:
+              - generic [ref=e2157]: stack gap
+              - generic [ref=e2162]: 12px
+        - generic [ref=e2163]:
+          - button "Radius" [ref=e2164] [cursor=pointer]:
+            - generic [ref=e2165]: Radius
+            - img [ref=e2166]
+          - generic [ref=e2168]:
+            - generic [ref=e2169]:
+              - generic [ref=e2170]: global
+              - generic [ref=e2175]: 8px
+            - generic [ref=e2176]:
+              - generic [ref=e2177]: button
+              - generic [ref=e2182]: 8px
+            - generic [ref=e2183]:
+              - generic [ref=e2184]: card
+              - generic [ref=e2189]: 12px
+            - generic [ref=e2190]:
+              - generic [ref=e2191]: input
+              - generic [ref=e2196]: 6px
+        - generic [ref=e2197]:
+          - button "Borders & Shadows" [ref=e2198] [cursor=pointer]:
+            - generic [ref=e2199]: Borders & Shadows
+            - img [ref=e2200]
+          - generic [ref=e2202]:
+            - generic [ref=e2203]:
+              - generic [ref=e2204]: border w
+              - generic [ref=e2209]: 1px
+            - generic [ref=e2210]:
+              - generic [ref=e2211]: style
+              - radiogroup [ref=e2213]:
+                - radio "solid" [checked] [ref=e2214]
+                - radio "dashed" [ref=e2215]
+                - radio "dotted" [ref=e2216]
+                - radio "none" [ref=e2217]
+            - generic [ref=e2218]:
+              - generic [ref=e2219]: card border
+              - generic [ref=e2220]:
+                - switch [checked] [ref=e2221] [cursor=pointer]
+                - checkbox [checked]
+            - generic [ref=e2222]:
+              - generic [ref=e2223]: card shadow
+              - generic [ref=e2225]:
+                - combobox [ref=e2226] [cursor=pointer]:
+                  - option "none"
+                  - option "sm" [selected]
+                  - option "md"
+                  - option "lg"
+                  - option "xl"
+                - img
+            - generic [ref=e2227]:
+              - generic [ref=e2228]: btn shadow
+              - generic [ref=e2229]:
+                - switch [ref=e2230] [cursor=pointer]
+                - checkbox
+            - generic [ref=e2231]:
+              - generic [ref=e2232]: glow
+              - generic [ref=e2234]:
+                - switch [ref=e2235] [cursor=pointer]
+                - checkbox
+        - generic [ref=e2236]:
+          - button "Motion" [ref=e2237] [cursor=pointer]:
+            - generic [ref=e2238]: Motion
+            - img [ref=e2239]
+          - generic [ref=e2241]:
+            - generic [ref=e2242]:
+              - generic [ref=e2243]: fast
+              - generic [ref=e2248]: 150ms
+            - generic [ref=e2249]:
+              - generic [ref=e2250]: normal
+              - generic [ref=e2255]: 200ms
+            - generic [ref=e2256]:
+              - generic [ref=e2257]: hover scale
+              - generic [ref=e2262]: "1.02"
+            - generic [ref=e2263]:
+              - generic [ref=e2264]: press scale
+              - generic [ref=e2269]: "0.98"
+        - generic [ref=e2270]:
+          - button "Grid & Layout" [ref=e2271] [cursor=pointer]:
+            - generic [ref=e2272]: Grid & Layout
+            - img [ref=e2273]
+          - generic [ref=e2275]:
+            - generic [ref=e2276]:
+              - generic [ref=e2277]: content-max
+              - generic [ref=e2282]: 1200px
+            - generic [ref=e2283]:
+              - generic [ref=e2284]: rail-gap
+              - generic [ref=e2289]: 24px
+            - generic [ref=e2290]:
+              - generic [ref=e2291]: grid-cell
+              - generic [ref=e2296]: 48px
+            - generic [ref=e2297]:
+              - generic [ref=e2298]: cross-stroke
+              - generic [ref=e2303]: 1.5px
+            - generic [ref=e2304]:
+              - generic [ref=e2305]: navbar-h
+              - generic [ref=e2310]: 56px
+            - generic [ref=e2311]:
+              - generic [ref=e2312]: bento-gap
+              - generic [ref=e2317]: 16px
+            - generic [ref=e2318]:
+              - generic [ref=e2319]: grid lines
+              - generic [ref=e2320]:
+                - switch [checked] [ref=e2321] [cursor=pointer]
+                - checkbox [checked]
+            - generic [ref=e2322]:
+              - generic [ref=e2323]: dots
+              - generic [ref=e2324]:
+                - switch [ref=e2325] [cursor=pointer]
+                - checkbox
+            - generic [ref=e2326]:
+              - generic [ref=e2327]: cell borders
+              - generic [ref=e2328]:
+                - switch [ref=e2329] [cursor=pointer]
+                - checkbox
+            - generic [ref=e2330]:
+              - generic [ref=e2331]: cell bg
+              - radiogroup [ref=e2333]:
+                - radio "none" [checked] [ref=e2334]
+                - radio "surface" [ref=e2335]
+                - radio "alternate" [ref=e2336]
+        - generic [ref=e2337]:
+          - button "Patterns" [ref=e2338] [cursor=pointer]:
+            - generic [ref=e2339]: Patterns
+            - img [ref=e2340]
+          - generic [ref=e2342]:
+            - generic [ref=e2343]:
+              - text: Gutter
+              - generic [ref=e2344]:
+                - button "grid" [ref=e2345] [cursor=pointer]
+                - button "dots" [ref=e2346] [cursor=pointer]
+                - button "crosshatch" [ref=e2347] [cursor=pointer]
+                - button "diagonal" [ref=e2348] [cursor=pointer]
+                - button "diamond" [ref=e2349] [cursor=pointer]
+                - button "horizontal" [ref=e2350] [cursor=pointer]
+                - button "horizontal-thin" [ref=e2351] [cursor=pointer]
+                - button "horizontal-wide" [ref=e2352] [cursor=pointer]
+                - button "hexagon" [ref=e2353] [cursor=pointer]
+                - button "triangle" [ref=e2354] [cursor=pointer]
+                - button "zigzag" [ref=e2355] [cursor=pointer]
+                - button "checker" [ref=e2356] [cursor=pointer]
+                - button "plus" [ref=e2357] [cursor=pointer]
+                - button "brick" [ref=e2358] [cursor=pointer]
+                - button "wave" [ref=e2359] [cursor=pointer]
+                - button "none" [ref=e2360] [cursor=pointer]
+            - generic [ref=e2361]:
+              - text: Margin
+              - generic [ref=e2362]:
+                - button "grid" [ref=e2363] [cursor=pointer]
+                - button "dots" [ref=e2364] [cursor=pointer]
+                - button "crosshatch" [ref=e2365] [cursor=pointer]
+                - button "diagonal" [ref=e2366] [cursor=pointer]
+                - button "diamond" [ref=e2367] [cursor=pointer]
+                - button "horizontal" [ref=e2368] [cursor=pointer]
+                - button "horizontal-thin" [ref=e2369] [cursor=pointer]
+                - button "horizontal-wide" [ref=e2370] [cursor=pointer]
+                - button "hexagon" [ref=e2371] [cursor=pointer]
+                - button "triangle" [ref=e2372] [cursor=pointer]
+                - button "zigzag" [ref=e2373] [cursor=pointer]
+                - button "checker" [ref=e2374] [cursor=pointer]
+                - button "plus" [ref=e2375] [cursor=pointer]
+                - button "brick" [ref=e2376] [cursor=pointer]
+                - button "wave" [ref=e2377] [cursor=pointer]
+                - button "none" [ref=e2378] [cursor=pointer]
+        - generic [ref=e2379]:
+          - button "Alignment" [ref=e2380] [cursor=pointer]:
+            - generic [ref=e2381]: Alignment
+            - img [ref=e2382]
+          - generic [ref=e2384]:
+            - generic [ref=e2385]:
+              - generic [ref=e2386]: content
+              - radiogroup [ref=e2388]:
+                - radio "center" [checked] [ref=e2389]
+                - radio "left" [ref=e2390]
+                - radio "wide" [ref=e2391]
+            - generic [ref=e2392]:
+              - generic [ref=e2393]: hero
+              - radiogroup [ref=e2395]:
+                - radio "center" [checked] [ref=e2396]
+                - radio "left" [ref=e2397]
+                - radio "full-bleed" [ref=e2398]
+            - generic [ref=e2399]:
+              - generic [ref=e2400]: navbar
+              - radiogroup [ref=e2402]:
+                - radio "full" [checked] [ref=e2403]
+                - radio "content" [ref=e2404]
+                - radio "inset" [ref=e2405]
+            - generic [ref=e2406]:
+              - generic [ref=e2407]: rail visible
+              - generic [ref=e2408]:
+                - switch [ref=e2409] [cursor=pointer]
+                - checkbox
+        - generic [ref=e2410]:
+          - button "Sound" [ref=e2411] [cursor=pointer]:
+            - generic [ref=e2412]: Sound
+            - img [ref=e2413]
+          - generic [ref=e2416]:
+            - generic [ref=e2417]: enabled
+            - generic [ref=e2418]:
+              - switch [checked] [ref=e2419] [cursor=pointer]
+              - checkbox [checked]
+    - generic [ref=e2421]:
+      - generic [ref=e2422]:
+        - button "sigil" [ref=e2423] [cursor=pointer]:
+          - img [ref=e2425]
+          - generic [ref=e2427]: sigil
+        - generic [ref=e2428]: default
+      - button "Canvas" [ref=e2430] [cursor=pointer]:
+        - img [ref=e2431]
+        - text: Canvas
+      - button "Random" [ref=e2434] [cursor=pointer]:
+        - img [ref=e2435]
+        - text: Random
+  - button "Open Next.js Dev Tools" [ref=e2446] [cursor=pointer]:
+    - img [ref=e2447]

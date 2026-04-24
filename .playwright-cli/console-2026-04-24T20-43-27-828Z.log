@@ -1,0 +1,1342 @@
+[     331ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:3000/components:0
+[     369ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     457ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     777ms] [ERROR] Each child in a list should have a unique "key" prop.%s%s See https://react.dev/link/warning-keys for more information. 
+
+Check the render method of `ForwardRef(PricingTable2)`.  @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   36130ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   38421ms] [LOG] [Fast Refresh] done in 2391ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   38426ms] [VERBOSE] [DOM] Password field is not contained in a form: (More info: https://goo.gl/9p2vKq) %o @ http://localhost:3000/components:0
+[   40393ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   40433ms] [LOG] [Fast Refresh] done in 76ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   46682ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   46704ms] [LOG] [Fast Refresh] done in 108ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   51218ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   51793ms] [LOG] [Fast Refresh] done in 676ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   51927ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   51992ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   52199ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
+      <div ref={null} className={undefined} style={{position:"...", ...}}>
+        <FrameOverlay>
+        <div className="s-transiti...">
+          <HeroShowcase>
+            <div className={undefined} style={undefined}>
+              <style>
+              <div className="hero-gallery">
+                <div className="grid grid-...">
+                  <div className="flex flex-...">
+                    <DeployCard>
+                    <ToolbarRow>
+                    <BuildStatus>
+                    <StatusBadgesRow>
+                    <ChatInputRow>
+                    <SliderRow>
+                    <BadgeRow>
+                    <VerifiedRow>
+                    <ToggleGroupRow>
+                    <MentionRow>
+                    <ConnectedRow>
+                    <MeterRow>
+                    <EnvironmentRow>
+                    <DatePickerRow>
+                    <CommitMessageRow>
+                    <UptimeRow>
+                    <LatencyBuildRow>
+                    <VoronoiRow>
+                    <TrafficCommitRow>
+                      <div className="flex flex-..." style={{border:"1p...", ...}}>
+                        <div>
+                        <CommitGrid2 data={[...]} weeks={20} cellSize={8} gap={2} showDayLabels={false} ...>
+                          <div ref={null} data-slot="commit-grid" className="inline-fle...">
+                            <div className="flex gap-0">
+                              <div className="flex" style={{gap:2}}>
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-06: 10 contributions"
+-                                   title="2025-12-06: 4 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-07: 17 contributions"
+-                                   title="2025-12-07: 4 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-08: 16 contributions"
+-                                   title="2025-12-08: 4 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-10: 1 contributions"
+-                                   title="2025-12-10: 11 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2025-12-11: 3 contributions"
+-                                   title="2025-12-11: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-12: 11 contributions"
+-                                   title="2025-12-12: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2025-12-13: 1 contributions"
+-                                   title="2025-12-13: 3 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-14: 2 contributions"
+-                                   title="2025-12-14: 7 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2025-12-15: 2 contributions"
+-                                   title="2025-12-15: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-16: 0 contributions"
+-                                   title="2025-12-16: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2025-12-17: 3 contributions"
+-                                   title="2025-12-17: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-18: 0 contributions"
+-                                   title="2025-12-18: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-19: 1 contributions"
+-                                   title="2025-12-19: 0 contributions"
+                                  >
+                                  ...
+                                <div>
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-29: 0 contributions"
+-                                   title="2025-12-29: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2025-12-30: 0 contributions"
+-                                   title="2025-12-30: 2 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-01: 2 contributions"
+-                                   title="2026-01-01: 5 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-01-03: 6 contributions"
+-                                   title="2026-01-03: 8 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-01-04: 7 contributions"
+-                                   title="2026-01-04: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-05: 9 contributions"
+-                                   title="2026-01-05: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-06: 8 contributions"
+-                                   title="2026-01-06: 11 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-07: 0 contributions"
+-                                   title="2026-01-07: 13 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-08: 10 contributions"
+-                                   title="2026-01-08: 7 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-09: 10 contributions"
+-                                   title="2026-01-09: 9 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-10: 3 contributions"
+-                                   title="2026-01-10: 4 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-11: 16 contributions"
+-                                   title="2026-01-11: 0 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.95"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-13: 14 contributions"
+-                                   title="2026-01-13: 18 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-14: 19 contributions"
+-                                   title="2026-01-14: 7 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-15: 0 contributions"
+-                                   title="2026-01-15: 5 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-01-16: 9 contributions"
+-                                   title="2026-01-16: 5 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-17: 10 contributions"
+-                                   title="2026-01-17: 5 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-18: 2 contributions"
+-                                   title="2026-01-18: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-19: 0 contributions"
+-                                   title="2026-01-19: 8 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-20: 16 contributions"
+-                                   title="2026-01-20: 13 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.95"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-21: 7 contributions"
+-                                   title="2026-01-21: 14 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-22: 6 contributions"
+-                                   title="2026-01-22: 13 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-23: 3 contributions"
+-                                   title="2026-01-23: 4 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-24: 2 contributions"
+-                                   title="2026-01-24: 7 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-01-26: 9 contributions"
+-                                   title="2026-01-26: 5 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-27: 7 contributions"
+-                                   title="2026-01-27: 0 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-01-28: 6 contributions"
+-                                   title="2026-01-28: 4 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-29: 2 contributions"
+-                                   title="2026-01-29: 4 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-30: 1 contributions"
+-                                   title="2026-01-30: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-01-31: 1 contributions"
+-                                   title="2026-01-31: 2 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-02: 0 contributions"
+-                                   title="2026-02-02: 1 contributions"
+                                  >
+                                  ...
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-10: 0 contributions"
+-                                   title="2026-02-10: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-02-11: 2 contributions"
+-                                   title="2026-02-11: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-02-12: 1 contributions"
+-                                   title="2026-02-12: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-13: 0 contributions"
+-                                   title="2026-02-13: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-02-14: 1 contributions"
+-                                   title="2026-02-14: 3 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-02-15: 6 contributions"
+-                                   title="2026-02-15: 5 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-02-16: 2 contributions"
+-                                   title="2026-02-16: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-02-17: 8 contributions"
+-                                   title="2026-02-17: 5 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-02-19: 8 contributions"
+-                                   title="2026-02-19: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-20: 2 contributions"
+-                                   title="2026-02-20: 8 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-21: 3 contributions"
+-                                   title="2026-02-21: 11 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.7}}
++                                   title="2026-02-22: 13 contributions"
+-                                   title="2026-02-22: 12 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.7}}
++                                   title="2026-02-23: 14 contributions"
+-                                   title="2026-02-23: 11 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-24: 1 contributions"
+-                                   title="2026-02-24: 10 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.95"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-25: 5 contributions"
+-                                   title="2026-02-25: 14 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.95}}
++                                   title="2026-02-26: 17 contributions"
+-                                   title="2026-02-26: 15 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-02-27: 3 contributions"
+-                                   title="2026-02-27: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-02-28: 3 contributions"
+-                                   title="2026-02-28: 7 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-01: 15 contributions"
+-                                   title="2026-03-01: 13 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-02: 0 contributions"
+-                                   title="2026-03-02: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-03: 10 contributions"
+-                                   title="2026-03-03: 5 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-04: 3 contributions"
+-                                   title="2026-03-04: 0 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-05: 3 contributions"
+-                                   title="2026-03-05: 10 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-06: 10 contributions"
+-                                   title="2026-03-06: 7 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-03-07: 5 contributions"
+-                                   title="2026-03-07: 9 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-03-08: 1 contributions"
+-                                   title="2026-03-08: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-09: 12 contributions"
+-                                   title="2026-03-09: 6 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-11: 9 contributions"
+-                                   title="2026-03-11: 3 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-12: 4 contributions"
+-                                   title="2026-03-12: 8 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-13: 2 contributions"
+-                                   title="2026-03-13: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-14: 0 contributions"
+-                                   title="2026-03-14: 5 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-15: 0 contributions"
+-                                   title="2026-03-15: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-03-16: 1 contributions"
+-                                   title="2026-03-16: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-17: 0 contributions"
+-                                   title="2026-03-17: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-18: 0 contributions"
+-                                   title="2026-03-18: 1 contributions"
+                                  >
+                                  ...
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.3}}
++                                   title="2026-03-27: 1 contributions"
+-                                   title="2026-03-27: 2 contributions"
+                                  >
+                                  ...
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-30: 0 contributions"
+-                                   title="2026-03-30: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-03-31: 0 contributions"
+-                                   title="2026-03-31: 1 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-01: 1 contributions"
+-                                   title="2026-04-01: 0 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-04-02: 7 contributions"
+-                                   title="2026-04-02: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-04-03: 6 contributions"
+-                                   title="2026-04-03: 7 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-04: 9 contributions"
+-                                   title="2026-04-04: 10 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-05: 9 contributions"
+-                                   title="2026-04-05: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-06: 2 contributions"
+-                                   title="2026-04-06: 12 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-07: 16 contributions"
+-                                   title="2026-04-07: 12 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-08: 1 contributions"
+-                                   title="2026-04-08: 0 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-09: 8 contributions"
+-                                   title="2026-04-09: 10 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.7}}
++                                   title="2026-04-11: 14 contributions"
+-                                   title="2026-04-11: 12 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.06"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-12: 15 contributions"
+-                                   title="2026-04-12: 0 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.7
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-13: 14 contributions"
+-                                   title="2026-04-13: 2 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-14: 1 contributions"
+-                                   title="2026-04-14: 6 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.95
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-15: 16 contributions"
+-                                   title="2026-04-15: 12 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.06
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-17: 0 contributions"
+-                                   title="2026-04-17: 13 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{width:8,height:8,backgroundColor:"var(--s-pr...",opacity:0.5}}
++                                   title="2026-04-18: 5 contributions"
+-                                   title="2026-04-18: 6 contributions"
+                                  >
+                                <div className="flex flex-col" style={{gap:2}}>
+                                  <div>
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.7"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-21: 7 contributions"
+-                                   title="2026-04-21: 10 contributions"
+                                  >
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.5
+-                                     opacity: "0.3"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-22: 6 contributions"
+-                                   title="2026-04-22: 4 contributions"
+                                  >
+                                  <div>
+                                  <div
+                                    className="rounded-[1px]"
+                                    style={{
++                                     width: 8
+-                                     width: "8px"
++                                     height: 8
+-                                     height: "8px"
++                                     backgroundColor: "var(--s-primary)"
++                                     opacity: 0.3
+-                                     opacity: "0.5"
+-                                     background-color: "var(--s-primary)"
+                                    }}
++                                   title="2026-04-24: 3 contributions"
+-                                   title="2026-04-24: 7 contributions"
+                                  >
+                    ...
+                  ...
+                ...
+ @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[   52694ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   52767ms] [LOG] [Fast Refresh] done in 173ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

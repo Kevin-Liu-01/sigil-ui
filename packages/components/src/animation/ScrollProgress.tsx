@@ -11,26 +11,31 @@ export interface ScrollProgressProps extends HTMLAttributes<HTMLDivElement> {
   height?: number;
   /** Whether to use fixed positioning. @default true */
   fixed?: boolean;
+  /** Controlled progress value from 0 to 100. Defaults to document scroll progress. */
+  value?: number;
 }
 
 export const ScrollProgress = forwardRef<HTMLDivElement, ScrollProgressProps>(
   function ScrollProgress(
-    { position = "top", height = 3, fixed = true, className, style, ...rest },
+    { position = "top", height = 3, fixed = true, value, className, style, ...rest },
     ref,
   ) {
     const reduced = useReducedMotion();
-    const [progress, setProgress] = useState(0);
+    const [scrollProgress, setScrollProgress] = useState(0);
+    const progress = value === undefined ? scrollProgress : Math.min(Math.max(value, 0), 100) / 100;
 
     useEffect(() => {
+      if (value !== undefined) return;
+
       const onScroll = () => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        setProgress(scrollHeight > 0 ? scrollTop / scrollHeight : 0);
+        setScrollProgress(scrollHeight > 0 ? scrollTop / scrollHeight : 0);
       };
       window.addEventListener("scroll", onScroll, { passive: true });
       onScroll();
       return () => window.removeEventListener("scroll", onScroll);
-    }, []);
+    }, [value]);
 
     return (
       <div

@@ -12,16 +12,18 @@ import {
   PRESET_NAMES,
   type PresetCategory,
 } from "../utils/presets.js";
+import { printIntro, symbols } from "../utils/terminal.js";
 
 export const presetCommand = new Command("preset")
   .description("Swap presets, browse the catalog, or scaffold a custom preset")
   .argument("[name]", 'preset name, "list" to browse, or "create" to scaffold custom')
   .action(async (name: string | undefined) => {
     const cwd = process.cwd();
+    printIntro("Sigil Preset", "Browse and swap complete visual systems");
 
     if (!configExists(cwd)) {
       console.log(
-        chalk.red("  ✗"),
+        symbols.error,
         "No sigil.config.ts found. Run",
         chalk.cyan("sigil init"),
         "first.",
@@ -63,7 +65,7 @@ export const presetCommand = new Command("preset")
 
     if (!isBuiltin && !fs.existsSync(customPath)) {
       console.log(
-        chalk.red("  ✗"),
+        symbols.error,
         `Unknown preset "${name}".`,
       );
       console.log();
@@ -82,7 +84,7 @@ export const presetCommand = new Command("preset")
     const info = getPresetInfo(name);
     console.log();
     console.log(
-      chalk.green("  ✓"),
+      symbols.success,
       `Switched from ${chalk.dim(previousPreset)} to ${chalk.bold.cyan(name)}`,
     );
     if (info) {

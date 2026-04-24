@@ -120,8 +120,8 @@ function Example() {
 The recommended way is through the CLI, which copies source files into your project so you can customize:
 
 ```bash
-npx sigil add button card input badge dialog
-npx sigil add --all
+npx @sigil-ui/cli add button card input badge dialog
+npx @sigil-ui/cli add --all
 ```
 
 This copies component source into your `componentsDir` (default: `src/components/ui/`). You own the files, but they still read from tokens. Even after copying, the right way to restyle is still through the token layer.

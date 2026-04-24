@@ -2,7 +2,7 @@
 
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -172,7 +172,7 @@ export default function DemosPage() {
         </div>
       </SigilSection>
 
-      <SectionDivider pattern="grid" />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* Featured demos */}
       <SigilSection>
@@ -185,7 +185,7 @@ export default function DemosPage() {
         </FeaturedGrid>
       </SigilSection>
 
-      <SectionDivider />
+      <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* Info + CTA */}
       <SigilSection padding="64px 24px">
@@ -206,6 +206,8 @@ export default function DemosPage() {
           </AccentCTA>
         </div>
       </SigilSection>
+
+      <Divider pattern="vertical" size="md" showBorders />
 
       <LandingFooter />
     </SigilFrame>

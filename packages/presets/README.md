@@ -183,10 +183,10 @@ When building UI in a Sigil project:
 
 1. **Check the active preset first** — read `sigil.config.ts` for the preset name, then understand its mood and aesthetic
 2. **To change the look, edit the preset or token CSS** — do not add Tailwind utility overrides to components
-3. **To change the entire aesthetic, switch presets** — `npx sigil preset <name>`
+3. **To change the entire aesthetic, switch presets** — `npx @sigil-ui/cli preset <name>`
 4. **To make targeted changes, use CSS variable overrides** in the token CSS file:
    ```css
    :root { --sigil-primary: oklch(0.65 0.18 150); }
    ```
-5. **To create a new aesthetic from scratch**, scaffold a custom preset: `npx sigil preset create`
+5. **To create a new aesthetic from scratch**, scaffold a custom preset: `npx @sigil-ui/cli preset create`
 6. **Never hardcode colors** — use `var(--sigil-*)` in all styling

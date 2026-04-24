@@ -186,7 +186,7 @@ export function FontPicker({
         options={MONO_FONTS}
         value={mono}
         onChange={handleMono}
-        previewText="npx sigil init --preset noir"
+        previewText="npx @sigil-ui/cli init --preset noir"
       />
     </div>
   );

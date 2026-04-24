@@ -1,3 +1,8 @@
+---
+name: sigil-playbook
+trigger: when composing full pages, landing pages, dashboards, docs pages, or Sigil UI page structures
+---
+
 # Sigil Playbook — The Page Composition Skill
 
 > Read this before building any page in the Sigil aesthetic.

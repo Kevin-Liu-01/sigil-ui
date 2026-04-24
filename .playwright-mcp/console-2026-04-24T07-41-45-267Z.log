@@ -1,0 +1,142 @@
+[     164ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[     202ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   41485ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   43791ms] [LOG] [Fast Refresh] done in 2407ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   59385ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   61560ms] [LOG] [Fast Refresh] done in 1973ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   64193ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   66339ms] [LOG] [Fast Refresh] done in 2247ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   80483ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   80747ms] [LOG] [Fast Refresh] done in 261ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   88908ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   91561ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[   91588ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  130110ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  132052ms] [LOG] [Fast Refresh] done in 1788ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  132218ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  133259ms] [LOG] [Fast Refresh] done in 934ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  133649ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  135877ms] [LOG] [Fast Refresh] done in 2035ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  135980ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  139710ms] [LOG] [Fast Refresh] done in 3568ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  158799ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  161883ms] [LOG] [Fast Refresh] done in 2685ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  250189ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  250219ms] [ERROR] ./apps/web/components/landing/hero-showcase.tsx:81:3
+the name `Calendar` is defined multiple times
+  79 |   Archive,
+  80 |   MoreHorizontal,
+> 81 |   Calendar,
+     |   ^^^^^^^^
+  82 |   Bold,
+  83 |   Italic,
+  84 |   Underline,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  250271ms] [ERROR] ./apps/web/components/landing/hero-showcase.tsx:81:3
+the name `Calendar` is defined multiple times
+  79 |   Archive,
+  80 |   MoreHorizontal,
+> 81 |   Calendar,
+     |   ^^^^^^^^
+  82 |   Bold,
+  83 |   Italic,
+  84 |   Underline,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  250335ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  263152ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  263353ms] [ERROR] ./apps/web/components/landing/hero-showcase.tsx:81:3
+the name `Calendar` is defined multiple times
+  79 |   Archive,
+  80 |   MoreHorizontal,
+> 81 |   Calendar,
+     |   ^^^^^^^^
+  82 |   Bold,
+  83 |   Italic,
+  84 |   Underline,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  282246ms] [ERROR] ./apps/web/components/landing/hero-showcase.tsx:81:3
+the name `Calendar` is defined multiple times
+  79 |   Archive,
+  80 |   MoreHorizontal,
+> 81 |   Calendar,
+     |   ^^^^^^^^
+  82 |   Bold,
+  83 |   Italic,
+  84 |   Underline,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  282254ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  291763ms] [ERROR] ./apps/web/components/landing/hero-showcase.tsx:81:3
+the name `Calendar` is defined multiple times
+  79 |   Archive,
+  80 |   MoreHorizontal,
+> 81 |   Calendar,
+     |   ^^^^^^^^
+  82 |   Bold,
+  83 |   Italic,
+  84 |   Underline,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Client Component Browser]
+    ./apps/web/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./apps/web/components/landing/hero-showcase.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Client Component SSR]
+    ./apps/web/app/page.tsx [Server Component] @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:3272
+[  291783ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  299182ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  299531ms] [LOG] [Fast Refresh] done in 302ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  305102ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431
+[  305188ms] [LOG] [Fast Refresh] done in 133ms @ http://localhost:3000/_next/static/chunks/10zw_next_dist_09~qnvg._.js:2431

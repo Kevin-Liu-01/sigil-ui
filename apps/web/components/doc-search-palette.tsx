@@ -104,6 +104,7 @@ const DOC_ITEMS: PaletteItem[] = [
   { label: "Select", href: "/docs/components/select", section: "Components" },
   { label: "Separator", href: "/docs/components/separator", section: "Components" },
   { label: "Sheet", href: "/docs/components/sheet", section: "Components" },
+  { label: "Sigil Cursor", href: "/docs/components/sigil-cursor", section: "Components" },
   { label: "Sidebar", href: "/docs/components/sidebar", section: "Components" },
   { label: "Signature Pad", href: "/docs/components/signature-pad", section: "Components" },
   { label: "Simple Grid", href: "/docs/components/simple-grid", section: "Components" },

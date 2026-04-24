@@ -39,13 +39,18 @@ export function useSigilAnimate<T extends HTMLElement = HTMLDivElement>(
   useEffect(() => {
     if (!shouldAnimate || !ref.current) return;
 
-    animateElement(ref.current, {
+    const animation = animateElement(ref.current, {
       preset,
       duration,
       delay,
       stagger,
       scrollTrigger: trigger === "scroll",
     });
+
+    return () => {
+      animation.scrollTrigger?.kill();
+      animation.kill();
+    };
   }, [shouldAnimate, delay, duration, trigger, preset, stagger]);
 
   return ref;

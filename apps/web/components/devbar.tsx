@@ -13,6 +13,8 @@ import {
 import {
   Shuffle,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Grid3X3,
   Monitor,
   PanelLeft,
@@ -823,9 +825,9 @@ const DUR = "380ms";
 /* ================================================================== */
 
 function EdgeHandle({ dock, open, onToggle }: { dock: DockPosition; open: boolean; onToggle: () => void }) {
-  const chevronRotation = open
-    ? (dock === "left" ? 180 : 0)
-    : (dock === "left" ? 0 : 180);
+  const Icon = dock === "left"
+    ? (open ? ChevronLeft : ChevronRight)
+    : (open ? ChevronRight : ChevronLeft);
 
   return (
     <button type="button" onClick={onToggle} style={{
@@ -835,12 +837,12 @@ function EdgeHandle({ dock, open, onToggle }: { dock: DockPosition; open: boolea
       borderRadius: dock === "left" ? "0 6px 6px 0" : "6px 0 0 6px",
       background: "var(--db-surface)", border: "1px solid var(--db-border)",
       ...(dock === "left" ? { borderLeft: "none" } : { borderRight: "none" }),
-      cursor: "pointer", padding: 0, color: "var(--db-muted)", transition: `all ${DUR} ${EASE_SPRING}`, opacity: 0.7,
+      cursor: "pointer", padding: 0, color: "var(--db-muted)", transition: `all ${DUR} ${EASE_SPRING}`, opacity: 1,
     }}
-      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.color = "var(--db-accent)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.opacity = "0.7"; e.currentTarget.style.color = "var(--db-muted)"; }}
+      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--db-accent)"; }}
+      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--db-muted)"; }}
     >
-      <ChevronDown size={11} style={{ transform: `rotate(${chevronRotation}deg)`, transition: `transform ${DUR} ${EASE_SPRING}` }} />
+      <Icon size={11} />
     </button>
   );
 }

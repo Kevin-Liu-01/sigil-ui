@@ -21,7 +21,9 @@ export const UsageGauge = forwardRef<SVGSVGElement, UsageGaugeProps>(
     const cx = w / 2;
     const cy = h - 16;
     const r = Math.min(cx - 8, cy - 8);
-    const pct = Math.min(value / max, 1);
+    const pct = max > 0 ? Math.min(Math.max(value / max, 0), 1) : 0;
+    const ariaMax = Math.max(max, 0);
+    const ariaValue = Math.min(Math.max(value, 0), ariaMax);
     const startAngle = -180;
     const sweep = 180;
     const endAngle = startAngle + sweep * pct;
@@ -34,18 +36,22 @@ export const UsageGauge = forwardRef<SVGSVGElement, UsageGaugeProps>(
     const trackStart = arcPoint(startAngle);
     const trackEnd = arcPoint(startAngle + sweep);
     const filledEnd = arcPoint(endAngle);
-    const large = pct > 0.5 ? 1 : 0;
 
     let fillColor = color ?? "var(--s-primary)";
     if (autoColor && !color) {
-      if (pct > 0.9) fillColor = "var(--s-error, #ef4444)";
-      else if (pct > 0.7) fillColor = "var(--s-warning, #f59e0b)";
+      if (pct > 0.9) fillColor = "var(--s-error, currentColor)";
+      else if (pct > 0.7) fillColor = "var(--s-warning, currentColor)";
       else fillColor = "var(--s-primary)";
     }
 
     return (
       <svg
         ref={ref}
+        role="meter"
+        aria-valuenow={ariaValue}
+        aria-valuemin={0}
+        aria-valuemax={ariaMax}
+        aria-label={label}
         data-slot="usage-gauge"
         width={w}
         height={h}
@@ -63,7 +69,7 @@ export const UsageGauge = forwardRef<SVGSVGElement, UsageGaugeProps>(
         />
         {pct > 0 && (
           <path
-            d={`M ${trackStart.x} ${trackStart.y} A ${r} ${r} 0 ${large} 1 ${filledEnd.x} ${filledEnd.y}`}
+            d={`M ${trackStart.x} ${trackStart.y} A ${r} ${r} 0 0 1 ${filledEnd.x} ${filledEnd.y}`}
             fill="none"
             stroke={fillColor}
             strokeWidth={8}

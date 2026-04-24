@@ -20,7 +20,8 @@ pnpm add -D @sigil-ui/cli
 Or use directly via npx:
 
 ```bash
-npx sigil init
+npx @sigil-ui/cli init
+pnpm dlx @sigil-ui/cli convert
 ```
 
 ## Commands
@@ -54,12 +55,38 @@ The most important command. Walks you through a questionnaire that configures Si
 - Token CSS file — imports base tokens + preset + optional overrides
 - Components directory — with optional starter component stubs
 - `.sigil/AGENTS.md` — instructions for AI agents (optional)
+- `.sigil/skills/` — Sigil workflow skills for tokens, presets, components, layouts, pages, migrations, and polish
+- `.cursor/rules/sigil-skills.mdc` — Cursor rule that enforces the installed skills
 
 **Flags:**
 - `-p, --preset <name>` — skip preset selection
 - `-d, --dir <dir>` — override components directory
 - `-y, --yes` — skip all prompts, use defaults
 - `--no-agent` — skip agent instructions generation
+- `--install` / `--no-install` — control dependency installation
+- `--inject-css` / `--no-inject-css` — control global CSS import injection
+- `--dry-run` — preview setup changes without writing files
+
+### `sigil convert` — Adopt Sigil in an Existing Project
+
+Converts an existing Next.js, Vite, Remix, Astro, or React-style project end-to-end.
+
+```bash
+pnpm dlx @sigil-ui/cli convert
+npx @sigil-ui/cli convert --preset noir --no-install
+```
+
+It detects your framework, package manager, TypeScript, Tailwind, and global CSS file, then writes Sigil config/tokens/agent instructions, injects the token import, updates `package.json`, and optionally installs dependencies.
+
+**Flags:**
+- `-p, --preset <name>` — preset to use
+- `-d, --dir <dir>` — components directory
+- `-y, --yes` — skip prompts, use defaults
+- `--no-agent` — skip agent instructions generation
+- `--no-install` — update package.json but skip package-manager install
+- `--no-inject-css` — skip global CSS import injection
+- `--dry-run` — preview conversion without writing files
+- `--overwrite` — replace an existing `sigil.config.ts`
 
 ### `sigil add` — Install Components
 
@@ -72,7 +99,7 @@ sigil add dialog --overwrite         # replace existing files
 sigil add badge --dir lib/ui         # custom output directory
 ```
 
-Components are copied as source so you own them, but they still read from token CSS variables. The right way to restyle is still through the token layer.
+Components are copied as source so you own them, but they still read from token CSS variables. The CLI resolves source from `@sigil-ui/components` and creates small local support helpers when needed. The right way to restyle is still through the token layer.
 
 **Available components:** button, card, input, badge, dialog, dropdown, tabs, tooltip, sigil-grid, sigil-cross, sigil-rail, sigil-card
 
@@ -110,7 +137,7 @@ Compares your token CSS file against a snapshot in `.sigil/tokens.snapshot.css`.
 sigil doctor
 ```
 
-Runs 6 diagnostics:
+Runs diagnostics:
 
 | Check | What it validates |
 |-------|-------------------|
@@ -119,6 +146,7 @@ Runs 6 diagnostics:
 | Components | Components directory exists, counts `.tsx` files |
 | Dependencies | All npm deps for installed components are present in `node_modules` |
 | CSS Import | Global CSS file references Sigil tokens |
+| Agent Assets | `.sigil/AGENTS.md`, `.sigil/skills/`, and Cursor skill rules are present |
 | Preset | Active preset is one of the 31 built-ins or has a custom file |
 
 ## Generated Agent Instructions (`.sigil/AGENTS.md`)
@@ -130,9 +158,22 @@ When `sigil init` generates agent instructions, it creates a markdown file that 
 - Which features are enabled (GSAP, Motion, etc.)
 - Token naming conventions (`var(--sigil-*)`)
 - How to make visual changes (edit tokens, not components)
+- Which installed Sigil skill to read before editing
 - Available CLI commands
 
 This is critical for agent-driven development. The agent reads this file and knows to update the central spec instead of manually editing Tailwind classes across component files.
+
+The generated `.sigil/skills/` bundle includes:
+
+| Skill | Use For |
+|-------|---------|
+| `sigil-tokens` | Editing colors, typography, spacing, shadows, motion, and token CSS |
+| `sigil-preset` | Creating or choosing full visual presets |
+| `sigil-component` | Creating, modifying, reviewing, or registering components |
+| `sigil-layout` | Composing sections, grids, rails, and app shells |
+| `sigil-playbook` | Building complete pages in the Sigil aesthetic |
+| `sigil-migration` | Migrating from shadcn/ui or another design system |
+| `sigil-polish` | Typography, surfaces, animations, performance, and interaction polish |
 
 ## Configuration (`sigil.config.ts`)
 
@@ -153,9 +194,10 @@ export default config;
 
 When setting up or maintaining a Sigil project:
 
-1. **Run `sigil init`** to set up the token pipeline — do not manually create config files
+1. **Run `sigil convert`** to adopt Sigil in an existing project, or `sigil init` for config-only setup — do not manually create config files
 2. **Run `sigil add`** to install components — do not manually copy component files
 3. **Run `sigil preset <name>`** to change the aesthetic — do not manually edit colors across files
 4. **Run `sigil doctor`** after any changes to validate consistency
 5. **Read `.sigil/AGENTS.md`** at the start of any task to understand the project's Sigil setup
-6. **The token CSS file is the single point of visual customization.** Edit it for overrides, or switch presets for wholesale changes.
+6. **Read the relevant `.sigil/skills/<name>/SKILL.md`** before editing Sigil code
+7. **The token CSS file is the single point of visual customization.** Edit it for overrides, or switch presets for wholesale changes.

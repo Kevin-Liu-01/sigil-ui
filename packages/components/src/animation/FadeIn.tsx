@@ -3,6 +3,7 @@
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils";
 import { useInView, type UseInViewOptions } from "./useInView";
+import { useMountReveal } from "./useMountReveal";
 import { useReducedMotion } from "./useReducedMotion";
 
 type FadeDirection = "up" | "down" | "left" | "right" | "none";
@@ -46,7 +47,8 @@ export const FadeIn = forwardRef<HTMLDivElement, FadeInProps>(
   ) {
     const reduced = useReducedMotion();
     const { ref: viewRef, inView } = useInView<HTMLDivElement>(viewOptions);
-    const visible = reduced || trigger === "mount" ? true : inView;
+    const mounted = useMountReveal(trigger === "mount" && !reduced);
+    const visible = reduced || (trigger === "mount" ? mounted : inView);
 
     const mergedRef = (el: HTMLDivElement | null) => {
       (viewRef as React.MutableRefObject<HTMLDivElement | null>).current = el;

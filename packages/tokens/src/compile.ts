@@ -162,6 +162,28 @@ export function compileToCss(
     }
   }
 
+  // Cursor
+  if (tokens.cursor) {
+    for (const [key, value] of Object.entries(tokens.cursor)) {
+      if (value !== undefined) {
+        if (typeof value === "boolean") {
+          lightVars.push(`${cssVar(prefix, "cursor", key)}: ${value ? "1" : "0"};`);
+        } else {
+          lightVars.push(`${cssVar(prefix, "cursor", key)}: ${value};`);
+        }
+      }
+    }
+  }
+
+  // Scrollbar
+  if (tokens.scrollbar) {
+    for (const [key, value] of Object.entries(tokens.scrollbar)) {
+      if (value !== undefined) {
+        lightVars.push(`${cssVar(prefix, "scrollbar", key)}: ${value};`);
+      }
+    }
+  }
+
   // Code
   if (tokens.code) {
     for (const [key, value] of Object.entries(tokens.code)) {
@@ -272,6 +294,71 @@ export function compileToCss(
   }
 
   return lines.join("\n") + "\n";
+}
+
+// ---------------------------------------------------------------------------
+// compileInteractionCss
+// ---------------------------------------------------------------------------
+
+/**
+ * Generates opt-in native interaction styling for token-driven scrollbars and
+ * the custom cursor host attribute.
+ */
+export function compileInteractionCss(options: CssCompileOptions = {}): string {
+  const { prefix = "s" } = options;
+  const p = `--${prefix}`;
+
+  return [
+    ".sigil-scrollbar, [data-sigil-scrollbar] {",
+    `  scrollbar-width: var(${p}-scrollbar-firefox-width, thin);`,
+    `  scrollbar-color: var(${p}-scrollbar-thumb, var(${p}-border)) var(${p}-scrollbar-track, transparent);`,
+    `  scrollbar-gutter: var(${p}-scrollbar-gutter, auto);`,
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar, [data-sigil-scrollbar]::-webkit-scrollbar {",
+    `  width: var(${p}-scrollbar-width, 10px);`,
+    `  height: var(${p}-scrollbar-height, 10px);`,
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar-track, [data-sigil-scrollbar]::-webkit-scrollbar-track {",
+    `  background: var(${p}-scrollbar-track, transparent);`,
+    `  border-radius: var(${p}-scrollbar-radius, var(${p}-radius-full));`,
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar-thumb, [data-sigil-scrollbar]::-webkit-scrollbar-thumb {",
+    `  background: var(${p}-scrollbar-thumb, var(${p}-border));`,
+    `  border: var(${p}-scrollbar-padding, 2px) solid var(${p}-scrollbar-track, transparent);`,
+    `  border-radius: var(${p}-scrollbar-radius, var(${p}-radius-full));`,
+    "  background-clip: padding-box;",
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar-thumb:hover, [data-sigil-scrollbar]::-webkit-scrollbar-thumb:hover {",
+    `  background: var(${p}-scrollbar-thumb-hover, var(${p}-border-strong));`,
+    "  background-clip: padding-box;",
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar-thumb:active, [data-sigil-scrollbar]::-webkit-scrollbar-thumb:active {",
+    `  background: var(${p}-scrollbar-thumb-active, var(${p}-primary));`,
+    "  background-clip: padding-box;",
+    "}",
+    "",
+    ".sigil-scrollbar::-webkit-scrollbar-corner, [data-sigil-scrollbar]::-webkit-scrollbar-corner {",
+    `  background: var(${p}-scrollbar-corner, transparent);`,
+    "}",
+    "",
+    ".sigil-scrollbar-hidden, [data-sigil-scrollbar='hidden'] {",
+    "  scrollbar-width: none;",
+    "}",
+    "",
+    ".sigil-scrollbar-hidden::-webkit-scrollbar, [data-sigil-scrollbar='hidden']::-webkit-scrollbar {",
+    "  display: none;",
+    "}",
+    "",
+    "[data-sigil-cursor='custom'], [data-sigil-cursor='custom'] * {",
+    "  cursor: none !important;",
+    "}",
+    "",
+  ].join("\n");
 }
 
 // ---------------------------------------------------------------------------

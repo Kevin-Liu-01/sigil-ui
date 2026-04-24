@@ -124,7 +124,7 @@ Other systems: "I want a brutalist aesthetic"
   → Result: still looks like the old system with sharp corners
 
 Sigil: "I want a brutalist aesthetic"
-  → npx sigil preset anvil
+  → npx @sigil-ui/cli preset anvil
   → 259 tokens change: radius → 0, borders → thick,
     shadows → harsh, fonts → Space Grotesk, spacing → dense,
     motion → snappy, patterns → grid lines
@@ -287,9 +287,9 @@ Interactive bootstrapper: pick a template (AI SaaS, docs, dashboard, portfolio, 
 ### Existing project
 
 ```bash
-npx sigil init          # Interactive setup — detects framework, recommends presets
-npx sigil add button card input dialog
-npx sigil preset noir   # Swap visual identity in one command
+pnpm dlx @sigil-ui/cli convert   # Full adoption — deps, tokens, CSS import, agent instructions
+npx @sigil-ui/cli add button card input dialog
+npx @sigil-ui/cli preset noir    # Swap visual identity in one command
 ```
 
 ---
@@ -299,6 +299,7 @@ npx sigil preset noir   # Swap visual identity in one command
 | Command | What it does |
 |---------|-------------|
 | `sigil init` | Interactive setup: detects framework, asks about use case, recommends presets, generates agent instructions |
+| `sigil convert` | Convert an existing project end-to-end: dependencies, token CSS, global CSS import, components directory, agent instructions |
 | `sigil add <components>` | Copy components into your project (they read from tokens automatically) |
 | `sigil add --all` | Add all available components |
 | `sigil preset list` | Browse all 34 presets by category |

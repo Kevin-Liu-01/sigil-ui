@@ -3,7 +3,7 @@
 import { useState } from "react";
 import {
   SigilSection,
-  SectionDivider,
+  Divider,
   GapPixelGrid,
   GapPixelCell,
   MonoLabel,
@@ -135,7 +135,7 @@ export default function PresetsPage() {
           </div>
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="vertical" size="md" showBorders />
 
         {/* ── Category filter + Preset grid ───────────────── */}
         <SigilSection padding="32px 24px 48px">
@@ -207,7 +207,7 @@ export default function PresetsPage() {
           </GapPixelGrid>
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="diagonal" size="sm" showBorders />
 
         {/* ── Preset Comparison ───────────────────────────── */}
         <SigilSection padding="48px 24px">
@@ -232,7 +232,7 @@ export default function PresetsPage() {
           <PresetComparisonView />
         </SigilSection>
 
-        <SectionDivider />
+        <Divider pattern="vertical" size="sm" showBorders />
 
         {/* ── How Presets Work ────────────────────────────── */}
         <SigilSection padding="48px 24px 64px">
@@ -261,6 +261,8 @@ export default function PresetsPage() {
             <a href="/sandbox">Try in Sandbox</a>
           </AccentCTA>
         </SigilSection>
+
+        <Divider pattern="diagonal" size="md" showBorders />
       </BorderStack>
 
       <LandingFooter />

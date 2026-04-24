@@ -42,7 +42,7 @@ export default function AboutPage() {
           updates.
         </p>
         <p style={{ marginTop: 16 }}>
-          Sigil ships a CLI (<code>npx sigil init</code>), a preset browser, a
+          Sigil ships a CLI (<code>npx @sigil-ui/cli convert</code>), a preset browser, a
           drag-and-drop sandbox, and agent instructions so LLMs can build with
           it out of the box.
         </p>

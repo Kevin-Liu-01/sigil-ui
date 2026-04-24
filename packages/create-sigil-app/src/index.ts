@@ -4,6 +4,8 @@ import chalk from "chalk";
 import fs from "fs-extra";
 import path from "node:path";
 import { execSync } from "node:child_process";
+import { printIntro, symbols, withSpinner } from "./terminal.js";
+import { generateRequiredSkillsSection, installSigilAgentAssets } from "./skills.js";
 
 const TEMPLATES = [
   { value: "ai-saas", label: "AI SaaS", description: "Dashboard + AI features, dark mode, charts" },
@@ -87,10 +89,7 @@ program
   .action(async (directory: string | undefined, opts) => {
     const pm = detectPM();
 
-    console.log();
-    console.log(chalk.bold("  ◆ create-sigil-app"));
-    console.log(chalk.dim("  Bootstrap a new project with Sigil UI"));
-    console.log();
+    printIntro("create-sigil-app", "Bootstrap a new project with Sigil UI");
 
     // Step 1: Project name/directory
     let projectDir = directory;
@@ -136,6 +135,10 @@ program
       template = selectedTemplate;
     }
     template = template ?? "minimal";
+    if (template !== "minimal") {
+      console.log(`  ${symbols.warning} Template "${template}" is coming soon; using minimal scaffold for now.`);
+      template = "minimal";
+    }
 
     // Step 3: Preset
     let preset = opts.preset;
@@ -222,17 +225,19 @@ program
     fs.ensureDirSync(projectPath);
 
     // Step A: Create Next.js app
-    console.log(chalk.dim("  Creating Next.js app..."));
     try {
-      execSync(
-        `${PM_CREATE[pm]} create-next-app@latest ${projectPath} --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --turbopack --skip-install`,
-        { stdio: "pipe" },
+      await withSpinner(
+        "Creating Next.js app",
+        () => execSync(
+          `${PM_CREATE[pm]} create-next-app@latest ${projectPath} --typescript --tailwind --eslint --app --src-dir --import-alias "@/*" --turbopack --skip-install`,
+          { stdio: "pipe" },
+        ),
+        "Next.js project created",
       );
-      console.log(chalk.green("  ✓"), "Next.js project created");
     } catch {
-      console.log(chalk.yellow("  ⚠"), "create-next-app failed, scaffolding manually...");
+      console.log(`  ${symbols.warning} create-next-app failed, scaffolding manually...`);
       scaffoldManually(projectPath, projectName);
-      console.log(chalk.green("  ✓"), "Project scaffolded");
+      console.log(`  ${symbols.success} Project scaffolded`);
     }
 
     // Step B: Add Sigil config
@@ -251,7 +256,7 @@ const config: SigilConfig = {
 export default config;
 `;
     fs.writeFileSync(path.join(projectPath, "sigil.config.ts"), configContent, "utf-8");
-    console.log(chalk.green("  ✓"), "Created sigil.config.ts");
+    console.log(`  ${symbols.success} Created sigil.config.ts`);
 
     // Step C: Create tokens CSS
     const fontOverride = customFont
@@ -269,7 +274,7 @@ ${fontOverride}`;
     const tokensFullPath = path.join(projectPath, tokensPath);
     fs.ensureDirSync(path.dirname(tokensFullPath));
     fs.writeFileSync(tokensFullPath, tokensContent, "utf-8");
-    console.log(chalk.green("  ✓"), `Created ${tokensPath}`);
+    console.log(`  ${symbols.success} Created ${tokensPath}`);
 
     // Step D: Create components directory
     const compFullPath = path.join(projectPath, componentsDir);
@@ -281,7 +286,7 @@ ${fontOverride}`;
       const globalCss = fs.readFileSync(globalCssPath, "utf-8");
       const sigilImport = `@import "../../styles/sigil.tokens.css";\n`;
       fs.writeFileSync(globalCssPath, sigilImport + globalCss, "utf-8");
-      console.log(chalk.green("  ✓"), "Injected token import into globals.css");
+      console.log(`  ${symbols.success} Injected token import into globals.css`);
     }
 
     // Step F: Agent instructions
@@ -290,7 +295,11 @@ ${fontOverride}`;
       const agentPath = path.join(projectPath, ".sigil", "AGENTS.md");
       fs.ensureDirSync(path.dirname(agentPath));
       fs.writeFileSync(agentPath, agentContent, "utf-8");
-      console.log(chalk.green("  ✓"), "Created .sigil/AGENTS.md");
+      console.log(`  ${symbols.success} Created .sigil/AGENTS.md`);
+
+      const skillCount = installSigilAgentAssets(projectPath);
+      console.log(`  ${symbols.success} Installed ${skillCount} Sigil skills`);
+      console.log(`  ${symbols.success} Created .cursor/rules/sigil-skills.mdc`);
     }
 
     // Step G: Update package.json with Sigil deps
@@ -318,17 +327,19 @@ ${fontOverride}`;
       pkg.devDependencies["@sigil-ui/cli"] = "latest";
 
       fs.writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n", "utf-8");
-      console.log(chalk.green("  ✓"), "Updated package.json with Sigil dependencies");
+      console.log(`  ${symbols.success} Updated package.json with Sigil dependencies`);
     }
 
     // Step H: Install deps
     if (opts.install !== false) {
-      console.log(chalk.dim("  Installing dependencies..."));
       try {
-        execSync(`${pm} install`, { cwd: projectPath, stdio: "pipe" });
-        console.log(chalk.green("  ✓"), "Dependencies installed");
+        await withSpinner(
+          "Installing dependencies",
+          () => execSync(`${pm} install`, { cwd: projectPath, stdio: "pipe" }),
+          "Dependencies installed",
+        );
       } catch {
-        console.log(chalk.yellow("  ⚠"), "Install failed. Run manually:");
+        console.log(`  ${symbols.warning} Install failed. Run manually:`);
         console.log(`     ${chalk.cyan(`cd ${projectDir} && ${pm} install`)}`);
       }
     }
@@ -339,7 +350,7 @@ ${fontOverride}`;
         execSync("git init", { cwd: projectPath, stdio: "pipe" });
         execSync("git add -A", { cwd: projectPath, stdio: "pipe" });
         execSync('git commit -m "Initial commit with Sigil UI"', { cwd: projectPath, stdio: "pipe" });
-        console.log(chalk.green("  ✓"), "Git initialized with initial commit");
+        console.log(`  ${symbols.success} Git initialized with initial commit`);
       } catch {
         // Git may already be initialized or unavailable
       }
@@ -357,9 +368,9 @@ ${fontOverride}`;
     if (customFont) console.log(chalk.dim("  Font:     ") + chalk.cyan(customFont));
     console.log();
     console.log(chalk.dim("  Commands:"));
-    console.log(`    ${chalk.cyan("npx sigil add <component>")}  Add components`);
-    console.log(`    ${chalk.cyan("npx sigil preset <name>")}    Switch presets`);
-    console.log(`    ${chalk.cyan("npx sigil doctor")}            Validate setup`);
+    console.log(`    ${chalk.cyan("npx @sigil-ui/cli add <component>")}  Add components`);
+    console.log(`    ${chalk.cyan("npx @sigil-ui/cli preset <name>")}    Switch presets`);
+    console.log(`    ${chalk.cyan("npx @sigil-ui/cli doctor")}            Validate setup`);
     console.log();
   });
 
@@ -491,8 +502,8 @@ To change how things look, edit the token CSS file (\`${tokensPath}\`) or switch
 | Primary color | Edit \`${tokensPath}\`: \`--sigil-primary: oklch(...);\` | Edit component files |
 | Fonts | Edit \`${tokensPath}\`: \`--sigil-font-display: "Font", ...;\` | Add font classes to components |
 | Border radius | Edit \`${tokensPath}\`: \`--sigil-radius-md: 12px;\` | Add \`rounded-*\` to components |
-| Everything at once | Run \`npx sigil preset <name>\` | Edit dozens of files |
-| Custom aesthetic | Run \`npx sigil preset create\` | Override each component |
+| Everything at once | Run \`npx @sigil-ui/cli preset <name>\` | Edit dozens of files |
+| Custom aesthetic | Run \`npx @sigil-ui/cli preset create\` | Override each component |
 
 ## Token Conventions
 
@@ -507,26 +518,30 @@ To change how things look, edit the token CSS file (\`${tokensPath}\`) or switch
 - Every component uses \`forwardRef\` and accepts \`className\`
 - Styling references \`var(--s-*)\` — never hardcoded values
 - Use \`clsx\` + \`tailwind-merge\` for class merging
-- Add with \`npx sigil add <name>\`
+- Add with \`npx @sigil-ui/cli add <name>\`
+
+${generateRequiredSkillsSection()}
 
 ## Commands
 
 \`\`\`bash
-npx sigil add button card     # copy components into project
-npx sigil preset list         # browse all 31 presets
-npx sigil preset <name>       # switch presets
-npx sigil preset create       # scaffold custom preset
-npx sigil doctor              # validate project health
-npx sigil diff                # show token changes
+npx @sigil-ui/cli convert     # adopt Sigil in an existing project
+npx @sigil-ui/cli add button card     # copy components into project
+npx @sigil-ui/cli preset list         # browse all 31 presets
+npx @sigil-ui/cli preset <name>       # switch presets
+npx @sigil-ui/cli preset create       # scaffold custom preset
+npx @sigil-ui/cli doctor              # validate project health
+npx @sigil-ui/cli diff                # show token changes
 \`\`\`
 
 ## Agent Workflow
 
 1. Read this file to understand the setup
-2. Use existing components from \`${componentsDir}\` before creating new ones
-3. For visual changes, edit \`${tokensPath}\` — never hardcode values
-4. For wholesale changes, switch presets
-5. Run \`npx sigil doctor\` after changes
+2. Read the relevant skill from \`.sigil/skills/\` before editing
+3. Use existing components from \`${componentsDir}\` before creating new ones
+4. For visual changes, edit \`${tokensPath}\` — never hardcode values
+5. For wholesale changes, switch presets
+6. Run \`npx @sigil-ui/cli doctor\` after changes
 `;
 }
 

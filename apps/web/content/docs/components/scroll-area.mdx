@@ -39,21 +39,38 @@ import { ScrollArea } from "@sigil-ui/components";
 </ScrollArea>
 ```
 
+## Custom thickness
+
+```tsx
+<ScrollArea scrollbarSize={14} className="h-[240px]">
+  <div className="p-4">Chunkier scrollbar, same token system.</div>
+</ScrollArea>
+```
+
 ## Token integration
 
 | CSS Variable | Used for |
 |---|---|
-| `--s-border` | Scrollbar thumb color |
-| `--s-border-muted` | Scrollbar track color |
-| `--s-radius-full` | Thumb border radius |
+| `--s-scrollbar-width` | Vertical scrollbar width |
+| `--s-scrollbar-height` | Horizontal scrollbar height |
+| `--s-scrollbar-padding` | Internal track padding |
+| `--s-scrollbar-track` | Track background |
+| `--s-scrollbar-thumb` | Thumb color |
+| `--s-scrollbar-thumb-hover` | Thumb hover color |
+| `--s-scrollbar-thumb-active` | Thumb active color |
+| `--s-scrollbar-radius` | Track and thumb radius |
 | `--s-duration-fast` | Thumb fade transition |
+
+Native scroll containers can opt into the same system with `className="sigil-scrollbar"` or `data-sigil-scrollbar`.
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
 | `orientation` | `"vertical" \| "horizontal" \| "both"` | `"vertical"` | Scroll direction |
-| `scrollbarSize` | `number` | `8` | Scrollbar width in px |
+| `scrollbarSize` | `number \| string` | token value | Scrollbar thickness for this instance |
+| `scrollbarClassName` | `string` | — | Additional classes for the track |
+| `thumbClassName` | `string` | — | Additional classes for the thumb |
 | `className` | `string` | — | Additional CSS classes |
 | `children` | `ReactNode` | — | Scrollable content |
 

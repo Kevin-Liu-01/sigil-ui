@@ -3,6 +3,7 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../utils";
 import { useInView, type UseInViewOptions } from "./useInView";
+import { useMountReveal } from "./useMountReveal";
 import { useReducedMotion } from "./useReducedMotion";
 
 type RevealUnit = "word" | "char";
@@ -41,7 +42,8 @@ export const TextReveal = forwardRef<HTMLDivElement, TextRevealProps>(
   ) {
     const reduced = useReducedMotion();
     const { ref: viewRef, inView } = useInView<HTMLDivElement>(viewOptions);
-    const visible = reduced || trigger === "mount" ? true : inView;
+    const mounted = useMountReveal(trigger === "mount" && !reduced);
+    const visible = reduced || (trigger === "mount" ? mounted : inView);
 
     const mergedRef = (el: HTMLDivElement | null) => {
       (viewRef as React.MutableRefObject<HTMLDivElement | null>).current = el;

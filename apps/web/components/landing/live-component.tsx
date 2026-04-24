@@ -502,7 +502,6 @@ const GRID_CELLS = [
   "Calendar",
   "DataTable",
   "Alert",
-  "Dialog",
 ] as const;
 
 const VARIANT_COUNTS: Record<string, number> = {
@@ -516,11 +515,215 @@ const VARIANT_COUNTS: Record<string, number> = {
   Dialog: 2,
 };
 
-export interface LiveComponentGridProps {
-  className?: string;
+export function ComponentGalleryCTA() {
+  return (
+    <div
+      style={{
+        position: "relative",
+        gridColumn: "1 / -1",
+        minHeight: 260,
+        overflow: "hidden",
+        border: "1px solid var(--s-border)",
+        marginRight: -1,
+        marginBottom: -1,
+        background:
+          "linear-gradient(115deg, color-mix(in oklch, var(--s-background) 92%, var(--s-primary)) 0%, var(--s-background) 42%, color-mix(in oklch, var(--s-primary) 20%, var(--s-background)) 100%)",
+      }}
+    >
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.38,
+          backgroundImage:
+            "linear-gradient(var(--s-border-muted) 1px, transparent 1px), linear-gradient(90deg, var(--s-border-muted) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          maskImage: "linear-gradient(90deg, black 0%, black 46%, transparent 72%)",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          opacity: 0.16,
+          backgroundImage:
+            "radial-gradient(circle at 20% 30%, var(--s-text) 0 1px, transparent 1px), radial-gradient(circle at 82% 62%, var(--s-text) 0 1px, transparent 1px)",
+          backgroundSize: "11px 13px, 17px 19px",
+          mixBlendMode: "overlay",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(circle at 72% 40%, color-mix(in oklch, var(--s-primary) 28%, transparent), transparent 34%), linear-gradient(90deg, transparent 0%, color-mix(in oklch, var(--s-primary) 10%, transparent) 48%, transparent 100%)",
+        }}
+      />
+
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "grid",
+          gridTemplateColumns: "minmax(0, 0.9fr) minmax(320px, 1.1fr)",
+          gap: 24,
+          minHeight: 260,
+          padding: 24,
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <div
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              marginBottom: 16,
+              padding: "6px 9px",
+              border: "1px solid var(--s-border)",
+              background: "var(--s-background)",
+              fontFamily: "var(--s-font-mono, monospace)",
+              fontSize: 10,
+              textTransform: "uppercase",
+              letterSpacing: "0.16em",
+              color: "var(--s-primary)",
+            }}
+          >
+            <span
+              style={{
+                width: 6,
+                height: 6,
+                background: "var(--s-primary)",
+                display: "inline-block",
+              }}
+            />
+            token scaffold to production UI
+          </div>
+          <h3
+            style={{
+              margin: 0,
+              maxWidth: 520,
+              color: "var(--s-text)",
+              fontFamily: "var(--s-font-display)",
+              fontSize: "clamp(28px, 4vw, 48px)",
+              lineHeight: 0.98,
+              letterSpacing: "-0.04em",
+              fontWeight: 700,
+            }}
+          >
+            Browse the full component system.
+          </h3>
+          <p
+            style={{
+              margin: "14px 0 22px",
+              maxWidth: 500,
+              color: "var(--s-text-muted)",
+              lineHeight: 1.6,
+              fontSize: 14,
+            }}
+          >
+            Start with blueprint-level primitives, then drop in finished components
+            that already inherit the active preset.
+          </p>
+          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <Button asChild>
+              <a href="/components" style={{ textDecoration: "none" }}>
+                Browse Components
+              </a>
+            </Button>
+            <Button asChild variant="outline">
+              <a href="/docs/components/button" style={{ textDecoration: "none" }}>
+                Read Docs
+              </a>
+            </Button>
+          </div>
+        </div>
+
+        <div
+          style={{
+            position: "relative",
+            minHeight: 196,
+            border: "1px solid var(--s-border)",
+            background: "var(--s-background)",
+            boxShadow: "var(--s-shadow-lg)",
+            overflow: "hidden",
+          }}
+        >
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(115deg, transparent 0%, transparent 42%, color-mix(in oklch, var(--s-primary) 10%, transparent) 42%, color-mix(in oklch, var(--s-primary) 18%, transparent) 100%)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              inset: 16,
+              display: "grid",
+              gridTemplateColumns: "1fr 1fr",
+              gap: 12,
+            }}
+          >
+            <div
+              style={{
+                border: "1px dashed var(--s-border)",
+                background:
+                  "linear-gradient(var(--s-border-muted) 1px, transparent 1px), linear-gradient(90deg, var(--s-border-muted) 1px, transparent 1px)",
+                backgroundSize: "18px 18px",
+                padding: 14,
+                color: "var(--s-text-muted)",
+                fontFamily: "var(--s-font-mono, monospace)",
+                fontSize: 10,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+              }}
+            >
+              <div style={{ marginBottom: 34 }}>blueprint</div>
+              <div style={{ height: 22, border: "1px solid var(--s-border)" }} />
+              <div style={{ marginTop: 12, width: "72%", height: 8, background: "var(--s-border-muted)" }} />
+              <div style={{ marginTop: 7, width: "54%", height: 8, background: "var(--s-border-muted)" }} />
+            </div>
+            <Card
+              style={{
+                position: "relative",
+                background: "var(--s-surface-elevated)",
+                boxShadow: "var(--s-shadow-md)",
+              }}
+            >
+              <CardHeader>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                  <CardTitle>Component</CardTitle>
+                  <Badge>Live</Badge>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                  <Input placeholder="Search components..." />
+                  <Progress value={72} />
+                  <Button size="sm">Install</Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
-export function LiveComponentGrid({ className }: LiveComponentGridProps) {
+export interface LiveComponentGridProps {
+  className?: string;
+  showCta?: boolean;
+}
+
+export function LiveComponentGrid({ className, showCta = true }: LiveComponentGridProps) {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
@@ -632,6 +835,7 @@ export function LiveComponentGrid({ className }: LiveComponentGridProps) {
           </div>
         );
       })}
+      {showCta && <ComponentGalleryCTA />}
     </div>
   );
 }

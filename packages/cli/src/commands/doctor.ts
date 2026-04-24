@@ -4,6 +4,8 @@ import fs from "fs-extra";
 import path from "node:path";
 import { readConfig, configExists } from "../utils/config.js";
 import { discoverLocalComponents, getComponent } from "../utils/registry.js";
+import { getMissingSigilSkillFiles, hasSigilCursorRule } from "../utils/skills.js";
+import { printIntro, symbols } from "../utils/terminal.js";
 
 type DiagnosticResult = {
   label: string;
@@ -17,15 +19,14 @@ export const doctorCommand = new Command("doctor")
     const cwd = process.cwd();
     const results: DiagnosticResult[] = [];
 
-    console.log(chalk.bold("Sigil Doctor"));
-    console.log(chalk.dim("Running diagnostics…"));
-    console.log();
+    printIntro("Sigil Doctor", "Running diagnostics");
 
     results.push(checkConfig(cwd));
     results.push(checkTokensFile(cwd));
     results.push(checkComponentsDir(cwd));
     results.push(await checkComponentDeps(cwd));
     results.push(checkCssImport(cwd));
+    results.push(checkAgentAssets(cwd));
     results.push(await checkPreset(cwd));
 
     const passes = results.filter((r) => r.status === "pass");
@@ -35,10 +36,10 @@ export const doctorCommand = new Command("doctor")
     for (const r of results) {
       const icon =
         r.status === "pass"
-          ? chalk.green("✓")
+          ? symbols.success
           : r.status === "warn"
-            ? chalk.yellow("⚠")
-            : chalk.red("✗");
+            ? symbols.warning
+            : symbols.error;
       console.log(`  ${icon} ${chalk.bold(r.label)}: ${r.message}`);
     }
 
@@ -185,6 +186,36 @@ function checkCssImport(cwd: string): DiagnosticResult {
     status: "warn",
     message: "Could not find Sigil token import in global CSS",
   };
+}
+
+function checkAgentAssets(cwd: string): DiagnosticResult {
+  const agentPath = path.join(cwd, ".sigil", "AGENTS.md");
+  if (!fs.existsSync(agentPath)) {
+    return {
+      label: "Agent Assets",
+      status: "warn",
+      message: ".sigil/AGENTS.md not found — run `sigil init` without `--no-agent`",
+    };
+  }
+
+  const missingSkills = getMissingSigilSkillFiles(cwd);
+  if (missingSkills.length > 0) {
+    return {
+      label: "Agent Assets",
+      status: "warn",
+      message: `Missing Sigil skills: ${missingSkills.slice(0, 3).join(", ")}${missingSkills.length > 3 ? ", ..." : ""}`,
+    };
+  }
+
+  if (!hasSigilCursorRule(cwd)) {
+    return {
+      label: "Agent Assets",
+      status: "warn",
+      message: ".cursor/rules/sigil-skills.mdc not found — rerun `sigil init` to enforce installed skills",
+    };
+  }
+
+  return { label: "Agent Assets", status: "pass", message: "Agent instructions and Sigil skills installed" };
 }
 
 async function checkPreset(cwd: string): Promise<DiagnosticResult> {

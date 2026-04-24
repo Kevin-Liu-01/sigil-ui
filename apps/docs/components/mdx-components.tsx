@@ -29,7 +29,7 @@ export {
   DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger, DropdownMenu, DropdownMenuCheckboxItem,
   DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuSub,
   DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, EcosystemDiagram, Editable, Empty,
-  ExplodedView, FAQSection, FadeIn, FeatureFrame, FeatureFrameSection, FeatureGrid,
+  ExplodedBox3D, ExplodedView, FAQSection, FadeIn, FeatureFrame, FeatureFrameSection, FeatureGrid,
   FeatureMiniDiagram, FeatureSection, FeatureShowcaseSection, FeaturedGrid, Field, FieldDescription,
   FieldError, FieldLabel, Fieldset, FileUpload, Flex, FloatingUI,
   FlowDiagram, Footer, FooterSection, Form, FormControl, FormDescription,
