@@ -32,9 +32,9 @@ export interface StatePersistenceProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantColors = {
-  success: { border: "var(--s-success,#22c55e)", bg: "var(--s-success,#22c55e)" },
-  danger: { border: "var(--s-error,#ef4444)", bg: "var(--s-error,#ef4444)" },
-  muted: { border: "var(--s-border,#e4e4e7)", bg: "var(--s-text-muted,#71717a)" },
+  success: { border: "var(--s-success)", bg: "var(--s-success)" },
+  danger: { border: "var(--s-error)", bg: "var(--s-error)" },
+  muted: { border: "var(--s-border)", bg: "var(--s-text-muted)" },
 } as const;
 
 export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps>(
@@ -72,10 +72,10 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
         {/* Active section */}
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted,#71717a)]">
+            <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted)]">
               {activeLabel}
             </span>
-            <div className="h-px flex-1 bg-[var(--s-border,#e4e4e7)]" />
+            <div className="h-px flex-1 bg-[var(--s-border)]" />
           </div>
 
           {/* Primary item */}
@@ -95,10 +95,10 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
           >
             <div className="relative flex h-2.5 w-2.5 shrink-0 items-center justify-center">
               <div
-                className="absolute inset-0 animate-ping rounded-full"
+                className="absolute inset-0 animate-ping rounded-[var(--s-radius-full)]"
                 style={{ backgroundColor: v.border, opacity: 0.35, animationDuration: "var(--s-duration-slow,400ms)" }}
               />
-              <div className="relative h-2.5 w-2.5 rounded-full" style={{ backgroundColor: v.border }} />
+              <div className="relative h-2.5 w-2.5 rounded-[var(--s-radius-full)]" style={{ backgroundColor: v.border }} />
             </div>
             <div className="flex-1 leading-tight">
               <div className="flex items-baseline gap-1.5">
@@ -106,7 +106,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                   {activeItem.label}
                 </span>
                 {activeItem.sublabel && (
-                  <span className="font-mono text-[10px] text-[var(--s-text-muted,#71717a)]">
+                  <span className="font-mono text-[10px] text-[var(--s-text-muted)]">
                     · {activeItem.sublabel}
                   </span>
                 )}
@@ -117,7 +117,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                 {activeItem.value}
               </span>
               {activeItem.valueLabel && (
-                <span className="font-mono text-[10px] text-[var(--s-text-muted,#71717a)]">
+                <span className="font-mono text-[10px] text-[var(--s-text-muted)]">
                   {activeItem.valueLabel}
                 </span>
               )}
@@ -133,7 +133,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                 return (
                   <div
                     key={c.label}
-                    className="flex items-center gap-2 border border-dashed border-[var(--s-border,#e4e4e7)] bg-[var(--s-bg,#fff)] px-2.5 py-2"
+                    className="flex items-center gap-2 border border-dashed border-[var(--s-border)] bg-[var(--s-background)] px-2.5 py-2"
                     style={{
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateY(0)" : "translateY(8px)",
@@ -142,11 +142,11 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                         : `opacity var(--s-duration-normal,250ms) var(--s-ease-out,ease-out) ${cDelay}ms, transform var(--s-duration-normal,250ms) var(--s-ease-out,ease-out) ${cDelay}ms`,
                     }}
                   >
-                    <div className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: cv.bg, opacity: 0.5 }} />
+                    <div className="h-1.5 w-1.5 shrink-0 rounded-[var(--s-radius-full)]" style={{ backgroundColor: cv.bg, opacity: 0.5 }} />
                     <div className="flex-1 leading-tight">
-                      <span className="block font-mono text-[10px] text-[var(--s-text-muted,#71717a)]">{c.label}</span>
+                      <span className="block font-mono text-[10px] text-[var(--s-text-muted)]">{c.label}</span>
                       {c.sublabel && (
-                        <span className="block font-mono text-[9px] uppercase tracking-wider text-[var(--s-text-muted,#71717a)]/70">{c.sublabel}</span>
+                        <span className="block font-mono text-[9px] uppercase tracking-wider text-[var(--s-text-muted)]/70">{c.sublabel}</span>
                       )}
                     </div>
                     <span className="font-mono text-[10px] font-semibold tabular-nums" style={{ color: cv.border }}>
@@ -163,10 +163,10 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
         {persistedState.length > 0 && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted,#71717a)]">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted)]">
                 {stateLabel}
               </span>
-              <div className="h-px flex-1 bg-[var(--s-border,#e4e4e7)]" />
+              <div className="h-px flex-1 bg-[var(--s-border)]" />
             </div>
             <div className="space-y-px">
               {persistedState.map((row, i) => {
@@ -174,7 +174,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                 return (
                   <div
                     key={row.label}
-                    className="flex items-center gap-3 border border-[var(--s-border,#e4e4e7)] bg-[var(--s-bg,#fff)] px-3.5 py-2.5"
+                    className="flex items-center gap-3 border border-[var(--s-border)] bg-[var(--s-background)] px-3.5 py-2.5"
                     style={{
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateX(0)" : "translateX(-6px)",
@@ -183,10 +183,10 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                         : `opacity var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${rowDelay}ms, transform var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${rowDelay}ms`,
                     }}
                   >
-                    {row.icon && <span className="text-[var(--s-primary,#6366f1)]">{row.icon}</span>}
+                    {row.icon && <span className="text-[var(--s-primary)]">{row.icon}</span>}
                     <span className="flex-1 font-mono text-xs text-[var(--s-text,currentColor)]">{row.label}</span>
                     {row.status && (
-                      <span className="font-mono text-xs font-medium text-[var(--s-primary,#6366f1)]">{row.status}</span>
+                      <span className="font-mono text-xs font-medium text-[var(--s-primary)]">{row.status}</span>
                     )}
                   </div>
                 );

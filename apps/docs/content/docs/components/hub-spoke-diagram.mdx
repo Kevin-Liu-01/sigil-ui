@@ -1,0 +1,48 @@
+---
+title: HubSpokeDiagram
+description: A hub-and-spoke layout with a central node connected to left and right spoke nodes.
+---
+
+## Import
+
+```tsx
+import { HubSpokeDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<HubSpokeDiagram
+  hub={{ label: "API Gateway", sublabel: "v2.1" }}
+  spokes={[
+    { id: "auth", label: "Auth", side: "left" },
+    { id: "users", label: "Users", side: "left" },
+    { id: "billing", label: "Billing", side: "right" },
+    { id: "notify", label: "Notifications", side: "right" },
+  ]}
+/>
+```
+
+## With icons
+
+```tsx
+<HubSpokeDiagram
+  hub={{ label: "Core", icon: <CpuIcon /> }}
+  spokes={[
+    { id: "db", label: "Database", icon: <DatabaseIcon />, side: "left" },
+    { id: "cache", label: "Cache", icon: <ZapIcon />, side: "right" },
+  ]}
+  connector="solid"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `hub` | `{ label, icon?, sublabel? }` | — | Central hub node (required) |
+| `spokes` | `SpokeNode[]` | — | Array of `{ id, label, icon?, side }` (required) |
+| `connector` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed"` | Spoke connector style |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.

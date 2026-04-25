@@ -59,7 +59,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           onClick={() => setCollapsed(!collapsed)}
           className={cn(
-            "absolute -right-3 top-6 z-10 inline-flex h-6 w-6 items-center justify-center rounded-full",
+            "absolute -right-3 top-6 z-10 inline-flex h-6 w-6 items-center justify-center rounded-[var(--s-radius-full)]",
             "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
             "shadow-[var(--s-shadow-sm)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10 hover:text-[var(--s-text)]",

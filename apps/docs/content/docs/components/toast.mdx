@@ -1,0 +1,96 @@
+---
+title: Toast
+description: A non-intrusive notification popup with auto-dismiss, action buttons, and swipe-to-dismiss. Built on Radix Toast.
+---
+
+## Import
+
+```tsx
+import { Toaster, toast } from "@sigil-ui/components";
+```
+
+## Setup
+
+Add `<Toaster />` to your root layout:
+
+```tsx
+<Toaster />
+```
+
+## Usage
+
+```tsx
+toast("Changes saved successfully.");
+```
+
+## Variants
+
+```tsx
+toast.success("File uploaded.");
+toast.error("Something went wrong.");
+toast.warning("Storage almost full.");
+toast.info("New version available.");
+```
+
+## With action
+
+```tsx
+toast("Message deleted.", {
+  action: { label: "Undo", onClick: () => restore() },
+});
+```
+
+## With description
+
+```tsx
+toast("Deployment complete", {
+  description: "Your changes are now live in production.",
+});
+```
+
+## Custom duration
+
+```tsx
+toast("Quick flash", { duration: 2000 });
+toast("Sticky notice", { duration: Infinity });
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Toast background |
+| `--s-text` | Toast message color |
+| `--s-text-muted` | Description color |
+| `--s-border` | Toast border |
+| `--s-success` | Success variant accent |
+| `--s-error` | Error variant accent |
+| `--s-warning` | Warning variant accent |
+| `--s-card-radius` | Border radius |
+| `--s-shadow-lg` | Toast elevation |
+| `--s-duration-normal` | Enter/exit animation |
+
+## Props
+
+### toast()
+
+| Param | Type | Default | Description |
+|---|---|---|---|
+| `message` | `string` | — | Toast message |
+| `options.description` | `string` | — | Secondary text |
+| `options.action` | `{ label: string; onClick: () => void }` | — | Action button |
+| `options.duration` | `number` | `5000` | Auto-dismiss time in ms |
+
+### Toaster
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `position` | `"top-right" \| "top-left" \| "bottom-right" \| "bottom-left"` | `"bottom-right"` | Toast position |
+| `className` | `string` | — | Additional CSS classes |
+
+## Accessibility
+
+- Uses `role="status"` with `aria-live="polite"` for non-urgent toasts
+- Error toasts use `aria-live="assertive"`
+- Swipe-to-dismiss works on touch devices
+- Focus moves to action button when present

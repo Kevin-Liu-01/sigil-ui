@@ -24,8 +24,8 @@ export const StreamFlowDiagram = forwardRef<HTMLDivElement, StreamFlowDiagramPro
           </div>
 
           <svg width="32" height="16" className="shrink-0" aria-hidden>
-            <line x1="0" y1="8" x2="24" y2="8" stroke="var(--s-border-strong)" strokeWidth="1.5" strokeDasharray="4 3" />
-            <polygon points="24,5 32,8 24,11" fill="var(--s-border-strong)" />
+            <line x1="0" y1="8" x2="24" y2="8" stroke="var(--s-chart-axis)" strokeWidth="1.5" strokeDasharray="4 3" />
+            <polygon points="24,5 32,8 24,11" fill="var(--s-chart-axis)" />
           </svg>
 
           <div className="flex items-center gap-1 flex-wrap">
@@ -43,8 +43,8 @@ export const StreamFlowDiagram = forwardRef<HTMLDivElement, StreamFlowDiagramPro
           {output && (
             <>
               <svg width="24" height="16" className="shrink-0" aria-hidden>
-                <line x1="0" y1="8" x2="16" y2="8" stroke="var(--s-border-strong)" strokeWidth="1.5" strokeDasharray="4 3" />
-                <polygon points="16,5 24,8 16,11" fill="var(--s-border-strong)" />
+                <line x1="0" y1="8" x2="16" y2="8" stroke="var(--s-chart-axis)" strokeWidth="1.5" strokeDasharray="4 3" />
+                <polygon points="16,5 24,8 16,11" fill="var(--s-chart-axis)" />
               </svg>
               <div className="px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] bg-[var(--s-background)] text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text)]">
                 {output}

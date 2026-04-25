@@ -75,7 +75,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                     "rounded-[var(--s-radius-button,0px)]",
                     action.variant === "secondary" || i > 0
                       ? "bg-transparent text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface)]"
-                      : "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] hover:brightness-110",
+                      : "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:brightness-110",
                   )}
                 >
                   {action.label}

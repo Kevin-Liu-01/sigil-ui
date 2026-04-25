@@ -1,0 +1,50 @@
+---
+title: DiagramConnector
+description: An SVG arrow connector with solid, dashed, or animated variants for linking diagram nodes.
+---
+
+## Import
+
+```tsx
+import { DiagramConnector } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<DiagramConnector />
+```
+
+## Variants
+
+```tsx
+<DiagramConnector variant="solid" />
+<DiagramConnector variant="dashed" />
+<DiagramConnector variant="dashed-animated" />
+```
+
+## Vertical direction
+
+```tsx
+<DiagramConnector direction="vertical" length={80} />
+```
+
+## With label
+
+```tsx
+<DiagramConnector label="HTTPS" length={100} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed-animated"` | Line style |
+| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Arrow direction |
+| `label` | `string` | — | Text label along the connector |
+| `length` | `number` | `60` | Length in pixels |
+| `strokeColor` | `string` | `var(--s-border-strong)` | Custom stroke color |
+| `arrowSize` | `number` | `6` | Arrowhead size in pixels |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<svg>` HTML attributes.

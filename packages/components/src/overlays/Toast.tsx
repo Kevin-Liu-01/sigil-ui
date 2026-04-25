@@ -57,7 +57,7 @@ function toastStyle(variant: ToastVariant, fill: ToastFill): React.CSSProperties
   const c = variantColors[variant];
   switch (fill) {
     case "filled":
-      return { borderColor: c, backgroundColor: c, color: "var(--s-primary-contrast, #fff)" };
+      return { borderColor: c, backgroundColor: c, color: "var(--s-primary-contrast)" };
     case "soft":
       return { borderColor: "transparent", backgroundColor: `color-mix(in oklch, ${c} 10%, var(--s-background))`, color: c };
     case "outline":

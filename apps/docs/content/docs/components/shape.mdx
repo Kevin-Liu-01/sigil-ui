@@ -1,0 +1,59 @@
+---
+title: Shape
+description: Generic SVG shape component with six variants and configurable size, fill, and stroke.
+---
+
+## Import
+
+```tsx
+import { Shape } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Shape />
+```
+
+## Variants
+
+```tsx
+<Shape variant="diamond" />
+<Shape variant="hexagon" />
+<Shape variant="triangle" />
+<Shape variant="circle" />
+<Shape variant="cross" />
+<Shape variant="pill" />
+```
+
+## Sizes
+
+```tsx
+<Shape size="sm" />
+<Shape size="md" />
+<Shape size="lg" />
+<Shape size="xl" />
+```
+
+## Filled
+
+```tsx
+<Shape variant="hexagon" filled />
+<Shape variant="circle" filled size="lg" />
+```
+
+## Custom stroke
+
+```tsx
+<Shape variant="triangle" strokeWidth={3} size="xl" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"diamond" \| "hexagon" \| "triangle" \| "circle" \| "cross" \| "pill"` | `"diamond"` | Shape type |
+| `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Shape size (16/24/32/48 px) |
+| `filled` | `boolean` | `false` | Fill the shape with `--s-primary` |
+| `strokeWidth` | `number` | `1.5` | Stroke width |
+| `className` | `string` | — | Additional CSS classes |

@@ -66,7 +66,7 @@ export const AreaChart = forwardRef<SVGSVGElement, AreaChartProps>(
       return padT + plotH - (value / maxVal) * plotH;
     }
 
-    const defaultColors = ["var(--s-primary)", "var(--s-success, #22c55e)", "var(--s-warning, #f59e0b)", "var(--s-error, #ef4444)"];
+    const defaultColors = ["var(--s-primary)", "var(--s-success)", "var(--s-warning)", "var(--s-error)"];
     const gridLines = 5;
     const xLabels = series[0]?.points.map((p) => p.label) ?? [];
 

@@ -56,7 +56,7 @@ export const RatingGroup = forwardRef<HTMLDivElement, RatingGroupProps>(function
             className={cn(
               "cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] rounded-[var(--s-radius-sm,2px)]",
-              filled ? "text-[var(--s-warning,#f59e0b)]" : "text-[var(--s-border)]",
+              filled ? "text-[var(--s-warning)]" : "text-[var(--s-border)]",
             )}
           >
             <svg viewBox="0 0 20 20" fill="currentColor" className={sizeMap[size]} aria-hidden>

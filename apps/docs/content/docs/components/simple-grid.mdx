@@ -1,0 +1,43 @@
+---
+title: SimpleGrid
+description: CSS grid with a fixed column count or responsive auto-fill based on minimum child width.
+---
+
+## Import
+
+```tsx
+import { SimpleGrid } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<SimpleGrid columns={3} gap={16}>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+</SimpleGrid>
+```
+
+## Responsive auto-fill
+
+```tsx
+<SimpleGrid minChildWidth={200} gap={16}>
+  <div>Card A</div>
+  <div>Card B</div>
+  <div>Card C</div>
+  <div>Card D</div>
+</SimpleGrid>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `number` | — | Fixed number of columns |
+| `minChildWidth` | `number \| string` | — | Minimum child width for `auto-fill` grid. Overrides `columns` |
+| `gap` | `number \| string` | — | Gap between items (number = px) |
+| `className` | `string` | — | Additional CSS classes |

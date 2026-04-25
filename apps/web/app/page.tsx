@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
-import { FooterQuadrantDiagram, HeroLogoField } from "@/components/landing/hero-logo-field";
+import { FooterComponentDiagram, FooterQuadrantDiagram, HeroLogoField } from "@/components/landing/hero-logo-field";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { Terminal } from "@/components/landing/terminal";
@@ -143,7 +143,7 @@ function Hero() {
 
         <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
           The same Radix components you trust, with an agent-first token layer on top.
-          100+ components. 259 tokens. One markdown file that humans and AI agents
+          200+ token-driven components. 259 tokens. One markdown file that humans and AI agents
           both edit to control every color, font, radius, and animation.
         </DensityText>
 
@@ -223,7 +223,7 @@ function TokenPipelineSection() {
       <SectionHeader
         label="Token System"
         heading="One file compiles to everything."
-        description="Edit sigil.tokens.md. 300+ CSS variables compile. 103 components update instantly."
+        description="Edit sigil.tokens.md. 300+ CSS variables compile. 200+ token-driven components update instantly."
       />
       <TokenPipelineDiagram />
     </LandingSection>
@@ -265,7 +265,7 @@ function AgentFirstSection() {
               { name: "Radix Primitives", desc: "Accessible, unstyled behavior layer — focus management, keyboard nav, ARIA" },
               { name: "forwardRef + className", desc: "Standard React patterns. Slot composition. No proprietary abstractions" },
               { name: "Tailwind + clsx + twMerge", desc: "The same class composition stack used across the React ecosystem" },
-              { name: "100+ Production Components", desc: "Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested" },
+              { name: "200+ Token-Driven Components", desc: "Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested" },
             ].map((item) => (
               <div key={item.name} className="border-b border-[var(--s-border)] pb-2.5">
                 <DensityText role="detail" as="span" className="font-semibold block">{item.name}</DensityText>
@@ -309,7 +309,7 @@ function AgentFirstSection() {
           <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">02</TabularValue>
           <DensityText role="detail" as="span" className="font-semibold block mb-1">Edits tokens.md</DensityText>
           <DensityText role="chrome" as="span" muted>
-            Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through 100+ component files.
+            Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through 200+ token-driven components.
           </DensityText>
         </GapPixelCell>
         <GapPixelCell className="p-5">
@@ -837,7 +837,7 @@ function QuickStartSection() {
           {[
             ["00:30", "target setup"],
             ["259", "token fields"],
-            ["100+", "components"],
+            ["200+", "token-driven components"],
           ].map(([value, label]) => (
             <div key={label} className="border-r border-[var(--s-border)] p-5 last:border-r-0">
               <TabularValue className="block text-[clamp(24px,4vw,48px)] font-bold text-[var(--s-text)]">
@@ -941,7 +941,7 @@ function FinalCTA() {
             Start building.
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
-            One file. 259 tokens. 100+ components. 31 presets. The design system that
+            One file. 259 tokens. 200+ token-driven components. 31 presets. The design system that
             compiles from a single markdown file.
           </DensityText>
           <div className="flex flex-wrap items-center gap-3">
@@ -956,20 +956,38 @@ function FinalCTA() {
             </a>
           </div>
         </div>
-        <div
-          className="relative hidden min-h-[320px] overflow-hidden border border-[var(--s-border)] md:block"
-          style={{
-            borderStyle: "var(--s-border-style, solid)",
-            borderRadius: "var(--s-radius-md, 8px)",
-            background: "var(--s-background)",
-          }}
-        >
-          <FooterQuadrantDiagram />
+        <div className="hidden grid-cols-2 gap-3 md:grid">
           <div
-            className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
-            style={{ color: "var(--s-text-muted)" }}
+            className="relative min-h-[320px] overflow-hidden border border-[var(--s-border)]"
+            style={{
+              borderStyle: "var(--s-border-style, solid)",
+              borderRadius: "var(--s-radius-md, 8px)",
+              background: "var(--s-background)",
+            }}
           >
-            blueprint variants / 20
+            <FooterQuadrantDiagram />
+            <div
+              className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
+              style={{ color: "var(--s-text-muted)" }}
+            >
+              blueprint variants / 20
+            </div>
+          </div>
+          <div
+            className="relative min-h-[320px] overflow-hidden border border-[var(--s-border)]"
+            style={{
+              borderStyle: "var(--s-border-style, solid)",
+              borderRadius: "var(--s-radius-md, 8px)",
+              background: "var(--s-background)",
+            }}
+          >
+            <FooterComponentDiagram />
+            <div
+              className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
+              style={{ color: "var(--s-text-muted)" }}
+            >
+              component blueprint
+            </div>
           </div>
         </div>
       </div>

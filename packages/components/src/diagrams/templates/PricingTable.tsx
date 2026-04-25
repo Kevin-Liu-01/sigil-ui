@@ -54,7 +54,7 @@ export const PricingTable = forwardRef<HTMLDivElement, PricingTableProps>(
                 >
                   <div className="flex flex-col items-center gap-1">
                     {col.badge && (
-                      <span className="inline-block rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--s-primary-contrast,#fff)]">
+                      <span className="inline-block rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[var(--s-primary-contrast)]">
                         {col.badge}
                       </span>
                     )}

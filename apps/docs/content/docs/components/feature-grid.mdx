@@ -1,0 +1,54 @@
+---
+title: FeatureGrid
+description: Alternating two-column feature rows with text and visual panes.
+---
+
+## Import
+
+```tsx
+import { FeatureGrid } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<FeatureGrid
+  rows={[
+    {
+      heading: "Blazing fast builds",
+      bullets: ["Incremental compilation", "Hot module replacement"],
+      visual: <div className="w-full h-48 bg-[var(--s-surface-elevated)]" />,
+    },
+    {
+      heading: "Token-driven theming",
+      bullets: ["259 configurable tokens", "One-command preset switching"],
+      quote: "Changed our entire brand in 30 seconds.",
+      visual: <div className="w-full h-48 bg-[var(--s-surface-elevated)]" />,
+    },
+  ]}
+/>
+```
+
+## Custom gap and row height
+
+```tsx
+<FeatureGrid rows={rows} gap="2px" rowMinHeight={400} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `rows` | `FeatureRow[]` | — | Array of feature rows |
+| `gap` | `string` | `"0"` | Gap between rows |
+| `rowMinHeight` | `number` | `320` | Minimum row height in px |
+| `className` | `string` | — | Additional CSS classes |
+
+### FeatureRow
+
+| Field | Type | Description |
+|---|---|---|
+| `heading` | `string` | Row heading |
+| `bullets` | `string[]` | Bullet points |
+| `quote` | `string` | Optional blockquote |
+| `visual` | `ReactNode` | Visual pane content |

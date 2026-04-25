@@ -1,0 +1,44 @@
+---
+title: Header
+description: Sticky page header with backdrop blur and configurable border.
+---
+
+## Import
+
+```tsx
+import { Header } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Header>
+  <nav>Logo · Links · Actions</nav>
+</Header>
+```
+
+## Non-sticky without blur
+
+```tsx
+<Header sticky={false} blur={false}>
+  Static header
+</Header>
+```
+
+## Custom height
+
+```tsx
+<Header height={72} bordered={false}>
+  Taller header without bottom border
+</Header>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `sticky` | `boolean` | `true` | Stick to viewport top |
+| `blur` | `boolean` | `true` | Apply backdrop blur effect |
+| `bordered` | `boolean` | `true` | Show bottom border |
+| `height` | `number \| string` | `"var(--s-navbar-height, 56px)"` | Header height |
+| `className` | `string` | — | Additional CSS classes |

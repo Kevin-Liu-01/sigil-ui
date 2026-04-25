@@ -105,9 +105,9 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
                     ${estimate.brandCost.toFixed(2)}
                   </span>
                 </div>
-                <div className="h-2 rounded-full" style={{ background: "var(--s-border-muted)" }}>
+                <div className="h-2 rounded-[var(--s-radius-full)]" style={{ background: "var(--s-border-muted)" }}>
                   <div
-                    className="h-2 rounded-full"
+                    className="h-2 rounded-[var(--s-radius-full)]"
                     style={{
                       width: maxCost > 0 ? `${(estimate.brandCost / maxCost) * 100}%` : "0%",
                       background: "var(--s-primary)",
@@ -125,9 +125,9 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
                       ${estimate.competitorCost.toFixed(2)}
                     </span>
                   </div>
-                  <div className="h-2 rounded-full" style={{ background: "var(--s-border-muted)" }}>
+                  <div className="h-2 rounded-[var(--s-radius-full)]" style={{ background: "var(--s-border-muted)" }}>
                     <div
-                      className="h-2 rounded-full"
+                      className="h-2 rounded-[var(--s-radius-full)]"
                       style={{
                         width: maxCost > 0 ? `${((estimate.competitorCost ?? 0) / maxCost) * 100}%` : "0%",
                         background: "var(--s-error)",

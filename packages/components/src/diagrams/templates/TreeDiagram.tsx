@@ -20,7 +20,7 @@ export interface TreeDiagramProps extends HTMLAttributes<HTMLDivElement> {
 const nodeVariants: Record<string, string> = {
   default: "border-[var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
   highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] text-[var(--s-text)] ring-1 ring-[var(--s-primary)]/20",
-  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
+  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
   muted: "border-[var(--s-border-muted)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
 };
 

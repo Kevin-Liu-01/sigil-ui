@@ -88,9 +88,9 @@ export const LeaderboardTable = forwardRef<HTMLDivElement, LeaderboardTableProps
                         className={cn(
                           "font-[family-name:var(--s-font-mono)] text-xs tabular-nums",
                           row.delta.startsWith("+") || row.delta.startsWith("↑")
-                            ? "text-[var(--s-success,#22c55e)]"
+                            ? "text-[var(--s-success)]"
                             : row.delta.startsWith("-") || row.delta.startsWith("↓")
-                              ? "text-[var(--s-error,#ef4444)]"
+                              ? "text-[var(--s-error)]"
                               : "text-[var(--s-text-muted)]",
                         )}
                       >

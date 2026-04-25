@@ -1,0 +1,43 @@
+---
+title: PieChart
+description: "A classic pie chart with percentage labels and legend."
+---
+
+## Import
+
+```tsx
+import { PieChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <PieChart
+    slices={[
+      { label: "Direct", value: 45 },
+      { label: "Organic", value: 30 },
+      { label: "Referral", value: 15 },
+      { label: "Social", value: 10 },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `slices` | `PieSlice[]` | — | Pie slices with label and value |
+| `width` | `number` | `220` | SVG width |
+| `height` | `number` | `220` | SVG height |
+| `showLabels` | `boolean` | `true` | Show percentage labels on slices |
+| `showLegend` | `boolean` | `true` | Show legend below chart |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | First slice color |
+| `--s-success` | Second slice color |
+| `--s-warning` | Third slice color |
+| `--s-error` | Fourth slice color |
+| `--s-text-muted` | Legend text |

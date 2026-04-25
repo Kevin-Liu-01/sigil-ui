@@ -1,0 +1,42 @@
+---
+title: Pagination
+description: "A Pagination component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Pagination } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Pagination />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Pagination>Pagination content</Pagination>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `currentPage` | `number` | — | Current active page (1-indexed). |
+| `totalPages` | `number` | — | Total number of pages. |
+| `onPageChange` | `(page: number) => void` | — | Callback when page changes. |
+| `siblingCount` | `number` | `1` | Number of page buttons visible around current. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-sm` | Radius sm |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |
+| `--s-surface` | Surface |
+| `--s-primary-contrast` | Primary contrast |

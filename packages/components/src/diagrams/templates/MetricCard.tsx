@@ -63,8 +63,8 @@ export const MetricCard = forwardRef<HTMLDivElement, MetricCardProps>(
                 <span
                   className={cn(
                     "text-xs font-semibold font-[family-name:var(--s-font-mono)] tabular-nums",
-                    isPositive && "text-[var(--s-success,#22c55e)]",
-                    isNegative && "text-[var(--s-error,#ef4444)]",
+                    isPositive && "text-[var(--s-success)]",
+                    isNegative && "text-[var(--s-error)]",
                     !isPositive && !isNegative && "text-[var(--s-text-muted)]",
                   )}
                 >

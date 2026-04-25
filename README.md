@@ -14,7 +14,7 @@
 
 <p align="center">
   A token-driven design system where visual identity is a first-class primitive.<br>
-  150+ components. 34 presets. 259 configurable tokens.<br>
+  200+ token-driven components. 34 presets. 259 configurable tokens.<br>
   One file controls your entire visual identity — and AI agents can read, reason about, and modify it.
 </p>
 
@@ -33,7 +33,7 @@ The status quo                              Sigil
 ─────────────                               ─────
 copy components                             install preset
   ↓                                           ↓
-manually edit each one                      all 150+ components inherit identity
+manually edit each one                      all 200+ token-driven components inherit identity
   ↓                                           ↓
 drift, inconsistency                        agent edits ONE token file
   ↓                                           ↓
@@ -67,7 +67,7 @@ everything looks the same                   distinct visual identity
 │         │  consumed by                                              │
 │         ▼                                                           │
 │                                                                     │
-│   150+ Components              Read var(--s-*), never hardcode     │
+│   200+ Token-Driven Components Read var(--s-*), never hardcode     │
 │   (React + Tailwind v4)        Identity flows DOWN, never UP       │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
@@ -147,7 +147,7 @@ Sigil: "I want a brutalist aesthetic"
 | **Shapes** | 5 | Hexagon, Diamond, Triangle, Diagonal |
 | **Patterns** | 4 | Tessellation, GrainGradient, Cross, Pattern (14 variants) |
 | **Playbook** | 9 | GapPixelGrid, FrostedPanel, AccentCTA, DensityText, BorderStack |
-| **Total** | **150+** | |
+| **Total** | **200+** | Token-driven components |
 
 ---
 
@@ -315,7 +315,7 @@ npx @sigil-ui/cli preset noir    # Swap visual identity in one command
 | Package | Description |
 |---------|-------------|
 | `@sigil-ui/tokens` | Token system — types, defaults, compiler, markdown parser. The core differentiator. |
-| `@sigil-ui/components` | 150+ styled components consuming tokens via CSS custom properties |
+| `@sigil-ui/components` | 200+ token-driven components consuming tokens via CSS custom properties |
 | `@sigil-ui/primitives` | Headless behavior layer (Radix-based, 16 primitives) |
 | `@sigil-ui/presets` | 34 curated preset bundles (259 tokens each) |
 | `@sigil-ui/cli` | CLI for init, add, preset management, diff, doctor |
@@ -378,7 +378,7 @@ With Sigil (agent touches 1 file):
 packages/
   tokens/           @sigil-ui/tokens      Source of truth: types, compiler, markdown parser
   presets/           @sigil-ui/presets     34 curated preset bundles (259 tokens each)
-  components/        @sigil-ui/components  150+ styled React components
+  components/        @sigil-ui/components  200+ token-driven React components
   primitives/        @sigil-ui/primitives  16 Radix-based headless behavior primitives
   cli/               @sigil-ui/cli        CLI: init, add, preset, diff, doctor
   create-sigil-app/                       npx create-sigil-app bootstrapper

@@ -26,7 +26,7 @@ import { Clipboard } from "@sigil-ui/components";
 Use the `children` render prop for full control over the UI:
 
 ```tsx
-<Clipboard value="npx sigil init">
+<Clipboard value="npx @sigil-ui/cli init">
   {({ copied, copy }) => (
     <button onClick={copy}>
       {copied ? "Copied!" : "Copy command"}

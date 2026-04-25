@@ -12,11 +12,13 @@ export interface CommitGridProps extends HTMLAttributes<HTMLDivElement> {
   data: CommitDay[];
   /** Number of weeks to show. @default 52 */
   weeks?: number;
+  /** Last date to render, formatted as YYYY-MM-DD. Defaults to the latest date in data. */
+  endDate?: string;
   /** Size of each cell in px. @default 12 */
   cellSize?: number;
   /** Gap between cells in px. @default 2 */
   gap?: number;
-  /** Color for filled cells. @default "var(--s-success, #22c55e)" */
+  /** Color for filled cells. @default "var(--s-success)" */
   color?: string;
   /** Day labels on left side. @default true */
   showDayLabels?: boolean;
@@ -26,6 +28,25 @@ export interface CommitGridProps extends HTMLAttributes<HTMLDivElement> {
 
 const dayLabels = ["", "Mon", "", "Wed", "", "Fri", ""];
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+function latestDate(data: CommitDay[]): string {
+  return data.reduce((latest, day) => (day.date > latest ? day.date : latest), data[0]?.date ?? "1970-01-01");
+}
+
+function parseIsoDate(date: string): Date {
+  const [year = 1970, month = 1, day = 1] = date.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+function addUtcDays(date: Date, days: number): Date {
+  const next = new Date(date);
+  next.setUTCDate(next.getUTCDate() + days);
+  return next;
+}
+
+function formatIsoDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
+}
 
 function intensityLevel(count: number, max: number): number {
   if (count === 0) return 0;
@@ -39,17 +60,16 @@ function intensityLevel(count: number, max: number): number {
 
 export const CommitGrid = forwardRef<HTMLDivElement, CommitGridProps>(
   function CommitGrid(
-    { data, weeks = 52, cellSize = 12, gap = 2, color, showDayLabels = true, showMonthLabels = true, className, ...rest },
+    { data, weeks = 52, endDate, cellSize = 12, gap = 2, color, showDayLabels = true, showMonthLabels = true, className, ...rest },
     ref,
   ) {
     const totalDays = weeks * 7;
     const dayMap = new Map(data.map((d) => [d.date, d.count]));
     const maxCount = Math.max(...data.map((d) => d.count), 1);
 
-    const today = new Date();
-    const startDate = new Date(today);
-    startDate.setDate(startDate.getDate() - totalDays + 1);
-    const startDayOfWeek = startDate.getDay();
+    const rangeEndDate = parseIsoDate(endDate ?? latestDate(data));
+    const startDate = addUtcDays(rangeEndDate, -totalDays + 1);
+    const startDayOfWeek = startDate.getUTCDay();
 
     const grid: { date: string; count: number; dayOfWeek: number; month: number }[][] = [];
     let currentWeek: { date: string; count: number; dayOfWeek: number; month: number }[] = [];
@@ -58,14 +78,13 @@ export const CommitGrid = forwardRef<HTMLDivElement, CommitGridProps>(
       if (i < startDayOfWeek) {
         currentWeek.push({ date: "", count: -1, dayOfWeek: i % 7, month: -1 });
       } else {
-        const d = new Date(startDate);
-        d.setDate(d.getDate() + (i - startDayOfWeek));
-        const dateStr = d.toISOString().split("T")[0];
+        const d = addUtcDays(startDate, i - startDayOfWeek);
+        const dateStr = formatIsoDate(d);
         currentWeek.push({
           date: dateStr,
           count: dayMap.get(dateStr) ?? 0,
-          dayOfWeek: d.getDay(),
-          month: d.getMonth(),
+          dayOfWeek: d.getUTCDay(),
+          month: d.getUTCMonth(),
         });
       }
 
@@ -131,7 +150,7 @@ export const CommitGrid = forwardRef<HTMLDivElement, CommitGridProps>(
                       style={{
                         width: cellSize,
                         height: cellSize,
-                        backgroundColor: color ?? "var(--s-success, #22c55e)",
+                        backgroundColor: color ?? "var(--s-success)",
                         opacity: opacityLevels[level],
                       }}
                       title={`${day.date}: ${day.count} contributions`}

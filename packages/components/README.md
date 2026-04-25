@@ -1,6 +1,6 @@
 # @sigil-ui/components
 
-65+ styled React components that consume Sigil design tokens via CSS custom properties. These components are the visual output layer — they read from `@sigil-ui/tokens` and render accordingly.
+200+ token-driven components that consume Sigil design tokens via CSS custom properties. These components are the visual output layer — they read from `@sigil-ui/tokens` and render accordingly.
 
 ## The Core Principle
 

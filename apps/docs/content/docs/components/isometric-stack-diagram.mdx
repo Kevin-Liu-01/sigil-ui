@@ -1,0 +1,50 @@
+---
+title: IsometricStackDiagram
+description: A 3D isometric stack of labeled layers rendered as an SVG with configurable dimensions and hatching.
+---
+
+## Import
+
+```tsx
+import { IsometricStackDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<IsometricStackDiagram
+  layers={[
+    { label: "App" },
+    { label: "Runtime" },
+    { label: "OS", hatched: true },
+  ]}
+/>
+```
+
+## Custom dimensions and colors
+
+```tsx
+<IsometricStackDiagram
+  width={160}
+  layerHeight={28}
+  gap={6}
+  layers={[
+    { label: "UI", color: "var(--s-primary)" },
+    { label: "API", color: "var(--s-surface)" },
+    { label: "DB", color: "var(--s-surface)", hatched: true },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layers` | `IsoStackLayer[]` | — | Array of `{ label, color?, hatched? }` (required) |
+| `logo` | `ReactNode` | — | Optional logo element |
+| `width` | `number` | `120` | Width of each layer in isometric units |
+| `layerHeight` | `number` | `20` | Height of each layer in isometric units |
+| `gap` | `number` | `4` | Vertical gap between layers |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<svg>` HTML attributes.

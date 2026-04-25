@@ -5,7 +5,7 @@ import { cn } from "../utils";
 import { useReducedMotion } from "./useReducedMotion";
 
 export interface GradientTextProps extends HTMLAttributes<HTMLSpanElement> {
-  /** Gradient colors. @default ["var(--s-primary,#6366f1)","var(--s-accent,#ec4899)","var(--s-primary,#6366f1)"] */
+  /** Gradient colors. @default ["var(--s-primary)","var(--s-accent,#ec4899)","var(--s-primary)"] */
   colors?: string[];
   /** Animation duration in seconds. @default 4 */
   duration?: number;
@@ -19,7 +19,7 @@ const keyframe = `@keyframes sigil-gradient-shift { 0% { background-position: 0%
 export const GradientText = forwardRef<HTMLSpanElement, GradientTextProps>(
   function GradientText(
     {
-      colors = ["var(--s-primary,#6366f1)", "var(--s-accent,#ec4899)", "var(--s-primary,#6366f1)"],
+      colors = ["var(--s-primary)", "var(--s-accent,#ec4899)", "var(--s-primary)"],
       duration = 4,
       animate = true,
       className,

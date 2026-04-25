@@ -1,0 +1,63 @@
+---
+title: DonutChart
+description: "A ring/donut chart for proportional data with optional center value and label."
+---
+
+## Import
+
+```tsx
+import { DonutChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <DonutChart
+    segments={[
+      { label: "Direct", value: 45 },
+      { label: "Organic", value: 30 },
+      { label: "Referral", value: 15 },
+      { label: "Social", value: 10 },
+    ]}
+    centerValue="2.4K"
+    centerLabel="visitors"
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DonutChart
+  segments={[
+    { label: "Direct", value: 45 },
+    { label: "Organic", value: 30 },
+  ]}
+  centerValue="2.4K"
+  centerLabel="visitors"
+  thickness={24}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `segments` | `DonutSegment[]` | — | Ring segments with label, value, optional color |
+| `width` | `number` | `200` | SVG width |
+| `height` | `number` | `200` | SVG height |
+| `thickness` | `number` | `24` | Ring thickness in px |
+| `centerLabel` | `string` | — | Descriptive label in the center |
+| `centerValue` | `string` | — | Main value displayed in the center |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | First segment color |
+| `--s-success` | Second segment color |
+| `--s-warning` | Third segment color |
+| `--s-error` | Fourth segment color |
+| `--s-info` | Fifth segment color |
+| `--s-text` | Center value text |
+| `--s-text-muted` | Center label text |
+| `--s-font-mono` | Center value font family |

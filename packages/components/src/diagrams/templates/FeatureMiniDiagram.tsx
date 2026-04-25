@@ -74,7 +74,7 @@ export const FeatureMiniDiagram = forwardRef<SVGSVGElement, FeatureMiniDiagramPr
               return (
                 <g key={i}>
                   <rect x={size * 0.12} y={y} width={size * 0.76} height={h} rx={3} fill={i === 2 ? accent : "var(--s-surface)"} stroke={muted} strokeWidth={1} opacity={i === 2 ? 0.7 : 1} />
-                  {size >= 60 && <text x={size / 2} y={y + h * 0.65} fontSize={fs} fill={i === 2 ? "var(--s-primary-contrast, #fff)" : text} textAnchor="middle">{["App", "Runtime", "HW"][i]}</text>}
+                  {size >= 60 && <text x={size / 2} y={y + h * 0.65} fontSize={fs} fill={i === 2 ? "var(--s-primary-contrast)" : text} textAnchor="middle">{["App", "Runtime", "HW"][i]}</text>}
                 </g>
               );
             })}

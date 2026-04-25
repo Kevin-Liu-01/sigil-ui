@@ -28,9 +28,9 @@ function FeatureFrameRow({ headline, points, label, diagram, reversed }: Feature
   const visible = reduced || inView;
 
   const copy = (
-    <div className="flex flex-col justify-center border-b border-[var(--s-border,#e4e4e7)] p-6 sm:p-8 lg:p-10 md:border-b-0 md:border-r last:border-r-0">
+    <div className="flex flex-col justify-center border-b border-[var(--s-border)] p-6 sm:p-8 lg:p-10 md:border-b-0 md:border-r last:border-r-0">
       {label && (
-        <span className="mb-2 font-mono text-xs uppercase tracking-widest text-[var(--s-primary,#6366f1)]">
+        <span className="mb-2 font-mono text-xs uppercase tracking-widest text-[var(--s-primary)]">
           {label}
         </span>
       )}
@@ -49,7 +49,7 @@ function FeatureFrameRow({ headline, points, label, diagram, reversed }: Feature
           {points.map((p, i) => (
             <li
               key={p}
-              className="flex items-baseline gap-2 text-base leading-snug text-[var(--s-text-muted,#71717a)]"
+              className="flex items-baseline gap-2 text-base leading-snug text-[var(--s-text-muted)]"
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(8px)",
@@ -58,7 +58,7 @@ function FeatureFrameRow({ headline, points, label, diagram, reversed }: Feature
                   : `opacity var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${150 + i * 60}ms, transform var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${150 + i * 60}ms`,
               }}
             >
-              <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--s-primary,#6366f1)]" />
+              <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-[var(--s-radius-full)] bg-[var(--s-primary)]" />
               {p}
             </li>
           ))}
@@ -76,11 +76,11 @@ function FeatureFrameRow({ headline, points, label, diagram, reversed }: Feature
   return (
     <div
       ref={ref}
-      className="grid grid-cols-1 border-b border-[var(--s-border,#e4e4e7)] last:border-b-0 md:grid-cols-2"
+      className="grid grid-cols-1 border-b border-[var(--s-border)] last:border-b-0 md:grid-cols-2"
     >
       {reversed ? (
         <>
-          <div className="border-b border-[var(--s-border,#e4e4e7)] md:border-b-0 md:border-r">{visual}</div>
+          <div className="border-b border-[var(--s-border)] md:border-b-0 md:border-r">{visual}</div>
           {copy}
         </>
       ) : (
@@ -127,7 +127,7 @@ export const FeatureFrameSection = forwardRef<HTMLElement, FeatureFrameSectionPr
         {(label || heading) && (
           <div className="relative mx-auto mb-12 max-w-2xl text-center">
             {label && (
-              <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-primary,#6366f1)]">
+              <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-primary)]">
                 {label}
               </span>
             )}
@@ -141,7 +141,7 @@ export const FeatureFrameSection = forwardRef<HTMLElement, FeatureFrameSectionPr
 
         <div
           ref={viewRef}
-          className="border border-[var(--s-border,#e4e4e7)]"
+          className="border border-[var(--s-border)]"
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(60px)",

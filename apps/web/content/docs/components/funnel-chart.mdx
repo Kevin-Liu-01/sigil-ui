@@ -1,0 +1,57 @@
+---
+title: FunnelChart
+description: "A conversion funnel chart showing step-by-step drop-off rates with values."
+---
+
+## Import
+
+```tsx
+import { FunnelChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <FunnelChart
+    steps={[
+      { label: "Visitors", value: 10000 },
+      { label: "Signups", value: 3200 },
+      { label: "Active", value: 1800 },
+      { label: "Paid", value: 450 },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<FunnelChart
+  steps={[
+    { label: "Visitors", value: 10000 },
+    { label: "Signups", value: 3200 },
+    { label: "Active", value: 1800 },
+    { label: "Paid", value: 450 },
+  ]}
+  showRates
+  showValues
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `steps` | `FunnelStep[]` | — | Funnel stages from widest to narrowest |
+| `showRates` | `boolean` | `true` | Show conversion rate between steps |
+| `showValues` | `boolean` | `true` | Show absolute values on bars |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default bar color |
+| `--s-primary-contrast` | Bar text color |
+| `--s-text-muted` | Conversion rate labels |
+| `--s-font-mono` | Value and rate font |
+| `--s-radius-sm` | Bar corner radius |
+| `--s-duration-fast` | Hover transition |

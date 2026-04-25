@@ -17,7 +17,7 @@ const COLOR = "var(--s-border-muted)";
 
 type PatternSide = "left" | "right";
 
-const SVG_STROKE = "rgba(140,140,155,0.24)";
+const SVG_STROKE = "oklch(0.62 0.02 280 / 0.24)";
 
 function buildHexSvg(cell: number): string {
   const s = Math.round(cell * 0.5);

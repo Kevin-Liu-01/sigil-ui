@@ -1,0 +1,51 @@
+---
+title: UsageGauge
+description: "A semicircular gauge for displaying resource usage with auto-color thresholds."
+---
+
+## Import
+
+```tsx
+import { UsageGauge } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "flex", gap: 24 }}>
+    <UsageGauge value={42} max={100} label="Storage" />
+    <UsageGauge value={78} max={100} label="CPU" />
+    <UsageGauge value={95} max={100} label="Memory" />
+  </div>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<UsageGauge value={78} max={100} label="CPU" unit="%" autoColor />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `number` | — | Current value |
+| `max` | `number` | `100` | Maximum value |
+| `label` | `string` | — | Label below percentage |
+| `unit` | `string` | — | Unit shown on scale ends |
+| `width` | `number` | `160` | SVG width |
+| `height` | `number` | `120` | SVG height |
+| `color` | `string` | — | Override arc color |
+| `autoColor` | `boolean` | `true` | Auto-color: primary below 70%, warning 70-90%, error above 90% |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Normal usage arc color |
+| `--s-warning` | Warning threshold color (>70%) |
+| `--s-error` | Critical threshold color (>90%) |
+| `--s-border` | Track background |
+| `--s-text` | Percentage value |
+| `--s-text-muted` | Label and scale text |
+| `--s-font-mono` | Value font family |

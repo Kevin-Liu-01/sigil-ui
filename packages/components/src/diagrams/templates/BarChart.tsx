@@ -27,10 +27,10 @@ export interface BarChartProps extends HTMLAttributes<HTMLDivElement> {
 
 const defaultColors = [
   "var(--s-primary)",
-  "var(--s-success, #22c55e)",
-  "var(--s-warning, #f59e0b)",
-  "var(--s-error, #ef4444)",
-  "var(--s-info, #3b82f6)",
+  "var(--s-success)",
+  "var(--s-warning)",
+  "var(--s-error)",
+  "var(--s-info)",
 ];
 
 export const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
@@ -113,7 +113,7 @@ export const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
                   const w = (bar.value / maxVal) * 100;
                   return (
                     <div key={bar.label} className="flex items-center gap-2">
-                      <div className="flex-1 relative h-6 rounded-[var(--s-radius-sm,2px)] bg-[var(--s-surface-elevated,#f4f4f5)]">
+                      <div className="flex-1 relative h-6 rounded-[var(--s-radius-sm,2px)] bg-[var(--s-surface-elevated)]">
                         <div
                           className="absolute inset-y-0 left-0 rounded-[var(--s-radius-sm,2px)] flex items-center px-2"
                           style={{
@@ -123,7 +123,7 @@ export const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
                           }}
                         >
                           {w > 20 && (
-                            <span className="text-[10px] font-semibold text-[var(--s-primary-contrast,#fff)] whitespace-nowrap">
+                            <span className="text-[10px] font-semibold text-[var(--s-primary-contrast)] whitespace-nowrap">
                               {bar.label}
                             </span>
                           )}

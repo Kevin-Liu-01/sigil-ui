@@ -1,0 +1,45 @@
+---
+title: MermaidDiagram
+description: "A Mermaid.js diagram renderer with dark theme support for flowcharts, sequences, and more."
+---
+
+## Import
+
+```tsx
+import { MermaidDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MermaidDiagram
+    chart="graph TD; A[Client] --> B[API Gateway]; B --> C[Auth Service]; B --> D[Data Service]; C --> E[Database]; D --> E;"
+    theme="dark"
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MermaidDiagram
+  chart="graph TD; A[Client] --> B[API]; B --> C[DB];"
+  theme="dark"
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `chart` | `string` | — | Mermaid chart definition string |
+| `theme` | `"dark" \| "default"` | `"dark"` | Color theme |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Container border |
+| `--s-surface` | Light theme background |
+| `--s-error` | Error message text |
+| `--s-text-muted` | Loading text |
+| `--s-radius-card` | Container radius |

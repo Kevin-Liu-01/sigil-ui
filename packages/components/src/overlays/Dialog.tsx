@@ -22,7 +22,7 @@ const DialogOverlay = forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-0 z-50",
-        "bg-[var(--s-overlay-bg,rgba(0,0,0,0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
+        "bg-[var(--s-overlay-bg)] backdrop-blur-[var(--s-overlay-blur)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
@@ -45,11 +45,11 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
           data-slot="dialog"
           className={cn(
             "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
-            "gap-4 border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] p-6",
-            "shadow-[var(--s-dialog-shadow,0_16px_48px_-8px_rgba(0,0,0,0.35),0_4px_16px_-4px_rgba(0,0,0,0.2))]",
+            "gap-4 border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border)] bg-[var(--s-overlay-surface)] p-[var(--s-overlay-padding)]",
+            "shadow-[var(--s-overlay-shadow)]",
             "ring-1 ring-[var(--s-text)]/[0.04]",
-            "rounded-[var(--s-card-radius,8px)]",
-            "duration-[var(--s-duration-fast,200ms)]",
+            "rounded-[var(--s-overlay-radius)]",
+            "duration-[var(--s-duration-fast)]",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
             "data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95",
@@ -64,7 +64,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
             className={cn(
               "absolute right-4 top-4 rounded-[var(--s-radius-sm,0px)] opacity-70",
               "transition-opacity hover:opacity-100",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
               "disabled:pointer-events-none",
             )}
           >

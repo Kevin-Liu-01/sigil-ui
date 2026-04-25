@@ -26,7 +26,7 @@ export interface FlowDiagramProps extends HTMLAttributes<HTMLDivElement> {
 const nodeVariantStyles = {
   default: "border-[var(--s-border)] bg-[var(--s-surface)]",
   highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] ring-1 ring-[var(--s-primary)]/20",
-  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
+  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
 };
 
 export const FlowDiagram = forwardRef<HTMLDivElement, FlowDiagramProps>(function FlowDiagram(
@@ -89,13 +89,13 @@ export const FlowDiagram = forwardRef<HTMLDivElement, FlowDiagramProps>(function
             >
               {isH ? (
                 <>
-                  <line x1="0" y1="12" x2="32" y2="12" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
-                  <polygon points="32,8 40,12 32,16" fill="var(--s-border-strong, var(--s-border))" />
+                  <line x1="0" y1="12" x2="32" y2="12" stroke="var(--s-chart-axis)" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
+                  <polygon points="32,8 40,12 32,16" fill="var(--s-chart-axis)" />
                 </>
               ) : (
                 <>
-                  <line x1="8" y1="0" x2="8" y2="32" stroke="var(--s-border-strong, var(--s-border))" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
-                  <polygon points="4,32 8,40 12,32" fill="var(--s-border-strong, var(--s-border))" />
+                  <line x1="8" y1="0" x2="8" y2="32" stroke="var(--s-chart-axis)" strokeWidth="1.5" className={connector === "dashed-animated" ? "flow-dash-anim" : undefined} {...dashProps} />
+                  <polygon points="4,32 8,40 12,32" fill="var(--s-chart-axis)" />
                 </>
               )}
               {orderedPairs[i]?.label && (

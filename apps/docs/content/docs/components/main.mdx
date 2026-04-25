@@ -1,0 +1,43 @@
+---
+title: Main
+description: Semantic main content area with max-width constraint and auto centering.
+---
+
+## Import
+
+```tsx
+import { Main } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Main>
+  <h1>Page content</h1>
+  <p>Constrained to the default content max-width.</p>
+</Main>
+```
+
+## Custom max-width
+
+```tsx
+<Main maxWidth="800px">
+  Narrower content area
+</Main>
+```
+
+## Disable centering
+
+```tsx
+<Main center={false}>
+  Left-aligned main content
+</Main>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `maxWidth` | `string` | `"var(--s-content-max, 1200px)"` | Maximum width of the content area |
+| `center` | `boolean` | `true` | Center the element with auto margins |
+| `className` | `string` | — | Additional CSS classes |

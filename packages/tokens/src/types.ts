@@ -588,6 +588,89 @@ export type GridVisualTokens = {
 };
 
 // ---------------------------------------------------------------------------
+// Deep component control tokens
+// ---------------------------------------------------------------------------
+
+export type FocusTokens = {
+  readonly "ring-width"?: string;
+  readonly "ring-color"?: string;
+  readonly "ring-offset"?: string;
+  readonly "ring-shadow"?: string;
+  readonly "outline-color"?: string;
+  readonly [key: string]: string | undefined;
+};
+
+export type OverlayTokens = {
+  readonly bg?: string;
+  readonly blur?: string;
+  readonly surface?: string;
+  readonly border?: string;
+  readonly shadow?: string;
+  readonly radius?: string;
+  readonly padding?: string;
+  readonly "z-index"?: string;
+  readonly [key: string]: string | undefined;
+};
+
+export type DataVizTokens = {
+  readonly "series-1"?: string;
+  readonly "series-2"?: string;
+  readonly "series-3"?: string;
+  readonly "series-4"?: string;
+  readonly "series-5"?: string;
+  readonly positive?: string;
+  readonly negative?: string;
+  readonly neutral?: string;
+  readonly grid?: string;
+  readonly axis?: string;
+  readonly label?: string;
+  readonly "tooltip-bg"?: string;
+  readonly "tooltip-border"?: string;
+  readonly [key: string]: string | undefined;
+};
+
+export type MediaTokens = {
+  readonly radius?: string;
+  readonly border?: string;
+  readonly outline?: string;
+  readonly shadow?: string;
+  readonly bg?: string;
+  readonly "object-fit"?: "cover" | "contain" | "fill" | "none" | "scale-down";
+  readonly [key: string]: string | undefined;
+};
+
+export type ControlTokens = {
+  readonly height?: string;
+  readonly "height-sm"?: string;
+  readonly "height-lg"?: string;
+  readonly "hit-area"?: string;
+  readonly "icon-size"?: string;
+  readonly "handle-size"?: string;
+  readonly "track-height"?: string;
+  readonly "track-bg"?: string;
+  readonly "track-fill"?: string;
+  readonly "thumb-bg"?: string;
+  readonly "thumb-border"?: string;
+  readonly [key: string]: string | undefined;
+};
+
+export type ComponentSurfaceTokens = {
+  readonly bg?: string;
+  readonly "bg-elevated"?: string;
+  readonly "bg-muted"?: string;
+  readonly border?: string;
+  readonly "border-muted"?: string;
+  readonly "border-strong"?: string;
+  readonly text?: string;
+  readonly "text-muted"?: string;
+  readonly contrast?: string;
+  readonly "hover-bg"?: string;
+  readonly "active-bg"?: string;
+  readonly "selected-bg"?: string;
+  readonly [key: string]: string | undefined;
+};
+
+// ---------------------------------------------------------------------------
 // Composite token object
 // ---------------------------------------------------------------------------
 
@@ -614,6 +697,12 @@ export type SigilTokens = {
   readonly sections?: SectionStyleTokens;
   readonly dividers?: DividerStyleTokens;
   readonly gridVisuals?: GridVisualTokens;
+  readonly focus?: FocusTokens;
+  readonly overlays?: OverlayTokens;
+  readonly dataViz?: DataVizTokens;
+  readonly media?: MediaTokens;
+  readonly controls?: ControlTokens;
+  readonly componentSurfaces?: ComponentSurfaceTokens;
 };
 
 // ---------------------------------------------------------------------------

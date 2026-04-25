@@ -27,7 +27,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
         <div className="flex items-start gap-8 min-w-max px-4 py-6">
           {entries.map((entry, i) => (
             <div key={i} className="flex flex-col items-center text-center min-w-[140px]">
-              <div className="w-3 h-3 rounded-full bg-[var(--s-primary)] shrink-0" />
+              <div className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-primary)] shrink-0" />
               <div className="w-px h-6 bg-[var(--s-border)]" />
               <div className="mt-2">
                 <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] block">{entry.date}</span>
@@ -52,7 +52,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(function Timel
         {entries.map((entry, i) => (
           <div key={i} className="flex gap-4 relative">
             <div className="w-[15px] shrink-0 flex justify-center pt-1.5">
-              <div className="w-3 h-3 rounded-full bg-[var(--s-primary)] relative z-[1]" />
+              <div className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-primary)] relative z-[1]" />
             </div>
             <div className="flex-1 pb-2">
               <span className="text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] block">{entry.date}</span>

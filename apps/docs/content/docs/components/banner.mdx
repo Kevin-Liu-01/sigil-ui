@@ -1,0 +1,45 @@
+---
+title: Banner
+description: Status banner for announcements and alerts with variant colors and optional dismiss.
+---
+
+## Import
+
+```tsx
+import { Banner } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Banner variant="info">New version available — update now.</Banner>
+```
+
+## Variants
+
+```tsx
+<Banner variant="success">Deployment succeeded.</Banner>
+<Banner variant="warning">API rate limit approaching.</Banner>
+<Banner variant="error">Build failed. Check logs.</Banner>
+<Banner variant="default">General announcement.</Banner>
+```
+
+## With icon and dismiss
+
+```tsx
+import { Info } from "lucide-react";
+
+<Banner variant="info" icon={<Info />} dismissible onDismiss={() => console.log("dismissed")}>
+  This banner can be dismissed.
+</Banner>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"default" \| "info" \| "warning" \| "error" \| "success"` | `"default"` | Color variant |
+| `icon` | `ReactNode` | — | Leading icon |
+| `dismissible` | `boolean` | `false` | Show dismiss button |
+| `onDismiss` | `() => void` | — | Callback when dismissed |
+| `className` | `string` | — | Additional CSS classes |

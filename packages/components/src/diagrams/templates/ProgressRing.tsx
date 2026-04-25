@@ -23,10 +23,10 @@ export interface ProgressRingProps extends Omit<SVGAttributes<SVGSVGElement>, "w
 }
 
 const defaultColors = [
-  "var(--s-error, #ef4444)",
-  "var(--s-success, #22c55e)",
-  "var(--s-info, #3b82f6)",
-  "var(--s-warning, #f59e0b)",
+  "var(--s-error)",
+  "var(--s-success)",
+  "var(--s-info)",
+  "var(--s-warning)",
 ];
 
 export const ProgressRing = forwardRef<SVGSVGElement, ProgressRingProps>(
@@ -80,7 +80,7 @@ export const ProgressRing = forwardRef<SVGSVGElement, ProgressRingProps>(
               const pct = Math.round((track.value / max) * 100);
               return (
                 <div key={i} className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: track.color ?? defaultColors[i % defaultColors.length] }} />
+                  <div className="w-2 h-2 rounded-[var(--s-radius-full)] shrink-0" style={{ backgroundColor: track.color ?? defaultColors[i % defaultColors.length] }} />
                   <span className="text-xs text-[var(--s-text-muted)]">
                     {track.label} <span className="font-[family-name:var(--s-font-mono)] font-semibold tabular-nums text-[var(--s-text)]">{pct}%</span>
                   </span>

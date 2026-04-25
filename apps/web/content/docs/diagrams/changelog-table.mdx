@@ -1,0 +1,88 @@
+---
+title: ChangelogTable
+description: "A changelog table for displaying versioned release notes."
+---
+
+## Import
+
+```tsx
+import { ChangelogTable } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ChangelogTable
+    releases={[
+      {
+        version: "2.1.0",
+        date: "2026-04-20",
+        entries: [
+          { type: "added", description: "New radar chart component" },
+          { type: "fixed", description: "Tooltip positioning in dark mode" },
+          { type: "changed", description: "Updated token compiler output" },
+        ],
+      },
+      {
+        version: "2.0.0",
+        date: "2026-04-01",
+        entries: [
+          { type: "added", description: "Complete design token overhaul" },
+          { type: "removed", description: "Legacy CSS class API" },
+          { type: "security", description: "Patched XSS in markdown renderer" },
+        ],
+      },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ChangelogTable
+  releases={[
+    {
+      version: "2.1.0",
+      date: "2026-04-20",
+      entries: [
+        { type: "added", description: "New radar chart component" },
+        { type: "fixed", description: "Tooltip positioning in dark mode" },
+        { type: "changed", description: "Updated token compiler output" },
+      ],
+    },
+    {
+      version: "2.0.0",
+      date: "2026-04-01",
+      entries: [
+        { type: "added", description: "Complete design token overhaul" },
+        { type: "removed", description: "Legacy CSS class API" },
+        { type: "security", description: "Patched XSS in markdown renderer" },
+      ],
+    },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `releases` | `ChangelogRelease[]` | — | Array of release objects |
+| `showBadges` | `boolean` | `true` | Show colored type badges |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-success` | "added" badge |
+| `--s-info` | "changed" badge |
+| `--s-warning` | "fixed" badge |
+| `--s-error` | "removed" and "security" badges |
+| `--s-border` | Card and divider borders |
+| `--s-surface` | Card background |
+| `--s-surface-elevated` | Version header background |
+| `--s-text` | Entry text and version |
+| `--s-text-muted` | Date and "deprecated" badge |
+| `--s-font-mono` | Version number font |
+| `--s-radius-card` | Card radius |
+| `--s-radius-sm` | Badge radius |

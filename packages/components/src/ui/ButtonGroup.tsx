@@ -20,13 +20,13 @@ export const ButtonGroup = forwardRef<HTMLDivElement, ButtonGroupProps>(
           orientation === "horizontal"
             ? [
                 "flex-row",
-                "[&>*]:rounded-none [&>*]:border-r-0",
+                "[&>*]:rounded-[var(--s-radius-none)] [&>*]:border-r-0",
                 "[&>*:first-child]:rounded-l-[var(--s-radius-md,6px)]",
                 "[&>*:last-child]:rounded-r-[var(--s-radius-md,6px)] [&>*:last-child]:border-r",
               ]
             : [
                 "flex-col",
-                "[&>*]:rounded-none [&>*]:border-b-0",
+                "[&>*]:rounded-[var(--s-radius-none)] [&>*]:border-b-0",
                 "[&>*:first-child]:rounded-t-[var(--s-radius-md,6px)]",
                 "[&>*:last-child]:rounded-b-[var(--s-radius-md,6px)] [&>*:last-child]:border-b",
               ],

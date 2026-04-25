@@ -48,8 +48,8 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
     <div
       ref={ref}
       className={cn(
-        "group relative border border-[var(--s-border,#e4e4e7)] bg-[var(--s-surface,#fafafa)] p-5",
-        "transition-colors duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary,#6366f1)]/30",
+        "group relative border border-[var(--s-border)] bg-[var(--s-surface)] p-5",
+        "transition-colors duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary)]/30",
       )}
       style={{
         opacity: visible ? 1 : 0,
@@ -60,13 +60,13 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
       }}
     >
       {/* Floating section label */}
-      <div className="absolute -top-3 left-4 bg-[var(--s-bg,#fff)] px-2 font-mono text-[9px] tracking-wider text-[var(--s-text-muted,#71717a)]">
+      <div className="absolute -top-3 left-4 bg-[var(--s-background)] px-2 font-mono text-[9px] tracking-wider text-[var(--s-text-muted)]">
         {label}
       </div>
 
       {/* Diagram viewport */}
       {data.diagram && (
-        <div className="mb-4 border border-[var(--s-border,#e4e4e7)]/50 bg-[var(--s-bg,#fff)] p-3">
+        <div className="mb-4 border border-[var(--s-border)]/50 bg-[var(--s-background)] p-3">
           {data.diagram}
         </div>
       )}
@@ -75,23 +75,23 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
         {data.title}
       </h3>
       {data.subtitle && (
-        <p className="mt-1 text-[11px] text-[var(--s-text-muted,#71717a)]">
+        <p className="mt-1 text-[11px] text-[var(--s-text-muted)]">
           {data.subtitle}
         </p>
       )}
 
       {/* Spec table */}
       {data.specRows && data.specRows.length > 0 && (
-        <div className="mt-4 border-t border-[var(--s-border,#e4e4e7)]/50">
+        <div className="mt-4 border-t border-[var(--s-border)]/50">
           {data.specRows.map((row) => (
             <div
               key={row.label}
-              className="flex items-center justify-between border-b border-[var(--s-border,#e4e4e7)]/30 px-2 py-1.5"
+              className="flex items-center justify-between border-b border-[var(--s-border)]/30 px-2 py-1.5"
             >
-              <span className="font-mono text-[10px] tracking-wider text-[var(--s-text-muted,#71717a)]">
+              <span className="font-mono text-[10px] tracking-wider text-[var(--s-text-muted)]">
                 {row.label}
               </span>
-              <span className="font-mono text-[10px] tabular-nums text-[var(--s-primary,#6366f1)]">
+              <span className="font-mono text-[10px] tabular-nums text-[var(--s-primary)]">
                 {row.value}
               </span>
             </div>
@@ -105,7 +105,7 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
           {data.callouts.map((text) => (
             <span
               key={text}
-              className="inline-flex items-center gap-1 border border-[var(--s-primary,#6366f1)]/15 bg-[var(--s-primary,#6366f1)]/[0.06] px-2 py-0.5 font-mono text-[9px] text-[var(--s-primary,#6366f1)]"
+              className="inline-flex items-center gap-1 border border-[var(--s-primary)]/15 bg-[var(--s-primary)]/[0.06] px-2 py-0.5 font-mono text-[9px] text-[var(--s-primary)]"
             >
               <span aria-hidden className="text-[8px]">&#x25C6;</span>
               {text}
@@ -162,7 +162,7 @@ export const BlueprintGridSection = forwardRef<HTMLElement, BlueprintGridSection
               }}
             >
               {label && (
-                <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-primary,#6366f1)]">
+                <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-primary)]">
                   {label}
                 </span>
               )}

@@ -16,11 +16,11 @@ export type SkeletonVariant =
 const VARIANT_STYLES: Record<SkeletonVariant, string> = {
   text:    "h-4 w-full rounded-[var(--s-radius-sm,4px)]",
   heading: "h-8 w-3/4 rounded-[var(--s-radius-md,6px)]",
-  avatar:  "h-10 w-10 rounded-full",
+  avatar:  "h-10 w-10 rounded-[var(--s-radius-full)]",
   card:    "h-48 w-full rounded-[var(--s-radius-lg,12px)]",
   image:   "h-40 w-full rounded-[var(--s-radius-md,6px)]",
   button:  "h-10 w-24 rounded-[var(--s-radius-md,6px)]",
-  badge:   "h-5 w-16 rounded-full",
+  badge:   "h-5 w-16 rounded-[var(--s-radius-full)]",
   default: "",
 };
 
@@ -38,12 +38,12 @@ export const Skeleton = forwardRef<HTMLDivElement, SkeletonProps>(
         data-slot="skeleton"
         aria-hidden
         className={cn(
-          "animate-pulse bg-[var(--s-border,#e4e4e7)]",
+          "animate-pulse bg-[var(--s-component-surface-border-muted)]",
           VARIANT_STYLES[variant],
           className,
         )}
         style={{
-          animationDuration: "var(--s-duration-slow, 400ms)",
+          animationDuration: "var(--s-duration-slow)",
           ...style,
         }}
         {...rest}

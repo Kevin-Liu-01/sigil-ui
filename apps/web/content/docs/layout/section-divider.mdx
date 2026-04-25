@@ -1,0 +1,25 @@
+---
+title: SectionDivider
+description: "Deprecated alias for Divider. Use Divider for patterned section bands."
+---
+
+## Import
+
+```tsx
+import { Divider } from "@sigil-ui/components";
+```
+
+## Use Divider
+
+<ComponentPreview vertical>
+  <Divider pattern="vertical" size="md" />
+  <Divider pattern="diagonal" size="sm" />
+</ComponentPreview>
+
+`SectionDivider` remains available as a compatibility alias, but new code should use `Divider`.
+
+```tsx
+<Divider pattern="vertical" size="md" />
+<Divider pattern="diagonal" size="sm" />
+<Divider orientation="vertical" pattern="diagonal" />
+```

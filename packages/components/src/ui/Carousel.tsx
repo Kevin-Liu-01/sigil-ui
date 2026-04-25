@@ -116,7 +116,7 @@ export const CarouselContent = forwardRef<HTMLDivElement, CarouselContentProps>(
           className={cn(
             "flex",
             orientation === "vertical" ? "flex-col" : "-ml-4",
-            isTilt && "[&>div]:transition-transform [&>div]:duration-300",
+            isTilt && "[&>div]:transition-transform [&>div]:duration-[var(--s-duration-normal)]",
             className,
           )}
           style={isTilt ? { transformStyle: "preserve-3d" } : undefined}

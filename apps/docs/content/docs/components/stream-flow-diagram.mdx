@@ -1,0 +1,40 @@
+---
+title: StreamFlowDiagram
+description: A token-stream visualization showing a source emitting tokens with an optional aggregated output.
+---
+
+## Import
+
+```tsx
+import { StreamFlowDiagram } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<StreamFlowDiagram
+  source={{ label: "LLM" }}
+  tokens={["Hello", "World", "!"]}
+  output="Hello World!"
+/>
+```
+
+## Without output
+
+```tsx
+<StreamFlowDiagram
+  source={{ label: "Tokenizer", icon: <CpuIcon /> }}
+  tokens={["The", "quick", "brown", "fox"]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `source` | `{ label, icon? }` | — | Source node (required) |
+| `tokens` | `string[]` | `["Hello", "World", "!"]` | Array of token strings to display |
+| `output` | `string` | — | Aggregated output text |
+| `className` | `string` | — | Additional CSS classes |
+
+Plus all standard `<div>` HTML attributes.

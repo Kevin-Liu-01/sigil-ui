@@ -1,0 +1,68 @@
+---
+title: CostCalculator
+description: Interactive pricing calculator with configurable sliders and a brand-vs-competitor cost comparison.
+---
+
+## Import
+
+```tsx
+import { CostCalculator } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+const [requests, setRequests] = useState(50000);
+
+<CostCalculator
+  sliders={[
+    { label: "Requests", value: requests, unit: "req/mo", min: 0, max: 200000, step: 1000, onChange: setRequests },
+  ]}
+  estimate={{
+    brandName: "Sigil Cloud",
+    brandCost: requests * 0.0001,
+    competitorName: "Competitor",
+    competitorCost: requests * 0.0003,
+    savingsNote: "Scale to zero when idle — no minimum fee.",
+  }}
+/>
+```
+
+## Custom slider renderer
+
+```tsx
+<CostCalculator
+  sliders={sliders}
+  estimate={estimate}
+  sliderRenderer={(s) => <MyCustomSlider key={s.label} {...s} />}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `sliders` | `CostSlider[]` | — | Configurable input sliders |
+| `estimate` | `CostEstimate` | — | Brand and competitor cost data |
+| `sliderRenderer` | `(slider: CostSlider) => ReactNode` | — | Custom slider render function |
+| `className` | `string` | — | Additional CSS classes |
+
+### CostSlider
+
+| Field | Type | Description |
+|---|---|---|
+| `label` | `string` | Slider label |
+| `value` | `number` | Current value |
+| `unit` | `string` | Unit display (e.g. `"req/mo"`) |
+| `min` / `max` / `step` | `number` | Range constraints |
+| `onChange` | `(value: number) => void` | Value change handler |
+
+### CostEstimate
+
+| Field | Type | Description |
+|---|---|---|
+| `brandName` | `string` | Your brand label |
+| `brandCost` | `number` | Your monthly cost |
+| `competitorName` | `string` | Competitor label |
+| `competitorCost` | `number` | Competitor monthly cost |
+| `savingsNote` | `string` | Optional savings callout |

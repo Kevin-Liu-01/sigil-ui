@@ -72,7 +72,7 @@ const LAYERS: LayerDef[] = [
       { label: "Badge" },
     ],
     description:
-      "100+ production components built on Radix primitives. They consume var(--s-*) tokens — never hardcode values. Switch presets and the entire library updates.",
+      "200+ token-driven components built on Radix primitives. They consume var(--s-*) tokens — never hardcode values. Switch presets and the entire library updates.",
     color: "oklch(0.60 0.16 168)",
   },
   {

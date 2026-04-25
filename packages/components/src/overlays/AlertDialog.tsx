@@ -20,8 +20,8 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
         <AlertDialogPrimitive.Overlay
           className={cn(
             "fixed inset-0 z-50",
-            "bg-[var(--s-overlay-bg,rgba(0,0,0,0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
-            "data-[state=open]:animate-[fadeIn_150ms_ease-out] data-[state=closed]:animate-[fadeIn_150ms_ease-out_reverse]",
+            "bg-[var(--s-overlay-bg)] backdrop-blur-[var(--s-overlay-blur)]",
+            "data-[state=open]:animate-[fadeIn_var(--s-duration-fast)_ease-out] data-[state=closed]:animate-[fadeIn_var(--s-duration-fast)_ease-out_reverse]",
           )}
         />
         <AlertDialogPrimitive.Content
@@ -29,11 +29,11 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
           data-slot="alert-dialog"
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
-            "w-full max-w-[500px] mx-4 p-6 rounded-[var(--s-card-radius,8px)]",
-            "bg-[var(--s-background)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
-            "shadow-[var(--s-dialog-shadow,0_16px_48px_-8px_rgba(0,0,0,0.35),0_4px_16px_-4px_rgba(0,0,0,0.2))]",
+            "w-full max-w-[500px] mx-4 p-[var(--s-overlay-padding)] rounded-[var(--s-overlay-radius)]",
+            "bg-[var(--s-overlay-surface)] border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border)]",
+            "shadow-[var(--s-overlay-shadow)]",
             "ring-1 ring-[var(--s-text)]/[0.04]",
-            "data-[state=open]:animate-[dialogIn_200ms_ease-out]",
+            "data-[state=open]:animate-[dialogIn_var(--s-duration-normal)_ease-out]",
             className,
           )}
           {...rest}
@@ -100,9 +100,9 @@ export const AlertDialogAction = forwardRef<HTMLButtonElement, ComponentPropsWit
         ref={ref}
         className={cn(
           "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)] px-4 py-2 text-sm font-medium",
-          "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] hover:opacity-90",
-          "transition-opacity duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+          "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:opacity-90",
+          "transition-opacity duration-[var(--s-duration-fast)]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           className,
         )}
         {...rest}

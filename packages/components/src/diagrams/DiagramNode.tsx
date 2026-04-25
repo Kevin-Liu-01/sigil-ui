@@ -32,7 +32,7 @@ const variantStyles: Record<DiagramNodeVariant, string> = {
   default: "border-[var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
   highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] text-[var(--s-text)] ring-1 ring-[var(--s-primary)]/20",
   muted: "border-[var(--s-border-muted)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
-  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
+  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
 };
 
 export const DiagramNode = forwardRef<HTMLDivElement, DiagramNodeProps>(
@@ -58,7 +58,7 @@ export const DiagramNode = forwardRef<HTMLDivElement, DiagramNodeProps>(
           {sublabel && <span className="text-[0.75em] opacity-70 truncate">{sublabel}</span>}
         </div>
         {badge && (
-          <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1.5 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] text-[10px] font-bold">
+          <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-5 h-5 px-1.5 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)] text-[10px] font-bold">
             {badge}
           </span>
         )}

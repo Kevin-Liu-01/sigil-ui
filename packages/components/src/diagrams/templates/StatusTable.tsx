@@ -20,23 +20,23 @@ export interface StatusTableProps extends HTMLAttributes<HTMLDivElement> {
 const statusConfig: Record<ServiceStatus, { label: string; dot: string; text: string }> = {
   operational: {
     label: "Operational",
-    dot: "bg-[var(--s-success,#22c55e)]",
-    text: "text-[var(--s-success,#22c55e)]",
+    dot: "bg-[var(--s-success)]",
+    text: "text-[var(--s-success)]",
   },
   degraded: {
     label: "Degraded",
-    dot: "bg-[var(--s-warning,#f59e0b)]",
-    text: "text-[var(--s-warning,#f59e0b)]",
+    dot: "bg-[var(--s-warning)]",
+    text: "text-[var(--s-warning)]",
   },
   outage: {
     label: "Outage",
-    dot: "bg-[var(--s-error,#ef4444)]",
-    text: "text-[var(--s-error,#ef4444)]",
+    dot: "bg-[var(--s-error)]",
+    text: "text-[var(--s-error)]",
   },
   maintenance: {
     label: "Maintenance",
-    dot: "bg-[var(--s-info,#3b82f6)]",
-    text: "text-[var(--s-info,#3b82f6)]",
+    dot: "bg-[var(--s-info)]",
+    text: "text-[var(--s-info)]",
   },
 };
 
@@ -77,7 +77,7 @@ export const StatusTable = forwardRef<HTMLDivElement, StatusTableProps>(
                   <td className="py-3 px-4 font-medium text-[var(--s-text)]">{svc.name}</td>
                   <td className="py-3 px-4">
                     <span className="inline-flex items-center gap-2">
-                      <span className={cn("inline-block h-2 w-2 rounded-full", cfg.dot)} />
+                      <span className={cn("inline-block h-2 w-2 rounded-[var(--s-radius-full)]", cfg.dot)} />
                       <span className={cn("text-xs font-medium", cfg.text)}>{cfg.label}</span>
                     </span>
                   </td>

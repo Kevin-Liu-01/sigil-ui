@@ -1,0 +1,81 @@
+---
+title: Pagination
+description: A page navigation component with previous/next buttons, numbered pages, and ellipsis truncation.
+---
+
+## Import
+
+```tsx
+import {
+  Pagination, PaginationContent, PaginationItem,
+  PaginationPrevious, PaginationNext, PaginationLink, PaginationEllipsis,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem><PaginationPrevious href="/page/1" /></PaginationItem>
+    <PaginationItem><PaginationLink href="/page/1">1</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="/page/2" isActive>2</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationLink href="/page/3">3</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationNext href="/page/3" /></PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+## With ellipsis
+
+```tsx
+<Pagination>
+  <PaginationContent>
+    <PaginationItem><PaginationPrevious href="#" /></PaginationItem>
+    <PaginationItem><PaginationLink href="#">1</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationEllipsis /></PaginationItem>
+    <PaginationItem><PaginationLink href="#" isActive>5</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationEllipsis /></PaginationItem>
+    <PaginationItem><PaginationLink href="#">10</PaginationLink></PaginationItem>
+    <PaginationItem><PaginationNext href="#" /></PaginationItem>
+  </PaginationContent>
+</Pagination>
+```
+
+## Button variant
+
+Use `onClick` instead of `href` for SPA routing:
+
+```tsx
+<PaginationLink onClick={() => setPage(3)}>3</PaginationLink>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface-elevated` | Active page background |
+| `--s-primary` | Active page accent |
+| `--s-text` | Page number color |
+| `--s-text-muted` | Ellipsis and disabled color |
+| `--s-border` | Item border |
+| `--s-radius-md` | Item border radius |
+| `--s-duration-fast` | Hover transition |
+
+## Props
+
+### PaginationLink
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `href` | `string` | — | Link destination |
+| `isActive` | `boolean` | `false` | Current page |
+| `onClick` | `() => void` | — | Click handler |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Page number |
+
+## Accessibility
+
+- Uses `<nav>` with `aria-label="Pagination"`
+- Active page marked with `aria-current="page"`
+- Previous/Next buttons have `aria-label` text

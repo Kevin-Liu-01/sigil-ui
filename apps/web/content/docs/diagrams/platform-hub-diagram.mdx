@@ -1,0 +1,50 @@
+---
+title: PlatformHubDiagram
+description: "A platform hub diagram showing a central platform with connected services."
+---
+
+## Import
+
+```tsx
+import { PlatformHubDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <PlatformHubDiagram
+    left={[{ label: "Inputs", items: [{ label: "Tokens" }, { label: "Presets" }] }]}
+    center={{
+      label: "Platform",
+      items: [{ label: "CLI" }, { label: "Docs" }],
+    }}
+    right={[{ label: "Outputs", items: [{ label: "CSS" }, { label: "Components" }] }]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<PlatformHubDiagram
+  left={[{ label: "Inputs", items: [{ label: "Tokens" }] }]}
+  center={{ label: "Platform" }}
+  right={[{ label: "Outputs", items: [{ label: "Components" }] }]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `left` | `PlatformGroup[]` | — | Left-side groups |
+| `center` | `{ label: string; icon?: ReactNode; items?: PlatformItem[] }` | — | Central hub |
+| `right` | `PlatformGroup[]` | — | Right-side groups |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Hub accent |
+| `--s-border` | Connection lines |
+| `--s-surface` | Node background |
+| `--s-text` | Labels |

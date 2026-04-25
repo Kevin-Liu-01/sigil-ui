@@ -50,7 +50,7 @@ export const PipelineDiagram = forwardRef<HTMLDivElement, PipelineDiagramProps>(
                 )}
               </div>
               {showNumbers && step.icon && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] text-[10px] font-bold">
+                <span className="absolute -top-1 -right-1 flex items-center justify-center w-5 h-5 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)] text-[10px] font-bold">
                   {i + 1}
                 </span>
               )}

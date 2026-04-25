@@ -378,7 +378,7 @@ export default function WalkthroughPage() {
             <MonoLabel variant="accent" className="block mb-3">WHY THIS IS FASTER</MonoLabel>
             <div className="flex flex-col gap-4">
               {[
-                { label: "One file vs. dozens", desc: "Edit 1 markdown file instead of hunting through 100+ component files. One change propagates everywhere." },
+                { label: "One file vs. dozens", desc: "Edit 1 markdown file instead of hunting through 200+ token-driven components. One change propagates everywhere." },
                 { label: "Agent-friendly", desc: "AI agents read sigil.tokens.md, make targeted edits, and get deterministic visual output. Fewer LLM tokens, zero drift." },
                 { label: "No vendor lock-in", desc: "Your preset lives in your repo. Not a config in someone else's library — a markdown file you can read, diff, and version." },
                 { label: "Instant visual refresh", desc: "Change a token, CSS recompiles, every component updates. No manual search-and-replace across files." },
@@ -468,7 +468,7 @@ export default function WalkthroughPage() {
             ))}
           </GapPixelGrid>
           <DensityText role="body" as="p" muted className="mt-4">
-            100+ components across 14 categories. <a href="/components" className="text-[var(--s-primary)] no-underline">Browse the full library →</a>
+            200+ token-driven components across 14 categories. <a href="/components" className="text-[var(--s-primary)] no-underline">Browse the full library →</a>
           </DensityText>
         </div>
       </Step>
@@ -669,7 +669,7 @@ export default function PricingPage() {
             Ready to build?
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 mx-auto max-w-md leading-relaxed">
-            You've seen the full workflow. One file, 259 tokens, 100+ components, 31 presets.
+            You've seen the full workflow. One file, 259 tokens, 200+ token-driven components, 31 presets.
             The design system that compiles from markdown.
           </DensityText>
           <div className="flex items-center justify-center gap-3 flex-wrap mb-8">

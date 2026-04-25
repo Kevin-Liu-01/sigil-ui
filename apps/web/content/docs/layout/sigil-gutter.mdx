@@ -1,0 +1,51 @@
+---
+title: SigilGutter
+description: "A SigilGutter component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { SigilGutter, SigilPageGrid, SigilFrame, SigilFullBleed } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <SigilGutter />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<SigilGutter>...</SigilGutter>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<SigilPageGrid>`
+- `<SigilFrame>`
+- `<SigilFullBleed>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `showGrid` | `boolean` | — | — |
+| `gridCell` | `number` | — | — |
+| `pattern` | `GutterPattern` | — | — |
+| `side` | `PatternSide` | — | — |
+| `visible` | `boolean` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border-muted` | Border muted |
+| `--s-gutter-border` | Gutter border |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-page-margin` | Page margin |
+| `--s-content-max` | Content max |

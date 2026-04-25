@@ -1,0 +1,60 @@
+---
+title: DiagramNode
+description: "A primitive node for use inside diagrams, with icon, label, sublabel, badge, and variants."
+---
+
+## Import
+
+```tsx
+import { DiagramNode } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+    <DiagramNode label="Default" sublabel="Node" />
+    <DiagramNode label="Highlighted" variant="highlighted" />
+    <DiagramNode label="Accent" variant="accent" />
+    <DiagramNode label="Muted" variant="muted" />
+  </div>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DiagramNode
+  label="API Server"
+  sublabel="Node.js"
+  variant="highlighted"
+  size="md"
+  badge={3}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Primary node label |
+| `sublabel` | `string` | — | Secondary label below |
+| `icon` | `ReactNode` | — | Icon element |
+| `variant` | `"default" \| "highlighted" \| "muted" \| "accent"` | `"default"` | Visual style |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Node size |
+| `mono` | `boolean` | `false` | Use monospace font |
+| `badge` | `ReactNode` | — | Badge shown at top-right corner |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Default node border |
+| `--s-surface` | Node background |
+| `--s-text` | Label text |
+| `--s-primary` | Highlighted and accent styling |
+| `--s-primary-muted` | Highlighted background |
+| `--s-primary-contrast` | Accent text |
+| `--s-radius-md` | Node border radius |
+| `--s-radius-full` | Badge border radius |
+| `--s-duration-fast` | Hover transition |
+| `--s-font-mono` | Mono font family |

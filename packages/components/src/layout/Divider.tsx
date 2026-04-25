@@ -203,7 +203,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
         <div className="absolute inset-0 z-[2] flex items-center justify-center">
           <span
             className={cn(
-              "bg-[var(--s-background,#fff)] px-3 py-0.5 text-xs text-[var(--s-text-muted)] font-[family-name:var(--s-font-mono)]",
+              "bg-[var(--s-background)] px-3 py-0.5 text-xs text-[var(--s-text-muted)] font-[family-name:var(--s-font-mono)]",
               !isHorizontal && "[writing-mode:vertical-rl]",
             )}
           >

@@ -48,10 +48,10 @@ export const TabsTrigger = forwardRef<HTMLButtonElement, TabsTriggerProps>(
         className={cn(
           "inline-flex items-center justify-center whitespace-nowrap",
           "rounded-[var(--s-radius-sm,0px)] px-3 py-1 text-sm font-medium",
-          "transition-all duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+          "transition-all duration-[var(--s-duration-fast)]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "disabled:pointer-events-none disabled:opacity-50",
-          "data-[state=active]:bg-[var(--s-background)] data-[state=active]:text-[var(--s-text)] data-[state=active]:shadow-sm",
+          "data-[state=active]:bg-[var(--s-background)] data-[state=active]:text-[var(--s-text)] data-[state=active]:shadow-[var(--s-shadow-sm)]",
           "data-[state=inactive]:text-[var(--s-text-muted)] data-[state=inactive]:hover:text-[var(--s-text)]",
           className,
         )}
@@ -72,7 +72,7 @@ export const TabsContent = forwardRef<HTMLDivElement, TabsContentProps>(
         data-slot="tabs-content"
         className={cn(
           "mt-2",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           className,
         )}
         {...props}

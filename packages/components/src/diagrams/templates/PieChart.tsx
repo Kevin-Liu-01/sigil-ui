@@ -20,12 +20,12 @@ export interface PieChartProps extends Omit<SVGAttributes<SVGSVGElement>, "width
 }
 
 const defaultColors = [
-  "var(--s-primary)",
-  "var(--s-success, #22c55e)",
-  "var(--s-warning, #f59e0b)",
-  "var(--s-error, #ef4444)",
-  "var(--s-info, #3b82f6)",
-  "var(--s-border-strong, #a1a1aa)",
+  "var(--s-chart-series-1)",
+  "var(--s-chart-series-2)",
+  "var(--s-chart-series-3)",
+  "var(--s-chart-series-4)",
+  "var(--s-chart-series-5)",
+  "var(--s-chart-neutral)",
 ];
 
 export const PieChart = forwardRef<SVGSVGElement, PieChartProps>(
@@ -82,8 +82,8 @@ export const PieChart = forwardRef<SVGSVGElement, PieChartProps>(
                     dominantBaseline="central"
                     fontSize={11}
                     fontWeight={700}
-                    fill="white"
-                    style={{ textShadow: "0 1px 3px rgba(0,0,0,0.5)" }}
+                    fill="var(--s-primary-contrast)"
+                    style={{ textShadow: "0 1px 3px oklch(0 0 0 / 0.5)" }}
                   >
                     {pct}%
                   </text>
@@ -97,7 +97,7 @@ export const PieChart = forwardRef<SVGSVGElement, PieChartProps>(
           <div className="flex flex-wrap gap-x-4 gap-y-1 justify-center">
             {sliceData.map((sl, i) => (
               <div key={i} className="flex items-center gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: sl.color }} />
+                <div className="w-2.5 h-2.5 rounded-[var(--s-radius-full)] shrink-0" style={{ backgroundColor: sl.color }} />
                 <span className="text-xs text-[var(--s-text-muted)]">{sl.label}</span>
               </div>
             ))}

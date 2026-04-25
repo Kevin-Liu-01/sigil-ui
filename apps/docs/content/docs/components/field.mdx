@@ -1,0 +1,78 @@
+---
+title: Field
+description: A form field wrapper that connects a label, input, description, and error message with accessible aria attributes.
+---
+
+## Import
+
+```tsx
+import { Field, FieldLabel, FieldDescription, FieldError } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Field>
+  <FieldLabel>Email address</FieldLabel>
+  <Input type="email" placeholder="you@example.com" />
+  <FieldDescription>We'll never share your email.</FieldDescription>
+</Field>
+```
+
+## With error
+
+```tsx
+<Field invalid>
+  <FieldLabel>Username</FieldLabel>
+  <Input placeholder="Choose a username" />
+  <FieldError>Username is already taken.</FieldError>
+</Field>
+```
+
+## Required field
+
+```tsx
+<Field required>
+  <FieldLabel>Password</FieldLabel>
+  <Input type="password" />
+  <FieldDescription>Minimum 8 characters.</FieldDescription>
+</Field>
+```
+
+## Horizontal layout
+
+```tsx
+<Field orientation="horizontal">
+  <FieldLabel>Notify me</FieldLabel>
+  <Switch />
+</Field>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-text` | Label text color |
+| `--s-text-muted` | Description text color |
+| `--s-error` | Error message and invalid border |
+| `--s-font-body` | Font family |
+| `--s-space-2` | Gap between label, input, and description |
+
+## Props
+
+### Field
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `invalid` | `boolean` | `false` | Show error state on children |
+| `required` | `boolean` | `false` | Mark as required |
+| `disabled` | `boolean` | `false` | Disable all children |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Layout direction |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Field content |
+
+## Accessibility
+
+- Auto-generates `id` and wires `aria-labelledby`, `aria-describedby`, and `aria-errormessage`
+- `required` adds `aria-required="true"` to the input
+- `invalid` adds `aria-invalid="true"` to the input

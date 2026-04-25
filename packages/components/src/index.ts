@@ -8,6 +8,7 @@ export { cn } from "./utils";
 // ---------------------------------------------------------------------------
 export {
   SigilSoundContext,
+  SigilSoundProvider,
   useSigilSound,
   type SigilSoundName,
   type SigilSoundContextValue,

@@ -5,6 +5,7 @@ import type {
   SigilTokens,
   ThemedColor,
 } from "./types";
+import { defaultTokens } from "./tokens";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -27,6 +28,40 @@ function indent(depth: number): string {
   return "  ".repeat(depth);
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function deepMerge<T extends Record<string, unknown>>(base: T, override: Record<string, unknown>): T {
+  const result: Record<string, unknown> = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    const baseValue = result[key];
+    if (isPlainObject(baseValue) && isPlainObject(value)) {
+      result[key] = deepMerge(baseValue, value);
+    } else if (value !== undefined) {
+      result[key] = value;
+    }
+  }
+  return result as T;
+}
+
+function emitTokenGroup(
+  target: string[],
+  prefix: string,
+  group: string,
+  tokens: Record<string, unknown> | undefined,
+): void {
+  if (!tokens) return;
+  for (const [key, value] of Object.entries(tokens)) {
+    if (value === undefined) continue;
+    if (typeof value === "boolean") {
+      target.push(`${cssVar(prefix, group, key)}: ${value ? "1" : "0"};`);
+    } else {
+      target.push(`${cssVar(prefix, group, key)}: ${value};`);
+    }
+  }
+}
+
 // ---------------------------------------------------------------------------
 // compileToCss
 // ---------------------------------------------------------------------------
@@ -40,6 +75,7 @@ export function compileToCss(
   tokens: SigilTokens,
   options: CssCompileOptions = {},
 ): string {
+  const resolvedTokens = deepMerge(defaultTokens, tokens) as SigilTokens;
   const {
     prefix = "s",
     includeLight = true,
@@ -61,7 +97,7 @@ export function compileToCss(
   }
 
   // Colors
-  const colors = tokens.colors;
+  const colors = resolvedTokens.colors;
   for (const [key, value] of Object.entries(colors) as [
     keyof ColorTokens,
     ColorValue | ThemedColor,
@@ -70,19 +106,19 @@ export function compileToCss(
   }
 
   // Typography
-  for (const [key, value] of Object.entries(tokens.typography)) {
+  for (const [key, value] of Object.entries(resolvedTokens.typography)) {
     lightVars.push(`${cssVar(prefix, key)}: ${value};`);
   }
 
   // Spacing scale → --s-space-{value}
-  for (const step of tokens.spacing.scale) {
+  for (const step of resolvedTokens.spacing.scale) {
     lightVars.push(
-      `${cssVar(prefix, "space", String(step))}: ${step}${tokens.spacing.unit};`,
+      `${cssVar(prefix, "space", String(step))}: ${step}${resolvedTokens.spacing.unit};`,
     );
   }
 
   // Sigil grid
-  for (const [key, value] of Object.entries(tokens.sigil)) {
+  for (const [key, value] of Object.entries(resolvedTokens.sigil)) {
     if (typeof value === "boolean") {
       lightVars.push(`${cssVar(prefix, key)}: ${value ? "1" : "0"};`);
     } else {
@@ -91,48 +127,48 @@ export function compileToCss(
   }
 
   // Radius
-  for (const [key, value] of Object.entries(tokens.radius)) {
+  for (const [key, value] of Object.entries(resolvedTokens.radius)) {
     lightVars.push(`${cssVar(prefix, "radius", key)}: ${value};`);
   }
 
   // Shadows
-  for (const [key, value] of Object.entries(tokens.shadows)) {
+  for (const [key, value] of Object.entries(resolvedTokens.shadows)) {
     lightVars.push(`${cssVar(prefix, "shadow", key)}: ${value};`);
   }
 
   // Motion durations
-  for (const [key, value] of Object.entries(tokens.motion.duration)) {
+  for (const [key, value] of Object.entries(resolvedTokens.motion.duration)) {
     lightVars.push(`${cssVar(prefix, "duration", key)}: ${value};`);
   }
 
   // Motion easings
-  for (const [key, value] of Object.entries(tokens.motion.easing)) {
+  for (const [key, value] of Object.entries(resolvedTokens.motion.easing)) {
     lightVars.push(`${cssVar(prefix, "ease", key)}: ${value};`);
   }
 
   // Borders — widths
-  for (const [key, value] of Object.entries(tokens.borders.width)) {
+  for (const [key, value] of Object.entries(resolvedTokens.borders.width)) {
     lightVars.push(`${cssVar(prefix, "border", key)}: ${value};`);
   }
   // Borders — style + per-component
-  if (tokens.borders.style) lightVars.push(`${cssVar(prefix, "border-style")}: ${tokens.borders.style};`);
-  if (tokens.borders["card-border"]) lightVars.push(`${cssVar(prefix, "card-border")}: ${tokens.borders["card-border"]};`);
-  if (tokens.borders["card-border-hover"]) lightVars.push(`${cssVar(prefix, "card-border-hover")}: ${tokens.borders["card-border-hover"]};`);
-  if (tokens.borders["button-border"]) lightVars.push(`${cssVar(prefix, "button-border")}: ${tokens.borders["button-border"]};`);
-  if (tokens.borders["input-border"]) lightVars.push(`${cssVar(prefix, "input-border")}: ${tokens.borders["input-border"]};`);
-  if (tokens.borders["divider-style"]) lightVars.push(`${cssVar(prefix, "divider-style")}: ${tokens.borders["divider-style"]};`);
-  if (tokens.borders["divider-width"]) lightVars.push(`${cssVar(prefix, "divider-width")}: ${tokens.borders["divider-width"]};`);
+  if (resolvedTokens.borders.style) lightVars.push(`${cssVar(prefix, "border-style")}: ${resolvedTokens.borders.style};`);
+  if (resolvedTokens.borders["card-border"]) lightVars.push(`${cssVar(prefix, "card-border")}: ${resolvedTokens.borders["card-border"]};`);
+  if (resolvedTokens.borders["card-border-hover"]) lightVars.push(`${cssVar(prefix, "card-border-hover")}: ${resolvedTokens.borders["card-border-hover"]};`);
+  if (resolvedTokens.borders["button-border"]) lightVars.push(`${cssVar(prefix, "button-border")}: ${resolvedTokens.borders["button-border"]};`);
+  if (resolvedTokens.borders["input-border"]) lightVars.push(`${cssVar(prefix, "input-border")}: ${resolvedTokens.borders["input-border"]};`);
+  if (resolvedTokens.borders["divider-style"]) lightVars.push(`${cssVar(prefix, "divider-style")}: ${resolvedTokens.borders["divider-style"]};`);
+  if (resolvedTokens.borders["divider-width"]) lightVars.push(`${cssVar(prefix, "divider-width")}: ${resolvedTokens.borders["divider-width"]};`);
 
   // Buttons
-  if (tokens.buttons) {
-    for (const [key, value] of Object.entries(tokens.buttons)) {
+  if (resolvedTokens.buttons) {
+    for (const [key, value] of Object.entries(resolvedTokens.buttons)) {
       lightVars.push(`${cssVar(prefix, "button", key)}: ${value};`);
     }
   }
 
   // Cards
-  if (tokens.cards) {
-    for (const [key, value] of Object.entries(tokens.cards)) {
+  if (resolvedTokens.cards) {
+    for (const [key, value] of Object.entries(resolvedTokens.cards)) {
       if (typeof value === "boolean") {
         lightVars.push(`${cssVar(prefix, "card", key)}: ${value ? "1" : "0"};`);
       } else {
@@ -142,29 +178,29 @@ export function compileToCss(
   }
 
   // Headings
-  if (tokens.headings) {
-    for (const [key, value] of Object.entries(tokens.headings)) {
+  if (resolvedTokens.headings) {
+    for (const [key, value] of Object.entries(resolvedTokens.headings)) {
       lightVars.push(`${cssVar(prefix, key)}: ${value};`);
     }
   }
 
   // Navigation
-  if (tokens.navigation) {
-    for (const [key, value] of Object.entries(tokens.navigation)) {
+  if (resolvedTokens.navigation) {
+    for (const [key, value] of Object.entries(resolvedTokens.navigation)) {
       lightVars.push(`${cssVar(prefix, key)}: ${value};`);
     }
   }
 
   // Inputs
-  if (tokens.inputs) {
-    for (const [key, value] of Object.entries(tokens.inputs)) {
+  if (resolvedTokens.inputs) {
+    for (const [key, value] of Object.entries(resolvedTokens.inputs)) {
       lightVars.push(`${cssVar(prefix, "input", key)}: ${value};`);
     }
   }
 
   // Cursor
-  if (tokens.cursor) {
-    for (const [key, value] of Object.entries(tokens.cursor)) {
+  if (resolvedTokens.cursor) {
+    for (const [key, value] of Object.entries(resolvedTokens.cursor)) {
       if (value !== undefined) {
         if (typeof value === "boolean") {
           lightVars.push(`${cssVar(prefix, "cursor", key)}: ${value ? "1" : "0"};`);
@@ -176,8 +212,8 @@ export function compileToCss(
   }
 
   // Scrollbar
-  if (tokens.scrollbar) {
-    for (const [key, value] of Object.entries(tokens.scrollbar)) {
+  if (resolvedTokens.scrollbar) {
+    for (const [key, value] of Object.entries(resolvedTokens.scrollbar)) {
       if (value !== undefined) {
         lightVars.push(`${cssVar(prefix, "scrollbar", key)}: ${value};`);
       }
@@ -185,15 +221,15 @@ export function compileToCss(
   }
 
   // Code
-  if (tokens.code) {
-    for (const [key, value] of Object.entries(tokens.code)) {
+  if (resolvedTokens.code) {
+    for (const [key, value] of Object.entries(resolvedTokens.code)) {
       lightVars.push(`${cssVar(prefix, "code", key)}: ${value};`);
     }
   }
 
   // Backgrounds
-  if (tokens.backgrounds) {
-    for (const [key, value] of Object.entries(tokens.backgrounds)) {
+  if (resolvedTokens.backgrounds) {
+    for (const [key, value] of Object.entries(resolvedTokens.backgrounds)) {
       if (typeof value === "boolean") {
         lightVars.push(`${cssVar(prefix, "bg", key)}: ${value ? "1" : "0"};`);
       } else {
@@ -203,27 +239,27 @@ export function compileToCss(
   }
 
   // Spacing — non-scale fields
-  for (const [key, value] of Object.entries(tokens.spacing)) {
+  for (const [key, value] of Object.entries(resolvedTokens.spacing)) {
     if (key === "scale" || key === "unit") continue;
     lightVars.push(`${cssVar(prefix, key)}: ${value};`);
   }
 
   // Motion — non-duration/easing fields
-  for (const [key, value] of Object.entries(tokens.motion)) {
+  for (const [key, value] of Object.entries(resolvedTokens.motion)) {
     if (key === "duration" || key === "easing") continue;
     if (value !== undefined) lightVars.push(`${cssVar(prefix, key)}: ${value};`);
   }
 
   // Layout
-  if (tokens.layout) {
-    for (const [key, value] of Object.entries(tokens.layout)) {
+  if (resolvedTokens.layout) {
+    for (const [key, value] of Object.entries(resolvedTokens.layout)) {
       lightVars.push(`${cssVar(prefix, key)}: ${value};`);
     }
   }
 
   // Alignment
-  if (tokens.alignment) {
-    for (const [key, value] of Object.entries(tokens.alignment)) {
+  if (resolvedTokens.alignment) {
+    for (const [key, value] of Object.entries(resolvedTokens.alignment)) {
       if (value !== undefined) {
         if (typeof value === "boolean") {
           lightVars.push(`${cssVar(prefix, "align", key)}: ${value ? "1" : "0"};`);
@@ -235,8 +271,8 @@ export function compileToCss(
   }
 
   // Sections
-  if (tokens.sections) {
-    for (const [key, value] of Object.entries(tokens.sections)) {
+  if (resolvedTokens.sections) {
+    for (const [key, value] of Object.entries(resolvedTokens.sections)) {
       if (value !== undefined) {
         if (typeof value === "boolean") {
           lightVars.push(`${cssVar(prefix, "section", key)}: ${value ? "1" : "0"};`);
@@ -248,8 +284,8 @@ export function compileToCss(
   }
 
   // Dividers
-  if (tokens.dividers) {
-    for (const [key, value] of Object.entries(tokens.dividers)) {
+  if (resolvedTokens.dividers) {
+    for (const [key, value] of Object.entries(resolvedTokens.dividers)) {
       if (value !== undefined) {
         if (typeof value === "boolean") {
           lightVars.push(`${cssVar(prefix, "divider", key)}: ${value ? "1" : "0"};`);
@@ -261,8 +297,8 @@ export function compileToCss(
   }
 
   // Grid visuals
-  if (tokens.gridVisuals) {
-    for (const [key, value] of Object.entries(tokens.gridVisuals)) {
+  if (resolvedTokens.gridVisuals) {
+    for (const [key, value] of Object.entries(resolvedTokens.gridVisuals)) {
       if (value !== undefined) {
         if (typeof value === "boolean") {
           lightVars.push(`${cssVar(prefix, "grid", key)}: ${value ? "1" : "0"};`);
@@ -272,6 +308,13 @@ export function compileToCss(
       }
     }
   }
+
+  emitTokenGroup(lightVars, prefix, "focus", resolvedTokens.focus);
+  emitTokenGroup(lightVars, prefix, "overlay", resolvedTokens.overlays);
+  emitTokenGroup(lightVars, prefix, "chart", resolvedTokens.dataViz);
+  emitTokenGroup(lightVars, prefix, "media", resolvedTokens.media);
+  emitTokenGroup(lightVars, prefix, "control", resolvedTokens.controls);
+  emitTokenGroup(lightVars, prefix, "component-surface", resolvedTokens.componentSurfaces);
 
   // Assemble
   const lines: string[] = [];

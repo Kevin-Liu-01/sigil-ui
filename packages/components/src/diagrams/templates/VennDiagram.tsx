@@ -35,7 +35,7 @@ export const VennDiagram = forwardRef<SVGSVGElement, VennDiagramProps>(
           { x: cx + overlap * 0.5, y: cy },
         ];
 
-    const defaultColors = ["var(--s-primary)", "var(--s-success, #22c55e)", "var(--s-warning, #f59e0b)"];
+    const defaultColors = ["var(--s-primary)", "var(--s-success)", "var(--s-warning)"];
 
     return (
       <svg

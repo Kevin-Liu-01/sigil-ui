@@ -30,18 +30,19 @@ bun add @sigil-ui/tokens @sigil-ui/components
 The fastest way to start is the `init` command. It creates a token file, wires up CSS imports, and optionally applies a preset.
 
 ```bash
-npx sigil init
+npx @sigil-ui/cli init
 ```
 
 Options:
 
 ```bash
 # Start with a preset
-npx sigil init --preset minimal
-npx sigil init --preset brutalist
+npx @sigil-ui/cli init --preset minimal
+npx @sigil-ui/cli init --preset brutalist
 
 # Specify output directory
-npx sigil init --cwd ./apps/web
+cd apps/web
+npx @sigil-ui/cli init
 ```
 
 ## Manual setup
@@ -94,7 +95,7 @@ Override any token by redefining CSS variables. You can do this in a global styl
 Or create a full preset file and compile it with the CLI:
 
 ```bash
-npx sigil compile ./tokens/brand.ts --out ./public/brand.css
+npx @sigil-ui/cli compile ./tokens/brand.ts --out ./public/brand.css
 ```
 
 ## Framework guides

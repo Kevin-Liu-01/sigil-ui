@@ -13,7 +13,6 @@ import {
   Switch,
   Diagonal,
   Shape,
-  Box3D,
   MonoLabel,
   DensityText,
   TabularValue,
@@ -254,6 +253,110 @@ const TERRAIN_BOXES = [
   { title: "Actions", kind: "actions", depth: 42, accent: "var(--s-primary)" },
 ] as const;
 
+function PseudoBox({
+  title,
+  accent,
+  depth,
+  open,
+  intensity,
+  onToggle,
+  children,
+}: {
+  title: string;
+  accent: string;
+  depth: number;
+  open: boolean;
+  intensity: number;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  const offset = Math.max(10, Math.round(depth * 0.42));
+
+  return (
+    <div className="relative h-[148px] w-full max-w-[198px]">
+      <div
+        className="absolute border border-[var(--s-border-muted)] bg-[var(--s-background)]"
+        style={{
+          inset: `${offset + 10}px 0 0 ${offset}px`,
+        }}
+      />
+      <div
+        className="absolute z-10 border border-[var(--s-border)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)]"
+        style={{
+          inset: `18px ${offset}px ${offset}px 0`,
+        }}
+      >
+        <div
+          className="absolute right-[-1px] top-[10px] h-[calc(100%-10px)] border-r border-[var(--s-border-muted)]"
+          style={{ width: `${offset}px`, transform: `translateX(${offset}px) skewY(32deg)`, transformOrigin: "left top" }}
+        />
+        <div
+          className="absolute bottom-[-1px] left-[10px] border-b border-[var(--s-border-muted)]"
+          style={{ height: `${offset}px`, width: "calc(100% - 10px)", transform: `translateY(${offset}px) skewX(58deg)`, transformOrigin: "left top" }}
+        />
+        <div className="relative z-[1] flex h-full flex-col justify-end gap-3 p-4 pt-8">
+          <div
+            className="pointer-events-none absolute inset-x-4 top-4 h-1.5 bg-[var(--s-border-muted)]"
+            aria-hidden="true"
+          />
+          <div
+            className={open ? "opacity-100" : "opacity-35"}
+            style={{ transition: "opacity 180ms ease" }}
+          >
+            {children}
+          </div>
+          <Progress value={open ? 84 : Math.round(32 + intensity * 44)} />
+        </div>
+      </div>
+
+      <button
+        type="button"
+        aria-pressed={open}
+        onClick={onToggle}
+        className="absolute z-20 cursor-pointer border border-[var(--s-border)] bg-[var(--s-surface)] text-left shadow-[var(--s-shadow-sm)]"
+        style={{
+          inset: `0 ${offset + 10}px auto 0`,
+          height: 76,
+          transform: open
+            ? `translate3d(${offset + 18}px, -${offset + 16}px, 0) rotate(-4deg)`
+            : `translate3d(${intensity * 5}px, -${intensity * 4}px, 0)`,
+          transition: "transform 260ms cubic-bezier(0.16, 1, 0.3, 1), background-color 160ms ease",
+        }}
+      >
+        <div className="flex h-full flex-col justify-between p-4">
+          <div className="flex items-center justify-between gap-2">
+            <MonoLabel variant="accent" size="xs">{title}</MonoLabel>
+            <span className="h-2 w-2" style={{ background: accent }} />
+          </div>
+          <div className="grid gap-1.5">
+            <div className="h-2 w-3/4 bg-[var(--s-text)]" />
+            <div className="h-2 w-1/2 bg-[var(--s-border)]" />
+          </div>
+        </div>
+      </button>
+    </div>
+  );
+}
+
+function MiniProjectedBox({ depth }: { depth: number }) {
+  const offset = Math.max(8, Math.round(depth * 0.36));
+
+  return (
+    <div className="relative h-20 w-28">
+      <div
+        className="absolute border border-[var(--s-border-muted)] bg-[var(--s-background)]"
+        style={{ inset: `${offset}px 0 0 ${offset}px` }}
+      />
+      <div
+        className="absolute flex items-center justify-center border border-[var(--s-border)] bg-[var(--s-surface)]"
+        style={{ inset: `0 ${offset}px ${offset}px 0` }}
+      >
+        <TabularValue size="xs" muted>{depth}px</TabularValue>
+      </div>
+    </div>
+  );
+}
+
 function TerrainBoxContent({ kind }: { kind: (typeof TERRAIN_BOXES)[number]["kind"] }) {
   if (kind === "button") return <Button size="sm">Deploy</Button>;
   if (kind === "input") return <Input placeholder="Search..." className="h-8 text-xs" />;
@@ -284,6 +387,7 @@ function TerrainBoxContent({ kind }: { kind: (typeof TERRAIN_BOXES)[number]["kin
 
 function ReactiveTerrainGrid() {
   const [pointer, setPointer] = React.useState({ x: 0.5, y: 0.45, active: false });
+  const [openBoxes, setOpenBoxes] = React.useState<Set<string>>(() => new Set(["Input"]));
 
   return (
     <div
@@ -328,16 +432,23 @@ function ReactiveTerrainGrid() {
                 transition: "transform 180ms cubic-bezier(0.16, 1, 0.3, 1)",
               }}
             >
-              <Box3D depth={box.depth} variant="card" hoverLift className="h-[130px] w-full max-w-[190px]">
-                <div className="flex h-full w-full flex-col justify-between p-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <MonoLabel variant="accent" size="xs">{box.title}</MonoLabel>
-                    <span className="h-2 w-2" style={{ background: box.accent }} />
-                  </div>
-                  <TerrainBoxContent kind={box.kind} />
-                  <Progress value={Math.round(38 + intensity * 58)} />
-                </div>
-              </Box3D>
+              <PseudoBox
+                title={box.title}
+                accent={box.accent}
+                depth={box.depth}
+                open={openBoxes.has(box.title)}
+                intensity={intensity}
+                onToggle={() => {
+                  setOpenBoxes((current) => {
+                    const next = new Set(current);
+                    if (next.has(box.title)) next.delete(box.title);
+                    else next.add(box.title);
+                    return next;
+                  });
+                }}
+              >
+                <TerrainBoxContent kind={box.kind} />
+              </PseudoBox>
             </div>
           );
         })}
@@ -418,9 +529,7 @@ export function ThreeDShowcase() {
           <SceneBlock label="03" title="Projected Boxes">
             <div className="grid h-full grid-cols-2 place-items-center gap-3">
               {[18, 28, 38, 48].map((depth) => (
-                <Box3D key={depth} depth={depth} hoverLift className="h-16 w-24">
-                  <TabularValue size="xs" muted>{depth}px</TabularValue>
-                </Box3D>
+                <MiniProjectedBox key={depth} depth={depth} />
               ))}
             </div>
           </SceneBlock>

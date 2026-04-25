@@ -1,0 +1,80 @@
+---
+title: Toolbar
+description: A horizontal toolbar for grouping actions, toggles, and separators. Built on Radix Toolbar.
+---
+
+## Import
+
+```tsx
+import {
+  Toolbar, ToolbarButton, ToolbarSeparator,
+  ToolbarToggleGroup, ToolbarToggleItem, ToolbarLink,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Toolbar>
+  <ToolbarToggleGroup type="multiple">
+    <ToolbarToggleItem value="bold" aria-label="Bold">
+      <BoldIcon className="size-4" />
+    </ToolbarToggleItem>
+    <ToolbarToggleItem value="italic" aria-label="Italic">
+      <ItalicIcon className="size-4" />
+    </ToolbarToggleItem>
+  </ToolbarToggleGroup>
+  <ToolbarSeparator />
+  <ToolbarButton>
+    <LinkIcon className="size-4" />
+    Link
+  </ToolbarButton>
+</Toolbar>
+```
+
+## With link
+
+```tsx
+<Toolbar>
+  <ToolbarLink href="/docs">Documentation</ToolbarLink>
+  <ToolbarSeparator />
+  <ToolbarButton>Settings</ToolbarButton>
+</Toolbar>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Toolbar background |
+| `--s-surface-elevated` | Active toggle background |
+| `--s-text` | Button and toggle text |
+| `--s-text-muted` | Inactive icon color |
+| `--s-border` | Separator and toolbar border |
+| `--s-radius-md` | Toolbar border radius |
+| `--s-duration-fast` | Hover/press transition |
+
+## Props
+
+### ToolbarButton
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `disabled` | `boolean` | `false` | Disable the button |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Button content |
+
+### ToolbarToggleItem
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Toggle value |
+| `disabled` | `boolean` | `false` | Disable this toggle |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Toggle content |
+
+## Accessibility
+
+- Uses `role="toolbar"` with roving tabindex
+- Arrow keys navigate between toolbar items
+- Provide `aria-label` for the toolbar and icon-only items

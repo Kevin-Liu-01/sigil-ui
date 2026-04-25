@@ -43,7 +43,7 @@ export const DependencyGraph = forwardRef<SVGSVGElement, DependencyGraphProps>(
       >
         <defs>
           <marker id="dep-arrow" viewBox="0 0 10 7" refX="10" refY="3.5" markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-            <polygon points="0 0, 10 3.5, 0 7" fill="var(--s-border-strong, var(--s-border))" />
+            <polygon points="0 0, 10 3.5, 0 7" fill="var(--s-chart-axis)" />
           </marker>
         </defs>
 
@@ -69,7 +69,7 @@ export const DependencyGraph = forwardRef<SVGSVGElement, DependencyGraphProps>(
                 y1={y1}
                 x2={x2}
                 y2={y2}
-                stroke="var(--s-border-strong, var(--s-border))"
+                stroke="var(--s-chart-axis)"
                 strokeWidth={1.2}
                 strokeDasharray={edge.dashed ? "5 3" : undefined}
                 markerEnd="url(#dep-arrow)"

@@ -73,7 +73,7 @@ export const SegmentedControlItem = forwardRef<HTMLButtonElement, SegmentedContr
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
           "disabled:pointer-events-none disabled:opacity-50",
           isActive
-            ? "bg-[var(--s-background)] text-[var(--s-text)] shadow-[var(--s-shadow-sm,0_1px_3px_rgba(0,0,0,0.1))]"
+            ? "bg-[var(--s-background)] text-[var(--s-text)] shadow-[var(--s-shadow-sm,0_1px_3px_oklch(0 0 0 / 0.1))]"
             : "bg-transparent text-[var(--s-text-muted)] hover:text-[var(--s-text)]",
           className,
         )}

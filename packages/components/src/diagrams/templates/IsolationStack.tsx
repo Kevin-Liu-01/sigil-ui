@@ -36,20 +36,20 @@ function StatusIcon({ status }: { status: "full" | "partial" | "none" }) {
   if (status === "full") {
     return (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M4 8l3 3 5-5" stroke="var(--s-success,#22c55e)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M4 8l3 3 5-5" stroke="var(--s-success)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }
   if (status === "partial") {
     return (
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path d="M4 8h8" stroke="var(--s-warning,#f59e0b)" strokeWidth="2" strokeLinecap="round" />
+        <path d="M4 8h8" stroke="var(--s-warning)" strokeWidth="2" strokeLinecap="round" />
       </svg>
     );
   }
   return (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-      <path d="M5 5l6 6M11 5l-6 6" stroke="var(--s-error,#ef4444)" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
+      <path d="M5 5l6 6M11 5l-6 6" stroke="var(--s-error)" strokeWidth="2" strokeLinecap="round" opacity="0.5" />
     </svg>
   );
 }
@@ -76,10 +76,10 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
         {/* Layer stack */}
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[11px] uppercase tracking-widest text-[var(--s-text-muted,#71717a)]">
+            <span className="font-mono text-[11px] uppercase tracking-widest text-[var(--s-text-muted)]">
               Isolation model
             </span>
-            <div className="h-px flex-1 bg-[var(--s-border,#e4e4e7)]" />
+            <div className="h-px flex-1 bg-[var(--s-border)]" />
           </div>
           <div className="flex flex-col items-center gap-1.5 py-3">
             {layers.map((layer, i) => {
@@ -90,8 +90,8 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
                   className={cn(
                     "flex items-center justify-center px-4 py-2",
                     layer.accent
-                      ? "border border-[var(--s-primary,#6366f1)] bg-[var(--s-primary,#6366f1)]/[0.08]"
-                      : "border border-[var(--s-border,#e4e4e7)] bg-[var(--s-surface,#fafafa)]",
+                      ? "border border-[var(--s-primary)] bg-[var(--s-primary)]/[0.08]"
+                      : "border border-[var(--s-border)] bg-[var(--s-surface)]",
                   )}
                   style={{
                     width: layer.width ?? "100%",
@@ -107,7 +107,7 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
                     className={cn(
                       "font-mono text-xs font-semibold tracking-wider",
                       layer.accent
-                        ? "text-[var(--s-primary,#6366f1)]"
+                        ? "text-[var(--s-primary)]"
                         : "text-[var(--s-text,currentColor)]",
                     )}
                   >
@@ -123,26 +123,26 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
         {columns && rows && (
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[11px] uppercase tracking-widest text-[var(--s-text-muted,#71717a)]">
+              <span className="font-mono text-[11px] uppercase tracking-widest text-[var(--s-text-muted)]">
                 Comparison
               </span>
-              <div className="h-px flex-1 bg-[var(--s-border,#e4e4e7)]" />
+              <div className="h-px flex-1 bg-[var(--s-border)]" />
             </div>
-            <div className="overflow-hidden border border-[var(--s-border,#e4e4e7)]">
+            <div className="overflow-hidden border border-[var(--s-border)]">
               {/* Header */}
               <div
-                className="grid gap-px bg-[var(--s-border,#e4e4e7)]"
+                className="grid gap-px bg-[var(--s-border)]"
                 style={{ gridTemplateColumns: `1fr ${columns.map(() => "64px").join(" ")}` }}
               >
-                <div className="bg-[var(--s-surface,#fafafa)] px-3 py-2" />
+                <div className="bg-[var(--s-surface)] px-3 py-2" />
                 {columns.map((col) => (
                   <div
                     key={col.key}
                     className={cn(
-                      "bg-[var(--s-surface,#fafafa)] px-1 py-2 text-center font-mono text-[10px] uppercase tracking-wider",
+                      "bg-[var(--s-surface)] px-1 py-2 text-center font-mono text-[10px] uppercase tracking-wider",
                       col.accent
-                        ? "font-semibold text-[var(--s-primary,#6366f1)]"
-                        : "text-[var(--s-text-muted,#71717a)]",
+                        ? "font-semibold text-[var(--s-primary)]"
+                        : "text-[var(--s-text-muted)]",
                     )}
                   >
                     {col.label}
@@ -156,7 +156,7 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
                 return (
                   <div
                     key={row.label}
-                    className="grid gap-px bg-[var(--s-border,#e4e4e7)]"
+                    className="grid gap-px bg-[var(--s-border)]"
                     style={{
                       gridTemplateColumns: `1fr ${columns.map(() => "64px").join(" ")}`,
                       opacity: visible ? 1 : 0,
@@ -166,11 +166,11 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
                         : `opacity var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${rowDelay}ms, transform var(--s-duration-fast,150ms) var(--s-ease-out,ease-out) ${rowDelay}ms`,
                     }}
                   >
-                    <div className="bg-[var(--s-bg,#fff)] px-3 py-2 font-mono text-[11px] text-[var(--s-text,currentColor)]">
+                    <div className="bg-[var(--s-background)] px-3 py-2 font-mono text-[11px] text-[var(--s-text,currentColor)]">
                       {row.label}
                     </div>
                     {columns.map((col) => (
-                      <div key={col.key} className="flex items-center justify-center bg-[var(--s-bg,#fff)]">
+                      <div key={col.key} className="flex items-center justify-center bg-[var(--s-background)]">
                         <StatusIcon status={row.values[col.key] ?? "none"} />
                       </div>
                     ))}

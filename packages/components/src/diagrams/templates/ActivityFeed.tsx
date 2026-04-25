@@ -21,11 +21,11 @@ export interface ActivityFeedProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantDot: Record<ActivityEntryVariant, string> = {
-  default: "bg-[var(--s-border-strong,#a1a1aa)]",
-  success: "bg-[var(--s-success,#22c55e)]",
-  warning: "bg-[var(--s-warning,#f59e0b)]",
-  error: "bg-[var(--s-error,#ef4444)]",
-  info: "bg-[var(--s-info,#3b82f6)]",
+  default: "bg-[var(--s-chart-neutral)]",
+  success: "bg-[var(--s-success)]",
+  warning: "bg-[var(--s-warning)]",
+  error: "bg-[var(--s-error)]",
+  info: "bg-[var(--s-info)]",
 };
 
 export const ActivityFeed = forwardRef<HTMLDivElement, ActivityFeedProps>(
@@ -50,7 +50,7 @@ export const ActivityFeed = forwardRef<HTMLDivElement, ActivityFeedProps>(
                   {entry.icon ? (
                     <span className="[&_svg]:size-4 text-[var(--s-text-muted)]">{entry.icon}</span>
                   ) : (
-                    <div className={cn("w-2.5 h-2.5 rounded-full mt-0.5", variantDot[variant])} />
+                    <div className={cn("w-2.5 h-2.5 rounded-[var(--s-radius-full)] mt-0.5", variantDot[variant])} />
                   )}
                 </div>
                 <div className="flex-1 min-w-0">

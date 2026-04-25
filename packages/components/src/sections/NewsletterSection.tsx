@@ -48,7 +48,7 @@ export const NewsletterSection = forwardRef<HTMLElement, NewsletterSectionProps>
               type="submit"
               className={cn(
                 "h-10 px-5 text-sm font-medium rounded-[var(--s-radius-button,0px)]",
-                "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]",
+                "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
                 "hover:brightness-110 transition-all duration-[var(--s-duration-fast,150ms)]",
               )}
             >

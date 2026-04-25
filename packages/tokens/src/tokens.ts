@@ -126,10 +126,10 @@ export const defaultTokens: SigilTokens = {
   },
 
   shadows: {
-    sm: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-    md: "0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.06), 0 2px 4px 0 rgb(0 0 0 / 0.04)",
-    lg: "0 0 0 1px rgb(0 0 0 / 0.04), 0 2px 4px -2px rgb(0 0 0 / 0.06), 0 4px 8px -2px rgb(0 0 0 / 0.08)",
-    xl: "0 0 0 1px rgb(0 0 0 / 0.03), 0 4px 6px -4px rgb(0 0 0 / 0.06), 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 20px 25px -5px rgb(0 0 0 / 0.06)",
+    sm: "0 1px 2px 0 oklch(0 0 0 / 0.05)",
+    md: "0 0 0 1px oklch(0 0 0 / 0.06), 0 1px 2px -1px oklch(0 0 0 / 0.06), 0 2px 4px 0 oklch(0 0 0 / 0.04)",
+    lg: "0 0 0 1px oklch(0 0 0 / 0.04), 0 2px 4px -2px oklch(0 0 0 / 0.06), 0 4px 8px -2px oklch(0 0 0 / 0.08)",
+    xl: "0 0 0 1px oklch(0 0 0 / 0.03), 0 4px 6px -4px oklch(0 0 0 / 0.06), 0 10px 15px -3px oklch(0 0 0 / 0.1), 0 20px 25px -5px oklch(0 0 0 / 0.06)",
   },
 
   motion: {
@@ -293,5 +293,78 @@ export const defaultTokens: SigilTokens = {
     "firefox-width": "thin",
     gutter: "auto",
     visibility: "auto",
+  },
+
+  focus: {
+    "ring-width": "2px",
+    "ring-color": "var(--s-primary)",
+    "ring-offset": "2px",
+    "ring-shadow": "0 0 0 var(--s-focus-ring-width) color-mix(in oklch, var(--s-focus-ring-color) 35%, transparent)",
+    "outline-color": "var(--s-border-interactive)",
+  },
+
+  overlays: {
+    bg: "oklch(0 0 0 / 0.55)",
+    blur: "2px",
+    surface: "var(--s-surface)",
+    border: "var(--s-border)",
+    shadow: "var(--s-shadow-xl)",
+    radius: "var(--s-card-radius, var(--s-radius-lg))",
+    padding: "24px",
+    "z-index": "50",
+  },
+
+  dataViz: {
+    "series-1": "var(--s-primary)",
+    "series-2": "var(--s-secondary)",
+    "series-3": "var(--s-accent, var(--s-info))",
+    "series-4": "var(--s-success)",
+    "series-5": "var(--s-warning)",
+    positive: "var(--s-success)",
+    negative: "var(--s-error)",
+    neutral: "var(--s-text-muted)",
+    grid: "var(--s-border-muted)",
+    axis: "var(--s-border-strong)",
+    label: "var(--s-text-secondary)",
+    "tooltip-bg": "var(--s-surface-elevated)",
+    "tooltip-border": "var(--s-border)",
+  },
+
+  media: {
+    radius: "var(--s-radius-md)",
+    border: "1px solid var(--s-border-muted)",
+    outline: "1px solid color-mix(in oklch, var(--s-text) 8%, transparent)",
+    shadow: "var(--s-shadow-sm)",
+    bg: "var(--s-surface-sunken, var(--s-surface))",
+    "object-fit": "cover",
+  },
+
+  controls: {
+    height: "36px",
+    "height-sm": "32px",
+    "height-lg": "44px",
+    "hit-area": "40px",
+    "icon-size": "16px",
+    "handle-size": "20px",
+    "track-height": "8px",
+    "track-bg": "var(--s-surface-sunken, var(--s-surface))",
+    "track-fill": "var(--s-primary)",
+    "thumb-bg": "var(--s-surface-elevated)",
+    "thumb-border": "var(--s-border)",
+  },
+
+  componentSurfaces: {
+    bg: "var(--s-surface)",
+    "bg-elevated": "var(--s-surface-elevated)",
+    "bg-muted": "var(--s-surface-sunken, var(--s-surface))",
+    border: "var(--s-border)",
+    "border-muted": "var(--s-border-muted)",
+    "border-strong": "var(--s-border-strong)",
+    text: "var(--s-text)",
+    "text-muted": "var(--s-text-muted)",
+    contrast: "var(--s-primary-contrast, var(--s-text-inverse))",
+    "hover-bg": "var(--s-surface-elevated)",
+    "active-bg": "var(--s-surface-sunken, var(--s-surface))",
+    "selected-bg": "color-mix(in oklch, var(--s-primary) 12%, transparent)",
   },
 } as const;

@@ -2,11 +2,12 @@
 
 import React, { useEffect, useState, cloneElement } from "react";
 import type { ReactElement } from "react";
-import { Badge, Button, Card, CardContent, Input, Progress } from "@sigil-ui/components";
+import { Badge, Button, Card, CardContent, Input, Progress, Switch } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
 
 /* ── Timing ──────────────────────────────────────────────────── */
 const CYCLE_MS = 4200;
+const PHASE_MS = 1050;
 const STAGGER_MS = 40;
 const ANIM_MS = 3400;
 
@@ -262,37 +263,37 @@ const HERO_TOKEN_STEPS = [
 
 const HERO_CURSOR_STEPS = [
   {
-    left: "58%",
+    left: "56%",
     top: "30%",
-    select: { left: "43%", top: "16%", width: "22%", height: "24%" },
-    settings: { left: "43%", top: "42%" },
+    select: { left: "40.5%", top: "13%", width: "24%", height: "24%" },
+    settings: { left: "41%", top: "39%" },
     component: "UsageCard",
     preset: "sigil -> forge",
     ...HERO_TOKEN_STEPS[0],
   },
   {
-    left: "80%",
+    left: "82%",
     top: "30%",
-    select: { left: "68%", top: "16%", width: "24%", height: "24%" },
-    settings: { left: "66%", top: "42%" },
+    select: { left: "66.5%", top: "13%", width: "26%", height: "24%" },
+    settings: { left: "66.5%", top: "39%" },
     component: "PresetSwatches",
     preset: "forge -> prism",
     ...HERO_TOKEN_STEPS[1],
   },
   {
-    left: "69%",
-    top: "62%",
-    select: { left: "43%", top: "48%", width: "49%", height: "31%" },
-    settings: { left: "51%", top: "81%" },
+    left: "70%",
+    top: "58%",
+    select: { left: "40.5%", top: "40%", width: "52%", height: "26%" },
+    settings: { left: "54%", top: "68%" },
     component: "DatePicker",
     preset: "prism -> sigil",
     ...HERO_TOKEN_STEPS[2],
   },
   {
-    left: "76%",
-    top: "86%",
-    select: { left: "43%", top: "82%", width: "49%", height: "12%" },
-    settings: { left: "44%", top: "70%" },
+    left: "78%",
+    top: "75%",
+    select: { left: "40.5%", top: "68%", width: "52%", height: "9%" },
+    settings: { left: "58%", top: "79%" },
     component: "TokenAction",
     preset: "saved",
     ...HERO_TOKEN_STEPS[3],
@@ -527,6 +528,15 @@ const STYLE_BLOCK = `
   0% { opacity: 0; transform: translateY(4px); filter: blur(2px); }
   100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
+@keyframes hlf-type-line {
+  0% { clip-path: inset(0 100% 0 0); opacity: 0.35; }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; }
+}
+@keyframes hlf-apply-style {
+  0%, 42% { box-shadow: none; filter: none; }
+  58% { box-shadow: 0 0 0 1px var(--s-primary), 0 0 24px color-mix(in oklch, var(--s-primary) 26%, transparent); filter: brightness(1.06); }
+  100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 70%, transparent); filter: none; }
+}
 .hero-logo-field {
   --hlf-pri: var(--s-primary, oklch(0.55 0.2 275));
   --hlf-mid: color-mix(
@@ -545,6 +555,15 @@ const STYLE_BLOCK = `
 }
 .hero-logo-field__token-line {
   animation: hlf-token-rewrite 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-logo-field__typed {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: hlf-type-line 900ms steps(34, end) 120ms both;
+}
+.hero-logo-field__apply {
+  animation: hlf-apply-style 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 `;
 
@@ -567,6 +586,7 @@ function renderVariant(elements: V) {
 export function HeroLogoField() {
   const [mounted, setMounted] = useState(false);
   const [idx, setIdx] = useState(0);
+  const [phase, setPhase] = useState(0);
   const [inspected, setInspected] = useState(false);
 
   useEffect(() => {
@@ -576,14 +596,25 @@ export function HeroLogoField() {
   useEffect(() => {
     if (!mounted || inspected) return;
     const interval = setInterval(() => {
-      setIdx((i) => (i + 1) % HERO_VARIANTS.length);
-    }, CYCLE_MS);
+      setPhase((current) => {
+        if (current >= 3) {
+          setIdx((i) => (i + 1) % HERO_CURSOR_STEPS.length);
+          return 0;
+        }
+        return current + 1;
+      });
+    }, PHASE_MS);
     return () => clearInterval(interval);
   }, [mounted, inspected]);
 
-  const activeToken = HERO_CURSOR_STEPS[idx % HERO_CURSOR_STEPS.length];
+  const activeStepIndex = idx % HERO_CURSOR_STEPS.length;
+  const activeToken = HERO_CURSOR_STEPS[activeStepIndex];
   const cursorLeft = activeToken.left;
   const cursorTop = activeToken.top;
+  const activeComponent = activeToken.component;
+  const isSelecting = phase >= 1;
+  const isTyping = phase >= 2;
+  const isApplied = phase >= 3;
 
   return (
     <div
@@ -639,8 +670,6 @@ export function HeroLogoField() {
           </pattern>
           </defs>
 
-          <g opacity={0.34}>{renderVariant(HERO_COMPONENT_DRAWING)}</g>
-
           {inspected && (
             <g>
               <rect
@@ -665,9 +694,9 @@ export function HeroLogoField() {
         <div
           style={{
             position: "absolute",
-            left: "43%",
-            top: "16%",
-            width: "49%",
+            left: "41%",
+            top: "13%",
+            width: "52%",
             display: "grid",
             gap: 10,
             pointerEvents: "none",
@@ -675,10 +704,14 @@ export function HeroLogoField() {
         >
           <div className="grid grid-cols-2 gap-2">
             <Card
-              className="overflow-hidden"
+              className={`overflow-hidden ${activeComponent === "UsageCard" && isApplied ? "hero-logo-field__apply" : ""}`}
               style={{
-                borderColor: "var(--s-primary)",
-                background: "color-mix(in oklch, var(--s-background) 92%, transparent)",
+                borderColor: activeComponent === "UsageCard" && isApplied ? "var(--s-primary)" : "var(--s-border)",
+                background:
+                  activeComponent === "UsageCard" && isApplied
+                    ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-background))"
+                    : "color-mix(in oklch, var(--s-background) 92%, transparent)",
+                transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
               }}
             >
               <CardContent className="p-3">
@@ -687,14 +720,18 @@ export function HeroLogoField() {
                   <Badge size="sm" className="text-[8px]">live</Badge>
                 </div>
                 <div className="font-[family-name:var(--s-font-mono)] text-lg font-bold tabular-nums" style={{ color: "var(--s-text)" }}>12.4k</div>
-                <Progress value={72} className="mt-2 h-1" />
+                <Progress value={activeComponent === "UsageCard" && isApplied ? 88 : 72} className="mt-2 h-1" />
               </CardContent>
             </Card>
             <Card
-              className="overflow-hidden"
+              className={`overflow-hidden ${activeComponent === "PresetSwatches" && isApplied ? "hero-logo-field__apply" : ""}`}
               style={{
-                borderColor: "var(--s-primary)",
-                background: "color-mix(in oklch, var(--s-background) 92%, transparent)",
+                borderColor: activeComponent === "PresetSwatches" && isApplied ? "var(--s-primary)" : "var(--s-border)",
+                background:
+                  activeComponent === "PresetSwatches" && isApplied
+                    ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-background))"
+                    : "color-mix(in oklch, var(--s-background) 92%, transparent)",
+                transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
               }}
             >
               <CardContent className="p-3">
@@ -710,7 +747,12 @@ export function HeroLogoField() {
                         height: 18,
                         border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                         borderRadius: "var(--s-radius-sm,4px)",
-                        background: itemIdx === idx % 3 ? "var(--s-primary)" : "transparent",
+                        background:
+                          itemIdx === activeStepIndex % 3 || (activeComponent === "PresetSwatches" && isApplied)
+                            ? itemIdx === 0
+                              ? "var(--s-primary)"
+                              : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
+                            : "transparent",
                       }}
                     />
                   ))}
@@ -720,10 +762,15 @@ export function HeroLogoField() {
           </div>
 
           <Card
-            className="overflow-hidden"
+            className={`overflow-hidden ${activeComponent === "DatePicker" && isApplied ? "hero-logo-field__apply" : ""}`}
             style={{
-              borderColor: "var(--s-primary)",
-              background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
+              borderColor: activeComponent === "DatePicker" && isApplied ? "var(--s-primary)" : "var(--s-border)",
+              borderRadius: activeComponent === "DatePicker" && isApplied ? "var(--s-radius-lg,14px)" : "var(--s-radius-md,8px)",
+              background:
+                activeComponent === "DatePicker" && isApplied
+                  ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-background))"
+                  : "color-mix(in oklch, var(--s-background) 94%, transparent)",
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
             }}
           >
             <CardContent className="p-3">
@@ -739,7 +786,10 @@ export function HeroLogoField() {
                       height: 16,
                       border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-muted, var(--s-border))",
                       borderRadius: "var(--s-radius-sm,4px)",
-                      background: itemIdx === 11 ? "var(--s-primary)" : "transparent",
+                      background:
+                        itemIdx === 11 || (activeComponent === "DatePicker" && isApplied && [10, 11, 12].includes(itemIdx))
+                          ? "var(--s-primary)"
+                          : "transparent",
                     }}
                   />
                 ))}
@@ -747,63 +797,123 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
 
-          <div className="grid grid-cols-[1fr_auto] gap-2">
+          <div className={`grid grid-cols-[1fr_auto] gap-2 ${activeComponent === "TokenAction" && isApplied ? "hero-logo-field__apply" : ""}`}>
             <Input value="sigil.tokens.md" readOnly className="h-8 text-[10px]" />
-            <Button size="sm" className="h-8 px-3 text-[10px]">Apply</Button>
+            <Button size="sm" className="h-8 px-3 text-[10px]">{activeComponent === "TokenAction" && isApplied ? "Saved" : "Apply"}</Button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-2">
+            <Card
+              style={{
+                borderColor: "var(--s-border)",
+                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
+              }}
+            >
+              <CardContent className="p-3">
+                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
+                  controls
+                </div>
+                <Switch checked={isApplied} onCheckedChange={() => {}} />
+              </CardContent>
+            </Card>
+            <Card
+              style={{
+                borderColor: "var(--s-border)",
+                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
+              }}
+            >
+              <CardContent className="p-3">
+                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
+                  status
+                </div>
+                <Badge size="sm" variant={isApplied ? "default" : "outline"} className="text-[8px]">
+                  {isApplied ? "applied" : "idle"}
+                </Badge>
+              </CardContent>
+            </Card>
+            <Card
+              style={{
+                borderColor: "var(--s-border)",
+                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
+              }}
+            >
+              <CardContent className="p-3">
+                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
+                  tokens
+                </div>
+                <div className="grid grid-cols-4 gap-1">
+                  {HERO_TOKEN_STEPS.map((token) => (
+                    <span
+                      key={token.token}
+                      style={{
+                        height: 13,
+                        border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
+                        borderRadius: "var(--s-radius-sm,4px)",
+                        background: token.token === activeToken.token && isApplied ? "var(--s-primary)" : "transparent",
+                      }}
+                    />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
 
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            ...activeToken.select,
-            border: "var(--s-border-thin,1px) dashed var(--s-primary)",
-            borderRadius: "var(--s-radius-md,8px)",
-            background: "color-mix(in oklch, var(--s-primary) 7%, transparent)",
-            transition: "left var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), top var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), width var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), height var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div
-          key={`${activeToken.component}-${activeToken.token}`}
-          className="hero-logo-field__token-line"
-          style={{
-            position: "absolute",
-            ...activeToken.settings,
-              width: 194,
-            border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
-            borderRadius: "var(--s-radius-md,8px)",
-            background: "var(--s-background)",
-            boxShadow: "var(--s-shadow-sm, 0 8px 20px rgb(0 0 0 / 0.12))",
-            overflow: "hidden",
-            pointerEvents: "none",
-          }}
-        >
+        {isSelecting && (
           <div
+            aria-hidden="true"
             style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
-              padding: "7px 9px",
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 9,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "var(--s-text-muted)",
+              position: "absolute",
+              ...activeToken.select,
+              border: "var(--s-border-thin,1px) dashed var(--s-primary)",
+              borderRadius: "var(--s-radius-md,8px)",
+              background: "color-mix(in oklch, var(--s-primary) 7%, transparent)",
+              transition: "left var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), top var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), width var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), height var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1)",
+              pointerEvents: "none",
+            }}
+          />
+        )}
+
+        {isTyping && (
+          <div
+            key={`${activeToken.component}-${activeToken.token}-${phase}`}
+            className="hero-logo-field__token-line"
+            style={{
+              position: "absolute",
+              ...activeToken.settings,
+              width: 194,
+              border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
+              borderRadius: "var(--s-radius-md,8px)",
+              background: "var(--s-background)",
+              boxShadow: "var(--s-shadow-sm, 0 8px 20px rgb(0 0 0 / 0.12))",
+              overflow: "hidden",
+              pointerEvents: "none",
             }}
           >
-            <span>{activeToken.component}</span>
-            <span>saved</span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
+                padding: "7px 9px",
+                fontFamily: "var(--s-font-mono)",
+                fontSize: 9,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: "var(--s-text-muted)",
+              }}
+            >
+              <span>{activeToken.component}</span>
+              <span>{isApplied ? "saved" : "typing"}</span>
+            </div>
+            <div style={{ display: "grid", gap: 4, padding: 9, fontFamily: "var(--s-font-mono)", fontSize: 10 }}>
+              <div style={{ color: "var(--s-primary)", fontWeight: 700 }}>{activeToken.token}</div>
+              <div className="hero-logo-field__typed" style={{ color: "var(--s-text)" }}>{activeToken.line}</div>
+              <div style={{ color: "var(--s-text-muted)" }}>preset: {isApplied ? activeToken.preset : "writing..."}</div>
+            </div>
           </div>
-          <div style={{ display: "grid", gap: 4, padding: 9, fontFamily: "var(--s-font-mono)", fontSize: 10 }}>
-            <div style={{ color: "var(--s-primary)", fontWeight: 700 }}>{activeToken.token}</div>
-            <div style={{ color: "var(--s-text)" }}>{activeToken.line}</div>
-            <div style={{ color: "var(--s-text-muted)" }}>preset: {activeToken.preset}</div>
-          </div>
-        </div>
+        )}
 
         <div
           aria-hidden="true"
@@ -845,8 +955,8 @@ export function HeroLogoField() {
           style={{
             position: "absolute",
             left: 18,
-            top: 82,
-            width: 230,
+            top: 36,
+            width: 270,
             border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
             borderRadius: "var(--s-radius-md,8px)",
             background: "var(--s-background)",
@@ -867,13 +977,37 @@ export function HeroLogoField() {
           >
             sigil.tokens.md
           </div>
-          <div style={{ padding: "8px 9px", fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.7 }}>
+          <div style={{ padding: "8px 9px", fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.62 }}>
             <div style={{ color: "var(--s-text)", fontWeight: 700 }}>## Component Drawer</div>
-            <div style={{ color: "var(--s-text-muted)" }}>component: {activeToken.component}</div>
-            <div key={activeToken.line} className="hero-logo-field__token-line" style={{ color: "var(--s-primary)" }}>
-              {activeToken.line}
-            </div>
-            <div style={{ color: "var(--s-text-muted)" }}>save: preset.apply()</div>
+            <div style={{ color: "var(--s-text-muted)" }}>components:</div>
+            <div style={{ color: activeComponent === "UsageCard" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- UsageCard</div>
+            <div style={{ color: activeComponent === "PresetSwatches" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- PresetSwatches</div>
+            <div style={{ color: activeComponent === "DatePicker" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- DatePicker</div>
+            <div style={{ color: activeComponent === "TokenAction" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- TokenAction</div>
+            <div style={{ height: 6 }} />
+            <div style={{ color: "var(--s-text)", fontWeight: 700 }}>## Preset overrides</div>
+            {HERO_TOKEN_STEPS.map((token) => {
+              const active = token.token === activeToken.token;
+              return (
+                <div
+                  key={token.token}
+                  className={active && isTyping ? "hero-logo-field__token-line hero-logo-field__typed" : undefined}
+                  style={{
+                    color: active ? "var(--s-primary)" : "var(--s-text-muted)",
+                  }}
+                >
+                  {active && isTyping ? activeToken.line : token.line}
+                </div>
+              );
+            })}
+            {isTyping ? (
+              <div key={activeToken.line} className="hero-logo-field__token-line hero-logo-field__typed" style={{ color: "var(--s-primary)" }}>
+                writing: {activeToken.token}
+              </div>
+            ) : (
+              <div style={{ color: "var(--s-text-muted)" }}>select component...</div>
+            )}
+            <div style={{ color: "var(--s-text-muted)" }}>{isApplied ? "save: preset.apply()" : "save: waiting"}</div>
           </div>
         </div>
 
@@ -1055,6 +1189,47 @@ export function FooterQuadrantDiagram() {
         </defs>
         <g opacity={0.58}>{renderVariant(HERO_BLUEPRINT)}</g>
         <g opacity={0.95}>{renderVariant(HERO_VARIANTS[idx])}</g>
+      </svg>
+    </>
+  );
+}
+
+export function FooterComponentDiagram() {
+  return (
+    <>
+      <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
+      <svg
+        viewBox="-12 -12 144 144"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="hero-logo-field"
+        style={{
+          display: "block",
+          width: "100%",
+          height: "100%",
+          color: "var(--s-primary)",
+        }}
+        aria-hidden="true"
+      >
+        <defs>
+          <pattern id="hlf-footer-component-hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <line x1="0" y1="0" x2="0" y2="4" stroke={P} strokeWidth="0.25" opacity="0.28" />
+          </pattern>
+          <pattern id="hlf-hatch-neutral" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
+            <line x1="0" y1="0" x2="0" y2="4" stroke={P} strokeWidth="0.25" opacity="0.22" />
+          </pattern>
+          <pattern id="hlf-hatch-pri" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-32)">
+            <line x1="0" y1="0" x2="0" y2="3" stroke={P} strokeWidth="0.25" opacity="0.55" />
+          </pattern>
+          <pattern id="hlf-hatch-pri-soft" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-32)">
+            <line x1="0" y1="0" x2="0" y2="3" stroke={P} strokeWidth="0.25" opacity="0.34" />
+          </pattern>
+          <pattern id="hlf-hatch-mid-soft" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="3" stroke={P} strokeWidth="0.25" opacity="0.32" />
+          </pattern>
+        </defs>
+        <rect x={2} y={2} width={116} height={116} stroke={P} {...G} fill="url(#hlf-footer-component-hatch)" strokeOpacity={0.46} />
+        <g opacity={0.95}>{renderVariant(HERO_COMPONENT_DRAWING)}</g>
       </svg>
     </>
   );

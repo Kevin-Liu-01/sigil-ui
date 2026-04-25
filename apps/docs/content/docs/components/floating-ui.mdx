@@ -1,0 +1,51 @@
+---
+title: FloatingUI
+description: Stacked floating layer composition with configurable offset and shadow depth.
+---
+
+## Import
+
+```tsx
+import { FloatingUI } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<FloatingUI
+  layers={[
+    <div className="p-4">Layer 1</div>,
+    <div className="p-4">Layer 2</div>,
+    <div className="p-4">Layer 3</div>,
+  ]}
+/>
+```
+
+## Custom offset
+
+```tsx
+<FloatingUI
+  offset={30}
+  layers={[
+    <div className="p-6">Top layer</div>,
+    <div className="p-6">Middle layer</div>,
+    <div className="p-6">Bottom layer</div>,
+  ]}
+/>
+```
+
+## Shadow depth
+
+```tsx
+<FloatingUI shadowDepth="sm" layers={[<div className="p-4">Subtle</div>, <div className="p-4">Shadow</div>]} />
+<FloatingUI shadowDepth="lg" layers={[<div className="p-4">Heavy</div>, <div className="p-4">Shadow</div>]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layers` | `ReactNode[]` | — | Array of elements stacked as floating layers |
+| `offset` | `number` | `20` | Pixel offset between each layer |
+| `shadowDepth` | `"sm" \| "md" \| "lg"` | `"md"` | Shadow intensity per layer |
+| `className` | `string` | — | Additional CSS classes |

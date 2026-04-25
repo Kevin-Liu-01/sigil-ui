@@ -30,7 +30,7 @@ export const GradientBannerSection = forwardRef<HTMLElement, GradientBannerSecti
             </div>
           )}
           {text && (
-            <p className="text-sm font-medium text-[var(--s-primary-contrast,#fff)] opacity-80">
+            <p className="text-sm font-medium text-[var(--s-primary-contrast)] opacity-80">
               {text}
             </p>
           )}

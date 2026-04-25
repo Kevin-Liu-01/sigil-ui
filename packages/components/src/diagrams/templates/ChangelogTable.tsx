@@ -23,12 +23,12 @@ export interface ChangelogTableProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const typeBadgeStyles: Record<ChangelogEntryType, string> = {
-  added: "bg-[var(--s-success,#22c55e)]/15 text-[var(--s-success,#22c55e)] border-[var(--s-success,#22c55e)]/30",
-  changed: "bg-[var(--s-info,#3b82f6)]/15 text-[var(--s-info,#3b82f6)] border-[var(--s-info,#3b82f6)]/30",
-  fixed: "bg-[var(--s-warning,#f59e0b)]/15 text-[var(--s-warning,#f59e0b)] border-[var(--s-warning,#f59e0b)]/30",
-  removed: "bg-[var(--s-error,#ef4444)]/15 text-[var(--s-error,#ef4444)] border-[var(--s-error,#ef4444)]/30",
+  added: "bg-[var(--s-success)]/15 text-[var(--s-success)] border-[var(--s-success)]/30",
+  changed: "bg-[var(--s-info)]/15 text-[var(--s-info)] border-[var(--s-info)]/30",
+  fixed: "bg-[var(--s-warning)]/15 text-[var(--s-warning)] border-[var(--s-warning)]/30",
+  removed: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[var(--s-error)]/30",
   deprecated: "bg-[var(--s-text-muted)]/10 text-[var(--s-text-muted)] border-[var(--s-text-muted)]/30",
-  security: "bg-[var(--s-error,#ef4444)]/15 text-[var(--s-error,#ef4444)] border-[var(--s-error,#ef4444)]/30",
+  security: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[var(--s-error)]/30",
 };
 
 export const ChangelogTable = forwardRef<HTMLDivElement, ChangelogTableProps>(

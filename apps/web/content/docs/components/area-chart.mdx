@@ -1,0 +1,63 @@
+---
+title: AreaChart
+description: "A smooth area chart with gradient fill, Catmull-Rom curves, and multi-series support."
+---
+
+## Import
+
+```tsx
+import { AreaChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <AreaChart
+    series={[
+      {
+        label: "Revenue",
+        points: [
+          { label: "Jan", value: 40 },
+          { label: "Feb", value: 55 },
+          { label: "Mar", value: 48 },
+          { label: "Apr", value: 72 },
+          { label: "May", value: 85 },
+          { label: "Jun", value: 95 },
+        ],
+      },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<AreaChart
+  series={[
+    { label: "Revenue", points: [...] },
+    { label: "Expenses", points: [...], color: "var(--s-error)" },
+  ]}
+  curve="smooth"
+  showGrid
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `series` | `AreaChartSeries[]` | — | Data series to render |
+| `width` | `number` | `500` | SVG width |
+| `height` | `number` | `250` | SVG height |
+| `stacked` | `boolean` | `false` | Stack multiple series |
+| `showGrid` | `boolean` | `true` | Show horizontal grid lines |
+| `curve` | `"smooth" \| "linear"` | `"smooth"` | Line interpolation method |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default area and line color |
+| `--s-border` | Grid lines |
+| `--s-text-muted` | Axis labels |
+| `--s-font-mono` | Label font family |

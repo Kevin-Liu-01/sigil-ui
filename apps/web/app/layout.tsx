@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s — Sigil UI",
   },
   description:
-    "The component library where one markdown file controls your entire design system. 100+ token-driven components, 300+ tokens, 30 presets, built for AI agents.",
+    "The component library where one markdown file controls your entire design system. 200+ token-driven components, 300+ tokens, 30 presets, built for AI agents.",
   keywords: [
     "sigil ui",
     "design tokens",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     siteName: "Sigil UI",
     title: "Sigil UI — Change the tokens. Everything updates.",
     description:
-      "100+ token-driven React components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
+      "200+ token-driven components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
     images: [
       {
         url: "/og.png",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sigil UI — Change the tokens. Everything updates.",
     description:
-      "100+ token-driven React components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
+      "200+ token-driven components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
     images: ["/og.png"],
     creator: "@kevinliu",
   },
@@ -68,7 +68,7 @@ const jsonLd = {
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Any",
   description:
-    "Token-driven React component library with 100+ components, 300+ tokens, 30 presets, and markdown-first design system for AI agents.",
+    "React component library with 200+ token-driven components, 300+ tokens, 30 presets, and markdown-first design system for AI agents.",
   url: "https://sigil-ui.com",
   author: {
     "@type": "Person",

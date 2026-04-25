@@ -1,0 +1,48 @@
+---
+title: BillingChart
+description: "A stacked bar chart for cost breakdown and billing visualization."
+---
+
+## Import
+
+```tsx
+import { BillingChart } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <BillingChart
+    currency="$"
+    periods={[
+      { label: "Jan", segments: [{ label: "Compute", value: 120 }, { label: "Storage", value: 45 }, { label: "Network", value: 20 }] },
+      { label: "Feb", segments: [{ label: "Compute", value: 140 }, { label: "Storage", value: 52 }, { label: "Network", value: 25 }] },
+      { label: "Mar", segments: [{ label: "Compute", value: 160 }, { label: "Storage", value: 58 }, { label: "Network", value: 30 }] },
+      { label: "Apr", segments: [{ label: "Compute", value: 135 }, { label: "Storage", value: 48 }, { label: "Network", value: 22 }] },
+      { label: "May", segments: [{ label: "Compute", value: 180 }, { label: "Storage", value: 65 }, { label: "Network", value: 35 }] },
+      { label: "Jun", segments: [{ label: "Compute", value: 200 }, { label: "Storage", value: 70 }, { label: "Network", value: 40 }] },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `periods` | `BillingPeriod[]` | — | Billing periods with segments |
+| `width` | `number` | `500` | SVG width |
+| `height` | `number` | `260` | SVG height |
+| `currency` | `string` | `"$"` | Currency symbol |
+| `showLegend` | `boolean` | `true` | Show legend |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | First segment color |
+| `--s-success` | Second segment color |
+| `--s-warning` | Third segment color |
+| `--s-border` | Grid lines |
+| `--s-text` | Total labels |
+| `--s-text-muted` | Axis and legend text |
+| `--s-font-mono` | Value font |

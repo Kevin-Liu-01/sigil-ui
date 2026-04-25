@@ -1,0 +1,50 @@
+---
+title: TeamSection
+description: Team member grid with avatar, name, role, and social links.
+---
+
+## Import
+
+```tsx
+import { TeamSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<TeamSection
+  label="Team"
+  title="Our team"
+  members={[
+    { name: "Alice Chen", role: "CEO", avatar: "/team/alice.jpg" },
+    { name: "Bob Park", role: "CTO", links: [{ label: "GitHub", href: "https://github.com/bob" }] },
+    { name: "Carol Lin", role: "Design Lead" },
+    { name: "Dave Kim", role: "Engineer" },
+  ]}
+/>
+```
+
+## Three columns
+
+```tsx
+<TeamSection
+  title="Leadership"
+  members={members}
+  columns={3}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Uppercase mono label |
+| `title` | `string` | `"Our team"` | Section heading |
+| `description` | `string` | — | Supporting text |
+| `members` | `TeamMember[]` | **required** | Array of `{ name, role, avatar?, links? }` |
+| `columns` | `3 \| 4` | `4` | Grid column count |
+| `className` | `string` | — | Additional CSS classes |
+
+Each `links` item is `{ label, href, icon? }`. Without an icon, the label text is shown.
+
+Plus all standard `<section>` HTML attributes.

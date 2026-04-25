@@ -20,10 +20,10 @@ export interface BillingChartProps extends Omit<SVGAttributes<SVGSVGElement>, "w
 
 const defaultColors = [
   "var(--s-primary)",
-  "var(--s-success, #22c55e)",
-  "var(--s-warning, #f59e0b)",
-  "var(--s-error, #ef4444)",
-  "var(--s-info, #3b82f6)",
+  "var(--s-success)",
+  "var(--s-warning)",
+  "var(--s-error)",
+  "var(--s-info)",
 ];
 
 function fmtCurrency(v: number, sym: string): string {

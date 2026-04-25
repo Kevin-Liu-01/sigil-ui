@@ -76,7 +76,7 @@ export const HeatmapGrid = forwardRef<HTMLDivElement, HeatmapGridProps>(
                 return (
                   <div
                     key={ci}
-                    className="flex items-center justify-center rounded-[var(--s-radius-sm,2px)] font-[family-name:var(--s-font-mono)] text-[10px] font-semibold text-[var(--s-primary-contrast,#fff)]"
+                    className="flex items-center justify-center rounded-[var(--s-radius-sm,2px)] font-[family-name:var(--s-font-mono)] text-[10px] font-semibold text-[var(--s-primary-contrast)]"
                     style={{
                       width: cellSize,
                       height: cellSize,

@@ -44,7 +44,7 @@ export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
             <img
               src={avatar}
               alt={author}
-              className="w-10 h-10 rounded-full object-cover border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]"
+              className="w-10 h-10 rounded-[var(--s-radius-full)] object-cover border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]"
               loading="lazy"
             />
           )}

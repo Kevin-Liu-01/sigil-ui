@@ -60,7 +60,7 @@ export const SigilGridCell = forwardRef<HTMLDivElement, SigilGridCellProps>(
       <div
         ref={ref}
         data-slot="grid" className={cn(
-          "relative p-4 rounded-sm transition-colors duration-200",
+          "relative p-4 rounded-[var(--s-grid-cell-radius,var(--s-radius-sm))] transition-colors duration-[var(--s-duration-normal)]",
           "hover:bg-[var(--s-surface-elevated)]",
           className,
         )}

@@ -8,7 +8,8 @@
     "lint": "turbo lint",
     "clean": "turbo clean",
     "typecheck": "turbo typecheck",
-    "audit:contrast": "tsx scripts/audit-contrast.ts"
+    "audit:contrast": "tsx scripts/audit-contrast.ts",
+    "audit:sigil": "node scripts/audit-sigil.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",

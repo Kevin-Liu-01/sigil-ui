@@ -1,0 +1,37 @@
+---
+title: SparkLine
+description: "A tiny inline sparkline chart for dashboard metrics."
+---
+
+## Import
+
+```tsx
+import { SparkLine } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
+    <SparkLine data={[10, 25, 18, 32, 28, 45, 40, 55, 50, 62]} />
+    <SparkLine data={[50, 42, 38, 35, 30, 28, 22, 18, 15, 10]} color="var(--s-error, #ef4444)" />
+    <SparkLine data={[5, 12, 8, 15, 22, 18, 25, 30, 28, 35]} color="var(--s-success, #22c55e)" />
+  </div>
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `data` | `number[]` | — | Array of numeric values |
+| `width` | `number` | `120` | SVG width |
+| `height` | `number` | `32` | SVG height |
+| `color` | `string` | `var(--s-primary)` | Line color |
+| `filled` | `boolean` | `true` | Fill area under line |
+| `showEndDot` | `boolean` | `true` | Show dot at last point |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default line color |

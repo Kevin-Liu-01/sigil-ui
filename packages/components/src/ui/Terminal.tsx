@@ -43,9 +43,9 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
       <div className="flex items-center justify-between px-4 py-2 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
-            <span className="w-3 h-3 rounded-full bg-[var(--s-error)]" />
-            <span className="w-3 h-3 rounded-full bg-[var(--s-warning)]" />
-            <span className="w-3 h-3 rounded-full bg-[var(--s-success)]" />
+            <span className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-error)]" />
+            <span className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-warning)]" />
+            <span className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-success)]" />
           </div>
           <span className="text-xs text-[var(--s-text-muted)] ml-2">{title}</span>
         </div>

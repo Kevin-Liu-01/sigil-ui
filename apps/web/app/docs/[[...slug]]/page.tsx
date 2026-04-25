@@ -8,6 +8,7 @@ import {
 import { notFound } from "next/navigation";
 import defaultMdxComponents from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
+import * as mdxComponents from "../../../components/mdx-components";
 
 export default async function Page(props: {
   params: Promise<{ slug?: string[] }>;
@@ -17,13 +18,14 @@ export default async function Page(props: {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const components = { ...defaultMdxComponents, ...mdxComponents } as any;
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription>{page.data.description}</DocsDescription>
       <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
+        <MDX components={components} />
       </DocsBody>
     </DocsPage>
   );

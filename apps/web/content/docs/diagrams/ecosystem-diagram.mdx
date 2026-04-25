@@ -1,0 +1,49 @@
+---
+title: EcosystemDiagram
+description: "A radial ecosystem diagram showing related tools and services around a central product."
+---
+
+## Import
+
+```tsx
+import { EcosystemDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <EcosystemDiagram
+    center={{ label: "Sigil UI", sublabel: "system" }}
+    ring={[
+      { label: "Tokens" },
+      { label: "Presets" },
+      { label: "Components" },
+      { label: "CLI" },
+      { label: "Docs" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<EcosystemDiagram center={{ label: "Your Product" }} ring={[{ label: "API" }, { label: "SDK" }]} />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `center` | `{ label: string; icon?: ReactNode; sublabel?: string }` | — | Center hub |
+| `ring` | `EcosystemNode[]` | — | Surrounding ecosystem nodes |
+| `size` | `number` | `280` | Diagram size in pixels |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Center node color |
+| `--s-border` | Connection lines |
+| `--s-surface` | Node background |
+| `--s-text` | Labels |
+| `--s-radius-md` | Node radius |

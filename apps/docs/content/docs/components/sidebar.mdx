@@ -1,0 +1,97 @@
+---
+title: Sidebar
+description: A collapsible application sidebar with navigation groups, icons, badges, and responsive behavior.
+---
+
+## Import
+
+```tsx
+import {
+  Sidebar, SidebarHeader, SidebarContent, SidebarFooter,
+  SidebarGroup, SidebarGroupLabel, SidebarItem, SidebarTrigger,
+} from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<Sidebar>
+  <SidebarHeader>
+    <span className="font-semibold">My App</span>
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarGroup>
+      <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+      <SidebarItem href="/dashboard" icon={<HomeIcon />}>Dashboard</SidebarItem>
+      <SidebarItem href="/settings" icon={<GearIcon />}>Settings</SidebarItem>
+    </SidebarGroup>
+  </SidebarContent>
+  <SidebarFooter>
+    <SidebarItem icon={<UserIcon />}>Profile</SidebarItem>
+  </SidebarFooter>
+</Sidebar>
+```
+
+## Collapsible
+
+```tsx
+<Sidebar collapsible>
+  <SidebarHeader>
+    <SidebarTrigger />
+    <span>My App</span>
+  </SidebarHeader>
+  <SidebarContent>
+    <SidebarItem href="/" icon={<HomeIcon />}>Home</SidebarItem>
+  </SidebarContent>
+</Sidebar>
+```
+
+When collapsed, only icons are visible with tooltips on hover.
+
+## With badges
+
+```tsx
+<SidebarItem href="/inbox" icon={<InboxIcon />} badge={3}>Inbox</SidebarItem>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-surface` | Sidebar background |
+| `--s-surface-elevated` | Active item background |
+| `--s-text` | Item text |
+| `--s-text-muted` | Group label and inactive icon |
+| `--s-primary` | Active item accent |
+| `--s-border` | Right edge border |
+| `--s-duration-normal` | Collapse animation |
+| `--s-ease-default` | Animation easing |
+
+## Props
+
+### Sidebar
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `collapsible` | `boolean` | `false` | Enable collapse behavior |
+| `defaultCollapsed` | `boolean` | `false` | Start collapsed |
+| `width` | `number \| string` | `240` | Expanded width |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Sidebar content |
+
+### SidebarItem
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `href` | `string` | — | Navigation destination |
+| `icon` | `ReactNode` | — | Leading icon |
+| `badge` | `number \| string` | — | Trailing badge |
+| `active` | `boolean` | `false` | Active state |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Item label |
+
+## Accessibility
+
+- Uses `<nav>` with `aria-label` for the navigation region
+- Collapse toggle has `aria-expanded` and `aria-controls`
+- Active item marked with `aria-current="page"`

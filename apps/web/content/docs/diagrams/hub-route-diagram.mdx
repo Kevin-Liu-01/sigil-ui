@@ -1,0 +1,62 @@
+---
+title: HubRouteDiagram
+description: "A routing diagram showing paths from a central hub to multiple destinations."
+---
+
+## Import
+
+```tsx
+import { HubRouteDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <HubRouteDiagram
+    source={{ label: "App" }}
+    hub={{
+      label: "Sigil",
+      layers: [
+        { label: "Tokens" },
+        { label: "Presets" },
+        { label: "Primitives" },
+        { label: "Components" },
+      ],
+    }}
+    leftLabel="Inputs"
+    rightLabel="Outputs"
+    leftTargets={[{ label: "Theme" }, { label: "Docs" }]}
+    rightTargets={[{ label: "CSS" }, { label: "UI" }]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<HubRouteDiagram
+  source={{ label: "App" }}
+  hub={{ label: "Sigil", layers: [{ label: "Tokens" }, { label: "Components" }] }}
+  leftTargets={[{ label: "Theme" }]}
+  rightTargets={[{ label: "UI" }]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
+| `hub` | `{ label: string; layers: HubRouteLayer[] }` | — | Central hub and layers |
+| `leftTargets` | `HubRouteNode[]` | — | Left target group |
+| `rightTargets` | `HubRouteNode[]` | — | Right target group |
+| `leftLabel` | `string` | — | Optional left group label |
+| `rightLabel` | `string` | — | Optional right group label |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Hub and route colors |
+| `--s-border` | Route lines |
+| `--s-surface` | Node background |
+| `--s-text` | Labels |

@@ -1,0 +1,44 @@
+---
+title: Box3DGrid
+description: "A Box3DGrid component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Box3DGrid } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Box3DGrid
+    columns={3}
+    items={[
+      { key: "one", children: "1" },
+      { key: "two", children: "2" },
+      { key: "three", children: "3" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Box3DGrid
+  columns={3}
+  items={[
+    { key: "one", children: "1" },
+    { key: "two", children: "2" },
+    { key: "three", children: "3" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `items` | `Box3DGridItem[]` | — | Items to display in the grid. |
+| `columns` | `number` | `3` | Number of columns. |
+| `gap` | `string | number` | `1.5rem` | Gap between boxes. |

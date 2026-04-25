@@ -10,7 +10,8 @@ import { SigilSoundContext } from "@sigil-ui/components";
 
 type SigilSoundName =
   | "tap" | "toggle" | "success" | "error" | "hover" | "preset"
-  | "slide" | "open" | "close" | "expand" | "nav" | "notify" | "delete";
+  | "slide" | "open" | "close" | "expand" | "nav" | "notify" | "delete"
+  | string;
 
 type SoundDef = {
   source: { type: string; frequency: number | { start: number; end: number } };
@@ -158,7 +159,8 @@ export function SigilSoundProvider({ children }: { children: ReactNode }) {
   }, [activePreset]);
 
   const play = useCallback(
-    (name: SigilSoundName) => {
+    (name?: SigilSoundName) => {
+      if (!name) return;
       if (!enabled) return;
       const fn = compiledSounds[name];
       if (fn) {

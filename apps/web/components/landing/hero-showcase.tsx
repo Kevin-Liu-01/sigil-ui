@@ -108,6 +108,10 @@ import {
 
 const EASING = "cubic-bezier(0.16, 1, 0.3, 1)";
 
+function createDemoDate(): Date {
+  return new Date(2026, 3, 24);
+}
+
 const TRANSITION_CSS = `
 .hero-gallery, .hero-gallery * {
   transition:
@@ -897,7 +901,7 @@ function MeterRow() {
 }
 
 function CalendarCard() {
-  const [selected, setSelected] = useState<Date | undefined>(new Date());
+  const [selected, setSelected] = useState<Date | undefined>(() => createDemoDate());
   return (
     <div className="w-full overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <SigilCalendar
@@ -1219,21 +1223,29 @@ function MiniSparkline() {
   );
 }
 
+const TRAFFIC_COMMIT_END_TIME = Date.UTC(2026, 3, 24);
+const TRAFFIC_COMMIT_DAYS = Array.from({ length: 140 }, (_, index) => {
+  const daysAgo = 139 - index;
+  const date = new Date(TRAFFIC_COMMIT_END_TIME);
+  date.setUTCDate(date.getUTCDate() - daysAgo);
+
+  const wave = Math.round(4 + 4 * Math.sin(index / 6));
+  const texture = (index * 7 + index * index * 3 + 11) % 8;
+
+  return {
+    date: date.toISOString().slice(0, 10),
+    count: Math.max(0, wave + texture - 3),
+  };
+});
+
 function TrafficCommitRow() {
-  const days: { date: string; count: number }[] = [];
-  const now = new Date();
-  for (let i = 139; i >= 0; i--) {
-    const d = new Date(now);
-    d.setDate(d.getDate() - i);
-    days.push({ date: d.toISOString().split("T")[0], count: Math.floor(Math.random() * 10 * (1 + Math.sin(i / 7))) });
-  }
   return (
     <div className="flex flex-col gap-2 p-3 overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <div className="flex items-center justify-between">
         <span className="text-[10px] font-medium text-[var(--s-text)]">Traffic</span>
         <span className="text-[9px] tabular-nums text-[var(--s-text-muted)]">20 weeks</span>
       </div>
-      <CommitGrid data={days} weeks={20} cellSize={8} gap={2} showDayLabels={false} showMonthLabels={false} color="var(--s-primary)" />
+      <CommitGrid data={TRAFFIC_COMMIT_DAYS} weeks={20} cellSize={8} gap={2} showDayLabels={false} showMonthLabels={false} color="var(--s-primary)" />
     </div>
   );
 }

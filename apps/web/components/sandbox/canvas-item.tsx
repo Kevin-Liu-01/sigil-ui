@@ -22,12 +22,28 @@ import {
   CardTitle,
   Badge,
   Input,
+  Textarea,
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  Checkbox,
+  Switch,
+  Slider,
+  Tooltip,
+  TooltipProvider,
   KPI,
   Terminal,
   CodeBlock,
   SigilGrid,
   SigilGridCell,
   Stack,
+  Box,
+  Container,
+  Flex,
+  SimpleGrid,
+  Center,
   Diamond,
   Hexagon,
   Triangle,
@@ -129,6 +145,67 @@ function InputWrapper(props: Record<string, any>) {
   );
 }
 
+function TextareaWrapper(props: Record<string, any>) {
+  return (
+    <div className="max-w-sm p-4">
+      <Textarea placeholder={props.placeholder ?? "Write a note..."} />
+    </div>
+  );
+}
+
+function SelectWrapper() {
+  return (
+    <div className="max-w-sm p-4">
+      <Select defaultValue="sigil">
+        <SelectTrigger>
+          <SelectValue placeholder="Choose preset" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="sigil">Sigil</SelectItem>
+          <SelectItem value="noir">Noir</SelectItem>
+          <SelectItem value="cobalt">Cobalt</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+}
+
+function CheckboxWrapper() {
+  return (
+    <label className="flex items-center gap-3 p-4 text-sm text-[var(--s-text)]">
+      <Checkbox defaultChecked />
+      Enable tokens
+    </label>
+  );
+}
+
+function SwitchWrapper() {
+  return (
+    <label className="flex items-center gap-3 p-4 text-sm text-[var(--s-text)]">
+      <Switch defaultChecked />
+      Motion
+    </label>
+  );
+}
+
+function SliderWrapper() {
+  return (
+    <div className="max-w-sm p-4">
+      <Slider defaultValue={[64]} max={100} />
+    </div>
+  );
+}
+
+function TooltipWrapper() {
+  return (
+    <TooltipProvider>
+      <Tooltip content="Token-driven tooltip">
+        <Button variant="outline">Hover me</Button>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
+
 function KPIWrapper(props: Record<string, any>) {
   return (
     <div className="flex gap-4 p-4 flex-wrap">
@@ -190,6 +267,54 @@ function StackWrapper(props: Record<string, any>) {
         </div>
       ))}
     </Stack>
+  );
+}
+
+function BoxWrapper() {
+  return (
+    <Box className="m-4 rounded-[var(--s-radius-md)] border border-[var(--s-border)] bg-[var(--s-surface)] p-4 text-sm text-[var(--s-text)]">
+      Tokenized box
+    </Box>
+  );
+}
+
+function ContainerWrapper() {
+  return (
+    <Container className="p-4">
+      <div className="rounded-[var(--s-radius-md)] border border-[var(--s-border)] bg-[var(--s-surface)] p-4 text-sm text-[var(--s-text-muted)]">
+        Centered container
+      </div>
+    </Container>
+  );
+}
+
+function FlexWrapper() {
+  return (
+    <Flex className="gap-3 p-4">
+      <Badge>Alpha</Badge>
+      <Badge variant="secondary">Beta</Badge>
+      <Badge variant="outline">Gamma</Badge>
+    </Flex>
+  );
+}
+
+function SimpleGridWrapper() {
+  return (
+    <SimpleGrid columns={3} className="gap-3 p-4">
+      {["One", "Two", "Three"].map((label) => (
+        <div key={label} className="rounded-[var(--s-radius-md)] border border-[var(--s-border)] bg-[var(--s-surface)] p-3 text-sm text-[var(--s-text-muted)]">
+          {label}
+        </div>
+      ))}
+    </SimpleGrid>
+  );
+}
+
+function CenterWrapper() {
+  return (
+    <Center className="min-h-32 rounded-[var(--s-radius-md)] border border-dashed border-[var(--s-border)] p-4 text-sm text-[var(--s-text-muted)]">
+      Centered content
+    </Center>
   );
 }
 
@@ -305,7 +430,7 @@ function TimelineWrapper(props: Record<string, any>) {
       entries={props.entries ?? [
         { date: "Jan 2025", title: "Project Started", description: "Initial commit and architecture design" },
         { date: "Mar 2025", title: "Alpha Release", description: "First public alpha with 10 components" },
-        { date: "Jun 2025", title: "1.0 Launch", description: "Stable release with 50+ components and 31 presets" },
+        { date: "Jun 2025", title: "1.0 Launch", description: "Stable release with 200+ token-driven components and 31 presets" },
       ]}
     />
   );
@@ -472,11 +597,22 @@ export const COMPONENT_REGISTRY: Record<string, RegistryEntry> = {
   Card: { component: CardWrapper, defaultProps: { title: "Card Title" }, label: "Card" },
   Badge: { component: BadgeWrapper, defaultProps: { variant: "default", children: "Badge" }, label: "Badge" },
   Input: { component: InputWrapper, defaultProps: { placeholder: "Enter text..." }, label: "Input" },
+  Textarea: { component: TextareaWrapper, defaultProps: { placeholder: "Write a note..." }, label: "Textarea" },
+  Select: { component: SelectWrapper, defaultProps: {}, label: "Select" },
+  Checkbox: { component: CheckboxWrapper, defaultProps: {}, label: "Checkbox" },
+  Switch: { component: SwitchWrapper, defaultProps: {}, label: "Switch" },
+  Slider: { component: SliderWrapper, defaultProps: {}, label: "Slider" },
+  Tooltip: { component: TooltipWrapper, defaultProps: {}, label: "Tooltip" },
   KPI: { component: KPIWrapper, defaultProps: { label: "Revenue", value: "$48.2K" }, label: "KPI" },
   Terminal: { component: TerminalWrapper, defaultProps: {}, label: "Terminal" },
   CodeBlock: { component: CodeBlockWrapper, defaultProps: {}, label: "Code Block" },
   Grid: { component: GridWrapper, defaultProps: { columns: 3 }, label: "Grid" },
   Stack: { component: StackWrapper, defaultProps: {}, label: "Stack" },
+  Box: { component: BoxWrapper, defaultProps: {}, label: "Box" },
+  Container: { component: ContainerWrapper, defaultProps: {}, label: "Container" },
+  Flex: { component: FlexWrapper, defaultProps: {}, label: "Flex" },
+  SimpleGrid: { component: SimpleGridWrapper, defaultProps: {}, label: "Simple Grid" },
+  Center: { component: CenterWrapper, defaultProps: {}, label: "Center" },
   Diamond: { component: DiamondWrapper, defaultProps: { size: "lg" }, label: "Diamond" },
   Hexagon: { component: HexagonWrapper, defaultProps: { size: "lg" }, label: "Hexagon" },
   Triangle: { component: TriangleWrapper, defaultProps: { size: "lg" }, label: "Triangle" },

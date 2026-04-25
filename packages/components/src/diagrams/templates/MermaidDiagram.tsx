@@ -24,15 +24,15 @@ export const MermaidDiagram = forwardRef<HTMLDivElement, MermaidDiagramProps>(
             startOnLoad: false,
             theme: theme === "dark" ? "dark" : "default",
             themeVariables: theme === "dark" ? {
-              primaryColor: "#7c3aed",
-              primaryTextColor: "#e4e4e7",
-              primaryBorderColor: "#3f3f46",
-              lineColor: "#52525b",
-              sectionBkgColor: "#18181b",
-              altSectionBkgColor: "#27272a",
-              gridColor: "#27272a",
-              secondaryColor: "#27272a",
-              tertiaryColor: "#18181b",
+              primaryColor: "var(--s-primary)",
+              primaryTextColor: "var(--s-text)",
+              primaryBorderColor: "var(--s-border-strong)",
+              lineColor: "var(--s-chart-axis)",
+              sectionBkgColor: "var(--s-surface)",
+              altSectionBkgColor: "var(--s-surface-elevated)",
+              gridColor: "var(--s-chart-grid)",
+              secondaryColor: "var(--s-surface-elevated)",
+              tertiaryColor: "var(--s-surface)",
             } : undefined,
             flowchart: { curve: "basis" },
           });
@@ -55,7 +55,7 @@ export const MermaidDiagram = forwardRef<HTMLDivElement, MermaidDiagramProps>(
         data-slot="mermaid-diagram"
         className={cn(
           "w-full overflow-auto rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] p-4",
-          theme === "dark" ? "bg-[#0d1117]" : "bg-[var(--s-surface)]",
+          theme === "dark" ? "bg-[var(--s-background)]" : "bg-[var(--s-surface)]",
           className,
         )}
         {...props}

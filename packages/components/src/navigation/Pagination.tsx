@@ -84,7 +84,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
             className={cn(
               buttonBase,
               page === currentPage
-                ? "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)]"
+                ? "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]"
                 : "text-[var(--s-text-muted)] hover:bg-[var(--s-surface)]",
             )}
           >

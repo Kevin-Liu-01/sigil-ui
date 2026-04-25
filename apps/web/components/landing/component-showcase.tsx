@@ -98,6 +98,10 @@ type ComponentCell = {
   render: () => ReactNode;
 };
 
+function createDemoDate(): Date {
+  return new Date(2026, 3, 24);
+}
+
 const CATEGORIES = [
   "All", "UI", "Layout", "Navigation", "Overlays", "Data",
   "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Pretext", "Patterns", "Playbook",
@@ -421,6 +425,12 @@ const CELLS: ComponentCell[] = [
       <LoadingSpinner variant="dots2" size="md" />
       <LoadingSpinner variant="dots2" size="lg" />
     </div>
+  )},
+  { name: "BrailleSpinner", category: "UI", variants: 6, render: () => (
+    <BrailleSpinner name="orbit" label="Loading" className="text-2xl text-[var(--s-primary)]" />
+  )},
+  { name: "CircularProgress", category: "UI", variants: 3, render: () => (
+    <CircularProgress value={68} size={56} />
   )},
   { name: "NumberField", category: "UI", variants: 1, render: () => (
     <div className="w-full max-w-[160px]">
@@ -840,12 +850,12 @@ const CELLS: ComponentCell[] = [
   { name: "Meter", category: "Data", variants: 1, render: () => <Meter value={68} max={100} label="CPU Usage" /> },
   { name: "Calendar", category: "Data", variants: 1, render: () => (
     <div className="w-full flex justify-center overflow-hidden">
-      <Calendar mode="single" selected={new Date()} className="p-0" />
+      <Calendar mode="single" selected={createDemoDate()} className="p-0" />
     </div>
   )},
   { name: "DatePicker", category: "Data", variants: 1, render: () => (
     <div className="w-full flex flex-col gap-2 items-start">
-      <DatePicker value={new Date()} className="w-full" />
+      <DatePicker value={createDemoDate()} className="w-full" />
     </div>
   )},
   { name: "DateRangePicker", category: "Data", variants: 1, docPath: "/docs/components/date-picker", render: () => (
@@ -1112,7 +1122,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "StatsSection", category: "Sections", variants: 3, render: () => (
     <div className="grid grid-cols-3 gap-2 w-full text-center">
-      {[{ v: "200+", l: "Components" }, { v: "44", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
+      {[{ v: "200+", l: "Token-Driven Components" }, { v: "44", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
         <div key={s.l} className="py-2">
           <div className="text-base font-bold text-[var(--s-text)]">{s.v}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{s.l}</div>
@@ -1298,7 +1308,7 @@ const CELLS: ComponentCell[] = [
   { name: "Tessellation", category: "Patterns", variants: 7, render: () => (
     <Tessellation variant="zigzag" className="w-full" style={{ height: 48 }} opacity={0.4} />
   )},
-  { name: "Grain Gradient", category: "Patterns", variants: 4, render: () => (
+  { name: "GrainGradient", category: "Patterns", variants: 4, render: () => (
     <div className="relative overflow-hidden rounded-md w-full" style={{ height: 48, background: "var(--s-surface)" }}>
       <GrainGradient tint="accent" intensity="medium" />
     </div>

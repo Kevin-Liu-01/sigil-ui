@@ -18,7 +18,7 @@ Every component reads from a single token object. Colors, spacing, radii, shadow
 |---|---|---|
 | Theming | Edit config files + CSS variables + component files | Edit one token file |
 | Agent workflow | Agent modifies scattered Tailwind classes or style props | Your agent edits one file |
-| Presets | Copy a config from a blog post | `npx sigil init --preset minimal` |
+| Presets | Copy a config from a blog post | `npx @sigil-ui/cli init --preset minimal` |
 | Token system | CSS variables, manually maintained | Three-layer architecture: primitive → semantic → component |
 | Shipping themes | "Just change the CSS variables" | Ship a preset, not a config file |
 
@@ -29,7 +29,7 @@ Every component reads from a single token object. Colors, spacing, radii, shadow
 pnpm add @sigil-ui/tokens @sigil-ui/components
 
 # Or scaffold a new project
-npx sigil init
+npx @sigil-ui/cli init
 ```
 
 Import the token CSS and start building:

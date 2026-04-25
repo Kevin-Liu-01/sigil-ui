@@ -20,7 +20,7 @@ const SheetOverlay = forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-0 z-50",
-        "bg-[var(--s-overlay-bg,rgba(0,0,0,0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
+        "bg-[var(--s-overlay-bg)] backdrop-blur-[var(--s-overlay-blur)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
@@ -51,10 +51,10 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
           ref={ref}
           data-slot="sheet"
           className={cn(
-            "fixed z-50 flex flex-col gap-4 p-6",
-            "bg-[var(--s-background)] border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
-            "shadow-[var(--s-shadow-lg)]",
-            "transition-transform duration-[var(--s-duration-normal,200ms)] ease-out",
+            "fixed z-50 flex flex-col gap-4 p-[var(--s-overlay-padding)]",
+            "bg-[var(--s-overlay-surface)] border-[var(--s-overlay-border)] border-[style:var(--s-border-style,solid)]",
+            "shadow-[var(--s-overlay-shadow)]",
+            "transition-transform duration-[var(--s-duration-normal)] ease-out",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             sideVariants[side],
             className,
@@ -66,7 +66,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
             className={cn(
               "absolute right-4 top-4 rounded-[var(--s-radius-sm,0px)] opacity-70",
               "transition-opacity hover:opacity-100",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+              "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
             )}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>

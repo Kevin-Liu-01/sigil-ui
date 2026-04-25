@@ -1,0 +1,54 @@
+---
+title: Pattern
+description: CSS-only background pattern overlay with seven variants. No SVGs needed.
+---
+
+## Import
+
+```tsx
+import { Pattern } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<div className="relative h-64">
+  <Pattern />
+</div>
+```
+
+## Variants
+
+```tsx
+<Pattern variant="dots" />
+<Pattern variant="hatch" />
+<Pattern variant="diagonal" />
+<Pattern variant="diamond" />
+<Pattern variant="hexagon" />
+<Pattern variant="triangle" />
+<Pattern variant="crosshatch" />
+```
+
+## Opacity and scale
+
+```tsx
+<Pattern variant="dots" opacity={0.2} scale={1.5} />
+```
+
+## As a section background
+
+```tsx
+<section className="relative py-20">
+  <Pattern variant="crosshatch" opacity={0.05} className="absolute inset-0" />
+  <div className="relative z-10">Section content</div>
+</section>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `variant` | `"dots" \| "hatch" \| "diagonal" \| "diamond" \| "hexagon" \| "triangle" \| "crosshatch"` | `"dots"` | Pattern type |
+| `opacity` | `number` | `0.1` | Pattern opacity |
+| `scale` | `number` | `1` | Pattern scale multiplier |
+| `className` | `string` | — | Additional CSS classes |

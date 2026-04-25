@@ -1,0 +1,44 @@
+---
+title: LogoCloudSection
+description: Horizontal logo strip with grayscale-to-color hover effect.
+---
+
+## Import
+
+```tsx
+import { LogoCloudSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<LogoCloudSection
+  heading="Trusted by teams at"
+  logos={[
+    { name: "Vercel", logo: <VercelLogo /> },
+    { name: "Stripe", logo: <StripeLogo /> },
+    { name: "GitHub", logo: <GitHubLogo /> },
+  ]}
+/>
+```
+
+## Without heading
+
+```tsx
+<LogoCloudSection
+  heading=""
+  logos={logos}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `heading` | `string` | `"Trusted by teams at"` | Text above the logo row |
+| `logos` | `LogoCloudItem[]` | **required** | Array of `{ name, logo }` where logo is a ReactNode (SVG or img) |
+| `className` | `string` | — | Additional CSS classes |
+
+Logos render at 24px height with grayscale filter that clears on hover.
+
+Plus all standard `<section>` HTML attributes.

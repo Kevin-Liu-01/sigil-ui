@@ -57,7 +57,7 @@ To change the visual output, edit the top of this chain — not the bottom.
 packages/
   tokens/           @sigil-ui/tokens     — Source of truth: types, defaults, compiler, markdown parser
   presets/           @sigil-ui/presets    — 31 curated preset bundles (259 tokens each)
-  components/        @sigil-ui/components — 65+ styled React components (read from tokens, don't hardcode)
+  components/        @sigil-ui/components — 200+ token-driven React components (read from tokens, don't hardcode)
   primitives/        @sigil-ui/primitives — 16 Radix-based headless behavior primitives
   cli/               @sigil-ui/cli       — CLI: init, add, preset, diff, doctor
   create-sigil-app/                      — npx create-sigil-app bootstrapper

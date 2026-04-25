@@ -28,19 +28,19 @@ export interface CapabilityGridProps extends HTMLAttributes<HTMLDivElement> {
 
 const calloutColors = {
   danger: {
-    border: "var(--s-error,#ef4444)",
-    bg: "var(--s-error,#ef4444)",
-    text: "var(--s-error,#ef4444)",
+    border: "var(--s-error)",
+    bg: "var(--s-error)",
+    text: "var(--s-error)",
   },
   warning: {
-    border: "var(--s-warning,#f59e0b)",
-    bg: "var(--s-warning,#f59e0b)",
-    text: "var(--s-warning,#f59e0b)",
+    border: "var(--s-warning)",
+    bg: "var(--s-warning)",
+    text: "var(--s-warning)",
   },
   info: {
-    border: "var(--s-info,#3b82f6)",
-    bg: "var(--s-info,#3b82f6)",
-    text: "var(--s-info,#3b82f6)",
+    border: "var(--s-info)",
+    bg: "var(--s-info)",
+    text: "var(--s-info)",
   },
 } as const;
 
@@ -80,10 +80,10 @@ export const CapabilityGrid = forwardRef<HTMLDivElement, CapabilityGridProps>(
               }}
             >
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted,#71717a)]">
+                <span className="font-mono text-xs uppercase tracking-widest text-[var(--s-text-muted)]">
                   {cat.label}
                 </span>
-                <div className="h-px flex-1 bg-[var(--s-border,#e4e4e7)]" />
+                <div className="h-px flex-1 bg-[var(--s-border)]" />
               </div>
               <div className="flex flex-wrap gap-2">
                 {cat.items.map((item, ii) => {
@@ -91,7 +91,7 @@ export const CapabilityGrid = forwardRef<HTMLDivElement, CapabilityGridProps>(
                   return (
                     <div
                       key={item.name}
-                      className="flex items-center gap-2 border border-[var(--s-border,#e4e4e7)] bg-[var(--s-surface,#fafafa)] px-2.5 py-1.5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated,#f4f4f5)]"
+                      className="flex items-center gap-2 border border-[var(--s-border)] bg-[var(--s-surface)] px-2.5 py-1.5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]"
                       style={{
                         opacity: visible ? 1 : 0,
                         transform: visible ? "translateY(0)" : "translateY(6px)",
@@ -102,7 +102,7 @@ export const CapabilityGrid = forwardRef<HTMLDivElement, CapabilityGridProps>(
                     >
                       <span
                         className="inline-block h-2 w-2 rounded-[1px]"
-                        style={{ backgroundColor: item.color ?? "var(--s-primary,#6366f1)", opacity: 0.8 }}
+                        style={{ backgroundColor: item.color ?? "var(--s-primary)", opacity: 0.8 }}
                       />
                       <span className="font-mono text-xs font-medium text-[var(--s-text,currentColor)]">
                         {item.name}
@@ -139,7 +139,7 @@ export const CapabilityGrid = forwardRef<HTMLDivElement, CapabilityGridProps>(
               {callout.items.map((item) => (
                 <span
                   key={item}
-                  className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--s-text-muted,#71717a)]"
+                  className="flex items-center gap-1.5 font-mono text-[11px] text-[var(--s-text-muted)]"
                 >
                   <span style={{ color: colors.text, opacity: 0.5 }}>x</span>
                   {item}

@@ -50,11 +50,11 @@ export const AccentCTA = forwardRef<HTMLButtonElement, AccentCTAProps>(
           "inline-flex items-center justify-center gap-2",
           "font-[family-name:var(--s-font-mono)] font-semibold uppercase tracking-[0.08em]",
           "cursor-pointer select-none whitespace-nowrap",
-          "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#0F0F0F)]",
-          "transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
+          "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
+          "transition-all duration-[var(--s-duration-fast)] ease-out",
           "active:scale-[var(--s-button-active-scale,0.97)]",
           glow && "hover:shadow-[0_0_24px_var(--s-glow,var(--s-primary))]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-background)]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)] focus-visible:ring-offset-[var(--s-background)]",
           "disabled:opacity-50 disabled:pointer-events-none",
           sizeStyles[size],
           className,
@@ -93,7 +93,7 @@ export const AccentActive = forwardRef<HTMLDivElement, AccentActiveProps>(
         data-slot="accent-active"
         data-active={active || undefined}
         className={cn(
-          "transition-colors duration-[var(--s-duration-fast,150ms)]",
+          "transition-colors duration-[var(--s-duration-fast)]",
           active
             ? "border-[color:color-mix(in_oklch,var(--s-primary)_40%,transparent)] bg-[color-mix(in_oklch,var(--s-primary)_10%,transparent)] text-[var(--s-primary)]"
             : "border-[var(--s-border)] bg-transparent text-[var(--s-text-muted)]",

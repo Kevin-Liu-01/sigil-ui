@@ -1,0 +1,63 @@
+---
+title: StatusTable
+description: "A service health status table with colored indicators, uptime tracking, and incident dates."
+---
+
+## Import
+
+```tsx
+import { StatusTable } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <StatusTable
+    title="System Status"
+    services={[
+      { name: "API", status: "operational", uptime: "99.98%", lastIncident: "14 days ago" },
+      { name: "Database", status: "operational", uptime: "99.99%" },
+      { name: "CDN", status: "degraded", uptime: "99.90%", lastIncident: "2 hours ago" },
+      { name: "Auth", status: "operational", uptime: "99.95%", lastIncident: "7 days ago" },
+      { name: "Webhooks", status: "maintenance", lastIncident: "Now" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<StatusTable
+  title="System Status"
+  services={[
+    { name: "API", status: "operational", uptime: "99.98%" },
+    { name: "CDN", status: "degraded", uptime: "99.90%", lastIncident: "2h ago" },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `services` | `ServiceEntry[]` | — | Service rows with name, status, uptime, lastIncident |
+| `title` | `string` | — | Optional header title |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-success` | Operational status |
+| `--s-warning` | Degraded status |
+| `--s-error` | Outage status |
+| `--s-info` | Maintenance status |
+| `--s-border` | Table borders |
+| `--s-surface` | Background |
+| `--s-surface-elevated` | Row hover |
+| `--s-text` | Service name and title |
+| `--s-text-muted` | Column headers, uptime, dates |
+| `--s-font-mono` | Uptime and date font |
+| `--s-radius-card` | Container radius |
+| `--s-shadow-sm` | Container shadow |
+| `--s-border-style` | Border style |
+| `--s-duration-fast` | Hover transition |

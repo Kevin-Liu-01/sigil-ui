@@ -58,7 +58,7 @@ export const LineChart = forwardRef<SVGSVGElement, LineChartProps>(
     }
 
     const gridLines = 5;
-    const defaultColors = ["var(--s-primary)", "var(--s-success, #22c55e)", "var(--s-warning, #f59e0b)", "var(--s-error, #ef4444)"];
+    const defaultColors = ["var(--s-primary)", "var(--s-success)", "var(--s-warning)", "var(--s-error)"];
 
     return (
       <svg

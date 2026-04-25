@@ -1,0 +1,52 @@
+---
+title: AccentCTA
+description: "A AccentCTA component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { AccentCTA, AccentActive } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview vertical>
+  <AccentCTA>
+    AccentCTA content
+  </AccentCTA>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<AccentCTA>...</AccentCTA>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<AccentActive>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `size` | `AccentCTASize` | `md` | Button size. |
+| `glow` | `boolean` | `true` | Enable glow effect on hover. |
+| `asChild` | `boolean` | — | Render as child element (Radix Slot pattern for links). |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-font-mono` | Font mono |
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-duration-fast` | Duration fast |
+| `--s-button-active-scale` | Button active scale |
+| `--s-glow` | Glow |
+| `--s-background` | Background |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |

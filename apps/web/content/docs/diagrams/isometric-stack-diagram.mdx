@@ -1,0 +1,36 @@
+---
+title: IsometricStackDiagram
+description: "A 3D isometric stack diagram showing layered infrastructure components."
+---
+
+## Import
+
+```tsx
+import { IsometricStackDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <IsometricStackDiagram
+    layers={[
+      { label: "Frontend", color: "var(--s-primary)" },
+      { label: "API", color: "var(--s-success, #22c55e)" },
+      { label: "Database", color: "var(--s-warning, #f59e0b)" },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `layers` | `IsoStackLayer[]` | — | Stack layers with label and color |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default layer color |
+| `--s-text` | Layer labels |
+| `--s-border` | Layer outlines |

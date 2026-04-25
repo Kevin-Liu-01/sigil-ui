@@ -48,7 +48,7 @@ import { ComponentShowcase } from "@/components/landing/component-showcase";
 import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
 
 const STATS = [
-  { value: "200+", label: "Components" },
+  { value: "200+", label: "Token-Driven Components" },
   { value: "14", label: "Categories" },
   { value: "259", label: "Tokens" },
   { value: "44", label: "Presets" },
@@ -61,7 +61,7 @@ const TOKEN_CARDS = [
   },
   {
     title: "One preset, everything updates",
-    body: "Switch presets and all 200+ components change simultaneously. One command, zero prop drilling, zero theme objects.",
+    body: "Switch presets and all 200+ token-driven components change simultaneously. One command, zero prop drilling, zero theme objects.",
   },
   {
     title: "Agent-friendly",
@@ -82,7 +82,7 @@ export default function ComponentsPage() {
           </MonoLabel>
 
           <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
-            100+ Token-Driven Components.
+            200+ Token-Driven Components.
           </h1>
 
           <DensityText

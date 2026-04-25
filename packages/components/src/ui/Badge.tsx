@@ -22,19 +22,19 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 
 const variantStyles: Record<BadgeVariant, string> = {
   default:
-    "bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] border-transparent",
   secondary:
     "bg-[var(--s-surface)] text-[var(--s-text-secondary)] border-transparent",
   outline:
     "bg-transparent text-[var(--s-text)] border border-[var(--s-border)]",
   destructive:
-    "bg-[var(--s-error)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-error)] text-[var(--s-primary-contrast)] border-transparent",
   success:
-    "bg-[var(--s-success)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-success)] text-[var(--s-primary-contrast)] border-transparent",
   warning:
-    "bg-[var(--s-warning)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-warning)] text-[var(--s-primary-contrast)] border-transparent",
   info:
-    "bg-[var(--s-info)] text-[var(--s-primary-contrast,#fff)] border-transparent",
+    "bg-[var(--s-info)] text-[var(--s-primary-contrast)] border-transparent",
 };
 
 const sizeStyles: Record<string, string> = {

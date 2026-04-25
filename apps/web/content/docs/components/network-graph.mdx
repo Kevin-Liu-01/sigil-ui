@@ -1,0 +1,61 @@
+---
+title: NetworkGraph
+description: "A node-link network graph for relationship visualization with weighted edges."
+---
+
+## Import
+
+```tsx
+import { NetworkGraph } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <NetworkGraph
+    nodes={[
+      { id: "a", label: "Node A", x: 100, y: 100, size: 10 },
+      { id: "b", label: "Node B", x: 300, y: 80 },
+      { id: "c", label: "Node C", x: 200, y: 250, size: 8 },
+      { id: "d", label: "Node D", x: 400, y: 200 },
+    ]}
+    edges={[
+      { source: "a", target: "b", weight: 2 },
+      { source: "a", target: "c" },
+      { source: "b", target: "d", weight: 3 },
+      { source: "c", target: "d" },
+    ]}
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<NetworkGraph
+  nodes={[
+    { id: "a", label: "Node A", x: 100, y: 100, size: 10 },
+    { id: "b", label: "Node B", x: 300, y: 80 },
+  ]}
+  edges={[
+    { source: "a", target: "b", weight: 2 },
+  ]}
+/>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `nodes` | `NetworkNode[]` | — | Node positions, labels, sizes, and colors |
+| `edges` | `NetworkEdge[]` | — | Edges between nodes with optional weight |
+| `width` | `number` | `500` | SVG width |
+| `height` | `number` | `400` | SVG height |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default node fill color |
+| `--s-border` | Edge stroke |
+| `--s-text-muted` | Node labels |
+| `--s-font-mono` | Label font family |

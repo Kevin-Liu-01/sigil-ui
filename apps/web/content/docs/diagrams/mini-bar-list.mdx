@@ -1,0 +1,44 @@
+---
+title: MiniBarList
+description: "A horizontal bar list for ranked items — ideal for top-N analytics."
+---
+
+## Import
+
+```tsx
+import { MiniBarList } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MiniBarList
+    valueLabel="Views"
+    items={[
+      { label: "/docs/getting-started", value: 4230 },
+      { label: "/docs/components/button", value: 3150 },
+      { label: "/docs/theming", value: 2840 },
+      { label: "/docs/diagrams/flow-diagram", value: 1920 },
+      { label: "/docs/installation", value: 1480 },
+    ]}
+  />
+</ComponentPreview>
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `items` | `MiniBarItem[]` | — | Ranked items |
+| `valueLabel` | `string` | `"Count"` | Header for value column |
+| `formatValue` | `(v: number) => string` | — | Custom value formatter |
+| `color` | `string` | `var(--s-primary)` | Bar color |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Default bar color |
+| `--s-text` | Item label and value |
+| `--s-text-muted` | Column headers and icons |
+| `--s-font-mono` | Value font |
+| `--s-radius-sm` | Bar radius |

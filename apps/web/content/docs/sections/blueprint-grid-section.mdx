@@ -1,0 +1,38 @@
+---
+title: BlueprintGridSection
+description: "Blueprint-style 2-column feature grid inspired by Dedalus' BlueprintFeatures. Each card scroll-reveals with staggered delay; contains a diagram viewport, spec table, and callout chips."
+---
+
+## Import
+
+```tsx
+import { BlueprintGridSection } from "@sigil-ui/components";
+```
+
+## Usage
+
+```tsx
+<BlueprintGridSection>...</BlueprintGridSection>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Section label. |
+| `heading` | `string` | — | Section heading. |
+| `cards` | `BlueprintCardData[]` | — | Cards to render in a 2-column staggered grid. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-ease-out` | Ease out |
+| `--s-ease-default` | Ease default |
+| `--s-bg` | Bg |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

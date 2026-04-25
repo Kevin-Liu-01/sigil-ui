@@ -22,7 +22,7 @@ export const Panel = forwardRef<HTMLDivElement, PanelProps>(
         className={cn(
           "grid border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)]/92",
           square
-            ? cn("rounded-none gap-4", compact ? "p-4" : "p-5 sm:p-6")
+            ? cn("rounded-[var(--s-radius-none)] gap-4", compact ? "p-4" : "p-5 sm:p-6")
             : cn(
                 "gap-5 rounded-[var(--s-card-radius,8px)]",
                 compact ? "p-5" : "p-6",

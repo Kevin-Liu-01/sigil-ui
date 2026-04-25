@@ -1,0 +1,43 @@
+---
+title: StreamFlowDiagram
+description: "An animated streaming flow diagram showing data moving through pipeline stages."
+---
+
+## Import
+
+```tsx
+import { StreamFlowDiagram } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <StreamFlowDiagram
+    source={{ label: "Prompt" }}
+    tokens={["tokens", "compile", "render"]}
+    output="UI"
+  />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<StreamFlowDiagram source={{ label: "Prompt" }} tokens={["tokens", "compile"]} output="UI" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
+| `tokens` | `string[]` | `["Hello", "World", "!"]` | Streamed tokens |
+| `output` | `string` | — | Optional output node |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Stream flow color |
+| `--s-border` | Pipeline borders |
+| `--s-surface` | Stage background |
+| `--s-text` | Stage labels |
