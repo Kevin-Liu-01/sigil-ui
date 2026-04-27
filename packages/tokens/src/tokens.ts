@@ -67,6 +67,10 @@ export const defaultTokens: SigilTokens = {
     warning: "oklch(0.75 0.15 85)",
     error: "oklch(0.60 0.20 25)",
     info: "oklch(0.60 0.15 250)",
+    highlight: {
+      light: "oklch(0.94 0.12 95)",
+      dark: "oklch(0.30 0.08 95)",
+    },
   },
 
   typography: {

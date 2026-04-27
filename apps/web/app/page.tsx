@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
 import { FooterComponentDiagram, FooterQuadrantDiagram, HeroLogoField } from "@/components/landing/hero-logo-field";
@@ -14,10 +14,13 @@ import { SigilFrame, useIsEdgeless } from "@/components/landing/sigil-frame";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
 import { LayerStackDiagram } from "@/components/landing/layer-stack";
 import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
+import { ComponentStackDiagram } from "@/components/landing/component-stack";
 import { PresetComparisonView } from "@/components/landing/preset-comparison";
 import { MarkdownEditorPreview } from "@/components/landing/markdown-editor";
 import { useSigilTokens } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
+import { TextureBg } from "@/components/texture-bg";
 
 import {
   SigilSection,
@@ -52,7 +55,7 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
   return (
     <SigilSection
       {...props}
-      borderTop={props.borderTop && !edgeless}
+      borderTop={false}
       borderBottom={props.borderBottom && !edgeless}
       showCrosses={props.showCrosses && !edgeless}
     />
@@ -63,7 +66,7 @@ function LandingDivider(props: React.ComponentProps<typeof Divider>) {
   let edgeless = false;
   try { edgeless = useIsEdgeless(); } catch { /* outside provider */ }
   if (edgeless) return null;
-  return <Divider {...props} />;
+  return <Divider {...props} pattern="diagonal" fadeEdges={false} />;
 }
 
 /* ================================================================ */
@@ -132,10 +135,11 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="96px 24px 48px">
+    <LandingSection borderTop padding="120px 24px 64px" style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
         <HeroLogoField />
-        <MonoLabel variant="accent" className="block mb-4">npm install</MonoLabel>
+        <MonoLabel variant="accent" className="block mb-4">$ npx create-sigil-app@latest</MonoLabel>
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
           Your Design Systems <br /> Live in One File.
@@ -143,7 +147,7 @@ function Hero() {
 
         <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
           The same Radix components you trust, with an agent-first token layer on top.
-          200+ token-driven components. 259 tokens. One markdown file that humans and AI agents
+          {" "}{SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.tokenCount} tokens. One token file that humans and AI agents
           both edit to control every color, font, radius, and animation.
         </DensityText>
 
@@ -156,6 +160,12 @@ function Hero() {
             className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
           >
             View Components
+          </a>
+          <a
+            href="/sandbox"
+            className="inline-flex items-center px-5 py-2.5 bg-[var(--s-surface)] text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:border-[var(--s-primary)]"
+          >
+            Try the Token Lab
           </a>
         </div>
 
@@ -206,26 +216,32 @@ function ComponentGalleryBannerSection() {
 
 function LayerSection() {
   return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Architecture"
-        heading="Four layers. One agent-editable surface."
-        description="Tokens define the primitives. Presets bundle them. Components consume them. Pages compose them. The agent layer sits alongside — humans and AI both edit the same token file."
-      />
-      <LayerStackDiagram />
+    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.3} />
+      <div className="relative z-[1]">
+        <SectionHeader
+          label="Architecture"
+          heading="Four layers. One agent-editable surface."
+          description="Tokens define the primitives. Presets bundle them. Components consume them. Pages compose them. The agent layer sits alongside — humans and AI both edit the same token file."
+        />
+        <LayerStackDiagram />
+      </div>
     </LandingSection>
   );
 }
 
 function TokenPipelineSection() {
   return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Token System"
-        heading="One file compiles to everything."
-        description="Edit sigil.tokens.md. 300+ CSS variables compile. 200+ token-driven components update instantly."
-      />
-      <TokenPipelineDiagram />
+    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.3} />
+      <div className="relative z-[1]">
+        <SectionHeader
+          label="Token System"
+          heading="One file compiles to everything."
+          description={`Edit sigil.tokens.md or token CSS overrides. ${SIGIL_PRODUCT_STATS.tokenCount} token fields compile. ${SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components update instantly.`}
+        />
+        <TokenPipelineDiagram />
+      </div>
     </LandingSection>
   );
 }
@@ -249,7 +265,9 @@ function MarkdownEditorSection() {
 
 function AgentFirstSection() {
   return (
-    <LandingSection borderTop>
+    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.25} />
+      <div className="relative z-[1]">
       <SectionHeader
         label="Agent-First Design"
         heading="Same components you trust. One file for agents to edit."
@@ -265,7 +283,7 @@ function AgentFirstSection() {
               { name: "Radix Primitives", desc: "Accessible, unstyled behavior layer — focus management, keyboard nav, ARIA" },
               { name: "forwardRef + className", desc: "Standard React patterns. Slot composition. No proprietary abstractions" },
               { name: "Tailwind + clsx + twMerge", desc: "The same class composition stack used across the React ecosystem" },
-              { name: "200+ Token-Driven Components", desc: "Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested" },
+              { name: `${SIGIL_PRODUCT_STATS.componentCountLabel} Token-Driven Components`, desc: "Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested" },
             ].map((item) => (
               <div key={item.name} className="border-b border-[var(--s-border)] pb-2.5">
                 <DensityText role="detail" as="span" className="font-semibold block">{item.name}</DensityText>
@@ -280,9 +298,9 @@ function AgentFirstSection() {
           <MonoLabel variant="accent" className="block mb-4">THE LAYER AGENTS EDIT</MonoLabel>
           <div className="flex flex-col gap-3 mb-6">
             {[
-              { name: "sigil.tokens.md", desc: "One markdown file. 259 fields. Human-readable, agent-writable, git-diffable" },
+              { name: "sigil.tokens.md", desc: `One markdown override file. ${SIGIL_PRODUCT_STATS.tokenCount} token system. Human-readable, agent-writable, git-diffable` },
               { name: "compileToCss()", desc: "Deterministic compiler. Same input always produces same CSS output" },
-              { name: "var(--s-*) variables", desc: "300+ CSS custom properties. Components read them — agents never touch components" },
+              { name: "var(--s-*) variables", desc: "CSS custom properties. Components read them — agents never touch components" },
               { name: ".sigil/AGENTS.md", desc: "Auto-generated instructions for any AI agent — preset mood, token conventions, CLI commands" },
             ].map((item) => (
               <div key={item.name} className="border-b border-[var(--s-border)] pb-2.5">
@@ -309,14 +327,14 @@ function AgentFirstSection() {
           <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">02</TabularValue>
           <DensityText role="detail" as="span" className="font-semibold block mb-1">Edits tokens.md</DensityText>
           <DensityText role="chrome" as="span" muted>
-            Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through 200+ token-driven components.
+            Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components.
           </DensityText>
         </GapPixelCell>
         <GapPixelCell className="p-5">
           <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">03</TabularValue>
           <DensityText role="detail" as="span" className="font-semibold block mb-1">CSS recompiles</DensityText>
           <DensityText role="chrome" as="span" muted>
-            Deterministic output. Same tokens always produce the same 300+ CSS variables. No surprise side effects.
+            Deterministic output. Same tokens always produce the same CSS variables. No surprise side effects.
           </DensityText>
         </GapPixelCell>
         <GapPixelCell className="p-5">
@@ -328,6 +346,7 @@ function AgentFirstSection() {
         </GapPixelCell>
       </GapPixelGrid>
 
+      </div>
     </LandingSection>
   );
 }
@@ -351,7 +370,9 @@ function ComponentsSection() {
   const [activeTab, setActiveTab] = useState("UI");
 
   return (
-    <LandingSection id="components" borderTop>
+    <LandingSection id="components" borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.25} />
+      <div className="relative z-[1]">
       <SectionHeader
         label="Components"
         heading="Components that inherit the system."
@@ -385,6 +406,23 @@ function ComponentsSection() {
       <div className="mt-12">
         <MonoLabel variant="accent" className="block mb-4">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
         <ComponentAnatomyDiagram />
+      </div>
+      </div>
+    </LandingSection>
+  );
+}
+
+function ComponentStackSection() {
+  return (
+    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.3} />
+      <div className="relative z-[1]">
+        <SectionHeader
+          label="Under the Hood"
+          heading="One import. Batteries included."
+          description="Select a component to see what ships with it — Radix primitives, animation engines, sound feedback, charting libraries — all wired in automatically."
+        />
+        <ComponentStackDiagram />
       </div>
     </LandingSection>
   );
@@ -514,6 +552,498 @@ function EvaluationProductSection() {
   );
 }
 
+/* ================================================================ */
+/* Capabilities Showcase — inspire, preset swap, ripple, history     */
+/* ================================================================ */
+
+const INSPIRE_COLORS = [
+  { hex: "#9b99e8", label: "primary", oklch: "oklch(0.65 0.18 275)", count: 47 },
+  { hex: "#1a1a24", label: "surface", oklch: "oklch(0.13 0.02 268)", count: 31 },
+  { hex: "#e8e8ed", label: "text", oklch: "oklch(0.94 0.01 260)", count: 28 },
+  { hex: "#2a2a3a", label: "border", oklch: "oklch(0.22 0.02 270)", count: 19 },
+  { hex: "#da8325", label: "accent", oklch: "oklch(0.68 0.16 62)", count: 12 },
+  { hex: "#10b981", label: "success", oklch: "oklch(0.72 0.17 168)", count: 8 },
+];
+
+const INSPIRE_TOKEN_LINES = [
+  "--s-primary: oklch(0.65 0.18 275);",
+  "--s-primary-hover: oklch(0.58 0.2 275);",
+  "--s-background: oklch(0.13 0.012 260);",
+  "--s-surface: oklch(0.18 0.016 260);",
+  "--s-text: oklch(0.94 0.008 260);",
+  "--s-radius-card: var(--s-radius-lg);",
+];
+
+function useTypingEffect(text: string, speed = 30, trigger = true) {
+  const [displayed, setDisplayed] = useState("");
+  const [done, setDone] = useState(false);
+  useEffect(() => {
+    if (!trigger) { setDisplayed(""); setDone(false); return; }
+    let i = 0;
+    setDisplayed("");
+    setDone(false);
+    const tick = () => {
+      if (i < text.length) {
+        i++;
+        setDisplayed(text.slice(0, i));
+        setTimeout(tick, speed + Math.random() * 16);
+      } else {
+        setDone(true);
+      }
+    };
+    tick();
+  }, [text, speed, trigger]);
+  return { displayed, done };
+}
+
+function InspireShowcase() {
+  const [phase, setPhase] = useState(0);
+  const typing = useTypingEffect(
+    "sigil inspire https://linear.app --name linear",
+    26,
+    true,
+  );
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase(1), 2200);
+    const t2 = setTimeout(() => setPhase(2), 4000);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Inspire"
+        heading="See a site you like? Extract its tokens."
+        description="sigil inspire extracts colors from any URL or CSS file, drafts OKLCH tokens, generates a preset file, and creates a preview page — one command."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        {/* Left: terminal + command */}
+        <div className="flex flex-col gap-5">
+          <div
+            className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4"
+            style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)" }}
+          >
+            <div className="flex items-center gap-2 mb-3 pb-2 border-b border-[var(--s-border)]">
+              <MonoLabel variant="accent" size="xs">Terminal</MonoLabel>
+              <Badge variant="outline" size="sm">live</Badge>
+            </div>
+            <div className="text-[13px]">
+              <span className="text-[var(--s-text-muted)]">$ </span>
+              <span className="text-[var(--s-text)]">{typing.displayed}</span>
+              <span
+                className="inline-block w-2 h-4 bg-[var(--s-primary)] ml-0.5 align-middle"
+                style={{ opacity: typing.done ? 0 : 1, transition: "opacity 300ms" }}
+              />
+            </div>
+          </div>
+
+          {/* Extracted colors */}
+          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+            <MonoLabel variant="accent" size="xs" className="block mb-3">Extracted colors</MonoLabel>
+            <div className="grid gap-2">
+              {INSPIRE_COLORS.map((c, i) => (
+                <div
+                  key={c.hex}
+                  className="flex items-center gap-3 transition-all duration-[var(--s-duration-normal,300ms)]"
+                  style={{
+                    opacity: phase >= 1 ? 1 : 0,
+                    transform: phase >= 1 ? "translateX(0)" : "translateX(-12px)",
+                    transitionDelay: phase >= 1 ? `${i * 60}ms` : "0ms",
+                  }}
+                >
+                  <div className="w-4 h-4 border border-[var(--s-border)]" style={{ background: c.hex }} />
+                  <MonoLabel size="xs" className="w-14 normal-case tracking-normal">{c.label}</MonoLabel>
+                  <DensityText role="chrome" muted className="flex-1">{c.oklch}</DensityText>
+                  <TabularValue size="xs" muted>{c.count}x</TabularValue>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: generated token draft */}
+        <div
+          className="border border-[var(--s-border)] bg-[var(--s-background)] p-4 transition-opacity duration-500"
+          style={{ opacity: phase >= 2 ? 1 : 0.3, transitionDelay: phase >= 2 ? "200ms" : "0ms" }}
+        >
+          <div className="flex items-center justify-between mb-4">
+            <MonoLabel variant="accent" size="xs">Generated token draft</MonoLabel>
+            <Badge variant={phase >= 2 ? "default" : "outline"} size="sm">
+              {phase >= 2 ? "Ready" : "Waiting"}
+            </Badge>
+          </div>
+          <div
+            className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4"
+            style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)", fontSize: 12, lineHeight: 1.9 }}
+          >
+            <div className="text-[var(--s-text-muted)]">{":root {"}</div>
+            {INSPIRE_TOKEN_LINES.map((line, i) => (
+              <div
+                key={i}
+                className="pl-4 transition-all duration-[var(--s-duration-normal,300ms)]"
+                style={{
+                  color: line.includes("primary") ? "var(--s-primary)" : "var(--s-text)",
+                  opacity: phase >= 2 ? 1 : 0,
+                  transform: phase >= 2 ? "translateY(0)" : "translateY(6px)",
+                  transitionDelay: phase >= 2 ? `${400 + i * 80}ms` : "0ms",
+                }}
+              >
+                {line}
+              </div>
+            ))}
+            <div className="text-[var(--s-text-muted)]">{"}"}</div>
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {[
+              { path: "tokens.css", label: "draft" },
+              { path: `preset.ts`, label: "preset" },
+              { path: "page.tsx", label: "preview" },
+            ].map((file, i) => (
+              <div
+                key={file.path}
+                className="border border-[var(--s-border)] bg-[var(--s-surface)] p-2.5 transition-all duration-[var(--s-duration-normal,300ms)]"
+                style={{
+                  opacity: phase >= 2 ? 1 : 0,
+                  transitionDelay: phase >= 2 ? `${800 + i * 100}ms` : "0ms",
+                }}
+              >
+                <MonoLabel size="xs" className="block normal-case tracking-normal">{file.path}</MonoLabel>
+                <DensityText role="chrome" muted>{file.label}</DensityText>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </LandingSection>
+  );
+}
+
+const MINI_PRESETS: { name: string; primary: string; bg: string; surface: string; text: string; border: string; radius: string }[] = [
+  { name: "sigil", primary: "#9b99e8", bg: "#0f0f14", surface: "#1a1a24", text: "#e8e8ed", border: "#2a2a3a", radius: "8px" },
+  { name: "noir", primary: "#d97706", bg: "#0a0a0a", surface: "#141414", text: "#e5e5e5", border: "#262626", radius: "6px" },
+  { name: "forge", primary: "#ea580c", bg: "#0c0a09", surface: "#1c1917", text: "#e7e5e4", border: "#292524", radius: "2px" },
+  { name: "cipher", primary: "#22c55e", bg: "#0a0f0a", surface: "#141f14", text: "#d4e8d4", border: "#1c3a1c", radius: "4px" },
+  { name: "arc", primary: "#7c3aed", bg: "#0f0b1a", surface: "#1a1528", text: "#e8e3f5", border: "#2d2640", radius: "14px" },
+  { name: "flux", primary: "#ec4899", bg: "#0f172a", surface: "#1e293b", text: "#e2e8f0", border: "#334155", radius: "12px" },
+];
+
+function PresetCycleShowcase() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setIndex((prev) => (prev + 1) % MINI_PRESETS.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  const p = MINI_PRESETS[index];
+
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Preset Identity"
+        heading="Same components. Different design language."
+        description={`${SIGIL_PRODUCT_STATS.presetCount} presets change all 259 tokens at once. Not a theme toggle — a different visual identity. Watch the same page morph.`}
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr] items-start">
+        {/* Mini site preview */}
+        <div
+          className="overflow-hidden border transition-all duration-[600ms]"
+          style={{
+            background: p.bg, color: p.text, borderColor: p.border,
+            borderRadius: 8,
+            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+          }}
+        >
+          {/* Mini navbar */}
+          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: `1px solid ${p.border}` }}>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 transition-all duration-[600ms]" style={{ background: p.primary, borderRadius: Number.parseInt(p.radius) / 2 || 2 }} />
+              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "-0.01em" }}>Sigil / {p.name}</span>
+            </div>
+            <div className="flex gap-3">
+              {["Docs", "Presets", "Lab"].map((l) => (
+                <span key={l} className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: `color-mix(in srgb, ${p.text} 50%, transparent)` }}>{l}</span>
+              ))}
+            </div>
+          </div>
+
+          {/* Mini hero */}
+          <div className="px-5 py-7">
+            <div className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.16em] mb-2 transition-colors duration-[600ms]" style={{ color: p.primary }}>
+              Design system
+            </div>
+            <div className="text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2">
+              One token file.<br />Every component.
+            </div>
+            <div className="text-[11px] leading-[1.6] mb-4" style={{ color: `color-mix(in srgb, ${p.text} 60%, transparent)`, maxWidth: 260 }}>
+              259 tokens control your entire visual identity.
+            </div>
+            <div className="flex gap-2">
+              <div className="text-[9px] font-bold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ background: p.primary, color: p.bg, borderRadius: p.radius }}>Get Started</div>
+              <div className="text-[9px] font-semibold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ border: `1px solid ${p.border}`, borderRadius: p.radius }}>Browse</div>
+            </div>
+          </div>
+
+          {/* Mini cards */}
+          <div className="grid grid-cols-3 gap-px transition-all duration-[600ms]" style={{ background: p.border }}>
+            {["259", "46", "1"].map((val, i) => (
+              <div key={i} className="p-3.5 transition-all duration-[600ms]" style={{ background: p.surface }}>
+                <div className="font-[family-name:var(--s-font-mono)] text-lg font-bold tracking-[-0.02em] transition-colors duration-[600ms]" style={{ color: p.primary }}>{val}</div>
+                <div className="text-[9px] font-semibold uppercase tracking-[0.06em]">
+                  {["Tokens", "Presets", "Agent"][i]}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Preset selector + info */}
+        <div className="flex flex-col gap-5">
+          <GapPixelGrid columns={{ base: 3, sm: 6 }} gap={1}>
+            {MINI_PRESETS.map((preset, i) => (
+              <GapPixelCell
+                key={preset.name}
+                className="flex flex-col items-center gap-2 p-3 cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
+                style={{ background: index === i ? "var(--s-surface)" : undefined }}
+                onClick={() => setIndex(i)}
+              >
+                <div
+                  className="w-5 h-5 border-2 transition-all duration-300"
+                  style={{
+                    background: preset.primary,
+                    borderColor: index === i ? "var(--s-text)" : "transparent",
+                    borderRadius: "50%",
+                    transform: index === i ? "scale(1.25)" : "scale(1)",
+                  }}
+                />
+                <MonoLabel size="xs" variant={index === i ? "accent" : "muted"}>{preset.name}</MonoLabel>
+              </GapPixelCell>
+            ))}
+          </GapPixelGrid>
+
+          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-5">
+            <MonoLabel variant="accent" size="xs" className="block mb-3">Active preset</MonoLabel>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { label: "primary", value: p.primary },
+                { label: "radius", value: p.radius },
+                { label: "background", value: p.bg },
+                { label: "border", value: p.border },
+              ].map((row) => (
+                <div key={row.label} className="flex items-center justify-between border-b border-[var(--s-border)] pb-2">
+                  <MonoLabel size="xs" className="normal-case tracking-normal">{row.label}</MonoLabel>
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 border border-[var(--s-border)]" style={{ background: row.value }} />
+                    <DensityText role="chrome" muted>{row.value}</DensityText>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+            <MonoLabel variant="accent" size="xs" className="block mb-2">One command</MonoLabel>
+            <div className="font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
+              <span className="text-[var(--s-text-muted)]">$ </span>sigil preset {p.name}
+            </div>
+          </div>
+        </div>
+      </div>
+    </LandingSection>
+  );
+}
+
+const RIPPLE_COMPONENTS = ["Button", "Card", "Input", "Badge", "Dialog", "Navbar", "Tooltip", "Progress"];
+
+function TokenRippleShowcase() {
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    const id = setInterval(() => setActive((prev) => !prev), 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Token Propagation"
+        heading="Edit one token. Every component updates."
+        description="Components read from CSS variables. Change --s-primary and every button, link, focus ring, badge, gradient, and glow updates. One file. Zero component edits."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        {/* Token source */}
+        <div className="flex flex-col gap-4">
+          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4">
+            <MonoLabel variant="accent" size="xs" className="block mb-3">Token source</MonoLabel>
+            <div
+              className="border border-[var(--s-border)] bg-[var(--s-background)] px-4 py-3"
+              style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)", fontSize: 13 }}
+            >
+              <span className="text-[var(--s-text-muted)]">--s-primary: </span>
+              <span
+                className="transition-colors duration-[var(--s-duration-normal,300ms)]"
+                style={{ color: active ? "var(--s-primary)" : "var(--s-text-muted)" }}
+              >
+                {active ? "oklch(0.65 0.24 275)" : "oklch(0.45 0.08 260)"}
+              </span>
+            </div>
+          </div>
+
+          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4">
+            <div className="flex items-center gap-2 mb-3">
+              <div
+                className="w-2 h-2 rounded-full transition-colors duration-300"
+                style={{ background: active ? "var(--s-success)" : "var(--s-text-muted)" }}
+              />
+              <MonoLabel size="xs" variant={active ? "accent" : "muted"}>
+                {active ? "Propagating to 200+ components" : "Waiting for token change..."}
+              </MonoLabel>
+            </div>
+            <Progress value={active ? 100 : 0} className="transition-all duration-[800ms]" />
+          </div>
+        </div>
+
+        {/* Component grid that lights up */}
+        <GapPixelGrid columns={{ base: 2, sm: 4 }} gap={1}>
+          {RIPPLE_COMPONENTS.map((name, i) => (
+            <GapPixelCell
+              key={name}
+              className="p-3.5 text-center transition-all duration-[var(--s-duration-normal,300ms)]"
+              style={{
+                background: active ? "var(--s-primary)" : "var(--s-background)",
+                color: active ? "var(--s-background)" : "var(--s-text-muted)",
+                transitionDelay: `${i * 60}ms`,
+              }}
+            >
+              <MonoLabel size="xs" variant="muted" style={{ color: "inherit" }}>{name}</MonoLabel>
+            </GapPixelCell>
+          ))}
+        </GapPixelGrid>
+      </div>
+    </LandingSection>
+  );
+}
+
+const HISTORY_SNAPSHOTS = [
+  { name: "Launch v1", preset: "sigil", time: "2:14 PM", color: "#9b99e8" },
+  { name: "Dark rebrand", preset: "noir", time: "3:42 PM", color: "#d97706" },
+  { name: "Investor deck", preset: "flux", time: "5:08 PM", color: "#ec4899" },
+];
+
+function DesignHistoryShowcase() {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPhase(1), 600);
+    const t2 = setTimeout(() => setPhase(2), 1400);
+    const t3 = setTimeout(() => setPhase(3), 2200);
+    const t4 = setTimeout(() => setPhase(4), 3400);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
+  }, []);
+
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Design History"
+        heading="Save your direction. Compare. Restore."
+        description="The sandbox saves full token snapshots to local storage. Name them, compare against current tokens, export as JSON, restore any saved state instantly."
+      />
+
+      <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
+        {/* Snapshot list */}
+        <div className="border border-[var(--s-border)] bg-[var(--s-surface)]">
+          <div className="flex items-center justify-between border-b border-[var(--s-border)] p-4">
+            <MonoLabel variant="accent" size="xs">Saved states</MonoLabel>
+            <Badge variant="outline" size="sm">{HISTORY_SNAPSHOTS.length} snapshots</Badge>
+          </div>
+          <div className="divide-y divide-[var(--s-border)]">
+            {HISTORY_SNAPSHOTS.map((snap, i) => (
+              <div
+                key={snap.name}
+                className="flex items-center justify-between p-4 transition-all duration-[var(--s-duration-normal,300ms)]"
+                style={{
+                  opacity: phase > i ? 1 : 0,
+                  transform: phase > i ? "translateX(0)" : "translateX(-12px)",
+                  transitionDelay: `${i * 100}ms`,
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: snap.color }} />
+                  <DensityText role="detail" className="font-semibold">{snap.name}</DensityText>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MonoLabel size="xs" className="normal-case tracking-normal">{snap.preset}</MonoLabel>
+                  <DensityText role="chrome" muted>{snap.time}</DensityText>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Actions + restore confirmation */}
+        <div className="flex flex-col gap-4">
+          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+            <MonoLabel variant="accent" size="xs" className="block mb-3">Actions</MonoLabel>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="outline" size="sm">Restore</Button>
+              <Button variant="outline" size="sm">Export JSON</Button>
+              <Button variant="outline" size="sm">Compare</Button>
+            </div>
+          </div>
+
+          <div
+            className="border bg-[var(--s-surface)] p-4 transition-all duration-500"
+            style={{
+              borderColor: phase >= 4 ? "var(--s-success)" : "var(--s-border)",
+              opacity: phase >= 4 ? 1 : 0.3,
+            }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <div
+                className="w-2 h-2 rounded-full transition-colors duration-300"
+                style={{ background: phase >= 4 ? "var(--s-success)" : "var(--s-text-muted)" }}
+              />
+              <MonoLabel size="xs" variant={phase >= 4 ? "accent" : "muted"}>
+                {phase >= 4 ? "Restored — \"Launch v1\" applied" : "Select a snapshot to compare"}
+              </MonoLabel>
+            </div>
+            {phase >= 4 && (
+              <div className="grid grid-cols-2 gap-2">
+                {[
+                  { token: "--s-primary", from: "#ec4899", to: "#9b99e8" },
+                  { token: "--s-radius-md", from: "12px", to: "8px" },
+                ].map((diff) => (
+                  <div key={diff.token} className="border border-[var(--s-border)] bg-[var(--s-background)] p-2.5">
+                    <MonoLabel size="xs" className="block mb-1 normal-case tracking-normal text-[var(--s-primary)]">{diff.token}</MonoLabel>
+                    <div className="flex items-center gap-2 font-[family-name:var(--s-font-mono)] text-[10px]">
+                      <span className="text-[var(--s-text-muted)] line-through">{diff.from}</span>
+                      <span className="text-[var(--s-text-muted)]">&rarr;</span>
+                      <span className="text-[var(--s-text)]">{diff.to}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+            <MonoLabel variant="accent" size="xs" className="block mb-2">Try it</MonoLabel>
+            <DensityText role="body" as="p" muted className="mb-3 text-sm">
+              Open the sandbox, switch between presets, and save named snapshots from the History tab.
+            </DensityText>
+            <Button variant="outline" size="sm" asChild>
+              <a href="/sandbox" className="no-underline">Open Sandbox</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </LandingSection>
+  );
+}
+
 const COMMAND_CARDS = [
   {
     command: "npx create-sigil-app",
@@ -538,6 +1068,24 @@ const COMMAND_CARDS = [
     title: "Switch visual language",
     body: "Writes a complete preset into the token file and refreshes the compiled CSS variables.",
     output: ["259 fields", "css variables", "theme updated"],
+  },
+  {
+    command: "sigil inspire https://example.com",
+    title: "Draft tokens from a reference",
+    body: "Extracts colors from a URL or CSS file, drafts OKLCH tokens, and scaffolds a preset file and preview page.",
+    output: ["colors extracted", "preset drafted", "preview page"],
+  },
+  {
+    command: "sigil docs",
+    title: "Generate library docs",
+    body: "Writes project docs and llms.txt from your active config, installed components, and token file.",
+    output: ["sigil-project.md", "llms.txt", "agent context"],
+  },
+  {
+    command: "sigil adapter shadcn",
+    title: "Bridge existing systems",
+    body: "Creates compatibility CSS so shadcn, Bootstrap, or Material variables inherit your Sigil tokens.",
+    output: ["variable map", "css written", "one import"],
   },
   {
     command: "sigil diff",
@@ -620,7 +1168,7 @@ function PresetsSection() {
     <LandingSection id="presets" borderTop>
       <SectionHeader
         label="Presets"
-        heading="Start from 31 presets. Or build your own."
+        heading={`Start from ${SIGIL_PRODUCT_STATS.presetCount} presets. Or build your own.`}
         description="Use a curated preset as-is, fork one as a starting point, or create a fully custom preset from scratch. Your project's sigil.tokens.md is the final authority — not a library."
       />
 
@@ -639,7 +1187,7 @@ function PresetsSection() {
               <span className="text-[var(--s-text)]">sigil preset noir</span>
             </div>
             <DensityText role="body" as="p" muted>
-              31 curated bundles. One command writes all 259 tokens to your file. Use as-is or as a base to customize.
+              {SIGIL_PRODUCT_STATS.presetCount} curated bundles. One command writes the token layer to your file. Use as-is or as a base to customize.
             </DensityText>
           </GapPixelCell>
           <GapPixelCell className="p-6">
@@ -801,7 +1349,7 @@ const QUICK_START_STEPS = [
     time: "08-18s",
     title: "Pick a system",
     command: "sigil preset sigil",
-    body: "Start from one of 31 presets or let the installer recommend one from your product type.",
+    body: `Start from one of ${SIGIL_PRODUCT_STATS.presetCount} presets or let the installer recommend one from your product type.`,
   },
   {
     time: "18-30s",
@@ -812,8 +1360,8 @@ const QUICK_START_STEPS = [
 ];
 
 const GENERATED_FILES = [
-  { path: "sigil.tokens.md", detail: "259 editable fields" },
-  { path: "app/sigil.css", detail: "300+ CSS vars" },
+  { path: "sigil.tokens.md", detail: `${SIGIL_PRODUCT_STATS.tokenCount} token system` },
+  { path: "app/sigil.css", detail: "CSS variables" },
   { path: ".sigil/AGENTS.md", detail: "agent instructions" },
   { path: "components/ui/*", detail: "token-bound UI" },
 ];
@@ -934,15 +1482,16 @@ function QuickStartSection() {
 
 function FinalCTA() {
   return (
-    <LandingSection borderTop padding="80px 24px">
-      <div className="mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
+    <LandingSection borderTop padding="80px 24px" style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.45} darkOpacity={0.35} />
+      <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>
           <h2 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-[var(--s-text)]">
             Start building.
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
-            One file. 259 tokens. 200+ token-driven components. 31 presets. The design system that
-            compiles from a single markdown file.
+            One file. {SIGIL_PRODUCT_STATS.tokenCount} tokens. {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.presetCount} presets. The design system that
+            compiles from a single token layer.
           </DensityText>
           <div className="flex flex-wrap items-center gap-3">
             <AccentCTA size="lg" asChild>
@@ -1038,11 +1587,33 @@ export default function LandingPage() {
       {/* ACT 2 — How It Looks */}
       <ComponentsSection />
 
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      {/* Component Stack — what's under each component */}
+      <ComponentStackSection />
+
       <LandingDivider pattern="vertical" size="sm" showBorders />
 
       <EvaluationProductSection />
 
       <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      {/* Capabilities Showcase */}
+      <InspireShowcase />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      <PresetCycleShowcase />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
+
+      <TokenRippleShowcase />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      <DesignHistoryShowcase />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
 
       <CommandSurfaceSection />
 

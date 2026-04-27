@@ -547,7 +547,7 @@ type SigilPreset = {
 | Derive from base | `mergePresets(base, overrides, name?, metadata?)` | Deep-merge partial overrides onto a base preset |
 | User-created | `sigil preset create` | Scaffolds `sigil.preset.<name>.ts` in project root |
 | Switch | `sigil preset <name>` | Swap active preset in config + regenerate tokens CSS |
-| Browse | `sigil preset list` | Print all 31 presets organized by category with descriptions and fonts |
+| Browse | `sigil preset list` | Print all 44 presets organized by category with descriptions and fonts |
 
 ### 2.5 Preset Catalog Metadata
 
@@ -662,7 +662,7 @@ Re-exports from Radix UI with `*Primitive` naming:
 |------|------------|-------------|
 | 0 | Auto | **Project detection** — framework (Next.js/Remix/Vite/Astro), PM (pnpm/yarn/bun/npm), TypeScript, Tailwind, `src/` dir, global CSS path |
 | 1 | Select | **Project type** — SaaS, Marketing, Docs, Blog, Portfolio, E-commerce, Startup, Custom |
-| 2 | Select | **Preset** — Recommended for project type + full categorized catalog (31 presets) |
+| 2 | Select | **Preset** — Recommended for project type + full categorized catalog (44 presets) |
 | 3 | Confirm + text | **Customization** — optionally override primary color (OKLCH), display font, body font, mono font |
 | 4 | Multiselect | **Features** — GSAP + ScrollTrigger, Motion (Framer Motion), Radix Primitives, Pretext, Sigil Grid (defaults vary by project type) |
 | 5 | Multiselect | **Starter components** — button, card, input, badge, dialog, dropdown, tabs, tooltip, sigil-grid, sigil-cross, sigil-rail, sigil-card |
@@ -705,9 +705,12 @@ Re-exports from Radix UI with `*Primitive` naming:
 | Usage | Description |
 |-------|-------------|
 | `sigil preset` | Show current preset info + commands |
-| `sigil preset list` | Browse all 31 presets by category with descriptions and font info |
+| `sigil preset list` | Browse all 44 presets by category with descriptions and font info |
 | `sigil preset <name>` | Switch to a built-in or custom preset |
 | `sigil preset create` | Interactive scaffold: choose base preset, primary color, display font → writes `sigil.preset.<name>.ts` |
+| `sigil inspire <source>` | Extract a reference URL/file into draft token CSS, a custom preset file, and a preview page |
+| `sigil docs` | Generate local `docs/sigil-project.md` and `llms.txt` for the custom library |
+| `sigil adapter <name>` | Generate shadcn, Bootstrap, or Material compatibility CSS backed by Sigil tokens |
 
 ### 4.4 `sigil diff` — Token Change Tracking
 
@@ -740,15 +743,15 @@ Runs 6 diagnostic checks:
 
 | Template | Description | Use Case |
 |----------|-------------|----------|
-| `ai-saas` | Dashboard + AI features, dark mode, charts | AI product admin |
-| `dev-docs` | Documentation with search, code blocks | API docs, guides |
-| `dashboard` | Analytics with tables, charts | Admin panels |
-| `portfolio` | Creative portfolio with scroll animations | Personal/agency |
-| `ecommerce` | Product catalog, cart, checkout | Online store |
-| `blog` | Content with MDX, RSS, categories | Publication |
-| `agency` | Case studies, team page | Agency site |
-| `cli-tool` | CLI documentation with terminal examples | Developer tool docs |
-| `startup` | Landing + waitlist, pricing, FAQ | Product launch |
+| `ai-saas` | Token-native AI product landing starter | AI product launch |
+| `dev-docs` | Documentation starter with install blocks and agent-readable structure | API docs, guides |
+| `dashboard` | Analytics surface with KPI cards and operational sections | Admin panels |
+| `portfolio` | Personal/studio portfolio with project narrative sections | Personal/agency |
+| `ecommerce` | Storefront starter with product, trust, and checkout cues | Online store |
+| `blog` | Editorial starter with article and subscription structure | Publication |
+| `agency` | Studio landing page with services, proof, and inquiry CTA | Agency site |
+| `cli-tool` | Developer tool landing with terminal and command-led sections | Developer tool docs |
+| `startup` | Launch page with waitlist, proof, features, and FAQ structure | Product launch |
 | `minimal` | Just Next.js + Sigil | Clean starting point |
 
 ### 5.2 Interactive Flow
@@ -786,7 +789,7 @@ Runs 6 diagnostic checks:
 Lives at repo root. Covers:
 - Repository structure
 - Token architecture (3-layer model)
-- Preset system (31 presets, 6 categories, creation steps)
+- Preset system (44 presets, 7 categories, creation steps)
 - Component conventions (forwardRef, className, CSS variables, class naming)
 - CLI commands
 - Color rules (OKLCH, themed vs unthemed)
@@ -920,7 +923,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 | **Config** | `writeConfig` → `readConfig` round-trips all fields; `configExists` detects presence/absence | P1 |
 | **Registry** | `getComponent` returns correct entry; `resolveWithDependencies` walks dependency chain; `listComponentNames` is complete | P1 |
 | **Detection** | Detects Next.js, Remix, Vite, Astro from package.json; detects all package managers; finds global CSS in all candidate paths | P1 |
-| **Catalog** | All 31 presets have catalog entries; no duplicate names; all categories have at least one entry | P2 |
+| **Catalog** | All 44 presets have catalog entries; no duplicate names; all categories have at least one entry | P2 |
 | **Agent instructions** | Generated markdown contains preset name, paths, feature list; no undefined values | P2 |
 
 ### 10.2 CLI Integration Tests
@@ -942,7 +945,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 
 | Test | Description | Priority |
 |------|-------------|----------|
-| Every preset × key components | Render Button, Card, Input, Badge with each of 31 presets → screenshot comparison | P1 |
+| Every preset × key components | Render Button, Card, Input, Badge with each of 44 presets → screenshot comparison | P1 |
 | Light/dark mode | Same component renders correctly in both themes | P1 |
 | Token override | Override `--sigil-primary` → component updates visually | P2 |
 | Responsive | Components render correctly at mobile/tablet/desktop breakpoints | P2 |
@@ -953,7 +956,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 |------|-------------|----------|
 | axe-core scan | Every component passes automated a11y audit | P1 |
 | Keyboard navigation | Dialog, Dropdown, Tabs, Tooltip, Accordion are keyboard-navigable | P1 |
-| Color contrast | All text/background token combinations meet WCAG AA (4.5:1 for normal text, 3:1 for large) across all 31 presets | P1 |
+| Color contrast | All text/background token combinations meet WCAG AA (4.5:1 for normal text, 3:1 for large) across all 44 presets | P1 |
 | Focus indicators | Every interactive component has visible focus ring using `--sigil-focus-ring-*` tokens | P2 |
 | Screen reader | Overlays announce correctly; live regions work | P2 |
 
@@ -990,7 +993,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 - Fumadocs-based
 - Component API reference (every component's props, variants, slots)
 - Token reference (every category, every field)
-- Preset gallery (visual previews of all 31 presets)
+- Preset gallery (visual previews of all 44 presets)
 - Migration guide (shadcn → Sigil)
 - Agent usage guide
 

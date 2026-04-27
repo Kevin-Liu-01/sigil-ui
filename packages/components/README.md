@@ -9,7 +9,7 @@
 ```
 Wrong:  open Button.tsx → change "bg-indigo-600" to "bg-emerald-600"
 Wrong:  open Card.tsx → add "rounded-2xl" to override the default radius
-Right:  change --sigil-primary to emerald in your token CSS → every primary-colored component updates
+Right:  change --s-primary to emerald in your token CSS → every primary-colored component updates
 Right:  switch to a preset with larger radius → every component's corners update
 ```
 
@@ -23,7 +23,7 @@ pnpm add @sigil-ui/components
 
 **Peer dependencies:** `@sigil-ui/tokens`, `react`, `react-dom`
 
-## Component Inventory (65)
+## Component Inventory (300+)
 
 ### Layout (9)
 `Stack` `Grid` `Section` `Frame` `PageGrid` `Margin` `Gutter` `Divider` `HRule`
@@ -54,6 +54,17 @@ pnpm add @sigil-ui/components
 
 ### Animation (1)
 `AnimateOnScroll`
+
+### Expansion Recipes (120)
+
+The library also includes shadcn/Radix-inspired composed recipes for product apps:
+
+- **Overlay and interaction:** `Modal` `ConfirmDialog` `PromptDialog` `ResponsiveDialog` `Lightbox` `ImagePreview` `Spotlight` `CommandMenu` `ActionMenu` `OverflowMenu` `MegaMenu` `ContextPanel` `PopoverForm` `FloatingPanel` `TooltipGroup` `Tour` `TourStep` `Coachmark` `HotkeyProvider` `ShortcutRecorder`
+- **Forms and inputs:** `SearchInput` `CurrencyInput` `PhoneInput` `TimePicker` `DateTimePicker` `DateRangeField` `MultiSelect` `Autocomplete` `CreatableSelect` `AsyncSelect` `SegmentedTabs` `RangeSlider` `DualRangeSlider` `FileDropzone` `ImageUpload` `AvatarUpload` `ColorField` `ComboboxField` `CheckboxCard` `RadioCard` `SwitchField` `SliderField` `StepperField` `TagsField` `CopyInput`
+- **Feedback and status:** `StatusBadge` `StatusDot` `StatusPill` `OnlineIndicator` `PresenceAvatar` `Notification` `NotificationList` `InlineAlert` `Callout` `BannerAlert` `ErrorState` `LoadingState` `SuccessState` `ProgressSteps` `TimelineProgress` `ToastAction` `ToastPromise` `SkeletonCard` `SkeletonTable` `SpinnerOverlay`
+- **Data display:** `DescriptionList` `KeyValue` `PropertyList` `StatCard` `MetricGrid` `Trend` `SparkArea` `SparkBar` `DataList` `DataListItem` `DataGrid` `DataToolbar` `DataFilters` `DataPagination` `ColumnVisibility` `BulkActions` `EmptyTable` `Listbox` `VirtualList` `TreeTable`
+- **Layout and navigation:** `ContainerQuery` `SplitPane` `Dock` `TopBar` `BottomBar` `MobileNav` `SidebarNav` `AppHeader` `PageHeader` `SectionHeader` `ContentTabs` `AnchorNav` `TableOfContents` `ScrollSpy` `MasonryGrid` `MediaCard` `ResourceCard` `FeatureCard` `PricingCard` `TestimonialCarousel`
+- **Developer and AI/product UI:** `CodeTabs` `CodePreview` `CopyButton` `TokenPreview` `ThemeSwatch` `ThemeSwitcher` `PromptInput` `ChatMessage` `ChatThread` `MessageComposer` `ActivityTimeline` `AuditLog` `Changelog` `VersionBadge` `KeyboardKey`
 
 ## How Components Consume Tokens
 
@@ -95,8 +106,8 @@ This means:
 | Class prefix | All CSS classes prefixed with `sigil-` |
 | Variants | Exposed as typed props: `variant`, `size`, `intent` |
 | Slot pattern | `asChild` prop via `@radix-ui/react-slot` for composability |
-| Token styling | All visual properties via `var(--sigil-*)`, never hardcoded |
-| Motion | All transitions use `--sigil-duration-*` and `--sigil-easing-*` |
+| Token styling | All visual properties via `var(--s-*)`, never hardcoded |
+| Motion | All transitions use `--s-duration-*` and `--s-ease-*` |
 
 ## Usage
 

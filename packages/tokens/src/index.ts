@@ -25,6 +25,7 @@ export type {
   DividerStyleTokens,
   GridVisualTokens,
   GutterPattern,
+  MarkdownTokenOverrides,
   MotionDurations,
   MotionEasings,
   MotionTokens,

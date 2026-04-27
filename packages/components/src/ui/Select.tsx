@@ -39,7 +39,7 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
         className={cn(
           "flex h-[var(--s-input-height,36px)] w-full items-center justify-between gap-2",
           "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
-          "border bg-[var(--s-background)]",
+          "border border-[style:var(--s-border-style,solid)] bg-[var(--s-background)]",
           "px-3",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "focus:outline-none focus:ring-1",

@@ -190,7 +190,7 @@ async function selectPreset(projectType: string): Promise<PresetInfo | undefined
     choices.push({ title: "", value: "_divider", description: "" });
   }
 
-  const categoryOrder: PresetCategory[] = ["structural", "minimal", "dark", "colorful", "editorial", "industrial"];
+  const categoryOrder: PresetCategory[] = ["structural", "minimal", "dark", "colorful", "editorial", "industrial", "edgeless"];
 
   for (const cat of categoryOrder) {
     const presets = categories.get(cat);

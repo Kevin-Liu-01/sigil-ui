@@ -8,7 +8,7 @@
 
 ```
 Wrong:  open Card.tsx → change rounded-lg to rounded-none → open Button.tsx → change bg-indigo to bg-yellow → repeat
-Right:  sigil preset brutalist   (every component updates to brutalist aesthetic)
+Right:  sigil preset anvil       (every component updates to a heavy industrial aesthetic)
 Right:  edit the preset's tokens.radius.md from "8px" to "0px"   (every rounded corner goes sharp)
 ```
 
@@ -186,7 +186,7 @@ When building UI in a Sigil project:
 3. **To change the entire aesthetic, switch presets** — `npx @sigil-ui/cli preset <name>`
 4. **To make targeted changes, use CSS variable overrides** in the token CSS file:
    ```css
-   :root { --sigil-primary: oklch(0.65 0.18 150); }
+   :root { --s-primary: oklch(0.65 0.18 150); }
    ```
 5. **To create a new aesthetic from scratch**, scaffold a custom preset: `npx @sigil-ui/cli preset create`
-6. **Never hardcode colors** — use `var(--sigil-*)` in all styling
+6. **Never hardcode colors** — use `var(--s-*)` in all styling

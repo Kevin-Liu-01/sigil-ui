@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { NavbarLogo } from "@/components/landing/hero-logo-field";
-import { BookOpen, LayoutGrid, Palette, Play, Star, PanelsTopLeft, Footprints } from "lucide-react";
+import { BookOpen, LayoutGrid, Palette, Play, Star, PanelsTopLeft, Footprints, Menu, X } from "lucide-react";
 import { SigilThemeToggle } from "./theme-toggle";
 import { useIsEdgeless } from "./sigil-frame";
 
@@ -51,6 +51,7 @@ export { LandingNavbar as Navbar };
 
 export function LandingNavbar({ fullBleed = false }: { fullBleed?: boolean }) {
   const stars = useGitHubStars();
+  const [mobileOpen, setMobileOpen] = useState(false);
   let edgeless = false;
   try { edgeless = useIsEdgeless(); } catch { /* outside provider */ }
 
@@ -122,6 +123,16 @@ export function LandingNavbar({ fullBleed = false }: { fullBleed?: boolean }) {
         </a>
 
         <SigilThemeToggle />
+
+        <button
+          type="button"
+          className="inline-flex md:hidden items-center justify-center h-8 w-8 border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-sm,4px)] bg-transparent text-[var(--s-text-muted)]"
+          aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
+          aria-expanded={mobileOpen}
+          onClick={() => setMobileOpen((open) => !open)}
+        >
+          {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+        </button>
       </div>
     </>
   );
@@ -130,7 +141,7 @@ export function LandingNavbar({ fullBleed = false }: { fullBleed?: boolean }) {
 
   if (fullBleed) {
     return (
-      <nav className={`w-full sticky top-0 z-50 bg-[var(--s-background)] ${borderClass} backdrop-blur-xl backdrop-saturate-[1.4]`}>
+      <nav className={`w-full sticky top-0 z-50 bg-[color-mix(in_oklch,var(--s-background)_80%,transparent)] ${borderClass} backdrop-blur-xl backdrop-saturate-[1.4]`}>
         <div
           className="mx-auto flex items-center justify-between h-[var(--s-navbar-height,56px)] w-full"
           style={{
@@ -140,13 +151,54 @@ export function LandingNavbar({ fullBleed = false }: { fullBleed?: boolean }) {
         >
           {navContent}
         </div>
+        {mobileOpen && <MobileMenu onNavigate={() => setMobileOpen(false)} />}
       </nav>
     );
   }
 
   return (
-    <nav className={`flex items-center justify-between h-[var(--s-navbar-height,56px)] px-6 ${borderClass} sticky top-0 z-50 bg-[var(--s-background)] backdrop-blur-xl backdrop-saturate-[1.4]`}>
+    <nav className={`flex items-center justify-between h-[var(--s-navbar-height,56px)] px-6 ${borderClass} sticky top-0 z-50 bg-[color-mix(in_oklch,var(--s-background)_80%,transparent)] backdrop-blur-xl backdrop-saturate-[1.4]`}>
       {navContent}
+      {mobileOpen && <MobileMenu onNavigate={() => setMobileOpen(false)} />}
     </nav>
+  );
+}
+
+function MobileMenu({ onNavigate }: { onNavigate: () => void }) {
+  return (
+    <div className="absolute inset-x-0 top-[var(--s-navbar-height,56px)] z-50 border-b border-[var(--s-border)] bg-[var(--s-background)] px-4 py-4 shadow-[var(--s-shadow-lg)] md:hidden">
+      <div className="flex flex-col gap-2">
+        {NAV_LINKS.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            onClick={onNavigate}
+            className="flex items-center gap-2 rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border-muted)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-xs font-medium uppercase tracking-[0.04em] text-[var(--s-text-muted)] no-underline"
+          >
+            {link.icon}
+            {link.label}
+          </a>
+        ))}
+        <button
+          type="button"
+          onClick={() => {
+            window.dispatchEvent(new Event("sigil:open-search"));
+            onNavigate();
+          }}
+          className="flex items-center gap-2 rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border-muted)] bg-transparent px-3 py-2 font-[family-name:var(--s-font-mono)] text-xs font-medium uppercase tracking-[0.04em] text-[var(--s-text-muted)]"
+        >
+          <BookOpen size={14} />
+          Search Docs
+        </button>
+        <a
+          href="/sandbox"
+          onClick={onNavigate}
+          className="mt-1 flex items-center justify-center gap-2 rounded-[var(--s-radius-sm,4px)] bg-[var(--s-primary)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-xs font-semibold uppercase tracking-[0.04em] text-[var(--s-primary-contrast,#fff)] no-underline"
+        >
+          <PanelsTopLeft size={14} />
+          Try Sandbox
+        </a>
+      </div>
+    </div>
   );
 }

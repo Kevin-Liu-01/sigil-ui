@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 
 export const metadata: Metadata = {
   title: "About — Sigil UI",
@@ -30,14 +31,14 @@ export default function AboutPage() {
         <p>
           Sigil is a token-driven design system for people who believe visual
           identity should be a single source of truth — not scattered across
-          hundreds of component files. One spec controls 300+ CSS variables.
-          200+ token-driven components read those variables. 30 presets swap the entire
+          hundreds of component files. One token layer controls the visual system.
+          {` ${SIGIL_PRODUCT_STATS.componentCountLabel}`} token-driven components read those variables. {SIGIL_PRODUCT_STATS.presetCount} presets swap the entire
           aesthetic in a single command.
         </p>
         <p style={{ marginTop: 16 }}>Built by Kevin Liu.</p>
         <p style={{ marginTop: 16 }}>
           The idea: one markdown file (<code>sigil.tokens.md</code>) controls
-          300+ CSS variables. 200+ token-driven components read these variables. 30 presets
+          core token overrides. {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components read these variables. {SIGIL_PRODUCT_STATS.presetCount} presets
           swap the entire visual identity. Your agent edits one file. Everything
           updates.
         </p>

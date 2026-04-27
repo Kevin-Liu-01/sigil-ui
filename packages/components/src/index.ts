@@ -151,6 +151,14 @@ export { VisuallyHidden, type VisuallyHiddenProps } from "./ui/VisuallyHidden";
 export { SegmentedControl, SegmentedControlItem, type SegmentedControlProps, type SegmentedControlItemProps } from "./ui/SegmentedControl";
 export { CircularProgress, type CircularProgressProps } from "./ui/CircularProgress";
 export { PasswordInput, type PasswordInputProps } from "./ui/PasswordInput";
+export * from "./ui/AdvancedInputs";
+export * from "./ui/StatusFeedback";
+export * from "./ui/Productivity";
+
+// ---------------------------------------------------------------------------
+// Data display recipes
+// ---------------------------------------------------------------------------
+export * from "./data/DataComponents";
 
 // ---------------------------------------------------------------------------
 // Navigation
@@ -174,6 +182,7 @@ export {
 } from "./navigation/Menubar";
 export { Toolbar, ToolbarButton, ToolbarSeparator, ToolbarToggleGroup, ToolbarToggleItem, ToolbarLink, type ToolbarProps } from "./navigation/Toolbar";
 export { SocialIcons, type SocialIconsProps, type SocialLink } from "./navigation/SocialIcons";
+export * from "./navigation/AppSurfaces";
 
 // ---------------------------------------------------------------------------
 // Overlays
@@ -213,6 +222,7 @@ export {
 export { HoverCard, HoverCardTrigger, HoverCardContent } from "./overlays/HoverCard";
 export { Sonner, sonnerToast, type SonnerProps } from "./overlays/Sonner";
 export { PreviewCard, PreviewCardTrigger, PreviewCardContent } from "./overlays/PreviewCard";
+export * from "./overlays/ComposedOverlays";
 
 // ---------------------------------------------------------------------------
 // Shapes

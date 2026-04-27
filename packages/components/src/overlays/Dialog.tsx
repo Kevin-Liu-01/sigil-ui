@@ -59,6 +59,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
           )}
           {...props}
         >
+          <DialogPrimitive.Title className="sr-only">Dialog</DialogPrimitive.Title>
           {children}
           <DialogPrimitive.Close
             className={cn(

@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSigilTokens } from "./token-provider";
 import type { SigilTokens } from "@sigil-ui/tokens";
+import { tokensToMarkdown } from "./token-markdown";
 
 /**
  * Flattens a SigilTokens object into CSS custom property declarations.
@@ -62,15 +63,16 @@ function tokensToCssText(tokens: SigilTokens): string {
 
 type PresetEditorProps = {
   className?: string;
+  markdownText?: string;
   /** Called when user wants to copy the CSS output. */
   onCopy?: () => void;
   /** Called when user wants to export the preset. */
   onExport?: () => void;
 };
 
-export function PresetEditor({ className, onCopy, onExport }: PresetEditorProps) {
+export function PresetEditor({ className, markdownText, onCopy, onExport }: PresetEditorProps) {
   const { tokens, activePreset, patchTokens } = useSigilTokens();
-  const [editMode, setEditMode] = useState<"css" | "json">("css");
+  const [editMode, setEditMode] = useState<"markdown" | "css" | "json">("markdown");
   const [localText, setLocalText] = useState("");
   const [isDirty, setIsDirty] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -80,12 +82,17 @@ export function PresetEditor({ className, onCopy, onExport }: PresetEditorProps)
     () => JSON.stringify(tokens, null, 2),
     [tokens],
   );
+  const generatedMarkdown = useMemo(
+    () => markdownText ?? tokensToMarkdown(tokens, activePreset.replace(/\*$/, "")),
+    [activePreset, markdownText, tokens],
+  );
 
   useEffect(() => {
     if (!isDirty) {
-      setLocalText(editMode === "css" ? generatedCss : generatedJson);
+      if (editMode === "markdown") setLocalText(generatedMarkdown);
+      else setLocalText(editMode === "css" ? generatedCss : generatedJson);
     }
-  }, [generatedCss, generatedJson, editMode, isDirty]);
+  }, [generatedCss, generatedJson, generatedMarkdown, editMode, isDirty]);
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -96,6 +103,10 @@ export function PresetEditor({ className, onCopy, onExport }: PresetEditorProps)
   );
 
   const handleApply = useCallback(() => {
+    if (editMode === "markdown") {
+      setIsDirty(false);
+      return;
+    }
     if (editMode === "json") {
       try {
         const parsed = JSON.parse(localText) as Partial<SigilTokens>;
@@ -179,7 +190,7 @@ export function PresetEditor({ className, onCopy, onExport }: PresetEditorProps)
               overflow: "hidden",
             }}
           >
-            {(["css", "json"] as const).map((mode) => (
+            {(["markdown", "css", "json"] as const).map((mode) => (
               <button
                 key={mode}
                 type="button"
@@ -205,7 +216,7 @@ export function PresetEditor({ className, onCopy, onExport }: PresetEditorProps)
                       : "var(--s-text-muted)",
                 }}
               >
-                {mode}
+                {mode === "markdown" ? "tokens.md" : mode}
               </button>
             ))}
           </div>

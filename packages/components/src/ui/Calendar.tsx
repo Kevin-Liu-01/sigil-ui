@@ -1,7 +1,8 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, type ComponentProps } from "react";
+import { forwardRef, useEffect, useRef, useState, type ComponentProps } from "react";
 import { DayPicker, getDefaultClassNames, type DayButton } from "react-day-picker";
+import type { DropdownProps } from "react-day-picker";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react";
 import { Button } from "./Button";
 import { cn } from "../utils";
@@ -44,10 +45,11 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
         months: cn("relative flex flex-col gap-4 md:flex-row", defaultClassNames.months),
         month: cn("flex w-full flex-col gap-4", defaultClassNames.month),
         nav: cn(
-          "absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1",
+          "absolute inset-x-0 top-0 flex w-full items-center justify-between gap-1 pointer-events-none",
           defaultClassNames.nav,
         ),
         button_previous: cn(
+          "pointer-events-auto",
           "inline-flex size-[var(--cell-size)] items-center justify-center rounded-[var(--s-radius-sm,4px)] p-0",
           "text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface)] hover:text-[var(--s-text)]",
@@ -55,6 +57,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
           defaultClassNames.button_previous,
         ),
         button_next: cn(
+          "pointer-events-auto",
           "inline-flex size-[var(--cell-size)] items-center justify-center rounded-[var(--s-radius-sm,4px)] p-0",
           "text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface)] hover:text-[var(--s-text)]",
@@ -69,11 +72,8 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
           "flex h-[var(--cell-size)] w-full items-center justify-center gap-1.5 text-sm font-medium",
           defaultClassNames.dropdowns,
         ),
-        dropdown_root: cn(
-          "relative rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]",
-          defaultClassNames.dropdown_root,
-        ),
-        dropdown: cn("absolute inset-0 opacity-0", defaultClassNames.dropdown),
+        dropdown_root: cn("relative", defaultClassNames.dropdown_root),
+        dropdown: cn("absolute inset-0 opacity-0 pointer-events-none", defaultClassNames.dropdown),
         caption_label: cn(
           "font-medium text-[var(--s-text)] select-none",
           captionLayout === "label" ? "text-sm" : "flex h-8 items-center gap-1 rounded-[var(--s-radius-md,6px)] pr-1 pl-2 text-sm",
@@ -119,6 +119,7 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
               : ChevronDownIcon;
           return <Icon className={cn("size-4", chevronCn)} {...chevronProps} />;
         },
+        Dropdown: CalendarDropdown,
         DayButton: CalendarDayButton,
         WeekNumber: ({ children, ...wnProps }) => (
           <td {...wnProps}>
@@ -133,6 +134,137 @@ export const Calendar = forwardRef<HTMLDivElement, CalendarProps>(function Calen
     />
   );
 });
+
+function CalendarDropdown({
+  options,
+  className: _className,
+  components: _components,
+  classNames: _classNames,
+  value,
+  onChange,
+  disabled,
+  ...rest
+}: DropdownProps) {
+  const [open, setOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+  const numericValue = Number(value);
+  const selectedOption = options?.find((o) => o.value === numericValue);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const el = listRef.current?.querySelector("[data-active=true]");
+    el?.scrollIntoView({ block: "nearest" });
+
+    const onPointerDown = (e: PointerEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        setOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const handleSelect = (optionValue: number) => {
+    const syntheticEvent = {
+      target: { value: String(optionValue) },
+    } as React.ChangeEvent<HTMLSelectElement>;
+    onChange?.(syntheticEvent);
+    setOpen(false);
+  };
+
+  return (
+    <div ref={containerRef} className="relative">
+      <button
+        type="button"
+        disabled={disabled}
+        aria-label={rest["aria-label"]}
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className={cn(
+          "flex h-8 items-center gap-1 rounded-[var(--s-radius-md,6px)] px-2 text-sm font-medium",
+          "text-[var(--s-text)] bg-transparent",
+          "border border-transparent",
+          "transition-colors duration-[var(--s-duration-fast,150ms)]",
+          "hover:bg-[var(--s-surface)] hover:border-[var(--s-border)]",
+          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+          "disabled:opacity-50 disabled:cursor-not-allowed",
+          "cursor-pointer select-none",
+        )}
+      >
+        {selectedOption?.label}
+        <ChevronDownIcon className={cn(
+          "size-3.5 text-[var(--s-text-muted)] transition-transform duration-[var(--s-duration-fast,150ms)]",
+          open && "rotate-180",
+        )} />
+      </button>
+      {open && (
+        <div
+          className={cn(
+            "absolute left-1/2 top-[calc(100%+4px)] z-50 -translate-x-1/2",
+            "min-w-[8rem] overflow-hidden p-1",
+            "rounded-[var(--s-card-radius,var(--s-radius-md,8px))]",
+            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-lg)]",
+            "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
+          )}
+        >
+          <div
+            ref={listRef}
+            role="listbox"
+            className="max-h-[280px] overflow-y-auto"
+          >
+            {options?.map(({ value: optValue, label, disabled: optDisabled }) => (
+              <button
+                key={optValue}
+                type="button"
+                role="option"
+                disabled={optDisabled}
+                aria-selected={optValue === numericValue}
+                data-active={optValue === numericValue}
+                onClick={() => handleSelect(optValue)}
+                className={cn(
+                  "relative flex h-8 w-full cursor-default select-none items-center",
+                  "rounded-[var(--s-radius-sm,4px)] pl-8 pr-3 text-sm outline-none",
+                  "text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,100ms)]",
+                  "hover:bg-[var(--s-background)] focus-visible:bg-[var(--s-background)]",
+                  "disabled:pointer-events-none disabled:opacity-50",
+                  optValue === numericValue && "font-medium",
+                )}
+              >
+                <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                  {optValue === numericValue && (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+                      <path
+                        d="M3 7l3 3 5-6"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </span>
+                {label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function CalendarDayButton({
   className,

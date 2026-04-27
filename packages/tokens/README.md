@@ -8,7 +8,7 @@ The design token system that powers Sigil UI. This is the single source of truth
 
 ```
 Traditional:  open Button.tsx → find the Tailwind class → change bg-blue-500 to bg-indigo-600 → repeat for every component
-Sigil:        change --sigil-primary → every component that uses primary updates instantly
+Sigil:        change --s-primary → every component that uses primary updates instantly
 ```
 
 Agents and humans should treat `@sigil-ui/tokens` as the control layer. Components are downstream consumers.
@@ -68,7 +68,7 @@ Four compile targets from the same `SigilTokens` object:
 
 ### Markdown Parser (`compile.ts`)
 
-`parseMarkdownTokens(markdown)` — reads `sigil.tokens.md` back into a `SigilTokens` object. This closes the agent editing loop: agent edits the markdown, parser reads it back, compiler outputs CSS/Tailwind/TS.
+`parseMarkdownTokens(markdown)` — reads `sigil.tokens.md` back into `MarkdownTokenOverrides` for the core markdown-editable groups (`colors`, `typography`, `spacing`, `sigil`, `radius`, `shadows`, `motion`, `borders`). Full presets use typed `SigilTokens`; markdown is the agent-friendly override surface that can be merged with defaults before compiling CSS or Tailwind.
 
 ## CSS Compiler Options
 
@@ -86,8 +86,8 @@ compileToCss(tokens, {
 
 ```
 Primitive   → raw values, no meaning        oklch(0.65 0.15 280), 4px, "Nacelle"
-Semantic    → named purpose                 --sigil-primary, --sigil-surface, --sigil-duration-fast
-Component   → scoped to one component       --sigil-card-radius, --sigil-grid-cell (use sparingly)
+Semantic    → named purpose                 --s-primary, --s-surface, --s-duration-fast
+Component   → scoped to one component       --s-card-radius, --s-grid-cell (use sparingly)
 ```
 
 ## Color Rules
@@ -105,17 +105,17 @@ All colors use OKLCH: `oklch(L C H)` where:
 When an agent needs to change how a Sigil project looks:
 
 1. **Read the active preset** — understand the current mood, fonts, and colors
-2. **Edit `sigil.tokens.md`** or the token CSS file — change values at the semantic level
+2. **Edit `sigil.tokens.md`** for core overrides or the token CSS file — change values at the semantic level
 3. **Never edit component files to change colors/spacing/fonts** — components read from CSS variables
 4. **Use OKLCH for all colors** — no hex, no rgb, no hsl
 5. **Run `npx @sigil-ui/cli doctor`** after changes to validate
 
-The token system is designed so that a single edit propagates everywhere. An agent changing `--sigil-primary` from indigo to emerald updates buttons, links, focus rings, gradients, glows, and badges — without touching any component file.
+The token system is designed so that a single edit propagates everywhere. An agent changing `--s-primary` from indigo to emerald updates buttons, links, focus rings, gradients, glows, and badges — without touching any component file.
 
 ## Exports
 
 ```typescript
-import { defaultTokens, SigilTokens, SigilPreset } from "@sigil-ui/tokens";
+import { defaultTokens, SigilTokens, SigilPreset, MarkdownTokenOverrides } from "@sigil-ui/tokens";
 import { compileToCss, compileToTailwind, compileToTs, compileToJson, parseMarkdownTokens } from "@sigil-ui/tokens";
 import { createPreset, mergePresets, sigilPreset } from "@sigil-ui/tokens";
 ```

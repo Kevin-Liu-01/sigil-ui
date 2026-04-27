@@ -112,15 +112,16 @@ export const brandPreset: SigilPreset = {
 };
 ```
 
-## Compiling a preset
+## Applying a preset
 
-Use the CLI to compile your preset to CSS:
+Use the CLI to write the selected preset imports and then validate the project:
 
 ```bash
-npx @sigil-ui/cli compile ./presets/brand.ts --out ./public/brand.css
+npx @sigil-ui/cli preset brand
+npx @sigil-ui/cli doctor
 ```
 
-This generates a CSS file with all `--s-*` variables set to your preset values, including light/dark mode support.
+This updates your token CSS so the compiled `--s-*` variables resolve to your preset values, including light/dark mode support.
 
 ## Applying a preset at runtime
 

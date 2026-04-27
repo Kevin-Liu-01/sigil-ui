@@ -18,7 +18,7 @@ Every component reads from a single token object. Colors, spacing, radii, shadow
 |---|---|---|
 | Theming | Edit config files + CSS variables + component files | Edit one token file |
 | Agent workflow | Agent modifies scattered Tailwind classes or style props | Your agent edits one file |
-| Presets | Copy a config from a blog post | `npx @sigil-ui/cli init --preset minimal` |
+| Presets | Copy a config from a blog post | `npx @sigil-ui/cli init --preset sigil` |
 | Token system | CSS variables, manually maintained | Three-layer architecture: primitive → semantic → component |
 | Shipping themes | "Just change the CSS variables" | Ship a preset, not a config file |
 
@@ -67,4 +67,5 @@ Every layer compiles to CSS custom properties with the `--s-` prefix. Components
 - [Installation](/docs/installation) — detailed setup for Next.js, Vite, and Remix
 - [Theming](/docs/theming) — create and share presets
 - [CLI Reference](/docs/cli) — all available commands
+- [Component Recipes](/docs/components/component-recipes) — expanded overlays, inputs, status, data, app shell, and AI UI
 - [Button](/docs/components/button) — your first component

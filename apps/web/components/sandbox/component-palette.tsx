@@ -182,32 +182,19 @@ const CATEGORIES = {
 } as const;
 
 type CategoryName = keyof typeof CATEGORIES;
-
 const CATEGORY_NAMES = Object.keys(CATEGORIES) as CategoryName[];
+const CATEGORY_COUNTS = Object.fromEntries(
+  CATEGORY_NAMES.map((cat) => [cat, (CATEGORIES[cat] as readonly { id: string }[]).length]),
+) as Record<CategoryName, number>;
+const TOTAL_COUNT = Object.values(CATEGORY_COUNTS).reduce((a, b) => a + b, 0);
 
-type ComponentItem = {
-  id: string;
-  name: string;
-  icon: string;
-};
+type ComponentItem = { id: string; name: string; icon: string };
 
-function DraggableCard({
-  item,
-  onAdd,
-}: {
-  item: ComponentItem;
-  onAdd: (component: string, props: Record<string, any>) => void;
-}) {
-  const { attributes, listeners, setNodeRef, transform, isDragging } =
-    useDraggable({
-      id: `palette-${item.id}`,
-      data: { component: item.id, props: {} },
-    });
-
-  const style = {
-    transform: transform ? CSS.Translate.toString(transform) : undefined,
-    opacity: isDragging ? 0.5 : 1,
-  };
+function DraggableCard({ item, onAdd }: { item: ComponentItem; onAdd: (component: string, props: Record<string, unknown>) => void }) {
+  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+    id: `palette-${item.id}`,
+    data: { component: item.id, props: {} },
+  });
 
   return (
     <button
@@ -215,35 +202,22 @@ function DraggableCard({
       {...listeners}
       {...attributes}
       onClick={() => onAdd(item.id, {})}
+      className="flex flex-col items-center justify-center gap-1 border bg-transparent cursor-grab transition-all duration-[var(--s-duration-fast,120ms)] hover:border-[var(--s-primary)] hover:-translate-y-px"
       style={{
-        ...style,
-        width: 80,
-        height: 60,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 4,
-        background: "var(--s-surface)",
-        border: "1px solid var(--s-border)",
-        borderRadius: 6,
-        cursor: "grab",
+        transform: transform ? CSS.Translate.toString(transform) : undefined,
+        opacity: isDragging ? 0.4 : 1,
+        borderColor: "var(--s-border)",
+        background: "var(--s-background)",
+        borderRadius: "var(--s-radius-sm, 4px)",
+        padding: "10px 4px",
         fontFamily: "inherit",
-        transition: "border-color 150ms, background 150ms",
+        minHeight: "56px",
       }}
     >
-      <span style={{ fontSize: 16, lineHeight: 1 }}>{item.icon}</span>
+      <span style={{ fontSize: 15, lineHeight: 1 }}>{item.icon}</span>
       <span
-        style={{
-          fontSize: 10,
-          color: "var(--s-text-muted)",
-          fontWeight: 500,
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          maxWidth: "100%",
-          padding: "0 4px",
-        }}
+        className="font-[family-name:var(--s-font-mono)] overflow-hidden text-ellipsis whitespace-nowrap w-full text-center"
+        style={{ fontSize: "9px", fontWeight: 500, color: "var(--s-text-muted)", padding: "0 2px" }}
       >
         {item.name}
       </span>
@@ -251,131 +225,69 @@ function DraggableCard({
   );
 }
 
-export function ComponentPalette({
-  onAddComponent,
-}: {
-  onAddComponent: (component: string, props: Record<string, any>) => void;
-}) {
-  const [activeCategory, setActiveCategory] =
-    useState<CategoryName>("Layout");
+export function ComponentPalette({ onAddComponent }: { onAddComponent: (component: string, props: Record<string, unknown>) => void }) {
+  const [activeCategory, setActiveCategory] = useState<CategoryName>("Marketing");
   const [search, setSearch] = useState("");
 
   const filteredItems = useMemo(() => {
     const query = search.trim().toLowerCase();
-    if (!query) {
-      return CATEGORIES[activeCategory] as readonly ComponentItem[];
-    }
-    return Object.values(CATEGORIES)
-      .flat()
-      .filter(
-        (item) =>
-          item.name.toLowerCase().includes(query) ||
-          item.id.toLowerCase().includes(query),
-      );
+    if (!query) return CATEGORIES[activeCategory] as readonly ComponentItem[];
+    return Object.values(CATEGORIES).flat().filter(
+      (item) => item.name.toLowerCase().includes(query) || item.id.toLowerCase().includes(query),
+    );
   }, [search, activeCategory]);
 
   return (
-    <div style={{ height: "100%", display: "flex", flexDirection: "column" }}>
+    <div className="flex h-full flex-col">
       {/* Search */}
-      <div
-        style={{
-          padding: "8px 16px 0",
-          flexShrink: 0,
-        }}
-      >
+      <div className="shrink-0 px-3 pt-2 pb-1">
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search components..."
-          style={{
-            width: "100%",
-            padding: "6px 10px",
-            fontSize: 12,
-            fontFamily: "inherit",
-            background: "var(--s-surface)",
-            border: "1px solid var(--s-border)",
-            borderRadius: 6,
-            color: "var(--s-text)",
-            outline: "none",
-          }}
+          placeholder={`Search ${TOTAL_COUNT} components...`}
+          className="w-full border bg-[var(--s-background)] px-2.5 py-1.5 text-[11px] text-[var(--s-text)] outline-none font-[family-name:var(--s-font-mono)]"
+          style={{ borderColor: "var(--s-border)", borderRadius: "var(--s-radius-sm, 4px)" }}
         />
       </div>
 
-      {/* Category tabs */}
-      <div
-        style={{
-          display: "flex",
-          gap: 2,
-          padding: "6px 16px",
-          borderBottom: "1px solid var(--s-border)",
-          flexShrink: 0,
-          overflowX: "auto",
-        }}
-      >
+      {/* Category pills — vertical list for sidebar */}
+      <div className="shrink-0 flex flex-wrap gap-1 px-3 py-2 border-b" style={{ borderColor: "var(--s-border)" }}>
         {CATEGORY_NAMES.map((cat) => {
           const isActive = !search && activeCategory === cat;
           return (
             <button
               key={cat}
-              onClick={() => {
-                setSearch("");
-                setActiveCategory(cat);
-              }}
+              onClick={() => { setSearch(""); setActiveCategory(cat); }}
+              className="font-[family-name:var(--s-font-mono)] cursor-pointer border-none whitespace-nowrap transition-colors duration-[var(--s-duration-fast,120ms)]"
               style={{
-                padding: "4px 10px",
-                fontSize: 11,
-                fontWeight: 500,
+                padding: "3px 8px",
+                fontSize: "10px",
+                fontWeight: 600,
                 color: isActive ? "var(--s-primary)" : "var(--s-text-muted)",
-                background: isActive
-                  ? "color-mix(in srgb, var(--s-primary) 10%, transparent)"
-                  : "transparent",
-                border: "none",
-                borderRadius: 4,
-                cursor: "pointer",
-                whiteSpace: "nowrap",
-                fontFamily: "inherit",
-                transition: "color 150ms, background 150ms",
+                background: isActive ? "color-mix(in oklch, var(--s-primary) 12%, transparent)" : "transparent",
+                borderRadius: "var(--s-radius-sm, 4px)",
               }}
             >
               {cat}
+              <span className="ml-1 opacity-50">{CATEGORY_COUNTS[cat]}</span>
             </button>
           );
         })}
       </div>
 
-      {/* Component grid */}
-      <div
-        style={{
-          flex: 1,
-          padding: "10px 16px",
-          overflowY: "auto",
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 8,
-          alignContent: "start",
-        }}
-      >
+      {/* 2-column component grid */}
+      <div className="flex-1 overflow-y-auto px-3 py-2">
         {filteredItems.length === 0 ? (
-          <span
-            style={{
-              fontSize: 12,
-              color: "var(--s-text-muted)",
-              padding: "16px 0",
-              width: "100%",
-              textAlign: "center",
-            }}
-          >
-            No components match &ldquo;{search}&rdquo;
-          </span>
+          <div className="flex h-24 items-center justify-center text-[11px]" style={{ color: "var(--s-text-muted)" }}>
+            No match for &ldquo;{search}&rdquo;
+          </div>
         ) : (
-          filteredItems.map((item) => (
-            <DraggableCard
-              key={item.id}
-              item={item}
-              onAdd={onAddComponent}
-            />
-          ))
+          <div className="grid grid-cols-2 gap-1.5">
+            {filteredItems.map((item) => (
+              <DraggableCard key={item.id} item={item} onAdd={onAddComponent} />
+            ))}
+          </div>
         )}
       </div>
     </div>

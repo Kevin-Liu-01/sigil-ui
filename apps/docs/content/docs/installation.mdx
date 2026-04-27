@@ -37,8 +37,8 @@ Options:
 
 ```bash
 # Start with a preset
-npx @sigil-ui/cli init --preset minimal
-npx @sigil-ui/cli init --preset brutalist
+npx @sigil-ui/cli init --preset sigil
+npx @sigil-ui/cli init --preset anvil
 
 # Specify output directory
 cd apps/web
@@ -92,10 +92,11 @@ Override any token by redefining CSS variables. You can do this in a global styl
 }
 ```
 
-Or create a full preset file and compile it with the CLI:
+Or switch to a full preset with the CLI:
 
 ```bash
-npx @sigil-ui/cli compile ./tokens/brand.ts --out ./public/brand.css
+npx @sigil-ui/cli preset anvil
+npx @sigil-ui/cli doctor
 ```
 
 ## Framework guides

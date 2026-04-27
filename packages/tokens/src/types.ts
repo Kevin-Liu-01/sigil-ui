@@ -70,6 +70,7 @@ export type ColorTokens = {
   readonly "gradient-start"?: ColorValue | ThemedColor;
   readonly "gradient-end"?: ColorValue | ThemedColor;
   readonly glow?: ColorValue | ThemedColor;
+  readonly highlight?: ColorValue | ThemedColor;
 };
 
 // ---------------------------------------------------------------------------
@@ -704,6 +705,11 @@ export type SigilTokens = {
   readonly controls?: ControlTokens;
   readonly componentSurfaces?: ComponentSurfaceTokens;
 };
+
+export type MarkdownTokenOverrides = Pick<
+  SigilTokens,
+  "colors" | "typography" | "spacing" | "sigil" | "radius" | "shadows" | "motion" | "borders"
+>;
 
 // ---------------------------------------------------------------------------
 // Preset

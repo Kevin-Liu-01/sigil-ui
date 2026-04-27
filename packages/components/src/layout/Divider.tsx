@@ -13,7 +13,7 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   pattern?: DividerPattern;
   /** Band thickness. @default "md" */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  /** Pattern opacity. @default 0.15 */
+  /** Pattern opacity. @default 1 */
   opacity?: number;
   /** Pattern scale multiplier. @default 1 */
   scale?: number;
@@ -107,7 +107,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
     pattern = "vertical",
     size = "md",
     scale = 1,
-    opacity = 0.15,
+    opacity = 1,
     showBorders = true,
     showCross = false,
     label,

@@ -45,6 +45,12 @@ jobs:
       - name: Audit Sigil package surface
         run: pnpm audit:sigil
 
+      - name: Audit preset contrast
+        run: pnpm audit:contrast
+
+      - name: Smoke test create-sigil-app golden path
+        run: pnpm smoke:create-app
+
   package-smoke:
     name: Package Smoke
     runs-on: ubuntu-latest

@@ -8,6 +8,7 @@ const webDocsRoot = path.join(root, "apps/web/content/docs");
 const docsRoot = path.join(root, "apps/docs/content/docs");
 const showcasePath = path.join(root, "apps/web/components/landing/component-showcase.tsx");
 const canvasRegistryPath = path.join(root, "apps/web/components/sandbox/canvas-item.tsx");
+const presetCatalogPath = path.join(root, "packages/presets/src/catalog.ts");
 
 const exportNames = extractExports(read(indexPath));
 const webDocs = listMdxSlugs(webDocsRoot);
@@ -18,6 +19,8 @@ const canvasNames = extractRegistryKeys(read(canvasRegistryPath));
 const sourceFiles = walk(componentRoot).filter((file) => /\.(tsx?|json)$/.test(file));
 const violations = scanTokenViolations(sourceFiles);
 const staleCliDocs = scanStaleCliDocs([webDocsRoot, docsRoot]);
+const presetNames = extractStringValues(read(presetCatalogPath), /\bname:\s*"([^"]+)"/g);
+const productFactDrift = scanProductFactDrift(presetNames.size);
 
 const report = {
   exports: {
@@ -38,11 +41,15 @@ const report = {
   },
   tokenViolations: violations,
   staleCliDocs,
+  productFacts: {
+    presetCount: presetNames.size,
+    drift: productFactDrift,
+  },
 };
 
 printReport(report);
 
-const hasErrors = staleCliDocs.length > 0;
+const hasErrors = staleCliDocs.length > 0 || productFactDrift.length > 0;
 if (hasErrors) {
   process.exitCode = 1;
 }
@@ -175,6 +182,46 @@ function scanStaleCliDocs(dirs) {
   return [...new Set(stale)].sort();
 }
 
+function scanProductFactDrift(presetCount) {
+  const files = [
+    path.join(root, "README.md"),
+    path.join(root, "AGENTS.md"),
+    path.join(root, "packages/cli/README.md"),
+    path.join(root, "packages/create-sigil-app/README.md"),
+    path.join(root, "packages/components/README.md"),
+    path.join(root, "packages/presets/README.md"),
+    path.join(root, "packages/tokens/README.md"),
+    ...walk(path.join(root, "apps/web/app")).filter((file) => /\.(tsx?|mdx?)$/.test(file)),
+    ...walk(path.join(root, "apps/web/components")).filter((file) => /\.(tsx?|mdx?)$/.test(file)),
+    ...walk(webDocsRoot).filter((file) => file.endsWith(".mdx")),
+    ...walk(docsRoot).filter((file) => file.endsWith(".mdx")),
+  ].filter((file) => fs.existsSync(file));
+
+  const stale = [];
+  const wrongPresetCount = new RegExp(`\\b(?!${presetCount}\\b)\\d+\\s+presets\\b`, "i");
+  const staleExamples = [
+    /--preset\s+(?:minimal|brutalist)\b/,
+    /\bsigil\s+preset\s+brutalist\b/,
+    /\b@sigil-ui\/cli\s+compile\b/,
+  ];
+
+  for (const file of files) {
+    const source = read(file);
+    const failures = [];
+    if (wrongPresetCount.test(source)) failures.push(`preset count must be ${presetCount}`);
+    for (const pattern of staleExamples) {
+      if (pattern.test(source)) failures.push(`stale example: ${pattern}`);
+    }
+    if (failures.length === 0) continue;
+    stale.push({
+      file: path.relative(root, file).replaceAll(path.sep, "/"),
+      failures,
+    });
+  }
+
+  return stale.sort((a, b) => a.file.localeCompare(b.file));
+}
+
 function printReport(data) {
   console.log("Sigil audit");
   console.log(`- exports: ${data.exports.count}`);
@@ -187,10 +234,19 @@ function printReport(data) {
   console.log(`- exported without canvas baseline: ${data.demos.exportedWithoutCanvas.length}`);
   console.log(`- token-pattern findings: ${data.tokenViolations.length}`);
   console.log(`- stale CLI docs: ${data.staleCliDocs.length}`);
+  console.log(`- preset catalog count: ${data.productFacts.presetCount}`);
+  console.log(`- product fact drift: ${data.productFacts.drift.length}`);
 
   if (data.staleCliDocs.length > 0) {
     console.log("\nStale CLI docs:");
     for (const file of data.staleCliDocs) console.log(`  - ${file}`);
+  }
+
+  if (data.productFacts.drift.length > 0) {
+    console.log("\nProduct fact drift:");
+    for (const item of data.productFacts.drift) {
+      console.log(`  - ${item.file}: ${item.failures.join("; ")}`);
+    }
   }
 
   const topViolations = data.tokenViolations.slice(0, 20);

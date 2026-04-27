@@ -11,6 +11,7 @@ import {
 } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 import type { CanvasItemData } from "./canvas";
 
 import {
@@ -408,7 +409,7 @@ function FeatureFrameWrapper(props: Record<string, any>) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
       <FeatureFrame title={props.title ?? "Lightning Fast"} description="Built for performance with zero-runtime CSS variables." />
-      <FeatureFrame title="Fully Themeable" description="31 presets out of the box. Create your own in minutes." />
+      <FeatureFrame title="Fully Themeable" description={`${SIGIL_PRODUCT_STATS.presetCount} presets out of the box. Create your own in minutes.`} />
     </div>
   );
 }
@@ -430,7 +431,7 @@ function TimelineWrapper(props: Record<string, any>) {
       entries={props.entries ?? [
         { date: "Jan 2025", title: "Project Started", description: "Initial commit and architecture design" },
         { date: "Mar 2025", title: "Alpha Release", description: "First public alpha with 10 components" },
-        { date: "Jun 2025", title: "1.0 Launch", description: "Stable release with 200+ token-driven components and 31 presets" },
+        { date: "Jun 2025", title: "1.0 Launch", description: `Stable release with ${SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components and ${SIGIL_PRODUCT_STATS.presetCount} presets` },
       ]}
     />
   );
@@ -468,7 +469,7 @@ function AccordionWrapper(props: Record<string, any>) {
     <Accordion type="single" collapsible className="max-w-md">
       <AccordionItem value="1">
         <AccordionTrigger>What is Sigil UI?</AccordionTrigger>
-        <AccordionContent>A design token-driven component library with 31 presets.</AccordionContent>
+        <AccordionContent>A design token-driven component library with {SIGIL_PRODUCT_STATS.presetCount} presets.</AccordionContent>
       </AccordionItem>
       <AccordionItem value="2">
         <AccordionTrigger>How do presets work?</AccordionTrigger>

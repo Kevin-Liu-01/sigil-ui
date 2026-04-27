@@ -1,4 +1,5 @@
 export { presetCatalog, getCatalogEntry, type PresetCatalogEntry } from "./catalog";
+export { _templatePreset } from "./_template";
 export { defaultPreset } from "./default";
 export { sigilPreset } from "./sigil";
 export { cruxPreset } from "./crux";

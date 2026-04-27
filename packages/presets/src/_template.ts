@@ -1,0 +1,621 @@
+/**
+ * Sigil UI — Kitchen-Sink Preset Template
+ *
+ * Every field from SigilTokens is populated here. When creating a custom
+ * preset, copy this file and change the values — do NOT delete fields.
+ *
+ * Usage:
+ *   cp packages/presets/src/_template.ts packages/presets/src/my-preset.ts
+ *   # or: sigil preset create  (generates from this template)
+ *
+ * All 28 token categories. All ~350 fields. No gaps.
+ */
+
+import type { SigilPreset } from "@sigil-ui/tokens";
+
+export const _templatePreset: SigilPreset = {
+  name: "_template",
+  metadata: {
+    description: "Kitchen-sink template — every token field populated",
+    author: "sigil",
+    version: "0.1.0",
+    tags: ["template", "reference"],
+    mood: "neutral baseline",
+    inspiration: "Reference template for custom preset creation",
+  },
+  tokens: {
+    // -----------------------------------------------------------------------
+    // 1. COLORS (35 fields)
+    // -----------------------------------------------------------------------
+    colors: {
+      background: { light: "oklch(0.985 0.002 260)", dark: "oklch(0.08 0.015 280)" },
+      surface: { light: "oklch(0.97 0.003 260)", dark: "oklch(0.12 0.012 280)" },
+      "surface-elevated": { light: "oklch(1 0 0)", dark: "oklch(0.16 0.012 280)" },
+      "surface-sunken": { light: "oklch(0.955 0.004 260)", dark: "oklch(0.06 0.015 280)" },
+
+      primary: "oklch(0.65 0.18 275)",
+      "primary-hover": "oklch(0.58 0.2 275)",
+      "primary-muted": "oklch(0.65 0.08 275)",
+      "primary-contrast": "oklch(1 0 0)",
+      secondary: "oklch(0.75 0.14 75)",
+      "secondary-hover": "oklch(0.68 0.16 75)",
+      "secondary-muted": "oklch(0.75 0.06 75)",
+      accent: "oklch(0.7 0.15 200)",
+      "accent-hover": "oklch(0.63 0.17 200)",
+      "accent-muted": "oklch(0.7 0.06 200)",
+
+      text: { light: "oklch(0.15 0.01 280)", dark: "oklch(0.93 0.005 260)" },
+      "text-secondary": { light: "oklch(0.35 0.01 280)", dark: "oklch(0.78 0.005 260)" },
+      "text-muted": { light: "oklch(0.5 0.008 280)", dark: "oklch(0.65 0.005 260)" },
+      "text-subtle": { light: "oklch(0.62 0.006 280)", dark: "oklch(0.52 0.005 260)" },
+      "text-disabled": { light: "oklch(0.72 0.004 280)", dark: "oklch(0.38 0.005 260)" },
+      "text-inverse": { light: "oklch(0.97 0.003 260)", dark: "oklch(0.12 0.01 280)" },
+
+      border: { light: "oklch(0.65 0.004 280)", dark: "oklch(0.47 0.008 280)" },
+      "border-muted": { light: "oklch(0.92 0.003 280)", dark: "oklch(0.24 0.006 280)" },
+      "border-strong": { light: "oklch(0.65 0.006 280)", dark: "oklch(0.47 0.01 280)" },
+      "border-interactive": { light: "oklch(0.65 0.18 275)", dark: "oklch(0.65 0.18 275)" },
+
+      success: "oklch(0.62 0.19 155)",
+      "success-muted": "oklch(0.72 0.06 155)",
+      warning: "oklch(0.65 0.16 80)",
+      "warning-muted": "oklch(0.8 0.06 80)",
+      error: "oklch(0.63 0.22 25)",
+      "error-muted": "oklch(0.63 0.08 25)",
+      info: "oklch(0.64 0.15 240)",
+      "info-muted": "oklch(0.7 0.06 240)",
+
+      "gradient-start": "oklch(0.65 0.18 275)",
+      "gradient-end": "oklch(0.7 0.15 200)",
+      glow: "oklch(0.65 0.18 275 / 0.4)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 2. TYPOGRAPHY (31 fields)
+    // -----------------------------------------------------------------------
+    typography: {
+      "font-display": "'PP Neue Montreal', system-ui, sans-serif",
+      "font-body": "'PP Neue Montreal', system-ui, sans-serif",
+      "font-mono": "'PP Fraktion Mono', ui-monospace, monospace",
+
+      "size-xs": "0.75rem",
+      "size-sm": "0.8125rem",
+      "size-base": "0.9375rem",
+      "size-lg": "1.0625rem",
+      "size-xl": "1.1875rem",
+      "size-2xl": "1.4375rem",
+      "size-3xl": "1.75rem",
+      "size-4xl": "2.125rem",
+      "size-5xl": "2.75rem",
+      "size-6xl": "3.5rem",
+
+      "weight-normal": "400",
+      "weight-medium": "500",
+      "weight-semibold": "600",
+      "weight-bold": "700",
+      "weight-extrabold": "800",
+
+      "leading-tight": "1.25",
+      "leading-normal": "1.5",
+      "leading-relaxed": "1.625",
+      "leading-loose": "2",
+
+      "tracking-tighter": "-0.04em",
+      "tracking-tight": "-0.02em",
+      "tracking-normal": "0em",
+      "tracking-wide": "0.02em",
+      "tracking-wider": "0.04em",
+
+      "heading-weight": "600",
+      "heading-tracking": "-0.02em",
+      "heading-transform": "none",
+      "heading-family": "'PP Neue Montreal', system-ui, sans-serif",
+    },
+
+    // -----------------------------------------------------------------------
+    // 3. SPACING (25 fields)
+    // -----------------------------------------------------------------------
+    spacing: {
+      scale: [4, 8, 12, 16, 20, 28, 40, 56, 72, 88],
+      unit: "px",
+
+      "button-px": "20px",
+      "button-py": "10px",
+      "button-px-sm": "14px",
+      "button-py-sm": "6px",
+      "button-px-lg": "28px",
+      "button-py-lg": "12px",
+
+      "card-padding": "20px",
+      "card-padding-sm": "14px",
+      "card-padding-lg": "28px",
+
+      "input-px": "10px",
+      "input-py": "7px",
+
+      "badge-px": "7px",
+      "badge-py": "2px",
+
+      "section-py": "64px",
+      "section-py-lg": "96px",
+
+      "navbar-height": "56px",
+      "navbar-px": "20px",
+
+      "footer-py": "40px",
+
+      "modal-padding": "20px",
+      "popover-padding": "14px",
+      "tooltip-padding": "6px 10px",
+
+      "table-cell-px": "14px",
+      "table-cell-py": "10px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 4. LAYOUT (22 fields)
+    // -----------------------------------------------------------------------
+    layout: {
+      "content-max": "1200px",
+      "content-max-narrow": "720px",
+      "content-max-wide": "1440px",
+
+      "page-margin": "20px",
+      "page-margin-sm": "14px",
+      "page-margin-lg": "40px",
+
+      gutter: "20px",
+      "gutter-sm": "14px",
+      "gutter-lg": "32px",
+
+      "grid-columns": "12",
+      "grid-gap": "20px",
+
+      "bento-gap": "14px",
+      "bento-radius": "10px",
+      "bento-min-height": "180px",
+
+      "section-gap": "28px",
+
+      "sidebar-width": "260px",
+      "sidebar-collapsed": "56px",
+
+      "footer-columns": "4",
+
+      "stack-gap": "14px",
+      "stack-gap-sm": "8px",
+      "stack-gap-lg": "20px",
+
+      "prose-max": "62ch",
+    },
+
+    // -----------------------------------------------------------------------
+    // 5. SIGIL GRID (10 fields)
+    // -----------------------------------------------------------------------
+    sigil: {
+      "grid-cell": "48px",
+      "cross-arm": "10px",
+      "cross-stroke": "1.5px",
+      "rail-gap": "24px",
+      "card-radius": "10px",
+      "gutter-pattern": "grid",
+      "margin-pattern": "plus",
+      "gutter-border": "1px solid",
+      "margin-border": "1px solid",
+      "gutter-visible": true,
+    },
+
+    // -----------------------------------------------------------------------
+    // 6. RADIUS (16 fields)
+    // -----------------------------------------------------------------------
+    radius: {
+      none: "0px",
+      sm: "4px",
+      md: "6px",
+      lg: "8px",
+      xl: "12px",
+      "2xl": "16px",
+      full: "9999px",
+
+      button: "6px",
+      card: "8px",
+      input: "6px",
+      badge: "9999px",
+      modal: "12px",
+      popover: "8px",
+      tooltip: "6px",
+      image: "6px",
+      bento: "8px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 7. SHADOWS (14 fields)
+    // -----------------------------------------------------------------------
+    shadows: {
+      sm: "0 1px 2px 0 rgb(0 0 0 / 0.06)",
+      md: "0 0 0 1px rgb(0 0 0 / 0.05), 0 1px 3px rgb(0 0 0 / 0.1)",
+      lg: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      xl: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+      "2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+      glow: "0 0 20px var(--s-primary)",
+      "glow-sm": "0 0 10px var(--s-primary)",
+      colored: "0 4px 14px -3px var(--s-primary)",
+      inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.06)",
+      card: "0 0 0 1px var(--s-border)",
+      button: "none",
+      "button-hover": "0 1px 3px rgb(0 0 0 / 0.12)",
+      dropdown: "0 4px 12px rgb(0 0 0 / 0.12), 0 0 0 1px rgb(0 0 0 / 0.04)",
+      modal: "0 16px 48px -8px rgb(0 0 0 / 0.2)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 8. MOTION (18 fields)
+    // -----------------------------------------------------------------------
+    motion: {
+      duration: {
+        instant: "0ms",
+        fast: "150ms",
+        normal: "250ms",
+        slow: "400ms",
+        slower: "600ms",
+        slowest: "1000ms",
+      },
+      easing: {
+        default: "cubic-bezier(0.16, 1, 0.3, 1)",
+        in: "cubic-bezier(0.55, 0, 1, 0.45)",
+        out: "cubic-bezier(0, 0.55, 0.45, 1)",
+        "in-out": "cubic-bezier(0.45, 0, 0.55, 1)",
+        spring: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+        bounce: "cubic-bezier(0.68, -0.55, 0.27, 1.55)",
+      },
+      "enter-preset": "fadeUp",
+      "exit-preset": "fadeOut",
+      "hover-scale": "1.02",
+      "press-scale": "0.97",
+      "hover-lift": "-2px",
+      "stagger-interval": "50ms",
+      "stagger-interval-fast": "25ms",
+    },
+
+    // -----------------------------------------------------------------------
+    // 9. BORDERS (11 fields)
+    // -----------------------------------------------------------------------
+    borders: {
+      width: { none: "0px", thin: "1px", medium: "1.5px", thick: "2px" },
+      style: "solid",
+      "card-border": "1px solid",
+      "card-border-hover": "1px solid",
+      "button-border": "1px solid",
+      "input-border": "1px solid",
+      "divider-style": "solid",
+      "divider-width": "1px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 10. BUTTONS (9 fields)
+    // -----------------------------------------------------------------------
+    buttons: {
+      "font-weight": "600",
+      "text-transform": "none",
+      "letter-spacing": "0em",
+      "font-family": "'PP Neue Montreal', system-ui, sans-serif",
+      "border-width": "1px",
+      "hover-effect": "darken",
+      "active-scale": "0.97",
+      "icon-gap": "8px",
+      "min-width": "0px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 11. CARDS (18 fields)
+    // -----------------------------------------------------------------------
+    cards: {
+      "border-style": "solid",
+      "border-width": "1px",
+      "hover-effect": "border",
+      "hover-border-color": "var(--s-border-strong)",
+      padding: "20px",
+      "header-padding": "20px 20px 0",
+      "footer-padding": "0 20px 20px",
+      "title-size": "1.0625rem",
+      "title-weight": "600",
+      "description-size": "0.8125rem",
+      background: "surface",
+      shadow: "sm",
+      outline: true,
+      "outline-on-hover-only": false,
+      "gap-between": "16px",
+      "aspect-ratio": "auto",
+      "content-padding-x": "20px",
+      "content-padding-y": "16px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 12. HEADINGS (15 fields)
+    // -----------------------------------------------------------------------
+    headings: {
+      "h1-size": "2.125rem",
+      "h1-weight": "700",
+      "h1-tracking": "-0.025em",
+      "h1-leading": "1.2",
+      "h2-size": "1.75rem",
+      "h2-weight": "600",
+      "h2-tracking": "-0.02em",
+      "h3-size": "1.4375rem",
+      "h3-weight": "600",
+      "h4-size": "1.1875rem",
+      "h4-weight": "600",
+      "display-size": "3.5rem",
+      "display-weight": "800",
+      "display-tracking": "-0.04em",
+      "display-leading": "1.1",
+    },
+
+    // -----------------------------------------------------------------------
+    // 13. NAVIGATION (12 fields)
+    // -----------------------------------------------------------------------
+    navigation: {
+      "navbar-height": "56px",
+      "navbar-backdrop-blur": "12px",
+      "navbar-border": "1px solid",
+      "navbar-bg-opacity": "0.85",
+      "nav-link-weight": "500",
+      "nav-link-size": "0.8125rem",
+      "nav-link-hover": "color",
+      "breadcrumb-separator": "/",
+      "pagination-radius": "6px",
+      "sidebar-width": "260px",
+      "sidebar-item-radius": "6px",
+      "sidebar-item-padding": "7px 10px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 14. BACKGROUNDS (9 fields)
+    // -----------------------------------------------------------------------
+    backgrounds: {
+      pattern: "grid",
+      "pattern-opacity": "0.03",
+      "pattern-scale": "1",
+      noise: true,
+      "noise-opacity": "0.02",
+      "gradient-angle": "135deg",
+      "gradient-type": "none",
+      "hero-pattern": "grid",
+      "section-divider": "line",
+    },
+
+    // -----------------------------------------------------------------------
+    // 15. CODE (14 fields)
+    // -----------------------------------------------------------------------
+    code: {
+      "font-family": "'PP Fraktion Mono', ui-monospace, monospace",
+      "font-size": "0.8125rem",
+      "line-height": "1.65",
+      bg: "var(--s-surface-sunken)",
+      border: "1px solid var(--s-border)",
+      "border-radius": "6px",
+      padding: "14px",
+      "tab-size": "2",
+      "selection-bg": "var(--s-primary-muted)",
+      "comment-color": "var(--s-text-muted)",
+      "keyword-color": "var(--s-primary)",
+      "string-color": "var(--s-success)",
+      "number-color": "var(--s-warning)",
+      "function-color": "var(--s-info)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 16. INPUTS (13 fields)
+    // -----------------------------------------------------------------------
+    inputs: {
+      height: "38px",
+      "height-sm": "30px",
+      "height-lg": "46px",
+      "border-width": "1px",
+      "focus-ring-width": "2px",
+      "focus-ring-color": "var(--s-primary)",
+      "focus-ring-offset": "2px",
+      "placeholder-color": "var(--s-text-subtle)",
+      "error-border-color": "var(--s-error)",
+      "label-size": "0.8125rem",
+      "label-weight": "500",
+      "label-spacing": "6px",
+      "helper-size": "0.75rem",
+    },
+
+    // -----------------------------------------------------------------------
+    // 17. CURSOR (14 fields)
+    // -----------------------------------------------------------------------
+    cursor: {
+      variant: "sigil",
+      size: "24px",
+      "dot-size": "4px",
+      "stroke-width": "1.5px",
+      "tick-size": "6px",
+      gap: "3px",
+      radius: "0px",
+      color: "var(--s-text)",
+      "ring-color": "var(--s-primary)",
+      "dot-color": "var(--s-primary)",
+      glow: "none",
+      opacity: "1",
+      "blend-mode": "normal",
+      "z-index": "9999",
+      "hide-native": false,
+    },
+
+    // -----------------------------------------------------------------------
+    // 18. SCROLLBAR (15 fields)
+    // -----------------------------------------------------------------------
+    scrollbar: {
+      width: "8px",
+      height: "8px",
+      padding: "2px",
+      radius: "9999px",
+      track: "transparent",
+      thumb: "var(--s-border-muted)",
+      "thumb-hover": "var(--s-border)",
+      "thumb-active": "var(--s-border-strong)",
+      corner: "transparent",
+      border: "none",
+      "firefox-width": "thin",
+      gutter: "stable",
+      visibility: "auto",
+    },
+
+    // -----------------------------------------------------------------------
+    // 19. ALIGNMENT (13 fields)
+    // -----------------------------------------------------------------------
+    alignment: {
+      "rail-width": "1200px",
+      "rail-columns": "12",
+      "rail-gutter": "20px",
+      "rail-margin": "24px",
+      "rail-visible": true,
+      "rail-color": "var(--s-border-muted)",
+      "content-align": "center",
+      "hero-align": "center",
+      "section-align": "center",
+      "navbar-align": "full",
+      "footer-align": "content",
+      "title-align": "left",
+    },
+
+    // -----------------------------------------------------------------------
+    // 20. SECTIONS (10 fields)
+    // -----------------------------------------------------------------------
+    sections: {
+      "padding-y": "64px",
+      "padding-y-hero": "120px",
+      "padding-x": "24px",
+      "max-width": "1200px",
+      gap: "32px",
+      "title-align": "left",
+      "divider-above": true,
+      "divider-below": true,
+      "background-alt": false,
+      indent: "0px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 21. DIVIDERS (8 fields)
+    // -----------------------------------------------------------------------
+    dividers: {
+      style: "solid",
+      width: "1px",
+      color: "var(--s-border)",
+      spacing: "0px",
+      "show-cross": true,
+      "show-label": false,
+      "full-bleed": false,
+      ornament: "cross",
+    },
+
+    // -----------------------------------------------------------------------
+    // 22. GRID VISUALS (10 fields)
+    // -----------------------------------------------------------------------
+    gridVisuals: {
+      "show-lines": true,
+      "line-color": "var(--s-border-muted)",
+      "line-width": "1px",
+      "show-dots": true,
+      "dot-size": "2px",
+      "cell-background": "none",
+      "cell-border": true,
+      "cell-radius": "0px",
+      "cell-padding": "16px",
+      "hover-effect": "none",
+    },
+
+    // -----------------------------------------------------------------------
+    // 23. FOCUS (5 fields)
+    // -----------------------------------------------------------------------
+    focus: {
+      "ring-width": "2px",
+      "ring-color": "var(--s-primary)",
+      "ring-offset": "2px",
+      "ring-shadow": "0 0 0 2px var(--s-primary)",
+      "outline-color": "var(--s-primary)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 24. OVERLAYS (8 fields)
+    // -----------------------------------------------------------------------
+    overlays: {
+      bg: "rgb(0 0 0 / 0.5)",
+      blur: "8px",
+      surface: "var(--s-surface-elevated)",
+      border: "1px solid var(--s-border-muted)",
+      shadow: "var(--s-shadow-xl)",
+      radius: "var(--s-radius-lg)",
+      padding: "20px",
+      "z-index": "50",
+    },
+
+    // -----------------------------------------------------------------------
+    // 25. DATA VISUALIZATION (13 fields)
+    // -----------------------------------------------------------------------
+    dataViz: {
+      "series-1": "var(--s-primary)",
+      "series-2": "var(--s-secondary)",
+      "series-3": "var(--s-accent)",
+      "series-4": "var(--s-info)",
+      "series-5": "var(--s-success)",
+      positive: "var(--s-success)",
+      negative: "var(--s-error)",
+      neutral: "var(--s-text-muted)",
+      grid: "var(--s-border-muted)",
+      axis: "var(--s-border)",
+      label: "var(--s-text-secondary)",
+      "tooltip-bg": "var(--s-surface-elevated)",
+      "tooltip-border": "var(--s-border-muted)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 26. MEDIA (6 fields)
+    // -----------------------------------------------------------------------
+    media: {
+      radius: "var(--s-radius-md)",
+      border: "none",
+      outline: "1px solid rgb(0 0 0 / 0.08)",
+      shadow: "none",
+      bg: "var(--s-surface-sunken)",
+      "object-fit": "cover",
+    },
+
+    // -----------------------------------------------------------------------
+    // 27. CONTROLS (11 fields)
+    // -----------------------------------------------------------------------
+    controls: {
+      height: "38px",
+      "height-sm": "30px",
+      "height-lg": "46px",
+      "hit-area": "44px",
+      "icon-size": "16px",
+      "handle-size": "20px",
+      "track-height": "4px",
+      "track-bg": "var(--s-border-muted)",
+      "track-fill": "var(--s-primary)",
+      "thumb-bg": "var(--s-surface-elevated)",
+      "thumb-border": "2px solid var(--s-primary)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 28. COMPONENT SURFACES (12 fields)
+    // -----------------------------------------------------------------------
+    componentSurfaces: {
+      bg: "var(--s-surface)",
+      "bg-elevated": "var(--s-surface-elevated)",
+      "bg-muted": "var(--s-surface-sunken)",
+      border: "var(--s-border)",
+      "border-muted": "var(--s-border-muted)",
+      "border-strong": "var(--s-border-strong)",
+      text: "var(--s-text)",
+      "text-muted": "var(--s-text-muted)",
+      contrast: "var(--s-primary-contrast)",
+      "hover-bg": "var(--s-surface-elevated)",
+      "active-bg": "var(--s-surface-sunken)",
+      "selected-bg": "var(--s-primary-muted)",
+    },
+  },
+};

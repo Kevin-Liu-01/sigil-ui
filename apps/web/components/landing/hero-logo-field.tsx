@@ -1,9 +1,15 @@
 "use client";
 
-import React, { useEffect, useState, cloneElement } from "react";
+import React, { useEffect, useState, useRef, useCallback, cloneElement } from "react";
 import type { ReactElement } from "react";
-import { Badge, Button, Card, CardContent, Input, Progress, Switch } from "@sigil-ui/components";
+import {
+  Avatar, AvatarGroup, Badge, Button, Calendar, Card, CardContent, Checkbox,
+  CommitGrid, Input, KPI, Meter, Progress, Separator, SparkLine,
+  Slider, Stepper, Switch, Tabs, TabsList, TabsTrigger,
+  ToggleGroup, ToggleGroupItem,
+} from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
+import { Palette, RectangleHorizontal, SquareSlash, Clock } from "lucide-react";
 
 /* ── Timing ──────────────────────────────────────────────────── */
 const CYCLE_MS = 4200;
@@ -255,10 +261,10 @@ const HERO_CELLS = [
 ] as const;
 
 const HERO_TOKEN_STEPS = [
-  { token: "--s-primary", line: "primary: oklch(0.66 0.18 275)", label: "primary geometry" },
-  { token: "--s-border", line: "border: oklch(0.24 0.01 260)", label: "cell outline" },
-  { token: "--s-radius-md", line: "radius-md: 8px", label: "component corners" },
-  { token: "--s-duration-slow", line: "duration-slow: 600ms", label: "draw timing" },
+  { token: "--s-primary", before: "primary: oklch(0.55 0.12 275)", line: "primary: oklch(0.66 0.18 275)", label: "primary geometry" },
+  { token: "--s-border", before: "border: oklch(0.20 0.01 260)", line: "border: oklch(0.24 0.01 260)", label: "cell outline" },
+  { token: "--s-radius-md", before: "radius-md: 8px", line: "radius-md: 16px", label: "component corners" },
+  { token: "--s-duration-slow", before: "duration-slow: 300ms", line: "duration-slow: 600ms", label: "draw timing" },
 ] as const;
 
 const HERO_CURSOR_STEPS = [
@@ -525,17 +531,18 @@ const STYLE_BLOCK = `
   to { opacity: 1; transform: translateY(0); }
 }
 @keyframes hlf-token-rewrite {
-  0% { opacity: 0; transform: translateY(4px); filter: blur(2px); }
+  0% { opacity: 0; transform: translateY(3px); filter: blur(1px); }
   100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 @keyframes hlf-type-line {
-  0% { clip-path: inset(0 100% 0 0); opacity: 0.35; }
+  0% { clip-path: inset(0 100% 0 0); opacity: 0.4; }
+  60% { opacity: 1; }
   100% { clip-path: inset(0 0 0 0); opacity: 1; }
 }
 @keyframes hlf-apply-style {
-  0%, 42% { box-shadow: none; filter: none; }
-  58% { box-shadow: 0 0 0 1px var(--s-primary), 0 0 24px color-mix(in oklch, var(--s-primary) 26%, transparent); filter: brightness(1.06); }
-  100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 70%, transparent); filter: none; }
+  0% { box-shadow: none; filter: none; }
+  40% { box-shadow: 0 0 0 2px var(--s-primary), 0 0 28px color-mix(in oklch, var(--s-primary) 30%, transparent); filter: brightness(1.08); }
+  100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 50%, transparent); filter: none; }
 }
 .hero-logo-field {
   --hlf-pri: var(--s-primary, oklch(0.55 0.2 275));
@@ -554,16 +561,28 @@ const STYLE_BLOCK = `
   animation: hlf-panel-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-logo-field__token-line {
-  animation: hlf-token-rewrite 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hlf-token-rewrite 320ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-logo-field__typed {
   display: inline-block;
   overflow: hidden;
   white-space: nowrap;
-  animation: hlf-type-line 900ms steps(34, end) 120ms both;
+  animation: hlf-type-line 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
 }
 .hero-logo-field__apply {
-  animation: hlf-apply-style 1200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: hlf-apply-style 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-logo-field__line-active {
+  background: color-mix(in oklch, var(--s-primary) 14%, transparent);
+  border-left: 2px solid var(--s-primary);
+  margin-left: -8px;
+  padding-left: 6px;
+  transition: background-color 300ms, border-color 300ms;
+}
+.hero-logo-field__line-done {
+  border-left: 2px solid color-mix(in oklch, var(--s-primary) 50%, transparent);
+  margin-left: -8px;
+  padding-left: 6px;
 }
 `;
 
@@ -583,529 +602,489 @@ function renderVariant(elements: V) {
 
 /* ── Components ──────────────────────────────────────────────── */
 
+const STEP_KEYS = ["UsageCard", "PresetSwatches", "DatePicker", "TokenAction"] as const;
+
+function seededRandom(seed: number) {
+  let s = seed;
+  return () => {
+    s = (s * 16807 + 0) % 2147483647;
+    return (s - 1) / 2147483646;
+  };
+}
+
+const COMMIT_DAYS = (() => {
+  const days: { date: string; count: number }[] = [];
+  const rand = seededRandom(42);
+  const base = new Date(Date.UTC(2026, 2, 1));
+  for (let i = 48; i >= 0; i--) {
+    const d = new Date(base);
+    d.setUTCDate(d.getUTCDate() + (49 - i));
+    days.push({ date: d.toISOString().split("T")[0], count: Math.floor(rand() * 7 * (1 + Math.sin(i / 4))) });
+  }
+  return days;
+})();
+
 export function HeroLogoField() {
   const [mounted, setMounted] = useState(false);
   const [idx, setIdx] = useState(0);
   const [phase, setPhase] = useState(0);
-  const [inspected, setInspected] = useState(false);
+  const [appliedSet, setAppliedSet] = useState<Set<string>>(new Set());
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const componentRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const [selRect, setSelRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
+
+  const setComponentRef = useCallback((key: string) => (el: HTMLDivElement | null) => {
+    componentRefs.current[key] = el;
+  }, []);
 
   useEffect(() => {
     requestAnimationFrame(() => setMounted(true));
   }, []);
 
   useEffect(() => {
-    if (!mounted || inspected) return;
+    if (!mounted) return;
     const interval = setInterval(() => {
       setPhase((current) => {
         if (current >= 3) {
-          setIdx((i) => (i + 1) % HERO_CURSOR_STEPS.length);
+          const currentKey = STEP_KEYS[idx % STEP_KEYS.length];
+          setAppliedSet((prev) => new Set([...prev, currentKey]));
+          const nextIdx = (idx + 1) % STEP_KEYS.length;
+          if (nextIdx === 0) {
+            setTimeout(() => setAppliedSet(new Set()), 800);
+          }
+          setIdx(nextIdx);
           return 0;
         }
         return current + 1;
       });
     }, PHASE_MS);
     return () => clearInterval(interval);
-  }, [mounted, inspected]);
+  }, [mounted, idx]);
 
-  const activeStepIndex = idx % HERO_CURSOR_STEPS.length;
+  useEffect(() => {
+    const container = containerRef.current;
+    const target = componentRefs.current[STEP_KEYS[idx % STEP_KEYS.length]];
+    if (!container || !target || phase < 1) {
+      setSelRect(null);
+      return;
+    }
+    const cRect = container.getBoundingClientRect();
+    const tRect = target.getBoundingClientRect();
+    const pad = 6;
+    setSelRect({
+      top: tRect.top - cRect.top - pad,
+      left: tRect.left - cRect.left - pad,
+      width: tRect.width + pad * 2,
+      height: tRect.height + pad * 2,
+    });
+  }, [idx, phase]);
+
+  const activeStepIndex = idx % STEP_KEYS.length;
   const activeToken = HERO_CURSOR_STEPS[activeStepIndex];
-  const cursorLeft = activeToken.left;
-  const cursorTop = activeToken.top;
   const activeComponent = activeToken.component;
   const isSelecting = phase >= 1;
   const isTyping = phase >= 2;
   const isApplied = phase >= 3;
 
+  const applied = (name: string) => appliedSet.has(name) || (activeComponent === name && isApplied);
+  const radiusApplied = applied("DatePicker") || (activeComponent === "DatePicker" && isTyping);
+
+  const mono9: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 9, letterSpacing: "0.08em", textTransform: "uppercase" };
+  const mono10: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.62 };
+  const cellBg = "color-mix(in oklch, var(--s-background) 94%, transparent)";
+
   return (
     <div
       className="hero-logo-field"
-      style={{
-        position: "absolute",
-        inset: 0,
-        overflow: "visible",
-        pointerEvents: "none",
-        zIndex: 0,
-      }}
+      style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}
     >
       <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
+
       <div
+        ref={containerRef}
+        className="grid"
         style={{
           position: "absolute",
-          right: -32,
+          right: 0,
           top: "50%",
           transform: "translateY(-50%)",
-          width: "min(58vw, 640px)",
-          height: "min(48vw, 520px)",
-          minWidth: 520,
-          minHeight: 460,
-          opacity: mounted ? 0.96 : 0,
-          color: "var(--s-text-muted)",
+          width: "min(54vw, 580px)",
+          minWidth: 480,
+          opacity: mounted ? 1 : 0,
           transition: "opacity 600ms ease",
           pointerEvents: "auto",
+          gridTemplateColumns: "repeat(7, 1fr)",
+          gap: 6,
         }}
       >
-        <svg
-          key={idx}
-          viewBox="-12 -12 144 144"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          aria-hidden="true"
-          style={{ display: "block", width: "100%", height: "100%" }}
-        >
-          <defs>
-            <pattern id="hlf-hatch-pri" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-32)">
-              <line x1="0" y1="0" x2="0" y2="3" stroke={P} strokeWidth="0.25" opacity="0.55" />
-            </pattern>
-            <pattern id="hlf-hatch-pri-soft" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-32)">
-              <line x1="0" y1="0" x2="0" y2="3" stroke={P} strokeWidth="0.25" opacity="0.34" />
-            </pattern>
-            <pattern id="hlf-hatch-mid" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="3" stroke={M} strokeWidth="0.25" opacity="0.5" />
-            </pattern>
-            <pattern id="hlf-hatch-mid-soft" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="3" stroke={M} strokeWidth="0.25" opacity="0.32" />
-            </pattern>
-          <pattern id="hlf-hatch-neutral" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)">
-            <line x1="0" y1="0" x2="0" y2="4" stroke={N} strokeWidth="0.25" opacity="0.22" />
-          </pattern>
-          </defs>
-
-          {inspected && (
-            <g>
-              <rect
-                className="hero-logo-field__inspect-frame"
-                x={6}
-                y={6}
-                width={108}
-                height={108}
-                stroke={P}
-                strokeWidth={0.25}
-                opacity={0.65}
-                fill="none"
-              />
-              <path d="M 6 18 V 6 H 18" stroke={P} strokeWidth={0.25} opacity={0.5} />
-              <path d="M 102 6 H 114 V 18" stroke={P} strokeWidth={0.25} opacity={0.5} />
-              <path d="M 114 102 V 114 H 102" stroke={P} strokeWidth={0.25} opacity={0.5} />
-              <path d="M 18 114 H 6 V 102" stroke={P} strokeWidth={0.25} opacity={0.5} />
-            </g>
-          )}
-        </svg>
-
+        {/* Row 1: sigil.tokens.md (3 cols) + UsageCard (2) + PresetSwatches (2) */}
         <div
+          className="row-span-3"
           style={{
-            position: "absolute",
-            left: "41%",
-            top: "13%",
-            width: "52%",
-            display: "grid",
-            gap: 10,
-            pointerEvents: "none",
+            gridColumn: "1 / 4",
+            border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
+            borderRadius: "var(--s-radius-md,8px)",
+            background: "color-mix(in oklch, var(--s-primary) 6%, var(--s-background))",
+            overflow: "hidden",
+            boxShadow: "0 0 0 1px color-mix(in oklch, var(--s-primary) 18%, transparent), 0 8px 32px color-mix(in oklch, var(--s-primary) 12%, transparent)",
           }}
         >
-          <div className="grid grid-cols-2 gap-2">
-            <Card
-              className={`overflow-hidden ${activeComponent === "UsageCard" && isApplied ? "hero-logo-field__apply" : ""}`}
-              style={{
-                borderColor: activeComponent === "UsageCard" && isApplied ? "var(--s-primary)" : "var(--s-border)",
-                background:
-                  activeComponent === "UsageCard" && isApplied
-                    ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-background))"
-                    : "color-mix(in oklch, var(--s-background) 92%, transparent)",
-                transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>usage</span>
-                  <Badge size="sm" className="text-[8px]">live</Badge>
-                </div>
-                <div className="font-[family-name:var(--s-font-mono)] text-lg font-bold tabular-nums" style={{ color: "var(--s-text)" }}>12.4k</div>
-                <Progress value={activeComponent === "UsageCard" && isApplied ? 88 : 72} className="mt-2 h-1" />
-              </CardContent>
-            </Card>
-            <Card
-              className={`overflow-hidden ${activeComponent === "PresetSwatches" && isApplied ? "hero-logo-field__apply" : ""}`}
-              style={{
-                borderColor: activeComponent === "PresetSwatches" && isApplied ? "var(--s-primary)" : "var(--s-border)",
-                background:
-                  activeComponent === "PresetSwatches" && isApplied
-                    ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-background))"
-                    : "color-mix(in oklch, var(--s-background) 92%, transparent)",
-                transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
-                  preset
-                </div>
-                <div className="flex gap-1">
-                  {["sigil", "onyx", "rune"].map((name, itemIdx) => (
-                    <span
-                      key={name}
-                      style={{
-                        width: 18,
-                        height: 18,
-                        border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
-                        borderRadius: "var(--s-radius-sm,4px)",
-                        background:
-                          itemIdx === activeStepIndex % 3 || (activeComponent === "PresetSwatches" && isApplied)
-                            ? itemIdx === 0
-                              ? "var(--s-primary)"
-                              : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
-                            : "transparent",
-                      }}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+          <div style={{ ...mono9, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)", padding: "5px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "color-mix(in oklch, var(--s-primary) 12%, transparent)" }}>
+            <span style={{ fontWeight: 700 }}>sigil.tokens.md</span>
+            <span style={{ fontSize: 8, color: "var(--s-primary)" }}>{appliedSet.size}/4</span>
           </div>
+          <div style={{ ...mono10, padding: "6px 8px", fontSize: 9, lineHeight: 1.55 }}>
+            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>---</div>
+            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>preset: sigil</div>
+            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>---</div>
+            <div style={{ height: 2 }} />
 
+            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><Palette size={10} style={{ opacity: 0.6 }} /> ## Colors</div>
+            {(() => {
+              const t = HERO_TOKEN_STEPS[0];
+              const isActive = activeToken.token === t.token;
+              const isDone = applied("UsageCard");
+              return (
+                <div
+                  key={t.token}
+                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
+                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
+                >
+                  {t.line} {isDone && !isActive ? "✓" : ""}
+                </div>
+              );
+            })()}
+            <div style={{ color: "var(--s-text-muted)" }}>background: oklch(0.08 0.01 260)</div>
+            <div style={{ height: 2 }} />
+
+            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><RectangleHorizontal size={10} style={{ opacity: 0.6 }} /> ## Borders</div>
+            {(() => {
+              const t = HERO_TOKEN_STEPS[1];
+              const isActive = activeToken.token === t.token;
+              const isDone = applied("PresetSwatches");
+              return (
+                <div
+                  key={t.token}
+                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
+                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
+                >
+                  {t.line} {isDone && !isActive ? "✓" : ""}
+                </div>
+              );
+            })()}
+            <div style={{ height: 2 }} />
+
+            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><SquareSlash size={10} style={{ opacity: 0.6 }} /> ## Radius</div>
+            {(() => {
+              const t = HERO_TOKEN_STEPS[2];
+              const isActive = activeToken.token === t.token;
+              const isDone = applied("DatePicker");
+              return (
+                <div
+                  key={t.token}
+                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
+                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
+                >
+                  {t.line} {isDone && !isActive ? "✓" : ""}
+                </div>
+              );
+            })()}
+            <div style={{ color: "var(--s-text-muted)" }}>sm: 4px</div>
+            <div style={{ height: 2 }} />
+
+            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><Clock size={10} style={{ opacity: 0.6 }} /> ## Motion</div>
+            {(() => {
+              const t = HERO_TOKEN_STEPS[3];
+              const isActive = activeToken.token === t.token;
+              const isDone = applied("TokenAction");
+              return (
+                <div
+                  key={t.token}
+                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
+                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
+                >
+                  {t.line} {isDone && !isActive ? "✓" : ""}
+                </div>
+              );
+            })()}
+            <div style={{ color: "var(--s-text-muted)" }}>fast: 150ms</div>
+            <div style={{ height: 2 }} />
+
+            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5, borderTop: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", paddingTop: 3, marginTop: 2 }}>
+              {isApplied ? "✓ preset.apply()" : isTyping ? `writing ${activeToken.token}...` : `idle — ${appliedSet.size} saved`}
+            </div>
+          </div>
+        </div>
+
+        <div ref={setComponentRef("UsageCard")} style={{ gridColumn: "4 / 6" }}>
           <Card
-            className={`overflow-hidden ${activeComponent === "DatePicker" && isApplied ? "hero-logo-field__apply" : ""}`}
+            className={`overflow-hidden h-full ${applied("UsageCard") ? "hero-logo-field__apply" : ""}`}
             style={{
-              borderColor: activeComponent === "DatePicker" && isApplied ? "var(--s-primary)" : "var(--s-border)",
-              borderRadius: activeComponent === "DatePicker" && isApplied ? "var(--s-radius-lg,14px)" : "var(--s-radius-md,8px)",
-              background:
-                activeComponent === "DatePicker" && isApplied
-                  ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-background))"
-                  : "color-mix(in oklch, var(--s-background) 94%, transparent)",
-              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
+              borderColor: applied("UsageCard") ? "var(--s-primary)" : "var(--s-border)",
+              background: applied("UsageCard") ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-background))" : cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-3">
-              <div className="mb-2 flex items-center justify-between">
-                <span className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>date picker</span>
-                <Badge size="sm" variant="outline" className="text-[8px]">token</Badge>
+            <CardContent className="p-2.5">
+              <div className="mb-1 flex items-center justify-between">
+                <span style={{ ...mono9, color: "var(--s-text-muted)" }}>usage</span>
+                <Badge size="sm" className="text-[7px]">live</Badge>
               </div>
-              <div className="grid grid-cols-7 gap-1">
-                {Array.from({ length: 21 }, (_, itemIdx) => (
+              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: "var(--s-text)" }}>12.4k</div>
+              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" />
+            </CardContent>
+          </Card>
+        </div>
+
+        <div ref={setComponentRef("PresetSwatches")} style={{ gridColumn: "6 / 8" }}>
+          <Card
+            className={`overflow-hidden h-full ${applied("PresetSwatches") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("PresetSwatches") ? "var(--s-primary)" : "var(--s-border)",
+              background: applied("PresetSwatches") ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-background))" : cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2.5">
+              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>preset</div>
+              <div className="flex gap-1">
+                {["sigil", "onyx", "rune", "flux", "prism"].map((name, itemIdx) => (
                   <span
-                    key={itemIdx}
+                    key={name}
                     style={{
-                      height: 16,
-                      border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-muted, var(--s-border))",
+                      width: 16, height: 16,
+                      border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                       borderRadius: "var(--s-radius-sm,4px)",
-                      background:
-                        itemIdx === 11 || (activeComponent === "DatePicker" && isApplied && [10, 11, 12].includes(itemIdx))
-                          ? "var(--s-primary)"
-                          : "transparent",
+                      background: applied("PresetSwatches")
+                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
+                        : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="flex mt-1 gap-1">
+                {["kova", "cobalt", "helix", "hex", "crux"].map((name, itemIdx) => (
+                  <span
+                    key={name}
+                    style={{
+                      width: 16, height: 16,
+                      border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
+                      borderRadius: "var(--s-radius-sm,4px)",
+                      background: applied("PresetSwatches")
+                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
+                        : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
                     }}
                   />
                 ))}
               </div>
             </CardContent>
           </Card>
+        </div>
 
-          <div className={`grid grid-cols-[1fr_auto] gap-2 ${activeComponent === "TokenAction" && isApplied ? "hero-logo-field__apply" : ""}`}>
-            <Input value="sigil.tokens.md" readOnly className="h-8 text-[10px]" />
-            <Button size="sm" className="h-8 px-3 text-[10px]">{activeComponent === "TokenAction" && isApplied ? "Saved" : "Apply"}</Button>
-          </div>
+        {/* Row 2: DatePicker spans right 4 cols */}
+        <div
+          ref={setComponentRef("DatePicker")}
+          className={`overflow-hidden ${radiusApplied ? "hero-logo-field__apply" : ""}`}
+          style={{
+            gridColumn: "4 / 8",
+            border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
+            borderRadius: radiusApplied ? "16px" : "var(--s-radius-md,8px)",
+            background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-background))" : cellBg,
+            transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
+          }}
+        >
+          <Calendar
+            mode="single"
+            selected={new Date()}
+            captionLayout="label"
+            disableNavigation={false}
+            className="p-1 w-full [--cell-size:1rem] [&_table]:w-full [&_table]:text-[8px] [&_table]:table-fixed [&_button]:text-[8px] [&_button]:p-0 [&_button]:h-4 [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[8px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-row]:h-4 [&_.rdp-cell]:p-px [&_.rdp-day]:h-4 [&_.rdp-day]:w-full [&_.rdp-day_selected]:h-4 [&_.rdp-day_selected]:w-full [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
+          />
+        </div>
 
-          <div className="grid grid-cols-3 gap-2">
-            <Card
-              style={{
-                borderColor: "var(--s-border)",
-                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
-                  controls
-                </div>
-                <Switch checked={isApplied} onCheckedChange={() => {}} />
-              </CardContent>
-            </Card>
-            <Card
-              style={{
-                borderColor: "var(--s-border)",
-                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
-                  status
-                </div>
-                <Badge size="sm" variant={isApplied ? "default" : "outline"} className="text-[8px]">
-                  {isApplied ? "applied" : "idle"}
-                </Badge>
-              </CardContent>
-            </Card>
-            <Card
-              style={{
-                borderColor: "var(--s-border)",
-                background: "color-mix(in oklch, var(--s-background) 94%, transparent)",
-              }}
-            >
-              <CardContent className="p-3">
-                <div className="mb-2 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: "var(--s-text-muted)" }}>
-                  tokens
-                </div>
-                <div className="grid grid-cols-4 gap-1">
-                  {HERO_TOKEN_STEPS.map((token) => (
-                    <span
-                      key={token.token}
-                      style={{
-                        height: 13,
-                        border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
-                        borderRadius: "var(--s-radius-sm,4px)",
-                        background: token.token === activeToken.token && isApplied ? "var(--s-primary)" : "transparent",
-                      }}
-                    />
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+        {/* Row 3: TokenAction spans right 4 cols */}
+        <div ref={setComponentRef("TokenAction")} style={{ gridColumn: "4 / 8" }}>
+          <div className={`grid grid-cols-[1fr_auto] gap-2 ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`}>
+            <Input value="sigil.tokens.md" readOnly className="h-7 text-[9px]" />
+            <Button size="sm" className="h-7 px-2.5 text-[9px]">{applied("TokenAction") ? "Saved" : "Apply"}</Button>
           </div>
         </div>
 
-        {isSelecting && (
-          <div
-            aria-hidden="true"
-            style={{
-              position: "absolute",
-              ...activeToken.select,
-              border: "var(--s-border-thin,1px) dashed var(--s-primary)",
-              borderRadius: "var(--s-radius-md,8px)",
-              background: "color-mix(in oklch, var(--s-primary) 7%, transparent)",
-              transition: "left var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), top var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), width var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), height var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1)",
-              pointerEvents: "none",
-            }}
-          />
-        )}
-
-        {isTyping && (
-          <div
-            key={`${activeToken.component}-${activeToken.token}-${phase}`}
-            className="hero-logo-field__token-line"
-            style={{
-              position: "absolute",
-              ...activeToken.settings,
-              width: 194,
-              border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
-              borderRadius: "var(--s-radius-md,8px)",
-              background: "var(--s-background)",
-              boxShadow: "var(--s-shadow-sm, 0 8px 20px rgb(0 0 0 / 0.12))",
-              overflow: "hidden",
-              pointerEvents: "none",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
-                padding: "7px 9px",
-                fontFamily: "var(--s-font-mono)",
-                fontSize: 9,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--s-text-muted)",
-              }}
-            >
-              <span>{activeToken.component}</span>
-              <span>{isApplied ? "saved" : "typing"}</span>
+        {/* Row 4: KPI + CommitGrid side by side + Tabs */}
+        {/* Row 4: KPI + Contributions (full width) + controls column | Coverage + ToggleGroup */}
+        <div style={{ gridColumn: "1 / 2" }}>
+          <KPI label="ARR" value="$7.52m" change="+67%" trend="up" className="text-[9px]" />
+        </div>
+        <Card style={{ gridColumn: "2 / 4", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2 h-full">
+         
+            <CommitGrid data={COMMIT_DAYS} weeks={10} cellSize={10} gap={2} showDayLabels={false} showMonthLabels={false} color="var(--s-primary)" />
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "4 / 5", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5 h-full flex flex-col justify-between gap-2">
+            <div className="flex items-center gap-1 flex-wrap">
+              <Badge size="sm" variant={appliedSet.size >= 4 ? "default" : "outline"} className="text-[7px]">
+                {appliedSet.size >= 4 ? "staged" : "staging"}
+              </Badge>
+              <Badge size="sm" variant="outline" className="text-[7px]">v2.4</Badge>
             </div>
-            <div style={{ display: "grid", gap: 4, padding: 9, fontFamily: "var(--s-font-mono)", fontSize: 10 }}>
-              <div style={{ color: "var(--s-primary)", fontWeight: 700 }}>{activeToken.token}</div>
-              <div className="hero-logo-field__typed" style={{ color: "var(--s-text)" }}>{activeToken.line}</div>
-              <div style={{ color: "var(--s-text-muted)" }}>preset: {isApplied ? activeToken.preset : "writing..."}</div>
+            <div className="flex items-center gap-1">
+              {["us", "eu", "ap"].map((r) => (
+                <Badge key={r} size="sm" variant="outline" className="text-[7px]">{r}</Badge>
+              ))}
             </div>
-          </div>
-        )}
+            <Checkbox label="Dark" defaultChecked />
+            <Checkbox label="Animate" />
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "5 / 8", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5">
+            <Meter value={appliedSet.size * 25} max={100} label="Coverage" className="text-[9px]" />
+            <div className="mt-2">
+              <ToggleGroup type="single" defaultValue="bold" className="w-full">
+                <ToggleGroupItem value="bold" size="sm" className="text-[9px] h-6 flex-1 font-bold">B</ToggleGroupItem>
+                <ToggleGroupItem value="italic" size="sm" className="text-[9px] h-6 flex-1 italic">I</ToggleGroupItem>
+                <ToggleGroupItem value="underline" size="sm" className="text-[9px] h-6 flex-1 underline">U</ToggleGroupItem>
+              </ToggleGroup>
+            </div>
+          </CardContent>
+        </Card>
 
+        {/* Row 5: SparkLine (big) + Team + 2 Sliders + Switches + Buttons */}
+        <Card style={{ gridColumn: "1 / 3", borderColor: "var(--s-border)", background: cellBg, overflow: "hidden" }}>
+          <CardContent className="p-0">
+            <div className="px-2.5 pt-2 flex items-center justify-between">
+              <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
+              <span className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums" style={{ color: "var(--s-text-muted)" }}>p99 12ms</span>
+            </div>
+            <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13, 9, 16]} width={300} height={42} filled className="w-full block" style={{ display: "block" }} />
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "3 / 4", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5">
+            <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>team</div>
+            <AvatarGroup max={3}>
+              <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" />
+              <Avatar src="https://github.com/leerob.png" name="Lee" size="sm" />
+              <Avatar src="https://github.com/rauchg.png" name="G" size="sm" />
+            </AvatarGroup>
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "4 / 5", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5 flex flex-col gap-2">
+            <div>
+              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>spacing</div>
+              <Slider defaultValue={[16]} min={4} max={48} step={4} className="w-full" />
+            </div>
+            <div>
+              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</div>
+              <Slider defaultValue={[8]} min={0} max={24} step={2} className="w-full" />
+            </div>
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "5 / 6", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5 flex flex-col gap-2">
+          
+            <div className="flex items-center justify-between">
+              <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>sound</span>
+              <Switch checked={applied("UsageCard")} onCheckedChange={() => {}} />
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>motion</span>
+              <Switch defaultChecked onCheckedChange={() => {}} />
+            </div>
+          </CardContent>
+        </Card>
+        <Card style={{ gridColumn: "6 / 8", borderColor: "var(--s-border)", background: cellBg }}>
+          <CardContent className="p-2.5">
+            <div className="grid grid-cols-6 gap-1.5">
+              <Button size="sm" className="col-span-3 h-6 px-2 text-[8px]">Primary</Button>
+              <Button size="sm" variant="outline" className="col-span-3 h-6 px-2 text-[8px]">Outline</Button>
+              <Button size="sm" variant="secondary" className="col-span-4 h-6 px-2 text-[8px]">Secondary</Button>
+              <Button size="sm" variant="ghost" className="col-span-2 h-6 px-2 text-[8px]">Ghost</Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* ── Selection overlay (ref-measured, always rendered) ── */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: cursorLeft,
-            top: cursorTop,
-            display: "grid",
-            gridTemplateColumns: "auto auto",
-            alignItems: "start",
-            gap: 8,
-            color: "var(--s-primary)",
-            transition: "left var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1), top var(--s-duration-slow,600ms) cubic-bezier(0.16,1,0.3,1)",
+            top: selRect?.top ?? 0,
+            left: selRect?.left ?? 0,
+            width: selRect?.width ?? 0,
+            height: selRect?.height ?? 0,
+            border: "var(--s-border-thin,1px) dashed var(--s-primary)",
+            borderRadius: "var(--s-radius-md,8px)",
+            background: "color-mix(in oklch, var(--s-primary) 7%, transparent)",
+            opacity: isSelecting && selRect ? 1 : 0,
+            transition: "top 600ms cubic-bezier(0.16,1,0.3,1), left 600ms cubic-bezier(0.16,1,0.3,1), width 600ms cubic-bezier(0.16,1,0.3,1), height 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease, border-radius 600ms cubic-bezier(0.16,1,0.3,1)",
             pointerEvents: "none",
+            zIndex: 10,
           }}
         >
-          <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 3L18 15L11 16.5L8.5 24L3 3Z" fill="var(--s-background)" stroke="var(--s-primary)" strokeWidth="0.25" />
-          </svg>
           <div
+            key={`sel-${activeComponent}-${idx}`}
             style={{
-            minWidth: 138,
+              position: "absolute",
+              left: 0,
+              bottom: -32,
+              padding: "5px 10px",
+              background: "var(--s-background)",
               border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
               borderRadius: "var(--s-radius-sm,4px)",
-              background: "var(--s-background)",
-              padding: "6px 8px",
+              boxShadow: "0 4px 16px color-mix(in oklch, var(--s-primary) 18%, transparent)",
               fontFamily: "var(--s-font-mono)",
               fontSize: 9,
               lineHeight: 1.4,
-              boxShadow: "var(--s-shadow-sm, 0 8px 20px rgb(0 0 0 / 0.12))",
+              whiteSpace: "nowrap",
+              width: "max-content",
+              opacity: isSelecting ? 1 : 0,
+              transform: isSelecting ? "translateY(0)" : "translateY(-4px)",
+              transition: "opacity 250ms cubic-bezier(0.16,1,0.3,1), transform 250ms cubic-bezier(0.16,1,0.3,1)",
             }}
           >
-            <div style={{ color: "var(--s-primary)", fontWeight: 700 }}>{activeToken.token}</div>
-            <div style={{ color: "var(--s-text-muted)" }}>{activeToken.label}</div>
-          </div>
-        </div>
-
-        <div
-          style={{
-            position: "absolute",
-            left: 18,
-            top: 36,
-            width: 270,
-            border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
-            borderRadius: "var(--s-radius-md,8px)",
-            background: "var(--s-background)",
-            overflow: "hidden",
-            boxShadow: "var(--s-shadow-sm, 0 8px 20px rgb(0 0 0 / 0.12))",
-          }}
-        >
-          <div
-            style={{
-              borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
-              padding: "7px 9px",
-              fontFamily: "var(--s-font-mono)",
-              fontSize: 9,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "var(--s-text-muted)",
-            }}
-          >
-            sigil.tokens.md
-          </div>
-          <div style={{ padding: "8px 9px", fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.62 }}>
-            <div style={{ color: "var(--s-text)", fontWeight: 700 }}>## Component Drawer</div>
-            <div style={{ color: "var(--s-text-muted)" }}>components:</div>
-            <div style={{ color: activeComponent === "UsageCard" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- UsageCard</div>
-            <div style={{ color: activeComponent === "PresetSwatches" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- PresetSwatches</div>
-            <div style={{ color: activeComponent === "DatePicker" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- DatePicker</div>
-            <div style={{ color: activeComponent === "TokenAction" ? "var(--s-primary)" : "var(--s-text-muted)" }}>- TokenAction</div>
-            <div style={{ height: 6 }} />
-            <div style={{ color: "var(--s-text)", fontWeight: 700 }}>## Preset overrides</div>
-            {HERO_TOKEN_STEPS.map((token) => {
-              const active = token.token === activeToken.token;
-              return (
-                <div
-                  key={token.token}
-                  className={active && isTyping ? "hero-logo-field__token-line hero-logo-field__typed" : undefined}
-                  style={{
-                    color: active ? "var(--s-primary)" : "var(--s-text-muted)",
-                  }}
-                >
-                  {active && isTyping ? activeToken.line : token.line}
-                </div>
-              );
-            })}
-            {isTyping ? (
-              <div key={activeToken.line} className="hero-logo-field__token-line hero-logo-field__typed" style={{ color: "var(--s-primary)" }}>
-                writing: {activeToken.token}
-              </div>
-            ) : (
-              <div style={{ color: "var(--s-text-muted)" }}>select component...</div>
+            {!isTyping && (
+              <span style={{ color: "var(--s-text-muted)" }}>{activeToken.before}</span>
             )}
-            <div style={{ color: "var(--s-text-muted)" }}>{isApplied ? "save: preset.apply()" : "save: waiting"}</div>
+            {isTyping && !isApplied && (
+              <>
+                <span style={{ color: "var(--s-text-muted)", textDecoration: "line-through", opacity: 0.5 }}>{activeToken.before}</span>
+                <span style={{ color: "var(--s-primary)", marginLeft: 6 }}>&rarr;</span>
+                <span className="hero-logo-field__typed" style={{ color: "var(--s-primary)", marginLeft: 6 }}>{activeToken.line}</span>
+              </>
+            )}
+            {isApplied && (
+              <>
+                <span style={{ color: "var(--s-primary)" }}>{activeToken.line}</span>
+                <span style={{ color: "var(--s-success, #10b981)", marginLeft: 6 }}>✓</span>
+              </>
+            )}
           </div>
         </div>
 
-        <button
-          type="button"
-          aria-expanded={inspected}
-          onClick={() => setInspected((value) => !value)}
+        {/* ── Cursor (always rendered, opacity-driven) ────────── */}
+        <div
+          aria-hidden="true"
           style={{
             position: "absolute",
-            left: 20,
-            bottom: 22,
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 6,
-            height: 26,
-            padding: "0 9px",
-            border: "1px solid var(--s-border)",
-            borderRadius: "var(--s-radius-sm, 4px)",
-            background: "var(--s-background)",
-            color: "var(--s-text)",
-            fontFamily: "var(--s-font-mono)",
-            fontSize: 9,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            cursor: "pointer",
-            backdropFilter: "blur(8px)",
-            transition: "border-color var(--s-duration-fast, 150ms), background-color var(--s-duration-fast, 150ms)",
+            left: (selRect?.left ?? 0) + (selRect?.width ?? 0) - 10,
+            top: (selRect?.top ?? 0) + (selRect?.height ?? 0) - 10,
+            opacity: selRect ? 1 : 0,
+            color: "var(--s-primary)",
+            transition: "left 600ms cubic-bezier(0.16,1,0.3,1), top 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease",
+            pointerEvents: "none",
+            zIndex: 11,
+            filter: "drop-shadow(0 2px 6px color-mix(in oklch, var(--s-primary) 22%, transparent))",
           }}
         >
-          <span aria-hidden="true" style={{ width: 5, height: 5, background: "var(--s-primary)" }} />
-          {inspected ? "Hide" : "Inspect"}
-        </button>
-
-        {inspected && (
-          <div
-            className="hero-logo-field__inspector"
-            style={{
-              position: "absolute",
-              top: 48,
-              right: 64,
-              width: 300,
-              maxWidth: "calc(100vw - 40px)",
-              boxShadow: "var(--s-shadow-md, 0 18px 50px rgb(0 0 0 / 0.18))",
-            }}
-          >
-            <MarkdownChrome title="Blueprint Source" meta="20 variants">
-            <pre
-              style={{
-                margin: 0,
-                padding: 10,
-                overflow: "auto",
-                maxHeight: 96,
-                borderBottom: "var(--s-border-thin, 1px) var(--s-border-style, solid) var(--s-border)",
-                color: "var(--s-text-muted)",
-                fontFamily: "var(--s-font-mono)",
-                fontSize: 10,
-                lineHeight: 1.55,
-                whiteSpace: "pre-wrap",
-              }}
-            >
-              {DIAGRAM_CODE}
-            </pre>
-            <div style={{ padding: 10 }}>
-              <div
-                style={{
-                  marginBottom: 7,
-                  color: "var(--s-text-muted)",
-                  fontFamily: "var(--s-font-mono)",
-                  fontSize: 9,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Sigil Tokens
-              </div>
-              <div style={{ display: "grid", gap: 5 }}>
-                {TOKEN_ROWS.map(({ token, usage, preview }) => (
-                  <div
-                    key={token}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "28px 96px 1fr",
-                      gap: 8,
-                      alignItems: "center",
-                      fontFamily: "var(--s-font-mono)",
-                      fontSize: 9,
-                    }}
-                  >
-                    <TokenPreviewGlyph kind={preview} />
-                    <code style={{ color: "var(--s-primary)" }}>{token}</code>
-                    <span style={{ color: "var(--s-text-muted)" }}>{usage}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            </MarkdownChrome>
-          </div>
-        )}
+          <svg width="20" height="26" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3L18 15L11 16.5L8.5 24L3 3Z" fill="var(--s-background)" stroke="var(--s-primary)" strokeWidth="1.5" />
+          </svg>
+        </div>
       </div>
     </div>
   );

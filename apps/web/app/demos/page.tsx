@@ -15,6 +15,7 @@ import {
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
+import { TextureBg } from "@/components/texture-bg";
 
 const DEMOS = [
   { num: "01", name: "AI SaaS Landing", slug: "ai-saas", preset: "sigil", description: "Modern AI product landing with gradient hero, feature grid, and pricing tiers.", color: "#9b99e8" },
@@ -155,8 +156,9 @@ export default function DemosPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="96px 24px 48px">
-        <div className="mb-6">
+      <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+        <TextureBg opacity={0.3} />
+        <div className="relative z-[1] mb-6">
           <MonoLabel variant="accent" className="block mb-4">
             / Demos
           </MonoLabel>

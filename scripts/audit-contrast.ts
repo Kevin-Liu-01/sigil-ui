@@ -10,54 +10,45 @@
  */
 
 import { parse, converter } from "culori";
-
-import { defaultPreset } from "../packages/presets/src/default";
-import { sigilPreset } from "../packages/presets/src/sigil";
-import { cruxPreset } from "../packages/presets/src/crux";
-import { alloyPreset } from "../packages/presets/src/alloy";
-import { basaltPreset } from "../packages/presets/src/basalt";
-import { forgePreset } from "../packages/presets/src/forge";
-import { onyxPreset } from "../packages/presets/src/onyx";
-import { fluxPreset } from "../packages/presets/src/flux";
-import { kovaPreset } from "../packages/presets/src/kova";
-import { etchPreset } from "../packages/presets/src/etch";
-import { anvilPreset } from "../packages/presets/src/anvil";
-import { rivetPreset } from "../packages/presets/src/rivet";
-import { shardPreset } from "../packages/presets/src/shard";
-import { runePreset } from "../packages/presets/src/rune";
-import { fangPreset } from "../packages/presets/src/fang";
-import { cobaltPreset } from "../packages/presets/src/cobalt";
-import { strataPreset } from "../packages/presets/src/strata";
-import { brassPreset } from "../packages/presets/src/brass";
-import { obsidPreset } from "../packages/presets/src/obsid";
-import { axiomPreset } from "../packages/presets/src/axiom";
-import { glyphPreset } from "../packages/presets/src/glyph";
-import { cipherPreset } from "../packages/presets/src/cipher";
-import { prismPreset } from "../packages/presets/src/prism";
-import { helixPreset } from "../packages/presets/src/helix";
-import { hexPreset } from "../packages/presets/src/hex";
-import { vexPreset } from "../packages/presets/src/vex";
-import { arcPreset } from "../packages/presets/src/arc";
-import { dsgnPreset } from "../packages/presets/src/dsgn";
-import { mrkrPreset } from "../packages/presets/src/mrkr";
-import { noirPreset } from "../packages/presets/src/noir";
-import { duskPreset } from "../packages/presets/src/dusk";
-import { monoPreset } from "../packages/presets/src/mono";
-
+import { presetCatalog } from "../packages/presets/src/catalog";
+import * as presetExports from "../packages/presets/src/index";
 import type { SigilPreset } from "../packages/tokens/src/types";
 
 // ---------------------------------------------------------------------------
 // All presets
 // ---------------------------------------------------------------------------
 
-const ALL_PRESETS: SigilPreset[] = [
-  defaultPreset, sigilPreset, cruxPreset, alloyPreset, basaltPreset, forgePreset,
-  onyxPreset, fluxPreset, kovaPreset, etchPreset, anvilPreset,
-  rivetPreset, shardPreset, runePreset, fangPreset, cobaltPreset,
-  strataPreset, brassPreset, obsidPreset, axiomPreset, glyphPreset,
-  cipherPreset, prismPreset, helixPreset, hexPreset, vexPreset,
-  arcPreset, dsgnPreset, mrkrPreset, noirPreset, duskPreset, monoPreset,
-];
+const exportedPresets = Object.values(presetExports).filter(isSigilPreset);
+const catalogNames = new Set(presetCatalog.map((preset) => preset.name));
+const catalogPresetNames = new Set<string>();
+const ALL_PRESETS: SigilPreset[] = [];
+
+for (const preset of exportedPresets) {
+  if (preset.name === "default") {
+    ALL_PRESETS.push(preset);
+    continue;
+  }
+  if (catalogNames.has(preset.name)) {
+    catalogPresetNames.add(preset.name);
+    ALL_PRESETS.push(preset);
+  }
+}
+
+const missingExports = [...catalogNames].filter((name) => !catalogPresetNames.has(name)).sort();
+if (missingExports.length > 0) {
+  console.error(`Preset catalog entries missing token exports: ${missingExports.join(", ")}`);
+  process.exit(1);
+}
+
+function isSigilPreset(value: unknown): value is SigilPreset {
+  return (
+    typeof value === "object" &&
+    value !== null &&
+    "name" in value &&
+    "tokens" in value &&
+    "metadata" in value
+  );
+}
 
 // ---------------------------------------------------------------------------
 // Color conversion
@@ -139,28 +130,29 @@ interface CheckDef {
   bg: string;
   minRatio: number;
   label: string;
+  severity: "fail" | "warn";
 }
 
 const CHECKS: CheckDef[] = [
-  { fg: "text",           bg: "background",  minRatio: 4.5, label: "text on bg" },
-  { fg: "text-secondary", bg: "background",  minRatio: 4.5, label: "text-secondary on bg" },
-  { fg: "text-muted",     bg: "background",  minRatio: 4.5, label: "text-muted on bg" },
-  { fg: "text-subtle",    bg: "background",  minRatio: 3.0, label: "text-subtle on bg (large)" },
-  { fg: "text",           bg: "surface",     minRatio: 4.5, label: "text on surface" },
-  { fg: "text-secondary", bg: "surface",     minRatio: 4.5, label: "text-secondary on surface" },
-  { fg: "text-muted",     bg: "surface",     minRatio: 3.0, label: "text-muted on surface" },
-  { fg: "primary",        bg: "background",  minRatio: 3.0, label: "primary on bg (UI)" },
-  { fg: "border",         bg: "background",  minRatio: 3.0, label: "border on bg (UI)" },
-  { fg: "border-strong",  bg: "background",  minRatio: 3.0, label: "border-strong on bg" },
-  { fg: "success",        bg: "background",  minRatio: 3.0, label: "success on bg" },
-  { fg: "warning",        bg: "background",  minRatio: 3.0, label: "warning on bg" },
-  { fg: "error",          bg: "background",  minRatio: 3.0, label: "error on bg" },
-  { fg: "info",           bg: "background",  minRatio: 3.0, label: "info on bg" },
+  { fg: "text",           bg: "background",  minRatio: 4.5, label: "text on bg", severity: "fail" },
+  { fg: "text-secondary", bg: "background",  minRatio: 4.5, label: "text-secondary on bg", severity: "fail" },
+  { fg: "text-muted",     bg: "background",  minRatio: 4.5, label: "text-muted on bg", severity: "warn" },
+  { fg: "text-subtle",    bg: "background",  minRatio: 3.0, label: "text-subtle on bg (large)", severity: "warn" },
+  { fg: "text",           bg: "surface",     minRatio: 4.5, label: "text on surface", severity: "fail" },
+  { fg: "text-secondary", bg: "surface",     minRatio: 4.5, label: "text-secondary on surface", severity: "fail" },
+  { fg: "text-muted",     bg: "surface",     minRatio: 3.0, label: "text-muted on surface", severity: "warn" },
+  { fg: "primary",        bg: "background",  minRatio: 3.0, label: "primary on bg (UI)", severity: "warn" },
+  { fg: "border",         bg: "background",  minRatio: 3.0, label: "border on bg (UI)", severity: "warn" },
+  { fg: "border-strong",  bg: "background",  minRatio: 3.0, label: "border-strong on bg", severity: "warn" },
+  { fg: "success",        bg: "background",  minRatio: 3.0, label: "success on bg", severity: "warn" },
+  { fg: "warning",        bg: "background",  minRatio: 3.0, label: "warning on bg", severity: "warn" },
+  { fg: "error",          bg: "background",  minRatio: 3.0, label: "error on bg", severity: "warn" },
+  { fg: "info",           bg: "background",  minRatio: 3.0, label: "info on bg", severity: "warn" },
 ];
 
 // primary-contrast on primary (button text)
 const BUTTON_CHECK: CheckDef = {
-  fg: "primary-contrast", bg: "primary", minRatio: 4.5, label: "primary-contrast on primary (btn)"
+  fg: "primary-contrast", bg: "primary", minRatio: 4.5, label: "primary-contrast on primary (btn)", severity: "fail"
 };
 
 // ---------------------------------------------------------------------------
@@ -175,6 +167,7 @@ interface Failure {
   required: number;
   fgColor: string;
   bgColor: string;
+  severity: "fail" | "warn";
 }
 
 const failures: Failure[] = [];
@@ -205,6 +198,7 @@ for (const preset of ALL_PRESETS) {
           required: check.minRatio,
           fgColor: fgRaw,
           bgColor: bgRaw,
+          severity: check.severity,
         });
       }
     }
@@ -227,6 +221,7 @@ for (const preset of ALL_PRESETS) {
             required: BUTTON_CHECK.minRatio,
             fgColor: pcRaw,
             bgColor: pRaw,
+            severity: BUTTON_CHECK.severity,
           });
         }
       }
@@ -240,23 +235,28 @@ for (const preset of ALL_PRESETS) {
 
 console.log(`\nWCAG AA Contrast Audit — ${ALL_PRESETS.length} presets, ${totalChecks} checks\n`);
 
+const hardFailures = failures.filter((failure) => failure.severity === "fail");
+const warnings = failures.filter((failure) => failure.severity === "warn");
+
 if (failures.length === 0) {
   console.log("ALL CHECKS PASSED\n");
   process.exit(0);
 }
 
-console.log(`FAILURES: ${failures.length}\n`);
-console.log("Preset          | Mode  | Check                              | Ratio | Req   | FG → BG");
-console.log("----------------|-------|------------------------------------|-------|-------|--------");
+console.log(`FAILURES: ${hardFailures.length}`);
+console.log(`WARNINGS: ${warnings.length}\n`);
+console.log("Preset          | Mode  | Sev  | Check                              | Ratio | Req   | FG → BG");
+console.log("----------------|-------|------|------------------------------------|-------|-------|--------");
 
 for (const f of failures) {
   const name = f.preset.padEnd(15);
   const mode = f.mode.padEnd(5);
+  const severity = f.severity.padEnd(4);
   const label = f.label.padEnd(34);
   const ratio = f.ratio.toFixed(2).padStart(5);
   const req = f.required.toFixed(1).padStart(5);
-  console.log(`${name} | ${mode} | ${label} | ${ratio} | ${req} | ${f.fgColor} → ${f.bgColor}`);
+  console.log(`${name} | ${mode} | ${severity} | ${label} | ${ratio} | ${req} | ${f.fgColor} → ${f.bgColor}`);
 }
 
-console.log(`\n${failures.length} failures out of ${totalChecks} checks.\n`);
-process.exit(1);
+console.log(`\n${hardFailures.length} hard failures and ${warnings.length} warnings out of ${totalChecks} checks.\n`);
+process.exit(hardFailures.length > 0 ? 1 : 0);

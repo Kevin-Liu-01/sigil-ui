@@ -898,10 +898,10 @@ function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolea
         width: "100%",
         borderRadius: showFrame ? 8 : 0,
         border: showFrame ? "1px solid var(--db-border)" : "none",
-        overflow: "hidden",
+        overflow: showFrame ? "hidden" : undefined,
         transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>
-        <div style={{ width: "100%", height: "100%", overflowX: "hidden", overflowY: "auto" }}>
+        <div style={{ width: "100%", height: canvas ? "100%" : undefined, overflowX: canvas ? "hidden" : undefined, overflowY: canvas ? "auto" : undefined }}>
           {children}
         </div>
       </div>
@@ -1280,7 +1280,7 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
       {/* Main row: sidebar + content + agent */}
       <div style={{
         flex: 1, display: "flex", flexDirection: "row",
-        minHeight: 0, minWidth: 0, overflow: "hidden", position: "relative",
+        minHeight: 0, minWidth: 0, overflow: canvasMode ? "hidden" : undefined, position: "relative",
         paddingBottom: canvasMode ? 0 : TOOLBAR_H,
       }}>
         {/* In-flow sidebar (canvas desktop only) */}

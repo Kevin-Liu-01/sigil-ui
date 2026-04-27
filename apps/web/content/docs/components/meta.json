@@ -1,6 +1,7 @@
 {
   "title": "Components",
   "pages": [
+    "component-recipes",
     "accordion",
     "alert",
     "alert-dialog",

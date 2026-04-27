@@ -10,6 +10,8 @@ import { LayerStackDiagram } from "@/components/landing/layer-stack";
 import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
 import { PresetComparisonView } from "@/components/landing/preset-comparison";
 import { MarkdownEditorPreview } from "@/components/landing/markdown-editor";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
+import { TextureBg } from "@/components/texture-bg";
 
 import {
   SigilSection,
@@ -207,7 +209,9 @@ export default function WalkthroughPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="96px 24px 48px">
+      <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+        <TextureBg opacity={0.3} />
+        <div className="relative z-[1]">
         <MonoLabel variant="accent" className="block mb-4">/ Walkthrough</MonoLabel>
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
@@ -229,6 +233,7 @@ export default function WalkthroughPage() {
             </GapPixelCell>
           ))}
         </GapPixelGrid>
+        </div>
       </SigilSection>
 
       <Divider pattern="vertical" size="md" showBorders />
@@ -249,8 +254,8 @@ export default function WalkthroughPage() {
             <div className="flex flex-col gap-4">
               {[
                 { file: "sigil.config.ts", desc: "Project config — framework detection, component output path, active preset" },
-                { file: "sigil.tokens.md", desc: "The source of truth — 259 token fields in human-readable markdown" },
-                { file: "globals.css", desc: "300+ CSS custom properties compiled from your token file" },
+                { file: "sigil.tokens.md", desc: `Markdown overrides for the ${SIGIL_PRODUCT_STATS.tokenCount}-token system` },
+                { file: "globals.css", desc: "CSS custom properties compiled from your token layer" },
                 { file: "package.json", desc: "@sigil-ui/components and @sigil-ui/presets added as dependencies" },
               ].map((item) => (
                 <div key={item.file} className="border-b border-[var(--s-border)] pb-3">
@@ -291,7 +296,7 @@ export default function WalkthroughPage() {
       <Step
         number="03"
         label="DEFINE YOUR PRESET"
-        heading="Create your own — or start from 31."
+        heading={`Create your own — or start from ${SIGIL_PRODUCT_STATS.presetCount}.`}
         description="Your project needs its own visual identity. Create a custom preset interactively, fork a curated one as a starting point, or edit sigil.tokens.md directly. The file is yours — presets are just starting points."
       >
         {/* Three paths */}
@@ -300,7 +305,7 @@ export default function WalkthroughPage() {
             <MonoLabel variant="accent" className="block mb-3">RECOMMENDED: CREATE CUSTOM</MonoLabel>
             <DensityText role="body" as="p" muted className="mb-3">
               Interactive scaffolding asks for your brand colors, fonts, and radius preference.
-              Generates a complete 259-token preset that you own.
+              Generates a complete token preset that you own.
             </DensityText>
             <div
               className="font-[family-name:var(--s-font-mono)] text-[12px] p-2"
@@ -312,7 +317,7 @@ export default function WalkthroughPage() {
           <GapPixelCell className="p-6">
             <MonoLabel className="block mb-3">FORK A CURATED PRESET</MonoLabel>
             <DensityText role="body" as="p" muted className="mb-3">
-              Start from one of 31 presets, then customize. The preset writes to your
+              Start from one of {SIGIL_PRODUCT_STATS.presetCount} presets, then customize. The preset writes to your
               token file — you can change any value afterward.
             </DensityText>
             <div
@@ -325,8 +330,8 @@ export default function WalkthroughPage() {
           <GapPixelCell className="p-6">
             <MonoLabel className="block mb-3">EDIT TOKENS DIRECTLY</MonoLabel>
             <DensityText role="body" as="p" muted className="mb-3">
-              Open sigil.tokens.md and set every value yourself. Full control over all 259
-              fields — 16 categories from colors to motion.
+              Open sigil.tokens.md and set core values yourself. Full control through the token
+              layer — from colors to motion.
             </DensityText>
             <div
               className="font-[family-name:var(--s-font-mono)] text-[12px] p-2"
@@ -669,8 +674,8 @@ export default function PricingPage() {
             Ready to build?
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 mx-auto max-w-md leading-relaxed">
-            You've seen the full workflow. One file, 259 tokens, 200+ token-driven components, 31 presets.
-            The design system that compiles from markdown.
+            You've seen the full workflow. One file, {SIGIL_PRODUCT_STATS.tokenCount} tokens, {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components, {SIGIL_PRODUCT_STATS.presetCount} presets.
+            The design system that compiles from a token layer.
           </DensityText>
           <div className="flex items-center justify-center gap-3 flex-wrap mb-8">
             <AccentCTA size="lg" asChild>

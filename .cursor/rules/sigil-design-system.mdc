@@ -4,6 +4,16 @@
 >
 > **Full references:** [style/design.md](../../style/design.md) (motion guide) | [style/ux-principles.md](../../style/ux-principles.md) (product UX) | [style/style.md](../../style/style.md) (engineering philosophy) | [skills/sigil-polish/](../../skills/sigil-polish/SKILL.md) (interface polish skill with typography, surfaces, animations, performance deep-dives)
 
+## Custom Preset Rule (MANDATORY — Enforced Before All Other Rules)
+
+**Every custom preset MUST populate ALL 28 token categories and ALL ~350 fields.**
+
+- The canonical template is `packages/presets/src/_template.ts`.
+- When creating a custom preset: copy `_template.ts` or spread it as a base. Change values, never delete fields.
+- No partial presets. If a field exists in `_template.ts`, it must exist in your preset.
+- The 28 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`, `radius`, `shadows`, `motion`, `borders`, `buttons`, `cards`, `headings`, `navigation`, `backgrounds`, `code`, `inputs`, `cursor`, `scrollbar`, `alignment`, `sections`, `dividers`, `gridVisuals`, `focus`, `overlays`, `dataViz`, `media`, `controls`, `componentSurfaces`.
+- Read `skills/sigil-preset/SKILL.md` before creating any preset.
+
 ## Color Rules
 
 - OKLCH for all authored palettes. Use `oklch(L C H)` — L=lightness (0-1), C=chroma (0-0.37), H=hue (0-360).

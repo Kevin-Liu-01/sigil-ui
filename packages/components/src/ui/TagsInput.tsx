@@ -89,7 +89,7 @@ export const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(function Tag
             "inline-flex items-center gap-1 h-6 px-2",
             "rounded-[var(--s-radius-sm,3px)]",
             "bg-[var(--s-surface)] text-[var(--s-text)] text-xs font-medium",
-            "border border-[var(--s-border)]",
+            "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           )}
         >
           {tag}

@@ -225,6 +225,7 @@
   --s-error-muted: #fef2f2;
   --s-info: #2563eb;
   --s-info-muted: #eff6ff;
+  --s-highlight: #fef9c3;
 
   /* Accent palette */
   --s-accent-indigo: #18181b;
@@ -519,6 +520,7 @@ html[data-theme="dark"],
   --s-warning-muted: #451a03;
   --s-error-muted: #450a0a;
   --s-info-muted: #172554;
+  --s-highlight: rgba(250, 204, 21, 0.15);
 
   --s-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
   --s-shadow-md: 0 0 0 1px rgb(255 255 255 / 0.04),
@@ -959,16 +961,22 @@ h1, h2, h3, h4, h5, h6 {
 /* ================================================================== */
 /* Theme-switch transition kill                                        */
 /* ================================================================== */
-/* During light ↔ dark toggle, ThemeProvider sets                      */
-/* data-switching-theme on <html>. This zeroes transition-duration on  */
-/* everything except interactive primitives ([data-slot]) so colors    */
-/* snap instantly. Non-color properties (transform, opacity) aren't    */
-/* changing during theme switch, so the zero duration is invisible.    */
-
-html[data-switching-theme] *:not([data-slot]),
-html[data-switching-theme] *:not([data-slot])::before,
-html[data-switching-theme] *:not([data-slot])::after {
-  transition-duration: 0s !important;
+/* During light <-> dark toggle, ThemeProvider sets data-switching-theme
+   on <html>. Color-like token transitions snap instantly, while transform
+   and opacity animations (for example the switch thumb/icon motion) remain. */
+html[data-switching-theme],
+html[data-switching-theme] *,
+html[data-switching-theme] *::before,
+html[data-switching-theme] *::after {
+  transition-property:
+    transform,
+    translate,
+    scale,
+    rotate,
+    opacity,
+    filter,
+    backdrop-filter,
+    -webkit-backdrop-filter !important;
 }
 
 /* ================================================================== */

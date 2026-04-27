@@ -14,8 +14,8 @@
 
 <p align="center">
   A token-driven design system where visual identity is a first-class primitive.<br>
-  200+ token-driven components. 34 presets. 259 configurable tokens.<br>
-  One file controls your entire visual identity — and AI agents can read, reason about, and modify it.
+  200+ token-driven components. 44 presets. 259 configurable tokens.<br>
+  One token layer controls your entire visual identity — and AI agents can read, reason about, and modify it.
 </p>
 
 <p align="center">
@@ -40,7 +40,7 @@ drift, inconsistency                        agent edits ONE token file
 everything looks the same                   distinct visual identity
 ```
 
-**The core innovation:** a single `sigil.tokens.md` file that both humans and AI agents can read and edit. 259 tokens across 20 categories. Every component reads from this file. Swap presets, and every component updates — not a theme toggle, a different *design language*.
+**The core innovation:** a single token layer that both humans and AI agents can read and edit. `sigil.tokens.md` is the markdown override surface for the core token groups; full presets use typed token objects. Every component reads the compiled variables. Swap presets, and every component updates — not a theme toggle, a different *design language*.
 
 ---
 
@@ -50,13 +50,13 @@ everything looks the same                   distinct visual identity
 ┌─────────────────────────────────────────────────────────────────────┐
 │                                                                     │
 │   sigil.tokens.md              Human or AI agent edits this file    │
-│   (markdown)                   259 tokens, 20 categories            │
+│   (markdown overrides)         core token groups                    │
 │                                                                     │
 │         │  parseMarkdownTokens()                                    │
 │         ▼                                                           │
 │                                                                     │
 │   SigilTokens                  TypeScript object with full types    │
-│   (typed object)               Validated, exhaustive, composable    │
+│   (typed object)               exhaustive, composable               │
 │                                                                     │
 │         │  compileToCss() / compileToTailwind()                     │
 │         ▼                                                           │
@@ -87,7 +87,7 @@ To change the visual output, edit the **top** of this chain — never the bottom
 | **Agent interface** | None | None | None | None | **`sigil.tokens.md`** |
 | **Change primary color** | Edit every file | Edit theme | Edit config | Edit theme | **Edit 1 token** |
 | **Complete visual overhaul** | Rewrite everything | Painful | Partial | Painful | **`sigil preset noir`** |
-| **Curated identities** | 0 | 0 | 0 | 0 | **34 presets** |
+| **Curated identities** | 0 | 0 | 0 | 0 | **44 presets** |
 | **Configurable tokens** | ~0 | ~40 | ~30 | ~50 | **259** |
 | **Token categories** | 0 | 5 | 4 | 6 | **20** |
 | **Per-component tokens** | No | Partial | No | Partial | **Yes (buttons, cards, inputs, nav, code, ...)** |
@@ -206,7 +206,7 @@ All colors use **OKLCH** — perceptually uniform, P3-gamut-ready: `oklch(L C H)
 
 ---
 
-## Preset System (34 Presets)
+## Preset System (44 Presets)
 
 One command changes all 259 tokens at once. Not a theme toggle — a different *design language*.
 
@@ -302,9 +302,12 @@ npx @sigil-ui/cli preset noir    # Swap visual identity in one command
 | `sigil convert` | Convert an existing project end-to-end: dependencies, token CSS, global CSS import, components directory, agent instructions |
 | `sigil add <components>` | Copy components into your project (they read from tokens automatically) |
 | `sigil add --all` | Add all available components |
-| `sigil preset list` | Browse all 34 presets by category |
+| `sigil preset list` | Browse all 44 presets by category |
 | `sigil preset <name>` | Switch to a different preset (regenerates token CSS) |
 | `sigil preset create` | Scaffold a custom preset with base selection, color, and font prompts |
+| `sigil inspire <url-or-file>` | Draft token CSS, a custom preset, and a preview page from a reference |
+| `sigil docs` | Generate local custom-library docs and `llms.txt` |
+| `sigil adapter <name>` | Bridge shadcn, Bootstrap, or Material variables into Sigil tokens |
 | `sigil diff` | Show token changes since last sync |
 | `sigil doctor` | Validate project health (config, tokens, components, deps, CSS import, preset) |
 
@@ -317,7 +320,7 @@ npx @sigil-ui/cli preset noir    # Swap visual identity in one command
 | `@sigil-ui/tokens` | Token system — types, defaults, compiler, markdown parser. The core differentiator. |
 | `@sigil-ui/components` | 200+ token-driven components consuming tokens via CSS custom properties |
 | `@sigil-ui/primitives` | Headless behavior layer (Radix-based, 16 primitives) |
-| `@sigil-ui/presets` | 34 curated preset bundles (259 tokens each) |
+| `@sigil-ui/presets` | 44 curated preset bundles (259 tokens each) |
 | `@sigil-ui/cli` | CLI for init, add, preset management, diff, doctor |
 | `create-sigil-app` | Project bootstrapper with template selection |
 
@@ -333,7 +336,7 @@ Sigil is built for AI agents to operate. Not agent-compatible. Agent-native.
 | `AGENTS.md` | Comprehensive agent instructions at repo root |
 | `.sigil/AGENTS.md` | Project-specific agent instructions (generated by `sigil init`) |
 | Agent skills | Pre-built skills for Cursor, Claude Code, and Codex |
-| `sigil docs <component>` | Component docs as agent-readable markdown |
+| `sigil docs` | Project docs and `llms.txt` as agent-readable markdown |
 
 ### Why agents build faster with Sigil
 
@@ -377,7 +380,7 @@ With Sigil (agent touches 1 file):
 ```
 packages/
   tokens/           @sigil-ui/tokens      Source of truth: types, compiler, markdown parser
-  presets/           @sigil-ui/presets     34 curated preset bundles (259 tokens each)
+  presets/           @sigil-ui/presets     44 curated preset bundles (259 tokens each)
   components/        @sigil-ui/components  200+ token-driven React components
   primitives/        @sigil-ui/primitives  16 Radix-based headless behavior primitives
   cli/               @sigil-ui/cli        CLI: init, add, preset, diff, doctor

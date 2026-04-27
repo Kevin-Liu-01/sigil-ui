@@ -18,6 +18,8 @@ import {
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
+import { TextureBg } from "@/components/texture-bg";
 
 const posts = [
   {
@@ -25,7 +27,7 @@ const posts = [
     title: "Introducing Sigil UI",
     category: "Launch",
     excerpt:
-      "The token-driven design system that replaces scattered Tailwind overrides with a single source of truth. One file, 300+ variables, 30 presets.",
+      `The token-driven design system that replaces scattered Tailwind overrides with a single source of truth. One file, ${SIGIL_PRODUCT_STATS.tokenCount} tokens, ${SIGIL_PRODUCT_STATS.presetCount} presets.`,
   },
   {
     date: "2026-04-20",
@@ -88,8 +90,9 @@ export default function BlogPage() {
         <LandingNavbar />
 
         {/* ── Hero ── */}
-        <SigilSection borderTop>
-          <div className="flex flex-col gap-4 max-w-[640px]">
+        <SigilSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+          <TextureBg opacity={0.3} />
+          <div className="relative z-[1] flex flex-col gap-4 max-w-[640px]">
             <MonoLabel variant="accent">/ Blog</MonoLabel>
             <h1
               className={cn(

@@ -4,7 +4,7 @@
   "commit": false,
   "fixed": [],
   "linked": [
-    ["@sigil-ui/tokens", "@sigil-ui/primitives", "@sigil-ui/components", "@sigil-ui/cli", "@sigil-ui/presets"]
+    ["@sigil-ui/tokens", "@sigil-ui/primitives", "@sigil-ui/components", "@sigil-ui/cli", "@sigil-ui/presets", "create-sigil-app"]
   ],
   "access": "public",
   "baseBranch": "main",

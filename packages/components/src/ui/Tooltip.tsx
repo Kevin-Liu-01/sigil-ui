@@ -30,7 +30,7 @@ export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(function Tool
           className={cn(
             "z-50 overflow-hidden",
             "rounded-[var(--s-radius-sm,4px)]",
-            "border border-[var(--s-border)] bg-[var(--s-surface)]",
+            "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)]",
             "px-3 py-1.5 text-xs text-[var(--s-text)]",
             "shadow-[var(--s-shadow-sm)]",
             "animate-in fade-in-0 zoom-in-95",

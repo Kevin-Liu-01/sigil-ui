@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { SigilShell } from "@/components/sigil-shell";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DocSearchPalette } from "@/components/doc-search-palette";
+import { SIGIL_PRODUCT_SUMMARY } from "@/lib/product-stats";
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s — Sigil UI",
   },
   description:
-    "The component library where one markdown file controls your entire design system. 200+ token-driven components, 300+ tokens, 30 presets, built for AI agents.",
+    `The component library where tokens control your entire design system. ${SIGIL_PRODUCT_SUMMARY}, built for AI agents.`,
   keywords: [
     "sigil ui",
     "design tokens",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "Sigil UI",
     title: "Sigil UI — Change the tokens. Everything updates.",
     description:
-      "200+ token-driven components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
+      `${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system built for AI agents.`,
     images: [
       {
         url: "/og.png",
@@ -54,7 +55,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Sigil UI — Change the tokens. Everything updates.",
     description:
-      "200+ token-driven components, 300+ tokens, 30 presets, and a markdown-first design system built for AI agents.",
+      `${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system built for AI agents.`,
     images: ["/og.png"],
     creator: "@kevinliu",
   },
@@ -68,7 +69,7 @@ const jsonLd = {
   applicationCategory: "DeveloperApplication",
   operatingSystem: "Any",
   description:
-    "React component library with 200+ token-driven components, 300+ tokens, 30 presets, and markdown-first design system for AI agents.",
+    `React component library with ${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system.`,
   url: "https://sigil-ui.com",
   author: {
     "@type": "Person",

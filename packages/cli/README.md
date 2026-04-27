@@ -8,6 +8,9 @@ The CLI is the primary interface for configuring a Sigil project. Instead of man
 - **Set up the token pipeline** (`sigil init`)
 - **Install token-driven components** (`sigil add`)
 - **Switch the entire visual identity** (`sigil preset`)
+- **Draft tokens from references** (`sigil inspire`)
+- **Generate custom library docs** (`sigil docs`)
+- **Bridge existing systems into Sigil tokens** (`sigil adapter`)
 - **Validate that tokens are consistent** (`sigil doctor`)
 - **Track token changes** (`sigil diff`)
 
@@ -43,7 +46,7 @@ The most important command. Walks you through a questionnaire that configures Si
 | Step | Question | Options |
 |------|----------|---------|
 | 1 | What are you building? | SaaS, Marketing, Docs, Blog, Portfolio, E-commerce, Startup, Custom |
-| 2 | Choose a preset | 31 presets organized by category, with recommendations based on project type |
+| 2 | Choose a preset | 44 presets organized by category, with recommendations based on project type |
 | 3 | Customize preset? | Override primary color (OKLCH), display font, body font, mono font |
 | 4 | Which features? | GSAP + ScrollTrigger, Motion, Radix Primitives, Pretext, Sigil Grid |
 | 5 | Starter components? | button, card, input, badge, dialog, dropdown, tabs, tooltip, sigil-grid/cross/rail/card |
@@ -107,12 +110,12 @@ Components are copied as source so you own them, but they still read from token 
 
 ```bash
 sigil preset              # show current preset info
-sigil preset list         # browse all 31 presets by category with descriptions and fonts
+sigil preset list         # browse all 44 presets by category with descriptions and fonts
 sigil preset noir         # switch to noir preset
 sigil preset create       # scaffold a custom preset file
 ```
 
-**`sigil preset list`** prints all 31 presets organized by category (Structural, Minimal, Dark, Colorful, Editorial, Industrial) with descriptions and font stacks.
+**`sigil preset list`** prints all 44 presets organized by category (Structural, Minimal, Dark, Colorful, Editorial, Industrial, Edgeless) with descriptions and font stacks.
 
 **`sigil preset create`** walks you through:
 1. Custom preset name
@@ -121,6 +124,41 @@ sigil preset create       # scaffold a custom preset file
 4. Display font
 
 Creates `sigil.preset.<name>.ts` in your project root. Activate with `sigil preset <name>`.
+
+### `sigil inspire` — Reference to Token Draft
+
+Turns a URL, saved HTML file, CSS file, or raw style text into a reviewable Sigil token draft.
+
+```bash
+sigil inspire https://example.com --name example-inspired
+sigil inspire ./reference.css --name launch-theme --apply
+sigil inspire ./reference.html --name studio --no-demo
+```
+
+It writes `.sigil/inspire/<name>/tokens.css`, `sigil.preset.<name>.ts`, and a local preview page at `src/app/sigil-inspire/<name>/page.tsx` by default. The output is a token direction, not a pixel clone.
+
+### `sigil docs` — Custom Library Docs
+
+Generates local project documentation from the active config, installed components, and token file.
+
+```bash
+sigil docs
+sigil docs --out docs/internal --llms llms.txt
+```
+
+It writes `docs/sigil-project.md` and `llms.txt` so humans and agents can understand the active preset, copied components, token surface, and recommended commands.
+
+### `sigil adapter` — Appearance Bridges
+
+Creates compatibility CSS for existing design-system variables so older code can inherit Sigil tokens.
+
+```bash
+sigil adapter shadcn --inject
+sigil adapter bootstrap
+sigil adapter material --out src/styles/mui-sigil.css
+```
+
+Adapters are bridges, not full clones. They let you keep existing variable names while Sigil becomes the central design source.
 
 ### `sigil diff` — Token Change Tracking
 

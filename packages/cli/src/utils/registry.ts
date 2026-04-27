@@ -125,6 +125,114 @@ const COMPONENT_SOURCE_FILES: Record<string, string> = {
   "sigil-cursor": "ui/SigilCursor.tsx",
 };
 
+const COMPOSED_COMPONENT_GROUPS: Array<{
+  source: string;
+  file: string;
+  dependencies: string[];
+  registryDependencies: string[];
+  names: string[];
+}> = [
+  {
+    source: "overlays/ComposedOverlays.tsx",
+    file: "composed-overlays.tsx",
+    dependencies: [
+      "@radix-ui/react-alert-dialog",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-tooltip",
+      "cmdk",
+    ],
+    registryDependencies: ["button", "input", "dialog", "dropdown", "tooltip"],
+    names: [
+      "modal", "confirm-dialog", "prompt-dialog", "responsive-dialog", "lightbox",
+      "image-preview", "spotlight", "command-menu", "action-menu", "overflow-menu",
+      "mega-menu", "context-panel", "popover-form", "floating-panel", "tooltip-group",
+      "tour", "tour-step", "coachmark", "hotkey-provider", "shortcut-recorder",
+    ],
+  },
+  {
+    source: "ui/AdvancedInputs.tsx",
+    file: "advanced-inputs.tsx",
+    dependencies: [
+      "@radix-ui/react-checkbox",
+      "@radix-ui/react-popover",
+      "@radix-ui/react-radio-group",
+      "@radix-ui/react-slider",
+      "@radix-ui/react-switch",
+      "lucide-react",
+    ],
+    registryDependencies: ["button", "input"],
+    names: [
+      "search-input", "currency-input", "phone-input", "time-picker", "date-time-picker",
+      "date-range-field", "multi-select", "autocomplete", "creatable-select", "async-select",
+      "segmented-tabs", "range-slider", "dual-range-slider", "file-dropzone", "image-upload",
+      "avatar-upload", "color-field", "combobox-field", "checkbox-card", "radio-card",
+      "switch-field", "slider-field", "stepper-field", "tags-field", "copy-input",
+    ],
+  },
+  {
+    source: "ui/StatusFeedback.tsx",
+    file: "status-feedback.tsx",
+    dependencies: ["@radix-ui/react-toast"],
+    registryDependencies: ["button", "badge"],
+    names: [
+      "status-badge", "status-dot", "status-pill", "online-indicator", "presence-avatar",
+      "notification", "notification-list", "inline-alert", "callout", "banner-alert",
+      "error-state", "loading-state", "success-state", "progress-steps", "timeline-progress",
+      "toast-action", "toast-promise", "skeleton-card", "skeleton-table", "spinner-overlay",
+    ],
+  },
+  {
+    source: "data/DataComponents.tsx",
+    file: "data-components.tsx",
+    dependencies: ["@radix-ui/react-checkbox"],
+    registryDependencies: ["button", "input"],
+    names: [
+      "description-list", "key-value", "property-list", "stat-card", "metric-grid",
+      "trend", "spark-area", "spark-bar", "data-list", "data-list-item",
+      "data-grid", "data-toolbar", "data-filters", "data-pagination", "column-visibility",
+      "bulk-actions", "empty-table", "listbox", "virtual-list", "tree-table",
+    ],
+  },
+  {
+    source: "navigation/AppSurfaces.tsx",
+    file: "app-surfaces.tsx",
+    dependencies: ["@radix-ui/react-tabs"],
+    registryDependencies: ["button", "card", "tabs"],
+    names: [
+      "container-query", "split-pane", "dock", "top-bar", "bottom-bar",
+      "mobile-nav", "sidebar-nav", "app-header", "page-header", "section-header",
+      "content-tabs", "anchor-nav", "table-of-contents", "scroll-spy", "masonry-grid",
+      "media-card", "resource-card", "feature-card", "pricing-card", "testimonial-carousel",
+    ],
+  },
+  {
+    source: "ui/Productivity.tsx",
+    file: "productivity.tsx",
+    dependencies: ["@radix-ui/react-tabs"],
+    registryDependencies: ["button", "card", "tabs"],
+    names: [
+      "code-tabs", "code-preview", "copy-button", "token-preview", "theme-swatch",
+      "theme-switcher", "prompt-input", "chat-message", "chat-thread", "message-composer",
+      "activity-timeline", "audit-log", "changelog", "version-badge", "keyboard-key",
+    ],
+  },
+];
+
+for (const group of COMPOSED_COMPONENT_GROUPS) {
+  for (const name of group.names) {
+    COMPONENT_REGISTRY[name] = {
+      name,
+      files: [group.file],
+      dependencies: group.dependencies,
+      devDependencies: [],
+      registryDependencies: group.registryDependencies,
+    };
+    COMPONENT_SOURCE_FILES[name] = group.source;
+  }
+}
+
 export function getComponent(name: string): ComponentEntry | null {
   return COMPONENT_REGISTRY[name] ?? null;
 }

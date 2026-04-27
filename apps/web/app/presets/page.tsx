@@ -18,6 +18,7 @@ import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
 import { PresetComparisonView } from "@/components/landing/preset-comparison";
+import { TextureBg } from "@/components/texture-bg";
 
 const CATEGORIES = [
   "All",
@@ -97,8 +98,9 @@ export default function PresetsPage() {
 
       <BorderStack>
         {/* ── Hero ────────────────────────────────────────── */}
-        <SigilSection borderTop padding="96px 24px 48px">
-          <div className="mb-12 max-w-3xl">
+        <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+          <TextureBg opacity={0.3} />
+          <div className="relative z-[1] mb-12 max-w-3xl">
             <MonoLabel variant="accent" className="mb-4 block">
               / Presets
             </MonoLabel>

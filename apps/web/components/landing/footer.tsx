@@ -1,6 +1,7 @@
 "use client";
 
 import { FooterLogo, NavbarLogo } from "@/components/landing/hero-logo-field";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 import { SigilSection } from "@sigil-ui/components";
 
 function GitHubIcon() {
@@ -92,7 +93,7 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
             </span>
           </div>
           <p className="text-[13px] leading-relaxed text-[var(--s-text-muted)] mb-5 max-w-[260px]">
-            The token-driven design system. 200+ token-driven components, 32 presets, one markdown file controls everything.
+            The token-driven design system. {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components, {SIGIL_PRODUCT_STATS.presetCount} presets, one token layer controls everything.
           </p>
           <div className="flex items-center gap-2">
             {SOCIAL_LINKS.map((link) => (

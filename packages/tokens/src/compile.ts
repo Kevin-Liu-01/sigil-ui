@@ -2,6 +2,7 @@ import type {
   ColorTokens,
   ColorValue,
   CssCompileOptions,
+  MarkdownTokenOverrides,
   SigilTokens,
   ThemedColor,
 } from "./types";
@@ -72,10 +73,10 @@ function emitTokenGroup(
  * values emit once in `:root`.
  */
 export function compileToCss(
-  tokens: SigilTokens,
+  tokens: SigilTokens | Partial<SigilTokens>,
   options: CssCompileOptions = {},
 ): string {
-  const resolvedTokens = deepMerge(defaultTokens, tokens) as SigilTokens;
+  const resolvedTokens = deepMerge(defaultTokens, tokens as Record<string, unknown>) as SigilTokens;
   const {
     prefix = "s",
     includeLight = true,
@@ -412,12 +413,13 @@ export function compileInteractionCss(options: CssCompileOptions = {}): string {
  * Generates a Tailwind CSS v4 `@theme` block that maps CSS variables
  * to Tailwind utility names.
  */
-export function compileToTailwind(tokens: SigilTokens): string {
+export function compileToTailwind(tokens: SigilTokens | Partial<SigilTokens>): string {
+  const resolvedTokens = deepMerge(defaultTokens, tokens as Record<string, unknown>) as SigilTokens;
   const lines: string[] = ["@theme {"];
   const p = "s";
 
   // Colors → --color-*
-  for (const key of Object.keys(tokens.colors)) {
+  for (const key of Object.keys(resolvedTokens.colors)) {
     lines.push(`${indent(1)}--color-${key}: var(--${p}-${key});`);
   }
 
@@ -429,7 +431,7 @@ export function compileToTailwind(tokens: SigilTokens): string {
 
   // Spacing → --spacing-*
   lines.push("");
-  for (const step of tokens.spacing.scale) {
+  for (const step of resolvedTokens.spacing.scale) {
     lines.push(
       `${indent(1)}--spacing-${step}: var(--${p}-space-${step});`,
     );
@@ -437,19 +439,19 @@ export function compileToTailwind(tokens: SigilTokens): string {
 
   // Radius → --radius-*
   lines.push("");
-  for (const key of Object.keys(tokens.radius)) {
+  for (const key of Object.keys(resolvedTokens.radius)) {
     lines.push(`${indent(1)}--radius-${key}: var(--${p}-radius-${key});`);
   }
 
   // Shadows → --shadow-*
   lines.push("");
-  for (const key of Object.keys(tokens.shadows)) {
+  for (const key of Object.keys(resolvedTokens.shadows)) {
     lines.push(`${indent(1)}--shadow-${key}: var(--${p}-shadow-${key});`);
   }
 
   // Motion durations → --duration-*
   lines.push("");
-  for (const key of Object.keys(tokens.motion.duration)) {
+  for (const key of Object.keys(resolvedTokens.motion.duration)) {
     lines.push(
       `${indent(1)}--duration-${key}: var(--${p}-duration-${key});`,
     );
@@ -457,7 +459,7 @@ export function compileToTailwind(tokens: SigilTokens): string {
 
   // Motion easings → --ease-*
   lines.push("");
-  for (const key of Object.keys(tokens.motion.easing)) {
+  for (const key of Object.keys(resolvedTokens.motion.easing)) {
     lines.push(`${indent(1)}--ease-${key}: var(--${p}-ease-${key});`);
   }
 
@@ -541,8 +543,9 @@ function stripBackticks(s: string): string {
 }
 
 /**
- * Parses the canonical `sigil.tokens.md` file back into a SigilTokens
- * object. This is the read side of the agent-editable token loop.
+ * Parses the canonical `sigil.tokens.md` override file back into the core
+ * markdown-editable token groups. Full presets use typed `SigilTokens`; this
+ * parser intentionally covers the human/agent-friendly markdown surface.
  *
  * The markdown format uses tables with columns:
  * `Token | Light Value | Dark Value | Description`
@@ -550,7 +553,7 @@ function stripBackticks(s: string): string {
  * `Token | Value | Description`
  * for static tokens.
  */
-export function parseMarkdownTokens(markdown: string): SigilTokens {
+export function parseMarkdownTokens(markdown: string): MarkdownTokenOverrides {
   const colors = parseColorSection(markdown);
   const typography = parseTypographySection(markdown);
   const spacing = parseSpacingSection(markdown);
@@ -580,6 +583,7 @@ const THEMED_COLOR_KEYS = new Set([
   "border-muted",
   "border-strong",
   "border-interactive",
+  "highlight",
 ]);
 
 function parseColorSection(markdown: string): SigilTokens["colors"] {

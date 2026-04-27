@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, type ReactNode } from "react";
 import { NativeSelect } from "@sigil-ui/components";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
+import { Palette, Type, Space, SquareSlash, RectangleHorizontal, Layers, Clock, Grid3X3, Ruler, Volume2 } from "lucide-react";
 
 const DISPLAY_FONTS = [
   "ABC Monument Grotesk", "PP Neue Montreal", "PP Mori", "Apfel Grotezk",
@@ -150,8 +151,8 @@ function SelectField({ value, options, onChange }: {
 
 /* ─── Collapsible section ─── */
 
-function Section({ title, defaultOpen, children }: {
-  title: string; defaultOpen?: boolean; children: React.ReactNode;
+function Section({ title, icon, defaultOpen, children }: {
+  title: string; icon?: ReactNode; defaultOpen?: boolean; children: React.ReactNode;
 }) {
   const [open, setOpen] = useState(defaultOpen ?? false);
   return (
@@ -167,8 +168,9 @@ function Section({ title, defaultOpen, children }: {
         <span style={{
           fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600,
           color: "var(--s-text-secondary)", textTransform: "uppercase" as const,
-          letterSpacing: "0.06em",
+          letterSpacing: "0.06em", display: "flex", alignItems: "center", gap: 6,
         }}>
+          {icon}
           {title}
         </span>
         <span style={{ fontSize: 10, color: "var(--s-text-muted)", transition: "transform 200ms", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}>
@@ -314,7 +316,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
         <div style={{ flex: 1, overflowY: "auto" }}>
 
           {/* 1. Colors */}
-          <Section title="Colors" defaultOpen>
+          <Section title="Colors" icon={<Palette size={12} />} defaultOpen>
             <Row label="primary">
               <ColorInput value={readStr(c, "primary", "#9b99e8")} onChange={(v) => patch("colors", "primary", v)} />
             </Row>
@@ -357,7 +359,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 2. Typography */}
-          <Section title="Typography">
+          <Section title="Typography" icon={<Type size={12} />}>
             <Row label="display font">
               <SelectField
                 value={readStr(t, "font-display", "PP Neue Montreal").split(",")[0]!.replace(/['"]/g, "")}
@@ -391,7 +393,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 3. Spacing */}
-          <Section title="Spacing">
+          <Section title="Spacing" icon={<Space size={12} />}>
             <Row label="page margin" value={`${readNum(layout, "page-margin", 24)}px`}>
               <Slider value={readNum(layout, "page-margin", 24)} min={8} max={64} step={4} onChange={(v) => patch("layout", "page-margin", `${v}px`)} />
             </Row>
@@ -410,7 +412,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 4. Radius */}
-          <Section title="Radius">
+          <Section title="Radius" icon={<SquareSlash size={12} />}>
             <Row label="global" value={`${readNum(r, "md", 8)}px`}>
               <Slider value={readNum(r, "md", 8)} min={0} max={32} step={1} onChange={(v) => patch("radius", "md", `${v}px`)} />
             </Row>
@@ -448,7 +450,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 5. Borders */}
-          <Section title="Borders">
+          <Section title="Borders" icon={<RectangleHorizontal size={12} />}>
             <Row label="width" value={`${readNum(bw, "thin", 1)}px`}>
               <Slider value={readNum(bw, "thin", 1)} min={0} max={4} step={0.5} onChange={(v) => patch("borders", "width.thin", `${v}px`)} />
             </Row>
@@ -478,7 +480,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 6. Shadows */}
-          <Section title="Shadows">
+          <Section title="Shadows" icon={<Layers size={12} />}>
             <Row label="card shadow">
               <SelectField
                 value={readStr(cards, "shadow", "md")}
@@ -500,7 +502,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 7. Motion */}
-          <Section title="Motion">
+          <Section title="Motion" icon={<Clock size={12} />}>
             <Row label="fast" value={`${readNum(md, "fast", 150)}ms`}>
               <Slider value={readNum(md, "fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration.fast", `${v}ms`)} />
             </Row>
@@ -516,7 +518,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 8. Grid Visuals */}
-          <Section title="Grid Visuals">
+          <Section title="Grid Visuals" icon={<Grid3X3 size={12} />}>
             <Row label="grid lines">
               <Toggle checked={readBool(grid, "show-grid", true)} onChange={(v) => patch("sigil", "show-grid", v)} />
             </Row>
@@ -536,7 +538,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 9. Alignment */}
-          <Section title="Alignment">
+          <Section title="Alignment" icon={<Ruler size={12} />}>
             <Row label="content">
               <Segmented
                 options={CONTENT_ALIGN}
@@ -564,7 +566,7 @@ export function ControlPanel({ open, onClose }: { open: boolean; onClose: () => 
           </Section>
 
           {/* 10. Sound */}
-          <Section title="Sound">
+          <Section title="Sound" icon={<Volume2 size={12} />}>
             <Row label="enabled">
               <Toggle checked={soundEnabled} onChange={setSoundEnabled} />
             </Row>

@@ -8,6 +8,9 @@ import { presetCommand } from "./commands/preset.js";
 import { diffCommand } from "./commands/diff.js";
 import { doctorCommand } from "./commands/doctor.js";
 import { convertCommand } from "./commands/convert.js";
+import { inspireCommand } from "./commands/inspire.js";
+import { docsCommand } from "./commands/docs.js";
+import { adapterCommand } from "./commands/adapter.js";
 
 const program = new Command();
 
@@ -20,6 +23,9 @@ program.addCommand(initCommand);
 program.addCommand(convertCommand);
 program.addCommand(addCommand);
 program.addCommand(presetCommand);
+program.addCommand(inspireCommand);
+program.addCommand(docsCommand);
+program.addCommand(adapterCommand);
 program.addCommand(diffCommand);
 program.addCommand(doctorCommand);
 

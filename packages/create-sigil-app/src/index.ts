@@ -5,47 +5,44 @@ import fs from "fs-extra";
 import path from "node:path";
 import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { presetCatalog } from "@sigil-ui/presets/catalog";
 import { printIntro, symbols, withSpinner } from "./terminal.js";
 import { generateRequiredSkillsSection, installSigilAgentAssets } from "./skills.js";
+import { TEMPLATES, getTemplate, generateTemplatePage } from "./templates.js";
 
 const SIGIL_PACKAGE_VERSION = readPackageVersion();
 const SIGIL_PACKAGE_RANGE = `^${SIGIL_PACKAGE_VERSION}`;
 
-const TEMPLATES = [
-  { value: "ai-saas", label: "AI SaaS", description: "Dashboard + AI features, dark mode, charts" },
-  { value: "dev-docs", label: "Developer Docs", description: "Documentation site with search, code blocks" },
-  { value: "dashboard", label: "Dashboard", description: "Analytics dashboard with tables, charts" },
-  { value: "portfolio", label: "Portfolio", description: "Creative portfolio with scroll animations" },
-  { value: "ecommerce", label: "E-commerce", description: "Product catalog, cart, checkout" },
-  { value: "blog", label: "Blog", description: "Content site with MDX, RSS, categories" },
-  { value: "agency", label: "Agency", description: "Agency site with case studies, team page" },
-  { value: "cli-tool", label: "CLI Tool Docs", description: "CLI documentation with terminal examples" },
-  { value: "startup", label: "Startup Landing", description: "Landing page + waitlist, pricing, FAQ" },
-  { value: "minimal", label: "Minimal", description: "Clean starting point — just Next.js + Sigil" },
+const POPULAR_PRESETS = [
+  "sigil",
+  "crux",
+  "cobalt",
+  "flux",
+  "noir",
+  "prism",
+  "mono",
+  "onyx",
+  "arc",
+  "etch",
+  "dusk",
+  "forge",
 ] as const;
 
+const catalogByName = new Map(presetCatalog.map((preset) => [preset.name, preset]));
+
 const PRESET_CHOICES = [
-  { title: "Sigil (default)", value: "sigil", description: "Structural-visibility, soft indigo + warm amber" },
-  { title: "Crux", value: "crux", description: "Decisive minimal, maximum whitespace" },
-  { title: "Cobalt", value: "cobalt", description: "Blue metallic, chemical precision" },
-  { title: "Flux", value: "flux", description: "Dynamic gradients, energetic flow" },
-  { title: "Noir", value: "noir", description: "Film noir, cinematic dark, warm amber" },
-  { title: "Prism", value: "prism", description: "Light spectrum, rainbow celebration" },
-  { title: "Mono", value: "mono", description: "Monochrome monospace, terminal aesthetic" },
-  { title: "Onyx", value: "onyx", description: "Pure black gemstone, ultra-dark premium" },
-  { title: "Arc", value: "arc", description: "Curved trajectories, smooth flowing forms" },
-  { title: "Etch", value: "etch", description: "Acid-etched lines, engraved precision" },
-  { title: "Dusk", value: "dusk", description: "Twilight gradient, warm-to-cool sunset" },
-  { title: "Forge", value: "forge", description: "Molten heat, orange-red glow, industrial" },
-  { title: "Browse all 31 presets...", value: "_all", description: "See the full catalog" },
+  ...POPULAR_PRESETS.map((name) => {
+    const preset = catalogByName.get(name);
+    return {
+      title: preset?.label ?? name,
+      value: name,
+      description: preset?.description ?? "",
+    };
+  }),
+  { title: `Browse all ${presetCatalog.length} presets...`, value: "_all", description: "See the full catalog" },
 ];
 
-const ALL_PRESETS = [
-  "sigil", "crux", "alloy", "basalt", "forge", "onyx", "flux", "kova",
-  "etch", "anvil", "rivet", "shard", "rune", "fang", "cobalt", "strata",
-  "brass", "obsid", "axiom", "glyph", "cipher", "prism", "helix", "hex",
-  "vex", "arc", "dsgn", "mrkr", "noir", "dusk", "mono",
-];
+const ALL_PRESETS = presetCatalog.map((preset) => preset.name);
 
 type DetectedPM = "pnpm" | "yarn" | "bun" | "npm";
 
@@ -139,9 +136,10 @@ program
       template = selectedTemplate;
     }
     template = template ?? "minimal";
-    if (template !== "minimal") {
-      console.log(`  ${symbols.warning} Template "${template}" is coming soon; using minimal scaffold for now.`);
-      template = "minimal";
+    const selectedTemplate = getTemplate(template);
+    if (selectedTemplate.value !== template) {
+      console.log(`  ${symbols.warning} Unknown template "${template}"; using minimal scaffold.`);
+      template = selectedTemplate.value;
     }
 
     // Step 3: Preset
@@ -168,7 +166,7 @@ program
         preset = selectedPreset;
       }
     }
-    preset = preset ?? "sigil";
+    preset = preset ?? selectedTemplate.defaultPreset;
 
     // Step 4: Font customization
     let customFont: string | undefined;
@@ -264,7 +262,7 @@ export default config;
 
     // Step C: Create tokens CSS
     const fontOverride = customFont
-      ? `\n:root {\n  --sigil-font-display: "${customFont}", system-ui, sans-serif;\n}\n`
+      ? `\n:root {\n  --s-font-display: "${customFont}", system-ui, sans-serif;\n}\n`
       : "";
 
     const tokensContent = `/* Sigil UI tokens — generated by create-sigil-app
@@ -293,7 +291,11 @@ ${fontOverride}`;
       console.log(`  ${symbols.success} Injected token import into globals.css`);
     }
 
-    // Step F: Agent instructions
+    // Step F: Apply template page
+    applyTemplate(projectPath, selectedTemplate);
+    console.log(`  ${symbols.success} Applied ${selectedTemplate.label} template`);
+
+    // Step G: Agent instructions
     if (generateAgent) {
       const agentContent = generateAgentMd(preset, componentsDir, tokensPath, features);
       const agentPath = path.join(projectPath, ".sigil", "AGENTS.md");
@@ -306,7 +308,7 @@ ${fontOverride}`;
       console.log(`  ${symbols.success} Created .cursor/rules/sigil-skills.mdc`);
     }
 
-    // Step G: Update package.json with Sigil deps
+    // Step H: Update package.json with Sigil deps
     const pkgPath = path.join(projectPath, "package.json");
     if (fs.existsSync(pkgPath)) {
       const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
@@ -334,7 +336,7 @@ ${fontOverride}`;
       console.log(`  ${symbols.success} Updated package.json with Sigil dependencies`);
     }
 
-    // Step H: Install deps
+    // Step I: Install deps
     if (opts.install !== false) {
       try {
         await withSpinner(
@@ -348,7 +350,7 @@ ${fontOverride}`;
       }
     }
 
-    // Step I: Init git
+    // Step J: Init git
     if (opts.git !== false) {
       try {
         execSync("git init", { cwd: projectPath, stdio: "pipe" });
@@ -368,7 +370,7 @@ ${fontOverride}`;
     console.log(`  ${chalk.cyan(`${PM_RUN[pm]} dev`)}`);
     console.log();
     console.log(chalk.dim("  Preset:   ") + chalk.cyan(preset));
-    console.log(chalk.dim("  Template: ") + chalk.cyan(template));
+    console.log(chalk.dim("  Template: ") + chalk.cyan(selectedTemplate.value));
     if (customFont) console.log(chalk.dim("  Font:     ") + chalk.cyan(customFont));
     console.log();
     console.log(chalk.dim("  Commands:"));
@@ -473,6 +475,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   );
 }
 
+function applyTemplate(projectPath: string, template: ReturnType<typeof getTemplate>): void {
+  const pagePath = path.join(projectPath, "src", "app", "page.tsx");
+  fs.ensureDirSync(path.dirname(pagePath));
+  fs.writeFileSync(pagePath, generateTemplatePage(template), "utf-8");
+}
+
 function generateAgentMd(
   preset: string,
   componentsDir: string,
@@ -503,9 +511,9 @@ To change how things look, edit the token CSS file (\`${tokensPath}\`) or switch
 
 | Want to change... | Do this | Do NOT do this |
 |-------------------|---------|----------------|
-| Primary color | Edit \`${tokensPath}\`: \`--sigil-primary: oklch(...);\` | Edit component files |
-| Fonts | Edit \`${tokensPath}\`: \`--sigil-font-display: "Font", ...;\` | Add font classes to components |
-| Border radius | Edit \`${tokensPath}\`: \`--sigil-radius-md: 12px;\` | Add \`rounded-*\` to components |
+| Primary color | Edit \`${tokensPath}\`: \`--s-primary: oklch(...);\` | Edit component files |
+| Fonts | Edit \`${tokensPath}\`: \`--s-font-display: "Font", ...;\` | Add font classes to components |
+| Border radius | Edit \`${tokensPath}\`: \`--s-radius-md: 12px;\` | Add \`rounded-*\` to components |
 | Everything at once | Run \`npx @sigil-ui/cli preset <name>\` | Edit dozens of files |
 | Custom aesthetic | Run \`npx @sigil-ui/cli preset create\` | Override each component |
 
@@ -531,9 +539,12 @@ ${generateRequiredSkillsSection()}
 \`\`\`bash
 npx @sigil-ui/cli convert     # adopt Sigil in an existing project
 npx @sigil-ui/cli add button card     # copy components into project
-npx @sigil-ui/cli preset list         # browse all 31 presets
+npx @sigil-ui/cli preset list         # browse all ${presetCatalog.length} presets
 npx @sigil-ui/cli preset <name>       # switch presets
 npx @sigil-ui/cli preset create       # scaffold custom preset
+npx @sigil-ui/cli inspire <url-or-file> --name <name>  # draft tokens from a reference
+npx @sigil-ui/cli docs                # generate local docs and llms.txt
+npx @sigil-ui/cli adapter shadcn      # bridge existing design-system variables
 npx @sigil-ui/cli doctor              # validate project health
 npx @sigil-ui/cli diff                # show token changes
 \`\`\`

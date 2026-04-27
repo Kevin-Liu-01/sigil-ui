@@ -16,9 +16,9 @@ WRONG — manually editing component styling:
   (repeat for every component, miss some, drift, inconsistency)
 
 RIGHT — editing the central token spec:
-  change --sigil-primary → every primary-colored element updates (buttons, links, focus rings, badges, gradients)
-  change --sigil-radius-md → every medium-radius element updates (cards, inputs, dropdowns, tooltips)
-  run "sigil preset brutalist" → the ENTIRE visual identity changes in one command
+ change --s-primary → every primary-colored element updates (buttons, links, focus rings, badges, gradients)
+ change --s-radius-md → every medium-radius element updates (cards, inputs, dropdowns, tooltips)
+ run "sigil preset anvil" → the ENTIRE visual identity changes in one command
 ```
 
 This is the fundamental insight. Agents that understand this build 10x faster because one token edit replaces dozens of component edits.
@@ -26,8 +26,10 @@ This is the fundamental insight. Agents that understand this build 10x faster be
 ## How It Works
 
 ```
-sigil.tokens.md (human/agent-editable markdown)
-       ↓ parseMarkdownTokens()
+sigil.tokens.md (human/agent-editable markdown overrides)
+ ↓ parseMarkdownTokens()
+MarkdownTokenOverrides (core token groups)
+ ↓ merge with defaults / presets
 SigilTokens (TypeScript object, 259 configurable fields)
        ↓ compileToCss() / compileToTailwind()
 CSS custom properties (--s-primary, --s-radius-md, --s-duration-fast, ...)
@@ -41,10 +43,10 @@ To change the visual output, edit the top of this chain — not the bottom.
 
 | Task | What to edit | Do NOT edit |
 |------|-------------|-------------|
-| Change primary color | Token CSS: `--sigil-primary: oklch(...)` | Component files |
-| Change fonts | Token CSS: `--sigil-font-display: "NewFont", ...` | Component files |
-| Change all border radius | Token CSS: `--sigil-radius-md: 12px` | Component files |
-| Change animation speed | Token CSS: `--sigil-duration-fast: 200ms` | Component files |
+| Change primary color | Token CSS: `--s-primary: oklch(...)` | Component files |
+| Change fonts | Token CSS: `--s-font-display: "NewFont", ...` | Component files |
+| Change all border radius | Token CSS: `--s-radius-md: 12px` | Component files |
+| Change animation speed | Token CSS: `--s-duration-fast: 200ms` | Component files |
 | Change card hover effect | Preset: `cards.hover-effect: "glow"` | Card component file |
 | Change button press scale | Preset: `buttons.active-scale: "0.95"` | Button component file |
 | Change background pattern | Preset: `backgrounds.pattern: "dots"` | Layout files |
@@ -108,9 +110,9 @@ skills/              Agent skills for specific workflows
 
 All colors use OKLCH: `oklch(L C H)` — L=lightness (0-1), C=chroma (0-0.37), H=hue (0-360).
 
-## Preset System (31 Presets)
+## Preset System (44 Presets)
 
-Switching presets changes ALL 259 tokens at once. Six categories:
+Switching presets changes ALL 350+ tokens at once. Six categories:
 
 | Category | Presets | Aesthetic |
 |----------|---------|-----------|
@@ -121,13 +123,35 @@ Switching presets changes ALL 259 tokens at once. Six categories:
 | Editorial | etch, rune, strata, glyph, mrkr | Typography-forward, print-inspired |
 | Industrial | alloy, forge, anvil, rivet, brass | Metallic, mechanical, utilitarian |
 
+### Custom Preset Rule (MANDATORY)
+
+**Every custom preset MUST populate ALL 28 token categories and ALL fields.**
+
+The canonical template is `packages/presets/src/_template.ts`. It contains every
+field from `SigilTokens` (~350 fields across 28 categories) with sensible defaults.
+
+When creating a custom preset — whether in-repo or via `sigil preset create`:
+
+1. **Start from `_template.ts`** — copy it or spread it as a base.
+2. **Never delete fields** — change values, don't remove keys.
+3. **No partial presets** — if a field exists in `_template.ts`, it must exist in your preset.
+
+The 28 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`,
+`radius`, `shadows`, `motion`, `borders`, `buttons`, `cards`, `headings`,
+`navigation`, `backgrounds`, `code`, `inputs`, `cursor`, `scrollbar`, `alignment`,
+`sections`, `dividers`, `gridVisuals`, `focus`, `overlays`, `dataViz`, `media`,
+`controls`, `componentSurfaces`.
+
+Read `skills/sigil-preset/SKILL.md` for the full field count per category and
+the validation checklist.
+
 ## CLI Commands
 
 | Command | Purpose |
 |---------|---------|
 | `sigil init` | Interactive setup: detects project, asks about use case, recommends presets, configures everything, generates agent instructions |
 | `sigil add <name>` | Copy components into your project (they still read from tokens) |
-| `sigil preset list` | Browse all 31 presets by category |
+| `sigil preset list` | Browse all 44 presets by category |
 | `sigil preset <name>` | Switch preset (regenerates token CSS) |
 | `sigil preset create` | Scaffold a custom preset with base selection, color, and font prompts |
 | `sigil diff` | Show token CSS changes since last sync |
@@ -193,7 +217,7 @@ When creating new components, follow these same conventions. When modifying appe
 ```
 1. Identify what needs to change (color? spacing? radius? everything?)
 2. If everything → sigil preset <name>
-3. If specific tokens → edit the token CSS file with :root { --sigil-*: value; }
+3. If specific tokens → edit the token CSS file with :root { --s-*: value; }
 4. If a full custom aesthetic → sigil preset create, then edit the preset file
 5. NEVER edit component files for visual changes
 6. npx @sigil-ui/cli doctor after changes

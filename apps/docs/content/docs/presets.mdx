@@ -1,6 +1,6 @@
 ---
 title: Presets
-description: "31 curated visual identities — switch your entire design system with one config change."
+description: "44 curated visual identities — switch your entire design system with one config change."
 ---
 
 ## What is a preset
@@ -14,7 +14,7 @@ npx @sigil-ui/cli preset cobalt
 ## Browsing presets
 
 ```bash
-# List all 31 presets with categories and descriptions
+# List all 44 presets with categories and descriptions
 npx @sigil-ui/cli preset list
 
 # Inspect a specific preset
@@ -120,6 +120,26 @@ Heavy foundations. Metallic palettes. Utilitarian craft.
 | **Rivet** | Mechanical precision, utilitarian | Amber | Inter |
 | **Brass** | Warm metallic, vintage patina | Gold | Fraunces |
 
+### Edgeless
+
+Open, ambient systems for softer pages without visible structural chrome.
+
+| Preset | Description | Primary hue | Display font |
+|--------|-------------|-------------|--------------|
+| **Vast** | Expansive open space, warm editorial tones | Terracotta | Fraunces |
+| **Aura** | Ethereal dark with luminous violet glow | Violet | General Sans |
+| **Field** | Clean utilitarian open space | Green | Space Grotesk |
+| **Clay** | Warm terracotta, handcrafted feel | Terracotta | DM Serif Display |
+| **Sage** | Botanical calm and understated elegance | Green | Libre Baskerville |
+| **Ink** | Deep indigo immersion | Indigo | Plus Jakarta Sans |
+| **Sand** | Warm golden desert surfaces | Amber | Instrument Serif |
+| **Plum** | Luxurious deep plum and mauve surfaces | Magenta | Playfair Display |
+| **Moss** | Dark forest organic-tech energy | Green | Space Grotesk |
+| **Coral** | Soft coral, warm and friendly | Coral | Outfit |
+| **Dune** | Golden desert warmth with sharp edges | Amber | Instrument Serif |
+| **Ocean** | Deep teal, calming depth | Teal | General Sans |
+| **Rose** | Dusty rose, refined serif type | Rose | Fraunces |
+
 ## Creating a custom preset
 
 ```bash
@@ -155,10 +175,11 @@ export const myBrand: SigilPreset = {
 };
 ```
 
-Compile it:
+Activate it by adding it to your project and selecting it with the CLI:
 
 ```bash
-npx @sigil-ui/cli compile ./presets/my-brand.ts --out ./public/my-brand.css
+npx @sigil-ui/cli preset my-brand
+npx @sigil-ui/cli doctor
 ```
 
 ## Comparing presets

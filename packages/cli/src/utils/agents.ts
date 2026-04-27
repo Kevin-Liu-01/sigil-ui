@@ -1,5 +1,5 @@
 import type { SigilConfig } from "./config.js";
-import type { PresetInfo } from "./presets.js";
+import { PRESET_CATALOG, type PresetInfo } from "./presets.js";
 import type { ProjectDetection } from "./detect.js";
 import { generateRequiredSkillsSection } from "./skills.js";
 
@@ -37,10 +37,10 @@ ${preset ? `| Mood | ${preset.mood} |\n` : ""}| Components | \`${config.componen
 
 | Want to change... | Do this | Do NOT do this |
 |-------------------|---------|----------------|
-| Primary color | Edit \`${config.tokensPath}\`: \`--sigil-primary: oklch(...);\` | Edit component files |
-| Fonts | Edit \`${config.tokensPath}\`: \`--sigil-font-display: "Font", ...;\` | Add font classes to components |
-| Border radius | Edit \`${config.tokensPath}\`: \`--sigil-radius-md: 12px;\` | Add \`rounded-*\` to components |
-| Animation speed | Edit \`${config.tokensPath}\`: \`--sigil-duration-fast: 200ms;\` | Add inline transition values |
+| Primary color | Edit \`${config.tokensPath}\`: \`--s-primary: oklch(...);\` | Edit component files |
+| Fonts | Edit \`${config.tokensPath}\`: \`--s-font-display: "Font", ...;\` | Add font classes to components |
+| Border radius | Edit \`${config.tokensPath}\`: \`--s-radius-md: 12px;\` | Add \`rounded-*\` to components |
+| Animation speed | Edit \`${config.tokensPath}\`: \`--s-duration-fast: 200ms;\` | Add inline transition values |
 | Everything at once | Run \`npx @sigil-ui/cli preset <name>\` | Edit dozens of component files |
 | Create custom aesthetic | Run \`npx @sigil-ui/cli preset create\` | Manually override each component |
 
@@ -68,9 +68,12 @@ npx @sigil-ui/cli convert     # adopt Sigil end-to-end
 npx @sigil-ui/cli add <components>    # copy components into project
 npx @sigil-ui/cli add --all           # add all registered components
 npx @sigil-ui/cli preset              # show current preset
-npx @sigil-ui/cli preset list         # browse all 31 presets by category
+npx @sigil-ui/cli preset list         # browse all ${PRESET_CATALOG.length} presets by category
 npx @sigil-ui/cli preset <name>       # switch presets
 npx @sigil-ui/cli preset create       # scaffold a custom preset
+npx @sigil-ui/cli inspire <url-or-file> --name <name>  # draft tokens from a reference
+npx @sigil-ui/cli docs                # generate local docs and llms.txt
+npx @sigil-ui/cli adapter shadcn      # bridge existing system variables to Sigil tokens
 npx @sigil-ui/cli diff                # show token changes
 npx @sigil-ui/cli doctor              # validate project health
 \`\`\`
@@ -93,5 +96,5 @@ npx @sigil-ui/cli doctor              # validate project health
 5. For visual changes, edit \`${config.tokensPath}\` — never hardcode values in components
 6. For wholesale changes, switch presets: \`npx @sigil-ui/cli preset <name>\`
 7. Run \`npx @sigil-ui/cli doctor\` after changes to validate
-${features.includes("gsap") ? `8. Scroll animations use GSAP + ScrollTrigger — import from \`gsap\` and \`gsap/ScrollTrigger\`\n` : ""}${features.includes("motion") ? `${features.includes("gsap") ? "9" : "8"}. Component animations use Motion — use \`motion\` components with spring physics\n` : ""}${features.includes("grid") ? `${features.includes("gsap") && features.includes("motion") ? "10" : features.includes("gsap") || features.includes("motion") ? "9" : "8"}. Layout uses the Sigil structural-visibility grid — \`--sigil-grid-cell\` (48px) and \`--sigil-rail-gap\` (24px)\n` : ""}`;
+${features.includes("gsap") ? `8. Scroll animations use GSAP + ScrollTrigger — import from \`gsap\` and \`gsap/ScrollTrigger\`\n` : ""}${features.includes("motion") ? `${features.includes("gsap") ? "9" : "8"}. Component animations use Motion — use \`motion\` components with spring physics\n` : ""}${features.includes("grid") ? `${features.includes("gsap") && features.includes("motion") ? "10" : features.includes("gsap") || features.includes("motion") ? "9" : "8"}. Layout uses the Sigil structural-visibility grid — \`--s-grid-cell\` (48px) and \`--s-rail-gap\` (24px)\n` : ""}`;
 }

@@ -1218,7 +1218,9 @@ function MiniSparkline() {
         <span className="text-[10px] font-medium text-[var(--s-text)]">Requests / min</span>
         <span className="text-[9px] tabular-nums text-[var(--s-success)]">↑ 23%</span>
       </div>
-      <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={120} filled className="w-full h-full flex-1" style={{ display: "block" }} />
+      <div className="relative flex-1 min-h-0">
+        <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={120} filled className="absolute inset-0 w-full h-full" style={{ display: "block" }} preserveAspectRatio="none" />
+      </div>
     </div>
   );
 }

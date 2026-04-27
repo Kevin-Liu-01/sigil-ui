@@ -1,13 +1,35 @@
 "use client";
 
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes";
-import { createContext, useCallback, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, type ReactNode } from "react";
 
 type ThemeOverride = { setTheme: (theme: string) => void };
 const ThemeOverrideCtx = createContext<ThemeOverride | null>(null);
 
 function ThemeGate({ children }: { children: ReactNode }) {
   const { setTheme: rawSetTheme } = useTheme();
+  const unlockFramesRef = useRef<number[]>([]);
+
+  const cancelQueuedUnlock = useCallback(() => {
+    for (const frame of unlockFramesRef.current) {
+      cancelAnimationFrame(frame);
+    }
+    unlockFramesRef.current = [];
+  }, []);
+
+  const queueUnlock = useCallback((root: HTMLElement) => {
+    cancelQueuedUnlock();
+    const firstFrame = requestAnimationFrame(() => {
+      const secondFrame = requestAnimationFrame(() => {
+        root.removeAttribute("data-switching-theme");
+        unlockFramesRef.current = [];
+      });
+      unlockFramesRef.current = [secondFrame];
+    });
+    unlockFramesRef.current = [firstFrame];
+  }, [cancelQueuedUnlock]);
+
+  useEffect(() => cancelQueuedUnlock, [cancelQueuedUnlock]);
 
   const setTheme = useCallback(
     (theme: string) => {
@@ -19,28 +41,19 @@ function ThemeGate({ children }: { children: ReactNode }) {
             : "light"
           : theme;
 
-      // 1. Kill transitions
+      // Keep token-driven color transitions suppressed until next-themes has
+      // synced its DOM writes. Transform/opacity animations keep running.
       root.setAttribute("data-switching-theme", "");
 
-      // 2. Apply class + data-theme synchronously so every element's
-      //    CSS custom properties update in one shot — no staggering.
       root.classList.toggle("dark", resolved === "dark");
       root.classList.toggle("light", resolved === "light");
       root.setAttribute("data-theme", resolved);
+      root.style.colorScheme = resolved;
 
-      // 3. Force a single synchronous reflow — the browser computes
-      //    ALL new token values right now while transitions are killed.
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      root.offsetHeight;
-
-      // 4. Re-enable transitions
-      root.removeAttribute("data-switching-theme");
-
-      // 5. Let next-themes sync its internal React state (DOM is
-      //    already correct so this causes no visible change).
       rawSetTheme(theme);
+      queueUnlock(root);
     },
-    [rawSetTheme],
+    [queueUnlock, rawSetTheme],
   );
 
   const value = useMemo(() => ({ setTheme }), [setTheme]);

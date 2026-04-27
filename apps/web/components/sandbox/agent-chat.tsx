@@ -408,12 +408,12 @@ export function AgentChat({
               background: isStreaming ? "var(--s-warning, orange)" : "var(--s-success, green)",
             }}
           />
-          <span style={{ fontSize: "12px", fontWeight: 600 }}>Agent</span>
+          <span style={{ fontSize: "12px", fontWeight: 600 }}>Token Forge Agent</span>
         </div>
         <span
           style={{ fontSize: "10px", color: "var(--s-text-subtle)" }}
         >
-          {canvasItems.length} component{canvasItems.length !== 1 ? "s" : ""}
+          generates from scratch
         </span>
       </div>
 
@@ -445,8 +445,9 @@ export function AgentChat({
             }}
           >
             <span style={{ fontSize: "11px", lineHeight: "1.6" }}>
-              Describe your ideal design aesthetic. The agent will patch tokens
-              in real-time — try &ldquo;make it brutalist&rdquo; or &ldquo;warmer, rounder corners&rdquo;.
+              Describe a visual direction and the agent will generate a fresh token
+              sheet from scratch — try &ldquo;warm editorial with serif headlines&rdquo;
+              or &ldquo;dark terminal with acid green accents&rdquo;.
             </span>
           </div>
         )}
@@ -623,7 +624,7 @@ export function AgentChat({
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Describe what to build…"
+            placeholder="Describe a visual direction to generate tokens…"
             rows={1}
             style={{
               flex: 1,
