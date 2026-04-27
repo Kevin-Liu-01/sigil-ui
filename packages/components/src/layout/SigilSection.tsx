@@ -231,6 +231,7 @@ function InnerSection({
       data-slot="sigilsection" className={cn("relative", className)}
       style={{
         padding,
+        background: "var(--s-background)",
         borderTop: borderTop
           ? "1px solid var(--s-border)"
           : undefined,

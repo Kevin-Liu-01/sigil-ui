@@ -125,14 +125,15 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   ref,
 ) {
   const gridConfig = usePageGridConfig();
-  const cell = gridConfig?.gridCell ?? 48;
+  const rawCell = gridConfig?.gridCell ?? 16;
   const thickness = sizeMap[size];
+  const cell = Math.min(rawCell, thickness);
   const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
   const resolvedPattern = resolveDividerPattern(pattern, gridConfig);
   const patternCss =
     resolvedPattern === "vertical"
-      ? getLegacyVerticalPatternCSS(cell, scale)
+      ? getLegacyVerticalPatternCSS(rawCell, scale)
       : getSigilPatternStyles(resolvedPattern, cell * scale);
   const legacyPatternOffset = isHorizontal
     ? `${(cell * scale) / 2}px 0`

@@ -102,6 +102,21 @@ export type SigilPatternStyles = {
   isMask?: boolean;
 };
 
+const PATTERN_CELL_SCALE: Partial<Record<GutterPattern, number>> = {
+  grid: 0.5,
+  dots: 0.5,
+  crosshatch: 0.5,
+  diagonal: 0.5,
+  diamond: 0.5,
+  hexagon: 0.5,
+  triangle: 0.5,
+  zigzag: 0.5,
+  checker: 0.5,
+  plus: 0.5,
+  brick: 0.5,
+  wave: 0.5,
+};
+
 export function getSigilPatternStyles(
   pattern: GutterPattern,
   cell: number,
@@ -109,33 +124,33 @@ export function getSigilPatternStyles(
 ): SigilPatternStyles | null {
   const C = COLOR;
   const R = side === "right";
+  const scale = PATTERN_CELL_SCALE[pattern] ?? 1;
+  const s = Math.max(Math.round(cell * scale), 8);
   switch (pattern) {
     case "grid": {
-      const mid = Math.floor(cell / 2);
-      const dir = R ? "to left" : "to right";
       return {
         backgroundImage: [
-          `linear-gradient(${dir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(${R ? "to left" : "to right"}, ${C} 1px, transparent 1px)`,
           `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         ].join(", "),
-        backgroundSize: `${cell}px ${cell}px`,
+        backgroundSize: `${s}px ${s}px`,
       };
     }
     case "dots":
       return {
-        backgroundImage: `radial-gradient(circle, ${C} 1.2px, transparent 1.2px)`,
-        backgroundSize: `${cell}px ${cell}px`,
+        backgroundImage: `radial-gradient(circle, ${C} 1px, transparent 1px)`,
+        backgroundSize: `${s}px ${s}px`,
         backgroundPosition: R
-          ? `0px ${cell / 2}px`
-          : `${cell / 2}px ${cell / 2}px`,
+          ? `0px ${s / 2}px`
+          : `${s / 2}px ${s / 2}px`,
       };
     case "crosshatch": {
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
       return {
         backgroundImage: [
-          `repeating-linear-gradient(${a}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
-          `repeating-linear-gradient(${b}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
+          `repeating-linear-gradient(${a}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
+          `repeating-linear-gradient(${b}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
         ].join(", "),
         backgroundSize: "100% 100%, 100% 100%",
       };
@@ -143,12 +158,12 @@ export function getSigilPatternStyles(
     case "diagonal": {
       const angle = R ? -45 : 45;
       return {
-        backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
+        backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
         backgroundSize: "100% 100%",
       };
     }
     case "diamond": {
-      const h = cell / 2;
+      const h = s / 2;
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
       return {
@@ -179,7 +194,7 @@ export function getSigilPatternStyles(
       };
     }
     case "hexagon": {
-      const { w, h, lines } = getHexLines(cell);
+      const { w, h, lines } = getHexLines(s);
       const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
@@ -188,7 +203,7 @@ export function getSigilPatternStyles(
       };
     }
     case "triangle": {
-      const { w, h, lines } = getTriangleLines(cell);
+      const { w, h, lines } = getTriangleLines(s);
       const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
@@ -205,25 +220,25 @@ export function getSigilPatternStyles(
           `linear-gradient(${a3}deg, ${C} 25%, transparent 25%)`,
           `linear-gradient(${a4}deg, ${C} 25%, transparent 25%)`,
         ].join(", "),
-        backgroundSize: `${cell}px ${cell}px`,
+        backgroundSize: `${s}px ${s}px`,
       };
     }
     case "checker": {
-      const h = cell / 2;
+      const h = s / 2;
       const a = R ? -45 : 45;
       return {
         backgroundImage: [
           `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
           `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
         ].join(", "),
-        backgroundSize: `${cell}px ${cell}px`,
+        backgroundSize: `${s}px ${s}px`,
         backgroundPosition: R
           ? `${h}px ${h}px, 0 0`
           : `0 0, ${h}px ${h}px`,
       };
     }
     case "plus": {
-      const mid = Math.floor(cell / 2);
+      const mid = Math.floor(s / 2);
       const dir = R ? "to left" : "to right";
       const vDir = R ? "to top" : "to bottom";
       return {
@@ -231,11 +246,11 @@ export function getSigilPatternStyles(
           `linear-gradient(${dir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
           `linear-gradient(${vDir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
         ].join(", "),
-        backgroundSize: `${cell}px ${cell}px`,
+        backgroundSize: `${s}px ${s}px`,
       };
     }
     case "brick": {
-      const { w, h, lines } = getBrickLines(cell);
+      const { w, h, lines } = getBrickLines(s);
       const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
@@ -244,8 +259,8 @@ export function getSigilPatternStyles(
       };
     }
     case "wave": {
-      const w = cell;
-      const h = cell;
+      const w = s;
+      const h = s;
       const a = h * 0.35;
       const mid = h / 2;
       const pts: string[] = [];
@@ -401,7 +416,8 @@ export function SigilPageGrid({
   marginBorder,
   edgeless = false,
 }: SigilPageGridProps) {
-  const effectiveRailGap = edgeless ? 0 : railGap;
+  const gutterHasPattern = gutterPattern !== "none" && showGutterGrid;
+  const effectiveRailGap = edgeless || !gutterHasPattern ? 0 : railGap;
   const config: PageGridConfig = {
     railGap: effectiveRailGap,
     contentMax,
@@ -466,10 +482,22 @@ export function SigilPageGrid({
         <div aria-hidden="true" style={marginStyleL} />
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" visible={gutterVisible} />
         <div
-          className="flex min-w-0 flex-col"
+          className="relative flex min-w-0 flex-col"
           style={{ background: "var(--s-background)" }}
         >
-          {children}
+          {!edgeless && showGutterGrid && gutterPattern !== "none" && (
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 z-0"
+              style={{
+                backgroundImage: `linear-gradient(to bottom, ${STRUCTURAL_LINE_COLOR} 1px, transparent 1px)`,
+                backgroundSize: `100% ${gridCell}px`,
+              }}
+            />
+          )}
+          <div className="relative z-[1] flex min-w-0 flex-col flex-1">
+            {children}
+          </div>
         </div>
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" visible={gutterVisible} />
         <div aria-hidden="true" style={marginStyleR} />

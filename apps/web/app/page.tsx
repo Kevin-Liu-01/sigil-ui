@@ -63,7 +63,6 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
 }
 
 function LandingDivider({
-  pattern: _pattern,
   fadeEdges: _fadeEdges,
   ...props
 }: React.ComponentProps<typeof Divider>) {

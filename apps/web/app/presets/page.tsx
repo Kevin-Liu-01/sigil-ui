@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import {
   SigilSection,
   Divider,
@@ -166,45 +167,51 @@ export default function PresetsPage() {
 
           <GapPixelGrid columns={{ sm: 2, md: 3, lg: 4 }}>
             {filtered.map((preset) => (
-              <GapPixelCell key={preset.name} className="flex flex-col">
-                <div
-                  style={{ height: 24, background: preset.primary }}
-                  aria-hidden
-                />
+              <Link
+                key={preset.name}
+                href={`/presets/${preset.name}`}
+                className="no-underline text-inherit"
+              >
+                <GapPixelCell className="flex flex-col h-full transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]">
+                  <div
+                    style={{ height: 24, background: preset.primary }}
+                    aria-hidden
+                  />
 
-                <div className="flex flex-col gap-2 p-4">
-                  <DensityText role="nav" className="font-semibold">
-                    {preset.name}
-                  </DensityText>
+                  <div className="flex flex-col gap-2 p-4">
+                    <DensityText role="nav" className="font-semibold">
+                      {preset.name}
+                    </DensityText>
 
-                  <MonoLabel>{preset.category}</MonoLabel>
+                    <MonoLabel>{preset.category}</MonoLabel>
 
-                  <div className="flex items-center justify-between">
-                    <TabularValue size="xs" muted>
-                      {preset.font}
-                    </TabularValue>
-                    <TabularValue size="xs" muted>
-                      {preset.radius}
-                    </TabularValue>
+                    <div className="flex items-center justify-between">
+                      <TabularValue size="xs" muted>
+                        {preset.font}
+                      </TabularValue>
+                      <TabularValue size="xs" muted>
+                        {preset.radius}
+                      </TabularValue>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-1">
+                      <div
+                        className="shrink-0 border border-[var(--s-border)]"
+                        style={{
+                          width: 14,
+                          height: 14,
+                          borderRadius: "50%",
+                          background: preset.bg,
+                        }}
+                        aria-label={`Background: ${preset.bg}`}
+                      />
+                      <TabularValue size="xs" muted>
+                        {preset.bg}
+                      </TabularValue>
+                    </div>
                   </div>
-
-                  <div className="flex items-center gap-2 pt-1">
-                    <div
-                      className="shrink-0 border border-[var(--s-border)]"
-                      style={{
-                        width: 14,
-                        height: 14,
-                        borderRadius: "50%",
-                        background: preset.bg,
-                      }}
-                      aria-label={`Background: ${preset.bg}`}
-                    />
-                    <TabularValue size="xs" muted>
-                      {preset.bg}
-                    </TabularValue>
-                  </div>
-                </div>
-              </GapPixelCell>
+                </GapPixelCell>
+              </Link>
             ))}
           </GapPixelGrid>
         </SigilSection>
