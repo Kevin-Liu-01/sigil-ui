@@ -1,0 +1,32 @@
+---
+title: ImagePreview
+description: ImagePreview is a token-driven Sigil component in the overlay and interaction group.
+---
+
+## Import
+
+```tsx
+import { ImagePreview } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ImagePreview src="https://placehold.co/640x360/png" alt="Placeholder image" className="h-36 w-64" />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ImagePreview src="https://placehold.co/640x360/png" alt="Placeholder image" className="h-36 w-64" />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add image-preview
+```
+
+## Token Integration
+
+ImagePreview follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

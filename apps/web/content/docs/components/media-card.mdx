@@ -1,0 +1,32 @@
+---
+title: MediaCard
+description: MediaCard is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { MediaCard } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MediaCard media={<img src="https://placehold.co/640x360/png" alt="Preview" />} title="Media card" description="Image plus content." />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MediaCard media={<img src="https://placehold.co/640x360/png" alt="Preview" />} title="Media card" description="Image plus content." />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add media-card
+```
+
+## Token Integration
+
+MediaCard follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

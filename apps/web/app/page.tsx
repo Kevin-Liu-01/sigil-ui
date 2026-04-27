@@ -62,11 +62,15 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
   );
 }
 
-function LandingDivider(props: React.ComponentProps<typeof Divider>) {
+function LandingDivider({
+  pattern: _pattern,
+  fadeEdges: _fadeEdges,
+  ...props
+}: React.ComponentProps<typeof Divider>) {
   let edgeless = false;
   try { edgeless = useIsEdgeless(); } catch { /* outside provider */ }
   if (edgeless) return null;
-  return <Divider {...props} pattern="diagonal" fadeEdges={false} />;
+  return <Divider {...props} fadeEdges={false} />;
 }
 
 /* ================================================================ */
@@ -135,7 +139,7 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="120px 24px 64px" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection borderTop padding="152px 24px 64px" style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
         <HeroLogoField />
@@ -160,12 +164,6 @@ function Hero() {
             className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
           >
             View Components
-          </a>
-          <a
-            href="/sandbox"
-            className="inline-flex items-center px-5 py-2.5 bg-[var(--s-surface)] text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:border-[var(--s-primary)]"
-          >
-            Try the Token Lab
           </a>
         </div>
 

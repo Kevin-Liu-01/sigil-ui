@@ -3,6 +3,7 @@
 import {
   forwardRef,
   useCallback,
+  useId,
   useState,
   type HTMLAttributes,
 } from "react";
@@ -25,6 +26,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
   { value: controlledValue, defaultValue = "#3b82f6", onChange, swatches = DEFAULT_SWATCHES, disabled, className, ...props },
   ref,
 ) {
+  const colorInputId = useId();
   const [internalValue, setInternalValue] = useState(defaultValue);
   const color = controlledValue ?? internalValue;
 
@@ -44,20 +46,22 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
       {...props}
     >
       <div className="flex items-center gap-3">
-        <div
+        <label
+          htmlFor={colorInputId}
           className={cn(
-            "size-10 shrink-0 rounded-[var(--s-radius-md,6px)]",
+            "size-10 shrink-0 cursor-pointer rounded-[var(--s-radius-md,6px)]",
             "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
           )}
           style={{ backgroundColor: color }}
+          aria-label="Open color picker"
         />
         <input
+          id={colorInputId}
           type="color"
           value={color}
           onChange={(e) => update(e.target.value)}
           disabled={disabled}
-          className="size-0 opacity-0 absolute"
-          id="sigil-color-input"
+          className="sr-only"
         />
         <input
           type="text"

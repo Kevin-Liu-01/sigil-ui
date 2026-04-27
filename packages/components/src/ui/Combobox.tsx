@@ -43,8 +43,18 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(-1);
+  const rootRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+
+  const setRootRef = useCallback((node: HTMLDivElement | null) => {
+    rootRef.current = node;
+    if (typeof ref === "function") {
+      ref(node);
+    } else if (ref) {
+      ref.current = node;
+    }
+  }, [ref]);
 
   const setOpenWithSound = useCallback((nextOrFn: boolean | ((prev: boolean) => boolean)) => {
     setOpen((prev) => {
@@ -91,15 +101,14 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      const root = (ref as React.RefObject<HTMLDivElement>)?.current ?? inputRef.current?.parentElement;
-      if (root && !root.contains(e.target as Node)) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
         setOpenWithSound(false);
         setQuery("");
       }
     };
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
-  }, [open, ref]);
+  }, [open, setOpenWithSound]);
 
   useEffect(() => {
     if (open && listRef.current && activeIndex >= 0) {
@@ -109,7 +118,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
   }, [activeIndex, open]);
 
   return (
-    <div ref={ref} data-slot="combobox" className={cn("relative w-full", className)}>
+    <div ref={setRootRef} data-slot="combobox" className={cn("relative w-full", className)}>
       <button
         type="button"
         role="combobox"

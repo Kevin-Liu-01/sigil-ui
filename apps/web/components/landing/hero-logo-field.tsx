@@ -9,7 +9,8 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
-import { Palette, RectangleHorizontal, SquareSlash, Clock } from "lucide-react";
+import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, MoveHorizontal, SlidersHorizontal } from "lucide-react";
+import { OklchText } from "../oklch-text";
 
 /* ── Timing ──────────────────────────────────────────────────── */
 const CYCLE_MS = 4200;
@@ -265,46 +266,43 @@ const HERO_TOKEN_STEPS = [
   { token: "--s-border", before: "border: oklch(0.20 0.01 260)", line: "border: oklch(0.24 0.01 260)", label: "cell outline" },
   { token: "--s-radius-md", before: "radius-md: 8px", line: "radius-md: 16px", label: "component corners" },
   { token: "--s-duration-slow", before: "duration-slow: 300ms", line: "duration-slow: 600ms", label: "draw timing" },
+  { token: "--s-font-display", before: 'font-display: "IBM Plex Sans"', line: 'font-display: "Space Grotesk"', label: "heading typeface" },
+  { token: "--s-success", before: "success: oklch(0.60 0.15 145)", line: "success: oklch(0.72 0.19 145)", label: "positive signal" },
+  { token: "--s-space-2", before: "space-2: 8px", line: "space-2: 12px", label: "component gap" },
+  { token: "--s-shadow-md", before: "shadow-md: 0 4px 12px", line: "shadow-md: 0 8px 24px", label: "card elevation" },
+  { token: "--s-accent", before: "accent: oklch(0.60 0.16 250)", line: "accent: oklch(0.70 0.22 190)", label: "chart highlight" },
+  { token: "--s-radius-full", before: "radius-full: 9999px", line: "radius-full: 8px", label: "avatar shape" },
+  { token: "--s-input-height", before: "input-height: 36px", line: "input-height: 28px", label: "control size" },
+  { token: "--s-duration-fast", before: "duration-fast: 150ms", line: "duration-fast: 80ms", label: "micro transition" },
+  { token: "--s-font-body", before: 'font-body: "Inter"', line: 'font-body: "DM Sans"', label: "body typeface" },
 ] as const;
 
 const HERO_CURSOR_STEPS = [
-  {
-    left: "56%",
-    top: "30%",
-    select: { left: "40.5%", top: "13%", width: "24%", height: "24%" },
-    settings: { left: "41%", top: "39%" },
-    component: "UsageCard",
-    preset: "sigil -> forge",
-    ...HERO_TOKEN_STEPS[0],
-  },
-  {
-    left: "82%",
-    top: "30%",
-    select: { left: "66.5%", top: "13%", width: "26%", height: "24%" },
-    settings: { left: "66.5%", top: "39%" },
-    component: "PresetSwatches",
-    preset: "forge -> prism",
-    ...HERO_TOKEN_STEPS[1],
-  },
-  {
-    left: "70%",
-    top: "58%",
-    select: { left: "40.5%", top: "40%", width: "52%", height: "26%" },
-    settings: { left: "54%", top: "68%" },
-    component: "DatePicker",
-    preset: "prism -> sigil",
-    ...HERO_TOKEN_STEPS[2],
-  },
-  {
-    left: "78%",
-    top: "75%",
-    select: { left: "40.5%", top: "68%", width: "52%", height: "9%" },
-    settings: { left: "58%", top: "79%" },
-    component: "TokenAction",
-    preset: "saved",
-    ...HERO_TOKEN_STEPS[3],
-  },
+  { component: "UsageCard", ...HERO_TOKEN_STEPS[0] },
+  { component: "PresetSwatches", ...HERO_TOKEN_STEPS[1] },
+  { component: "DatePicker", ...HERO_TOKEN_STEPS[2] },
+  { component: "TokenAction", ...HERO_TOKEN_STEPS[3] },
+  { component: "KPI", ...HERO_TOKEN_STEPS[4] },
+  { component: "CommitGrid", ...HERO_TOKEN_STEPS[5] },
+  { component: "Badges", ...HERO_TOKEN_STEPS[6] },
+  { component: "Coverage", ...HERO_TOKEN_STEPS[7] },
+  { component: "SparkLine", ...HERO_TOKEN_STEPS[8] },
+  { component: "Team", ...HERO_TOKEN_STEPS[9] },
+  { component: "Sliders", ...HERO_TOKEN_STEPS[10] },
+  { component: "Switches", ...HERO_TOKEN_STEPS[11] },
+  { component: "Buttons", ...HERO_TOKEN_STEPS[12] },
 ] as const;
+
+const TOKEN_SECTIONS: { name: string; icon: React.ElementType; indices: number[] }[] = [
+  { name: "Colors", icon: Palette, indices: [0, 5, 8] },
+  { name: "Borders", icon: RectangleHorizontal, indices: [1] },
+  { name: "Radius", icon: SquareSlash, indices: [2, 9] },
+  { name: "Motion", icon: Clock, indices: [3, 11] },
+  { name: "Typography", icon: Type, indices: [4, 12] },
+  { name: "Spacing", icon: MoveHorizontal, indices: [6] },
+  { name: "Shadows", icon: Layers, indices: [7] },
+  { name: "Inputs", icon: SlidersHorizontal, indices: [10] },
+];
 
 const HERO_VARIANTS: V[] = HERO_CONFIGS.map((config, variantIdx) =>
   config.flatMap((pattern, cellIdx) => {
@@ -541,8 +539,8 @@ const STYLE_BLOCK = `
 }
 @keyframes hlf-apply-style {
   0% { box-shadow: none; filter: none; }
-  40% { box-shadow: 0 0 0 2px var(--s-primary), 0 0 28px color-mix(in oklch, var(--s-primary) 30%, transparent); filter: brightness(1.08); }
-  100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 50%, transparent); filter: none; }
+  40% { box-shadow: 0 0 0 1.5px var(--s-primary), 0 0 16px color-mix(in oklch, var(--s-primary) 16%, transparent); filter: brightness(1.03); }
+  100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 28%, transparent); filter: none; }
 }
 .hero-logo-field {
   --hlf-pri: var(--s-primary, oklch(0.55 0.2 275));
@@ -573,14 +571,14 @@ const STYLE_BLOCK = `
   animation: hlf-apply-style 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-logo-field__line-active {
-  background: color-mix(in oklch, var(--s-primary) 14%, transparent);
-  border-left: 2px solid var(--s-primary);
+  background: color-mix(in oklch, var(--s-primary) 10%, transparent);
+  border-left: 2px solid color-mix(in oklch, var(--s-primary) 70%, transparent);
   margin-left: -8px;
   padding-left: 6px;
   transition: background-color 300ms, border-color 300ms;
 }
 .hero-logo-field__line-done {
-  border-left: 2px solid color-mix(in oklch, var(--s-primary) 50%, transparent);
+  border-left: 2px solid color-mix(in oklch, var(--s-primary) 30%, transparent);
   margin-left: -8px;
   padding-left: 6px;
 }
@@ -602,7 +600,13 @@ function renderVariant(elements: V) {
 
 /* ── Components ──────────────────────────────────────────────── */
 
-const STEP_KEYS = ["UsageCard", "PresetSwatches", "DatePicker", "TokenAction"] as const;
+const STEP_KEYS = [
+  "UsageCard", "PresetSwatches", "DatePicker", "TokenAction",
+  "KPI", "CommitGrid", "Badges", "Coverage",
+  "SparkLine", "Team", "Sliders", "Switches", "Buttons",
+] as const;
+
+const TOTAL_STEPS = 13;
 
 function seededRandom(seed: number) {
   let s = seed;
@@ -629,8 +633,11 @@ export function HeroLogoField() {
   const [idx, setIdx] = useState(0);
   const [phase, setPhase] = useState(0);
   const [appliedSet, setAppliedSet] = useState<Set<string>>(new Set());
+  const appliedQueue = useRef<string[]>([]);
+  const [formats, setFormats] = useState<string[]>(["bold"]);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const mdScrollRef = useRef<HTMLDivElement>(null);
   const componentRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [selRect, setSelRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
 
@@ -648,12 +655,18 @@ export function HeroLogoField() {
       setPhase((current) => {
         if (current >= 3) {
           const currentKey = STEP_KEYS[idx % STEP_KEYS.length];
-          setAppliedSet((prev) => new Set([...prev, currentKey]));
-          const nextIdx = (idx + 1) % STEP_KEYS.length;
-          if (nextIdx === 0) {
-            setTimeout(() => setAppliedSet(new Set()), 800);
+          appliedQueue.current = [...appliedQueue.current.filter((k) => k !== currentKey), currentKey];
+          setAppliedSet(new Set(appliedQueue.current));
+          const nextIdx = idx + 1;
+          if (nextIdx >= STEP_KEYS.length) {
+            setTimeout(() => {
+              appliedQueue.current = [];
+              setAppliedSet(new Set());
+              setIdx(0);
+            }, 1200);
+          } else {
+            setIdx(nextIdx);
           }
-          setIdx(nextIdx);
           return 0;
         }
         return current + 1;
@@ -665,10 +678,8 @@ export function HeroLogoField() {
   useEffect(() => {
     const container = containerRef.current;
     const target = componentRefs.current[STEP_KEYS[idx % STEP_KEYS.length]];
-    if (!container || !target || phase < 1) {
-      setSelRect(null);
-      return;
-    }
+    if (!container || !target) return;
+    if (phase < 1) return;
     const cRect = container.getBoundingClientRect();
     const tRect = target.getBoundingClientRect();
     const pad = 6;
@@ -680,6 +691,23 @@ export function HeroLogoField() {
     });
   }, [idx, phase]);
 
+  useEffect(() => {
+    const container = mdScrollRef.current;
+    if (!container) return;
+    const activeLine = container.querySelector("[data-active-token]") as HTMLElement | null;
+    if (activeLine) {
+      const lineTop = activeLine.offsetTop - container.offsetTop;
+      const lineBottom = lineTop + activeLine.offsetHeight;
+      const viewTop = container.scrollTop;
+      const viewBottom = viewTop + container.clientHeight;
+      if (lineTop < viewTop) {
+        container.scrollTop = lineTop - 4;
+      } else if (lineBottom > viewBottom) {
+        container.scrollTop = lineBottom - container.clientHeight + 4;
+      }
+    }
+  }, [idx]);
+
   const activeStepIndex = idx % STEP_KEYS.length;
   const activeToken = HERO_CURSOR_STEPS[activeStepIndex];
   const activeComponent = activeToken.component;
@@ -690,9 +718,14 @@ export function HeroLogoField() {
   const applied = (name: string) => appliedSet.has(name) || (activeComponent === name && isApplied);
   const radiusApplied = applied("DatePicker") || (activeComponent === "DatePicker" && isTyping);
 
+  const containerHeight = containerRef.current?.clientHeight ?? 0;
+  const containerWidth = containerRef.current?.clientWidth ?? 0;
+  const flipLabel = selRect ? (selRect.top + selRect.height + 36) > containerHeight : false;
+  const anchorLabelRight = selRect ? (selRect.left + selRect.width > containerWidth * 0.55) : false;
+
   const mono9: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 9, letterSpacing: "0.08em", textTransform: "uppercase" };
   const mono10: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.62 };
-  const cellBg = "color-mix(in oklch, var(--s-background) 94%, transparent)";
+  const cellBg = "var(--s-surface, var(--s-background))";
 
   return (
     <div
@@ -709,13 +742,15 @@ export function HeroLogoField() {
           right: 0,
           top: "50%",
           transform: "translateY(-50%)",
+          marginTop: 20,
           width: "min(54vw, 580px)",
           minWidth: 480,
           opacity: mounted ? 1 : 0,
           transition: "opacity 600ms ease",
           pointerEvents: "auto",
           gridTemplateColumns: "repeat(7, 1fr)",
-          gap: 6,
+          gridTemplateRows: "auto auto auto auto 1fr 1fr",
+          gap: 5,
         }}
       >
         {/* Row 1: sigil.tokens.md (3 cols) + UsageCard (2) + PresetSwatches (2) */}
@@ -723,96 +758,61 @@ export function HeroLogoField() {
           className="row-span-3"
           style={{
             gridColumn: "1 / 4",
-            border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
+            border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-strong, var(--s-border))",
             borderRadius: "var(--s-radius-md,8px)",
-            background: "color-mix(in oklch, var(--s-primary) 6%, var(--s-background))",
+            background: "var(--s-surface, var(--s-background))",
             overflow: "hidden",
-            boxShadow: "0 0 0 1px color-mix(in oklch, var(--s-primary) 18%, transparent), 0 8px 32px color-mix(in oklch, var(--s-primary) 12%, transparent)",
+            boxShadow: "var(--s-shadow-md, 0 2px 8px rgb(0 0 0 / 0.08))",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
-          <div style={{ ...mono9, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)", padding: "5px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "color-mix(in oklch, var(--s-primary) 12%, transparent)" }}>
+          <div style={{ ...mono9, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", padding: "3px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--s-surface-elevated, var(--s-surface))", flexShrink: 0 }}>
             <span style={{ fontWeight: 700 }}>sigil.tokens.md</span>
-            <span style={{ fontSize: 8, color: "var(--s-primary)" }}>{appliedSet.size}/4</span>
+            <span style={{ fontSize: 8, color: "var(--s-text-muted)" }}>{appliedSet.size}/{STEP_KEYS.length}</span>
           </div>
-          <div style={{ ...mono10, padding: "6px 8px", fontSize: 9, lineHeight: 1.55 }}>
-            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>---</div>
-            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>preset: sigil</div>
-            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5 }}>---</div>
-            <div style={{ height: 2 }} />
-
-            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><Palette size={10} style={{ opacity: 0.6 }} /> ## Colors</div>
-            {(() => {
-              const t = HERO_TOKEN_STEPS[0];
-              const isActive = activeToken.token === t.token;
-              const isDone = applied("UsageCard");
+          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 8, lineHeight: 1.4, overflow: "auto", flex: 1, minHeight: 0 }}>
+            {TOKEN_SECTIONS.map((section, si) => {
+              const Icon = section.icon;
               return (
-                <div
-                  key={t.token}
-                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
-                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
-                >
-                  {t.line} {isDone && !isActive ? "✓" : ""}
-                </div>
+                <React.Fragment key={section.name}>
+                  <div style={{ color: "var(--s-text)", fontWeight: 700, marginTop: si > 0 ? 1 : 0, fontSize: 8 }}>
+                    {section.name}
+                  </div>
+                  {section.indices.map((stepIdx) => {
+                    const t = HERO_TOKEN_STEPS[stepIdx];
+                    const step = HERO_CURSOR_STEPS[stepIdx];
+                    const isActive = activeToken.token === t.token;
+                    const isDone = applied(step.component);
+                    return (
+                      <div
+                        key={t.token}
+                        {...(isActive ? { "data-active-token": true } : {})}
+                        className={isActive ? "hero-logo-field__line-active" : isDone ? "hero-logo-field__line-done" : undefined}
+                        style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms", paddingLeft: 11, display: "flex", alignItems: "center", gap: 3 }}
+                      >
+                        <Icon size={7} style={{ opacity: 0.4, flexShrink: 0 }} />
+                        <OklchText>{isActive ? t.line : isDone ? t.line : t.before}</OklchText>
+                        {isDone && !isActive ? " ✓" : ""}
+                      </div>
+                    );
+                  })}
+                </React.Fragment>
               );
-            })()}
-            <div style={{ color: "var(--s-text-muted)" }}>background: oklch(0.08 0.01 260)</div>
-            <div style={{ height: 2 }} />
-
-            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><RectangleHorizontal size={10} style={{ opacity: 0.6 }} /> ## Borders</div>
-            {(() => {
-              const t = HERO_TOKEN_STEPS[1];
-              const isActive = activeToken.token === t.token;
-              const isDone = applied("PresetSwatches");
-              return (
-                <div
-                  key={t.token}
-                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
-                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
-                >
-                  {t.line} {isDone && !isActive ? "✓" : ""}
-                </div>
-              );
-            })()}
-            <div style={{ height: 2 }} />
-
-            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><SquareSlash size={10} style={{ opacity: 0.6 }} /> ## Radius</div>
-            {(() => {
-              const t = HERO_TOKEN_STEPS[2];
-              const isActive = activeToken.token === t.token;
-              const isDone = applied("DatePicker");
-              return (
-                <div
-                  key={t.token}
-                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
-                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
-                >
-                  {t.line} {isDone && !isActive ? "✓" : ""}
-                </div>
-              );
-            })()}
-            <div style={{ color: "var(--s-text-muted)" }}>sm: 4px</div>
-            <div style={{ height: 2 }} />
-
-            <div style={{ color: "var(--s-text)", fontWeight: 700, display: "flex", alignItems: "center", gap: 4 }}><Clock size={10} style={{ opacity: 0.6 }} /> ## Motion</div>
-            {(() => {
-              const t = HERO_TOKEN_STEPS[3];
-              const isActive = activeToken.token === t.token;
-              const isDone = applied("TokenAction");
-              return (
-                <div
-                  key={t.token}
-                  className={isActive && isTyping ? "hero-logo-field__line-active hero-logo-field__typed" : isDone ? "hero-logo-field__line-done" : undefined}
-                  style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms" }}
-                >
-                  {t.line} {isDone && !isActive ? "✓" : ""}
-                </div>
-              );
-            })()}
-            <div style={{ color: "var(--s-text-muted)" }}>fast: 150ms</div>
-            <div style={{ height: 2 }} />
-
-            <div style={{ color: "var(--s-text-subtle, var(--s-text-muted))", opacity: 0.5, borderTop: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", paddingTop: 3, marginTop: 2 }}>
-              {isApplied ? "✓ preset.apply()" : isTyping ? `writing ${activeToken.token}...` : `idle — ${appliedSet.size} saved`}
+            })}
+            <div style={{
+              borderTop: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
+              paddingTop: 3,
+              marginTop: 3,
+              fontSize: 7,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              color: "var(--s-text-muted)",
+              opacity: 0.6,
+            }}>
+              <span>{isApplied ? "✓ applied" : isSelecting ? activeToken.token : "idle"}</span>
+              <span style={{ fontVariantNumeric: "tabular-nums" }}>{appliedSet.size}/{STEP_KEYS.length}</span>
             </div>
           </div>
         </div>
@@ -822,17 +822,17 @@ export function HeroLogoField() {
             className={`overflow-hidden h-full ${applied("UsageCard") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("UsageCard") ? "var(--s-primary)" : "var(--s-border)",
-              background: applied("UsageCard") ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-background))" : cellBg,
+              background: applied("UsageCard") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
             <CardContent className="p-2.5">
               <div className="mb-1 flex items-center justify-between">
                 <span style={{ ...mono9, color: "var(--s-text-muted)" }}>usage</span>
-                <Badge size="sm" className="text-[7px]">live</Badge>
+                <Badge size="sm" className="text-[7px]" style={applied("UsageCard") ? { background: "oklch(0.66 0.18 275)", borderColor: "oklch(0.66 0.18 275)" } : undefined}>live</Badge>
               </div>
-              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: "var(--s-text)" }}>12.4k</div>
-              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" />
+              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: applied("UsageCard") ? "oklch(0.66 0.18 275)" : "var(--s-text)", transition: "color 600ms" }}>12.4k</div>
+              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" style={applied("UsageCard") ? { "--progress-color": "oklch(0.66 0.18 275)" } as React.CSSProperties : undefined} />
             </CardContent>
           </Card>
         </div>
@@ -842,7 +842,7 @@ export function HeroLogoField() {
             className={`overflow-hidden h-full ${applied("PresetSwatches") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("PresetSwatches") ? "var(--s-primary)" : "var(--s-border)",
-              background: applied("PresetSwatches") ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-background))" : cellBg,
+              background: applied("PresetSwatches") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
@@ -857,7 +857,7 @@ export function HeroLogoField() {
                       border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                       borderRadius: "var(--s-radius-sm,4px)",
                       background: applied("PresetSwatches")
-                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
+                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 12%, transparent)"
                         : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
                     }}
                   />
@@ -872,7 +872,7 @@ export function HeroLogoField() {
                       border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                       borderRadius: "var(--s-radius-sm,4px)",
                       background: applied("PresetSwatches")
-                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 42%, transparent)"
+                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 12%, transparent)"
                         : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
                     }}
                   />
@@ -890,7 +890,7 @@ export function HeroLogoField() {
             gridColumn: "4 / 8",
             border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
             borderRadius: radiusApplied ? "16px" : "var(--s-radius-md,8px)",
-            background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-background))" : cellBg,
+            background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
             transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
           }}
         >
@@ -905,108 +905,218 @@ export function HeroLogoField() {
 
         {/* Row 3: TokenAction spans right 4 cols */}
         <div ref={setComponentRef("TokenAction")} style={{ gridColumn: "4 / 8" }}>
-          <div className={`grid grid-cols-[1fr_auto] gap-2 ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`}>
-            <Input value="sigil.tokens.md" readOnly className="h-7 text-[9px]" />
+          <div className={`grid grid-cols-[1fr_auto] gap-2 ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`} style={{ transition: `all ${applied("TokenAction") ? "600ms" : "var(--s-duration-slow,300ms)"}` }}>
+            <Input
+              value="sigil.tokens.md"
+              readOnly
+              className={`h-7 text-[9px] ${applied("TokenAction") ? "hero-logo-field__typed" : ""}`}
+              key={applied("TokenAction") ? "typed" : "idle"}
+            />
             <Button size="sm" className="h-7 px-2.5 text-[9px]">{applied("TokenAction") ? "Saved" : "Apply"}</Button>
           </div>
         </div>
 
-        {/* Row 4: KPI + CommitGrid side by side + Tabs */}
-        {/* Row 4: KPI + Contributions (full width) + controls column | Coverage + ToggleGroup */}
-        <div style={{ gridColumn: "1 / 2" }}>
-          <KPI label="ARR" value="$7.52m" change="+67%" trend="up" className="text-[9px]" />
+        {/* Row 4: KPI + CommitGrid + Badges + Coverage/ToggleGroup */}
+        <div ref={setComponentRef("KPI")} className="h-full" style={{ gridColumn: "1 / 2" }}>
+          <KPI
+            label="ARR"
+            value="$7.52m"
+            change="+67%"
+            trend="up"
+            className={`text-[9px] ${applied("KPI") ? "hero-logo-field__apply" : ""}`}
+            style={{ fontFamily: applied("KPI") ? '"Space Grotesk", var(--s-font-display)' : undefined }}
+          />
         </div>
-        <Card style={{ gridColumn: "2 / 4", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2 h-full">
-         
-            <CommitGrid data={COMMIT_DAYS} weeks={10} cellSize={10} gap={2} showDayLabels={false} showMonthLabels={false} color="var(--s-primary)" />
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "4 / 5", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5 h-full flex flex-col justify-between gap-2">
-            <div className="flex items-center gap-1 flex-wrap">
-              <Badge size="sm" variant={appliedSet.size >= 4 ? "default" : "outline"} className="text-[7px]">
-                {appliedSet.size >= 4 ? "staged" : "staging"}
-              </Badge>
-              <Badge size="sm" variant="outline" className="text-[7px]">v2.4</Badge>
-            </div>
-            <div className="flex items-center gap-1">
-              {["us", "eu", "ap"].map((r) => (
-                <Badge key={r} size="sm" variant="outline" className="text-[7px]">{r}</Badge>
-              ))}
-            </div>
-            <Checkbox label="Dark" defaultChecked />
-            <Checkbox label="Animate" />
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "5 / 8", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5">
-            <Meter value={appliedSet.size * 25} max={100} label="Coverage" className="text-[9px]" />
-            <div className="mt-2">
-              <ToggleGroup type="single" defaultValue="bold" className="w-full">
-                <ToggleGroupItem value="bold" size="sm" className="text-[9px] h-6 flex-1 font-bold">B</ToggleGroupItem>
-                <ToggleGroupItem value="italic" size="sm" className="text-[9px] h-6 flex-1 italic">I</ToggleGroupItem>
-                <ToggleGroupItem value="underline" size="sm" className="text-[9px] h-6 flex-1 underline">U</ToggleGroupItem>
-              </ToggleGroup>
-            </div>
-          </CardContent>
-        </Card>
+        <div ref={setComponentRef("CommitGrid")} className="h-full" style={{ gridColumn: "2 / 4" }}>
+          <Card
+            className={`h-full ${applied("CommitGrid") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("CommitGrid") ? "var(--s-primary)" : "var(--s-border)",
+              background: applied("CommitGrid") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2 h-full">
+              <CommitGrid data={COMMIT_DAYS} weeks={10} cellSize={10} gap={2} showDayLabels={false} showMonthLabels={false} color={applied("CommitGrid") ? "var(--s-success, #22c55e)" : "var(--s-primary)"} />
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Badges")} className="h-full" style={{ gridColumn: "4 / 5" }}>
+          <Card
+            className={`h-full ${applied("Badges") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Badges") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2 h-full flex flex-col justify-between" style={{ gap: applied("Badges") ? 8 : 4, transition: "gap var(--s-duration-slow,600ms)" }}>
+              <div className="flex items-center gap-1 flex-wrap">
+                <Badge size="sm" variant={appliedSet.size >= 4 ? "default" : "outline"} className="text-[7px]">
+                  {appliedSet.size >= 4 ? "staged" : "staging"}
+                </Badge>
+                <Badge size="sm" variant="outline" className="text-[7px]">v2.4</Badge>
+              </div>
+              <div className="flex items-center gap-1">
+                {["us", "eu", "ap"].map((r) => (
+                  <Badge key={r} size="sm" variant="outline" className="text-[7px]">{r}</Badge>
+                ))}
+              </div>
+              <Checkbox label="Dark" defaultChecked />
+              <Checkbox label="Animate" />
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Coverage")} className="h-full" style={{ gridColumn: "5 / 8" }}>
+          <Card
+            className={`h-full ${applied("Coverage") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Coverage") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              boxShadow: applied("Coverage") ? "0 8px 24px rgb(0 0 0 / 0.12)" : undefined,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), box-shadow var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2 h-full flex flex-col">
+              <textarea
+                value="Design tokens control every visual property. One file configures color, type, spacing, and motion."
+                readOnly
+                style={{
+                  width: "100%",
+                  flex: 1,
+                  minHeight: 0,
+                  resize: "none",
+                  background: "transparent",
+                  border: "none",
+                  outline: "none",
+                  fontFamily: formats.includes("mono") ? "var(--s-font-mono)" : "var(--s-font-body, var(--s-font-mono))",
+                  fontSize: 9,
+                  lineHeight: 1.5,
+                  color: "var(--s-text)",
+                  fontWeight: formats.includes("bold") ? 700 : 400,
+                  fontStyle: formats.includes("italic") ? "italic" : "normal",
+                  textDecoration: [formats.includes("underline") && "underline", formats.includes("strikethrough") && "line-through"].filter(Boolean).join(" ") || "none",
+                  letterSpacing: formats.includes("tracking") ? "0.08em" : undefined,
+                  textTransform: formats.includes("uppercase") ? "uppercase" : undefined,
+                  padding: 0,
+                }}
+              />
+              <div className="flex flex-col gap-1 mt-1" style={{ flexShrink: 0 }}>
+                <ToggleGroup type="multiple" value={formats} onValueChange={(v) => setFormats(Array.isArray(v) ? v : [v])} className="w-full">
+                  <ToggleGroupItem value="bold" size="sm" className="text-[8px] h-5 flex-1 font-bold">B</ToggleGroupItem>
+                  <ToggleGroupItem value="italic" size="sm" className="text-[8px] h-5 flex-1 italic">I</ToggleGroupItem>
+                  <ToggleGroupItem value="underline" size="sm" className="text-[8px] h-5 flex-1 underline">U</ToggleGroupItem>
+                  <ToggleGroupItem value="strikethrough" size="sm" className="text-[8px] h-5 flex-1 line-through">S</ToggleGroupItem>
+                </ToggleGroup>
+                <ToggleGroup type="multiple" value={formats} onValueChange={(v) => setFormats(Array.isArray(v) ? v : [v])} className="w-full">
+                  <ToggleGroupItem value="uppercase" size="sm" className="text-[7px] h-5 flex-1 uppercase">Aa</ToggleGroupItem>
+                  <ToggleGroupItem value="tracking" size="sm" className="text-[7px] h-5 flex-1 tracking-widest">T↔</ToggleGroupItem>
+                  <ToggleGroupItem value="mono" size="sm" className="text-[7px] h-5 flex-1 font-mono">{'</>'}</ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Row 5: SparkLine (big) + Team + 2 Sliders + Switches + Buttons */}
-        <Card style={{ gridColumn: "1 / 3", borderColor: "var(--s-border)", background: cellBg, overflow: "hidden" }}>
-          <CardContent className="p-0">
-            <div className="px-2.5 pt-2 flex items-center justify-between">
-              <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
-              <span className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums" style={{ color: "var(--s-text-muted)" }}>p99 12ms</span>
-            </div>
-            <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13, 9, 16]} width={300} height={42} filled className="w-full block" style={{ display: "block" }} />
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "3 / 4", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5">
-            <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>team</div>
-            <AvatarGroup max={3}>
-              <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" />
-              <Avatar src="https://github.com/leerob.png" name="Lee" size="sm" />
-              <Avatar src="https://github.com/rauchg.png" name="G" size="sm" />
-            </AvatarGroup>
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "4 / 5", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5 flex flex-col gap-2">
-            <div>
-              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>spacing</div>
-              <Slider defaultValue={[16]} min={4} max={48} step={4} className="w-full" />
-            </div>
-            <div>
-              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</div>
-              <Slider defaultValue={[8]} min={0} max={24} step={2} className="w-full" />
-            </div>
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "5 / 6", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5 flex flex-col gap-2">
-          
-            <div className="flex items-center justify-between">
-              <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>sound</span>
-              <Switch checked={applied("UsageCard")} onCheckedChange={() => {}} />
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>motion</span>
-              <Switch defaultChecked onCheckedChange={() => {}} />
-            </div>
-          </CardContent>
-        </Card>
-        <Card style={{ gridColumn: "6 / 8", borderColor: "var(--s-border)", background: cellBg }}>
-          <CardContent className="p-2.5">
-            <div className="grid grid-cols-6 gap-1.5">
-              <Button size="sm" className="col-span-3 h-6 px-2 text-[8px]">Primary</Button>
-              <Button size="sm" variant="outline" className="col-span-3 h-6 px-2 text-[8px]">Outline</Button>
-              <Button size="sm" variant="secondary" className="col-span-4 h-6 px-2 text-[8px]">Secondary</Button>
-              <Button size="sm" variant="ghost" className="col-span-2 h-6 px-2 text-[8px]">Ghost</Button>
-            </div>
-          </CardContent>
-        </Card>
+        {/* Row 5: SparkLine + Team + Sliders + Switches + Buttons */}
+        <div ref={setComponentRef("SparkLine")} className="h-full" style={{ gridColumn: "1 / 3" }}>
+          <Card
+            className={`h-full ${applied("SparkLine") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("SparkLine") ? "var(--s-primary)" : "var(--s-border)",
+              background: applied("SparkLine") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-0.5 flex-col flex ">
+              <div className="mb-1 px-0.5 flex items-center justify-between">
+                <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
+                <span className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums" style={{ color: "var(--s-text-muted)" }}>p99 12ms</span>
+              </div>
+              <SparkLine data={[8, 11, 9, 13, 10, 12, 16, 14, 18, 15, 19, 17, 13, 20]} width={200} height={58} filled className="w-full h-full" color={applied("SparkLine") ? "oklch(0.70 0.22 190)" : undefined} />
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Team")} className="h-full" style={{ gridColumn: "3 / 4" }}>
+          <Card
+            className={`h-full ${applied("Team") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Team") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2.5">
+              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>team</div>
+              <AvatarGroup max={3}>
+                <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
+                <Avatar src="https://github.com/leerob.png" name="Lee" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
+                <Avatar src="https://github.com/rauchg.png" name="G" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
+              </AvatarGroup>
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Sliders")} className="h-full" style={{ gridColumn: "4 / 5" }}>
+          <Card
+            className={`h-full ${applied("Sliders") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Sliders") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2.5 flex flex-col gap-2">
+              <div>
+                <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>spacing</div>
+                <Slider defaultValue={[16]} min={4} max={48} step={4} className="w-full" />
+              </div>
+              <div>
+                <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</div>
+                <Slider defaultValue={[8]} min={0} max={24} step={2} className="w-full" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Switches")} className="h-full" style={{ gridColumn: "5 / 6" }}>
+          <Card
+            className={`h-full ${applied("Switches") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Switches") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2.5 flex flex-col gap-2">
+              <div className="flex items-center justify-between">
+                <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>sound</span>
+                <Switch checked={applied("UsageCard")} onCheckedChange={() => {}} />
+              </div>
+              <div className="flex items-center justify-between">
+                <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>motion</span>
+                <Switch defaultChecked onCheckedChange={() => {}} />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        <div ref={setComponentRef("Buttons")} className="h-full" style={{ gridColumn: "6 / 8" }}>
+          <Card
+            className={`h-full ${applied("Buttons") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              borderColor: applied("Buttons") ? "var(--s-primary)" : "var(--s-border)",
+              background: cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+            }}
+          >
+            <CardContent className="p-2.5">
+              <div className="grid grid-cols-6 gap-1.5" style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}>
+                <Button size="sm" className="col-span-3 h-6 px-2 text-[8px]">Primary</Button>
+                <Button size="sm" variant="outline" className="col-span-3 h-6 px-2 text-[8px]">Outline</Button>
+                <Button size="sm" variant="secondary" className="col-span-4 h-6 px-2 text-[8px]">Secondary</Button>
+                <Button size="sm" variant="ghost" className="col-span-2 h-6 px-2 text-[8px]">Ghost</Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
         {/* ── Selection overlay (ref-measured, always rendered) ── */}
         <div
@@ -1017,10 +1127,10 @@ export function HeroLogoField() {
             left: selRect?.left ?? 0,
             width: selRect?.width ?? 0,
             height: selRect?.height ?? 0,
-            border: "var(--s-border-thin,1px) dashed var(--s-primary)",
+            border: "var(--s-border-thin,1px) dashed color-mix(in oklch, var(--s-primary) 50%, transparent)",
             borderRadius: "var(--s-radius-md,8px)",
-            background: "color-mix(in oklch, var(--s-primary) 7%, transparent)",
-            opacity: isSelecting && selRect ? 1 : 0,
+            background: "color-mix(in oklch, var(--s-primary) 6%, transparent)",
+            opacity: selRect ? 1 : 0,
             transition: "top 600ms cubic-bezier(0.16,1,0.3,1), left 600ms cubic-bezier(0.16,1,0.3,1), width 600ms cubic-bezier(0.16,1,0.3,1), height 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease, border-radius 600ms cubic-bezier(0.16,1,0.3,1)",
             pointerEvents: "none",
             zIndex: 10,
@@ -1030,36 +1140,41 @@ export function HeroLogoField() {
             key={`sel-${activeComponent}-${idx}`}
             style={{
               position: "absolute",
-              left: 0,
-              bottom: -32,
+              left: "50%",
+              transform: `translateX(-50%) ${isSelecting ? "translateY(0)" : "translateY(-4px)"}`,
+              ...(flipLabel ? { top: -32 } : { bottom: -32 }),
               padding: "5px 10px",
               background: "var(--s-background)",
-              border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
+              border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-interactive, var(--s-primary))",
               borderRadius: "var(--s-radius-sm,4px)",
-              boxShadow: "0 4px 16px color-mix(in oklch, var(--s-primary) 18%, transparent)",
+              boxShadow: "var(--s-shadow-md, 0 4px 12px rgb(0 0 0 / 0.1))",
               fontFamily: "var(--s-font-mono)",
               fontSize: 9,
               lineHeight: 1.4,
               whiteSpace: "nowrap",
               width: "max-content",
-              opacity: isSelecting ? 1 : 0,
-              transform: isSelecting ? "translateY(0)" : "translateY(-4px)",
+              maxWidth: selRect
+                ? Math.min(selRect.left + selRect.width, containerWidth - selRect.left) * 2
+                : undefined,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              opacity: selRect ? 1 : 0,
               transition: "opacity 250ms cubic-bezier(0.16,1,0.3,1), transform 250ms cubic-bezier(0.16,1,0.3,1)",
             }}
           >
             {!isTyping && (
-              <span style={{ color: "var(--s-text-muted)" }}>{activeToken.before}</span>
+              <span style={{ color: "var(--s-text-muted)" }}><OklchText>{activeToken.before}</OklchText></span>
             )}
             {isTyping && !isApplied && (
               <>
-                <span style={{ color: "var(--s-text-muted)", textDecoration: "line-through", opacity: 0.5 }}>{activeToken.before}</span>
+                <span style={{ color: "var(--s-text-muted)", textDecoration: "line-through", opacity: 0.5 }}><OklchText>{activeToken.before}</OklchText></span>
                 <span style={{ color: "var(--s-primary)", marginLeft: 6 }}>&rarr;</span>
-                <span className="hero-logo-field__typed" style={{ color: "var(--s-primary)", marginLeft: 6 }}>{activeToken.line}</span>
+                <span className="hero-logo-field__typed" style={{ color: "var(--s-primary)", marginLeft: 6 }}><OklchText>{activeToken.line}</OklchText></span>
               </>
             )}
             {isApplied && (
               <>
-                <span style={{ color: "var(--s-primary)" }}>{activeToken.line}</span>
+                <span style={{ color: "var(--s-primary)" }}><OklchText>{activeToken.line}</OklchText></span>
                 <span style={{ color: "var(--s-success, #10b981)", marginLeft: 6 }}>✓</span>
               </>
             )}

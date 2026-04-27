@@ -1,0 +1,32 @@
+---
+title: DataToolbar
+description: DataToolbar is a token-driven Sigil component in the data display and tables group.
+---
+
+## Import
+
+```tsx
+import { DataToolbar } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <DataToolbar><DataFilters searchPlaceholder="Filter..." /><Button variant="outline">Export</Button></DataToolbar>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DataToolbar><DataFilters searchPlaceholder="Filter..." /><Button variant="outline">Export</Button></DataToolbar>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add data-toolbar
+```
+
+## Token Integration
+
+DataToolbar follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

@@ -1,0 +1,32 @@
+---
+title: CheckboxCard
+description: CheckboxCard is a token-driven Sigil component in the forms and inputs group.
+---
+
+## Import
+
+```tsx
+import { CheckboxCard } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <CheckboxCard defaultChecked title="Enable sync" description="Use a selectable card for preferences." />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<CheckboxCard defaultChecked title="Enable sync" description="Use a selectable card for preferences." />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add checkbox-card
+```
+
+## Token Integration
+
+CheckboxCard follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

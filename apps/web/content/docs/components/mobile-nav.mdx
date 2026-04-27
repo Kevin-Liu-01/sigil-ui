@@ -1,0 +1,32 @@
+---
+title: MobileNav
+description: MobileNav is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { MobileNav } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MobileNav><Button variant="ghost">Docs</Button><Button variant="ghost">Components</Button></MobileNav>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MobileNav><Button variant="ghost">Docs</Button><Button variant="ghost">Components</Button></MobileNav>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add mobile-nav
+```
+
+## Token Integration
+
+MobileNav follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

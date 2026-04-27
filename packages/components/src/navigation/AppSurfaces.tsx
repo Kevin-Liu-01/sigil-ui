@@ -104,6 +104,9 @@ export const ContentTabs = forwardRef<HTMLDivElement, ContentTabsProps>(function
   { tabs, defaultValue, className, ...props },
   ref,
 ) {
+  if (tabs.length === 0) {
+    return <div ref={ref} className={cn("text-sm text-[var(--s-text-muted)]", className)} {...props}>No tabs available.</div>;
+  }
   return (
     <div ref={ref} className={className} {...props}>
       <Tabs defaultValue={defaultValue ?? tabs[0]?.value}>
@@ -160,6 +163,7 @@ export const ScrollSpy = forwardRef<HTMLElement, ScrollSpyProps>(function Scroll
     const onScroll = () => {
       let current: AnchorNavItem | undefined;
       for (const item of items) {
+        if (!item.href.startsWith("#")) continue;
         const element = document.querySelector(item.href);
         if (element && element.getBoundingClientRect().top <= 120) current = item;
       }
@@ -170,7 +174,7 @@ export const ScrollSpy = forwardRef<HTMLElement, ScrollSpyProps>(function Scroll
     return () => window.removeEventListener("scroll", onScroll);
   }, [items]);
   return (
-    <nav ref={ref} className={cn("grid gap-1", className)} {...props}>
+    <nav ref={ref} aria-label={props["aria-label"] ?? "Section navigation"} className={cn("grid gap-1", className)} {...props}>
       {items.map((item) => (
         <a key={item.href} href={item.href} className={cn("text-sm text-[var(--s-text-muted)] hover:text-[var(--s-text)]", active === item.href && activeClassName)}>
           {item.label}
@@ -268,5 +272,13 @@ export const TestimonialCarousel = forwardRef<HTMLDivElement, HTMLAttributes<HTM
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("flex snap-x gap-4 overflow-x-auto pb-2 [&>*]:min-w-[min(24rem,85vw)] [&>*]:snap-start", className)} {...props} />;
+  return (
+    <div
+      ref={ref}
+      role="region"
+      aria-label={props["aria-label"] ?? "Testimonials"}
+      className={cn("flex snap-x gap-4 overflow-x-auto overscroll-x-contain pb-2 [&>*]:min-w-[min(16rem,80vw)] [&>*]:snap-start", className)}
+      {...props}
+    />
+  );
 });

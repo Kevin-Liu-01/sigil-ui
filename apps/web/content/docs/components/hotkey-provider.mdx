@@ -1,0 +1,32 @@
+---
+title: HotkeyProvider
+description: HotkeyProvider is a token-driven Sigil component in the overlay and interaction group.
+---
+
+## Import
+
+```tsx
+import { HotkeyProvider } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <HotkeyProvider hotkeys={[]}><div className="flex items-center gap-2"><KeyboardKey>⌘K</KeyboardKey><span>Hotkey provider mounted</span></div></HotkeyProvider>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<HotkeyProvider hotkeys={[]}><div className="flex items-center gap-2"><KeyboardKey>⌘K</KeyboardKey><span>Hotkey provider mounted</span></div></HotkeyProvider>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add hotkey-provider
+```
+
+## Token Integration
+
+HotkeyProvider follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

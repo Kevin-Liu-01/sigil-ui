@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type ReactNode } from "react";
+import { forwardRef, type ForwardedRef, type ReactElement, type ReactNode, type Ref } from "react";
 import {
   Table,
   TableHeader,
@@ -24,6 +24,7 @@ export interface DataTableProps<T> {
   emptyMessage?: string;
   onRowClick?: (row: T, index: number) => void;
   rowClassName?: string | ((row: T, index: number) => string);
+  getRowId?: (row: T, index: number) => string;
 }
 
 function DataTableInner<T extends Record<string, unknown>>(
@@ -34,8 +35,9 @@ function DataTableInner<T extends Record<string, unknown>>(
     emptyMessage = "No results.",
     onRowClick,
     rowClassName,
+    getRowId,
   }: DataTableProps<T>,
-  ref: React.ForwardedRef<HTMLTableElement>,
+  ref: ForwardedRef<HTMLTableElement>,
 ) {
   return (
     <Table ref={ref} data-slot="data-table" className={className}>
@@ -65,7 +67,7 @@ function DataTableInner<T extends Record<string, unknown>>(
 
             return (
               <TableRow
-                key={rowIdx}
+                key={getRowId?.(row, rowIdx) ?? String(row.id ?? row.key ?? rowIdx)}
                 onClick={onRowClick ? () => onRowClick(row, rowIdx) : undefined}
                 className={cn(
                   onRowClick && "cursor-pointer",
@@ -89,5 +91,5 @@ function DataTableInner<T extends Record<string, unknown>>(
 }
 
 export const DataTable = forwardRef(DataTableInner) as <T extends Record<string, unknown>>(
-  props: DataTableProps<T> & { ref?: React.Ref<HTMLTableElement> },
-) => React.ReactElement | null;
+  props: DataTableProps<T> & { ref?: Ref<HTMLTableElement> },
+) => ReactElement | null;

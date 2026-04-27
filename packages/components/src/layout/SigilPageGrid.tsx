@@ -13,86 +13,109 @@ import type { GutterPattern } from "@sigil-ui/tokens";
 /* Pattern generator                                                    */
 /* ------------------------------------------------------------------ */
 
-const COLOR = "var(--s-border-muted)";
+const STRUCTURAL_LINE_COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
+const STRUCTURAL_BORDER =
+  "var(--s-gutter-border, var(--s-border-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
+const COLOR = STRUCTURAL_LINE_COLOR;
 
-type PatternSide = "left" | "right";
+export type PatternSide = "left" | "right";
 
-const SVG_STROKE = "oklch(0.62 0.02 280 / 0.24)";
+const SVG_STROKE_MASK = "white";
 
-function buildHexSvg(cell: number): string {
+function buildLineSvg(
+  tileW: number,
+  tileH: number,
+  lines: number[][],
+): string {
+  const lineEls = lines
+    .map(
+      ([x1, y1, x2, y2]) =>
+        `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_STROKE_MASK}' stroke-width='1'/>`,
+    )
+    .join("");
+  return `<svg xmlns='http://www.w3.org/2000/svg' width='${tileW}' height='${tileH}'>${lineEls}</svg>`;
+}
+
+function mirrorLinesX(lines: number[][], tileW: number): number[][] {
+  return lines.map(([x1, y1, x2, y2]) => [tileW - x1, y1, tileW - x2, y2]);
+}
+
+function getHexLines(cell: number): { w: number; h: number; lines: number[][] } {
   const s = Math.round(cell * 0.5);
   const w = Math.round(s * 1.732);
   const tileH = s * 3;
   const halfS = Math.round(s / 2);
   const threeHalfS = Math.round(s * 1.5);
-
-  const lines = [
-    [w / 2, 0, w, halfS],
-    [w, halfS, w, threeHalfS],
-    [w, threeHalfS, w / 2, s * 2],
-    [w / 2, s * 2, 0, threeHalfS],
-    [0, threeHalfS, 0, halfS],
-    [0, halfS, w / 2, 0],
-    [w / 2, s * 2, w / 2, tileH],
-  ];
-
-  const lineEls = lines
-    .map(
-      ([x1, y1, x2, y2]) =>
-        `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-    )
-    .join("");
-
-  return [
-    `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${tileH}'>`,
-    lineEls,
-    `</svg>`,
-  ].join("");
+  return {
+    w,
+    h: tileH,
+    lines: [
+      [w / 2, 0, w, halfS],
+      [w, halfS, w, threeHalfS],
+      [w, threeHalfS, w / 2, s * 2],
+      [w / 2, s * 2, 0, threeHalfS],
+      [0, threeHalfS, 0, halfS],
+      [0, halfS, w / 2, 0],
+      [w / 2, s * 2, w / 2, tileH],
+    ],
+  };
 }
 
-function buildTriangleSvg(cell: number): string {
+function getTriangleLines(cell: number): { w: number; h: number; lines: number[][] } {
   const side = cell;
   const h = Math.round(side * 0.866);
   const half = Math.round(side / 2);
-  const tileW = side;
-  const tileH = h * 2;
-
-  const lines = [
-    [0, 0, tileW, 0],
-    [0, h, tileW, h],
-    [0, tileH, tileW, tileH],
-    [0, 0, half, h],
-    [half, h, 0, tileH],
-    [half, h, tileW, tileH],
-    [tileW, 0, half, h],
-  ];
-
-  const lineEls = lines
-    .map(
-      ([x1, y1, x2, y2]) =>
-        `<line x1='${x1}' y1='${y1}' x2='${x2}' y2='${y2}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-    )
-    .join("");
-
-  return [
-    `<svg xmlns='http://www.w3.org/2000/svg' width='${tileW}' height='${tileH}'>`,
-    lineEls,
-    `</svg>`,
-  ].join("");
+  return {
+    w: side,
+    h: h * 2,
+    lines: [
+      [0, 0, side, 0],
+      [0, h, side, h],
+      [0, h * 2, side, h * 2],
+      [0, 0, half, h],
+      [half, h, 0, h * 2],
+      [half, h, side, h * 2],
+      [side, 0, half, h],
+    ],
+  };
 }
 
-function patternStyles(
+function getBrickLines(cell: number): { w: number; h: number; lines: number[][] } {
+  const rowH = Math.round(cell / 2);
+  const half = Math.round(cell / 2);
+  return {
+    w: cell,
+    h: rowH * 2,
+    lines: [
+      [0, rowH, cell, rowH],
+      [0, rowH * 2, cell, rowH * 2],
+      [0, 0, 0, rowH],
+      [half, rowH, half, rowH * 2],
+    ],
+  };
+}
+
+export type SigilPatternStyles = {
+  backgroundImage: string;
+  backgroundSize: string;
+  backgroundPosition?: string;
+  isMask?: boolean;
+};
+
+export function getSigilPatternStyles(
   pattern: GutterPattern,
   cell: number,
-  _side: PatternSide = "left",
-): { backgroundImage: string; backgroundSize: string; backgroundPosition?: string } | null {
+  side: PatternSide = "left",
+): SigilPatternStyles | null {
   const C = COLOR;
+  const R = side === "right";
   switch (pattern) {
     case "grid": {
       const mid = Math.floor(cell / 2);
+      const dir = R ? "to left" : "to right";
       return {
         backgroundImage: [
-          `linear-gradient(to right, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(${dir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
           `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         ].join(", "),
         backgroundSize: `${cell}px ${cell}px`,
@@ -102,27 +125,36 @@ function patternStyles(
       return {
         backgroundImage: `radial-gradient(circle, ${C} 1.2px, transparent 1.2px)`,
         backgroundSize: `${cell}px ${cell}px`,
-        backgroundPosition: `${cell / 2}px ${cell / 2}px`,
+        backgroundPosition: R
+          ? `0px ${cell / 2}px`
+          : `${cell / 2}px ${cell / 2}px`,
       };
-    case "crosshatch":
+    case "crosshatch": {
+      const a = R ? -45 : 45;
+      const b = R ? 45 : -45;
       return {
         backgroundImage: [
-          `repeating-linear-gradient(45deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
-          `repeating-linear-gradient(-45deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
+          `repeating-linear-gradient(${a}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
+          `repeating-linear-gradient(${b}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
         ].join(", "),
         backgroundSize: "100% 100%, 100% 100%",
       };
-    case "diagonal":
+    }
+    case "diagonal": {
+      const angle = R ? -45 : 45;
       return {
-        backgroundImage: `repeating-linear-gradient(45deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
+        backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${cell - 1}px, ${C} ${cell - 1}px, ${C} ${cell}px)`,
         backgroundSize: "100% 100%",
       };
+    }
     case "diamond": {
       const h = cell / 2;
+      const a = R ? -45 : 45;
+      const b = R ? 45 : -45;
       return {
         backgroundImage: [
-          `linear-gradient(45deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
-          `linear-gradient(-45deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
+          `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
+          `linear-gradient(${b}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
         ].join(", "),
         backgroundSize: `${h}px ${h}px`,
       };
@@ -147,69 +179,68 @@ function patternStyles(
       };
     }
     case "hexagon": {
-      const s = Math.round(cell * 0.5);
-      const w = Math.round(s * 1.732);
-      const tileH = s * 3;
-      const svg = buildHexSvg(cell);
+      const { w, h, lines } = getHexLines(cell);
+      const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
-        backgroundSize: `${w}px ${tileH}px`,
+        backgroundSize: `${w}px ${h}px`,
+        isMask: true,
       };
     }
     case "triangle": {
-      const h = Math.round(cell * 0.866);
-      const tileH = h * 2;
-      const svg = buildTriangleSvg(cell);
+      const { w, h, lines } = getTriangleLines(cell);
+      const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
-        backgroundSize: `${cell}px ${tileH}px`,
+        backgroundSize: `${w}px ${h}px`,
+        isMask: true,
       };
     }
-    case "zigzag":
+    case "zigzag": {
+      const [a1, a2, a3, a4] = R ? [45, 315, 225, 135] : [135, 225, 315, 45];
       return {
         backgroundImage: [
-          `linear-gradient(135deg, ${C} 25%, transparent 25%)`,
-          `linear-gradient(225deg, ${C} 25%, transparent 25%)`,
-          `linear-gradient(315deg, ${C} 25%, transparent 25%)`,
-          `linear-gradient(45deg, ${C} 25%, transparent 25%)`,
+          `linear-gradient(${a1}deg, ${C} 25%, transparent 25%)`,
+          `linear-gradient(${a2}deg, ${C} 25%, transparent 25%)`,
+          `linear-gradient(${a3}deg, ${C} 25%, transparent 25%)`,
+          `linear-gradient(${a4}deg, ${C} 25%, transparent 25%)`,
         ].join(", "),
         backgroundSize: `${cell}px ${cell}px`,
       };
+    }
     case "checker": {
       const h = cell / 2;
+      const a = R ? -45 : 45;
       return {
         backgroundImage: [
-          `linear-gradient(45deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
-          `linear-gradient(45deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
+          `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
+          `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
         ].join(", "),
         backgroundSize: `${cell}px ${cell}px`,
-        backgroundPosition: `0 0, ${h}px ${h}px`,
+        backgroundPosition: R
+          ? `${h}px ${h}px, 0 0`
+          : `0 0, ${h}px ${h}px`,
       };
     }
     case "plus": {
       const mid = Math.floor(cell / 2);
+      const dir = R ? "to left" : "to right";
+      const vDir = R ? "to top" : "to bottom";
       return {
         backgroundImage: [
-          `linear-gradient(to right, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
-          `linear-gradient(to bottom, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(${dir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(${vDir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
         ].join(", "),
         backgroundSize: `${cell}px ${cell}px`,
       };
     }
     case "brick": {
-      const rowH = Math.round(cell / 2);
-      const half = Math.round(cell / 2);
-      const svg = [
-        `<svg xmlns='http://www.w3.org/2000/svg' width='${cell}' height='${rowH * 2}'>`,
-        `<line x1='0' y1='${rowH}' x2='${cell}' y2='${rowH}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-        `<line x1='0' y1='${rowH * 2}' x2='${cell}' y2='${rowH * 2}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-        `<line x1='0' y1='0' x2='0' y2='${rowH}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-        `<line x1='${half}' y1='${rowH}' x2='${half}' y2='${rowH * 2}' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-        `</svg>`,
-      ].join("");
+      const { w, h, lines } = getBrickLines(cell);
+      const svg = buildLineSvg(w, h, R ? mirrorLinesX(lines, w) : lines);
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
-        backgroundSize: `${cell}px ${rowH * 2}px`,
+        backgroundSize: `${w}px ${h}px`,
+        isMask: true,
       };
     }
     case "wave": {
@@ -219,19 +250,17 @@ function patternStyles(
       const mid = h / 2;
       const pts: string[] = [];
       const steps = 40;
+      const sign = R ? -1 : 1;
       for (let i = 0; i <= steps; i++) {
-        const x = (i / steps) * w;
-        const y = mid + a * Math.sin((i / steps) * Math.PI * 2);
+        const x = R ? w - (i / steps) * w : (i / steps) * w;
+        const y = mid + sign * a * Math.sin((i / steps) * Math.PI * 2);
         pts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`);
       }
-      const svg = [
-        `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'>`,
-        `<path d='${pts.join(" ")}' fill='none' stroke='${SVG_STROKE}' stroke-width='1'/>`,
-        `</svg>`,
-      ].join("");
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='${w}' height='${h}'><path d='${pts.join(" ")}' fill='none' stroke='${SVG_STROKE_MASK}' stroke-width='1'/></svg>`;
       return {
         backgroundImage: `url("data:image/svg+xml,${encodeURIComponent(svg)}")`,
         backgroundSize: `${w}px ${h}px`,
+        isMask: true,
       };
     }
     case "none":
@@ -249,6 +278,8 @@ export interface PageGridConfig {
   contentMax: number;
   gridCell: number;
   crossStroke: number;
+  gutterPattern: GutterPattern;
+  marginPattern: GutterPattern;
   edgeless: boolean;
 }
 
@@ -257,6 +288,8 @@ const DEFAULTS: PageGridConfig = {
   contentMax: 1200,
   gridCell: 16,
   crossStroke: 1.5,
+  gutterPattern: "grid",
+  marginPattern: "horizontal",
   edgeless: false,
 };
 
@@ -296,28 +329,39 @@ export function SigilGutter({
   }
 
   const cell = gridCell ?? DEFAULTS.gridCell;
-  const patternCss = showGrid ? patternStyles(pattern, cell, side) : null;
+  const patternCss = showGrid ? getSigilPatternStyles(pattern, cell, side) : null;
+
+  if (!patternCss) {
+    return <div aria-hidden="true" />;
+  }
 
   return (
     <div
       aria-hidden="true"
       data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
       style={{
-        borderLeft: "var(--s-gutter-border, 1px solid) var(--s-border)",
-        borderRight: "var(--s-gutter-border, 1px solid) var(--s-border)",
+        borderLeft: STRUCTURAL_BORDER,
+        borderRight: STRUCTURAL_BORDER,
         background: "var(--s-background)",
       }}
     >
-      {patternCss && (
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: patternCss.backgroundImage,
-            backgroundSize: patternCss.backgroundSize,
-            ...(patternCss.backgroundPosition ? { backgroundPosition: patternCss.backgroundPosition } : {}),
-          }}
-        />
-      )}
+      <div
+        className="absolute inset-0"
+        style={patternCss.isMask ? {
+          backgroundColor: COLOR,
+          WebkitMaskImage: patternCss.backgroundImage,
+          WebkitMaskSize: patternCss.backgroundSize,
+          WebkitMaskRepeat: "repeat",
+          maskImage: patternCss.backgroundImage,
+          maskSize: patternCss.backgroundSize,
+          maskRepeat: "repeat",
+          ...(patternCss.backgroundPosition ? { WebkitMaskPosition: patternCss.backgroundPosition, maskPosition: patternCss.backgroundPosition } : {}),
+        } : {
+          backgroundImage: patternCss.backgroundImage,
+          backgroundSize: patternCss.backgroundSize,
+          ...(patternCss.backgroundPosition ? { backgroundPosition: patternCss.backgroundPosition } : {}),
+        }}
+      />
     </div>
   );
 }
@@ -363,6 +407,8 @@ export function SigilPageGrid({
     contentMax,
     gridCell,
     crossStroke,
+    gutterPattern,
+    marginPattern,
     edgeless,
   };
 
@@ -372,40 +418,47 @@ export function SigilPageGrid({
 
   const marginCell = gridCell;
   const marginCssL = !edgeless && showMarginLines
-    ? patternStyles(marginPattern, marginCell, "left")
+    ? getSigilPatternStyles(marginPattern, marginCell, "left")
     : null;
   const marginCssR = !edgeless && showMarginLines
-    ? patternStyles(marginPattern, marginCell, "right")
+    ? getSigilPatternStyles(marginPattern, marginCell, "right")
     : null;
 
   const gutterVisible = !edgeless && effectiveRailGap > 0;
 
-  const marginBorderVal = !edgeless && marginBorder && !gutterVisible
-    ? `${marginBorder} var(--s-border)`
-    : undefined;
+  function buildMarginStyle(css: SigilPatternStyles | null, innerEdge: "Right" | "Left"): CSSProperties {
+    const base: CSSProperties = { backgroundColor: "var(--s-background)" };
+    if (css) {
+      if (css.isMask) {
+        Object.assign(base, {
+          backgroundColor: COLOR,
+          WebkitMaskImage: css.backgroundImage,
+          WebkitMaskSize: css.backgroundSize,
+          WebkitMaskRepeat: "repeat",
+          maskImage: css.backgroundImage,
+          maskSize: css.backgroundSize,
+          maskRepeat: "repeat" as const,
+          ...(css.backgroundPosition ? { WebkitMaskPosition: css.backgroundPosition, maskPosition: css.backgroundPosition } : {}),
+        });
+      } else {
+        Object.assign(base, {
+          backgroundImage: css.backgroundImage,
+          backgroundSize: css.backgroundSize,
+          ...(css.backgroundPosition ? { backgroundPosition: css.backgroundPosition } : {}),
+        });
+      }
+    }
+    if (!edgeless && !gutterVisible) {
+      const prop = `border${innerEdge}` as keyof CSSProperties;
+      Object.assign(base, {
+        [prop]: marginBorder ?? "var(--s-margin-border, none)",
+      });
+    }
+    return base;
+  }
 
-  const marginStyleL: CSSProperties = {
-    backgroundColor: "var(--s-background)",
-    ...(marginCssL
-      ? {
-          backgroundImage: marginCssL.backgroundImage,
-          backgroundSize: marginCssL.backgroundSize,
-          ...(marginCssL.backgroundPosition ? { backgroundPosition: marginCssL.backgroundPosition } : {}),
-        }
-      : {}),
-    ...(marginBorderVal ? { borderRight: marginBorderVal } : {}),
-  };
-  const marginStyleR: CSSProperties = {
-    backgroundColor: "var(--s-background)",
-    ...(marginCssR
-      ? {
-          backgroundImage: marginCssR.backgroundImage,
-          backgroundSize: marginCssR.backgroundSize,
-          ...(marginCssR.backgroundPosition ? { backgroundPosition: marginCssR.backgroundPosition } : {}),
-        }
-      : {}),
-    ...(marginBorderVal ? { borderLeft: marginBorderVal } : {}),
-  };
+  const marginStyleL = buildMarginStyle(marginCssL, "Right");
+  const marginStyleR = buildMarginStyle(marginCssR, "Left");
 
   return (
     <PageGridContext.Provider value={config}>

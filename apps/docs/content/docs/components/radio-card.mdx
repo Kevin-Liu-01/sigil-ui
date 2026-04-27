@@ -1,0 +1,32 @@
+---
+title: RadioCard
+description: RadioCard is a token-driven Sigil component in the forms and inputs group.
+---
+
+## Import
+
+```tsx
+import { RadioCard } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <RadioGroup defaultValue="pro"><RadioCard value="pro" title="Pro" description="Best for teams." /></RadioGroup>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<RadioGroup defaultValue="pro"><RadioCard value="pro" title="Pro" description="Best for teams." /></RadioGroup>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add radio-card
+```
+
+## Token Integration
+
+RadioCard follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

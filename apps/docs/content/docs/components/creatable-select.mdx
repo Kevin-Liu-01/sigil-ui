@@ -1,0 +1,32 @@
+---
+title: CreatableSelect
+description: CreatableSelect is a token-driven Sigil component in the forms and inputs group.
+---
+
+## Import
+
+```tsx
+import { CreatableSelect } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <CreatableSelect options={[{ value: "sigil", label: "Sigil" }]} placeholder="Pick or create" />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<CreatableSelect options={[{ value: "sigil", label: "Sigil" }]} placeholder="Pick or create" />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add creatable-select
+```
+
+## Token Integration
+
+CreatableSelect follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

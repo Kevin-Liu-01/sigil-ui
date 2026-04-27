@@ -4,6 +4,7 @@ import {
   forwardRef,
   useEffect,
   useId,
+  useMemo,
   useState,
   type ComponentPropsWithoutRef,
   type ComponentRef,
@@ -91,24 +92,27 @@ export const DateRangeField = forwardRef<HTMLButtonElement, DateRangeFieldProps>
   );
 });
 
-export interface MultiSelectProps extends Omit<ComponentPropsWithoutRef<"button">, "onChange" | "value"> {
+export interface MultiSelectProps extends Omit<ComponentPropsWithoutRef<"button">, "onChange" | "value" | "defaultValue"> {
   options: ComboboxOption[];
   value?: string[];
+  defaultValue?: string[];
   onValueChange?: (value: string[]) => void;
   placeholder?: string;
 }
 
 export const MultiSelect = forwardRef<HTMLButtonElement, MultiSelectProps>(function MultiSelect(
-  { options, value = [], onValueChange, placeholder = "Select options", className, ...props },
+  { options, value, defaultValue = [], onValueChange, placeholder = "Select options", className, ...props },
   ref,
 ) {
-  const selected = options.filter((option) => value.includes(option.value));
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const currentValue = value ?? internalValue;
+  const selected = options.filter((option) => currentValue.includes(option.value));
   const toggle = (optionValue: string) => {
-    onValueChange?.(
-      value.includes(optionValue)
-        ? value.filter((item) => item !== optionValue)
-        : [...value, optionValue],
-    );
+    const next = currentValue.includes(optionValue)
+      ? currentValue.filter((item) => item !== optionValue)
+      : [...currentValue, optionValue];
+    if (value === undefined) setInternalValue(next);
+    onValueChange?.(next);
   };
   return (
     <Popover>
@@ -141,7 +145,7 @@ export const MultiSelect = forwardRef<HTMLButtonElement, MultiSelectProps>(funct
               "hover:bg-[var(--s-surface)] disabled:opacity-50",
             )}
           >
-            <Checkbox checked={value.includes(option.value)} tabIndex={-1} aria-hidden />
+            <Checkbox checked={currentValue.includes(option.value)} tabIndex={-1} aria-hidden />
             {option.label}
           </button>
         ))}
@@ -157,59 +161,179 @@ export const Autocomplete = Combobox;
 export interface CreatableSelectProps extends AutocompleteProps {
   onCreate?: (value: string) => void;
   createLabel?: string;
+  createPlaceholder?: string;
 }
 
-export function CreatableSelect({ options, onCreate, createLabel = "Create", ...props }: CreatableSelectProps) {
+export function CreatableSelect({
+  options,
+  onCreate,
+  createLabel = "Create",
+  createPlaceholder = "New option…",
+  ...props
+}: CreatableSelectProps) {
   const [items, setItems] = useState(options);
+  const [newValue, setNewValue] = useState("");
+  useEffect(() => setItems(options), [options]);
+  const createOption = () => {
+    const trimmed = newValue.trim();
+    if (!trimmed) return;
+    const option = { value: trimmed, label: trimmed };
+    setItems((prev) => [...prev, option]);
+    setNewValue("");
+    onCreate?.(trimmed);
+  };
   return (
     <div className="grid gap-2">
       <Combobox options={items} {...props} />
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        onClick={() => {
-          const value = window.prompt(`${createLabel}:`);
-          if (!value) return;
-          setItems((prev) => [...prev, { value, label: value }]);
-          onCreate?.(value);
-        }}
-      >
-        {createLabel}
-      </Button>
+      <div className="flex gap-2">
+        <Input
+          value={newValue}
+          onChange={(event) => setNewValue(event.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              event.preventDefault();
+              createOption();
+            }
+          }}
+          placeholder={createPlaceholder}
+        />
+        <Button type="button" variant="outline" size="sm" disabled={!newValue.trim()} onClick={createOption}>
+          {createLabel}
+        </Button>
+      </div>
     </div>
   );
 }
 
 export interface AsyncSelectProps extends Omit<AutocompleteProps, "options"> {
-  loadOptions: (query: string) => Promise<ComboboxOption[]>;
+  loadOptions?: (query: string) => Promise<ComboboxOption[]>;
 }
 
-export function AsyncSelect({ loadOptions, searchPlaceholder = "Search...", ...props }: AsyncSelectProps) {
-  const [options, setOptions] = useState<ComboboxOption[]>([]);
+export function AsyncSelect({
+  loadOptions,
+  value,
+  onValueChange,
+  placeholder = "Select…",
+  searchPlaceholder = "Search…",
+  emptyText = "No results.",
+  className,
+}: AsyncSelectProps) {
+  const fallbackOptions = useMemo<ComboboxOption[]>(
+    () => [
+      { value: "modal", label: "Modal" },
+      { value: "multi-select", label: "MultiSelect" },
+      { value: "status-badge", label: "StatusBadge" },
+    ],
+    [],
+  );
+  const [options, setOptions] = useState<ComboboxOption[]>(fallbackOptions);
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+  const selectedLabel = options.find((option) => option.value === value)?.label ?? "";
   useEffect(() => {
+    if (!loadOptions) {
+      setOptions(
+        fallbackOptions.filter((option) =>
+          option.label.toLowerCase().includes(query.toLowerCase()),
+        ),
+      );
+      return;
+    }
     let active = true;
-    loadOptions("").then((next) => {
+    loadOptions(query).then((next) => {
       if (active) setOptions(next);
     });
     return () => {
       active = false;
     };
-  }, [loadOptions]);
-  return <Combobox options={options} searchPlaceholder={searchPlaceholder} {...props} />;
+  }, [fallbackOptions, loadOptions, query]);
+
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          className={cn("w-full justify-between font-normal", !selectedLabel && "text-[var(--s-text-muted)]", className)}
+        >
+          {selectedLabel || placeholder}
+          <span aria-hidden>⌄</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-[var(--radix-popover-trigger-width)] p-2">
+        <Input
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
+          placeholder={searchPlaceholder}
+          className="mb-2"
+        />
+        <div className="grid max-h-56 gap-1 overflow-y-auto">
+          {options.length === 0 ? (
+            <div className="px-2 py-3 text-sm text-[var(--s-text-muted)]">{emptyText}</div>
+          ) : options.map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              disabled={option.disabled}
+              onClick={() => {
+                onValueChange?.(option.value);
+                setOpen(false);
+              }}
+              className={cn(
+                "rounded-[var(--s-radius-sm,4px)] px-2 py-2 text-left text-sm",
+                "hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+                option.value === value && "bg-[var(--s-surface)] font-medium",
+              )}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
 }
 
-export const SegmentedTabs = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function SegmentedTabs(
-  { className, ...props },
+export interface SegmentedTabsProps extends HTMLAttributes<HTMLDivElement> {
+  value?: string;
+  defaultValue?: string;
+  onValueChange?: (value: string) => void;
+  items?: Array<{ value: string; label: ReactNode }>;
+}
+
+export const SegmentedTabs = forwardRef<HTMLDivElement, SegmentedTabsProps>(function SegmentedTabs(
+  { value, defaultValue, onValueChange, items, children, className, ...props },
   ref,
 ) {
+  const [internalValue, setInternalValue] = useState(defaultValue ?? items?.[0]?.value);
+  const currentValue = value ?? internalValue;
+  const handleChange = (next: string) => {
+    if (value === undefined) setInternalValue(next);
+    onValueChange?.(next);
+  };
   return (
     <div
       ref={ref}
       data-slot="segmented-tabs"
+      role="tablist"
       className={cn("inline-flex rounded-[var(--s-radius-md,8px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-1", className)}
       {...props}
-    />
+    >
+      {items
+        ? items.map((item) => (
+          <button
+            key={item.value}
+            type="button"
+            role="tab"
+            aria-selected={item.value === currentValue}
+            onClick={() => handleChange(item.value)}
+            className="rounded-[var(--s-radius-sm,4px)] px-3 py-1 text-sm text-[var(--s-text-muted)] aria-selected:bg-[var(--s-background)] aria-selected:text-[var(--s-text)]"
+          >
+            {item.label}
+          </button>
+        ))
+        : children}
+    </div>
   );
 });
 
@@ -292,7 +416,7 @@ export const AvatarUpload = forwardRef<HTMLInputElement, AvatarUploadProps>(func
 
 export const ColorField = forwardRef<HTMLInputElement, Omit<InputHTMLAttributes<HTMLInputElement>, "type">>(
   function ColorField({ className, ...props }, ref) {
-    return <Input ref={ref} type="color" className={cn("h-10 p-1", className)} {...props} />;
+    return <Input ref={ref} type="color" className={cn("h-[var(--s-input-height,40px)] p-1", className)} {...props} />;
   },
 );
 
@@ -313,18 +437,27 @@ export function ComboboxField({ label, description, ...props }: ComboboxFieldPro
 
 export interface CheckboxCardProps extends Omit<ComponentPropsWithoutRef<"label">, "title"> {
   checked?: boolean;
+  defaultChecked?: boolean;
+  onCheckedChange?: (checked: boolean) => void;
   title?: ReactNode;
   description?: ReactNode;
 }
 
 export const CheckboxCard = forwardRef<HTMLLabelElement, CheckboxCardProps>(function CheckboxCard(
-  { checked, title, description, children, className, ...props },
+  { checked, defaultChecked, onCheckedChange, title, description, children, className, ...props },
   ref,
 ) {
+  const [internalChecked, setInternalChecked] = useState(Boolean(defaultChecked));
+  const isChecked = checked ?? internalChecked;
+  const toggle = () => {
+    const next = !isChecked;
+    if (checked === undefined) setInternalChecked(next);
+    onCheckedChange?.(next);
+  };
   return (
     <label
       ref={ref}
-      data-checked={checked || undefined}
+      data-checked={isChecked || undefined}
       className={cn(
         "flex cursor-pointer gap-3 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-background)] p-4",
         "data-[checked=true]:border-[var(--s-primary)] data-[checked=true]:bg-[color-mix(in_oklch,var(--s-primary)_8%,transparent)]",
@@ -332,12 +465,17 @@ export const CheckboxCard = forwardRef<HTMLLabelElement, CheckboxCardProps>(func
       )}
       {...props}
     >
-      <Checkbox checked={checked} tabIndex={-1} aria-hidden />
+      <Checkbox checked={isChecked} onCheckedChange={(next) => {
+        const bool = Boolean(next);
+        if (checked === undefined) setInternalChecked(bool);
+        onCheckedChange?.(bool);
+      }} onClick={(event) => event.stopPropagation()} />
       <span className="grid gap-1">
         {title && <span className="font-medium text-[var(--s-text)]">{title}</span>}
         {description && <span className="text-sm text-[var(--s-text-muted)]">{description}</span>}
         {children}
       </span>
+      <input type="checkbox" checked={isChecked} onChange={toggle} className="sr-only" />
     </label>
   );
 });

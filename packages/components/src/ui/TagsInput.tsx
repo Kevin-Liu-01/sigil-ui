@@ -29,7 +29,7 @@ export const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(function Tag
 
   const update = useCallback(
     (next: string[]) => {
-      if (!controlledValue) setInternalValue(next);
+      if (controlledValue === undefined) setInternalValue(next);
       onChange?.(next);
     },
     [controlledValue, onChange],

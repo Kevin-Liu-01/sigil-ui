@@ -30,9 +30,9 @@ export const mrkrPreset: SigilPreset = {
       "text-subtle": { light: "#958f8b", dark: "#8a847e" },
       "text-disabled": { light: "#d6d3d1", dark: "#57534e" },
       "text-inverse": { light: "#fefce8", dark: "#1c1917" },
-      border: { light: "#928f8d", dark: "#696561" },
-      "border-muted": { light: "#e7e5e4", dark: "#3d3830" },
-      "border-strong": { light: "#958f8b", dark: "#696560" },
+      border: { light: "#928f8d", dark: "oklch(0.380 0.008 68)" },
+      "border-muted": { light: "#c1bebd", dark: "oklch(0.320 0.011 78)" },
+      "border-strong": { light: "#958f8b", dark: "oklch(0.465 0.009 74)" },
       "border-interactive": { light: "#eab308", dark: "#eab308" },
       success: "#16a34a",
       "success-muted": "#16a34a20",
@@ -318,6 +318,8 @@ export const mrkrPreset: SigilPreset = {
       "show-label": true,
     },
     gridVisuals: {
+      "line-color": "var(--s-border-muted)",
+      "line-width": "1px",
       "show-lines": false,
     },
     cursor: {

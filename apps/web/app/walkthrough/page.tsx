@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
+import { OklchText } from "@/components/oklch-text";
 import { SigilFrame } from "@/components/landing/sigil-frame";
 import { Terminal } from "@/components/landing/terminal";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
@@ -362,11 +363,11 @@ export default function WalkthroughPage() {
               style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
             >
               <div className="font-semibold text-[var(--s-text)]">## Colors</div>
-              <div className="text-[var(--s-text-muted)]">primary: <span className="text-[var(--s-primary)]">oklch(0.53 0.21 275)</span></div>
-              <div className="text-[var(--s-text-muted)]">primary-hover: oklch(0.48 0.21 275)</div>
-              <div className="text-[var(--s-text-muted)]">background: oklch(0.13 0.02 260)</div>
-              <div className="text-[var(--s-text-muted)]">surface: oklch(0.17 0.02 260)</div>
-              <div className="text-[var(--s-text-muted)]">border: oklch(0.25 0.02 260)</div>
+              <div className="text-[var(--s-text-muted)]">primary: <span className="text-[var(--s-primary)]"><OklchText>{"oklch(0.53 0.21 275)"}</OklchText></span></div>
+              <div className="text-[var(--s-text-muted)]"><OklchText>{"primary-hover: oklch(0.48 0.21 275)"}</OklchText></div>
+              <div className="text-[var(--s-text-muted)]"><OklchText>{"background: oklch(0.13 0.02 260)"}</OklchText></div>
+              <div className="text-[var(--s-text-muted)]"><OklchText>{"surface: oklch(0.17 0.02 260)"}</OklchText></div>
+              <div className="text-[var(--s-text-muted)]"><OklchText>{"border: oklch(0.25 0.02 260)"}</OklchText></div>
               <div>&nbsp;</div>
               <div className="font-semibold text-[var(--s-text)]">## Typography</div>
               <div className="text-[var(--s-text-muted)]">font-display: <span className="text-[var(--s-primary)]">{'"Inter", system-ui, sans-serif'}</span></div>

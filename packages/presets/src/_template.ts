@@ -51,9 +51,9 @@ export const _templatePreset: SigilPreset = {
       "text-disabled": { light: "oklch(0.72 0.004 280)", dark: "oklch(0.38 0.005 260)" },
       "text-inverse": { light: "oklch(0.97 0.003 260)", dark: "oklch(0.12 0.01 280)" },
 
-      border: { light: "oklch(0.65 0.004 280)", dark: "oklch(0.47 0.008 280)" },
-      "border-muted": { light: "oklch(0.92 0.003 280)", dark: "oklch(0.24 0.006 280)" },
-      "border-strong": { light: "oklch(0.65 0.006 280)", dark: "oklch(0.47 0.01 280)" },
+      border: { light: "oklch(0.65 0.004 280)", dark: "oklch(0.260 0.008 280)" },
+      "border-muted": { light: "oklch(0.82 0.006 280)", dark: "oklch(0.200 0.008 280)" },
+      "border-strong": { light: "oklch(0.65 0.006 280)", dark: "oklch(0.340 0.010 280)" },
       "border-interactive": { light: "oklch(0.65 0.18 275)", dark: "oklch(0.65 0.18 275)" },
 
       success: "oklch(0.62 0.19 155)",
@@ -200,8 +200,8 @@ export const _templatePreset: SigilPreset = {
       "card-radius": "10px",
       "gutter-pattern": "grid",
       "margin-pattern": "plus",
-      "gutter-border": "1px solid",
-      "margin-border": "1px solid",
+      "gutter-border": "1px solid var(--s-border-muted)",
+      "margin-border": "1px solid var(--s-border-muted)",
       "gutter-visible": true,
     },
 
@@ -503,7 +503,7 @@ export const _templatePreset: SigilPreset = {
     dividers: {
       style: "solid",
       width: "1px",
-      color: "var(--s-border)",
+      color: "var(--s-border-muted)",
       spacing: "0px",
       "show-cross": true,
       "show-label": false,

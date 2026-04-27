@@ -1,0 +1,32 @@
+---
+title: SidebarNav
+description: SidebarNav is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { SidebarNav } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <SidebarNav><a href="#">Overview</a><a href="#">Components</a></SidebarNav>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<SidebarNav><a href="#">Overview</a><a href="#">Components</a></SidebarNav>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add sidebar-nav
+```
+
+## Token Integration
+
+SidebarNav follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

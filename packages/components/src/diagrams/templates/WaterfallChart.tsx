@@ -118,7 +118,7 @@ export const WaterfallChart = forwardRef<HTMLDivElement, WaterfallChartProps>(
                         }}
                       >
                         {segPct > 15 && (
-                          <span className="absolute inset-0 hidden items-center justify-center whitespace-nowrap font-mono text-[10px] font-semibold text-[var(--s-primary-contrast)] drop-shadow-[0_1px_2px_oklch(0_0_0_/_0.4)] sm:flex">
+                          <span className="absolute inset-0 hidden items-center justify-center whitespace-nowrap font-mono text-[10px] font-semibold text-[var(--s-primary-contrast)] drop-shadow-[var(--s-shadow-sm,0_1px_2px_rgb(0_0_0_/_0.4))] sm:flex">
                             {step.label}
                           </span>
                         )}

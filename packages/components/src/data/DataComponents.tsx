@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import { forwardRef, useId, type ForwardedRef, type HTMLAttributes, type ReactElement, type ReactNode, type Ref } from "react";
 import { Button } from "../ui/Button";
 import { Checkbox } from "../ui/Checkbox";
 import { Empty } from "../ui/Empty";
@@ -242,7 +242,7 @@ export const BulkActions = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
 });
 
 export const EmptyTable = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { message?: string }>(
-  function EmptyTable({ message = "No rows found.", className, ...props }, ref) {
+  function EmptyTable({ message = "No rows found.", className, title: _title, ...props }, ref) {
     return <Empty ref={ref} className={className} title={message} {...props} />;
   },
 );
@@ -263,10 +263,43 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(function Listbox
   { options, value, onValueChange, className, ...props },
   ref,
 ) {
+  const listboxId = useId();
   return (
-    <div ref={ref} role="listbox" className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-1", className)} {...props}>
+    <div
+      ref={ref}
+      id={listboxId}
+      role="listbox"
+      tabIndex={0}
+      aria-activedescendant={value ? `${listboxId}-${value}` : undefined}
+      onKeyDown={(event) => {
+        const enabled = options.filter((option) => !option.disabled);
+        const currentIndex = enabled.findIndex((option) => option.value === value);
+        const move = (delta: number) => {
+          const next = enabled[Math.max(0, Math.min(enabled.length - 1, currentIndex + delta))];
+          if (next) onValueChange?.(next.value);
+        };
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          move(1);
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          move(-1);
+        }
+      }}
+      className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]", className)}
+      {...props}
+    >
       {options.map((option) => (
-        <button key={option.value} type="button" role="option" aria-selected={option.value === value} disabled={option.disabled} onClick={() => onValueChange?.(option.value)} className="rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-left text-sm hover:bg-[var(--s-surface)] aria-selected:bg-[var(--s-primary)] aria-selected:text-[var(--s-primary-contrast)]">
+        <button
+          key={option.value}
+          id={`${listboxId}-${option.value}`}
+          type="button"
+          role="option"
+          aria-selected={option.value === value}
+          disabled={option.disabled}
+          onClick={() => onValueChange?.(option.value)}
+          className="rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-left text-sm hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] aria-selected:bg-[var(--s-primary)] aria-selected:text-[var(--s-primary-contrast)]"
+        >
           {option.label}
         </button>
       ))}
@@ -276,20 +309,20 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(function Listbox
 
 export interface VirtualListProps<T> extends HTMLAttributes<HTMLDivElement> {
   items: T[];
-  renderItem: (item: T, index: number) => ReactNode;
+  renderItem?: (item: T, index: number) => ReactNode;
 }
 
-function VirtualListInner<T>({ items, renderItem, className, ...props }: VirtualListProps<T>, ref: React.ForwardedRef<HTMLDivElement>) {
+function VirtualListInner<T>({ items, renderItem, className, ...props }: VirtualListProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   return (
-    <div ref={ref} className={cn("max-h-80 overflow-auto", className)} {...props}>
-      {items.map((item, index) => renderItem(item, index))}
+    <div ref={ref} className={cn("max-h-80 overflow-auto [content-visibility:auto]", className)} {...props}>
+      {items.map((item, index) => renderItem ? renderItem(item, index) : <div key={index} className="border-b border-[var(--s-border)] px-3 py-2 text-sm">{item as ReactNode}</div>)}
     </div>
   );
 }
 
 export const VirtualList = forwardRef(VirtualListInner) as <T>(
-  props: VirtualListProps<T> & { ref?: React.Ref<HTMLDivElement> },
-) => React.ReactElement | null;
+  props: VirtualListProps<T> & { ref?: Ref<HTMLDivElement> },
+) => ReactElement | null;
 
 export interface TreeTableRow {
   id: string;
@@ -313,7 +346,7 @@ export const TreeTable = forwardRef<HTMLTableElement, TreeTableProps>(function T
 ) {
   const flatRows = flattenRows(rows);
   return (
-    <Table ref={ref} className={className} {...props}>
+    <Table ref={ref} role="treegrid" className={className} {...props}>
       {headers.length > 0 && (
         <TableHeader>
           <TableRow>
@@ -324,8 +357,8 @@ export const TreeTable = forwardRef<HTMLTableElement, TreeTableProps>(function T
       )}
       <TableBody>
         {flatRows.map((row) => (
-          <TableRow key={row.id}>
-            <TableCell style={{ paddingLeft: `${(row.depth + 1) * 16}px` }}>{row.label}</TableCell>
+          <TableRow key={row.id} aria-level={row.depth + 1}>
+            <TableCell style={{ paddingLeft: `calc(var(--s-spacing-4,1rem) * ${row.depth + 1})` }}>{row.label}</TableCell>
             {row.values?.map((value, index) => <TableCell key={index}>{value}</TableCell>)}
           </TableRow>
         ))}

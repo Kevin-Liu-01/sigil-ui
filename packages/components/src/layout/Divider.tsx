@@ -1,15 +1,20 @@
 "use client";
 
 import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import type { GutterPattern } from "@sigil-ui/tokens";
 import { cn } from "../utils";
-import { usePageGridConfig } from "./SigilPageGrid";
+import {
+  getSigilPatternStyles,
+  usePageGridConfig,
+  type SigilPatternStyles,
+} from "./SigilPageGrid";
 
-export type DividerPattern = "vertical" | "diagonal";
+export type DividerPattern = GutterPattern | "vertical";
 
 export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   /** Divider orientation. @default "horizontal" */
   orientation?: "horizontal" | "vertical";
-  /** Pattern variant filling the divider band. @default "vertical" */
+  /** Pattern variant filling the divider band. Defaults to the surrounding page grid pattern. */
   pattern?: DividerPattern;
   /** Band thickness. @default "md" */
   size?: "xs" | "sm" | "md" | "lg" | "xl";
@@ -37,32 +42,32 @@ const sizeMap: Record<NonNullable<DividerProps["size"]>, number> = {
   xl: 96,
 };
 
-const COLOR = "var(--s-border-muted)";
+const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
 const EDGE_FADE = 64;
 
-function getPatternCSS(
-  variant: DividerPattern,
+function getLegacyVerticalPatternCSS(
   cell: number,
   scale: number,
-): React.CSSProperties {
+): SigilPatternStyles {
   const s = cell * scale;
-  const C = COLOR;
+  return {
+    backgroundImage: `linear-gradient(to right, ${COLOR} 1px, transparent 1px)`,
+    backgroundSize: `${s}px 100%`,
+  };
+}
 
-  switch (variant) {
-    case "vertical":
-      return {
-        backgroundImage: `linear-gradient(to right, ${C} 1px, transparent 1px)`,
-        backgroundSize: `${s}px 100%`,
-      };
-    case "diagonal": {
-      const step = Math.max(8, s / 3);
-      return {
-        backgroundImage: `repeating-linear-gradient(45deg, transparent 0 ${step - 1}px, ${C} ${step - 1}px ${step}px)`,
-      };
-    }
-    default:
-      return {};
+function resolveDividerPattern(
+  pattern: DividerPattern | undefined,
+  gridConfig: ReturnType<typeof usePageGridConfig>,
+): DividerPattern {
+  if (pattern) return pattern;
+  if (gridConfig?.marginPattern && gridConfig.marginPattern !== "none") {
+    return gridConfig.marginPattern;
   }
+  if (gridConfig?.gutterPattern && gridConfig.gutterPattern !== "none") {
+    return gridConfig.gutterPattern;
+  }
+  return "horizontal";
 }
 
 function CrossMark() {
@@ -104,7 +109,7 @@ function getMaskImage(orientation: NonNullable<DividerProps["orientation"]>) {
 export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider(
   {
     orientation = "horizontal",
-    pattern = "vertical",
+    pattern,
     size = "md",
     scale = 1,
     opacity = 1,
@@ -124,6 +129,16 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   const thickness = sizeMap[size];
   const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
+  const resolvedPattern = resolveDividerPattern(pattern, gridConfig);
+  const patternCss =
+    resolvedPattern === "vertical"
+      ? getLegacyVerticalPatternCSS(cell, scale)
+      : getSigilPatternStyles(resolvedPattern, cell * scale);
+  const legacyPatternOffset = isHorizontal
+    ? `${(cell * scale) / 2}px 0`
+    : `0 ${(cell * scale) / 2}px`;
+  const patternPosition = patternCss?.backgroundPosition
+    ?? (resolvedPattern === "vertical" ? legacyPatternOffset : undefined);
 
   return (
     <div
@@ -147,13 +162,13 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
         <>
           <div
             className={cn(
-              "absolute bg-[var(--s-border-muted)]",
+              "absolute bg-[var(--s-grid-line-color,var(--s-border-muted))]",
               isHorizontal ? "inset-x-0 top-0 h-px" : "inset-y-0 left-0 w-px",
             )}
           />
           <div
             className={cn(
-              "absolute bg-[var(--s-border-muted)]",
+              "absolute bg-[var(--s-grid-line-color,var(--s-border-muted))]",
               isHorizontal ? "inset-x-0 bottom-0 h-px" : "inset-y-0 right-0 w-px",
             )}
           />
@@ -163,9 +178,29 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
       <div
         className="absolute inset-0"
         style={{
-          ...getPatternCSS(pattern, cell, scale),
+          ...(patternCss?.isMask
+            ? {
+              backgroundColor: COLOR,
+              WebkitMaskImage: patternCss.backgroundImage,
+              WebkitMaskSize: patternCss.backgroundSize,
+              WebkitMaskRepeat: "repeat",
+              maskImage: patternCss.backgroundImage,
+              maskSize: patternCss.backgroundSize,
+              maskRepeat: "repeat",
+              ...(patternPosition
+                ? {
+                  WebkitMaskPosition: patternPosition,
+                  maskPosition: patternPosition,
+                }
+                : {}),
+            }
+            : {
+              backgroundImage: patternCss?.backgroundImage,
+              backgroundSize: patternCss?.backgroundSize,
+              ...(patternPosition ? { backgroundPosition: patternPosition } : {}),
+            }),
           opacity,
-          ...(fadeEdges
+          ...(fadeEdges && !patternCss?.isMask
             ? {
               WebkitMaskImage: maskImage,
               maskImage,

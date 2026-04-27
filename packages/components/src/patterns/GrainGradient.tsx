@@ -20,7 +20,7 @@ const TINT_STYLES: Record<GrainTint, React.CSSProperties | undefined> = {
   },
   warm: {
     backgroundImage:
-      "radial-gradient(ellipse at 50% 40%, oklch(0.7 0.1 60 / 0.10) 0%, transparent 70%)",
+      "radial-gradient(ellipse at 50% 40%, oklch(from var(--s-warning, oklch(0.7 0.1 60)) l c h / 0.10) 0%, transparent 70%)",
   },
   neutral: {
     backgroundImage:

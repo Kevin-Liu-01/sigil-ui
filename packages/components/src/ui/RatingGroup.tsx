@@ -27,7 +27,7 @@ export const RatingGroup = forwardRef<HTMLDivElement, RatingGroupProps>(function
   const update = (next: number) => {
     if (disabled) return;
     play("tap");
-    if (!controlledValue) setInternalValue(next);
+    if (controlledValue === undefined) setInternalValue(next);
     onChange?.(next);
   };
 
@@ -48,7 +48,7 @@ export const RatingGroup = forwardRef<HTMLDivElement, RatingGroupProps>(function
             key={val}
             type="button"
             role="radio"
-            aria-checked={val <= rating}
+            aria-checked={val === rating}
             aria-label={`${val} star${val !== 1 ? "s" : ""}`}
             disabled={disabled}
             onClick={() => update(val)}

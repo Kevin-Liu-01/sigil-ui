@@ -342,7 +342,7 @@ export const defaultPreset: SigilPreset = {
     dividers: {
       style: "solid",
       width: "1px",
-      color: "var(--s-border)",
+      color: "var(--s-border-muted)",
       spacing: "0px",
       "show-cross": false,
       "show-label": false,

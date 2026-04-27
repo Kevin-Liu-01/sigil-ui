@@ -38,21 +38,31 @@ export function SigilFrame({ children }: { children: ReactNode }) {
       || (gutterPattern === "none" && marginPattern === "none" && railGap === 0);
   } catch { /* no provider */ }
 
+  const effectiveContentMax = isEdgeless ? Math.max(contentMax, 1400) : contentMax;
+
+  const frame = (
+    <SigilFrameBase
+      showGutterGrid={!isEdgeless}
+      showMarginLines={!isEdgeless}
+      gutterPattern={gutterPattern}
+      marginPattern={marginPattern}
+      marginBorder={marginBorder}
+      contentMax={effectiveContentMax}
+      railGap={railGap}
+      gridCell={gridCell}
+      crossStroke={crossStroke}
+    >
+      {children}
+    </SigilFrameBase>
+  );
+
   return (
     <EdgelessContext.Provider value={isEdgeless}>
-      <SigilFrameBase
-        showGutterGrid={!isEdgeless}
-        showMarginLines={!isEdgeless}
-        gutterPattern={gutterPattern}
-        marginPattern={marginPattern}
-        marginBorder={marginBorder}
-        contentMax={contentMax}
-        railGap={railGap}
-        gridCell={gridCell}
-        crossStroke={crossStroke}
-      >
-        {children}
-      </SigilFrameBase>
+      {isEdgeless ? (
+        <div style={{ "--s-content-max": `${effectiveContentMax}px` } as React.CSSProperties}>
+          {frame}
+        </div>
+      ) : frame}
     </EdgelessContext.Provider>
   );
 }

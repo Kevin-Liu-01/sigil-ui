@@ -1,0 +1,32 @@
+---
+title: RangeSlider
+description: RangeSlider is a token-driven Sigil component in the forms and inputs group.
+---
+
+## Import
+
+```tsx
+import { RangeSlider } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <RangeSlider label="Confidence" valueLabel="72%" defaultValue={[72]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<RangeSlider label="Confidence" valueLabel="72%" defaultValue={[72]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add range-slider
+```
+
+## Token Integration
+
+RangeSlider follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

@@ -14,6 +14,7 @@ import {
   cn,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph } from "./token-visuals";
+import { OklchText } from "../oklch-text";
 
 type TokenKind =
   | "color"
@@ -210,7 +211,7 @@ export function MarkdownEditorPreview({
                   <span>
                     <span style={{ color: active ? "var(--s-primary)" : "var(--s-text)" }}>{tokenLine.name}</span>
                     <span style={{ color: "var(--s-text-muted)" }}>: </span>
-                    <span>{tokenLine.value}</span>
+                    <span><OklchText>{tokenLine.value}</OklchText></span>
                   </span>
                 </button>
               );

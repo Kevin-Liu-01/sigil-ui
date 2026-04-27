@@ -1,0 +1,32 @@
+---
+title: MegaMenu
+description: MegaMenu is a token-driven Sigil component in the overlay and interaction group.
+---
+
+## Import
+
+```tsx
+import { MegaMenu } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MegaMenu><Card><CardHeader><CardTitle>Platform</CardTitle></CardHeader></Card><Card><CardHeader><CardTitle>Components</CardTitle></CardHeader></Card><Card><CardHeader><CardTitle>Docs</CardTitle></CardHeader></Card></MegaMenu>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MegaMenu><Card><CardHeader><CardTitle>Platform</CardTitle></CardHeader></Card><Card><CardHeader><CardTitle>Components</CardTitle></CardHeader></Card><Card><CardHeader><CardTitle>Docs</CardTitle></CardHeader></Card></MegaMenu>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add mega-menu
+```
+
+## Token Integration
+
+MegaMenu follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

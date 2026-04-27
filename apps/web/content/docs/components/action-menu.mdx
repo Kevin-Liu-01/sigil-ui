@@ -1,0 +1,32 @@
+---
+title: ActionMenu
+description: ActionMenu is a token-driven Sigil component in the overlay and interaction group.
+---
+
+## Import
+
+```tsx
+import { ActionMenu } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ActionMenu trigger={<Button variant="outline">Actions</Button>} items={[{ label: "Copy" }, { label: "Duplicate" }, { label: "Archive" }]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ActionMenu trigger={<Button variant="outline">Actions</Button>} items={[{ label: "Copy" }, { label: "Duplicate" }, { label: "Archive" }]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add action-menu
+```
+
+## Token Integration
+
+ActionMenu follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

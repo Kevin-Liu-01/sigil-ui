@@ -31,9 +31,9 @@ export const brassPreset: SigilPreset = {
       "text-subtle": { light: "oklch(0.65 0.01 50)", dark: "oklch(0.52 0.006 80)" },
       "text-disabled": { light: "oklch(0.75 0.008 50)", dark: "oklch(0.35 0.005 80)" },
       "text-inverse": { light: "oklch(0.96 0.008 85)", dark: "oklch(0.14 0.02 55)" },
-      border: { light: "oklch(0.65 0.015 75)", dark: "oklch(0.48 0.015 60)" },
-      "border-muted": { light: "oklch(0.91 0.01 75)", dark: "oklch(0.26 0.012 60)" },
-      "border-strong": { light: "oklch(0.65 0.02 75)", dark: "oklch(0.48 0.018 60)" },
+      border: { light: "oklch(0.65 0.015 75)", dark: "oklch(0.280 0.015 60)" },
+      "border-muted": { light: "oklch(0.82 0.010 75)", dark: "oklch(0.220 0.012 60)" },
+      "border-strong": { light: "oklch(0.65 0.02 75)", dark: "oklch(0.360 0.018 60)" },
       "border-interactive": { light: "oklch(0.58 0.14 75)", dark: "oklch(0.62 0.14 75)" },
       success: "oklch(0.63 0.16 155)",
       "success-muted": "oklch(0.65 0.05 155)",
@@ -140,7 +140,7 @@ export const brassPreset: SigilPreset = {
       "card-radius": "10px",
       "gutter-pattern": "zigzag",
       "margin-pattern": "horizontal",
-      "margin-border": "1px solid",
+      "margin-border": "1px solid var(--s-border-muted)",
     },
     radius: {
       none: "0px",
@@ -324,6 +324,8 @@ export const brassPreset: SigilPreset = {
       ornament: "diamond",
     },
     gridVisuals: {
+      "line-color": "var(--s-border-muted)",
+      "line-width": "1px",
       "show-lines": false,
     },
     cursor: {

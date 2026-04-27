@@ -1,0 +1,32 @@
+---
+title: PresenceAvatar
+description: PresenceAvatar is a token-driven Sigil component in the feedback and status group.
+---
+
+## Import
+
+```tsx
+import { PresenceAvatar } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <PresenceAvatar fallback="KL" status="online" />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<PresenceAvatar fallback="KL" status="online" />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add presence-avatar
+```
+
+## Token Integration
+
+PresenceAvatar follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

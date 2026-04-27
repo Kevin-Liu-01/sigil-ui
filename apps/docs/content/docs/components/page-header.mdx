@@ -1,0 +1,32 @@
+---
+title: PageHeader
+description: PageHeader is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { PageHeader } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <PageHeader title="Page title" description="A page-level heading block." />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<PageHeader title="Page title" description="A page-level heading block." />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add page-header
+```
+
+## Token Integration
+
+PageHeader follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

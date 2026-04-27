@@ -1,0 +1,32 @@
+---
+title: ScrollSpy
+description: ScrollSpy is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { ScrollSpy } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ScrollSpy items={[{ href: "#preview", label: "Preview" }, { href: "#usage", label: "Usage" }]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ScrollSpy items={[{ href: "#preview", label: "Preview" }, { href: "#usage", label: "Usage" }]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add scroll-spy
+```
+
+## Token Integration
+
+ScrollSpy follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

@@ -31,9 +31,9 @@ export const strataPreset: SigilPreset = {
       "text-subtle": { light: "oklch(0.63 0.01 55)", dark: "oklch(0.52 0.008 70)" },
       "text-disabled": { light: "oklch(0.75 0.008 55)", dark: "oklch(0.35 0.006 70)" },
       "text-inverse": { light: "oklch(0.95 0.005 70)", dark: "oklch(0.15 0.015 55)" },
-      border: { light: "oklch(0.63 0.015 60)", dark: "oklch(0.48 0.015 55)" },
-      "border-muted": { light: "oklch(0.9 0.01 60)", dark: "oklch(0.27 0.012 55)" },
-      "border-strong": { light: "oklch(0.63 0.02 60)", dark: "oklch(0.48 0.018 55)" },
+      border: { light: "oklch(0.63 0.015 60)", dark: "oklch(0.300 0.015 55)" },
+      "border-muted": { light: "oklch(0.80 0.010 60)", dark: "oklch(0.240 0.012 55)" },
+      "border-strong": { light: "oklch(0.63 0.02 60)", dark: "oklch(0.380 0.018 55)" },
       "border-interactive": { light: "oklch(0.5 0.12 65)", dark: "oklch(0.55 0.12 65)" },
       success: "oklch(0.61 0.16 155)",
       "success-muted": "oklch(0.65 0.05 155)",
@@ -140,7 +140,7 @@ export const strataPreset: SigilPreset = {
       "card-radius": "14px",
       "gutter-pattern": "diagonal",
       "margin-pattern": "triangle",
-      "margin-border": "1px solid",
+      "margin-border": "1px solid var(--s-border-muted)",
     },
     radius: {
       none: "0px",
@@ -322,6 +322,8 @@ export const strataPreset: SigilPreset = {
       "background-alt": true,
     },
     gridVisuals: {
+      "line-color": "var(--s-border-muted)",
+      "line-width": "1px",
       "show-lines": false,
     },
     cursor: {

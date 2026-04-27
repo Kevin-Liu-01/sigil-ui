@@ -1,0 +1,32 @@
+---
+title: ChatThread
+description: ChatThread is a token-driven Sigil component in the developer and ai/product ui group.
+---
+
+## Import
+
+```tsx
+import { ChatThread } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ChatThread><ChatMessage role="user">Show me dialogs.</ChatMessage><ChatMessage role="assistant">Use Modal or ConfirmDialog.</ChatMessage></ChatThread>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ChatThread><ChatMessage role="user">Show me dialogs.</ChatMessage><ChatMessage role="assistant">Use Modal or ConfirmDialog.</ChatMessage></ChatThread>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add chat-thread
+```
+
+## Token Integration
+
+ChatThread follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

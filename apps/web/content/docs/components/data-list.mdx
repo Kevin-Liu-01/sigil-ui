@@ -1,0 +1,32 @@
+---
+title: DataList
+description: DataList is a token-driven Sigil component in the data display and tables group.
+---
+
+## Import
+
+```tsx
+import { DataList } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <DataList><DataListItem><span>Modal</span><StatusBadge status="success">Ready</StatusBadge></DataListItem></DataList>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DataList><DataListItem><span>Modal</span><StatusBadge status="success">Ready</StatusBadge></DataListItem></DataList>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add data-list
+```
+
+## Token Integration
+
+DataList follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

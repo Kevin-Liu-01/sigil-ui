@@ -110,6 +110,7 @@ export interface PromptDialogProps extends Omit<ConfirmDialogProps, "onConfirm">
 
 export function PromptDialog({ placeholder, defaultValue = "", onConfirm, ...props }: PromptDialogProps) {
   const [value, setValue] = useState(defaultValue);
+  useEffect(() => setValue(defaultValue), [defaultValue]);
   return (
     <ConfirmDialog
       {...props}
@@ -140,6 +141,7 @@ export function Lightbox({ src, alt, caption, trigger, ...props }: LightboxProps
     <Dialog {...props}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
       <DialogContent className="max-w-5xl p-2">
+        <DialogTitle className="sr-only">{caption ?? alt}</DialogTitle>
         <img src={src} alt={alt} className="max-h-[80vh] w-full rounded-[var(--s-radius-md,8px)] object-contain" />
         {caption && <p className="px-2 pb-2 text-sm text-[var(--s-text-muted)]">{caption}</p>}
       </DialogContent>
@@ -181,7 +183,7 @@ export interface SpotlightItem {
   onSelect?: () => void;
 }
 
-export interface SpotlightProps extends ComponentPropsWithoutRef<typeof CommandDialog> {
+export interface SpotlightProps extends Omit<ComponentPropsWithoutRef<typeof CommandDialog>, "children"> {
   items: SpotlightItem[];
   placeholder?: string;
 }
@@ -237,7 +239,7 @@ export function ActionMenu({ trigger, items, align = "end" }: ActionMenuProps) {
 }
 
 export function OverflowMenu(props: Omit<ActionMenuProps, "trigger"> & { label?: string }) {
-  return <ActionMenu trigger={<Button aria-label={props.label ?? "More actions"} size="icon" variant="ghost">...</Button>} {...props} />;
+  return <ActionMenu trigger={<Button aria-label={props.label ?? "More actions"} size="icon" variant="ghost">⋯</Button>} {...props} />;
 }
 
 export const MegaMenu = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function MegaMenu(
@@ -323,15 +325,17 @@ export interface TourProps extends ComponentPropsWithoutRef<typeof Dialog> {
   step?: number;
   onStepChange?: (step: number) => void;
   finishLabel?: string;
+  trigger?: ReactNode;
 }
 
-export function Tour({ steps, step = 0, onStepChange, finishLabel = "Done", ...props }: TourProps) {
+export function Tour({ steps, step = 0, onStepChange, finishLabel = "Done", trigger, ...props }: TourProps) {
   const current = steps[step];
   if (!current) return null;
   const isLast = step >= steps.length - 1;
   return (
     <Modal
       {...props}
+      trigger={trigger}
       title={current.title}
       description={current.description}
       footer={
@@ -394,12 +398,13 @@ export function HotkeyProvider({ hotkeys, children }: { hotkeys: Hotkey[]; child
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const key = typeof event.key === "string" ? event.key.toLowerCase() : "";
       const pressed = [
         event.metaKey && "meta",
         event.ctrlKey && "ctrl",
         event.altKey && "alt",
         event.shiftKey && "shift",
-        event.key.toLowerCase(),
+        key,
       ].filter(Boolean) as string[];
 
       for (const hotkey of normalized) {
@@ -414,25 +419,40 @@ export function HotkeyProvider({ hotkeys, children }: { hotkeys: Hotkey[]; child
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [normalized]);
 
-  return <HotkeyContext.Provider value={hotkeys}>{children}</HotkeyContext.Provider>;
+  return <HotkeyContext.Provider value={normalized}>{children}</HotkeyContext.Provider>;
 }
 
 export interface ShortcutRecorderProps extends Omit<ButtonProps, "onChange"> {
   value?: string[];
+  defaultValue?: string[];
   onValueChange?: (keys: string[]) => void;
 }
 
 export const ShortcutRecorder = forwardRef<HTMLButtonElement, ShortcutRecorderProps>(function ShortcutRecorder(
-  { value = [], onValueChange, children, ...props },
+  { value, defaultValue = [], onValueChange, children, onClick, ...props },
   ref,
 ) {
+  const [recording, setRecording] = useState(false);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const keysValue = value ?? internalValue;
   return (
     <Button
       ref={ref}
       type="button"
       variant="outline"
+      aria-pressed={recording}
+      {...props}
+      onClick={(event) => {
+        setRecording(true);
+        onClick?.(event);
+      }}
       onKeyDown={(event) => {
+        if (!recording && event.key !== "Enter" && event.key !== " ") return;
         event.preventDefault();
+        if (event.key === "Escape") {
+          setRecording(false);
+          return;
+        }
         const keys = [
           event.metaKey && "Meta",
           event.ctrlKey && "Ctrl",
@@ -440,11 +460,13 @@ export const ShortcutRecorder = forwardRef<HTMLButtonElement, ShortcutRecorderPr
           event.shiftKey && "Shift",
           event.key.length === 1 ? event.key.toUpperCase() : event.key,
         ].filter(Boolean) as string[];
-        onValueChange?.([...new Set(keys)]);
+        const next = [...new Set(keys)];
+        if (value === undefined) setInternalValue(next);
+        onValueChange?.(next);
+        setRecording(false);
       }}
-      {...props}
     >
-      {children ?? (value.length ? value.join(" + ") : "Record shortcut")}
+      {children ?? (recording ? "Press keys…" : keysValue.length ? keysValue.join(" + ") : "Record shortcut")}
     </Button>
   );
 });

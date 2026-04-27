@@ -1,0 +1,32 @@
+---
+title: DescriptionList
+description: DescriptionList is a token-driven Sigil component in the data display and tables group.
+---
+
+## Import
+
+```tsx
+import { DescriptionList } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <DescriptionList items={[{ label: "Package", value: "@sigil-ui/components" }, { label: "Mode", value: "Token-driven" }]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DescriptionList items={[{ label: "Package", value: "@sigil-ui/components" }, { label: "Mode", value: "Token-driven" }]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add description-list
+```
+
+## Token Integration
+
+DescriptionList follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

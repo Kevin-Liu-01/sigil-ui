@@ -78,6 +78,30 @@ import {
   ResizablePanelGroup, ResizablePanel as ResizablePanelComp, ResizableHandle,
   PreviewCard, PreviewCardTrigger, PreviewCardContent,
   GapPixelGrid, GapPixelCell, MonoLabel, BorderStack, AccentCTA, TabularValue, DensityText, FrostedPanel, CardCell,
+  Modal, ConfirmDialog, PromptDialog, ResponsiveDialog, Lightbox, ImagePreview,
+  Spotlight, CommandMenu, ActionMenu, OverflowMenu, MegaMenu, ContextPanel,
+  PopoverForm, FloatingPanel, TooltipGroup, Tour, TourStep, Coachmark,
+  HotkeyProvider, ShortcutRecorder,
+  SearchInput, CurrencyInput, PhoneInput, TimePicker, DateTimePicker, DateRangeField,
+  MultiSelect, Autocomplete, CreatableSelect, AsyncSelect, SegmentedTabs,
+  RangeSlider, DualRangeSlider, FileDropzone, ImageUpload, AvatarUpload, ColorField,
+  ComboboxField, CheckboxCard, RadioCard, SwitchField, SliderField, StepperField,
+  TagsField, CopyInput,
+  StatusBadge, StatusDot, StatusPill, OnlineIndicator, PresenceAvatar,
+  Notification, NotificationList, InlineAlert, Callout, BannerAlert, ErrorState,
+  LoadingState, SuccessState, ProgressSteps, TimelineProgress, ToastAction,
+  ToastPromise, SkeletonCard, SkeletonTable, SpinnerOverlay,
+  DescriptionList, KeyValue, PropertyList, StatCard, MetricGrid, Trend, SparkArea,
+  SparkBar, DataList, DataListItem, DataGrid, DataToolbar, DataFilters,
+  DataPagination, ColumnVisibility, BulkActions, EmptyTable, Listbox, VirtualList,
+  TreeTable,
+  ContainerQuery, SplitPane, Dock, TopBar, BottomBar, MobileNav, SidebarNav,
+  AppHeader, PageHeader, SectionHeader, ContentTabs, AnchorNav, TableOfContents,
+  ScrollSpy, MasonryGrid, MediaCard, ResourceCard, FeatureCard, PricingCard,
+  TestimonialCarousel,
+  CodeTabs, CodePreview, CopyButton, TokenPreview, ThemeSwatch, ThemeSwitcher,
+  PromptInput, ChatMessage, ChatThread, MessageComposer, ActivityTimeline, AuditLog,
+  Changelog, VersionBadge, KeyboardKey,
 } from "@sigil-ui/components";
 import { TechFrame } from "./tech-frame";
 import { FooterLogo } from "./hero-logo-field";
@@ -104,7 +128,7 @@ function createDemoDate(): Date {
 
 const CATEGORIES = [
   "All", "UI", "Layout", "Navigation", "Overlays", "Data",
-  "Forms", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Pretext", "Patterns", "Playbook",
+  "Forms", "Feedback", "Developer", "Marketing", "Sections", "Shapes", "3D", "Diagrams", "Animation", "Pretext", "Patterns", "Playbook",
 ] as const;
 
 const DOC_SECTION_BY_CATEGORY: Record<string, string> = {
@@ -123,6 +147,8 @@ const DOC_SECTION_BY_CATEGORY: Record<string, string> = {
   UI: "components",
   Data: "components",
   Forms: "components",
+  Feedback: "components",
+  Developer: "components",
 };
 
 const DOC_PATH_OVERRIDES: Record<string, string | null> = {
@@ -311,6 +337,57 @@ function AnimatedScrollProgressPreview() {
   );
 }
 
+function SpotlightDemo({ command = false }: { command?: boolean }) {
+  const [open, setOpen] = useState(false);
+  const Palette = command ? CommandMenu : Spotlight;
+  return (
+    <div className="flex items-center gap-2">
+      <Button size="sm" variant="outline" onClick={() => setOpen(true)}>
+        Open
+      </Button>
+      <KeyboardKey>{command ? "⌘P" : "⌘K"}</KeyboardKey>
+      <Palette
+        open={open}
+        onOpenChange={setOpen}
+        items={[
+          { value: "components", label: "Components", description: "Open the component catalog" },
+          { value: "docs", label: "Docs", description: "Search documentation" },
+        ]}
+      />
+    </div>
+  );
+}
+
+function TourDemo() {
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState(0);
+  return (
+    <Tour
+      open={open}
+      onOpenChange={setOpen}
+      step={step}
+      onStepChange={setStep}
+      trigger={<Button size="sm" variant="outline">Start Tour</Button>}
+      steps={[
+        { title: "Inspect", description: "Review the component preview." },
+        { title: "Install", description: "Copy the CLI command from docs." },
+      ]}
+    />
+  );
+}
+
+function HotkeyProviderDemo() {
+  const [count, setCount] = useState(0);
+  return (
+    <HotkeyProvider hotkeys={[{ keys: ["meta", "k"], onTrigger: () => setCount((value) => value + 1) }]}>
+      <div className="flex items-center gap-2">
+        <KeyboardKey>⌘K</KeyboardKey>
+        <span className="text-xs text-[var(--s-text-muted)]">{count} triggers</span>
+      </div>
+    </HotkeyProvider>
+  );
+}
+
 const CELLS: ComponentCell[] = [
   /* ================================================================ */
   /* UI                                                                */
@@ -466,12 +543,12 @@ const CELLS: ComponentCell[] = [
       ))}
     </ScrollArea>
   )},
-  { name: "CodeBlock", category: "UI", variants: 1, render: () => (
+  { name: "CodeBlock", category: "UI", variants: 1, span: 2, render: () => (
     <div className="w-full [&_pre]:!p-2 [&_pre]:!text-[10px] [&_pre]:!leading-relaxed [&_button]:!top-1 [&_button]:!right-1 [&_button]:!h-5 [&_button]:!px-1.5 [&_button]:!text-[9px]">
       <CodeBlock language="tsx" code={'<Button variant="primary">\n  Click me\n</Button>'} />
     </div>
   )},
-  { name: "Terminal", category: "UI", variants: 1, render: () => (
+  { name: "Terminal", category: "UI", variants: 1, span: 2, render: () => (
     <div className="w-full [&>div]:!text-[10px] [&_pre]:!text-[10px] [&_pre]:!p-2 [&_pre]:!leading-relaxed [&>div>div:first-child]:!py-1 [&>div>div:first-child]:!px-2 [&>div>div:first-child]:!text-[9px]">
       <Terminal lines={["$ npx @sigil-ui/cli convert", "✓ Done in 1.2s"]} title="zsh" />
     </div>
@@ -636,7 +713,7 @@ const CELLS: ComponentCell[] = [
       <div className="h-4 bg-[var(--s-primary)] opacity-60 w-full" />
     </Flex>
   )},
-  { name: "AppShell", category: "Layout", variants: 1, render: () => (
+  { name: "AppShell", category: "Layout", variants: 1, span: 2, render: () => (
     <div className="w-full h-20 border border-[var(--s-border-muted)] overflow-hidden text-[9px]">
       <div className="h-4 border-b border-[var(--s-border-muted)] bg-[var(--s-surface)] flex items-center px-2 text-[var(--s-text-muted)]">Header</div>
       <div className="flex h-16">
@@ -651,7 +728,7 @@ const CELLS: ComponentCell[] = [
       <Banner variant="success" className="text-[10px] py-1 px-2">Success</Banner>
     </div>
   )},
-  { name: "Page Shell", category: "Layout", variants: 2, render: () => (
+  { name: "Page Shell", category: "Layout", variants: 2, span: 2, render: () => (
     <div className="w-full text-[9px] border border-[var(--s-border-muted)] overflow-hidden" style={{ height: 48 }}>
       <div className="mx-auto w-4/5 h-full flex items-center justify-center text-[var(--s-text-muted)]">
         centered content
@@ -738,7 +815,7 @@ const CELLS: ComponentCell[] = [
   /* ================================================================ */
   /* Overlays                                                          */
   /* ================================================================ */
-  { name: "Dialog", category: "Overlays", variants: 2, render: () => (
+  { name: "Dialog", category: "Overlays", variants: 2, span: 2, render: () => (
     <Dialog>
       <DialogTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Dialog</Button></DialogTrigger>
       <DialogContent><DialogHeader><DialogTitle>Confirm Action</DialogTitle><DialogDescription className="text-xs text-[var(--s-text-muted)]">Are you sure you want to proceed?</DialogDescription></DialogHeader></DialogContent>
@@ -790,7 +867,7 @@ const CELLS: ComponentCell[] = [
       </ContextMenuContent>
     </ContextMenu>
   )},
-  { name: "Command", category: "Overlays", variants: 2, render: () => (
+  { name: "Command", category: "Overlays", variants: 2, span: 2, render: () => (
     <Command className="w-full border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)]">
       <CommandInput placeholder="Type a command..." className="h-8 text-xs" />
     </Command>
@@ -848,7 +925,7 @@ const CELLS: ComponentCell[] = [
     <Stepper steps={[{ label: "Setup" }, { label: "Config" }, { label: "Deploy" }]} currentStep={1} />
   )},
   { name: "Meter", category: "Data", variants: 1, render: () => <Meter value={68} max={100} label="CPU Usage" /> },
-  { name: "Calendar", category: "Data", variants: 1, render: () => (
+  { name: "Calendar", category: "Data", variants: 1, span: 2, render: () => (
     <div className="w-full flex justify-center overflow-hidden">
       <Calendar mode="single" selected={createDemoDate()} className="p-0" />
     </div>
@@ -858,7 +935,7 @@ const CELLS: ComponentCell[] = [
       <DatePicker value={createDemoDate()} className="w-full" />
     </div>
   )},
-  { name: "DateRangePicker", category: "Data", variants: 1, docPath: "/docs/components/date-picker", render: () => (
+  { name: "DateRangePicker", category: "Data", variants: 1, docPath: "/docs/components/date-picker", span: 2, render: () => (
     <div className="w-full flex flex-col gap-2 items-start">
       <DateRangePicker
         value={{ from: new Date(2026, 3, 20), to: new Date(2026, 3, 24) }}
@@ -867,7 +944,7 @@ const CELLS: ComponentCell[] = [
     </div>
   )},
   { name: "Carousel", category: "Data", variants: 1, span: 2, render: () => (
-    <Carousel className="w-full max-w-[200px] mx-auto">
+    <Carousel className="w-full px-8">
       <CarouselContent>
         {[1, 2, 3].map((n) => (
           <CarouselItem key={n}>
@@ -877,8 +954,8 @@ const CELLS: ComponentCell[] = [
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="h-6 w-6 left-1" />
-      <CarouselNext className="h-6 w-6 right-1" />
+      <CarouselPrevious className="h-6 w-6 left-0" />
+      <CarouselNext className="h-6 w-6 right-0" />
     </Carousel>
   )},
   { name: "TreeView", category: "Data", variants: 1, render: () => (
@@ -928,7 +1005,7 @@ const CELLS: ComponentCell[] = [
       </InputOTP>
     </div>
   )},
-  { name: "Form", category: "Forms", variants: 1, render: () => (
+  { name: "Form", category: "Forms", variants: 1, span: 2, render: () => (
     <div className="flex flex-col gap-2 w-full">
       <Label className="text-[10px]">Email</Label>
       <Input placeholder="you@example.com" className="h-7 text-[10px]" />
@@ -954,7 +1031,7 @@ const CELLS: ComponentCell[] = [
   { name: "RatingGroup", category: "Forms", variants: 1, render: () => (
     <RatingGroup defaultValue={3} size="sm" />
   )},
-  { name: "InputGroup", category: "Forms", variants: 1, render: () => (
+  { name: "InputGroup", category: "Forms", variants: 1, span: 2, render: () => (
     <InputGroup className="w-full">
       <InputGroupAddon>$</InputGroupAddon>
       <InputGroupInput placeholder="0.00" />
@@ -968,7 +1045,7 @@ const CELLS: ComponentCell[] = [
       </div>
     </FileUpload>
   )},
-  { name: "SignaturePad", category: "Forms", variants: 1, render: () => (
+  { name: "SignaturePad", category: "Forms", variants: 1, span: 2, render: () => (
     <SignaturePad width={160} height={60} className="w-full" />
   )},
 
@@ -1159,7 +1236,7 @@ const CELLS: ComponentCell[] = [
       </TableBody>
     </Table>
   )},
-  { name: "CodeShowcaseSection", category: "Sections", variants: 1, render: () => (
+  { name: "CodeShowcaseSection", category: "Sections", variants: 1, span: 2, render: () => (
     <div className="w-full rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border)] overflow-hidden">
       <div className="flex border-b border-[var(--s-border)] bg-[var(--s-surface)]">
         <span className="px-2 py-1 text-[9px] font-mono text-[var(--s-text)] border-b-2 border-[var(--s-primary)]">TypeScript</span>
@@ -1240,7 +1317,7 @@ const CELLS: ComponentCell[] = [
   { name: "Hexagon", category: "Shapes", variants: 2, render: () => <Hexagon size="sm" className="!bg-[var(--s-primary)]" /> },
   { name: "Triangle", category: "Shapes", variants: 2, render: () => <Triangle size="sm" className="!bg-[var(--s-primary)]" /> },
   { name: "Diagonal", category: "Shapes", variants: 1, render: () => <Diagonal height={48} fill="var(--s-primary)" className="w-20" /> },
-  { name: "Shape", category: "Shapes", variants: 6, render: () => (
+  { name: "Shape", category: "Shapes", variants: 6, span: 2, render: () => (
     <div className="flex gap-3">
       <Shape variant="circle" size="sm" strokeWidth={1.5} />
       <Shape variant="diamond" size="sm" strokeWidth={1.5} />
@@ -1248,7 +1325,7 @@ const CELLS: ComponentCell[] = [
       <Shape variant="pill" size="sm" strokeWidth={1.5} />
     </div>
   )},
-  { name: "Cross", category: "Shapes", variants: 1, render: () => <Cross size={24} strokeWidth={1.5} /> },
+  { name: "Cross", category: "Shapes", variants: 1, span: 2, render: () => <Cross size={24} strokeWidth={1.5} /> },
 
   /* ================================================================ */
   /* New UI                                                            */
@@ -1305,7 +1382,7 @@ const CELLS: ComponentCell[] = [
       ))}
     </div>
   )},
-  { name: "Tessellation", category: "Patterns", variants: 7, render: () => (
+  { name: "Tessellation", category: "Patterns", variants: 7, span: 2, render: () => (
     <Tessellation variant="zigzag" className="w-full" style={{ height: 48 }} opacity={0.4} />
   )},
   { name: "GrainGradient", category: "Patterns", variants: 4, render: () => (
@@ -1338,12 +1415,12 @@ const CELLS: ComponentCell[] = [
       className="h-[60px]"
     />
   )},
-  { name: "IsometricView", category: "3D", variants: 1, render: () => (
+  { name: "IsometricView", category: "3D", variants: 1, span: 2, render: () => (
     <IsometricView angle={25} className="w-[64px] h-[64px]">
       <div className="w-full h-full rounded bg-[var(--s-primary)] opacity-80 flex items-center justify-center text-white text-[10px]">ISO</div>
     </IsometricView>
   )},
-  { name: "ExplodedView", category: "3D", variants: 1, render: () => (
+  { name: "ExplodedView", category: "3D", variants: 1, span: 2, render: () => (
     <ExplodedView
       gap="0.5rem"
       layers={[
@@ -1359,7 +1436,7 @@ const CELLS: ComponentCell[] = [
   { name: "IsometricCylinder", category: "3D", variants: 1, render: () => (
     <IsometricCylinder radius={25} height={40} topColor="var(--s-primary)" />
   )},
-  { name: "IsometricScene", category: "3D", variants: 1, render: () => (
+  { name: "IsometricScene", category: "3D", variants: 1, span: 2, render: () => (
     <IsometricScene height={80} className="w-full">
       <IsometricPrism width={40} height={30} depth={40} topColor="var(--s-primary)" />
     </IsometricScene>
@@ -1383,7 +1460,7 @@ const CELLS: ComponentCell[] = [
   /* ================================================================ */
   /* Diagrams                                                          */
   /* ================================================================ */
-  { name: "Diagram", category: "Diagrams", variants: 1, render: () => (
+  { name: "Diagram", category: "Diagrams", variants: 1, span: 2, render: () => (
     <Diagram showGrid gridSize={16} className="w-full p-3" style={{ minHeight: 60 }}>
       <div className="flex items-center justify-center gap-2">
         {["A", "B", "C"].map((n) => (
@@ -1414,7 +1491,7 @@ const CELLS: ComponentCell[] = [
       </span>
     </div>
   )},
-  { name: "FlowDiagram", category: "Diagrams", variants: 1, render: () => (
+  { name: "FlowDiagram", category: "Diagrams", variants: 1, span: 2, render: () => (
     <FlowDiagram
       nodes={[{ id: "1", label: "Start" }, { id: "2", label: "End" }]}
       connections={[{ from: "1", to: "2" }]}
@@ -1878,7 +1955,7 @@ const CELLS: ComponentCell[] = [
       )}
     </ReplayPreview>
   )},
-  { name: "PretextLayout", category: "Pretext", variants: 1, docPath: null, render: () => (
+  { name: "PretextLayout", category: "Pretext", variants: 1, docPath: null, span: 2, render: () => (
     <ReplayPreview interval={3600}>
       {() => (
         <div className="w-full space-y-1.5">
@@ -1907,7 +1984,7 @@ const CELLS: ComponentCell[] = [
       className="w-full !px-0 !py-0 [&>div]:!max-w-none [&_.grid]:!grid-cols-1 [&_h3]:!text-xs [&_li]:!text-[9px] [&_.relative.flex]:!min-h-[80px] [&_.p-6]:!p-3"
     />
   )},
-  { name: "BlueprintGridSection", category: "Sections", variants: 1, render: () => (
+  { name: "BlueprintGridSection", category: "Sections", variants: 1, span: 2, render: () => (
     <BlueprintGridSection
       cards={[{
         title: "Blueprint",
@@ -1939,7 +2016,7 @@ const CELLS: ComponentCell[] = [
       <MonoLabel variant="inverse" size="sm">Ships Immediately</MonoLabel>
     </div>
   )},
-  { name: "BorderStack", category: "Playbook", variants: 2, render: () => (
+  { name: "BorderStack", category: "Playbook", variants: 2, span: 2, render: () => (
     <BorderStack className="w-full">
       {["Nav", "Hero", "Features", "Footer"].map((s) => (
         <div key={s} className="py-2 px-3 text-[10px] text-[var(--s-text-muted)]">{s}</div>
@@ -1978,7 +2055,7 @@ const CELLS: ComponentCell[] = [
       <DensityText role="base">Base · 16px</DensityText>
     </div>
   )},
-  { name: "FrostedPanel", category: "Playbook", variants: 2, render: () => (
+  { name: "FrostedPanel", category: "Playbook", variants: 2, span: 2, render: () => (
     <div className="flex gap-2 w-full h-20">
       <FrostedPanel edge="right" className="flex-1 p-3 flex items-center justify-center">
         <span className="text-[10px] text-[var(--s-text-muted)]">Frosted</span>
@@ -1988,7 +2065,7 @@ const CELLS: ComponentCell[] = [
       </FrostedPanel>
     </div>
   )},
-  { name: "CardCell", category: "Playbook", variants: 1, render: () => (
+  { name: "CardCell", category: "Playbook", variants: 1, span: 2, render: () => (
     <CardCell
       title="Edge Compute"
       footer={<MonoLabel size="xs">12 regions</MonoLabel>}
@@ -2016,8 +2093,8 @@ const CELLS: ComponentCell[] = [
       Design is not just what it looks like — design is how it works.
     </Blockquote>
   )},
-  { name: "ResizablePanel", category: "UI", variants: 2, render: () => (
-    <div className="w-full border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] overflow-hidden" style={{ height: 80 }}>
+  { name: "ResizablePanel", category: "UI", variants: 2, span: 2, render: () => (
+    <div className="w-full border border-[var(--s-border)] rounded-[var(--s-radius-md,6px)] overflow-hidden" style={{ height: 96 }}>
       <ResizablePanelGroup>
         <ResizablePanelComp defaultSize={50}>
           <div className="flex items-center justify-center h-full text-[10px] text-[var(--s-text-muted)]">Left</div>
@@ -2037,20 +2114,194 @@ const CELLS: ComponentCell[] = [
       <PreviewCardContent title="Sigil UI" description="A token-driven design system with 44 presets." />
     </PreviewCard>
   )},
+  /* ================================================================ */
+  /* Added component expansion demos                                  */
+  /* ================================================================ */
+
+  /* Overlays */
+  { name: "Modal", category: "Overlays", variants: 1, render: () => <Modal trigger={<Button size="sm">Open</Button>} title="Modal" description="Token-driven dialog shell." /> },
+  { name: "ConfirmDialog", category: "Overlays", variants: 1, render: () => <ConfirmDialog trigger={<Button size="sm" variant="outline">Confirm</Button>} title="Confirm action" description="Review before continuing." /> },
+  { name: "PromptDialog", category: "Overlays", variants: 1, render: () => <PromptDialog trigger={<Button size="sm" variant="outline">Prompt</Button>} title="Rename" placeholder="Project name" /> },
+  { name: "ResponsiveDialog", category: "Overlays", variants: 1, render: () => <ResponsiveDialog trigger={<Button size="sm">Responsive</Button>} title="Responsive dialog" description="Adapts to app flows." /> },
+  { name: "Lightbox", category: "Overlays", variants: 1, render: () => <Lightbox trigger={<Button size="sm" variant="outline">Preview</Button>} src="https://placehold.co/640x360/png" alt="Preview" caption="Image preview" /> },
+  { name: "ImagePreview", category: "Overlays", variants: 1, render: () => <ImagePreview src="https://placehold.co/320x180/png" alt="Preview" className="h-20 w-32" /> },
+  { name: "Spotlight", category: "Overlays", variants: 1, render: () => <SpotlightDemo /> },
+  { name: "CommandMenu", category: "Overlays", variants: 1, render: () => <SpotlightDemo command /> },
+  { name: "ActionMenu", category: "Overlays", variants: 1, render: () => <ActionMenu trigger={<Button size="sm" variant="outline">Actions</Button>} items={[{ label: "Copy" }, { label: "Duplicate" }, { label: "Archive" }]} /> },
+  { name: "OverflowMenu", category: "Overlays", variants: 1, render: () => <OverflowMenu items={[{ label: "Edit" }, { label: "Share" }, { label: "Delete" }]} /> },
+  { name: "MegaMenu", category: "Overlays", variants: 1, span: 2, render: () => <MegaMenu className="grid-cols-3 p-3"><div className="text-xs">Platform</div><div className="text-xs">Components</div><div className="text-xs">Docs</div></MegaMenu> },
+  { name: "ContextPanel", category: "Overlays", variants: 1, render: () => <ContextPanel trigger={<Button size="sm" variant="outline">Panel</Button>}>Contextual content</ContextPanel> },
+  { name: "PopoverForm", category: "Overlays", variants: 1, span: 2, render: () => <PopoverForm trigger={<Button size="sm" variant="outline">Form</Button>}><Input placeholder="Email" /><Button size="sm">Submit</Button></PopoverForm> },
+  { name: "FloatingPanel", category: "Overlays", variants: 1, render: () => <FloatingPanel className="text-xs">Floating panel</FloatingPanel> },
+  { name: "TooltipGroup", category: "Overlays", variants: 1, render: () => <TooltipGroup><Tooltip content="Grouped timing"><Button size="sm" variant="outline">Hover</Button></Tooltip></TooltipGroup> },
+  { name: "Tour", category: "Overlays", variants: 1, render: () => <TourDemo /> },
+  { name: "TourStep", category: "Overlays", variants: 1, render: () => <TourStep className="text-xs">Tour step content</TourStep> },
+  { name: "Coachmark", category: "Overlays", variants: 1, render: () => <Coachmark trigger={<Button size="sm" variant="outline">Tip</Button>} title="Coachmark" description="Guide a user." /> },
+  { name: "HotkeyProvider", category: "Overlays", variants: 1, render: () => <HotkeyProviderDemo /> },
+  { name: "ShortcutRecorder", category: "Overlays", variants: 1, render: () => <ShortcutRecorder defaultValue={["Meta", "K"]} size="sm" /> },
+
+  /* Forms */
+  { name: "SearchInput", category: "Forms", variants: 1, render: () => <SearchInput placeholder="Search components..." /> },
+  { name: "CurrencyInput", category: "Forms", variants: 1, render: () => <CurrencyInput placeholder="0.00" /> },
+  { name: "PhoneInput", category: "Forms", variants: 1, render: () => <PhoneInput placeholder="+1 (555) 000-0000" /> },
+  { name: "TimePicker", category: "Forms", variants: 1, render: () => <TimePicker defaultValue="09:30" /> },
+  { name: "DateTimePicker", category: "Forms", variants: 1, render: () => <DateTimePicker /> },
+  { name: "DateRangeField", category: "Forms", variants: 1, span: 2, render: () => <DateRangeField label="Range" placeholder="Pick a date range" /> },
+  { name: "MultiSelect", category: "Forms", variants: 1, render: () => <MultiSelect options={[{ value: "react", label: "React" }, { value: "sigil", label: "Sigil" }, { value: "docs", label: "Docs" }]} defaultValue={["react", "sigil"]} /> },
+  { name: "Autocomplete", category: "Forms", variants: 1, render: () => <Autocomplete options={[{ value: "modal", label: "Modal" }, { value: "table", label: "Table" }]} placeholder="Pick component" /> },
+  { name: "CreatableSelect", category: "Forms", variants: 1, span: 2, render: () => <CreatableSelect options={[{ value: "sigil", label: "Sigil" }]} placeholder="Create option" /> },
+  { name: "AsyncSelect", category: "Forms", variants: 1, render: () => <AsyncSelect placeholder="Async options" /> },
+  { name: "SegmentedTabs", category: "Forms", variants: 1, render: () => <SegmentedTabs items={[{ value: "preview", label: "Preview" }, { value: "code", label: "Code" }]} /> },
+  { name: "RangeSlider", category: "Forms", variants: 1, render: () => <RangeSlider label="Confidence" valueLabel="72%" defaultValue={[72]} /> },
+  { name: "DualRangeSlider", category: "Forms", variants: 1, render: () => <DualRangeSlider defaultValue={[20, 80]} /> },
+  { name: "FileDropzone", category: "Forms", variants: 1, span: 2, render: () => <FileDropzone label="Drop files here" description="or browse" className="min-h-28" /> },
+  { name: "ImageUpload", category: "Forms", variants: 1, span: 2, render: () => <ImageUpload label="Upload image" className="min-h-28" /> },
+  { name: "AvatarUpload", category: "Forms", variants: 1, span: 2, render: () => <AvatarUpload previewUrl="https://placehold.co/128x128/png" label="Avatar" /> },
+  { name: "ColorField", category: "Forms", variants: 1, render: () => <ColorField defaultValue="#3b82f6" /> },
+  { name: "ComboboxField", category: "Forms", variants: 1, span: 2, render: () => <ComboboxField label="Component" options={[{ value: "modal", label: "Modal" }, { value: "select", label: "Select" }]} /> },
+  { name: "CheckboxCard", category: "Forms", variants: 1, render: () => <CheckboxCard defaultChecked title="Enable sync" description="Selectable card" /> },
+  { name: "RadioCard", category: "Forms", variants: 1, render: () => <RadioGroup defaultValue="pro"><RadioCard value="pro" title="Pro" description="Best for teams" /></RadioGroup> },
+  { name: "SwitchField", category: "Forms", variants: 1, render: () => <SwitchField label="Notifications" description="Product updates" defaultChecked /> },
+  { name: "SliderField", category: "Forms", variants: 1, render: () => <SliderField label="Volume" valueLabel="40%" defaultValue={[40]} /> },
+  { name: "StepperField", category: "Forms", variants: 1, render: () => <StepperField defaultValue={3} /> },
+  { name: "TagsField", category: "Forms", variants: 1, render: () => <TagsField defaultValue={["radix", "tokens"]} /> },
+  { name: "CopyInput", category: "Forms", variants: 1, render: () => <CopyInput defaultValue="sigil add button" readOnly /> },
+
+  /* Feedback */
+  { name: "StatusBadge", category: "Feedback", variants: 1, render: () => <StatusBadge status="success">Operational</StatusBadge> },
+  { name: "StatusDot", category: "Feedback", variants: 1, render: () => <div className="flex items-center gap-2"><StatusDot status="online" /> Online</div> },
+  { name: "StatusPill", category: "Feedback", variants: 1, render: () => <StatusPill status="warning">Pending</StatusPill> },
+  { name: "OnlineIndicator", category: "Feedback", variants: 1, render: () => <OnlineIndicator status="online" label="Online" /> },
+  { name: "PresenceAvatar", category: "Feedback", variants: 1, render: () => <PresenceAvatar fallback="KL" status="online" /> },
+  { name: "Notification", category: "Feedback", variants: 1, span: 2, render: () => <Notification title="Deploy complete" description="Docs published." unread /> },
+  { name: "NotificationList", category: "Feedback", variants: 1, span: 2, render: () => <NotificationList><Notification title="One" description="First" /><Notification title="Two" description="Second" /></NotificationList> },
+  { name: "InlineAlert", category: "Feedback", variants: 1, render: () => <InlineAlert variant="info">Inline alert</InlineAlert> },
+  { name: "Callout", category: "Feedback", variants: 1, render: () => <Callout variant="info" title="Token-first" description="Reads var(--s-*)." /> },
+  { name: "BannerAlert", category: "Feedback", variants: 1, render: () => <BannerAlert variant="warning" title="Heads up" description="Banner alert" /> },
+  { name: "ErrorState", category: "Feedback", variants: 1, render: () => <ErrorState title="Error" description="Try again." /> },
+  { name: "LoadingState", category: "Feedback", variants: 1, render: () => <LoadingState title="Loading" description="Fetching data." /> },
+  { name: "SuccessState", category: "Feedback", variants: 1, render: () => <SuccessState title="Success" description="All set." /> },
+  { name: "ProgressSteps", category: "Feedback", variants: 1, span: 2, render: () => <ProgressSteps currentStep={1} steps={[{ label: "Install" }, { label: "Configure" }, { label: "Ship" }]} /> },
+  { name: "TimelineProgress", category: "Feedback", variants: 1, render: () => <TimelineProgress value={66}>2 of 3 stages</TimelineProgress> },
+  { name: "ToastAction", category: "Feedback", variants: 1, render: () => <ToastAction>Undo</ToastAction> },
+  { name: "ToastPromise", category: "Feedback", variants: 1, render: () => <Button size="sm" variant="outline" onClick={() => void ToastPromise(Promise.resolve(), { loading: "Saving", success: "Saved", error: "Failed" })}>Toast promise</Button> },
+  { name: "SkeletonCard", category: "Feedback", variants: 1, render: () => <SkeletonCard /> },
+  { name: "SkeletonTable", category: "Feedback", variants: 1, render: () => <SkeletonTable /> },
+  { name: "SpinnerOverlay", category: "Feedback", variants: 1, span: 2, render: () => <div className="relative h-24 w-full rounded-[var(--s-card-radius)] border border-[var(--s-border)]"><SpinnerOverlay /></div> },
+
+  /* Data */
+  { name: "DescriptionList", category: "Data", variants: 1, render: () => <DescriptionList items={[{ label: "Package", value: "components" }, { label: "Mode", value: "tokens" }]} /> },
+  { name: "KeyValue", category: "Data", variants: 1, render: () => <KeyValue label="Preset" value="sigil" /> },
+  { name: "PropertyList", category: "Data", variants: 1, render: () => <PropertyList items={[{ label: "Status", value: "Ready" }, { label: "Count", value: "300+" }]} /> },
+  { name: "StatCard", category: "Data", variants: 1, render: () => <StatCard label="Components" value="300+" change={<Trend value={50} />} /> },
+  { name: "MetricGrid", category: "Data", variants: 1, span: 2, render: () => <MetricGrid><StatCard label="Components" value="300+" /><StatCard label="Presets" value="44" /></MetricGrid> },
+  { name: "Trend", category: "Data", variants: 1, render: () => <Trend value={24} /> },
+  { name: "SparkArea", category: "Data", variants: 1, render: () => <SparkArea values={[4, 8, 6, 12, 10, 16]} /> },
+  { name: "SparkBar", category: "Data", variants: 1, render: () => <SparkBar values={[4, 8, 6, 12, 10, 16]} /> },
+  { name: "DataList", category: "Data", variants: 1, render: () => <DataList><DataListItem><span>Modal</span><StatusBadge status="success">Ready</StatusBadge></DataListItem></DataList> },
+  { name: "DataListItem", category: "Data", variants: 1, render: () => <DataList><DataListItem><span>Component</span><span>Demo</span></DataListItem></DataList> },
+  { name: "DataGrid", category: "Data", variants: 1, span: 2, render: () => <DataGrid columns={2}><StatCard label="A" value="12" /><StatCard label="B" value="24" /></DataGrid> },
+  { name: "DataToolbar", category: "Data", variants: 1, span: 2, render: () => <DataToolbar><DataFilters searchPlaceholder="Filter..." /><Button size="sm" variant="outline">Export</Button></DataToolbar> },
+  { name: "DataFilters", category: "Data", variants: 1, render: () => <DataFilters searchPlaceholder="Filter rows..." /> },
+  { name: "DataPagination", category: "Data", variants: 1, render: () => <DataPagination page={2} pageCount={8} /> },
+  { name: "ColumnVisibility", category: "Data", variants: 1, render: () => <ColumnVisibility columns={[{ id: "name", label: "Name" }, { id: "status", label: "Status", visible: false }]} /> },
+  { name: "BulkActions", category: "Data", variants: 1, render: () => <BulkActions><span className="text-xs">3 selected</span><Button size="sm" variant="outline">Archive</Button></BulkActions> },
+  { name: "EmptyTable", category: "Data", variants: 1, render: () => <EmptyTable message="No rows found." /> },
+  { name: "Listbox", category: "Data", variants: 1, render: () => <Listbox value="modal" options={[{ value: "modal", label: "Modal" }, { value: "sheet", label: "Sheet" }]} /> },
+  { name: "VirtualList", category: "Data", variants: 1, render: () => <VirtualList items={["Modal", "MultiSelect", "StatusBadge", "DataToolbar"]} /> },
+  { name: "TreeTable", category: "Data", variants: 1, span: 2, render: () => <TreeTable headers={["Status"]} rows={[{ id: "components", label: "Components", values: ["Ready"], children: [{ id: "modal", label: "Modal", values: ["Ready"] }] }]} /> },
+
+  /* Layout and navigation */
+  { name: "ContainerQuery", category: "Layout", variants: 1, render: () => <ContainerQuery><Card><CardHeader><CardTitle>Container</CardTitle></CardHeader></Card></ContainerQuery> },
+  { name: "SplitPane", category: "Layout", variants: 1, render: () => <SplitPane left={<div className="border border-[var(--s-border)] p-2 text-xs">Left</div>} right={<div className="border border-[var(--s-border)] p-2 text-xs">Right</div>} /> },
+  { name: "Dock", category: "Navigation", variants: 1, render: () => <Dock className="static translate-x-0"><Button size="icon-sm" variant="ghost">A</Button><Button size="icon-sm" variant="ghost">B</Button></Dock> },
+  { name: "TopBar", category: "Navigation", variants: 1, render: () => <TopBar className="static min-h-10 text-xs">Top bar</TopBar> },
+  { name: "BottomBar", category: "Navigation", variants: 1, render: () => <BottomBar className="static min-h-10 text-xs">Bottom bar</BottomBar> },
+  { name: "MobileNav", category: "Navigation", variants: 1, render: () => <MobileNav><Button size="sm" variant="ghost">Docs</Button><Button size="sm" variant="ghost">UI</Button></MobileNav> },
+  { name: "SidebarNav", category: "Navigation", variants: 1, render: () => <SidebarNav><a href="#">Overview</a><a href="#">Components</a></SidebarNav> },
+  { name: "AppHeader", category: "Layout", variants: 1, render: () => <AppHeader title="Components" description="Browse catalog" actions={<Button size="sm">New</Button>} /> },
+  { name: "PageHeader", category: "Layout", variants: 1, render: () => <PageHeader title="Page title" description="Page heading block" /> },
+  { name: "SectionHeader", category: "Layout", variants: 1, render: () => <SectionHeader title="Section" description="Section heading block" /> },
+  { name: "ContentTabs", category: "Navigation", variants: 1, span: 2, render: () => <ContentTabs tabs={[{ value: "preview", label: "Preview", content: "Preview content" }, { value: "code", label: "Code", content: "Code content" }]} /> },
+  { name: "AnchorNav", category: "Navigation", variants: 1, render: () => <AnchorNav items={[{ href: "#overview", label: "Overview" }, { href: "#props", label: "Props" }]} /> },
+  { name: "TableOfContents", category: "Navigation", variants: 1, render: () => <TableOfContents items={[{ href: "#preview", label: "Preview" }, { href: "#usage", label: "Usage" }]} /> },
+  { name: "ScrollSpy", category: "Navigation", variants: 1, render: () => <ScrollSpy items={[{ href: "#preview", label: "Preview" }, { href: "#usage", label: "Usage" }]} /> },
+  { name: "MasonryGrid", category: "Layout", variants: 1, span: 2, render: () => <MasonryGrid><Card><CardHeader><CardTitle>One</CardTitle></CardHeader></Card><Card><CardHeader><CardTitle>Two</CardTitle></CardHeader><CardContent>More</CardContent></Card></MasonryGrid> },
+  { name: "MediaCard", category: "UI", variants: 1, span: 2, render: () => (
+    <MediaCard
+      className="grid w-full grid-cols-[minmax(120px,0.8fr)_1fr] overflow-hidden"
+      media={<img src="https://placehold.co/320x180/png" alt="Preview" className="h-full min-h-28 w-full object-cover" />}
+      title="Media card"
+      description="Image plus content"
+    />
+  )},
+  { name: "ResourceCard", category: "UI", variants: 1, span: 2, render: () => (
+    <ResourceCard
+      className="w-full"
+      title="Resource"
+      description="Linked docs resource"
+      href="/docs"
+    />
+  )},
+  { name: "FeatureCard", category: "UI", variants: 1, span: 2, render: () => (
+    <FeatureCard className="w-full" title="Feature" description="Feature summary card" />
+  )},
+  { name: "PricingCard", category: "UI", variants: 1, span: 2, render: () => (
+    <PricingCard
+      className="grid w-full grid-cols-[1fr_auto] items-start gap-4"
+      title="Team"
+      description="For teams"
+      price="$29"
+      features={["300+ components", "44 presets"]}
+      action={<Button size="sm">Start</Button>}
+    />
+  )},
+  { name: "TestimonialCarousel", category: "UI", variants: 1, span: 2, render: () => (
+    <TestimonialCarousel className="w-full [&>*]:min-w-[calc(50%-0.5rem)]">
+      <Card><CardContent className="p-4">“Token-first.”</CardContent></Card>
+      <Card><CardContent className="p-4">“Docs built in.”</CardContent></Card>
+    </TestimonialCarousel>
+  )},
+
+  /* Developer */
+  { name: "CodeTabs", category: "Developer", variants: 1, span: 2, render: () => <CodeTabs tabs={[{ value: "tsx", label: "TSX", code: "<Button>Ship</Button>", language: "tsx" }]} /> },
+  { name: "CodePreview", category: "Developer", variants: 1, span: 2, render: () => <CodePreview preview={<Button size="sm">Preview</Button>} code={`<Button>Preview</Button>`} language="tsx" /> },
+  { name: "CopyButton", category: "Developer", variants: 1, render: () => <CopyButton value="npx @sigil-ui/cli add button" size="sm">Copy command</CopyButton> },
+  { name: "TokenPreview", category: "Developer", variants: 1, render: () => <TokenPreview name="--s-primary" /> },
+  { name: "ThemeSwatch", category: "Developer", variants: 1, render: () => <ThemeSwatch name="Sigil" selected /> },
+  { name: "ThemeSwitcher", category: "Developer", variants: 1, span: 2, render: () => <ThemeSwitcher value="sigil" themes={[{ value: "sigil", label: "Sigil" }, { value: "mono", label: "Mono" }]} /> },
+  { name: "PromptInput", category: "Developer", variants: 1, span: 2, render: () => <PromptInput placeholder="Generate a component..." /> },
+  { name: "ChatMessage", category: "Developer", variants: 1, render: () => <ChatMessage role="assistant">Components stay token-first.</ChatMessage> },
+  { name: "ChatThread", category: "Developer", variants: 1, span: 2, render: () => <ChatThread><ChatMessage role="user">Show dialogs.</ChatMessage><ChatMessage role="assistant">Use Modal.</ChatMessage></ChatThread> },
+  { name: "MessageComposer", category: "Developer", variants: 1, span: 2, render: () => <MessageComposer placeholder="Message..." /> },
+  { name: "ActivityTimeline", category: "Developer", variants: 1, span: 2, render: () => <ActivityTimeline items={[{ title: "Component added", description: "Modal docs generated." }, { title: "Build passed", description: "Docs compiled." }]} /> },
+  { name: "AuditLog", category: "Developer", variants: 1, span: 2, render: () => <AuditLog><DataListItem><span>Kevin</span><span>Updated docs</span></DataListItem></AuditLog> },
+  { name: "Changelog", category: "Developer", variants: 1, span: 2, render: () => <Changelog><Card><CardHeader><CardTitle>v0.1.0</CardTitle><CardDescription>Added catalog pages.</CardDescription></CardHeader></Card></Changelog> },
+  { name: "VersionBadge", category: "Developer", variants: 1, render: () => <VersionBadge version="0.1.0" /> },
+  { name: "KeyboardKey", category: "Developer", variants: 1, render: () => <KeyboardKey>⌘K</KeyboardKey> },
+
 ];
 
 const CELL_STYLE: React.CSSProperties = {
-  minHeight: 140,
+  minHeight: 168,
   padding: "16px 16px 10px",
   border: "1px solid var(--s-border-muted)",
   borderRadius: "var(--s-radius-lg, 0px)",
   background: "var(--s-background)",
-  transition: "border-color 200ms ease, background 200ms ease",
+  transition: "border-color 200ms ease, background-color 200ms ease",
 };
+
+const SHOWCASE_AUDIT_CHECKLIST = CELLS.map((cell) => ({
+  name: cell.name,
+  category: cell.category,
+  hasDocs: Boolean(getDocsHref(cell)),
+  hasDemo: typeof cell.render === "function",
+}));
 
 export function ComponentShowcase() {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [search, setSearch] = useState("");
+  const totalComponents = SHOWCASE_AUDIT_CHECKLIST.length;
 
   const filtered = CELLS.filter((cell) => {
     if (activeCategory !== "All" && cell.category !== activeCategory) return false;
@@ -2094,7 +2345,7 @@ export function ComponentShowcase() {
       </div>
 
       <div className="font-[family-name:var(--s-font-mono)] text-[11px] text-[var(--s-text-muted)] mb-6">
-        {filtered.length} component{filtered.length !== 1 ? "s" : ""}
+        {filtered.length} of {totalComponents} component{filtered.length !== 1 ? "s" : ""}
         {search && <> matching &ldquo;{search}&rdquo;</>}
       </div>
 
@@ -2114,14 +2365,16 @@ export function ComponentShowcase() {
               </div>
             )}
             <TechFrame variant="brackets" extend={12} opacity={0.2} padding={4}>
-              <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}>
+              <div className="grid gap-3" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gridAutoFlow: "dense" }}>
                 {catCells.map((cell) => {
                   const docsHref = getDocsHref(cell);
                   return (
                     <div
                       key={cell.name}
-                      className="group flex flex-col"
-                      style={{ ...CELL_STYLE, ...(cell.span && cell.span > 1 ? { gridColumn: `span ${cell.span}` } : {}) }}
+                      className={`group flex min-w-0 flex-col overflow-visible ${
+                        cell.span && cell.span > 1 ? "md:col-span-2" : ""
+                      }`}
+                      style={CELL_STYLE}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.borderColor = "var(--s-border-strong)";
                         e.currentTarget.style.background = "var(--s-surface)";
@@ -2131,7 +2384,11 @@ export function ComponentShowcase() {
                         e.currentTarget.style.background = "var(--s-background)";
                       }}
                     >
-                      <div className="flex items-center justify-center flex-1 w-full">
+                      <div
+                        className={`flex min-w-0 flex-1 items-center justify-center w-full overflow-visible [&>*]:max-w-full ${
+                          cell.span && cell.span > 1 ? "[&>*]:w-full" : ""
+                        }`}
+                      >
                         {cell.render()}
                       </div>
                       <div className="flex items-center gap-1.5 mt-2 pt-1.5" style={{ borderTop: "1px solid var(--s-border-muted)" }}>

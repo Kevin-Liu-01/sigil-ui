@@ -56,10 +56,13 @@ type DevBarState = {
   setSidebarOpen: (v: boolean) => void;
   canvasMode: boolean;
   setCanvasMode: (v: boolean) => void;
+  frameVisible: boolean;
   dock: DockPosition;
   setDock: (d: DockPosition) => void;
   agentOpen: boolean;
   setAgentOpen: (v: boolean) => void;
+  enterCanvas: () => void;
+  exitCanvas: () => void;
 };
 
 const DevBarContext = createContext<DevBarState | null>(null);
@@ -68,15 +71,46 @@ export function useDevBar() {
   return useContext(DevBarContext);
 }
 
+const PHASE_DELAY = 300;
+
 export function DevBarProvider({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [canvasMode, setCanvasMode] = useState(false);
+  const [frameVisible, setFrameVisible] = useState(false);
   const [dock, setDock] = useState<DockPosition>("left");
   const [agentOpen, setAgentOpen] = useState(false);
+  const exitTimer1 = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const exitTimer2 = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const enterTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const clearTimers = useCallback(() => {
+    clearTimeout(enterTimer.current);
+    clearTimeout(exitTimer1.current);
+    clearTimeout(exitTimer2.current);
+  }, []);
+
+  const enterCanvas = useCallback(() => {
+    clearTimers();
+    setCanvasMode(true);
+    setFrameVisible(true);
+    enterTimer.current = setTimeout(() => setSidebarOpen(true), PHASE_DELAY);
+  }, [clearTimers]);
+
+  const exitCanvas = useCallback(() => {
+    clearTimers();
+    setSidebarOpen(false);
+    setAgentOpen(false);
+    exitTimer1.current = setTimeout(() => {
+      setFrameVisible(false);
+      exitTimer2.current = setTimeout(() => setCanvasMode(false), PHASE_DELAY);
+    }, PHASE_DELAY);
+  }, [clearTimers]);
+
+  useEffect(() => () => clearTimers(), [clearTimers]);
 
   const ctx = useMemo<DevBarState>(
-    () => ({ sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, dock, setDock, agentOpen, setAgentOpen }),
-    [sidebarOpen, canvasMode, dock, agentOpen],
+    () => ({ sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, frameVisible, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas }),
+    [sidebarOpen, canvasMode, frameVisible, dock, agentOpen, enterCanvas, exitCanvas],
   );
 
   return <DevBarContext.Provider value={ctx}>{children}</DevBarContext.Provider>;
@@ -724,7 +758,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const { play, enabled: soundEnabled, setEnabled: setSoundEnabled, setActivePreset: setSoundPreset } = useSigilSound();
 
   if (!devbar) return null;
-  const { sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, dock, setDock, agentOpen, setAgentOpen } = devbar;
+  const { sidebarOpen, setSidebarOpen, canvasMode, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas } = devbar;
 
   const handleRandomize = () => {
     const p = PRESET_DATA[Math.floor(Math.random() * PRESET_DATA.length)]!;
@@ -764,7 +798,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
       zIndex: 10001, gap: 2,
     }}>
       {/* Sigil button */}
-      {tbtn(<Grid3X3 size={11} style={{ color: "var(--db-accent)" }} />, () => { if (canvasMode) { setCanvasMode(false); setSidebarOpen(false); setAgentOpen(false); } else { setCanvasMode(true); setSidebarOpen(true); } }, canvasMode, isMobile ? undefined : "Studio")}
+      {tbtn(<Grid3X3 size={11} style={{ color: "var(--db-accent)" }} />, () => { if (canvasMode) exitCanvas(); else enterCanvas(); }, canvasMode, isMobile ? undefined : "Studio")}
 
       {/* Preset strip (hidden in canvas mode) */}
       {!canvasMode && (
@@ -774,7 +808,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
             flex: 1, display: "flex", gap: 1, overflowX: "auto", overflowY: "hidden",
             minWidth: 0, padding: "2px 4px",
           } as React.CSSProperties}>
-            {PRESET_DATA.map((p) => {
+            {PRESET_DATA.map((p, i) => {
               const active = activePreset.replace("*", "") === p.name;
               return (
                 <button key={p.name} type="button" onClick={() => handlePresetClick(p.name)} style={{
@@ -785,6 +819,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
                   fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 400,
                   color: active ? "var(--db-accent)" : "var(--db-muted)",
                   cursor: "pointer", transition: "all 100ms ease", whiteSpace: "nowrap",
+                  animation: `devbar-preset-in 400ms ${EASE_SPRING} ${i * 15}ms both`,
                 }}>
                   <div style={{ width: 8, height: 8, borderRadius: 2, background: p.colors[0], border: "0.5px solid rgba(128,128,128,0.15)", flexShrink: 0 }} />
                   {p.name}
@@ -803,7 +838,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
       <div style={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
         {tbtn(<Shuffle size={11} />, handleRandomize, false)}
         {divider}
-        {tbtn(<Monitor size={11} />, () => { const next = !canvasMode; setCanvasMode(next); if (next) setSidebarOpen(true); else { setSidebarOpen(false); setAgentOpen(false); } }, canvasMode, isMobile ? undefined : "Canvas")}
+        {tbtn(<Monitor size={11} />, () => { if (canvasMode) exitCanvas(); else enterCanvas(); }, canvasMode, isMobile ? undefined : "Canvas")}
         {canvasMode && !isMobile && tbtn(dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />, () => setDock(dock === "left" ? "right" : "left"), false)}
         {canvasMode && tbtn(<MessageSquare size={11} />, () => setAgentOpen(!agentOpen), agentOpen, isMobile ? undefined : "Agent")}
         {divider}
@@ -852,18 +887,37 @@ function EdgeHandle({ dock, open, onToggle }: { dock: DockPosition; open: boolea
 /* ================================================================== */
 
 function CollapsedTab({ dock, onOpen }: { dock: DockPosition; onOpen: () => void }) {
+  const isLeft = dock === "left";
   return (
     <button type="button" onClick={onOpen} style={{
       position: "absolute", zIndex: 2,
-      ...(dock === "left" ? { left: 0, top: "50%", transform: "translateY(-50%)" } : { right: 0, top: "50%", transform: "translateY(-50%)" }),
+      top: "50%",
+      ...(isLeft
+        ? { left: 0, transform: "translateY(-50%) translateX(-4px)" }
+        : { right: 0, transform: "translateY(-50%) translateX(4px)" }),
       display: "flex", alignItems: "center", gap: 6, padding: "10px 8px", flexDirection: "column",
-      borderRadius: dock === "left" ? "0 8px 8px 0" : "8px 0 0 8px",
+      borderRadius: isLeft ? "0 8px 8px 0" : "8px 0 0 8px",
       background: "var(--db-surface)", border: "1px solid var(--db-border)",
-      ...(dock === "left" ? { borderLeft: "none" } : { borderRight: "none" }),
-      cursor: "pointer", color: "var(--db-muted)", transition: "all 200ms ease", boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+      ...(isLeft ? { borderLeft: "none" } : { borderRight: "none" }),
+      cursor: "pointer", color: "var(--db-muted)",
+      transition: `all ${DUR} ${EASE_SPRING}`,
+      boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+      animation: `${isLeft ? "devbar-tab-poke" : "devbar-tab-poke-right"} 400ms cubic-bezier(0.32, 0.72, 0, 1) forwards`,
     }}
-      onMouseEnter={(e) => { e.currentTarget.style.color = "var(--db-accent)"; }}
-      onMouseLeave={(e) => { e.currentTarget.style.color = "var(--db-muted)"; }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.color = "var(--db-accent)";
+        e.currentTarget.style.transform = isLeft
+          ? "translateY(-50%) translateX(0px)"
+          : "translateY(-50%) translateX(0px)";
+        e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.2)";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.color = "var(--db-muted)";
+        e.currentTarget.style.transform = isLeft
+          ? "translateY(-50%) translateX(-4px)"
+          : "translateY(-50%) translateX(4px)";
+        e.currentTarget.style.boxShadow = "0 2px 8px rgba(0,0,0,0.15)";
+      }}
     >
       <Grid3X3 size={12} style={{ color: "inherit" }} />
       <span style={{ fontFamily: FONT_DISPLAY, fontSize: 9, fontWeight: 600, letterSpacing: "0.04em", writingMode: "vertical-lr", textOrientation: "mixed" }}>Studio</span>
@@ -877,9 +931,9 @@ function CollapsedTab({ dock, onOpen }: { dock: DockPosition; onOpen: () => void
 
 function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolean }) {
   const isMobile = useIsMobile();
-  const showFrame = canvas && !isMobile;
-
   const devbar = useDevBar();
+  const frameVisible = devbar?.frameVisible ?? false;
+  const showFrame = frameVisible && !isMobile;
   const dock = devbar?.dock ?? "left";
   const sidebarOpen = devbar?.sidebarOpen ?? false;
   const agentOpen = devbar?.agentOpen ?? false;
@@ -897,8 +951,8 @@ function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolea
       <div style={{
         width: "100%",
         borderRadius: showFrame ? 8 : 0,
-        border: showFrame ? "1px solid var(--db-border)" : "none",
-        overflow: showFrame ? "hidden" : undefined,
+        border: showFrame ? "1px solid var(--db-border)" : "1px solid transparent",
+        overflow: "hidden",
         transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>
         <div style={{ width: "100%", height: canvas ? "100%" : undefined, overflowX: canvas ? "hidden" : undefined, overflowY: canvas ? "auto" : undefined }}>
@@ -1280,8 +1334,9 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
       {/* Main row: sidebar + content + agent */}
       <div style={{
         flex: 1, display: "flex", flexDirection: "row",
-        minHeight: 0, minWidth: 0, overflow: canvasMode ? "hidden" : undefined, position: "relative",
+        minHeight: 0, minWidth: 0, overflow: "hidden", position: "relative",
         paddingBottom: canvasMode ? 0 : TOOLBAR_H,
+        transition: `padding-bottom ${DUR} ${EASE_SPRING}`,
       }}>
         {/* In-flow sidebar (canvas desktop only) */}
         {showInFlowSidebar && isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} isMobile={false} />}
@@ -1294,6 +1349,9 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
         {showInFlowAgent && <AgentPanel open={agentOpen} isMobile={false} />}
 
         {/* Collapsed tab (canvas desktop, sidebar closed) */}
+        {showInFlowSidebar && !sidebarOpen && (
+          <CollapsedTab dock={dock} onOpen={() => setSidebarOpen(true)} />
+        )}
       </div>
 
       {/* Toolbar: fixed in normal mode, in-flow in canvas mode */}
@@ -1371,6 +1429,18 @@ const DEVBAR_STYLES = `
   .devbar-preset-strip::-webkit-scrollbar { display: none; }
   .devbar-scroll { scrollbar-width: none; }
   .devbar-scroll::-webkit-scrollbar { display: none; }
+  @keyframes devbar-preset-in {
+    from { opacity: 0; transform: translateY(6px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes devbar-tab-poke {
+    from { opacity: 0; transform: translateY(-50%) translateX(-20px); }
+    to   { opacity: 1; transform: translateY(-50%) translateX(-4px); }
+  }
+  @keyframes devbar-tab-poke-right {
+    from { opacity: 0; transform: translateY(-50%) translateX(20px); }
+    to   { opacity: 1; transform: translateY(-50%) translateX(4px); }
+  }
   @media (max-width: ${MOBILE_BP}px) {
     .devbar-canvas-frame { border-radius: 0 !important; border: none !important; }
   }

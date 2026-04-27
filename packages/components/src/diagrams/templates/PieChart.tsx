@@ -83,7 +83,7 @@ export const PieChart = forwardRef<SVGSVGElement, PieChartProps>(
                     fontSize={11}
                     fontWeight={700}
                     fill="var(--s-primary-contrast)"
-                    style={{ textShadow: "0 1px 3px oklch(0 0 0 / 0.5)" }}
+                    style={{ textShadow: "var(--s-shadow-sm, 0 1px 3px rgb(0 0 0 / 0.5))" }}
                   >
                     {pct}%
                   </text>

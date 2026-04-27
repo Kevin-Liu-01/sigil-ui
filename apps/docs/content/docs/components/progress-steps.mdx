@@ -1,0 +1,32 @@
+---
+title: ProgressSteps
+description: ProgressSteps is a token-driven Sigil component in the feedback and status group.
+---
+
+## Import
+
+```tsx
+import { ProgressSteps } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <ProgressSteps currentStep={1} steps={[{ label: "Install" }, { label: "Configure" }, { label: "Ship" }]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<ProgressSteps currentStep={1} steps={[{ label: "Install" }, { label: "Configure" }, { label: "Ship" }]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add progress-steps
+```
+
+## Token Integration
+
+ProgressSteps follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

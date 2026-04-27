@@ -8,7 +8,7 @@ import { Progress } from "./Progress";
 import { Skeleton } from "./Skeleton";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { Alert, AlertDescription, AlertTitle, type AlertProps } from "./Alert";
-import { toast } from "../overlays/Toast";
+import { sonnerToast } from "../overlays/Sonner";
 import { cn } from "../utils";
 
 export interface StatusBadgeProps extends BadgeProps {
@@ -66,7 +66,7 @@ export const OnlineIndicator = forwardRef<HTMLSpanElement, OnlineIndicatorProps>
 ) {
   return (
     <span ref={ref} className={cn("inline-flex items-center gap-2 text-sm", className)} {...props}>
-      <StatusDot status={status} />
+      <StatusDot status={status} aria-hidden />
       {label}
     </span>
   );
@@ -83,7 +83,7 @@ export const PresenceAvatar = forwardRef<HTMLDivElement, PresenceAvatarProps>(fu
   return (
     <span className="relative inline-flex">
       <Avatar ref={ref} className={className} {...props} />
-      <StatusDot status={status} className="absolute bottom-0 right-0 ring-2 ring-[var(--s-background)]" />
+      <StatusDot status={status} aria-hidden className="absolute bottom-0 right-0 ring-2 ring-[var(--s-background)]" />
     </span>
   );
 });
@@ -195,8 +195,19 @@ export const ProgressSteps = forwardRef<HTMLOListElement, ProgressStepsProps>(fu
   return (
     <ol ref={ref} className={cn("grid gap-3", className)} {...props}>
       {steps.map((step, index) => (
-        <li key={index} data-active={index === currentStep || undefined} data-complete={index < currentStep || undefined} className="flex gap-3">
-          <span className="mt-1 flex size-5 items-center justify-center rounded-[var(--s-radius-full,9999px)] border border-[var(--s-border)] text-xs data-[complete=true]:bg-[var(--s-primary)]" />
+        <li
+          key={index}
+          aria-current={index === currentStep ? "step" : undefined}
+          data-active={index === currentStep || undefined}
+          data-complete={index < currentStep || undefined}
+          className="flex gap-3"
+        >
+          <span
+            aria-hidden
+            className="mt-1 flex size-5 items-center justify-center rounded-[var(--s-radius-full,9999px)] border border-[var(--s-border)] text-xs data-[complete=true]:bg-[var(--s-primary)]"
+          >
+            {index < currentStep ? "✓" : index + 1}
+          </span>
           <span className="grid gap-0.5">
             <span className="text-sm font-medium text-[var(--s-text)]">{step.label}</span>
             {step.description && <span className="text-xs text-[var(--s-text-muted)]">{step.description}</span>}
@@ -234,11 +245,7 @@ export function ToastPromise<T>(
   promise: Promise<T>,
   messages: { loading: string; success: string; error: string },
 ) {
-  toast({ title: messages.loading, variant: "info" });
-  promise.then(
-    () => toast({ title: messages.success, variant: "success" }),
-    () => toast({ title: messages.error, variant: "error" }),
-  );
+  sonnerToast.promise(promise, messages);
   return promise;
 }
 

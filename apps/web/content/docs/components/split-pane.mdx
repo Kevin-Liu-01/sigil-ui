@@ -1,0 +1,32 @@
+---
+title: SplitPane
+description: SplitPane is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { SplitPane } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <SplitPane left={<Card><CardHeader><CardTitle>Left</CardTitle></CardHeader></Card>} right={<Card><CardHeader><CardTitle>Right</CardTitle></CardHeader></Card>} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<SplitPane left={<Card><CardHeader><CardTitle>Left</CardTitle></CardHeader></Card>} right={<Card><CardHeader><CardTitle>Right</CardTitle></CardHeader></Card>} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add split-pane
+```
+
+## Token Integration
+
+SplitPane follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

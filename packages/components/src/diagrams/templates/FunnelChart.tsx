@@ -59,7 +59,7 @@ export const FunnelChart = forwardRef<HTMLDivElement, FunnelChartProps>(
                   opacity: 1 - i * 0.08,
                 }}
               >
-                <span className="text-xs font-semibold text-[var(--s-primary-contrast)] drop-shadow-[0_1px_2px_oklch(0 0 0 / 0.3)]">
+                <span className="text-xs font-semibold text-[var(--s-primary-contrast)] drop-shadow-[var(--s-shadow-sm,0_1px_2px_rgb(0_0_0_/_0.3))]">
                   {step.label}
                 </span>
                 {showValues && (

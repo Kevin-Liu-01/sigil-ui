@@ -10,8 +10,8 @@ const SMOOTH = "cubic-bezier(0.16, 1, 0.3, 1)";
 function MoonIcon({ visible }: { visible: boolean }) {
   return (
     <svg
-      width="11"
-      height="11"
+      width="13"
+      height="13"
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -45,8 +45,8 @@ const RAYS = [0, 45, 90, 135, 180, 225, 270, 315].map((angle) => {
 function SunIcon({ visible }: { visible: boolean }) {
   return (
     <svg
-      width="12"
-      height="12"
+      width="13"
+      height="13"
       viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +90,7 @@ export function SigilThemeToggle() {
   const isDark = resolvedTheme === "dark";
 
   if (!mounted) {
-    return <div className="w-11 h-6" />;
+    return <div className="w-14 h-8" />;
   }
 
   return (
@@ -99,6 +99,8 @@ export function SigilThemeToggle() {
       checked={isDark}
       onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
       aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+      className="!h-8 !w-14"
+      thumbClassName="!size-7 data-[state=checked]:!translate-x-6"
       thumbIcon={
         <>
           <MoonIcon visible={isDark} />

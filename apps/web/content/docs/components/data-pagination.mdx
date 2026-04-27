@@ -1,0 +1,32 @@
+---
+title: DataPagination
+description: DataPagination is a token-driven Sigil component in the data display and tables group.
+---
+
+## Import
+
+```tsx
+import { DataPagination } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <DataPagination page={2} pageCount={8} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<DataPagination page={2} pageCount={8} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add data-pagination
+```
+
+## Token Integration
+
+DataPagination follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

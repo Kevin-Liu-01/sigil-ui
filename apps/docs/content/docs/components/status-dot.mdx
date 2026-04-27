@@ -1,0 +1,32 @@
+---
+title: StatusDot
+description: StatusDot is a token-driven Sigil component in the feedback and status group.
+---
+
+## Import
+
+```tsx
+import { StatusDot } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <div className="flex items-center gap-2"><StatusDot status="online" /> Online</div>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<div className="flex items-center gap-2"><StatusDot status="online" /> Online</div>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add status-dot
+```
+
+## Token Integration
+
+StatusDot follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

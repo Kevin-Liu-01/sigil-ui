@@ -1,0 +1,32 @@
+---
+title: StatusBadge
+description: StatusBadge is a token-driven Sigil component in the feedback and status group.
+---
+
+## Import
+
+```tsx
+import { StatusBadge } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <StatusBadge status="success">Operational</StatusBadge>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<StatusBadge status="success">Operational</StatusBadge>
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add status-badge
+```
+
+## Token Integration
+
+StatusBadge follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

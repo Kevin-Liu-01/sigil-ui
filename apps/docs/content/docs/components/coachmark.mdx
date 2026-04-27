@@ -1,0 +1,32 @@
+---
+title: Coachmark
+description: Coachmark is a token-driven Sigil component in the overlay and interaction group.
+---
+
+## Import
+
+```tsx
+import { Coachmark } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Coachmark trigger={<Button variant="outline">Open coachmark</Button>} title="Coachmark" description="Guide users through a feature." />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Coachmark trigger={<Button variant="outline">Open coachmark</Button>} title="Coachmark" description="Guide users through a feature." />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add coachmark
+```
+
+## Token Integration
+
+Coachmark follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

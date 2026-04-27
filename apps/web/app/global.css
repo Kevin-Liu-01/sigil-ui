@@ -580,13 +580,13 @@ h1, h2, h3, h4, h5, h6 {
 .s-grid-bg,
 .r-grid-bg {
   background-image: linear-gradient(
-      var(--s-border-muted) var(--s-border-width-thin),
-      transparent var(--s-border-width-thin)
+      var(--s-grid-line-color, var(--s-border)) var(--s-border-width-thin, 1px),
+      transparent var(--s-border-width-thin, 1px)
     ),
     linear-gradient(
       90deg,
-      var(--s-border-muted) var(--s-border-width-thin),
-      transparent var(--s-border-width-thin)
+      var(--s-grid-line-color, var(--s-border)) var(--s-border-width-thin, 1px),
+      transparent var(--s-border-width-thin, 1px)
     );
   background-size: var(--s-grid-cell) var(--s-grid-cell);
 }
@@ -594,10 +594,10 @@ h1, h2, h3, h4, h5, h6 {
 .s-grid-bg-subtle,
 .r-grid-bg-subtle {
   background-image: linear-gradient(
-      var(--s-border-muted) 0.5px,
+      var(--s-grid-line-color, var(--s-border)) 0.5px,
       transparent 0.5px
     ),
-    linear-gradient(90deg, var(--s-border-muted) 0.5px, transparent 0.5px);
+    linear-gradient(90deg, var(--s-grid-line-color, var(--s-border)) 0.5px, transparent 0.5px);
   background-size: var(--s-grid-cell) var(--s-grid-cell);
 }
 
@@ -818,7 +818,7 @@ h1, h2, h3, h4, h5, h6 {
 /* ================================================================== */
 
 ::selection {
-  background: rgba(24, 24, 27, 0.15);
+  background: color-mix(in oklch, var(--s-primary) 18%, transparent);
   color: inherit;
 }
 
@@ -1095,8 +1095,8 @@ html[data-switching-theme] *::after {
 
 .s-divider {
   border: none;
-  border-top-style: var(--s-divider-style, solid);
-  border-top-width: var(--s-divider-width, 1px);
+  border-top-style: var(--s-divider-style, var(--s-border-style, solid));
+  border-top-width: var(--s-divider-width, var(--s-border-thin, 1px));
   border-top-color: var(--s-divider-color, var(--s-border));
   margin-top: var(--s-divider-spacing, 0px);
   margin-bottom: var(--s-divider-spacing, 0px);
@@ -1108,8 +1108,8 @@ html[data-switching-theme] *::after {
 
 .s-grid-visual[data-show-lines="1"] {
   background-image:
-    linear-gradient(to right, var(--s-grid-line-color, var(--s-border-muted)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px)),
-    linear-gradient(to bottom, var(--s-grid-line-color, var(--s-border-muted)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px));
+    linear-gradient(to right, var(--s-grid-line-color, var(--s-border)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px)),
+    linear-gradient(to bottom, var(--s-grid-line-color, var(--s-border)) var(--s-grid-line-width, 1px), transparent var(--s-grid-line-width, 1px));
   background-size: calc(100% / var(--s-align-rail-columns, 12)) calc(100% / var(--s-align-rail-columns, 12));
 }
 

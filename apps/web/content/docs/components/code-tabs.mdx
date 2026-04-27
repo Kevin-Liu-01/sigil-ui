@@ -1,0 +1,32 @@
+---
+title: CodeTabs
+description: CodeTabs is a token-driven Sigil component in the developer and ai/product ui group.
+---
+
+## Import
+
+```tsx
+import { CodeTabs } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <CodeTabs tabs={[{ value: "tsx", label: "TSX", code: "<Button>Ship</Button>", language: "tsx" }]} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<CodeTabs tabs={[{ value: "tsx", label: "TSX", code: "<Button>Ship</Button>", language: "tsx" }]} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add code-tabs
+```
+
+## Token Integration
+
+CodeTabs follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.

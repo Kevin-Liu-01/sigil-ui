@@ -25,6 +25,9 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(function CodeT
   { tabs, defaultValue, className, ...props },
   ref,
 ) {
+  if (tabs.length === 0) {
+    return <div ref={ref} className={cn("text-sm text-[var(--s-text-muted)]", className)} {...props}>No code tabs available.</div>;
+  }
   return (
     <div ref={ref} className={className} {...props}>
       <Tabs defaultValue={defaultValue ?? tabs[0]?.value}>
@@ -74,9 +77,10 @@ export const CopyButton = forwardRef<HTMLButtonElement, CopyButtonProps>(functio
       ref={ref}
       variant="outline"
       onClick={(event) => {
-        void navigator.clipboard?.writeText(value);
-        setCopied(true);
-        window.setTimeout(() => setCopied(false), 1200);
+        void navigator.clipboard?.writeText(value).then(() => {
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 1200);
+        });
         onClick?.(event);
       }}
       {...props}
@@ -178,7 +182,14 @@ export const ChatMessage = forwardRef<HTMLDivElement, ChatMessageProps>(function
   ref,
 ) {
   return (
-    <div ref={ref} data-role={role} className={cn("flex gap-3 data-[role=user]:flex-row-reverse", className)} {...props}>
+    <div
+      ref={ref}
+      role="listitem"
+      aria-label={`${role} message`}
+      data-role={role}
+      className={cn("flex gap-3 data-[role=user]:flex-row-reverse", className)}
+      {...props}
+    >
       {avatar && <div className="shrink-0">{avatar}</div>}
       <div className="max-w-[80%] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-2 text-sm data-[role=user]:bg-[var(--s-primary)] data-[role=user]:text-[var(--s-primary-contrast)]">
         {children}
@@ -191,7 +202,7 @@ export const ChatThread = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEleme
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("grid gap-4", className)} {...props} />;
+  return <div ref={ref} role="list" className={cn("grid gap-4", className)} {...props} />;
 });
 
 export interface MessageComposerProps extends PromptInputProps {
@@ -238,14 +249,14 @@ export const AuditLog = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("grid divide-y divide-[var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props} />;
+  return <div ref={ref} role="log" className={cn("grid divide-y divide-[var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props} />;
 });
 
 export const Changelog = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function Changelog(
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("grid gap-6", className)} {...props} />;
+  return <div ref={ref} role="feed" className={cn("grid gap-6", className)} {...props} />;
 });
 
 export interface VersionBadgeProps extends HTMLAttributes<HTMLSpanElement> {

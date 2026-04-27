@@ -1,0 +1,32 @@
+---
+title: AppHeader
+description: AppHeader is a token-driven Sigil component in the layout, navigation, and content group.
+---
+
+## Import
+
+```tsx
+import { AppHeader } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <AppHeader title="Components" description="Browse the catalog." actions={<Button>New</Button>} />
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<AppHeader title="Components" description="Browse the catalog." actions={<Button>New</Button>} />
+```
+
+## CLI
+
+```bash
+npx @sigil-ui/cli add app-header
+```
+
+## Token Integration
+
+AppHeader follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.
