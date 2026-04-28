@@ -1,6 +1,6 @@
 {
   "name": "create-sigil-app",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Bootstrap a new Next.js project with Sigil UI pre-configured",
   "license": "MIT",
   "type": "module",
