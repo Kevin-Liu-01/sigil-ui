@@ -42,6 +42,9 @@
     "@sigil-ui/presets": "workspace:*",
     "@sigil-ui/components": "workspace:*"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
     "@types/prompts": "^2.4.9",

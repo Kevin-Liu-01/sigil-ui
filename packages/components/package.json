@@ -80,6 +80,9 @@
     "tailwind-merge": "^3.0.2",
     "vaul": "^1.1.2"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "@types/d3-delaunay": "^6.0.4",
     "@types/react": "^19.0.0",

@@ -39,6 +39,9 @@
       "optional": true
     }
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "devDependencies": {
     "tsup": "^8.4.0",
     "typescript": "^5.8.0"
