@@ -6,6 +6,7 @@ import {
   useCallback,
   type CSSProperties,
   type HTMLAttributes,
+  type ReactElement,
 } from "react";
 import {
   DiagramCalloutLine,
@@ -694,7 +695,7 @@ function TopFaceTokenLines({ geo, ox, oy, active }: FaceProps) {
   const color = "oklch(0.50 0.24 275)";
   const n = 10, margin = 0.06;
   const step = (1 - 2 * margin) / (n - 1);
-  const els: JSX.Element[] = [];
+  const els: ReactElement[] = [];
 
   for (let i = 0; i < n; i++) {
     const v = margin + i * step;
