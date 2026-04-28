@@ -62,7 +62,7 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
               className={cn(
                 "inline-flex items-center justify-center h-11 px-[var(--s-hero-action-padding-x,24px)] py-[var(--s-hero-action-padding-y,12px)] rounded-[var(--s-radius-md,6px)]",
                 "text-sm font-medium transition-all duration-[var(--s-duration-fast,150ms)]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+                "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
                 actionVariantStyles[action.variant ?? "primary"],
               )}
             >

@@ -41,7 +41,7 @@ const triggerStyle = cn(
   "bg-transparent text-[var(--s-text)]",
   "transition-colors duration-[var(--s-duration-fast,150ms)]",
   "hover:bg-[var(--s-surface)] hover:text-[var(--s-text)]",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+  "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
   "disabled:pointer-events-none disabled:opacity-50",
   "data-[active]:bg-[var(--s-surface-elevated)]",
   "data-[state=open]:bg-[var(--s-surface-elevated)]",

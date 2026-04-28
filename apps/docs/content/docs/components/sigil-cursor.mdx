@@ -1,6 +1,6 @@
 ---
 title: SigilCursor
-description: A stylized, token-driven cursor overlay for Sigil interfaces.
+description: "A SigilCursor component from the Sigil design system."
 ---
 
 ## Import
@@ -11,66 +11,37 @@ import { SigilCursor } from "@sigil-ui/components";
 
 ## Usage
 
-Mount it once near your app root:
-
 ```tsx
-<body>
-  <SigilCursor />
-  {children}
-</body>
+<SigilCursor>...</SigilCursor>
 ```
-
-## Variants
-
-```tsx
-<SigilCursor variant="sigil" />
-<SigilCursor variant="ring" />
-<SigilCursor variant="dot" />
-<SigilCursor variant="crosshair" />
-```
-
-## Custom styling
-
-```tsx
-<SigilCursor
-  size={34}
-  dotSize={5}
-  color="var(--s-secondary)"
-  ringColor="var(--s-primary)"
-  dotColor="var(--s-primary)"
-  blendMode="difference"
-/>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-cursor-size` | Cursor outer size |
-| `--s-cursor-dot-size` | Center dot size |
-| `--s-cursor-stroke-width` | Ring and tick stroke |
-| `--s-cursor-tick-size` | Sigil tick length |
-| `--s-cursor-gap` | Space between ring and ticks |
-| `--s-cursor-color` | Tick color |
-| `--s-cursor-ring-color` | Ring color |
-| `--s-cursor-dot-color` | Center dot color |
-| `--s-cursor-glow` | Ring glow |
-| `--s-cursor-opacity` | Visible opacity |
-| `--s-cursor-blend-mode` | CSS blend mode |
-| `--s-cursor-z-index` | Overlay stacking level |
-
-The native cursor is hidden by default while the component is mounted. Set `hideNative={false}` to keep it visible.
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `enabled` | `boolean` | `true` | Mount or disable the custom cursor. |
-| `hideNative` | `boolean` | `true` | Hide the browser cursor while mounted. |
-| `variant` | `"sigil" \| "ring" \| "dot" \| "crosshair"` | `"sigil"` | Cursor drawing style. |
-| `size` | `number \| string` | token value | Cursor outer size. |
-| `dotSize` | `number \| string` | token value | Center dot size. |
-| `color` | `string` | token value | Primary cursor color. |
-| `ringColor` | `string` | token value | Ring color. |
-| `dotColor` | `string` | token value | Center dot color. |
-| `blendMode` | `CSSProperties["mixBlendMode"]` | token value | CSS blend mode. |
+| `enabled` | `boolean` | `true` | Enable the custom cursor. |
+| `hideNative` | `boolean` | `true` | Hide the native cursor while this component is mounted. |
+| `variant` | `SigilCursorVariant` | `sigil` | Cursor drawing style. |
+| `size` | `number | string` | — | Cursor outer size. Accepts a number of pixels or any CSS length. |
+| `dotSize` | `number | string` | — | Center dot size. Accepts a number of pixels or any CSS length. |
+| `color` | `string` | — | Primary cursor color. |
+| `ringColor` | `string` | — | Ring stroke color. |
+| `dotColor` | `string` | — | Center dot color. |
+| `blendMode` | `CSSProperties["mixBlendMode"]` | — | CSS mix-blend-mode value. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-cursor-size` | Cursor size |
+| `--s-cursor-color` | Cursor color |
+| `--s-primary` | Primary |
+| `--s-cursor-blend-mode` | Cursor blend mode |
+| `--s-duration-fast` | Duration fast |
+| `--s-ease-default` | Ease default |
+| `--s-cursor-opacity` | Cursor opacity |
+| `--s-cursor-stroke-width` | Cursor stroke width |
+| `--s-cursor-ring-color` | Cursor ring color |
+| `--s-cursor-radius` | Cursor radius |
+| `--s-radius-full` | Radius full |
+| `--s-cursor-glow` | Cursor glow |

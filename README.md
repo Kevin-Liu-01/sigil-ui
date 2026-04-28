@@ -31,7 +31,7 @@ Every AI-coded site looks the same. Agents copy components, apply defaults, prod
 ```
 The status quo                              Sigil
 ─────────────                               ─────
-copy components                             install preset
+copy components                             create/install preset
   ↓                                           ↓
 manually edit each one                      all 200+ token-driven components inherit identity
   ↓                                           ↓

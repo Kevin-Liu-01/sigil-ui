@@ -1,6 +1,6 @@
 ---
 title: Timeline
-description: "A vertical or horizontal timeline with dated entries and descriptions."
+description: "A Timeline component from the Sigil design system."
 ---
 
 ## Import
@@ -9,51 +9,26 @@ description: "A vertical or horizontal timeline with dated entries and descripti
 import { Timeline } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <Timeline
-    entries={[
-      { date: "2026-04", title: "v2.0 Launch", description: "Complete design token overhaul and 200+ token-driven components." },
-      { date: "2026-03", title: "Beta Release", description: "Public beta with early preset coverage." },
-      { date: "2026-02", title: "Alpha", description: "Internal testing with core token system." },
-      { date: "2026-01", title: "Project Start", description: "Initial architecture and design language." },
-    ]}
-    variant="vertical"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<Timeline
-  entries={[
-    { date: "2026-04", title: "Launch", description: "Public release" },
-    { date: "2026-03", title: "Beta", description: "Testing phase" },
-  ]}
-  variant="vertical"
-/>
-```
-
-## Horizontal variant
-
-```tsx
-<Timeline variant="horizontal" entries={entries} />
+<Timeline>...</Timeline>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `entries` | `TimelineEntry[]` | — | Timeline entries with date, title, and optional description |
-| `variant` | `"vertical" \| "horizontal"` | `"vertical"` | Layout orientation |
+| `entries` | `TimelineEntry[]` | — | Timeline entries. |
+| `variant` | `"vertical" | "horizontal"` | `vertical` | Layout variant. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Timeline dot color |
-| `--s-border` | Vertical line and horizontal connector |
-| `--s-text` | Entry title |
-| `--s-text-muted` | Date and description text |
-| `--s-font-mono` | Date font |
+| `--s-radius-full` | Radius full |
+| `--s-primary` | Primary |
+| `--s-border` | Border |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

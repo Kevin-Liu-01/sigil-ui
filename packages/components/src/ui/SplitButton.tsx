@@ -36,7 +36,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
             "text-sm font-medium text-[var(--s-text)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-surface-elevated)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+            "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
             "disabled:pointer-events-none disabled:opacity-50",
           )}
           {...rest}
@@ -55,7 +55,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
             "text-[var(--s-text-muted)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-surface-elevated)] hover:text-[var(--s-text)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+            "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
             "disabled:pointer-events-none disabled:opacity-50",
           )}
         >

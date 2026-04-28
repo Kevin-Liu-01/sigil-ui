@@ -3,6 +3,7 @@
   "pages": [
     "alert-dialog",
     "command",
+    "modal",
     "context-menu",
     "dialog",
     "drawer",

@@ -55,7 +55,7 @@ export const Clipboard = forwardRef<HTMLButtonElement, ClipboardProps>(function 
         "bg-[var(--s-surface)]",
         "hover:bg-[var(--s-surface-elevated)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+        "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
         className,
       )}
       {...props}

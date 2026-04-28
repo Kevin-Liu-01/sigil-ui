@@ -38,7 +38,7 @@ export const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(function Toggle
         "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)]",
         "font-medium text-[var(--s-text-secondary)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+        "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
         "disabled:pointer-events-none disabled:opacity-50",
         "data-[state=on]:text-[var(--s-text)]",
         variantStyles[variant],

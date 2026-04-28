@@ -603,16 +603,12 @@ function SearchRow() {
 
 function GPUCounterRow() {
   return (
-    <div className="flex flex-col gap-3">
-      <Separator />
-      <div className="flex items-center justify-between">
-        <div>
-          <span className="text-[11px] font-medium text-[var(--s-text)]">Number of GPUs</span>
-          <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">You can add more later.</p>
-        </div>
-        <NumberField value={8} min={1} max={64} />
+    <div className="flex items-center justify-between">
+      <div>
+        <span className="text-[11px] font-medium text-[var(--s-text)]">Number of GPUs</span>
+        <p className="text-[9px] text-[var(--s-text-muted)] mt-0.5">You can add more later.</p>
       </div>
-      <Separator />
+      <NumberField value={8} min={1} max={64} />
     </div>
   );
 }
@@ -1479,7 +1475,6 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <LatencyAreaRow />
           </div>
         </div>
-        <PresetDots />
       </div>
     </div>
   );

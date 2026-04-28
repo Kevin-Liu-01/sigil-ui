@@ -55,7 +55,7 @@ export const RatingGroup = forwardRef<HTMLDivElement, RatingGroupProps>(function
             onMouseEnter={() => setHovered(val)}
             className={cn(
               "cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] rounded-[var(--s-radius-sm,2px)]",
+              "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] rounded-[var(--s-radius-sm,2px)]",
               filled ? "text-[var(--s-warning)]" : "text-[var(--s-border)]",
             )}
           >

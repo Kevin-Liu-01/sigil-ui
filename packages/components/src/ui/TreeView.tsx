@@ -87,7 +87,7 @@ function TreeItem({
           "flex w-full items-center gap-1.5 rounded-[var(--s-radius-sm,4px)] px-2 py-1",
           "text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
           isSelected && "bg-[var(--s-surface)] font-medium",
         )}
         style={{ paddingLeft: `${level * 16 + 8}px` }}

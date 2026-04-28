@@ -34,7 +34,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           "bg-[var(--s-background)] text-[var(--s-text)]",
           "placeholder:text-[var(--s-text-muted)]",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:border-[var(--s-primary)] focus-visible:ring-1 focus-visible:ring-[var(--s-primary)]/20",
+          "focus-visible:outline-none focus-visible:border-[var(--s-input-focus-ring-color)] focus-visible:ring-[length:var(--s-input-focus-ring-width)] focus-visible:ring-[var(--s-input-focus-ring-color)]/20",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-[var(--s-text)]",
           "autofill:shadow-[inset_0_0_0px_1000px_var(--s-surface)]",

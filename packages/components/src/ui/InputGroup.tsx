@@ -18,7 +18,7 @@ export const InputGroup = forwardRef<HTMLDivElement, InputGroupProps>(function I
         "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
         "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
         "bg-[var(--s-background)]",
-        "focus-within:ring-1 focus-within:ring-[var(--s-primary)]/20 focus-within:border-[var(--s-primary)]",
+        "focus-within:ring-[length:var(--s-input-focus-ring-width)] focus-within:ring-[var(--s-input-focus-ring-color)]/20 focus-within:border-[var(--s-input-focus-ring-color)]",
         "transition-all duration-[var(--s-duration-fast,150ms)]",
         "has-[input:disabled]:opacity-50 has-[input:disabled]:cursor-not-allowed",
         className,

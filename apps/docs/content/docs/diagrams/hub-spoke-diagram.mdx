@@ -1,6 +1,6 @@
 ---
 title: HubSpokeDiagram
-description: "A hub-and-spoke diagram with a central node connected to surrounding nodes."
+description: "A HubSpokeDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,47 +9,28 @@ description: "A hub-and-spoke diagram with a central node connected to surroundi
 import { HubSpokeDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <HubSpokeDiagram
-    hub="Core API"
-    spokes={[
-      { label: "Auth" },
-      { label: "Billing" },
-      { label: "Search" },
-      { label: "Notifications" },
-      { label: "Analytics" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<HubSpokeDiagram
-  hub="Core API"
-  spokes={[
-    { label: "Auth" },
-    { label: "Billing" },
-    { label: "Search" },
-  ]}
-/>
+<HubSpokeDiagram>...</HubSpokeDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `hub` | `string` | — | Central hub label |
-| `spokes` | `SpokeNode[]` | — | Surrounding spoke nodes |
+| `hub` | `{ label: string; icon?: ReactNode; sublabel?: string` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Hub node color |
-| `--s-border` | Spoke connections and node borders |
-| `--s-surface` | Node background |
-| `--s-text` | Node labels |
-| `--s-radius-md` | Node border radius |
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-border-strong` | Border strong |
+| `--s-radius-lg` | Radius lg |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |

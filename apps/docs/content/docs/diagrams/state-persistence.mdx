@@ -1,6 +1,6 @@
 ---
 title: StatePersistence
-description: "A state persistence diagram showing how application state flows through storage layers."
+description: "A StatePersistence component from the Sigil design system."
 ---
 
 ## Import
@@ -9,50 +9,35 @@ description: "A state persistence diagram showing how application state flows th
 import { StatePersistence } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <StatePersistence
-    activeItem={{ label: "Theme", sublabel: "active", value: "saved", valueLabel: "local", variant: "success" }}
-    competitors={[
-      { label: "Draft", value: "syncing", variant: "muted" },
-      { label: "Session", value: "expired", variant: "danger" },
-    ]}
-    persistedState={[
-      { label: "Preset", status: "restored" },
-      { label: "Density", status: "restored" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<StatePersistence
-  activeItem={{ label: "Theme", value: "saved", variant: "success" }}
-  persistedState={[
-    { label: "Preset", status: "restored" },
-    { label: "Density", status: "restored" },
-  ]}
-/>
+<StatePersistence>...</StatePersistence>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `activeItem` | `PersistenceActiveItem` | — | Primary active state item |
-| `competitors` | `PersistenceActiveItem[]` | `[]` | Optional comparison items |
-| `persistedState` | `PersistedStateRow[]` | `[]` | Persisted state rows |
-| `activeLabel` | `string` | `"Status"` | Active section label |
-| `stateLabel` | `string` | `"Preserved state"` | State section label |
+| `activeItem` | `PersistenceActiveItem` | — | The primary "active" item (e.g. the product being promoted). |
+| `competitors` | `PersistenceActiveItem[]` | — | Competing items shown for comparison. |
+| `persistedState` | `PersistedStateRow[]` | — | Rows of persisted state. |
+| `activeLabel` | `string` | — | Section labels. |
+| `stateLabel` | `string` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Active state color |
-| `--s-border` | Table borders |
-| `--s-surface` | Background |
-| `--s-text` | Labels |
-| `--s-text-muted` | Descriptions |
+| `--s-success` | Success |
+| `--s-error` | Error |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-spring` | Ease spring |
+| `--s-radius-full` | Radius full |
+| `--s-duration-slow` | Duration slow |
+| `--s-text` | Text |
+| `--s-background` | Background |
+| `--s-ease-out` | Ease out |
+| `--s-duration-fast` | Duration fast |

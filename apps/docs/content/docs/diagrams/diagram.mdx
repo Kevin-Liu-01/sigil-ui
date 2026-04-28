@@ -1,6 +1,6 @@
 ---
 title: Diagram
-description: "A base diagram container with optional dot/line/cross grid background."
+description: "A Diagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,44 +9,25 @@ description: "A base diagram container with optional dot/line/cross grid backgro
 import { Diagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <Diagram showGrid gridVariant="dots" gridSize={24} style={{ height: 200 }}>
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "100%", fontSize: 14, color: "var(--s-text-muted)" }}>
-      Place diagram content here
-    </div>
-  </Diagram>
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<Diagram showGrid gridVariant="dots" gridSize={24}>
-  {/* Place DiagramNodes, DiagramConnectors, or custom content */}
-</Diagram>
+<Diagram>...</Diagram>
 ```
-
-## Grid variants
-
-- `"dots"` — Dot grid pattern
-- `"lines"` — Line grid pattern
-- `"cross"` — Combined dots and lines
-- `"none"` — No grid
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `showGrid` | `boolean` | `false` | Show background grid |
-| `gridVariant` | `"dots" \| "lines" \| "cross" \| "none"` | `"dots"` | Grid pattern style |
-| `gridSize` | `number` | `24` | Grid cell size in px |
+| `showGrid` | `boolean` | — | — |
+| `gridVariant` | `DiagramGridVariant` | — | — |
+| `gridSize` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Container border |
-| `--s-border-muted` | Grid pattern color |
-| `--s-surface` | Container background |
-| `--s-radius-card` | Container border radius |
+| `--s-border-muted` | Border muted |
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-surface` | Surface |

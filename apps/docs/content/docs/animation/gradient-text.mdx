@@ -9,17 +9,23 @@ description: "A GradientText component from the Sigil design system."
 import { GradientText } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <GradientText>Gradient text example</GradientText>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<GradientText>...</GradientText>
+<GradientText>GradientText content</GradientText>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `colors` | `string[]` | `[` | Gradient colors. var(--s-primary,#6366f1)","var(--s-accent,#ec4899)","var(--s-primary,#6366f1)"] |
+| `colors` | `string[]` | `[` | Gradient colors. var(--s-primary)","var(--s-accent,#ec4899)","var(--s-primary)"] |
 | `duration` | `number` | `4` | Animation duration in seconds. |
 | `animate` | `boolean` | `true` | Whether the gradient animates. |
 

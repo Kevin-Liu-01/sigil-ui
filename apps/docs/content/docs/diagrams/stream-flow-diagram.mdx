@@ -1,6 +1,6 @@
 ---
 title: StreamFlowDiagram
-description: "An animated streaming flow diagram showing data moving through pipeline stages."
+description: "A StreamFlowDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,35 +9,30 @@ description: "An animated streaming flow diagram showing data moving through pip
 import { StreamFlowDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <StreamFlowDiagram
-    source={{ label: "Prompt" }}
-    tokens={["tokens", "compile", "render"]}
-    output="UI"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<StreamFlowDiagram source={{ label: "Prompt" }} tokens={["tokens", "compile"]} output="UI" />
+<StreamFlowDiagram>...</StreamFlowDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
-| `tokens` | `string[]` | `["Hello", "World", "!"]` | Streamed tokens |
-| `output` | `string` | — | Optional output node |
+| `source` | `{ label: string; icon?: ReactNode` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Stream flow color |
-| `--s-border` | Pipeline borders |
-| `--s-surface` | Stage background |
-| `--s-text` | Stage labels |
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-radius-md` | Radius md |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-text` | Text |
+| `--s-chart-axis` | Chart axis |
+| `--s-radius-sm` | Radius sm |
+| `--s-font-mono` | Font mono |
+| `--s-background` | Background |

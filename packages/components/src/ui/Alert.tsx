@@ -103,7 +103,7 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
           className={cn(
             "absolute right-3 top-3 rounded-[var(--s-radius-sm,0px)] opacity-70",
             "transition-opacity hover:opacity-100",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+            "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           )}
         >
           <XIcon />

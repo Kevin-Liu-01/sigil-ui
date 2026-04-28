@@ -1,6 +1,6 @@
 ---
 title: PlatformHubDiagram
-description: "A platform hub diagram showing a central platform with connected services."
+description: "A PlatformHubDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,42 +9,32 @@ description: "A platform hub diagram showing a central platform with connected s
 import { PlatformHubDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <PlatformHubDiagram
-    left={[{ label: "Inputs", items: [{ label: "Tokens" }, { label: "Presets" }] }]}
-    center={{
-      label: "Platform",
-      items: [{ label: "CLI" }, { label: "Docs" }],
-    }}
-    right={[{ label: "Outputs", items: [{ label: "CSS" }, { label: "Components" }] }]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<PlatformHubDiagram
-  left={[{ label: "Inputs", items: [{ label: "Tokens" }] }]}
-  center={{ label: "Platform" }}
-  right={[{ label: "Outputs", items: [{ label: "Components" }] }]}
-/>
+<PlatformHubDiagram>...</PlatformHubDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `left` | `PlatformGroup[]` | — | Left-side groups |
-| `center` | `{ label: string; icon?: ReactNode; items?: PlatformItem[] }` | — | Central hub |
-| `right` | `PlatformGroup[]` | — | Right-side groups |
+| `left` | `PlatformGroup[]` | — | — |
+| `center` | `{ label: string; icon?: ReactNode; items?: { label: strin...` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Hub accent |
-| `--s-border` | Connection lines |
-| `--s-surface` | Node background |
-| `--s-text` | Labels |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-radius-sm` | Radius sm |
+| `--s-border-muted` | Border muted |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-border-strong` | Border strong |
+| `--s-radius-lg` | Radius lg |
+| `--s-primary` | Primary |

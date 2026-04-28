@@ -11,8 +11,13 @@ import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@s
 
 ## Preview
 
-<ComponentPreview>
-  <Accordion />
+<ComponentPreview vertical>
+  <Accordion type="single" collapsible>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What is Sigil UI?</AccordionTrigger>
+      <AccordionContent>A token-driven design system where one file updates everything.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
 </ComponentPreview>
 
 ## Usage

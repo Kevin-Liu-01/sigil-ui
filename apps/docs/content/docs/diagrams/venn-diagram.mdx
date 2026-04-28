@@ -1,6 +1,6 @@
 ---
 title: VennDiagram
-description: "A Venn diagram for visualizing set intersections (2 or 3 circles)."
+description: "A VennDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,47 +9,27 @@ description: "A Venn diagram for visualizing set intersections (2 or 3 circles).
 import { VennDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <VennDiagram
-    circles={[
-      { label: "Design" },
-      { label: "Engineering" },
-      { label: "Product" },
-    ]}
-    intersectionLabel="DX"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<VennDiagram
-  circles={[
-    { label: "Design" },
-    { label: "Engineering" },
-    { label: "Product" },
-  ]}
-  intersectionLabel="DX"
-/>
+<VennDiagram>...</VennDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `circles` | `[VennCircle, VennCircle] \| [VennCircle, VennCircle, VennCircle]` | — | 2 or 3 circle definitions |
-| `intersectionLabel` | `string` | — | Label for the center intersection |
-| `width` | `number` | `340` | SVG width |
-| `height` | `number` | `240` | SVG height |
+| `circles` | `[VennCircle, VennCircle] | [VennCircle, VennCircle, VennC...` | — | — |
+| `intersectionLabel` | `string` | — | Label for the intersection. |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | First circle color |
-| `--s-success` | Second circle color |
-| `--s-warning` | Third circle color |
-| `--s-text` | Circle and intersection labels |
-| `--s-font-mono` | Intersection label font |
+| `--s-primary` | Primary |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |

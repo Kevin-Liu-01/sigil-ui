@@ -1,6 +1,6 @@
 ---
 title: Separator
-description: "A plain horizontal or vertical line separator for compact UI groups."
+description: "A Separator component from the Sigil design system."
 ---
 
 ## Import
@@ -12,28 +12,14 @@ import { Separator } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <div style={{ display: "flex", alignItems: "center", gap: 12, width: "100%" }}>
-    <span>Account</span>
-    <Separator style={{ flex: 1 }} />
-    <Separator orientation="vertical" style={{ height: 32 }} />
-    <span>Settings</span>
-  </div>
+  <Separator />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Separator />
-<Separator orientation="vertical" className="h-4" />
+<Separator>Separator content</Separator>
 ```
-
-## Props
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `orientation` | `"horizontal" \| "vertical"` | `horizontal` | Separator orientation. |
-| `decorative` | `boolean` | `true` | Whether the line is hidden from assistive technology. |
-| `className` | `string` | — | Additional CSS classes. |
 
 ## Token integration
 

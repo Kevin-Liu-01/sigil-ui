@@ -181,7 +181,7 @@ export function compileToCss(
   // Headings
   if (resolvedTokens.headings) {
     for (const [key, value] of Object.entries(resolvedTokens.headings)) {
-      lightVars.push(`${cssVar(prefix, key)}: ${value};`);
+      lightVars.push(`${cssVar(prefix, "heading", key)}: ${value};`);
     }
   }
 

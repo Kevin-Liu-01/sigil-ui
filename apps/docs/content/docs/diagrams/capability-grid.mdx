@@ -1,6 +1,6 @@
 ---
 title: CapabilityGrid
-description: "A grid layout showing categorized capabilities or features with optional callouts."
+description: "A CapabilityGrid component from the Sigil design system."
 ---
 
 ## Import
@@ -9,43 +9,32 @@ description: "A grid layout showing categorized capabilities or features with op
 import { CapabilityGrid } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <CapabilityGrid
-    categories={[
-      { label: "Core", items: [{ name: "Tokens" }, { name: "Presets" }, { name: "CLI" }] },
-      { label: "Surface", items: [{ name: "Components" }, { name: "Layouts" }, { name: "Docs" }] },
-    ]}
-    callout={{ label: "Still manual", items: ["one-off CSS", "theme drift"], variant: "warning" }}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<CapabilityGrid
-  categories={[
-    { label: "Core", items: [{ name: "Tokens" }, { name: "Presets" }] },
-    { label: "Surface", items: [{ name: "Components" }, { name: "Docs" }] },
-  ]}
-/>
+<CapabilityGrid>...</CapabilityGrid>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `categories` | `CapabilityCategory[]` | — | Categories with items |
-| `callout` | `CapabilityCallout` | — | Optional callout section |
+| `categories` | `CapabilityCategory[]` | — | — |
+| `callout` | `CapabilityCallout` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Callout accent |
-| `--s-border` | Grid borders |
-| `--s-surface` | Card background |
-| `--s-text` | Item labels |
-| `--s-text-muted` | Descriptions |
-| `--s-radius-md` | Card radius |
+| `--s-error` | Error |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-text-muted` | Text muted |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-primary` | Primary |
+| `--s-text` | Text |

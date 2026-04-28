@@ -1,32 +1,68 @@
 ---
 title: SearchInput
-description: SearchInput is a token-driven Sigil component in the forms and inputs group.
+description: "A SearchInput component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { SearchInput } from "@sigil-ui/components";
+import { SearchInput, CurrencyInput, PhoneInput, TimePicker, DateTimePicker, DateRangeField, MultiSelect, Autocomplete, CreatableSelect, AsyncSelect, SegmentedTabs, RangeSlider, DualRangeSlider, FileDropzone, ImageUpload, AvatarUpload, ColorField, ComboboxField, CheckboxCard, RadioCard, SwitchField, SliderField, StepperField, TagsField, CopyInput } from "@sigil-ui/components";
 ```
 
 ## Preview
 
-<ComponentPreview>
-  <SearchInput placeholder="Search components..." />
+<ComponentPreview vertical>
+  <SearchInput placeholder="Search..." />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<SearchInput placeholder="Search components..." />
+<SearchInput>...</SearchInput>
 ```
 
-## CLI
+## Sub-components
 
-```bash
-npx @sigil-ui/cli add search-input
-```
+This component includes the following parts:
 
-## Token Integration
+- `<CurrencyInput>`
+- `<PhoneInput>`
+- `<TimePicker>`
+- `<DateTimePicker>`
+- `<DateRangeField>`
+- `<MultiSelect>`
+- `<Autocomplete>`
+- `<CreatableSelect>`
+- `<AsyncSelect>`
+- `<SegmentedTabs>`
+- `<RangeSlider>`
+- `<DualRangeSlider>`
+- `<FileDropzone>`
+- `<ImageUpload>`
+- `<AvatarUpload>`
+- `<ColorField>`
+- `<ComboboxField>`
+- `<CheckboxCard>`
+- `<RadioCard>`
+- `<SwitchField>`
+- `<SliderField>`
+- `<StepperField>`
+- `<TagsField>`
+- `<CopyInput>`
 
-SearchInput follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |
+| `--s-radius-input` | Radius input |
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-radius-sm` | Radius sm |
+| `--s-surface` | Surface |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |
+| `--s-text` | Text |
+| `--s-card-radius` | Card radius |
+| `--s-radius-full` | Radius full |

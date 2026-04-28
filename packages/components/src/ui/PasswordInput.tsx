@@ -42,7 +42,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
             "bg-[var(--s-background)] px-3 py-2 text-sm text-[var(--s-text)]",
             "h-[var(--s-input-height,40px)]",
             "placeholder:text-[var(--s-text-muted)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+            "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
             "disabled:cursor-not-allowed disabled:opacity-50",
             showToggle && "pr-10",
             className,

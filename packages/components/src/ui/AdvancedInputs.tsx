@@ -281,7 +281,7 @@ export function AsyncSelect({
               }}
               className={cn(
                 "rounded-[var(--s-radius-sm,4px)] px-2 py-2 text-left text-sm",
-                "hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+                "hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
                 option.value === value && "bg-[var(--s-surface)] font-medium",
               )}
             >

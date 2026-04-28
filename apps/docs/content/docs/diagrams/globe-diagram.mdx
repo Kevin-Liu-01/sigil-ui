@@ -1,6 +1,6 @@
 ---
 title: GlobeDiagram
-description: "A stylized globe diagram showing geographic points or global coverage."
+description: "A GlobeDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,32 +9,27 @@ description: "A stylized globe diagram showing geographic points or global cover
 import { GlobeDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <GlobeDiagram
-    cities={[
-      { name: "San Francisco", lat: 37.7749, lng: -122.4194 },
-      { name: "London", lat: 51.5074, lng: -0.1278 },
-      { name: "Tokyo", lat: 35.6762, lng: 139.6503 },
-      { name: "Sydney", lat: -33.8688, lng: 151.2093 },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<GlobeDiagram>...</GlobeDiagram>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `cities` | `GlobeCity[]` | — | Array of cities with name, lat, lng |
-| `width` | `number` | `300` | SVG width |
-| `height` | `number` | `300` | SVG height |
+| `size` | `number` | — | — |
+| `cities` | `GlobeCity[]` | — | — |
+| `dotColor` | `string` | — | — |
+| `arcColor` | `string` | — | — |
+| `rotation` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | City dot color |
-| `--s-border` | Globe outline and grid |
-| `--s-text-muted` | City labels |
-| `--s-font-mono` | Label font |
+| `--s-text-muted` | Text muted |
+| `--s-primary` | Primary |
+| `--s-border-muted` | Border muted |
+| `--s-font-mono` | Font mono |

@@ -1,8 +1,8 @@
 "use client";
 
-import { FooterLogo, NavbarLogo } from "@/components/landing/hero-logo-field";
+import { NavbarLogo } from "@/components/landing/hero-logo-field";
 import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
-import { SigilSection } from "@sigil-ui/components";
+import { SectionDivider, SigilSection } from "@sigil-ui/components";
 
 function GitHubIcon() {
   return (
@@ -86,10 +86,11 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
     <>
       <div className="grid grid-cols-2 md:grid-cols-6 gap-12">
         <div className="col-span-2">
-          <div className="flex items-center gap-2 mb-3">
+          <div className="flex items-center gap-2.5 mb-3">
             <NavbarLogo />
-            <span className="font-[family-name:var(--s-font-display)] font-bold text-sm text-[var(--s-text)]">
-              Sigil UI
+            <span className="font-[family-name:var(--s-font-display)] font-bold text-[15px] tracking-[-0.03em] text-[var(--s-text)]">
+              sigil<span className="opacity-30 font-light">/</span>
+              <span className="font-medium text-[13px]">UI</span>
             </span>
           </div>
           <p className="text-[13px] leading-relaxed text-[var(--s-text-muted)] mb-5 max-w-[260px]">
@@ -150,23 +151,29 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
 
   if (fullBleed) {
     return (
-      <footer className="w-full border-t border-[var(--s-border)] bg-[var(--s-surface)]">
-        <div
-          className="mx-auto w-full"
-          style={{
-            maxWidth: "var(--s-content-max, 1200px)",
-            padding: "var(--s-footer-py, 48px) var(--s-page-margin, 24px)",
-          }}
-        >
-          {footerContent}
-        </div>
-      </footer>
+      <>
+        <SectionDivider size="md" showCross fadeEdges />
+        <footer className="w-full bg-[var(--s-surface)]">
+          <div
+            className="mx-auto w-full"
+            style={{
+              maxWidth: "var(--s-content-max, 1200px)",
+              padding: "var(--s-footer-py, 48px) var(--s-page-margin, 24px)",
+            }}
+          >
+            {footerContent}
+          </div>
+        </footer>
+      </>
     );
   }
 
   return (
-    <SigilSection as="footer" borderTop showCrosses padding="48px 24px 48px">
-      {footerContent}
-    </SigilSection>
+    <>
+      <SectionDivider size="md" showCross fadeEdges />
+      <SigilSection as="footer" showCrosses padding="48px 24px 48px">
+        {footerContent}
+      </SigilSection>
+    </>
   );
 }

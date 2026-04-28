@@ -25,7 +25,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
           "border-[var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
           "placeholder:text-[var(--s-text-muted)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)] resize-y",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-1",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           hasError
             ? "border-[var(--s-error)] focus-visible:ring-[var(--s-error)]"

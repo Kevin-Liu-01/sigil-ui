@@ -1,6 +1,6 @@
 ---
 title: IsolationStack
-description: "A layered isolation stack showing separated concerns or environments."
+description: "A IsolationStack component from the Sigil design system."
 ---
 
 ## Import
@@ -9,43 +9,33 @@ description: "A layered isolation stack showing separated concerns or environmen
 import { IsolationStack } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <IsolationStack
-    layers={[
-      { label: "Browser", width: "100%" },
-      { label: "Sandbox", width: "82%" },
-      { label: "Agent", width: "64%", accent: true },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<IsolationStack
-  layers={[
-    { label: "Browser", width: "100%" },
-    { label: "Sandbox", width: "82%" },
-    { label: "Agent", width: "64%", accent: true },
-  ]}
-/>
+<IsolationStack>...</IsolationStack>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `layers` | `IsolationLayer[]` | — | Stack layers |
-| `columns` | `ComparisonColumn[]` | — | Optional comparison columns |
-| `rows` | `ComparisonRow[]` | — | Optional comparison rows |
+| `layers` | `IsolationLayer[]` | — | Stacked isolation layers (outer to inner). |
+| `columns` | `ComparisonColumn[]` | — | Comparison matrix columns. |
+| `rows` | `ComparisonRow[]` | — | Comparison matrix rows. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Layer borders |
-| `--s-surface` | Layer background |
-| `--s-text` | Labels |
-| `--s-text-muted` | Descriptions |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-error` | Error |
+| `--s-text-muted` | Text muted |
+| `--s-border` | Border |
+| `--s-primary` | Primary |
+| `--s-surface` | Surface |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-duration-slow` | Duration slow |
+| `--s-text` | Text |
+| `--s-duration-fast` | Duration fast |

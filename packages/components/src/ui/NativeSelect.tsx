@@ -23,12 +23,12 @@ export const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             "border border-[style:var(--s-border-style,solid)] bg-[var(--s-background)]",
             "px-3 py-1 pr-8",
             "transition-all duration-[var(--s-duration-fast,150ms)]",
-            "focus:outline-none focus:ring-1",
+            "focus:outline-none focus:ring-[length:var(--s-input-focus-ring-width)]",
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",
             "cursor-pointer",
             hasError
               ? "border-[var(--s-error)] focus:border-[var(--s-error)] focus:ring-[var(--s-error)]/20"
-              : "border-[var(--s-border)] focus:border-[var(--s-primary)] focus:ring-[var(--s-primary)]/20",
+              : "border-[var(--s-border)] focus:border-[var(--s-input-focus-ring-color)] focus:ring-[var(--s-input-focus-ring-color)]/20",
             className,
           )}
           {...props}

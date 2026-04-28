@@ -49,7 +49,7 @@ export const InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "first:rounded-l-[var(--s-radius-md,6px)] first:border-l",
           "last:rounded-r-[var(--s-radius-md,6px)]",
-          slot?.isActive && "z-10 ring-2 ring-[var(--s-ring,var(--s-primary))] ring-offset-1",
+          slot?.isActive && "z-10 ring-[length:var(--s-focus-ring-width)] ring-[var(--s-focus-ring-color)] ring-offset-[var(--s-focus-ring-offset)]",
           className,
         )}
         {...rest}

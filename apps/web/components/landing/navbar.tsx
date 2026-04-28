@@ -189,11 +189,9 @@ export function LandingNavbar() {
     <header
       className="sticky top-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        background: scrolled
-          ? "color-mix(in oklch, var(--s-background) 85%, transparent)"
-          : "transparent",
-        backdropFilter: scrolled ? "blur(16px) saturate(1.5)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(16px) saturate(1.5)" : "none",
+        background: "color-mix(in oklch, var(--s-background) 85%, transparent)",
+        backdropFilter: "blur(16px) saturate(1.5)",
+        WebkitBackdropFilter: "blur(16px) saturate(1.5)",
         boxShadow: scrolled
           ? "0 1px 3px color-mix(in oklch, var(--s-background) 30%, transparent), 0 4px 12px color-mix(in oklch, var(--s-background) 15%, transparent)"
           : "none",

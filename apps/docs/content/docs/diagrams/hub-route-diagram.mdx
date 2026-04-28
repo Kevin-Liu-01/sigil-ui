@@ -1,6 +1,6 @@
 ---
 title: HubRouteDiagram
-description: "A routing diagram showing paths from a central hub to multiple destinations."
+description: "A HubRouteDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,54 +9,31 @@ description: "A routing diagram showing paths from a central hub to multiple des
 import { HubRouteDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <HubRouteDiagram
-    source={{ label: "App" }}
-    hub={{
-      label: "Sigil",
-      layers: [
-        { label: "Tokens" },
-        { label: "Presets" },
-        { label: "Primitives" },
-        { label: "Components" },
-      ],
-    }}
-    leftLabel="Inputs"
-    rightLabel="Outputs"
-    leftTargets={[{ label: "Theme" }, { label: "Docs" }]}
-    rightTargets={[{ label: "CSS" }, { label: "UI" }]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<HubRouteDiagram
-  source={{ label: "App" }}
-  hub={{ label: "Sigil", layers: [{ label: "Tokens" }, { label: "Components" }] }}
-  leftTargets={[{ label: "Theme" }]}
-  rightTargets={[{ label: "UI" }]}
-/>
+<HubRouteDiagram>...</HubRouteDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `source` | `{ label: string; icon?: ReactNode }` | — | Source node |
-| `hub` | `{ label: string; layers: HubRouteLayer[] }` | — | Central hub and layers |
-| `leftTargets` | `HubRouteNode[]` | — | Left target group |
-| `rightTargets` | `HubRouteNode[]` | — | Right target group |
-| `leftLabel` | `string` | — | Optional left group label |
-| `rightLabel` | `string` | — | Optional right group label |
+| `source` | `{ label: string; icon?: ReactNode` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Hub and route colors |
-| `--s-border` | Route lines |
-| `--s-surface` | Node background |
-| `--s-text` | Labels |
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-border-muted` | Border muted |
+| `--s-radius-md` | Radius md |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-border-strong` | Border strong |
+| `--s-radius-lg` | Radius lg |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-font-mono` | Font mono |

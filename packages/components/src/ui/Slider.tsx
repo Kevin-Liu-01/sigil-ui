@@ -14,7 +14,7 @@ const thumbClasses = cn(
   "block size-4 border-2 border-[style:var(--s-border-style,solid)] border-[var(--s-primary)] bg-[var(--s-background)] shadow-[var(--s-shadow-sm)]",
   "rounded-[var(--s-radius-full,9999px)]",
   "transition-colors duration-[var(--s-duration-fast,150ms)]",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+  "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
   "disabled:pointer-events-none disabled:opacity-50",
   "cursor-pointer",
 );

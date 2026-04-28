@@ -1,6 +1,6 @@
 ---
 title: ArchitectureDiagram
-description: "An isometric architecture diagram with exploded-view layering for infrastructure visualization."
+description: "Isometric architecture diagram combining exploded-view layering with cross-hatching for infrastructure layers."
 ---
 
 ## Import
@@ -9,55 +9,33 @@ description: "An isometric architecture diagram with exploded-view layering for 
 import { ArchitectureDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <ArchitectureDiagram
-    title="Platform Architecture"
-    layers={[
-      { label: "Client", items: ["Web App", "Mobile App", "CLI"] },
-      { label: "API Gateway", items: ["REST", "GraphQL", "WebSocket"] },
-      { label: "Services", items: ["Auth", "Billing", "Notifications", "Search"] },
-      { label: "Infrastructure", items: ["PostgreSQL", "Redis", "S3", "CDN"] },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<ArchitectureDiagram
-  title="Platform Architecture"
-  layers={[
-    { label: "Client", items: ["Web App", "Mobile App"] },
-    { label: "Services", items: ["Auth", "Billing"] },
-    { label: "Infrastructure", items: ["PostgreSQL", "Redis"] },
-  ]}
-  gap="1.5rem"
-/>
+<ArchitectureDiagram>...</ArchitectureDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `layers` | `ArchitectureLayer[]` | — | Layers from top (client) to bottom (infrastructure) |
-| `title` | `string` | — | Diagram title |
-| `gap` | `string` | `"1.5rem"` | Gap between layers |
+| `layers` | `ArchitectureLayer[]` | — | Layers from top (highest abstraction) to bottom (infrastructure). |
+| `title` | `string` | — | Title for the diagram. |
+| `gap` | `string` | `1.5rem` | Gap between layers. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Layer borders |
+| `--s-card-radius` | Card radius |
 | `--s-border-style` | Border style |
-| `--s-surface` | Layer background |
-| `--s-surface-elevated` | Item background |
-| `--s-shadow-sm` | Layer shadow |
-| `--s-shadow-md` | Hover shadow |
-| `--s-text` | Layer and item labels |
-| `--s-radius-md` | Item radius |
-| `--s-card-radius` | Layer radius |
-| `--s-duration-fast` | Hover transition |
-| `--s-border-strong` | Item border |
-| `--s-background` | Container background |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text` | Text |
+| `--s-radius-md` | Radius md |
+| `--s-duration-fast` | Duration fast |
+| `--s-shadow-md` | Shadow md |
+| `--s-border-strong` | Border strong |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-background` | Background |

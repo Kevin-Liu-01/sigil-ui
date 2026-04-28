@@ -384,10 +384,15 @@ export type HeadingTokens = {
   readonly "h2-size": string;
   readonly "h2-weight": string;
   readonly "h2-tracking": string;
+  readonly "h2-leading"?: string;
   readonly "h3-size": string;
   readonly "h3-weight": string;
+  readonly "h3-tracking"?: string;
+  readonly "h3-leading"?: string;
   readonly "h4-size": string;
   readonly "h4-weight": string;
+  readonly "h4-tracking"?: string;
+  readonly "h4-leading"?: string;
   readonly "display-size": string;
   readonly "display-weight": string;
   readonly "display-tracking": string;

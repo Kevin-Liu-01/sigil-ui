@@ -1,6 +1,6 @@
 ---
 title: RadarChart
-description: "A spider/radar chart for multi-dimensional data comparison."
+description: "A RadarChart component from the Sigil design system."
 ---
 
 ## Import
@@ -9,57 +9,27 @@ description: "A spider/radar chart for multi-dimensional data comparison."
 import { RadarChart } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <RadarChart
-    axes={[
-      { label: "Speed" },
-      { label: "Power" },
-      { label: "Range" },
-      { label: "Defense" },
-      { label: "Accuracy" },
-    ]}
-    series={[
-      { label: "Model A", values: [80, 60, 90, 40, 70] },
-      { label: "Model B", values: [50, 85, 60, 75, 55], color: "var(--s-success, #22c55e)" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<RadarChart
-  axes={[
-    { label: "Speed" },
-    { label: "Power" },
-    { label: "Range" },
-    { label: "Defense" },
-    { label: "Accuracy" },
-  ]}
-  series={[
-    { label: "Model A", values: [80, 60, 90, 40, 70] },
-    { label: "Model B", values: [50, 85, 60, 75, 55], color: "var(--s-success)" },
-  ]}
-/>
+<RadarChart>...</RadarChart>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `axes` | `RadarAxis[]` | — | Axis definitions with label and optional max value |
-| `series` | `RadarSeries[]` | — | Data series to plot on the radar |
-| `width` | `number` | `300` | SVG width |
-| `height` | `number` | `300` | SVG height |
-| `rings` | `number` | `4` | Number of concentric grid rings |
+| `axes` | `RadarAxis[]` | — | — |
+| `series` | `RadarSeries[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
+| `rings` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Default series color |
-| `--s-border` | Grid ring and axis stroke |
-| `--s-text-muted` | Axis labels |
-| `--s-font-mono` | Label font family |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-primary` | Primary |

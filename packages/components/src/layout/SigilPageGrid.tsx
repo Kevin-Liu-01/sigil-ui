@@ -141,8 +141,8 @@ export function getSigilPatternStyles(
         backgroundImage: `radial-gradient(circle, ${C} 1px, transparent 1px)`,
         backgroundSize: `${s}px ${s}px`,
         backgroundPosition: R
-          ? `0px ${s / 2}px`
-          : `${s / 2}px ${s / 2}px`,
+          ? `left ${s / 2}px`
+          : `right ${s / 2}px`,
       };
     case "crosshatch": {
       const a = R ? -45 : 45;
@@ -233,8 +233,8 @@ export function getSigilPatternStyles(
         ].join(", "),
         backgroundSize: `${s}px ${s}px`,
         backgroundPosition: R
-          ? `${h}px ${h}px, 0 0`
-          : `0 0, ${h}px ${h}px`,
+          ? `left ${h}px top ${h}px, left top`
+          : `right top, right ${h}px top ${h}px`,
       };
     }
     case "plus": {
@@ -355,8 +355,7 @@ export function SigilGutter({
       aria-hidden="true"
       data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
       style={{
-        borderLeft: STRUCTURAL_BORDER,
-        borderRight: STRUCTURAL_BORDER,
+        [side === "left" ? "borderRight" : "borderLeft"]: STRUCTURAL_BORDER,
         background: "var(--s-background)",
       }}
     >
@@ -370,11 +369,12 @@ export function SigilGutter({
           maskImage: patternCss.backgroundImage,
           maskSize: patternCss.backgroundSize,
           maskRepeat: "repeat",
-          ...(patternCss.backgroundPosition ? { WebkitMaskPosition: patternCss.backgroundPosition, maskPosition: patternCss.backgroundPosition } : {}),
+          WebkitMaskPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
+          maskPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
         } : {
           backgroundImage: patternCss.backgroundImage,
           backgroundSize: patternCss.backgroundSize,
-          ...(patternCss.backgroundPosition ? { backgroundPosition: patternCss.backgroundPosition } : {}),
+          backgroundPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
         }}
       />
     </div>
@@ -442,11 +442,14 @@ export function SigilPageGrid({
 
   const gutterVisible = !edgeless && effectiveRailGap > 0;
 
-  function buildMarginStyle(css: SigilPatternStyles | null, innerEdge: "Right" | "Left"): CSSProperties {
-    const base: CSSProperties = { backgroundColor: "var(--s-background)" };
+  function buildMarginStyle(css: SigilPatternStyles | null, innerEdge: "Right" | "Left"): { container: CSSProperties; overlay: CSSProperties | null } {
+    const anchorPos = innerEdge === "Right" ? "right top" : "left top";
+    const container: CSSProperties = { backgroundColor: "var(--s-background)", position: "relative" as const, overflow: "hidden" as const };
+    let overlay: CSSProperties | null = null;
     if (css) {
       if (css.isMask) {
-        Object.assign(base, {
+        overlay = {
+          position: "absolute" as const, inset: 0,
           backgroundColor: COLOR,
           WebkitMaskImage: css.backgroundImage,
           WebkitMaskSize: css.backgroundSize,
@@ -454,32 +457,35 @@ export function SigilPageGrid({
           maskImage: css.backgroundImage,
           maskSize: css.backgroundSize,
           maskRepeat: "repeat" as const,
-          ...(css.backgroundPosition ? { WebkitMaskPosition: css.backgroundPosition, maskPosition: css.backgroundPosition } : {}),
-        });
+          WebkitMaskPosition: css.backgroundPosition ?? anchorPos,
+          maskPosition: css.backgroundPosition ?? anchorPos,
+        };
       } else {
-        Object.assign(base, {
+        Object.assign(container, {
           backgroundImage: css.backgroundImage,
           backgroundSize: css.backgroundSize,
-          ...(css.backgroundPosition ? { backgroundPosition: css.backgroundPosition } : {}),
+          backgroundPosition: css.backgroundPosition ?? anchorPos,
         });
       }
     }
-    if (!edgeless && !gutterVisible) {
+    if (!edgeless) {
       const prop = `border${innerEdge}` as keyof CSSProperties;
-      Object.assign(base, {
+      Object.assign(container, {
         [prop]: marginBorder ?? "var(--s-margin-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))",
       });
     }
-    return base;
+    return { container, overlay };
   }
 
-  const marginStyleL = buildMarginStyle(marginCssL, "Right");
-  const marginStyleR = buildMarginStyle(marginCssR, "Left");
+  const marginL = buildMarginStyle(marginCssL, "Right");
+  const marginR = buildMarginStyle(marginCssR, "Left");
 
   return (
     <PageGridContext.Provider value={config}>
       <div data-slot="sigilpagegrid" className={cn("grid min-h-screen", className)} style={gridCols}>
-        <div aria-hidden="true" style={marginStyleL} />
+        <div aria-hidden="true" style={marginL.container}>
+          {marginL.overlay && <div style={marginL.overlay} />}
+        </div>
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" visible={gutterVisible} />
         <div
           className="flex min-w-0 flex-col"
@@ -488,7 +494,9 @@ export function SigilPageGrid({
           {children}
         </div>
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" visible={gutterVisible} />
-        <div aria-hidden="true" style={marginStyleR} />
+        <div aria-hidden="true" style={marginR.container}>
+          {marginR.overlay && <div style={marginR.overlay} />}
+        </div>
       </div>
     </PageGridContext.Provider>
   );

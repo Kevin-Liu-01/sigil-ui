@@ -2,6 +2,7 @@ import "./global.css";
 import { RootProvider } from "fumadocs-ui/provider";
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { DocsPresetBar } from "@/components/docs-preset-bar";
 
 export const metadata: Metadata = {
   title: {
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <body>
         <RootProvider>{children}</RootProvider>
+        <DocsPresetBar />
       </body>
     </html>
   );

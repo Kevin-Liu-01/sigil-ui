@@ -1,6 +1,6 @@
 ---
 title: FlowDiagram
-description: "A flow diagram showing connected process steps with animated connectors."
+description: "A FlowDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,62 +9,32 @@ description: "A flow diagram showing connected process steps with animated conne
 import { FlowDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <FlowDiagram
-    nodes={[
-      { id: "input", label: "Input", variant: "default" },
-      { id: "process", label: "Process", variant: "highlighted" },
-      { id: "output", label: "Output", variant: "accent" },
-    ]}
-    connections={[
-      { from: "input", to: "process" },
-      { from: "process", to: "output" },
-    ]}
-    direction="horizontal"
-    connector="dashed-animated"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<FlowDiagram
-  nodes={[
-    { id: "input", label: "Input" },
-    { id: "process", label: "Process", variant: "highlighted" },
-    { id: "output", label: "Output", variant: "accent" },
-  ]}
-  connections={[
-    { from: "input", to: "process", label: "validate" },
-    { from: "process", to: "output" },
-  ]}
-  direction="horizontal"
-  connector="dashed-animated"
-/>
+<FlowDiagram>...</FlowDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `nodes` | `FlowNode[]` | — | Process nodes with id, label, variant, and optional children |
-| `connections` | `FlowConnection[]` | — | Connections between nodes with optional labels |
-| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
-| `connector` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed-animated"` | Connector line style |
+| `nodes` | `FlowNode[]` | — | — |
+| `connections` | `FlowConnection[]` | — | — |
+| `direction` | `"horizontal" | "vertical"` | — | — |
+| `connector` | `"solid" | "dashed" | "dashed-animated"` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Default node border and connector stroke |
-| `--s-border-strong` | Connector arrow fill |
-| `--s-surface` | Node background |
-| `--s-primary` | Highlighted and accent node styling |
-| `--s-primary-muted` | Highlighted node background |
-| `--s-primary-contrast` | Accent node text |
-| `--s-text` | Node label text |
-| `--s-text-muted` | Node sublabel and connector labels |
-| `--s-radius-md` | Node border radius |
-| `--s-font-mono` | Connector label font |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-radius-md` | Radius md |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-chart-axis` | Chart axis |
+| `--s-font-mono` | Font mono |

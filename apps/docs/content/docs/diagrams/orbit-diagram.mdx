@@ -1,6 +1,6 @@
 ---
 title: OrbitDiagram
-description: "A concentric orbit diagram with items positioned on orbital rings around a center."
+description: "A OrbitDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,35 +9,29 @@ description: "A concentric orbit diagram with items positioned on orbital rings 
 import { OrbitDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <OrbitDiagram
-    center={{ label: "Core" }}
-    nodes={[
-      { label: "Auth" },
-      { label: "API" },
-      { label: "DB" },
-      { label: "Cache" },
-    ]}
-    labels={["runtime", "data"]}
-  />
-</ComponentPreview>
+```tsx
+<OrbitDiagram>...</OrbitDiagram>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `center` | `{ label: string; icon?: ReactNode }` | — | Center node |
-| `nodes` | `OrbitNode[]` | — | Orbiting nodes |
-| `size` | `number` | `260` | Diagram size in pixels |
-| `labels` | `string[]` | `[]` | Optional labels inside the orbit |
+| `center` | `{ label: string; icon?: ReactNode` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Center node color |
-| `--s-border` | Orbit ring stroke |
-| `--s-surface` | Node background |
-| `--s-text` | Node labels |
+| `--s-border-muted` | Border muted |
+| `--s-radius-lg` | Radius lg |
+| `--s-primary` | Primary |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-radius-full` | Radius full |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |

@@ -69,7 +69,7 @@ export const Editable = forwardRef<HTMLDivElement, EditableProps>(function Edita
             "border-b border-transparent",
             "hover:border-[var(--s-border)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
-            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+            "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
             "rounded-[var(--s-radius-sm,2px)]",
             !text && "text-[var(--s-text-muted)] italic",
             disabled && "cursor-default opacity-70",

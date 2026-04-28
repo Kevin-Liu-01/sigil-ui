@@ -158,7 +158,10 @@ function generatePreview(componentName, props) {
     "Progress", "CircularProgress", "Meter", "ScrollProgress",
   ];
   const textComponents = [
-    "Badge", "Label", "Kbd", "MonoLabel", "InlineCode",
+    "Badge", "Label", "Kbd", "MonoLabel", "InlineCode", "Small", "Muted", "Large", "Lead",
+  ];
+  const statusComponents = [
+    "StatusBadge", "StatusDot", "StatusPill", "OnlineIndicator",
   ];
 
   if (simpleComponents.includes(componentName)) {
@@ -169,29 +172,78 @@ function generatePreview(componentName, props) {
     return `<ComponentPreview>\n  <${componentName}>${componentName} example</${componentName}>\n</ComponentPreview>`;
   }
 
-  if (componentName === "Button") {
-    return `<ComponentPreview>\n  <Button variant="primary">Primary</Button>\n  <Button variant="secondary">Secondary</Button>\n  <Button variant="outline">Outline</Button>\n  <Button variant="ghost">Ghost</Button>\n</ComponentPreview>`;
+  if (statusComponents.includes(componentName)) {
+    return `<ComponentPreview>\n  <${componentName} status="success" />\n  <${componentName} status="warning" />\n  <${componentName} status="error" />\n</ComponentPreview>`;
   }
-  if (componentName === "Input") {
-    return `<ComponentPreview vertical>\n  <Input placeholder="Enter text..." />\n</ComponentPreview>`;
-  }
-  if (componentName === "Textarea") {
-    return `<ComponentPreview vertical>\n  <Textarea placeholder="Write something..." />\n</ComponentPreview>`;
-  }
-  if (componentName === "Switch") {
-    return `<ComponentPreview>\n  <Switch />\n</ComponentPreview>`;
-  }
-  if (componentName === "Checkbox") {
-    return `<ComponentPreview>\n  <Checkbox />\n</ComponentPreview>`;
-  }
-  if (componentName === "Slider") {
-    return `<ComponentPreview>\n  <Slider defaultValue={[50]} />\n</ComponentPreview>`;
-  }
-  if (componentName === "Toggle") {
-    return `<ComponentPreview>\n  <Toggle>Toggle</Toggle>\n</ComponentPreview>`;
-  }
-  if (componentName === "Avatar") {
-    return `<ComponentPreview>\n  <Avatar name="Kevin Liu" />\n</ComponentPreview>`;
+
+  const specific = {
+    Button: `<ComponentPreview>\n  <Button variant="primary">Primary</Button>\n  <Button variant="secondary">Secondary</Button>\n  <Button variant="outline">Outline</Button>\n  <Button variant="ghost">Ghost</Button>\n</ComponentPreview>`,
+    Input: `<ComponentPreview vertical>\n  <Input placeholder="Enter text..." />\n</ComponentPreview>`,
+    Textarea: `<ComponentPreview vertical>\n  <Textarea placeholder="Write something..." rows={3} />\n</ComponentPreview>`,
+    Switch: `<ComponentPreview>\n  <Switch />\n</ComponentPreview>`,
+    Checkbox: `<ComponentPreview>\n  <Checkbox />\n</ComponentPreview>`,
+    Slider: `<ComponentPreview>\n  <Slider defaultValue={[50]} />\n</ComponentPreview>`,
+    Toggle: `<ComponentPreview>\n  <Toggle>Toggle</Toggle>\n</ComponentPreview>`,
+    Avatar: `<ComponentPreview>\n  <Avatar name="Kevin Liu" />\n</ComponentPreview>`,
+    Accordion: `<ComponentPreview vertical>\n  <Accordion type="single" collapsible>\n    <AccordionItem value="item-1">\n      <AccordionTrigger>What is Sigil UI?</AccordionTrigger>\n      <AccordionContent>A token-driven design system where one file updates everything.</AccordionContent>\n    </AccordionItem>\n  </Accordion>\n</ComponentPreview>`,
+    Tabs: `<ComponentPreview vertical>\n  <Tabs defaultValue="tab1">\n    <TabsList>\n      <TabsTrigger value="tab1">Overview</TabsTrigger>\n      <TabsTrigger value="tab2">Usage</TabsTrigger>\n    </TabsList>\n    <TabsContent value="tab1">Overview content</TabsContent>\n    <TabsContent value="tab2">Usage content</TabsContent>\n  </Tabs>\n</ComponentPreview>`,
+    Select: `<ComponentPreview>\n  <Select>\n    <SelectTrigger className="w-48">\n      <SelectValue placeholder="Choose option" />\n    </SelectTrigger>\n    <SelectContent>\n      <SelectItem value="a">Option A</SelectItem>\n      <SelectItem value="b">Option B</SelectItem>\n    </SelectContent>\n  </Select>\n</ComponentPreview>`,
+    RadioGroup: `<ComponentPreview>\n  <RadioGroup defaultValue="a">\n    <RadioGroupItem value="a" />\n    <RadioGroupItem value="b" />\n  </RadioGroup>\n</ComponentPreview>`,
+    ToggleGroup: `<ComponentPreview>\n  <ToggleGroup type="single">\n    <ToggleGroupItem value="a">A</ToggleGroupItem>\n    <ToggleGroupItem value="b">B</ToggleGroupItem>\n    <ToggleGroupItem value="c">C</ToggleGroupItem>\n  </ToggleGroup>\n</ComponentPreview>`,
+    LoadingSpinner: `<ComponentPreview>\n  <LoadingSpinner />\n</ComponentPreview>`,
+    BrailleSpinner: `<ComponentPreview>\n  <BrailleSpinner />\n</ComponentPreview>`,
+    NumberField: `<ComponentPreview>\n  <NumberField defaultValue={42} />\n</ComponentPreview>`,
+    PasswordInput: `<ComponentPreview vertical>\n  <PasswordInput placeholder="Enter password..." />\n</ComponentPreview>`,
+    SearchInput: `<ComponentPreview vertical>\n  <SearchInput placeholder="Search..." />\n</ComponentPreview>`,
+    CopyInput: `<ComponentPreview vertical>\n  <CopyInput value="npm install @sigil-ui/components" />\n</ComponentPreview>`,
+    Stepper: `<ComponentPreview vertical>\n  <Stepper steps={["Step 1", "Step 2", "Step 3"]} currentStep={1} />\n</ComponentPreview>`,
+    Timeline: `<ComponentPreview vertical>\n  <Timeline>\n    Timeline content\n  </Timeline>\n</ComponentPreview>`,
+    KPI: `<ComponentPreview>\n  <KPI label="Revenue" value="$12,340" />\n</ComponentPreview>`,
+    StatCard: `<ComponentPreview>\n  <StatCard label="Users" value="1,234" />\n</ComponentPreview>`,
+    MetricCard: `<ComponentPreview>\n  <MetricCard label="Uptime" value="99.9%" />\n</ComponentPreview>`,
+    Empty: `<ComponentPreview vertical>\n  <Empty>No items found</Empty>\n</ComponentPreview>`,
+    Callout: `<ComponentPreview vertical>\n  <Callout>This is an important callout message.</Callout>\n</ComponentPreview>`,
+    Blockquote: `<ComponentPreview vertical>\n  <Blockquote>Design is not just what it looks like. Design is how it works.</Blockquote>\n</ComponentPreview>`,
+    Terminal: `<ComponentPreview vertical>\n  <Terminal>$ npx @sigil-ui/cli init</Terminal>\n</ComponentPreview>`,
+    CodeBlock: `<ComponentPreview vertical>\n  <CodeBlock>const x = 42;</CodeBlock>\n</ComponentPreview>`,
+    TagsInput: `<ComponentPreview vertical>\n  <TagsInput placeholder="Add tag..." />\n</ComponentPreview>`,
+    Notification: `<ComponentPreview vertical>\n  <Notification title="Update available" description="A new version is ready." />\n</ComponentPreview>`,
+    AvatarGroup: `<ComponentPreview>\n  <AvatarGroup>\n    <Avatar name="Alice" />\n    <Avatar name="Bob" />\n    <Avatar name="Charlie" />\n  </AvatarGroup>\n</ComponentPreview>`,
+    ButtonGroup: `<ComponentPreview>\n  <ButtonGroup>\n    <Button variant="outline">Left</Button>\n    <Button variant="outline">Center</Button>\n    <Button variant="outline">Right</Button>\n  </ButtonGroup>\n</ComponentPreview>`,
+    Breadcrumb: `<ComponentPreview>\n  <Breadcrumb>\n    Docs / Components / Button\n  </Breadcrumb>\n</ComponentPreview>`,
+    Pagination: `<ComponentPreview>\n  <Pagination totalPages={10} currentPage={3} />\n</ComponentPreview>`,
+    SegmentedControl: `<ComponentPreview>\n  <SegmentedControl>\n    <SegmentedControlItem value="a">All</SegmentedControlItem>\n    <SegmentedControlItem value="b">Active</SegmentedControlItem>\n  </SegmentedControl>\n</ComponentPreview>`,
+    Tooltip: `<ComponentPreview>\n  <TooltipProvider>\n    <Tooltip>\n      <span>Hover me</span>\n    </Tooltip>\n  </TooltipProvider>\n</ComponentPreview>`,
+    Alert: `<ComponentPreview vertical>\n  <Alert>\n    <AlertTitle>Heads up</AlertTitle>\n    <AlertDescription>This is an alert message.</AlertDescription>\n  </Alert>\n</ComponentPreview>`,
+    InlineAlert: `<ComponentPreview vertical>\n  <InlineAlert>Something went wrong. Please try again.</InlineAlert>\n</ComponentPreview>`,
+    Pricing: `<ComponentPreview vertical>\n  <Pricing>\n    Pricing content\n  </Pricing>\n</ComponentPreview>`,
+    Cross: `<ComponentPreview>\n  <Cross size={48} />\n</ComponentPreview>`,
+    Diamond: `<ComponentPreview>\n  <Diamond size={48} />\n</ComponentPreview>`,
+    Hexagon: `<ComponentPreview>\n  <Hexagon size={48} />\n</ComponentPreview>`,
+    Triangle: `<ComponentPreview>\n  <Triangle size={48} />\n</ComponentPreview>`,
+    Shape: `<ComponentPreview>\n  <Shape variant="circle" size={48} />\n</ComponentPreview>`,
+    Marquee: `<ComponentPreview vertical>\n  <Marquee>Sigil UI — Design tokens that compound — </Marquee>\n</ComponentPreview>`,
+    GradientText: `<ComponentPreview>\n  <GradientText>Gradient text example</GradientText>\n</ComponentPreview>`,
+    LetterPullUp: `<ComponentPreview>\n  <LetterPullUp text="Hello World" />\n</ComponentPreview>`,
+    NumberTicker: `<ComponentPreview>\n  <NumberTicker value={1234} />\n</ComponentPreview>`,
+    WordRotate: `<ComponentPreview>\n  <WordRotate words={["Design", "Build", "Ship"]} />\n</ComponentPreview>`,
+    TextReveal: `<ComponentPreview>\n  <TextReveal text="Hover to reveal" />\n</ComponentPreview>`,
+    TypeWriter: `<ComponentPreview>\n  <TypeWriter text="Hello, World!" />\n</ComponentPreview>`,
+    Pattern: `<ComponentPreview>\n  <div style={{position:"relative",width:"100%",height:120}}>\n    <Pattern />\n  </div>\n</ComponentPreview>`,
+    GrainGradient: `<ComponentPreview>\n  <div style={{position:"relative",width:"100%",height:120,borderRadius:8,overflow:"hidden"}}>\n    <GrainGradient />\n  </div>\n</ComponentPreview>`,
+    ScrollArea: `<ComponentPreview>\n  <ScrollArea className="h-32 w-48 rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]">\n    <div className="p-4">Scrollable content goes here. Add more text to see scrolling behavior.</div>\n  </ScrollArea>\n</ComponentPreview>`,
+    Collapsible: `<ComponentPreview vertical>\n  <Collapsible>\n    <CollapsibleTrigger>Toggle content</CollapsibleTrigger>\n    <CollapsibleContent>Hidden content here</CollapsibleContent>\n  </Collapsible>\n</ComponentPreview>`,
+    AspectRatio: `<ComponentPreview>\n  <AspectRatio ratio={16/9} className="bg-[var(--s-surface)] rounded">\n    <div className="flex items-center justify-center h-full text-[var(--s-text-muted)]">16:9</div>\n  </AspectRatio>\n</ComponentPreview>`,
+    Editable: `<ComponentPreview>\n  <Editable defaultValue="Click to edit" />\n</ComponentPreview>`,
+    Clipboard: `<ComponentPreview>\n  <Clipboard value="npx @sigil-ui/cli init" />\n</ComponentPreview>`,
+    RatingGroup: `<ComponentPreview>\n  <RatingGroup defaultValue={3} />\n</ComponentPreview>`,
+    ColorPicker: `<ComponentPreview>\n  <ColorPicker />\n</ComponentPreview>`,
+    SignaturePad: `<ComponentPreview vertical>\n  <SignaturePad />\n</ComponentPreview>`,
+    KeyboardKey: `<ComponentPreview>\n  <KeyboardKey>⌘</KeyboardKey>\n  <KeyboardKey>K</KeyboardKey>\n</ComponentPreview>`,
+  };
+
+  if (specific[componentName]) {
+    return specific[componentName];
   }
 
   // For components with children prop
@@ -225,19 +277,63 @@ function generateMdx(componentName, source, filePath, category) {
   const importPath = "@sigil-ui/components";
 
   // Build preview — only for components that make sense to preview inline
-  const noPreview = isDiagram || isSection || isAnimation || 
-    ["AppShell", "PageShell", "PageGrid", "SigilPageGrid", "SigilNavbar", "Footer", "Navbar",
-     "Sidebar", "NavigationMenu", "Menubar", "Toolbar",
+  const noPreview =
+    ["AppShell", "PageShell", "PageGrid", "SigilPageGrid", "SigilNavbar",
+     "NavigationMenu", "Menubar",
      "Dialog", "Sheet", "AlertDialog", "Drawer", "Command", "CommandDialog",
-     "ContextMenu", "DropdownMenu", "Popover", "HoverCard", "PreviewCard",
+     "ContextMenu", "DropdownMenu",
      "Toaster", "Sonner", "toast", "sonnerToast",
      "Form", "FormField", "FormItem",
-     "Carousel", "Calendar", "DatePicker", "DataTable",
-     "ChartContainer", "Chart",
-     "DirectionProvider",
-     "TooltipProvider",
-     "LayoutControls",
-    ].includes(componentName);
+     "DataTable", "ChartContainer", "Chart",
+     "DirectionProvider", "TooltipProvider",
+     "LayoutControls", "FloatingUI",
+     "Modal", "ConfirmDialog", "PromptDialog", "ResponsiveDialog",
+     "Lightbox", "ImagePreview", "Spotlight", "CommandMenu",
+     "ActionMenu", "OverflowMenu", "MegaMenu", "ContextPanel",
+     "PopoverForm", "FloatingPanel",
+     "Tour", "TourStep", "Coachmark",
+     "HotkeyProvider", "ShortcutRecorder",
+     "Box3DGrid", "BentoSection", "CodeBlock", "TreeView", "SigilCursor",
+     "BlogGrid", "BlogHeader", "LogoBar", "LogoCloudSection",
+     "TeamSection", "TestimonialsSection", "TestimonialCard",
+     "ComparisonTable", "PricingTiers", "PricingTable",
+     "WaterfallChart", "BarChart", "PieChart", "LineChart", "AreaChart",
+     "RadarChart", "FunnelChart", "DonutChart", "HeatmapGrid",
+     "CommitGrid", "SparkLine", "UsageGauge", "BillingChart",
+     "ChangelogTable", "StatusTable", "SpecTable", "LeaderboardTable",
+     "Carousel", "Calendar", "DatePicker", "DateRangePicker",
+     "DateTimePicker", "TimePicker",
+     "Popover", "HoverCard", "PreviewCard",
+     "Toolbar", "Sidebar", "Footer", "Navbar",
+     "SigilGrid", "SigilGridCell", "SigilGutter", "SigilFrame",
+     "SigilFullBleed", "SigilSection",
+     "Diagram", "DiagramNode", "DiagramConnector", "DiagramLabel",
+     "TypeWriter", "Breadcrumb", "Combobox", "DensityText",
+     "Carousel", "TreeView", "DataGrid", "VirtualList", "TreeTable",
+     "MasonryGrid", "Listbox", "DataList",
+     "ComboboxField", "AsyncSelect", "CreatableSelect", "Autocomplete",
+     "MultiSelect", "FileDropzone", "FileUpload",
+     "Table", "DataTable", "DataToolbar", "DataFilters", "DataPagination",
+     "ColumnVisibility", "BulkActions", "EmptyTable",
+     "Box3D", "Card3D", "ExplodedBox3D", "ExplodedView",
+     "IsometricScene", "IsometricView", "IsometricStackDiagram",
+     "IsometricCylinder", "IsometricPrism",
+     "ParallaxLayer", "ScrollProgress",
+     "Marquee", "Stagger", "BlurFade", "FadeIn", "ScaleIn", "SlideIn",
+     "AnimateOnMount", "AnimateOnScroll",
+     "CrossHatch", "Tessellation",
+     "VoronoiBento", "VoronoiCell", "GapPixelGrid", "GapPixelCell",
+     "SimpleGrid", "IsolationStack", "BorderStack",
+     "FrostedPanel", "Frame",
+     "FeatureFrame", "FeatureGrid", "FeaturedGrid", "CapabilityGrid",
+     "SocialIcons", "CodeTabs", "CodePreview", "CodeBlock",
+     "ThemeSwitcher", "ThemeSwatch", "TokenPreview",
+     "ChatThread", "MessageComposer", "ChatMessage",
+     "ActivityTimeline", "AuditLog", "Changelog",
+     "PromptInput", "CopyButton",
+     "UnitPricing", "CostCalculator", "ComparisonSection",
+     "Pricing", "PricingCard",
+    ].includes(componentName) || isDiagram || isSection;
 
   let preview = "";
   if (!noPreview) {
@@ -340,8 +436,9 @@ for (const cat of CATEGORIES) {
     const mainComponent = exports[0] || fileName;
     if (cat.skip.includes(mainComponent)) continue;
 
-    // Skip hooks and utility-only files
+    // Skip hooks, utility-only files, and non-component exports
     if (fileName.startsWith("use") || fileName === "animate") continue;
+    if (mainComponent === "SPINNER_NAMES" || mainComponent === "SigilCursor") continue;
 
     const s = slug(mainComponent);
     const outPath = join(docsDir, `${s}.mdx`);

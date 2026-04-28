@@ -1,32 +1,58 @@
 ---
 title: CodeTabs
-description: CodeTabs is a token-driven Sigil component in the developer and ai/product ui group.
+description: "A CodeTabs component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { CodeTabs } from "@sigil-ui/components";
+import { CodeTabs, CodePreview, CopyButton, TokenPreview, ThemeSwatch, ThemeSwitcher, PromptInput, ChatMessage, ChatThread, MessageComposer, ActivityTimeline, AuditLog, Changelog, VersionBadge, KeyboardKey } from "@sigil-ui/components";
 ```
-
-## Preview
-
-<ComponentPreview>
-  <CodeTabs tabs={[{ value: "tsx", label: "TSX", code: "<Button>Ship</Button>", language: "tsx" }]} />
-</ComponentPreview>
 
 ## Usage
 
 ```tsx
-<CodeTabs tabs={[{ value: "tsx", label: "TSX", code: "<Button>Ship</Button>", language: "tsx" }]} />
+<CodeTabs>...</CodeTabs>
 ```
 
-## CLI
+## Sub-components
 
-```bash
-npx @sigil-ui/cli add code-tabs
-```
+This component includes the following parts:
 
-## Token Integration
+- `<CodePreview>`
+- `<CopyButton>`
+- `<TokenPreview>`
+- `<ThemeSwatch>`
+- `<ThemeSwitcher>`
+- `<PromptInput>`
+- `<ChatMessage>`
+- `<ChatThread>`
+- `<MessageComposer>`
+- `<ActivityTimeline>`
+- `<AuditLog>`
+- `<Changelog>`
+- `<VersionBadge>`
+- `<KeyboardKey>`
 
-CodeTabs follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `tabs` | `CodeTab[]` | — | — |
+| `defaultValue` | `string` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |
+| `--s-card-radius` | Card radius |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-radius-md` | Radius md |
+| `--s-radius-sm` | Radius sm |
+| `--s-text` | Text |
+| `--s-primary` | Primary |
+| `--s-surface` | Surface |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-shadow-sm` | Shadow sm |

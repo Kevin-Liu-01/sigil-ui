@@ -70,7 +70,7 @@ export const SegmentedControlItem = forwardRef<HTMLButtonElement, SegmentedContr
           "inline-flex items-center justify-center px-3 py-1.5 text-sm font-medium",
           "rounded-[calc(var(--s-radius-md,6px)-2px)]",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
           "disabled:pointer-events-none disabled:opacity-50",
           isActive
             ? "bg-[var(--s-background)] text-[var(--s-text)] shadow-[var(--s-shadow-sm,0_1px_3px_oklch(0 0 0 / 0.1))]"

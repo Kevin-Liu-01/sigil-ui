@@ -1,6 +1,6 @@
 ---
 title: ActivityFeed
-description: "A timeline-style feed of events with status indicators."
+description: "A ActivityFeed component from the Sigil design system."
 ---
 
 ## Import
@@ -9,36 +9,30 @@ description: "A timeline-style feed of events with status indicators."
 import { ActivityFeed } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <ActivityFeed
-    entries={[
-      { id: "1", title: "Deployment succeeded", description: "v2.1.0 deployed to production", timestamp: "2m ago", variant: "success" },
-      { id: "2", title: "PR #142 merged", description: "Add radar chart component", timestamp: "15m ago", variant: "info" },
-      { id: "3", title: "Build failed", description: "Type error in BillingChart.tsx", timestamp: "1h ago", variant: "error" },
-      { id: "4", title: "New comment", description: "Alice commented on PR #140", timestamp: "3h ago", variant: "default" },
-      { id: "5", title: "Dependency update", description: "Bumped @sigil-ui/tokens to 1.4.0", timestamp: "5h ago", variant: "warning" },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<ActivityFeed>...</ActivityFeed>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `entries` | `ActivityEntry[]` | — | Feed entries |
-| `maxEntries` | `number` | — | Truncate after N entries |
+| `entries` | `ActivityEntry[]` | — | — |
+| `maxEntries` | `number` | — | Maximum entries to show before truncating. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-success` | Success dot color |
-| `--s-warning` | Warning dot color |
-| `--s-error` | Error dot color |
-| `--s-info` | Info dot color |
-| `--s-border` | Timeline line |
-| `--s-text` | Entry title |
-| `--s-text-muted` | Description and timestamp |
-| `--s-font-mono` | Timestamp font |
+| `--s-chart-neutral` | Chart neutral |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-error` | Error |
+| `--s-info` | Info |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-radius-full` | Radius full |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |

@@ -65,7 +65,7 @@ export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProp
           "first:rounded-l-[var(--s-radius-md,6px)] last:rounded-r-[var(--s-radius-md,6px)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface-elevated)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:z-10",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)] focus-visible:z-10",
           "disabled:pointer-events-none disabled:opacity-50",
           "data-[state=on]:bg-[var(--s-surface)] data-[state=on]:text-[var(--s-text)]",
           sizeStyles[size],

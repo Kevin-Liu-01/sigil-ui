@@ -32,7 +32,7 @@ export const Checkbox = forwardRef<
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
         "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:border-[var(--s-primary)] data-[state=checked]:text-[var(--s-primary-contrast)]",
         "data-[state=indeterminate]:bg-[var(--s-primary)] data-[state=indeterminate]:border-[var(--s-primary)] data-[state=indeterminate]:text-[var(--s-primary-contrast)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+        "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "cursor-pointer",
         !label && className,

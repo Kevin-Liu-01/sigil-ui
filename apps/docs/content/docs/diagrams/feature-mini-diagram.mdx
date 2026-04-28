@@ -1,6 +1,6 @@
 ---
 title: FeatureMiniDiagram
-description: "A compact feature comparison diagram showing capabilities side by side."
+description: "A FeatureMiniDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,23 +9,27 @@ description: "A compact feature comparison diagram showing capabilities side by 
 import { FeatureMiniDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <FeatureMiniDiagram variant="comparison" />
-</ComponentPreview>
+```tsx
+<FeatureMiniDiagram>...</FeatureMiniDiagram>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `FeatureMiniVariant` | `"comparison"` | Diagram variant |
+| `variant` | `FeatureMiniVariant` | — | — |
+| `size` | `number` | — | — |
+| `accentColor` | `string` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Accent color |
-| `--s-border` | Borders |
-| `--s-surface` | Background |
-| `--s-text` | Labels |
+| `--s-primary` | Primary |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-surface` | Surface |
+| `--s-primary-contrast` | Primary contrast |

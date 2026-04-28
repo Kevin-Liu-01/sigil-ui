@@ -1,6 +1,6 @@
 ---
 title: EcosystemDiagram
-description: "A radial ecosystem diagram showing related tools and services around a central product."
+description: "A EcosystemDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,41 +9,27 @@ description: "A radial ecosystem diagram showing related tools and services arou
 import { EcosystemDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <EcosystemDiagram
-    center={{ label: "Sigil UI", sublabel: "system" }}
-    ring={[
-      { label: "Tokens" },
-      { label: "Presets" },
-      { label: "Components" },
-      { label: "CLI" },
-      { label: "Docs" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<EcosystemDiagram center={{ label: "Your Product" }} ring={[{ label: "API" }, { label: "SDK" }]} />
+<EcosystemDiagram>...</EcosystemDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `center` | `{ label: string; icon?: ReactNode; sublabel?: string }` | — | Center hub |
-| `ring` | `EcosystemNode[]` | — | Surrounding ecosystem nodes |
-| `size` | `number` | `280` | Diagram size in pixels |
+| `center` | `{ label: string; icon?: ReactNode; sublabel?: string` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Center node color |
-| `--s-border` | Connection lines |
-| `--s-surface` | Node background |
-| `--s-text` | Labels |
-| `--s-radius-md` | Node radius |
+| `--s-border-muted` | Border muted |
+| `--s-radius-full` | Radius full |
+| `--s-primary` | Primary |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-border` | Border |
+| `--s-surface` | Surface |

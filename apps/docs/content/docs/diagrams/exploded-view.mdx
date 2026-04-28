@@ -1,6 +1,6 @@
 ---
 title: ExplodedView
-description: "An exploded view diagram showing separated layers of a system or component."
+description: "A ExplodedView component from the Sigil design system."
 ---
 
 ## Import
@@ -9,43 +9,26 @@ description: "An exploded view diagram showing separated layers of a system or c
 import { ExplodedView } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <ExplodedView
-    layers={[
-      { label: "UI Layer", children: "React components with Tailwind" },
-      { label: "Token Layer", children: "CSS custom properties" },
-      { label: "Preset Layer", children: "259 configurable token values" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<ExplodedView
-  layers={[
-    { label: "UI Layer", children: "React components" },
-    { label: "Logic Layer", children: "Business rules" },
-    { label: "Data Layer", children: "PostgreSQL" },
-  ]}
-/>
+<ExplodedView>...</ExplodedView>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `layers` | `ExplodedViewLayer[]` | — | Layers from top to bottom with label and content |
+| `layers` | `ExplodedViewLayer[]` | — | Layers to display from top to bottom. |
+| `gap` | `string` | `2rem` | Gap between layers. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Layer borders |
-| `--s-surface` | Layer background |
-| `--s-text` | Layer label |
-| `--s-text-muted` | Layer content text |
-| `--s-radius-md` | Layer radius |
-| `--s-shadow-sm` | Layer shadow |
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

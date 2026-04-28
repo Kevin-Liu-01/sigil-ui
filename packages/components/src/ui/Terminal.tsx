@@ -53,7 +53,7 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
           <button
             type="button"
             onClick={handleCopy}
-            className="cursor-pointer text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)] px-2 py-1 rounded-[var(--s-radius-sm,4px)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]"
+            className="cursor-pointer text-xs text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)] px-2 py-1 rounded-[var(--s-radius-sm,4px)] focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]"
             aria-label="Copy to clipboard"
           >
             {copied ? "Copied!" : "Copy"}

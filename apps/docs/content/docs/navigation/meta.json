@@ -1,6 +1,7 @@
 {
   "title": "Navigation",
   "pages": [
+    "container-query",
     "breadcrumb",
     "footer",
     "menubar",

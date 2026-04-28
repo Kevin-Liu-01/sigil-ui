@@ -1,6 +1,6 @@
 ---
 title: PipelineDiagram
-description: "A horizontal pipeline diagram showing sequential processing stages."
+description: "A PipelineDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,45 +9,28 @@ description: "A horizontal pipeline diagram showing sequential processing stages
 import { PipelineDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <PipelineDiagram
-    steps={[
-      { label: "Source", status: "complete" },
-      { label: "Build", status: "complete" },
-      { label: "Test", status: "active" },
-      { label: "Deploy", status: "pending" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<PipelineDiagram
-  steps={[
-    { label: "Source", status: "complete" },
-    { label: "Build", status: "active" },
-    { label: "Deploy", status: "pending" },
-  ]}
-/>
+<PipelineDiagram>...</PipelineDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `steps` | `PipelineStep[]` | — | Pipeline stages with label and status |
+| `steps` | `PipelineStep[]` | — | — |
+| `direction` | `"horizontal" | "vertical"` | — | — |
+| `connector` | `"solid" | "dashed" | "dashed-animated"` | — | — |
+| `showNumbers` | `boolean` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Active step color |
-| `--s-success` | Complete step color |
-| `--s-border` | Connector and pending step border |
-| `--s-surface` | Step background |
-| `--s-text` | Step label |
-| `--s-text-muted` | Pending step text |
-| `--s-radius-md` | Step border radius |
+| `--s-radius-full` | Radius full |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |

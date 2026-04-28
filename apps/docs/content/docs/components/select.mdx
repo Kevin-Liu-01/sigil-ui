@@ -12,7 +12,15 @@ import { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectI
 ## Preview
 
 <ComponentPreview>
-  <Select />
+  <Select>
+    <SelectTrigger className="w-48">
+      <SelectValue placeholder="Choose option" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectItem value="a">Option A</SelectItem>
+      <SelectItem value="b">Option B</SelectItem>
+    </SelectContent>
+  </Select>
 </ComponentPreview>
 
 ## Usage
@@ -40,6 +48,7 @@ This component includes the following parts:
 | `--s-input-height` | Input height |
 | `--s-radius-input` | Radius input |
 | `--s-radius-md` | Radius md |
+| `--s-border-style` | Border style |
 | `--s-background` | Background |
 | `--s-duration-fast` | Duration fast |
 | `--s-surface` | Surface |
@@ -48,4 +57,3 @@ This component includes the following parts:
 | `--s-border` | Border |
 | `--s-primary` | Primary |
 | `--s-card-radius` | Card radius |
-| `--s-border-style` | Border style |

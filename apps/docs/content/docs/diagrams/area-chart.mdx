@@ -1,6 +1,6 @@
 ---
 title: AreaChart
-description: "A filled area chart with gradient shading and smooth curves."
+description: "A AreaChart component from the Sigil design system."
 ---
 
 ## Import
@@ -9,42 +9,31 @@ description: "A filled area chart with gradient shading and smooth curves."
 import { AreaChart } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <AreaChart
-    series={[
-      {
-        label: "Revenue",
-        points: [
-          { label: "Jan", value: 40 },
-          { label: "Feb", value: 55 },
-          { label: "Mar", value: 48 },
-          { label: "Apr", value: 72 },
-          { label: "May", value: 85 },
-          { label: "Jun", value: 95 },
-        ],
-      },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<AreaChart>...</AreaChart>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `series` | `AreaChartSeries[]` | — | Data series |
-| `width` | `number` | `500` | SVG width |
-| `height` | `number` | `250` | SVG height |
-| `stacked` | `boolean` | `false` | Stack areas |
-| `showGrid` | `boolean` | `true` | Show grid lines |
-| `curve` | `"smooth" \| "linear"` | `"smooth"` | Line interpolation |
+| `series` | `AreaChartSeries[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
+| `stacked` | `boolean` | `false` | Stacked areas. |
+| `showGrid` | `boolean` | `true` | Show grid lines. |
+| `curve` | `"smooth" | "linear"` | `smooth` | Curve type. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Default area color |
-| `--s-border` | Grid lines |
-| `--s-text-muted` | Axis labels |
-| `--s-font-mono` | Label font |
+| `--s-primary` | Primary |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-error` | Error |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |

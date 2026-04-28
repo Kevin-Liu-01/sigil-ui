@@ -54,7 +54,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(function Pagi
   const buttonBase = cn(
     "inline-flex items-center justify-center h-8 min-w-8 px-2 text-sm rounded-[var(--s-radius-sm,4px)]",
     "transition-colors duration-[var(--s-duration-fast,150ms)]",
-    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)]",
+    "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
     "disabled:opacity-50 disabled:pointer-events-none",
   );
 

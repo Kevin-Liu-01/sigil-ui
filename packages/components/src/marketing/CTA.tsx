@@ -62,7 +62,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(function CTA(
                 "inline-flex items-center justify-center h-11 px-[var(--s-cta-action-padding-x,24px)] py-[var(--s-cta-action-padding-y,12px)] rounded-[var(--s-radius-md,6px)]",
                 "text-sm font-medium transition-all duration-[var(--s-duration-fast,150ms)]",
                 "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:bg-[var(--s-primary-hover)]",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+                "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
               )}
             >
               {action.label}

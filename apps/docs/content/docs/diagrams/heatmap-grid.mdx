@@ -1,6 +1,6 @@
 ---
 title: HeatmapGrid
-description: "A color-intensity heatmap grid for visualizing 2D data matrices."
+description: "A HeatmapGrid component from the Sigil design system."
 ---
 
 ## Import
@@ -9,54 +9,30 @@ description: "A color-intensity heatmap grid for visualizing 2D data matrices."
 import { HeatmapGrid } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <HeatmapGrid
-    xLabels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
-    yLabels={["9am", "12pm", "3pm", "6pm"]}
-    data={[
-      [{ value: 2 }, { value: 5 }, { value: 8 }, { value: 3 }, { value: 1 }],
-      [{ value: 7 }, { value: 9 }, { value: 4 }, { value: 6 }, { value: 3 }],
-      [{ value: 4 }, { value: 3 }, { value: 6 }, { value: 8 }, { value: 5 }],
-      [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }, { value: 7 }],
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<HeatmapGrid
-  xLabels={["Mon", "Tue", "Wed", "Thu", "Fri"]}
-  yLabels={["9am", "12pm", "3pm", "6pm"]}
-  data={[
-    [{ value: 2 }, { value: 5 }, { value: 8 }, { value: 3 }, { value: 1 }],
-    [{ value: 7 }, { value: 9 }, { value: 4 }, { value: 6 }, { value: 3 }],
-    [{ value: 4 }, { value: 3 }, { value: 6 }, { value: 8 }, { value: 5 }],
-    [{ value: 1 }, { value: 2 }, { value: 3 }, { value: 4 }, { value: 7 }],
-  ]}
-/>
+<HeatmapGrid>...</HeatmapGrid>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `data` | `HeatmapCell[][]` | — | 2D array of cell values |
-| `xLabels` | `string[]` | — | Column labels |
-| `yLabels` | `string[]` | — | Row labels |
-| `min` | `number` | auto | Minimum value for color scale |
-| `max` | `number` | auto | Maximum value for color scale |
-| `color` | `string` | `var(--s-primary)` | High-intensity color |
-| `cellSize` | `number` | `40` | Cell size in pixels |
+| `data` | `HeatmapCell[][]` | — | — |
+| `xLabels` | `string[]` | — | — |
+| `yLabels` | `string[]` | — | — |
+| `min` | `number` | — | Minimum value (maps to lowest intensity). |
+| `max` | `number` | — | Maximum value (maps to highest intensity). |
+| `color` | `string` | `var(--s-primary)` | Color for the high-intensity end. |
+| `cellSize` | `number` | `40` | Cell size in px. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Default cell color |
-| `--s-primary-contrast` | Cell text color |
-| `--s-text-muted` | Axis labels |
-| `--s-font-mono` | Label and value font |
-| `--s-radius-sm` | Cell border radius |
+| `--s-primary` | Primary |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |
+| `--s-radius-sm` | Radius sm |
+| `--s-primary-contrast` | Primary contrast |

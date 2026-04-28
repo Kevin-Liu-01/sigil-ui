@@ -9,7 +9,7 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
-import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, MoveHorizontal, SlidersHorizontal } from "lucide-react";
+import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers } from "lucide-react";
 import { OklchText } from "../oklch-text";
 
 /* ── Timing ──────────────────────────────────────────────────── */
@@ -268,12 +268,12 @@ const HERO_TOKEN_STEPS = [
   { token: "--s-duration-slow", before: "duration-slow: 300ms", line: "duration-slow: 600ms", label: "draw timing" },
   { token: "--s-font-display", before: 'font-display: "IBM Plex Sans"', line: 'font-display: "Space Grotesk"', label: "heading typeface" },
   { token: "--s-success", before: "success: oklch(0.60 0.15 145)", line: "success: oklch(0.72 0.19 145)", label: "positive signal" },
-  { token: "--s-space-2", before: "space-2: 8px", line: "space-2: 12px", label: "component gap" },
-  { token: "--s-shadow-md", before: "shadow-md: 0 4px 12px", line: "shadow-md: 0 8px 24px", label: "card elevation" },
+  { token: "--s-radius-sm", before: "radius-sm: 0", line: "radius-sm: 9999px", label: "badge shape" },
+  { token: "--s-shadow-md", before: "shadow-md: 0 4px 12px", line: "shadow-md: 0 0 24px", label: "card glow" },
   { token: "--s-accent", before: "accent: oklch(0.60 0.16 250)", line: "accent: oklch(0.70 0.22 190)", label: "chart highlight" },
   { token: "--s-radius-full", before: "radius-full: 9999px", line: "radius-full: 8px", label: "avatar shape" },
-  { token: "--s-input-height", before: "input-height: 36px", line: "input-height: 28px", label: "control size" },
-  { token: "--s-duration-fast", before: "duration-fast: 150ms", line: "duration-fast: 80ms", label: "micro transition" },
+  { token: "--s-border-style", before: "border-style: solid", line: "border-style: dashed", label: "outline style" },
+  { token: "--s-surface", before: "surface: oklch(0.16 0 0)", line: "surface: oklch(0.22 0.03 275)", label: "card tint" },
   { token: "--s-font-body", before: 'font-body: "Inter"', line: 'font-body: "DM Sans"', label: "body typeface" },
 ] as const;
 
@@ -294,14 +294,12 @@ const HERO_CURSOR_STEPS = [
 ] as const;
 
 const TOKEN_SECTIONS: { name: string; icon: React.ElementType; indices: number[] }[] = [
-  { name: "Colors", icon: Palette, indices: [0, 5, 8] },
-  { name: "Borders", icon: RectangleHorizontal, indices: [1] },
-  { name: "Radius", icon: SquareSlash, indices: [2, 9] },
-  { name: "Motion", icon: Clock, indices: [3, 11] },
+  { name: "Colors", icon: Palette, indices: [0, 5, 8, 11] },
+  { name: "Borders", icon: RectangleHorizontal, indices: [1, 10] },
+  { name: "Radius", icon: SquareSlash, indices: [2, 6, 9] },
+  { name: "Motion", icon: Clock, indices: [3] },
   { name: "Typography", icon: Type, indices: [4, 12] },
-  { name: "Spacing", icon: MoveHorizontal, indices: [6] },
   { name: "Shadows", icon: Layers, indices: [7] },
-  { name: "Inputs", icon: SlidersHorizontal, indices: [10] },
 ];
 
 const HERO_VARIANTS: V[] = HERO_CONFIGS.map((config, variantIdx) =>
@@ -537,10 +535,20 @@ const STYLE_BLOCK = `
   60% { opacity: 1; }
   100% { clip-path: inset(0 0 0 0); opacity: 1; }
 }
+@keyframes hlf-caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
 @keyframes hlf-apply-style {
   0% { box-shadow: none; filter: none; }
   40% { box-shadow: 0 0 0 1.5px var(--s-primary), 0 0 16px color-mix(in oklch, var(--s-primary) 16%, transparent); filter: brightness(1.03); }
   100% { box-shadow: 0 0 0 1px color-mix(in oklch, var(--s-primary) 28%, transparent); filter: none; }
+}
+@keyframes hlf-cursor-click {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.72) translateY(2px); }
+  55% { transform: scale(0.72) translateY(2px); }
+  100% { transform: scale(1); }
 }
 .hero-logo-field {
   --hlf-pri: var(--s-primary, oklch(0.55 0.2 275));
@@ -567,20 +575,22 @@ const STYLE_BLOCK = `
   white-space: nowrap;
   animation: hlf-type-line 700ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
 }
+.hero-logo-field__caret {
+  animation: hlf-caret-blink 530ms step-end infinite;
+  color: var(--s-primary);
+  margin-left: 1px;
+  font-weight: 400;
+}
 .hero-logo-field__apply {
   animation: hlf-apply-style 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 .hero-logo-field__line-active {
   background: color-mix(in oklch, var(--s-primary) 10%, transparent);
-  border-left: 2px solid color-mix(in oklch, var(--s-primary) 70%, transparent);
-  margin-left: -8px;
-  padding-left: 6px;
+  border-left-color: color-mix(in oklch, var(--s-primary) 70%, transparent);
   transition: background-color 300ms, border-color 300ms;
 }
 .hero-logo-field__line-done {
-  border-left: 2px solid color-mix(in oklch, var(--s-primary) 30%, transparent);
-  margin-left: -8px;
-  padding-left: 6px;
+  border-left-color: color-mix(in oklch, var(--s-primary) 30%, transparent);
 }
 `;
 
@@ -636,10 +646,18 @@ export function HeroLogoField() {
   const appliedQueue = useRef<string[]>([]);
   const [formats, setFormats] = useState<string[]>(["bold"]);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
   const componentRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const [selRect, setSelRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
+  const [cursorTarget, setCursorTarget] = useState<{ left: number; top: number } | null>(null);
+  const [clicking, setClicking] = useState(false);
+  const [labelParts, setLabelParts] = useState<{ prefix: string; value: string; isNew: boolean } | null>(null);
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileScale, setMobileScale] = useState(1);
+  const [gridNaturalHeight, setGridNaturalHeight] = useState(0);
 
   const setComponentRef = useCallback((key: string) => (el: HTMLDivElement | null) => {
     componentRefs.current[key] = el;
@@ -648,6 +666,33 @@ export function HeroLogoField() {
   useEffect(() => {
     requestAnimationFrame(() => setMounted(true));
   }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) { setMobileScale(1); return; }
+    const el = wrapperRef.current;
+    if (!el) return;
+    const update = () => setMobileScale(Math.min(1, el.clientWidth / 480));
+    update();
+    const obs = new ResizeObserver(update);
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const obs = new ResizeObserver(([entry]) => setGridNaturalHeight(entry.contentRect.height));
+    obs.observe(containerRef.current);
+    return () => obs.disconnect();
+  }, []);
+
 
   useEffect(() => {
     if (!mounted) return;
@@ -676,20 +721,74 @@ export function HeroLogoField() {
   }, [mounted, idx]);
 
   useEffect(() => {
-    const container = containerRef.current;
+    if (phase < 1) {
+      setSelRect(null);
+      return;
+    }
     const target = componentRefs.current[STEP_KEYS[idx % STEP_KEYS.length]];
-    if (!container || !target) return;
-    if (phase < 1) return;
-    const cRect = container.getBoundingClientRect();
-    const tRect = target.getBoundingClientRect();
+    if (!target) return;
     const pad = 6;
     setSelRect({
-      top: tRect.top - cRect.top - pad,
-      left: tRect.left - cRect.left - pad,
-      width: tRect.width + pad * 2,
-      height: tRect.height + pad * 2,
+      top: target.offsetTop - pad,
+      left: target.offsetLeft - pad,
+      width: target.offsetWidth + pad * 2,
+      height: target.offsetHeight + pad * 2,
     });
   }, [idx, phase]);
+
+  useEffect(() => {
+    const target = componentRefs.current[STEP_KEYS[idx % STEP_KEYS.length]];
+    if (!target) return;
+    const pad = 6;
+    setCursorTarget({
+      left: target.offsetLeft + target.offsetWidth + pad - 10,
+      top: target.offsetTop + target.offsetHeight + pad - 10,
+    });
+  }, [idx, mounted]);
+
+  useEffect(() => {
+    if (phase === 1) {
+      setClicking(true);
+      const t = setTimeout(() => setClicking(false), 400);
+      return () => clearTimeout(t);
+    }
+  }, [phase, idx]);
+
+  useEffect(() => {
+    if (phase !== 2) {
+      setLabelParts(null);
+      return;
+    }
+    const token = HERO_CURSOR_STEPS[idx % STEP_KEYS.length];
+    const ci = token.before.indexOf(": ");
+    const prefix = ci >= 0 ? token.before.slice(0, ci + 2) : "";
+    const oldVal = ci >= 0 ? token.before.slice(ci + 2) : token.before;
+    const ni = token.line.indexOf(": ");
+    const newVal = ni >= 0 ? token.line.slice(ni + 2) : token.line;
+
+    let cancelled = false;
+    let step = 0;
+    const total = oldVal.length;
+
+    setLabelParts({ prefix, value: oldVal, isNew: false });
+
+    const tick = () => {
+      if (cancelled) return;
+      step++;
+      if (step <= total) {
+        setLabelParts({ prefix, value: oldVal.slice(0, total - step), isNew: false });
+        setTimeout(tick, 25);
+      } else {
+        const t = step - total;
+        if (t <= newVal.length) {
+          setLabelParts({ prefix, value: newVal.slice(0, t), isNew: true });
+          if (t < newVal.length) setTimeout(tick, 35);
+        }
+      }
+    };
+    const delay = setTimeout(tick, 80);
+    return () => { cancelled = true; clearTimeout(delay); };
+  }, [phase, idx]);
 
   useEffect(() => {
     const container = mdScrollRef.current;
@@ -708,6 +807,10 @@ export function HeroLogoField() {
     }
   }, [idx]);
 
+  const lastSelRect = useRef(selRect);
+  if (selRect) lastSelRect.current = selRect;
+  const displayRect = selRect ?? lastSelRect.current;
+
   const activeStepIndex = idx % STEP_KEYS.length;
   const activeToken = HERO_CURSOR_STEPS[activeStepIndex];
   const activeComponent = activeToken.component;
@@ -721,7 +824,11 @@ export function HeroLogoField() {
   const containerHeight = containerRef.current?.clientHeight ?? 0;
   const containerWidth = containerRef.current?.clientWidth ?? 0;
   const flipLabel = selRect ? (selRect.top + selRect.height + 36) > containerHeight : false;
-  const anchorLabelRight = selRect ? (selRect.left + selRect.width > containerWidth * 0.55) : false;
+
+  const overlayCenterX = (displayRect?.left ?? 0) + (displayRect?.width ?? 0) / 2;
+  const labelClampedCenter = Math.max(8, Math.min(overlayCenterX, containerWidth - 8));
+  const labelLeftInOverlay = labelClampedCenter - (displayRect?.left ?? 0);
+  const labelMaxWidth = containerWidth > 0 ? containerWidth - 16 : undefined;
 
   const mono9: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 9, letterSpacing: "0.08em", textTransform: "uppercase" };
   const mono10: React.CSSProperties = { fontFamily: "var(--s-font-mono)", fontSize: 10, lineHeight: 1.62 };
@@ -729,8 +836,21 @@ export function HeroLogoField() {
 
   return (
     <div
+      ref={wrapperRef}
       className="hero-logo-field"
-      style={{ position: "absolute", inset: 0, overflow: "visible", pointerEvents: "none", zIndex: 0 }}
+      style={isMobile ? {
+        position: "relative",
+        width: "100%",
+        overflow: "hidden",
+        marginTop: 24,
+        height: gridNaturalHeight ? gridNaturalHeight * mobileScale + 4 : undefined,
+      } : {
+        position: "absolute",
+        inset: 0,
+        overflow: "visible",
+        pointerEvents: "none",
+        zIndex: 0,
+      }}
     >
       <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
 
@@ -738,16 +858,23 @@ export function HeroLogoField() {
         ref={containerRef}
         className="grid"
         style={{
-          position: "absolute",
-          right: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          marginTop: 20,
-          width: "min(54vw, 580px)",
-          minWidth: 480,
+          ...(isMobile ? {
+            width: 480,
+            transform: `scale(${mobileScale})`,
+            transformOrigin: "top left",
+          } : {
+            position: "absolute",
+            right: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            marginTop: 20,
+            width: "min(54vw, 580px)",
+            minWidth: 480,
+          }),
           opacity: mounted ? 1 : 0,
           transition: "opacity 600ms ease",
           pointerEvents: "auto",
+          overflow: "visible",
           gridTemplateColumns: "repeat(7, 1fr)",
           gridTemplateRows: "auto auto auto auto 1fr 1fr",
           gap: 5,
@@ -767,16 +894,16 @@ export function HeroLogoField() {
             flexDirection: "column",
           }}
         >
-          <div style={{ ...mono9, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", padding: "3px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--s-surface-elevated, var(--s-surface))", flexShrink: 0 }}>
+          <div style={{ ...mono9, fontSize: 10, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", padding: "4px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--s-surface-elevated, var(--s-surface))", flexShrink: 0 }}>
             <span style={{ fontWeight: 700 }}>sigil.tokens.md</span>
-            <span style={{ fontSize: 8, color: "var(--s-text-muted)" }}>{appliedSet.size}/{STEP_KEYS.length}</span>
+            <span style={{ fontSize: 9, color: "var(--s-text-muted)" }}>{appliedSet.size}/{STEP_KEYS.length}</span>
           </div>
-          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 8, lineHeight: 1.4, overflow: "auto", flex: 1, minHeight: 0 }}>
+          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 10, lineHeight: 1.5, overflow: "auto", flex: 1, minHeight: 0 }}>
             {TOKEN_SECTIONS.map((section, si) => {
               const Icon = section.icon;
               return (
                 <React.Fragment key={section.name}>
-                  <div style={{ color: "var(--s-text)", fontWeight: 700, marginTop: si > 0 ? 1 : 0, fontSize: 8 }}>
+                  <div style={{ color: "var(--s-text)", fontWeight: 700, marginTop: si > 0 ? 2 : 0, fontSize: 10 }}>
                     {section.name}
                   </div>
                   {section.indices.map((stepIdx) => {
@@ -789,10 +916,14 @@ export function HeroLogoField() {
                         key={t.token}
                         {...(isActive ? { "data-active-token": true } : {})}
                         className={isActive ? "hero-logo-field__line-active" : isDone ? "hero-logo-field__line-done" : undefined}
-                        style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms", paddingLeft: 11, display: "flex", alignItems: "center", gap: 3 }}
+                        style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms", paddingLeft: 6, borderLeft: "2px solid transparent", display: "flex", alignItems: "center", gap: 3 }}
                       >
                         <Icon size={7} style={{ opacity: 0.4, flexShrink: 0 }} />
-                        <OklchText>{isActive ? t.line : isDone ? t.line : t.before}</OklchText>
+                        {isActive && isTyping && labelParts ? (
+                          <span>{labelParts.prefix}{labelParts.value}</span>
+                        ) : (
+                          <OklchText>{isDone ? t.line : t.before}</OklchText>
+                        )}
                         {isDone && !isActive ? " ✓" : ""}
                       </div>
                     );
@@ -804,7 +935,7 @@ export function HeroLogoField() {
               borderTop: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
               paddingTop: 3,
               marginTop: 3,
-              fontSize: 7,
+              fontSize: 9,
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
@@ -950,16 +1081,16 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2 h-full flex flex-col justify-between" style={{ gap: applied("Badges") ? 8 : 4, transition: "gap var(--s-duration-slow,600ms)" }}>
+            <CardContent className="p-2 h-full flex flex-col justify-between" style={{ gap: 4 }}>
               <div className="flex items-center gap-1 flex-wrap">
-                <Badge size="sm" variant={appliedSet.size >= 4 ? "default" : "outline"} className="text-[7px]">
+                <Badge size="sm" variant={appliedSet.size >= 4 ? "default" : "outline"} className="text-[7px]" style={applied("Badges") ? { borderRadius: 9999 } : undefined}>
                   {appliedSet.size >= 4 ? "staged" : "staging"}
                 </Badge>
-                <Badge size="sm" variant="outline" className="text-[7px]">v2.4</Badge>
+                <Badge size="sm" variant="outline" className="text-[7px]" style={applied("Badges") ? { borderRadius: 9999 } : undefined}>v2.4</Badge>
               </div>
               <div className="flex items-center gap-1">
                 {["us", "eu", "ap"].map((r) => (
-                  <Badge key={r} size="sm" variant="outline" className="text-[7px]">{r}</Badge>
+                  <Badge key={r} size="sm" variant="outline" className="text-[7px]" style={applied("Badges") ? { borderRadius: 9999 } : undefined}>{r}</Badge>
                 ))}
               </div>
               <Checkbox label="Dark" defaultChecked />
@@ -973,7 +1104,7 @@ export function HeroLogoField() {
             style={{
               borderColor: applied("Coverage") ? "var(--s-primary)" : "var(--s-border)",
               background: cellBg,
-              boxShadow: applied("Coverage") ? "0 8px 24px rgb(0 0 0 / 0.12)" : undefined,
+              boxShadow: applied("Coverage") ? "0 0 24px color-mix(in oklch, var(--s-primary) 30%, transparent), 0 8px 16px rgb(0 0 0 / 0.12)" : undefined,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), box-shadow var(--s-duration-slow,600ms)",
             }}
           >
@@ -1049,9 +1180,9 @@ export function HeroLogoField() {
             <CardContent className="p-2.5">
               <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>team</div>
               <AvatarGroup max={3}>
-                <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
-                <Avatar src="https://github.com/leerob.png" name="Lee" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
-                <Avatar src="https://github.com/rauchg.png" name="G" size="sm" style={applied("Team") ? { borderRadius: 8 } : undefined} />
+                <Avatar src="https://github.com/shadcn.png" name="shadcn" size="sm" className={applied("Team") ? "!rounded-[8px] [&_img]:!rounded-[8px] [&_span]:!rounded-[8px]" : undefined} />
+                <Avatar src="https://github.com/leerob.png" name="Lee" size="sm" className={applied("Team") ? "!rounded-[8px] [&_img]:!rounded-[8px] [&_span]:!rounded-[8px]" : undefined} />
+                <Avatar src="https://github.com/rauchg.png" name="G" size="sm" className={applied("Team") ? "!rounded-[8px] [&_img]:!rounded-[8px] [&_span]:!rounded-[8px]" : undefined} />
               </AvatarGroup>
             </CardContent>
           </Card>
@@ -1061,6 +1192,7 @@ export function HeroLogoField() {
             className={`h-full ${applied("Sliders") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("Sliders") ? "var(--s-primary)" : "var(--s-border)",
+              borderStyle: applied("Sliders") ? "dashed" : undefined,
               background: cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
@@ -1082,7 +1214,7 @@ export function HeroLogoField() {
             className={`h-full ${applied("Switches") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("Switches") ? "var(--s-primary)" : "var(--s-border)",
-              background: cellBg,
+              background: applied("Switches") ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-surface, var(--s-background)))" : cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
@@ -1123,15 +1255,15 @@ export function HeroLogoField() {
           aria-hidden="true"
           style={{
             position: "absolute",
-            top: selRect?.top ?? 0,
-            left: selRect?.left ?? 0,
-            width: selRect?.width ?? 0,
-            height: selRect?.height ?? 0,
+            top: displayRect?.top ?? 0,
+            left: displayRect?.left ?? 0,
+            width: displayRect?.width ?? 0,
+            height: displayRect?.height ?? 0,
             border: "var(--s-border-thin,1px) dashed color-mix(in oklch, var(--s-primary) 50%, transparent)",
             borderRadius: "var(--s-radius-md,8px)",
             background: "color-mix(in oklch, var(--s-primary) 6%, transparent)",
             opacity: selRect ? 1 : 0,
-            transition: "top 600ms cubic-bezier(0.16,1,0.3,1), left 600ms cubic-bezier(0.16,1,0.3,1), width 600ms cubic-bezier(0.16,1,0.3,1), height 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease, border-radius 600ms cubic-bezier(0.16,1,0.3,1)",
+            transition: "opacity 300ms cubic-bezier(0.16,1,0.3,1)",
             pointerEvents: "none",
             zIndex: 10,
           }}
@@ -1140,8 +1272,8 @@ export function HeroLogoField() {
             key={`sel-${activeComponent}-${idx}`}
             style={{
               position: "absolute",
-              left: "50%",
-              transform: `translateX(-50%) ${isSelecting ? "translateY(0)" : "translateY(-4px)"}`,
+              left: labelLeftInOverlay,
+              transform: "translateX(-50%)",
               ...(flipLabel ? { top: -32 } : { bottom: -32 }),
               padding: "5px 10px",
               background: "var(--s-background)",
@@ -1153,42 +1285,44 @@ export function HeroLogoField() {
               lineHeight: 1.4,
               whiteSpace: "nowrap",
               width: "max-content",
-              maxWidth: selRect
-                ? Math.min(selRect.left + selRect.width, containerWidth - selRect.left) * 2
-                : undefined,
+              maxWidth: labelMaxWidth,
               overflow: "hidden",
               textOverflow: "ellipsis",
-              opacity: selRect ? 1 : 0,
-              transition: "opacity 250ms cubic-bezier(0.16,1,0.3,1), transform 250ms cubic-bezier(0.16,1,0.3,1)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: 4,
             }}
           >
             {!isTyping && (
               <span style={{ color: "var(--s-text-muted)" }}><OklchText>{activeToken.before}</OklchText></span>
             )}
-            {isTyping && !isApplied && (
+            {isTyping && !isApplied && labelParts && (
               <>
-                <span style={{ color: "var(--s-text-muted)", textDecoration: "line-through", opacity: 0.5 }}><OklchText>{activeToken.before}</OklchText></span>
-                <span style={{ color: "var(--s-primary)", marginLeft: 6 }}>&rarr;</span>
-                <span className="hero-logo-field__typed" style={{ color: "var(--s-primary)", marginLeft: 6 }}><OklchText>{activeToken.line}</OklchText></span>
+                <span style={{ color: "var(--s-text-muted)" }}>{labelParts.prefix}</span>
+                <span style={{ color: labelParts.isNew ? "var(--s-primary)" : "var(--s-text-muted)" }}>
+                  {labelParts.value}
+                </span>
+                <span className="hero-logo-field__caret">│</span>
               </>
             )}
             {isApplied && (
               <>
                 <span style={{ color: "var(--s-primary)" }}><OklchText>{activeToken.line}</OklchText></span>
-                <span style={{ color: "var(--s-success, #10b981)", marginLeft: 6 }}>✓</span>
+                <span style={{ color: "var(--s-success, #10b981)" }}>✓</span>
               </>
             )}
           </div>
         </div>
 
-        {/* ── Cursor (always rendered, opacity-driven) ────────── */}
+        {/* ── Cursor (moves independently, clicks on select) ─── */}
         <div
           aria-hidden="true"
           style={{
             position: "absolute",
-            left: (selRect?.left ?? 0) + (selRect?.width ?? 0) - 10,
-            top: (selRect?.top ?? 0) + (selRect?.height ?? 0) - 10,
-            opacity: selRect ? 1 : 0,
+            left: cursorTarget?.left ?? 0,
+            top: cursorTarget?.top ?? 0,
+            opacity: cursorTarget ? 1 : 0,
             color: "var(--s-primary)",
             transition: "left 600ms cubic-bezier(0.16,1,0.3,1), top 600ms cubic-bezier(0.16,1,0.3,1), opacity 300ms ease",
             pointerEvents: "none",
@@ -1196,9 +1330,17 @@ export function HeroLogoField() {
             filter: "drop-shadow(0 2px 6px color-mix(in oklch, var(--s-primary) 22%, transparent))",
           }}
         >
-          <svg width="20" height="26" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 3L18 15L11 16.5L8.5 24L3 3Z" fill="var(--s-background)" stroke="var(--s-primary)" strokeWidth="1.5" />
-          </svg>
+          <div
+            key={`cursor-${idx}`}
+            style={{
+              transformOrigin: "3px 3px",
+              animation: clicking ? "hlf-cursor-click 350ms cubic-bezier(0.16,1,0.3,1)" : undefined,
+            }}
+          >
+            <svg width="20" height="26" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3L18 15L11 16.5L8.5 24L3 3Z" fill="var(--s-background)" stroke="var(--s-primary)" strokeWidth="1.5" />
+            </svg>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 ---
 title: ComparisonTable
-description: "A feature comparison table with checkmarks, text values, and hover highlighting."
+description: "A ComparisonTable component from the Sigil design system."
 ---
 
 ## Import
@@ -9,49 +9,29 @@ description: "A feature comparison table with checkmarks, text values, and hover
 import { ComparisonTable } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <ComparisonTable
-    columns={["Sigil", "shadcn/ui", "Chakra"]}
-    features={[
-      { name: "Design tokens", values: { "Sigil": true, "shadcn/ui": false, "Chakra": true } },
-      { name: "Preset system", values: { "Sigil": true, "shadcn/ui": false, "Chakra": false } },
-      { name: "CLI", values: { "Sigil": true, "shadcn/ui": true, "Chakra": false } },
-      { name: "Components", values: { "Sigil": "200+ token-driven components", "shadcn/ui": "40+", "Chakra": "50+" } },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<ComparisonTable
-  columns={["Sigil", "shadcn/ui", "Chakra"]}
-  features={[
-    { name: "Design tokens", values: { Sigil: true, "shadcn/ui": false, Chakra: true } },
-    { name: "Components", values: { Sigil: "200+ token-driven components", "shadcn/ui": "40+", Chakra: "50+" } },
-  ]}
-/>
+<ComparisonTable>...</ComparisonTable>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `features` | `ComparisonFeature[]` | — | Feature rows with boolean or string values |
-| `columns` | `string[]` | — | Column names (must match keys in feature values) |
+| `features` | `ComparisonFeature[]` | — | Feature rows to compare. |
+| `columns` | `string[]` | — | Column names (keys matching the values in features). |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Table borders |
 | `--s-border-style` | Border style |
-| `--s-surface-elevated` | Row hover background |
-| `--s-success` | Checkmark color |
-| `--s-text` | Feature names and string values |
-| `--s-text-muted` | Feature header and dash indicators |
-| `--s-radius-md` | Container radius |
-| `--s-shadow-sm` | Container shadow |
-| `--s-duration-fast` | Hover transition |
+| `--s-border` | Border |
+| `--s-radius-md` | Radius md |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-duration-fast` | Duration fast |
+| `--s-success` | Success |

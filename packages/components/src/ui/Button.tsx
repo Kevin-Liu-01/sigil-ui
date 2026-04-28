@@ -108,7 +108,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         "inline-flex items-center justify-center gap-2 font-medium whitespace-nowrap",
         "cursor-pointer select-none",
         "transition-all duration-[var(--s-duration-fast,150ms)] ease-out",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+        "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
         "disabled:opacity-50 disabled:pointer-events-none",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-4",
         variantStyles[variant],

@@ -11,8 +11,15 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <Tabs />
+<ComponentPreview vertical>
+  <Tabs defaultValue="tab1">
+    <TabsList>
+      <TabsTrigger value="tab1">Overview</TabsTrigger>
+      <TabsTrigger value="tab2">Usage</TabsTrigger>
+    </TabsList>
+    <TabsContent value="tab1">Overview content</TabsContent>
+    <TabsContent value="tab2">Usage content</TabsContent>
+  </Tabs>
 </ComponentPreview>
 
 ## Usage
@@ -38,7 +45,9 @@ This component includes the following parts:
 | `--s-text-muted` | Text muted |
 | `--s-radius-sm` | Radius sm |
 | `--s-duration-fast` | Duration fast |
-| `--s-ring` | Ring |
-| `--s-primary` | Primary |
+| `--s-focus-ring-width` | Focus ring width |
+| `--s-focus-ring-color` | Focus ring color |
+| `--s-focus-ring-offset` | Focus ring offset |
 | `--s-background` | Background |
 | `--s-text` | Text |
+| `--s-shadow-sm` | Shadow sm |

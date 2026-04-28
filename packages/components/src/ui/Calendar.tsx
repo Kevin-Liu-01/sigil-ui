@@ -198,7 +198,7 @@ function CalendarDropdown({
           "border border-transparent",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface)] hover:border-[var(--s-border)]",
-          "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--s-ring,var(--s-primary))]",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "cursor-pointer select-none",
         )}
@@ -294,7 +294,7 @@ function CalendarDayButton({
       className={cn(
         "flex aspect-square size-auto w-full min-w-[var(--cell-size)] flex-col gap-1 leading-none font-normal",
         "group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10",
-        "group-data-[focused=true]/day:ring-2 group-data-[focused=true]/day:ring-[var(--s-ring,var(--s-primary))]",
+        "group-data-[focused=true]/day:ring-[length:var(--s-focus-ring-width)] group-data-[focused=true]/day:ring-[var(--s-focus-ring-color)]",
         "data-[selected-single=true]:bg-[var(--s-primary)] data-[selected-single=true]:text-[var(--s-primary-contrast)]",
         "data-[range-start=true]:rounded-[var(--s-radius-sm,4px)] data-[range-start=true]:rounded-l-[var(--s-radius-sm,4px)] data-[range-start=true]:bg-[var(--s-primary)] data-[range-start=true]:text-[var(--s-primary-contrast)]",
         "data-[range-end=true]:rounded-[var(--s-radius-sm,4px)] data-[range-end=true]:rounded-r-[var(--s-radius-sm,4px)] data-[range-end=true]:bg-[var(--s-primary)] data-[range-end=true]:text-[var(--s-primary-contrast)]",

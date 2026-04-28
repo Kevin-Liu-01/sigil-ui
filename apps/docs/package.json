@@ -16,7 +16,9 @@
     "fumadocs-core": "^15.3.0",
     "fumadocs-ui": "^15.3.0",
     "@sigil-ui/tokens": "workspace:*",
-    "@sigil-ui/components": "workspace:*"
+    "@sigil-ui/presets": "workspace:*",
+    "@sigil-ui/components": "workspace:*",
+    "lucide-react": "^0.468.0"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",

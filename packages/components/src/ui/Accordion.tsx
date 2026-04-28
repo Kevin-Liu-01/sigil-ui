@@ -46,7 +46,7 @@ export const AccordionTrigger = forwardRef<
           "flex flex-1 items-center justify-between py-4 text-sm font-medium text-[var(--s-text)]",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "hover:underline",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "[&[data-state=open]>svg]:rotate-180",
           className,
         )}

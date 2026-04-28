@@ -54,7 +54,7 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(function Badge(
       className={cn(
         "inline-flex items-center rounded-[var(--s-radius-badge,2px)] border border-[style:var(--s-border-style,solid)] px-2.5 py-0.5 text-xs font-semibold",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--s-ring-offset,var(--s-background))]",
+        "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
         "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([data-icon])]:size-3",
         "whitespace-nowrap",
         variantStyles[variant],

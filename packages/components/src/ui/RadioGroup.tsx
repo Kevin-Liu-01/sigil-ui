@@ -34,7 +34,7 @@ export const RadioGroupItem = forwardRef<HTMLButtonElement, RadioGroupItemProps>
         className={cn(
           "peer h-5 w-5 shrink-0 rounded-[var(--s-radius-full,9999px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           "bg-transparent text-[var(--s-primary)]",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "data-[state=checked]:border-[var(--s-primary)]",
           className,

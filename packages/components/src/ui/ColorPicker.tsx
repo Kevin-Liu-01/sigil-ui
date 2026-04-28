@@ -74,7 +74,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
             "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
             "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "bg-[var(--s-background)] text-[var(--s-text)]",
-            "focus:outline-none focus:ring-1 focus:ring-[var(--s-primary)]/20 focus:border-[var(--s-primary)]",
+            "focus:outline-none focus:ring-[length:var(--s-input-focus-ring-width)] focus:ring-[var(--s-input-focus-ring-color)]/20 focus:border-[var(--s-input-focus-ring-color)]",
             "transition-all duration-[var(--s-duration-fast,150ms)]",
           )}
         />
@@ -92,7 +92,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
                 "size-6 rounded-[var(--s-radius-sm,3px)]",
                 "border-2 transition-all duration-[var(--s-duration-fast,150ms)]",
                 "hover:scale-110",
-                "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
+                "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
                 color === swatch
                   ? "border-[var(--s-primary)] ring-1 ring-[var(--s-primary)]"
                   : "border-transparent",

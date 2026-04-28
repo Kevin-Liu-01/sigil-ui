@@ -286,7 +286,7 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(function Listbox
           move(-1);
         }
       }}
-      className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))]", className)}
+      className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-1 focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]", className)}
       {...props}
     >
       {options.map((option) => (
@@ -298,7 +298,7 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(function Listbox
           aria-selected={option.value === value}
           disabled={option.disabled}
           onClick={() => onValueChange?.(option.value)}
-          className="rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-left text-sm hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] aria-selected:bg-[var(--s-primary)] aria-selected:text-[var(--s-primary-contrast)]"
+          className="rounded-[var(--s-radius-sm,4px)] px-3 py-2 text-left text-sm hover:bg-[var(--s-surface)] focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] aria-selected:bg-[var(--s-primary)] aria-selected:text-[var(--s-primary-contrast)]"
         >
           {option.label}
         </button>

@@ -1,6 +1,6 @@
 ---
 title: WaterfallChart
-description: "An animated waterfall chart showing segmented timing breakdowns with optional badge."
+description: "A WaterfallChart component from the Sigil design system."
 ---
 
 ## Import
@@ -9,52 +9,33 @@ description: "An animated waterfall chart showing segmented timing breakdowns wi
 import { WaterfallChart } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <WaterfallChart
-    rows={[
-      { label: "Traditional", steps: [{ label: "DNS", duration: 50 }, { label: "TCP", duration: 120 }, { label: "TLS", duration: 200 }, { label: "TTFB", duration: 800 }, { label: "Download", duration: 350 }] },
-      { label: "Optimized", accent: true, steps: [{ label: "DNS", duration: 10, color: "var(--s-success, #22c55e)" }, { label: "TCP", duration: 30, color: "var(--s-success, #22c55e)" }, { label: "TLS", duration: 20, color: "var(--s-success, #22c55e)" }, { label: "TTFB", duration: 15, color: "var(--s-primary)" }, { label: "Download", duration: 25, color: "var(--s-primary)" }] },
-    ]}
-    unit="ms"
-    badge="~15x faster"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<WaterfallChart
-  rows={[
-    { label: "Before", steps: [{ label: "DNS", duration: 50 }, { label: "TLS", duration: 200 }] },
-    { label: "After", accent: true, steps: [{ label: "DNS", duration: 10 }, { label: "TLS", duration: 20 }] },
-  ]}
-  unit="ms"
-  badge="~10x faster"
-/>
+<WaterfallChart>...</WaterfallChart>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `rows` | `WaterfallRow[]` | — | Rows with label, steps array, and optional accent flag |
-| `unit` | `string` | `"ms"` | Unit label for totals |
-| `badge` | `string` | — | Badge text shown below (e.g. "~50x faster") |
+| `rows` | `WaterfallRow[]` | — | — |
+| `unit` | `string` | `ms` | Unit label for totals. |
+| `badge` | `string` | — | Badge text shown below (e.g. "~50x faster"). |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Accent row value color |
-| `--s-text` | Row label text |
-| `--s-text-muted` | Non-accent row text |
-| `--s-border` | Default step color |
-| `--s-surface-elevated` | Bar track background |
-| `--s-success` | Badge border and text |
-| `--s-radius-sm` | Bar and segment radius |
-| `--s-duration-normal` | Enter animation duration |
-| `--s-ease-out` | Animation easing |
-| `--s-ease-spring` | Badge spring easing |
-| `--s-duration-fast` | Badge animation duration |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-ease-default` | Ease default |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-primary` | Primary |
+| `--s-radius-sm` | Radius sm |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-chart-series-1` | Chart series 1 |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-success` | Success |

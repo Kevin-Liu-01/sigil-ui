@@ -55,7 +55,7 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
   return (
     <SigilSection
       {...props}
-      borderTop={!edgeless && props.borderTop}
+      borderTop={false}
       borderBottom={!edgeless && props.borderBottom}
       showCrosses={!edgeless && props.showCrosses}
     />
@@ -92,7 +92,7 @@ function SectionHeader({
       <div className="flex items-baseline justify-between mb-4">
         <MonoLabel variant="accent" size="sm">/ {label}</MonoLabel>
       </div>
-      <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-3">
+      <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-[var(--s-heading-h2-tracking,-0.02em)] leading-[var(--s-heading-h2-leading,1.15)] text-[var(--s-text)] mb-3">
         {heading}
       </h2>
       {description && (
@@ -138,20 +138,21 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="152px 24px 64px" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection borderTop padding="clamp(40px, 12vw, 152px) 24px clamp(32px, 5vw, 64px)" style={{ position: "relative", maxWidth: "100vw" }}>
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
-        <HeroLogoField />
         <MonoLabel variant="accent" className="block mb-4">$ npx create-sigil-app@latest</MonoLabel>
 
-        <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4 max-w-3xl">
+        <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
           Your Design Systems <br /> Live in One File.
         </h1>
 
         <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
-          The same Radix components you trust, with an agent-first token layer on top.
-          {" "}{SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.tokenCount} tokens. One token file that humans and AI agents
-          both edit to control every color, font, radius, and animation.
+          <span className="hidden lg:inline">
+            The same Radix components you trust, with an agent-first token layer on top.
+            {" "}{SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
+          </span>
+          One token file that humans and AI agents both edit to control every color, font, radius, and animation.
         </DensityText>
 
         <div className="flex items-center gap-3 flex-wrap">
@@ -178,6 +179,7 @@ function Hero() {
             />
           ))}
         </div>
+        <HeroLogoField />
       </div>
 
     </LandingSection>
@@ -186,23 +188,18 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop>
-      <MonoLabel variant="accent" className="block mb-4">PRODUCT SURFACE GENERATED FROM THE SAME TOKENS</MonoLabel>
-      <TechFrame variant="overshoot" extend={16} opacity={0.35} padding={16}>
-        <div className="s-transition-all">
-          <HeroShowcase />
-        </div>
-      </TechFrame>
+    <LandingSection borderTop padding="24px var(--s-page-margin, 24px)">
+      <div className="s-transition-all">
+        <HeroShowcase />
+      </div>
     </LandingSection>
   );
 }
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="0 24px 48px">
-      <TechFrame variant="dimension" extend={12} opacity={0.3} padding={8}>
-        <ComponentGalleryCTA />
-      </TechFrame>
+    <LandingSection borderTop padding="24px 24px">
+      <ComponentGalleryCTA />
     </LandingSection>
   );
 }
@@ -1369,7 +1366,7 @@ function QuickStartSection() {
       <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
-          <h2 className="mb-4 max-w-[620px] font-[family-name:var(--s-font-display)] text-[clamp(36px,5vw,72px)] font-bold leading-[0.96] tracking-[-0.05em] text-[var(--s-text)]">
+          <h2 className="mb-4 max-w-[620px] font-[family-name:var(--s-font-display)] text-[clamp(36px,5vw,72px)] font-bold leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)]">
             Get started in 30 seconds.
           </h2>
           <DensityText role="body" as="p" muted className="max-w-[600px] leading-relaxed">
@@ -1479,11 +1476,13 @@ function QuickStartSection() {
 
 function FinalCTA() {
   return (
-    <LandingSection borderTop padding="80px 24px" style={{ position: "relative", overflow: "hidden" }}>
+    <>
+    <Divider size="md" showCross fadeEdges />
+    <LandingSection padding="80px 24px" style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>
-          <h2 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[1.1] tracking-tight text-[var(--s-text)]">
+          <h2 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[var(--s-heading-h1-leading,1.1)] tracking-[var(--s-heading-h1-tracking,-0.025em)] text-[var(--s-text)]">
             Start building.
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
@@ -1538,6 +1537,7 @@ function FinalCTA() {
         </div>
       </div>
     </LandingSection>
+    </>
   );
 }
 
@@ -1557,7 +1557,7 @@ export default function LandingPage() {
 
       <ProductSurfaceSection />
 
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="sm" showBorders />
 
       <ComponentGalleryBannerSection />
 

@@ -48,7 +48,7 @@ export const ResizableHandle = forwardRef<HTMLDivElement, ResizableHandleProps>(
           "bg-[var(--s-border)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "after:absolute after:inset-y-0 after:-left-1 after:-right-1",
           "hover:bg-[var(--s-primary)]/40",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-ring,var(--s-primary))] focus-visible:ring-offset-1",
+          "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full",
           "data-[panel-group-direction=vertical]:after:inset-x-0 data-[panel-group-direction=vertical]:after:-top-1 data-[panel-group-direction=vertical]:after:-bottom-1 data-[panel-group-direction=vertical]:after:left-auto data-[panel-group-direction=vertical]:after:right-auto",
           className,

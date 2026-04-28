@@ -1,6 +1,6 @@
 ---
 title: ScrollArea
-description: "A token-driven custom scrollbar container built on Radix ScrollArea."
+description: "A ScrollArea component from the Sigil design system."
 ---
 
 ## Import
@@ -12,7 +12,9 @@ import { ScrollArea } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <ScrollArea />
+  <ScrollArea className="h-32 w-48 rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]">
+    <div className="p-4">Scrollable content goes here. Add more text to see scrolling behavior.</div>
+  </ScrollArea>
 </ComponentPreview>
 
 ## Usage
@@ -21,43 +23,28 @@ import { ScrollArea } from "@sigil-ui/components";
 <ScrollArea>ScrollArea content</ScrollArea>
 ```
 
-## Both axes
-
-```tsx
-<ScrollArea orientation="both" className="h-[300px] w-[400px]">
-  <div className="h-[600px] w-[800px] p-4">Large content area</div>
-</ScrollArea>
-```
-
-## Custom thickness
-
-```tsx
-<ScrollArea scrollbarSize={14} className="h-[240px]">
-  <div className="p-4">Chunkier scrollbar, same token system.</div>
-</ScrollArea>
-```
-
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `orientation` | `"vertical" \| "horizontal" \| "both"` | `vertical` | Orientation of the scrollbar. |
-| `scrollbarSize` | `number \| string` | token value | Scrollbar thickness for this instance. |
-| `scrollbarClassName` | `string` | — | Additional classes for the track. |
-| `thumbClassName` | `string` | — | Additional classes for the thumb. |
+| `orientation` | `ScrollbarOrientation` | `vertical` | Orientation of the scrollbar. |
+| `scrollbarSize` | `number | string` | — | Override token-driven scrollbar thickness for this instance. |
+| `scrollbarClassName` | `string` | — | Additional classes for the scrollbar track. |
+| `thumbClassName` | `string` | — | Additional classes for the scrollbar thumb. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-scrollbar-width` | Vertical scrollbar width |
-| `--s-scrollbar-height` | Horizontal scrollbar height |
-| `--s-scrollbar-padding` | Internal track padding |
-| `--s-scrollbar-track` | Track background |
-| `--s-scrollbar-thumb` | Thumb color |
-| `--s-scrollbar-thumb-hover` | Thumb hover color |
-| `--s-scrollbar-thumb-active` | Thumb active color |
-| `--s-scrollbar-radius` | Track and thumb radius |
+| `--s-scrollbar-corner` | Scrollbar corner |
+| `--s-scrollbar-track` | Scrollbar track |
+| `--s-scrollbar-radius` | Scrollbar radius |
+| `--s-radius-full` | Radius full |
+| `--s-scrollbar-padding` | Scrollbar padding |
 | `--s-duration-fast` | Duration fast |
-
-Native scroll containers can opt into the same system with `className="sigil-scrollbar"` or `data-sigil-scrollbar`.
+| `--s-scrollbar-width` | Scrollbar width |
+| `--s-scrollbar-border` | Scrollbar border |
+| `--s-scrollbar-height` | Scrollbar height |
+| `--s-scrollbar-thumb` | Scrollbar thumb |
+| `--s-border` | Border |
+| `--s-scrollbar-thumb-hover` | Scrollbar thumb hover |

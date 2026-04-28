@@ -1,6 +1,6 @@
 ---
 title: SankeyDiagram
-description: "A Sankey flow diagram showing weighted relationships between source and target nodes."
+description: "A SankeyDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,56 +9,26 @@ description: "A Sankey flow diagram showing weighted relationships between sourc
 import { SankeyDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <SankeyDiagram
-    sources={[
-      { label: "Organic", value: 120 },
-      { label: "Direct", value: 80 },
-      { label: "Referral", value: 40 },
-    ]}
-    targets={[
-      { label: "Signup", value: 100 },
-      { label: "Bounce", value: 90 },
-      { label: "Trial", value: 50 },
-    ]}
-    links={[
-      { source: 0, target: 0, value: 70 },
-      { source: 0, target: 2, value: 50 },
-      { source: 1, target: 0, value: 30 },
-      { source: 1, target: 1, value: 50 },
-      { source: 2, target: 1, value: 40 },
-    ]}
-    width={400}
-    height={200}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<SankeyDiagram
-  sources={[{ label: "Organic", value: 120 }]}
-  targets={[{ label: "Signup", value: 100 }]}
-  links={[{ source: 0, target: 0, value: 70 }]}
-/>
+<SankeyDiagram>...</SankeyDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `sources` | `SankeyNode[]` | — | Left-side source nodes |
-| `targets` | `SankeyNode[]` | — | Right-side target nodes |
-| `links` | `SankeyLink[]` | — | Weighted links between source and target indices |
-| `width` | `number` | `400` | SVG width |
-| `height` | `number` | `200` | SVG height |
+| `sources` | `SankeyNode[]` | — | — |
+| `targets` | `SankeyNode[]` | — | — |
+| `links` | `SankeyLink[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Default node and link color |
-| `--s-text-muted` | Node labels |
-| `--s-font-mono` | Label font family |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
