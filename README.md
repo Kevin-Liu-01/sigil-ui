@@ -265,12 +265,22 @@ One command changes all 259 tokens at once. Not a theme toggle — a different *
 | **rivet** | Mechanical, utilitarian | Inter | Amber |
 | **brass** | Vintage instrument, patina | Fraunces | Gold |
 
-### Edgeless / Open
+### Edgeless / Atmospheric
 | Preset | Mood | Display Font | Primary |
 |--------|------|-------------|---------|
 | **vast** | Expansive open space, warm editorial | Fraunces | Terracotta |
 | **aura** | Ethereal dark, luminous violet glow | General Sans | Violet |
 | **field** | Clean utilitarian, monospace-forward | Space Grotesk | Green |
+| **clay** | Warm, earthy, handcrafted | DM Serif Display | Terracotta |
+| **sage** | Botanical, calm, natural | Libre Baskerville | Green |
+| **ink** | Creative, deep, immersive | Plus Jakarta Sans | Indigo |
+| **sand** | Warm, sunny, inviting | Instrument Serif | Amber |
+| **plum** | Luxurious, rich, dramatic | Playfair Display | Magenta |
+| **moss** | Forest, deep, organic-tech | Space Grotesk | Green |
+| **coral** | Warm, friendly, approachable | Outfit | Coral |
+| **dune** | Warm, golden, vast-feeling | Instrument Serif | Amber |
+| **ocean** | Deep, calming, oceanic | General Sans | Teal |
+| **rose** | Elegant, feminine, refined | Fraunces | Rose |
 
 ---
 
@@ -389,8 +399,24 @@ packages/
 apps/
   web/               Product site + sandbox (live preset switching)
   docs/              Documentation (Fumadocs)
-  landing/           Marketing site
-  demos/             10 template demos (ai-saas, dev-docs, dashboard, portfolio, ...)
+  demos/             17 demos: 10 templates + 7 showcase clones
+    ai-saas/         AI product landing
+    dashboard/       Analytics surface
+    portfolio/       Personal/studio portfolio
+    ecommerce/       Storefront starter
+    blog/            Editorial publication
+    agency/          Studio landing page
+    cli-tool/        Developer tool landing
+    startup/         Launch page with waitlist
+    dev-docs/        Documentation site
+    playground/      Component sandbox
+    vercel-clone/    Vercel-style showcase
+    linear-clone/    Linear-style showcase
+    vite-clone/      Vite-style showcase
+    viteplus-clone/  Vite+-style showcase
+    dedalus-clone/   Dedalus-style showcase
+    oxide-clone/     Oxide-style showcase
+    voidzero-clone/  VoidZero-style showcase
 
 style/               Design language and engineering philosophy
   design.md          Motion/animation guide (7 rules, speed limits, enter/exit)

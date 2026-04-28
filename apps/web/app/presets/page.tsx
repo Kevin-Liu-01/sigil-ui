@@ -107,7 +107,7 @@ export default function PresetsPage() {
             </MonoLabel>
 
             <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
-              31 Curated Presets.<br />
+              44 Curated Presets.<br />
               <span className="text-[var(--s-primary)]">Or build your own.</span>
             </h1>
 

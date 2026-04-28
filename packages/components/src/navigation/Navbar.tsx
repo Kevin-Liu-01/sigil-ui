@@ -13,7 +13,7 @@ export interface NavbarProps extends HTMLAttributes<HTMLElement> {
 
 /** Navigation bar with configurable sticky/transparent behavior. */
 export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
-  { sticky = false, transparent = false, className, children, ...rest },
+  { sticky = true, transparent = false, className, children, ...rest },
   ref,
 ) {
   return (
@@ -21,11 +21,13 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
       ref={ref}
       data-slot="navbar"
       className={cn(
-        "w-full z-50 flex items-center justify-between px-6 h-[var(--s-navbar-height,64px)]",
-        sticky && "sticky top-0",
+        "w-full z-50 flex items-center justify-between",
+        "px-[var(--s-navbar-padding-x,24px)] h-[var(--s-navbar-height,64px)]",
+        "shadow-[var(--s-navbar-shadow,none)]",
+        sticky && "sticky top-0 left-0 right-0",
         transparent
           ? "bg-transparent"
-          : "bg-[var(--s-background)]/95 backdrop-blur-[var(--s-navbar-backdrop-blur,12px)] border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          : "bg-[var(--s-background)] backdrop-blur-[var(--s-navbar-backdrop-blur,12px)] backdrop-saturate-[1.8] border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
         className,
       )}
       {...rest}
@@ -43,7 +45,7 @@ export interface NavbarLogoProps extends HTMLAttributes<HTMLDivElement> {
 export const NavbarLogo = forwardRef<HTMLDivElement, NavbarLogoProps>(
   function NavbarLogo({ className, children, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="navbar-logo" className={cn("flex items-center gap-2 font-semibold text-[var(--s-text)]", className)} {...rest}>
+      <div ref={ref} data-slot="navbar-logo" className={cn("flex items-center gap-[var(--s-navbar-logo-gap,8px)] font-semibold text-[var(--s-text)] [&_img]:h-[var(--s-navbar-logo-height,24px)] [&_svg]:h-[var(--s-navbar-logo-height,24px)]", className)} {...rest}>
         {children}
       </div>
     );
@@ -58,7 +60,7 @@ export interface NavbarLinksProps extends HTMLAttributes<HTMLDivElement> {
 export const NavbarLinks = forwardRef<HTMLDivElement, NavbarLinksProps>(
   function NavbarLinks({ className, children, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="navbar-links" className={cn("hidden md:flex items-center gap-6", className)} {...rest}>
+      <div ref={ref} data-slot="navbar-links" className={cn("hidden md:flex items-center gap-[var(--s-navbar-item-gap,24px)]", className)} {...rest}>
         {children}
       </div>
     );

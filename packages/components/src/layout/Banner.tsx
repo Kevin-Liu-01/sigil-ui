@@ -34,15 +34,21 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
       ref={ref}
       data-slot="banner"
       role="status"
-      className={cn("flex items-center gap-3 px-4 py-2 text-sm", className)}
+      className={cn(
+        "flex items-center gap-[var(--s-banner-icon-gap,12px)]",
+        "px-[var(--s-banner-padding-x,16px)] py-[var(--s-banner-padding-y,8px)]",
+        "text-[length:var(--s-banner-font-size,0.875rem)] font-[var(--s-banner-font-weight,500)]",
+        "rounded-[var(--s-banner-radius,0px)]",
+        className,
+      )}
       style={{
         backgroundColor: v.bg,
-        borderBottom: `1px solid ${v.border}`,
+        borderBottom: `var(--s-banner-border-width, 1px) solid ${v.border}`,
         color: v.text,
       }}
       {...props}
     >
-      {icon && <span className="shrink-0 [&_svg]:size-4">{icon}</span>}
+      {icon && <span className="shrink-0 [&_svg]:size-[var(--s-banner-icon-size,16px)]">{icon}</span>}
       <span className="flex-1 min-w-0">{children}</span>
       {dismissible && (
         <button
@@ -51,7 +57,7 @@ export const Banner = forwardRef<HTMLDivElement, BannerProps>(function Banner(
           className="shrink-0 opacity-60 hover:opacity-100 transition-opacity"
           aria-label="Dismiss"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
+          <svg className="size-[var(--s-banner-dismiss-size,16px)]" viewBox="0 0 14 14" fill="none" aria-hidden>
             <path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
           </svg>
         </button>

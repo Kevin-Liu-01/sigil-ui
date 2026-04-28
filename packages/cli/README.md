@@ -185,7 +185,7 @@ Runs diagnostics:
 | Dependencies | All npm deps for installed components are present in `node_modules` |
 | CSS Import | Global CSS file references Sigil tokens |
 | Agent Assets | `.sigil/AGENTS.md`, `.sigil/skills/`, and Cursor skill rules are present |
-| Preset | Active preset is one of the 31 built-ins or has a custom file |
+| Preset | Active preset is one of the 44 built-ins or has a custom file |
 
 ## Generated Agent Instructions (`.sigil/AGENTS.md`)
 

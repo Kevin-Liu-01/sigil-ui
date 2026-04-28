@@ -15,7 +15,7 @@ import type { GutterPattern } from "@sigil-ui/tokens";
 
 const STRUCTURAL_LINE_COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
 const STRUCTURAL_BORDER =
-  "var(--s-gutter-border, var(--s-border-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
+  "var(--s-gutter-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
 const COLOR = STRUCTURAL_LINE_COLOR;
 
 export type PatternSide = "left" | "right";
@@ -467,7 +467,7 @@ export function SigilPageGrid({
     if (!edgeless && !gutterVisible) {
       const prop = `border${innerEdge}` as keyof CSSProperties;
       Object.assign(base, {
-        [prop]: marginBorder ?? "var(--s-margin-border, none)",
+        [prop]: marginBorder ?? "var(--s-margin-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))",
       });
     }
     return base;
@@ -482,22 +482,10 @@ export function SigilPageGrid({
         <div aria-hidden="true" style={marginStyleL} />
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="left" visible={gutterVisible} />
         <div
-          className="relative flex min-w-0 flex-col"
+          className="flex min-w-0 flex-col"
           style={{ background: "var(--s-background)" }}
         >
-          {!edgeless && showGutterGrid && gutterPattern !== "none" && (
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 z-0"
-              style={{
-                backgroundImage: `linear-gradient(to bottom, ${STRUCTURAL_LINE_COLOR} 1px, transparent 1px)`,
-                backgroundSize: `100% ${gridCell}px`,
-              }}
-            />
-          )}
-          <div className="relative z-[1] flex min-w-0 flex-col flex-1">
-            {children}
-          </div>
+          {children}
         </div>
         <SigilGutter showGrid={showGutterGrid} gridCell={gridCell} pattern={gutterPattern} side="right" visible={gutterVisible} />
         <div aria-hidden="true" style={marginStyleR} />

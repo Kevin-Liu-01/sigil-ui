@@ -30,7 +30,7 @@ sigil.tokens.md (human/agent-editable markdown overrides)
  ↓ parseMarkdownTokens()
 MarkdownTokenOverrides (core token groups)
  ↓ merge with defaults / presets
-SigilTokens (TypeScript object, 259 configurable fields)
+SigilTokens (TypeScript object, 519 configurable fields)
        ↓ compileToCss() / compileToTailwind()
 CSS custom properties (--s-primary, --s-radius-md, --s-duration-fast, ...)
        ↓ consumed by
@@ -50,6 +50,10 @@ To change the visual output, edit the top of this chain — not the bottom.
 | Change card hover effect | Preset: `cards.hover-effect: "glow"` | Card component file |
 | Change button press scale | Preset: `buttons.active-scale: "0.95"` | Button component file |
 | Change background pattern | Preset: `backgrounds.pattern: "dots"` | Layout files |
+| Change hero padding/layout | Token CSS: `--s-hero-padding-y: 120px` | Hero component files |
+| Change CTA layout | Token CSS: `--s-cta-layout: "split"` | CTA component files |
+| Change footer structure | Token CSS: `--s-footer-columns: 3` | Footer component files |
+| Change page density | Preset: `pageRhythm.density: "editorial"` | Section/layout files |
 | Complete visual overhaul | `npx @sigil-ui/cli preset <name>` | Any component files |
 | Targeted brand update | Edit `sigil.tokens.md` or token CSS | Scattered Tailwind classes |
 
@@ -58,7 +62,7 @@ To change the visual output, edit the top of this chain — not the bottom.
 ```
 packages/
   tokens/           @sigil-ui/tokens     — Source of truth: types, defaults, compiler, markdown parser
-  presets/           @sigil-ui/presets    — 31 curated preset bundles (259 tokens each)
+  presets/           @sigil-ui/presets    — 44 curated preset bundles (519 tokens each)
   components/        @sigil-ui/components — 200+ token-driven React components (read from tokens, don't hardcode)
   primitives/        @sigil-ui/primitives — 16 Radix-based headless behavior primitives
   cli/               @sigil-ui/cli       — CLI: init, add, preset, diff, doctor
@@ -67,8 +71,7 @@ packages/
 apps/
   web/               Product site + sandbox (drag-and-drop component canvas, live preset switching)
   docs/              Documentation (Fumadocs)
-  landing/           Marketing site
-  demos/             10 template demos (ai-saas, dev-docs, dashboard, portfolio, ecommerce, blog, agency, cli-tool, startup, playground)
+  demos/             17 demos: 10 templates + 7 showcase clones (ai-saas, dashboard, portfolio, ecommerce, blog, agency, cli-tool, startup, dev-docs, playground, vercel-clone, linear-clone, vite-clone, viteplus-clone, dedalus-clone, oxide-clone, voidzero-clone)
 
 style/               Design language and engineering philosophy (from Dedalus)
   design.md          Design & animation guide: when to animate, speed, seven rules, enter/exit
@@ -85,34 +88,51 @@ skills/              Agent skills for specific workflows
   sigil-polish/      Interface polish: typography, surfaces, animations, performance (5 files)
 ```
 
-## Token System (259 Configurable Fields)
+## Token System (519 Configurable Fields)
 
-16 categories, 53 required fields, 206 optional fields:
+33 categories across 4 tiers: primitives, component tokens, block tokens, and composition tokens.
 
 | Category | Fields | What It Controls |
 |----------|--------|-----------------|
-| `colors` (35) | backgrounds, surfaces, text, borders, brand, status, gradients, glow | Every color in the UI |
+| `colors` (36) | backgrounds, surfaces, text, borders, brand, status, gradients, glow | Every color in the UI |
 | `typography` (31) | font stacks, size scale, weight scale, leading, tracking, heading styles | Every text element |
 | `spacing` (25) | base scale, button/card/input/badge/section/navbar/modal/tooltip padding | Every gap and padding |
 | `layout` (22) | content widths, page margins, gutters, grid, bento, sidebar, stack gaps | Page structure |
-| `sigil` (5) | grid cell, cross arm/stroke, rail gap, card radius | Structural-visibility system |
+| `sigil` (10) | grid cell, cross arm/stroke, rail gap, card radius, gutter patterns | Structural-visibility system |
 | `radius` (16) | scale (none→full) + per-component radius | Every rounded corner |
 | `shadows` (14) | scale + glow, colored, inner, per-component shadows | Every shadow and elevation |
-| `motion` (18) | durations, easings, hover/press/stagger presets | Every animation and transition |
+| `motion` (19) | durations, easings, hover/press/stagger presets | Every animation and transition |
 | `borders` (11) | width scale, style, per-component border definitions | Every border |
 | `buttons` (9) | font weight/transform/spacing, hover effect, active scale, icon gap | Button behavior and feel |
-| `cards` (10) | border style, hover effect, padding, title/description sizing | Card layout and interaction |
+| `cards` (18) | border style, hover effect, padding, title/description sizing, aspect ratio | Card layout and interaction |
 | `headings` (15) | h1-h4 + display sizes, weights, tracking, leading | Heading hierarchy |
-| `navigation` (12) | navbar height/blur/border, link style, breadcrumb, sidebar, pagination | Navigation feel |
+| `navigation` (24) | navbar height/blur/border/padding/items/logo, sidebar, pagination | Navigation structure and feel |
 | `backgrounds` (9) | pattern type/opacity, noise, gradient type/angle, hero pattern, section dividers | Page decoration |
 | `code` (14) | font, sizing, colors for syntax highlighting (comments, keywords, strings, etc.) | Code blocks |
 | `inputs` (13) | heights, focus ring, placeholder, error state, labels, helpers | Form field feel |
+| `cursor` (15) | variant, size, colors, glow, blend mode, z-index | Custom cursor system |
+| `scrollbar` (13) | width, track, thumb, radius, firefox compat | Scrollbar appearance |
+| `alignment` (13) | rail width/columns/gutter, content/hero/section/navbar/footer alignment | Page-level alignment grid |
+| `sections` (25) | padding scales, heading/description sizing, grid, alternate backgrounds | Section layout and rhythm |
+| `dividers` (15) | style, width, color, opacity, gradients, ornaments, bleed | Structural dividers |
+| `gridVisuals` (10) | lines, dots, cell background/border, hover effects | Grid decoration |
+| `focus` (5) | ring width/color/offset, shadow, outline | Focus state appearance |
+| `overlays` (8) | background, blur, surface, border, shadow, radius, z-index | Modal/overlay appearance |
+| `dataViz` (13) | series colors, positive/negative, grid, axis, tooltip | Chart and data display |
+| `media` (6) | radius, border, outline, shadow, object-fit | Image and media elements |
+| `controls` (11) | heights, hit area, icon/handle size, track/thumb styling | Sliders, toggles, controls |
+| `componentSurfaces` (12) | bg, border, text, hover/active/selected states | Component surface system |
+| `hero` (25) | min-height, padding, content width, layout, title/description/action sizing | Hero section structure |
+| `cta` (15) | padding, max-width, layout, title/description/action sizing, split gap | CTA section structure |
+| `footer` (15) | padding, columns, gaps, logo/link/social sizing, bottom bar | Footer structure |
+| `banner` (12) | height, padding, font, icon, border, position, dismiss size | Banner/announcement bar |
+| `pageRhythm` (14) | density, section gaps, alternate backgrounds, dividers, scroll snap | Page-level composition flow |
 
 All colors use OKLCH: `oklch(L C H)` — L=lightness (0-1), C=chroma (0-0.37), H=hue (0-360).
 
 ## Preset System (44 Presets)
 
-Switching presets changes ALL 350+ tokens at once. Six categories:
+Switching presets changes ALL 519 tokens at once — visual identity AND structural layout. Seven categories:
 
 | Category | Presets | Aesthetic |
 |----------|---------|-----------|
@@ -122,13 +142,14 @@ Switching presets changes ALL 350+ tokens at once. Six categories:
 | Colorful | flux, shard, prism, vex, dsgn, dusk | Gradients, vibrant accents, playful |
 | Editorial | etch, rune, strata, glyph, mrkr | Typography-forward, print-inspired |
 | Industrial | alloy, forge, anvil, rivet, brass | Metallic, mechanical, utilitarian |
+| Edgeless | vast, aura, field, clay, sage, ink, sand, plum, moss, coral, dune, ocean, rose | Atmospheric, warm, organic, expansive |
 
 ### Custom Preset Rule (MANDATORY)
 
-**Every custom preset MUST populate ALL 28 token categories and ALL fields.**
+**Every custom preset MUST populate ALL 33 token categories and ALL fields.**
 
 The canonical template is `packages/presets/src/_template.ts`. It contains every
-field from `SigilTokens` (~350 fields across 28 categories) with sensible defaults.
+field from `SigilTokens` (~519 fields across 33 categories) with sensible defaults.
 
 When creating a custom preset — whether in-repo or via `sigil preset create`:
 
@@ -136,11 +157,11 @@ When creating a custom preset — whether in-repo or via `sigil preset create`:
 2. **Never delete fields** — change values, don't remove keys.
 3. **No partial presets** — if a field exists in `_template.ts`, it must exist in your preset.
 
-The 28 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`,
+The 33 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`,
 `radius`, `shadows`, `motion`, `borders`, `buttons`, `cards`, `headings`,
 `navigation`, `backgrounds`, `code`, `inputs`, `cursor`, `scrollbar`, `alignment`,
 `sections`, `dividers`, `gridVisuals`, `focus`, `overlays`, `dataViz`, `media`,
-`controls`, `componentSurfaces`.
+`controls`, `componentSurfaces`, `hero`, `cta`, `footer`, `banner`, `pageRhythm`.
 
 Read `skills/sigil-preset/SKILL.md` for the full field count per category and
 the validation checklist.
@@ -150,10 +171,14 @@ the validation checklist.
 | Command | Purpose |
 |---------|---------|
 | `sigil init` | Interactive setup: detects project, asks about use case, recommends presets, configures everything, generates agent instructions |
+| `sigil convert` | Convert an existing project end-to-end: deps, tokens, CSS import, agent instructions |
 | `sigil add <name>` | Copy components into your project (they still read from tokens) |
 | `sigil preset list` | Browse all 44 presets by category |
 | `sigil preset <name>` | Switch preset (regenerates token CSS) |
 | `sigil preset create` | Scaffold a custom preset with base selection, color, and font prompts |
+| `sigil inspire <url-or-file>` | Draft token CSS, a custom preset, and a preview page from a reference |
+| `sigil docs` | Generate local custom-library docs and `llms.txt` |
+| `sigil adapter <name>` | Bridge shadcn, Bootstrap, or Material variables into Sigil tokens |
 | `sigil diff` | Show token CSS changes since last sync |
 | `sigil doctor` | Validate project health (config, tokens, components, deps, CSS import, preset) |
 

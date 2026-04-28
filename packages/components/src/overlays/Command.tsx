@@ -15,7 +15,7 @@ export const Command = forwardRef<
       data-slot="command"
       className={cn(
         "flex h-full w-full flex-col overflow-hidden",
-        "rounded-[var(--s-card-radius,8px)] bg-[var(--s-background)]",
+        "rounded-[var(--s-card-radius,8px)] bg-[var(--s-background,oklch(0.99_0_0))]",
         "text-[var(--s-text)]",
         className,
       )}

@@ -399,7 +399,7 @@ export default function WalkthroughPage() {
         </GapPixelGrid>
 
         {/* Curated presets as secondary option */}
-        <MonoLabel className="block mb-4">OR BROWSE 31 CURATED PRESETS</MonoLabel>
+        <MonoLabel className="block mb-4">OR BROWSE 44 CURATED PRESETS</MonoLabel>
         <DensityText role="body" as="p" muted className="mb-6 max-w-xl leading-relaxed">
           Don't want to start from scratch? Use a curated preset as your base — then customize.
           Click the preset pills below to compare visual identities.

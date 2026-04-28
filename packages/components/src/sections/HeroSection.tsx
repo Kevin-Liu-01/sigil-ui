@@ -27,50 +27,51 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
         ref={ref}
         data-slot="hero-section"
         className={cn(
-          "relative py-[var(--s-section-py-lg,96px)] overflow-hidden",
+          "relative py-[var(--s-hero-padding-y,96px)] overflow-hidden",
           className,
         )}
+        style={{ minHeight: "var(--s-hero-min-height, auto)" }}
         {...props}
       >
         <div className={cn(
-          "mx-auto max-w-[var(--s-content-max,1200px)] px-[var(--s-page-margin,24px)]",
+          "mx-auto max-w-[var(--s-content-max,1200px)] px-[var(--s-hero-padding-x,var(--s-page-margin,24px))]",
           align === "center" && "text-center",
         )}>
           {badge && (
-            <div className={cn("mb-6", align === "center" && "flex justify-center")}>
+            <div className={cn("mb-[var(--s-hero-badge-gap,24px)]", align === "center" && "flex justify-center")}>
               {badge}
             </div>
           )}
 
           <h1 className={cn(
             "font-[family-name:var(--s-font-display)] font-[var(--s-heading-weight,700)]",
-            "text-[clamp(2.25rem,6vw,4rem)] leading-[1.05] tracking-[var(--s-heading-tracking,-0.025em)]",
+            "text-[var(--s-hero-title-size,clamp(2.25rem,6vw,4rem))] leading-[1.05] tracking-[var(--s-heading-tracking,-0.025em)]",
             "text-[var(--s-text)] text-balance",
-            align === "center" && "mx-auto max-w-4xl",
-            align === "left" && "max-w-3xl",
+            align === "center" && "mx-auto max-w-[var(--s-hero-title-max-width,56rem)]",
+            align === "left" && "max-w-[var(--s-hero-title-max-width,48rem)]",
           )}>
             {title}
           </h1>
 
           {description && (
             <p className={cn(
-              "mt-6 text-lg leading-relaxed text-[var(--s-text-muted)]",
-              align === "center" && "mx-auto max-w-2xl",
-              align === "left" && "max-w-xl",
+              "mt-[var(--s-hero-description-gap,24px)] text-[length:var(--s-hero-description-size,1.125rem)] leading-relaxed text-[var(--s-text-muted)]",
+              align === "center" && "mx-auto max-w-[var(--s-hero-description-max-width,32rem)]",
+              align === "left" && "max-w-[var(--s-hero-description-max-width,32rem)]",
             )}>
               {description}
             </p>
           )}
 
           {actions && actions.length > 0 && (
-            <div className={cn("mt-8 flex gap-3 flex-wrap", align === "center" && "justify-center")}>
+            <div className={cn("mt-[var(--s-hero-actions-margin-top,32px)] flex gap-[var(--s-hero-actions-gap,12px)] flex-wrap", align === "center" && "justify-center")}>
               {actions.map((action, i) => (
                 <a
                   key={i}
                   href={action.href ?? "#"}
                   onClick={action.onClick}
                   className={cn(
-                    "inline-flex items-center gap-2 px-6 py-3 text-sm font-medium",
+                    "inline-flex items-center gap-2 px-[var(--s-hero-action-padding-x,24px)] py-[var(--s-hero-action-padding-y,12px)] text-sm font-medium",
                     "transition-all duration-[var(--s-duration-fast,150ms)]",
                     "rounded-[var(--s-radius-button,0px)]",
                     action.variant === "secondary" || i > 0
@@ -85,7 +86,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
           )}
 
           {installCommand && (
-            <div className={cn("mt-6", align === "center" && "flex justify-center")}>
+            <div className={cn("mt-[var(--s-hero-description-gap,24px)]", align === "center" && "flex justify-center")}>
               <code className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] font-[family-name:var(--s-font-mono)] text-sm text-[var(--s-text)]">
                 <span className="text-[var(--s-text-muted)]">$</span>
                 {installCommand}
@@ -94,7 +95,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
           )}
 
           {media && (
-            <div className="mt-12">
+            <div className="mt-[var(--s-hero-actions-margin-top,32px)]">
               {media}
             </div>
           )}

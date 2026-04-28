@@ -66,7 +66,7 @@ function buildPatch(p: SonicProfile): SoundPatch {
 }
 
 // ---------------------------------------------------------------------------
-// 31 preset patches — each with a unique sonic character
+// 44 preset patches — each with a unique sonic character
 // ---------------------------------------------------------------------------
 
 const PATCHES: Record<string, SoundPatch> = {

@@ -18,31 +18,31 @@ field from `SigilTokens` with sensible defaults. When creating a custom preset:
 2. **Never delete fields** — change values, don't remove keys.
 3. **No partial presets** — if a field exists in `_template.ts`, it must exist in your preset.
 
-The 28 required categories (all must be present):
+The 33 required categories (all must be present):
 
 | # | Category | Fields | Required |
 |---|----------|--------|----------|
-| 1 | `colors` | 35 | yes (type-required) |
+| 1 | `colors` | 36 | yes (type-required) |
 | 2 | `typography` | 31 | yes (type-required) |
 | 3 | `spacing` | 25 | yes (type-required) |
 | 4 | `layout` | 22 | **yes (template-required)** |
 | 5 | `sigil` | 10 | yes (type-required) |
 | 6 | `radius` | 16 | yes (type-required) |
 | 7 | `shadows` | 14 | yes (type-required) |
-| 8 | `motion` | 18 | yes (type-required) |
+| 8 | `motion` | 19 | yes (type-required) |
 | 9 | `borders` | 11 | yes (type-required) |
 | 10 | `buttons` | 9 | **yes (template-required)** |
 | 11 | `cards` | 18 | **yes (template-required)** |
 | 12 | `headings` | 15 | **yes (template-required)** |
-| 13 | `navigation` | 12 | **yes (template-required)** |
+| 13 | `navigation` | 24 | **yes (template-required)** |
 | 14 | `backgrounds` | 9 | **yes (template-required)** |
 | 15 | `code` | 14 | **yes (template-required)** |
 | 16 | `inputs` | 13 | **yes (template-required)** |
-| 17 | `cursor` | 14 | **yes (template-required)** |
+| 17 | `cursor` | 15 | **yes (template-required)** |
 | 18 | `scrollbar` | 13 | **yes (template-required)** |
 | 19 | `alignment` | 13 | **yes (template-required)** |
-| 20 | `sections` | 10 | **yes (template-required)** |
-| 21 | `dividers` | 8 | **yes (template-required)** |
+| 20 | `sections` | 25 | **yes (template-required)** |
+| 21 | `dividers` | 15 | **yes (template-required)** |
 | 22 | `gridVisuals` | 10 | **yes (template-required)** |
 | 23 | `focus` | 5 | **yes (template-required)** |
 | 24 | `overlays` | 8 | **yes (template-required)** |
@@ -50,6 +50,11 @@ The 28 required categories (all must be present):
 | 26 | `media` | 6 | **yes (template-required)** |
 | 27 | `controls` | 11 | **yes (template-required)** |
 | 28 | `componentSurfaces` | 12 | **yes (template-required)** |
+| 29 | `hero` | 25 | **yes (template-required)** |
+| 30 | `cta` | 15 | **yes (template-required)** |
+| 31 | `footer` | 15 | **yes (template-required)** |
+| 32 | `banner` | 12 | **yes (template-required)** |
+| 33 | `pageRhythm` | 14 | **yes (template-required)** |
 
 ## When to Use
 
@@ -84,7 +89,7 @@ export const myPreset: SigilPreset = {
     mood: "the vibe in 2-3 words",
   },
   tokens: {
-    // ALL 28 categories from _template.ts — change values, never delete fields
+    // ALL 33 categories from _template.ts — change values, never delete fields
     colors: { /* all 35 fields */ },
     typography: { /* all 31 fields */ },
     spacing: { /* all 25 fields */ },
@@ -140,7 +145,7 @@ export const myPreset: SigilPreset = {
 ### 4. User-created presets (via CLI)
 
 Users can run `sigil preset create` to scaffold a `sigil.preset.<name>.ts` file in
-their project root. The CLI generates from the template with all 28 categories.
+their project root. The CLI generates from the template with all 33 categories.
 
 ## Rules
 

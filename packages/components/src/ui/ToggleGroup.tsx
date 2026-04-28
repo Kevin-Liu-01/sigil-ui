@@ -38,7 +38,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
         ref={ref}
         data-slot="toggle-group"
         className={cn(
-          "inline-flex items-center rounded-[var(--s-radius-md,6px)]",
+          "flex w-full items-center rounded-[var(--s-radius-md,6px)]",
           "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
           className,
         )}
@@ -59,7 +59,7 @@ export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProp
         ref={ref}
         data-slot="toggle-group-item"
         className={cn(
-          "inline-flex cursor-pointer items-center justify-center font-medium",
+          "inline-flex flex-1 cursor-pointer items-center justify-center font-medium",
           "text-[var(--s-text-secondary)] bg-transparent",
           "border-r border-[style:var(--s-border-style,solid)] border-[var(--s-border)] last:border-r-0",
           "first:rounded-l-[var(--s-radius-md,6px)] last:rounded-r-[var(--s-radius-md,6px)]",

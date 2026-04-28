@@ -28,7 +28,7 @@ export const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
         ref={ref}
         data-slot="feature-section"
         className={cn(
-          "border-t border-[var(--s-border)] py-[var(--s-section-py,64px)]",
+          "py-[var(--s-section-py,64px)]",
           className,
         )}
         {...props}

@@ -20,7 +20,7 @@ const SheetOverlay = forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-0 z-50",
-        "bg-[var(--s-overlay-bg)] backdrop-blur-[var(--s-overlay-blur)]",
+        "bg-[var(--s-overlay-bg,oklch(0_0_0/0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
@@ -51,9 +51,9 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
           ref={ref}
           data-slot="sheet"
           className={cn(
-            "fixed z-50 flex flex-col gap-4 p-[var(--s-overlay-padding)]",
-            "bg-[var(--s-overlay-surface)] border-[var(--s-overlay-border)] border-[style:var(--s-border-style,solid)]",
-            "shadow-[var(--s-overlay-shadow)]",
+            "fixed z-50 flex flex-col gap-4 p-[var(--s-overlay-padding,24px)]",
+            "bg-[var(--s-overlay-surface,var(--s-surface))] border-[var(--s-overlay-border,var(--s-border))] border-[style:var(--s-border-style,solid)]",
+            "shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
             "transition-transform duration-[var(--s-duration-normal)] ease-out",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             sideVariants[side],

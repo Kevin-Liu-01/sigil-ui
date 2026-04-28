@@ -17,7 +17,7 @@ export const NewsletterSection = forwardRef<HTMLElement, NewsletterSectionProps>
       <section
         ref={ref}
         data-slot="newsletter-section"
-        className={cn("border-t border-[var(--s-border)] py-[var(--s-section-py,64px)]", className)}
+        className={cn("py-[var(--s-section-py,64px)]", className)}
         {...props}
       >
         <div className="mx-auto max-w-md px-[var(--s-page-margin,24px)] text-center">

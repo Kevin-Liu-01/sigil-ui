@@ -24,7 +24,7 @@ export const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
       <section
         ref={ref}
         data-slot="faq-section"
-        className={cn("border-t border-[var(--s-border)] py-[var(--s-section-py,64px)]", className)}
+        className={cn("py-[var(--s-section-py,64px)]", className)}
         {...props}
       >
         <div className="mx-auto max-w-[var(--s-content-max,1200px)] px-[var(--s-page-margin,24px)]">

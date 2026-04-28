@@ -49,7 +49,7 @@ const LAYERS: LayerDef[] = [
     id: "presets",
     num: "02",
     title: "PRESETS",
-    subtitle: "31 curated + custom",
+    subtitle: "44 curated + custom",
     items: [
       { label: "sigil" },
       { label: "noir" },

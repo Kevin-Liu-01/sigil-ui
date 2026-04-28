@@ -475,7 +475,7 @@ A maximally-configured Sigil preset controls **259 design tokens** across 16 cat
 
 **Package:** `@sigil-ui/presets`
 
-### 2.1 Built-in Presets (31)
+### 2.1 Built-in Presets (44)
 
 | # | Name | Category | Mood | Display Font | Primary Hue |
 |---|------|----------|------|-------------|-------------|
@@ -510,8 +510,21 @@ A maximally-configured Sigil preset controls **259 design tokens** across 16 cat
 | 29 | noir | Dark | cinematic, dramatic | GT America | Amber |
 | 30 | dusk | Colorful | twilight, warm-cool | Satoshi | Rose-Violet |
 | 31 | mono | Minimal | monochrome, terminal | Space Mono | Neutral |
+| 32 | vast | Edgeless | expansive, warm, editorial | Fraunces | Terracotta |
+| 33 | aura | Edgeless | ethereal, luminous, ambient | General Sans | Violet |
+| 34 | field | Edgeless | open, functional, utilitarian | Space Grotesk | Green |
+| 35 | clay | Edgeless | warm, earthy, handcrafted | DM Serif Display | Terracotta |
+| 36 | sage | Edgeless | botanical, calm, natural | Libre Baskerville | Green |
+| 37 | ink | Edgeless | creative, deep, immersive | Plus Jakarta Sans | Indigo |
+| 38 | sand | Edgeless | warm, sunny, inviting | Instrument Serif | Amber |
+| 39 | plum | Edgeless | luxurious, rich, dramatic | Playfair Display | Magenta |
+| 40 | moss | Edgeless | forest, deep, organic-tech | Space Grotesk | Green |
+| 41 | coral | Edgeless | warm, friendly, approachable | Outfit | Coral |
+| 42 | dune | Edgeless | warm, golden, vast-feeling | Instrument Serif | Amber |
+| 43 | ocean | Edgeless | deep, calming, oceanic | General Sans | Teal |
+| 44 | rose | Edgeless | elegant, feminine, refined | Fraunces | Rose |
 
-### 2.2 Preset Categories (6)
+### 2.2 Preset Categories (7)
 
 | Category | Description | Count |
 |----------|-------------|-------|
@@ -521,6 +534,7 @@ A maximally-configured Sigil preset controls **259 design tokens** across 16 cat
 | Colorful | Gradients, vibrant accents, playful | 6 |
 | Editorial | Typography-forward, print-inspired | 5 |
 | Industrial | Metallic, mechanical, utilitarian | 5 |
+| Edgeless | Atmospheric, warm, organic, expansive | 13 |
 
 ### 2.3 Preset Shape (`SigilPreset`)
 
@@ -730,7 +744,7 @@ Runs 6 diagnostic checks:
 | Components | Components directory exists, count `.tsx` files |
 | Dependencies | All npm deps for installed components are present |
 | CSS Import | Global CSS file references Sigil tokens |
-| Preset | Active preset is built-in (31) or has custom file |
+| Preset | Active preset is built-in (44) or has custom file |
 
 ---
 
@@ -760,7 +774,7 @@ Runs 6 diagnostic checks:
 |------|--------|---------|
 | 1 | Project name | Text input (validates kebab-case) |
 | 2 | Template | Select from 10 templates |
-| 3 | Preset | 12 popular choices + "browse all 31" |
+| 3 | Preset | 12 popular choices + "browse all 44" |
 | 4 | Display font | Optional text input |
 | 5 | Features | Multiselect: GSAP, Motion, Radix, Grid |
 | 6 | Agent instructions | Confirm yes/no |
@@ -934,7 +948,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 | `sigil init -y -p noir` | Uses noir preset; tokens CSS imports `@sigil-ui/presets/noir` | P0 |
 | `sigil add button card` | Creates `button.tsx` and `card.tsx` in components dir | P0 |
 | `sigil add --all` | Creates all 12 registered components | P1 |
-| `sigil preset list` | Output contains all 31 preset names and all 6 category headers | P1 |
+| `sigil preset list` | Output contains all 44 preset names and all 7 category headers | P1 |
 | `sigil preset create` (scripted) | Creates `sigil.preset.<name>.ts` with valid TypeScript | P1 |
 | `sigil preset <name>` | Updates config preset; regenerates tokens CSS | P1 |
 | `sigil diff` | First run creates snapshot; second run with changes shows diff | P2 |
@@ -1099,7 +1113,7 @@ Any CSS custom property can be overridden in the tokens CSS file:
 | Customization | Prompt |
 |---------------|--------|
 | Project type | 8 options |
-| Preset | 31 options with category grouping |
+| Preset | 44 options with category grouping |
 | Primary color override | OKLCH input |
 | Display font override | Text input |
 | Body font override | Text input |
@@ -1116,7 +1130,7 @@ Any CSS custom property can be overridden in the tokens CSS file:
 |---------------|--------|
 | Project directory | Text input |
 | Template | 10 options |
-| Preset | 31 options |
+| Preset | 44 options |
 | Display font | Text input |
 | Features | 4 options (multiselect) |
 | Agent instructions | Yes/no |

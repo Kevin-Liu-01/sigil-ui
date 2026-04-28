@@ -439,7 +439,7 @@ function TimelineWrapper(props: Record<string, any>) {
 
 function NavbarWrapper(props: Record<string, any>) {
   return (
-    <Navbar sticky={false}>
+    <Navbar fixed={false}>
       <NavbarLogo>
         <span className="font-bold text-[var(--s-text)]">Sigil</span>
       </NavbarLogo>

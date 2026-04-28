@@ -20,7 +20,7 @@ export const ContextMenuContent = forwardRef<
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",
           "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
-          "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-md)]",
+          "bg-[var(--s-surface,oklch(0.97_0_0))] text-[var(--s-text)] shadow-[var(--s-shadow-md,0_4px_16px_oklch(0_0_0/0.12))]",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
           className,
@@ -170,7 +170,7 @@ export const ContextMenuSubContent = forwardRef<
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",
           "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
-          "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-md)]",
+          "bg-[var(--s-surface,oklch(0.97_0_0))] text-[var(--s-text)] shadow-[var(--s-shadow-md,0_4px_16px_oklch(0_0_0/0.12))]",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
           className,

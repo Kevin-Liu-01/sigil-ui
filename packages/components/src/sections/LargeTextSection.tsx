@@ -14,7 +14,7 @@ export const LargeTextSection = forwardRef<HTMLElement, LargeTextSectionProps>(
       <section
         ref={ref}
         data-slot="large-text-section"
-        className={cn("border-t border-[var(--s-border)] py-[var(--s-section-py-lg,96px)]", className)}
+        className={cn("py-[var(--s-section-py-lg,96px)]", className)}
         {...props}
       >
         <div className={cn(

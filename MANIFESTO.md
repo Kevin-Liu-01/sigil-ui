@@ -47,7 +47,7 @@ This means:
 
 A sigil is a mark with intention. Not decoration — designation. Every preset in this system is a distinct sigil: a coherent set of visual decisions that says something specific about the product wearing it.
 
-Thirty-one presets. Not thirty-one themes. Themes are wallpaper. Presets are identities.
+Forty-four presets. Not forty-four themes. Themes are wallpaper. Presets are identities.
 
 ## The Standard
 

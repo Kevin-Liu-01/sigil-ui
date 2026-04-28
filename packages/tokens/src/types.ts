@@ -403,6 +403,18 @@ export type NavigationTokens = {
   readonly "navbar-backdrop-blur": string;
   readonly "navbar-border": string;
   readonly "navbar-bg-opacity": string;
+  readonly "navbar-padding-x"?: string;
+  readonly "navbar-position"?: "sticky" | "fixed" | "static";
+  readonly "navbar-logo-height"?: string;
+  readonly "navbar-logo-gap"?: string;
+  readonly "navbar-item-gap"?: string;
+  readonly "navbar-item-padding-x"?: string;
+  readonly "navbar-item-padding-y"?: string;
+  readonly "navbar-item-size"?: string;
+  readonly "navbar-cta-variant"?: "primary" | "secondary" | "ghost";
+  readonly "navbar-shadow"?: string;
+  readonly "navbar-height-scrolled"?: string;
+  readonly "navbar-mobile-breakpoint"?: string;
   readonly "nav-link-weight": string;
   readonly "nav-link-size": string;
   readonly "nav-link-hover": "underline" | "color" | "background" | "none";
@@ -542,11 +554,25 @@ export type AlignmentTokens = {
 
 export type SectionStyleTokens = {
   readonly "padding-y"?: string;
+  readonly "padding-y-sm"?: string;
   readonly "padding-y-hero"?: string;
+  readonly "padding-y-lg"?: string;
+  readonly "padding-y-xl"?: string;
   readonly "padding-x"?: string;
   readonly "max-width"?: string;
   readonly "gap"?: string;
   readonly "title-align"?: "left" | "center";
+  readonly "heading-size"?: string;
+  readonly "heading-align"?: "left" | "center";
+  readonly "heading-max-width"?: string;
+  readonly "heading-margin-bottom"?: string;
+  readonly "description-max-width"?: string;
+  readonly "description-gap"?: string;
+  readonly "content-gap"?: string;
+  readonly "grid-columns"?: string;
+  readonly "grid-gap"?: string;
+  readonly "alternate-bg"?: string;
+  readonly "alternate-bg-mode"?: "none" | "surface" | "sunken" | "elevated";
   readonly "divider-above"?: boolean;
   readonly "divider-below"?: boolean;
   readonly "background-alt"?: boolean;
@@ -563,6 +589,12 @@ export type DividerStyleTokens = {
   readonly "width"?: string;
   readonly "color"?: string;
   readonly "spacing"?: string;
+  readonly "opacity"?: string;
+  readonly "max-width"?: string;
+  readonly "margin-y"?: string;
+  readonly "thickness"?: string;
+  readonly "gradient-start"?: string;
+  readonly "gradient-end"?: string;
   readonly "show-cross"?: boolean;
   readonly "show-label"?: boolean;
   readonly "full-bleed"?: boolean;
@@ -672,6 +704,125 @@ export type ComponentSurfaceTokens = {
 };
 
 // ---------------------------------------------------------------------------
+// Hero tokens — above-the-fold layout control
+// ---------------------------------------------------------------------------
+
+export type HeroTokens = {
+  readonly "min-height"?: string;
+  readonly "padding-y"?: string;
+  readonly "padding-y-sm"?: string;
+  readonly "padding-x"?: string;
+  readonly "content-max"?: string;
+  readonly "content-align"?: "center" | "left" | "right";
+  readonly "layout"?: "centered" | "split" | "stacked" | "asymmetric";
+  readonly "media-position"?: "right" | "left" | "behind" | "below";
+  readonly "media-width"?: string;
+  readonly "media-radius"?: string;
+  readonly "title-size"?: string;
+  readonly "title-max-width"?: string;
+  readonly "description-size"?: string;
+  readonly "description-max-width"?: string;
+  readonly "description-gap"?: string;
+  readonly "actions-gap"?: string;
+  readonly "actions-margin-top"?: string;
+  readonly "action-padding-x"?: string;
+  readonly "action-padding-y"?: string;
+  readonly "badge-gap"?: string;
+  readonly "overlay-opacity"?: string;
+  readonly "scroll-indicator"?: boolean;
+  readonly "gradient-overlay"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// CTA tokens — call-to-action section layout
+// ---------------------------------------------------------------------------
+
+export type CTATokens = {
+  readonly "padding-y"?: string;
+  readonly "padding-x"?: string;
+  readonly "max-width"?: string;
+  readonly "layout"?: "centered" | "split";
+  readonly "border"?: boolean;
+  readonly "border-radius"?: string;
+  readonly "bg"?: string;
+  readonly "title-size"?: string;
+  readonly "description-max-width"?: string;
+  readonly "description-gap"?: string;
+  readonly "actions-gap"?: string;
+  readonly "actions-margin-top"?: string;
+  readonly "action-padding-x"?: string;
+  readonly "action-padding-y"?: string;
+  readonly "split-gap"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Footer tokens — page footer layout
+// ---------------------------------------------------------------------------
+
+export type FooterTokens = {
+  readonly "padding-y"?: string;
+  readonly "border-top"?: string;
+  readonly "columns"?: string;
+  readonly "column-gap"?: string;
+  readonly "row-gap"?: string;
+  readonly "logo-height"?: string;
+  readonly "tagline-max-width"?: string;
+  readonly "link-size"?: string;
+  readonly "link-gap"?: string;
+  readonly "group-title-size"?: string;
+  readonly "group-title-weight"?: string;
+  readonly "social-icon-size"?: string;
+  readonly "social-gap"?: string;
+  readonly "bottom-bar-padding"?: string;
+  readonly "bottom-bar-border"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Banner tokens — announcement bar / banner layout
+// ---------------------------------------------------------------------------
+
+export type BannerTokens = {
+  readonly "height"?: string;
+  readonly "padding-y"?: string;
+  readonly "padding-x"?: string;
+  readonly "font-size"?: string;
+  readonly "font-weight"?: string;
+  readonly "icon-size"?: string;
+  readonly "icon-gap"?: string;
+  readonly "border-width"?: string;
+  readonly "border-position"?: "bottom" | "top" | "none";
+  readonly "position"?: "top" | "bottom" | "inline";
+  readonly "dismiss-size"?: string;
+  readonly "radius"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
+// Page rhythm tokens — composition-level page flow
+// ---------------------------------------------------------------------------
+
+export type PageRhythmTokens = {
+  readonly "density"?: "compact" | "normal" | "spacious" | "editorial";
+  readonly "section-gap"?: string;
+  readonly "section-gap-sm"?: string;
+  readonly "section-gap-lg"?: string;
+  readonly "first-section-offset"?: string;
+  readonly "last-section-margin"?: string;
+  readonly "alternate-bg"?: boolean;
+  readonly "alternate-bg-color"?: string;
+  readonly "divider-between"?: boolean;
+  readonly "max-content-width"?: string;
+  readonly "vertical-rhythm-unit"?: string;
+  readonly "scroll-snap"?: boolean;
+  readonly "responsive-scale"?: string;
+  readonly "responsive-breakpoint"?: string;
+  readonly [key: string]: string | boolean | undefined;
+};
+
+// ---------------------------------------------------------------------------
 // Composite token object
 // ---------------------------------------------------------------------------
 
@@ -704,6 +855,11 @@ export type SigilTokens = {
   readonly media?: MediaTokens;
   readonly controls?: ControlTokens;
   readonly componentSurfaces?: ComponentSurfaceTokens;
+  readonly hero?: HeroTokens;
+  readonly cta?: CTATokens;
+  readonly footer?: FooterTokens;
+  readonly banner?: BannerTokens;
+  readonly pageRhythm?: PageRhythmTokens;
 };
 
 export type MarkdownTokenOverrides = Pick<

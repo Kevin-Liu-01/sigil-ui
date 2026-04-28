@@ -9,6 +9,9 @@ import {
 } from "./SigilPageGrid";
 import type { GutterPattern } from "@sigil-ui/tokens";
 
+const SECTION_BORDER =
+  "var(--s-section-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
+
 /* ------------------------------------------------------------------ */
 /* Cross mark SVG                                                       */
 /* ------------------------------------------------------------------ */
@@ -231,12 +234,11 @@ function InnerSection({
       data-slot="sigilsection" className={cn("relative", className)}
       style={{
         padding,
-        background: "var(--s-background)",
         borderTop: borderTop
-          ? "1px solid var(--s-border)"
+          ? SECTION_BORDER
           : undefined,
         borderBottom: borderBottom
-          ? "1px solid var(--s-border)"
+          ? SECTION_BORDER
           : undefined,
         ...style,
       }}
@@ -310,10 +312,10 @@ function StandaloneSection({
         style={{
           padding,
           borderTop: borderTop
-            ? "1px solid var(--s-border)"
+            ? SECTION_BORDER
             : undefined,
           borderBottom: borderBottom
-            ? "1px solid var(--s-border)"
+            ? SECTION_BORDER
             : undefined,
           background: "var(--s-background)",
         }}

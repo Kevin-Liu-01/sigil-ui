@@ -38,28 +38,29 @@ export const Hero = forwardRef<HTMLElement, HeroProps>(function Hero(
       data-slot="hero"
       className={cn(
         "relative flex flex-col items-center justify-center text-center",
-        "py-20 md:py-32 px-6",
+        "py-[var(--s-hero-padding-y,96px)] px-[var(--s-hero-padding-x,var(--s-page-margin,24px))]",
         className,
       )}
+      style={{ minHeight: "var(--s-hero-min-height, auto)" }}
       {...rest}
     >
-      <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--s-text)] max-w-4xl leading-tight tracking-tight">
+      <h1 className="text-[var(--s-hero-title-size,clamp(2.25rem,6vw,4rem))] font-bold text-[var(--s-text)] max-w-[var(--s-hero-title-max-width,56rem)] leading-tight tracking-tight">
         {title}
       </h1>
       {description && (
-        <p className="mt-6 text-lg md:text-xl text-[var(--s-text-secondary)] max-w-2xl leading-relaxed">
+        <p className="mt-[var(--s-hero-description-gap,24px)] text-[var(--s-hero-description-size,1.125rem)] text-[var(--s-text-secondary)] max-w-[var(--s-hero-description-max-width,32rem)] leading-relaxed">
           {description}
         </p>
       )}
       {actions && actions.length > 0 && (
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-[var(--s-hero-actions-margin-top,32px)] flex flex-wrap items-center justify-center gap-[var(--s-hero-actions-gap,12px)]">
           {actions.map((action) => (
             <a
               key={action.label}
               href={action.href}
               onClick={action.onClick}
               className={cn(
-                "inline-flex items-center justify-center h-11 px-6 rounded-[var(--s-radius-md,6px)]",
+                "inline-flex items-center justify-center h-11 px-[var(--s-hero-action-padding-x,24px)] py-[var(--s-hero-action-padding-y,12px)] rounded-[var(--s-radius-md,6px)]",
                 "text-sm font-medium transition-all duration-[var(--s-duration-fast,150ms)]",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--s-primary)] focus-visible:ring-offset-2",
                 actionVariantStyles[action.variant ?? "primary"],

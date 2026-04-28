@@ -22,7 +22,7 @@ const DialogOverlay = forwardRef<
       ref={ref}
       className={cn(
         "fixed inset-0 z-50",
-        "bg-[var(--s-overlay-bg)] backdrop-blur-[var(--s-overlay-blur)]",
+        "bg-[var(--s-overlay-bg,oklch(0_0_0/0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
         "data-[state=open]:animate-in data-[state=closed]:animate-out",
         "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
         className,
@@ -44,11 +44,12 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
           ref={ref}
           data-slot="dialog"
           className={cn(
-            "fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%]",
-            "gap-4 border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border)] bg-[var(--s-overlay-surface)] p-[var(--s-overlay-padding)]",
-            "shadow-[var(--s-overlay-shadow)]",
+            "fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2",
+            "gap-4 border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border,var(--s-border))]",
+            "bg-[var(--s-overlay-surface,var(--s-surface))] p-[var(--s-overlay-padding,24px)]",
+            "shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
             "ring-1 ring-[var(--s-text)]/[0.04]",
-            "rounded-[var(--s-overlay-radius)]",
+            "rounded-[var(--s-overlay-radius,var(--s-radius-lg,12px))]",
             "duration-[var(--s-duration-fast)]",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",
             "data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",

@@ -39,4 +39,4 @@ All CSS variables use the `--s-` prefix: `var(--s-primary)`, `var(--s-surface)`,
 
 ## Presets
 Each preset provides a complete SigilTokens object. Presets live in `packages/presets/src/`.
-31 presets across 6 categories: structural, minimal, dark, colorful, editorial, industrial.
+44 presets across 7 categories: structural, minimal, dark, colorful, editorial, industrial, edgeless.

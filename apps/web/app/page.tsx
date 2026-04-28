@@ -55,9 +55,9 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
   return (
     <SigilSection
       {...props}
-      borderTop={false}
-      borderBottom={props.borderBottom && !edgeless}
-      showCrosses={props.showCrosses && !edgeless}
+      borderTop={!edgeless && props.borderTop}
+      borderBottom={!edgeless && props.borderBottom}
+      showCrosses={!edgeless && props.showCrosses}
     />
   );
 }

@@ -43,6 +43,8 @@ const sizeMap: Record<NonNullable<DividerProps["size"]>, number> = {
 };
 
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
+const STRUCTURAL_BORDER =
+  "var(--s-divider-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
 const EDGE_FADE = 64;
 
 function getLegacyVerticalPatternCSS(
@@ -155,26 +157,15 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
       )}
       style={{
         [isHorizontal ? "height" : "width"]: thickness,
+        ...(showBorders
+          ? isHorizontal
+            ? { borderTop: STRUCTURAL_BORDER, borderBottom: STRUCTURAL_BORDER }
+            : { borderLeft: STRUCTURAL_BORDER, borderRight: STRUCTURAL_BORDER }
+          : {}),
         ...style,
       }}
       {...rest}
     >
-      {showBorders && (
-        <>
-          <div
-            className={cn(
-              "absolute bg-[var(--s-grid-line-color,var(--s-border-muted))]",
-              isHorizontal ? "inset-x-0 top-0 h-px" : "inset-y-0 left-0 w-px",
-            )}
-          />
-          <div
-            className={cn(
-              "absolute bg-[var(--s-grid-line-color,var(--s-border-muted))]",
-              isHorizontal ? "inset-x-0 bottom-0 h-px" : "inset-y-0 right-0 w-px",
-            )}
-          />
-        </>
-      )}
 
       <div
         className="absolute inset-0"

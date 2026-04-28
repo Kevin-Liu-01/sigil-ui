@@ -317,6 +317,21 @@ export function compileToCss(
   emitTokenGroup(lightVars, prefix, "control", resolvedTokens.controls);
   emitTokenGroup(lightVars, prefix, "component-surface", resolvedTokens.componentSurfaces);
 
+  // Hero
+  emitTokenGroup(lightVars, prefix, "hero", resolvedTokens.hero);
+
+  // CTA
+  emitTokenGroup(lightVars, prefix, "cta", resolvedTokens.cta);
+
+  // Footer
+  emitTokenGroup(lightVars, prefix, "footer", resolvedTokens.footer);
+
+  // Banner
+  emitTokenGroup(lightVars, prefix, "banner", resolvedTokens.banner);
+
+  // Page rhythm
+  emitTokenGroup(lightVars, prefix, "rhythm", resolvedTokens.pageRhythm);
+
   // Assemble
   const lines: string[] = [];
 

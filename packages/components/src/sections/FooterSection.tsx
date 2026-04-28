@@ -23,18 +23,19 @@ export const FooterSection = forwardRef<HTMLElement, FooterSectionProps>(
       <footer
         ref={ref}
         data-slot="footer-section"
-        className={cn("border-t border-[var(--s-border)] py-[var(--s-footer-py,48px)]", className)}
+        className={cn("py-[var(--s-footer-padding-y,48px)]", className)}
+        style={{ borderTop: "var(--s-footer-border-top, none)" }}
         {...props}
       >
         <div className="mx-auto max-w-[var(--s-content-max,1200px)] px-[var(--s-page-margin,24px)]">
-          <div className="grid grid-cols-2 md:grid-cols-[1.5fr_repeat(auto-fit,1fr)] gap-8 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-[1.5fr_repeat(auto-fit,1fr)] gap-x-[var(--s-footer-column-gap,32px)] gap-y-[var(--s-footer-row-gap,32px)] mb-12">
             <div className="col-span-2 md:col-span-1">
-              {logo && <div className="mb-3 [&_svg]:h-6 [&_svg]:w-auto">{logo}</div>}
-              {tagline && <p className="text-sm text-[var(--s-text-muted)] max-w-xs">{tagline}</p>}
+              {logo && <div className="mb-3 [&_svg]:h-[var(--s-footer-logo-height,24px)] [&_img]:h-[var(--s-footer-logo-height,24px)] [&_svg]:w-auto [&_img]:w-auto">{logo}</div>}
+              {tagline && <p className="text-[length:var(--s-footer-link-size,0.875rem)] text-[var(--s-text-muted)] max-w-[var(--s-footer-tagline-max-width,20rem)]">{tagline}</p>}
               {socials && socials.length > 0 && (
-                <div className="flex gap-3 mt-4">
+                <div className="flex gap-[var(--s-footer-social-gap,12px)] mt-4">
                   {socials.map((s, i) => (
-                    <a key={i} href={s.href} aria-label={s.label} className="text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors [&_svg]:size-5">
+                    <a key={i} href={s.href} aria-label={s.label} className="text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors [&_svg]:size-[var(--s-footer-social-icon-size,20px)]">
                       {s.icon}
                     </a>
                   ))}
@@ -44,11 +45,11 @@ export const FooterSection = forwardRef<HTMLElement, FooterSectionProps>(
 
             {groups.map((group, i) => (
               <div key={i}>
-                <h3 className="text-sm font-semibold text-[var(--s-text)] mb-3">{group.title}</h3>
-                <ul className="flex flex-col gap-2">
+                <h3 className="text-[length:var(--s-footer-group-title-size,0.875rem)] font-[var(--s-footer-group-title-weight,600)] text-[var(--s-text)] mb-3">{group.title}</h3>
+                <ul className="flex flex-col gap-[var(--s-footer-link-gap,8px)]">
                   {group.links.map((link, j) => (
                     <li key={j}>
-                      <a href={link.href} className="text-sm text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]">
+                      <a href={link.href} className="text-[length:var(--s-footer-link-size,0.875rem)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)]">
                         {link.label}
                       </a>
                     </li>
@@ -58,7 +59,7 @@ export const FooterSection = forwardRef<HTMLElement, FooterSectionProps>(
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-[var(--s-border-muted)]">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4" style={{ padding: "var(--s-footer-bottom-bar-padding, 24px 0)", borderTop: "var(--s-footer-bottom-bar-border, 1px solid var(--s-border-muted))" }}>
             {copyright && <span className="text-xs text-[var(--s-text-subtle)]">{copyright}</span>}
             {legal && legal.length > 0 && (
               <div className="flex gap-4">

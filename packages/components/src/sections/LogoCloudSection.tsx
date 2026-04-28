@@ -19,7 +19,7 @@ export const LogoCloudSection = forwardRef<HTMLElement, LogoCloudSectionProps>(
       <section
         ref={ref}
         data-slot="logo-cloud-section"
-        className={cn("border-t border-[var(--s-border)] py-12", className)}
+        className={cn("py-12", className)}
         {...props}
       >
         <div className="mx-auto max-w-[var(--s-content-max,1200px)] px-[var(--s-page-margin,24px)]">
