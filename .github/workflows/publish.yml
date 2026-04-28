@@ -35,8 +35,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build packages and apps
-        run: pnpm build
+      - name: Build publishable packages
+        run: >-
+          pnpm --filter @sigil-ui/tokens
+          --filter @sigil-ui/presets
+          --filter @sigil-ui/components
+          --filter @sigil-ui/primitives
+          --filter @sigil-ui/cli
+          --filter create-sigil-app
+          build
 
       - name: Create release PR or publish to npm
         uses: changesets/action@v1
