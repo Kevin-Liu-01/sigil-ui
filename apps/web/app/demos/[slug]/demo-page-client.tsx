@@ -613,7 +613,7 @@ function DevDocsDemo() {
           <div className="py-8">
             <MonoLabel as="div" className="mb-4 block">CONFIGURATION</MonoLabel>
             <DensityText role="body" as="p" muted className="mb-4 block">
-              After init, Sigil creates a token spec with 259 configurable fields.
+              After init, Sigil creates a token spec with 519 configurable fields.
               Edit the spec to customize any visual property.
             </DensityText>
             <div className="flex gap-4">
@@ -623,7 +623,7 @@ function DevDocsDemo() {
               </div>
               <div>
                 <MonoLabel as="div" className="mb-1">TOKENS</MonoLabel>
-                <TabularValue size="md">259</TabularValue>
+                <TabularValue size="md">519</TabularValue>
               </div>
               <div>
                 <MonoLabel as="div" className="mb-1">PRESETS</MonoLabel>
@@ -885,7 +885,7 @@ function CliToolDemo() {
             <MonoLabel as="div" className="mt-1">INSTALL SIZE</MonoLabel>
           </GapPixelCell>
           <GapPixelCell className="p-4 text-center">
-            <TabularValue size="xl" className="block">259</TabularValue>
+            <TabularValue size="xl" className="block">519</TabularValue>
             <MonoLabel as="div" className="mt-1">TOKEN FIELDS</MonoLabel>
           </GapPixelCell>
         </GapPixelGrid>

@@ -8,7 +8,7 @@
  *   cp packages/presets/src/_template.ts packages/presets/src/my-preset.ts
  *   # or: sigil preset create  (generates from this template)
  *
- * All 28 token categories. All ~350 fields. No gaps.
+ * All 33 token categories. All ~519 fields. No gaps.
  */
 
 import type { SigilPreset } from "@sigil-ui/tokens";

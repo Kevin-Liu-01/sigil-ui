@@ -35,7 +35,7 @@ const LAYERS: LayerDef[] = [
     id: "tokens",
     num: "01",
     title: "TOKENS",
-    subtitle: "259 configurable fields",
+    subtitle: "519 configurable fields",
     items: [
       { label: "--s-primary", value: "oklch(0.7 0.15 280)" },
       { label: "--s-radius-md", value: "6px" },
@@ -43,7 +43,7 @@ const LAYERS: LayerDef[] = [
       { label: "--s-duration-fast", value: "150ms" },
     ],
     description:
-      "259 CSS custom properties that define every visual decision in the system. Colors, fonts, spacing, radius, shadows, and motion — all in one place.",
+      "519 CSS custom properties that define every visual decision in the system. Colors, fonts, spacing, radius, shadows, and motion — all in one place.",
     color: "oklch(0.50 0.24 275)",
   },
   {
@@ -58,7 +58,7 @@ const LAYERS: LayerDef[] = [
       { label: "+ your own" },
     ],
     description:
-      "A preset is a complete set of 259 token values that defines a visual identity. Switch presets and the entire UI transforms in one command.",
+      "A preset is a complete set of 519 token values that defines a visual identity. Switch presets and the entire UI transforms in one command.",
     color: "oklch(0.56 0.20 45)",
   },
   {
@@ -99,7 +99,7 @@ const LAYER_NOTES: Record<string, string[]> = {
     "Agents edit tokens first. The layers above never need manual changes.",
   ],
   presets: [
-    "sigil preset noir — one command rewrites all 259 tokens simultaneously.",
+    "sigil preset noir — one command rewrites all 519 tokens simultaneously.",
     "44 built-in presets across 7 categories: structural, minimal, dark, colorful, editorial, industrial, edgeless.",
     "Create custom presets from any base. Every field is overridable.",
   ],

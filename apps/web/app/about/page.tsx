@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/metadata";
 import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 
-export const metadata: Metadata = {
-  title: "About — Sigil UI",
-  description: "The story behind Sigil UI.",
-};
+export const metadata = buildPageMetadata({
+  title: "About",
+  description:
+    "The story behind Sigil UI — a token-driven design system built for AI agents.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

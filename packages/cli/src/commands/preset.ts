@@ -210,7 +210,7 @@ import { ${baseName}Preset } from "@sigil-ui/presets/${baseName}";
 export const ${camel}Preset: SigilPreset = {
   name: "${name}",
   tokens: {
-    // Start from the kitchen-sink template (all 28 categories),
+    // Start from the kitchen-sink template (all 33 categories),
     // then layer the base preset's aesthetic on top.
     ..._templatePreset.tokens,
     ...${baseName}Preset.tokens,
@@ -233,7 +233,7 @@ export const ${camel}Preset: SigilPreset = {
 
     // Categories from _templatePreset that ${baseName} may not define are
     // inherited automatically: cursor, scrollbar, focus, overlays, dataViz,
-    // media, controls, componentSurfaces.
+    // media, controls, componentSurfaces, hero, cta, footer, banner, pageRhythm.
   },
   metadata: {
     description: "Custom preset — edit all tokens above",
@@ -246,11 +246,11 @@ export const ${camel}Preset: SigilPreset = {
 `;
   }
 
-  // Full scaffold — inline all 28 categories from the template
+  // Full scaffold — inline all 33 categories from the template
   return `/**
  * Custom Sigil preset: ${name}
  *
- * Generated from the kitchen-sink template. All 28 token categories are
+ * Generated from the kitchen-sink template. All 33 token categories are
  * populated. Change values freely, but never delete fields.
  */
 

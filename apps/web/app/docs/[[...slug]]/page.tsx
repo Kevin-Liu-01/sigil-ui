@@ -42,8 +42,26 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  const slug = params.slug?.join("/") ?? "";
+  const ogImageUrl = `/api/og?title=${encodeURIComponent(page.data.title)}&type=docs`;
+
   return {
     title: page.data.title,
     description: page.data.description,
+    alternates: { canonical: `/docs/${slug}` },
+    openGraph: {
+      title: `${page.data.title} — Sigil UI Docs`,
+      description: page.data.description,
+      url: `https://sigil-ui.com/docs/${slug}`,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: page.data.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      site: "@kevinliu",
+      creator: "@kevinliu",
+      title: `${page.data.title} — Sigil UI Docs`,
+      description: page.data.description,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: page.data.title }],
+    },
   };
 }

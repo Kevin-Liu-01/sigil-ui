@@ -47,10 +47,20 @@ const FOOTER_COLS = [
     ],
   },
   {
+    group: "Packages",
+    links: [
+      { label: "@sigil-ui/components", href: "https://www.npmjs.com/package/@sigil-ui/components" },
+      { label: "@sigil-ui/tokens", href: "https://www.npmjs.com/package/@sigil-ui/tokens" },
+      { label: "@sigil-ui/presets", href: "https://www.npmjs.com/package/@sigil-ui/presets" },
+      { label: "@sigil-ui/cli", href: "https://www.npmjs.com/package/@sigil-ui/cli" },
+      { label: "create-sigil-app", href: "https://www.npmjs.com/package/create-sigil-app" },
+      { label: "@sigil-ui/primitives", href: "https://www.npmjs.com/package/@sigil-ui/primitives" },
+    ],
+  },
+  {
     group: "Community",
     links: [
       { label: "GitHub", href: "https://github.com/Kevin-Liu-01/sigil-ui" },
-      { label: "npm", href: "https://www.npmjs.com/package/@sigil-ui/components" },
       { label: "Discord", href: "#" },
     ],
   },
@@ -84,7 +94,7 @@ const SOCIAL_LINKS = [
 export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
   const footerContent = (
     <>
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-12">
+      <div className="grid grid-cols-2 md:grid-cols-7 gap-12">
         <div className="col-span-2">
           <div className="flex items-center gap-2.5 mb-3">
             <NavbarLogo />

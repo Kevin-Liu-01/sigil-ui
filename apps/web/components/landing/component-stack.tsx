@@ -79,7 +79,7 @@ const LIBS: Record<string, LibEntry> = {
   "lucide":          { name: "Lucide",           shortLabel: "lucide",     cat: "icon",      logo: "/logos/lucide.svg",    desc: "1000+ tree-shakeable SVG icons for React", url: "https://lucide.dev" },
   "clsx":            { name: "clsx",             shortLabel: "clsx",       cat: "utility",                                  desc: "Tiny utility for conditional className strings" },
   "tw-merge":        { name: "tailwind-merge",   shortLabel: "tw-merge",   cat: "utility",   logo: "/logos/tailwind.svg",  desc: "Merge Tailwind classes without style conflicts" },
-  "tokens":          { name: "Token System",     shortLabel: "tokens",     cat: "tokens",                                   desc: "259 CSS custom properties — var(--s-primary), var(--s-radius-md), …" },
+  "tokens":          { name: "Token System",     shortLabel: "tokens",     cat: "tokens",                                   desc: "519 CSS custom properties — var(--s-primary), var(--s-radius-md), …" },
 };
 
 interface CompDef { id: string; name: string; libs: string[]; jsx: string }

@@ -158,7 +158,7 @@ const PRESET_CREATE_LINES = [
   { text: "? Border radius:  8px (rounded)", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "", delay: 200 },
   { text: "Created presets/acme-brand.ts", prefix: "✓", color: "var(--s-success)", delay: 400 },
-  { text: "Updated sigil.tokens.md (259 fields)", prefix: "✓", color: "var(--s-success)", delay: 400 },
+  { text: "Updated sigil.tokens.md (519 fields)", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "Regenerated CSS variables", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "", delay: 200 },
   { text: "Custom preset acme-brand is now active.", prefix: "✓", color: "var(--s-success)", delay: 300 },
@@ -191,7 +191,7 @@ const DOCTOR_LINES = [
   { text: "sigil doctor", prefix: "$", color: "var(--s-text)", delay: 600 },
   { text: "", delay: 200 },
   { text: "Config        sigil.config.ts found", prefix: "✓", color: "var(--s-success)", delay: 300 },
-  { text: "Tokens        sigil.tokens.md (259 fields)", prefix: "✓", color: "var(--s-success)", delay: 300 },
+  { text: "Tokens        sigil.tokens.md (519 fields)", prefix: "✓", color: "var(--s-success)", delay: 300 },
   { text: "CSS           Token CSS imported in layout", prefix: "✓", color: "var(--s-success)", delay: 300 },
   { text: "Components    4 installed, 0 outdated", prefix: "✓", color: "var(--s-success)", delay: 300 },
   { text: "Dependencies  @sigil-ui/components@1.0.0", prefix: "✓", color: "var(--s-success)", delay: 300 },
@@ -377,7 +377,7 @@ export default function WalkthroughPage() {
               <div className="font-semibold text-[var(--s-text)]">## Radius</div>
               <div className="text-[var(--s-text-muted)]">md: <span className="text-[var(--s-primary)]">8px</span></div>
               <div className="text-[var(--s-text-muted)]">...</div>
-              <div className="text-[var(--s-text-subtle)] text-[10px] mt-2">259 fields total — you control all of them</div>
+              <div className="text-[var(--s-text-subtle)] text-[10px] mt-2">519 fields total — you control all of them</div>
             </div>
           </GapPixelCell>
           <GapPixelCell className="p-6">
@@ -486,12 +486,12 @@ export default function WalkthroughPage() {
         number="05"
         label="FINE-TUNE YOUR PRESET"
         heading="Your token file is your design system."
-        description="Whether you created a custom preset or forked a curated one, sigil.tokens.md is now yours to fine-tune. Change any of 259 fields — colors, fonts, spacing, radius, shadows, motion — and every component updates instantly. This is how you build a unique visual identity without touching component code."
+        description="Whether you created a custom preset or forked a curated one, sigil.tokens.md is now yours to fine-tune. Change any of 519 fields — colors, fonts, spacing, radius, shadows, motion — and every component updates instantly. This is how you build a unique visual identity without touching component code."
       >
         <MarkdownEditorPreview />
 
         <div className="mt-10">
-          <MonoLabel variant="accent" className="block mb-4">259 CONFIGURABLE FIELDS</MonoLabel>
+          <MonoLabel variant="accent" className="block mb-4">519 CONFIGURABLE FIELDS</MonoLabel>
           <GapPixelGrid columns={{ sm: 2, md: 4 }}>
             {[
               { category: "Colors", count: "35", example: "primary, surface, border, text, status" },

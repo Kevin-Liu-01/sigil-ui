@@ -266,7 +266,7 @@ export function ManifestoContent() {
               </Paragraph>
               <Paragraph>
                 Sigil puts every visual decision — colors, type, spacing, radius, motion,
-                borders, shadows, 259 tokens total — into a token layer that an agent can
+                borders, shadows, 519 tokens total — into a token layer that an agent can
                 read, reason about, and modify. The markdown file covers the core override
                 surface; typed presets cover the full system. Components don't own their
                 appearance. The token spec does. Change the spec, everything updates.

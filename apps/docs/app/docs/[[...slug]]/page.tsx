@@ -48,8 +48,10 @@ export async function generateMetadata(props: {
   const page = source.getPage(params.slug);
   if (!page) notFound();
 
+  const slug = params.slug?.join("/") ?? "";
   return {
     title: page.data.title,
     description: page.data.description,
+    alternates: { canonical: `/docs/${slug}` },
   };
 }

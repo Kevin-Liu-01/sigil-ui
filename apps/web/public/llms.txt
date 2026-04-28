@@ -6,11 +6,12 @@ Sigil UI is a React component library with centralized design tokens. Unlike sha
 
 ## Packages
 
-- @sigil-ui/tokens — Design token system (CSS variables, Tailwind v4, TypeScript constants)
-- @sigil-ui/components — 70+ styled components
-- @sigil-ui/primitives — Headless behavior (Radix-based)
-- @sigil-ui/cli — CLI for init, add, preset management
-- @sigil-ui/presets — 5 built-in presets
+- @sigil-ui/tokens — Design token system (CSS variables, Tailwind v4, TypeScript constants) — https://www.npmjs.com/package/@sigil-ui/tokens
+- @sigil-ui/components — 200+ styled components — https://www.npmjs.com/package/@sigil-ui/components
+- @sigil-ui/primitives — Headless behavior (Radix-based) — https://www.npmjs.com/package/@sigil-ui/primitives
+- @sigil-ui/presets — 44 curated presets — https://www.npmjs.com/package/@sigil-ui/presets
+- @sigil-ui/cli — CLI for init, add, preset management — https://www.npmjs.com/package/@sigil-ui/cli
+- create-sigil-app — Project scaffolder — https://www.npmjs.com/package/create-sigil-app
 
 ## Components (70+)
 
@@ -45,4 +46,4 @@ npx sigil preset midnight
 
 - Documentation: https://sigil-ui.dev/docs
 - GitHub: https://github.com/Kevin-Liu-01/sigil-ui
-- npm: https://www.npmjs.com/package/@sigil-ui/components
+- npm: https://www.npmjs.com/org/sigil-ui

@@ -1176,7 +1176,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "FeatureSection", category: "Sections", variants: 2, render: () => (
     <div className="grid grid-cols-2 gap-2 w-full">
-      {[{ t: "Fast", d: "Sub-50ms" }, { t: "Tokens", d: "259 fields" }, { t: "Presets", d: "44 themes" }, { t: "CLI", d: "One command" }].map((f) => (
+      {[{ t: "Fast", d: "Sub-50ms" }, { t: "Tokens", d: "519 fields" }, { t: "Presets", d: "44 themes" }, { t: "CLI", d: "One command" }].map((f) => (
         <div key={f.t} className="p-2 rounded-[var(--s-radius-sm,0px)] border border-[var(--s-border-muted)] bg-[var(--s-background)]">
           <div className="text-[10px] font-semibold text-[var(--s-text)]">{f.t}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{f.d}</div>
@@ -1199,7 +1199,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "StatsSection", category: "Sections", variants: 3, render: () => (
     <div className="grid grid-cols-3 gap-2 w-full text-center">
-      {[{ v: "200+", l: "Token-Driven Components" }, { v: "44", l: "Presets" }, { v: "259", l: "Tokens" }].map((s) => (
+      {[{ v: "200+", l: "Token-Driven Components" }, { v: "44", l: "Presets" }, { v: "519", l: "Tokens" }].map((s) => (
         <div key={s.l} className="py-2">
           <div className="text-base font-bold text-[var(--s-text)]">{s.v}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{s.l}</div>
@@ -1753,7 +1753,7 @@ const CELLS: ComponentCell[] = [
     <StatusTable title="Status" services={[{ name: "API", status: "operational", uptime: "99.9%" }, { name: "Docs", status: "degraded", lastIncident: "1h ago" }]} />
   )},
   { name: "SpecTable", category: "Diagrams", variants: 1, span: 2, render: () => (
-    <SpecTable title="Spec" rows={[{ label: "Tokens", value: "259" }, { label: "Presets", value: "44", highlight: true }]} />
+    <SpecTable title="Spec" rows={[{ label: "Tokens", value: "519" }, { label: "Presets", value: "44", highlight: true }]} />
   )},
   { name: "LeaderboardTable", category: "Diagrams", variants: 1, span: 2, render: () => (
     <LeaderboardTable title="Usage" rows={[{ label: "Button", value: 12400, highlight: true }, { label: "Card", value: 9100 }]} />
@@ -1872,7 +1872,7 @@ const CELLS: ComponentCell[] = [
     <ReplayPreview interval={3400}>
       {() => (
         <div className="text-center">
-          <NumberTicker value={259} trigger="mount" className="text-3xl font-bold" style={{ color: "var(--s-text)" }} />
+          <NumberTicker value={519} trigger="mount" className="text-3xl font-bold" style={{ color: "var(--s-text)" }} />
           <div className="text-[10px] font-mono mt-1" style={{ color: "var(--s-text-muted)" }}>tokens</div>
         </div>
       )}
@@ -1990,7 +1990,7 @@ const CELLS: ComponentCell[] = [
         title: "Blueprint",
         subtitle: "Staggered card",
         diagram: <FeatureMiniDiagram variant="hub-spoke" size={64} />,
-        specRows: [{ label: "TOKENS", value: "259" }],
+        specRows: [{ label: "TOKENS", value: "519" }],
         callouts: ["typed"],
       }]}
       className="w-full !px-0 !py-0 [&>div]:!max-w-none [&_.grid]:!grid-cols-1 [&_.p-5]:!p-3"

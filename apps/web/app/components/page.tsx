@@ -49,9 +49,9 @@ import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy"
 import { TextureBg } from "@/components/texture-bg";
 
 const STATS = [
-  { value: "300+", label: "Token-Driven Components" },
-  { value: "20", label: "Categories" },
-  { value: "259", label: "Tokens" },
+  { value: "200+", label: "Token-Driven Components" },
+  { value: "33", label: "Categories" },
+  { value: "519", label: "Tokens" },
   { value: "44", label: "Presets" },
 ] as const;
 
@@ -84,7 +84,7 @@ export default function ComponentsPage() {
           </MonoLabel>
 
           <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
-            300+ Token-Driven Components.
+            200+ Token-Driven Components.
           </h1>
 
           <DensityText

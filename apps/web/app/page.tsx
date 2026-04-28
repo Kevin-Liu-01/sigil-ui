@@ -7,9 +7,7 @@ import { FooterComponentDiagram, FooterQuadrantDiagram, HeroLogoField } from "@/
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { Terminal } from "@/components/landing/terminal";
-import { ComponentGalleryCTA, LiveComponentGrid } from "@/components/landing/live-component";
-import { ShapesAndPatterns, ThreeDShowcase } from "@/components/landing/shapes-section";
-import { TechFrame } from "@/components/landing/tech-frame";
+import { ComponentGalleryCTA } from "@/components/landing/live-component";
 import { SigilFrame, useIsEdgeless } from "@/components/landing/sigil-frame";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
 import { LayerStackDiagram } from "@/components/landing/layer-stack";
@@ -31,18 +29,8 @@ import {
   TabularValue,
   DensityText,
   AccentCTA,
-  CardCell,
   FeaturedGrid,
-  BorderStack,
-  Button,
   Badge,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Input,
-  Switch,
-  Progress,
 } from "@sigil-ui/components";
 
 /* ================================================================ */
@@ -224,7 +212,7 @@ function LayerSection() {
   );
 }
 
-function TokenPipelineSection() {
+function TokenSystemSection() {
   return (
     <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.3} />
@@ -232,184 +220,31 @@ function TokenPipelineSection() {
         <SectionHeader
           label="Token System"
           heading="One file compiles to everything."
-          description={`Edit sigil.tokens.md or token CSS overrides. ${SIGIL_PRODUCT_STATS.tokenCount} token fields compile. ${SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components update instantly.`}
+          description={`Edit sigil.tokens.md — ${SIGIL_PRODUCT_STATS.tokenCount} tokens compile to CSS variables. ${SIGIL_PRODUCT_STATS.componentCountLabel} components update instantly. Agents edit the same file.`}
         />
         <TokenPipelineDiagram />
+
+        <div className="mt-20">
+          <MonoLabel variant="accent" className="block mb-3">LIVE TOKEN EDITOR</MonoLabel>
+          <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
+            Every line in sigil.tokens.md maps to a CSS variable and a live component preview.
+          </DensityText>
+          <MarkdownEditorPreview />
+        </div>
       </div>
     </LandingSection>
   );
 }
 
-function MarkdownEditorSection() {
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Your Token File"
-        heading="Scroll the markdown. Click a token. Watch the system move."
-        description="sigil.tokens.md becomes an inspectable design surface: every line maps to a CSS variable, a tiny visualization, and a live component preview."
-      />
-      <MarkdownEditorPreview />
-    </LandingSection>
-  );
-}
 
 /* ================================================================ */
-/* Agent-First Design                                                 */
+/* Under the Hood — component anatomy + stack merged                  */
 /* ================================================================ */
 
-function AgentFirstSection() {
-  return (
-    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
-      <TextureBg opacity={0.25} />
-      <div className="relative z-[1]">
-      <SectionHeader
-        label="Agent-First Design"
-        heading="Same components you trust. One file for agents to edit."
-        description="Sigil's components are built on Radix primitives and the same patterns behind shadcn/ui — accessible, composable, production-grade. The token layer is the thin control surface that makes them agent-editable without touching component code."
-      />
-
-      {/* Core diagram: Components (trusted) + Token layer (agent-editable) */}
-      <GapPixelGrid columns={{ md: 2 }} className="mb-12">
-        <GapPixelCell className="p-6">
-          <MonoLabel variant="accent" className="block mb-4">THE COMPONENTS YOU ALREADY TRUST</MonoLabel>
-          <div className="flex flex-col gap-3 mb-6">
-            {[
-              { name: "Radix Primitives", desc: "Accessible, unstyled behavior layer — focus management, keyboard nav, ARIA" },
-              { name: "forwardRef + className", desc: "Standard React patterns. Slot composition. No proprietary abstractions" },
-              { name: "Tailwind + clsx + twMerge", desc: "The same class composition stack used across the React ecosystem" },
-              { name: `${SIGIL_PRODUCT_STATS.componentCountLabel} Token-Driven Components`, desc: "Button, Card, Dialog, Tabs, Accordion, DataTable, Form — battle-tested" },
-            ].map((item) => (
-              <div key={item.name} className="border-b border-[var(--s-border)] pb-2.5">
-                <DensityText role="detail" as="span" className="font-semibold block">{item.name}</DensityText>
-                <DensityText role="chrome" as="span" muted>{item.desc}</DensityText>
-              </div>
-            ))}
-          </div>
-          <MonoLabel className="block">Nothing proprietary. Standard React components.</MonoLabel>
-        </GapPixelCell>
-
-        <GapPixelCell className="p-6 border-l-2 border-l-[var(--s-primary)]">
-          <MonoLabel variant="accent" className="block mb-4">THE LAYER AGENTS EDIT</MonoLabel>
-          <div className="flex flex-col gap-3 mb-6">
-            {[
-              { name: "sigil.tokens.md", desc: `One markdown override file. ${SIGIL_PRODUCT_STATS.tokenCount} token system. Human-readable, agent-writable, git-diffable` },
-              { name: "compileToCss()", desc: "Deterministic compiler. Same input always produces same CSS output" },
-              { name: "var(--s-*) variables", desc: "CSS custom properties. Components read them — agents never touch components" },
-              { name: ".sigil/AGENTS.md", desc: "Auto-generated instructions for any AI agent — preset mood, token conventions, CLI commands" },
-            ].map((item) => (
-              <div key={item.name} className="border-b border-[var(--s-border)] pb-2.5">
-                <DensityText role="detail" as="span" className="font-semibold block text-[var(--s-primary)]">{item.name}</DensityText>
-                <DensityText role="chrome" as="span" muted>{item.desc}</DensityText>
-              </div>
-            ))}
-          </div>
-          <MonoLabel variant="accent" className="block">Thin control surface. Maximum leverage.</MonoLabel>
-        </GapPixelCell>
-      </GapPixelGrid>
-
-      {/* Agent workflow: what an agent actually does */}
-      <MonoLabel variant="accent" className="block mb-4">WHAT AN AGENT DOES WITH SIGIL</MonoLabel>
-      <GapPixelGrid columns={{ md: 4 }}>
-        <GapPixelCell className="p-5">
-          <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">01</TabularValue>
-          <DensityText role="detail" as="span" className="font-semibold block mb-1">Reads AGENTS.md</DensityText>
-          <DensityText role="chrome" as="span" muted>
-            Learns the active preset, token naming, component conventions, and available CLI commands.
-          </DensityText>
-        </GapPixelCell>
-        <GapPixelCell className="p-5">
-          <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">02</TabularValue>
-          <DensityText role="detail" as="span" className="font-semibold block mb-1">Edits tokens.md</DensityText>
-          <DensityText role="chrome" as="span" muted>
-            Changes one file — colors, fonts, spacing, radius. One edit instead of hunting through {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components.
-          </DensityText>
-        </GapPixelCell>
-        <GapPixelCell className="p-5">
-          <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">03</TabularValue>
-          <DensityText role="detail" as="span" className="font-semibold block mb-1">CSS recompiles</DensityText>
-          <DensityText role="chrome" as="span" muted>
-            Deterministic output. Same tokens always produce the same CSS variables. No surprise side effects.
-          </DensityText>
-        </GapPixelCell>
-        <GapPixelCell className="p-5">
-          <TabularValue className="block mb-2 text-[var(--s-primary)] font-bold">04</TabularValue>
-          <DensityText role="detail" as="span" className="font-semibold block mb-1">Components update</DensityText>
-          <DensityText role="chrome" as="span" muted>
-            Every component reads var(--s-*). The agent never touches component code — the token layer is the only surface.
-          </DensityText>
-        </GapPixelCell>
-      </GapPixelGrid>
-
-      </div>
-    </LandingSection>
-  );
-}
-
-/* ================================================================ */
-/* ACT 2 — How It Looks                                               */
-/* ================================================================ */
-
-const COMPONENT_TABS = [
-  "Layout",
-  "UI",
-  "Navigation",
-  "Overlays",
-  "Shapes",
-  "3D",
-  "Diagrams",
-  "Marketing",
-];
-
-function ComponentsSection() {
-  const [activeTab, setActiveTab] = useState("UI");
-
+function UnderTheHoodSection() {
   return (
     <LandingSection id="components" borderTop style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.25} />
-      <div className="relative z-[1]">
-      <SectionHeader
-        label="Components"
-        heading="Components that inherit the system."
-        description="Every component reads from var(--s-*) tokens. Switch presets and the entire library updates."
-      />
-
-      {/* Category tabs */}
-      <div className="flex gap-0 border-b border-[var(--s-border)] mb-8 overflow-x-auto">
-        {COMPONENT_TABS.map((tab) => (
-          <button
-            key={tab}
-            type="button"
-            onClick={() => setActiveTab(tab)}
-            className={`bg-transparent border-0 px-4 py-2 cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)] shrink-0 ${
-              activeTab === tab
-                ? "text-[var(--s-text)] border-b-2 border-b-[var(--s-primary)]"
-                : "text-[var(--s-text-muted)] border-b-2 border-b-transparent hover:text-[var(--s-text)]"
-            }`}
-          >
-            <MonoLabel size="sm" variant={activeTab === tab ? "accent" : "muted"}>{tab}</MonoLabel>
-          </button>
-        ))}
-      </div>
-
-      {/* Live component grid */}
-      <TechFrame variant="dimension" extend={12} opacity={0.3} padding={8}>
-        <LiveComponentGrid showCta={false} />
-      </TechFrame>
-
-      {/* Component anatomy diagram */}
-      <div className="mt-12">
-        <MonoLabel variant="accent" className="block mb-4">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
-        <ComponentAnatomyDiagram />
-      </div>
-      </div>
-    </LandingSection>
-  );
-}
-
-function ComponentStackSection() {
-  return (
-    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
-      <TextureBg opacity={0.3} />
       <div className="relative z-[1]">
         <SectionHeader
           label="Under the Hood"
@@ -417,129 +252,13 @@ function ComponentStackSection() {
           description="Select a component to see what ships with it — Radix primitives, animation engines, sound feedback, charting libraries — all wired in automatically."
         />
         <ComponentStackDiagram />
-      </div>
-    </LandingSection>
-  );
-}
 
-const EVALUATION_CARDS = [
-  {
-    label: "contrast audit",
-    value: "AA",
-    title: "Readable by default",
-    body: "Every preset can be checked against text, surface, and action contrast before it ships.",
-    meter: 92,
-  },
-  {
-    label: "agent safety",
-    value: "1 file",
-    title: "Constrained edit surface",
-    body: "Agents change token fields and generated instructions instead of scattering style overrides.",
-    meter: 84,
-  },
-  {
-    label: "visual drift",
-    value: "0",
-    title: "Compiler-owned output",
-    body: "The same token spec always produces the same CSS variables, Tailwind theme, and component look.",
-    meter: 100,
-  },
-];
-
-const PRODUCT_FEATURES = [
-  {
-    title: "Token workbench",
-    label: "inspect",
-    body: "Trace a visual decision from markdown to CSS var to live component.",
-  },
-  {
-    title: "Preset switchboard",
-    label: "compose",
-    body: "Flip the entire visual language without touching page or component code.",
-  },
-  {
-    title: "Agent instructions",
-    label: "govern",
-    body: "Generated project guidance tells humans and AI where visual changes belong.",
-  },
-  {
-    title: "Component gallery",
-    label: "verify",
-    body: "Preview real UI under the active preset before adding it to an app.",
-  },
-];
-
-function MiniBlueprintPanel({ title, label }: { title: string; label: string }) {
-  return (
-    <div className="relative min-h-[150px] overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)] p-4">
-      <div
-        className="absolute inset-0 pointer-events-none opacity-[0.08]"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--s-text) 1px, transparent 1px), linear-gradient(90deg, var(--s-text) 1px, transparent 1px)",
-          backgroundSize: "20px 20px",
-        }}
-      />
-      <div className="relative z-[1] flex items-center justify-between">
-        <MonoLabel variant="accent" size="xs">{label}</MonoLabel>
-        <span className="h-2 w-2 bg-[var(--s-primary)]" />
-      </div>
-      <div className="relative z-[1] mt-8">
-        <div className="mb-3 h-3 w-3/5 bg-[var(--s-text)]" />
-        <div className="mb-2 h-2 w-4/5 bg-[var(--s-border)]" />
-        <div className="h-2 w-1/2 bg-[var(--s-border)]" />
-      </div>
-      <DensityText role="detail" className="relative z-[1] mt-6 block font-semibold">
-        {title}
-      </DensityText>
-    </div>
-  );
-}
-
-function EvaluationProductSection() {
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Product System"
-        heading="Evaluate the system before it becomes UI."
-        description="Sigil treats design-system work like product infrastructure: inspectable, measurable, and safe for agents to operate."
-      />
-
-      <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
-        <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-1">
-          {EVALUATION_CARDS.map((card) => (
-            <div key={card.label} className="border border-[var(--s-border)] bg-[var(--s-surface)] p-5">
-              <div className="mb-5 flex items-start justify-between gap-4">
-                <MonoLabel variant="accent" size="xs">{card.label}</MonoLabel>
-                <TabularValue className="text-[clamp(22px,3vw,40px)] font-bold text-[var(--s-text)]">
-                  {card.value}
-                </TabularValue>
-              </div>
-              <DensityText role="headline" as="h3" className="mb-2 text-xl font-semibold">
-                {card.title}
-              </DensityText>
-              <DensityText role="body" as="p" muted className="mb-4 leading-relaxed">
-                {card.body}
-              </DensityText>
-              <Progress value={card.meter} />
-            </div>
-          ))}
-        </div>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {PRODUCT_FEATURES.map((feature, index) => (
-            <div
-              key={feature.title}
-              className={index === 0 ? "md:col-span-2" : undefined}
-            >
-              <MiniBlueprintPanel title={feature.title} label={feature.label} />
-              <div className="border-x border-b border-[var(--s-border)] bg-[var(--s-surface)] p-4">
-                <DensityText role="body" as="p" muted>
-                  {feature.body}
-                </DensityText>
-              </div>
-            </div>
-          ))}
+        <div className="mt-20">
+          <MonoLabel variant="accent" className="block mb-3">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
+          <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
+            Each visual decision resolves to one named token. Every component reads the same CSS variable.
+          </DensityText>
+          <ComponentAnatomyDiagram />
         </div>
       </div>
     </LandingSection>
@@ -547,172 +266,8 @@ function EvaluationProductSection() {
 }
 
 /* ================================================================ */
-/* Capabilities Showcase — inspire, preset swap, ripple, history     */
+/* Preset Identity — morphing mini-site demo                         */
 /* ================================================================ */
-
-const INSPIRE_COLORS = [
-  { hex: "#9b99e8", label: "primary", oklch: "oklch(0.65 0.18 275)", count: 47 },
-  { hex: "#1a1a24", label: "surface", oklch: "oklch(0.13 0.02 268)", count: 31 },
-  { hex: "#e8e8ed", label: "text", oklch: "oklch(0.94 0.01 260)", count: 28 },
-  { hex: "#2a2a3a", label: "border", oklch: "oklch(0.22 0.02 270)", count: 19 },
-  { hex: "#da8325", label: "accent", oklch: "oklch(0.68 0.16 62)", count: 12 },
-  { hex: "#10b981", label: "success", oklch: "oklch(0.72 0.17 168)", count: 8 },
-];
-
-const INSPIRE_TOKEN_LINES = [
-  "--s-primary: oklch(0.65 0.18 275);",
-  "--s-primary-hover: oklch(0.58 0.2 275);",
-  "--s-background: oklch(0.13 0.012 260);",
-  "--s-surface: oklch(0.18 0.016 260);",
-  "--s-text: oklch(0.94 0.008 260);",
-  "--s-radius-card: var(--s-radius-lg);",
-];
-
-function useTypingEffect(text: string, speed = 30, trigger = true) {
-  const [displayed, setDisplayed] = useState("");
-  const [done, setDone] = useState(false);
-  useEffect(() => {
-    if (!trigger) { setDisplayed(""); setDone(false); return; }
-    let i = 0;
-    setDisplayed("");
-    setDone(false);
-    const tick = () => {
-      if (i < text.length) {
-        i++;
-        setDisplayed(text.slice(0, i));
-        setTimeout(tick, speed + Math.random() * 16);
-      } else {
-        setDone(true);
-      }
-    };
-    tick();
-  }, [text, speed, trigger]);
-  return { displayed, done };
-}
-
-function InspireShowcase() {
-  const [phase, setPhase] = useState(0);
-  const typing = useTypingEffect(
-    "sigil inspire https://linear.app --name linear",
-    26,
-    true,
-  );
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 2200);
-    const t2 = setTimeout(() => setPhase(2), 4000);
-    return () => { clearTimeout(t1); clearTimeout(t2); };
-  }, []);
-
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Inspire"
-        heading="See a site you like? Extract its tokens."
-        description="sigil inspire extracts colors from any URL or CSS file, drafts OKLCH tokens, generates a preset file, and creates a preview page — one command."
-      />
-
-      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        {/* Left: terminal + command */}
-        <div className="flex flex-col gap-5">
-          <div
-            className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4"
-            style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)" }}
-          >
-            <div className="flex items-center gap-2 mb-3 pb-2 border-b border-[var(--s-border)]">
-              <MonoLabel variant="accent" size="xs">Terminal</MonoLabel>
-              <Badge variant="outline" size="sm">live</Badge>
-            </div>
-            <div className="text-[13px]">
-              <span className="text-[var(--s-text-muted)]">$ </span>
-              <span className="text-[var(--s-text)]">{typing.displayed}</span>
-              <span
-                className="inline-block w-2 h-4 bg-[var(--s-primary)] ml-0.5 align-middle"
-                style={{ opacity: typing.done ? 0 : 1, transition: "opacity 300ms" }}
-              />
-            </div>
-          </div>
-
-          {/* Extracted colors */}
-          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
-            <MonoLabel variant="accent" size="xs" className="block mb-3">Extracted colors</MonoLabel>
-            <div className="grid gap-2">
-              {INSPIRE_COLORS.map((c, i) => (
-                <div
-                  key={c.hex}
-                  className="flex items-center gap-3 transition-all duration-[var(--s-duration-normal,300ms)]"
-                  style={{
-                    opacity: phase >= 1 ? 1 : 0,
-                    transform: phase >= 1 ? "translateX(0)" : "translateX(-12px)",
-                    transitionDelay: phase >= 1 ? `${i * 60}ms` : "0ms",
-                  }}
-                >
-                  <div className="w-4 h-4 border border-[var(--s-border)]" style={{ background: c.hex }} />
-                  <MonoLabel size="xs" className="w-14 normal-case tracking-normal">{c.label}</MonoLabel>
-                  <DensityText role="chrome" muted className="flex-1">{c.oklch}</DensityText>
-                  <TabularValue size="xs" muted>{c.count}x</TabularValue>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right: generated token draft */}
-        <div
-          className="border border-[var(--s-border)] bg-[var(--s-background)] p-4 transition-opacity duration-500"
-          style={{ opacity: phase >= 2 ? 1 : 0.3, transitionDelay: phase >= 2 ? "200ms" : "0ms" }}
-        >
-          <div className="flex items-center justify-between mb-4">
-            <MonoLabel variant="accent" size="xs">Generated token draft</MonoLabel>
-            <Badge variant={phase >= 2 ? "default" : "outline"} size="sm">
-              {phase >= 2 ? "Ready" : "Waiting"}
-            </Badge>
-          </div>
-          <div
-            className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4"
-            style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)", fontSize: 12, lineHeight: 1.9 }}
-          >
-            <div className="text-[var(--s-text-muted)]">{":root {"}</div>
-            {INSPIRE_TOKEN_LINES.map((line, i) => (
-              <div
-                key={i}
-                className="pl-4 transition-all duration-[var(--s-duration-normal,300ms)]"
-                style={{
-                  color: line.includes("primary") ? "var(--s-primary)" : "var(--s-text)",
-                  opacity: phase >= 2 ? 1 : 0,
-                  transform: phase >= 2 ? "translateY(0)" : "translateY(6px)",
-                  transitionDelay: phase >= 2 ? `${400 + i * 80}ms` : "0ms",
-                }}
-              >
-                {line}
-              </div>
-            ))}
-            <div className="text-[var(--s-text-muted)]">{"}"}</div>
-          </div>
-          <div className="mt-4 grid grid-cols-3 gap-2">
-            {[
-              { path: "tokens.css", label: "draft" },
-              { path: `preset.ts`, label: "preset" },
-              { path: "page.tsx", label: "preview" },
-            ].map((file, i) => (
-              <div
-                key={file.path}
-                className="border border-[var(--s-border)] bg-[var(--s-surface)] p-2.5 transition-all duration-[var(--s-duration-normal,300ms)]"
-                style={{
-                  opacity: phase >= 2 ? 1 : 0,
-                  transitionDelay: phase >= 2 ? `${800 + i * 100}ms` : "0ms",
-                }}
-              >
-                <MonoLabel size="xs" className="block normal-case tracking-normal">{file.path}</MonoLabel>
-                <DensityText role="chrome" muted>{file.label}</DensityText>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </LandingSection>
-  );
-}
 
 const MINI_PRESETS: { name: string; primary: string; bg: string; surface: string; text: string; border: string; radius: string }[] = [
   { name: "sigil", primary: "#9b99e8", bg: "#0f0f14", surface: "#1a1a24", text: "#e8e8ed", border: "#2a2a3a", radius: "8px" },
@@ -723,506 +278,512 @@ const MINI_PRESETS: { name: string; primary: string; bg: string; surface: string
   { name: "flux", primary: "#ec4899", bg: "#0f172a", surface: "#1e293b", text: "#e2e8f0", border: "#334155", radius: "12px" },
 ];
 
-function PresetCycleShowcase() {
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setIndex((prev) => (prev + 1) % MINI_PRESETS.length), 2200);
-    return () => clearInterval(id);
-  }, []);
-
+function PresetMorphDemo({ index, setIndex }: { index: number; setIndex: (i: number) => void }) {
   const p = MINI_PRESETS[index];
 
   return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Preset Identity"
-        heading="Same components. Different design language."
-        description={`${SIGIL_PRODUCT_STATS.presetCount} presets change all 259 tokens at once. Not a theme toggle — a different visual identity. Watch the same page morph.`}
-      />
-
-      <div className="grid gap-6 lg:grid-cols-[1fr_1fr] items-start">
-        {/* Mini site preview */}
-        <div
-          className="overflow-hidden border transition-all duration-[600ms]"
-          style={{
-            background: p.bg, color: p.text, borderColor: p.border,
-            borderRadius: 8,
-            transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
-          }}
-        >
-          {/* Mini navbar */}
-          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: `1px solid ${p.border}` }}>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 transition-all duration-[600ms]" style={{ background: p.primary, borderRadius: Number.parseInt(p.radius) / 2 || 2 }} />
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "-0.01em" }}>Sigil / {p.name}</span>
-            </div>
-            <div className="flex gap-3">
-              {["Docs", "Presets", "Lab"].map((l) => (
-                <span key={l} className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: `color-mix(in srgb, ${p.text} 50%, transparent)` }}>{l}</span>
-              ))}
-            </div>
+    <div className="grid gap-6 lg:grid-cols-[1fr_1fr] items-start">
+      <div
+        className="overflow-hidden border transition-all duration-[600ms]"
+        style={{
+          background: p.bg, color: p.text, borderColor: p.border,
+          borderRadius: 8,
+          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+        }}
+      >
+        <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: `1px solid ${p.border}` }}>
+          <div className="flex items-center gap-2">
+            <div className="w-3 h-3 transition-all duration-[600ms]" style={{ background: p.primary, borderRadius: Number.parseInt(p.radius) / 2 || 2 }} />
+            <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "-0.01em" }}>Sigil / {p.name}</span>
           </div>
-
-          {/* Mini hero */}
-          <div className="px-5 py-7">
-            <div className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.16em] mb-2 transition-colors duration-[600ms]" style={{ color: p.primary }}>
-              Design system
-            </div>
-            <div className="text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2">
-              One token file.<br />Every component.
-            </div>
-            <div className="text-[11px] leading-[1.6] mb-4" style={{ color: `color-mix(in srgb, ${p.text} 60%, transparent)`, maxWidth: 260 }}>
-              259 tokens control your entire visual identity.
-            </div>
-            <div className="flex gap-2">
-              <div className="text-[9px] font-bold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ background: p.primary, color: p.bg, borderRadius: p.radius }}>Get Started</div>
-              <div className="text-[9px] font-semibold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ border: `1px solid ${p.border}`, borderRadius: p.radius }}>Browse</div>
-            </div>
-          </div>
-
-          {/* Mini cards */}
-          <div className="grid grid-cols-3 gap-px transition-all duration-[600ms]" style={{ background: p.border }}>
-            {["259", "46", "1"].map((val, i) => (
-              <div key={i} className="p-3.5 transition-all duration-[600ms]" style={{ background: p.surface }}>
-                <div className="font-[family-name:var(--s-font-mono)] text-lg font-bold tracking-[-0.02em] transition-colors duration-[600ms]" style={{ color: p.primary }}>{val}</div>
-                <div className="text-[9px] font-semibold uppercase tracking-[0.06em]">
-                  {["Tokens", "Presets", "Agent"][i]}
-                </div>
-              </div>
+          <div className="flex gap-3">
+            {["Docs", "Presets", "Lab"].map((l) => (
+              <span key={l} className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.08em]" style={{ color: `color-mix(in srgb, ${p.text} 50%, transparent)` }}>{l}</span>
             ))}
           </div>
         </div>
 
-        {/* Preset selector + info */}
-        <div className="flex flex-col gap-5">
-          <GapPixelGrid columns={{ base: 3, sm: 6 }} gap={1}>
-            {MINI_PRESETS.map((preset, i) => (
-              <GapPixelCell
-                key={preset.name}
-                className="flex flex-col items-center gap-2 p-3 cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
-                style={{ background: index === i ? "var(--s-surface)" : undefined }}
-                onClick={() => setIndex(i)}
-              >
-                <div
-                  className="w-5 h-5 border-2 transition-all duration-300"
-                  style={{
-                    background: preset.primary,
-                    borderColor: index === i ? "var(--s-text)" : "transparent",
-                    borderRadius: "50%",
-                    transform: index === i ? "scale(1.25)" : "scale(1)",
-                  }}
-                />
-                <MonoLabel size="xs" variant={index === i ? "accent" : "muted"}>{preset.name}</MonoLabel>
-              </GapPixelCell>
-            ))}
-          </GapPixelGrid>
-
-          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-5">
-            <MonoLabel variant="accent" size="xs" className="block mb-3">Active preset</MonoLabel>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { label: "primary", value: p.primary },
-                { label: "radius", value: p.radius },
-                { label: "background", value: p.bg },
-                { label: "border", value: p.border },
-              ].map((row) => (
-                <div key={row.label} className="flex items-center justify-between border-b border-[var(--s-border)] pb-2">
-                  <MonoLabel size="xs" className="normal-case tracking-normal">{row.label}</MonoLabel>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 border border-[var(--s-border)]" style={{ background: row.value }} />
-                    <DensityText role="chrome" muted>{row.value}</DensityText>
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className="px-5 py-7">
+          <div className="font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.16em] mb-2 transition-colors duration-[600ms]" style={{ color: p.primary }}>
+            Design system
           </div>
-
-          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
-            <MonoLabel variant="accent" size="xs" className="block mb-2">One command</MonoLabel>
-            <div className="font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
-              <span className="text-[var(--s-text-muted)]">$ </span>sigil preset {p.name}
-            </div>
+          <div className="text-xl font-bold tracking-[-0.03em] leading-[1.1] mb-2">
+            One token file.<br />Every component.
           </div>
+          <div className="text-[11px] leading-[1.6] mb-4" style={{ color: `color-mix(in srgb, ${p.text} 60%, transparent)`, maxWidth: 260 }}>
+            519 tokens control your entire visual identity.
+          </div>
+          <div className="flex gap-2">
+            <div className="text-[9px] font-bold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ background: p.primary, color: p.bg, borderRadius: p.radius }}>Get Started</div>
+            <div className="text-[9px] font-semibold uppercase tracking-[0.04em] px-4 py-1.5 transition-all duration-[600ms]" style={{ border: `1px solid ${p.border}`, borderRadius: p.radius }}>Browse</div>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-3 gap-px transition-all duration-[600ms]" style={{ background: p.border }}>
+          {["519", "46", "1"].map((val, i) => (
+            <div key={i} className="p-3.5 transition-all duration-[600ms]" style={{ background: p.surface }}>
+              <div className="font-[family-name:var(--s-font-mono)] text-lg font-bold tracking-[-0.02em] transition-colors duration-[600ms]" style={{ color: p.primary }}>{val}</div>
+              <div className="text-[9px] font-semibold uppercase tracking-[0.06em]">
+                {["Tokens", "Presets", "Agent"][i]}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </LandingSection>
-  );
-}
 
-const RIPPLE_COMPONENTS = ["Button", "Card", "Input", "Badge", "Dialog", "Navbar", "Tooltip", "Progress"];
-
-function TokenRippleShowcase() {
-  const [active, setActive] = useState(false);
-
-  useEffect(() => {
-    const id = setInterval(() => setActive((prev) => !prev), 2800);
-    return () => clearInterval(id);
-  }, []);
-
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Token Propagation"
-        heading="Edit one token. Every component updates."
-        description="Components read from CSS variables. Change --s-primary and every button, link, focus ring, badge, gradient, and glow updates. One file. Zero component edits."
-      />
-
-      <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-        {/* Token source */}
-        <div className="flex flex-col gap-4">
-          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4">
-            <MonoLabel variant="accent" size="xs" className="block mb-3">Token source</MonoLabel>
-            <div
-              className="border border-[var(--s-border)] bg-[var(--s-background)] px-4 py-3"
-              style={{ fontFamily: "var(--s-font-mono, ui-monospace, monospace)", fontSize: 13 }}
-            >
-              <span className="text-[var(--s-text-muted)]">--s-primary: </span>
-              <span
-                className="transition-colors duration-[var(--s-duration-normal,300ms)]"
-                style={{ color: active ? "var(--s-primary)" : "var(--s-text-muted)" }}
-              >
-                {active ? "oklch(0.65 0.24 275)" : "oklch(0.45 0.08 260)"}
-              </span>
-            </div>
-          </div>
-
-          <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <div
-                className="w-2 h-2 rounded-full transition-colors duration-300"
-                style={{ background: active ? "var(--s-success)" : "var(--s-text-muted)" }}
-              />
-              <MonoLabel size="xs" variant={active ? "accent" : "muted"}>
-                {active ? "Propagating to 200+ components" : "Waiting for token change..."}
-              </MonoLabel>
-            </div>
-            <Progress value={active ? 100 : 0} className="transition-all duration-[800ms]" />
-          </div>
-        </div>
-
-        {/* Component grid that lights up */}
-        <GapPixelGrid columns={{ base: 2, sm: 4 }} gap={1}>
-          {RIPPLE_COMPONENTS.map((name, i) => (
+      <div className="flex flex-col gap-5">
+        <GapPixelGrid columns={{ base: 3, sm: 6 }} gap={1}>
+          {MINI_PRESETS.map((preset, i) => (
             <GapPixelCell
-              key={name}
-              className="p-3.5 text-center transition-all duration-[var(--s-duration-normal,300ms)]"
-              style={{
-                background: active ? "var(--s-primary)" : "var(--s-background)",
-                color: active ? "var(--s-background)" : "var(--s-text-muted)",
-                transitionDelay: `${i * 60}ms`,
-              }}
+              key={preset.name}
+              className="flex flex-col items-center gap-2 p-3 cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
+              style={{ background: index === i ? "var(--s-surface)" : undefined }}
+              onClick={() => setIndex(i)}
             >
-              <MonoLabel size="xs" variant="muted" style={{ color: "inherit" }}>{name}</MonoLabel>
+              <div
+                className="w-5 h-5 border-2 transition-all duration-300"
+                style={{
+                  background: preset.primary,
+                  borderColor: index === i ? "var(--s-text)" : "transparent",
+                  borderRadius: "50%",
+                  transform: index === i ? "scale(1.25)" : "scale(1)",
+                }}
+              />
+              <MonoLabel size="xs" variant={index === i ? "accent" : "muted"}>{preset.name}</MonoLabel>
             </GapPixelCell>
           ))}
         </GapPixelGrid>
-      </div>
-    </LandingSection>
-  );
-}
 
-const HISTORY_SNAPSHOTS = [
-  { name: "Launch v1", preset: "sigil", time: "2:14 PM", color: "#9b99e8" },
-  { name: "Dark rebrand", preset: "noir", time: "3:42 PM", color: "#d97706" },
-  { name: "Investor deck", preset: "flux", time: "5:08 PM", color: "#ec4899" },
-];
-
-function DesignHistoryShowcase() {
-  const [phase, setPhase] = useState(0);
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setPhase(1), 600);
-    const t2 = setTimeout(() => setPhase(2), 1400);
-    const t3 = setTimeout(() => setPhase(3), 2200);
-    const t4 = setTimeout(() => setPhase(4), 3400);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); clearTimeout(t4); };
-  }, []);
-
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Design History"
-        heading="Save your direction. Compare. Restore."
-        description="The sandbox saves full token snapshots to local storage. Name them, compare against current tokens, export as JSON, restore any saved state instantly."
-      />
-
-      <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
-        {/* Snapshot list */}
-        <div className="border border-[var(--s-border)] bg-[var(--s-surface)]">
-          <div className="flex items-center justify-between border-b border-[var(--s-border)] p-4">
-            <MonoLabel variant="accent" size="xs">Saved states</MonoLabel>
-            <Badge variant="outline" size="sm">{HISTORY_SNAPSHOTS.length} snapshots</Badge>
-          </div>
-          <div className="divide-y divide-[var(--s-border)]">
-            {HISTORY_SNAPSHOTS.map((snap, i) => (
-              <div
-                key={snap.name}
-                className="flex items-center justify-between p-4 transition-all duration-[var(--s-duration-normal,300ms)]"
-                style={{
-                  opacity: phase > i ? 1 : 0,
-                  transform: phase > i ? "translateX(0)" : "translateX(-12px)",
-                  transitionDelay: `${i * 100}ms`,
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-2.5 h-2.5 rounded-full" style={{ background: snap.color }} />
-                  <DensityText role="detail" className="font-semibold">{snap.name}</DensityText>
-                </div>
-                <div className="flex items-center gap-3">
-                  <MonoLabel size="xs" className="normal-case tracking-normal">{snap.preset}</MonoLabel>
-                  <DensityText role="chrome" muted>{snap.time}</DensityText>
+        <div className="border border-[var(--s-border)] bg-[var(--s-surface)] p-5">
+          <MonoLabel variant="accent" size="xs" className="block mb-3">Active preset</MonoLabel>
+          <div className="grid grid-cols-2 gap-3">
+            {[
+              { label: "primary", value: p.primary },
+              { label: "radius", value: p.radius },
+              { label: "background", value: p.bg },
+              { label: "border", value: p.border },
+            ].map((row) => (
+              <div key={row.label} className="flex items-center justify-between border-b border-[var(--s-border)] pb-2">
+                <MonoLabel size="xs" className="normal-case tracking-normal">{row.label}</MonoLabel>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 border border-[var(--s-border)]" style={{ background: row.value }} />
+                  <DensityText role="chrome" muted>{row.value}</DensityText>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Actions + restore confirmation */}
-        <div className="flex flex-col gap-4">
-          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
-            <MonoLabel variant="accent" size="xs" className="block mb-3">Actions</MonoLabel>
-            <div className="flex flex-wrap gap-2">
-              <Button variant="outline" size="sm">Restore</Button>
-              <Button variant="outline" size="sm">Export JSON</Button>
-              <Button variant="outline" size="sm">Compare</Button>
-            </div>
-          </div>
-
-          <div
-            className="border bg-[var(--s-surface)] p-4 transition-all duration-500"
-            style={{
-              borderColor: phase >= 4 ? "var(--s-success)" : "var(--s-border)",
-              opacity: phase >= 4 ? 1 : 0.3,
-            }}
-          >
-            <div className="flex items-center gap-2 mb-3">
-              <div
-                className="w-2 h-2 rounded-full transition-colors duration-300"
-                style={{ background: phase >= 4 ? "var(--s-success)" : "var(--s-text-muted)" }}
-              />
-              <MonoLabel size="xs" variant={phase >= 4 ? "accent" : "muted"}>
-                {phase >= 4 ? "Restored — \"Launch v1\" applied" : "Select a snapshot to compare"}
-              </MonoLabel>
-            </div>
-            {phase >= 4 && (
-              <div className="grid grid-cols-2 gap-2">
-                {[
-                  { token: "--s-primary", from: "#ec4899", to: "#9b99e8" },
-                  { token: "--s-radius-md", from: "12px", to: "8px" },
-                ].map((diff) => (
-                  <div key={diff.token} className="border border-[var(--s-border)] bg-[var(--s-background)] p-2.5">
-                    <MonoLabel size="xs" className="block mb-1 normal-case tracking-normal text-[var(--s-primary)]">{diff.token}</MonoLabel>
-                    <div className="flex items-center gap-2 font-[family-name:var(--s-font-mono)] text-[10px]">
-                      <span className="text-[var(--s-text-muted)] line-through">{diff.from}</span>
-                      <span className="text-[var(--s-text-muted)]">&rarr;</span>
-                      <span className="text-[var(--s-text)]">{diff.to}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
-            <MonoLabel variant="accent" size="xs" className="block mb-2">Try it</MonoLabel>
-            <DensityText role="body" as="p" muted className="mb-3 text-sm">
-              Open the sandbox, switch between presets, and save named snapshots from the History tab.
-            </DensityText>
-            <Button variant="outline" size="sm" asChild>
-              <a href="/sandbox" className="no-underline">Open Sandbox</a>
-            </Button>
+        <div className="border border-[var(--s-border)] bg-[var(--s-background)] p-4">
+          <MonoLabel variant="accent" size="xs" className="block mb-2">One command</MonoLabel>
+          <div className="font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
+            <span className="text-[var(--s-text-muted)]">$ </span>sigil preset {p.name}
           </div>
         </div>
       </div>
-    </LandingSection>
+    </div>
   );
 }
 
-const COMMAND_CARDS = [
+/* ================================================================ */
+/* CLI Voronoi Bento — organic polygon cells with skeleton diagrams   */
+/* ================================================================ */
+
+function CliDiagram({ variant, accent }: { variant: string; accent?: boolean }) {
+  const bd = accent ? "rgba(255,255,255,0.25)" : "var(--s-border)";
+  const fill = accent ? "rgba(255,255,255,0.1)" : "var(--s-background)";
+  const hi = accent ? "rgba(255,255,255,0.8)" : "var(--s-primary)";
+  const dim = accent ? "rgba(255,255,255,0.18)" : "var(--s-border-muted)";
+
+  if (variant === "scaffold") {
+    return (
+      <div className="relative w-[76px] h-[56px]">
+        <div className="absolute bottom-0 left-0 w-[50px] h-[38px] border" style={{ borderColor: dim, background: fill }} />
+        <div className="absolute bottom-[7px] left-[11px] w-[50px] h-[38px] border" style={{ borderColor: bd, background: fill }}>
+          <div className="mt-3 mx-2 h-[3px] w-[18px]" style={{ background: hi }} />
+          <div className="mt-1 mx-2 h-[2px] w-[26px]" style={{ background: dim }} />
+        </div>
+        <div className="absolute top-0 right-0 w-[50px] h-[38px] border" style={{ borderColor: bd, background: fill }}>
+          <div className="mt-3 mx-2 h-[3px] w-[22px]" style={{ background: hi }} />
+          <div className="mt-1 mx-2 h-[2px] w-[30px]" style={{ background: dim }} />
+          <div className="mt-1 mx-2 h-[2px] w-[16px]" style={{ background: dim }} />
+        </div>
+      </div>
+    );
+  }
+  if (variant === "init") {
+    return (
+      <div className="flex items-center gap-2.5">
+        <div className="w-9 h-9 border-2 rounded flex items-center justify-center" style={{ borderColor: bd }}>
+          <div className="w-3.5 h-3.5 rounded-full border-2" style={{ borderColor: hi }} />
+        </div>
+        <div style={{ color: hi, fontSize: 14 }}>→</div>
+        <div className="w-9 h-9 border rounded flex items-center justify-center" style={{ borderColor: hi, background: fill }}>
+          <span style={{ color: hi, fontSize: 14, fontWeight: 700 }}>✓</span>
+        </div>
+      </div>
+    );
+  }
+  if (variant === "add") {
+    return (
+      <div className="flex gap-2">
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="w-7 h-10 border flex flex-col justify-end p-1 gap-0.5" style={{ borderColor: i === 1 ? hi : bd, background: fill }}>
+            <div className="h-[3px] w-full" style={{ background: i === 1 ? hi : dim }} />
+            <div className="h-[2px] w-3/4" style={{ background: dim }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (variant === "preset") {
+    return (
+      <div className="flex gap-2.5 items-center">
+        {["#9b99e8", "#d97706", "#22c55e", "#ec4899"].map((c, i) => (
+          <div key={i} className="w-4 h-4 rounded-full" style={{ background: c, opacity: i === 0 ? 1 : 0.55, boxShadow: i === 0 ? `0 0 8px ${c}` : "none" }} />
+        ))}
+      </div>
+    );
+  }
+  if (variant === "inspire") {
+    return (
+      <div className="flex items-center gap-2">
+        <div className="border px-2 py-1.5" style={{ borderColor: bd, background: fill }}>
+          <div className="h-[3px] w-14" style={{ background: dim }} />
+        </div>
+        <span style={{ color: hi, fontSize: 13, fontWeight: 600 }}>→</span>
+        <div className="flex gap-1">
+          {["#9b99e8", "#da8325", "#10b981"].map((c) => (
+            <div key={c} className="w-3.5 h-3.5" style={{ background: c }} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+  if (variant === "docs") {
+    return (
+      <div className="w-16 border p-2.5 flex flex-col gap-[5px]" style={{ borderColor: bd, background: fill }}>
+        <div className="h-[3px] w-full" style={{ background: hi }} />
+        <div className="h-[2px] w-full" style={{ background: dim }} />
+        <div className="h-[2px] w-4/5" style={{ background: dim }} />
+        <div className="h-[2px] w-3/5" style={{ background: dim }} />
+      </div>
+    );
+  }
+  if (variant === "adapter") {
+    return (
+      <div className="flex items-center gap-1.5">
+        <div className="w-7 h-9 border flex flex-col justify-center gap-1 p-1" style={{ borderColor: bd, background: fill }}>
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+        </div>
+        <div className="w-7 flex flex-col items-center gap-0.5">
+          <div className="w-full h-[2px]" style={{ background: hi }} />
+          <div className="w-full h-[2px]" style={{ background: hi, opacity: 0.4 }} />
+        </div>
+        <div className="w-7 h-9 border flex flex-col justify-center gap-1 p-1" style={{ borderColor: hi, background: fill }}>
+          <div className="h-[2px] w-full" style={{ background: hi, opacity: 0.5 }} />
+          <div className="h-[2px] w-full" style={{ background: hi, opacity: 0.5 }} />
+        </div>
+      </div>
+    );
+  }
+  if (variant === "diff") {
+    return (
+      <div className="flex gap-1.5">
+        <div className="w-9 border flex flex-col gap-[5px] p-2" style={{ borderColor: bd, background: fill }}>
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+          <div className="h-[2px] w-full" style={{ background: "#f87171", opacity: 0.7 }} />
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+        </div>
+        <div className="w-9 border flex flex-col gap-[5px] p-2" style={{ borderColor: hi, background: fill }}>
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+          <div className="h-[2px] w-full" style={{ background: hi }} />
+          <div className="h-[2px] w-full" style={{ background: dim }} />
+        </div>
+      </div>
+    );
+  }
+  if (variant === "doctor") {
+    return (
+      <div className="flex flex-col gap-2">
+        {[1, 2, 3].map((i) => (
+          <div key={i} className="flex items-center gap-2">
+            <div className="w-3.5 h-3.5 border flex items-center justify-center" style={{ borderColor: hi }}>
+              <span style={{ color: hi, fontSize: 8, fontWeight: 700 }}>✓</span>
+            </div>
+            <div className="h-[2px]" style={{ width: `${24 + i * 8}px`, background: dim }} />
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return null;
+}
+
+const CLI_VORONOI_TILES = [
   {
+    points: "0,0 340,0 380,160 280,320 0,280",
     command: "npx create-sigil-app",
-    title: "Create a new app",
-    body: "Bootstraps project files, token CSS, base preset, docs links, and agent instructions.",
-    output: ["framework detected", "tokens written", "components ready"],
+    title: "Bootstrap a new app",
+    body: "Scaffolds token CSS, base preset, components, and agent instructions.",
+    diagram: "scaffold",
+    accent: true,
   },
   {
+    points: "340,0 620,0 580,190 380,160",
     command: "sigil init",
-    title: "Install into an existing app",
-    body: "Detects your stack and wires Sigil into the current project without replacing your app.",
-    output: ["config created", "css imported", "doctor passing"],
+    title: "Install into existing app",
+    body: "Detects your stack and wires Sigil in.",
+    diagram: "init",
   },
   {
-    command: "sigil add button card input",
+    points: "620,0 1000,0 1000,240 720,300 580,190",
+    command: "sigil add <names>",
     title: "Add components",
-    body: "Copies token-bound components into your project so they inherit the active visual system.",
-    output: ["button.tsx", "card.tsx", "input.tsx"],
+    body: "Copies token-bound components into your project.",
+    diagram: "add",
   },
   {
-    command: "sigil preset forge",
-    title: "Switch visual language",
-    body: "Writes a complete preset into the token file and refreshes the compiled CSS variables.",
-    output: ["259 fields", "css variables", "theme updated"],
+    points: "0,280 280,320 320,510 0,540",
+    command: "sigil preset <name>",
+    title: "Switch visual identity",
+    body: `${SIGIL_PRODUCT_STATS.presetCount} presets change all 519 tokens at once.`,
+    diagram: "preset",
   },
   {
-    command: "sigil inspire https://example.com",
-    title: "Draft tokens from a reference",
-    body: "Extracts colors from a URL or CSS file, drafts OKLCH tokens, and scaffolds a preset file and preview page.",
-    output: ["colors extracted", "preset drafted", "preview page"],
+    points: "280,320 380,160 580,190 720,300 680,480 320,510",
+    command: "sigil inspire <url>",
+    title: "Extract tokens from a reference",
+    body: "Pulls colors from any URL, drafts OKLCH tokens, generates a preset and preview page.",
+    diagram: "inspire",
   },
   {
+    points: "720,300 1000,240 1000,490 680,480",
     command: "sigil docs",
     title: "Generate library docs",
-    body: "Writes project docs and llms.txt from your active config, installed components, and token file.",
-    output: ["sigil-project.md", "llms.txt", "agent context"],
+    body: "Writes project docs and llms.txt from your config.",
+    diagram: "docs",
   },
   {
-    command: "sigil adapter shadcn",
+    points: "0,540 320,510 260,780 0,780",
+    command: "sigil adapter <name>",
     title: "Bridge existing systems",
-    body: "Creates compatibility CSS so shadcn, Bootstrap, or Material variables inherit your Sigil tokens.",
-    output: ["variable map", "css written", "one import"],
+    body: "CSS bridge so shadcn, Bootstrap, or Material variables inherit your tokens.",
+    diagram: "adapter",
   },
   {
+    points: "320,510 680,480 720,780 260,780",
     command: "sigil diff",
     title: "Review design changes",
-    body: "Shows token-level changes before you commit, so visual updates stay reviewable.",
-    output: ["colors changed", "radius changed", "motion unchanged"],
+    body: "Token-level changes before you commit.",
+    diagram: "diff",
   },
   {
+    points: "680,480 1000,490 1000,780 720,780",
     command: "sigil doctor",
     title: "Validate the install",
-    body: "Checks config, token file, CSS import, component paths, dependencies, and preset health.",
-    output: ["config ok", "tokens ok", "components ok"],
+    body: "Checks config, tokens, CSS import, components, and preset health.",
+    diagram: "doctor",
   },
 ];
 
-function CommandSurfaceSection() {
+function voronoiBounds(points: string) {
+  const coords = points.split(" ").map((pair) => pair.split(",").map(Number));
+  const xs = coords.map(([x]) => x);
+  const ys = coords.map(([, y]) => y);
+  return {
+    minX: Math.min(...xs), maxX: Math.max(...xs),
+    minY: Math.min(...ys), maxY: Math.max(...ys),
+    width: Math.max(...xs) - Math.min(...xs),
+    height: Math.max(...ys) - Math.min(...ys),
+  };
+}
+
+function CLIVoronoiSection() {
+  const VB_W = 1000;
+  const VB_H = 780;
+
   return (
     <LandingSection borderTop>
       <SectionHeader
         label="CLI Surface"
         heading="Every command maps to a product action."
-        description="The CLI is not just installation glue. It is the control plane for creating, changing, auditing, and validating your design system."
+        description="The CLI is the control plane for creating, changing, auditing, and validating your design system."
       />
 
-      <div className="grid gap-0 border border-[var(--s-border)] md:grid-cols-2 lg:grid-cols-3">
-        {COMMAND_CARDS.map((card) => (
-          <div key={card.command} className="border-b border-r border-[var(--s-border)] bg-[var(--s-background)] p-5 last:border-r-0">
-            <div className="mb-4 border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
-              <span className="text-[var(--s-text-muted)]">$</span> {card.command}
+      <div
+        className="relative overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)]"
+        style={{ height: "clamp(700px, 90vw, 1000px)" }}
+      >
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.05]"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--s-text) 1px, transparent 1px), linear-gradient(90deg, var(--s-text) 1px, transparent 1px)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+
+        {/* Background polygon fills */}
+        <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="none" aria-hidden>
+          {CLI_VORONOI_TILES.map((tile, i) => (
+            <polygon key={i} points={tile.points} fill={tile.accent
+              ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-surface))"
+              : "var(--s-surface)"
+            } />
+          ))}
+        </svg>
+
+        {/* Content blocks — centered at each polygon's centroid, no clipping */}
+        {CLI_VORONOI_TILES.map((tile, i) => {
+          const coords = tile.points.split(" ").map((p) => p.split(",").map(Number));
+          const cx = coords.reduce((s, [x]) => s + x, 0) / coords.length;
+          const cy = coords.reduce((s, [, y]) => s + y, 0) / coords.length;
+
+          const fg = tile.accent ? "var(--s-primary-contrast, #fff)" : "var(--s-text)";
+          const fgMuted = tile.accent ? "rgba(255,255,255,0.6)" : "var(--s-text-muted)";
+          const cmdColor = tile.accent ? "rgba(255,255,255,0.9)" : "var(--s-primary)";
+          const cmdBorder = tile.accent ? "rgba(255,255,255,0.2)" : "color-mix(in oklch, var(--s-primary) 30%, var(--s-border))";
+          const cmdBg = tile.accent ? "rgba(255,255,255,0.06)" : "color-mix(in oklch, var(--s-primary) 5%, var(--s-background))";
+
+          return (
+            <div
+              key={i}
+              className="absolute z-[1] flex flex-col items-center text-center pointer-events-none"
+              style={{
+                left: `${(cx / VB_W) * 100}%`,
+                top: `${(cy / VB_H) * 100}%`,
+                transform: "translate(-50%, -50%)",
+                maxWidth: 240,
+              }}
+            >
+              <div
+                className="font-[family-name:var(--s-font-mono)] text-[13px] font-semibold tracking-[0.03em] mb-3 px-4 py-2 border whitespace-nowrap"
+                style={{ color: cmdColor, borderColor: cmdBorder, background: cmdBg }}
+              >
+                $ {tile.command}
+              </div>
+              <div
+                className="font-semibold text-[18px] tracking-[-0.02em] leading-tight mb-4"
+                style={{ color: fg }}
+              >
+                {tile.title}
+              </div>
+              <div className="mb-4" style={{ transform: "scale(1.35)", transformOrigin: "center" }}>
+                <CliDiagram variant={tile.diagram} accent={tile.accent} />
+              </div>
+              <div className="text-[13px] leading-[1.5] max-w-[220px]" style={{ color: fgMuted }}>
+                {tile.body}
+              </div>
             </div>
-            <DensityText role="headline" as="h3" className="mb-2 text-xl font-semibold">
-              {card.title}
-            </DensityText>
-            <DensityText role="body" as="p" muted className="mb-5 leading-relaxed">
-              {card.body}
-            </DensityText>
-            <div className="grid gap-2">
-              {card.output.map((item) => (
-                <div key={item} className="flex items-center justify-between border border-[var(--s-border-muted)] px-2.5 py-1.5">
-                  <MonoLabel size="xs" className="normal-case tracking-normal">{item}</MonoLabel>
-                  <span className="h-1.5 w-1.5 bg-[var(--s-primary)]" />
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+          );
+        })}
+
+        {/* Polygon border strokes */}
+        <svg
+          className="pointer-events-none absolute inset-0 z-[2] h-full w-full"
+          viewBox={`0 0 ${VB_W} ${VB_H}`}
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          {CLI_VORONOI_TILES.map((tile, i) => (
+            <polygon
+              key={i}
+              points={tile.points}
+              fill="transparent"
+              stroke="var(--s-border)"
+              strokeWidth="1.5"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+        </svg>
+
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-[3] h-3 w-3 -translate-x-1/2 -translate-y-1/2 bg-[var(--s-primary)]" />
       </div>
-    </LandingSection>
-  );
-}
-
-function ShapesSection() {
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Shapes & Patterns"
-        heading="Voronoi bentos with actual content."
-        description="Irregular polygon cells that hold real shapes, stats, pattern fields, and product copy without cropping a rectangular layout."
-      />
-      <ShapesAndPatterns />
-    </LandingSection>
-  );
-}
-
-function ThreeDSection() {
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="3D Components"
-        heading="Projected UI without leaving CSS."
-        description="Isometric scenes, prisms, exploded boxes, tilt cards, and depth stacks all inherit the active token system."
-      />
-      <ThreeDShowcase />
     </LandingSection>
   );
 }
 
 function PresetsSection() {
+  const [morphIndex, setMorphIndex] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setMorphIndex((prev) => (prev + 1) % MINI_PRESETS.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
   return (
-    <LandingSection id="presets" borderTop>
-      <SectionHeader
-        label="Presets"
-        heading={`Start from ${SIGIL_PRODUCT_STATS.presetCount} presets. Or build your own.`}
-        description="Use a curated preset as-is, fork one as a starting point, or create a fully custom preset from scratch. Your project's sigil.tokens.md is the final authority — not a library."
-      />
+    <LandingSection id="presets" borderTop style={{ position: "relative", overflow: "hidden" }}>
+      <TextureBg opacity={0.25} />
+      <div className="relative z-[1]">
+        <SectionHeader
+          label="Presets"
+          heading="Same components. Different identity."
+          description={`${SIGIL_PRODUCT_STATS.presetCount} presets change all 519 tokens at once — not a theme toggle, a different visual language. Watch the same page morph.`}
+        />
 
-      <PresetComparisonView />
+        <PresetMorphDemo index={morphIndex} setIndex={setMorphIndex} />
 
-      {/* Custom preset emphasis */}
-      <div className="mt-12">
-        <GapPixelGrid columns={{ md: 3 }}>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="block mb-3">START FROM A PRESET</MonoLabel>
-            <div
-              className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
-              style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-            >
-              <span className="text-[var(--s-text-muted)]">$</span>{" "}
-              <span className="text-[var(--s-text)]">sigil preset noir</span>
-            </div>
-            <DensityText role="body" as="p" muted>
-              {SIGIL_PRODUCT_STATS.presetCount} curated bundles. One command writes the token layer to your file. Use as-is or as a base to customize.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="block mb-3">CREATE YOUR OWN</MonoLabel>
-            <div
-              className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
-              style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-            >
-              <span className="text-[var(--s-text-muted)]">$</span>{" "}
-              <span className="text-[var(--s-text)]">sigil preset create</span>
-            </div>
-            <DensityText role="body" as="p" muted>
-              Interactive scaffolding. Pick a base, set your brand colors and fonts, and a custom preset is generated that you own and control.
-            </DensityText>
-          </GapPixelCell>
-          <GapPixelCell className="p-6">
-            <MonoLabel variant="accent" className="block mb-3">EDIT TOKENS DIRECTLY</MonoLabel>
-            <div
-              className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3 leading-relaxed"
-              style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-            >
-              <div className="text-[var(--s-text-muted)]">## Colors</div>
-              <div className="text-[var(--s-primary)]">primary: oklch(0.65 0.2 150)</div>
-            </div>
-            <DensityText role="body" as="p" muted>
-              Open sigil.tokens.md and change any of 259 fields. Your file is the source of truth — presets are just starting points.
-            </DensityText>
-          </GapPixelCell>
-        </GapPixelGrid>
-      </div>
+        <div className="mt-16">
+          <MonoLabel variant="accent" className="block mb-4">COMPARE ALL PRESETS</MonoLabel>
+          <PresetComparisonView />
+        </div>
 
-      <div className="mt-10 flex gap-3">
-        <AccentCTA asChild>
-          <a href="/presets" className="no-underline">Browse Presets</a>
-        </AccentCTA>
-        <a
-          href="/sandbox"
-          className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
-        >
-          Create Custom Preset
-        </a>
+        <div className="mt-12">
+          <GapPixelGrid columns={{ md: 3 }}>
+            <GapPixelCell className="p-6">
+              <MonoLabel variant="accent" className="block mb-3">START FROM A PRESET</MonoLabel>
+              <div
+                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
+                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+              >
+                <span className="text-[var(--s-text-muted)]">$</span>{" "}
+                <span className="text-[var(--s-text)]">sigil preset noir</span>
+              </div>
+              <DensityText role="body" as="p" muted>
+                {SIGIL_PRODUCT_STATS.presetCount} curated bundles. One command writes the token layer.
+              </DensityText>
+            </GapPixelCell>
+            <GapPixelCell className="p-6">
+              <MonoLabel variant="accent" className="block mb-3">CREATE YOUR OWN</MonoLabel>
+              <div
+                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
+                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+              >
+                <span className="text-[var(--s-text-muted)]">$</span>{" "}
+                <span className="text-[var(--s-text)]">sigil preset create</span>
+              </div>
+              <DensityText role="body" as="p" muted>
+                Pick a base, set brand colors and fonts, and a custom preset is generated.
+              </DensityText>
+            </GapPixelCell>
+            <GapPixelCell className="p-6">
+              <MonoLabel variant="accent" className="block mb-3">EDIT TOKENS DIRECTLY</MonoLabel>
+              <div
+                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3 leading-relaxed"
+                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+              >
+                <div className="text-[var(--s-text-muted)]">## Colors</div>
+                <div className="text-[var(--s-primary)]">primary: oklch(0.65 0.2 150)</div>
+              </div>
+              <DensityText role="body" as="p" muted>
+                Open sigil.tokens.md and change any of 519 fields. Your file is the source of truth.
+              </DensityText>
+            </GapPixelCell>
+          </GapPixelGrid>
+        </div>
+
+        <div className="mt-10 flex gap-3">
+          <AccentCTA asChild>
+            <a href="/presets" className="no-underline">Browse Presets</a>
+          </AccentCTA>
+          <a
+            href="/sandbox"
+            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+          >
+            Create Custom Preset
+          </a>
+        </div>
       </div>
     </LandingSection>
   );
@@ -1378,7 +939,7 @@ function QuickStartSection() {
         <div className="grid grid-cols-3 border border-[var(--s-border)] bg-[var(--s-surface)]">
           {[
             ["00:30", "target setup"],
-            ["259", "token fields"],
+            ["519", "token fields"],
             ["200+", "token-driven components"],
           ].map(([value, label]) => (
             <div key={label} className="border-r border-[var(--s-border)] p-5 last:border-r-0">
@@ -1550,7 +1111,6 @@ export default function LandingPage() {
     <SigilFrame>
       <LandingNavbar />
 
-      {/* Hero */}
       <Hero />
 
       <LandingDivider pattern="vertical" size="md" showBorders />
@@ -1563,76 +1123,37 @@ export default function LandingPage() {
 
       <LandingDivider pattern="vertical" size="sm" showBorders />
 
-      {/* ACT 1 — What Is Sigil? */}
+      {/* Architecture */}
       <LayerSection />
 
       <LandingDivider pattern="diagonal" size="sm" showBorders />
 
-      <TokenPipelineSection />
+      {/* Token System — pipeline + live editor */}
+      <TokenSystemSection />
 
       <LandingDivider pattern="diagonal" size="sm" showBorders />
 
-      <MarkdownEditorSection />
-
-      <LandingDivider pattern="vertical" size="md" showBorders />
-
-      {/* Agent-First Design */}
-      <AgentFirstSection />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      {/* ACT 2 — How It Looks */}
-      <ComponentsSection />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      {/* Component Stack — what's under each component */}
-      <ComponentStackSection />
+      {/* Under the Hood — anatomy + stack */}
+      <UnderTheHoodSection />
 
       <LandingDivider pattern="vertical" size="sm" showBorders />
 
-      <EvaluationProductSection />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      {/* Capabilities Showcase */}
-      <InspireShowcase />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      <PresetCycleShowcase />
-
-      <LandingDivider pattern="vertical" size="sm" showBorders />
-
-      <TokenRippleShowcase />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      <DesignHistoryShowcase />
-
-      <LandingDivider pattern="vertical" size="sm" showBorders />
-
-      <CommandSurfaceSection />
-
-      <LandingDivider pattern="vertical" size="sm" showBorders />
-
-      <ThreeDSection />
-
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      <ShapesSection />
-
-      <LandingDivider pattern="vertical" size="sm" showBorders />
-
+      {/* Presets — morphing demo + comparison + paths */}
       <PresetsSection />
 
       <LandingDivider pattern="diagonal" size="sm" showBorders />
 
+      {/* CLI Surface — Voronoi bento */}
+      <CLIVoronoiSection />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
+
+      {/* Demos */}
       <DemoSitesSection />
 
       <LandingDivider pattern="vertical" size="md" showBorders />
 
-      {/* ACT 3 — How To Use It */}
+      {/* Quick Start */}
       <QuickStartSection />
 
       <FinalCTA />

@@ -9,7 +9,7 @@ trigger: when creating, modifying, or selecting a Sigil UI preset
 
 ## The #1 Rule: Full Token Coverage
 
-**Every custom preset MUST populate ALL 28 token categories and ALL fields.**
+**Every custom preset MUST populate ALL 33 token categories and ALL fields.**
 
 The canonical template is `packages/presets/src/_template.ts`. It contains every
 field from `SigilTokens` with sensible defaults. When creating a custom preset:
@@ -102,15 +102,15 @@ export const myPreset: SigilPreset = {
     buttons: { /* all 9 fields */ },
     cards: { /* all 18 fields */ },
     headings: { /* all 15 fields */ },
-    navigation: { /* all 12 fields */ },
+    navigation: { /* all 24 fields */ },
     backgrounds: { /* all 9 fields */ },
     code: { /* all 14 fields */ },
     inputs: { /* all 13 fields */ },
-    cursor: { /* all 14 fields */ },
+    cursor: { /* all 15 fields */ },
     scrollbar: { /* all 13 fields */ },
     alignment: { /* all 13 fields */ },
-    sections: { /* all 10 fields */ },
-    dividers: { /* all 8 fields */ },
+    sections: { /* all 25 fields */ },
+    dividers: { /* all 15 fields */ },
     gridVisuals: { /* all 10 fields */ },
     focus: { /* all 5 fields */ },
     overlays: { /* all 8 fields */ },
@@ -118,6 +118,11 @@ export const myPreset: SigilPreset = {
     media: { /* all 6 fields */ },
     controls: { /* all 11 fields */ },
     componentSurfaces: { /* all 12 fields */ },
+    hero: { /* all 25 fields */ },
+    cta: { /* all 15 fields */ },
+    footer: { /* all 15 fields */ },
+    banner: { /* all 12 fields */ },
+    pageRhythm: { /* all 14 fields */ },
   },
 };
 ```
@@ -149,7 +154,7 @@ their project root. The CLI generates from the template with all 33 categories.
 
 ## Rules
 
-1. **All 28 token categories required** — a preset must define every field from `_template.ts`. No partial presets. No missing categories. This is the most important rule.
+1. **All 33 token categories required** — a preset must define every field from `_template.ts`. No partial presets. No missing categories. This is the most important rule.
 2. **All colors in OKLCH** — use `oklch(L C H)` format exclusively. No hex, rgb, or hsl.
 3. **Themed colors** — `background`, `surface`, `surface-elevated`, all `text-*`, and all `border-*` tokens must provide both `light` and `dark` values.
 4. **Unthemed colors** — `primary`, `secondary`, `success`, `warning`, `error`, `info` are single values shared across themes.
@@ -164,7 +169,7 @@ their project root. The CLI generates from the template with all 33 categories.
 
 Before considering a custom preset complete, verify:
 
-- [ ] All 28 token categories present
+- [ ] All 33 token categories present
 - [ ] No fields from `_template.ts` are missing
 - [ ] All authored colors use OKLCH
 - [ ] Themed colors have both `light` and `dark`

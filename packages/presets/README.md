@@ -9,7 +9,7 @@
 ```
 Wrong:  open Card.tsx → change rounded-lg to rounded-none → open Button.tsx → change bg-indigo to bg-yellow → repeat
 Right:  sigil preset anvil       (every component updates to a heavy industrial aesthetic)
-Right:  edit the preset's tokens.radius.md from "8px" to "0px"   (every rounded corner goes sharp)
+Right:  edit the preset file's radius.md value from "8px" to "0px", or override --s-radius-md in your token CSS   (every rounded corner goes sharp)
 ```
 
 ## Installation
@@ -120,28 +120,45 @@ const noir = getCatalogEntry("noir");
 
 ## Preset Structure
 
-Every preset is a `SigilPreset` containing up to 259 tokens:
+Every preset is a `SigilPreset` containing up to 519 tokens:
 
 ```typescript
 type SigilPreset = {
   name: string;
   tokens: {
-    colors: { ... },        // 35 tokens: backgrounds, surfaces, text, borders, brand, status
-    typography: { ... },     // 31 tokens: font stacks, sizes, weights, leading, tracking
-    spacing: { ... },        // 25 tokens: scale, component-specific padding
-    layout: { ... },         // 22 tokens: content widths, gutters, grid, bento, sidebar
-    sigil: { ... },          // 5 tokens: structural-visibility grid
-    radius: { ... },         // 16 tokens: scale + per-component radius
-    shadows: { ... },        // 14 tokens: scale + glow, colored, component-specific
-    motion: { ... },         // 18 tokens: durations, easings, interaction presets
-    borders: { ... },        // 11 tokens: widths, styles, component-specific
-    buttons: { ... },        // 9 tokens: weight, transform, hover effect, active scale
-    cards: { ... },          // 10 tokens: border style, hover effect, padding, title/desc
-    headings: { ... },       // 15 tokens: h1-h4 + display sizes/weights/tracking
-    navigation: { ... },     // 12 tokens: navbar, sidebar, breadcrumb, pagination
-    backgrounds: { ... },    // 9 tokens: patterns, noise, gradients, hero, dividers
-    code: { ... },           // 14 tokens: font, colors, padding, syntax highlighting
-    inputs: { ... },         // 13 tokens: heights, focus ring, placeholder, labels
+    colors: { ... },           // 36 tokens: backgrounds, surfaces, text, borders, brand, status
+    typography: { ... },        // 31 tokens: font stacks, sizes, weights, leading, tracking
+    spacing: { ... },           // 25 tokens: scale, component-specific padding
+    layout: { ... },            // 22 tokens: content widths, gutters, grid, bento, sidebar
+    sigil: { ... },             // 10 tokens: structural-visibility grid
+    radius: { ... },            // 16 tokens: scale + per-component radius
+    shadows: { ... },           // 14 tokens: scale + glow, colored, component-specific
+    motion: { ... },            // 19 tokens: durations, easings, interaction presets
+    borders: { ... },           // 11 tokens: widths, styles, component-specific
+    buttons: { ... },           // 9 tokens: weight, transform, hover effect, active scale
+    cards: { ... },             // 18 tokens: border style, hover effect, padding, title/desc
+    headings: { ... },          // 15 tokens: h1-h4 + display sizes/weights/tracking
+    navigation: { ... },        // 24 tokens: navbar, sidebar, breadcrumb, pagination
+    backgrounds: { ... },       // 9 tokens: patterns, noise, gradients, hero, dividers
+    code: { ... },              // 14 tokens: font, colors, padding, syntax highlighting
+    inputs: { ... },            // 13 tokens: heights, focus ring, placeholder, labels
+    cursor: { ... },            // 15 tokens: variant, size, colors, glow, blend mode
+    scrollbar: { ... },         // 13 tokens: width, track, thumb, radius, firefox compat
+    alignment: { ... },         // 13 tokens: rail width/columns/gutter, content alignment
+    sections: { ... },          // 25 tokens: padding, heading/description sizing, grid
+    dividers: { ... },          // 15 tokens: style, width, color, gradients, ornaments
+    gridVisuals: { ... },       // 10 tokens: lines, dots, cell background/border
+    focus: { ... },             // 5 tokens: ring width/color/offset, shadow
+    overlays: { ... },          // 8 tokens: background, blur, surface, border, shadow
+    dataViz: { ... },           // 13 tokens: series colors, positive/negative, grid, axis
+    media: { ... },             // 6 tokens: radius, border, outline, shadow, object-fit
+    controls: { ... },          // 11 tokens: heights, hit area, track/thumb styling
+    componentSurfaces: { ... }, // 12 tokens: bg, border, text, hover/active/selected states
+    hero: { ... },              // 25 tokens: min-height, padding, layout, title/action sizing
+    cta: { ... },               // 15 tokens: padding, max-width, layout, title/action sizing
+    footer: { ... },            // 15 tokens: padding, columns, gaps, logo/link/social sizing
+    banner: { ... },            // 12 tokens: height, padding, font, icon, border, position
+    pageRhythm: { ... },        // 14 tokens: density, section gaps, dividers, scroll snap
   },
   metadata: {
     description: string,

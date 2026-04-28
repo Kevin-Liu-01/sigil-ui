@@ -23,26 +23,43 @@ pnpm add @sigil-ui/tokens
 
 ### Token Types (`types.ts`)
 
-The complete TypeScript type system for 259 design tokens across 16 categories:
+The complete TypeScript type system for 519 design tokens across 33 categories:
 
 | Category | Required Fields | Optional Fields | Total |
 |----------|----------------|-----------------|-------|
-| `colors` | 18 | 17 | 35 |
+| `colors` | 18 | 18 | 36 |
 | `typography` | 3 | 28 | 31 |
 | `spacing` | 2 | 23 | 25 |
 | `layout` | — (optional category) | 22 | 22 |
-| `sigil` (grid) | 5 | 0 | 5 |
+| `sigil` (grid) | 5 | 5 | 10 |
 | `radius` | 7 | 9 | 16 |
 | `shadows` | 4 | 10 | 14 |
-| `motion` | 10 | 8 | 18 |
+| `motion` | 10 | 9 | 19 |
 | `borders` | 4 | 7 | 11 |
 | `buttons` | — (optional category) | 9 | 9 |
-| `cards` | — (optional category) | 10 | 10 |
+| `cards` | — (optional category) | 18 | 18 |
 | `headings` | — (optional category) | 15 | 15 |
-| `navigation` | — (optional category) | 12 | 12 |
+| `navigation` | — (optional category) | 24 | 24 |
 | `backgrounds` | — (optional category) | 9 | 9 |
 | `code` | — (optional category) | 14 | 14 |
 | `inputs` | — (optional category) | 13 | 13 |
+| `cursor` | — (optional category) | 15 | 15 |
+| `scrollbar` | — (optional category) | 13 | 13 |
+| `alignment` | — (optional category) | 13 | 13 |
+| `sections` | — (optional category) | 25 | 25 |
+| `dividers` | — (optional category) | 15 | 15 |
+| `gridVisuals` | — (optional category) | 10 | 10 |
+| `focus` | — (optional category) | 5 | 5 |
+| `overlays` | — (optional category) | 8 | 8 |
+| `dataViz` | — (optional category) | 13 | 13 |
+| `media` | — (optional category) | 6 | 6 |
+| `controls` | — (optional category) | 11 | 11 |
+| `componentSurfaces` | — (optional category) | 12 | 12 |
+| `hero` | — (optional category) | 25 | 25 |
+| `cta` | — (optional category) | 15 | 15 |
+| `footer` | — (optional category) | 15 | 15 |
+| `banner` | — (optional category) | 12 | 12 |
+| `pageRhythm` | — (optional category) | 14 | 14 |
 
 ### Default Values (`tokens.ts`)
 

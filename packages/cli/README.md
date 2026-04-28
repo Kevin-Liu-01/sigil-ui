@@ -194,7 +194,7 @@ When `sigil init` generates agent instructions, it creates a markdown file that 
 - Which preset is active and its mood/aesthetic
 - Where components and token files live
 - Which features are enabled (GSAP, Motion, etc.)
-- Token naming conventions (`var(--sigil-*)`)
+- Token naming conventions (`var(--s-*)`)
 - How to make visual changes (edit tokens, not components)
 - Which installed Sigil skill to read before editing
 - Available CLI commands

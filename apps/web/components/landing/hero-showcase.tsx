@@ -270,7 +270,7 @@ function TokenPreviewCard() {
           </span>
           <p className="text-[9px] text-[var(--s-text-muted)] mt-1">Token-driven styling. Changes apply everywhere.</p>
         </div>
-        <KPI label="Tokens compiled" value="259" change="All passing" trend="up" className="text-xs" />
+        <KPI label="Tokens compiled" value="519" change="All passing" trend="up" className="text-xs" />
       </CardContent>
     </Card>
   );

@@ -7,6 +7,8 @@
 
 ## Package: @sigil-ui/tokens
 
+npm: https://www.npmjs.com/package/@sigil-ui/tokens
+
 ### Installation
 
 ```bash
@@ -253,6 +255,8 @@ All tokens are emitted as CSS custom properties with the `--r-` prefix:
 ---
 
 ## Package: @sigil-ui/components
+
+npm: https://www.npmjs.com/package/@sigil-ui/components
 
 ### Installation
 

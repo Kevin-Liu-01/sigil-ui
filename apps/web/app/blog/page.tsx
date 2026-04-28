@@ -69,7 +69,7 @@ const posts = [
     title: "Anatomy of a Preset",
     category: "Deep Dive",
     excerpt:
-      "What goes into a preset's 259 tokens across 16 categories. From colors to motion to code block syntax highlighting.",
+      "What goes into a preset's 519 tokens across 33 categories. From colors to motion to code block syntax highlighting.",
   },
   {
     date: "2026-04-05",

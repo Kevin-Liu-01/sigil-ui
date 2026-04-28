@@ -14,7 +14,7 @@
 
 <p align="center">
   A token-driven design system where visual identity is a first-class primitive.<br>
-  200+ token-driven components. 44 presets. 259 configurable tokens.<br>
+  200+ token-driven components. 44 presets. 519 configurable tokens.<br>
   One token layer controls your entire visual identity — and AI agents can read, reason about, and modify it.
 </p>
 
@@ -88,8 +88,8 @@ To change the visual output, edit the **top** of this chain — never the bottom
 | **Change primary color** | Edit every file | Edit theme | Edit config | Edit theme | **Edit 1 token** |
 | **Complete visual overhaul** | Rewrite everything | Painful | Partial | Painful | **`sigil preset noir`** |
 | **Curated identities** | 0 | 0 | 0 | 0 | **44 presets** |
-| **Configurable tokens** | ~0 | ~40 | ~30 | ~50 | **259** |
-| **Token categories** | 0 | 5 | 4 | 6 | **20** |
+| **Configurable tokens** | ~0 | ~40 | ~30 | ~50 | **519** |
+| **Token categories** | 0 | 5 | 4 | 6 | **33** |
 | **Per-component tokens** | No | Partial | No | Partial | **Yes (buttons, cards, inputs, nav, code, ...)** |
 | **Motion tokens** | No | No | No | No | **Yes (durations, easings, scales, staggers)** |
 | **Background/pattern tokens** | No | No | No | No | **Yes (dots, grid, noise, gradients, ...)** |
@@ -125,7 +125,7 @@ Other systems: "I want a brutalist aesthetic"
 
 Sigil: "I want a brutalist aesthetic"
   → npx @sigil-ui/cli preset anvil
-  → 259 tokens change: radius → 0, borders → thick,
+  → 519 tokens change: radius → 0, borders → thick,
     shadows → harsh, fonts → Space Grotesk, spacing → dense,
     motion → snappy, patterns → grid lines
   → Result: genuinely different visual identity
@@ -151,7 +151,7 @@ Sigil: "I want a brutalist aesthetic"
 
 ---
 
-## Token System (259 Fields, 20 Categories)
+## Token System (519 Fields, 33 Categories)
 
 Every visual property in the system is a token. No exceptions.
 
@@ -159,48 +159,78 @@ Every visual property in the system is a token. No exceptions.
 Token Coverage Map
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
- colors          ████████████████████████████████████  35 fields
+ colors          ████████████████████████████████████  36 fields
  typography      ███████████████████████████████       31
  spacing         █████████████████████████             25
+ hero            █████████████████████████             25
+ sections        █████████████████████████             25
+ navigation      ████████████████████████              24
  layout          ██████████████████████                22
- headings        ███████████████                       15
+ motion          ███████████████████                   19
+ cards           ██████████████████                    18
  radius          ████████████████                      16
+ headings        ███████████████                       15
+ dividers        ███████████████                       15
+ cursor          ███████████████                       15
+ cta             ███████████████                       15
+ footer          ███████████████                       15
  shadows         ██████████████                        14
- motion          ██████████████████                    18
  code            ██████████████                        14
+ pageRhythm      ██████████████                        14
  inputs          █████████████                         13
- navigation      ████████████                          12
+ alignment       █████████████                         13
+ scrollbar       █████████████                         13
+ dataViz         █████████████                         13
+ banner          ████████████                          12
+ compSurfaces    ████████████                          12
  borders         ███████████                           11
- cards           ██████████                            10
+ controls        ███████████                           11
+ sigil           ██████████                            10
+ gridVisuals     ██████████                            10
  buttons         █████████                              9
  backgrounds     █████████                              9
- sigil grid      █████                                  5
- alignment       varies                              ext.
- sections        varies                              ext.
- dividers        varies                              ext.
- grid visuals    varies                              ext.
+ overlays        ████████                               8
+ media           ██████                                 6
+ focus           █████                                  5
                                                   ──────
-                                                  259 fields
+                                                  519 fields
 ```
 
 | Category | Fields | Controls |
 |----------|--------|----------|
-| `colors` | 35 | Backgrounds, surfaces, text (5 levels), borders (4 levels), brand, status, gradients, glow |
-| `typography` | 31 | Font stacks (display/body/mono), size scale (xs→6xl), weight scale, leading, tracking |
-| `spacing` | 25 | Base scale, per-component padding (button, card, input, badge, section, navbar, modal, tooltip) |
-| `layout` | 22 | Content widths (narrow/default/wide), page margins, gutters, grid, bento, sidebar, stack gaps |
-| `headings` | 15 | h1–h4 + display: size, weight, tracking, leading for each |
-| `radius` | 16 | Scale (none → full) + per-component (button, card, input, badge, modal, popover, tooltip, image) |
-| `shadows` | 14 | Scale + glow, colored, inner, per-component (card, button, dropdown, modal) |
-| `motion` | 18 | Duration scale (instant→slowest), easing curves (5), hover/press scale, stagger intervals |
-| `code` | 14 | Font, sizing, colors for syntax highlighting (comments, keywords, strings, numbers, functions) |
-| `inputs` | 13 | Heights (sm/md/lg), focus ring, placeholder, error state, labels, helpers |
-| `navigation` | 12 | Navbar (height, blur, border, opacity), link style, breadcrumb, sidebar, pagination |
-| `borders` | 11 | Width scale (none→thick), style, per-component (card, button, input, divider) |
-| `cards` | 10 | Border style/width, hover effect, padding, title/description sizing, background, shadow |
-| `buttons` | 9 | Font weight/transform/spacing, hover effect, active scale, icon gap, min-width |
-| `backgrounds` | 9 | Pattern (14 types), opacity, noise, gradient (type/angle), hero pattern, section divider |
-| `sigil` | 5 | Grid cell, cross arm/stroke, rail gap, card radius |
+| `colors` | 36 | Backgrounds, surfaces, text, borders, brand, status, gradients, glow |
+| `typography` | 31 | Font stacks, size scale, weight scale, leading, tracking, heading styles |
+| `spacing` | 25 | Base scale, button/card/input/badge/section/navbar/modal/tooltip padding |
+| `layout` | 22 | Content widths, page margins, gutters, grid, bento, sidebar, stack gaps |
+| `sigil` | 10 | Grid cell, cross arm/stroke, rail gap, card radius, gutter patterns |
+| `radius` | 16 | Scale (none→full) + per-component radius |
+| `shadows` | 14 | Scale + glow, colored, inner, per-component shadows |
+| `motion` | 19 | Durations, easings, hover/press/stagger presets |
+| `borders` | 11 | Width scale, style, per-component border definitions |
+| `buttons` | 9 | Font weight/transform/spacing, hover effect, active scale, icon gap |
+| `cards` | 18 | Border style, hover effect, padding, title/description sizing, aspect ratio |
+| `headings` | 15 | h1–h4 + display sizes, weights, tracking, leading |
+| `navigation` | 24 | Navbar height/blur/border/padding/items/logo, sidebar, pagination |
+| `backgrounds` | 9 | Pattern type/opacity, noise, gradient type/angle, hero pattern, section dividers |
+| `code` | 14 | Font, sizing, colors for syntax highlighting (comments, keywords, strings, etc.) |
+| `inputs` | 13 | Heights, focus ring, placeholder, error state, labels, helpers |
+| `cursor` | 15 | Variant, size, colors, glow, blend mode, z-index |
+| `scrollbar` | 13 | Width, track, thumb, radius, firefox compat |
+| `alignment` | 13 | Rail width/columns/gutter, content/hero/section/navbar/footer alignment |
+| `sections` | 25 | Padding scales, heading/description sizing, grid, alternate backgrounds |
+| `dividers` | 15 | Style, width, color, opacity, gradients, ornaments, bleed |
+| `gridVisuals` | 10 | Lines, dots, cell background/border, hover effects |
+| `focus` | 5 | Ring width/color/offset, shadow, outline |
+| `overlays` | 8 | Background, blur, surface, border, shadow, radius, z-index |
+| `dataViz` | 13 | Series colors, positive/negative, grid, axis, tooltip |
+| `media` | 6 | Radius, border, outline, shadow, object-fit |
+| `controls` | 11 | Heights, hit area, icon/handle size, track/thumb styling |
+| `componentSurfaces` | 12 | Bg, border, text, hover/active/selected states |
+| `hero` | 25 | Min-height, padding, content width, layout, title/description/action sizing |
+| `cta` | 15 | Padding, max-width, layout, title/description/action sizing, split gap |
+| `footer` | 15 | Padding, columns, gaps, logo/link/social sizing, bottom bar |
+| `banner` | 12 | Height, padding, font, icon, border, position, dismiss size |
+| `pageRhythm` | 14 | Density, section gaps, alternate backgrounds, dividers, scroll snap |
 
 All colors use **OKLCH** — perceptually uniform, P3-gamut-ready: `oklch(L C H)`.
 
@@ -208,7 +238,7 @@ All colors use **OKLCH** — perceptually uniform, P3-gamut-ready: `oklch(L C H)
 
 ## Preset System (44 Presets)
 
-One command changes all 259 tokens at once. Not a theme toggle — a different *design language*.
+One command changes all 519 tokens at once. Not a theme toggle — a different *design language*.
 
 ### Structural / Precision
 | Preset | Mood | Display Font | Primary |
@@ -329,8 +359,8 @@ npx @sigil-ui/cli preset noir    # Swap visual identity in one command
 |---------|-------------|
 | `@sigil-ui/tokens` | Token system — types, defaults, compiler, markdown parser. The core differentiator. |
 | `@sigil-ui/components` | 200+ token-driven components consuming tokens via CSS custom properties |
-| `@sigil-ui/primitives` | Headless behavior layer (Radix-based, 16 primitives) |
-| `@sigil-ui/presets` | 44 curated preset bundles (259 tokens each) |
+| `@sigil-ui/primitives` | Headless behavior layer (Radix-based, 28 primitives) |
+| `@sigil-ui/presets` | 44 curated preset bundles (519 tokens each) |
 | `@sigil-ui/cli` | CLI for init, add, preset management, diff, doctor |
 | `create-sigil-app` | Project bootstrapper with template selection |
 
@@ -390,9 +420,9 @@ With Sigil (agent touches 1 file):
 ```
 packages/
   tokens/           @sigil-ui/tokens      Source of truth: types, compiler, markdown parser
-  presets/           @sigil-ui/presets     44 curated preset bundles (259 tokens each)
+  presets/           @sigil-ui/presets     44 curated preset bundles (519 tokens each)
   components/        @sigil-ui/components  200+ token-driven React components
-  primitives/        @sigil-ui/primitives  16 Radix-based headless behavior primitives
+  primitives/        @sigil-ui/primitives  28 Radix-based headless behavior primitives
   cli/               @sigil-ui/cli        CLI: init, add, preset, diff, doctor
   create-sigil-app/                       npx create-sigil-app bootstrapper
 

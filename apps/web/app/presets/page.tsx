@@ -76,7 +76,7 @@ const STEPS = [
   {
     number: "02",
     title: "Customize your token file",
-    description: "sigil.tokens.md is yours — change any of 259 fields to match your brand exactly.",
+    description: "sigil.tokens.md is yours — change any of 519 fields to match your brand exactly.",
   },
   {
     number: "03",
@@ -121,7 +121,7 @@ export default function PresetsPage() {
               <code className="text-[var(--s-primary)]">sigil preset create</code>.
               Your <code className="text-[var(--s-primary)]">sigil.tokens.md</code>{" "}
               is the source of truth — presets are starting points, not constraints.
-              259 tokens across 16 categories, fully yours to customize.
+              519 tokens across 33 categories, fully yours to customize.
             </DensityText>
 
             <div className="flex gap-3">

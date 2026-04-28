@@ -6,12 +6,12 @@
 
 ## Custom Preset Rule (MANDATORY — Enforced Before All Other Rules)
 
-**Every custom preset MUST populate ALL 28 token categories and ALL ~350 fields.**
+**Every custom preset MUST populate ALL 33 token categories and ALL ~519 fields.**
 
 - The canonical template is `packages/presets/src/_template.ts`.
 - When creating a custom preset: copy `_template.ts` or spread it as a base. Change values, never delete fields.
 - No partial presets. If a field exists in `_template.ts`, it must exist in your preset.
-- The 28 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`, `radius`, `shadows`, `motion`, `borders`, `buttons`, `cards`, `headings`, `navigation`, `backgrounds`, `code`, `inputs`, `cursor`, `scrollbar`, `alignment`, `sections`, `dividers`, `gridVisuals`, `focus`, `overlays`, `dataViz`, `media`, `controls`, `componentSurfaces`.
+- The 33 required categories: `colors`, `typography`, `spacing`, `layout`, `sigil`, `radius`, `shadows`, `motion`, `borders`, `buttons`, `cards`, `headings`, `navigation`, `backgrounds`, `code`, `inputs`, `cursor`, `scrollbar`, `alignment`, `sections`, `dividers`, `gridVisuals`, `focus`, `overlays`, `dataViz`, `media`, `controls`, `componentSurfaces`, `hero`, `cta`, `footer`, `banner`, `pageRhythm`.
 - Read `skills/sigil-preset/SKILL.md` before creating any preset.
 
 ## Color Rules

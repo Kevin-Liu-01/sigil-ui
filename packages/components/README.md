@@ -23,7 +23,7 @@ pnpm add @sigil-ui/components
 
 **Peer dependencies:** `@sigil-ui/tokens`, `react`, `react-dom`
 
-## Component Inventory (300+)
+## Component Inventory (200+)
 
 ### Layout (9)
 `Stack` `Grid` `Section` `Frame` `PageGrid` `Margin` `Gutter` `Divider` `HRule`

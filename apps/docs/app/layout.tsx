@@ -12,15 +12,28 @@ export const metadata: Metadata = {
   description:
     "The component library where one token file updates everything. Built for agents.",
   metadataBase: new URL("https://sigil-ui.dev"),
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "Sigil UI — Design tokens that compound",
     description:
       "The component library where one token file updates everything. Built for agents.",
-    siteName: "Sigil UI",
+    siteName: "Sigil UI Docs",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
+    site: "@kevinliu",
+    creator: "@kevinliu",
     title: "Sigil UI — Design tokens that compound",
     description:
       "The component library where one token file updates everything. Built for agents.",

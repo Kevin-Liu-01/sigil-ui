@@ -31,10 +31,10 @@
 | Layer | Purpose | Example |
 |-------|---------|---------|
 | **Primitive** | Raw values, no semantic meaning | `oklch(0.65 0.15 280)`, `4px`, `"Nacelle"` |
-| **Semantic** | Named purpose, consumed by components | `--sigil-primary`, `--sigil-surface`, `--sigil-duration-fast` |
-| **Component** | Scoped to a specific component (use sparingly) | `--sigil-card-radius`, `--sigil-grid-cell` |
+| **Semantic** | Named purpose, consumed by components | `--s-primary`, `--s-surface`, `--s-duration-fast` |
+| **Component** | Scoped to a specific component (use sparingly) | `--s-card-radius`, `--s-grid-cell` |
 
-### 1.2 Token Categories (16 total)
+### 1.2 Token Categories (33 total)
 
 #### 1.2.1 Colors (`ColorTokens`) — REQUIRED
 
@@ -85,7 +85,7 @@ Every color value is OKLCH format: `oklch(L C H)` where L=0–1, C=0–0.37, H=0
 | `gradient-end` | ❌ | Gradient end point |
 | `glow` | ❌ | Glow/emission effect color |
 
-**Total: 35 color tokens (18 required, 17 optional)**
+**Total: 36 color tokens (18 required, 18 optional)**
 
 #### 1.2.2 Typography (`TypographyTokens`) — REQUIRED
 
@@ -198,7 +198,7 @@ When present, ALL fields are required:
 | `rail-gap` | ✅ | Inner/outer rail distance |
 | `card-radius` | ✅ | Sigil card border radius |
 
-**Total: 5 tokens (all required)**
+**Total: 10 tokens (5 required, 5 optional)**
 
 #### 1.2.6 Radius (`RadiusTokens`) — REQUIRED
 
@@ -280,7 +280,7 @@ When present, ALL fields are required:
 | `stagger-interval` | Stagger delay between siblings |
 | `stagger-interval-fast` | Fast stagger delay |
 
-**Total: 18 motion tokens (10 required, 8 optional)**
+**Total: 19 motion tokens (10 required, 9 optional)**
 
 #### 1.2.9 Borders (`BorderTokens`) — REQUIRED
 
@@ -335,7 +335,7 @@ When present, ALL fields are required:
 | `title-weight` | string | Card title font weight |
 | `description-size` | string | Card description font size |
 
-**Total: 10 card tokens**
+**Total: 18 card tokens** (expanded to 18 fields)
 
 #### 1.2.12 Headings (`HeadingTokens`) — OPTIONAL category
 
@@ -380,7 +380,7 @@ When present, ALL fields are required:
 | `sidebar-item-radius` | string | Sidebar item radius |
 | `sidebar-item-padding` | string | Sidebar item padding |
 
-**Total: 12 navigation tokens**
+**Total: 24 navigation tokens** (expanded to 24 fields — see types.ts for full list)
 
 #### 1.2.14 Backgrounds (`BackgroundTokens`) — OPTIONAL category
 
@@ -449,25 +449,42 @@ When present, ALL fields are required:
 
 | Category | Required Fields | Optional Fields | Total |
 |----------|----------------|-----------------|-------|
-| Colors | 18 | 17 | 35 |
+| Colors | 18 | 18 | 36 |
 | Typography | 3 | 28 | 31 |
 | Spacing | 2 | 23 | 25 |
 | Layout | 0 (category optional) | 22 | 22 |
-| Sigil Grid | 5 | 0 | 5 |
+| Sigil | 5 | 5 | 10 |
 | Radius | 7 | 9 | 16 |
 | Shadows | 4 | 10 | 14 |
-| Motion | 10 | 8 | 18 |
+| Motion | 10 | 9 | 19 |
 | Borders | 4 | 7 | 11 |
 | Buttons | 0 (category optional) | 9 | 9 |
-| Cards | 0 (category optional) | 10 | 10 |
+| Cards | 0 (category optional) | 18 | 18 |
 | Headings | 0 (category optional) | 15 | 15 |
-| Navigation | 0 (category optional) | 12 | 12 |
+| Navigation | 0 (category optional) | 24 | 24 |
 | Backgrounds | 0 (category optional) | 9 | 9 |
 | Code | 0 (category optional) | 14 | 14 |
 | Inputs | 0 (category optional) | 13 | 13 |
-| **TOTAL** | **53** | **206** | **259** |
+| Cursor | 0 (category optional) | 15 | 15 |
+| Scrollbar | 0 (category optional) | 13 | 13 |
+| Alignment | 0 (category optional) | 13 | 13 |
+| Sections | 0 (category optional) | 25 | 25 |
+| Dividers | 0 (category optional) | 15 | 15 |
+| Grid Visuals | 0 (category optional) | 10 | 10 |
+| Focus | 0 (category optional) | 5 | 5 |
+| Overlays | 0 (category optional) | 8 | 8 |
+| Data Viz | 0 (category optional) | 13 | 13 |
+| Media | 0 (category optional) | 6 | 6 |
+| Controls | 0 (category optional) | 11 | 11 |
+| Component Surfaces | 0 (category optional) | 12 | 12 |
+| Hero | 0 (category optional) | 25 | 25 |
+| CTA | 0 (category optional) | 15 | 15 |
+| Footer | 0 (category optional) | 15 | 15 |
+| Banner | 0 (category optional) | 12 | 12 |
+| Page Rhythm | 0 (category optional) | 14 | 14 |
+| **TOTAL** | **53** | **466** | **519** |
 
-A maximally-configured Sigil preset controls **259 design tokens** across 16 categories.
+A maximally-configured Sigil preset controls **519 design tokens** across 33 categories.
 
 ---
 
@@ -541,7 +558,7 @@ A maximally-configured Sigil preset controls **259 design tokens** across 16 cat
 ```typescript
 type SigilPreset = {
   name: string;                     // Unique identifier
-  tokens: SigilTokens;             // All 16 token categories
+  tokens: SigilTokens;             // All 33 token categories
   metadata: {
     description: string;            // Required
     author?: string;                // Who made it
@@ -587,7 +604,7 @@ type PresetCatalogEntry = {
 
 ## 3. Component Library
 
-### 3.1 Package Components (65 files across 9 subdirectories)
+### 3.1 Package Components (250+ files across 12+ subdirectories)
 
 **Package:** `@sigil-ui/components`
 
@@ -640,12 +657,12 @@ type PresetCatalogEntry = {
 
 **Gap: 53 components exist in the library but are not in the CLI registry.**
 
-### 3.3 Primitives (16)
+### 3.3 Primitives (28)
 
 **Package:** `@sigil-ui/primitives`
 
 Re-exports from Radix UI with `*Primitive` naming:
-`Accordion`, `Avatar`, `Checkbox`, `Dialog`, `DropdownMenu`, `Label`, `Popover`, `Progress`, `ScrollArea`, `Select`, `Separator`, `Slider`, `Slot`, `Switch`, `Tabs`, `Tooltip`
+`Accordion`, `AlertDialog`, `AspectRatio`, `Avatar`, `Checkbox`, `Collapsible`, `ContextMenu`, `Dialog`, `DropdownMenu`, `HoverCard`, `Label`, `Menubar`, `NavigationMenu`, `Popover`, `Progress`, `RadioGroup`, `ScrollArea`, `Select`, `Separator`, `Slider`, `Slot`, `Switch`, `Tabs`, `Toast`, `Toggle`, `ToggleGroup`, `Toolbar`, `Tooltip`
 
 ### 3.4 Component Conventions
 
@@ -654,10 +671,10 @@ Re-exports from Radix UI with `*Primitive` naming:
 | `forwardRef` | Every component forwards refs |
 | `className` prop | Always accepted, merged with `clsx(internal, className)` |
 | `sigil-` prefix | CSS class names prefixed with `sigil-` |
-| Token-only styling | All visual properties via `var(--sigil-*)`, no hardcoded values |
+| Token-only styling | All visual properties via `var(--s-*)`, no hardcoded values |
 | Typed variants | Exposed as typed props (e.g. `variant`, `size`, `intent`) |
 | Slot pattern | `asChild` prop via `@radix-ui/react-slot` when composable |
-| Motion tokens | All transitions use `--sigil-duration-*` and `--sigil-easing-*` |
+| Motion tokens | All transitions use `--s-duration-*` and `--s-easing-*` |
 
 ---
 
@@ -961,7 +978,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 |------|-------------|----------|
 | Every preset × key components | Render Button, Card, Input, Badge with each of 44 presets → screenshot comparison | P1 |
 | Light/dark mode | Same component renders correctly in both themes | P1 |
-| Token override | Override `--sigil-primary` → component updates visually | P2 |
+| Token override | Override `--s-primary` → component updates visually | P2 |
 | Responsive | Components render correctly at mobile/tablet/desktop breakpoints | P2 |
 
 ### 10.4 Accessibility Tests
@@ -971,7 +988,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 | axe-core scan | Every component passes automated a11y audit | P1 |
 | Keyboard navigation | Dialog, Dropdown, Tabs, Tooltip, Accordion are keyboard-navigable | P1 |
 | Color contrast | All text/background token combinations meet WCAG AA (4.5:1 for normal text, 3:1 for large) across all 44 presets | P1 |
-| Focus indicators | Every interactive component has visible focus ring using `--sigil-focus-ring-*` tokens | P2 |
+| Focus indicators | Every interactive component has visible focus ring using `--s-focus-ring-*` tokens | P2 |
 | Screen reader | Overlays announce correctly; live regions work | P2 |
 
 ### 10.5 Preset Validation Tests
@@ -1019,7 +1036,7 @@ The sandbox has its own component registry mapping string names to `@sigil-ui/co
 | `AGENTS.md` | Repo-level agent instructions | AI agents working on Sigil |
 | `.sigil/AGENTS.md` | Project-specific agent instructions | AI agents working on user's project |
 | `llms.txt` | Component inventory + token schema | LLMs |
-| Skills (5) | Domain-specific agent workflows | Cursor, Claude Code, Codex |
+| Skills (7) | Domain-specific agent workflows | Cursor, Claude Code, Codex |
 
 ---
 
@@ -1058,7 +1075,7 @@ Users can create presets at three levels:
 |-----------|-----|
 | New token category | Add type to `types.ts`, add to `SigilTokens`, add defaults, add to all presets |
 | New field in existing category | Add optional field to type, add to presets that use it |
-| Override single token | CSS `:root { --sigil-*: value; }` in token CSS file |
+| Override single token | CSS `:root { --s-*: value; }` in token CSS file |
 
 ### 12.5 CLI Extension Points
 
@@ -1083,9 +1100,9 @@ Every single thing a user or agent can configure:
 | `tokensPath` | string | `"src/styles/sigil.tokens.css"` |
 | `typescript` | boolean | `true` |
 
-### A.2 Via preset selection (259 tokens)
+### A.2 Via preset selection (519 tokens)
 
-All 259 tokens listed in Section 1 — colors, typography, spacing, layout, grid, radius, shadows, motion, borders, buttons, cards, headings, navigation, backgrounds, code, inputs.
+All 519 tokens listed in Section 1 — colors, typography, spacing, layout, sigil, radius, shadows, motion, borders, buttons, cards, headings, navigation, backgrounds, code, inputs, cursor, scrollbar, alignment, sections, dividers, gridVisuals, focus, overlays, dataViz, media, controls, componentSurfaces, hero, cta, footer, banner, pageRhythm.
 
 ### A.3 Via token CSS overrides
 
@@ -1093,9 +1110,9 @@ Any CSS custom property can be overridden in the tokens CSS file:
 
 ```css
 :root {
-  --sigil-primary: oklch(0.65 0.15 280);
-  --sigil-font-display: "CustomFont", system-ui, sans-serif;
-  --sigil-radius-md: 12px;
+  --s-primary: oklch(0.65 0.15 280);
+  --s-font-display: "CustomFont", system-ui, sans-serif;
+  --s-radius-md: 12px;
 }
 ```
 
