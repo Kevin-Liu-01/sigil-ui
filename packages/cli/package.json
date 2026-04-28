@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/cli",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI for initializing Sigil UI, adding components, and managing presets",
   "license": "MIT",
   "type": "module",

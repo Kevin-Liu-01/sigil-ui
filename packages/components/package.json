@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/components",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Styled React components for Sigil UI — consumes CSS variables from @sigil-ui/tokens",
   "license": "MIT",
   "type": "module",
