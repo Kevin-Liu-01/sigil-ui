@@ -68,9 +68,8 @@ export function LandingNavbar() {
 
   const inner = (
     <div
-      className="mx-auto flex items-center justify-between w-full border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="flex items-center justify-between w-full border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        maxWidth: "var(--s-content-max, 1200px)",
         padding: "0 var(--s-navbar-padding-x, 25px)",
         height: "var(--s-navbar-height, 50px)",
       }}
