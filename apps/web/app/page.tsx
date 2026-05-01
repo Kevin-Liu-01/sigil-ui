@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { Copy, Check as CheckIcon } from "lucide-react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
 import { FooterComponentDiagram, FooterQuadrantDiagram, HeroLogoField } from "@/components/landing/hero-logo-field";
@@ -96,6 +97,48 @@ function SectionHeader({
 /* 1 — Hero                                                           */
 /* ================================================================ */
 
+const INSTALL_CMD = "npx create-sigil-app@latest";
+
+function InstallCommand({ className }: { className?: string }) {
+  const [copied, setCopied] = useState(false);
+  const copy = useCallback(() => {
+    navigator.clipboard.writeText(INSTALL_CMD).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }, []);
+
+  return (
+    <div
+      className={`inline-block overflow-hidden cursor-pointer group ${className ?? ""}`}
+      style={{
+        borderRadius: "var(--s-radius-xl, 16px) var(--s-radius-xl, 16px) 0 0",
+        padding: "1px 1px 0 1px",
+        background: "linear-gradient(180deg, color-mix(in oklch, var(--s-text) 25%, transparent) 0%, color-mix(in oklch, var(--s-text) 4%, transparent) 100%)",
+      }}
+      onClick={copy}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") copy(); }}
+    >
+      <div
+        className="inline-flex items-center gap-3 px-5 pt-2.5 pb-3 font-[family-name:var(--s-font-mono)] text-[14px] tracking-[0.01em] text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] group-hover:text-[var(--s-text)]"
+        style={{
+          background: "var(--s-background)",
+          borderRadius: "var(--s-radius-xl, 16px) var(--s-radius-xl, 16px) 0 0",
+        }}
+      >
+        <span>{INSTALL_CMD}</span>
+        {copied ? (
+          <CheckIcon size={15} className="text-[var(--s-success)] shrink-0" />
+        ) : (
+          <Copy size={15} className="shrink-0 opacity-50 group-hover:opacity-80 transition-opacity" />
+        )}
+      </div>
+    </div>
+  );
+}
+
 const PRESET_DOTS: { name: string; color: string }[] = [
   { name: "sigil", color: "#9b99e8" },
   { name: "noir", color: "#d97706" },
@@ -126,21 +169,20 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="clamp(40px, 12vw, 152px) 24px clamp(32px, 5vw, 64px)" style={{ position: "relative", maxWidth: "100vw" }}>
+    <LandingSection borderTop padding="clamp(50px, 12vw, 150px) var(--s-section-padding-x, var(--s-page-margin, 25px)) clamp(50px, 5vw, 100px)" style={{ position: "relative", maxWidth: "100vw" }}>
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
-        <MonoLabel variant="accent" className="block mb-4">$ npx create-sigil-app@latest</MonoLabel>
+        <InstallCommand className="mb-4" />
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
-          Your Design Systems <br /> Live in One File.
+          Agent-First <br /> Design System.
         </h1>
 
         <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
           <span className="hidden lg:inline">
-            The same Radix components you trust, with an agent-first token layer on top.
-            {" "}{SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
+            {SIGIL_PRODUCT_STATS.componentCountLabel} components, {SIGIL_PRODUCT_STATS.presetCount} presets, {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
           </span>
-          One token file that humans and AI agents both edit to control every color, font, radius, and animation.
+          One token file controls every color, font, radius, and animation. Agents and humans edit the same surface.
         </DensityText>
 
         <div className="flex items-center gap-3 flex-wrap">
@@ -176,7 +218,7 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop padding="24px var(--s-page-margin, 24px)">
+    <LandingSection borderTop padding="25px var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <div className="s-transition-all">
         <HeroShowcase />
       </div>
@@ -186,7 +228,7 @@ function ProductSurfaceSection() {
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="24px 24px">
+    <LandingSection borderTop padding="50px var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <ComponentGalleryCTA />
     </LandingSection>
   );
@@ -203,8 +245,8 @@ function LayerSection() {
       <div className="relative z-[1]">
         <SectionHeader
           label="Architecture"
-          heading="Four layers. One agent-editable surface."
-          description="Tokens define the primitives. Presets bundle them. Components consume them. Pages compose them. The agent layer sits alongside — humans and AI both edit the same token file."
+          heading="Four layers. One editable surface."
+          description="Tokens define every visual primitive. Presets bundle them into complete identities. Components consume them via CSS variables. Pages compose components. You only ever edit the token layer."
         />
         <LayerStackDiagram />
       </div>
@@ -219,15 +261,15 @@ function TokenSystemSection() {
       <div className="relative z-[1]">
         <SectionHeader
           label="Token System"
-          heading="One file compiles to everything."
-          description={`Edit sigil.tokens.md — ${SIGIL_PRODUCT_STATS.tokenCount} tokens compile to CSS variables. ${SIGIL_PRODUCT_STATS.componentCountLabel} components update instantly. Agents edit the same file.`}
+          heading="Edit one file. Everything recompiles."
+          description={`sigil.tokens.md compiles to ${SIGIL_PRODUCT_STATS.tokenCount} CSS custom properties. Every component reads them. Change a value, and ${SIGIL_PRODUCT_STATS.componentCountLabel} components update — no manual edits across files.`}
         />
         <TokenPipelineDiagram />
 
         <div className="mt-20">
           <MonoLabel variant="accent" className="block mb-3">LIVE TOKEN EDITOR</MonoLabel>
           <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
-            Every line in sigil.tokens.md maps to a CSS variable and a live component preview.
+            Every line in sigil.tokens.md maps to a CSS variable. Edit a value and see the component update live.
           </DensityText>
           <MarkdownEditorPreview />
         </div>
@@ -248,15 +290,15 @@ function UnderTheHoodSection() {
       <div className="relative z-[1]">
         <SectionHeader
           label="Under the Hood"
-          heading="One import. Batteries included."
-          description="Select a component to see what ships with it — Radix primitives, animation engines, sound feedback, charting libraries — all wired in automatically."
+          heading="Radix primitives. Token-driven styling. One import."
+          description="Each component bundles the behavior primitive, animation engine, and token bindings it needs. Select one to see what ships inside."
         />
         <ComponentStackDiagram />
 
         <div className="mt-20">
           <MonoLabel variant="accent" className="block mb-3">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
           <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
-            Each visual decision resolves to one named token. Every component reads the same CSS variable.
+            Every visual property resolves to one named token. No hardcoded values — components read CSS variables directly.
           </DensityText>
           <ComponentAnatomyDiagram />
         </div>
@@ -923,7 +965,7 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop padding="88px 24px">
+    <LandingSection borderTop padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
@@ -1039,7 +1081,7 @@ function FinalCTA() {
   return (
     <>
     <Divider size="md" showCross fadeEdges />
-    <LandingSection padding="80px 24px" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))" style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>

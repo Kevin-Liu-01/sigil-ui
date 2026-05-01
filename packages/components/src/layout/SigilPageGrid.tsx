@@ -350,19 +350,17 @@ export function SigilGutter({
     return <div aria-hidden="true" style={{ background: "var(--s-background)" }} />;
   }
 
-  const gutterShadow = side === "left"
-    ? `inset -1px 0 0 ${STRUCTURAL_LINE_COLOR}`
-    : `inset 1px 0 0 ${STRUCTURAL_LINE_COLOR}`;
+  // Shift pattern by -1px so horizontal grid lines overlap with CSS
+  // border-bottom lines (which sit 1px inside border-box elements).
+  const anchor = side === "right" ? "left -1px" : "right -1px";
 
   return (
     <div
       aria-hidden="true"
       data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
-      style={{
-        boxShadow: gutterShadow,
-        background: "var(--s-background)",
-      }}
+      style={{ background: "var(--s-background)" }}
     >
+      {/* Pattern fills the full rail width — no CSS border to shrink it */}
       <div
         className="absolute inset-0"
         style={patternCss.isMask ? {
@@ -373,12 +371,22 @@ export function SigilGutter({
           maskImage: patternCss.backgroundImage,
           maskSize: patternCss.backgroundSize,
           maskRepeat: "repeat",
-          WebkitMaskPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
-          maskPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
+          WebkitMaskPosition: patternCss.backgroundPosition ?? anchor,
+          maskPosition: patternCss.backgroundPosition ?? anchor,
         } : {
           backgroundImage: patternCss.backgroundImage,
           backgroundSize: patternCss.backgroundSize,
-          backgroundPosition: patternCss.backgroundPosition ?? (side === "right" ? "left top" : "right top"),
+          backgroundPosition: patternCss.backgroundPosition ?? anchor,
+        }}
+      />
+      {/* Structural border line — separate element so it doesn't eat from the pattern area */}
+      <div
+        className="absolute top-0 bottom-0"
+        style={{
+          [side === "left" ? "right" : "left"]: 0,
+          width: "var(--s-border-width-thin, 1px)",
+          background: STRUCTURAL_LINE_COLOR,
+          zIndex: 1,
         }}
       />
     </div>
@@ -473,18 +481,10 @@ export function SigilPageGrid({
       }
     }
     if (!edgeless) {
-      const shadowDir = innerEdge === "Right" ? "-1px" : "1px";
-      const borderColor = marginBorder
-        ? undefined
-        : STRUCTURAL_LINE_COLOR;
-      if (marginBorder) {
-        const prop = `border${innerEdge}` as keyof CSSProperties;
-        Object.assign(container, { [prop]: marginBorder });
-      } else {
-        Object.assign(container, {
-          boxShadow: `inset ${shadowDir} 0 0 ${borderColor}`,
-        });
-      }
+      const prop = `border${innerEdge}` as keyof CSSProperties;
+      Object.assign(container, {
+        [prop]: marginBorder ?? "var(--s-margin-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))",
+      });
     }
     return { container, overlay };
   }
@@ -584,7 +584,7 @@ export function SigilFullBleed({
   className,
   background,
   contentMax,
-  padding = "0 var(--s-page-margin, 24px)",
+  padding = "0 var(--s-page-margin, 25px)",
 }: SigilFullBleedProps) {
   return (
     <div

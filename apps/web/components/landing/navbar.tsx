@@ -68,11 +68,11 @@ export function LandingNavbar() {
 
   const inner = (
     <div
-      className="mx-auto flex items-center justify-between w-full border-b border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="mx-auto flex items-center justify-between w-full border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
         maxWidth: "var(--s-content-max, 1200px)",
-        padding: "0 var(--s-page-margin, 24px)",
-        height: 49,
+        padding: "0 var(--s-navbar-padding-x, 25px)",
+        height: "var(--s-navbar-height, 50px)",
       }}
     >
       {/* ── Logo ── */}
@@ -217,38 +217,48 @@ function ReleaseBanner() {
 
   return (
     <div
-      className="relative flex items-center justify-center gap-2 px-4 text-[12px] font-medium border-b border-[var(--s-border)] overflow-hidden h-[49px]"
-      style={{
-        background:
-          "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 8%, var(--s-background)), color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 8%, var(--s-background)))",
-        color: "var(--s-text)",
-      }}
+      className="absolute left-0 right-0 z-40 flex items-center justify-center"
+      style={{ top: "100%" }}
     >
-      <Sparkles size={12} className="shrink-0 text-[var(--s-primary)]" />
-      <span className="text-[var(--s-text-muted)]">
-        <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
-        {" "}is live &mdash; {" "}
-        <a
-          href="https://www.npmjs.com/org/sigil-ui"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-0.5 font-semibold text-[var(--s-primary)] no-underline hover:underline"
-        >
-          View on npm
-          <ArrowRight size={11} className="translate-y-px" />
-        </a>
-      </span>
-      <button
-        type="button"
-        onClick={() => {
-          setVisible(false);
-          localStorage.setItem(BANNER_DISMISS_KEY, "1");
+      <div
+        className="relative flex items-center justify-center gap-2 text-[12px] font-medium border-b border-[var(--s-border)] overflow-hidden w-full"
+        style={{
+          maxWidth: "var(--s-content-max, 1200px)",
+          padding: "0 var(--s-navbar-padding-x, 25px)",
+          height: "var(--s-banner-height, 25px)",
+          background:
+            "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 8%, var(--s-background)), color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 8%, var(--s-background)))",
+          backdropFilter: "blur(16px) saturate(1.5)",
+          WebkitBackdropFilter: "blur(16px) saturate(1.5)",
+          color: "var(--s-text)",
         }}
-        className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-150"
-        aria-label="Dismiss banner"
       >
-        <X size={12} />
-      </button>
+        <Sparkles size={12} className="shrink-0 text-[var(--s-primary)]" />
+        <span className="text-[var(--s-text-muted)]">
+          <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
+          {" "}is live &mdash;{" "}
+          <a
+            href="https://www.npmjs.com/org/sigil-ui"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-0.5 font-semibold text-[var(--s-primary)] no-underline hover:underline"
+          >
+            View on npm
+            <ArrowRight size={11} className="translate-y-px" />
+          </a>
+        </span>
+        <button
+          type="button"
+          onClick={() => {
+            setVisible(false);
+            localStorage.setItem(BANNER_DISMISS_KEY, "1");
+          }}
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-150"
+          aria-label="Dismiss banner"
+        >
+          <X size={12} />
+        </button>
+      </div>
     </div>
   );
 }

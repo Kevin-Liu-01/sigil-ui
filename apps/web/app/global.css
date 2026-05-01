@@ -441,11 +441,15 @@
   --s-input-py: 8px;
   --s-badge-px: 10px;
   --s-badge-py: 2px;
-  --s-section-py: 100px;
+  --s-section-padding-y: 100px;
+  --s-section-py: var(--s-section-padding-y, 100px);
   --s-section-py-lg: 100px;
   --s-navbar-height: 50px;
-  --s-navbar-px: 20px;
-  --s-footer-py: 50px;
+  --s-navbar-padding-x: 25px;
+  --s-navbar-px: var(--s-navbar-padding-x, 25px);
+  --s-banner-height: 25px;
+  --s-footer-padding-y: 50px;
+  --s-footer-py: var(--s-footer-padding-y, 50px);
   --s-modal-padding: 24px;
   --s-popover-padding: 16px;
   --s-tooltip-padding: 6px 12px;
@@ -455,9 +459,9 @@
   /* Layout detail */
   --s-content-max-narrow: 680px;
   --s-content-max-wide: 1400px;
-  --s-page-margin: 24px;
+  --s-page-margin: 25px;
   --s-page-margin-sm: 16px;
-  --s-page-margin-lg: 40px;
+  --s-page-margin-lg: 50px;
   --s-gutter: 24px;
   --s-gutter-sm: 16px;
   --s-gutter-lg: 32px;

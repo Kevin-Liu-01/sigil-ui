@@ -622,5 +622,114 @@ export const _templatePreset: SigilPreset = {
       "active-bg": "var(--s-surface-sunken)",
       "selected-bg": "var(--s-primary-muted)",
     },
+
+    // -----------------------------------------------------------------------
+    // 29. HERO (23 fields)
+    // -----------------------------------------------------------------------
+    hero: {
+      "min-height": "0px",
+      "padding-y": "120px",
+      "padding-y-sm": "80px",
+      "padding-x": "var(--s-page-margin, 25px)",
+      "content-max": "720px",
+      "content-align": "left" as const,
+      "layout": "stacked" as const,
+      "media-position": "right" as const,
+      "media-width": "50%",
+      "media-radius": "var(--s-radius-lg, 12px)",
+      "title-size": "clamp(2.5rem, 5vw, 4rem)",
+      "title-max-width": "720px",
+      "description-size": "1.125rem",
+      "description-max-width": "540px",
+      "description-gap": "16px",
+      "actions-gap": "12px",
+      "actions-margin-top": "24px",
+      "action-padding-x": "24px",
+      "action-padding-y": "12px",
+      "badge-gap": "16px",
+      "overlay-opacity": "0",
+      "scroll-indicator": false,
+      "gradient-overlay": "none",
+    },
+
+    // -----------------------------------------------------------------------
+    // 30. CTA (15 fields)
+    // -----------------------------------------------------------------------
+    cta: {
+      "padding-y": "100px",
+      "padding-x": "var(--s-page-margin, 25px)",
+      "max-width": "var(--s-content-max, 1200px)",
+      "layout": "centered" as const,
+      "border": false,
+      "border-radius": "0px",
+      "bg": "transparent",
+      "title-size": "clamp(1.75rem, 4vw, 3rem)",
+      "description-max-width": "480px",
+      "description-gap": "16px",
+      "actions-gap": "12px",
+      "actions-margin-top": "24px",
+      "action-padding-x": "24px",
+      "action-padding-y": "12px",
+      "split-gap": "48px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 31. FOOTER (15 fields)
+    // -----------------------------------------------------------------------
+    footer: {
+      "padding-y": "50px",
+      "border-top": "1px solid var(--s-border)",
+      "columns": "4",
+      "column-gap": "32px",
+      "row-gap": "24px",
+      "logo-height": "24px",
+      "tagline-max-width": "260px",
+      "link-size": "0.75rem",
+      "link-gap": "12px",
+      "group-title-size": "0.625rem",
+      "group-title-weight": "600",
+      "social-icon-size": "14px",
+      "social-gap": "8px",
+      "bottom-bar-padding": "50px",
+      "bottom-bar-border": "1px solid var(--s-border)",
+    },
+
+    // -----------------------------------------------------------------------
+    // 32. BANNER (12 fields)
+    // -----------------------------------------------------------------------
+    banner: {
+      "height": "25px",
+      "padding-y": "8px",
+      "padding-x": "16px",
+      "font-size": "0.75rem",
+      "font-weight": "500",
+      "icon-size": "12px",
+      "icon-gap": "8px",
+      "border-width": "1px",
+      "border-position": "bottom" as const,
+      "position": "top" as const,
+      "dismiss-size": "12px",
+      "radius": "0px",
+    },
+
+    // -----------------------------------------------------------------------
+    // 33. PAGE RHYTHM (14 fields)
+    // -----------------------------------------------------------------------
+    pageRhythm: {
+      "density": "normal" as const,
+      "section-gap": "0px",
+      "section-gap-sm": "0px",
+      "section-gap-lg": "0px",
+      "first-section-offset": "0px",
+      "last-section-margin": "0px",
+      "alternate-bg": false,
+      "alternate-bg-color": "var(--s-surface)",
+      "divider-between": false,
+      "max-content-width": "var(--s-content-max, 1200px)",
+      "vertical-rhythm-unit": "8px",
+      "scroll-snap": false,
+      "responsive-scale": "1",
+      "responsive-breakpoint": "768px",
+    },
   },
 };

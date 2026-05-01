@@ -12,7 +12,54 @@ import type { GutterPattern } from "@sigil-ui/tokens";
 const SECTION_BORDER =
   "var(--s-section-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
 
-const SECTION_BORDER_COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
+const BORDER_WIDTH = "var(--s-border-width-thin, 1px)";
+
+/**
+ * Split a CSS padding shorthand into [top, right, bottom, left],
+ * correctly handling `var(...)` references that contain spaces.
+ */
+function splitCssPadding(padding: string): [string, string, string, string] {
+  const values: string[] = [];
+  let cur = "";
+  let depth = 0;
+  for (const ch of padding) {
+    if (ch === "(") depth++;
+    if (ch === ")") depth--;
+    if (ch === " " && depth === 0) {
+      if (cur) values.push(cur);
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  if (cur) values.push(cur);
+
+  const t = values[0] ?? "0";
+  const r = values[1] ?? t;
+  const b = values[2] ?? t;
+  const l = values[3] ?? r;
+  return [t, r, b, l];
+}
+
+/**
+ * When a section has a real CSS border, the border adds to the element's
+ * auto-height. To keep total vertical space grid-aligned, we subtract
+ * the border width from the corresponding padding axis so
+ * (padding + border) = original padding.
+ */
+function borderCompensatedPadding(
+  padding: string,
+  borderTop: boolean,
+  borderBottom: boolean,
+): CSSProperties {
+  const [t, r, b, l] = splitCssPadding(padding);
+  return {
+    paddingTop: borderTop ? `calc(${t} - ${BORDER_WIDTH})` : t,
+    paddingRight: r,
+    paddingBottom: borderBottom ? `calc(${b} - ${BORDER_WIDTH})` : b,
+    paddingLeft: l,
+  };
+}
 
 /* ------------------------------------------------------------------ */
 /* Cross mark SVG                                                       */
@@ -153,7 +200,7 @@ export function SigilSection({
   borderTop = false,
   borderBottom = false,
   showCrosses = false,
-  padding = "var(--s-section-py, 100px) var(--s-page-margin, 24px)",
+  padding = "var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))",
   contentMax = 1200,
   railGap = 50,
   gutterPattern = "grid",
@@ -230,17 +277,19 @@ function InnerSection({
   padding: string;
   config: PageGridConfig;
 }) {
-  const shadows: string[] = [];
-  if (borderTop) shadows.push(`inset 0 1px 0 ${SECTION_BORDER_COLOR}`);
-  if (borderBottom) shadows.push(`inset 0 -1px 0 ${SECTION_BORDER_COLOR}`);
+  const hasBorder = borderTop || borderBottom;
+  const paddingStyle = hasBorder
+    ? borderCompensatedPadding(padding, borderTop, borderBottom)
+    : { padding };
 
   return (
     <Tag
       id={id}
       data-slot="sigilsection" className={cn("relative", className)}
       style={{
-        padding,
-        boxShadow: shadows.length ? shadows.join(", ") : undefined,
+        ...paddingStyle,
+        borderTop: borderTop ? SECTION_BORDER : undefined,
+        borderBottom: borderBottom ? SECTION_BORDER : undefined,
         ...style,
       }}
     >
@@ -304,9 +353,10 @@ function StandaloneSection({
     gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
   };
 
-  const standaloneShadows: string[] = [];
-  if (borderTop) standaloneShadows.push(`inset 0 1px 0 ${SECTION_BORDER_COLOR}`);
-  if (borderBottom) standaloneShadows.push(`inset 0 -1px 0 ${SECTION_BORDER_COLOR}`);
+  const standaloneHasBorder = borderTop || borderBottom;
+  const standalonePaddingStyle = standaloneHasBorder
+    ? borderCompensatedPadding(padding, borderTop, borderBottom)
+    : { padding };
 
   return (
     <Tag id={id} data-slot="sigilsection" className={cn("grid", className)} style={{ ...gridCols, ...style }}>
@@ -315,8 +365,9 @@ function StandaloneSection({
       <div
         className="relative"
         style={{
-          padding,
-          boxShadow: standaloneShadows.length ? standaloneShadows.join(", ") : undefined,
+          ...standalonePaddingStyle,
+          borderTop: borderTop ? SECTION_BORDER : undefined,
+          borderBottom: borderBottom ? SECTION_BORDER : undefined,
           background: "var(--s-background)",
         }}
       >

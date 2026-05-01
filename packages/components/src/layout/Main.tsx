@@ -19,8 +19,8 @@ export const Main = forwardRef<HTMLElement, MainProps>(function Main(
       className={cn("flex-1 min-w-0", center && "mx-auto w-full", className)}
       style={{
         maxWidth: maxWidth ?? "var(--s-content-max, 1200px)",
-        paddingLeft: "var(--s-page-margin, 24px)",
-        paddingRight: "var(--s-page-margin, 24px)",
+        paddingLeft: "var(--s-page-margin, 25px)",
+        paddingRight: "var(--s-page-margin, 25px)",
         ...style,
       }}
       {...props}
