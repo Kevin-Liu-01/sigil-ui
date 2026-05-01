@@ -32,7 +32,8 @@ export function SigilFrame({ children }: { children: ReactNode }) {
     if (sigil?.["cross-stroke"]) crossStroke = parseFloat(sigil["cross-stroke"] as string) || crossStroke;
     if (sigil?.["rail-gap"]) railGap = parseInt(sigil["rail-gap"] as string) || railGap;
     if (layout?.["content-max"]) contentMax = parseInt(layout["content-max"] as string) || contentMax;
-    if (sigil?.["margin-border"]) marginBorder = sigil["margin-border"] as string;
+    const mb = sigil?.["margin-border"] as string | undefined;
+    if (mb && mb !== "none") marginBorder = mb;
 
     isEdgeless = sigil?.["gutter-visible"] === false
       || (gutterPattern === "none" && marginPattern === "none" && railGap === 0);

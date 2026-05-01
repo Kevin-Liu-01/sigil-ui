@@ -9,6 +9,7 @@ import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { Terminal } from "@/components/landing/terminal";
 import { ComponentGalleryCTA } from "@/components/landing/live-component";
+import { ShapesAndPatterns, ThreeDShowcase } from "@/components/landing/shapes-section";
 import { SigilFrame, useIsEdgeless } from "@/components/landing/sigil-frame";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
 import { LayerStackDiagram } from "@/components/landing/layer-stack";
@@ -169,7 +170,7 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="clamp(50px, 12vw, 150px) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem)) clamp(50px, 5vw, 100px)" style={{ position: "relative", maxWidth: "100vw" }}>
+    <LandingSection borderTop padding="clamp(50px, 12vw, 150px) var(--s-section-padding-x, var(--s-page-margin, 25px)) clamp(50px, 5vw, 100px)" style={{ position: "relative", maxWidth: "100vw" }}>
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
         <InstallCommand className="mb-4" />
@@ -218,7 +219,7 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop padding="25px var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))">
+    <LandingSection borderTop padding="25px var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <div className="s-transition-all">
         <HeroShowcase />
       </div>
@@ -228,7 +229,7 @@ function ProductSurfaceSection() {
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="50px var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))">
+    <LandingSection borderTop padding="50px var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <ComponentGalleryCTA />
     </LandingSection>
   );
@@ -747,6 +748,32 @@ function CLIVoronoiSection() {
   );
 }
 
+function ShapesSection() {
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="Shapes & Patterns"
+        heading="Voronoi bentos with actual content."
+        description="Irregular polygon cells that hold real shapes, stats, pattern fields, and product copy without cropping a rectangular layout."
+      />
+      <ShapesAndPatterns />
+    </LandingSection>
+  );
+}
+
+function ThreeDSection() {
+  return (
+    <LandingSection borderTop>
+      <SectionHeader
+        label="3D Components"
+        heading="Projected UI without leaving CSS."
+        description="Isometric scenes, prisms, exploded boxes, tilt cards, and depth stacks all inherit the active token system."
+      />
+      <ThreeDShowcase />
+    </LandingSection>
+  );
+}
+
 function PresetsSection() {
   const [morphIndex, setMorphIndex] = useState(0);
   useEffect(() => {
@@ -965,7 +992,7 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y, 6.25rem) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))">
+    <LandingSection borderTop padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))">
       <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
@@ -1081,7 +1108,7 @@ function FinalCTA() {
   return (
     <>
     <Divider size="md" showCross fadeEdges />
-    <LandingSection padding="var(--s-section-padding-y, 6.25rem) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))" style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>
@@ -1187,6 +1214,16 @@ export default function LandingPage() {
 
       {/* CLI Surface — Voronoi bento */}
       <CLIVoronoiSection />
+
+      <LandingDivider pattern="vertical" size="sm" showBorders />
+
+      {/* 3D Components */}
+      <ThreeDSection />
+
+      <LandingDivider pattern="diagonal" size="sm" showBorders />
+
+      {/* Shapes & Patterns — Voronoi showcase */}
+      <ShapesSection />
 
       <LandingDivider pattern="vertical" size="sm" showBorders />
 

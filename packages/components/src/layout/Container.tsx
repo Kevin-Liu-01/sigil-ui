@@ -27,8 +27,8 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(function Con
       className={cn("w-full", center && "mx-auto", className)}
       style={{
         maxWidth: maxWidthMap[size],
-        paddingLeft: "var(--s-page-margin, 1.5625rem)",
-        paddingRight: "var(--s-page-margin, 1.5625rem)",
+        paddingLeft: "var(--s-page-margin, 25px)",
+        paddingRight: "var(--s-page-margin, 25px)",
         ...style,
       }}
       {...props}
