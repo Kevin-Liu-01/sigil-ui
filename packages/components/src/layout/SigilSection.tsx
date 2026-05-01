@@ -200,7 +200,7 @@ export function SigilSection({
   borderTop = false,
   borderBottom = false,
   showCrosses = false,
-  padding = "var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))",
+  padding = "var(--s-section-padding-y, 6.25rem) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))",
   contentMax = 1200,
   railGap = 50,
   gutterPattern = "grid",

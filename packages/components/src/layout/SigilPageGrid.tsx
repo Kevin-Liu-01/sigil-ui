@@ -584,7 +584,7 @@ export function SigilFullBleed({
   className,
   background,
   contentMax,
-  padding = "0 var(--s-page-margin, 25px)",
+  padding = "0 var(--s-page-margin, 1.5625rem)",
 }: SigilFullBleedProps) {
   return (
     <div

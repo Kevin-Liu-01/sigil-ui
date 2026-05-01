@@ -71,8 +71,8 @@ export function LandingNavbar() {
       className="mx-auto flex items-center justify-between w-full border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
         maxWidth: "var(--s-content-max, 1200px)",
-        padding: "0 var(--s-navbar-padding-x, 25px)",
-        height: "var(--s-navbar-height, 50px)",
+        padding: "0 var(--s-navbar-padding-x, 1.5625rem)",
+        height: "var(--s-navbar-height, 3.125rem)",
       }}
     >
       {/* ── Logo ── */}
@@ -224,8 +224,8 @@ function ReleaseBanner() {
         className="relative flex items-center justify-center gap-2 text-[12px] font-medium border-b border-[var(--s-border)] overflow-hidden w-full"
         style={{
           maxWidth: "var(--s-content-max, 1200px)",
-          padding: "0 var(--s-navbar-padding-x, 25px)",
-          height: "var(--s-banner-height, 25px)",
+          padding: "0 var(--s-navbar-padding-x, 1.5625rem)",
+          height: "var(--s-banner-height, 1.5625rem)",
           background:
             "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 8%, var(--s-background)), color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 8%, var(--s-background)))",
           backdropFilter: "blur(16px) saturate(1.5)",

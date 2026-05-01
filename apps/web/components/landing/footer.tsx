@@ -168,7 +168,7 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
             className="mx-auto w-full"
             style={{
               maxWidth: "var(--s-content-max, 1200px)",
-              padding: "var(--s-footer-padding-y, 50px) var(--s-section-padding-x, var(--s-page-margin, 25px))",
+              padding: "var(--s-footer-padding-y, 3.125rem) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem))",
             }}
           >
             {footerContent}
@@ -181,7 +181,7 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
   return (
     <>
       <SectionDivider size="md" showCross fadeEdges />
-      <SigilSection as="footer" showCrosses padding="var(--s-footer-padding-y, 50px) var(--s-section-padding-x, var(--s-page-margin, 25px)) var(--s-footer-padding-y, 50px)">
+      <SigilSection as="footer" showCrosses padding="var(--s-footer-padding-y, 3.125rem) var(--s-section-padding-x, var(--s-page-margin, 1.5625rem)) var(--s-footer-padding-y, 3.125rem)">
         {footerContent}
       </SigilSection>
     </>
