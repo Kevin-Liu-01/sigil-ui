@@ -259,7 +259,7 @@ export function ComponentStackDiagram({ className, ...rest }: ComponentStackDiag
       <div key={comp.id} className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr] animate-[s-fade-in_200ms_ease]">
 
         {/* ────────── LEFT: Blueprint ────────── */}
-        <div className="relative min-h-[460px] border-b border-[var(--s-border)] bg-[var(--s-background)] p-5 lg:border-b-0 lg:border-r">
+        <div className="relative min-h-[500px] border-b border-[var(--s-border)] bg-[var(--s-background)] p-5 lg:border-b-0 lg:border-r">
           {/* Grid background */}
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.06]"
@@ -276,7 +276,7 @@ export function ComponentStackDiagram({ className, ...rest }: ComponentStackDiag
           </div>
 
           {/* SVG + overlaid component */}
-          <div className="relative z-[1] mt-6 h-[370px]">
+          <div className="relative z-[1] mt-6 h-[400px]">
             <svg viewBox="0 0 520 380" className="absolute inset-0 h-full w-full" fill="none" aria-hidden>
               {/* Dashed outer frame */}
               <rect x="150" y="110" width="220" height="140" stroke="var(--s-border)" strokeDasharray="5 5" opacity="0.72" />

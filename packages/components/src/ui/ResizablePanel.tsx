@@ -56,7 +56,7 @@ export const ResizableHandle = forwardRef<HTMLDivElement, ResizableHandleProps>(
         {...rest}
       >
         {withHandle && (
-          <div className="z-10 flex h-4 w-3 items-center justify-center rounded-[var(--s-radius-sm)] border border-[var(--s-border)] bg-[var(--s-surface)]">
+          <div className="z-10 flex h-4 w-3 items-center justify-center rounded-[var(--s-radius-sm)] border border-[color:var(--s-border)] bg-[var(--s-surface)]">
             <svg width="6" height="10" viewBox="0 0 6 10" fill="none" className="text-[var(--s-text-muted)]">
               <path d="M1 1v8M5 1v8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
             </svg>

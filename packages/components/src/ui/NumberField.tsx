@@ -40,20 +40,20 @@ export const NumberField = forwardRef<HTMLDivElement, NumberFieldProps>(function
       data-slot="number-field"
       className={cn(
         "inline-flex h-[var(--s-input-height,36px)] items-center overflow-hidden",
-        "rounded-[var(--s-radius-input,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+        "rounded-[var(--s-radius-input,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
         "bg-[var(--s-background)] text-sm",
-        "focus-within:ring-[length:var(--s-input-focus-ring-width)] focus-within:ring-[var(--s-input-focus-ring-color)]/20 focus-within:border-[var(--s-input-focus-ring-color)]",
+        "focus-within:ring-[length:var(--s-input-focus-ring-width)] focus-within:ring-[var(--s-input-focus-ring-color)]/20 focus-within:border-[color:var(--s-input-focus-ring-color)]",
         className,
       )}
       {...rest}
     >
-      <button type="button" disabled={disabled || value <= min} onClick={decrement} className={cn(btnBase, "border-r border-[var(--s-border)]")} aria-label="Decrease">
+      <button type="button" disabled={disabled || value <= min} onClick={decrement} className={cn(btnBase, "border-r border-[color:var(--s-border)]")} aria-label="Decrease">
         <svg width="14" height="2" viewBox="0 0 14 2" fill="currentColor" aria-hidden><rect width="14" height="2" rx="1" /></svg>
       </button>
       <span className="min-w-[3rem] px-2 text-center tabular-nums font-medium text-[var(--s-text)] select-none">
         {value}
       </span>
-      <button type="button" disabled={disabled || value >= max} onClick={increment} className={cn(btnBase, "border-l border-[var(--s-border)]")} aria-label="Increase">
+      <button type="button" disabled={disabled || value >= max} onClick={increment} className={cn(btnBase, "border-l border-[color:var(--s-border)]")} aria-label="Increase">
         <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor" aria-hidden>
           <rect y="6" width="14" height="2" rx="1" />
           <rect x="6" width="2" height="14" rx="1" />

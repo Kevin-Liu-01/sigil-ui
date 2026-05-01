@@ -43,9 +43,9 @@ export const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
                 className={cn(
                   "flex flex-col gap-3 p-6",
                   "rounded-[var(--s-radius-card,0px)]",
-                  "border border-[var(--s-border-muted)] bg-[var(--s-surface)]",
+                  "border border-[color:var(--s-border-muted)] bg-[var(--s-surface)]",
                   "transition-colors duration-[var(--s-duration-fast,150ms)]",
-                  "hover:border-[var(--s-border)]",
+                  "hover:border-[color:var(--s-border)]",
                 )}
               >
                 {feature.icon && (

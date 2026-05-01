@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 export const metadata = buildPageMetadata({
   title: "Blog",
   description:
-    "Guides, tutorials, and updates from the Sigil UI team. Design tokens, preset authoring, agent workflows, and component patterns.",
+    "Guides, deep dives, and release notes from the Sigil UI project. Token architecture, preset authoring, component patterns, and practical workflows.",
   path: "/blog",
 });
 

@@ -110,10 +110,10 @@ export const defaultTokens: SigilTokens = {
   },
 
   sigil: {
-    "grid-cell": "48px",
+    "grid-cell": "50px",
     "cross-arm": "10px",
     "cross-stroke": "1.5px",
-    "rail-gap": "24px",
+    "rail-gap": "50px",
     "card-radius": "10px",
     "gutter-border": "1px solid",
     "gutter-visible": true,
@@ -211,7 +211,7 @@ export const defaultTokens: SigilTokens = {
   },
 
   navigation: {
-    "navbar-height": "56px",
+    "navbar-height": "50px",
     "navbar-backdrop-blur": "12px",
     "navbar-border": "1px solid",
     "navbar-bg-opacity": "0.8",
@@ -224,7 +224,7 @@ export const defaultTokens: SigilTokens = {
     "navbar-item-padding-y": "6px",
     "navbar-item-size": "0.875rem",
     "navbar-shadow": "none",
-    "navbar-height-scrolled": "48px",
+    "navbar-height-scrolled": "50px",
     "navbar-mobile-breakpoint": "768px",
     "nav-link-weight": "500",
     "nav-link-size": "0.875rem",
@@ -390,8 +390,8 @@ export const defaultTokens: SigilTokens = {
 
   hero: {
     "min-height": "auto",
-    "padding-y": "96px",
-    "padding-y-sm": "64px",
+    "padding-y": "100px",
+    "padding-y-sm": "100px",
     "padding-x": "var(--s-page-margin, 24px)",
     "content-max": "640px",
     "content-align": "center" as const,
@@ -415,7 +415,7 @@ export const defaultTokens: SigilTokens = {
   },
 
   cta: {
-    "padding-y": "80px",
+    "padding-y": "100px",
     "padding-x": "var(--s-page-margin, 24px)",
     "max-width": "var(--s-content-max, 1200px)",
     "layout": "centered" as const,
@@ -429,11 +429,11 @@ export const defaultTokens: SigilTokens = {
     "actions-margin-top": "32px",
     "action-padding-x": "24px",
     "action-padding-y": "12px",
-    "split-gap": "48px",
+    "split-gap": "50px",
   },
 
   footer: {
-    "padding-y": "48px",
+    "padding-y": "50px",
     "border-top": "1px solid var(--s-border)",
     "columns": "4",
     "column-gap": "32px",
@@ -451,7 +451,7 @@ export const defaultTokens: SigilTokens = {
   },
 
   banner: {
-    "height": "auto",
+    "height": "50px",
     "padding-y": "8px",
     "padding-x": "16px",
     "font-size": "0.875rem",

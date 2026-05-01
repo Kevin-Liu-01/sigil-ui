@@ -36,14 +36,14 @@ export const GanttChart = forwardRef<HTMLDivElement, GanttChartProps>(
         ref={ref}
         data-slot="gantt-chart"
         className={cn(
-          "w-full overflow-auto rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)]",
+          "w-full overflow-auto rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)]",
           className,
         )}
         {...rest}
       >
         <table className="w-full border-collapse text-xs">
           <thead>
-            <tr className="border-b border-[var(--s-border)]">
+            <tr className="border-b border-[color:var(--s-border)]">
               <th className="sticky left-0 z-10 bg-[var(--s-surface)] px-3 py-2 text-left font-medium text-[var(--s-text-muted)] min-w-[140px]">
                 Task
               </th>
@@ -71,7 +71,7 @@ export const GanttChart = forwardRef<HTMLDivElement, GanttChartProps>(
                   </td>
                 </tr>
                 {group.tasks.map((task) => (
-                  <tr key={task.id} className="border-b border-[var(--s-border)]/40">
+                  <tr key={task.id} className="border-b border-[color:var(--s-border)]/40">
                     <td className="sticky left-0 z-10 bg-[var(--s-surface)] px-3 py-2 text-[var(--s-text)] font-medium whitespace-nowrap">
                       {task.label}
                     </td>

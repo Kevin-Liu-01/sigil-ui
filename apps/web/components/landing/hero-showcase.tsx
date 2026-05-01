@@ -1011,7 +1011,7 @@ function LatencyBuildRow() {
 
 function VoronoiRow() {
   return (
-    <div className="w-full overflow-hidden flex-1 min-h-[52px]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+    <div className="w-full overflow-hidden flex-1 min-h-[100px]" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
       <div className="grid grid-cols-5 grid-rows-3 gap-px h-full" style={{ background: "var(--s-border)" }}>
         <div className="col-span-2 row-span-3" style={{ background: "var(--s-primary)", opacity: 0.8 }} />
         <div className="col-span-2 row-span-2" style={{ background: "var(--s-surface)" }} />
@@ -1215,7 +1215,7 @@ function MiniSparkline() {
         <span className="text-[9px] tabular-nums text-[var(--s-success)]">↑ 23%</span>
       </div>
       <div className="relative flex-1 min-h-0">
-        <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={120} filled className="absolute inset-0 w-full h-full" style={{ display: "block" }} preserveAspectRatio="none" />
+        <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={150} filled className="absolute inset-0 w-full h-full" style={{ display: "block" }} preserveAspectRatio="none" />
       </div>
     </div>
   );
@@ -1270,7 +1270,7 @@ function LatencyAreaRow() {
           color: "var(--s-warning)",
         }]}
         width={400}
-        height={120}
+        height={150}
         showGrid
         className="w-full h-full flex-1"
         style={{ display: "block" }}

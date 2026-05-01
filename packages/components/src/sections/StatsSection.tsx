@@ -40,8 +40,8 @@ export const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
                 key={i}
                 className={cn(
                   "flex flex-col items-center text-center gap-1 py-6",
-                  variant === "cards" && "rounded-[var(--s-radius-card,0px)] border border-[var(--s-border-muted)] bg-[var(--s-surface)] px-6",
-                  variant === "bordered" && i > 0 && "md:border-l md:border-[var(--s-border)]",
+                  variant === "cards" && "rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border-muted)] bg-[var(--s-surface)] px-6",
+                  variant === "bordered" && i > 0 && "md:border-l md:border-[color:var(--s-border)]",
                 )}
               >
                 <div className="flex items-baseline gap-1.5">

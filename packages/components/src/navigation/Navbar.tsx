@@ -27,7 +27,7 @@ export const Navbar = forwardRef<HTMLElement, NavbarProps>(function Navbar(
         sticky && "sticky top-0 left-0 right-0",
         transparent
           ? "bg-transparent"
-          : "bg-[var(--s-background)] backdrop-blur-[var(--s-navbar-backdrop-blur,12px)] backdrop-saturate-[1.8] border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          : "bg-[var(--s-background)] backdrop-blur-[var(--s-navbar-backdrop-blur,12px)] backdrop-saturate-[1.8] border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
         className,
       )}
       {...rest}

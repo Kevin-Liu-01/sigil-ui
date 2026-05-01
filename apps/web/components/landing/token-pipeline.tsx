@@ -193,7 +193,7 @@ function TokenFileCard({ activeGroup }: { activeGroup: TokenGroup }) {
 function CompilerSpine({ activeGroup }: { activeGroup: TokenGroup }) {
   return (
     <div
-      className="relative z-[2] mx-auto flex min-h-[360px] w-full max-w-[320px] flex-col justify-between border bg-[var(--s-surface)]/80 p-4 shadow-[var(--s-shadow-md)] backdrop-blur lg:absolute lg:bottom-10 lg:left-1/2 lg:top-10 lg:-translate-x-1/2"
+      className="relative z-[2] mx-auto flex min-h-[400px] w-full max-w-[320px] flex-col justify-between border bg-[var(--s-surface)]/80 p-4 shadow-[var(--s-shadow-md)] backdrop-blur lg:absolute lg:bottom-10 lg:left-1/2 lg:top-10 lg:-translate-x-1/2"
       style={{
         borderColor: "var(--s-border)",
         borderRadius: "var(--s-radius-lg, 12px)",
@@ -432,7 +432,7 @@ export function TokenPipelineDiagram({
     <div
       data-slot="token-pipeline"
       className={cn(
-        "relative min-h-[620px] overflow-hidden border bg-[var(--s-background)] p-4 sm:p-6 lg:p-8",
+        "relative min-h-[650px] overflow-hidden border bg-[var(--s-background)] p-4 sm:p-6 lg:p-8",
         className,
       )}
       onMouseMove={(event) => {
@@ -459,7 +459,7 @@ export function TokenPipelineDiagram({
       <div className="pointer-events-none absolute left-1/2 top-1/2 hidden aspect-square w-[min(520px,72vw)] -translate-x-1/2 -translate-y-1/2 rounded-[var(--s-radius-full,9999px)] border border-[var(--s-border)] lg:block" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 hidden aspect-square w-[min(360px,52vw)] -translate-x-1/2 -translate-y-1/2 rounded-[var(--s-radius-full,9999px)] border border-dashed border-[var(--s-border)] lg:block" />
 
-      <div className="relative z-[1] flex flex-col gap-5 lg:block lg:min-h-[560px]">
+      <div className="relative z-[1] flex flex-col gap-5 lg:block lg:min-h-[600px]">
         <TokenFileCard activeGroup={activeGroup} />
         <CompilerSpine activeGroup={activeGroup} />
         <ComponentCard activeGroup={activeGroup} />

@@ -75,16 +75,18 @@ const TOKENS: TokenEntry[] = [
 const CALLOUTS: {
   id: string;
   label: string;
+  dotX: number;
+  dotY: number;
   path: string;
   x: number;
   y: number;
   anchor?: "start" | "middle" | "end";
 }[] = [
-  { id: "fill", label: "fill", path: "M188 138 L120 84 L68 84", x: 64, y: 80 },
-  { id: "radius", label: "radius", path: "M318 138 L388 84 L452 84", x: 456, y: 80, anchor: "end" },
-  { id: "font", label: "type", path: "M214 194 L138 272 L76 272", x: 72, y: 268 },
-  { id: "speed", label: "motion", path: "M318 194 L400 272 L462 272", x: 466, y: 268, anchor: "end" },
-  { id: "shadow", label: "depth", path: "M278 224 L278 316", x: 278, y: 336, anchor: "middle" },
+  { id: "fill",   label: "fill",   dotX: 142, dotY: 140, path: "M142 140 L82 140 L82 78",   x: 82,  y: 68,  anchor: "middle" },
+  { id: "radius", label: "radius", dotX: 378, dotY: 140, path: "M378 140 L438 140 L438 78", x: 438, y: 68,  anchor: "middle" },
+  { id: "font",   label: "type",   dotX: 142, dotY: 210, path: "M142 210 L82 210 L82 278",  x: 82,  y: 292, anchor: "middle" },
+  { id: "speed",  label: "motion", dotX: 378, dotY: 210, path: "M378 210 L438 210 L438 278", x: 438, y: 292, anchor: "middle" },
+  { id: "shadow", label: "depth",  dotX: 260, dotY: 242, path: "M260 242 L260 320",          x: 260, y: 336, anchor: "middle" },
 ];
 
 function CalloutDot({ cx, cy, active }: { cx: number; cy: number; active: boolean }) {
@@ -110,7 +112,7 @@ export function ComponentAnatomyDiagram({ className, ...rest }: ComponentAnatomy
       {...rest}
     >
       <div className="grid grid-cols-1 lg:grid-cols-[1.08fr_0.92fr]">
-        <div className="relative min-h-[430px] border-b border-[var(--s-border)] bg-[var(--s-background)] p-5 lg:border-b-0 lg:border-r">
+        <div className="relative min-h-[450px] border-b border-[var(--s-border)] bg-[var(--s-background)] p-5 lg:border-b-0 lg:border-r">
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.06]"
             style={{
@@ -126,7 +128,7 @@ export function ComponentAnatomyDiagram({ className, ...rest }: ComponentAnatomy
             </TabularValue>
           </div>
 
-          <div className="relative z-[1] mt-6 h-[340px]">
+          <div className="relative z-[1] mt-6 h-[350px]">
             <svg viewBox="0 0 520 360" className="absolute inset-0 h-full w-full" fill="none" aria-hidden>
               <rect
                 x="142"
@@ -156,13 +158,14 @@ export function ComponentAnatomyDiagram({ className, ...rest }: ComponentAnatomy
                       stroke={active ? "var(--s-primary)" : "var(--s-border)"}
                       strokeWidth={active ? 1.4 : 1}
                       strokeDasharray={active ? undefined : "4 4"}
+                      fill="none"
                       style={{ transition: "stroke 150ms ease" }}
                     />
-                    <CalloutDot cx={callout.x} cy={callout.y + 4} active={active} />
+                    <CalloutDot cx={callout.dotX} cy={callout.dotY} active={active} />
                     <text
                       x={callout.x}
-                      y={callout.y - 4}
-                      textAnchor={callout.anchor ?? "start"}
+                      y={callout.y}
+                      textAnchor={callout.anchor ?? "middle"}
                       className="font-[family-name:var(--s-font-mono)]"
                       fill={active ? "var(--s-primary)" : "var(--s-text-muted)"}
                       fontSize={10}

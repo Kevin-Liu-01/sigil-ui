@@ -52,7 +52,7 @@ export const CTASection = forwardRef<HTMLElement, CTASectionProps>(
                         "inline-flex items-center gap-2 px-[var(--s-cta-action-padding-x,24px)] py-[var(--s-cta-action-padding-y,12px)] text-sm font-medium rounded-[var(--s-radius-button,0px)]",
                         "transition-all duration-[var(--s-duration-fast,150ms)]",
                         action.variant === "secondary" || i > 0
-                          ? "bg-transparent text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface)]"
+                          ? "bg-transparent text-[var(--s-text)] border border-[color:var(--s-border)] hover:bg-[var(--s-surface)]"
                           : "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:brightness-110",
                       )}
                     >
@@ -85,7 +85,7 @@ export const CTASection = forwardRef<HTMLElement, CTASectionProps>(
                           "inline-flex items-center gap-2 px-[var(--s-cta-action-padding-x,24px)] py-[var(--s-cta-action-padding-y,12px)] text-sm font-medium rounded-[var(--s-radius-button,0px)]",
                           "transition-all duration-[var(--s-duration-fast,150ms)]",
                           action.variant === "secondary" || i > 0
-                            ? "bg-transparent text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface)]"
+                            ? "bg-transparent text-[var(--s-text)] border border-[color:var(--s-border)] hover:bg-[var(--s-surface)]"
                             : "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:brightness-110",
                         )}
                       >

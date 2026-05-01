@@ -39,9 +39,9 @@ export const NewsletterSection = forwardRef<HTMLElement, NewsletterSectionProps>
               placeholder={placeholder}
               className={cn(
                 "flex-1 h-10 px-3 text-sm rounded-[var(--s-radius-input,0px)]",
-                "border border-[var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
+                "border border-[color:var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
                 "placeholder:text-[var(--s-text-muted)]",
-                "focus:outline-none focus:border-[var(--s-input-focus-ring-color)] focus:ring-[length:var(--s-input-focus-ring-width)] focus:ring-[var(--s-input-focus-ring-color)]/20",
+                "focus:outline-none focus:border-[color:var(--s-input-focus-ring-color)] focus:ring-[length:var(--s-input-focus-ring-width)] focus:ring-[var(--s-input-focus-ring-color)]/20",
               )}
             />
             <button

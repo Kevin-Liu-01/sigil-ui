@@ -22,14 +22,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
         aria-invalid={hasError || undefined}
         className={cn(
           "flex h-20 min-h-[80px] w-full rounded-[var(--s-radius-input,0px)] border border-[style:var(--s-border-style,solid)] px-3 py-2 text-sm",
-          "border-[var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
+          "border-[color:var(--s-border)] bg-[var(--s-background)] text-[var(--s-text)]",
           "placeholder:text-[var(--s-text-muted)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)] resize-y",
           "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           "disabled:cursor-not-allowed disabled:opacity-50",
           hasError
-            ? "border-[var(--s-error)] focus-visible:ring-[var(--s-error)]"
-            : "border-[var(--s-border)]",
+            ? "border-[color:var(--s-error)] focus-visible:ring-[var(--s-error)]"
+            : "border-[color:var(--s-border)]",
           className,
         )}
         {...rest}

@@ -1,7 +1,7 @@
 {
   "name": "@sigil-ui/components",
   "version": "1.0.0",
-  "description": "Styled React components for Sigil UI — consumes CSS variables from @sigil-ui/tokens",
+  "description": "350+ React components styled entirely through design tokens — every color, font, and radius reads from CSS custom properties",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -36,6 +36,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
+    "@base-ui/react": "^1.4.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",
@@ -70,7 +71,6 @@
     "d3-delaunay": "^6.0.4",
     "embla-carousel-react": "^8.6.0",
     "gsap": "^3.12.7",
-    "input-otp": "^1.4.2",
     "lucide-react": "^1.8.0",
     "react-day-picker": "^9.14.0",
     "react-resizable-panels": "^4.10.0",

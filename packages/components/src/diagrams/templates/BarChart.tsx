@@ -65,7 +65,7 @@ export const BarChart = forwardRef<HTMLDivElement, BarChartProps>(
                 {showGrid && (
                   <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
                     {[0, 1, 2, 3, 4].map((i) => (
-                      <div key={i} className="border-b border-dashed border-[var(--s-border)]/40 w-full" />
+                      <div key={i} className="border-b border-dashed border-[color:var(--s-border)]/40 w-full" />
                     ))}
                   </div>
                 )}

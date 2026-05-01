@@ -30,7 +30,7 @@ export const SpecTable = forwardRef<HTMLDivElement, SpecTableProps>(
       <tr
         key={i}
         className={cn(
-          "border-b border-[var(--s-border)]/40",
+          "border-b border-[color:var(--s-border)]/40",
           row.highlight && "bg-[var(--s-primary-muted)]/30",
         )}
       >
@@ -55,13 +55,13 @@ export const SpecTable = forwardRef<HTMLDivElement, SpecTableProps>(
         ref={ref}
         data-slot="spec-table"
         className={cn(
-          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
+          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}
       >
         {title && (
-          <div className="border-b border-[var(--s-border)] px-4 py-3">
+          <div className="border-b border-[color:var(--s-border)] px-4 py-3">
             <h3 className="text-sm font-semibold text-[var(--s-text)]">{title}</h3>
           </div>
         )}

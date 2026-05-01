@@ -22,12 +22,12 @@ export interface DonutChartProps extends Omit<SVGAttributes<SVGSVGElement>, "wid
 }
 
 const defaultColors = [
-  "var(--s-primary)",
-  "var(--s-success)",
-  "var(--s-warning)",
-  "var(--s-error)",
-  "var(--s-info)",
-  "var(--s-chart-neutral)",
+  "var(--s-primary, oklch(0.65 0.19 250))",
+  "var(--s-success, oklch(0.7 0.18 160))",
+  "var(--s-warning, oklch(0.72 0.16 60))",
+  "var(--s-error, oklch(0.6 0.22 30))",
+  "var(--s-info, oklch(0.65 0.2 250))",
+  "var(--s-chart-neutral, oklch(0.55 0.02 250))",
 ];
 
 export const DonutChart = forwardRef<SVGSVGElement, DonutChartProps>(

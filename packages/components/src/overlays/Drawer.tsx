@@ -2,64 +2,53 @@
 
 import {
   forwardRef,
-  type ButtonHTMLAttributes,
+  type ComponentPropsWithoutRef,
   type HTMLAttributes,
-  type ReactNode,
 } from "react";
-import { Drawer as DrawerPrimitive } from "vaul";
+import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { cn } from "../utils";
 
-export interface DrawerProps {
-  shouldScaleBackground?: boolean;
-  open?: boolean;
-  onOpenChange?: (open: boolean) => void;
-  children?: ReactNode;
+export interface DrawerProps extends ComponentPropsWithoutRef<typeof DrawerBase.Root> {}
+
+export function Drawer(props: DrawerProps) {
+  return <DrawerBase.Root {...props} />;
 }
 
-export const Drawer = ({
-  shouldScaleBackground = true,
-  ...rest
-}: DrawerProps) => (
-  <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...rest} />
-);
-
-export const DrawerTrigger = forwardRef<
-  HTMLButtonElement,
-  ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
->(function DrawerTrigger(props, ref) {
-  return <DrawerPrimitive.Trigger ref={ref} {...props} />;
-});
-
-export const DrawerClose = forwardRef<
-  HTMLButtonElement,
-  ButtonHTMLAttributes<HTMLButtonElement> & { asChild?: boolean }
->(function DrawerClose(props, ref) {
-  return <DrawerPrimitive.Close ref={ref} {...props} />;
-});
+export const DrawerTrigger = DrawerBase.Trigger;
+export const DrawerClose = DrawerBase.Close;
 
 export const DrawerContent = forwardRef<
   HTMLDivElement,
-  HTMLAttributes<HTMLDivElement>
+  ComponentPropsWithoutRef<typeof DrawerBase.Popup>
 >(function DrawerContent({ className, children, ...rest }, ref) {
   return (
-    <DrawerPrimitive.Portal>
-      <DrawerPrimitive.Overlay className="fixed inset-0 z-50 bg-[var(--s-overlay-bg,oklch(0_0_0/0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]" />
-      <DrawerPrimitive.Content
-        ref={ref}
-        data-slot="drawer"
+    <DrawerBase.Portal>
+      <DrawerBase.Backdrop
         className={cn(
-          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
-          "rounded-t-[var(--s-overlay-radius,var(--s-radius-lg,12px))]",
-          "border border-b-0 border-[var(--s-overlay-border,var(--s-border))] border-[style:var(--s-border-style,solid)]",
-          "bg-[var(--s-overlay-surface,var(--s-surface))] shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
-          className,
+          "fixed inset-0 z-50",
+          "bg-[var(--s-overlay-bg,oklch(0_0_0/0.55))] backdrop-blur-[var(--s-overlay-blur,2px)]",
+          "transition-opacity duration-[var(--s-duration-fast,150ms)]",
+          "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
         )}
-        {...rest}
-      >
-        <div className="mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border)]" />
-        {children}
-      </DrawerPrimitive.Content>
-    </DrawerPrimitive.Portal>
+      />
+      <DrawerBase.Viewport className="fixed inset-0 z-50">
+        <DrawerBase.Popup
+          ref={ref}
+          data-slot="drawer"
+          className={cn(
+            "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col",
+            "rounded-t-[var(--s-overlay-radius,var(--s-radius-lg,12px))]",
+            "border border-b-0 border-[color:var(--s-overlay-border,var(--s-border))] border-[style:var(--s-border-style,solid)]",
+            "bg-[var(--s-overlay-surface,var(--s-surface))] shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
+            className,
+          )}
+          {...rest}
+        >
+          <div className="mx-auto mt-4 h-1.5 w-12 shrink-0 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-border)]" />
+          {children}
+        </DrawerBase.Popup>
+      </DrawerBase.Viewport>
+    </DrawerBase.Portal>
   );
 });
 
@@ -89,10 +78,10 @@ export const DrawerFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEle
 
 export const DrawerTitle = forwardRef<
   HTMLHeadingElement,
-  HTMLAttributes<HTMLHeadingElement>
+  ComponentPropsWithoutRef<typeof DrawerBase.Title>
 >(function DrawerTitle({ className, ...rest }, ref) {
   return (
-    <DrawerPrimitive.Title
+    <DrawerBase.Title
       ref={ref}
       className={cn("text-lg font-semibold leading-none text-[var(--s-text)]", className)}
       {...rest}
@@ -102,10 +91,10 @@ export const DrawerTitle = forwardRef<
 
 export const DrawerDescription = forwardRef<
   HTMLParagraphElement,
-  HTMLAttributes<HTMLParagraphElement>
+  ComponentPropsWithoutRef<typeof DrawerBase.Description>
 >(function DrawerDescription({ className, ...rest }, ref) {
   return (
-    <DrawerPrimitive.Description
+    <DrawerBase.Description
       ref={ref}
       className={cn("text-sm text-[var(--s-text-muted)]", className)}
       {...rest}

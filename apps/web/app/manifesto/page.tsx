@@ -4,7 +4,7 @@ import { ManifestoContent } from "./content";
 export const metadata = buildPageMetadata({
   title: "Manifesto",
   description:
-    "Why Sigil exists: an opinionated design language built to kill the AI-generated aesthetic.",
+    "Why we built Sigil — every AI-coded site looks the same because agents get components without opinions. Sigil gives them a token layer with real design identity.",
   path: "/manifesto",
 });
 

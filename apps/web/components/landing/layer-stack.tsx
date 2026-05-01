@@ -9,7 +9,6 @@ import {
   type ReactElement,
 } from "react";
 import {
-  DiagramCalloutLine,
   MonoLabel,
   TabularValue,
   DensityText,
@@ -65,7 +64,7 @@ const LAYERS: LayerDef[] = [
     id: "components",
     num: "03",
     title: "COMPONENTS",
-    subtitle: "200+ token-driven",
+    subtitle: "350+ token-driven",
     items: [
       { label: "Button" },
       { label: "Card" },
@@ -73,7 +72,7 @@ const LAYERS: LayerDef[] = [
       { label: "Badge" },
     ],
     description:
-      "200+ React components that read from token variables. They never hardcode colors, spacing, or motion — so they survive every preset switch without changing a line.",
+      "350+ React components that read from token variables. They never hardcode colors, spacing, or motion — so they survive every preset switch without changing a line.",
     color: "oklch(0.52 0.20 160)",
   },
   {
@@ -105,7 +104,7 @@ const LAYER_NOTES: Record<string, string[]> = {
   ],
   components: [
     "Read-only consumers of tokens. They never own colors, spacing, or motion values.",
-    "Built on Radix primitives — keyboard navigation, focus management, ARIA handled.",
+    "Built on Base UI primitives — keyboard navigation, focus management, ARIA handled.",
     "Button, Card, Input, Badge, and 196 more — all available via sigil add.",
   ],
   pages: [
@@ -264,7 +263,7 @@ export function LayerStackDiagram({
       className={cn("", className)}
       {...rest}
     >
-      <div className="relative grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-0 items-stretch min-h-[520px] border border-[var(--s-border)] bg-[var(--s-background)]">
+      <div className="relative grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-0 items-stretch min-h-[550px] border border-[var(--s-border)] bg-[var(--s-background)]">
         {/* ────────────────── Isometric SVG ────────────────── */}
         <div className="relative flex items-center justify-center overflow-hidden bg-[var(--s-background)] px-4 py-10">
           {/* subtle dot grid behind the stack */}
@@ -445,10 +444,6 @@ export function LayerStackDiagram({
               );
             })}
 
-            <LayerCallouts geos={geos} ox={ox} oy={oy} activeIndex={activeIndex} />
-
-            {/* ── Agent layer dashed line ── */}
-            <AgentLine ox={ox} oy={oy} />
           </svg>
         </div>
 
@@ -645,51 +640,6 @@ function SideFaceContent({
   );
 }
 
-function LayerCallouts({
-  geos,
-  ox,
-  oy,
-  activeIndex,
-}: {
-  geos: Array<{
-    top: [number, number][];
-    left: [number, number][];
-    right: [number, number][];
-    center: [number, number];
-  }>;
-  ox: number;
-  oy: number;
-  activeIndex: number;
-}) {
-  return (
-    <g>
-      {LAYERS.map((layer, index) => {
-        if (activeIndex >= 0 && index > activeIndex) return null;
-        const geo = geos[index];
-        const isActive = activeIndex === index;
-        const start = pointOnQuad(geo.right, 0.82, 0.42);
-        const x1 = start[0] + ox;
-        const y1 = start[1] + oy;
-        const elbowX = x1 + 42;
-        const labelX = elbowX + 10;
-        const labelY = y1 - 2;
-
-        return (
-          <DiagramCalloutLine
-            key={layer.id}
-            path={`M ${x1} ${y1} L ${elbowX} ${y1 - 22} L ${labelX + 72} ${y1 - 22}`}
-            dotX={x1}
-            dotY={y1}
-            label={layer.title}
-            labelX={labelX}
-            labelY={labelY - 24}
-            active={isActive}
-          />
-        );
-      })}
-    </g>
-  );
-}
 
 function TopFaceTokenLines({ geo, ox, oy, active }: FaceProps) {
   const color = "oklch(0.50 0.24 275)";
@@ -899,41 +849,3 @@ function TopFacePageIcon({ geo, ox, oy, active }: FaceProps) {
   );
 }
 
-/* ================================================================ */
-/* Agent line along the left edge of the stack                        */
-/* ================================================================ */
-
-function AgentLine({ ox, oy }: { ox: number; oy: number }) {
-  const bottom = iso(0, 0, 0);
-  const top = iso(0, (LAYERS.length - 1) * (H + GAP) + H + LIFT, 0);
-  const x = bottom[0] + ox - 16;
-  const y1 = bottom[1] + oy;
-  const y2 = top[1] + oy;
-  const midY = (y1 + y2) / 2;
-
-  return (
-    <g>
-      <DiagramCalloutLine
-        path={`M ${x} ${y1} L ${x} ${y2}`}
-        dotX={x}
-        dotY={y1}
-        active
-      />
-      <circle cx={x} cy={y2} r={2} fill="var(--s-text-muted)" opacity={0.5} />
-      <text
-        x={x - 6}
-        y={midY}
-        textAnchor="middle"
-        fill="var(--s-text-muted)"
-        fontSize={6}
-        fontWeight={600}
-        letterSpacing="0.15em"
-        opacity={0.5}
-        transform={`rotate(-90, ${x - 6}, ${midY})`}
-        style={{ fontFamily: "var(--s-font-mono, monospace)" }}
-      >
-        AGENT LAYER
-      </text>
-    </g>
-  );
-}

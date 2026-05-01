@@ -37,7 +37,7 @@ export const KPI = forwardRef<HTMLDivElement, KPIProps>(function KPI(
       data-slot="kpi"
       className={cn(
         "flex flex-col gap-1 p-4",
-        "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+        "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
         "rounded-[var(--s-radius-card,0px)]",
         "bg-[var(--s-surface)] shadow-[var(--s-shadow-sm)]",
         className,

@@ -44,7 +44,7 @@ export const MetricCard = forwardRef<HTMLDivElement, MetricCardProps>(
         ref={ref}
         data-slot="metric-card"
         className={cn(
-          "rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] p-4 shadow-[var(--s-shadow-sm)]",
+          "rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] p-4 shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}

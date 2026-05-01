@@ -39,7 +39,7 @@ export const TEMPLATES: readonly TemplateDefinition[] = [
     metrics: [
       ["1", "token source"],
       ["46", "preset identities"],
-      ["200+", "components"],
+      ["350+", "components"],
     ],
     sections: [
       ["Token pipeline", "Preset CSS is imported once and every component reads from the same variables."],

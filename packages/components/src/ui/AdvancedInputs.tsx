@@ -121,7 +121,7 @@ export const MultiSelect = forwardRef<HTMLButtonElement, MultiSelectProps>(funct
           ref={ref as Ref<HTMLButtonElement>}
           type="button"
           className={cn(
-            "flex min-h-10 w-full flex-wrap items-center gap-1 rounded-[var(--s-radius-input,var(--s-radius-md,6px))] border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-2 text-left text-sm",
+            "flex min-h-10 w-full flex-wrap items-center gap-1 rounded-[var(--s-radius-input,var(--s-radius-md,6px))] border border-[color:var(--s-border)] bg-[var(--s-background)] px-3 py-2 text-left text-sm",
             className,
           )}
           {...props}
@@ -316,7 +316,7 @@ export const SegmentedTabs = forwardRef<HTMLDivElement, SegmentedTabsProps>(func
       ref={ref}
       data-slot="segmented-tabs"
       role="tablist"
-      className={cn("inline-flex rounded-[var(--s-radius-md,8px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-1", className)}
+      className={cn("inline-flex rounded-[var(--s-radius-md,8px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] p-1", className)}
       {...props}
     >
       {items
@@ -380,7 +380,7 @@ export const FileDropzone = forwardRef<HTMLInputElement, FileDropzoneProps>(func
     <label
       htmlFor={id}
       className={cn(
-        "flex min-h-32 cursor-pointer flex-col items-center justify-center gap-2 rounded-[var(--s-card-radius,10px)] border border-dashed border-[var(--s-border)] bg-[var(--s-surface)] p-6 text-center",
+        "flex min-h-32 cursor-pointer flex-col items-center justify-center gap-2 rounded-[var(--s-card-radius,10px)] border border-dashed border-[color:var(--s-border)] bg-[var(--s-surface)] p-6 text-center",
         className,
       )}
     >
@@ -459,8 +459,8 @@ export const CheckboxCard = forwardRef<HTMLLabelElement, CheckboxCardProps>(func
       ref={ref}
       data-checked={isChecked || undefined}
       className={cn(
-        "flex cursor-pointer gap-3 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-background)] p-4",
-        "data-[checked=true]:border-[var(--s-primary)] data-[checked=true]:bg-[color-mix(in_oklch,var(--s-primary)_8%,transparent)]",
+        "flex cursor-pointer gap-3 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-background)] p-4",
+        "data-[checked=true]:border-[color:var(--s-primary)] data-[checked=true]:bg-[color-mix(in_oklch,var(--s-primary)_8%,transparent)]",
         className,
       )}
       {...props}
@@ -491,7 +491,7 @@ export const RadioCard = forwardRef<HTMLLabelElement, RadioCardProps>(function R
   ref,
 ) {
   return (
-    <label ref={ref} className={cn("flex cursor-pointer gap-3 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-4", className)} {...props}>
+    <label ref={ref} className={cn("flex cursor-pointer gap-3 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] p-4", className)} {...props}>
       <RadioGroupItem value={value} />
       <span className="grid gap-1">
         {title && <span className="font-medium text-[var(--s-text)]">{title}</span>}

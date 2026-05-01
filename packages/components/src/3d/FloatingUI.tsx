@@ -40,7 +40,7 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
           key={i}
           className={cn(
             "absolute left-0 right-0 rounded-[var(--s-card-radius,8px)]",
-            "border border-[var(--s-border)] bg-[var(--s-surface)]",
+            "border border-[color:var(--s-border)] bg-[var(--s-surface)]",
             shadowMap[shadowDepth],
           )}
           style={{

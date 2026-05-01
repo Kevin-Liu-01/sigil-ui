@@ -33,7 +33,7 @@ export const FAQSection = forwardRef<HTMLElement, FAQSectionProps>(
           <div className={cn("mx-auto", columns === 1 ? "max-w-2xl" : "grid md:grid-cols-2 gap-x-12 gap-y-0 max-w-4xl")}>
             <AccordionPrimitive.Root type="single" collapsible className="w-full">
               {items.map((item, i) => (
-                <AccordionPrimitive.Item key={i} value={`faq-${i}`} className="border-b border-[var(--s-border)]">
+                <AccordionPrimitive.Item key={i} value={`faq-${i}`} className="border-b border-[color:var(--s-border)]">
                   <AccordionPrimitive.Header className="flex">
                     <AccordionPrimitive.Trigger className="flex flex-1 items-center justify-between py-4 text-sm font-medium text-[var(--s-text)] transition-all hover:underline [&[data-state=open]>svg]:rotate-180">
                       {item.question}

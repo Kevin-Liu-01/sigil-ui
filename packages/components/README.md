@@ -1,6 +1,6 @@
 # @sigil-ui/components
 
-200+ token-driven components that consume Sigil design tokens via CSS custom properties. These components are the visual output layer — they read from `@sigil-ui/tokens` and render accordingly.
+350+ token-driven components that consume Sigil design tokens via CSS custom properties. These components are the visual output layer — they read from `@sigil-ui/tokens` and render accordingly.
 
 ## The Core Principle
 
@@ -23,7 +23,7 @@ pnpm add @sigil-ui/components
 
 **Peer dependencies:** `@sigil-ui/tokens`, `react`, `react-dom`
 
-## Component Inventory (200+)
+## Component Inventory (350+)
 
 ### Layout (9)
 `Stack` `Grid` `Section` `Frame` `PageGrid` `Margin` `Gutter` `Divider` `HRule`

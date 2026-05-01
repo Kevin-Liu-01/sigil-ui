@@ -35,7 +35,7 @@ export const SegmentedControl = forwardRef<HTMLDivElement, SegmentedControlProps
             "inline-flex items-center gap-1 p-1",
             "rounded-[var(--s-radius-md,6px)]",
             "bg-[var(--s-surface-sunken,var(--s-surface))]",
-            "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+            "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
             className,
           )}
           {...rest}

@@ -55,7 +55,7 @@ export const CodePreview = forwardRef<HTMLDivElement, CodePreviewProps>(function
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("grid overflow-hidden rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props}>
+    <div ref={ref} className={cn("grid overflow-hidden rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)]", className)} {...props}>
       <div className="bg-[var(--s-background)] p-4">{preview}</div>
       {code && <CodeBlock code={code} language={language} className="rounded-none border-x-0 border-b-0" />}
     </div>
@@ -101,8 +101,8 @@ export const TokenPreview = forwardRef<HTMLDivElement, TokenPreviewProps>(functi
 ) {
   const tokenValue = value ?? `var(${name})`;
   return (
-    <div ref={ref} className={cn("flex items-center gap-3 rounded-[var(--s-radius-md,8px)] border border-[var(--s-border)] p-3", className)} {...props}>
-      <span className="size-8 rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border)]" style={{ background: tokenValue }} />
+    <div ref={ref} className={cn("flex items-center gap-3 rounded-[var(--s-radius-md,8px)] border border-[color:var(--s-border)] p-3", className)} {...props}>
+      <span className="size-8 rounded-[var(--s-radius-sm,4px)] border border-[color:var(--s-border)]" style={{ background: tokenValue }} />
       <span className="grid text-sm">
         <code className="font-mono text-[var(--s-text)]">{name}</code>
         <span className="text-[var(--s-text-muted)]">{tokenValue}</span>
@@ -122,7 +122,7 @@ export const ThemeSwatch = forwardRef<HTMLButtonElement, ThemeSwatchProps>(funct
   ref,
 ) {
   return (
-    <button ref={ref} type="button" aria-pressed={selected} className={cn("grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-2 text-left aria-pressed:border-[var(--s-primary)]", className)} {...props}>
+    <button ref={ref} type="button" aria-pressed={selected} className={cn("grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] p-2 text-left aria-pressed:border-[color:var(--s-primary)]", className)} {...props}>
       <span className="flex overflow-hidden rounded-[var(--s-radius-sm,4px)]">
         {colors.map((color, index) => <span key={index} className="h-8 flex-1" style={{ background: color }} />)}
       </span>
@@ -165,7 +165,7 @@ export const PromptInput = forwardRef<HTMLTextAreaElement, PromptInputProps>(fun
   ref,
 ) {
   return (
-    <div className="grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-background)] p-2">
+    <div className="grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-background)] p-2">
       <Textarea ref={ref} rows={3} className={cn("border-0 shadow-none focus-visible:ring-0", className)} {...props} />
       {actions && <div className="flex items-center justify-end gap-2">{actions}</div>}
     </div>
@@ -191,7 +191,7 @@ export const ChatMessage = forwardRef<HTMLDivElement, ChatMessageProps>(function
       {...props}
     >
       {avatar && <div className="shrink-0">{avatar}</div>}
-      <div className="max-w-[80%] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-surface)] px-3 py-2 text-sm data-[role=user]:bg-[var(--s-primary)] data-[role=user]:text-[var(--s-primary-contrast)]">
+      <div className="max-w-[80%] rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] px-3 py-2 text-sm data-[role=user]:bg-[var(--s-primary)] data-[role=user]:text-[var(--s-primary-contrast)]">
         {children}
       </div>
     </div>
@@ -232,7 +232,7 @@ export const ActivityTimeline = forwardRef<HTMLOListElement, ActivityTimelinePro
   ref,
 ) {
   return (
-    <ol ref={ref} className={cn("grid gap-4 border-l border-[var(--s-border)] pl-4", className)} {...props}>
+    <ol ref={ref} className={cn("grid gap-4 border-l border-[color:var(--s-border)] pl-4", className)} {...props}>
       {items?.map((item, index) => (
         <li key={index} className="relative grid gap-1 before:absolute before:-left-[21px] before:top-1.5 before:size-2 before:rounded-full before:bg-[var(--s-primary)]">
           <div className="font-medium text-[var(--s-text)]">{item.title}</div>
@@ -249,7 +249,7 @@ export const AuditLog = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} role="log" className={cn("grid divide-y divide-[var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props} />;
+  return <div ref={ref} role="log" className={cn("grid divide-y divide-[color:var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)]", className)} {...props} />;
 });
 
 export const Changelog = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function Changelog(
@@ -274,6 +274,6 @@ export const KeyboardKey = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
   { className, ...props },
   ref,
 ) {
-  return <kbd ref={ref} className={cn("rounded-[var(--s-radius-sm,4px)] border border-[var(--s-border)] bg-[var(--s-surface)] px-1.5 py-0.5 font-mono text-xs shadow-[var(--s-shadow-sm)]", className)} {...props} />;
+  return <kbd ref={ref} className={cn("rounded-[var(--s-radius-sm,4px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] px-1.5 py-0.5 font-mono text-xs shadow-[var(--s-shadow-sm)]", className)} {...props} />;
 });
 

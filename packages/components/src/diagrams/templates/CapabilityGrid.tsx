@@ -91,7 +91,7 @@ export const CapabilityGrid = forwardRef<HTMLDivElement, CapabilityGridProps>(
                   return (
                     <div
                       key={item.name}
-                      className="flex items-center gap-2 border border-[var(--s-border)] bg-[var(--s-surface)] px-2.5 py-1.5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]"
+                      className="flex items-center gap-2 border border-[color:var(--s-border)] bg-[var(--s-surface)] px-2.5 py-1.5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]"
                       style={{
                         opacity: visible ? 1 : 0,
                         transform: visible ? "translateY(0)" : "translateY(6px)",

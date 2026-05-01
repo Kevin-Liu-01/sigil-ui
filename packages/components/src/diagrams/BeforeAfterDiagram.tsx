@@ -19,8 +19,8 @@ export const BeforeAfterDiagram = forwardRef<HTMLDivElement, BeforeAfterDiagramP
         className={cn("grid grid-cols-1 md:grid-cols-2 gap-4", className)}
         {...props}
       >
-        <div className="flex flex-col rounded-[var(--s-radius-card,0px)] border border-[var(--s-error)]/30 overflow-hidden">
-          <div className="flex items-center gap-2 px-4 py-2 bg-[var(--s-error-muted)] border-b border-[var(--s-error)]/20">
+        <div className="flex flex-col rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-error)]/30 overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-2 bg-[var(--s-error-muted)] border-b border-[color:var(--s-error)]/20">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[var(--s-error)]" aria-hidden>
               <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.5" />
               <path d="M5 5l4 4M9 5l-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -32,8 +32,8 @@ export const BeforeAfterDiagram = forwardRef<HTMLDivElement, BeforeAfterDiagramP
           </div>
         </div>
 
-        <div className="flex flex-col rounded-[var(--s-radius-card,0px)] border border-[var(--s-success)]/30 overflow-hidden">
-          <div className="flex items-center gap-2 px-4 py-2 bg-[var(--s-success-muted)] border-b border-[var(--s-success)]/20">
+        <div className="flex flex-col rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-success)]/30 overflow-hidden">
+          <div className="flex items-center gap-2 px-4 py-2 bg-[var(--s-success-muted)] border-b border-[color:var(--s-success)]/20">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-[var(--s-success)]" aria-hidden>
               <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1.5" />
               <path d="M4.5 7l2 2 3.5-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

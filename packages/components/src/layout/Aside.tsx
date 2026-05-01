@@ -22,7 +22,7 @@ export const Aside = forwardRef<HTMLElement, AsideProps>(function Aside(
         sticky && "sticky top-0 h-screen",
         borderSide === "left" && "border-l",
         borderSide === "right" && "border-r",
-        borderSide !== "none" && "border-[var(--s-border)]",
+        borderSide !== "none" && "border-[color:var(--s-border)]",
         className,
       )}
       style={{

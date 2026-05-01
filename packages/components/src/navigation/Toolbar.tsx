@@ -16,7 +16,7 @@ export const Toolbar = forwardRef<HTMLDivElement, ToolbarProps>(function Toolbar
       data-slot="toolbar"
       className={cn(
         "flex items-center gap-1 rounded-[var(--s-radius-md,6px)]",
-        "border border-[var(--s-border)] bg-[var(--s-surface)] p-1",
+        "border border-[color:var(--s-border)] bg-[var(--s-surface)] p-1",
         className,
       )}
       {...props}

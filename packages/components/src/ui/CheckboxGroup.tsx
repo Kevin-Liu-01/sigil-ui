@@ -63,7 +63,7 @@ export const CheckboxGroupItem = forwardRef<HTMLLabelElement, CheckboxGroupItemP
           disabled={disabled}
           className={cn(
             "h-4 w-4 shrink-0 rounded-[var(--s-radius-sm,3px)]",
-            "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] accent-[var(--s-primary)]",
+            "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] accent-[var(--s-primary)]",
             "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
           )}
         />

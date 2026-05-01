@@ -1,20 +1,18 @@
 "use client";
 
-import { forwardRef, type ComponentPropsWithoutRef, type ElementRef } from "react";
-import { OTPInput, OTPInputContext } from "input-otp";
-import { useContext } from "react";
+import { forwardRef, type ComponentPropsWithoutRef } from "react";
+import { OTPFieldPreview as OTPField } from "@base-ui/react/otp-field";
 import { cn } from "../utils";
 
-export type InputOTPProps = ComponentPropsWithoutRef<typeof OTPInput>;
+export interface InputOTPProps extends ComponentPropsWithoutRef<typeof OTPField.Root> {}
 
-export const InputOTP = forwardRef<ElementRef<typeof OTPInput>, InputOTPProps>(
-  function InputOTP({ className, containerClassName, ...rest }, ref) {
+export const InputOTP = forwardRef<HTMLDivElement, InputOTPProps>(
+  function InputOTP({ className, ...rest }, ref) {
     return (
-      <OTPInput
+      <OTPField.Root
         ref={ref}
         data-slot="input-otp"
-        containerClassName={cn("flex items-center gap-2", containerClassName)}
-        className={cn("disabled:cursor-not-allowed", className)}
+        className={cn("flex items-center gap-2", className)}
         {...rest}
       />
     );
@@ -31,55 +29,42 @@ export const InputOTPGroup = forwardRef<HTMLDivElement, InputOTPGroupProps>(
   },
 );
 
-export interface InputOTPSlotProps extends ComponentPropsWithoutRef<"div"> {
-  index: number;
-}
+export interface InputOTPSlotProps extends ComponentPropsWithoutRef<typeof OTPField.Input> {}
 
-export const InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(
-  function InputOTPSlot({ index, className, ...rest }, ref) {
-    const ctx = useContext(OTPInputContext);
-    const slot = ctx.slots[index];
-
+export const InputOTPSlot = forwardRef<HTMLInputElement, InputOTPSlotProps>(
+  function InputOTPSlot({ className, ...rest }, ref) {
     return (
-      <div
+      <OTPField.Input
         ref={ref}
         className={cn(
           "relative flex h-10 w-10 items-center justify-center",
-          "border-y border-r border-[var(--s-border)] text-sm font-medium text-[var(--s-text)]",
+          "border-y border-r border-[color:var(--s-border)] text-sm font-medium text-[var(--s-text)]",
           "transition-all duration-[var(--s-duration-fast,150ms)]",
           "first:rounded-l-[var(--s-radius-md,6px)] first:border-l",
           "last:rounded-r-[var(--s-radius-md,6px)]",
-          slot?.isActive && "z-10 ring-[length:var(--s-focus-ring-width)] ring-[var(--s-focus-ring-color)] ring-offset-[var(--s-focus-ring-offset)]",
+          "data-[focused]:z-10 data-[focused]:ring-[length:var(--s-focus-ring-width)] data-[focused]:ring-[var(--s-focus-ring-color)] data-[focused]:ring-offset-[var(--s-focus-ring-offset)]",
           className,
         )}
         {...rest}
-      >
-        {slot?.char ?? ""}
-        {slot?.hasFakeCaret && (
-          <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <span className="h-4 w-px animate-pulse bg-[var(--s-text)]" />
-          </span>
-        )}
-      </div>
+      />
     );
   },
 );
 
-export interface InputOTPSeparatorProps extends ComponentPropsWithoutRef<"div"> {}
+export interface InputOTPSeparatorProps extends ComponentPropsWithoutRef<typeof OTPField.Separator> {}
 
 export const InputOTPSeparator = forwardRef<HTMLDivElement, InputOTPSeparatorProps>(
   function InputOTPSeparator({ className, ...rest }, ref) {
     return (
-      <div
+      <OTPField.Separator
         ref={ref}
-        role="separator"
         className={cn("flex items-center text-[var(--s-text-muted)]", className)}
         {...rest}
       >
         <svg width="8" height="2" viewBox="0 0 8 2" fill="currentColor" aria-hidden>
           <rect width="8" height="2" rx="1" />
         </svg>
-      </div>
+      </OTPField.Separator>
     );
   },
 );

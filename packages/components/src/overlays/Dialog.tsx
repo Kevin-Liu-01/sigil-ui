@@ -45,7 +45,7 @@ export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>(
           data-slot="dialog"
           className={cn(
             "fixed left-1/2 top-1/2 z-50 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2",
-            "gap-4 border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border,var(--s-border))]",
+            "gap-4 border border-[style:var(--s-border-style,solid)] border-[color:var(--s-overlay-border,var(--s-border))]",
             "bg-[var(--s-overlay-surface,var(--s-surface))] p-[var(--s-overlay-padding,24px)]",
             "shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
             "ring-1 ring-[var(--s-text)]/[0.04]",

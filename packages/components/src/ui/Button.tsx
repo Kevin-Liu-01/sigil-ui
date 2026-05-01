@@ -45,7 +45,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   ].join(" "),
   secondary: [
     "bg-[var(--s-surface)] text-[var(--s-text)]",
-    "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+    "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
     "hover:bg-[var(--s-surface-elevated)]",
   ].join(" "),
   ghost: [
@@ -54,7 +54,7 @@ const variantStyles: Record<ButtonVariant, string> = {
   ].join(" "),
   outline: [
     "bg-transparent text-[var(--s-text)]",
-    "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+    "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
     "hover:bg-[var(--s-surface)]",
   ].join(" "),
   destructive: [

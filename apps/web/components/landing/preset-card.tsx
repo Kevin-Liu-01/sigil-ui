@@ -26,7 +26,7 @@ export function PresetCard({
         border: `1px solid ${border}`,
         background: bg,
         color: text,
-        minHeight: 180,
+        minHeight: 200,
         cursor: "pointer",
         outline: active ? "2px solid var(--s-primary)" : "none",
         outlineOffset: 2,

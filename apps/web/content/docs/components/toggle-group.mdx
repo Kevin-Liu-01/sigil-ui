@@ -12,7 +12,7 @@ import { ToggleGroup, ToggleGroupItem } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<ToggleGroup type="single" defaultValue="center">
+<ToggleGroup defaultValue={["center"]}>
   <ToggleGroupItem value="left" aria-label="Align left">
     <AlignLeftIcon className="size-4" />
   </ToggleGroupItem>
@@ -38,7 +38,7 @@ import { ToggleGroup, ToggleGroupItem } from "@sigil-ui/components";
 ## Variants
 
 ```tsx
-<ToggleGroup type="single" variant="outline">
+<ToggleGroup variant="outline">
   <ToggleGroupItem value="a">A</ToggleGroupItem>
   <ToggleGroupItem value="b">B</ToggleGroupItem>
 </ToggleGroup>

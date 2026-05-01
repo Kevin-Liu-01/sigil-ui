@@ -74,7 +74,7 @@ export const FeatureShowcaseSection = forwardRef<HTMLElement, FeatureShowcaseSec
                     </div>
                   )}
                 </div>
-                <div className="rounded-[var(--s-radius-card,0px)] border border-[var(--s-border-muted)] bg-[var(--s-surface)] overflow-hidden">
+                <div className="rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border-muted)] bg-[var(--s-surface)] overflow-hidden">
                   {row.media}
                 </div>
               </div>

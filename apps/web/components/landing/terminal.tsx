@@ -93,7 +93,7 @@ export function Terminal({ lines, title = "terminal" }: TerminalProps) {
           padding: "var(--s-space-6)",
           fontSize: "13px",
           lineHeight: 1.8,
-          minHeight: 180,
+          minHeight: 200,
         }}
       >
         {lines.slice(0, visibleCount).map((line, i) => (

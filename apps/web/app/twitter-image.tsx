@@ -117,7 +117,7 @@ export default async function Image() {
               display: "flex",
             }}
           >
-            200+ components · 519 tokens · 46 presets
+            350+ components · 519 tokens · 46 presets
           </div>
         </div>
 

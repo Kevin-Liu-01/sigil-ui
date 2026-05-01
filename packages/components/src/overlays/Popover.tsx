@@ -29,7 +29,7 @@ export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>(
           className={cn(
             "z-50 w-72 p-4",
             "rounded-[var(--s-card-radius,8px)]",
-            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "bg-[var(--s-surface,oklch(0.97_0_0))] text-[var(--s-text)]",
             "shadow-[var(--s-shadow-md,0_4px_16px_oklch(0_0_0/0.12))]",
             "outline-none",

@@ -23,7 +23,7 @@ export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
         data-slot="testimonial-card"
         className={cn(
           "flex flex-col gap-4 p-6 rounded-[var(--s-card-radius,8px)]",
-          "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-sm)]",
+          "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}
@@ -39,12 +39,12 @@ export const TestimonialCard = forwardRef<HTMLDivElement, TestimonialCardProps>(
         <blockquote className="text-sm text-[var(--s-text)] leading-relaxed flex-1">
           &ldquo;{quote}&rdquo;
         </blockquote>
-        <div className="flex items-center gap-3 pt-2 border-t border-[style:var(--s-border-style,solid)] border-[var(--s-border)]">
+        <div className="flex items-center gap-3 pt-2 border-t border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]">
           {avatar && (
             <img
               src={avatar}
               alt={author}
-              className="w-10 h-10 rounded-[var(--s-radius-full)] object-cover border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]"
+              className="w-10 h-10 rounded-[var(--s-radius-full)] object-cover border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]"
               loading="lazy"
             />
           )}

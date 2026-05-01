@@ -43,18 +43,18 @@ export const Dock = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(functio
     <nav
       ref={ref}
       data-slot="dock"
-      className={cn("fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-[var(--s-radius-full,9999px)] border border-[var(--s-border)] bg-[var(--s-overlay-surface,var(--s-surface))] p-1 shadow-[var(--s-shadow-lg)]", className)}
+      className={cn("fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-[var(--s-radius-full,9999px)] border border-[color:var(--s-border)] bg-[var(--s-overlay-surface,var(--s-surface))] p-1 shadow-[var(--s-shadow-lg)]", className)}
       {...props}
     />
   );
 });
 
 export const TopBar = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function TopBar({ className, ...props }, ref) {
-  return <header ref={ref} className={cn("sticky top-0 z-40 flex min-h-14 items-center border-b border-[var(--s-border)] bg-[var(--s-background)]/90 px-4 backdrop-blur", className)} {...props} />;
+  return <header ref={ref} className={cn("sticky top-0 z-40 flex min-h-14 items-center border-b border-[color:var(--s-border)] bg-[var(--s-background)]/90 px-4 backdrop-blur", className)} {...props} />;
 });
 
 export const BottomBar = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function BottomBar({ className, ...props }, ref) {
-  return <footer ref={ref} className={cn("sticky bottom-0 z-40 flex min-h-14 items-center border-t border-[var(--s-border)] bg-[var(--s-background)]/90 px-4 backdrop-blur", className)} {...props} />;
+  return <footer ref={ref} className={cn("sticky bottom-0 z-40 flex min-h-14 items-center border-t border-[color:var(--s-border)] bg-[var(--s-background)]/90 px-4 backdrop-blur", className)} {...props} />;
 });
 
 export const MobileNav = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function MobileNav({ className, ...props }, ref) {
@@ -62,7 +62,7 @@ export const MobileNav = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(fu
 });
 
 export const SidebarNav = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(function SidebarNav({ className, ...props }, ref) {
-  return <nav ref={ref} className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-2", className)} {...props} />;
+  return <nav ref={ref} className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] p-2", className)} {...props} />;
 });
 
 export interface HeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
@@ -76,7 +76,7 @@ export const AppHeader = forwardRef<HTMLDivElement, HeaderProps>(function AppHea
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("flex flex-wrap items-center justify-between gap-4 border-b border-[var(--s-border)] pb-4", className)} {...props}>
+    <div ref={ref} className={cn("flex flex-wrap items-center justify-between gap-4 border-b border-[color:var(--s-border)] pb-4", className)} {...props}>
       <div className="grid gap-1">
         {title && <h1 className="text-xl font-semibold text-[var(--s-text)]">{title}</h1>}
         {description && <p className="text-sm text-[var(--s-text-muted)]">{description}</p>}

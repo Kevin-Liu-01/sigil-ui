@@ -44,7 +44,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
         data-slot="sidebar"
         data-collapsed={collapsed || undefined}
         className={cn(
-          "sticky top-0 flex h-screen flex-col border-r border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "sticky top-0 flex h-screen flex-col border-r border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)]",
           "transition-[width] duration-[var(--s-duration-normal,200ms)] ease-out",
           collapsed ? "w-16" : "w-[var(--s-sidebar-width,280px)]",
@@ -60,7 +60,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
           onClick={() => setCollapsed(!collapsed)}
           className={cn(
             "absolute -right-3 top-6 z-10 inline-flex h-6 w-6 items-center justify-center rounded-[var(--s-radius-full)]",
-            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
+            "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
             "shadow-[var(--s-shadow-sm)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10 hover:text-[var(--s-text)]",
           )}
@@ -82,7 +82,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
 export const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarHeader({ className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="sidebar-header" className={cn("flex items-center gap-2 px-4 py-4 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-header" className={cn("flex items-center gap-2 px-4 py-4 border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
     );
   },
 );
@@ -102,7 +102,7 @@ export const SidebarContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivE
 export const SidebarFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarFooter({ className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="sidebar-footer" className={cn("border-t border-[var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-3", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-footer" className={cn("border-t border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-3", className)} {...rest} />
     );
   },
 );

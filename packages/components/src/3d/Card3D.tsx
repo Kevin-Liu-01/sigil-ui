@@ -54,7 +54,7 @@ export const Card3D = forwardRef<HTMLDivElement, Card3DProps>(function Card3D(
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       className={cn(
-        "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)]",
+        "rounded-[var(--s-card-radius,8px)] border border-[color:var(--s-border)]",
         "bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
         "will-change-transform",
         className,

@@ -1,7 +1,7 @@
 {
   "name": "@sigil-ui/primitives",
   "version": "1.0.0",
-  "description": "Headless behavior primitives for Sigil UI",
+  "description": "Headless behavior primitives for Sigil UI — Radix for core components, Base UI for extended primitives",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -28,6 +28,7 @@
     "react-dom": "^18.0.0 || ^19.0.0"
   },
   "dependencies": {
+    "@base-ui/react": "^1.4.1",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-alert-dialog": "^1.1.15",
     "@radix-ui/react-aspect-ratio": "^1.1.8",

@@ -27,8 +27,8 @@ export const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
             "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-[var(--s-surface)] disabled:text-[var(--s-text-muted)]",
             "cursor-pointer",
             hasError
-              ? "border-[var(--s-error)] focus:border-[var(--s-error)] focus:ring-[var(--s-error)]/20"
-              : "border-[var(--s-border)] focus:border-[var(--s-input-focus-ring-color)] focus:ring-[var(--s-input-focus-ring-color)]/20",
+              ? "border-[color:var(--s-error)] focus:border-[color:var(--s-error)] focus:ring-[var(--s-error)]/20"
+              : "border-[color:var(--s-border)] focus:border-[color:var(--s-input-focus-ring-color)] focus:ring-[var(--s-input-focus-ring-color)]/20",
             className,
           )}
           {...props}

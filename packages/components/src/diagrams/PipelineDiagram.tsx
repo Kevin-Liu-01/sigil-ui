@@ -40,7 +40,7 @@ export const PipelineDiagram = forwardRef<HTMLDivElement, PipelineDiagramProps>(
               <div className={cn(
                 "flex items-center justify-center w-10 h-10",
                 "rounded-[var(--s-radius-full,9999px)]",
-                "border-2 border-[var(--s-primary)] bg-[var(--s-primary-muted)]",
+                "border-2 border-[color:var(--s-primary)] bg-[var(--s-primary-muted)]",
                 "text-[var(--s-primary)] [&_svg]:size-4",
               )}>
                 {step.icon ?? (

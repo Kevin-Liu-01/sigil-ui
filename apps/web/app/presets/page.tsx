@@ -81,7 +81,7 @@ const STEPS = [
   {
     number: "03",
     title: "Everything updates",
-    description: "CSS recompiles, 200+ token-driven components refresh — zero component-level edits required.",
+    description: "CSS recompiles, 350+ token-driven components refresh — zero component-level edits required.",
   },
 ] as const;
 

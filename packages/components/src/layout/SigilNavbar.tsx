@@ -78,22 +78,25 @@ export function SigilNavbar({
   const marginCell = Math.round(gridCell / 3);
 
   function marginBg(side: "left" | "right"): CSSProperties {
-    if (!showMarginLines || marginPattern === "none") return {};
+    if (!showMarginLines || marginPattern === "none") return { background: "var(--s-background)" };
     const angle = side === "left" ? 45 : -45;
     const C = "var(--s-border-muted)";
     if (marginPattern === "horizontal") {
       return {
+        backgroundColor: "var(--s-background)",
         backgroundImage: `linear-gradient(to bottom, transparent ${marginCell - 1}px, ${C} ${marginCell - 1}px)`,
         backgroundSize: `100% ${marginCell}px`,
       };
     }
     if (marginPattern === "dots") {
       return {
+        backgroundColor: "var(--s-background)",
         backgroundImage: `radial-gradient(circle, ${C} 0.75px, transparent 0.75px)`,
         backgroundSize: `${marginCell}px ${marginCell}px`,
       };
     }
     return {
+      backgroundColor: "var(--s-background)",
       backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${marginCell - 1}px, ${C} ${marginCell - 1}px, ${C} ${marginCell}px)`,
       backgroundSize: `${Math.round(marginCell * 1.414)}px ${Math.round(marginCell * 1.414)}px`,
     };

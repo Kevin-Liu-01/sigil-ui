@@ -49,7 +49,7 @@ export const KeyValue = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
 export const PropertyList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { items?: KeyValueItem[] }>(
   function PropertyList({ items, children, className, ...props }, ref) {
     return (
-      <div ref={ref} className={cn("grid divide-y divide-[var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props}>
+      <div ref={ref} className={cn("grid divide-y divide-[color:var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)]", className)} {...props}>
         {items?.map((item, index) => <KeyValue key={index} label={item.label} value={item.value} className="p-3" />)}
         {children}
       </div>
@@ -68,7 +68,7 @@ export const StatCard = forwardRef<HTMLDivElement, StatCardProps>(function StatC
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-4", className)} {...props}>
+    <div ref={ref} className={cn("grid gap-2 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] p-4", className)} {...props}>
       {label && <span className="text-xs uppercase tracking-[0.12em] text-[var(--s-text-muted)]">{label}</span>}
       {value && <span className="text-2xl font-semibold tabular-nums text-[var(--s-text)]">{value}</span>}
       {change && <span className="text-sm text-[var(--s-text-muted)]">{change}</span>}
@@ -143,7 +143,7 @@ export const DataList = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("grid divide-y divide-[var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)]", className)} {...props} />;
+  return <div ref={ref} className={cn("grid divide-y divide-[color:var(--s-border)] rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)]", className)} {...props} />;
 });
 
 export const DataListItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(function DataListItem(
@@ -238,7 +238,7 @@ export const BulkActions = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElem
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("flex items-center gap-2 rounded-[var(--s-radius-md,8px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-2", className)} {...props} />;
+  return <div ref={ref} className={cn("flex items-center gap-2 rounded-[var(--s-radius-md,8px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] p-2", className)} {...props} />;
 });
 
 export const EmptyTable = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement> & { message?: string }>(
@@ -286,7 +286,7 @@ export const Listbox = forwardRef<HTMLDivElement, ListboxProps>(function Listbox
           move(-1);
         }
       }}
-      className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-1 focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]", className)}
+      className={cn("grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] p-1 focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]", className)}
       {...props}
     >
       {options.map((option) => (
@@ -315,7 +315,7 @@ export interface VirtualListProps<T> extends HTMLAttributes<HTMLDivElement> {
 function VirtualListInner<T>({ items, renderItem, className, ...props }: VirtualListProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div ref={ref} className={cn("max-h-80 overflow-auto [content-visibility:auto]", className)} {...props}>
-      {items.map((item, index) => renderItem ? renderItem(item, index) : <div key={index} className="border-b border-[var(--s-border)] px-3 py-2 text-sm">{item as ReactNode}</div>)}
+      {items.map((item, index) => renderItem ? renderItem(item, index) : <div key={index} className="border-b border-[color:var(--s-border)] px-3 py-2 text-sm">{item as ReactNode}</div>)}
     </div>
   );
 }

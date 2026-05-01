@@ -231,7 +231,7 @@ function generatePreview(componentName, props) {
     TypeWriter: `<ComponentPreview>\n  <TypeWriter text="Hello, World!" />\n</ComponentPreview>`,
     Pattern: `<ComponentPreview>\n  <div style={{position:"relative",width:"100%",height:120}}>\n    <Pattern />\n  </div>\n</ComponentPreview>`,
     GrainGradient: `<ComponentPreview>\n  <div style={{position:"relative",width:"100%",height:120,borderRadius:8,overflow:"hidden"}}>\n    <GrainGradient />\n  </div>\n</ComponentPreview>`,
-    ScrollArea: `<ComponentPreview>\n  <ScrollArea className="h-32 w-48 rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)]">\n    <div className="p-4">Scrollable content goes here. Add more text to see scrolling behavior.</div>\n  </ScrollArea>\n</ComponentPreview>`,
+    ScrollArea: `<ComponentPreview>\n  <ScrollArea className="h-32 w-48 rounded-[var(--s-radius-md,6px)] border border-[color:var(--s-border)]">\n    <div className="p-4">Scrollable content goes here. Add more text to see scrolling behavior.</div>\n  </ScrollArea>\n</ComponentPreview>`,
     Collapsible: `<ComponentPreview vertical>\n  <Collapsible>\n    <CollapsibleTrigger>Toggle content</CollapsibleTrigger>\n    <CollapsibleContent>Hidden content here</CollapsibleContent>\n  </Collapsible>\n</ComponentPreview>`,
     AspectRatio: `<ComponentPreview>\n  <AspectRatio ratio={16/9} className="bg-[var(--s-surface)] rounded">\n    <div className="flex items-center justify-center h-full text-[var(--s-text-muted)]">16:9</div>\n  </AspectRatio>\n</ComponentPreview>`,
     Editable: `<ComponentPreview>\n  <Editable defaultValue="Click to edit" />\n</ComponentPreview>`,

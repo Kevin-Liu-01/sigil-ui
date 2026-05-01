@@ -197,7 +197,7 @@ function CalendarDropdown({
           "text-[var(--s-text)] bg-transparent",
           "border border-transparent",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
-          "hover:bg-[var(--s-surface)] hover:border-[var(--s-border)]",
+          "hover:bg-[var(--s-surface)] hover:border-[color:var(--s-border)]",
           "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
           "disabled:opacity-50 disabled:cursor-not-allowed",
           "cursor-pointer select-none",
@@ -215,7 +215,7 @@ function CalendarDropdown({
             "absolute left-1/2 top-[calc(100%+4px)] z-50 -translate-x-1/2",
             "min-w-[8rem] overflow-hidden p-1",
             "rounded-[var(--s-card-radius,var(--s-radius-md,8px))]",
-            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-lg)]",
             "animate-in fade-in-0 zoom-in-95 slide-in-from-top-2",
           )}

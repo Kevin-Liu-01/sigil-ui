@@ -133,7 +133,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                 return (
                   <div
                     key={c.label}
-                    className="flex items-center gap-2 border border-dashed border-[var(--s-border)] bg-[var(--s-background)] px-2.5 py-2"
+                    className="flex items-center gap-2 border border-dashed border-[color:var(--s-border)] bg-[var(--s-background)] px-2.5 py-2"
                     style={{
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateY(0)" : "translateY(8px)",
@@ -174,7 +174,7 @@ export const StatePersistence = forwardRef<HTMLDivElement, StatePersistenceProps
                 return (
                   <div
                     key={row.label}
-                    className="flex items-center gap-3 border border-[var(--s-border)] bg-[var(--s-background)] px-3.5 py-2.5"
+                    className="flex items-center gap-3 border border-[color:var(--s-border)] bg-[var(--s-background)] px-3.5 py-2.5"
                     style={{
                       opacity: visible ? 1 : 0,
                       transform: visible ? "translateX(0)" : "translateX(-6px)",

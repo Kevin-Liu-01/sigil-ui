@@ -263,10 +263,10 @@
   --s-card-radius: 0px;
 
   /* Sigil grid */
-  --s-grid-cell: 48px;
+  --s-grid-cell: 50px;
   --s-cross-arm: 10px;
   --s-cross-stroke: 1.5px;
-  --s-rail-gap: 24px;
+  --s-rail-gap: 50px;
   --s-content-max: 1200px;
 
   /* Border widths */
@@ -374,7 +374,7 @@
   --s-card-description-size: 0.875rem;
 
   /* Navigation */
-  --s-nav-navbar-height: 56px;
+  --s-nav-navbar-height: 50px;
   --s-nav-navbar-backdrop-blur: 12px;
   --s-nav-navbar-border: 1px solid;
   --s-nav-navbar-bg-opacity: 0.8;
@@ -441,11 +441,11 @@
   --s-input-py: 8px;
   --s-badge-px: 10px;
   --s-badge-py: 2px;
-  --s-section-py: 64px;
-  --s-section-py-lg: 96px;
-  --s-navbar-height: 56px;
+  --s-section-py: 100px;
+  --s-section-py-lg: 100px;
+  --s-navbar-height: 50px;
   --s-navbar-px: 20px;
-  --s-footer-py: 48px;
+  --s-footer-py: 50px;
   --s-modal-padding: 24px;
   --s-popover-padding: 16px;
   --s-tooltip-padding: 6px 12px;
@@ -465,7 +465,7 @@
   --s-grid-gap: 24px;
   --s-bento-gap: 16px;
   --s-bento-radius: 0px;
-  --s-bento-min-height: 180px;
+  --s-bento-min-height: 200px;
   --s-section-gap: 24px;
   --s-sidebar-width: 256px;
   --s-sidebar-collapsed: 48px;
@@ -930,8 +930,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Section with bottom border */
 .s-section-border {
   border-bottom: 1px solid var(--s-border-muted);
-  padding-bottom: var(--s-section-padding-y, 64px);
-  margin-bottom: var(--s-section-padding-y, 64px);
+  padding-bottom: var(--s-section-padding-y, 100px);
+  margin-bottom: var(--s-section-padding-y, 100px);
 }
 
 /* Monospace data table */
@@ -1085,8 +1085,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section {
-  padding-top: var(--s-section-padding-y, 64px);
-  padding-bottom: var(--s-section-padding-y, 64px);
+  padding-top: var(--s-section-padding-y, 100px);
+  padding-bottom: var(--s-section-padding-y, 100px);
   padding-left: var(--s-align-rail-margin, 24px);
   padding-right: var(--s-align-rail-margin, 24px);
   max-width: var(--s-align-rail-width, 1200px);
@@ -1094,8 +1094,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section-hero {
-  padding-top: var(--s-section-padding-y-hero, 120px);
-  padding-bottom: var(--s-section-padding-y-hero, 120px);
+  padding-top: var(--s-section-padding-y-hero, 150px);
+  padding-bottom: var(--s-section-padding-y-hero, 150px);
 }
 
 .s-divider {

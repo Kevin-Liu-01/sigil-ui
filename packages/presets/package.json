@@ -1,7 +1,7 @@
 {
   "name": "@sigil-ui/presets",
   "version": "1.0.0",
-  "description": "Built-in presets for Sigil UI — 44 curated token sheets with font pairings",
+  "description": "46 curated presets for Sigil UI — each rewrites all 519 tokens to create a distinct visual identity with matched font pairings",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",

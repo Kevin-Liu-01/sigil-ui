@@ -95,7 +95,7 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
                   key={i}
                   className="flex items-center gap-3 px-1 -mx-1 cursor-default"
                   style={{
-                    height: 26,
+                    height: 50,
                     borderRadius: 0,
                     background: active ? "var(--s-primary-muted)" : "transparent",
                     transition: "background 200ms ease",
@@ -123,7 +123,7 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
                 </div>
               );
             })}
-            <div className="h-[26px] flex items-center px-1 -mx-1">
+            <div className="h-[50px] flex items-center px-1 -mx-1">
               <span
                 className="font-mono"
                 style={{
@@ -164,7 +164,7 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
                   key={i}
                   className="flex items-baseline gap-1 px-1 -mx-1"
                   style={{
-                    height: 26,
+                    height: 50,
                     borderRadius: 0,
                     background: active ? "var(--s-primary-muted)" : "transparent",
                     transition: "background 200ms ease",
@@ -374,7 +374,7 @@ const LAYOUT_CELLS: ShowcaseCell[] = [
           <div
             key={n}
             style={{
-              height: 24,
+              height: 50,
               background: "var(--s-surface-elevated)",
               border: "1px solid var(--s-border)",
               borderRadius: 0,
@@ -402,7 +402,7 @@ const LAYOUT_CELLS: ShowcaseCell[] = [
       <div
         className="flex items-center justify-center w-full"
         style={{
-          height: 48,
+          height: 50,
           border: "2px solid var(--s-border-strong)",
           borderRadius: 0,
           background: "var(--s-surface)",
@@ -420,7 +420,7 @@ const TAB_CONFIG: Record<string, ShowcaseCell[]> = {
 };
 
 const CELL_STYLE: React.CSSProperties = {
-  minHeight: 120,
+  minHeight: 150,
   padding: "10px 10px 6px",
   borderRadius: 0,
   border: "1px solid var(--s-border-muted)",
@@ -819,7 +819,7 @@ export function CodeExample({ filename, language, code, highlightLines = [], cla
       <div
         className="flex items-center justify-between px-3"
         style={{
-          height: 32,
+          height: 50,
           borderBottom: "1px solid var(--s-border)",
           background: "var(--s-surface)",
         }}
@@ -1007,7 +1007,7 @@ export function MarkdownPreview({ content, onTokenHover, highlightedToken, class
           <div
             className="flex items-center gap-2 px-3"
             style={{
-              height: 28,
+              height: 50,
               borderBottom: "1px solid var(--s-border-muted)",
               background: "var(--s-surface)",
             }}
@@ -1036,7 +1036,7 @@ export function MarkdownPreview({ content, onTokenHover, highlightedToken, class
                       style={{
                         fontSize: 11,
                         color: "var(--s-text)",
-                        height: 28,
+                        height: 50,
                         borderBottom: "1px solid var(--s-border-muted)",
                         width: "40%",
                       }}
@@ -1048,7 +1048,7 @@ export function MarkdownPreview({ content, onTokenHover, highlightedToken, class
                       style={{
                         fontSize: 11,
                         color: valueColor(row.value),
-                        height: 28,
+                        height: 50,
                         borderBottom: "1px solid var(--s-border-muted)",
                       }}
                     >

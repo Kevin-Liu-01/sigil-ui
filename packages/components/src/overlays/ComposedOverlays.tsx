@@ -165,7 +165,7 @@ export const ImagePreview = forwardRef<HTMLButtonElement, ImagePreviewProps>(fun
       <button
         ref={ref}
         type="button"
-        className={cn("overflow-hidden rounded-[var(--s-radius-md,8px)] border border-[var(--s-border)]", className)}
+        className={cn("overflow-hidden rounded-[var(--s-radius-md,8px)] border border-[color:var(--s-border)]", className)}
         onClick={() => setOpen(true)}
         {...props}
       >
@@ -251,7 +251,7 @@ export const MegaMenu = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(fun
       ref={ref}
       data-slot="mega-menu"
       className={cn(
-        "grid gap-4 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-surface)] p-4 shadow-[var(--s-shadow-lg)] md:grid-cols-3",
+        "grid gap-4 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] p-4 shadow-[var(--s-shadow-lg)] md:grid-cols-3",
         className,
       )}
       {...props}
@@ -293,7 +293,7 @@ export const FloatingPanel = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEl
       ref={ref}
       data-slot="floating-panel"
       className={cn(
-        "rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-overlay-surface,var(--s-surface))] p-4 shadow-[var(--s-overlay-shadow,var(--s-shadow-lg))]",
+        "rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-overlay-surface,var(--s-surface))] p-4 shadow-[var(--s-overlay-shadow,var(--s-shadow-lg))]",
         className,
       )}
       {...props}

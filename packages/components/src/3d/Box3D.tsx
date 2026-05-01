@@ -20,9 +20,9 @@ export interface Box3DProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantStyles: Record<string, string> = {
-  container: "border-[var(--s-border)]",
-  card: "border-[var(--s-border)] shadow-[var(--s-shadow-md)]",
-  panel: "border-[var(--s-border-strong)]",
+  container: "border-[color:var(--s-border)]",
+  card: "border-[color:var(--s-border)] shadow-[var(--s-shadow-md)]",
+  panel: "border-[color:var(--s-border-strong)]",
 };
 
 /** Token-driven projected box with attached front, top, and side faces. */
@@ -51,7 +51,7 @@ export const Box3D = forwardRef<HTMLDivElement, Box3DProps>(function Box3D(
     ...style,
   } as CSSProperties;
 
-  const faceBase = "border border-[var(--s-border)] bg-[var(--s-surface)]";
+  const faceBase = "border border-[color:var(--s-border)] bg-[var(--s-surface)]";
   const sideFace = cn("pointer-events-none absolute", faceBase, "bg-[var(--s-surface-elevated,var(--s-surface))]");
 
   return (

@@ -4,7 +4,7 @@ import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 export const metadata = buildPageMetadata({
   title: "About",
   description:
-    "The story behind Sigil UI — a token-driven design system built for AI agents.",
+    "Why we built Sigil UI — a React component library where one token file replaces scattered styling across hundreds of components.",
   path: "/about",
 });
 
@@ -31,24 +31,27 @@ export default function AboutPage() {
         }}
       >
         <p>
-          Sigil is a token-driven design system for people who believe visual
-          identity should be a single source of truth — not scattered across
-          hundreds of component files. One token layer controls the visual system.
-          {` ${SIGIL_PRODUCT_STATS.componentCountLabel}`} token-driven components read those variables. {SIGIL_PRODUCT_STATS.presetCount} presets swap the entire
-          aesthetic in a single command.
+          Most design systems give you components without opinions. You copy them,
+          manually style each one, and inevitably drift. Sigil takes a different
+          approach: one token file controls your entire visual identity. Every
+          color, font, radius, shadow, and animation resolves to a single named
+          token. {SIGIL_PRODUCT_STATS.componentCountLabel} components read those
+          tokens through CSS custom properties — so you change the source, and
+          everything downstream updates.
+        </p>
+        <p style={{ marginTop: 16 }}>
+          The token surface is a markdown file (<code>sigil.tokens.md</code>)
+          that compiles to {SIGIL_PRODUCT_STATS.tokenCount} CSS variables. Humans
+          and AI agents edit the same file. {SIGIL_PRODUCT_STATS.presetCount}{" "}
+          curated presets swap every token at once — not a color toggle, a
+          different design language.
+        </p>
+        <p style={{ marginTop: 16 }}>
+          Sigil also ships a CLI for project setup, preset switching, and health
+          checks; a drag-and-drop sandbox for composing pages; and auto-generated
+          agent instructions so LLMs can build with it immediately.
         </p>
         <p style={{ marginTop: 16 }}>Built by Kevin Liu.</p>
-        <p style={{ marginTop: 16 }}>
-          The idea: one markdown file (<code>sigil.tokens.md</code>) controls
-          core token overrides. {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components read these variables. {SIGIL_PRODUCT_STATS.presetCount} presets
-          swap the entire visual identity. Your agent edits one file. Everything
-          updates.
-        </p>
-        <p style={{ marginTop: 16 }}>
-          Sigil ships a CLI (<code>npx @sigil-ui/cli convert</code>), a preset browser, a
-          drag-and-drop sandbox, and agent instructions so LLMs can build with
-          it out of the box.
-        </p>
         <p style={{ marginTop: 24 }}>
           <a href="/" style={{ color: "var(--s-primary)" }}>
             ← Back home

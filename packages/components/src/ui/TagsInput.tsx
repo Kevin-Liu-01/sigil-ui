@@ -72,9 +72,9 @@ export const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(function Tag
       className={cn(
         "flex flex-wrap items-center gap-1.5 min-h-[var(--s-input-height,36px)] px-2 py-1.5",
         "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
-        "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+        "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
         "bg-[var(--s-background)]",
-        "focus-within:ring-[length:var(--s-input-focus-ring-width)] focus-within:ring-[var(--s-input-focus-ring-color)]/20 focus-within:border-[var(--s-input-focus-ring-color)]",
+        "focus-within:ring-[length:var(--s-input-focus-ring-width)] focus-within:ring-[var(--s-input-focus-ring-color)]/20 focus-within:border-[color:var(--s-input-focus-ring-color)]",
         "transition-all duration-[var(--s-duration-fast,150ms)]",
         disabled && "opacity-50 cursor-not-allowed",
         className,
@@ -89,7 +89,7 @@ export const TagsInput = forwardRef<HTMLDivElement, TagsInputProps>(function Tag
             "inline-flex items-center gap-1 h-6 px-2",
             "rounded-[var(--s-radius-sm,3px)]",
             "bg-[var(--s-surface)] text-[var(--s-text)] text-xs font-medium",
-            "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+            "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
           )}
         >
           {tag}

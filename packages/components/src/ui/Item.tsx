@@ -73,7 +73,7 @@ export const ItemGroup = forwardRef<HTMLDivElement, ItemGroupProps>(function Ite
       data-slot="item-group"
       role="list"
       className={cn(
-        "flex flex-col divide-y divide-[var(--s-border)]",
+        "flex flex-col divide-y divide-[color:var(--s-border)]",
         "[&>[data-slot=item]]:py-3 [&>[data-slot=item]:first-child]:pt-0 [&>[data-slot=item]:last-child]:pb-0",
         className,
       )}

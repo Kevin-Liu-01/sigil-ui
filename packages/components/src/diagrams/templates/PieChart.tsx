@@ -20,12 +20,12 @@ export interface PieChartProps extends Omit<SVGAttributes<SVGSVGElement>, "width
 }
 
 const defaultColors = [
-  "var(--s-chart-series-1)",
-  "var(--s-chart-series-2)",
-  "var(--s-chart-series-3)",
-  "var(--s-chart-series-4)",
-  "var(--s-chart-series-5)",
-  "var(--s-chart-neutral)",
+  "var(--s-chart-series-1, oklch(0.65 0.19 250))",
+  "var(--s-chart-series-2, oklch(0.7 0.18 160))",
+  "var(--s-chart-series-3, oklch(0.65 0.2 310))",
+  "var(--s-chart-series-4, oklch(0.72 0.16 60))",
+  "var(--s-chart-series-5, oklch(0.6 0.22 30))",
+  "var(--s-chart-neutral, oklch(0.55 0.02 250))",
 ];
 
 export const PieChart = forwardRef<SVGSVGElement, PieChartProps>(

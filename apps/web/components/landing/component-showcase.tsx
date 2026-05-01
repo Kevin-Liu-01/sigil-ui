@@ -823,7 +823,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "Drawer", category: "Overlays", variants: 2, render: () => (
     <Drawer>
-      <DrawerTrigger asChild><Button size="sm" variant="outline" className="text-xs">Open Drawer</Button></DrawerTrigger>
+      <DrawerTrigger render={<Button size="sm" variant="outline" className="text-xs" />}>Open Drawer</DrawerTrigger>
       <DrawerContent><DrawerHeader><DrawerTitle>Drawer</DrawerTitle></DrawerHeader></DrawerContent>
     </Drawer>
   )},
@@ -995,12 +995,12 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "InputOTP", category: "Forms", variants: 1, render: () => (
     <div className="flex justify-center w-full">
-      <InputOTP maxLength={4}>
+      <InputOTP length={4}>
         <InputOTPGroup>
-          <InputOTPSlot index={0} />
-          <InputOTPSlot index={1} />
-          <InputOTPSlot index={2} />
-          <InputOTPSlot index={3} />
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
+          <InputOTPSlot />
         </InputOTPGroup>
       </InputOTP>
     </div>
@@ -1199,7 +1199,7 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "StatsSection", category: "Sections", variants: 3, render: () => (
     <div className="grid grid-cols-3 gap-2 w-full text-center">
-      {[{ v: "200+", l: "Token-Driven Components" }, { v: "44", l: "Presets" }, { v: "519", l: "Tokens" }].map((s) => (
+      {[{ v: "350+", l: "Token-Driven Components" }, { v: "46", l: "Presets" }, { v: "519", l: "Tokens" }].map((s) => (
         <div key={s.l} className="py-2">
           <div className="text-base font-bold text-[var(--s-text)]">{s.v}</div>
           <div className="text-[9px] text-[var(--s-text-muted)]">{s.l}</div>
@@ -1753,7 +1753,7 @@ const CELLS: ComponentCell[] = [
     <StatusTable title="Status" services={[{ name: "API", status: "operational", uptime: "99.9%" }, { name: "Docs", status: "degraded", lastIncident: "1h ago" }]} />
   )},
   { name: "SpecTable", category: "Diagrams", variants: 1, span: 2, render: () => (
-    <SpecTable title="Spec" rows={[{ label: "Tokens", value: "519" }, { label: "Presets", value: "44", highlight: true }]} />
+    <SpecTable title="Spec" rows={[{ label: "Tokens", value: "519" }, { label: "Presets", value: "46", highlight: true }]} />
   )},
   { name: "LeaderboardTable", category: "Diagrams", variants: 1, span: 2, render: () => (
     <LeaderboardTable title="Usage" rows={[{ label: "Button", value: 12400, highlight: true }, { label: "Card", value: 9100 }]} />
@@ -2108,8 +2108,8 @@ const CELLS: ComponentCell[] = [
   )},
   { name: "PreviewCard", category: "Overlays", variants: 1, render: () => (
     <PreviewCard>
-      <PreviewCardTrigger asChild>
-        <button type="button" className="text-xs underline text-[var(--s-primary)] bg-transparent border-0 cursor-pointer">Hover for preview</button>
+      <PreviewCardTrigger render={<button type="button" className="text-xs underline text-[var(--s-primary)] bg-transparent border-0 cursor-pointer" />}>
+        Hover for preview
       </PreviewCardTrigger>
       <PreviewCardContent title="Sigil UI" description="A token-driven design system with 44 presets." />
     </PreviewCard>
@@ -2194,7 +2194,7 @@ const CELLS: ComponentCell[] = [
   { name: "KeyValue", category: "Data", variants: 1, render: () => <KeyValue label="Preset" value="sigil" /> },
   { name: "PropertyList", category: "Data", variants: 1, render: () => <PropertyList items={[{ label: "Status", value: "Ready" }, { label: "Count", value: "300+" }]} /> },
   { name: "StatCard", category: "Data", variants: 1, render: () => <StatCard label="Components" value="300+" change={<Trend value={50} />} /> },
-  { name: "MetricGrid", category: "Data", variants: 1, span: 2, render: () => <MetricGrid><StatCard label="Components" value="300+" /><StatCard label="Presets" value="44" /></MetricGrid> },
+  { name: "MetricGrid", category: "Data", variants: 1, span: 2, render: () => <MetricGrid><StatCard label="Components" value="300+" /><StatCard label="Presets" value="46" /></MetricGrid> },
   { name: "Trend", category: "Data", variants: 1, render: () => <Trend value={24} /> },
   { name: "SparkArea", category: "Data", variants: 1, render: () => <SparkArea values={[4, 8, 6, 12, 10, 16]} /> },
   { name: "SparkBar", category: "Data", variants: 1, render: () => <SparkBar values={[4, 8, 6, 12, 10, 16]} /> },

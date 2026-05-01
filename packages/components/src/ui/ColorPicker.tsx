@@ -50,7 +50,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
           htmlFor={colorInputId}
           className={cn(
             "size-10 shrink-0 cursor-pointer rounded-[var(--s-radius-md,6px)]",
-            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           )}
           style={{ backgroundColor: color }}
           aria-label="Open color picker"
@@ -72,9 +72,9 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
           className={cn(
             "h-[var(--s-input-height,36px)] w-28 px-3 text-sm font-[family-name:var(--s-font-mono)]",
             "rounded-[var(--s-radius-input,var(--s-radius-md,6px))]",
-            "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+            "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
             "bg-[var(--s-background)] text-[var(--s-text)]",
-            "focus:outline-none focus:ring-[length:var(--s-input-focus-ring-width)] focus:ring-[var(--s-input-focus-ring-color)]/20 focus:border-[var(--s-input-focus-ring-color)]",
+            "focus:outline-none focus:ring-[length:var(--s-input-focus-ring-width)] focus:ring-[var(--s-input-focus-ring-color)]/20 focus:border-[color:var(--s-input-focus-ring-color)]",
             "transition-all duration-[var(--s-duration-fast,150ms)]",
           )}
         />
@@ -94,7 +94,7 @@ export const ColorPicker = forwardRef<HTMLDivElement, ColorPickerProps>(function
                 "hover:scale-110",
                 "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
                 color === swatch
-                  ? "border-[var(--s-primary)] ring-1 ring-[var(--s-primary)]"
+                  ? "border-[color:var(--s-primary)] ring-1 ring-[var(--s-primary)]"
                   : "border-transparent",
               )}
               style={{ backgroundColor: swatch }}

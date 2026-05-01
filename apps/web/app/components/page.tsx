@@ -49,10 +49,10 @@ import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy"
 import { TextureBg } from "@/components/texture-bg";
 
 const STATS = [
-  { value: "200+", label: "Token-Driven Components" },
-  { value: "33", label: "Categories" },
-  { value: "519", label: "Tokens" },
-  { value: "44", label: "Presets" },
+  { value: "350+", label: "Token-Driven Components" },
+  { value: "28+13", label: "Radix + Base UI Primitives" },
+  { value: "519", label: "Design Tokens" },
+  { value: "46", label: "Presets" },
 ] as const;
 
 const TOKEN_CARDS = [
@@ -62,7 +62,7 @@ const TOKEN_CARDS = [
   },
   {
     title: "One preset, everything updates",
-    body: "Switch presets and all 200+ token-driven components change simultaneously. One command, zero prop drilling, zero theme objects.",
+    body: "Switch presets and all 350+ token-driven components change simultaneously. One command, zero prop drilling, zero theme objects.",
   },
   {
     title: "Agent-friendly",
@@ -84,7 +84,7 @@ export default function ComponentsPage() {
           </MonoLabel>
 
           <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
-            200+ Token-Driven Components.
+            350+ Token-Driven Components.
           </h1>
 
           <DensityText

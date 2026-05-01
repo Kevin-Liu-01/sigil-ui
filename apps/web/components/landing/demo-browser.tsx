@@ -94,7 +94,7 @@ export function DemoBrowser({
       <div
         className="flex items-center relative"
         style={{
-          height: 36,
+          height: 50,
           padding: "0 14px",
           borderBottom: "1px solid var(--s-border)",
           background: "var(--s-surface)",
@@ -126,7 +126,7 @@ export function DemoBrowser({
       <div
         className="group-hover:-translate-y-0.5 group-hover:shadow-lg transition-all"
         style={{
-          height: isSmall ? 160 : "auto",
+          height: isSmall ? 200 : "auto",
           minHeight: isSmall ? undefined : 200,
           overflow: "hidden",
           transitionDuration: "var(--s-duration-fast, 150ms)",

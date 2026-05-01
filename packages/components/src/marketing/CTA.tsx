@@ -34,7 +34,7 @@ export const CTA = forwardRef<HTMLElement, CTAProps>(function CTA(
       data-slot="cta"
       className={cn(
         "w-full px-[var(--s-cta-padding-x,var(--s-page-margin,24px))] py-[var(--s-cta-padding-y,80px)]",
-        "rounded-[var(--s-cta-border-radius,var(--s-card-radius,8px))] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+        "rounded-[var(--s-cta-border-radius,var(--s-card-radius,8px))] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
         "bg-[var(--s-cta-bg,var(--s-surface))]",
         isSplit ? "flex flex-col md:flex-row items-center justify-between gap-[var(--s-cta-split-gap,48px)]" : "text-center",
         className,

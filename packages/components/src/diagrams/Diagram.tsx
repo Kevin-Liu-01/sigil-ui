@@ -50,7 +50,7 @@ export const Diagram = forwardRef<HTMLDivElement, DiagramProps>(function Diagram
       data-slot="diagram"
       className={cn(
         "relative w-full overflow-hidden rounded-[var(--s-radius-card,0px)]",
-        "border border-[var(--s-border)] bg-[var(--s-surface)] p-6",
+        "border border-[color:var(--s-border)] bg-[var(--s-surface)] p-6",
         className,
       )}
       style={{

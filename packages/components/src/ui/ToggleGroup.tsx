@@ -39,7 +39,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
         data-slot="toggle-group"
         className={cn(
           "flex w-full items-center rounded-[var(--s-radius-md,6px)]",
-          "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+          "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
           className,
         )}
         onValueChange={(value: any) => { play("toggle"); onValueChange?.(value); }}
@@ -61,7 +61,7 @@ export const ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProp
         className={cn(
           "inline-flex flex-1 cursor-pointer items-center justify-center font-medium",
           "text-[var(--s-text-secondary)] bg-transparent",
-          "border-r border-[style:var(--s-border-style,solid)] border-[var(--s-border)] last:border-r-0",
+          "border-r border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] last:border-r-0",
           "first:rounded-l-[var(--s-radius-md,6px)] last:rounded-r-[var(--s-radius-md,6px)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface-elevated)]",

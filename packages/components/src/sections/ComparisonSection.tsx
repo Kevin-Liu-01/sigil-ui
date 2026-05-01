@@ -44,14 +44,14 @@ export const ComparisonSection = forwardRef<HTMLElement, ComparisonSectionProps>
         <div className="mx-auto max-w-[var(--s-content-max-narrow,680px)] px-[var(--s-page-margin,24px)]">
           {title && <SectionHeading label={label} title={title} description={description} align="center" />}
 
-          <div className="border border-[var(--s-border)] rounded-[var(--s-radius-card,0px)] overflow-hidden">
-            <div className="grid grid-cols-3 bg-[var(--s-surface)] border-b border-[var(--s-border)]">
+          <div className="border border-[color:var(--s-border)] rounded-[var(--s-radius-card,0px)] overflow-hidden">
+            <div className="grid grid-cols-3 bg-[var(--s-surface)] border-b border-[color:var(--s-border)]">
               <div className="p-3 text-sm text-[var(--s-text-muted)]">Feature</div>
               <div className="p-3 text-sm font-semibold text-[var(--s-text)] text-center">{usLabel}</div>
               <div className="p-3 text-sm text-[var(--s-text-muted)] text-center">{themLabel}</div>
             </div>
             {features.map((f, i) => (
-              <div key={i} className={cn("grid grid-cols-3 border-b border-[var(--s-border-muted)] last:border-b-0", i % 2 === 0 ? "bg-[var(--s-background)]" : "bg-[var(--s-surface)]")}>
+              <div key={i} className={cn("grid grid-cols-3 border-b border-[color:var(--s-border-muted)] last:border-b-0", i % 2 === 0 ? "bg-[var(--s-background)]" : "bg-[var(--s-surface)]")}>
                 <div className="p-3 text-sm text-[var(--s-text)]">{f.name}</div>
                 <div className="p-3 flex items-center justify-center">{renderCell(f.us)}</div>
                 <div className="p-3 flex items-center justify-center">{renderCell(f.them)}</div>

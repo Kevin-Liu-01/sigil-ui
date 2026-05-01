@@ -63,7 +63,7 @@ export const MatrixDiagram = forwardRef<HTMLDivElement, MatrixDiagramProps>(
                   <div
                     key={cell.id}
                     className={cn(
-                      "flex flex-col items-center justify-center gap-1 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)]",
+                      "flex flex-col items-center justify-center gap-1 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)]",
                       "bg-[var(--s-surface)] p-4 min-w-[120px] min-h-[100px]",
                       "transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]",
                     )}

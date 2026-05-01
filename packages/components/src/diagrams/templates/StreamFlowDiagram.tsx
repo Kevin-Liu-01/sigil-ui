@@ -15,11 +15,11 @@ export const StreamFlowDiagram = forwardRef<HTMLDivElement, StreamFlowDiagramPro
       <div
         ref={ref}
         data-slot="stream-flow-diagram"
-        className={cn("w-full p-4 rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)]", className)}
+        className={cn("w-full p-4 rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)]", className)}
         {...props}
       >
         <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-primary)] bg-[var(--s-primary-muted)] text-sm font-medium text-[var(--s-text)] [&_svg]:size-4">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-primary)] bg-[var(--s-primary-muted)] text-sm font-medium text-[var(--s-text)] [&_svg]:size-4">
             {source.icon}{source.label}
           </div>
 
@@ -46,7 +46,7 @@ export const StreamFlowDiagram = forwardRef<HTMLDivElement, StreamFlowDiagramPro
                 <line x1="0" y1="8" x2="16" y2="8" stroke="var(--s-chart-axis)" strokeWidth="1.5" strokeDasharray="4 3" />
                 <polygon points="16,5 24,8 16,11" fill="var(--s-chart-axis)" />
               </svg>
-              <div className="px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] bg-[var(--s-background)] text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text)]">
+              <div className="px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)] bg-[var(--s-background)] text-xs font-[family-name:var(--s-font-mono)] text-[var(--s-text)]">
                 {output}
               </div>
             </>

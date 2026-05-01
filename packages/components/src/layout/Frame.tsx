@@ -10,9 +10,9 @@ export interface FrameProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantStyles: Record<string, string> = {
-  default: "border-[var(--s-border)]",
-  accent: "border-[var(--s-primary)]",
-  dashed: "border-[var(--s-border)] border-dashed",
+  default: "border-[color:var(--s-border)]",
+  accent: "border-[color:var(--s-primary)]",
+  dashed: "border-[color:var(--s-border)] border-dashed",
 };
 
 /** Structural-visibility border frame for visual containment. */

@@ -26,7 +26,7 @@ const variantStyles: Record<BadgeVariant, string> = {
   secondary:
     "bg-[var(--s-surface)] text-[var(--s-text-secondary)] border-transparent",
   outline:
-    "bg-transparent text-[var(--s-text)] border border-[var(--s-border)]",
+    "bg-transparent text-[var(--s-text)] border border-[color:var(--s-border)]",
   destructive:
     "bg-[var(--s-error)] text-[var(--s-primary-contrast)] border-transparent",
   success:

@@ -55,8 +55,8 @@ export const StackDiagram = forwardRef<HTMLDivElement, StackDiagramProps>(
                   "relative flex items-stretch rounded-[var(--s-radius-md,0px)] border overflow-hidden",
                   "transition-all duration-[var(--s-duration-fast,150ms)]",
                   isActive
-                    ? "border-[var(--s-primary)] ring-1 ring-[var(--s-primary)]/20 scale-[1.01]"
-                    : "border-[var(--s-border)]",
+                    ? "border-[color:var(--s-primary)] ring-1 ring-[var(--s-primary)]/20 scale-[1.01]"
+                    : "border-[color:var(--s-border)]",
                   layer.accent
                     ? "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]"
                     : "bg-[var(--s-surface)]",
@@ -76,7 +76,7 @@ export const StackDiagram = forwardRef<HTMLDivElement, StackDiagramProps>(
 
                 <div className={cn(
                   "flex items-center justify-center w-16 shrink-0 border-r",
-                  layer.accent ? "border-[var(--s-primary-contrast)]/20" : "border-[var(--s-border-muted)]",
+                  layer.accent ? "border-[color:var(--s-primary-contrast)]/20" : "border-[color:var(--s-border-muted)]",
                 )}>
                   <span className={cn(
                     "text-[10px] font-semibold uppercase tracking-wider font-[family-name:var(--s-font-mono)]",

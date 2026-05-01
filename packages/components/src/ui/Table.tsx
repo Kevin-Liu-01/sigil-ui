@@ -26,7 +26,7 @@ export const TableHeader = forwardRef<HTMLTableSectionElement, HTMLAttributes<HT
       <thead
         ref={ref}
         data-slot="table-header"
-        className={cn("border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] [&_tr]:border-b [&_tr]:border-[style:var(--s-border-style,solid)]", className)}
+        className={cn("border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] [&_tr]:border-b [&_tr]:border-[style:var(--s-border-style,solid)]", className)}
         {...rest}
       />
     );
@@ -55,7 +55,7 @@ export const TableRow = forwardRef<HTMLTableRowElement, HTMLAttributes<HTMLTable
         ref={ref}
         data-slot="table-row"
         className={cn(
-          "border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] transition-colors duration-[var(--s-duration-fast,150ms)]",
+          "border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] transition-colors duration-[var(--s-duration-fast,150ms)]",
           "hover:bg-[var(--s-surface-elevated)]",
           "data-[state=selected]:bg-[var(--s-surface-elevated)]",
           className,

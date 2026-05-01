@@ -4,13 +4,15 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { DocsPresetBar } from "@/components/docs-preset-bar";
 
+const docsDescription =
+  "Documentation for Sigil UI — the React component library where one token file controls every color, font, radius, and animation. Guides for tokens, presets, components, and the CLI.";
+
 export const metadata: Metadata = {
   title: {
-    default: "Sigil UI — Design tokens that compound",
-    template: "%s | Sigil UI",
+    default: "Sigil UI Docs — Tokens, Presets, Components, CLI",
+    template: "%s | Sigil UI Docs",
   },
-  description:
-    "The component library where one token file updates everything. Built for agents.",
+  description: docsDescription,
   metadataBase: new URL("https://sigil-ui.dev"),
   alternates: { canonical: "/" },
   robots: {
@@ -24,9 +26,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Sigil UI — Design tokens that compound",
-    description:
-      "The component library where one token file updates everything. Built for agents.",
+    title: "Sigil UI Docs — Tokens, Presets, Components, CLI",
+    description: docsDescription,
     siteName: "Sigil UI Docs",
     type: "website",
   },
@@ -34,9 +35,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@kevinliu",
     creator: "@kevinliu",
-    title: "Sigil UI — Design tokens that compound",
-    description:
-      "The component library where one token file updates everything. Built for agents.",
+    title: "Sigil UI Docs — Tokens, Presets, Components, CLI",
+    description: docsDescription,
   },
 };
 

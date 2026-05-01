@@ -31,7 +31,7 @@ export const IsometricScene = forwardRef<HTMLDivElement, IsometricSceneProps>(
         data-slot="isometric-scene"
         className={cn(
           "relative overflow-hidden flex items-center justify-center",
-          "rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)]",
+          "rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)]",
           className,
         )}
         style={{ width, height: typeof height === "number" ? height : height, ...gridBg, ...style }}

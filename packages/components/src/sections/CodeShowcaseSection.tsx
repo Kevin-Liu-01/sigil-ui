@@ -31,9 +31,9 @@ export const CodeShowcaseSection = forwardRef<HTMLElement, CodeShowcaseSectionPr
         <div className="mx-auto max-w-[var(--s-content-max-narrow,680px)] px-[var(--s-page-margin,24px)]">
           {title && <SectionHeading label={label} title={title} description={description} align="center" />}
 
-          <div className="rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] overflow-hidden">
+          <div className="rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border)] overflow-hidden">
             {tabs.length > 1 && (
-              <div className="flex border-b border-[var(--s-border)] bg-[var(--s-surface)]">
+              <div className="flex border-b border-[color:var(--s-border)] bg-[var(--s-surface)]">
                 {tabs.map((tab, i) => (
                   <button
                     key={i}
@@ -42,7 +42,7 @@ export const CodeShowcaseSection = forwardRef<HTMLElement, CodeShowcaseSectionPr
                     className={cn(
                       "px-4 py-2 text-xs font-medium font-[family-name:var(--s-font-mono)] transition-colors",
                       active === i
-                        ? "text-[var(--s-text)] border-b-2 border-[var(--s-primary)]"
+                        ? "text-[var(--s-text)] border-b-2 border-[color:var(--s-primary)]"
                         : "text-[var(--s-text-muted)] hover:text-[var(--s-text)]",
                     )}
                   >

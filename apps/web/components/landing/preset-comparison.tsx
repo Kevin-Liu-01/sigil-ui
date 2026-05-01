@@ -87,7 +87,7 @@ function MiniPage({ preset }: { preset: PresetName }) {
       <div
         className="flex items-center justify-between px-3"
         style={{
-          height: 40,
+          height: 50,
           borderBottom: `1px solid ${p.border}`,
         }}
       >

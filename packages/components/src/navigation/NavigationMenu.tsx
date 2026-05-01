@@ -99,7 +99,7 @@ function NavigationMenuViewport() {
           "origin-top-center relative mt-1.5 w-full overflow-hidden",
           "h-[var(--radix-navigation-menu-viewport-height)]",
           "w-[var(--radix-navigation-menu-viewport-width)]",
-          "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
           "bg-[var(--s-background)] shadow-[var(--s-shadow-md)]",
           "data-[state=open]:animate-in data-[state=open]:fade-in data-[state=open]:zoom-in-90",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out data-[state=closed]:zoom-out-95",

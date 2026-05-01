@@ -5,7 +5,11 @@ import type { ReactNode } from "react";
 import { SigilShell } from "@/components/sigil-shell";
 import { ThemeProvider } from "@/components/theme-provider";
 import { DocSearchPalette } from "@/components/doc-search-palette";
-import { SIGIL_PRODUCT_SUMMARY } from "@/lib/product-stats";
+import {
+  SIGIL_PRODUCT_SUMMARY,
+  SIGIL_ONE_LINER,
+  SIGIL_PRODUCT_STATS,
+} from "@/lib/product-stats";
 
 const robotoMono = Roboto_Mono({
   subsets: ["latin"],
@@ -13,24 +17,26 @@ const robotoMono = Roboto_Mono({
   display: "swap",
 });
 
+const siteDescription = `${SIGIL_ONE_LINER} ${SIGIL_PRODUCT_SUMMARY} — all styled through CSS custom properties. Switch presets and every component updates instantly.`;
+const ogDescription = `One token file. ${SIGIL_PRODUCT_SUMMARY}. Switch presets and your entire UI updates — colors, fonts, spacing, radius, motion, everything.`;
+
 export const metadata: Metadata = {
   title: {
-    default: "Sigil UI",
+    default: "Sigil UI — Token-Driven React Components",
     template: "%s — Sigil UI",
   },
-  description:
-    `The component library where tokens control your entire design system. ${SIGIL_PRODUCT_SUMMARY}, built for AI agents.`,
+  description: siteDescription,
   keywords: [
     "sigil ui",
     "design tokens",
-    "component library",
-    "react components",
-    "tailwind css",
+    "react component library",
     "design system",
-    "ai agents",
-    "presets",
-    "token-driven",
-    "component library",
+    "tailwind css",
+    "css custom properties",
+    "theming presets",
+    "token-driven components",
+    "base ui primitives",
+    "open source ui",
   ],
   authors: [{ name: "Kevin Liu", url: "https://kevinliu.me" }],
   creator: "Kevin Liu",
@@ -52,17 +58,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://sigil-ui.com",
     siteName: "Sigil UI",
-    title: "Sigil UI — Change the tokens. Everything updates.",
-    description:
-      `${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system built for AI agents.`,
+    title: "Sigil UI — One Token File Controls Everything",
+    description: ogDescription,
   },
   twitter: {
     card: "summary_large_image",
     site: "@kevinliu",
     creator: "@kevinliu",
-    title: "Sigil UI — Change the tokens. Everything updates.",
-    description:
-      `${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system built for AI agents.`,
+    title: "Sigil UI — One Token File Controls Everything",
+    description: ogDescription,
   },
 };
 
@@ -74,8 +78,7 @@ const jsonLd = {
       "@id": "https://sigil-ui.com/#website",
       name: "Sigil UI",
       url: "https://sigil-ui.com",
-      description:
-        "Token-driven component library. Change the tokens, everything updates.",
+      description: SIGIL_ONE_LINER,
       publisher: { "@id": "https://sigil-ui.com/#organization" },
     },
     {
@@ -84,7 +87,7 @@ const jsonLd = {
       name: "Sigil UI",
       url: "https://sigil-ui.com",
       logo: "https://sigil-ui.com/logo.svg",
-      description: `Open-source design system with ${SIGIL_PRODUCT_SUMMARY}. Built for AI agents.`,
+      description: `Open-source React component library with ${SIGIL_PRODUCT_SUMMARY}. One token file controls every color, font, radius, and animation.`,
       sameAs: [
         "https://github.com/keiranlovett/reticle-ui",
         "https://www.npmjs.com/org/sigil-ui",
@@ -102,7 +105,7 @@ const jsonLd = {
       name: "Sigil UI",
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Any",
-      description: `React component library with ${SIGIL_PRODUCT_SUMMARY}, and an agent-first design system.`,
+      description: `${SIGIL_ONE_LINER} ${SIGIL_PRODUCT_SUMMARY}, all styled through CSS custom properties from a single token layer.`,
       url: "https://sigil-ui.com",
       author: { "@id": "https://sigil-ui.com/#organization" },
       license: "https://opensource.org/licenses/MIT",
@@ -112,13 +115,13 @@ const jsonLd = {
         priceCurrency: "USD",
       },
       featureList: [
-        "519 configurable design tokens",
-        "200+ React components",
-        "46 curated presets",
-        "AI agent-first workflow",
-        "OKLCH color system",
+        `${SIGIL_PRODUCT_STATS.tokenCount} configurable design tokens in one file`,
+        `${SIGIL_PRODUCT_STATS.componentCountLabel} React components built on Radix + Base UI primitives`,
+        `${SIGIL_PRODUCT_STATS.presetCount} curated presets that change every token at once`,
+        "OKLCH color system with perceptual uniformity",
         "Token-driven theming via CSS custom properties",
-        "CLI for init, preset switching, and component scaffolding",
+        "CLI for project setup, preset switching, and component scaffolding",
+        "Agent-readable token layer for AI-assisted development",
       ],
     },
   ],

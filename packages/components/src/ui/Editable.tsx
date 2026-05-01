@@ -54,7 +54,7 @@ export const Editable = forwardRef<HTMLDivElement, EditableProps>(function Edita
           }}
           className={cn(
             "inline-flex min-w-[40px] bg-transparent text-[var(--s-text)]",
-            "border-b-2 border-[var(--s-primary)]",
+            "border-b-2 border-[color:var(--s-primary)]",
             "focus:outline-none",
             "text-inherit font-inherit",
           )}
@@ -67,7 +67,7 @@ export const Editable = forwardRef<HTMLDivElement, EditableProps>(function Edita
           className={cn(
             "inline-flex text-[var(--s-text)]",
             "border-b border-transparent",
-            "hover:border-[var(--s-border)]",
+            "hover:border-[color:var(--s-border)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
             "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)]",
             "rounded-[var(--s-radius-sm,2px)]",

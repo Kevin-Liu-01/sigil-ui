@@ -25,7 +25,7 @@ export const AccordionItem = forwardRef<
     <AccordionPrimitive.Item
       ref={ref}
       data-slot="accordion-item"
-      className={cn("border-b border-[var(--s-border)]", className)}
+      className={cn("border-b border-[color:var(--s-border)]", className)}
       {...props}
     />
   );

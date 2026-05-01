@@ -90,8 +90,8 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
                   className={cn(
                     "flex items-center justify-center px-4 py-2",
                     layer.accent
-                      ? "border border-[var(--s-primary)] bg-[var(--s-primary)]/[0.08]"
-                      : "border border-[var(--s-border)] bg-[var(--s-surface)]",
+                      ? "border border-[color:var(--s-primary)] bg-[var(--s-primary)]/[0.08]"
+                      : "border border-[color:var(--s-border)] bg-[var(--s-surface)]",
                   )}
                   style={{
                     width: layer.width ?? "100%",
@@ -128,7 +128,7 @@ export const IsolationStack = forwardRef<HTMLDivElement, IsolationStackProps>(
               </span>
               <div className="h-px flex-1 bg-[var(--s-border)]" />
             </div>
-            <div className="overflow-hidden border border-[var(--s-border)]">
+            <div className="overflow-hidden border border-[color:var(--s-border)]">
               {/* Header */}
               <div
                 className="grid gap-px bg-[var(--s-border)]"

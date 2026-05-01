@@ -31,7 +31,7 @@ export const DropdownMenuContent = forwardRef<
         sideOffset={sideOffset}
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",
-          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface,oklch(0.97_0_0))] text-[var(--s-text)] shadow-[var(--s-shadow-md,0_4px_16px_oklch(0_0_0/0.12))]",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
@@ -184,7 +184,7 @@ export const DropdownMenuSubContent = forwardRef<
         ref={ref}
         className={cn(
           "z-50 min-w-[8rem] overflow-hidden p-1",
-          "rounded-[var(--s-card-radius,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "rounded-[var(--s-card-radius,8px)] border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface,oklch(0.97_0_0))] text-[var(--s-text)] shadow-[var(--s-shadow-md,0_4px_16px_oklch(0_0_0/0.12))]",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",

@@ -48,8 +48,8 @@ export const SelectTrigger = forwardRef<HTMLButtonElement, SelectTriggerProps>(
           "placeholder:text-[var(--s-text-muted)]",
           "[&>span]:truncate",
           hasError
-            ? "border-[var(--s-error)] focus:border-[var(--s-error)] focus:ring-[var(--s-error)]/20"
-            : "border-[var(--s-border)] focus:border-[var(--s-input-focus-ring-color)] focus:ring-[var(--s-input-focus-ring-color)]/20",
+            ? "border-[color:var(--s-error)] focus:border-[color:var(--s-error)] focus:ring-[var(--s-error)]/20"
+            : "border-[color:var(--s-border)] focus:border-[color:var(--s-input-focus-ring-color)] focus:ring-[var(--s-input-focus-ring-color)]/20",
           className,
         )}
         {...props}
@@ -96,7 +96,7 @@ export const SelectContent = forwardRef<
         className={cn(
           "relative z-50 max-h-[min(var(--radix-select-content-available-height,384px),384px)] min-w-[8rem] overflow-hidden",
           "rounded-[var(--s-card-radius,var(--s-radius-md,8px))]",
-          "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-lg)]",
           "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
           "data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",

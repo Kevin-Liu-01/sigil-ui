@@ -104,8 +104,8 @@ export const Notification = forwardRef<HTMLDivElement, NotificationProps>(functi
       ref={ref}
       data-unread={unread || undefined}
       className={cn(
-        "relative grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] bg-[var(--s-background)] p-4",
-        "data-[unread=true]:border-[var(--s-primary)] data-[unread=true]:bg-[color-mix(in_oklch,var(--s-primary)_6%,transparent)]",
+        "relative grid gap-1 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] bg-[var(--s-background)] p-4",
+        "data-[unread=true]:border-[color:var(--s-primary)] data-[unread=true]:bg-[color-mix(in_oklch,var(--s-primary)_6%,transparent)]",
         className,
       )}
       {...props}
@@ -162,7 +162,7 @@ const StateBlock = forwardRef<HTMLDivElement, StateProps>(function StateBlock(
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("grid place-items-center gap-3 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-8 text-center", className)} {...props}>
+    <div ref={ref} className={cn("grid place-items-center gap-3 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] p-8 text-center", className)} {...props}>
       {children}
       {title && <h3 className="text-base font-semibold text-[var(--s-text)]">{title}</h3>}
       {description && <p className="max-w-sm text-sm text-[var(--s-text-muted)]">{description}</p>}
@@ -204,7 +204,7 @@ export const ProgressSteps = forwardRef<HTMLOListElement, ProgressStepsProps>(fu
         >
           <span
             aria-hidden
-            className="mt-1 flex size-5 items-center justify-center rounded-[var(--s-radius-full,9999px)] border border-[var(--s-border)] text-xs data-[complete=true]:bg-[var(--s-primary)]"
+            className="mt-1 flex size-5 items-center justify-center rounded-[var(--s-radius-full,9999px)] border border-[color:var(--s-border)] text-xs data-[complete=true]:bg-[var(--s-primary)]"
           >
             {index < currentStep ? "✓" : index + 1}
           </span>
@@ -254,7 +254,7 @@ export const SkeletonCard = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEle
   ref,
 ) {
   return (
-    <div ref={ref} className={cn("grid gap-3 rounded-[var(--s-card-radius,10px)] border border-[var(--s-border)] p-4", className)} {...props}>
+    <div ref={ref} className={cn("grid gap-3 rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)] p-4", className)} {...props}>
       <Skeleton className="h-5 w-1/2" />
       <Skeleton className="h-20 w-full" />
       <Skeleton className="h-4 w-2/3" />

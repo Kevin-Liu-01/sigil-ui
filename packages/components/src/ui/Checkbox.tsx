@@ -27,11 +27,11 @@ export const Checkbox = forwardRef<
       checked={checked}
       onCheckedChange={(val) => { play("toggle"); onCheckedChange?.(val); }}
       className={cn(
-        "peer size-4 shrink-0 border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-background)]",
+        "peer size-4 shrink-0 border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-background)]",
         "rounded-[var(--s-radius-sm,0px)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
-        "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:border-[var(--s-primary)] data-[state=checked]:text-[var(--s-primary-contrast)]",
-        "data-[state=indeterminate]:bg-[var(--s-primary)] data-[state=indeterminate]:border-[var(--s-primary)] data-[state=indeterminate]:text-[var(--s-primary-contrast)]",
+        "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:border-[color:var(--s-primary)] data-[state=checked]:text-[var(--s-primary-contrast)]",
+        "data-[state=indeterminate]:bg-[var(--s-primary)] data-[state=indeterminate]:border-[color:var(--s-primary)] data-[state=indeterminate]:text-[var(--s-primary-contrast)]",
         "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         "cursor-pointer",

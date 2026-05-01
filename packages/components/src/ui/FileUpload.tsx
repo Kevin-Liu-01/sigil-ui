@@ -76,11 +76,11 @@ export const FileUpload = forwardRef<HTMLDivElement, FileUploadProps>(function F
       className={cn(
         "flex flex-col items-center justify-center gap-2 p-8",
         "rounded-[var(--s-radius-md,8px)]",
-        "border-2 border-dashed border-[var(--s-border)]",
+        "border-2 border-dashed border-[color:var(--s-border)]",
         "bg-[var(--s-background)]",
         "cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)]",
-        "hover:border-[var(--s-primary)] hover:bg-[var(--s-surface)]",
-        isDragging && "border-[var(--s-primary)] bg-[var(--s-surface)]",
+        "hover:border-[color:var(--s-primary)] hover:bg-[var(--s-surface)]",
+        isDragging && "border-[color:var(--s-primary)] bg-[var(--s-surface)]",
         disabled && "opacity-50 cursor-not-allowed pointer-events-none",
         className,
       )}

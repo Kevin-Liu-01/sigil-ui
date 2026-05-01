@@ -30,7 +30,7 @@ export const AlertDialogContent = forwardRef<HTMLDivElement, AlertDialogContentP
           className={cn(
             "fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2",
             "w-full max-w-[500px] p-[var(--s-overlay-padding,24px)] rounded-[var(--s-overlay-radius,var(--s-radius-lg,12px))]",
-            "bg-[var(--s-overlay-surface,var(--s-surface))] border border-[style:var(--s-border-style,solid)] border-[var(--s-overlay-border,var(--s-border))]",
+            "bg-[var(--s-overlay-surface,var(--s-surface))] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-overlay-border,var(--s-border))]",
             "shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
             "ring-1 ring-[var(--s-text)]/[0.04]",
             "data-[state=open]:animate-[dialogIn_var(--s-duration-normal)_ease-out]",
@@ -119,7 +119,7 @@ export const AlertDialogCancel = forwardRef<HTMLButtonElement, ComponentPropsWit
         ref={ref}
         className={cn(
           "inline-flex items-center justify-center rounded-[var(--s-radius-md,6px)] px-4 py-2 text-sm font-medium",
-          "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-transparent text-[var(--s-text)]",
+          "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-transparent text-[var(--s-text)]",
           "hover:bg-[var(--s-surface-elevated)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           "focus-visible:outline-none focus-visible:ring-[length:var(--s-focus-ring-width)] focus-visible:ring-[var(--s-focus-ring-color)] focus-visible:ring-offset-[var(--s-focus-ring-offset)]",

@@ -33,7 +33,7 @@ export const ExplodedView = forwardRef<HTMLDivElement, ExplodedViewProps>(functi
         <div key={i} className="w-full relative">
           <div
             className={cn(
-              "relative rounded-[var(--s-radius-md,6px)] border border-[var(--s-border)] p-4",
+              "relative rounded-[var(--s-radius-md,6px)] border border-[color:var(--s-border)] p-4",
               "bg-[var(--s-surface)]",
               layer.hatched && "overflow-hidden",
             )}
@@ -62,7 +62,7 @@ export const ExplodedView = forwardRef<HTMLDivElement, ExplodedViewProps>(functi
           </div>
           {i < layers.length - 1 && (
             <div className="flex justify-center" style={{ height: gap }}>
-              <div className="w-px h-full border-l border-dashed border-[var(--s-border)]" />
+              <div className="w-px h-full border-l border-dashed border-[color:var(--s-border)]" />
             </div>
           )}
         </div>

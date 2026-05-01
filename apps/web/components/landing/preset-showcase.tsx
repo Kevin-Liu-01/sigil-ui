@@ -38,7 +38,7 @@ function MiniPage({ preset, active, onClick }: { preset: PresetDef; active: bool
         className="relative overflow-hidden transition-all"
         style={{
           width: 280,
-          height: 180,
+          height: 200,
           borderRadius: 8,
           border: active
             ? `2px solid ${preset.primary}`
@@ -53,7 +53,7 @@ function MiniPage({ preset, active, onClick }: { preset: PresetDef; active: bool
         <div
           style={{
             width: 560,
-            height: 360,
+            height: 400,
             transform: "scale(0.5)",
             transformOrigin: "top left",
             background: preset.bg,

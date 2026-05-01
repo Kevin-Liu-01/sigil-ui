@@ -277,7 +277,7 @@ export function LiveComponent({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: compact ? 100 : 160,
+        minHeight: compact ? 100 : 200,
         padding: compact ? 12 : 24,
         background: "var(--s-background)",
         borderBottom: "1px solid var(--s-border)",
@@ -482,7 +482,7 @@ export function LiveComponent({
           code
         </span>
       </div>
-      <div style={{ minHeight: 120, display: "flex", flexDirection: "column" }}>
+      <div style={{ minHeight: 150, display: "flex", flexDirection: "column" }}>
         {codeArea}
       </div>
       {tokensBar}
@@ -521,7 +521,7 @@ export function ComponentGalleryCTA() {
       style={{
         position: "relative",
         gridColumn: "1 / -1",
-        minHeight: 260,
+        minHeight: 300,
         overflow: "hidden",
         border: "1px solid var(--s-border)",
         marginRight: -1,
@@ -571,7 +571,7 @@ export function ComponentGalleryCTA() {
           display: "grid",
           gridTemplateColumns: "minmax(0, 0.9fr) minmax(320px, 1.1fr)",
           gap: 24,
-          minHeight: 260,
+          minHeight: 300,
           padding: 24,
           alignItems: "center",
         }}
@@ -646,7 +646,7 @@ export function ComponentGalleryCTA() {
         <div
           style={{
             position: "relative",
-            minHeight: 196,
+            minHeight: 200,
             border: "1px solid var(--s-border)",
             background: "var(--s-background)",
             boxShadow: "var(--s-shadow-lg)",

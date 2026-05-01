@@ -29,10 +29,10 @@ const iconSizes: Record<DiagramNodeSize, string> = {
 };
 
 const variantStyles: Record<DiagramNodeVariant, string> = {
-  default: "border-[var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
-  highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] text-[var(--s-text)] ring-1 ring-[var(--s-primary)]/20",
-  muted: "border-[var(--s-border-muted)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
-  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
+  default: "border-[color:var(--s-border)] bg-[var(--s-surface)] text-[var(--s-text)]",
+  highlighted: "border-[color:var(--s-primary)] bg-[var(--s-primary-muted)] text-[var(--s-text)] ring-1 ring-[var(--s-primary)]/20",
+  muted: "border-[color:var(--s-border-muted)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
+  accent: "border-[color:var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
 };
 
 export const DiagramNode = forwardRef<HTMLDivElement, DiagramNodeProps>(

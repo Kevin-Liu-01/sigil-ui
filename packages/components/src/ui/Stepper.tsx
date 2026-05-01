@@ -116,8 +116,8 @@ function StepCircle({ state, index }: { state: "completed" | "current" | "upcomi
         "flex h-8 w-8 shrink-0 items-center justify-center rounded-[var(--s-radius-full,9999px)] text-xs font-semibold",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",
         state === "completed" && "bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
-        state === "current" && "border-2 border-[var(--s-primary)] bg-[var(--s-bg)] text-[var(--s-primary)]",
-        state === "upcoming" && "border-2 border-[var(--s-border)] bg-[var(--s-bg)] text-[var(--s-text-muted)]",
+        state === "current" && "border-2 border-[color:var(--s-primary)] bg-[var(--s-bg)] text-[var(--s-primary)]",
+        state === "upcoming" && "border-2 border-[color:var(--s-border)] bg-[var(--s-bg)] text-[var(--s-text-muted)]",
       )}
     >
       {state === "completed" ? (

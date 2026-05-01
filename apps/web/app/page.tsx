@@ -607,9 +607,9 @@ function CLIVoronoiSection() {
   return (
     <LandingSection borderTop>
       <SectionHeader
-        label="CLI Surface"
-        heading="Every command maps to a product action."
-        description="The CLI is the control plane for creating, changing, auditing, and validating your design system."
+        label="CLI"
+        heading="Set up, switch presets, audit, and validate — from the terminal."
+        description="One CLI to scaffold projects, swap visual identities, generate docs, bridge existing systems, and verify everything works."
       />
 
       <div
@@ -718,8 +718,8 @@ function PresetsSection() {
       <div className="relative z-[1]">
         <SectionHeader
           label="Presets"
-          heading="Same components. Different identity."
-          description={`${SIGIL_PRODUCT_STATS.presetCount} presets change all 519 tokens at once — not a theme toggle, a different visual language. Watch the same page morph.`}
+          heading="Same components. Completely different identity."
+          description={`Each of the ${SIGIL_PRODUCT_STATS.presetCount} presets rewrites all ${SIGIL_PRODUCT_STATS.tokenCount} tokens at once — colors, fonts, spacing, radius, motion, everything. Not a theme toggle. A different design language.`}
         />
 
         <PresetMorphDemo index={morphIndex} setIndex={setMorphIndex} />
@@ -811,8 +811,8 @@ function DemoSitesSection() {
     <LandingSection borderTop>
       <SectionHeader
         label="Demos"
-        heading="17 production templates."
-        description="Real sites built with Sigil. Each uses a different preset."
+        heading="17 templates. Real sites, real presets."
+        description="SaaS landing pages, dashboards, e-commerce, portfolios, dev docs — each built with a different preset to show how the same components produce different products."
       />
 
       <FeaturedGrid columns={3}>
@@ -1047,8 +1047,8 @@ function FinalCTA() {
             Start building.
           </h2>
           <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
-            One file. {SIGIL_PRODUCT_STATS.tokenCount} tokens. {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components. {SIGIL_PRODUCT_STATS.presetCount} presets. The design system that
-            compiles from a single token layer.
+            {SIGIL_PRODUCT_STATS.componentCountLabel} components. {SIGIL_PRODUCT_STATS.presetCount} presets. {SIGIL_PRODUCT_STATS.tokenCount} tokens.
+            One file controls everything — start building in 30 seconds.
           </DensityText>
           <div className="flex flex-wrap items-center gap-3">
             <AccentCTA size="lg" asChild>

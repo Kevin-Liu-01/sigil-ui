@@ -28,7 +28,7 @@ export const HubSpokeDiagram = forwardRef<HTMLDivElement, HubSpokeDiagramProps>(
       <div className="flex flex-col gap-3 justify-center">
         {items.map(spoke => (
           <div key={spoke.id} className={cn("flex items-center gap-3", side === "right" && "flex-row-reverse")}>
-            <div className="flex items-center gap-2 px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] text-xs font-medium text-[var(--s-text)] [&_svg]:size-3.5 [&_svg]:text-[var(--s-text-muted)]">
+            <div className="flex items-center gap-2 px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] text-xs font-medium text-[var(--s-text)] [&_svg]:size-3.5 [&_svg]:text-[var(--s-text-muted)]">
               {spoke.icon}
               {spoke.label}
             </div>
@@ -51,7 +51,7 @@ export const HubSpokeDiagram = forwardRef<HTMLDivElement, HubSpokeDiagramProps>(
 
         <div className={cn(
           "relative flex flex-col items-center justify-center gap-1 px-6 py-4 mx-2",
-          "rounded-[var(--s-radius-lg,0px)] border-2 border-[var(--s-primary)]",
+          "rounded-[var(--s-radius-lg,0px)] border-2 border-[color:var(--s-primary)]",
           "bg-[var(--s-primary-muted)]",
           "min-w-[120px] text-center",
         )}>

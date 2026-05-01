@@ -33,7 +33,7 @@ export const H2 = forwardRef<HTMLHeadingElement, HTMLAttributes<HTMLHeadingEleme
           "text-[var(--s-heading-h2-size,1.875rem)] font-[var(--s-heading-h2-weight,700)]",
           "leading-[var(--s-heading-h2-leading,1.15)] tracking-[var(--s-heading-h2-tracking,-0.01em)]",
           "text-[var(--s-text)] text-balance",
-          "border-b border-[var(--s-border)] pb-2 first:mt-0",
+          "border-b border-[color:var(--s-border)] pb-2 first:mt-0",
           className,
         )}
         {...props}
@@ -172,7 +172,7 @@ export const Blockquote = forwardRef<HTMLQuoteElement, HTMLAttributes<HTMLQuoteE
         ref={ref}
         data-slot="blockquote"
         className={cn(
-          "border-l-2 border-[var(--s-border)] pl-6 italic text-[var(--s-text-muted)]",
+          "border-l-2 border-[color:var(--s-border)] pl-6 italic text-[var(--s-text-muted)]",
           className,
         )}
         {...props}

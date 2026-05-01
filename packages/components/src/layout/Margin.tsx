@@ -27,7 +27,7 @@ export const Margin = forwardRef<HTMLDivElement, MarginProps>(function Margin(
       data-slot="margin"
       className={cn(
         sizeMap[size],
-        visible && "border-x border-[var(--s-border-muted)]",
+        visible && "border-x border-[color:var(--s-border-muted)]",
         className,
       )}
       {...rest}

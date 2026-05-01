@@ -63,11 +63,11 @@ export const InstallSection = forwardRef<HTMLElement, InstallSectionProps>(
                 <div
                   key={i}
                   className={cn(
-                    "rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] overflow-hidden",
+                    "rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)] overflow-hidden",
                     i > 0 && "mt-3",
                   )}
                 >
-                  <div className="flex items-center justify-between px-3 py-1.5 bg-[var(--s-surface)] border-b border-[var(--s-border-muted)]">
+                  <div className="flex items-center justify-between px-3 py-1.5 bg-[var(--s-surface)] border-b border-[color:var(--s-border-muted)]">
                     <span className="text-[10px] font-semibold uppercase tracking-wider text-[var(--s-text-muted)] font-[family-name:var(--s-font-mono)]">
                       {cmd.label}
                     </span>

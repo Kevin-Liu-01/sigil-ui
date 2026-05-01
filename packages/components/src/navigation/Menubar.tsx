@@ -11,7 +11,7 @@ export const Menubar = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeo
         ref={ref}
         data-slot="menubar"
         className={cn(
-          "flex h-10 items-center gap-1 rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+          "flex h-10 items-center gap-1 rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
           "bg-[var(--s-surface)] px-1",
           className,
         )}
@@ -45,7 +45,7 @@ export const MenubarTrigger = forwardRef<HTMLButtonElement, ComponentPropsWithou
 
 const contentClass = cn(
   "z-50 min-w-[12rem] overflow-hidden rounded-[var(--s-radius-md,6px)] p-1",
-  "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
+  "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
   "text-[var(--s-text)]",
   "data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95",
   "data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",

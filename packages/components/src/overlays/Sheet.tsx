@@ -52,7 +52,7 @@ export const SheetContent = forwardRef<HTMLDivElement, SheetContentProps>(
           data-slot="sheet"
           className={cn(
             "fixed z-50 flex flex-col gap-4 p-[var(--s-overlay-padding,24px)]",
-            "bg-[var(--s-overlay-surface,var(--s-surface))] border-[var(--s-overlay-border,var(--s-border))] border-[style:var(--s-border-style,solid)]",
+            "bg-[var(--s-overlay-surface,var(--s-surface))] border-[color:var(--s-overlay-border,var(--s-border))] border-[style:var(--s-border-style,solid)]",
             "shadow-[var(--s-overlay-shadow,var(--s-shadow-xl))]",
             "transition-transform duration-[var(--s-duration-normal)] ease-out",
             "data-[state=open]:animate-in data-[state=closed]:animate-out",

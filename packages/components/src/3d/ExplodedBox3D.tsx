@@ -18,9 +18,9 @@ export interface ExplodedBox3DProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const variantStyles: Record<NonNullable<ExplodedBox3DProps["variant"]>, string> = {
-  container: "border-[var(--s-border)]",
-  card: "border-[var(--s-border)] shadow-[var(--s-shadow-sm)]",
-  panel: "border-[var(--s-border-strong)]",
+  container: "border-[color:var(--s-border)]",
+  card: "border-[color:var(--s-border)] shadow-[var(--s-shadow-sm)]",
+  panel: "border-[color:var(--s-border-strong)]",
 };
 
 const faces = [

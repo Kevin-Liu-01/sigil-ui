@@ -23,12 +23,12 @@ export interface ChangelogTableProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const typeBadgeStyles: Record<ChangelogEntryType, string> = {
-  added: "bg-[var(--s-success)]/15 text-[var(--s-success)] border-[var(--s-success)]/30",
-  changed: "bg-[var(--s-info)]/15 text-[var(--s-info)] border-[var(--s-info)]/30",
-  fixed: "bg-[var(--s-warning)]/15 text-[var(--s-warning)] border-[var(--s-warning)]/30",
-  removed: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[var(--s-error)]/30",
-  deprecated: "bg-[var(--s-text-muted)]/10 text-[var(--s-text-muted)] border-[var(--s-text-muted)]/30",
-  security: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[var(--s-error)]/30",
+  added: "bg-[var(--s-success)]/15 text-[var(--s-success)] border-[color:var(--s-success)]/30",
+  changed: "bg-[var(--s-info)]/15 text-[var(--s-info)] border-[color:var(--s-info)]/30",
+  fixed: "bg-[var(--s-warning)]/15 text-[var(--s-warning)] border-[color:var(--s-warning)]/30",
+  removed: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[color:var(--s-error)]/30",
+  deprecated: "bg-[var(--s-text-muted)]/10 text-[var(--s-text-muted)] border-[color:var(--s-text-muted)]/30",
+  security: "bg-[var(--s-error)]/15 text-[var(--s-error)] border-[color:var(--s-error)]/30",
 };
 
 export const ChangelogTable = forwardRef<HTMLDivElement, ChangelogTableProps>(
@@ -43,9 +43,9 @@ export const ChangelogTable = forwardRef<HTMLDivElement, ChangelogTableProps>(
         {releases.map((release) => (
           <div
             key={release.version}
-            className="rounded-[var(--s-radius-card,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] overflow-hidden"
+            className="rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] overflow-hidden"
           >
-            <div className="flex items-baseline gap-3 border-b border-[var(--s-border)] px-4 py-3 bg-[var(--s-surface-elevated)]">
+            <div className="flex items-baseline gap-3 border-b border-[color:var(--s-border)] px-4 py-3 bg-[var(--s-surface-elevated)]">
               <span className="font-[family-name:var(--s-font-mono)] text-sm font-bold text-[var(--s-text)] tabular-nums">
                 v{release.version}
               </span>
@@ -53,7 +53,7 @@ export const ChangelogTable = forwardRef<HTMLDivElement, ChangelogTableProps>(
                 {release.date}
               </span>
             </div>
-            <div className="divide-y divide-[var(--s-border)]/40">
+            <div className="divide-y divide-[color:var(--s-border)]/40">
               {release.entries.map((entry, i) => (
                 <div key={i} className="flex items-start gap-3 px-4 py-2.5">
                   {showBadges && (

@@ -276,7 +276,7 @@ export default function WalkthroughPage() {
         number="02"
         label="UNDERSTAND"
         heading="Same components you trust. One layer for agents to edit."
-        description="Sigil's components are built on Radix primitives — the same accessible, composable patterns behind shadcn/ui. The token layer is the thin, agent-friendly control surface on top. Humans and AI agents both edit sigil.tokens.md; the components never change."
+        description="Sigil's components are built on Radix + Base UI primitives — accessible, composable headless patterns. The token layer is the thin, agent-friendly control surface on top. Humans and AI agents both edit sigil.tokens.md; the components never change."
       >
         <LayerStackDiagram />
 
@@ -384,7 +384,7 @@ export default function WalkthroughPage() {
             <MonoLabel variant="accent" className="block mb-3">WHY THIS IS FASTER</MonoLabel>
             <div className="flex flex-col gap-4">
               {[
-                { label: "One file vs. dozens", desc: "Edit 1 markdown file instead of hunting through 200+ token-driven components. One change propagates everywhere." },
+                { label: "One file vs. dozens", desc: "Edit 1 markdown file instead of hunting through 350+ token-driven components. One change propagates everywhere." },
                 { label: "Agent-friendly", desc: "AI agents read sigil.tokens.md, make targeted edits, and get deterministic visual output. Fewer LLM tokens, zero drift." },
                 { label: "No vendor lock-in", desc: "Your preset lives in your repo. Not a config in someone else's library — a markdown file you can read, diff, and version." },
                 { label: "Instant visual refresh", desc: "Change a token, CSS recompiles, every component updates. No manual search-and-replace across files." },
@@ -474,7 +474,7 @@ export default function WalkthroughPage() {
             ))}
           </GapPixelGrid>
           <DensityText role="body" as="p" muted className="mt-4">
-            200+ token-driven components across 14 categories. <a href="/components" className="text-[var(--s-primary)] no-underline">Browse the full library →</a>
+            350+ token-driven components across 14 categories. <a href="/components" className="text-[var(--s-primary)] no-underline">Browse the full library →</a>
           </DensityText>
         </div>
       </Step>

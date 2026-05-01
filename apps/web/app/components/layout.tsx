@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 export const metadata = buildPageMetadata({
   title: "Components",
   description:
-    "200+ token-driven React components. Buttons, cards, inputs, navigation, overlays, data viz, and more — all styled via CSS custom properties.",
+    "Browse 350+ React components — buttons, cards, inputs, navigation, overlays, charts, and more. Every component is styled through design tokens, not hardcoded values.",
   path: "/components",
   ogTitle: "Component Gallery — Sigil UI",
 });

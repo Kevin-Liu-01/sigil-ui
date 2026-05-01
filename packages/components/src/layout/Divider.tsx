@@ -34,18 +34,22 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   decorative?: boolean;
 }
 
+const CELL = 50;
+const THIN = CELL / 3;
+const BORDER_PX = 2;
+
 const sizeMap: Record<NonNullable<DividerProps["size"]>, number> = {
-  xs: 8,
-  sm: 16,
-  md: 24,
-  lg: 48,
-  xl: 96,
+  xs: THIN - BORDER_PX,
+  sm: THIN - BORDER_PX,
+  md: THIN * 2 - BORDER_PX,
+  lg: CELL - BORDER_PX,
+  xl: CELL * 2 - BORDER_PX,
 };
 
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
 const STRUCTURAL_BORDER =
   "var(--s-divider-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
-const EDGE_FADE = 64;
+const EDGE_FADE = 50;
 
 function getLegacyVerticalPatternCSS(
   cell: number,

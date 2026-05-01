@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 export const metadata = buildPageMetadata({
   title: "Presets",
   description:
-    "46 curated preset themes spanning structural, minimal, dark, colorful, editorial, industrial, and edgeless aesthetics. Each preset configures all 519 tokens.",
+    "46 curated presets across seven categories — structural, minimal, dark, colorful, editorial, industrial, and edgeless. Each preset rewrites all 519 tokens to create a distinct visual identity.",
   path: "/presets",
   ogTitle: "Preset Gallery — Sigil UI",
 });

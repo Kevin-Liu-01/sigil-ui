@@ -66,7 +66,7 @@ export const CardCell = forwardRef<HTMLDivElement, CardCellProps>(
         </div>
         {footer && (
           <div
-            className="flex items-center gap-2 border-t border-[var(--s-border)] px-[var(--s-card-padding,16px)] py-2"
+            className="flex items-center gap-2 border-t border-[color:var(--s-border)] px-[var(--s-card-padding,16px)] py-2"
           >
             {footer}
           </div>

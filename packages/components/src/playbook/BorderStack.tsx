@@ -14,7 +14,7 @@ export interface BorderStackProps extends HTMLAttributes<HTMLDivElement> {
 /**
  * Vertical stack of bordered bands — the Sigil section rhythm.
  *
- * Sections are separated by `border-t border-[var(--s-border)]`,
+ * Sections are separated by `border-t border-[color:var(--s-border)]`,
  * not by spacing or shadows. The page reads as a vertical stack
  * of bordered bands:
  *
@@ -68,9 +68,9 @@ export const BorderStack = forwardRef<HTMLDivElement, BorderStackProps>(
           <div
             key={i}
             className={cn(
-              borders === "all" && "border-b border-[var(--s-border)]",
+              borders === "all" && "border-b border-[color:var(--s-border)]",
               borders === "all" && i === 0 && "border-t",
-              borders === "between" && i > 0 && "border-t border-[var(--s-border)]",
+              borders === "between" && i > 0 && "border-t border-[color:var(--s-border)]",
             )}
           >
             {child}

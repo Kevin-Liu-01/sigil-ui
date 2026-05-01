@@ -48,8 +48,8 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
     <div
       ref={ref}
       className={cn(
-        "group relative border border-[var(--s-border)] bg-[var(--s-surface)] p-5",
-        "transition-colors duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary)]/30",
+        "group relative border border-[color:var(--s-border)] bg-[var(--s-surface)] p-5",
+        "transition-colors duration-[var(--s-duration-fast,150ms)] hover:border-[color:var(--s-primary)]/30",
       )}
       style={{
         opacity: visible ? 1 : 0,
@@ -66,7 +66,7 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
 
       {/* Diagram viewport */}
       {data.diagram && (
-        <div className="mb-4 border border-[var(--s-border)]/50 bg-[var(--s-background)] p-3">
+        <div className="mb-4 border border-[color:var(--s-border)]/50 bg-[var(--s-background)] p-3">
           {data.diagram}
         </div>
       )}
@@ -82,11 +82,11 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
 
       {/* Spec table */}
       {data.specRows && data.specRows.length > 0 && (
-        <div className="mt-4 border-t border-[var(--s-border)]/50">
+        <div className="mt-4 border-t border-[color:var(--s-border)]/50">
           {data.specRows.map((row) => (
             <div
               key={row.label}
-              className="flex items-center justify-between border-b border-[var(--s-border)]/30 px-2 py-1.5"
+              className="flex items-center justify-between border-b border-[color:var(--s-border)]/30 px-2 py-1.5"
             >
               <span className="font-mono text-[10px] tracking-wider text-[var(--s-text-muted)]">
                 {row.label}
@@ -105,7 +105,7 @@ function BlueprintCard({ data, index }: BlueprintCardProps) {
           {data.callouts.map((text) => (
             <span
               key={text}
-              className="inline-flex items-center gap-1 border border-[var(--s-primary)]/15 bg-[var(--s-primary)]/[0.06] px-2 py-0.5 font-mono text-[9px] text-[var(--s-primary)]"
+              className="inline-flex items-center gap-1 border border-[color:var(--s-primary)]/15 bg-[var(--s-primary)]/[0.06] px-2 py-0.5 font-mono text-[9px] text-[var(--s-primary)]"
             >
               <span aria-hidden className="text-[8px]">&#x25C6;</span>
               {text}

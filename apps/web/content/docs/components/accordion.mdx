@@ -67,7 +67,7 @@ Allow more than one panel to be expanded simultaneously.
 Set an item to be expanded on first render.
 
 ```tsx
-<Accordion defaultValue="faq-1">
+<Accordion defaultValue={["faq-1"]}>
   <AccordionItem value="faq-1">
     <AccordionTrigger>Already open</AccordionTrigger>
     <AccordionContent>This panel starts expanded.</AccordionContent>

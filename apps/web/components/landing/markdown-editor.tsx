@@ -168,7 +168,7 @@ export function MarkdownEditorPreview({
         <GapPixelCell className="flex flex-col">
           <MarkdownChrome title="SIGIL.TOKENS.MD" meta="scroll + click">
           <div
-            className="max-h-[520px] overflow-y-auto px-0 py-3 font-[family-name:var(--s-font-mono)] text-[11px] leading-[1.7]"
+            className="max-h-[550px] overflow-y-auto px-0 py-3 font-[family-name:var(--s-font-mono)] text-[11px] leading-[1.7]"
             style={{ background: "var(--s-surface)" }}
           >
             {TOKEN_LINES.map((line, index) => {

@@ -38,7 +38,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(
           ref={ref}
           type={visible ? "text" : "password"}
           className={cn(
-            "flex w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+            "flex w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
             "bg-[var(--s-background)] px-3 py-2 text-sm text-[var(--s-text)]",
             "h-[var(--s-input-height,40px)]",
             "placeholder:text-[var(--s-text-muted)]",

@@ -24,9 +24,9 @@ export interface FlowDiagramProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const nodeVariantStyles = {
-  default: "border-[var(--s-border)] bg-[var(--s-surface)]",
-  highlighted: "border-[var(--s-primary)] bg-[var(--s-primary-muted)] ring-1 ring-[var(--s-primary)]/20",
-  accent: "border-[var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
+  default: "border-[color:var(--s-border)] bg-[var(--s-surface)]",
+  highlighted: "border-[color:var(--s-primary)] bg-[var(--s-primary-muted)] ring-1 ring-[var(--s-primary)]/20",
+  accent: "border-[color:var(--s-primary)] bg-[var(--s-primary)] text-[var(--s-primary-contrast)]",
 };
 
 export const FlowDiagram = forwardRef<HTMLDivElement, FlowDiagramProps>(function FlowDiagram(

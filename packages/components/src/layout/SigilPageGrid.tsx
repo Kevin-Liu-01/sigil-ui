@@ -180,7 +180,7 @@ export function getSigilPatternStyles(
         backgroundSize: `100% ${cell}px`,
       };
     case "horizontal-thin": {
-      const thin = Math.round(cell / 3);
+      const thin = cell / 3;
       return {
         backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${thin}px`,
@@ -299,7 +299,7 @@ export interface PageGridConfig {
 }
 
 const DEFAULTS: PageGridConfig = {
-  railGap: 48,
+  railGap: 50,
   contentMax: 1200,
   gridCell: 16,
   crossStroke: 1.5,
@@ -340,22 +340,26 @@ export function SigilGutter({
   className,
 }: SigilGutterProps) {
   if (!visible) {
-    return <div aria-hidden="true" />;
+    return <div aria-hidden="true" style={{ background: "var(--s-background)" }} />;
   }
 
   const cell = gridCell ?? DEFAULTS.gridCell;
   const patternCss = showGrid ? getSigilPatternStyles(pattern, cell, side) : null;
 
   if (!patternCss) {
-    return <div aria-hidden="true" />;
+    return <div aria-hidden="true" style={{ background: "var(--s-background)" }} />;
   }
+
+  const gutterShadow = side === "left"
+    ? `inset -1px 0 0 ${STRUCTURAL_LINE_COLOR}`
+    : `inset 1px 0 0 ${STRUCTURAL_LINE_COLOR}`;
 
   return (
     <div
       aria-hidden="true"
       data-slot="sigilpagegrid" className={cn("relative overflow-hidden", className)}
       style={{
-        [side === "left" ? "borderRight" : "borderLeft"]: STRUCTURAL_BORDER,
+        boxShadow: gutterShadow,
         background: "var(--s-background)",
       }}
     >
@@ -469,10 +473,18 @@ export function SigilPageGrid({
       }
     }
     if (!edgeless) {
-      const prop = `border${innerEdge}` as keyof CSSProperties;
-      Object.assign(container, {
-        [prop]: marginBorder ?? "var(--s-margin-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))",
-      });
+      const shadowDir = innerEdge === "Right" ? "-1px" : "1px";
+      const borderColor = marginBorder
+        ? undefined
+        : STRUCTURAL_LINE_COLOR;
+      if (marginBorder) {
+        const prop = `border${innerEdge}` as keyof CSSProperties;
+        Object.assign(container, { [prop]: marginBorder });
+      } else {
+        Object.assign(container, {
+          boxShadow: `inset ${shadowDir} 0 0 ${borderColor}`,
+        });
+      }
     }
     return { container, overlay };
   }

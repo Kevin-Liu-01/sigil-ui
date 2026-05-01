@@ -43,6 +43,16 @@ This means:
 - Two projects using Sigil can look nothing alike, because the system was designed for divergence, not convergence
 - The agent has a legible, structured interface to the entire visual system — not scattered Tailwind classes across hundreds of files
 
+## The Guardrail
+
+The system is agent-first. Not agent-compatible — agent-native.
+
+Every component ships with an `AGENTS.md`. Five domain skills teach agents how to use tokens, author components, compose layouts, create presets, and migrate from shadcn. The idea is simple: **agents write the UI, the tokens enforce taste.** You don't need a designer reviewing every agent-generated component if the token spec constrains the visual space tightly enough. The design system becomes the guardrail.
+
+Think about it like CSS but for an entire design system. CSS gave us a way to separate style from structure so you didn't hardcode fonts into every `<p>` tag. Sigil does the same thing one level up: it separates *identity* from *components* so you don't hardcode design decisions into every React file. One markdown file — `sigil.tokens.md` — is the single editable surface for both humans and agents. A designer sets the constraints. An agent operates within them. The output is on-brand by construction, not by review.
+
+I've shipped full production sites where AI agents read the token spec and produced on-brand pages without manual design review. Not because the agents had taste — they don't. Because the token system made it impossible to produce off-brand output. The visual space was constrained tightly enough that "correct" and "on-brand" became the same thing.
+
 ## The Name
 
 A sigil is a mark with intention. Not decoration — designation. Every preset in this system is a distinct sigil: a coherent set of visual decisions that says something specific about the product wearing it.

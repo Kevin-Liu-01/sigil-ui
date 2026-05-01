@@ -27,7 +27,7 @@ export const Diamond = forwardRef<HTMLDivElement, DiamondProps>(function Diamond
       data-slot="diamond"
       className={cn(
         "inline-flex items-center justify-center",
-        "bg-[var(--s-surface)] border-[var(--s-border)]",
+        "bg-[var(--s-surface)] border-[color:var(--s-border)]",
         sizeStyles[size],
         className,
       )}

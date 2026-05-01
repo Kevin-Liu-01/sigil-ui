@@ -24,7 +24,7 @@ export const Footer = forwardRef<HTMLElement, FooterProps>(function Footer(
       ref={ref}
       data-slot="footer"
       className={cn(
-        "w-full border-t border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]",
+        "w-full border-t border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]",
         "px-6 py-[var(--s-footer-py,48px)]",
         className,
       )}

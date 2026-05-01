@@ -34,13 +34,13 @@ export const Terminal = forwardRef<HTMLDivElement, TerminalProps>(function Termi
       ref={ref}
       data-slot="terminal"
       className={cn(
-        "rounded-[var(--s-radius-card,8px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
+        "rounded-[var(--s-radius-card,8px)] border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] overflow-hidden",
         "bg-[var(--s-background)] font-[family:var(--s-code-font-family,ui-monospace,SFMono-Regular,monospace)] text-sm",
         className,
       )}
       {...rest}
     >
-      <div className="flex items-center justify-between px-4 py-2 border-b border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)]">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-[var(--s-radius-full)] bg-[var(--s-error)]" />

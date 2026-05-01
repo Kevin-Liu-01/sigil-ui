@@ -35,14 +35,14 @@ export const PricingTable = forwardRef<HTMLDivElement, PricingTableProps>(
         ref={ref}
         data-slot="pricing-table"
         className={cn(
-          "w-full overflow-auto rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] shadow-[var(--s-shadow-sm)]",
+          "w-full overflow-auto rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}
       >
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="border-b border-[var(--s-border)]">
+            <tr className="border-b border-[color:var(--s-border)]">
               <th className="text-left py-4 px-4 font-medium text-[var(--s-text-muted)] min-w-[180px]" />
               {columns.map((col) => (
                 <th
@@ -87,7 +87,7 @@ export const PricingTable = forwardRef<HTMLDivElement, PricingTableProps>(
                 )}
                 <tr
                   key={feature.name}
-                  className="border-b border-[var(--s-border)]/40 hover:bg-[var(--s-surface-elevated)] transition-colors duration-[var(--s-duration-fast,150ms)]"
+                  className="border-b border-[color:var(--s-border)]/40 hover:bg-[var(--s-surface-elevated)] transition-colors duration-[var(--s-duration-fast,150ms)]"
                 >
                   <td className="py-3 px-4 text-[var(--s-text)]">{feature.name}</td>
                   {columns.map((col) => {

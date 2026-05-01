@@ -47,19 +47,19 @@ export const StatusTable = forwardRef<HTMLDivElement, StatusTableProps>(
         ref={ref}
         data-slot="status-table"
         className={cn(
-          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
+          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}
       >
         {title && (
-          <div className="border-b border-[var(--s-border)] px-4 py-3">
+          <div className="border-b border-[color:var(--s-border)] px-4 py-3">
             <h3 className="text-sm font-semibold text-[var(--s-text)]">{title}</h3>
           </div>
         )}
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="border-b border-[var(--s-border)]">
+            <tr className="border-b border-[color:var(--s-border)]">
               <th className="text-left py-2.5 px-4 font-medium text-[var(--s-text-muted)]">Service</th>
               <th className="text-left py-2.5 px-4 font-medium text-[var(--s-text-muted)]">Status</th>
               <th className="text-right py-2.5 px-4 font-medium text-[var(--s-text-muted)]">Uptime</th>
@@ -72,7 +72,7 @@ export const StatusTable = forwardRef<HTMLDivElement, StatusTableProps>(
               return (
                 <tr
                   key={svc.name}
-                  className="border-b border-[var(--s-border)]/40 hover:bg-[var(--s-surface-elevated)] transition-colors duration-[var(--s-duration-fast,150ms)]"
+                  className="border-b border-[color:var(--s-border)]/40 hover:bg-[var(--s-surface-elevated)] transition-colors duration-[var(--s-duration-fast,150ms)]"
                 >
                   <td className="py-3 px-4 font-medium text-[var(--s-text)]">{svc.name}</td>
                   <td className="py-3 px-4">

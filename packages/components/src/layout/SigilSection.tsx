@@ -12,6 +12,8 @@ import type { GutterPattern } from "@sigil-ui/tokens";
 const SECTION_BORDER =
   "var(--s-section-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
 
+const SECTION_BORDER_COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
+
 /* ------------------------------------------------------------------ */
 /* Cross mark SVG                                                       */
 /* ------------------------------------------------------------------ */
@@ -151,9 +153,9 @@ export function SigilSection({
   borderTop = false,
   borderBottom = false,
   showCrosses = false,
-  padding = "var(--s-section-py, 96px) var(--s-page-margin, 24px)",
+  padding = "var(--s-section-py, 100px) var(--s-page-margin, 24px)",
   contentMax = 1200,
-  railGap = 24,
+  railGap = 50,
   gutterPattern = "grid",
   marginPattern = "horizontal",
   showGutterGrid = true,
@@ -228,18 +230,17 @@ function InnerSection({
   padding: string;
   config: PageGridConfig;
 }) {
+  const shadows: string[] = [];
+  if (borderTop) shadows.push(`inset 0 1px 0 ${SECTION_BORDER_COLOR}`);
+  if (borderBottom) shadows.push(`inset 0 -1px 0 ${SECTION_BORDER_COLOR}`);
+
   return (
     <Tag
       id={id}
       data-slot="sigilsection" className={cn("relative", className)}
       style={{
         padding,
-        borderTop: borderTop
-          ? SECTION_BORDER
-          : undefined,
-        borderBottom: borderBottom
-          ? SECTION_BORDER
-          : undefined,
+        boxShadow: shadows.length ? shadows.join(", ") : undefined,
         ...style,
       }}
     >
@@ -303,6 +304,10 @@ function StandaloneSection({
     gridTemplateColumns: `1fr ${railGap}px minmax(0, ${contentMax}px) ${railGap}px 1fr`,
   };
 
+  const standaloneShadows: string[] = [];
+  if (borderTop) standaloneShadows.push(`inset 0 1px 0 ${SECTION_BORDER_COLOR}`);
+  if (borderBottom) standaloneShadows.push(`inset 0 -1px 0 ${SECTION_BORDER_COLOR}`);
+
   return (
     <Tag id={id} data-slot="sigilsection" className={cn("grid", className)} style={{ ...gridCols, ...style }}>
       <div aria-hidden="true" />
@@ -311,12 +316,7 @@ function StandaloneSection({
         className="relative"
         style={{
           padding,
-          borderTop: borderTop
-            ? SECTION_BORDER
-            : undefined,
-          borderBottom: borderBottom
-            ? SECTION_BORDER
-            : undefined,
+          boxShadow: standaloneShadows.length ? standaloneShadows.join(", ") : undefined,
           background: "var(--s-background)",
         }}
       >

@@ -4,7 +4,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 export const metadata = buildPageMetadata({
   title: "Walkthrough",
   description:
-    "Step-by-step guide to the Sigil UI token pipeline. See how tokens flow from markdown to CSS custom properties to components.",
+    "A step-by-step guide showing how Sigil tokens flow from a markdown file to CSS custom properties to live components. Understand the full pipeline in five minutes.",
   path: "/walkthrough",
 });
 

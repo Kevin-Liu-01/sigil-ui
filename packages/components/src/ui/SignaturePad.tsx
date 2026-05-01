@@ -99,7 +99,7 @@ export const SignaturePad = forwardRef<HTMLDivElement, SignaturePadProps>(functi
         className={cn(
           "relative overflow-hidden",
           "rounded-[var(--s-radius-md,8px)]",
-          "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-background)]",
         )}
       >

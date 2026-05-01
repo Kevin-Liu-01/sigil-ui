@@ -76,7 +76,7 @@ function GeometricGlyph({
 
   return (
     <div
-      className="relative h-[120px] w-[120px]"
+      className="relative h-[150px] w-[120px]"
       style={{
         clipPath,
         background: color,
@@ -239,7 +239,7 @@ function SceneBlock({
         <MonoLabel variant="accent" size="xs">{label}</MonoLabel>
         <MonoLabel size="xs" variant="muted">{title}</MonoLabel>
       </div>
-      <div className="min-h-[220px] p-4">{children}</div>
+      <div className="min-h-[250px] p-4">{children}</div>
     </div>
   );
 }
@@ -273,7 +273,7 @@ function PseudoBox({
   const offset = Math.max(10, Math.round(depth * 0.42));
 
   return (
-    <div className="relative h-[148px] w-full max-w-[198px]">
+    <div className="relative h-[150px] w-full max-w-[198px]">
       <div
         className="absolute border border-[var(--s-border-muted)] bg-[var(--s-background)]"
         style={{
@@ -316,7 +316,7 @@ function PseudoBox({
         className="absolute z-20 cursor-pointer border border-[var(--s-border)] bg-[var(--s-surface)] text-left shadow-[var(--s-shadow-sm)]"
         style={{
           inset: `0 ${offset + 10}px auto 0`,
-          height: 76,
+          height: 100,
           transform: open
             ? `translate3d(${offset + 18}px, -${offset + 16}px, 0) rotate(-4deg)`
             : `translate3d(${intensity * 5}px, -${intensity * 4}px, 0)`,
@@ -463,7 +463,7 @@ function ReactiveTerrainGrid() {
 function CylinderStack() {
   return (
     <div className="flex h-full flex-col items-center justify-center">
-      <div className="relative h-[190px] w-[210px]">
+      <div className="relative h-[200px] w-[210px]">
         {[0, 1, 2, 3].map((layer) => (
           <div
             key={layer}
@@ -512,7 +512,7 @@ export function ThreeDShowcase() {
             <MonoLabel variant="accent">interactive component terrain</MonoLabel>
             <Badge variant="outline" className="font-[family-name:var(--s-font-mono)]">move cursor</Badge>
           </div>
-          <IsometricScene height={460} gridSize={36} className="bg-[var(--s-background)]">
+          <IsometricScene height={500} gridSize={36} className="bg-[var(--s-background)]">
             <ReactiveTerrainGrid />
           </IsometricScene>
         </div>
@@ -617,7 +617,7 @@ function polygonBounds(points: string) {
 export function ShapesAndPatterns() {
   return (
     <TechFrame variant="overshoot" extend={16} opacity={0.3} padding={8}>
-      <div className="relative h-[720px] overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)]">
+      <div className="relative h-[750px] overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)]">
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.06]"
           style={{

@@ -29,19 +29,19 @@ export const LeaderboardTable = forwardRef<HTMLDivElement, LeaderboardTableProps
         ref={ref}
         data-slot="leaderboard-table"
         className={cn(
-          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
+          "w-full rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] overflow-hidden shadow-[var(--s-shadow-sm)]",
           className,
         )}
         {...rest}
       >
         {title && (
-          <div className="border-b border-[var(--s-border)] px-4 py-3">
+          <div className="border-b border-[color:var(--s-border)] px-4 py-3">
             <h3 className="text-sm font-semibold text-[var(--s-text)]">{title}</h3>
           </div>
         )}
         <table className="w-full text-sm border-collapse">
           <thead>
-            <tr className="border-b border-[var(--s-border)]">
+            <tr className="border-b border-[color:var(--s-border)]">
               <th className="w-12 py-2.5 px-3 text-center font-medium text-[var(--s-text-muted)]">#</th>
               <th className="text-left py-2.5 px-4 font-medium text-[var(--s-text-muted)]">Name</th>
               <th className="text-right py-2.5 px-4 font-medium text-[var(--s-text-muted)]">{valueLabel}</th>
@@ -56,7 +56,7 @@ export const LeaderboardTable = forwardRef<HTMLDivElement, LeaderboardTableProps
                 <tr
                   key={row.label}
                   className={cn(
-                    "border-b border-[var(--s-border)]/40 transition-colors duration-[var(--s-duration-fast,150ms)]",
+                    "border-b border-[color:var(--s-border)]/40 transition-colors duration-[var(--s-duration-fast,150ms)]",
                     row.highlight
                       ? "bg-[var(--s-primary-muted)]/30"
                       : "hover:bg-[var(--s-surface-elevated)]",

@@ -215,7 +215,7 @@ export function ComponentGrid({ className = "" }: ComponentGridProps) {
               transform: hoveredIdx === i ? "scale(1.02)" : "scale(1)",
               transitionDuration: "var(--s-duration-fast, 150ms)",
               transitionTimingFunction: "var(--s-ease-out, ease-out)",
-              minHeight: 72,
+              minHeight: 100,
               display: "flex",
               alignItems: "center",
             }}

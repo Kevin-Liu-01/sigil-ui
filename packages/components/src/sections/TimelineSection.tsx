@@ -35,7 +35,7 @@ export const TimelineSection = forwardRef<HTMLElement, TimelineSectionProps>(
             <div className="flex flex-col gap-8">
               {events.map((event, i) => (
                 <div key={i} className="relative pl-12">
-                  <div className="absolute left-0 top-1 w-8 h-8 rounded-[var(--s-radius-full,9999px)] border-2 border-[var(--s-border)] bg-[var(--s-background)] flex items-center justify-center text-[var(--s-text-muted)] [&_svg]:size-3.5">
+                  <div className="absolute left-0 top-1 w-8 h-8 rounded-[var(--s-radius-full,9999px)] border-2 border-[color:var(--s-border)] bg-[var(--s-background)] flex items-center justify-center text-[var(--s-text-muted)] [&_svg]:size-3.5">
                     {event.icon ?? (
                       <div className="w-2 h-2 rounded-[var(--s-radius-full,9999px)] bg-[var(--s-primary)]" />
                     )}

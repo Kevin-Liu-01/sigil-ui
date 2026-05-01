@@ -21,7 +21,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
         data-slot="split-button"
         className={cn(
           "inline-flex items-stretch overflow-hidden",
-          "rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)]",
+          "rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
           "bg-[var(--s-surface)] text-sm",
           disabled && "opacity-50 pointer-events-none",
           className,
@@ -51,7 +51,7 @@ export const SplitButton = forwardRef<HTMLDivElement, SplitButtonProps>(
           aria-label={dropdownLabel}
           className={cn(
             "inline-flex items-center justify-center w-7 h-8 shrink-0",
-            "border-l border-[var(--s-border)]",
+            "border-l border-[color:var(--s-border)]",
             "text-[var(--s-text-muted)]",
             "transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-surface-elevated)] hover:text-[var(--s-text)]",

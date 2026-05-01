@@ -5,7 +5,7 @@ import { buildPageMetadata } from "@/lib/metadata";
 const base = buildPageMetadata({
   title: "Demos",
   description:
-    "17 full-page demo sites built with Sigil UI. Templates for AI SaaS, dashboards, e-commerce, portfolios, blogs, and more — plus showcase clones of Linear, Vercel, and Vite.",
+    "17 production-ready templates built with Sigil UI — SaaS, dashboards, e-commerce, portfolios, dev docs, and more. Each uses a different preset to show how the same components create distinct products.",
   path: "/demos",
   ogTitle: "Demo Sites — Sigil UI",
 });

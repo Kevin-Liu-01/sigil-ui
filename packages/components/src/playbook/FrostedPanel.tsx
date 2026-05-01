@@ -16,10 +16,10 @@ export interface FrostedPanelProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const edgeBorders: Record<FrostedPanelEdge, string> = {
-  left: "border-l border-[var(--s-border)]",
-  right: "border-r border-[var(--s-border)]",
-  top: "border-t border-[var(--s-border)]",
-  bottom: "border-b border-[var(--s-border)]",
+  left: "border-l border-[color:var(--s-border)]",
+  right: "border-r border-[color:var(--s-border)]",
+  top: "border-t border-[color:var(--s-border)]",
+  bottom: "border-b border-[color:var(--s-border)]",
 };
 
 /**

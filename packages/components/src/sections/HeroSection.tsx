@@ -75,7 +75,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
                     "transition-all duration-[var(--s-duration-fast,150ms)]",
                     "rounded-[var(--s-radius-button,0px)]",
                     action.variant === "secondary" || i > 0
-                      ? "bg-transparent text-[var(--s-text)] border border-[var(--s-border)] hover:bg-[var(--s-surface)]"
+                      ? "bg-transparent text-[var(--s-text)] border border-[color:var(--s-border)] hover:bg-[var(--s-surface)]"
                       : "bg-[var(--s-primary)] text-[var(--s-primary-contrast)] hover:brightness-110",
                   )}
                 >
@@ -87,7 +87,7 @@ export const HeroSection = forwardRef<HTMLElement, HeroSectionProps>(
 
           {installCommand && (
             <div className={cn("mt-[var(--s-hero-description-gap,24px)]", align === "center" && "flex justify-center")}>
-              <code className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--s-radius-md,0px)] border border-[var(--s-border)] bg-[var(--s-surface)] font-[family-name:var(--s-font-mono)] text-sm text-[var(--s-text)]">
+              <code className="inline-flex items-center gap-2 px-4 py-2 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] font-[family-name:var(--s-font-mono)] text-sm text-[var(--s-text)]">
                 <span className="text-[var(--s-text-muted)]">$</span>
                 {installCommand}
               </code>

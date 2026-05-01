@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Sigil",
     start_url: "/",
     description:
-      "Token-driven component library. 200+ components, 519 tokens, 46 presets. Built for AI agents.",
+      "Token-driven component library. 350+ components, 519 tokens, 46 presets. Built for AI agents.",
     icons: [
       {
         src: "/icon.svg",

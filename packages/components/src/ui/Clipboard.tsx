@@ -51,7 +51,7 @@ export const Clipboard = forwardRef<HTMLButtonElement, ClipboardProps>(function 
         "inline-flex items-center justify-center gap-1.5",
         "rounded-[var(--s-radius-sm,4px)] px-2 py-1",
         "text-xs font-medium text-[var(--s-text-muted)]",
-        "border border-[var(--s-border)] border-[style:var(--s-border-style,solid)]",
+        "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
         "bg-[var(--s-surface)]",
         "hover:bg-[var(--s-surface-elevated)]",
         "transition-colors duration-[var(--s-duration-fast,150ms)]",

@@ -24,7 +24,7 @@ export const FeatureFrame = forwardRef<HTMLDivElement, FeatureFrameProps>(functi
       data-slot="feature-frame"
       className={cn(
         "flex flex-col gap-3 p-6 rounded-[var(--s-card-radius,8px)]",
-        "border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)]",
+        "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)]",
         "transition-all duration-[var(--s-duration-normal,200ms)] hover:shadow-[var(--s-shadow-md)] hover:-translate-y-0.5",
         className,
       )}

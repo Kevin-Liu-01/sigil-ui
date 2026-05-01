@@ -21,7 +21,7 @@ Wrap your app in `<TooltipProvider>`:
 
 ## Usage
 
-`Tooltip` is a wrapper component. Pass `content` for the tooltip text and a **single element** as children (rendered with `asChild`):
+`Tooltip` is a wrapper component. Pass `content` for the tooltip text and a **single element** as children (rendered with asChild):
 
 ```tsx
 <Tooltip content="More information">
@@ -70,7 +70,7 @@ Wrap your app in `<TooltipProvider>`:
 | `content` | `string` | — | Tooltip text |
 | `side` | `"top" \| "right" \| "bottom" \| "left"` | `"top"` | Preferred side |
 | `delayDuration` | `number` | `200` | Open delay in ms |
-| `children` | `ReactNode` | — | Single trigger element (rendered via `asChild`) |
+| `children` | `ReactNode` | — | Single trigger element (rendered via asChild) |
 
 ### TooltipProvider
 
@@ -83,5 +83,5 @@ Wrap your app in `<TooltipProvider>`:
 - Tooltip appears on both hover and focus
 - Content is linked via `aria-describedby`
 - Escape closes the tooltip
-- Children must be a single element (required by `asChild`)
+- Children must be a single element (required by the Radix Slot pattern)
 - Follows WAI-ARIA Tooltip pattern

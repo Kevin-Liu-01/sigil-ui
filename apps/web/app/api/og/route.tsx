@@ -155,7 +155,7 @@ export async function GET(request: NextRequest) {
               }}
             >
               {isDefault
-                ? "200+ components · 519 tokens · 46 presets"
+                ? "350+ components · 519 tokens · 46 presets"
                 : subtitle ||
                   (type === "docs"
                     ? "Documentation"

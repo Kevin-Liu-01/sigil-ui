@@ -18,7 +18,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(function Card(
       ref={ref}
       data-slot="card"
       className={cn(
-        "flex flex-col gap-4 rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[var(--s-border)] bg-[var(--s-surface)] p-0 text-[var(--s-text)] shadow-[var(--s-shadow-sm)]",
+        "flex flex-col gap-4 rounded-[var(--s-radius-card,0px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)] p-0 text-[var(--s-text)] shadow-[var(--s-shadow-sm)]",
         hoverable && "transition-all duration-[var(--s-duration-normal,200ms)] hover:shadow-[var(--s-shadow-md)] hover:-translate-y-0.5",
         className,
       )}
