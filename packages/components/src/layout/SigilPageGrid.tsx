@@ -350,9 +350,7 @@ export function SigilGutter({
     return <div aria-hidden="true" style={{ background: "var(--s-background)" }} />;
   }
 
-  // Shift pattern by -1px so horizontal grid lines overlap with CSS
-  // border-bottom lines (which sit 1px inside border-box elements).
-  const anchor = side === "right" ? "left -1px" : "right -1px";
+  const anchor = side === "right" ? "left top" : "right top";
 
   return (
     <div
@@ -483,7 +481,7 @@ export function SigilPageGrid({
     if (!edgeless) {
       const prop = `border${innerEdge}` as keyof CSSProperties;
       Object.assign(container, {
-        [prop]: marginBorder ?? "var(--s-margin-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))",
+        [prop]: marginBorder ?? `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${STRUCTURAL_LINE_COLOR}`,
       });
     }
     return { container, overlay };
