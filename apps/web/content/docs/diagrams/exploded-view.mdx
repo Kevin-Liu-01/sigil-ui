@@ -1,94 +1,34 @@
 ---
 title: ExplodedView
-description: An exploded diagram that separates layered components with 3D spacing. Ideal for architecture overviews and stack visualizations.
+description: "A ExplodedView component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { ExplodedView, ExplodedLayer } from "@sigil-ui/components";
+import { ExplodedView } from "@sigil-ui/components";
 ```
 
 ## Usage
 
 ```tsx
-<ExplodedView>
-  <ExplodedLayer label="Frontend" color="var(--s-primary)">
-    React + Tailwind
-  </ExplodedLayer>
-  <ExplodedLayer label="API" color="var(--s-secondary)">
-    Next.js API Routes
-  </ExplodedLayer>
-  <ExplodedLayer label="Database" color="var(--s-success)">
-    PostgreSQL
-  </ExplodedLayer>
-</ExplodedView>
+<ExplodedView>...</ExplodedView>
 ```
-
-## Spacing
-
-```tsx
-<ExplodedView spacing="compact">Tight layers</ExplodedView>
-<ExplodedView spacing="normal">Default</ExplodedView>
-<ExplodedView spacing="wide">Dramatic separation</ExplodedView>
-```
-
-## Interactive hover
-
-Layers spread further apart on hover to reveal details:
-
-```tsx
-<ExplodedView interactive>
-  <ExplodedLayer label="UI">Components</ExplodedLayer>
-  <ExplodedLayer label="State">Zustand</ExplodedLayer>
-  <ExplodedLayer label="Data">API layer</ExplodedLayer>
-</ExplodedView>
-```
-
-## Horizontal orientation
-
-```tsx
-<ExplodedView orientation="horizontal">
-  <ExplodedLayer label="Input">Request</ExplodedLayer>
-  <ExplodedLayer label="Process">Transform</ExplodedLayer>
-  <ExplodedLayer label="Output">Response</ExplodedLayer>
-</ExplodedView>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Layer background |
-| `--s-border` | Layer border |
-| `--s-text` | Label text |
-| `--s-text-muted` | Description text |
-| `--s-shadow-md` | Layer elevation |
-| `--s-duration-normal` | Hover spread animation |
-| `--s-ease-spring` | Spread easing |
 
 ## Props
 
-### ExplodedView
-
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `spacing` | `"compact" \| "normal" \| "wide"` | `"normal"` | Layer separation |
-| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Stack direction |
-| `interactive` | `boolean` | `false` | Spread on hover |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | ExplodedLayer children |
+| `layers` | `ExplodedViewLayer[]` | — | Layers to display from top to bottom. |
+| `gap` | `string` | `2rem` | Gap between layers. |
 
-### ExplodedLayer
+## Token integration
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `label` | `string` | — | Layer label |
-| `color` | `string` | `var(--s-primary)` | Layer accent color |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Layer content |
-
-## Accessibility
-
-- Layers are rendered in DOM order for logical reading
-- `prefers-reduced-motion` disables hover spread animation
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

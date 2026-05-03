@@ -1,6 +1,6 @@
 ---
 title: Ripple
-description: Expanding concentric ring animation. Decorative element for hero sections, status indicators, or background effects.
+description: "A Ripple component from the Sigil design system."
 ---
 
 ## Import
@@ -9,30 +9,29 @@ description: Expanding concentric ring animation. Decorative element for hero se
 import { Ripple } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Ripple />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Ripple />
-```
-
-## Custom colors and sizing
-
-```tsx
-<Ripple
-  rings={5}
-  size={300}
-  duration={3}
-  color="var(--s-primary)"
-/>
+<Ripple>Ripple content</Ripple>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `rings` | `number` | `3` | Number of concentric rings |
-| `duration` | `number` | `2.5` | Ring expansion duration in seconds |
-| `color` | `string` | `"var(--s-primary)"` | Ring border color |
-| `size` | `number` | `200` | Container size in px |
+| `rings` | `number` | `3` | Number of concentric rings. |
+| `duration` | `number` | `2.5` | Duration of each ring's expansion in seconds. |
+| `color` | `string` | `var(--s-primary, currentColor)` | Ring color. |
+| `size` | `number` | `200` | Maximum ring size. |
 
-Renders `aria-hidden` for accessibility. Respects `prefers-reduced-motion`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |

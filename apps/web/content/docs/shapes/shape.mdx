@@ -1,6 +1,6 @@
 ---
 title: Shape
-description: A generic shape primitive that renders any polygon via CSS clip-path. The base for Diamond, Hexagon, Triangle, and custom shapes.
+description: "A Shape component from the Sigil design system."
 ---
 
 ## Import
@@ -9,71 +9,29 @@ description: A generic shape primitive that renders any polygon via CSS clip-pat
 import { Shape } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Shape variant="circle" size={48} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Shape points="50,0 100,50 50,100 0,50" size={48} />
+<Shape>Shape content</Shape>
 ```
-
-The `points` prop accepts a polygon string used in `clip-path: polygon(...)`.
-
-## Preset shapes
-
-```tsx
-<Shape preset="diamond" size={32} color="var(--s-primary)" />
-<Shape preset="hexagon" size={48} color="var(--s-secondary)" />
-<Shape preset="triangle" size={36} color="var(--s-error)" />
-<Shape preset="pentagon" size={40} color="var(--s-success)" />
-<Shape preset="octagon" size={44} color="var(--s-warning)" />
-```
-
-## Custom polygon
-
-```tsx
-<Shape
-  points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35"
-  size={64}
-  color="var(--s-primary)"
-/>
-```
-
-A 10-point star.
-
-## Outlined
-
-```tsx
-<Shape preset="hexagon" variant="outlined" color="var(--s-border)" size={48} />
-```
-
-## Animation
-
-```tsx
-<Shape preset="diamond" animated="pulse" color="var(--s-primary)" size={32} />
-<Shape preset="hexagon" animated="spin" color="var(--s-secondary)" size={48} />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Default fill color |
-| `--s-border` | Outlined variant stroke |
-| `--s-duration-slow` | Animation duration |
-| `--s-ease-spring` | Animation easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `points` | `string` | — | Polygon points for clip-path |
-| `preset` | `"diamond" \| "hexagon" \| "triangle" \| "pentagon" \| "octagon"` | — | Preset shape |
-| `size` | `number \| string` | `48` | Width and height |
-| `color` | `string` | `var(--s-primary)` | Fill or stroke color |
-| `variant` | `"filled" \| "outlined"` | `"filled"` | Visual variant |
-| `animated` | `"pulse" \| "spin" \| "float" \| false` | `false` | Animation type |
-| `className` | `string` | — | Additional CSS classes |
+| `variant` | `ShapeVariant` | `diamond` | Shape type. |
+| `size` | `ShapeSize` | `md` | Size. |
+| `filled` | `boolean` | — | Fill the shape with color. |
+| `strokeWidth` | `number` | `1.5` | Custom stroke width. |
 
-## Accessibility
+## Token integration
 
-- Renders with `role="presentation"` by default
-- Add `role="img"` and `aria-label` when the shape conveys meaning
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |

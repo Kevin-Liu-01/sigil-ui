@@ -1,6 +1,6 @@
 ---
 title: Triangle
-description: A CSS clip-path triangle with configurable direction, size, and color. Use for arrows, indicators, and decorative elements.
+description: "A Triangle component from the Sigil design system."
 ---
 
 ## Import
@@ -9,85 +9,27 @@ description: A CSS clip-path triangle with configurable direction, size, and col
 import { Triangle } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Triangle size={48} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Triangle />
+<Triangle>Triangle content</Triangle>
 ```
-
-Renders an upward-pointing equilateral triangle using CSS `clip-path`. Default size is `24px`.
-
-## Directions
-
-```tsx
-<Triangle direction="up" />
-<Triangle direction="down" />
-<Triangle direction="left" />
-<Triangle direction="right" />
-```
-
-## Sizes
-
-```tsx
-<Triangle size={12} />
-<Triangle size={24} />
-<Triangle size={48} />
-```
-
-## Colors
-
-```tsx
-<Triangle color="var(--s-primary)" />
-<Triangle color="var(--s-error)" />
-<Triangle color="var(--s-success)" />
-```
-
-## Outlined
-
-```tsx
-<Triangle variant="outlined" color="var(--s-primary)" />
-<Triangle variant="outlined" strokeWidth={2} />
-```
-
-## Arrow indicator pattern
-
-```tsx
-<Stack direction="row" gap={4} align="center">
-  <span>Revenue</span>
-  <Triangle size={10} direction="up" color="var(--s-success)" />
-  <span className="text-[var(--s-success)]">+12%</span>
-</Stack>
-```
-
-## Animation
-
-```tsx
-<Triangle animated="pulse" color="var(--s-primary)" />
-<Triangle animated="float" color="var(--s-secondary)" />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Default fill color |
-| `--s-border` | Outlined variant stroke |
-| `--s-duration-slow` | Animation duration |
-| `--s-ease-spring` | Animation easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `size` | `number \| string` | `24` | Width and height |
-| `direction` | `"up" \| "down" \| "left" \| "right"` | `"up"` | Point direction |
-| `color` | `string` | `var(--s-primary)` | Fill or stroke color |
-| `variant` | `"filled" \| "outlined"` | `"filled"` | Visual variant |
-| `strokeWidth` | `number` | `1.5` | Stroke width for outlined variant |
-| `animated` | `"pulse" \| "float" \| false` | `false` | Animation type |
-| `className` | `string` | — | Additional CSS classes |
+| `direction` | `"up" | "down" | "left" | "right"` | `up` | Direction the triangle points. |
+| `size` | `"sm" | "md" | "lg" | "xl"` | `md` | Triangle size. |
 
-## Accessibility
+## Token integration
 
-- Renders with `role="presentation"` by default
-- Add `role="img"` and `aria-label` when conveying meaning (e.g. trend direction)
+| CSS Variable | Purpose |
+|---|---|
+| `--s-surface` | Surface |

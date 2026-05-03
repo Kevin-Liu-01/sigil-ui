@@ -1,17 +1,7 @@
 ---
 title: Combobox
-description: Searchable select with keyboard navigation and filtered options list.
+description: "A Combobox component from the Sigil design system."
 ---
-
-# Combobox
-
-> Searchable select with keyboard navigation and filtered options list.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add combobox
-```
 
 ## Import
 
@@ -19,88 +9,42 @@ npx @sigil-ui/cli add combobox
 import { Combobox } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Combobox placeholder="Select framework..." options={[{ value: "next", label: "Next.js" }, { value: "remix", label: "Remix" }, { value: "astro", label: "Astro" }]} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Combobox
-  options={[
-    { value: "react", label: "React" },
-    { value: "vue", label: "Vue" },
-    { value: "svelte", label: "Svelte" },
-    { value: "solid", label: "Solid" },
-  ]}
-  placeholder="Select framework..."
-/>
-```
-
-## Examples
-
-### Controlled value
-
-```tsx
-const [framework, setFramework] = useState("");
-
-<Combobox
-  options={frameworks}
-  value={framework}
-  onValueChange={setFramework}
-  placeholder="Pick a framework..."
-/>
-```
-
-### Custom empty state
-
-```tsx
-<Combobox
-  options={users}
-  placeholder="Search users..."
-  searchPlaceholder="Type a name..."
-  emptyText="No users found."
-/>
-```
-
-### With disabled options
-
-```tsx
-<Combobox
-  options={[
-    { value: "free", label: "Free" },
-    { value: "pro", label: "Pro" },
-    { value: "enterprise", label: "Enterprise", disabled: true },
-  ]}
-  placeholder="Select plan..."
-/>
+<Combobox>...</Combobox>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `options` | `ComboboxOption[]` | — | List of selectable options |
-| `value` | `string` | — | Controlled selected value |
-| `onValueChange` | `(value: string) => void` | — | Selection change handler |
-| `placeholder` | `string` | `"Select…"` | Trigger placeholder text |
-| `searchPlaceholder` | `string` | `"Search…"` | Search input placeholder |
-| `emptyText` | `string` | `"No results."` | Text when no options match |
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `options` | `ComboboxOption[]` | — | — |
+| `value` | `string` | — | — |
+| `onValueChange` | `(value: string) => void` | — | — |
+| `placeholder` | `string` | — | — |
+| `searchPlaceholder` | `string` | — | — |
+| `emptyText` | `string` | — | — |
 
-### ComboboxOption
+## Token integration
 
-| Prop | Type | Description |
-|------|------|-------------|
-| `value` | `string` | Option value |
-| `label` | `string` | Display label |
-| `disabled` | `boolean` | Disable this option |
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-background` — dropdown background
-- `--s-surface` — option hover background
-- `--s-border` — trigger and dropdown border
-- `--s-text` — selected text and options
-- `--s-text-muted` — placeholder and search icon
-- `--s-primary` — focus ring and checkmark
-- `--s-radius-md` — trigger and dropdown radius
-- `--s-shadow-md` — dropdown elevation
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-border-style` | Border style |
+| `--s-background` | Background |
+| `--s-border` | Border |
+| `--s-duration-fast` | Duration fast |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |
+| `--s-surface` | Surface |
+| `--s-shadow-md` | Shadow md |
+| `--s-radius-sm` | Radius sm |
+| `--s-text` | Text |

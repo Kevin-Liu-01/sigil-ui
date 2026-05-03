@@ -1,17 +1,7 @@
 ---
-title: Segmented Control
-description: iOS-style segmented control for mutually exclusive options.
+title: SegmentedControl
+description: "A SegmentedControl component from the Sigil design system."
 ---
-
-# Segmented Control
-
-> Mutually exclusive option selector with a pill-style indicator — distinct from ToggleGroup in that it always has exactly one selection.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add segmented-control
-```
 
 ## Import
 
@@ -19,67 +9,47 @@ npx @sigil-ui/cli add segmented-control
 import { SegmentedControl, SegmentedControlItem } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <SegmentedControl>
+    <SegmentedControlItem value="a">All</SegmentedControlItem>
+    <SegmentedControlItem value="b">Active</SegmentedControlItem>
+  </SegmentedControl>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-const [view, setView] = useState("grid");
-
-<SegmentedControl value={view} onValueChange={setView}>
-  <SegmentedControlItem value="grid">Grid</SegmentedControlItem>
-  <SegmentedControlItem value="list">List</SegmentedControlItem>
-  <SegmentedControlItem value="board">Board</SegmentedControlItem>
-</SegmentedControl>
+<SegmentedControl>...</SegmentedControl>
 ```
 
-## Examples
+## Sub-components
 
-### Two options
+This component includes the following parts:
 
-```tsx
-<SegmentedControl value="monthly" onValueChange={() => {}}>
-  <SegmentedControlItem value="monthly">Monthly</SegmentedControlItem>
-  <SegmentedControlItem value="yearly">Yearly</SegmentedControlItem>
-</SegmentedControl>
-```
-
-### With disabled item
-
-```tsx
-<SegmentedControl value="light" onValueChange={() => {}}>
-  <SegmentedControlItem value="light">Light</SegmentedControlItem>
-  <SegmentedControlItem value="dark">Dark</SegmentedControlItem>
-  <SegmentedControlItem value="system" disabled>System</SegmentedControlItem>
-</SegmentedControl>
-```
+- `<SegmentedControlItem>`
 
 ## Props
 
-### SegmentedControl
-
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | — | Currently active segment value |
-| `onValueChange` | `(value: string) => void` | — | Callback when selection changes |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | SegmentedControlItem children |
+|---|---|---|---|
+| `value` | `string` | — | — |
+| `onValueChange` | `(value: string) => void` | — | — |
 
-### SegmentedControlItem
+## Token integration
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | — | Value for this segment |
-| `disabled` | `boolean` | `false` | Disable this option |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Label content |
-
-## Tokens
-
-- `--s-surface-sunken` — track background
-- `--s-background` — active segment background
-- `--s-border` — track border
-- `--s-border-style` — border style
-- `--s-radius-md` — track border radius
-- `--s-shadow-sm` — active segment shadow
-- `--s-text` / `--s-text-muted` — label colors
-- `--s-primary` — focus ring
-- `--s-duration-fast` — transition speed
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-surface-sunken` | Surface sunken |
+| `--s-surface` | Surface |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-duration-fast` | Duration fast |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text-muted` | Text muted |

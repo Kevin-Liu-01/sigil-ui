@@ -1,6 +1,6 @@
 ---
 title: LeaderboardTable
-description: "A ranked leaderboard table with medals, deltas, and highlighting."
+description: "A LeaderboardTable component from the Sigil design system."
 ---
 
 ## Import
@@ -9,60 +9,34 @@ description: "A ranked leaderboard table with medals, deltas, and highlighting."
 import { LeaderboardTable } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <LeaderboardTable
-    title="Top Contributors"
-    valueLabel="Points"
-    rows={[
-      { label: "Alice", value: 2480, delta: "+120" },
-      { label: "Bob", value: 2310, delta: "+85" },
-      { label: "Carol", value: 2150, delta: "-30" },
-      { label: "Dave", value: 1980, delta: "+200", highlight: true },
-      { label: "Eve", value: 1870, delta: "+10" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<LeaderboardTable
-  title="Top Contributors"
-  valueLabel="Points"
-  rows={[
-    { label: "Alice", value: 2480, delta: "+120" },
-    { label: "Bob", value: 2310, delta: "+85" },
-    { label: "Carol", value: 2150, delta: "-30" },
-    { label: "Dave", value: 1980, delta: "+200", highlight: true },
-    { label: "Eve", value: 1870, delta: "+10" },
-  ]}
-/>
+<LeaderboardTable>...</LeaderboardTable>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `rows` | `LeaderboardRow[]` | — | Ranked entries with label, value, delta |
-| `valueLabel` | `string` | `"Score"` | Column header for values |
-| `title` | `string` | — | Optional title header |
-| `showMedals` | `boolean` | `true` | Show medal icons for top 3 |
+| `rows` | `LeaderboardRow[]` | — | — |
+| `valueLabel` | `string` | — | — |
+| `title` | `string` | — | — |
+| `showMedals` | `boolean` | `true` | Show medal icons for top 3. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary-muted` | Highlighted row background |
-| `--s-success` | Positive delta color |
-| `--s-error` | Negative delta color |
-| `--s-border` | Table borders |
-| `--s-surface` | Background |
-| `--s-surface-elevated` | Row hover |
-| `--s-text` | Names and values |
-| `--s-text-muted` | Rank numbers, column headers |
-| `--s-font-mono` | Values, ranks, deltas font |
-| `--s-radius-card` | Container radius |
-| `--s-shadow-sm` | Container shadow |
-| `--s-duration-fast` | Hover transition |
+| `--s-radius-card` | Radius card |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary-muted` | Primary muted |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-font-mono` | Font mono |
+| `--s-success` | Success |

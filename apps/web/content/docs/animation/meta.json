@@ -1,25 +1,23 @@
 {
   "title": "Animation",
   "pages": [
-    "fade-in",
-    "slide-in",
-    "scale-in",
-    "blur-fade",
-    "stagger",
     "animate-on-mount",
     "animate-on-scroll",
-    "text-reveal",
-    "letter-pull-up",
-    "word-rotate",
-    "typewriter",
-    "number-ticker",
+    "blur-fade",
+    "fade-in",
     "gradient-text",
-    "scroll-progress",
-    "parallax-layer",
+    "letter-pull-up",
     "marquee",
-    "ripple",
+    "number-ticker",
+    "parallax-layer",
     "pulse",
-    "use-in-view",
-    "use-reduced-motion"
+    "ripple",
+    "scale-in",
+    "scroll-progress",
+    "slide-in",
+    "stagger",
+    "text-reveal",
+    "type-writer",
+    "word-rotate"
   ]
 }

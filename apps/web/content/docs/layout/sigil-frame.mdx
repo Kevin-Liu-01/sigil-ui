@@ -1,0 +1,64 @@
+---
+title: SigilFrame
+description: A structural-visibility frame that displays the underlying token grid — cross marks, rail lines, and measurement labels — around its children.
+---
+
+## Import
+
+```tsx
+import { SigilFrame } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <SigilFrame className="w-full">
+    <div className="p-8 text-center text-[var(--s-text-muted)]">
+      Content inside a sigil frame
+    </div>
+  </SigilFrame>
+</ComponentPreview>
+
+## Usage
+
+`SigilFrame` wraps content in the structural-visibility system — showing cross marks at corners, rail lines along edges, and optional measurement labels. This is the signature visual language of the Sigil design system.
+
+```tsx
+<SigilFrame>
+  <Card>
+    <CardHeader>
+      <CardTitle>Token-driven</CardTitle>
+    </CardHeader>
+  </Card>
+</SigilFrame>
+```
+
+## With labels
+
+```tsx
+<SigilFrame label="fig.01" caption="Component preview">
+  <Button variant="primary">Primary action</Button>
+</SigilFrame>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-cross-arm` | Cross mark arm length |
+| `--s-cross-stroke` | Cross mark stroke width |
+| `--s-border` | Rail line color |
+| `--s-border-muted` | Grid line color |
+| `--s-text-muted` | Label text color |
+| `--s-font-mono` | Label font family |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `label` | `string` | — | Figure label (e.g. "fig.01") |
+| `caption` | `string` | — | Caption text below the frame |
+| `showCross` | `boolean` | `true` | Show cross marks at corners |
+| `showRails` | `boolean` | `true` | Show rail lines along edges |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Content to frame |

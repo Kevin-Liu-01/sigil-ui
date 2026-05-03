@@ -96,7 +96,7 @@ function NavigationMenuViewport() {
     <div className="absolute left-0 top-full flex justify-center">
       <NavPrimitive.Viewport
         className={cn(
-          "origin-top-center relative mt-1.5 w-full overflow-hidden",
+          "origin-top-center relative mt-1.5 w-full overflow-hidden outline-none",
           "h-[var(--radix-navigation-menu-viewport-height)]",
           "w-[var(--radix-navigation-menu-viewport-width)]",
           "rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",

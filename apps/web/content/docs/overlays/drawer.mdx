@@ -9,6 +9,23 @@ description: "A Drawer component from the Sigil design system."
 import { Drawer, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Drawer>
+  <DrawerTrigger asChild><Button variant="outline">Open drawer</Button></DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Settings</DrawerTitle>
+      <DrawerDescription>Adjust your preferences.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose asChild><Button variant="ghost">Close</Button></DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
@@ -39,12 +56,15 @@ This component includes the following parts:
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-overlay` | Overlay |
-| `--s-card-radius` | Card radius |
+| `--s-overlay-bg` | Overlay bg |
+| `--s-overlay-blur` | Overlay blur |
+| `--s-overlay-radius` | Overlay radius |
+| `--s-radius-lg` | Radius lg |
+| `--s-overlay-border` | Overlay border |
 | `--s-border` | Border |
 | `--s-border-style` | Border style |
-| `--s-background` | Background |
-| `--s-shadow-lg` | Shadow lg |
+| `--s-overlay-surface` | Overlay surface |
+| `--s-surface` | Surface |
+| `--s-overlay-shadow` | Overlay shadow |
+| `--s-shadow-xl` | Shadow xl |
 | `--s-radius-full` | Radius full |
-| `--s-text` | Text |
-| `--s-text-muted` | Text muted |

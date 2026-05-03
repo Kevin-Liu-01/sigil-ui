@@ -43,6 +43,7 @@ import {
 } from "@sigil-ui/components";
 import { useSigilTokens } from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
+import { SpringCurveEditor, EasingCurveEditor, SubSection } from "./studio-editors";
 import type { SigilTokens, GutterPattern } from "@sigil-ui/tokens";
 
 /* ================================================================== */
@@ -644,11 +645,60 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
     <Row label="glow"><div style={{ display: "flex", alignItems: "center", gap: 8 }}><Toggle checked={readBool(sh, "glow", false)} onChange={(v) => patch("shadows", "glow", v)} />{readBool(sh, "glow", false) && <ColorInput value={sh?.["glow-color"]} onChange={(v) => patch("shadows", "glow-color", v)} />}</div></Row>
   </>);
 
+  const springDuration = readNum(md, "normal", 250) / 1000;
+  const springBounce = (() => {
+    const easing = tokens.motion?.easing;
+    if (!easing) return 0.04;
+    const springVal = typeof easing === "object" ? (easing as Record<string, string>).spring : undefined;
+    if (!springVal) return 0.04;
+    const m2 = springVal.match(/cubic-bezier\([^,]+,\s*([^,]+)/);
+    if (m2) {
+      const y1 = parseFloat(m2[1]);
+      return Math.max(0, Math.min(1, (y1 - 1) / 0.56));
+    }
+    return 0.04;
+  })();
+
+  const currentEasing = (() => {
+    const easing = tokens.motion?.easing;
+    if (!easing) return "cubic-bezier(0.16, 1, 0.3, 1)";
+    if (typeof easing === "object") return (easing as Record<string, string>).default ?? "cubic-bezier(0.16, 1, 0.3, 1)";
+    return "cubic-bezier(0.16, 1, 0.3, 1)";
+  })();
+
   const motionContent = (<>
-    <Row label="fast" value={`${readNum(md, "fast", 150)}ms`}><Slider value={readNum(md, "fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration.fast", `${v}ms`)} /></Row>
-    <Row label="normal" value={`${readNum(md, "normal", 250)}ms`}><Slider value={readNum(md, "normal", 250)} min={100} max={500} step={10} onChange={(v) => patch("motion", "duration.normal", `${v}ms`)} /></Row>
-    <Row label="hover scale" value={readNum(m, "hover-scale", 1.02).toFixed(2)}><Slider value={readNum(m, "hover-scale", 1.02)} min={1.0} max={1.1} step={0.01} onChange={(v) => patch("motion", "hover-scale", String(v))} /></Row>
-    <Row label="press scale" value={readNum(m, "press-scale", 0.97).toFixed(2)}><Slider value={readNum(m, "press-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("motion", "press-scale", String(v))} /></Row>
+    <SubSection title="Transition Spring" defaultOpen>
+      <SpringCurveEditor
+        duration={springDuration}
+        bounce={springBounce}
+        onDurationChange={(s) => patch("motion", "duration.normal", `${Math.round(s * 1000)}ms`)}
+        onBounceChange={(b) => {
+          const y1 = 1 + b * 0.56;
+          const x1 = Math.max(0, 0.34 - b * 0.16);
+          const x2 = Math.min(1, 0.64 + b * 0.08);
+          const css = `cubic-bezier(${x1.toFixed(2)}, ${y1.toFixed(2)}, ${x2.toFixed(2)}, 1)`;
+          patch("motion", "easing.spring", css);
+        }}
+        onEasingChange={(css) => patch("motion", "easing.spring", css)}
+      />
+    </SubSection>
+    <SubSection title="Default Easing" defaultOpen>
+      <EasingCurveEditor
+        easing={currentEasing}
+        onEasingChange={(css) => patch("motion", "easing.default", css)}
+      />
+    </SubSection>
+    <SubSection title="Durations">
+      <Row label="fast" value={`${readNum(md, "fast", 150)}ms`}><Slider value={readNum(md, "fast", 150)} min={50} max={300} step={10} onChange={(v) => patch("motion", "duration.fast", `${v}ms`)} /></Row>
+      <Row label="normal" value={`${readNum(md, "normal", 250)}ms`}><Slider value={readNum(md, "normal", 250)} min={100} max={500} step={10} onChange={(v) => patch("motion", "duration.normal", `${v}ms`)} /></Row>
+      <Row label="slow" value={`${readNum(md, "slow", 400)}ms`}><Slider value={readNum(md, "slow", 400)} min={200} max={1200} step={20} onChange={(v) => patch("motion", "duration.slow", `${v}ms`)} /></Row>
+    </SubSection>
+    <SubSection title="Interaction">
+      <Row label="hover scale" value={readNum(m, "hover-scale", 1.02).toFixed(2)}><Slider value={readNum(m, "hover-scale", 1.02)} min={1.0} max={1.1} step={0.01} onChange={(v) => patch("motion", "hover-scale", String(v))} /></Row>
+      <Row label="press scale" value={readNum(m, "press-scale", 0.97).toFixed(2)}><Slider value={readNum(m, "press-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("motion", "press-scale", String(v))} /></Row>
+      <Row label="hover lift" value={`${readNum(m, "hover-lift", 2)}px`}><Slider value={readNum(m, "hover-lift", 2)} min={0} max={12} step={1} onChange={(v) => patch("motion", "hover-lift", `${v}px`)} /></Row>
+      <Row label="stagger" value={`${readNum(m, "stagger-interval", 50)}ms`}><Slider value={readNum(m, "stagger-interval", 50)} min={10} max={200} step={10} onChange={(v) => patch("motion", "stagger-interval", `${v}ms`)} /></Row>
+    </SubSection>
   </>);
 
   const gridLayoutContent = (<>
@@ -684,6 +734,99 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
     <Row label="hero"><Segmented options={HERO_ALIGN} value={readStr(align, "hero-align", "center") as typeof HERO_ALIGN[number]} onChange={(v) => patch("alignment" as keyof SigilTokens, "hero-align", v)} /></Row>
     <Row label="navbar"><Segmented options={NAVBAR_ALIGN} value={readStr(nav, "navbar-align", "full") as typeof NAVBAR_ALIGN[number]} onChange={(v) => patch("navigation", "navbar-align", v)} /></Row>
     <Row label="rail visible"><Toggle checked={readBool(align, "rail-visible", false)} onChange={(v) => patch("alignment" as keyof SigilTokens, "rail-visible", v)} /></Row>
+  </>);
+
+  const bg = tokens.backgrounds as Record<string, unknown> | undefined;
+  const headings = tokens.headings as Record<string, unknown> | undefined;
+  const hero = (tokens as Record<string, unknown>).hero as Record<string, unknown> | undefined;
+  const ctaTokens = (tokens as Record<string, unknown>).cta as Record<string, unknown> | undefined;
+  const footer = (tokens as Record<string, unknown>).footer as Record<string, unknown> | undefined;
+  const inputs = tokens.inputs as Record<string, unknown> | undefined;
+
+  const HOVER_EFFECTS = ["glow", "lift", "darken", "outline", "fill", "none"] as const;
+  const TEXT_TRANSFORMS = ["none", "uppercase", "capitalize", "lowercase"] as const;
+  const CARD_HOVER = ["lift", "glow", "border", "scale", "none"] as const;
+  const BG_PATTERNS = ["none", "dots", "grid", "crosshatch", "diagonal", "diamond", "hexagon", "triangle"] as const;
+  const GRADIENT_TYPES = ["none", "linear", "radial", "conic"] as const;
+  const CARD_ASPECT = ["auto", "1/1", "4/3", "16/9"] as const;
+  const HERO_LAYOUTS = ["center", "left", "split"] as const;
+  const CTA_LAYOUTS = ["center", "left", "split"] as const;
+
+  const buttonsContent = (<>
+    <Row label="weight"><SelectField value={readStr(buttons, "font-weight", "600")} options={["400", "500", "600", "700"]} onChange={(v) => patch("buttons", "font-weight", v)} /></Row>
+    <Row label="transform"><SelectField value={readStr(buttons, "text-transform", "none")} options={TEXT_TRANSFORMS} onChange={(v) => patch("buttons", "text-transform", v)} /></Row>
+    <Row label="hover"><SelectField value={readStr(buttons, "hover-effect", "glow")} options={HOVER_EFFECTS} onChange={(v) => patch("buttons", "hover-effect", v)} /></Row>
+    <Row label="active scale" value={readNum(buttons, "active-scale", 0.97).toFixed(2)}><Slider value={readNum(buttons, "active-scale", 0.97)} min={0.9} max={1.0} step={0.01} onChange={(v) => patch("buttons", "active-scale", String(v))} /></Row>
+    <Row label="min-width" value={`${readNum(buttons, "min-width", 0)}px`}><Slider value={readNum(buttons, "min-width", 0)} min={0} max={200} step={4} onChange={(v) => patch("buttons", "min-width", `${v}px`)} /></Row>
+    <Row label="letter sp" value={`${readNum(buttons, "letter-spacing", 0).toFixed(3)}em`}><Slider value={readNum(buttons, "letter-spacing", 0)} min={-0.02} max={0.12} step={0.005} onChange={(v) => patch("buttons", "letter-spacing", `${v}em`)} /></Row>
+    <Row label="icon gap" value={`${readNum(buttons, "icon-gap", 8)}px`}><Slider value={readNum(buttons, "icon-gap", 8)} min={2} max={16} step={1} onChange={(v) => patch("buttons", "icon-gap", `${v}px`)} /></Row>
+    <Row label="shadow"><Toggle checked={readBool(buttons, "shadow", false)} onChange={(v) => patch("buttons", "shadow", v)} /></Row>
+  </>);
+
+  const cardsContent = (<>
+    <Row label="hover"><SelectField value={readStr(cards, "hover-effect", "lift")} options={CARD_HOVER} onChange={(v) => patch("cards", "hover-effect", v)} /></Row>
+    <Row label="border"><SelectField value={readStr(cards, "border-style", "solid")} options={BORDER_STYLES} onChange={(v) => patch("cards", "border-style", v)} /></Row>
+    <Row label="shadow"><SelectField value={readStr(cards, "shadow", "md")} options={SHADOW_OPTIONS} onChange={(v) => patch("cards", "shadow", v)} /></Row>
+    <Row label="padding" value={`${readNum(cards, "padding", 24)}px`}><Slider value={readNum(cards, "padding", 24)} min={8} max={48} step={4} onChange={(v) => patch("cards", "padding", `${v}px`)} /></Row>
+    <Row label="title size" value={`${readNum(cards, "title-size", 16)}px`}><Slider value={readNum(cards, "title-size", 16)} min={12} max={28} step={1} onChange={(v) => patch("cards", "title-size", `${v}px`)} /></Row>
+    <Row label="title wt"><SelectField value={readStr(cards, "title-weight", "600")} options={["400", "500", "600", "700", "800"]} onChange={(v) => patch("cards", "title-weight", v)} /></Row>
+    <Row label="desc size" value={`${readNum(cards, "description-size", 14)}px`}><Slider value={readNum(cards, "description-size", 14)} min={10} max={20} step={1} onChange={(v) => patch("cards", "description-size", `${v}px`)} /></Row>
+    <Row label="aspect"><SelectField value={readStr(cards, "aspect-ratio", "auto")} options={CARD_ASPECT} onChange={(v) => patch("cards", "aspect-ratio", v)} /></Row>
+    <Row label="outline"><Toggle checked={readBool(cards, "outline", false)} onChange={(v) => patch("cards", "outline", v)} /></Row>
+  </>);
+
+  const backgroundsContent = (<>
+    <Row label="pattern"><SelectField value={readStr(bg, "pattern", "none")} options={BG_PATTERNS} onChange={(v) => patch("backgrounds", "pattern", v)} /></Row>
+    <Row label="pattern α" value={readNum(bg, "pattern-opacity", 0.1).toFixed(2)}><Slider value={readNum(bg, "pattern-opacity", 0.1)} min={0} max={0.5} step={0.01} onChange={(v) => patch("backgrounds", "pattern-opacity", String(v))} /></Row>
+    <Row label="noise"><Toggle checked={readBool(bg, "noise", false)} onChange={(v) => patch("backgrounds", "noise", v)} /></Row>
+    <Row label="gradient"><SelectField value={readStr(bg, "gradient-type", "none")} options={GRADIENT_TYPES} onChange={(v) => patch("backgrounds", "gradient-type", v)} /></Row>
+    <Row label="grad angle" value={`${readNum(bg, "gradient-angle", 180)}°`}><Slider value={readNum(bg, "gradient-angle", 180)} min={0} max={360} step={15} onChange={(v) => patch("backgrounds", "gradient-angle", `${v}deg`)} /></Row>
+  </>);
+
+  const headingsContent = (<>
+    <Row label="h1 size" value={`${readNum(headings, "h1-size", 48)}px`}><Slider value={readNum(headings, "h1-size", 48)} min={28} max={80} step={2} onChange={(v) => patch("headings", "h1-size", `${v}px`)} /></Row>
+    <Row label="h2 size" value={`${readNum(headings, "h2-size", 36)}px`}><Slider value={readNum(headings, "h2-size", 36)} min={20} max={60} step={2} onChange={(v) => patch("headings", "h2-size", `${v}px`)} /></Row>
+    <Row label="h3 size" value={`${readNum(headings, "h3-size", 28)}px`}><Slider value={readNum(headings, "h3-size", 28)} min={16} max={44} step={1} onChange={(v) => patch("headings", "h3-size", `${v}px`)} /></Row>
+    <Row label="h4 size" value={`${readNum(headings, "h4-size", 22)}px`}><Slider value={readNum(headings, "h4-size", 22)} min={14} max={36} step={1} onChange={(v) => patch("headings", "h4-size", `${v}px`)} /></Row>
+    <Row label="weight"><SelectField value={readStr(headings, "weight", "700")} options={["400", "500", "600", "700", "800", "900"]} onChange={(v) => patch("headings", "weight", v)} /></Row>
+    <Row label="tracking" value={`${readNum(headings, "tracking", -0.02).toFixed(3)}em`}><Slider value={readNum(headings, "tracking", -0.02)} min={-0.06} max={0.02} step={0.002} onChange={(v) => patch("headings", "tracking", `${v}em`)} /></Row>
+    <Row label="leading" value={readNum(headings, "leading", 1.2).toFixed(2)}><Slider value={readNum(headings, "leading", 1.2)} min={0.9} max={1.6} step={0.05} onChange={(v) => patch("headings", "leading", String(v))} /></Row>
+  </>);
+
+  const navigationContent = (<>
+    <Row label="height" value={`${readNum(nav, "navbar-height", 56)}px`}><Slider value={readNum(nav, "navbar-height", 56)} min={36} max={96} step={4} onChange={(v) => patch("navigation", "navbar-height", `${v}px`)} /></Row>
+    <Row label="blur" value={`${readNum(nav, "navbar-blur", 12)}px`}><Slider value={readNum(nav, "navbar-blur", 12)} min={0} max={32} step={2} onChange={(v) => patch("navigation", "navbar-blur", `${v}px`)} /></Row>
+    <Row label="border"><Toggle checked={readBool(nav, "navbar-border", true)} onChange={(v) => patch("navigation", "navbar-border", v)} /></Row>
+    <Row label="padding" value={`${readNum(nav, "navbar-padding-x", 16)}px`}><Slider value={readNum(nav, "navbar-padding-x", 16)} min={8} max={48} step={4} onChange={(v) => patch("navigation", "navbar-padding-x", `${v}px`)} /></Row>
+    <Row label="item gap" value={`${readNum(nav, "navbar-item-gap", 8)}px`}><Slider value={readNum(nav, "navbar-item-gap", 8)} min={2} max={24} step={2} onChange={(v) => patch("navigation", "navbar-item-gap", `${v}px`)} /></Row>
+  </>);
+
+  const inputsContent = (<>
+    <Row label="height" value={`${readNum(inputs, "height", 40)}px`}><Slider value={readNum(inputs, "height", 40)} min={28} max={56} step={2} onChange={(v) => patch("inputs", "height", `${v}px`)} /></Row>
+    <Row label="focus ring" value={`${readNum(inputs, "focus-ring-width", 2)}px`}><Slider value={readNum(inputs, "focus-ring-width", 2)} min={0} max={4} step={0.5} onChange={(v) => patch("inputs", "focus-ring-width", `${v}px`)} /></Row>
+    <Row label="focus ring"><div style={{ display: "flex", alignItems: "center", gap: 8 }}><ColorInput value={inputs?.["focus-ring-color"]} onChange={(v) => patch("inputs", "focus-ring-color", v)} /></div></Row>
+  </>);
+
+  const heroContent = (<>
+    <Row label="min-height" value={`${readNum(hero, "min-height", 600)}px`}><Slider value={readNum(hero, "min-height", 600)} min={300} max={1000} step={20} onChange={(v) => patch("hero" as keyof SigilTokens, "min-height", `${v}px`)} /></Row>
+    <Row label="padding Y" value={`${readNum(hero, "padding-y", 80)}px`}><Slider value={readNum(hero, "padding-y", 80)} min={24} max={200} step={8} onChange={(v) => patch("hero" as keyof SigilTokens, "padding-y", `${v}px`)} /></Row>
+    <Row label="content-max" value={`${readNum(hero, "content-max-width", 680)}px`}><Slider value={readNum(hero, "content-max-width", 680)} min={400} max={1200} step={20} onChange={(v) => patch("hero" as keyof SigilTokens, "content-max-width", `${v}px`)} /></Row>
+    <Row label="layout"><SelectField value={readStr(hero, "layout", "center")} options={HERO_LAYOUTS} onChange={(v) => patch("hero" as keyof SigilTokens, "layout", v)} /></Row>
+    <Row label="title size" value={`${readNum(hero, "title-size", 56)}px`}><Slider value={readNum(hero, "title-size", 56)} min={28} max={96} step={2} onChange={(v) => patch("hero" as keyof SigilTokens, "title-size", `${v}px`)} /></Row>
+    <Row label="desc size" value={`${readNum(hero, "description-size", 18)}px`}><Slider value={readNum(hero, "description-size", 18)} min={12} max={28} step={1} onChange={(v) => patch("hero" as keyof SigilTokens, "description-size", `${v}px`)} /></Row>
+  </>);
+
+  const ctaContent = (<>
+    <Row label="padding Y" value={`${readNum(ctaTokens, "padding-y", 64)}px`}><Slider value={readNum(ctaTokens, "padding-y", 64)} min={24} max={160} step={8} onChange={(v) => patch("cta" as keyof SigilTokens, "padding-y", `${v}px`)} /></Row>
+    <Row label="max-width" value={`${readNum(ctaTokens, "max-width", 600)}px`}><Slider value={readNum(ctaTokens, "max-width", 600)} min={320} max={1000} step={20} onChange={(v) => patch("cta" as keyof SigilTokens, "max-width", `${v}px`)} /></Row>
+    <Row label="layout"><SelectField value={readStr(ctaTokens, "layout", "center")} options={CTA_LAYOUTS} onChange={(v) => patch("cta" as keyof SigilTokens, "layout", v)} /></Row>
+    <Row label="title size" value={`${readNum(ctaTokens, "title-size", 36)}px`}><Slider value={readNum(ctaTokens, "title-size", 36)} min={20} max={60} step={2} onChange={(v) => patch("cta" as keyof SigilTokens, "title-size", `${v}px`)} /></Row>
+  </>);
+
+  const footerContent = (<>
+    <Row label="padding Y" value={`${readNum(footer, "padding-y", 48)}px`}><Slider value={readNum(footer, "padding-y", 48)} min={16} max={120} step={8} onChange={(v) => patch("footer" as keyof SigilTokens, "padding-y", `${v}px`)} /></Row>
+    <Row label="columns" value={String(readNum(footer, "columns", 4))}><Slider value={readNum(footer, "columns", 4)} min={1} max={6} step={1} onChange={(v) => patch("footer" as keyof SigilTokens, "columns", String(v))} /></Row>
+    <Row label="gap" value={`${readNum(footer, "column-gap", 24)}px`}><Slider value={readNum(footer, "column-gap", 24)} min={8} max={48} step={4} onChange={(v) => patch("footer" as keyof SigilTokens, "column-gap", `${v}px`)} /></Row>
   </>);
 
   const handleRandomize = useCallback(() => {
@@ -738,7 +881,16 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
         <Section title="Spacing">{spacingContent}</Section>
         <Section title="Radius">{radiusContent}</Section>
         <Section title="Borders & Shadows">{bordersContent}</Section>
-        <Section title="Motion">{motionContent}</Section>
+        <Section title="Motion" defaultOpen>{motionContent}</Section>
+        <Section title="Buttons">{buttonsContent}</Section>
+        <Section title="Cards">{cardsContent}</Section>
+        <Section title="Inputs">{inputsContent}</Section>
+        <Section title="Headings">{headingsContent}</Section>
+        <Section title="Backgrounds">{backgroundsContent}</Section>
+        <Section title="Navigation">{navigationContent}</Section>
+        <Section title="Hero">{heroContent}</Section>
+        <Section title="CTA">{ctaContent}</Section>
+        <Section title="Footer">{footerContent}</Section>
         <Section title="Grid & Layout">{gridLayoutContent}</Section>
         <Section title="Patterns">{patternsContent}</Section>
         <Section title="Alignment">{alignmentContent}</Section>
@@ -951,7 +1103,7 @@ function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolea
       <div style={{
         width: "100%",
         borderRadius: showFrame ? 8 : 0,
-        border: showFrame ? "1px solid var(--db-border)" : "1px solid transparent",
+        border: showFrame ? "1px solid var(--db-border)" : "none",
         overflow: showFrame ? "hidden" : undefined,
         transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>

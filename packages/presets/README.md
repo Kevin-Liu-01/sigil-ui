@@ -1,6 +1,6 @@
 # @sigil-ui/presets
 
-44 curated design system presets for Sigil UI. Each preset controls **everything** about a project's visual identity — colors, fonts, spacing, radius, shadows, motion, buttons, cards, headings, navigation, backgrounds, and code blocks — through a single `SigilPreset` object.
+46 curated design system presets for Sigil UI. Each preset controls **everything** about a project's visual identity — colors, fonts, spacing, radius, shadows, motion, buttons, cards, headings, navigation, backgrounds, and code blocks — through a single `SigilPreset` object.
 
 ## The Core Principle
 
@@ -18,7 +18,7 @@ Right:  edit the preset file's radius.md value from "8px" to "0px", or override 
 pnpm add @sigil-ui/presets
 ```
 
-## 44 Presets in 7 Categories
+## 46 Presets in 7 Categories
 
 ### Structural / Precision
 | Preset | Mood | Display Font | Hue |

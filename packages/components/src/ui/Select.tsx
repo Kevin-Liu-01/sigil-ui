@@ -94,7 +94,7 @@ export const SelectContent = forwardRef<
         position={position}
         sideOffset={sideOffset}
         className={cn(
-          "relative z-50 max-h-[min(var(--radix-select-content-available-height,384px),384px)] min-w-[8rem] overflow-hidden",
+          "relative z-50 max-h-[min(var(--radix-select-content-available-height,384px),384px)] min-w-[8rem] overflow-hidden outline-none",
           "rounded-[var(--s-card-radius,var(--s-radius-md,8px))]",
           "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)] shadow-[var(--s-shadow-lg)]",

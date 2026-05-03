@@ -1,6 +1,6 @@
 ---
 title: HRule
-description: A decorative horizontal rule with Sigil-style cross marks at intersections. Extends beyond the standard divider with ornamental details.
+description: "A HRule component from the Sigil design system."
 ---
 
 ## Import
@@ -9,66 +9,30 @@ description: A decorative horizontal rule with Sigil-style cross marks at inters
 import { HRule } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <HRule />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<HRule />
+<HRule>HRule content</HRule>
 ```
-
-Renders a horizontal line with small cross marks at each end, using the sigil cross token system.
-
-## Variants
-
-### Plain
-
-```tsx
-<HRule variant="plain" />
-```
-
-A simple line without cross marks.
-
-### Crosses
-
-```tsx
-<HRule variant="crosses" />
-```
-
-Cross marks at both endpoints (default).
-
-### Center cross
-
-```tsx
-<HRule variant="center" />
-```
-
-A single cross mark at the center of the rule.
-
-## Custom color
-
-```tsx
-<HRule color="var(--s-primary)" />
-<HRule color="var(--s-border-muted)" />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-border` | Line color |
-| `--s-cross-arm` | Cross mark arm length |
-| `--s-cross-stroke` | Cross mark stroke width |
-| `--s-cross-color` | Cross mark color (falls back to `--s-border`) |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"plain" \| "crosses" \| "center"` | `"crosses"` | Rule style |
-| `color` | `string` | `var(--s-border)` | Line and cross color |
-| `spacing` | `"sm" \| "md" \| "lg"` | `"md"` | Vertical margin |
-| `className` | `string` | — | Additional CSS classes |
+| `label` | `ReactNode` | — | Optional label rendered in the center of the rule. |
+| `showCross` | `boolean` | — | Show cross marks at endpoints. |
 
-## Accessibility
+## Token integration
 
-- Renders with `role="separator"`
-- Cross marks are SVG with `aria-hidden="true"`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-cross-stroke` | Cross stroke |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

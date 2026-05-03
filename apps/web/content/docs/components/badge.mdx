@@ -1,17 +1,7 @@
 ---
 title: Badge
-description: Inline status indicator with variant and size options.
+description: "A Badge component from the Sigil design system."
 ---
-
-# Badge
-
-> Inline status indicator with variant and size options.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add badge
-```
 
 ## Import
 
@@ -19,61 +9,38 @@ npx @sigil-ui/cli add badge
 import { Badge } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Badge>Badge example</Badge>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Badge>Default</Badge>
-```
-
-## Examples
-
-### Variants
-
-```tsx
-<Badge variant="default">Primary</Badge>
-<Badge variant="secondary">Secondary</Badge>
-<Badge variant="outline">Outline</Badge>
-<Badge variant="destructive">Error</Badge>
-```
-
-### Small size
-
-```tsx
-<Badge size="sm">New</Badge>
-<Badge size="sm" variant="destructive">Critical</Badge>
-```
-
-### Inside other components
-
-Badges work well inside cards, tables, and list items.
-
-```tsx
-<Card>
-  <CardHeader>
-    <div className="flex items-center gap-2">
-      <h3>API Keys</h3>
-      <Badge variant="secondary">3 active</Badge>
-    </div>
-  </CardHeader>
-</Card>
+<Badge>Badge content</Badge>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"default" \| "secondary" \| "outline" \| "destructive"` | `"default"` | Visual variant |
-| `size` | `"sm" \| "md"` | `"md"` | Badge size |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Badge content |
+|---|---|---|---|
+| `variant` | `BadgeVariant` | `default` | Visual variant. |
+| `size` | `"sm" | "md"` | `md` | Badge size. |
 
-## Tokens
+## Token integration
 
-This component reads these CSS variables:
-
-- `--s-primary` — default variant background
-- `--s-surface-elevated` — secondary variant background
-- `--s-border` — secondary and outline variant border
-- `--s-error` — destructive variant background
-- `--s-text` — outline variant text
-- `--s-text-secondary` — secondary variant text
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-surface` | Surface |
+| `--s-text-secondary` | Text secondary |
+| `--s-text` | Text |
+| `--s-border` | Border |
+| `--s-error` | Error |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-radius-badge` | Radius badge |
+| `--s-border-style` | Border style |

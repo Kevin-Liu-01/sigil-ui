@@ -1,6 +1,6 @@
 ---
 title: PricingTable
-description: "A feature comparison pricing table with highlighted tiers."
+description: "A PricingTable component from the Sigil design system."
 ---
 
 ## Import
@@ -9,66 +9,33 @@ description: "A feature comparison pricing table with highlighted tiers."
 import { PricingTable } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <PricingTable
-    columns={[
-      { name: "Free", price: "$0" },
-      { name: "Pro", price: "$19", period: "mo", highlighted: true, badge: "Popular" },
-      { name: "Enterprise", price: "Custom", period: "mo" },
-    ]}
-    features={[
-      { name: "Users", values: { Free: "1", Pro: "10", Enterprise: "Unlimited" } },
-      { name: "Storage", values: { Free: "1 GB", Pro: "100 GB", Enterprise: "Unlimited" } },
-      { name: "API Access", values: { Free: false, Pro: true, Enterprise: true } },
-      { name: "SSO", values: { Free: false, Pro: false, Enterprise: true } },
-    ]}
-    categories={[{ label: "Usage", startIndex: 0 }, { label: "Security", startIndex: 2 }]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<PricingTable
-  columns={[
-    { name: "Free", price: "$0" },
-    { name: "Pro", price: "$19", period: "mo", highlighted: true, badge: "Popular" },
-    { name: "Enterprise", price: "Custom", period: "mo" },
-  ]}
-  features={[
-    { name: "Users", values: { Free: "1", Pro: "10", Enterprise: "Unlimited" } },
-    { name: "Storage", values: { Free: "1 GB", Pro: "100 GB", Enterprise: "Unlimited" } },
-    { name: "API Access", values: { Free: false, Pro: true, Enterprise: true } },
-    { name: "SSO", values: { Free: false, Pro: false, Enterprise: true } },
-  ]}
-  categories={[{ label: "Usage", startIndex: 0 }, { label: "Security", startIndex: 2 }]}
-/>
+<PricingTable>...</PricingTable>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `columns` | `PricingColumn[]` | — | Tier definitions with name, price, badge |
-| `features` | `PricingFeature[]` | — | Feature rows with values per tier |
-| `categories` | `{ label, startIndex }[]` | — | Optional category grouping headers |
+| `columns` | `PricingColumn[]` | — | — |
+| `features` | `PricingFeature[]` | — | — |
+| `categories` | `{ label: string; startIndex: number` | — | Category headers group features visually. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Badge background, highlighted column |
-| `--s-primary-muted` | Highlighted column background |
-| `--s-primary-contrast` | Badge text |
-| `--s-border` | Table borders |
-| `--s-surface` | Background |
-| `--s-surface-elevated` | Category header and hover |
-| `--s-success` | Checkmark color |
-| `--s-text` | Feature and value text |
-| `--s-text-muted` | Header and dash color |
-| `--s-font-mono` | Price font |
-| `--s-radius-card` | Container radius |
-| `--s-shadow-sm` | Container shadow |
-| `--s-duration-fast` | Hover transition |
+| `--s-radius-card` | Radius card |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text-muted` | Text muted |
+| `--s-primary-muted` | Primary muted |
+| `--s-radius-full` | Radius full |
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |
+| `--s-surface-elevated` | Surface elevated |

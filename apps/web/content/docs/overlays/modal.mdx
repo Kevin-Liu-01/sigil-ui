@@ -1,0 +1,72 @@
+---
+title: Modal
+description: "A Modal component from the Sigil design system."
+---
+
+## Import
+
+```tsx
+import { Modal, ConfirmDialog, PromptDialog, ResponsiveDialog, Lightbox, ImagePreview, Spotlight, CommandMenu, ActionMenu, OverflowMenu, MegaMenu, ContextPanel, PopoverForm, FloatingPanel, TooltipGroup, Tour, TourStep, Coachmark, HotkeyProvider, ShortcutRecorder } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <Modal trigger={<Button>Open modal</Button>} title="Modal Title" description="This is a modal dialog.">
+  <p>Modal content goes here.</p>
+</Modal>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<Modal>...</Modal>
+```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<ConfirmDialog>`
+- `<PromptDialog>`
+- `<ResponsiveDialog>`
+- `<Lightbox>`
+- `<ImagePreview>`
+- `<Spotlight>`
+- `<CommandMenu>`
+- `<ActionMenu>`
+- `<OverflowMenu>`
+- `<MegaMenu>`
+- `<ContextPanel>`
+- `<PopoverForm>`
+- `<FloatingPanel>`
+- `<TooltipGroup>`
+- `<Tour>`
+- `<TourStep>`
+- `<Coachmark>`
+- `<HotkeyProvider>`
+- `<ShortcutRecorder>`
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `trigger` | `ReactNode` | — | — |
+| `title` | `ReactNode` | — | — |
+| `description` | `ReactNode` | — | — |
+| `footer` | `ReactNode` | — | — |
+| `contentClassName` | `string` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-text-muted` | Text muted |
+| `--s-border` | Border |
+| `--s-card-radius` | Card radius |
+| `--s-surface` | Surface |
+| `--s-shadow-lg` | Shadow lg |
+| `--s-overlay-surface` | Overlay surface |
+| `--s-overlay-shadow` | Overlay shadow |
+| `--s-text` | Text |

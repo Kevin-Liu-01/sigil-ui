@@ -46,52 +46,79 @@ export { dunePreset } from "./dune";
 export { oceanPreset } from "./ocean";
 export { rosePreset } from "./rose";
 
+import type { SigilPreset } from "@sigil-ui/tokens";
+import { defaultTokens } from "@sigil-ui/tokens";
+
+function deepMergeTokens(base: Record<string, unknown>, override: Record<string, unknown>): Record<string, unknown> {
+  const result: Record<string, unknown> = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    const baseValue = result[key];
+    if (
+      typeof baseValue === "object" && baseValue !== null && !Array.isArray(baseValue) &&
+      typeof value === "object" && value !== null && !Array.isArray(value) &&
+      !("light" in (baseValue as Record<string, unknown>) && "dark" in (baseValue as Record<string, unknown>))
+    ) {
+      result[key] = deepMergeTokens(baseValue as Record<string, unknown>, value as Record<string, unknown>);
+    } else if (value !== undefined) {
+      result[key] = value;
+    }
+  }
+  return result;
+}
+
+function resolvePreset(preset: SigilPreset): SigilPreset {
+  return {
+    ...preset,
+    tokens: deepMergeTokens(defaultTokens as unknown as Record<string, unknown>, preset.tokens as unknown as Record<string, unknown>) as unknown as SigilPreset["tokens"],
+  };
+}
+
 export const presets = {
-  default: () => import("./default").then((m) => m.defaultPreset),
-  sigil: () => import("./sigil").then((m) => m.sigilPreset),
-  crux: () => import("./crux").then((m) => m.cruxPreset),
-  alloy: () => import("./alloy").then((m) => m.alloyPreset),
-  basalt: () => import("./basalt").then((m) => m.basaltPreset),
-  forge: () => import("./forge").then((m) => m.forgePreset),
-  onyx: () => import("./onyx").then((m) => m.onyxPreset),
-  flux: () => import("./flux").then((m) => m.fluxPreset),
-  kova: () => import("./kova").then((m) => m.kovaPreset),
-  etch: () => import("./etch").then((m) => m.etchPreset),
-  anvil: () => import("./anvil").then((m) => m.anvilPreset),
-  rivet: () => import("./rivet").then((m) => m.rivetPreset),
-  shard: () => import("./shard").then((m) => m.shardPreset),
-  rune: () => import("./rune").then((m) => m.runePreset),
-  fang: () => import("./fang").then((m) => m.fangPreset),
-  cobalt: () => import("./cobalt").then((m) => m.cobaltPreset),
-  strata: () => import("./strata").then((m) => m.strataPreset),
-  brass: () => import("./brass").then((m) => m.brassPreset),
-  obsid: () => import("./obsid").then((m) => m.obsidPreset),
-  axiom: () => import("./axiom").then((m) => m.axiomPreset),
-  glyph: () => import("./glyph").then((m) => m.glyphPreset),
-  cipher: () => import("./cipher").then((m) => m.cipherPreset),
-  prism: () => import("./prism").then((m) => m.prismPreset),
-  helix: () => import("./helix").then((m) => m.helixPreset),
-  hex: () => import("./hex").then((m) => m.hexPreset),
-  vex: () => import("./vex").then((m) => m.vexPreset),
-  arc: () => import("./arc").then((m) => m.arcPreset),
-  dsgn: () => import("./dsgn").then((m) => m.dsgnPreset),
-  mrkr: () => import("./mrkr").then((m) => m.mrkrPreset),
-  noir: () => import("./noir").then((m) => m.noirPreset),
-  dusk: () => import("./dusk").then((m) => m.duskPreset),
-  mono: () => import("./mono").then((m) => m.monoPreset),
-  vast: () => import("./vast").then((m) => m.vastPreset),
-  aura: () => import("./aura").then((m) => m.auraPreset),
-  field: () => import("./field").then((m) => m.fieldPreset),
-  clay: () => import("./clay").then((m) => m.clayPreset),
-  sage: () => import("./sage").then((m) => m.sagePreset),
-  ink: () => import("./ink").then((m) => m.inkPreset),
-  sand: () => import("./sand").then((m) => m.sandPreset),
-  plum: () => import("./plum").then((m) => m.plumPreset),
-  moss: () => import("./moss").then((m) => m.mossPreset),
-  coral: () => import("./coral").then((m) => m.coralPreset),
-  dune: () => import("./dune").then((m) => m.dunePreset),
-  ocean: () => import("./ocean").then((m) => m.oceanPreset),
-  rose: () => import("./rose").then((m) => m.rosePreset),
+  default: () => import("./default").then((m) => resolvePreset(m.defaultPreset)),
+  sigil: () => import("./sigil").then((m) => resolvePreset(m.sigilPreset)),
+  crux: () => import("./crux").then((m) => resolvePreset(m.cruxPreset)),
+  alloy: () => import("./alloy").then((m) => resolvePreset(m.alloyPreset)),
+  basalt: () => import("./basalt").then((m) => resolvePreset(m.basaltPreset)),
+  forge: () => import("./forge").then((m) => resolvePreset(m.forgePreset)),
+  onyx: () => import("./onyx").then((m) => resolvePreset(m.onyxPreset)),
+  flux: () => import("./flux").then((m) => resolvePreset(m.fluxPreset)),
+  kova: () => import("./kova").then((m) => resolvePreset(m.kovaPreset)),
+  etch: () => import("./etch").then((m) => resolvePreset(m.etchPreset)),
+  anvil: () => import("./anvil").then((m) => resolvePreset(m.anvilPreset)),
+  rivet: () => import("./rivet").then((m) => resolvePreset(m.rivetPreset)),
+  shard: () => import("./shard").then((m) => resolvePreset(m.shardPreset)),
+  rune: () => import("./rune").then((m) => resolvePreset(m.runePreset)),
+  fang: () => import("./fang").then((m) => resolvePreset(m.fangPreset)),
+  cobalt: () => import("./cobalt").then((m) => resolvePreset(m.cobaltPreset)),
+  strata: () => import("./strata").then((m) => resolvePreset(m.strataPreset)),
+  brass: () => import("./brass").then((m) => resolvePreset(m.brassPreset)),
+  obsid: () => import("./obsid").then((m) => resolvePreset(m.obsidPreset)),
+  axiom: () => import("./axiom").then((m) => resolvePreset(m.axiomPreset)),
+  glyph: () => import("./glyph").then((m) => resolvePreset(m.glyphPreset)),
+  cipher: () => import("./cipher").then((m) => resolvePreset(m.cipherPreset)),
+  prism: () => import("./prism").then((m) => resolvePreset(m.prismPreset)),
+  helix: () => import("./helix").then((m) => resolvePreset(m.helixPreset)),
+  hex: () => import("./hex").then((m) => resolvePreset(m.hexPreset)),
+  vex: () => import("./vex").then((m) => resolvePreset(m.vexPreset)),
+  arc: () => import("./arc").then((m) => resolvePreset(m.arcPreset)),
+  dsgn: () => import("./dsgn").then((m) => resolvePreset(m.dsgnPreset)),
+  mrkr: () => import("./mrkr").then((m) => resolvePreset(m.mrkrPreset)),
+  noir: () => import("./noir").then((m) => resolvePreset(m.noirPreset)),
+  dusk: () => import("./dusk").then((m) => resolvePreset(m.duskPreset)),
+  mono: () => import("./mono").then((m) => resolvePreset(m.monoPreset)),
+  vast: () => import("./vast").then((m) => resolvePreset(m.vastPreset)),
+  aura: () => import("./aura").then((m) => resolvePreset(m.auraPreset)),
+  field: () => import("./field").then((m) => resolvePreset(m.fieldPreset)),
+  clay: () => import("./clay").then((m) => resolvePreset(m.clayPreset)),
+  sage: () => import("./sage").then((m) => resolvePreset(m.sagePreset)),
+  ink: () => import("./ink").then((m) => resolvePreset(m.inkPreset)),
+  sand: () => import("./sand").then((m) => resolvePreset(m.sandPreset)),
+  plum: () => import("./plum").then((m) => resolvePreset(m.plumPreset)),
+  moss: () => import("./moss").then((m) => resolvePreset(m.mossPreset)),
+  coral: () => import("./coral").then((m) => resolvePreset(m.coralPreset)),
+  dune: () => import("./dune").then((m) => resolvePreset(m.dunePreset)),
+  ocean: () => import("./ocean").then((m) => resolvePreset(m.oceanPreset)),
+  rose: () => import("./rose").then((m) => resolvePreset(m.rosePreset)),
 } as const;
 
 export type PresetName = keyof typeof presets;

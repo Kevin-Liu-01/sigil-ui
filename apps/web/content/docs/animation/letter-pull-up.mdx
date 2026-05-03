@@ -1,6 +1,6 @@
 ---
 title: LetterPullUp
-description: Letter-by-letter pull-up animation. Each character translates upward with staggered timing for dramatic headlines.
+description: "A LetterPullUp component from the Sigil design system."
 ---
 
 ## Import
@@ -9,26 +9,33 @@ description: Letter-by-letter pull-up animation. Each character translates upwar
 import { LetterPullUp } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <LetterPullUp text="Hello World" />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<LetterPullUp text="Hello World" className="text-4xl font-bold" />
-```
-
-## Custom timing
-
-```tsx
-<LetterPullUp text="Sigil UI" interval={40} pullDistance={32} delay={200} />
+<LetterPullUp>LetterPullUp content</LetterPullUp>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `text` | `string` | — | Text to animate |
-| `interval` | `number` | `30` | Delay between letters in ms |
-| `delay` | `number` | `0` | Base delay in ms |
-| `pullDistance` | `number` | `24` | Pull distance in px |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+| `text` | `string` | — | The text to animate. |
+| `interval` | `number` | `30` | Stagger between letters in ms. |
+| `delay` | `number` | `0` | Base delay in ms. |
+| `pullDistance` | `number` | `24` | Pull distance in pixels. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
 
-Uses `--s-ease-default` (expo-style) for natural deceleration.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-fast` | Duration fast |
+| `--s-ease-default` | Ease default |
+| `--s-duration-normal` | Duration normal |

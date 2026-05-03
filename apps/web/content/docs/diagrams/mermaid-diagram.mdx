@@ -1,6 +1,6 @@
 ---
 title: MermaidDiagram
-description: "A Mermaid.js diagram renderer with dark theme support for flowcharts, sequences, and more."
+description: "A MermaidDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,37 +9,32 @@ description: "A Mermaid.js diagram renderer with dark theme support for flowchar
 import { MermaidDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <MermaidDiagram
-    chart="graph TD; A[Client] --> B[API Gateway]; B --> C[Auth Service]; B --> D[Data Service]; C --> E[Database]; D --> E;"
-    theme="dark"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<MermaidDiagram
-  chart="graph TD; A[Client] --> B[API]; B --> C[DB];"
-  theme="dark"
-/>
+<MermaidDiagram>...</MermaidDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `chart` | `string` | — | Mermaid chart definition string |
-| `theme` | `"dark" \| "default"` | `"dark"` | Color theme |
+| `chart` | `string` | — | — |
+| `theme` | `"dark" | "default"` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Container border |
-| `--s-surface` | Light theme background |
-| `--s-error` | Error message text |
-| `--s-text-muted` | Loading text |
-| `--s-radius-card` | Container radius |
+| `--s-primary` | Primary |
+| `--s-text` | Text |
+| `--s-border-strong` | Border strong |
+| `--s-chart-axis` | Chart axis |
+| `--s-surface` | Surface |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-chart-grid` | Chart grid |
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-error` | Error |
+| `--s-text-muted` | Text muted |

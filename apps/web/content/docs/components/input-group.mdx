@@ -1,90 +1,48 @@
 ---
 title: InputGroup
-description: Composed input with addons, buttons, and text segments for building combined form controls.
+description: "A InputGroup component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import {
-  InputGroup, InputGroupInput, InputGroupTextarea,
-  InputGroupAddon, InputGroupButton, InputGroupText,
-} from "@sigil-ui/components";
+import { InputGroup, InputGroupInput, InputGroupTextarea, InputGroupAddon, InputGroupButton, InputGroupText } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview>
+  <InputGroup />
+</ComponentPreview>
 
 ## Usage
 
 ```tsx
-<InputGroup>
-  <InputGroupAddon>https://</InputGroupAddon>
-  <InputGroupInput placeholder="example.com" />
-</InputGroup>
+<InputGroup>...</InputGroup>
 ```
 
-## With button
+## Sub-components
 
-```tsx
-<InputGroup>
-  <InputGroupInput placeholder="Search..." />
-  <InputGroupButton>Go</InputGroupButton>
-</InputGroup>
-```
+This component includes the following parts:
 
-## With text segments
-
-```tsx
-<InputGroup>
-  <InputGroupText>$</InputGroupText>
-  <InputGroupInput type="number" placeholder="0.00" />
-  <InputGroupText>USD</InputGroupText>
-</InputGroup>
-```
+- `<InputGroupInput>`
+- `<InputGroupTextarea>`
+- `<InputGroupAddon>`
+- `<InputGroupButton>`
+- `<InputGroupText>`
 
 ## Token integration
 
-| CSS Variable | Used for |
+| CSS Variable | Purpose |
 |---|---|
-| `--s-radius-input` / `--s-radius-md` | Container and addon corner radius |
-| `--s-border` | Container, addon, and button borders |
-| `--s-border-style` | Border style (solid, dashed, etc.) |
-| `--s-background` | Container background |
-| `--s-surface` | Addon and button background |
-| `--s-surface-elevated` | Button hover background |
-| `--s-text` | Input text color |
-| `--s-text-muted` | Placeholder and addon text |
-| `--s-primary` | Focus ring and border |
-| `--s-duration-fast` | Focus and hover transitions |
-
-## Props
-
-### InputGroup
-
-Extends `HTMLAttributes<HTMLDivElement>`. Wraps child inputs, addons, buttons, and text into a unified control.
-
-### InputGroupInput
-
-Extends `InputHTMLAttributes<HTMLInputElement>`. Standard input that fills available space.
-
-### InputGroupTextarea
-
-Extends `TextareaHTMLAttributes<HTMLTextAreaElement>`. Textarea variant for multiline input groups.
-
-### InputGroupAddon
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `position` | `"inline-start" \| "inline-end"` | — | Logical position hint |
-| `className` | `string` | — | Additional CSS classes |
-
-### InputGroupButton
-
-Extends `HTMLAttributes<HTMLButtonElement>`. Renders a `<button type="button">` with addon styling.
-
-### InputGroupText
-
-Extends `HTMLAttributes<HTMLSpanElement>`. Inline text label (e.g. currency symbols).
-
-## Accessibility
-
-- Focus-within ring highlights the entire group when any child is focused
-- Disabled inputs propagate visual disabled state to the container via `:has(input:disabled)`
+| `--s-radius-input` | Radius input |
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-border-style` | Border style |
+| `--s-background` | Background |
+| `--s-primary` | Primary |
+| `--s-duration-fast` | Duration fast |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-surface` | Surface |
+| `--s-surface-elevated` | Surface elevated |

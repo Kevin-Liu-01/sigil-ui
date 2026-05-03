@@ -1,6 +1,6 @@
 ---
 title: Diagonal
-description: A diagonal line or slash element rendered via CSS. Use for decorative section dividers, strikethrough effects, and geometric patterns.
+description: "A Diagonal component from the Sigil design system."
 ---
 
 ## Import
@@ -9,74 +9,28 @@ description: A diagonal line or slash element rendered via CSS. Use for decorati
 import { Diagonal } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Diagonal />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Diagonal />
+<Diagonal>Diagonal content</Diagonal>
 ```
-
-Renders a 45-degree diagonal line using a CSS gradient or SVG stroke.
-
-## Angles
-
-```tsx
-<Diagonal angle={45} />
-<Diagonal angle={-45} />
-<Diagonal angle={30} />
-<Diagonal angle={60} />
-```
-
-## Sizes
-
-```tsx
-<Diagonal size={32} />
-<Diagonal size={64} />
-<Diagonal size={128} />
-```
-
-## Colors
-
-```tsx
-<Diagonal color="var(--s-primary)" />
-<Diagonal color="var(--s-border)" />
-<Diagonal color="var(--s-error)" />
-```
-
-## Thickness
-
-```tsx
-<Diagonal thickness={1} />
-<Diagonal thickness={2} />
-<Diagonal thickness={4} />
-```
-
-## Section divider pattern
-
-```tsx
-<div className="relative h-24 w-full overflow-hidden">
-  <Diagonal angle={-5} size="100%" color="var(--s-surface-elevated)" thickness={100} />
-</div>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-border` | Default stroke color |
-| `--s-primary` | Accent color variant |
-| `--s-cross-stroke` | Default thickness |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `size` | `number \| string` | `48` | Container width and height |
-| `angle` | `number` | `45` | Line angle in degrees |
-| `color` | `string` | `var(--s-border)` | Line color |
-| `thickness` | `number` | `1` | Line thickness in px |
-| `className` | `string` | — | Additional CSS classes |
+| `direction` | `"left" | "right"` | `right` | Diagonal cut direction. |
+| `height` | `number` | `80` | Height of the diagonal section. |
+| `fill` | `string` | — | Fill color (CSS value). Defaults to the surface token. |
 
-## Accessibility
+## Token integration
 
-- Renders with `role="presentation"` and `aria-hidden="true"`
-- Purely decorative — no semantic meaning
+| CSS Variable | Purpose |
+|---|---|
+| `--s-surface` | Surface |

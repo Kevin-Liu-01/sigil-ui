@@ -136,13 +136,13 @@ export const _templatePreset: SigilPreset = {
       "badge-px": "7px",
       "badge-py": "2px",
 
-      "section-py": "64px",
+      "section-py": "72px",
       "section-py-lg": "96px",
 
-      "navbar-height": "56px",
+      "navbar-height": "48px",
       "navbar-px": "20px",
 
-      "footer-py": "40px",
+      "footer-py": "48px",
 
       "modal-padding": "20px",
       "popover-padding": "14px",
@@ -173,9 +173,9 @@ export const _templatePreset: SigilPreset = {
 
       "bento-gap": "14px",
       "bento-radius": "10px",
-      "bento-min-height": "180px",
+      "bento-min-height": "192px",
 
-      "section-gap": "28px",
+      "section-gap": "24px",
 
       "sidebar-width": "260px",
       "sidebar-collapsed": "56px",
@@ -360,7 +360,7 @@ export const _templatePreset: SigilPreset = {
     // 13. NAVIGATION (12 fields)
     // -----------------------------------------------------------------------
     navigation: {
-      "navbar-height": "56px",
+      "navbar-height": "48px",
       "navbar-backdrop-blur": "12px",
       "navbar-border": "1px solid",
       "navbar-bg-opacity": "0.85",
@@ -490,7 +490,7 @@ export const _templatePreset: SigilPreset = {
     // 20. SECTIONS (10 fields)
     // -----------------------------------------------------------------------
     sections: {
-      "padding-y": "64px",
+      "padding-y": "72px",
       "padding-y-hero": "120px",
       "padding-x": "24px",
       "max-width": "1200px",
@@ -629,7 +629,7 @@ export const _templatePreset: SigilPreset = {
     hero: {
       "min-height": "0px",
       "padding-y": "120px",
-      "padding-y-sm": "80px",
+      "padding-y-sm": "72px",
       "padding-x": "var(--s-page-margin, 25px)",
       "content-max": "720px",
       "content-align": "left" as const,
@@ -656,7 +656,7 @@ export const _templatePreset: SigilPreset = {
     // 30. CTA (15 fields)
     // -----------------------------------------------------------------------
     cta: {
-      "padding-y": "100px",
+      "padding-y": "96px",
       "padding-x": "var(--s-page-margin, 25px)",
       "max-width": "var(--s-content-max, 1200px)",
       "layout": "centered" as const,
@@ -677,7 +677,7 @@ export const _templatePreset: SigilPreset = {
     // 31. FOOTER (15 fields)
     // -----------------------------------------------------------------------
     footer: {
-      "padding-y": "50px",
+      "padding-y": "48px",
       "border-top": "1px solid var(--s-border)",
       "columns": "4",
       "column-gap": "32px",
@@ -690,7 +690,7 @@ export const _templatePreset: SigilPreset = {
       "group-title-weight": "600",
       "social-icon-size": "14px",
       "social-gap": "8px",
-      "bottom-bar-padding": "50px",
+      "bottom-bar-padding": "48px",
       "bottom-bar-border": "1px solid var(--s-border)",
     },
 

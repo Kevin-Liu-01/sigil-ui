@@ -1,6 +1,6 @@
 ---
 title: Progress
-description: A horizontal progress bar with token-driven fill color, animated transitions, and optional label.
+description: "A Progress component from the Sigil design system."
 ---
 
 ## Import
@@ -9,64 +9,34 @@ description: A horizontal progress bar with token-driven fill color, animated tr
 import { Progress } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Progress />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Progress value={60} />
+<Progress>Progress content</Progress>
 ```
-
-## With label
-
-```tsx
-<Progress value={60} label="Upload progress" />
-```
-
-## Indeterminate
-
-Omit `value` for an indeterminate shimmer animation:
-
-```tsx
-<Progress />
-```
-
-## Sizes
-
-```tsx
-<Progress value={40} size="sm" />
-<Progress value={40} size="md" />
-<Progress value={40} size="lg" />
-```
-
-## Custom color
-
-```tsx
-<Progress value={100} color="var(--s-success)" label="Complete" />
-<Progress value={90} color="var(--s-error)" label="Storage" />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Default fill color |
-| `--s-surface` | Track background |
-| `--s-text-muted` | Label color |
-| `--s-radius-full` | Track and fill border radius |
-| `--s-duration-normal` | Fill transition |
-| `--s-ease-default` | Transition easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `value` | `number` | — | Current value (0–100). Omit for indeterminate. |
-| `label` | `string` | — | Accessible label text |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Track height |
-| `color` | `string` | `var(--s-primary)` | Fill color |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `number` | — | Progress value (0–100). Omit for indeterminate. |
+| `label` | `boolean` | — | Show percentage label. |
+| `size` | `"sm" | "md" | "lg"` | `md` | — |
 
-## Accessibility
+## Token integration
 
-- Uses `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`
-- `aria-label` set from the `label` prop
-- Indeterminate state omits `aria-valuenow`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-full` | Radius full |
+| `--s-border-muted` | Border muted |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-duration-normal` | Duration normal |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

@@ -1,6 +1,6 @@
 ---
 title: TextReveal
-description: Word-by-word or character-by-character staggered text reveal with blur and opacity transitions.
+description: "A TextReveal component from the Sigil design system."
 ---
 
 ## Import
@@ -9,26 +9,32 @@ description: Word-by-word or character-by-character staggered text reveal with b
 import { TextReveal } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <TextReveal text="Hover to reveal" />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<TextReveal text="Token-driven design system" />
-```
-
-## By character
-
-```tsx
-<TextReveal text="Sigil UI" by="char" interval={30} />
+<TextReveal>TextReveal content</TextReveal>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `text` | `string` | — | Text to reveal |
-| `by` | `"word" \| "char"` | `"word"` | Reveal unit |
-| `interval` | `number` | `60` | Stagger between units in ms |
-| `delay` | `number` | `0` | Base delay in ms |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
+| `text` | `string` | — | The text to reveal. |
+| `by` | `RevealUnit` | `word` | Reveal by word or character. |
+| `interval` | `number` | `60` | Stagger interval between units in ms. |
+| `delay` | `number` | `0` | Base delay in ms. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
 
-Accessible: renders full text in `aria-label`, individual units marked `aria-hidden`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-fast` | Duration fast |
+| `--s-ease-out` | Ease out |

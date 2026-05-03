@@ -1,6 +1,6 @@
 ---
 title: NumberTicker
-description: Animated counting number with easeOutExpo curve. Supports locale formatting, decimals, prefix, and suffix.
+description: "A NumberTicker component from the Sigil design system."
 ---
 
 ## Import
@@ -9,32 +9,29 @@ description: Animated counting number with easeOutExpo curve. Supports locale fo
 import { NumberTicker } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <NumberTicker value={1234} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<NumberTicker value={519} />
-```
-
-## With formatting
-
-```tsx
-<NumberTicker value={99.9} decimals={1} suffix="%" />
-<NumberTicker value={42000} prefix="$" />
-<NumberTicker value={1500} from={0} duration={2000} />
+<NumberTicker>NumberTicker content</NumberTicker>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `value` | `number` | — | Target value |
-| `from` | `number` | `0` | Starting value |
-| `duration` | `number` | `1200` | Animation duration in ms |
-| `delay` | `number` | `0` | Base delay in ms |
-| `decimals` | `number` | `0` | Decimal places |
-| `prefix` | `string` | `""` | Prefix (e.g. "$") |
-| `suffix` | `string` | `""` | Suffix (e.g. "%") |
-| `formatNumber` | `boolean` | `true` | Locale number formatting |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
-
-Uses `tabular-nums` for stable width during animation.
+| `value` | `number` | — | Target value to count to. |
+| `from` | `number` | `0` | Starting value. |
+| `duration` | `number` | `1200` | Animation duration in ms. |
+| `delay` | `number` | `0` | Base delay in ms. |
+| `decimals` | `number` | `0` | Number of decimal places. |
+| `prefix` | `string` | — | Prefix string (e.g. "$"). |
+| `suffix` | `string` | — | Suffix string (e.g. "%"). |
+| `formatNumber` | `boolean` | `true` | Use locale number formatting with separators. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |

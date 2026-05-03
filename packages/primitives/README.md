@@ -1,6 +1,6 @@
 # @sigil-ui/primitives
 
-Headless behavior primitives for Sigil UI. This package re-exports Radix UI primitives under a unified `*Primitive` naming convention. It provides accessible, unstyled interaction patterns that `@sigil-ui/components` consumes for its styled components.
+40+ headless behavior primitives for Sigil UI. Re-exports Radix UI (28 families) and Base UI (13 families) under a unified `*Primitive` naming convention. Provides accessible, unstyled interaction patterns that `@sigil-ui/components` consumes for its styled components.
 
 ## Role in the System
 

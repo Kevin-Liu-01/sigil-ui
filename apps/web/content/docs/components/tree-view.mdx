@@ -1,100 +1,42 @@
 ---
 title: TreeView
-description: Hierarchical tree with expandable nodes, selection state, and optional icons.
+description: "A TreeView component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
 import { TreeView } from "@sigil-ui/components";
-import type { TreeNode } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview>
+  <TreeView data={[{ id: "1", name: "src", children: [{ id: "2", name: "components" }, { id: "3", name: "utils" }] }]} />
+</ComponentPreview>
 
 ## Usage
 
 ```tsx
-const data: TreeNode[] = [
-  {
-    id: "src",
-    label: "src",
-    children: [
-      { id: "app", label: "app.tsx" },
-      { id: "index", label: "index.ts" },
-    ],
-  },
-  { id: "readme", label: "README.md" },
-];
-
-<TreeView data={data} />
+<TreeView>...</TreeView>
 ```
-
-## With selection and default expanded
-
-```tsx
-import { useState } from "react";
-
-function FileTree() {
-  const [selected, setSelected] = useState<string>();
-
-  return (
-    <TreeView
-      data={data}
-      defaultExpanded={["src"]}
-      selectedId={selected}
-      onSelect={setSelected}
-    />
-  );
-}
-```
-
-## With icons
-
-```tsx
-const data: TreeNode[] = [
-  {
-    id: "docs",
-    label: "docs",
-    icon: <FolderIcon />,
-    children: [
-      { id: "guide", label: "guide.md", icon: <FileIcon /> },
-    ],
-  },
-];
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-radius-sm` | Node button radius |
-| `--s-text` | Node label text |
-| `--s-text-muted` | Chevron and icon color |
-| `--s-surface` | Hover and selected background |
-| `--s-primary` | Focus ring |
-| `--s-duration-fast` | Expand/collapse chevron rotation and hover transition |
 
 ## Props
 
-### TreeView
-
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `data` | `TreeNode[]` | — | Tree data |
-| `defaultExpanded` | `string[]` | `[]` | Node IDs expanded on mount |
-| `onSelect` | `(id: string) => void` | — | Called when a node is clicked |
-| `selectedId` | `string` | — | Currently selected node ID |
-| `className` | `string` | — | Additional CSS classes |
+| `data` | `TreeNode[]` | — | — |
+| `defaultExpanded` | `string[]` | — | — |
+| `onSelect` | `(id: string) => void` | — | — |
+| `selectedId` | `string` | — | — |
 
-### TreeNode (type)
+## Token integration
 
-| Field | Type | Description |
-|---|---|---|
-| `id` | `string` | Unique identifier |
-| `label` | `ReactNode` | Display label |
-| `children` | `TreeNode[]` | Nested child nodes |
-| `icon` | `ReactNode` | Optional leading icon |
-
-## Accessibility
-
-- Uses `role="tree"`, `role="treeitem"`, and `role="group"` ARIA pattern
-- `aria-expanded` is set on branch nodes
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-sm` | Radius sm |
+| `--s-text` | Text |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |

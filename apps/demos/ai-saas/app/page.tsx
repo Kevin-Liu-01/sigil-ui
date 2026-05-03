@@ -7,10 +7,17 @@ export default function Page() {
         style={{ borderBottom: "1px solid var(--r-border)", background: "rgba(10,10,15,0.8)" }}
       >
         <div className="flex items-center gap-2">
-          <div
-            className="h-8 w-8 rounded-lg"
-            style={{ background: "var(--r-primary)" }}
-          />
+          <svg className="h-8 w-8" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="5" fill="var(--r-primary)" />
+            <circle cx="4" cy="4" r="2" fill="var(--r-primary)" opacity="0.6" />
+            <circle cx="20" cy="4" r="2" fill="var(--r-primary)" opacity="0.6" />
+            <circle cx="4" cy="20" r="2" fill="var(--r-primary)" opacity="0.6" />
+            <circle cx="20" cy="20" r="2" fill="var(--r-primary)" opacity="0.6" />
+            <line x1="9" y1="9" x2="5.5" y2="5.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+            <line x1="15" y1="9" x2="18.5" y2="5.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+            <line x1="9" y1="15" x2="5.5" y2="18.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+            <line x1="15" y1="15" x2="18.5" y2="18.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+          </svg>
           <span className="text-lg font-semibold">Sigil AI</span>
         </div>
         <div className="hidden md:flex items-center gap-8 text-sm" style={{ color: "var(--r-text-muted)" }}>
@@ -244,10 +251,17 @@ export default function Page() {
       >
         <div className="mx-auto max-w-5xl flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div
-              className="h-6 w-6 rounded-md"
-              style={{ background: "var(--r-primary)" }}
-            />
+            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="5" fill="var(--r-primary)" />
+              <circle cx="4" cy="4" r="2" fill="var(--r-primary)" opacity="0.6" />
+              <circle cx="20" cy="4" r="2" fill="var(--r-primary)" opacity="0.6" />
+              <circle cx="4" cy="20" r="2" fill="var(--r-primary)" opacity="0.6" />
+              <circle cx="20" cy="20" r="2" fill="var(--r-primary)" opacity="0.6" />
+              <line x1="9" y1="9" x2="5.5" y2="5.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="15" y1="9" x2="18.5" y2="5.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="9" y1="15" x2="5.5" y2="18.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+              <line x1="15" y1="15" x2="18.5" y2="18.5" stroke="var(--r-primary)" strokeWidth="1.5" opacity="0.5" />
+            </svg>
             <span className="text-sm font-medium">Sigil AI</span>
           </div>
           <div className="flex gap-8 text-sm" style={{ color: "var(--r-text-muted)" }}>

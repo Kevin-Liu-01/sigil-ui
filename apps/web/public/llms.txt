@@ -1,49 +1,82 @@
 # Sigil UI
 
-> The component library where one token file updates everything.
+> One markdown file controls your entire design system.
 
-Sigil UI is a React component library with centralized design tokens. Unlike shadcn/ui where you copy components and manually edit each one, Sigil uses a single `sigil.tokens.md` markdown file that an AI agent can read and edit. All components consume tokens from this file. Swap presets, and every component updates.
+## What It Is
+
+Sigil UI is a token-driven React design system. One DESIGN.md file defines every color, font, radius, shadow, and animation across 350+ components. Edit the markdown — CSS, Tailwind v4, and W3C JSON recompile automatically.
+
+## Key Stats
+
+- 519 design tokens across 33 categories
+- 46 curated presets (each populates all 519 tokens)
+- 350+ token-driven React components
+- 40+ headless behavior primitives (Radix + Base UI)
+- OKLCH color space, light/dark themed
+- Compiles to CSS custom properties + Tailwind v4 + W3C JSON
+
+## How It Works
+
+DESIGN.md contains all tokens in markdown tables. Run `sigil design compile` to generate:
+- CSS custom properties (:root { --s-primary: oklch(...); ... })
+- Tailwind v4 @theme block
+- W3C Design Tokens JSON
+
+Components read from var(--s-*). Change the token file, components update.
+
+## Token Categories (33)
+
+colors, typography, spacing, layout, sigil, radius, shadows, motion, borders, buttons, cards, headings, navigation, backgrounds, code, inputs, cursor, scrollbar, alignment, sections, dividers, gridVisuals, focus, overlays, dataViz, media, controls, componentSurfaces, hero, cta, footer, banner, pageRhythm
+
+## Presets (46)
+
+Structural: sigil, kova, cobalt, helix, hex
+Minimal: crux, axiom, arc, mono
+Dark: basalt, onyx, fang, obsid, cipher, noir
+Colorful: flux, shard, prism, vex, dsgn, dusk
+Editorial: etch, rune, strata, glyph, mrkr
+Industrial: alloy, forge, anvil, rivet, brass
+Edgeless: vast, aura, field, clay, sage, ink, sand, plum, moss, coral, dune, ocean, rose
+
+## CLI Commands
+
+sigil init — project setup
+sigil design generate — create DESIGN.md from preset
+sigil design compile — parse DESIGN.md → CSS + Tailwind + JSON
+sigil design sync — update compile sections in-place
+sigil design extract <url> — extract DESIGN.md from URL
+sigil preset <name> — switch preset
+sigil add <name> — add components
+sigil inspire <url> — draft tokens from reference
+sigil docs — generate docs + llms.txt
+sigil doctor — validate project health
 
 ## Packages
 
-- @sigil-ui/tokens — Design token system (CSS variables, Tailwind v4, TypeScript constants) — https://www.npmjs.com/package/@sigil-ui/tokens
-- @sigil-ui/components — 200+ styled components — https://www.npmjs.com/package/@sigil-ui/components
-- @sigil-ui/primitives — Headless behavior (Radix-based) — https://www.npmjs.com/package/@sigil-ui/primitives
-- @sigil-ui/presets — 44 curated presets — https://www.npmjs.com/package/@sigil-ui/presets
-- @sigil-ui/cli — CLI for init, add, preset management — https://www.npmjs.com/package/@sigil-ui/cli
-- create-sigil-app — Project scaffolder — https://www.npmjs.com/package/create-sigil-app
+@sigil-ui/tokens — 519 tokens, compiler (CSS, Tailwind, W3C JSON, TypeScript)
+@sigil-ui/presets — 46 curated presets
+@sigil-ui/components — 350+ token-driven React components
+@sigil-ui/primitives — 40+ headless primitives (Radix + Base UI)
+@sigil-ui/cli — project workflow CLI
+create-sigil-app — one-command scaffolding
 
-## Components (70+)
+## The Core Principle
 
-### Layout: Stack, Grid, GridCell, Section, Frame, PageGrid, Margin, Gutter, Divider, HRule
-### UI: Button, Badge, Card, Label, Input, Textarea, Select, Checkbox, Switch, Slider, Progress, Separator, Avatar, Skeleton, Table, Tabs, Accordion, Tooltip, ScrollArea, KPI, Terminal, CodeBlock, LoadingSpinner
-### Navigation: Navbar, Footer, Breadcrumb, Pagination
-### Overlays: Dialog, Sheet, Popover, Toast
-### Shapes: Shape, Diamond, Hexagon, Triangle, Diagonal
-### 3D: Box3D, Box3DGrid, Card3D, FloatingUI, IsometricView
-### Diagrams: Diagram, ExplodedView, FlowDiagram, Timeline, ComparisonTable, ArchitectureDiagram
-### Marketing: Hero, FeatureFrame, Pricing, CTA, LogoBar, TestimonialCard
-### Patterns: Pattern (dots, hatch, diagonal, diamond, hexagon, triangle, crosshatch), Cross
-### Animation: AnimateOnScroll, useSigilAnimate hook
+Edit tokens, not components. One file at the top of the chain controls everything downstream. Presets are complete visual identities (500+ resolved tokens), not color schemes.
 
-## Presets
+## For Agents
 
-- sigil — Structural visibility, soft indigo, Nacelle font
-- midnight — Dark premium, electric blue, GT America font
-- editorial — Paper-like, cobalt accent, Soehne font
-- brutalist — High contrast, acid yellow, Space Grotesk font
-- soft — Warm pastels, coral accent, Satoshi font
-
-## Quick Start
-
-```bash
-npx sigil init
-npx sigil add button card input
-npx sigil preset midnight
-```
+- Read DESIGN.md to understand the current visual identity
+- Edit token tables in DESIGN.md to change appearance
+- Run `sigil design compile` after edits
+- Never edit component files for visual changes
+- Use OKLCH for all color values
+- Reference skills/sigil-design/SKILL.md for the format spec
+- Reference skills/sigil-messaging/SKILL.md for copy/positioning
 
 ## Links
 
-- Documentation: https://sigil-ui.dev/docs
-- GitHub: https://github.com/Kevin-Liu-01/sigil-ui
-- npm: https://www.npmjs.com/org/sigil-ui
+Website: https://sigil-ui.com
+Docs: https://sigil-ui.com/docs
+Presets: https://sigil-ui.com/presets
+GitHub: https://github.com/kevinliu/reticle-ui

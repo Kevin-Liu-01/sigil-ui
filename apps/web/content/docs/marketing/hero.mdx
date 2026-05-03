@@ -1,6 +1,6 @@
 ---
 title: Hero
-description: A full-width hero section with headline, subheadline, CTA buttons, and optional background media. The top-of-page entry point.
+description: "A Hero component from the Sigil design system."
 ---
 
 ## Import
@@ -9,84 +9,41 @@ description: A full-width hero section with headline, subheadline, CTA buttons, 
 import { Hero } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Hero>
+    Hero content
+  </Hero>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Hero
-  headline="Build interfaces that feel alive"
-  subheadline="A token-driven design system with 46 presets."
->
-  <Button variant="primary" size="lg">Get started</Button>
-  <Button variant="outline" size="lg">View docs</Button>
-</Hero>
+<Hero>Hero content</Hero>
 ```
-
-## With background
-
-```tsx
-<Hero
-  headline="Ship faster"
-  subheadline="One token file controls everything."
-  background="var(--s-surface-elevated)"
->
-  <Button variant="primary">Start building</Button>
-</Hero>
-```
-
-## With image
-
-```tsx
-<Hero
-  headline="Design engineering"
-  subheadline="Components that read from your token file."
-  image="/hero-visual.png"
->
-  <Button variant="primary">Try it free</Button>
-</Hero>
-```
-
-## Alignment
-
-```tsx
-<Hero align="left" headline="Left-aligned hero" subheadline="Content flows naturally." />
-<Hero align="center" headline="Centered hero" subheadline="Symmetrical layout." />
-```
-
-## Sizes
-
-```tsx
-<Hero size="sm" headline="Compact hero" />
-<Hero size="md" headline="Default hero" />
-<Hero size="lg" headline="Full-screen hero" />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-text` | Headline color |
-| `--s-text-muted` | Subheadline color |
-| `--s-surface` | Default background |
-| `--s-font-display` | Headline font family |
-| `--s-font-body` | Subheadline font family |
-| `--s-space-section` | Vertical padding |
-| `--s-max-width` | Content max-width |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `headline` | `string` | — | Main heading text |
-| `subheadline` | `string` | — | Supporting text |
-| `image` | `string` | — | Background or side image URL |
-| `background` | `string` | — | Background color or gradient |
-| `align` | `"left" \| "center"` | `"center"` | Content alignment |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Section height |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | CTA buttons and extra content |
+| `title` | `ReactNode` | — | Headline text. |
+| `description` | `ReactNode` | — | Supporting description text. |
+| `actions` | `HeroAction[]` | — | CTA action buttons. |
 
-## Accessibility
+## Token integration
 
-- Headline renders as `<h1>` for page structure
-- CTA buttons are focusable with visible focus ring
-- Background images are decorative with `aria-hidden="true"`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-primary-hover` | Primary hover |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-border` | Border |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-hero-padding-y` | Hero padding y |
+| `--s-hero-padding-x` | Hero padding x |
+| `--s-page-margin` | Page margin |
+| `--s-hero-min-height` | Hero min height |

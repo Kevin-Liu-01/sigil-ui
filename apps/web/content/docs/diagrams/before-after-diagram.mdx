@@ -1,6 +1,6 @@
 ---
 title: BeforeAfterDiagram
-description: "A side-by-side before/after comparison diagram."
+description: "A BeforeAfterDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,44 +9,28 @@ description: "A side-by-side before/after comparison diagram."
 import { BeforeAfterDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <BeforeAfterDiagram
-    beforeTitle="Before"
-    afterTitle="After"
-    before="Manual CSS overrides, scattered Tailwind classes, no consistency"
-    after="Token-driven design, one preset change updates everything"
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<BeforeAfterDiagram
-  beforeTitle="Before"
-  afterTitle="After"
-  before="Manual edits"
-  after="Automated tokens"
-/>
+<BeforeAfterDiagram>...</BeforeAfterDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `beforeTitle` | `string` | `"Without"` | Before panel label |
-| `afterTitle` | `string` | `"With"` | After panel label |
-| `before` | `ReactNode` | — | Before panel content |
-| `after` | `ReactNode` | — | After panel content |
+| `beforeTitle` | `string` | — | — |
+| `afterTitle` | `string` | — | — |
+| `before` | `ReactNode` | — | — |
+| `after` | `ReactNode` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Panel borders |
-| `--s-surface` | Panel background |
-| `--s-error` | Before accent |
-| `--s-success` | After accent |
-| `--s-text` | Title and content |
-| `--s-radius-md` | Panel radius |
+| `--s-radius-card` | Radius card |
+| `--s-error` | Error |
+| `--s-error-muted` | Error muted |
+| `--s-surface` | Surface |
+| `--s-success` | Success |
+| `--s-success-muted` | Success muted |

@@ -1,6 +1,6 @@
 ---
 title: NumberField
-description: A numeric input with increment/decrement buttons, min/max constraints, and step control.
+description: "A NumberField component from the Sigil design system."
 ---
 
 ## Import
@@ -9,71 +9,40 @@ description: A numeric input with increment/decrement buttons, min/max constrain
 import { NumberField } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <NumberField defaultValue={42} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<NumberField label="Quantity" defaultValue={1} />
+<NumberField>NumberField content</NumberField>
 ```
-
-## Min, max, and step
-
-```tsx
-<NumberField label="Quantity" min={0} max={100} step={5} defaultValue={10} />
-```
-
-## Controlled
-
-```tsx
-import { useState } from "react";
-
-function PriceInput() {
-  const [value, setValue] = useState(29);
-
-  return <NumberField label="Price" value={value} onChange={setValue} min={0} />;
-}
-```
-
-## With prefix
-
-```tsx
-<NumberField label="Amount" prefix="$" min={0} step={0.01} />
-```
-
-## Disabled
-
-```tsx
-<NumberField label="Fixed" value={42} disabled />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Input background |
-| `--s-border` | Input border |
-| `--s-border-interactive` | Focus border |
-| `--s-text` | Value text |
-| `--s-text-muted` | Placeholder/label |
-| `--s-radius-md` | Border radius |
-| `--s-duration-fast` | Button press feedback |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `label` | `string` | — | Accessible label |
-| `value` | `number` | — | Controlled value |
-| `defaultValue` | `number` | — | Uncontrolled default |
-| `onChange` | `(value: number) => void` | — | Change handler |
-| `min` | `number` | — | Minimum value |
-| `max` | `number` | — | Maximum value |
-| `step` | `number` | `1` | Increment/decrement step |
-| `prefix` | `string` | — | Text before the value |
-| `disabled` | `boolean` | `false` | Disable interactions |
-| `className` | `string` | — | Additional CSS classes |
+| `value` | `number` | — | — |
+| `onValueChange` | `(value: number) => void` | — | — |
+| `min` | `number` | — | — |
+| `max` | `number` | — | — |
+| `step` | `number` | — | — |
+| `disabled` | `boolean` | — | — |
 
-## Accessibility
+## Token integration
 
-- Uses `role="spinbutton"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`
-- Arrow Up/Down increments and decrements
-- `aria-label` set from the `label` prop
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-text` | Text |
+| `--s-input-height` | Input height |
+| `--s-radius-input` | Radius input |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-primary` | Primary |

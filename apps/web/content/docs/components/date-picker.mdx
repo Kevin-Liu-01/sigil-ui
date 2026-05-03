@@ -1,103 +1,42 @@
 ---
 title: DatePicker
-description: Date input with calendar popover for selecting single dates or ranges.
+description: "A DatePicker component from the Sigil design system."
 ---
-
-# DatePicker
-
-> Date input with calendar popover for selecting single dates or ranges.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add date-picker
-```
 
 ## Import
 
 ```tsx
-import { Calendar } from "@sigil-ui/components";
-import { Popover, PopoverTrigger, PopoverContent } from "@sigil-ui/components";
-import { Button } from "@sigil-ui/components";
+import { DatePicker, DateRangePicker } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview>
+  <DatePicker />
+</ComponentPreview>
 
 ## Usage
 
-Compose `Calendar` inside a `Popover` to create a date picker.
-
 ```tsx
-const [date, setDate] = useState<Date | undefined>();
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">
-      {date ? format(date, "PPP") : "Pick a date"}
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-auto p-0">
-    <Calendar mode="single" selected={date} onSelect={setDate} />
-  </PopoverContent>
-</Popover>
+<DatePicker>...</DatePicker>
 ```
 
-## Examples
+## Sub-components
 
-### Date range picker
+This component includes the following parts:
 
-```tsx
-const [range, setRange] = useState<DateRange | undefined>();
-
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">
-      {range?.from ? (
-        range.to ? (
-          `${format(range.from, "LLL dd")} - ${format(range.to, "LLL dd")}`
-        ) : format(range.from, "LLL dd")
-      ) : "Pick dates"}
-    </Button>
-  </PopoverTrigger>
-  <PopoverContent className="w-auto p-0">
-    <Calendar mode="range" selected={range} onSelect={setRange} numberOfMonths={2} />
-  </PopoverContent>
-</Popover>
-```
-
-### With presets
-
-```tsx
-<Popover>
-  <PopoverTrigger asChild>
-    <Button variant="outline">{date ? format(date, "PPP") : "Pick a date"}</Button>
-  </PopoverTrigger>
-  <PopoverContent className="flex w-auto flex-col gap-2 p-2">
-    <div className="flex gap-1">
-      <Button size="sm" variant="ghost" onClick={() => setDate(new Date())}>Today</Button>
-      <Button size="sm" variant="ghost" onClick={() => setDate(addDays(new Date(), 7))}>In a week</Button>
-    </div>
-    <Calendar mode="single" selected={date} onSelect={setDate} />
-  </PopoverContent>
-</Popover>
-```
+- `<DateRangePicker>`
 
 ## Props
 
-DatePicker is a composition pattern. See individual component docs:
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `Date` | — | — |
+| `onValueChange` | `(date: Date | undefined) => void` | — | — |
+| `placeholder` | `string` | — | — |
 
-| Component | Docs |
-|-----------|------|
-| Calendar | [Calendar](/docs/components/calendar) |
-| Popover | Popover |
-| Button | [Button](/docs/components/button) |
+## Token integration
 
-## Tokens
-
-Inherits tokens from [Calendar](/docs/components/calendar) and Popover:
-
-- `--s-primary` — selected date highlight
-- `--s-text` — date text, trigger text
-- `--s-text-muted` — placeholder, weekday headers
-- `--s-border` — popover border
-- `--s-surface` — popover background
-- `--s-shadow-md` — popover elevation
-- `--s-card-radius` — popover and day cell radius
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |

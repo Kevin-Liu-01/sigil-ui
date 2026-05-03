@@ -184,13 +184,94 @@ export default defineEventHandler(() => {
                 </p>
               </div>
               <div
-                className="flex-1 w-full aspect-[4/3]"
+                className="flex-1 w-full aspect-[4/3] flex items-center justify-center p-8"
                 style={{
                   background: "var(--r-surface)",
                   borderRadius: "var(--r-radius-lg)",
                   border: "1px solid var(--r-border)",
                 }}
-              />
+              >
+                {i === 0 && (
+                  <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+                    <rect x="50" y="30" width="80" height="55" rx="8" stroke="var(--r-border)" strokeWidth="1.5" />
+                    <path d="M90 43 L102 66 L78 66 Z" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <rect x="160" y="30" width="80" height="55" rx="8" stroke="var(--r-border)" strokeWidth="1.5" />
+                    <path d="M192 44 C202 38 210 44 204 52 C198 58 194 62 204 66" stroke="var(--r-primary)" strokeWidth="2" strokeLinecap="round" />
+                    <rect x="270" y="30" width="80" height="55" rx="8" stroke="var(--r-border)" strokeWidth="1.5" />
+                    <path d="M298 68 L310 45 L322 68" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <path d="M315 68 L322 56 L329 68" stroke="var(--r-primary)" strokeWidth="1.5" />
+                    <line x1="90" y1="85" x2="200" y2="140" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 4" />
+                    <line x1="200" y1="85" x2="200" y2="140" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 4" />
+                    <line x1="310" y1="85" x2="200" y2="140" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 4" />
+                    <circle cx="200" cy="140" r="5" fill="var(--r-primary)" />
+                    <line x1="200" y1="145" x2="200" y2="165" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 4" />
+                    <rect x="120" y="165" width="160" height="100" rx="8" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <line x1="120" y1="198" x2="280" y2="198" stroke="var(--r-border)" strokeWidth="1" />
+                    <line x1="120" y1="232" x2="280" y2="232" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="135" y="178" width="40" height="4" rx="2" fill="var(--r-border)" />
+                    <rect x="135" y="210" width="30" height="4" rx="2" fill="var(--r-border)" />
+                    <rect x="135" y="244" width="35" height="4" rx="2" fill="var(--r-border)" />
+                    <circle cx="265" cy="182" r="4" fill="var(--r-primary)" />
+                    <circle cx="265" cy="215" r="4" fill="var(--r-primary)" />
+                    <circle cx="265" cy="248" r="4" fill="var(--r-primary)" />
+                  </svg>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+                    <circle cx="200" cy="150" r="70" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <ellipse cx="200" cy="150" rx="70" ry="22" stroke="var(--r-border)" strokeWidth="1" />
+                    <ellipse cx="200" cy="120" rx="52" ry="14" stroke="var(--r-border)" strokeWidth="0.75" />
+                    <ellipse cx="200" cy="180" rx="52" ry="14" stroke="var(--r-border)" strokeWidth="0.75" />
+                    <ellipse cx="200" cy="150" rx="22" ry="70" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="60" cy="55" r="8" stroke="var(--r-primary)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="340" cy="70" r="8" stroke="var(--r-primary)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="50" cy="220" r="8" stroke="var(--r-text-muted)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="350" cy="230" r="8" stroke="var(--r-text-muted)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="200" cy="22" r="8" stroke="var(--r-primary)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="95" cy="270" r="8" stroke="var(--r-text-muted)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="310" cy="275" r="8" stroke="var(--r-text-muted)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <line x1="137" y1="105" x2="67" y2="59" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="263" y1="110" x2="333" y2="74" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="137" y1="195" x2="57" y2="216" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="263" y1="190" x2="343" y2="226" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="200" y1="80" x2="200" y2="30" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="148" y1="210" x2="102" y2="265" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <line x1="252" y1="210" x2="303" y2="270" stroke="var(--r-border)" strokeWidth="1" strokeDasharray="4 3" />
+                    <circle cx="137" cy="105" r="3" fill="var(--r-primary)" />
+                    <circle cx="263" cy="110" r="3" fill="var(--r-primary)" />
+                    <circle cx="200" cy="80" r="3" fill="var(--r-primary)" />
+                  </svg>
+                )}
+                {i === 2 && (
+                  <svg viewBox="0 0 400 300" fill="none" className="w-full h-full">
+                    <rect x="40" y="20" width="320" height="260" rx="10" stroke="var(--r-border)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <rect x="41" y="21" width="318" height="50" rx="9" fill="var(--r-border)" fillOpacity={0.15} />
+                    <line x1="40" y1="71" x2="360" y2="71" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="72" cy="46" r="14" stroke="var(--r-text-muted)" strokeWidth="1.5" fill="var(--r-surface)" />
+                    <circle cx="72" cy="46" r="5" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <line x1="72" y1="38" x2="72" y2="41" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <line x1="72" y1="51" x2="72" y2="54" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <line x1="64" y1="46" x2="67" y2="46" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <line x1="77" y1="46" x2="80" y2="46" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    <rect x="96" y="39" width="70" height="6" rx="3" fill="var(--r-text-muted)" />
+                    <rect x="96" y="51" width="35" height="4" rx="2" fill="var(--r-border)" />
+                    <rect x="65" y="90" width="220" height="5" rx="2.5" fill="var(--r-border)" />
+                    <rect x="65" y="103" width="170" height="5" rx="2.5" fill="var(--r-border)" />
+                    <rect x="65" y="125" width="200" height="32" rx="6" stroke="var(--r-border)" strokeWidth="1.5" />
+                    <rect x="80" y="138" width="120" height="5" rx="2.5" fill="var(--r-primary)" />
+                    <path d="M228 134 L236 134 L236 142" stroke="var(--r-primary)" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="228" y1="142" x2="236" y2="134" stroke="var(--r-primary)" strokeWidth="1.5" strokeLinecap="round" />
+                    <circle cx="80" cy="192" r="10" stroke="var(--r-primary)" strokeWidth="1.5" />
+                    <path d="M75 192 L78 195 L85 188" stroke="var(--r-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <rect x="100" y="187" width="120" height="5" rx="2.5" fill="var(--r-border)" />
+                    <rect x="100" y="198" width="80" height="4" rx="2" fill="var(--r-border)" fillOpacity={0.5} />
+                    <circle cx="80" cy="232" r="10" stroke="var(--r-primary)" strokeWidth="1.5" />
+                    <path d="M75 232 L78 235 L85 228" stroke="var(--r-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <rect x="100" y="227" width="100" height="5" rx="2.5" fill="var(--r-border)" />
+                    <rect x="100" y="238" width="60" height="4" rx="2" fill="var(--r-border)" fillOpacity={0.5} />
+                  </svg>
+                )}
+              </div>
             </div>
           ))}
         </div>

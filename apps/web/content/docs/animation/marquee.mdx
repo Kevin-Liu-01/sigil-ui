@@ -1,6 +1,6 @@
 ---
 title: Marquee
-description: Infinite scrolling content in any direction. CSS-driven with pause-on-hover and configurable speed.
+description: "A Marquee component from the Sigil design system."
 ---
 
 ## Import
@@ -9,41 +9,29 @@ description: Infinite scrolling content in any direction. CSS-driven with pause-
 import { Marquee } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Marquee>
+  <Badge>Sigil UI</Badge>
+  <Badge>Token-driven</Badge>
+  <Badge>350+ components</Badge>
+  <Badge>44 presets</Badge>
+</Marquee>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Marquee>
-  <img src="/logo1.svg" alt="Logo 1" />
-  <img src="/logo2.svg" alt="Logo 2" />
-  <img src="/logo3.svg" alt="Logo 3" />
-</Marquee>
-```
-
-## Directions
-
-```tsx
-<Marquee direction="left">Left (default)</Marquee>
-<Marquee direction="right">Right</Marquee>
-<Marquee direction="up">Up</Marquee>
-<Marquee direction="down">Down</Marquee>
-```
-
-## Speed and gap
-
-```tsx
-<Marquee duration={15} gap="2rem">
-  {logos.map((logo) => <img key={logo.alt} src={logo.src} alt={logo.alt} />)}
-</Marquee>
+<Marquee>...</Marquee>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `direction` | `"left" \| "right" \| "up" \| "down"` | `"left"` | Scroll direction |
-| `duration` | `number` | `30` | Full cycle duration in seconds |
-| `pauseOnHover` | `boolean` | `true` | Pause when hovered |
-| `repeat` | `number` | `2` | Content copies for seamless loop |
-| `gap` | `string` | `"1rem"` | Gap between items |
-
-Respects `prefers-reduced-motion`.
+| `direction` | `"left" | "right" | "up" | "down"` | `left` | Scroll direction. |
+| `duration` | `number` | `30` | Animation duration in seconds. |
+| `pauseOnHover` | `boolean` | `true` | Pause on hover. |
+| `repeat` | `number` | `2` | Number of content copies for seamless loop. |
+| `gap` | `string` | `1rem` | Gap between items. |

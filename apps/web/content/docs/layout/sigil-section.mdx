@@ -11,16 +11,14 @@ import { SigilSection } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview vertical>
-  <SigilSection>
-    SigilSection content
-  </SigilSection>
+<ComponentPreview>
+  <SigilSection className="border border-dashed border-[var(--s-border)] p-4">A sigil section with token-driven padding</SigilSection>
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<SigilSection>SigilSection content</SigilSection>
+<SigilSection>...</SigilSection>
 ```
 
 ## Props
@@ -44,6 +42,11 @@ import { SigilSection } from "@sigil-ui/components";
 
 | CSS Variable | Purpose |
 |---|---|
+| `--s-section-border` | Section border |
+| `--s-border-width-thin` | Border width thin |
+| `--s-border-style` | Border style |
+| `--s-grid-line-color` | Grid line color |
+| `--s-border-muted` | Border muted |
 | `--s-border` | Border |
 | `--s-section-py` | Section py |
 | `--s-page-margin` | Page margin |

@@ -1,6 +1,6 @@
 ---
 title: CommitGrid
-description: "A GitHub-style contribution heatmap grid."
+description: "A CommitGrid component from the Sigil design system."
 ---
 
 ## Import
@@ -9,48 +9,29 @@ description: "A GitHub-style contribution heatmap grid."
 import { CommitGrid } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <CommitGrid
-    weeks={12}
-    data={[
-      { date: "2026-01-26", count: 3 }, { date: "2026-01-27", count: 5 }, { date: "2026-01-28", count: 1 },
-      { date: "2026-01-30", count: 7 }, { date: "2026-02-01", count: 2 }, { date: "2026-02-03", count: 4 },
-      { date: "2026-02-05", count: 6 }, { date: "2026-02-07", count: 1 }, { date: "2026-02-09", count: 8 },
-      { date: "2026-02-11", count: 3 }, { date: "2026-02-13", count: 5 }, { date: "2026-02-15", count: 2 },
-      { date: "2026-02-17", count: 4 }, { date: "2026-02-19", count: 7 }, { date: "2026-02-21", count: 1 },
-      { date: "2026-02-23", count: 6 }, { date: "2026-02-25", count: 3 }, { date: "2026-02-27", count: 5 },
-      { date: "2026-03-01", count: 8 }, { date: "2026-03-03", count: 2 }, { date: "2026-03-05", count: 4 },
-      { date: "2026-03-07", count: 6 }, { date: "2026-03-09", count: 1 }, { date: "2026-03-11", count: 7 },
-      { date: "2026-03-13", count: 3 }, { date: "2026-03-15", count: 5 }, { date: "2026-03-17", count: 2 },
-      { date: "2026-03-19", count: 4 }, { date: "2026-03-21", count: 8 }, { date: "2026-03-23", count: 1 },
-      { date: "2026-03-25", count: 6 }, { date: "2026-03-27", count: 3 }, { date: "2026-03-29", count: 5 },
-      { date: "2026-03-31", count: 7 }, { date: "2026-04-02", count: 2 }, { date: "2026-04-04", count: 4 },
-      { date: "2026-04-06", count: 6 }, { date: "2026-04-08", count: 8 }, { date: "2026-04-10", count: 3 },
-      { date: "2026-04-12", count: 5 }, { date: "2026-04-14", count: 1 }, { date: "2026-04-16", count: 7 },
-      { date: "2026-04-18", count: 4 }, { date: "2026-04-20", count: 6 }, { date: "2026-04-22", count: 2 },
-      { date: "2026-04-24", count: 5 },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<CommitGrid>...</CommitGrid>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `data` | `CommitDay[]` | — | Array of date/count entry objects |
-| `weeks` | `number` | `52` | Number of weeks to show |
-| `cellSize` | `number` | `12` | Cell size in pixels |
-| `gap` | `number` | `2` | Gap between cells |
-| `color` | `string` | `var(--s-success)` | Cell color |
-| `showDayLabels` | `boolean` | `true` | Show day labels |
-| `showMonthLabels` | `boolean` | `true` | Show month labels |
+| `data` | `CommitDay[]` | — | — |
+| `weeks` | `number` | `52` | Number of weeks to show. |
+| `endDate` | `string` | — | Last date to render, formatted as YYYY-MM-DD. Defaults to the latest date in data. |
+| `cellSize` | `number` | `12` | Size of each cell in px. |
+| `gap` | `number` | `2` | Gap between cells in px. |
+| `color` | `string` | `var(--s-success)` | Color for filled cells. |
+| `showDayLabels` | `boolean` | `true` | Day labels on left side. |
+| `showMonthLabels` | `boolean` | `true` | Month labels on top. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-success` | Default cell color |
-| `--s-text-muted` | Day and month labels |
-| `--s-font-mono` | Label font |
+| `--s-success` | Success |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |

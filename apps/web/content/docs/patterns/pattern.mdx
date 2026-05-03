@@ -1,17 +1,7 @@
 ---
 title: Pattern
-description: SVG background pattern overlays with 7 variants.
+description: "A Pattern component from the Sigil design system."
 ---
-
-# Pattern
-
-> Repeating SVG background patterns for decorative overlays — dots, grid, diagonal, diamond, hexagon, triangle, crosshatch.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add pattern
-```
 
 ## Import
 
@@ -19,44 +9,30 @@ npx @sigil-ui/cli add pattern
 import { Pattern } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <div style={{position:"relative",width:"100%",height:120}}>
+    <Pattern />
+  </div>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<div className="relative h-64">
-  <Pattern variant="dots" opacity={0.08} />
-  <div className="relative z-10">Content on top</div>
-</div>
-```
-
-## Examples
-
-### Dots
-
-```tsx
-<Pattern variant="dots" opacity={0.1} />
-```
-
-### Crosshatch
-
-```tsx
-<Pattern variant="crosshatch" opacity={0.06} scale={1.5} />
-```
-
-### Diamond
-
-```tsx
-<Pattern variant="diamond" opacity={0.08} />
+<Pattern>Pattern content</Pattern>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | `"dots" \| "hatch" \| "diagonal" \| "diamond" \| "hexagon" \| "triangle" \| "crosshatch"` | — | Pattern type |
-| opacity | number | 0.1 | Pattern opacity |
-| scale | number | 1 | Scale multiplier for pattern size |
-| className | string | — | Additional classes |
+|---|---|---|---|
+| `variant` | `PatternVariant` | `dots` | Pattern type. |
+| `opacity` | `number` | `0.1` | Pattern opacity. |
+| `scale` | `number` | `1` | Scale of the pattern. |
 
-## Tokens
+## Token integration
 
-- `--s-border` — pattern stroke color
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text` | Text |

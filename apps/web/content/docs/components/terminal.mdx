@@ -1,6 +1,6 @@
 ---
 title: Terminal
-description: A styled terminal/code output block with syntax highlighting, copy button, and line numbers. Uses mono font tokens.
+description: "A Terminal component from the Sigil design system."
 ---
 
 ## Import
@@ -9,73 +9,39 @@ description: A styled terminal/code output block with syntax highlighting, copy 
 import { Terminal } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Terminal>$ npx @sigil-ui/cli init</Terminal>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Terminal>npm install @sigil-ui/components</Terminal>
+<Terminal>Terminal content</Terminal>
 ```
-
-## With title
-
-```tsx
-<Terminal title="Terminal">
-  npx create-sigil-app my-app
-</Terminal>
-```
-
-## Multi-line output
-
-```tsx
-<Terminal title="Output">
-{`$ sigil doctor
-✓ Token file found
-✓ Preset valid
-✓ Components installed
-✓ No issues detected`}
-</Terminal>
-```
-
-## With line numbers
-
-```tsx
-<Terminal lineNumbers>
-{`const tokens = loadTokens();
-const css = compileCSS(tokens);
-writeFile("tokens.css", css);`}
-</Terminal>
-```
-
-## Copy button
-
-```tsx
-<Terminal copyable>
-  pnpm add @sigil-ui/components @sigil-ui/tokens
-</Terminal>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Terminal background |
-| `--s-text` | Output text color |
-| `--s-text-muted` | Line numbers and title |
-| `--s-border` | Terminal border |
-| `--s-card-radius` | Border radius |
-| `--s-font-mono` | Monospace font family |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `title` | `string` | — | Window title bar text |
-| `lineNumbers` | `boolean` | `false` | Show line numbers |
-| `copyable` | `boolean` | `false` | Show copy-to-clipboard button |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Terminal content |
+| `title` | `string` | — | Terminal title (shown in the title bar). |
+| `lines` | `string[]` | — | Code/text lines to display. |
+| `showLineNumbers` | `boolean` | `true` | Show line numbers. |
 
-## Accessibility
+## Token integration
 
-- Content wrapped in `<pre><code>` for semantic code blocks
-- Copy button has `aria-label="Copy to clipboard"`
-- Line numbers are `aria-hidden` to avoid noisy screen reader output
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-border-style` | Border style |
+| `--s-background` | Background |
+| `--s-code-font-family` | Code font family |
+| `--s-surface` | Surface |
+| `--s-radius-full` | Radius full |
+| `--s-error` | Error |
+| `--s-warning` | Warning |
+| `--s-success` | Success |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

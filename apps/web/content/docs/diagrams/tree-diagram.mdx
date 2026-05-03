@@ -1,6 +1,6 @@
 ---
 title: TreeDiagram
-description: "A hierarchical tree diagram showing parent-child relationships."
+description: "A TreeDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,58 +9,30 @@ description: "A hierarchical tree diagram showing parent-child relationships."
 import { TreeDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <TreeDiagram
-    root={{
-      id: "root",
-      label: "App",
-      variant: "accent",
-      children: [
-        { id: "api", label: "API", children: [
-          { id: "auth", label: "Auth" },
-          { id: "db", label: "Database" },
-        ]},
-        { id: "ui", label: "Frontend" },
-      ],
-    }}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<TreeDiagram
-  root={{
-    id: "root",
-    label: "App",
-    variant: "accent",
-    children: [
-      { id: "api", label: "API", children: [
-        { id: "auth", label: "Auth" },
-        { id: "db", label: "Database" },
-      ]},
-      { id: "ui", label: "Frontend" },
-    ],
-  }}
-/>
+<TreeDiagram>...</TreeDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `root` | `TreeNode` | — | Root node of the tree |
-| `connector` | `"solid" \| "dashed"` | `"solid"` | Connector line style |
-| `compact` | `boolean` | `false` | Use smaller node sizing |
+| `root` | `TreeDiagramNode` | — | — |
+| `connector` | `"solid" | "dashed"` | — | — |
+| `compact` | `boolean` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Connector lines and default node border |
-| `--s-surface` | Node background |
-| `--s-text` | Node label text |
-| `--s-primary` | Accent and highlighted node styles |
-| `--s-radius-md` | Node border radius |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-border-muted` | Border muted |
+| `--s-text-muted` | Text muted |
+| `--s-radius-md` | Radius md |

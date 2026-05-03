@@ -1,17 +1,7 @@
 ---
 title: Cross
-description: Cross mark SVG used at grid intersections for structural visibility.
+description: "A Cross component from the Sigil design system."
 ---
-
-# Cross
-
-> The signature Sigil cross mark — placed at grid intersections to make the underlying structure visible.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add cross
-```
 
 ## Import
 
@@ -19,34 +9,27 @@ npx @sigil-ui/cli add cross
 import { Cross } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Cross size={48} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Cross size={10} strokeWidth={1.5} />
-```
-
-## Examples
-
-### Small
-
-```tsx
-<Cross size={8} />
-```
-
-### Large accent
-
-```tsx
-<Cross size={16} strokeWidth={2} className="text-[var(--s-primary)]" />
+<Cross>Cross content</Cross>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| size | number | 10 | Cross dimensions (width and height) |
-| strokeWidth | number | 1.5 | Line thickness |
-| className | string | — | Additional classes |
+|---|---|---|---|
+| `size` | `number` | `12` | Cross size in px. |
+| `strokeWidth` | `number` | `1` | Stroke width. |
 
-## Tokens
+## Token integration
 
-- `--s-border` — default stroke color
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |

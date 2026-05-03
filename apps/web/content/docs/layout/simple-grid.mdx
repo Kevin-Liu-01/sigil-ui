@@ -12,13 +12,17 @@ import { SimpleGrid } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <SimpleGrid />
+  <SimpleGrid columns={3} gap={16}>
+  <div className="p-4 border border-[var(--s-border)]">1</div>
+  <div className="p-4 border border-[var(--s-border)]">2</div>
+  <div className="p-4 border border-[var(--s-border)]">3</div>
+</SimpleGrid>
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<SimpleGrid>SimpleGrid content</SimpleGrid>
+<SimpleGrid>...</SimpleGrid>
 ```
 
 ## Props

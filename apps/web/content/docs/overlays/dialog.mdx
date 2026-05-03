@@ -9,6 +9,24 @@ description: "A Dialog component from the Sigil design system."
 import { Dialog, DialogTrigger, DialogClose, DialogPortal, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Dialog>
+  <DialogTrigger asChild><Button>Open dialog</Button></DialogTrigger>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>Edit profile</DialogTitle>
+      <DialogDescription>Update your settings below.</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>
+      <DialogClose asChild><Button variant="ghost">Cancel</Button></DialogClose>
+      <Button variant="primary">Save</Button>
+    </DialogFooter>
+  </DialogContent>
+</Dialog>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
@@ -35,12 +53,12 @@ This component includes the following parts:
 | `--s-overlay-bg` | Overlay bg |
 | `--s-overlay-blur` | Overlay blur |
 | `--s-border-style` | Border style |
+| `--s-overlay-border` | Overlay border |
 | `--s-border` | Border |
+| `--s-overlay-surface` | Overlay surface |
 | `--s-surface` | Surface |
-| `--s-dialog-shadow` | Dialog shadow |
+| `--s-overlay-padding` | Overlay padding |
+| `--s-overlay-shadow` | Overlay shadow |
+| `--s-shadow-xl` | Shadow xl |
 | `--s-text` | Text |
-| `--s-card-radius` | Card radius |
-| `--s-duration-fast` | Duration fast |
-| `--s-radius-sm` | Radius sm |
-| `--s-ring` | Ring |
-| `--s-primary` | Primary |
+| `--s-overlay-radius` | Overlay radius |

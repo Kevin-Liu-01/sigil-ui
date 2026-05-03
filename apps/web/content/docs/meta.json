@@ -12,17 +12,25 @@
     "...components",
     "---Layout---",
     "...layout",
+    "---Navigation---",
+    "...navigation",
+    "---Overlays---",
+    "...overlays",
     "---Shapes---",
     "...shapes",
     "---3D---",
     "...3d",
-    "---Animation---",
-    "...animation",
     "---Diagrams---",
     "...diagrams",
     "---Marketing---",
     "...marketing",
     "---Patterns---",
-    "...patterns"
+    "...patterns",
+    "---Sections---",
+    "...sections",
+    "---Playbook---",
+    "...playbook",
+    "---Animation---",
+    "...animation"
   ]
 }

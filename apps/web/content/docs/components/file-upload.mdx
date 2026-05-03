@@ -1,6 +1,6 @@
 ---
 title: FileUpload
-description: Drag-and-drop file upload zone with click-to-browse fallback, file type filtering, and size limits.
+description: "A FileUpload component from the Sigil design system."
 ---
 
 ## Import
@@ -9,60 +9,37 @@ description: Drag-and-drop file upload zone with click-to-browse fallback, file 
 import { FileUpload } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <FileUpload />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<FileUpload onChange={(files) => console.log(files)} />
+<FileUpload>...</FileUpload>
 ```
-
-## With constraints
-
-```tsx
-<FileUpload
-  accept="image/*"
-  multiple
-  maxSize={5 * 1024 * 1024}
-  onChange={(files) => console.log(files)}
-/>
-```
-
-## Custom content
-
-```tsx
-<FileUpload accept=".pdf" onChange={handleFiles}>
-  <p className="text-sm font-medium text-[var(--s-text)]">
-    Drop your PDF here
-  </p>
-  <p className="text-xs text-[var(--s-text-muted)]">Max 10MB</p>
-</FileUpload>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-radius-md` | Drop zone border radius |
-| `--s-border` | Dashed border |
-| `--s-background` | Drop zone background |
-| `--s-surface` | Hover and drag-over background |
-| `--s-primary` | Active drag border |
-| `--s-text` | Primary label text |
-| `--s-text-muted` | Icon and secondary label text |
-| `--s-duration-fast` | Hover/drag transitions |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `accept` | `string` | — | Accepted file types (e.g. `"image/*"`, `".pdf,.docx"`) |
-| `multiple` | `boolean` | `false` | Allow multiple file selection |
-| `maxSize` | `number` | — | Max file size in bytes (files exceeding this are silently filtered) |
-| `disabled` | `boolean` | `false` | Disable upload interactions |
-| `onChange` | `(files: File[]) => void` | — | Called with accepted files |
-| `children` | `ReactNode` | — | Custom drop zone content (replaces default icon and text) |
-| `className` | `string` | — | Additional CSS classes |
+| `accept` | `string` | — | — |
+| `multiple` | `boolean` | — | — |
+| `maxSize` | `number` | — | — |
+| `disabled` | `boolean` | — | — |
+| `onChange` | `(files: File[]) => void` | — | — |
 
-## Accessibility
+## Token integration
 
-- Hidden `<input type="file">` is activated by clicking the visible drop zone
-- `data-dragging` attribute is set during drag-over for custom styling hooks
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-surface` | Surface |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

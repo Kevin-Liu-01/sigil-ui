@@ -7,17 +7,11 @@ A guide to writing code that lasts.
 ## Quick Hitters
 
 - **Write for easy reading.** Sentences should be short. Break ideas down into simple clauses.
-
 - **Readers hate extra words.** Why waste time say lot word when few word do trick?
-
 - **Optimize for glanceability.** A reviewer should be able to understand the file's shape from its names, signatures, and section order before reading bodies. If folding the function bodies would make the file incomprehensible, the structure is wrong.
-
 - **Fail closed.** If the system cannot prove a required invariant, reject the request or refuse readiness. Silent fallback to a weaker mode hides broken behavior.
-
 - **Share code behind stable contracts.** In this monorepo, this means the `packages/` directory. Any public API or interface should expect to be imported and used. Design the function well the first time around since changing it afterwards is expensive.
-
 - **Keep edit/test/debug loops fast.** Reality should be the basis of all decisions. Get in the habit of making the feedback loop as short as humanly possible.
-
 - **Land changes atomically with tests.** Inline module testing keeps tests and code close together. Separate `tests/` folders are for integration and end-to-end only.
 
 ## Hard Limits

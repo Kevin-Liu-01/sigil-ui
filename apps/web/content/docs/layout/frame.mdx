@@ -1,6 +1,6 @@
 ---
 title: Frame
-description: An aspect-ratio container for images, video, and embedded content. Maintains consistent proportions across breakpoints.
+description: "A Frame component from the Sigil design system."
 ---
 
 ## Import
@@ -9,56 +9,28 @@ description: An aspect-ratio container for images, video, and embedded content. 
 import { Frame } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Frame className="p-6">Framed content</Frame>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Frame ratio="16/9">
-  <img src="/hero.jpg" alt="Hero image" />
-</Frame>
+<Frame>...</Frame>
 ```
-
-## Common ratios
-
-```tsx
-<Frame ratio="1/1">Square</Frame>
-<Frame ratio="4/3">Classic</Frame>
-<Frame ratio="16/9">Widescreen</Frame>
-<Frame ratio="21/9">Ultrawide</Frame>
-```
-
-## Video embed
-
-```tsx
-<Frame ratio="16/9">
-  <iframe src="https://youtube.com/embed/..." allowFullScreen />
-</Frame>
-```
-
-## With overflow visible
-
-```tsx
-<Frame ratio="1/1" overflow="visible">
-  <Card3D>Content that extends beyond the frame</Card3D>
-</Frame>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-radius-md` | Frame border radius |
-| `--s-surface` | Frame background (visible before content loads) |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `ratio` | `string` | `"1/1"` | CSS aspect-ratio value |
-| `overflow` | `"hidden" \| "visible"` | `"hidden"` | Content overflow behavior |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Frame content |
+| `variant` | `"default" | "accent" | "dashed"` | `default` | Border style variant. |
 
-## Accessibility
+## Token integration
 
-- Renders as a `<div>` — add semantic meaning via children
-- Images inside should have descriptive `alt` text
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-primary` | Primary |
+| `--s-card-radius` | Card radius |

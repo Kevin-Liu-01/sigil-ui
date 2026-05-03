@@ -115,18 +115,47 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Product photo placeholder */}
+          {/* Server rack illustration */}
           <div
-            className="w-full aspect-[4/3] flex items-center justify-center"
+            className="w-full aspect-[4/3] flex items-center justify-center p-8"
             style={{
               border: "1px solid var(--r-border)",
               borderRadius: "var(--r-radius-lg)",
               background: "var(--r-surface)",
             }}
           >
-            <span className="text-xs tracking-[0.2em] uppercase" style={{ color: "var(--r-text-muted)" }}>
-              Product Image
-            </span>
+            <svg
+              viewBox="0 0 200 260"
+              fill="none"
+              style={{ width: "100%", height: "100%", maxWidth: "240px" }}
+            >
+              {/* Rack outline */}
+              <rect x="20" y="10" width="160" height="240" rx="4" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+              {/* Rack rails */}
+              <line x1="36" y1="10" x2="36" y2="250" stroke="var(--r-border)" strokeWidth="1" />
+              <line x1="164" y1="10" x2="164" y2="250" stroke="var(--r-border)" strokeWidth="1" />
+              {/* Sled 1 */}
+              <rect x="40" y="30" width="120" height="50" rx="2" stroke="var(--r-text-muted)" strokeWidth="1" />
+              <rect x="50" y="42" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="85" y="42" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="50" y="56" width="50" height="6" rx="1" fill="var(--r-border)" />
+              <circle cx="140" cy="46" r="3" fill="var(--r-primary)" />
+              <circle cx="140" cy="58" r="3" fill="var(--r-primary)" opacity="0.4" />
+              {/* Sled 2 */}
+              <rect x="40" y="100" width="120" height="50" rx="2" stroke="var(--r-text-muted)" strokeWidth="1" />
+              <rect x="50" y="112" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="85" y="112" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="50" y="126" width="50" height="6" rx="1" fill="var(--r-border)" />
+              <circle cx="140" cy="116" r="3" fill="var(--r-primary)" />
+              <circle cx="140" cy="128" r="3" fill="var(--r-primary)" opacity="0.4" />
+              {/* Sled 3 */}
+              <rect x="40" y="170" width="120" height="50" rx="2" stroke="var(--r-text-muted)" strokeWidth="1" />
+              <rect x="50" y="182" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="85" y="182" width="30" height="8" rx="1" fill="var(--r-border)" />
+              <rect x="50" y="196" width="50" height="6" rx="1" fill="var(--r-border)" />
+              <circle cx="140" cy="186" r="3" fill="var(--r-primary)" />
+              <circle cx="140" cy="198" r="3" fill="var(--r-primary)" opacity="0.4" />
+            </svg>
           </div>
         </div>
       </section>
@@ -218,7 +247,7 @@ export default function Page() {
                 </p>
               </div>
               <div
-                className={`aspect-video flex items-center justify-center ${
+                className={`aspect-video flex items-center justify-center p-6 ${
                   feature.flip ? "lg:[direction:ltr]" : ""
                 }`}
                 style={{
@@ -227,12 +256,100 @@ export default function Page() {
                   background: "var(--r-surface)",
                 }}
               >
-                <span
-                  className="text-xs tracking-[0.2em] uppercase"
-                  style={{ color: "var(--r-text-muted)" }}
-                >
-                  Feature Image
-                </span>
+                {i === 0 && (
+                  <svg viewBox="0 0 280 160" fill="none" style={{ width: "100%", height: "100%", maxWidth: "360px" }}>
+                    {/* Sled chassis */}
+                    <rect x="20" y="20" width="240" height="120" rx="3" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    {/* CPU modules */}
+                    <rect x="36" y="36" width="44" height="34" rx="2" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="40" y="40" width="36" height="26" rx="1" fill="var(--r-border)" opacity="0.5" />
+                    <rect x="90" y="36" width="44" height="34" rx="2" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="94" y="40" width="36" height="26" rx="1" fill="var(--r-border)" opacity="0.5" />
+                    {/* Memory DIMMs */}
+                    <rect x="148" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    <rect x="160" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    <rect x="172" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    <rect x="184" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    <rect x="196" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    <rect x="208" y="36" width="8" height="34" rx="1" fill="var(--r-border)" opacity="0.6" />
+                    {/* NVMe slots */}
+                    <rect x="36" y="84" width="60" height="16" rx="2" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="104" y="84" width="60" height="16" rx="2" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="172" y="84" width="60" height="16" rx="2" stroke="var(--r-border)" strokeWidth="1" />
+                    {/* LEDs */}
+                    <circle cx="236" cy="36" r="4" fill="var(--r-primary)" />
+                    <circle cx="236" cy="50" r="4" fill="var(--r-primary)" opacity="0.4" />
+                    <circle cx="236" cy="64" r="4" fill="var(--r-primary)" opacity="0.4" />
+                    {/* Bottom label area */}
+                    <rect x="36" y="112" width="80" height="8" rx="1" fill="var(--r-border)" opacity="0.3" />
+                    <rect x="130" y="112" width="40" height="8" rx="1" fill="var(--r-border)" opacity="0.3" />
+                  </svg>
+                )}
+                {i === 1 && (
+                  <svg viewBox="0 0 280 160" fill="none" style={{ width: "100%", height: "100%", maxWidth: "360px" }}>
+                    {/* Terminal window */}
+                    <rect x="10" y="10" width="260" height="140" rx="4" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    {/* Title bar */}
+                    <line x1="10" y1="30" x2="270" y2="30" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="24" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="36" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="48" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    {/* Request */}
+                    <text x="24" y="50" fontSize="9" fontFamily="monospace" fill="var(--r-primary)">GET</text>
+                    <text x="50" y="50" fontSize="9" fontFamily="monospace" fill="var(--r-text)">/v1/instances</text>
+                    {/* Headers */}
+                    <text x="24" y="66" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)">Authorization: Bearer oxide_tk_...</text>
+                    <text x="24" y="78" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)">Content-Type: application/json</text>
+                    {/* Divider */}
+                    <line x1="24" y1="86" x2="256" y2="86" stroke="var(--r-border)" strokeWidth="0.5" strokeDasharray="3 2" />
+                    {/* Response */}
+                    <text x="24" y="100" fontSize="9" fontFamily="monospace" fill="var(--r-primary)">200 OK</text>
+                    <text x="24" y="116" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)">{"{"}</text>
+                    <text x="34" y="128" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)">{'"items": [ { "name": "api-server-01",'}</text>
+                    <text x="34" y="140" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)">{'"ncpus": 16, "memory": 68719476736 } ]'}</text>
+                  </svg>
+                )}
+                {i === 2 && (
+                  <svg viewBox="0 0 280 160" fill="none" style={{ width: "100%", height: "100%", maxWidth: "360px" }}>
+                    {/* Window frame */}
+                    <rect x="10" y="10" width="260" height="140" rx="4" stroke="var(--r-text-muted)" strokeWidth="1.5" />
+                    {/* Title bar */}
+                    <line x1="10" y1="30" x2="270" y2="30" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="24" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="36" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    <circle cx="48" cy="20" r="3" stroke="var(--r-border)" strokeWidth="1" />
+                    <text x="120" y="23" fontSize="8" fontFamily="monospace" fill="var(--r-text-muted)" textAnchor="middle">Oxide Console</text>
+                    {/* Sidebar */}
+                    <line x1="80" y1="30" x2="80" y2="150" stroke="var(--r-border)" strokeWidth="1" />
+                    <rect x="18" y="38" width="52" height="8" rx="2" fill="var(--r-primary)" opacity="0.8" />
+                    <rect x="18" y="52" width="48" height="6" rx="1" fill="var(--r-border)" opacity="0.4" />
+                    <rect x="18" y="64" width="44" height="6" rx="1" fill="var(--r-border)" opacity="0.4" />
+                    <rect x="18" y="76" width="50" height="6" rx="1" fill="var(--r-border)" opacity="0.4" />
+                    <rect x="18" y="88" width="38" height="6" rx="1" fill="var(--r-border)" opacity="0.4" />
+                    <rect x="18" y="100" width="46" height="6" rx="1" fill="var(--r-border)" opacity="0.4" />
+                    {/* Content panel - instance table */}
+                    <text x="92" y="46" fontSize="8" fontFamily="monospace" fill="var(--r-text)">Instances</text>
+                    <line x1="88" y1="52" x2="262" y2="52" stroke="var(--r-border)" strokeWidth="0.5" />
+                    {/* Table header */}
+                    <text x="92" y="64" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">NAME</text>
+                    <text x="160" y="64" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">CPU</text>
+                    <text x="200" y="64" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">STATUS</text>
+                    <line x1="88" y1="68" x2="262" y2="68" stroke="var(--r-border)" strokeWidth="0.5" />
+                    {/* Table rows */}
+                    <text x="92" y="80" fontSize="7" fontFamily="monospace" fill="var(--r-text)">api-server-01</text>
+                    <text x="160" y="80" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">16</text>
+                    <circle cx="208" cy="77" r="3" fill="var(--r-primary)" />
+                    <text x="92" y="94" fontSize="7" fontFamily="monospace" fill="var(--r-text)">worker-pool-a</text>
+                    <text x="160" y="94" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">32</text>
+                    <circle cx="208" cy="91" r="3" fill="var(--r-primary)" />
+                    <text x="92" y="108" fontSize="7" fontFamily="monospace" fill="var(--r-text)">db-primary</text>
+                    <text x="160" y="108" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">8</text>
+                    <circle cx="208" cy="105" r="3" fill="var(--r-primary)" />
+                    <text x="92" y="122" fontSize="7" fontFamily="monospace" fill="var(--r-text)">cache-node-01</text>
+                    <text x="160" y="122" fontSize="7" fontFamily="monospace" fill="var(--r-text-muted)">4</text>
+                    <circle cx="208" cy="119" r="3" fill="var(--r-primary)" opacity="0.4" />
+                  </svg>
+                )}
               </div>
             </div>
           ))}

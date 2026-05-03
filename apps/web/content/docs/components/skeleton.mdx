@@ -1,6 +1,6 @@
 ---
 title: Skeleton
-description: A placeholder shimmer for loading states. Matches the shape of the content it replaces with token-driven animation.
+description: "A Skeleton component from the Sigil design system."
 ---
 
 ## Import
@@ -9,62 +9,32 @@ description: A placeholder shimmer for loading states. Matches the shape of the 
 import { Skeleton } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Skeleton />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Skeleton className="h-4 w-[200px]" />
+<Skeleton>Skeleton content</Skeleton>
 ```
-
-## Card skeleton
-
-```tsx
-<Card>
-  <CardBody>
-    <Stack gap={12}>
-      <Skeleton className="h-6 w-[150px]" />
-      <Skeleton className="h-4 w-full" />
-      <Skeleton className="h-4 w-[80%]" />
-    </Stack>
-  </CardBody>
-</Card>
-```
-
-## Avatar and text
-
-```tsx
-<Stack direction="row" gap={12} align="center">
-  <Skeleton className="size-10 rounded-full" />
-  <Stack gap={4}>
-    <Skeleton className="h-4 w-[120px]" />
-    <Skeleton className="h-3 w-[80px]" />
-  </Stack>
-</Stack>
-```
-
-## Circle variant
-
-```tsx
-<Skeleton variant="circle" size={48} />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Base skeleton color |
-| `--s-surface-elevated` | Shimmer highlight color |
-| `--s-radius-md` | Default border radius |
-| `--s-duration-slower` | Shimmer animation cycle |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"rectangle" \| "circle"` | `"rectangle"` | Shape variant |
-| `size` | `number` | — | Width and height for circle variant |
-| `className` | `string` | — | Width, height, and radius via CSS |
+| `variant` | `SkeletonVariant` | `default` | Shape / size preset. |
 
-## Accessibility
+## Token integration
 
-- Renders with `aria-hidden="true"` since it is a decorative placeholder
-- Pair with `aria-busy="true"` on the parent container during loading
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-sm` | Radius sm |
+| `--s-radius-md` | Radius md |
+| `--s-radius-full` | Radius full |
+| `--s-radius-lg` | Radius lg |
+| `--s-text` | Text |
+| `--s-surface` | Surface |
+| `--s-duration-slow` | Duration slow |

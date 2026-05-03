@@ -9,7 +9,7 @@ import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { Terminal } from "@/components/landing/terminal";
 import { ComponentGalleryCTA } from "@/components/landing/live-component";
-import { ShapesAndPatterns, ThreeDShowcase } from "@/components/landing/shapes-section";
+import { ThreeDShowcase } from "@/components/landing/shapes-section";
 import { SigilFrame, useIsEdgeless } from "@/components/landing/sigil-frame";
 import { TokenPipelineDiagram } from "@/components/landing/token-pipeline";
 import { LayerStackDiagram } from "@/components/landing/layer-stack";
@@ -170,13 +170,13 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="clamp(50px, 12vw, 150px) var(--s-section-padding-x, var(--s-page-margin, 25px)) clamp(50px, 5vw, 100px)" style={{ position: "relative", maxWidth: "100vw" }}>
+    <LandingSection borderTop padding="clamp(48px, 12vw, 144px) var(--s-section-padding-x, var(--s-page-margin, 24px)) clamp(48px, 5vw, 96px)" style={{ position: "relative", maxWidth: "100vw" }}>
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] mb-12">
         <InstallCommand className="mb-4" />
 
         <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
-          Agent-First <br /> Design System.
+          An Agent-First <br /> Design System.
         </h1>
 
         <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
@@ -219,7 +219,7 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop padding="25px var(--s-section-padding-x, var(--s-page-margin, 25px))">
+    <LandingSection borderTop padding="24px var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <div className="s-transition-all">
         <HeroShowcase />
       </div>
@@ -229,7 +229,7 @@ function ProductSurfaceSection() {
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="50px var(--s-section-padding-x, var(--s-page-margin, 25px))">
+    <LandingSection borderTop padding="48px var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <ComponentGalleryCTA />
     </LandingSection>
   );
@@ -572,6 +572,7 @@ const CLI_VORONOI_TILES = [
     body: "Scaffolds token CSS, base preset, components, and agent instructions.",
     diagram: "scaffold",
     accent: true,
+    cellStyle: "accent" as const,
   },
   {
     points: "340,0 620,0 580,190 380,160",
@@ -579,6 +580,7 @@ const CLI_VORONOI_TILES = [
     title: "Install into existing app",
     body: "Detects your stack and wires Sigil in.",
     diagram: "init",
+    cellStyle: "grid" as const,
   },
   {
     points: "620,0 1000,0 1000,240 720,300 580,190",
@@ -586,6 +588,7 @@ const CLI_VORONOI_TILES = [
     title: "Add components",
     body: "Copies token-bound components into your project.",
     diagram: "add",
+    cellStyle: "dots" as const,
   },
   {
     points: "0,280 280,320 320,510 0,540",
@@ -593,6 +596,7 @@ const CLI_VORONOI_TILES = [
     title: "Switch visual identity",
     body: `${SIGIL_PRODUCT_STATS.presetCount} presets change all 519 tokens at once.`,
     diagram: "preset",
+    cellStyle: "tint-primary" as const,
   },
   {
     points: "280,320 380,160 580,190 720,300 680,480 320,510",
@@ -600,6 +604,7 @@ const CLI_VORONOI_TILES = [
     title: "Extract tokens from a reference",
     body: "Pulls colors from any URL, drafts OKLCH tokens, generates a preset and preview page.",
     diagram: "inspire",
+    cellStyle: "diagonal" as const,
   },
   {
     points: "720,300 1000,240 1000,490 680,480",
@@ -607,6 +612,7 @@ const CLI_VORONOI_TILES = [
     title: "Generate library docs",
     body: "Writes project docs and llms.txt from your config.",
     diagram: "docs",
+    cellStyle: "crosshatch" as const,
   },
   {
     points: "0,540 320,510 260,780 0,780",
@@ -614,6 +620,7 @@ const CLI_VORONOI_TILES = [
     title: "Bridge existing systems",
     body: "CSS bridge so shadcn, Bootstrap, or Material variables inherit your tokens.",
     diagram: "adapter",
+    cellStyle: "tint-emerald" as const,
   },
   {
     points: "320,510 680,480 720,780 260,780",
@@ -621,6 +628,7 @@ const CLI_VORONOI_TILES = [
     title: "Review design changes",
     body: "Token-level changes before you commit.",
     diagram: "diff",
+    cellStyle: "tint-amber" as const,
   },
   {
     points: "680,480 1000,490 1000,780 720,780",
@@ -628,6 +636,7 @@ const CLI_VORONOI_TILES = [
     title: "Validate the install",
     body: "Checks config, tokens, CSS import, components, and preset health.",
     diagram: "doctor",
+    cellStyle: "plus" as const,
   },
 ];
 
@@ -670,12 +679,86 @@ function CLIVoronoiSection() {
 
         {/* Background polygon fills */}
         <svg className="absolute inset-0 h-full w-full" viewBox={`0 0 ${VB_W} ${VB_H}`} preserveAspectRatio="none" aria-hidden>
-          {CLI_VORONOI_TILES.map((tile, i) => (
-            <polygon key={i} points={tile.points} fill={tile.accent
-              ? "color-mix(in oklch, var(--s-primary) 14%, var(--s-surface))"
-              : "var(--s-surface)"
-            } />
-          ))}
+          <defs>
+            {/* Accent gradient */}
+            <linearGradient id="cli-accent-grad" x1="0%" y1="0%" x2="85%" y2="100%">
+              <stop offset="0%" stopColor="var(--s-primary)" />
+              <stop offset="100%" stopColor="color-mix(in oklch, var(--s-primary) 40%, var(--s-background))" />
+            </linearGradient>
+
+            {/* Color tint gradients */}
+            <linearGradient id="cli-tint-primary" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="color-mix(in oklch, var(--s-primary) 10%, var(--s-surface))" />
+              <stop offset="100%" stopColor="var(--s-surface)" />
+            </linearGradient>
+            <linearGradient id="cli-tint-emerald" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="color-mix(in oklch, var(--s-accent-emerald) 12%, var(--s-surface))" />
+              <stop offset="100%" stopColor="var(--s-surface)" />
+            </linearGradient>
+            <linearGradient id="cli-tint-amber" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="color-mix(in oklch, var(--s-accent-amber) 10%, var(--s-surface))" />
+              <stop offset="100%" stopColor="var(--s-surface)" />
+            </linearGradient>
+
+            {/* Grid pattern */}
+            <pattern id="cli-pat-grid" width="16" height="16" patternUnits="userSpaceOnUse">
+              <path d="M 16 0 L 0 0 0 16" fill="none" stroke="var(--s-border)" strokeWidth="0.5" />
+            </pattern>
+
+            {/* Dots pattern */}
+            <pattern id="cli-pat-dots" width="12" height="12" patternUnits="userSpaceOnUse">
+              <circle cx="6" cy="6" r="1" fill="var(--s-border)" />
+            </pattern>
+
+            {/* Diagonal lines */}
+            <pattern id="cli-pat-diagonal" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+              <line x1="0" y1="0" x2="0" y2="10" stroke="var(--s-border)" strokeWidth="0.5" />
+            </pattern>
+
+            {/* Crosshatch */}
+            <pattern id="cli-pat-crosshatch" width="10" height="10" patternUnits="userSpaceOnUse">
+              <line x1="0" y1="0" x2="10" y2="10" stroke="var(--s-border)" strokeWidth="0.4" />
+              <line x1="10" y1="0" x2="0" y2="10" stroke="var(--s-border)" strokeWidth="0.4" />
+            </pattern>
+
+            {/* Plus / cross */}
+            <pattern id="cli-pat-plus" width="14" height="14" patternUnits="userSpaceOnUse">
+              <line x1="7" y1="3" x2="7" y2="11" stroke="var(--s-border)" strokeWidth="0.5" />
+              <line x1="3" y1="7" x2="11" y2="7" stroke="var(--s-border)" strokeWidth="0.5" />
+            </pattern>
+          </defs>
+
+          {/* Base fills */}
+          {CLI_VORONOI_TILES.map((tile, i) => {
+            const fillMap: Record<string, string> = {
+              accent: "url(#cli-accent-grad)",
+              "tint-primary": "url(#cli-tint-primary)",
+              "tint-emerald": "url(#cli-tint-emerald)",
+              "tint-amber": "url(#cli-tint-amber)",
+            };
+            return (
+              <polygon
+                key={i}
+                points={tile.points}
+                fill={fillMap[tile.cellStyle] ?? "var(--s-surface)"}
+              />
+            );
+          })}
+
+          {/* Pattern overlays */}
+          {CLI_VORONOI_TILES.map((tile, i) => {
+            const patMap: Record<string, string> = {
+              grid: "url(#cli-pat-grid)",
+              dots: "url(#cli-pat-dots)",
+              diagonal: "url(#cli-pat-diagonal)",
+              crosshatch: "url(#cli-pat-crosshatch)",
+              plus: "url(#cli-pat-plus)",
+            };
+            const pat = patMap[tile.cellStyle];
+            return pat ? (
+              <polygon key={`pat-${i}`} points={tile.points} fill={pat} opacity="0.45" />
+            ) : null;
+          })}
         </svg>
 
         {/* Content blocks — centered at each polygon's centroid, no clipping */}
@@ -744,19 +827,6 @@ function CLIVoronoiSection() {
 
         <div className="pointer-events-none absolute left-1/2 top-1/2 z-[3] h-3 w-3 -translate-x-1/2 -translate-y-1/2 bg-[var(--s-primary)]" />
       </div>
-    </LandingSection>
-  );
-}
-
-function ShapesSection() {
-  return (
-    <LandingSection borderTop>
-      <SectionHeader
-        label="Shapes & Patterns"
-        heading="Voronoi bentos with actual content."
-        description="Irregular polygon cells that hold real shapes, stats, pattern fields, and product copy without cropping a rectangular layout."
-      />
-      <ShapesAndPatterns />
     </LandingSection>
   );
 }
@@ -992,7 +1062,7 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))">
+    <LandingSection borderTop padding="var(--s-section-padding-y, 72px) var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
@@ -1108,7 +1178,7 @@ function FinalCTA() {
   return (
     <>
     <Divider size="md" showCross fadeEdges />
-    <LandingSection padding="var(--s-section-padding-y, 100px) var(--s-section-padding-x, var(--s-page-margin, 25px))" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection padding="var(--s-section-padding-y, 72px) var(--s-section-padding-x, var(--s-page-margin, 24px))" style={{ position: "relative", overflow: "hidden" }}>
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>
@@ -1221,11 +1291,6 @@ export default function LandingPage() {
       <ThreeDSection />
 
       <LandingDivider pattern="diagonal" size="sm" showBorders />
-
-      {/* Shapes & Patterns — Voronoi showcase */}
-      <ShapesSection />
-
-      <LandingDivider pattern="vertical" size="sm" showBorders />
 
       {/* Demos */}
       <DemoSitesSection />

@@ -1,17 +1,7 @@
 ---
 title: Panel
-description: Bordered content container with compact and square variants.
+description: "A Panel component from the Sigil design system."
 ---
-
-# Panel
-
-> Bordered content container with token-driven surface, border, and radius. Supports compact and square layout modes.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add panel
-```
 
 ## Import
 
@@ -19,73 +9,39 @@ npx @sigil-ui/cli add panel
 import { Panel, PanelHead } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Panel>
+    Panel content
+  </Panel>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Panel>
-  <PanelHead>
-    <h3>Settings</h3>
-    <Button size="sm" variant="outline">Save</Button>
-  </PanelHead>
-  <p>Panel content goes here.</p>
-</Panel>
+<Panel>...</Panel>
 ```
 
-## Examples
+## Sub-components
 
-### Compact
+This component includes the following parts:
 
-```tsx
-<Panel compact>
-  <PanelHead>
-    <span>Compact panel</span>
-  </PanelHead>
-  <p>Tighter padding for dense layouts.</p>
-</Panel>
-```
-
-### Square
-
-Flush corners for inset layouts inside an AppShell or detail page.
-
-```tsx
-<Panel square>
-  <PanelHead>
-    <span>Detail View</span>
-  </PanelHead>
-  <p>Square variant removes border radius.</p>
-</Panel>
-```
-
-### Square + Compact
-
-```tsx
-<Panel square compact>
-  <p>Tightest rhythm for tool panels.</p>
-</Panel>
-```
+- `<PanelHead>`
 
 ## Props
 
-### Panel
-
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `compact` | `boolean` | `false` | Tighter padding rhythm |
-| `square` | `boolean` | `false` | Flush corners for inset layouts |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Panel content |
+|---|---|---|---|
+| `compact` | `boolean` | — | Tighter padding rhythm. |
+| `square` | `boolean` | — | Flush corners + tighter rhythm for inset/detail layouts. |
 
-### PanelHead
+## Token integration
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Header content |
-
-## Tokens
-
-- `--s-border` — panel border color
-- `--s-border-style` — border style (solid, dashed, etc.)
-- `--s-surface` — panel background
-- `--s-card-radius` — border radius (when not `square`)
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-radius-none` | Radius none |
+| `--s-card-radius` | Card radius |

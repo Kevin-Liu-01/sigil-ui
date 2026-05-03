@@ -873,6 +873,46 @@ export type MarkdownTokenOverrides = Pick<
 >;
 
 // ---------------------------------------------------------------------------
+// DESIGN.md — unified design reference document
+// ---------------------------------------------------------------------------
+
+export type DesignTheme = "light" | "dark" | "adaptive";
+export type DesignDensity = "compact" | "balanced" | "editorial";
+
+export type DesignMetadata = {
+  readonly brand: string;
+  readonly tagline: string;
+  readonly theme: DesignTheme;
+  readonly preset: string;
+  readonly density: DesignDensity;
+  readonly description: string;
+};
+
+export type DesignComponent = {
+  readonly name: string;
+  readonly description: string;
+};
+
+export type DesignSurface = {
+  readonly level: number;
+  readonly name: string;
+  readonly value: string;
+  readonly purpose: string;
+};
+
+export type DesignDocument = {
+  readonly metadata: DesignMetadata;
+  readonly tokens: SigilTokens;
+  readonly components: readonly DesignComponent[];
+  readonly surfaces: readonly DesignSurface[];
+  readonly dos: readonly string[];
+  readonly donts: readonly string[];
+  readonly imagery: string;
+  readonly layout: string;
+  readonly similarBrands: readonly string[];
+};
+
+// ---------------------------------------------------------------------------
 // Preset
 // ---------------------------------------------------------------------------
 

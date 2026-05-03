@@ -1,6 +1,6 @@
 ---
 title: PieChart
-description: "A classic pie chart with percentage labels and legend."
+description: "A PieChart component from the Sigil design system."
 ---
 
 ## Import
@@ -9,35 +9,33 @@ description: "A classic pie chart with percentage labels and legend."
 import { PieChart } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <PieChart
-    slices={[
-      { label: "Direct", value: 45 },
-      { label: "Organic", value: 30 },
-      { label: "Referral", value: 15 },
-      { label: "Social", value: 10 },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<PieChart>...</PieChart>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `slices` | `PieSlice[]` | — | Pie slices with label and value |
-| `width` | `number` | `220` | SVG width |
-| `height` | `number` | `220` | SVG height |
-| `showLabels` | `boolean` | `true` | Show percentage labels on slices |
-| `showLegend` | `boolean` | `true` | Show legend below chart |
+| `slices` | `PieSlice[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
+| `showLabels` | `boolean` | `true` | Show percentage labels on slices. |
+| `showLegend` | `boolean` | `true` | Show legend below chart. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | First slice color |
-| `--s-success` | Second slice color |
-| `--s-warning` | Third slice color |
-| `--s-error` | Fourth slice color |
-| `--s-text-muted` | Legend text |
+| `--s-chart-series-1` | Chart series 1 |
+| `--s-chart-series-2` | Chart series 2 |
+| `--s-chart-series-3` | Chart series 3 |
+| `--s-chart-series-4` | Chart series 4 |
+| `--s-chart-series-5` | Chart series 5 |
+| `--s-chart-neutral` | Chart neutral |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-radius-full` | Radius full |
+| `--s-text-muted` | Text muted |

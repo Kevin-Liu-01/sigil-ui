@@ -1,6 +1,6 @@
 ---
 title: Kbd
-description: Keyboard shortcut indicator with optional grouping for multi-key combos.
+description: "A Kbd component from the Sigil design system."
 ---
 
 ## Import
@@ -9,45 +9,31 @@ description: Keyboard shortcut indicator with optional grouping for multi-key co
 import { Kbd, KbdGroup } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Kbd>Kbd example</Kbd>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Kbd>⌘</Kbd>
+<Kbd>...</Kbd>
 ```
 
-## Key combination
+## Sub-components
 
-```tsx
-<KbdGroup>
-  <Kbd>⌘</Kbd>
-  <Kbd>K</Kbd>
-</KbdGroup>
-```
+This component includes the following parts:
 
-## In context
-
-```tsx
-<p className="text-sm text-[var(--s-text-muted)]">
-  Press <KbdGroup><Kbd>⌘</Kbd><Kbd>S</Kbd></KbdGroup> to save
-</p>
-```
+- `<KbdGroup>`
 
 ## Token integration
 
-| CSS Variable | Used for |
+| CSS Variable | Purpose |
 |---|---|
-| `--s-radius-sm` | Key border radius |
-| `--s-border` | Key border |
+| `--s-radius-sm` | Radius sm |
+| `--s-border` | Border |
 | `--s-border-style` | Border style |
-| `--s-surface` | Key background |
-| `--s-text-muted` | Key text color |
-
-## Props
-
-### Kbd
-
-Extends `HTMLAttributes<HTMLElement>`. Renders a `<kbd>` element styled as a physical key.
-
-### KbdGroup
-
-Extends `HTMLAttributes<HTMLDivElement>`. Inline flex container that spaces multiple `<Kbd>` elements with a small gap.
+| `--s-surface` | Surface |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |

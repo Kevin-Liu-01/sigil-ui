@@ -1,6 +1,6 @@
 ---
 title: StackDiagram
-description: "A vertical stack diagram showing layered technology or architecture components."
+description: "A StackDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -9,43 +9,32 @@ description: "A vertical stack diagram showing layered technology or architectur
 import { StackDiagram } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <StackDiagram
-    layers={[
-      { label: "Frontend", description: "React + Next.js" },
-      { label: "API Layer", description: "tRPC + Zod" },
-      { label: "Database", description: "PostgreSQL + Drizzle" },
-      { label: "Infrastructure", description: "AWS + Docker" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<StackDiagram
-  layers={[
-    { label: "Frontend", description: "React" },
-    { label: "Backend", description: "Node.js" },
-    { label: "Database", description: "PostgreSQL" },
-  ]}
-/>
+<StackDiagram>...</StackDiagram>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `layers` | `StackLayer[]` | — | Stack layers from top to bottom |
+| `layers` | `StackLayer[]` | — | — |
+| `title` | `string` | — | — |
+| `gap` | `string` | — | — |
+| `tilt` | `boolean` | — | — |
+| `interactive` | `boolean` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Layer borders |
-| `--s-surface` | Layer background |
-| `--s-text` | Layer label |
-| `--s-text-muted` | Layer description |
-| `--s-radius-md` | Layer border radius |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-radius-md` | Radius md |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-border` | Border |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-surface` | Surface |
+| `--s-border-muted` | Border muted |

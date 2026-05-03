@@ -26,16 +26,18 @@ This is the fundamental insight. Agents that understand this build 10x faster be
 ## How It Works
 
 ```
-sigil.tokens.md (human/agent-editable markdown overrides)
- ↓ parseMarkdownTokens()
-MarkdownTokenOverrides (core token groups)
- ↓ merge with defaults / presets
+DESIGN.md (human/agent-editable markdown — all 33 categories, 519 tokens)
+ ↓ parseDesignMarkdown() / sigil design compile
 SigilTokens (TypeScript object, 519 configurable fields)
-       ↓ compileToCss() / compileToTailwind()
+ ↓ compileToCss() / compileToTailwind() / compileToW3CJson()
 CSS custom properties (--s-primary, --s-radius-md, --s-duration-fast, ...)
-       ↓ consumed by
-Components (read var(--s-*), never hardcode values)
+Tailwind v4 @theme block
+W3C Design Tokens JSON
+ ↓ consumed by
+350+ Components (read var(--s-*), never hardcode values)
 ```
+
+Legacy path (still supported): `sigil.tokens.md` → `parseMarkdownTokens()` → 8 core groups.
 
 To change the visual output, edit the top of this chain — not the bottom.
 
@@ -62,15 +64,14 @@ To change the visual output, edit the top of this chain — not the bottom.
 ```
 packages/
   tokens/           @sigil-ui/tokens     — Source of truth: types, defaults, compiler, markdown parser
-  presets/           @sigil-ui/presets    — 44 curated preset bundles (519 tokens each)
-  components/        @sigil-ui/components — 200+ token-driven React components (read from tokens, don't hardcode)
-  primitives/        @sigil-ui/primitives — 28 Radix-based headless behavior primitives
+  presets/           @sigil-ui/presets    — 46 curated preset bundles (44 named + default + template, 519 tokens each)
+  components/        @sigil-ui/components — 350+ token-driven React components (read from tokens, don't hardcode)
+  primitives/        @sigil-ui/primitives — 40+ headless behavior primitives (Radix UI + Base UI)
   cli/               @sigil-ui/cli       — CLI: init, add, preset, diff, doctor
   create-sigil-app/                      — npx create-sigil-app bootstrapper
 
 apps/
-  web/               Product site + sandbox (drag-and-drop component canvas, live preset switching)
-  docs/              Documentation (Fumadocs)
+  web/               Product site + docs + sandbox (Fumadocs at /docs, drag-and-drop component canvas, live preset switching)
   demos/             17 demos: 10 templates + 7 showcase clones (ai-saas, dashboard, portfolio, ecommerce, blog, agency, cli-tool, startup, dev-docs, playground, vercel-clone, linear-clone, vite-clone, viteplus-clone, dedalus-clone, oxide-clone, voidzero-clone)
 
 style/               Design language and engineering philosophy (from Dedalus)
@@ -130,9 +131,9 @@ skills/              Agent skills for specific workflows
 
 All colors use OKLCH: `oklch(L C H)` — L=lightness (0-1), C=chroma (0-0.37), H=hue (0-360).
 
-## Preset System (44 Presets)
+## Preset System (46 Presets)
 
-Switching presets changes ALL 519 tokens at once — visual identity AND structural layout. Seven categories:
+Switching presets changes ALL 519 tokens at once — visual identity AND structural layout. 44 named curated presets + default + template = 46 total. Seven categories:
 
 | Category | Presets | Aesthetic |
 |----------|---------|-----------|
@@ -173,9 +174,13 @@ the validation checklist.
 | `sigil init` | Interactive setup: detects project, asks about use case, recommends presets, configures everything, generates agent instructions |
 | `sigil convert` | Convert an existing project end-to-end: deps, tokens, CSS import, agent instructions |
 | `sigil add <name>` | Copy components into your project (they still read from tokens) |
-| `sigil preset list` | Browse all 44 presets by category |
+| `sigil preset list` | Browse all 46 presets by category |
 | `sigil preset <name>` | Switch preset (regenerates token CSS) |
 | `sigil preset create` | Scaffold a custom preset with base selection, color, and font prompts |
+| `sigil design generate` | Create DESIGN.md from current preset + overrides |
+| `sigil design compile` | Parse DESIGN.md → output CSS + Tailwind + W3C JSON |
+| `sigil design sync` | Update compile sections in DESIGN.md from token tables |
+| `sigil design extract <url>` | Extract full DESIGN.md from a reference URL |
 | `sigil inspire <url-or-file>` | Draft token CSS, a custom preset, and a preview page from a reference |
 | `sigil docs` | Generate local custom-library docs and `llms.txt` |
 | `sigil adapter <name>` | Bridge shadcn, Bootstrap, or Material variables into Sigil tokens |
@@ -227,6 +232,34 @@ Components are downstream consumers. They:
 
 When creating new components, follow these same conventions. When modifying appearance, edit tokens.
 
+## Why Constraints, Not Context
+
+Other agent-facing tools (e.g. Refero) give agents design *context* — screenshots, reference patterns, style guidelines. Sigil gives agents design **constraints** — tokens that compile to CSS, components that consume those tokens, and presets that define the entire visual space.
+
+Context tells an agent what good looks like. Constraints make it impossible to produce off-brand output. An agent with a reference screenshot still creates every button, card, and layout from scratch. With Sigil, those components already exist, already enforce the token spec, and the agent composes pages from constrained parts.
+
+```
+Reference approach:     Agent reads DESIGN.md → creates components from scratch → generic output
+Sigil approach:         Agent reads tokens → uses pre-built components → on-brand by construction
+```
+
+This is the architectural bet: **integrated design philosophy > reference material**.
+
+## Auditors
+
+Quality is validated at every layer:
+
+| Auditor | What it checks |
+|---------|---------------|
+| `sigil doctor` | Config, tokens, components, deps, CSS imports, preset validity |
+| `sigil diff` | Token CSS changes since last sync |
+| Preset validation | All 519 fields present, OKLCH validity, scale progressions |
+| TypeScript `satisfies` | Every preset satisfies `SigilPreset` at build time |
+| Design system rules | `.cursor/rules/sigil-design-system.mdc` enforces token-only styling |
+| Component conventions | `forwardRef`, `className`, `var(--s-*)` only, `sigil-` prefix |
+
+Run `sigil doctor` after any change. Run `sigil diff` before committing.
+
 ## Agent Workflow
 
 ### Setting up a new project
@@ -276,6 +309,8 @@ Read the relevant skill file before starting a task:
 |------|-----------|
 | Edit/extend tokens | `skills/sigil-tokens/SKILL.md` |
 | Create/modify presets | `skills/sigil-preset/SKILL.md` |
+| Generate/compile DESIGN.md | `skills/sigil-design/SKILL.md` |
+| Copy, positioning, stats, auditors | `skills/sigil-messaging/SKILL.md` |
 | Create/modify components | `skills/sigil-component/SKILL.md` |
 | Page layout with grid | `skills/sigil-layout/SKILL.md` |
 | Build pages (10 composition rules) | `skills/sigil-playbook/SKILL.md` |

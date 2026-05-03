@@ -1,17 +1,7 @@
 ---
 title: Checkbox
-description: Styled checkbox input with optional label.
+description: "A Checkbox component from the Sigil design system."
 ---
-
-# Checkbox
-
-> Styled checkbox input with optional label.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add checkbox
-```
 
 ## Import
 
@@ -19,56 +9,35 @@ npx @sigil-ui/cli add checkbox
 import { Checkbox } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Checkbox />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Checkbox label="Accept terms and conditions" />
-```
-
-## Examples
-
-### Without label
-
-```tsx
-<Checkbox aria-label="Select row" />
-```
-
-### Controlled
-
-```tsx
-const [checked, setChecked] = useState(false);
-
-<Checkbox
-  label="Enable notifications"
-  checked={checked}
-  onChange={(e) => setChecked(e.target.checked)}
-/>
-```
-
-### Disabled
-
-```tsx
-<Checkbox label="Read-only option" disabled checked />
+<Checkbox>Checkbox content</Checkbox>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `label` | `string` | — | Label text displayed next to the checkbox |
-| `checked` | `boolean` | — | Controlled checked state |
-| `onChange` | `ChangeEventHandler` | — | Change event handler |
-| `disabled` | `boolean` | `false` | Disable the checkbox |
-| `id` | `string` | — | Custom id (auto-generated from label if omitted) |
-| `className` | `string` | — | Additional CSS classes on the input |
+|---|---|---|---|
+| `label` | `string` | — | — |
 
-Plus all standard `<input>` HTML attributes (except `type`).
+## Token integration
 
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-primary` — checked accent color and focus ring
-- `--s-border` — unchecked border
-- `--s-text` — label text color
-- `--s-radius-sm` — checkbox border radius
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-radius-sm` | Radius sm |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-ring` | Ring |
+| `--s-ring-offset` | Ring offset |
+| `--s-text` | Text |

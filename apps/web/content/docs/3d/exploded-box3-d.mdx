@@ -1,6 +1,6 @@
 ---
 title: ExplodedBox3D
-description: "An exploded 3D box diagram component from the Sigil design system."
+description: "A ExplodedBox3D component from the Sigil design system."
 ---
 
 ## Import
@@ -12,13 +12,13 @@ import { ExplodedBox3D } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <ExplodedBox3D showLabels />
+  <ExplodedBox3D size={120} />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<ExplodedBox3D showLabels>UI</ExplodedBox3D>
+<ExplodedBox3D>...</ExplodedBox3D>
 ```
 
 ## Props
@@ -27,7 +27,7 @@ import { ExplodedBox3D } from "@sigil-ui/components";
 |---|---|---|---|
 | `size` | `number` | `80` | Size of the front/back square in px. |
 | `depth` | `number` | `22` | Depth of the side faces in px. |
-| `gap` | `number` | `10` | Gap between separated faces in px. |
+| `gap` | `number` | `10` | Gap between the separated faces in px. |
 | `variant` | `"container" | "card" | "panel"` | `container` | Preset variant. |
 | `showLabels` | `boolean` | `false` | Show small face labels for diagram use. |
 
@@ -36,7 +36,8 @@ import { ExplodedBox3D } from "@sigil-ui/components";
 | CSS Variable | Purpose |
 |---|---|
 | `--s-border` | Border |
-| `--s-border-strong` | Strong border |
-| `--s-shadow-sm` | Card shadow |
-| `--s-surface` | Face surface |
-| `--s-text-muted` | Face labels |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-border-strong` | Border strong |
+| `--s-text-muted` | Text muted |
+| `--s-surface` | Surface |
+| `--s-text` | Text |

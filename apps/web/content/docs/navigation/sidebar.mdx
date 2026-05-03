@@ -9,6 +9,21 @@ description: "A Sidebar component from the Sigil design system."
 import { Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarItem } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Sidebar className="w-64 border border-[var(--s-border)]">
+  <SidebarHeader>Navigation</SidebarHeader>
+  <SidebarContent>
+    <SidebarGroup>
+      <SidebarGroupLabel>Menu</SidebarGroupLabel>
+      <SidebarItem>Dashboard</SidebarItem>
+      <SidebarItem>Settings</SidebarItem>
+    </SidebarGroup>
+  </SidebarContent>
+</Sidebar>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
@@ -42,6 +57,7 @@ This component includes the following parts:
 | `--s-text` | Text |
 | `--s-duration-normal` | Duration normal |
 | `--s-sidebar-width` | Sidebar width |
+| `--s-radius-full` | Radius full |
 | `--s-text-muted` | Text muted |
 | `--s-shadow-sm` | Shadow sm |
 | `--s-duration-fast` | Duration fast |

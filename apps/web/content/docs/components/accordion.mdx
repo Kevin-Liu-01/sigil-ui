@@ -1,109 +1,46 @@
 ---
 title: Accordion
-description: Expandable content panels with single or multiple open items.
+description: "A Accordion component from the Sigil design system."
 ---
-
-# Accordion
-
-> Expandable content panels with single or multiple open items.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add accordion
-```
 
 ## Import
 
 ```tsx
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@sigil-ui/components";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview vertical>
+  <Accordion>
+    <AccordionItem value="item-1">
+      <AccordionTrigger>What is Sigil UI?</AccordionTrigger>
+      <AccordionContent>A token-driven design system where one file updates everything.</AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Accordion>
-  <AccordionItem value="item-1">
-    <AccordionTrigger>What is Sigil UI?</AccordionTrigger>
-    <AccordionContent>
-      A token-driven React component library where one file controls your entire design system.
-    </AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="item-2">
-    <AccordionTrigger>How does theming work?</AccordionTrigger>
-    <AccordionContent>
-      Every component reads CSS custom properties. Change a token, update every component.
-    </AccordionContent>
-  </AccordionItem>
-</Accordion>
+<Accordion>...</Accordion>
 ```
 
-## Examples
+## Sub-components
 
-### Multiple items open
+This component includes the following parts:
 
-Allow more than one panel to be expanded simultaneously.
+- `<AccordionItem>`
+- `<AccordionTrigger>`
+- `<AccordionContent>`
 
-```tsx
-<Accordion multiple>
-  <AccordionItem value="a">
-    <AccordionTrigger>First</AccordionTrigger>
-    <AccordionContent>Content A</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="b">
-    <AccordionTrigger>Second</AccordionTrigger>
-    <AccordionContent>Content B</AccordionContent>
-  </AccordionItem>
-</Accordion>
-```
+## Token integration
 
-### Default open
-
-Set an item to be expanded on first render.
-
-```tsx
-<Accordion defaultValue={["faq-1"]}>
-  <AccordionItem value="faq-1">
-    <AccordionTrigger>Already open</AccordionTrigger>
-    <AccordionContent>This panel starts expanded.</AccordionContent>
-  </AccordionItem>
-</Accordion>
-```
-
-## Props
-
-### Accordion
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `multiple` | `boolean` | `false` | Allow multiple items open at once |
-| `defaultValue` | `string \| string[]` | — | Item value(s) to open by default |
-| `className` | `string` | — | Additional CSS classes |
-
-### AccordionItem
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `string` | — | Unique identifier for this item |
-
-### AccordionTrigger
-
-Renders a `<button>` inside an `<h3>`. Accepts all button HTML attributes.
-
-### AccordionContent
-
-Renders an animated region panel. Accepts all div HTML attributes.
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-border` — divider between items
-- `--s-text` — trigger text color
-- `--s-text-secondary` — content text color
-- `--s-text-muted` — chevron icon color
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-text` | Text |
+| `--s-duration-fast` | Duration fast |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |

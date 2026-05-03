@@ -1,6 +1,6 @@
 ---
 title: DependencyGraph
-description: "A directed dependency graph with nodes and labeled edges."
+description: "A DependencyGraph component from the Sigil design system."
 ---
 
 ## Import
@@ -9,60 +9,29 @@ description: "A directed dependency graph with nodes and labeled edges."
 import { DependencyGraph } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <DependencyGraph
-    nodes={[
-      { id: "app", label: "App", x: 250, y: 40 },
-      { id: "api", label: "API", x: 120, y: 150 },
-      { id: "db", label: "DB", x: 380, y: 150 },
-      { id: "cache", label: "Cache", x: 250, y: 260, group: "infra" },
-    ]}
-    edges={[
-      { from: "app", to: "api" },
-      { from: "app", to: "db" },
-      { from: "api", to: "cache", label: "reads", dashed: true },
-      { from: "db", to: "cache", label: "syncs" },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<DependencyGraph
-  nodes={[
-    { id: "app", label: "App", x: 250, y: 40 },
-    { id: "api", label: "API", x: 120, y: 150 },
-    { id: "db", label: "DB", x: 380, y: 150 },
-    { id: "cache", label: "Cache", x: 250, y: 260, group: "infra" },
-  ]}
-  edges={[
-    { from: "app", to: "api" },
-    { from: "app", to: "db" },
-    { from: "api", to: "cache", label: "reads", dashed: true },
-    { from: "db", to: "cache", label: "syncs" },
-  ]}
-/>
+<DependencyGraph>...</DependencyGraph>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `nodes` | `DepNode[]` | — | Node positions and labels |
-| `edges` | `DepEdge[]` | — | Directed edges between nodes |
-| `width` | `number` | `500` | SVG width |
-| `height` | `number` | `400` | SVG height |
-| `nodeRadius` | `number` | `28` | Node circle radius |
+| `nodes` | `DepNode[]` | — | — |
+| `edges` | `DepEdge[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
+| `nodeRadius` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Node stroke and edge lines |
-| `--s-surface` | Node fill |
-| `--s-text` | Node label text |
-| `--s-text-muted` | Edge labels and group text |
-| `--s-font-mono` | Label font family |
+| `--s-chart-axis` | Chart axis |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-surface` | Surface |
+| `--s-border` | Border |
+| `--s-text` | Text |

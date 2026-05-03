@@ -428,7 +428,7 @@ function DemoFooter() {
   return (
     <div
       className="flex flex-col gap-8"
-      style={{ borderTop: "1px solid var(--s-border-muted)", paddingTop: 50 }}
+      style={{ borderTop: "1px solid var(--s-border-muted)", paddingTop: 48 }}
     >
       <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
         <div className="col-span-2 md:col-span-1">

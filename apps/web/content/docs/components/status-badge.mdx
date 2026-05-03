@@ -1,32 +1,71 @@
 ---
 title: StatusBadge
-description: StatusBadge is a token-driven Sigil component in the feedback and status group.
+description: "A StatusBadge component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { StatusBadge } from "@sigil-ui/components";
+import { StatusBadge, StatusDot, StatusPill, OnlineIndicator, PresenceAvatar, Notification, NotificationList, InlineAlert, Callout, BannerAlert, ErrorState, LoadingState, SuccessState, ProgressSteps, TimelineProgress, ToastAction, ToastPromise, SkeletonCard, SkeletonTable, SpinnerOverlay } from "@sigil-ui/components";
 ```
 
 ## Preview
 
 <ComponentPreview>
-  <StatusBadge status="success">Operational</StatusBadge>
+  <StatusBadge status="success" />
+  <StatusBadge status="warning" />
+  <StatusBadge status="error" />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<StatusBadge status="success">Operational</StatusBadge>
+<StatusBadge>...</StatusBadge>
 ```
 
-## CLI
+## Sub-components
 
-```bash
-npx @sigil-ui/cli add status-badge
-```
+This component includes the following parts:
 
-## Token Integration
+- `<StatusDot>`
+- `<StatusPill>`
+- `<OnlineIndicator>`
+- `<PresenceAvatar>`
+- `<Notification>`
+- `<NotificationList>`
+- `<InlineAlert>`
+- `<Callout>`
+- `<BannerAlert>`
+- `<ErrorState>`
+- `<LoadingState>`
+- `<SuccessState>`
+- `<ProgressSteps>`
+- `<TimelineProgress>`
+- `<ToastAction>`
+- `<ToastPromise>`
+- `<SkeletonCard>`
+- `<SkeletonTable>`
+- `<SpinnerOverlay>`
 
-StatusBadge follows the Sigil component rules: styles resolve from `var(--s-*)`, class names are mergeable through `className`, and the component is exported from `@sigil-ui/components`.
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `status` | `"online" | "offline" | "busy" | "away" | "success" | "war...` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-success` | Success |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-text-muted` | Text muted |
+| `--s-error` | Error |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-radius-full` | Radius full |
+| `--s-background` | Background |
+| `--s-card-radius` | Card radius |
+| `--s-border` | Border |

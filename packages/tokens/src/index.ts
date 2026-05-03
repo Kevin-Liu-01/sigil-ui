@@ -1,9 +1,12 @@
 export {
+  compileDesignMd,
   compileInteractionCss,
   compileToCss,
   compileToJson,
   compileToTailwind,
   compileToTs,
+  compileToW3CJson,
+  parseDesignMarkdown,
   parseMarkdownTokens,
 } from "./compile";
 
@@ -24,6 +27,12 @@ export type {
   CssCompileOptions,
   CursorTokens,
   CursorVariant,
+  DesignComponent,
+  DesignDensity,
+  DesignDocument,
+  DesignMetadata,
+  DesignSurface,
+  DesignTheme,
   DividerStyleTokens,
   FooterTokens,
   GridVisualTokens,

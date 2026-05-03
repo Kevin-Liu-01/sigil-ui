@@ -1,6 +1,6 @@
 ---
 title: AnimateOnScroll
-description: GSAP-powered scroll-triggered animation wrapper. Uses ScrollTrigger for viewport-based reveals with configurable presets.
+description: "A AnimateOnScroll component from the Sigil design system."
 ---
 
 ## Import
@@ -9,31 +9,24 @@ description: GSAP-powered scroll-triggered animation wrapper. Uses ScrollTrigger
 import { AnimateOnScroll } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <AnimateOnScroll>
+  <Badge>I animate when scrolled into view</Badge>
+</AnimateOnScroll>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<AnimateOnScroll preset="fadeUp">
-  <Card>Reveals on scroll</Card>
-</AnimateOnScroll>
-```
-
-## Presets
-
-```tsx
-<AnimateOnScroll preset="fadeUp">Fade up</AnimateOnScroll>
-<AnimateOnScroll preset="fadeDown">Fade down</AnimateOnScroll>
-<AnimateOnScroll preset="scaleIn">Scale in</AnimateOnScroll>
-<AnimateOnScroll preset="blurIn">Blur in</AnimateOnScroll>
-<AnimateOnScroll preset="slideLeft">Slide left</AnimateOnScroll>
-<AnimateOnScroll preset="slideRight">Slide right</AnimateOnScroll>
+<AnimateOnScroll>...</AnimateOnScroll>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `preset` | `PresetName` | `"fadeUp"` | Animation preset |
-| `delay` | `number` | `0` | Delay in seconds |
-| `duration` | `number` | `0.6` | Duration in seconds |
-
-Uses GSAP ScrollTrigger under the hood. For a lighter, CSS-only alternative, use `FadeIn`, `SlideIn`, `ScaleIn`, or `BlurFade`.
+| `preset` | `UseSigilAnimateConfig["preset"]` | `fadeUp` | Animation preset. |
+| `delay` | `number` | — | Delay in seconds. |
+| `duration` | `number` | `0.6` | Duration in seconds. |

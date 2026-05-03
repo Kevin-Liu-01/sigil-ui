@@ -145,7 +145,7 @@ export const Combobox = forwardRef<HTMLDivElement, ComboboxProps>(function Combo
 
       {open && (
         <div className={cn(
-          "absolute z-50 mt-1 w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
+          "absolute z-50 mt-1 w-full rounded-[var(--s-radius-md,6px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] outline-none",
           "bg-[var(--s-surface)] shadow-[var(--s-shadow-md)]",
         )}>
           <div className="p-2">

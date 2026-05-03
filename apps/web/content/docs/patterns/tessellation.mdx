@@ -1,17 +1,7 @@
 ---
 title: Tessellation
-description: CSS geometric tessellation patterns — zigzag, chevron, wave, hatching, crosshatching, triangleGrid, diamondGrid.
+description: "A Tessellation component from the Sigil design system."
 ---
-
-# Tessellation
-
-> Seven geometric tessellation patterns built with CSS gradients. No SVG, no images — pure CSS.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add tessellation
-```
 
 ## Import
 
@@ -22,40 +12,19 @@ import { Tessellation } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<div className="relative h-48">
-  <Tessellation variant="zigzag" opacity={0.08} />
-</div>
-```
-
-## Examples
-
-### Hatching (45-degree lines)
-
-```tsx
-<Tessellation variant="hatching" opacity={0.1} />
-```
-
-### Crosshatching (two-direction)
-
-```tsx
-<Tessellation variant="crosshatching" opacity={0.06} />
-```
-
-### Triangle Grid
-
-```tsx
-<Tessellation variant="triangleGrid" opacity={0.08} scale={1.5} />
+<Tessellation>...</Tessellation>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | `"zigzag" \| "chevron" \| "wave" \| "hatching" \| "crosshatching" \| "triangleGrid" \| "diamondGrid"` | — | Tessellation type |
-| opacity | number | 0.06 | Pattern opacity |
-| scale | number | 1 | Size multiplier |
-| className | string | — | Additional classes |
+|---|---|---|---|
+| `variant` | `TessellationVariant` | `zigzag` | Pattern variant. |
+| `opacity` | `number` | `0.06` | Pattern opacity. |
+| `scale` | `number` | `1` | Scale multiplier on background-size. |
 
-## Tokens
+## Token integration
 
-- `--s-border` — line/pattern color
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |

@@ -1,6 +1,6 @@
 ---
 title: BlurFade
-description: Modern blur + fade + translate reveal animation. Combines opacity, gaussian blur, and vertical offset for a polished entrance.
+description: "A BlurFade component from the Sigil design system."
 ---
 
 ## Import
@@ -9,30 +9,33 @@ description: Modern blur + fade + translate reveal animation. Combines opacity, 
 import { BlurFade } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <BlurFade>
+  <p className="text-lg font-medium">Blur fade animation</p>
+</BlurFade>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<BlurFade>
-  <h1>Hero headline</h1>
-</BlurFade>
-```
-
-## Custom blur and offset
-
-```tsx
-<BlurFade blur={16} yOffset={24} delay={300}>
-  <p>Stronger blur, more offset</p>
-</BlurFade>
+<BlurFade>...</BlurFade>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `blur` | `number` | `10` | Initial blur radius in px |
-| `yOffset` | `number` | `16` | Vertical translate in px |
-| `delay` | `number` | `0` | Delay in ms |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
-| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+| `blur` | `number` | `10` | Initial blur radius in pixels. |
+| `yOffset` | `number` | `16` | Vertical offset in pixels. |
+| `delay` | `number` | `0` | Delay before animation in ms. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
 
-Uses `--s-duration-slow` for a longer, more cinematic reveal. Respects `prefers-reduced-motion`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-slow` | Duration slow |
+| `--s-ease-out` | Ease out |

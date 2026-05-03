@@ -1,0 +1,68 @@
+---
+title: SigilPageGrid
+description: A page-level 12-column grid with structural-visibility rail lines, cross marks at intersections, and gutter patterns.
+---
+
+## Import
+
+```tsx
+import { SigilPageGrid } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <SigilPageGrid columns={4} className="min-h-[120px]">
+    <div className="p-4 border border-[var(--s-border)]">A</div>
+    <div className="p-4 border border-[var(--s-border)]">B</div>
+    <div className="p-4 border border-[var(--s-border)]">C</div>
+    <div className="p-4 border border-[var(--s-border)]">D</div>
+  </SigilPageGrid>
+</ComponentPreview>
+
+## Usage
+
+`SigilPageGrid` is the top-level page layout grid. It provides a 12-column system with structural-visibility overlays — the grid lines, cross marks, and gutter patterns that make Sigil's design language visible.
+
+```tsx
+<SigilPageGrid>
+  <SigilGridCell span={8}>
+    <Card>Main content</Card>
+  </SigilGridCell>
+  <SigilGridCell span={4}>
+    <Card>Sidebar</Card>
+  </SigilGridCell>
+</SigilPageGrid>
+```
+
+## With visible grid
+
+```tsx
+<SigilPageGrid showGrid showCross>
+  <SigilGridCell span={6}>Left half</SigilGridCell>
+  <SigilGridCell span={6}>Right half</SigilGridCell>
+</SigilPageGrid>
+```
+
+## Token integration
+
+| CSS Variable | Used for |
+|---|---|
+| `--s-grid-cell` | Cell size |
+| `--s-grid-columns` | Number of columns |
+| `--s-grid-gap` | Gap between cells |
+| `--s-cross-arm` | Cross mark size |
+| `--s-cross-stroke` | Cross mark thickness |
+| `--s-border` | Grid line color |
+| `--s-content-max` | Maximum content width |
+| `--s-page-margin` | Page-level margin |
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `columns` | `number` | `12` | Number of grid columns |
+| `showGrid` | `boolean` | `false` | Show grid lines |
+| `showCross` | `boolean` | `false` | Show cross marks at intersections |
+| `className` | `string` | — | Additional CSS classes |
+| `children` | `ReactNode` | — | Grid cells |

@@ -1,6 +1,6 @@
 ---
 title: Item
-description: Flexible list item with media, title, description, and action slots.
+description: "A Item component from the Sigil design system."
 ---
 
 ## Import
@@ -9,51 +9,39 @@ description: Flexible list item with media, title, description, and action slots
 import { Item, ItemGroup } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Item />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Item title="Settings" description="Manage your account preferences" />
+<Item>...</Item>
 ```
 
-## With media and action
+## Sub-components
 
-```tsx
-<Item
-  media={<img src="/avatar.jpg" alt="User" className="w-10 h-10 rounded-full" />}
-  title="Kevin Liu"
-  description="kevin@example.com"
-  action={<button className="text-xs text-[var(--s-primary)]">Edit</button>}
-/>
-```
+This component includes the following parts:
 
-## Vertical orientation
-
-```tsx
-<Item
-  orientation="vertical"
-  media={<img src="/card-image.jpg" alt="Feature" className="w-full h-32 object-cover rounded-md" />}
-  title="Feature title"
-  description="A brief feature description."
-/>
-```
-
-## Grouped
-
-```tsx
-<ItemGroup>
-  <Item title="Profile" description="Edit your profile" />
-  <Item title="Billing" description="Manage subscription" />
-  <Item title="Notifications" description="Configure alerts" />
-</ItemGroup>
-```
+- `<ItemGroup>`
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `media` | `ReactNode` | — | Leading media (image, icon, avatar) |
-| `title` | `ReactNode` | — | Item title |
-| `description` | `ReactNode` | — | Item description |
-| `action` | `ReactNode` | — | Trailing action element |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
-| `className` | `string` | — | Additional CSS classes |
+| `media` | `ReactNode` | — | — |
+| `title` | `ReactNode` | — | — |
+| `description` | `ReactNode` | — | — |
+| `action` | `ReactNode` | — | — |
+| `orientation` | `"horizontal" | "vertical"` | `horizontal` | Orientation of media relative to content. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-border` | Border |

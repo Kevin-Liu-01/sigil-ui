@@ -1,126 +1,39 @@
 ---
 title: DataTable
-description: Feature-rich data table with sorting, filtering, pagination, and row selection.
+description: "A DataTable component from the Sigil design system."
 ---
-
-# DataTable
-
-> Feature-rich data table with sorting, filtering, pagination, and row selection.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add data-table
-```
 
 ## Import
 
 ```tsx
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@sigil-ui/components";
+import { DataTable } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview>
+  <DataTable columns={[{ header: "Name", accessorKey: "name" }, { header: "Status", accessorKey: "status" }]} data={[{ name: "Project Alpha", status: "Active" }, { name: "Project Beta", status: "Draft" }]} />
+</ComponentPreview>
 
 ## Usage
 
-Build data tables by composing the base `Table` primitives with your data layer (e.g. TanStack Table).
-
 ```tsx
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Name</TableHead>
-      <TableHead>Status</TableHead>
-      <TableHead>Role</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>Alice</TableCell>
-      <TableCell><Badge>Active</Badge></TableCell>
-      <TableCell>Admin</TableCell>
-    </TableRow>
-    <TableRow>
-      <TableCell>Bob</TableCell>
-      <TableCell><Badge variant="secondary">Inactive</Badge></TableCell>
-      <TableCell>Editor</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>
-```
-
-## Examples
-
-### With TanStack Table
-
-```tsx
-import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
-
-const table = useReactTable({ data, columns, getCoreRowModel: getCoreRowModel() });
-
-<Table>
-  <TableHeader>
-    {table.getHeaderGroups().map((headerGroup) => (
-      <TableRow key={headerGroup.id}>
-        {headerGroup.headers.map((header) => (
-          <TableHead key={header.id}>
-            {flexRender(header.column.columnDef.header, header.getContext())}
-          </TableHead>
-        ))}
-      </TableRow>
-    ))}
-  </TableHeader>
-  <TableBody>
-    {table.getRowModel().rows.map((row) => (
-      <TableRow key={row.id}>
-        {row.getVisibleCells().map((cell) => (
-          <TableCell key={cell.id}>
-            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-          </TableCell>
-        ))}
-      </TableRow>
-    ))}
-  </TableBody>
-</Table>
-```
-
-### Sortable columns
-
-```tsx
-<TableHead
-  onClick={() => column.toggleSorting()}
-  className="cursor-pointer select-none"
->
-  Name {column.getIsSorted() === "asc" ? "↑" : column.getIsSorted() === "desc" ? "↓" : ""}
-</TableHead>
+<DataTable>...</DataTable>
 ```
 
 ## Props
 
-### Table
-
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `columns` | `DataTableColumn<T>[]` | — | — |
+| `data` | `T[]` | — | — |
+| `emptyMessage` | `string` | — | — |
+| `onRowClick` | `(row: T, index: number) => void` | — | — |
+| `rowClassName` | `string | ((row: T, index: number) => string)` | — | — |
+| `getRowId` | `(row: T, index: number) => string` | — | — |
 
-### TableRow
+## Token integration
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
-
-### TableHead / TableCell
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Additional CSS classes |
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-surface` — table background
-- `--s-surface-elevated` — header row background
-- `--s-border` — row borders
-- `--s-border-muted` — subtle dividers
-- `--s-text` — cell text
-- `--s-text-muted` — header text
-- `--s-primary` — selected row highlight
+| CSS Variable | Purpose |
+|---|---|
+| `--s-text-muted` | Text muted |

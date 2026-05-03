@@ -1,6 +1,6 @@
 ---
 title: ScrollProgress
-description: Fixed progress bar that tracks page scroll position. Token-colored, accessible, and configurable.
+description: "A ScrollProgress component from the Sigil design system."
 ---
 
 ## Import
@@ -9,31 +9,29 @@ description: Fixed progress bar that tracks page scroll position. Token-colored,
 import { ScrollProgress } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <ScrollProgress />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<ScrollProgress />
-```
-
-## Bottom position
-
-```tsx
-<ScrollProgress position="bottom" height={4} />
-```
-
-## Sticky (non-fixed)
-
-```tsx
-<ScrollProgress fixed={false} />
+<ScrollProgress>...</ScrollProgress>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `position` | `"top" \| "bottom"` | `"top"` | Bar position |
-| `height` | `number` | `3` | Bar height in px |
-| `fixed` | `boolean` | `true` | Use fixed positioning |
-| `value` | `number` | — | Controlled progress value from 0 to 100 |
+| `position` | `"top" | "bottom"` | `top` | Position on screen. |
+| `height` | `number` | `3` | Bar height in pixels. |
+| `fixed` | `boolean` | `true` | Whether to use fixed positioning. |
+| `value` | `number` | — | Controlled progress value from 0 to 100. Defaults to document scroll progress. |
 
-Uses `var(--s-primary)` for the bar color. Accessible with `role="progressbar"` and `aria-valuenow`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |

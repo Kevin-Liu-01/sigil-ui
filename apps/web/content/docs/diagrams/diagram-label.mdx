@@ -1,6 +1,6 @@
 ---
 title: DiagramLabel
-description: "A positioned text label for annotating diagrams."
+description: "A DiagramLabel component from the Sigil design system."
 ---
 
 ## Import
@@ -9,27 +9,29 @@ description: "A positioned text label for annotating diagrams."
 import { DiagramLabel } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <DiagramLabel>API Gateway</DiagramLabel>
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<DiagramLabel>API Gateway</DiagramLabel>
+<DiagramLabel>...</DiagramLabel>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `children` | `ReactNode` | — | Label text content |
+| `text` | `string` | — | — |
+| `variant` | `"default" | "accent" | "warn"` | — | — |
+| `showDot` | `boolean` | — | — |
+| `showLine` | `boolean` | — | — |
+| `lineLength` | `number` | — | — |
+| `position` | `"top" | "bottom" | "left" | "right"` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-text-muted` | Label text color |
-| `--s-font-mono` | Label font |
+| `--s-text-muted` | Text muted |
+| `--s-primary` | Primary |
+| `--s-error` | Error |
+| `--s-radius-full` | Radius full |
+| `--s-font-mono` | Font mono |

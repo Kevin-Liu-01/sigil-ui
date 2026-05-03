@@ -1,17 +1,7 @@
 ---
 title: CodeBlock
-description: Syntax-highlighted code display with line numbers, file name, and copy button.
+description: "A CodeBlock component from the Sigil design system."
 ---
-
-# CodeBlock
-
-> Syntax-highlighted code display with line numbers, file name, and copy button.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add code-block
-```
 
 ## Import
 
@@ -19,67 +9,39 @@ npx @sigil-ui/cli add code-block
 import { CodeBlock } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <CodeBlock language="tsx">{'const greeting = "Hello, Sigil!";'}</CodeBlock>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<CodeBlock
-  code={`const greeting = "Hello, Sigil";
-console.log(greeting);`}
-  language="typescript"
-/>
-```
-
-## Examples
-
-### With file name
-
-```tsx
-<CodeBlock
-  code={`export default function App() {
-  return <h1>Welcome</h1>;
-}`}
-  language="tsx"
-  fileName="app/page.tsx"
-/>
-```
-
-### Without line numbers
-
-```tsx
-<CodeBlock
-  code={`npm install @sigil-ui/components`}
-  language="bash"
-  showLineNumbers={false}
-/>
-```
-
-### Multi-line with scroll
-
-```tsx
-<CodeBlock
-  code={longCodeString}
-  language="typescript"
-  fileName="utils/tokens.ts"
-/>
+<CodeBlock>...</CodeBlock>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `code` | `string` | — | Code content to display |
-| `language` | `string` | — | Language label shown in header |
-| `showLineNumbers` | `boolean` | `true` | Show line numbers |
-| `fileName` | `string` | — | File name shown in header (overrides language label) |
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `code` | `string` | — | Code content. |
+| `language` | `string` | — | Language label. |
+| `showLineNumbers` | `boolean` | `true` | Show line numbers. |
+| `fileName` | `string` | — | File name to display. |
 
-## Tokens
+## Token integration
 
-This component reads these CSS variables:
-
-- `--s-background` — code area background
-- `--s-surface` — header bar background
-- `--s-border` — outer border and header divider
-- `--s-card-radius` — container border radius
-- `--s-text-muted` — line numbers, header labels, copy button
-- `--s-text` — copy button hover
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-card` | Radius card |
+| `--s-border` | Border |
+| `--s-border-style` | Border style |
+| `--s-code-bg` | Code bg |
+| `--s-background` | Background |
+| `--s-code-font-family` | Code font family |
+| `--s-surface` | Surface |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-duration-fast` | Duration fast |
+| `--s-radius-sm` | Radius sm |

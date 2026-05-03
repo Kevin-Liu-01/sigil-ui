@@ -1,17 +1,7 @@
 ---
-title: Circular Progress
-description: Circular progress indicator with determinate and indeterminate modes.
+title: CircularProgress
+description: "A CircularProgress component from the Sigil design system."
 ---
-
-# Circular Progress
-
-> SVG-based circular progress ring — provide a value for determinate mode, or omit for an animated spinner.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add circular-progress
-```
 
 ## Import
 
@@ -19,52 +9,30 @@ npx @sigil-ui/cli add circular-progress
 import { CircularProgress } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <CircularProgress />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<CircularProgress value={65} />
-```
-
-## Examples
-
-### Determinate
-
-```tsx
-<CircularProgress value={25} />
-<CircularProgress value={50} />
-<CircularProgress value={75} />
-<CircularProgress value={100} />
-```
-
-### Indeterminate
-
-```tsx
-<CircularProgress />
-```
-
-### Custom size
-
-```tsx
-<CircularProgress value={60} size={64} strokeWidth={6} />
-```
-
-### Small
-
-```tsx
-<CircularProgress value={80} size={24} strokeWidth={3} />
+<CircularProgress>CircularProgress content</CircularProgress>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `value` | `number` | — | Progress 0–100. Omit for indeterminate |
-| `size` | `number` | `40` | Diameter in pixels |
-| `strokeWidth` | `number` | `4` | Stroke width in pixels |
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `value` | `number` | — | Progress value between 0 and 100. Omit for indeterminate. |
+| `size` | `number` | `40` | Diameter in pixels. |
+| `strokeWidth` | `number` | `4` | Stroke width in pixels. |
 
-## Tokens
+## Token integration
 
-- `--s-primary` — progress arc color
-- `--s-border` — track color
-- `--s-duration-normal` — animation duration for value transitions
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-primary` | Primary |
+| `--s-duration-normal` | Duration normal |

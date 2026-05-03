@@ -1,96 +1,34 @@
 ---
 title: Timeline
-description: A vertical or horizontal timeline with events, markers, and connecting lines. Ideal for changelogs, roadmaps, and history.
+description: "A Timeline component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { Timeline, TimelineItem } from "@sigil-ui/components";
+import { Timeline } from "@sigil-ui/components";
 ```
 
 ## Usage
 
 ```tsx
-<Timeline>
-  <TimelineItem title="v1.0" description="Initial release" date="Jan 2025" />
-  <TimelineItem title="v1.1" description="Added preset system" date="Mar 2025" />
-  <TimelineItem title="v2.0" description="Token-driven architecture" date="Jun 2025" />
-</Timeline>
+<Timeline>...</Timeline>
 ```
-
-## With icons
-
-```tsx
-<Timeline>
-  <TimelineItem title="Shipped" icon={<CheckIcon />} date="Today" />
-  <TimelineItem title="In review" icon={<EyeIcon />} date="Yesterday" />
-  <TimelineItem title="Started" icon={<PlayIcon />} date="Last week" />
-</Timeline>
-```
-
-## Horizontal
-
-```tsx
-<Timeline orientation="horizontal">
-  <TimelineItem title="Q1" description="Research" />
-  <TimelineItem title="Q2" description="Build" />
-  <TimelineItem title="Q3" description="Launch" />
-  <TimelineItem title="Q4" description="Scale" />
-</Timeline>
-```
-
-## Active item
-
-```tsx
-<TimelineItem title="Current sprint" active />
-```
-
-The active item is highlighted with `--s-primary`.
-
-## Alternating layout
-
-```tsx
-<Timeline alternating>
-  <TimelineItem title="Left" description="Odd items on the left" />
-  <TimelineItem title="Right" description="Even items on the right" />
-</Timeline>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Active marker and accent |
-| `--s-border` | Connecting line |
-| `--s-text` | Title text |
-| `--s-text-muted` | Description and date text |
-| `--s-surface-elevated` | Marker background |
-| `--s-radius-full` | Marker border radius |
 
 ## Props
 
-### Timeline
-
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Layout direction |
-| `alternating` | `boolean` | `false` | Alternate item sides |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | TimelineItem children |
+| `entries` | `TimelineEntry[]` | — | Timeline entries. |
+| `variant` | `"vertical" | "horizontal"` | `vertical` | Layout variant. |
 
-### TimelineItem
+## Token integration
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `title` | `string` | — | Event title |
-| `description` | `string` | — | Event description |
-| `date` | `string` | — | Date or time label |
-| `icon` | `ReactNode` | — | Custom marker icon |
-| `active` | `boolean` | `false` | Highlight as current |
-| `className` | `string` | — | Additional CSS classes |
-
-## Accessibility
-
-- Uses an ordered `<ol>` for semantic event sequence
-- Active item marked with `aria-current="step"`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-full` | Radius full |
+| `--s-primary` | Primary |
+| `--s-border` | Border |
+| `--s-font-mono` | Font mono |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

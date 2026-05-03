@@ -1,6 +1,6 @@
 ---
 title: Textarea
-description: A multi-line text input with auto-resize, character count, and token-driven styling.
+description: "A Textarea component from the Sigil design system."
 ---
 
 ## Import
@@ -9,81 +9,34 @@ description: A multi-line text input with auto-resize, character count, and toke
 import { Textarea } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Textarea placeholder="Write something..." rows={3} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Textarea placeholder="Write your message..." />
+<Textarea>Textarea content</Textarea>
 ```
-
-## With label
-
-```tsx
-<Stack gap={8}>
-  <Label htmlFor="bio">Bio</Label>
-  <Textarea id="bio" placeholder="Tell us about yourself" />
-</Stack>
-```
-
-## Auto-resize
-
-The textarea grows with content up to an optional max height:
-
-```tsx
-<Textarea autoResize placeholder="Grows as you type..." />
-<Textarea autoResize maxRows={8} placeholder="Grows up to 8 rows" />
-```
-
-## Character count
-
-```tsx
-<Textarea maxLength={280} showCount placeholder="Write a tweet..." />
-```
-
-## Variants
-
-```tsx
-<Textarea variant="outline" placeholder="Bordered" />
-<Textarea variant="filled" placeholder="Filled background" />
-<Textarea variant="flush" placeholder="Bottom border only" />
-```
-
-## Error state
-
-```tsx
-<Textarea error errorMessage="Message is required." />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Filled variant background |
-| `--s-text` | Input text color |
-| `--s-text-muted` | Placeholder and character count |
-| `--s-border` | Default border |
-| `--s-border-interactive` | Focus border |
-| `--s-error` | Error state border |
-| `--s-radius-md` | Border radius |
-| `--s-font-body` | Font family |
-| `--s-duration-fast` | Focus transition |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `variant` | `"outline" \| "filled" \| "flush"` | `"outline"` | Visual variant |
-| `autoResize` | `boolean` | `false` | Auto-grow with content |
-| `maxRows` | `number` | — | Max rows for auto-resize |
-| `maxLength` | `number` | — | Maximum characters |
-| `showCount` | `boolean` | `false` | Display character count |
-| `error` | `boolean` | `false` | Error state |
-| `errorMessage` | `string` | — | Error text below textarea |
-| `className` | `string` | — | Additional CSS classes |
+| `error` | `string | boolean` | — | Error message — puts the textarea in error state when truthy. |
 
-Plus all standard `<textarea>` HTML attributes.
+## Token integration
 
-## Accessibility
-
-- Uses native `<textarea>` element
-- Error state adds `aria-invalid="true"` and `aria-describedby`
-- Character count is announced via `aria-live="polite"`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-input` | Radius input |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-background` | Background |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-error` | Error |

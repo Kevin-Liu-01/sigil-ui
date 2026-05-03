@@ -1,6 +1,6 @@
 ---
 title: CrossHatch
-description: "A decorative cross-hatch pattern overlay for diagram backgrounds."
+description: "A CrossHatch component from the Sigil design system."
 ---
 
 ## Import
@@ -9,26 +9,23 @@ description: "A decorative cross-hatch pattern overlay for diagram backgrounds."
 import { CrossHatch } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <CrossHatch style={{ width: "100%", height: 120 }} />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<CrossHatch style={{ width: "100%", height: 120 }} />
+<CrossHatch>...</CrossHatch>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| Standard HTML div attributes. | | | |
+| `angle` | `number` | — | — |
+| `spacing` | `number` | — | — |
+| `color` | `string` | — | — |
+| `opacity` | `number` | — | — |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-border-muted` | Hatch line color |
+| `--s-text` | Text |

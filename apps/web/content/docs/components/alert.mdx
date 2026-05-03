@@ -1,17 +1,7 @@
 ---
 title: Alert
-description: Contextual banner with variant-colored accent border for status messages.
+description: "A Alert component from the Sigil design system."
 ---
-
-# Alert
-
-> Contextual banner with variant-colored accent border for status messages.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add alert
-```
 
 ## Import
 
@@ -19,72 +9,49 @@ npx @sigil-ui/cli add alert
 import { Alert, AlertTitle, AlertDescription } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Alert>
+    <AlertTitle>Heads up</AlertTitle>
+    <AlertDescription>This is an alert message.</AlertDescription>
+  </Alert>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Alert>
-  <AlertTitle>Heads up</AlertTitle>
-  <AlertDescription>This is a default alert with neutral styling.</AlertDescription>
-</Alert>
+<Alert>...</Alert>
 ```
 
-## Examples
+## Sub-components
 
-### Destructive
+This component includes the following parts:
 
-```tsx
-<Alert variant="destructive">
-  <AlertTitle>Error</AlertTitle>
-  <AlertDescription>Something went wrong. Please try again.</AlertDescription>
-</Alert>
-```
-
-### Success
-
-```tsx
-<Alert variant="success">
-  <AlertTitle>Saved</AlertTitle>
-  <AlertDescription>Your changes have been saved successfully.</AlertDescription>
-</Alert>
-```
-
-### Warning
-
-```tsx
-<Alert variant="warning">
-  <AlertTitle>Warning</AlertTitle>
-  <AlertDescription>This action cannot be undone.</AlertDescription>
-</Alert>
-```
+- `<AlertTitle>`
+- `<AlertDescription>`
 
 ## Props
 
-### Alert
-
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `variant` | `"default" \| "destructive" \| "success" \| "warning" \| "info"` | `"default"` | Visual variant controlling accent color |
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `variant` | `AlertVariant` | `default` | Visual variant controlling accent color and background. |
+| `fill` | `AlertFill` | `outline` | Fill style. "outline" = border only, "filled" = solid bg, "soft" = tinted bg. |
+| `onClose` | `() => void` | — | Callback to render a close button. When provided, an X button appears. |
 
-### AlertTitle
+## Token integration
 
-Renders an `<h5>`. Accepts all heading HTML attributes.
-
-### AlertDescription
-
-Renders a `<p>`. Accepts all paragraph HTML attributes.
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-surface-elevated` — default variant background
-- `--s-border` — outer border
-- `--s-border-strong` — default variant left accent
-- `--s-error` — destructive variant accent and tint
-- `--s-success` — success variant accent and tint
-- `--s-warning` — warning variant accent and tint
-- `--s-info` — info variant accent and tint
-- `--s-text` — title text color
-- `--s-text-secondary` — description text color
-- `--s-card-radius` — border radius
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-text` | Text |
+| `--s-surface` | Surface |
+| `--s-error` | Error |
+| `--s-success` | Success |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-radius-md` | Radius md |
+| `--s-border-style` | Border style |
+| `--s-radius-sm` | Radius sm |
+| `--s-ring` | Ring |

@@ -22,8 +22,8 @@ from it. Everything else is hardcoded.
 | Token count | **519** | 519 CSS custom properties across 33 token categories |
 | Token categories | **33** | Was 28 before block token expansion |
 | Preset count | **44** (marketing) / **46** (`product-stats.ts`) | 44 named curated presets + default + _template = 46 in code |
-| Component count | **200+** | Conservative marketing number |
-| Primitives count | **28** | Radix-based headless behavior primitives |
+| Component count | **350+** | 545 exports across 258 files; "350+" is the marketing floor |
+| Primitives count | **40+** | 28 Radix + 13 Base UI headless behavior primitives |
 
 ---
 
@@ -68,8 +68,8 @@ from it. Everything else is hardcoded.
 | `apps/web/content/docs/components/feature-grid.mdx` | 24 | "519 configurable tokens" |
 | `apps/web/content/docs/components/feature-showcase-section.mdx` | 21 | "519 configurable fields" |
 | `apps/web/content/docs/animation/number-ticker.mdx` | 15 | `NumberTicker value={519}` |
-| `apps/docs/content/docs/components/feature-grid.mdx` | 24 | "519 configurable tokens" |
-| `apps/docs/content/docs/components/feature-showcase-section.mdx` | 21 | "519 configurable fields" |
+| `apps/web/content/docs/components/feature-grid.mdx` | 24 | "519 configurable tokens" |
+| `apps/web/content/docs/components/feature-showcase-section.mdx` | 21 | "519 configurable fields" |
 
 ---
 
@@ -118,9 +118,9 @@ from it. Everything else is hardcoded.
 | `apps/web/components/landing/component-showcase.tsx` | 610, 1179, 1197, 1750, 2114, 2255 | Stat cards, showcase copy |
 | `apps/web/content/docs/components/feature-showcase-section.mdx` | 27 | "44 presets" |
 | `apps/web/content/docs/components/announcement-bar.mdx` | 23 | "44 presets" |
-| `apps/docs/content/docs/index.mdx` | 71 | "44 presets" |
-| `apps/docs/content/docs/installation.mdx` | 12 | "44 presets" |
-| `apps/docs/content/docs/presets.mdx` | 17 | "44 presets" |
+| `apps/web/content/docs/index.mdx` | 71 | "44 presets" |
+| `apps/web/content/docs/installation.mdx` | 12 | "44 presets" |
+| `apps/web/content/docs/presets.mdx` | 17 | "44 presets" |
 | Various other `apps/web/content/docs/marketing/*.mdx` | — | "44 presets" in example copy |
 
 ### Known discrepancy
@@ -131,7 +131,7 @@ one canonical number when the count changes.
 
 ---
 
-## Component Count (200+)
+## Component Count (350+)
 
 ### Centralized (reads `SIGIL_PRODUCT_STATS.componentCountLabel`)
 
@@ -145,7 +145,7 @@ one canonical number when the count changes.
 | `apps/web/components/landing/footer.tsx` | Footer |
 | `apps/web/components/sandbox/canvas-item.tsx` | Canvas badges |
 
-### Hardcoded "200+"
+### Hardcoded "350+"
 
 | File | Lines | Context |
 |------|-------|---------|
@@ -160,19 +160,19 @@ one canonical number when the count changes.
 | `apps/web/app/components/page.tsx` | 52, 87 | STATS array, h1 heading |
 | `apps/web/components/landing/layer-stack.tsx` | 68, 76 | "200+ components" |
 | `apps/web/components/landing/component-showcase.tsx` | 1202, 2195, 2255 | Stat rows |
-| `apps/docs/content/docs/index.mdx` | 70 | "200+ components" |
-| `apps/docs/content/docs/installation.mdx` | 11 | "200+ components" |
+| `apps/web/content/docs/index.mdx` | 70 | "200+ components" |
+| `apps/web/content/docs/installation.mdx` | 11 | "200+ components" |
 | Various `apps/web/content/docs/components/*.mdx` | — | Example copy |
 
 ---
 
-## Primitives Count (28)
+## Primitives Count (40+)
 
 | File | Lines | Context |
 |------|-------|---------|
-| `AGENTS.md` | 67 | "28 Radix-based headless behavior primitives" |
-| `README.md` | 362, 425 | "28 primitives" in package table and structure block |
-| `packages/primitives/README.md` | 23 | "Included Primitives (28)" |
+| `AGENTS.md` | 67 | "40+ headless behavior primitives (Radix UI + Base UI)" |
+| `README.md` | package table, structure block | "40+ headless primitives" |
+| `packages/primitives/README.md` | 23 | "Included Primitives (40+)" |
 
 ---
 
@@ -188,6 +188,19 @@ update all of these:
 | `SPEC.md` | Grand total table |
 | `packages/tokens/README.md` | Category table |
 | `skills/sigil-preset/SKILL.md` | Required categories table (33 rows) |
+
+---
+
+## Auditor References
+
+Files that reference Sigil's quality validation / auditor system:
+
+| File | Context |
+|------|---------|
+| `README.md` | Auditors table (doctor, diff, preset validation, type guarantees, WCAG, conventions, rules) |
+| `AGENTS.md` | Auditors section (doctor, diff, preset validation, TypeScript satisfies, design rules, conventions) |
+| `SPEC.md` | Testing Strategy section (unit, CLI integration, visual regression, a11y, preset validation) |
+| `skills/sigil-messaging/SKILL.md` | Auditor positioning in messaging |
 
 ---
 

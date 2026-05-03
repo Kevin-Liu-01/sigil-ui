@@ -1,6 +1,6 @@
 ---
 title: WordRotate
-description: Cycles through an array of words or phrases with blur + translate transitions. Inline-friendly for use within sentences.
+description: "A WordRotate component from the Sigil design system."
 ---
 
 ## Import
@@ -9,25 +9,29 @@ description: Cycles through an array of words or phrases with blur + translate t
 import { WordRotate } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <WordRotate words={["Design", "Build", "Ship"]} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<p>
-  Build with <WordRotate words={["speed", "style", "confidence"]} />
-</p>
-```
-
-## Custom duration
-
-```tsx
-<WordRotate words={["React", "Vue", "Svelte"]} duration={3000} />
+<WordRotate>WordRotate content</WordRotate>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `words` | `string[]` | — | Words to cycle through |
-| `duration` | `number` | `2500` | Time each word is shown in ms |
+| `words` | `string[]` | — | Array of words/phrases to cycle through. |
+| `duration` | `number` | `2500` | Time each word is shown in ms. |
 
-Renders as inline `<span>`. Uses `aria-live="polite"` for screen readers.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-fast` | Duration fast |
+| `--s-ease-out` | Ease out |
+| `--s-ease-default` | Ease default |

@@ -5,20 +5,18 @@ const root = process.cwd();
 const componentRoot = path.join(root, "packages/components/src");
 const indexPath = path.join(componentRoot, "index.ts");
 const webDocsRoot = path.join(root, "apps/web/content/docs");
-const docsRoot = path.join(root, "apps/docs/content/docs");
 const showcasePath = path.join(root, "apps/web/components/landing/component-showcase.tsx");
 const canvasRegistryPath = path.join(root, "apps/web/components/sandbox/canvas-item.tsx");
 const presetCatalogPath = path.join(root, "packages/presets/src/catalog.ts");
 
 const exportNames = extractExports(read(indexPath));
 const webDocs = listMdxSlugs(webDocsRoot);
-const docsDocs = listMdxSlugs(docsRoot);
 const showcaseNames = extractStringValues(read(showcasePath), /name:\s*"([^"]+)"/g);
 const canvasNames = extractRegistryKeys(read(canvasRegistryPath));
 
 const sourceFiles = walk(componentRoot).filter((file) => /\.(tsx?|json)$/.test(file));
 const violations = scanTokenViolations(sourceFiles);
-const staleCliDocs = scanStaleCliDocs([webDocsRoot, docsRoot]);
+const staleCliDocs = scanStaleCliDocs([webDocsRoot]);
 const presetNames = extractStringValues(read(presetCatalogPath), /\bname:\s*"([^"]+)"/g);
 const productFactDrift = scanProductFactDrift(presetNames.size);
 
@@ -28,10 +26,7 @@ const report = {
     names: exportNames,
   },
   docs: {
-    webCount: webDocs.size,
-    docsCount: docsDocs.size,
-    missingInWeb: [...docsDocs].filter((slug) => !webDocs.has(slug)).sort(),
-    missingInDocs: [...webDocs].filter((slug) => !docsDocs.has(slug)).sort(),
+    count: webDocs.size,
   },
   demos: {
     showcaseCount: showcaseNames.size,
@@ -194,7 +189,6 @@ function scanProductFactDrift(presetCount) {
     ...walk(path.join(root, "apps/web/app")).filter((file) => /\.(tsx?|mdx?)$/.test(file)),
     ...walk(path.join(root, "apps/web/components")).filter((file) => /\.(tsx?|mdx?)$/.test(file)),
     ...walk(webDocsRoot).filter((file) => file.endsWith(".mdx")),
-    ...walk(docsRoot).filter((file) => file.endsWith(".mdx")),
   ].filter((file) => fs.existsSync(file));
 
   const stale = [];

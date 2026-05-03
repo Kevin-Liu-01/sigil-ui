@@ -1,6 +1,6 @@
 ---
 title: Separator
-description: A plain horizontal or vertical line separator for compact UI groups. Use Divider for patterned section bands.
+description: "A Separator component from the Sigil design system."
 ---
 
 ## Import
@@ -9,49 +9,20 @@ description: A plain horizontal or vertical line separator for compact UI groups
 import { Separator } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Separator />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Separator />
-<Separator orientation="vertical" className="h-4" />
+<Separator>Separator content</Separator>
 ```
-
-## Vertical
-
-```tsx
-<Stack direction="row" gap={16} align="center">
-  <span>Home</span>
-  <Separator orientation="vertical" className="h-4" />
-  <span>About</span>
-  <Separator orientation="vertical" className="h-4" />
-  <span>Contact</span>
-</Stack>
-```
-
-## Decorative vs semantic
-
-```tsx
-<Separator decorative />
-<Separator decorative={false} />
-```
-
-When `decorative={false}`, the separator has `role="separator"`.
 
 ## Token integration
 
-| CSS Variable | Used for |
+| CSS Variable | Purpose |
 |---|---|
-| `--s-border` | Line color |
-
-## Props
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Divider direction |
-| `decorative` | `boolean` | `true` | Whether purely decorative |
-| `className` | `string` | — | Additional CSS classes |
-
-## Accessibility
-
-- `decorative={true}` sets `role="none"` so screen readers skip it
-- `decorative={false}` sets `role="separator"` with `aria-orientation`
+| `--s-border` | Border |

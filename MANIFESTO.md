@@ -43,6 +43,23 @@ This means:
 - Two projects using Sigil can look nothing alike, because the system was designed for divergence, not convergence
 - The agent has a legible, structured interface to the entire visual system — not scattered Tailwind classes across hundreds of files
 
+## Context vs Constraints
+
+There's a growing category of tools that try to solve the generic-AI problem by giving agents more context. Screenshot libraries. Pattern databases. Reference MCP servers. The idea: if the agent can *see* what good design looks like, it'll produce better output.
+
+It doesn't work. Not reliably.
+
+An agent with a reference screenshot of Stripe's dashboard will still generate its own button, its own card, its own input, its own spacing — and that's where the median aesthetic leaks back in. The agent understood the *reference*. It didn't adopt the *system*. Context is information. Information is necessary but not sufficient.
+
+Sigil takes the opposite approach: **constraints over context**. Instead of showing the agent what good looks like and hoping it follows through, Sigil makes it structurally impossible to produce off-brand output. The components already exist. They already consume the token spec. The agent doesn't create a button — it uses `<Button>`, which reads `var(--s-primary)` and `var(--s-radius-button)` and `var(--s-button-hover-effect)`. The visual identity is baked into the architecture, not described in a reference doc.
+
+```
+Reference tools:   context → agent → components from scratch → hope
+Sigil:             constraints → agent → pre-built parts → certainty
+```
+
+This isn't a criticism of reference tools — they're useful for inspiration. But inspiration is a human workflow. Agents need rails. Sigil is the rail.
+
 ## The Guardrail
 
 The system is agent-first. Not agent-compatible — agent-native.
@@ -57,8 +74,10 @@ I've shipped full production sites where AI agents read the token spec and produ
 
 A sigil is a mark with intention. Not decoration — designation. Every preset in this system is a distinct sigil: a coherent set of visual decisions that says something specific about the product wearing it.
 
-Forty-four presets. Not forty-four themes. Themes are wallpaper. Presets are identities.
+Forty-six presets. Not forty-six themes. Themes are wallpaper. Presets are identities.
 
 ## The Standard
 
 If it looks like every other AI-generated site, it failed. That's the bar.
+
+If an agent needed to create components from scratch to use it, it's a reference library — not a design system. That's the other bar.

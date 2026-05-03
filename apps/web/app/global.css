@@ -263,7 +263,7 @@
   --s-card-radius: 0px;
 
   /* Sigil grid */
-  --s-grid-cell: 50px;
+  --s-grid-cell: 48px;
   --s-cross-arm: 10px;
   --s-cross-stroke: 1.5px;
   --s-rail-gap: 50px;
@@ -374,7 +374,7 @@
   --s-card-description-size: 0.875rem;
 
   /* Navigation */
-  --s-nav-navbar-height: 50px;
+  --s-nav-navbar-height: 48px;
   --s-nav-navbar-backdrop-blur: 12px;
   --s-nav-navbar-border: 1px solid;
   --s-nav-navbar-bg-opacity: 0.8;
@@ -441,15 +441,15 @@
   --s-input-py: 8px;
   --s-badge-px: 10px;
   --s-badge-py: 2px;
-  --s-section-padding-y: 100px;
-  --s-section-py: var(--s-section-padding-y, 100px);
-  --s-section-py-lg: 100px;
-  --s-navbar-height: 50px;
-  --s-navbar-padding-x: 25px;
-  --s-navbar-px: var(--s-navbar-padding-x, 25px);
-  --s-banner-height: 25px;
-  --s-footer-padding-y: 50px;
-  --s-footer-py: var(--s-footer-padding-y, 50px);
+  --s-section-padding-y: 72px;
+  --s-section-py: var(--s-section-padding-y, 72px);
+  --s-section-py-lg: 96px;
+  --s-navbar-height: 48px;
+  --s-navbar-padding-x: 24px;
+  --s-navbar-px: var(--s-navbar-padding-x, 24px);
+  --s-banner-height: 24px;
+  --s-footer-padding-y: 48px;
+  --s-footer-py: var(--s-footer-padding-y, 48px);
   --s-modal-padding: 24px;
   --s-popover-padding: 16px;
   --s-tooltip-padding: 6px 12px;
@@ -459,7 +459,7 @@
   /* Layout detail */
   --s-content-max-narrow: 680px;
   --s-content-max-wide: 1400px;
-  --s-page-margin: 25px;
+  --s-page-margin: 24px;
   --s-page-margin-sm: 16px;
   --s-page-margin-lg: 50px;
   --s-gutter: 24px;
@@ -801,25 +801,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ================================================================== */
-/* Scrollbar                                                          */
+/* Scrollbar — overlay, auto-hiding                                   */
 /* ================================================================== */
+/* Uses standardized properties so the scrollbar overlays content     */
+/* instead of consuming layout space. The track stays transparent     */
+/* and the thumb auto-hides when not scrolling (native behavior).    */
+/* Avoids ::-webkit-scrollbar which forces classic (space-consuming)  */
+/* scrollbar mode.                                                    */
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--s-border);
-  border-radius: var(--s-radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--s-border-strong);
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--s-border) transparent;
 }
 
 /* ================================================================== */
@@ -934,8 +926,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Section with bottom border */
 .s-section-border {
   border-bottom: 1px solid var(--s-border-muted);
-  padding-bottom: var(--s-section-padding-y, 100px);
-  margin-bottom: var(--s-section-padding-y, 100px);
+  padding-bottom: var(--s-section-padding-y, 75px);
+  margin-bottom: var(--s-section-padding-y, 75px);
 }
 
 /* Monospace data table */
@@ -1089,8 +1081,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section {
-  padding-top: var(--s-section-padding-y, 100px);
-  padding-bottom: var(--s-section-padding-y, 100px);
+  padding-top: var(--s-section-padding-y, 75px);
+  padding-bottom: var(--s-section-padding-y, 75px);
   padding-left: var(--s-align-rail-margin, 24px);
   padding-right: var(--s-align-rail-margin, 24px);
   max-width: var(--s-align-rail-width, 1200px);
@@ -1098,8 +1090,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section-hero {
-  padding-top: var(--s-section-padding-y-hero, 150px);
-  padding-bottom: var(--s-section-padding-y-hero, 150px);
+  padding-top: var(--s-section-padding-y-hero, 125px);
+  padding-bottom: var(--s-section-padding-y-hero, 125px);
 }
 
 .s-divider {
@@ -1130,6 +1122,163 @@ html[data-switching-theme] *::after {
   border-radius: var(--s-radius-card, var(--s-card-radius, 10px));
   padding: var(--s-card-padding, 24px);
   box-shadow: var(--s-card-shadow, none);
+}
+
+/* ================================================================== */
+/* Fumadocs theme bridge — map Fumadocs vars to Sigil tokens           */
+/* ================================================================== */
+
+:root {
+  --color-fd-background: var(--s-background);
+  --color-fd-foreground: var(--s-text);
+  --color-fd-muted: var(--s-surface);
+  --color-fd-muted-foreground: var(--s-text-muted);
+  --color-fd-popover: var(--s-surface-elevated);
+  --color-fd-popover-foreground: var(--s-text);
+  --color-fd-card: var(--s-surface);
+  --color-fd-card-foreground: var(--s-text);
+  --color-fd-border: var(--s-border);
+  --color-fd-primary: var(--s-primary);
+  --color-fd-primary-foreground: var(--s-primary-contrast);
+  --color-fd-accent: var(--s-surface);
+  --color-fd-accent-foreground: var(--s-text);
+  --color-fd-ring: var(--s-focus-ring-color, var(--s-primary));
+}
+
+/* ================================================================== */
+/* Component preview                                                   */
+/* ================================================================== */
+
+.sigil-preview {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 32px;
+  border: 1px solid var(--s-border);
+  border-radius: var(--s-radius-lg, 12px);
+  background: var(--s-background);
+  margin: 20px 0;
+  position: relative;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.sigil-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(circle at 1px 1px, var(--s-border-muted) 0.5px, transparent 0.5px);
+  background-size: 16px 16px;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.sigil-preview-vertical {
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.sigil-preview-wrapper {
+  margin: 20px 0;
+}
+
+.sigil-preview-wrapper .sigil-preview {
+  margin: 0;
+}
+
+.sigil-preview-label {
+  font-family: var(--s-font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--s-text-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border: 1px solid var(--s-border);
+  border-bottom: none;
+  border-radius: var(--s-radius-lg, 12px) var(--s-radius-lg, 12px) 0 0;
+  background: var(--s-surface);
+}
+
+.sigil-preview-label + .sigil-preview {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* ================================================================== */
+/* Fumadocs overrides — sidebar                                        */
+/* ================================================================== */
+
+nav[data-fd-sidebar] {
+  border-right-color: var(--s-border) !important;
+}
+
+/* ================================================================== */
+/* Fumadocs overrides — content typography                             */
+/* ================================================================== */
+
+[data-fd-doc] h1,
+[data-fd-doc] h2,
+[data-fd-doc] h3,
+[data-fd-doc] h4 {
+  font-family: var(--s-font-display);
+  letter-spacing: -0.02em;
+}
+
+[data-fd-doc] code:not(pre code) {
+  font-family: var(--s-font-mono);
+  font-size: 0.85em;
+  padding: 2px 5px;
+  border-radius: var(--s-radius-sm, 6px);
+  background: var(--s-surface);
+  border: 1px solid var(--s-border-muted);
+}
+
+[data-fd-doc] pre {
+  border: 1px solid var(--s-border) !important;
+  border-radius: var(--s-radius-md, 8px) !important;
+  font-family: var(--s-font-mono) !important;
+}
+
+/* ================================================================== */
+/* Fumadocs overrides — prose tables                                   */
+/* ================================================================== */
+
+[data-fd-doc] table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+[data-fd-doc] th {
+  font-weight: 600;
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--s-border);
+  font-family: var(--s-font-display);
+  font-size: 0.8125rem;
+  letter-spacing: 0.01em;
+  color: var(--s-text-secondary);
+}
+
+[data-fd-doc] td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--s-border-muted);
+  vertical-align: top;
+}
+
+/* ================================================================== */
+/* Smooth token transitions (preset switching in docs)                 */
+/* ================================================================== */
+
+.sigil-preview *,
+[data-fd-doc] pre,
+[data-fd-doc] pre *,
+[data-fd-doc] code,
+[data-fd-doc] code * {
+  transition-duration: 0s !important;
 }
 
 /* ================================================================== */

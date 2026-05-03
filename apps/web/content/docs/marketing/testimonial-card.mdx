@@ -1,6 +1,6 @@
 ---
 title: TestimonialCard
-description: A customer quote card with avatar, name, role, and company. Use in grids or carousels for social proof sections.
+description: "A TestimonialCard component from the Sigil design system."
 ---
 
 ## Import
@@ -12,91 +12,28 @@ import { TestimonialCard } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<TestimonialCard
-  quote="Sigil made our entire design system token-driven. Switching presets is like magic."
-  name="Jane Doe"
-  role="Design Engineer"
-  company="Acme Corp"
-  avatar="/avatars/jane.jpg"
-/>
+<TestimonialCard>...</TestimonialCard>
 ```
-
-## Grid layout
-
-```tsx
-<SigilGrid columns={3}>
-  <SigilGridCell>
-    <TestimonialCard
-      quote="The preset system saved us weeks of design work."
-      name="Alex Kim"
-      role="CTO"
-      company="Startup Inc"
-    />
-  </SigilGridCell>
-  <SigilGridCell>
-    <TestimonialCard
-      quote="Agent-friendly by design. Our AI workflows just work."
-      name="Sam Lee"
-      role="Senior Engineer"
-      company="DevTools Co"
-    />
-  </SigilGridCell>
-  <SigilGridCell>
-    <TestimonialCard
-      quote="Best component library we've used. Period."
-      name="Morgan Chen"
-      role="Product Lead"
-      company="Scale Labs"
-    />
-  </SigilGridCell>
-</SigilGrid>
-```
-
-## With rating
-
-```tsx
-<TestimonialCard
-  quote="5 stars. Would recommend to every team."
-  name="Pat Johnson"
-  role="Engineer"
-  rating={5}
-/>
-```
-
-## Compact variant
-
-```tsx
-<TestimonialCard variant="compact" quote="Love it." name="Chris" />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Card background |
-| `--s-border` | Card border |
-| `--s-text` | Quote text |
-| `--s-text-muted` | Name, role, company |
-| `--s-primary` | Star rating color |
-| `--s-card-radius` | Border radius |
-| `--s-shadow-sm` | Resting elevation |
-| `--s-font-body` | Quote font |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `quote` | `string` | — | Testimonial text |
-| `name` | `string` | — | Author name |
-| `role` | `string` | — | Author role/title |
-| `company` | `string` | — | Company name |
-| `avatar` | `string` | — | Avatar image URL |
-| `rating` | `number` | — | Star rating (1–5) |
-| `variant` | `"default" \| "compact"` | `"default"` | Card variant |
-| `className` | `string` | — | Additional CSS classes |
+| `quote` | `string` | — | Quote text. |
+| `author` | `string` | — | Author name. |
+| `role` | `string` | — | Author role / company. |
+| `avatar` | `string` | — | Avatar image URL. |
 
-## Accessibility
+## Token integration
 
-- Quote is wrapped in `<blockquote>` with `<cite>` for attribution
-- Star rating has `aria-label` like "Rated 5 out of 5 stars"
-- Avatar image is decorative when name is present
+| CSS Variable | Purpose |
+|---|---|
+| `--s-card-radius` | Card radius |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-primary` | Primary |
+| `--s-text` | Text |
+| `--s-radius-full` | Radius full |
+| `--s-text-muted` | Text muted |

@@ -1,6 +1,6 @@
 ---
 title: Getting Started
-description: Ship a design system your agent can maintain. One token file updates every component, every theme, every breakpoint.
+description: One markdown file controls your entire design system. 519 tokens, 33 categories, 350+ components. Compiles to CSS + Tailwind v4.
 ---
 
 ## Why Sigil UI
@@ -10,7 +10,7 @@ Change a border radius? Hunt through every component. Update a color? Grep and p
 
 **Sigil takes the opposite approach.**
 
-Every component reads from a single token object. Colors, spacing, radii, shadows, motion — all derived from one source. Change once, update everywhere.
+Your entire design system lives in one `DESIGN.md` file — 519 tokens across 33 categories. Edit the markdown, run `sigil design compile`, and every component updates. Colors, spacing, radii, shadows, motion, page composition — all from one source.
 
 ### How it compares to traditional component libraries
 
@@ -61,6 +61,17 @@ Every layer compiles to CSS custom properties with the `--s-` prefix. Components
   --s-shadow-md: 0 0 0 1px rgb(0 0 0 / 0.06), ...;
 }
 ```
+
+### Packages on npm
+
+| Package | Description |
+|---|---|
+| [`@sigil-ui/tokens`](https://www.npmjs.com/package/@sigil-ui/tokens) | 519 tokens, 33 categories. Compiles to CSS, Tailwind v4, W3C JSON. |
+| [`@sigil-ui/components`](https://www.npmjs.com/package/@sigil-ui/components) | 350+ token-driven React components |
+| [`@sigil-ui/presets`](https://www.npmjs.com/package/@sigil-ui/presets) | 46 curated preset bundles (500+ tokens each) |
+| [`@sigil-ui/primitives`](https://www.npmjs.com/package/@sigil-ui/primitives) | 40+ headless primitives (Radix + Base UI) |
+| [`@sigil-ui/cli`](https://www.npmjs.com/package/@sigil-ui/cli) | CLI for init, design, preset, add, inspire, doctor |
+| [`create-sigil-app`](https://www.npmjs.com/package/create-sigil-app) | One-command project scaffolding |
 
 ### Next steps
 

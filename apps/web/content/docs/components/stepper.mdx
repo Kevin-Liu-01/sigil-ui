@@ -1,6 +1,6 @@
 ---
 title: Stepper
-description: Multi-step progress indicator with horizontal and vertical orientations.
+description: "A Stepper component from the Sigil design system."
 ---
 
 ## Import
@@ -9,44 +9,35 @@ description: Multi-step progress indicator with horizontal and vertical orientat
 import { Stepper } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <Stepper steps={["Step 1", "Step 2", "Step 3"]} currentStep={1} />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Stepper
-  steps={[{ label: "Account" }, { label: "Profile" }, { label: "Review" }]}
-  currentStep={1}
-/>
-```
-
-## With descriptions (vertical)
-
-```tsx
-<Stepper
-  orientation="vertical"
-  currentStep={2}
-  steps={[
-    { label: "Create account", description: "Enter your email and password" },
-    { label: "Set up profile", description: "Add your name and avatar" },
-    { label: "Review", description: "Confirm your details" },
-    { label: "Done", description: "You're all set" },
-  ]}
-/>
-```
-
-## Completed state
-
-```tsx
-<Stepper
-  steps={[{ label: "Upload" }, { label: "Process" }, { label: "Complete" }]}
-  currentStep={3}
-/>
+<Stepper>Stepper content</Stepper>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `steps` | `StepperStepConfig[]` | — | Step definitions (`{ label, description? }`) |
-| `currentStep` | `number` | — | Zero-based index of the active step |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction |
-| `className` | `string` | — | Additional CSS classes |
+| `steps` | `StepperStepConfig[]` | — | — |
+| `currentStep` | `number` | — | — |
+| `orientation` | `"horizontal" | "vertical"` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-radius-full` | Radius full |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-bg` | Bg |

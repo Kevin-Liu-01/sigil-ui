@@ -1,6 +1,6 @@
 ---
 title: SlideIn
-description: Slide-in animation from any edge with spring-like easing and scroll or mount trigger.
+description: "A SlideIn component from the Sigil design system."
 ---
 
 ## Import
@@ -9,31 +9,35 @@ description: Slide-in animation from any edge with spring-like easing and scroll
 import { SlideIn } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <SlideIn direction="left">
+  <Badge>Slide in from left</Badge>
+</SlideIn>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<SlideIn direction="left">
-  <Card>Slides in from the left</Card>
-</SlideIn>
-```
-
-## Directions
-
-```tsx
-<SlideIn direction="left">From left</SlideIn>
-<SlideIn direction="right">From right</SlideIn>
-<SlideIn direction="up">From above</SlideIn>
-<SlideIn direction="down">From below</SlideIn>
+<SlideIn>...</SlideIn>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `direction` | `"up" \| "down" \| "left" \| "right"` | `"left"` | Slide edge |
-| `offset` | `number` | `60` | Slide distance in px |
-| `delay` | `number` | `0` | Delay in ms |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
-| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+| `direction` | `SlideDirection` | `left` | Edge to slide from. |
+| `offset` | `number` | `60` | Slide distance in pixels. |
+| `delay` | `number` | `0` | Delay before animation in ms. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
 
-Respects `prefers-reduced-motion`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-slow` | Duration slow |
+| `--s-ease-default` | Ease default |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |

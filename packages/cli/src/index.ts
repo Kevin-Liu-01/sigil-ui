@@ -11,6 +11,7 @@ import { convertCommand } from "./commands/convert.js";
 import { inspireCommand } from "./commands/inspire.js";
 import { docsCommand } from "./commands/docs.js";
 import { adapterCommand } from "./commands/adapter.js";
+import { designCommand } from "./commands/design.js";
 
 const program = new Command();
 
@@ -26,6 +27,7 @@ program.addCommand(presetCommand);
 program.addCommand(inspireCommand);
 program.addCommand(docsCommand);
 program.addCommand(adapterCommand);
+program.addCommand(designCommand);
 program.addCommand(diffCommand);
 program.addCommand(doctorCommand);
 

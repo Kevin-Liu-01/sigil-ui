@@ -9,6 +9,16 @@ description: A token-driven container with optional grid backgrounds for composi
 import { Diagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Diagram>
+  <DiagramNode id="a" x={50} y={50} label="Start" />
+  <DiagramNode id="b" x={200} y={50} label="End" />
+  <DiagramConnector from="a" to="b" />
+</Diagram>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

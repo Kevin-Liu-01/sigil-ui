@@ -1,6 +1,6 @@
 ---
 title: ScaleIn
-description: Scale-up reveal animation with spring easing. Animates from a smaller initial scale to full size.
+description: "A ScaleIn component from the Sigil design system."
 ---
 
 ## Import
@@ -9,29 +9,33 @@ description: Scale-up reveal animation with spring easing. Animates from a small
 import { ScaleIn } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <ScaleIn>
+  <Badge>Scale in</Badge>
+</ScaleIn>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<ScaleIn>
-  <Card>Scales into view</Card>
-</ScaleIn>
-```
-
-## Custom initial scale
-
-```tsx
-<ScaleIn initialScale={0.8} delay={100}>
-  <img src="/hero.png" alt="Hero" />
-</ScaleIn>
+<ScaleIn>...</ScaleIn>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `initialScale` | `number` | `0.92` | Starting scale factor |
-| `delay` | `number` | `0` | Delay in ms |
-| `trigger` | `"scroll" \| "mount"` | `"scroll"` | Trigger mode |
-| `viewOptions` | `UseInViewOptions` | — | IntersectionObserver config |
+| `initialScale` | `number` | `0.92` | Initial scale factor. |
+| `delay` | `number` | `0` | Delay before animation in ms. |
+| `trigger` | `"scroll" | "mount"` | — | — |
+| `viewOptions` | `UseInViewOptions` | — | — |
 
-Uses `--s-ease-spring` for natural spring easing. Respects `prefers-reduced-motion`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-ease-spring` | Ease spring |

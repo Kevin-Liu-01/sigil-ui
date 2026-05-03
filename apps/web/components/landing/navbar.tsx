@@ -68,10 +68,12 @@ export function LandingNavbar() {
 
   const inner = (
     <div
-      className="flex items-center justify-between w-full border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="mx-auto flex items-center justify-between w-full overflow-hidden border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        padding: "0 var(--s-navbar-padding-x, 25px)",
-        height: "var(--s-navbar-height, 50px)",
+        maxWidth: "var(--s-content-max, 1200px)",
+        paddingInline: "var(--s-navbar-padding-x, 24px)",
+        height: "var(--s-navbar-height, 48px)",
+        boxSizing: "border-box",
       }}
     >
       {/* ── Logo ── */}
@@ -223,8 +225,9 @@ function ReleaseBanner() {
         className="relative flex items-center justify-center gap-2 text-[12px] font-medium border-b border-[var(--s-border)] overflow-hidden w-full"
         style={{
           maxWidth: "var(--s-content-max, 1200px)",
-          padding: "0 var(--s-navbar-padding-x, 25px)",
-          height: "var(--s-banner-height, 25px)",
+          paddingInline: "var(--s-navbar-padding-x, 24px)",
+          height: "var(--s-banner-height, 24px)",
+          boxSizing: "border-box",
           background:
             "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 8%, var(--s-background)), color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 8%, var(--s-background)))",
           backdropFilter: "blur(16px) saturate(1.5)",

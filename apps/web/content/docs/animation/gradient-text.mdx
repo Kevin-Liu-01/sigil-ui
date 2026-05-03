@@ -1,6 +1,6 @@
 ---
 title: GradientText
-description: Animated gradient text using background-clip. Shifts gradient colors smoothly for eye-catching headlines.
+description: "A GradientText component from the Sigil design system."
 ---
 
 ## Import
@@ -9,37 +9,29 @@ description: Animated gradient text using background-clip. Shifts gradient color
 import { GradientText } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <GradientText>Gradient text example</GradientText>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<GradientText className="text-4xl font-bold">
-  Sigil UI
-</GradientText>
-```
-
-## Custom colors
-
-```tsx
-<GradientText
-  colors={["#6366f1", "#ec4899", "#6366f1"]}
-  duration={6}
->
-  Custom gradient
-</GradientText>
-```
-
-## Static (no animation)
-
-```tsx
-<GradientText animate={false}>Static gradient</GradientText>
+<GradientText>GradientText content</GradientText>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `colors` | `string[]` | `["var(--s-primary)", "var(--s-accent)", "var(--s-primary)"]` | Gradient stops |
-| `duration` | `number` | `4` | Animation cycle in seconds |
-| `animate` | `boolean` | `true` | Enable animation |
+| `colors` | `string[]` | `[` | Gradient colors. var(--s-primary)","var(--s-accent,#ec4899)","var(--s-primary)"] |
+| `duration` | `number` | `4` | Animation duration in seconds. |
+| `animate` | `boolean` | `true` | Whether the gradient animates. |
 
-Respects `prefers-reduced-motion`.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-primary` | Primary |
+| `--s-accent` | Accent |

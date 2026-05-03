@@ -9,6 +9,22 @@ description: "A Command component from the Sigil design system."
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem, CommandSeparator, CommandDialog } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Command className="border border-[var(--s-border)]">
+  <CommandInput placeholder="Type a command..." />
+  <CommandList>
+    <CommandEmpty>No results.</CommandEmpty>
+    <CommandGroup heading="Suggestions">
+      <CommandItem>Calendar</CommandItem>
+      <CommandItem>Search</CommandItem>
+      <CommandItem>Settings</CommandItem>
+    </CommandGroup>
+  </CommandList>
+</Command>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

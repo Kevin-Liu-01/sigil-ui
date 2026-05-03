@@ -1,6 +1,6 @@
 ---
 title: SpecTable
-description: "A technical specification table for displaying key-value data with grouping."
+description: "A SpecTable component from the Sigil design system."
 ---
 
 ## Import
@@ -9,74 +9,31 @@ description: "A technical specification table for displaying key-value data with
 import { SpecTable } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <SpecTable
-    title="GPU Specifications"
-    groups={[
-      {
-        title: "Performance",
-        rows: [
-          { label: "TFLOPS", value: "312", unit: "FP16", highlight: true },
-          { label: "Memory", value: "80", unit: "GB HBM3" },
-          { label: "Bandwidth", value: "3.35", unit: "TB/s" },
-        ],
-      },
-      {
-        title: "Physical",
-        rows: [
-          { label: "TDP", value: "700", unit: "W" },
-          { label: "Process", value: "4nm" },
-        ],
-      },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<SpecTable
-  title="GPU Specifications"
-  groups={[
-    {
-      title: "Performance",
-      rows: [
-        { label: "TFLOPS", value: "312", unit: "FP16", highlight: true },
-        { label: "Memory", value: "80", unit: "GB HBM3" },
-        { label: "Bandwidth", value: "3.35", unit: "TB/s" },
-      ],
-    },
-    {
-      title: "Physical",
-      rows: [
-        { label: "TDP", value: "700", unit: "W" },
-        { label: "Process", value: "4nm" },
-      ],
-    },
-  ]}
-/>
+<SpecTable>...</SpecTable>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `rows` | `SpecRow[]` | — | Ungrouped specification rows |
-| `groups` | `SpecGroup[]` | — | Grouped rows with section headers |
-| `title` | `string` | — | Optional title header |
+| `rows` | `SpecRow[]` | — | Ungrouped rows (use when no grouping needed). |
+| `groups` | `SpecGroup[]` | — | Grouped rows with section headings. |
+| `title` | `string` | — | Title shown at top. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary-muted` | Highlighted row background |
-| `--s-border` | Table borders |
-| `--s-surface` | Background |
-| `--s-surface-elevated` | Group header background |
-| `--s-text` | Values |
-| `--s-text-muted` | Labels, units, group titles |
-| `--s-font-mono` | Value font |
-| `--s-radius-card` | Container radius |
-| `--s-shadow-sm` | Container shadow |
+| `--s-border` | Border |
+| `--s-primary-muted` | Primary muted |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-font-mono` | Font mono |
+| `--s-radius-card` | Radius card |
+| `--s-border-style` | Border style |
+| `--s-surface` | Surface |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-surface-elevated` | Surface elevated |

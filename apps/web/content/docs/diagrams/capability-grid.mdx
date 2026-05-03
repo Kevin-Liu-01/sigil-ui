@@ -1,6 +1,6 @@
 ---
 title: CapabilityGrid
-description: Animated capability chip matrix with category-by-category staggered reveals. Supports callout sections for comparison.
+description: "A CapabilityGrid component from the Sigil design system."
 ---
 
 ## Import
@@ -12,37 +12,29 @@ import { CapabilityGrid } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<CapabilityGrid
-  categories={[
-    {
-      label: "Runtimes",
-      items: [
-        { name: "Python", color: "var(--s-primary)" },
-        { name: "Node.js", color: "var(--s-primary)" },
-        { name: "Rust", color: "var(--s-primary)" },
-      ],
-    },
-    {
-      label: "Packages",
-      items: [
-        { name: "apt", color: "var(--s-warning)" },
-        { name: "pip", color: "var(--s-warning)" },
-      ],
-    },
-  ]}
-  callout={{
-    label: "Sandboxes restrict",
-    items: ["No root access", "No GPU", "Read-only FS"],
-    variant: "danger",
-  }}
-/>
+<CapabilityGrid>...</CapabilityGrid>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `categories` | `CapabilityCategory[]` | — | Chip categories |
-| `callout` | `CapabilityCallout` | — | Comparison callout |
+| `categories` | `CapabilityCategory[]` | — | — |
+| `callout` | `CapabilityCallout` | — | — |
 
-Categories and chips stagger into view on scroll.
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-error` | Error |
+| `--s-warning` | Warning |
+| `--s-info` | Info |
+| `--s-duration-normal` | Duration normal |
+| `--s-ease-out` | Ease out |
+| `--s-text-muted` | Text muted |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-primary` | Primary |
+| `--s-text` | Text |

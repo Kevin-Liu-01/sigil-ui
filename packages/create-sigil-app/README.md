@@ -22,7 +22,7 @@ npx create-sigil-app my-app -y   # defaults: minimal template, sigil preset
 |------|----------|---------|
 | 1 | Project name | Text input (kebab-case) |
 | 2 | Template | Minimal, AI SaaS, dashboard, docs, portfolio, ecommerce, blog, agency, CLI tool, startup |
-| 3 | Preset | 12 popular picks + browse all 44 |
+| 3 | Preset | 12 popular picks + browse all 46 |
 | 4 | Display font | Optional text input |
 | 5 | Features | GSAP, Motion, Radix Primitives, Sigil Grid |
 | 6 | Agent instructions | Generate `.sigil/AGENTS.md` |

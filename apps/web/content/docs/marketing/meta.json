@@ -1,11 +1,18 @@
 {
   "title": "Marketing",
   "pages": [
-    "hero",
-    "feature-frame",
-    "pricing",
+    "announcement-bar",
+    "blog-grid",
+    "blog-header",
     "cta",
+    "cost-calculator",
+    "feature-frame",
+    "feature-grid",
+    "hero",
     "logo-bar",
-    "testimonial-card"
+    "pricing",
+    "pricing-tiers",
+    "testimonial-card",
+    "unit-pricing"
   ]
 }

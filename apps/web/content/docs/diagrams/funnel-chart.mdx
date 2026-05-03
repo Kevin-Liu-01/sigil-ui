@@ -1,6 +1,6 @@
 ---
 title: FunnelChart
-description: "A conversion funnel chart with step-by-step drop-off rates."
+description: "A FunnelChart component from the Sigil design system."
 ---
 
 ## Import
@@ -9,47 +9,28 @@ description: "A conversion funnel chart with step-by-step drop-off rates."
 import { FunnelChart } from "@sigil-ui/components";
 ```
 
-## Preview
-
-<ComponentPreview>
-  <FunnelChart
-    steps={[
-      { label: "Visitors", value: 10000 },
-      { label: "Signups", value: 3200 },
-      { label: "Active", value: 1800 },
-      { label: "Paid", value: 450 },
-    ]}
-  />
-</ComponentPreview>
-
 ## Usage
 
 ```tsx
-<FunnelChart
-  steps={[
-    { label: "Visitors", value: 10000 },
-    { label: "Signups", value: 3200 },
-    { label: "Active", value: 1800 },
-    { label: "Paid", value: 450 },
-  ]}
-/>
+<FunnelChart>...</FunnelChart>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `steps` | `FunnelStep[]` | — | Funnel stages from top to bottom |
-| `showRates` | `boolean` | `true` | Show conversion rate between steps |
-| `showValues` | `boolean` | `true` | Show absolute values on bars |
+| `steps` | `FunnelStep[]` | — | — |
+| `showRates` | `boolean` | `true` | Show conversion rate between steps. |
+| `showValues` | `boolean` | `true` | Show absolute values. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Default bar color |
-| `--s-primary-contrast` | Bar text color |
-| `--s-text-muted` | Conversion rate labels |
-| `--s-font-mono` | Value and rate font |
-| `--s-radius-sm` | Bar border radius |
-| `--s-duration-fast` | Hover transition |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-radius-sm` | Radius sm |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-shadow-sm` | Shadow sm |

@@ -1,93 +1,61 @@
 ---
 title: Table
-description: A data table with token-driven borders, striped rows, and sortable headers. Composable with atomic sub-components.
+description: "A Table component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell } from "@sigil-ui/components";
+import { Table, TableHeader, TableBody, TableRow, TableHead, TableCell, TableCaption } from "@sigil-ui/components";
 ```
 
-## Usage
+## Preview
 
-```tsx
-<Table>
+<ComponentPreview>
+  <Table>
   <TableHeader>
     <TableRow>
       <TableHead>Name</TableHead>
       <TableHead>Status</TableHead>
-      <TableHead>Amount</TableHead>
     </TableRow>
   </TableHeader>
   <TableBody>
     <TableRow>
-      <TableCell>Acme Corp</TableCell>
+      <TableCell>Alpha</TableCell>
       <TableCell>Active</TableCell>
-      <TableCell>$1,200</TableCell>
     </TableRow>
     <TableRow>
-      <TableCell>Globex</TableCell>
-      <TableCell>Pending</TableCell>
-      <TableCell>$340</TableCell>
+      <TableCell>Beta</TableCell>
+      <TableCell>Draft</TableCell>
     </TableRow>
   </TableBody>
 </Table>
-```
+</ComponentPreview>
 
-## Striped rows
-
-```tsx
-<Table striped>
-  <TableHeader>...</TableHeader>
-  <TableBody>...</TableBody>
-</Table>
-```
-
-## Compact
+## Usage
 
 ```tsx
-<Table size="sm">
-  <TableHeader>...</TableHeader>
-  <TableBody>...</TableBody>
-</Table>
+<Table>...</Table>
 ```
+
+## Sub-components
+
+This component includes the following parts:
+
+- `<TableHeader>`
+- `<TableBody>`
+- `<TableRow>`
+- `<TableHead>`
+- `<TableCell>`
+- `<TableCaption>`
 
 ## Token integration
 
-| CSS Variable | Used for |
+| CSS Variable | Purpose |
 |---|---|
-| `--s-surface` | Table background |
-| `--s-surface-elevated` | Striped row background |
-| `--s-text` | Cell text |
-| `--s-text-muted` | Header text |
-| `--s-border` | Row and cell borders |
-| `--s-font-body` | Body font |
-| `--s-font-mono` | Numeric cells (optional) |
-
-## Props
-
-### Table
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `striped` | `boolean` | `false` | Alternate row backgrounds |
-| `size` | `"sm" \| "md"` | `"md"` | Row padding |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Table content |
-
-### TableHead
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `sortable` | `boolean` | `false` | Show sort indicator |
-| `sorted` | `"asc" \| "desc" \| false` | `false` | Current sort direction |
-| `onSort` | `() => void` | — | Sort click handler |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Header content |
-
-## Accessibility
-
-- Uses semantic `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`
-- Sortable headers use `aria-sort` with `"ascending"` or `"descending"`
-- Focus ring on sortable headers uses `--s-border-interactive`
+| `--s-border` | Border |
+| `--s-border-style` | Border style |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |

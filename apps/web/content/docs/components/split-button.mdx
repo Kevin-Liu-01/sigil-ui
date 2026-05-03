@@ -1,6 +1,6 @@
 ---
 title: SplitButton
-description: Button with a primary action and a separate dropdown trigger, sharing one visual container.
+description: "A SplitButton component from the Sigil design system."
 ---
 
 ## Import
@@ -9,52 +9,36 @@ description: Button with a primary action and a separate dropdown trigger, shari
 import { SplitButton } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <SplitButton />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<SplitButton onClick={() => console.log("save")}>
-  Save
-</SplitButton>
-```
-
-## With icon
-
-```tsx
-<SplitButton
-  icon={<PlusIcon className="size-4" />}
-  onClick={() => console.log("create")}
-  onDropdownClick={() => console.log("dropdown")}
->
-  Create
-</SplitButton>
-```
-
-## Custom dropdown handler
-
-```tsx
-<SplitButton
-  onClick={() => alert("Primary action")}
-  onDropdownClick={() => alert("Show menu")}
-  dropdownLabel="Show more actions"
->
-  Deploy
-</SplitButton>
-```
-
-## Disabled
-
-```tsx
-<SplitButton disabled>Unavailable</SplitButton>
+<SplitButton>SplitButton content</SplitButton>
 ```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `children` | `ReactNode` | — | Button label |
-| `icon` | `ReactNode` | — | Leading icon |
-| `onClick` | `function` | — | Primary button click handler |
-| `onDropdownClick` | `function` | — | Dropdown trigger click handler |
-| `dropdownLabel` | `string` | `"More options"` | Accessible label for dropdown button |
-| `disabled` | `boolean` | `false` | Disable both buttons |
-| `className` | `string` | — | Additional CSS classes |
+| `icon` | `ReactNode` | — | — |
+| `onDropdownClick` | `() => void` | — | — |
+| `dropdownLabel` | `string` | — | — |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-md` | Radius md |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-primary` | Primary |
+| `--s-text-muted` | Text muted |

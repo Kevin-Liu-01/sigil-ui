@@ -1,6 +1,6 @@
 ---
 title: ComparisonTable
-description: A side-by-side feature comparison with check/cross indicators, highlight columns, and responsive stacking.
+description: "A ComparisonTable component from the Sigil design system."
 ---
 
 ## Import
@@ -12,72 +12,26 @@ import { ComparisonTable } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<ComparisonTable
-  columns={["Free", "Pro", "Enterprise"]}
-  rows={[
-    { feature: "Components", values: [true, true, true] },
-    { feature: "Presets", values: ["5", "31", "Unlimited"] },
-    { feature: "Custom tokens", values: [false, true, true] },
-    { feature: "Priority support", values: [false, false, true] },
-  ]}
-/>
+<ComparisonTable>...</ComparisonTable>
 ```
-
-## Highlighted column
-
-```tsx
-<ComparisonTable
-  columns={["Starter", "Pro", "Team"]}
-  highlight={1}
-  rows={[
-    { feature: "Users", values: ["1", "5", "Unlimited"] },
-    { feature: "Storage", values: ["1GB", "10GB", "100GB"] },
-  ]}
-/>
-```
-
-Column index `1` ("Pro") gets a highlighted background and border.
-
-## With prices
-
-```tsx
-<ComparisonTable
-  columns={[
-    { label: "Free", price: "$0" },
-    { label: "Pro", price: "$29/mo" },
-    { label: "Enterprise", price: "Custom" },
-  ]}
-  highlight={1}
-  rows={[
-    { feature: "API calls", values: ["1k/mo", "100k/mo", "Unlimited"] },
-  ]}
-/>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Table background |
-| `--s-surface-elevated` | Highlighted column background |
-| `--s-primary` | Highlight column border |
-| `--s-success` | Check mark color |
-| `--s-error` | Cross mark color |
-| `--s-text` | Feature and value text |
-| `--s-text-muted` | Column header text |
-| `--s-border` | Row and column borders |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `columns` | `(string \| { label: string; price?: string })[]` | — | Column headers |
-| `rows` | `{ feature: string; values: (string \| boolean)[] }[]` | — | Feature rows |
-| `highlight` | `number` | — | Highlighted column index |
-| `className` | `string` | — | Additional CSS classes |
+| `features` | `ComparisonFeature[]` | — | Feature rows to compare. |
+| `columns` | `string[]` | — | Column names (keys matching the values in features). |
 
-## Accessibility
+## Token integration
 
-- Uses semantic `<table>` markup
-- Boolean values render as visually hidden "Included" or "Not included" text
-- Highlighted column has `aria-current="true"` on the header
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-radius-md` | Radius md |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-duration-fast` | Duration fast |
+| `--s-success` | Success |

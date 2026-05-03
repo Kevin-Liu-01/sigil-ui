@@ -1,6 +1,6 @@
 ---
 title: FloatingUI
-description: A 3D floating card that hovers above the page surface with adjustable elevation, shadow, and drift animation.
+description: "A FloatingUI component from the Sigil design system."
 ---
 
 ## Import
@@ -9,81 +9,33 @@ description: A 3D floating card that hovers above the page surface with adjustab
 import { FloatingUI } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <FloatingUI />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<FloatingUI>
-  <Card>
-    <CardBody>This card floats above the page.</CardBody>
-  </Card>
-</FloatingUI>
+<FloatingUI>...</FloatingUI>
 ```
-
-## Elevation levels
-
-```tsx
-<FloatingUI elevation="low">Subtle lift</FloatingUI>
-<FloatingUI elevation="mid">Default hover</FloatingUI>
-<FloatingUI elevation="high">Dramatic float</FloatingUI>
-```
-
-Higher elevation increases the translateZ, shadow size, and blur.
-
-## Drift animation
-
-```tsx
-<FloatingUI drift>
-  <Card>Gently bobs up and down.</Card>
-</FloatingUI>
-```
-
-## Interactive tilt
-
-Follows the cursor for a parallax effect:
-
-```tsx
-<FloatingUI interactive>
-  <Card>Tilts toward cursor on hover.</Card>
-</FloatingUI>
-```
-
-## Stacked floating elements
-
-```tsx
-<div className="relative">
-  <FloatingUI elevation="low" className="absolute top-0 left-0">
-    <Card>Background layer</Card>
-  </FloatingUI>
-  <FloatingUI elevation="high" className="absolute top-4 left-4">
-    <Card>Foreground layer</Card>
-  </FloatingUI>
-</div>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-shadow-md` | Low elevation shadow |
-| `--s-shadow-lg` | Mid elevation shadow |
-| `--s-shadow-xl` | High elevation shadow |
-| `--s-duration-slower` | Drift animation cycle |
-| `--s-duration-fast` | Tilt response |
-| `--s-ease-spring` | Tilt interpolation |
-| `--s-ease-default` | Drift easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `elevation` | `"low" \| "mid" \| "high"` | `"mid"` | Float height |
-| `drift` | `boolean` | `false` | Enable bob animation |
-| `interactive` | `boolean` | `false` | Follow cursor tilt |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | Floating content |
+| `layers` | `ReactNode[]` | — | Array of React elements to stack as floating layers. |
+| `offset` | `number` | `20` | Pixel offset between each layer. |
+| `shadowDepth` | `"sm" | "md" | "lg"` | `md` | Shadow depth applied to each layer. |
 
-## Accessibility
+## Token integration
 
-- `prefers-reduced-motion` disables drift and tilt animations
-- Content inside remains fully accessible
-- Decorative by default — add `role` if the float conveys meaning
+| CSS Variable | Purpose |
+|---|---|
+| `--s-shadow-sm` | Shadow sm |
+| `--s-shadow-md` | Shadow md |
+| `--s-shadow-lg` | Shadow lg |
+| `--s-card-radius` | Card radius |
+| `--s-border` | Border |
+| `--s-surface` | Surface |

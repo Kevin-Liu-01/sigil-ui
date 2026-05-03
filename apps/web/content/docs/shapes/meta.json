@@ -1,4 +1,10 @@
 {
   "title": "Shapes",
-  "pages": ["diamond", "hexagon", "triangle", "diagonal", "shape"]
+  "pages": [
+    "diagonal",
+    "diamond",
+    "hexagon",
+    "shape",
+    "triangle"
+  ]
 }

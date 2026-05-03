@@ -1,6 +1,6 @@
 ---
 title: RadioGroup
-description: A set of mutually exclusive radio buttons. Built on Radix RadioGroup with token-driven active and focus states.
+description: "A RadioGroup component from the Sigil design system."
 ---
 
 ## Import
@@ -9,92 +9,32 @@ description: A set of mutually exclusive radio buttons. Built on Radix RadioGrou
 import { RadioGroup, RadioGroupItem } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <RadioGroup defaultValue="a">
+    <RadioGroupItem value="a" />
+    <RadioGroupItem value="b" />
+  </RadioGroup>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<RadioGroup defaultValue="email">
-  <Stack gap={8}>
-    <Stack direction="row" gap={8} align="center">
-      <RadioGroupItem value="email" id="r1" />
-      <Label htmlFor="r1">Email</Label>
-    </Stack>
-    <Stack direction="row" gap={8} align="center">
-      <RadioGroupItem value="sms" id="r2" />
-      <Label htmlFor="r2">SMS</Label>
-    </Stack>
-    <Stack direction="row" gap={8} align="center">
-      <RadioGroupItem value="push" id="r3" />
-      <Label htmlFor="r3">Push notification</Label>
-    </Stack>
-  </Stack>
-</RadioGroup>
+<RadioGroup>...</RadioGroup>
 ```
 
-## Controlled
+## Sub-components
 
-```tsx
-import { useState } from "react";
+This component includes the following parts:
 
-function NotificationPref() {
-  const [method, setMethod] = useState("email");
-
-  return (
-    <RadioGroup value={method} onValueChange={setMethod}>
-      <Stack direction="row" gap={8} align="center">
-        <RadioGroupItem value="email" id="c1" />
-        <Label htmlFor="c1">Email</Label>
-      </Stack>
-      <Stack direction="row" gap={8} align="center">
-        <RadioGroupItem value="sms" id="c2" />
-        <Label htmlFor="c2">SMS</Label>
-      </Stack>
-    </RadioGroup>
-  );
-}
-```
-
-## Disabled
-
-```tsx
-<RadioGroup defaultValue="a" disabled>
-  <RadioGroupItem value="a" id="d1" />
-  <RadioGroupItem value="b" id="d2" />
-</RadioGroup>
-```
+- `<RadioGroupItem>`
 
 ## Token integration
 
-| CSS Variable | Used for |
+| CSS Variable | Purpose |
 |---|---|
-| `--s-primary` | Selected indicator fill |
-| `--s-border` | Unselected ring border |
-| `--s-border-interactive` | Focus ring |
-| `--s-text-disabled` | Disabled state color |
-| `--s-radius-full` | Indicator border radius |
-| `--s-duration-fast` | Selection transition |
-
-## Props
-
-### RadioGroup
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `value` | `string` | — | Controlled value |
-| `defaultValue` | `string` | — | Default selected value |
-| `onValueChange` | `(value: string) => void` | — | Change handler |
-| `disabled` | `boolean` | `false` | Disable all items |
-| `className` | `string` | — | Additional CSS classes |
-
-### RadioGroupItem
-
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `value` | `string` | — | Item value |
-| `disabled` | `boolean` | `false` | Disable this item |
-| `className` | `string` | — | Additional CSS classes |
-
-## Accessibility
-
-- Uses `role="radiogroup"` with `role="radio"` children
-- Arrow keys move selection between items
-- `aria-checked` reflects the selected state
+| `--s-radius-full` | Radius full |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-primary` | Primary |

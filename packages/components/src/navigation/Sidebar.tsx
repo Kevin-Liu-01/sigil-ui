@@ -46,8 +46,8 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
         className={cn(
           "sticky top-0 flex h-screen flex-col border-r border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)]",
-          "transition-[width] duration-[var(--s-duration-normal,200ms)] ease-out",
-          collapsed ? "w-16" : "w-[var(--s-sidebar-width,280px)]",
+          "transition-[width] duration-[var(--s-duration-normal,200ms)] ease-[var(--s-ease-out)]",
+          collapsed ? "w-[var(--s-sidebar-collapsed,48px)]" : "w-[var(--s-sidebar-width,256px)]",
           className,
         )}
         {...rest}
@@ -59,7 +59,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           onClick={() => setCollapsed(!collapsed)}
           className={cn(
-            "absolute -right-3 top-6 z-10 inline-flex h-6 w-6 items-center justify-center rounded-[var(--s-radius-full)]",
+            "absolute -right-[var(--s-space-3,12px)] top-[var(--s-space-6,24px)] z-10 inline-flex size-[var(--s-space-6,24px)] items-center justify-center rounded-[var(--s-radius-full)]",
             "border border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)]",
             "shadow-[var(--s-shadow-sm)] transition-colors duration-[var(--s-duration-fast,150ms)]",
             "hover:bg-[var(--s-primary)]/10 hover:text-[var(--s-text)]",
@@ -82,7 +82,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
 export const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarHeader({ className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="sidebar-header" className={cn("flex items-center gap-2 px-4 py-4 border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-header" className={cn("flex items-center gap-[var(--s-space-2,8px)] px-[var(--s-space-4,16px)] py-[var(--s-space-4,16px)] border-b border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]", className)} {...rest} />
     );
   },
 );
@@ -92,7 +92,7 @@ export const SidebarHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivEl
 export const SidebarContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarContent({ className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="sidebar-content" className={cn("flex-1 overflow-y-auto px-2 py-2", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-content" className={cn("flex-1 overflow-y-auto px-[var(--s-space-2,8px)] py-[var(--s-space-2,8px)]", className)} {...rest} />
     );
   },
 );
@@ -102,7 +102,7 @@ export const SidebarContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivE
 export const SidebarFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
   function SidebarFooter({ className, ...rest }, ref) {
     return (
-      <div ref={ref} data-slot="sidebar-footer" className={cn("border-t border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-3", className)} {...rest} />
+      <div ref={ref} data-slot="sidebar-footer" className={cn("border-t border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)] px-[var(--s-space-4,16px)] py-[var(--s-space-3,12px)]", className)} {...rest} />
     );
   },
 );
@@ -115,7 +115,7 @@ export interface SidebarGroupProps extends HTMLAttributes<HTMLDivElement> {
 
 export const SidebarGroup = forwardRef<HTMLDivElement, SidebarGroupProps>(
   function SidebarGroup({ className, ...rest }, ref) {
-    return <div ref={ref} data-slot="sidebar-group" className={cn("py-2", className)} {...rest} />;
+    return <div ref={ref} data-slot="sidebar-group" className={cn("py-[var(--s-space-2,8px)]", className)} {...rest} />;
   },
 );
 
@@ -135,7 +135,7 @@ export const SidebarGroupLabel = forwardRef<HTMLDivElement, SidebarGroupLabelPro
       <div
         ref={ref}
         data-slot="sidebar-group-label"
-        className={cn("px-3 py-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--s-text-muted)]", className)}
+        className={cn("px-[var(--s-space-3,12px)] py-[var(--s-space-1,4px)] text-[length:var(--s-size-xs)] font-[var(--s-weight-semibold)] uppercase tracking-[var(--s-tracking-wider)] text-[var(--s-text-muted)]", className)}
         {...rest}
       >
         {children}
@@ -165,12 +165,14 @@ export const SidebarItem = forwardRef<HTMLButtonElement, SidebarItemProps>(
         data-slot="sidebar-item"
         aria-current={active ? "page" : undefined}
         className={cn(
-          "flex w-full items-center gap-3 rounded-[var(--s-radius-md,6px)] px-3 py-2 text-sm font-medium",
+          "flex w-full items-center gap-[var(--s-space-3,12px)] rounded-[var(--s-nav-sidebar-item-radius,var(--s-radius-md))]",
+          "[padding:var(--s-nav-sidebar-item-padding,8px_12px)]",
+          "text-[length:var(--s-size-sm)] font-[var(--s-weight-medium)]",
           "transition-colors duration-[var(--s-duration-fast,150ms)]",
           active
             ? "bg-[var(--s-primary)]/10 text-[var(--s-primary)]"
             : "text-[var(--s-text-muted)] hover:bg-[var(--s-primary)]/5 hover:text-[var(--s-text)]",
-          collapsed && "justify-center px-0",
+          collapsed && "justify-center [padding:var(--s-space-2,8px)_0]",
           className,
         )}
         {...rest}

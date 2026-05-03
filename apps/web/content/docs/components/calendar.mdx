@@ -1,17 +1,7 @@
 ---
 title: Calendar
-description: Date picker calendar powered by react-day-picker with token-driven styling.
+description: "A Calendar component from the Sigil design system."
 ---
-
-# Calendar
-
-> Date picker calendar powered by react-day-picker with token-driven styling.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add calendar
-```
 
 ## Import
 
@@ -19,74 +9,31 @@ npx @sigil-ui/cli add calendar
 import { Calendar } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Calendar />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-const [date, setDate] = useState<Date | undefined>(new Date());
-
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-/>
+<Calendar>...</Calendar>
 ```
 
-## Examples
+## Token integration
 
-### Date range
-
-```tsx
-const [range, setRange] = useState<DateRange | undefined>();
-
-<Calendar
-  mode="range"
-  selected={range}
-  onSelect={setRange}
-  numberOfMonths={2}
-/>
-```
-
-### With disabled dates
-
-```tsx
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  disabled={(day) => day < new Date()}
-/>
-```
-
-### Hide outside days
-
-```tsx
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-  showOutsideDays={false}
-/>
-```
-
-## Props
-
-Extends all `react-day-picker` `DayPicker` props.
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `mode` | `"single" \| "range" \| "multiple"` | — | Selection mode |
-| `selected` | `Date \| DateRange \| Date[]` | — | Selected date(s) |
-| `onSelect` | `function` | — | Selection change handler |
-| `showOutsideDays` | `boolean` | `true` | Show days from adjacent months |
-| `numberOfMonths` | `number` | `1` | Number of months to display |
-| `disabled` | `Matcher \| Matcher[]` | — | Dates to disable |
-| `className` | `string` | — | Additional CSS classes |
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-primary` — selected day background, today ring, focus ring
-- `--s-text` — day text, caption label
-- `--s-text-muted` — weekday headers, outside days, navigation arrows
-- `--s-radius-sm` — day cell and navigation button radius
+| CSS Variable | Purpose |
+|---|---|
+| `--s-background` | Background |
+| `--s-radius-sm` | Radius sm |
+| `--s-text-muted` | Text muted |
+| `--s-duration-fast` | Duration fast |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-radius-md` | Radius md |
+| `--s-radius-none` | Radius none |
+| `--s-surface-elevated` | Surface elevated |
+| `--s-border` | Border |
+| `--s-ring` | Ring |
+| `--s-primary` | Primary |

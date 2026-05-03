@@ -9,6 +9,20 @@ description: "A Sheet component from the Sigil design system."
 import { Sheet, SheetTrigger, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Sheet>
+  <SheetTrigger asChild><Button variant="outline">Open sheet</Button></SheetTrigger>
+  <SheetContent>
+    <SheetHeader>
+      <SheetTitle>Settings</SheetTitle>
+      <SheetDescription>Configure your preferences.</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
@@ -32,13 +46,13 @@ This component includes the following parts:
 |---|---|
 | `--s-overlay-bg` | Overlay bg |
 | `--s-overlay-blur` | Overlay blur |
-| `--s-background` | Background |
+| `--s-overlay-padding` | Overlay padding |
+| `--s-overlay-surface` | Overlay surface |
+| `--s-surface` | Surface |
+| `--s-overlay-border` | Overlay border |
 | `--s-border` | Border |
 | `--s-border-style` | Border style |
-| `--s-shadow-lg` | Shadow lg |
+| `--s-overlay-shadow` | Overlay shadow |
+| `--s-shadow-xl` | Shadow xl |
 | `--s-duration-normal` | Duration normal |
 | `--s-radius-sm` | Radius sm |
-| `--s-ring` | Ring |
-| `--s-primary` | Primary |
-| `--s-text` | Text |
-| `--s-text-muted` | Text muted |

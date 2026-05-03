@@ -1,100 +1,41 @@
 ---
 title: Pricing
-description: A pricing section with plan cards, feature lists, and highlighted recommended plan. Responsive grid layout.
+description: "A Pricing component from the Sigil design system."
 ---
 
 ## Import
 
 ```tsx
-import { Pricing, PricingPlan } from "@sigil-ui/components";
+import { Pricing } from "@sigil-ui/components";
 ```
 
 ## Usage
 
 ```tsx
-<Pricing>
-  <PricingPlan
-    name="Free"
-    price="$0"
-    description="For side projects"
-    features={["5 components", "Starter presets", "Community support"]}
-    cta="Get started"
-    ctaHref="/signup"
-  />
-  <PricingPlan
-    name="Pro"
-    price="$29"
-    period="/mo"
-    description="For production apps"
-    features={["All components", "46 presets", "Custom tokens", "Priority support"]}
-    cta="Start free trial"
-    ctaHref="/signup?plan=pro"
-    highlighted
-  />
-  <PricingPlan
-    name="Enterprise"
-    price="Custom"
-    description="For teams at scale"
-    features={["Everything in Pro", "SSO", "SLA", "Dedicated support"]}
-    cta="Contact sales"
-    ctaHref="/contact"
-  />
-</Pricing>
+<Pricing>...</Pricing>
 ```
-
-## Two-column layout
-
-```tsx
-<Pricing columns={2}>
-  <PricingPlan name="Monthly" price="$29" period="/mo" features={["All features"]} cta="Subscribe" />
-  <PricingPlan name="Annual" price="$19" period="/mo" badge="Save 34%" features={["All features"]} cta="Subscribe" highlighted />
-</Pricing>
-```
-
-## With badge
-
-```tsx
-<PricingPlan name="Pro" price="$29" badge="Most popular" highlighted />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Plan card background |
-| `--s-surface-elevated` | Highlighted plan background |
-| `--s-primary` | Highlighted plan border and CTA |
-| `--s-text` | Plan name and price |
-| `--s-text-muted` | Description and feature text |
-| `--s-success` | Check mark for features |
-| `--s-card-radius` | Plan card radius |
-| `--s-shadow-lg` | Highlighted plan elevation |
 
 ## Props
 
-### Pricing
-
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `columns` | `2 \| 3 \| 4` | `3` | Grid columns |
-| `className` | `string` | — | Additional CSS classes |
-| `children` | `ReactNode` | — | PricingPlan children |
+| `name` | `string` | — | Plan name. |
+| `price` | `string` | — | Price display (e.g. "$19"). |
+| `period` | `string` | — | Billing period (e.g. "/mo"). |
+| `features` | `string[]` | — | Feature list. |
+| `cta` | `ReactNode` | — | CTA button content. |
+| `highlighted` | `boolean` | — | Highlight this card as recommended. |
 
-### PricingPlan
+## Token integration
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `name` | `string` | — | Plan name |
-| `price` | `string` | — | Price display |
-| `period` | `string` | — | Billing period suffix |
-| `description` | `string` | — | Plan description |
-| `features` | `string[]` | — | Feature list |
-| `cta` | `string` | — | Button text |
-| `ctaHref` | `string` | — | Button link |
-| `badge` | `string` | — | Badge text |
-| `highlighted` | `boolean` | `false` | Highlight this plan |
-
-## Accessibility
-
-- Feature check marks have visually hidden "Included:" prefix
-- CTA buttons have descriptive `aria-label` including plan name
+| CSS Variable | Purpose |
+|---|---|
+| `--s-card-radius` | Card radius |
+| `--s-border-style` | Border style |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-shadow-lg` | Shadow lg |
+| `--s-border` | Border |
+| `--s-text-muted` | Text muted |
+| `--s-text` | Text |
+| `--s-success` | Success |

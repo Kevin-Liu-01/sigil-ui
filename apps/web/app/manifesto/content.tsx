@@ -294,7 +294,7 @@ export function ManifestoContent() {
                 says something specific about the product wearing it.
               </Paragraph>
               <Paragraph>
-                Thirty-one presets. Not thirty-one themes. Themes are wallpaper. Presets are
+                Forty-six presets. Not forty-six themes. Themes are wallpaper. Presets are
                 identities.
               </Paragraph>
             </section>

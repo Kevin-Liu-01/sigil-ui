@@ -25,12 +25,12 @@ If an animation has no purpose, delete it.
 Sometimes the best animation is no animation.
 
 - **High-frequency interactions**: anything triggered tens or hundreds of times a day (command
-  palettes, keyboard navigation, list selection) should have zero animation. The user has a goal;
-  motion becomes friction.
+palettes, keyboard navigation, list selection) should have zero animation. The user has a goal;
+motion becomes friction.
 - **Keyboard-initiated actions**: arrow key navigation, hotkey commands. These are repeated rapidly;
-  even 100ms of transition makes them feel laggy and disconnected.
+even 100ms of transition makes them feel laggy and disconnected.
 - **Daily-driver hover effects**: if users hover the same element dozens of times a day, skip the
-  transition. Initial delight fades into annoyance.
+transition. Initial delight fades into annoyance.
 
 The litmus test: will the user see this animation more than ~10 times per session? If yes, make it
 instant or remove it entirely.
@@ -44,6 +44,7 @@ Prefer 150-200ms for interactive elements (dropdowns, selects, tooltips). Reserv
 larger transitions (page changes, modals, morphing components).
 
 In Sigil, all durations come from tokens:
+
 - `var(--s-duration-fast)` — 150ms, interactive elements
 - `var(--s-duration-normal)` — 200ms, standard transitions
 - `var(--s-duration-slow)` — 300ms, larger movements
@@ -125,10 +126,12 @@ individual improvements are subtle; the aggregate is not.
 
 Every motion value in a Sigil component must come from a token:
 
-| Property | Token | Banned |
-|----------|-------|--------|
-| Duration | `duration-[var(--s-duration-*)]` | `duration-150`, `duration-200` |
-| Easing | `var(--s-ease-*)` | Hardcoded `cubic-bezier(...)` in components |
-| Shadow (hover) | `shadow-[var(--s-shadow-*)]` | `shadow-sm`, `shadow-md` |
+
+| Property       | Token                            | Banned                                      |
+| -------------- | -------------------------------- | ------------------------------------------- |
+| Duration       | `duration-[var(--s-duration-*)]` | `duration-150`, `duration-200`              |
+| Easing         | `var(--s-ease-*)`                | Hardcoded `cubic-bezier(...)` in components |
+| Shadow (hover) | `shadow-[var(--s-shadow-*)]`     | `shadow-sm`, `shadow-md`                    |
+
 
 Easings and durations live in the preset so the entire motion personality changes with one preset swap. A `restrained` preset uses shorter durations and subtle easings. A `theatrical` preset uses longer durations and springier curves. The components don't change — only the tokens do.

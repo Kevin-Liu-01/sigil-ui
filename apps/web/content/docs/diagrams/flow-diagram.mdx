@@ -1,6 +1,6 @@
 ---
 title: FlowDiagram
-description: A directional flow chart with auto-layout, branching, and animated edge paths. Built on the Diagram primitive.
+description: "A FlowDiagram component from the Sigil design system."
 ---
 
 ## Import
@@ -12,102 +12,29 @@ import { FlowDiagram } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<FlowDiagram
-  direction="horizontal"
-  nodes={[
-    { id: "start", label: "User visits" },
-    { id: "auth", label: "Authenticate" },
-    { id: "dashboard", label: "Dashboard", variant: "accent" },
-  ]}
-  connections={[
-    { from: "start", to: "auth" },
-    { from: "auth", to: "dashboard" },
-  ]}
-/>
+<FlowDiagram>...</FlowDiagram>
 ```
-
-Steps are automatically connected with directional arrows.
-
-## Branching
-
-```tsx
-<FlowDiagram
-  direction="vertical"
-  nodes={[
-    { id: "input", label: "Request" },
-    { id: "validate", label: "Validate", variant: "highlighted" },
-    { id: "response", label: "Send response" },
-  ]}
-  connections={[
-    { from: "input", to: "validate", label: "valid?" },
-    { from: "validate", to: "response" },
-  ]}
-/>
-```
-
-## Animated edges
-
-```tsx
-<FlowDiagram
-  connector="dashed-animated"
-  nodes={[
-    { id: "a", label: "Fetch data" },
-    { id: "b", label: "Transform" },
-    { id: "c", label: "Render" },
-  ]}
-  connections={[
-    { from: "a", to: "b" },
-    { from: "b", to: "c" },
-  ]}
-/>
-```
-
-Dashed edges animate to show flow direction.
-
-## Node variants
-
-```tsx
-const nodes = [
-  { id: "start", label: "Start" },
-  { id: "process", label: "Process", variant: "highlighted" },
-  { id: "end", label: "End", variant: "accent" },
-];
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-surface` | Step background |
-| `--s-border` | Step border and edge stroke |
-| `--s-primary` | Active step accent |
-| `--s-text` | Step label |
-| `--s-radius-md` | Rectangle step radius |
-| `--s-font-mono` | Label font |
-| `--s-duration-slow` | Edge animation speed |
 
 ## Props
 
-### FlowDiagram
-
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `nodes` | `FlowNode[]` | — | Ordered nodes to render |
-| `connections` | `FlowConnection[]` | — | Directed edges between nodes |
-| `direction` | `"horizontal" \| "vertical"` | `"horizontal"` | Flow direction |
-| `connector` | `"solid" \| "dashed" \| "dashed-animated"` | `"dashed-animated"` | Edge style |
-| `className` | `string` | — | Additional CSS classes |
+| `nodes` | `FlowNode[]` | — | — |
+| `connections` | `FlowConnection[]` | — | — |
+| `direction` | `"horizontal" | "vertical"` | — | — |
+| `connector` | `"solid" | "dashed" | "dashed-animated"` | — | — |
 
-### FlowNode
+## Token integration
 
-| Prop | Type | Default | Description |
-|---|---|---|---|
-| `id` | `string` | — | Unique step identifier |
-| `label` | `string` | — | Step label |
-| `children` | `ReactNode` | — | Optional secondary text |
-| `variant` | `"default" \| "highlighted" \| "accent"` | `"default"` | Node treatment |
-
-## Accessibility
-
-- SVG edges have `aria-hidden="true"`
-- Node labels render as text inside token-styled cards
+| CSS Variable | Purpose |
+|---|---|
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-primary` | Primary |
+| `--s-primary-muted` | Primary muted |
+| `--s-primary-contrast` | Primary contrast |
+| `--s-radius-md` | Radius md |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |
+| `--s-chart-axis` | Chart axis |
+| `--s-font-mono` | Font mono |

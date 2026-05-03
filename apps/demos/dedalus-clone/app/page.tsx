@@ -3,14 +3,31 @@ export default function Page() {
     {
       title: "Type-safe from edge to database",
       desc: "End-to-end TypeScript with generated types for your database schema. Catch errors at compile time, not in production.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--r-primary)" }}>
+          <polyline points="7 4 2 10 7 16" />
+          <polyline points="13 4 18 10 13 16" />
+        </svg>
+      ),
     },
     {
       title: "Built-in auth & permissions",
       desc: "Row-level security, JWT tokens, and social auth providers configured in minutes. No third-party auth service needed.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--r-primary)" }}>
+          <path d="M10 2L3 6v4c0 4.4 3 8.5 7 10 4-1.5 7-5.6 7-10V6l-7-4z" />
+          <polyline points="7 10 9 12 13 8" />
+        </svg>
+      ),
     },
     {
       title: "Real-time subscriptions",
       desc: "Subscribe to database changes with a single line of code. Build collaborative features without managing WebSockets.",
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: "var(--r-primary)" }}>
+          <path d="M11 2L4 11h5l-1 7 7-9h-5l1-7z" />
+        </svg>
+      ),
     },
   ];
 
@@ -206,13 +223,7 @@ const { data, error } = await db
                     borderRadius: "var(--r-radius)",
                   }}
                 >
-                  <div
-                    className="w-3 h-3"
-                    style={{
-                      background: "var(--r-primary)",
-                      borderRadius: "2px",
-                    }}
-                  />
+                  {f.icon}
                 </div>
                 <h3 className="text-base font-semibold mb-3">{f.title}</h3>
                 <p className="text-sm leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
@@ -331,7 +342,7 @@ const { data, error } = await db
 
       {/* CTA band */}
       <section
-        className="px-6 py-24 text-center"
+        className="relative px-6 py-24 text-center overflow-hidden"
         style={{
           borderTop: "1px solid var(--r-border)",
           background: "var(--r-surface)",

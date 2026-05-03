@@ -1,4 +1,9 @@
 {
   "title": "Patterns",
-  "pages": ["pattern", "tessellation", "cross", "grain-gradient"]
+  "pages": [
+    "cross",
+    "grain-gradient",
+    "pattern",
+    "tessellation"
+  ]
 }

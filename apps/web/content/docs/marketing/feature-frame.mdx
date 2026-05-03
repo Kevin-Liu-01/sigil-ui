@@ -1,6 +1,6 @@
 ---
 title: FeatureFrame
-description: A feature showcase section with icon, headline, description, and optional visual. Use in feature grids and benefit lists.
+description: "A FeatureFrame component from the Sigil design system."
 ---
 
 ## Import
@@ -12,84 +12,29 @@ import { FeatureFrame } from "@sigil-ui/components";
 ## Usage
 
 ```tsx
-<FeatureFrame
-  icon={<TokensIcon className="size-6" />}
-  title="Token-driven"
-  description="One file controls your entire visual identity."
-/>
+<FeatureFrame>...</FeatureFrame>
 ```
-
-## Feature grid
-
-```tsx
-<SigilGrid columns={3}>
-  <SigilGridCell>
-    <FeatureFrame
-      icon={<PaletteIcon className="size-6" />}
-      title="46 presets"
-      description="Switch visual identity with a single config change."
-    />
-  </SigilGridCell>
-  <SigilGridCell>
-    <FeatureFrame
-      icon={<CodeIcon className="size-6" />}
-      title="Copy-paste"
-      description="Own your components. No lock-in."
-    />
-  </SigilGridCell>
-  <SigilGridCell>
-    <FeatureFrame
-      icon={<AgentIcon className="size-6" />}
-      title="Agent-ready"
-      description="AI agents edit one token file, not scattered classes."
-    />
-  </SigilGridCell>
-</SigilGrid>
-```
-
-## With visual
-
-```tsx
-<FeatureFrame
-  title="Live preview"
-  description="See changes instantly as you edit tokens."
-  visual={<img src="/preview.png" alt="Live preview demo" />}
-/>
-```
-
-## Horizontal layout
-
-```tsx
-<FeatureFrame
-  orientation="horizontal"
-  icon={<ZapIcon className="size-6" />}
-  title="Fast builds"
-  description="Token compilation in under 50ms."
-/>
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Icon color |
-| `--s-text` | Title color |
-| `--s-text-muted` | Description color |
-| `--s-font-display` | Title font |
-| `--s-space-4` | Gap between icon, title, description |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `icon` | `ReactNode` | — | Feature icon |
-| `title` | `string` | — | Feature title |
-| `description` | `string` | — | Feature description |
-| `visual` | `ReactNode` | — | Image or illustration |
-| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Layout direction |
-| `className` | `string` | — | Additional CSS classes |
+| `icon` | `ReactNode` | — | Icon or visual element. |
+| `title` | `string` | — | Feature title. |
+| `description` | `string` | — | Feature description. |
 
-## Accessibility
+## Token integration
 
-- Icon is decorative with `aria-hidden="true"` when title is present
-- Title renders as `<h3>` within a section context
+| CSS Variable | Purpose |
+|---|---|
+| `--s-card-radius` | Card radius |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-duration-normal` | Duration normal |
+| `--s-shadow-md` | Shadow md |
+| `--s-radius-md` | Radius md |
+| `--s-primary-muted` | Primary muted |
+| `--s-primary` | Primary |
+| `--s-text` | Text |
+| `--s-text-muted` | Text muted |

@@ -28,6 +28,23 @@ import {
 } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Drawer>
+  <DrawerTrigger asChild><Button variant="outline">Open drawer</Button></DrawerTrigger>
+  <DrawerContent>
+    <DrawerHeader>
+      <DrawerTitle>Settings</DrawerTitle>
+      <DrawerDescription>Adjust your preferences.</DrawerDescription>
+    </DrawerHeader>
+    <DrawerFooter>
+      <DrawerClose asChild><Button variant="ghost">Close</Button></DrawerClose>
+    </DrawerFooter>
+  </DrawerContent>
+</Drawer>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

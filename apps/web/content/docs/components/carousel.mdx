@@ -1,112 +1,61 @@
 ---
 title: Carousel
-description: Scrollable content carousel powered by Embla with previous/next navigation.
+description: "A Carousel component from the Sigil design system."
 ---
-
-# Carousel
-
-> Scrollable content carousel powered by Embla with previous/next navigation.
-
-## Installation
-
-```bash
-npx @sigil-ui/cli add carousel
-```
 
 ## Import
 
 ```tsx
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-} from "@sigil-ui/components";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@sigil-ui/components";
 ```
+
+## Preview
+
+<ComponentPreview>
+  <Carousel className="w-full max-w-xs">
+  <CarouselContent>
+    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 1</div></CarouselItem>
+    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 2</div></CarouselItem>
+    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 3</div></CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+</Carousel>
+</ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Carousel>
-  <CarouselContent>
-    <CarouselItem>Slide 1</CarouselItem>
-    <CarouselItem>Slide 2</CarouselItem>
-    <CarouselItem>Slide 3</CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
+<Carousel>...</Carousel>
 ```
 
-## Examples
+## Sub-components
 
-### Vertical orientation
+This component includes the following parts:
 
-```tsx
-<Carousel orientation="vertical" className="h-[300px]">
-  <CarouselContent>
-    <CarouselItem>Top</CarouselItem>
-    <CarouselItem>Middle</CarouselItem>
-    <CarouselItem>Bottom</CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
-```
-
-### With Embla options
-
-```tsx
-<Carousel opts={{ loop: true, align: "start" }}>
-  <CarouselContent>
-    <CarouselItem className="basis-1/3">Card 1</CarouselItem>
-    <CarouselItem className="basis-1/3">Card 2</CarouselItem>
-    <CarouselItem className="basis-1/3">Card 3</CarouselItem>
-    <CarouselItem className="basis-1/3">Card 4</CarouselItem>
-  </CarouselContent>
-</Carousel>
-```
-
-### Image gallery
-
-```tsx
-<Carousel>
-  <CarouselContent>
-    {images.map((src, i) => (
-      <CarouselItem key={i}>
-        <img src={src} alt={`Photo ${i + 1}`} className="w-full rounded-[var(--s-radius-md)]" />
-      </CarouselItem>
-    ))}
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
-```
+- `<CarouselContent>`
+- `<CarouselItem>`
+- `<CarouselPrevious>`
+- `<CarouselNext>`
 
 ## Props
 
-### Carousel
-
 | Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Scroll direction |
-| `opts` | `EmblaOptionsType` | — | Embla carousel options |
-| `className` | `string` | — | Additional CSS classes |
+|---|---|---|---|
+| `orientation` | `"horizontal" | "vertical"` | — | — |
+| `opts` | `Parameters<typeof useEmblaCarousel>[0]` | — | — |
+| `tilt` | `boolean` | — | Enable 3D tilt perspective on slides. |
 
-### CarouselItem
+## Token integration
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `className` | `string` | — | Width control (e.g. `basis-1/3`) |
-
-## Tokens
-
-This component reads these CSS variables:
-
-- `--s-border` — navigation button border
-- `--s-background` — navigation button background
-- `--s-text-muted` — navigation arrow color
-- `--s-surface-elevated` — navigation button hover
-- `--s-radius-full` — navigation button shape
-- `--s-shadow-sm` — navigation button elevation
+| CSS Variable | Purpose |
+|---|---|
+| `--s-duration-normal` | Duration normal |
+| `--s-radius-full` | Radius full |
+| `--s-border-style` | Border style |
+| `--s-border` | Border |
+| `--s-surface` | Surface |
+| `--s-text` | Text |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-duration-fast` | Duration fast |
+| `--s-primary` | Primary |

@@ -32,11 +32,24 @@ import {
 } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <ContextMenu>
+  <ContextMenuTrigger className="flex h-24 w-full items-center justify-center border border-dashed border-[var(--s-border)] text-[var(--s-text-muted)]">Right-click here</ContextMenuTrigger>
+  <ContextMenuContent>
+    <ContextMenuItem>Cut</ContextMenuItem>
+    <ContextMenuItem>Copy</ContextMenuItem>
+    <ContextMenuItem>Paste</ContextMenuItem>
+  </ContextMenuContent>
+</ContextMenu>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
 <ContextMenu>
-  <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-[var(--s-radius-md)] border border-dashed border-[var(--s-border)]">
+  <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-[var(--s-radius-md)] border border-dashed border-[color:var(--s-border)]">
     Right click here
   </ContextMenuTrigger>
   <ContextMenuContent>

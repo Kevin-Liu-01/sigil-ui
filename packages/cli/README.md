@@ -5,6 +5,7 @@ The command-line interface for Sigil UI. Handles project setup, component instal
 ## The Core Principle
 
 The CLI is the primary interface for configuring a Sigil project. Instead of manually editing config files, Tailwind configs, or component styles, use the CLI to:
+- **Generate and compile DESIGN.md** (`sigil design generate/compile/sync/extract`)
 - **Set up the token pipeline** (`sigil init`)
 - **Install token-driven components** (`sigil add`)
 - **Switch the entire visual identity** (`sigil preset`)
@@ -46,7 +47,7 @@ The most important command. Walks you through a questionnaire that configures Si
 | Step | Question | Options |
 |------|----------|---------|
 | 1 | What are you building? | SaaS, Marketing, Docs, Blog, Portfolio, E-commerce, Startup, Custom |
-| 2 | Choose a preset | 44 presets organized by category, with recommendations based on project type |
+| 2 | Choose a preset | 46 presets organized by category, with recommendations based on project type |
 | 3 | Customize preset? | Override primary color (OKLCH), display font, body font, mono font |
 | 4 | Which features? | GSAP + ScrollTrigger, Motion, Radix Primitives, Pretext, Sigil Grid |
 | 5 | Starter components? | button, card, input, badge, dialog, dropdown, tabs, tooltip, sigil-grid/cross/rail/card |
@@ -110,12 +111,12 @@ Components are copied as source so you own them, but they still read from token 
 
 ```bash
 sigil preset              # show current preset info
-sigil preset list         # browse all 44 presets by category with descriptions and fonts
+sigil preset list         # browse all 46 presets by category with descriptions and fonts
 sigil preset noir         # switch to noir preset
 sigil preset create       # scaffold a custom preset file
 ```
 
-**`sigil preset list`** prints all 44 presets organized by category (Structural, Minimal, Dark, Colorful, Editorial, Industrial, Edgeless) with descriptions and font stacks.
+**`sigil preset list`** prints all 46 presets organized by category (Structural, Minimal, Dark, Colorful, Editorial, Industrial, Edgeless) with descriptions and font stacks.
 
 **`sigil preset create`** walks you through:
 1. Custom preset name

@@ -83,9 +83,13 @@ Four compile targets from the same `SigilTokens` object:
 
 `compileInteractionCss(options?)` emits opt-in native helpers for `sigil-scrollbar`, `data-sigil-scrollbar`, and `data-sigil-cursor`.
 
-### Markdown Parser (`compile.ts`)
+### Markdown Parsers (`compile.ts`)
 
-`parseMarkdownTokens(markdown)` — reads `sigil.tokens.md` back into `MarkdownTokenOverrides` for the core markdown-editable groups (`colors`, `typography`, `spacing`, `sigil`, `radius`, `shadows`, `motion`, `borders`). Full presets use typed `SigilTokens`; markdown is the agent-friendly override surface that can be merged with defaults before compiling CSS or Tailwind.
+`parseDesignMarkdown(markdown)` — reads a full `DESIGN.md` into a `DesignDocument` with all 33 token categories plus metadata, components, surfaces, and guidelines. This is the primary format.
+
+`parseMarkdownTokens(markdown)` — reads legacy `sigil.tokens.md` back into `MarkdownTokenOverrides` for the 8 core groups. Still supported for backward compatibility.
+
+`compileToW3CJson(tokens)` — outputs W3C Design Tokens Community Group format.
 
 ## CSS Compiler Options
 
@@ -122,10 +126,11 @@ All colors use OKLCH: `oklch(L C H)` where:
 When an agent needs to change how a Sigil project looks:
 
 1. **Read the active preset** — understand the current mood, fonts, and colors
-2. **Edit `sigil.tokens.md`** for core overrides or the token CSS file — change values at the semantic level
-3. **Never edit component files to change colors/spacing/fonts** — components read from CSS variables
-4. **Use OKLCH for all colors** — no hex, no rgb, no hsl
-5. **Run `npx @sigil-ui/cli doctor`** after changes to validate
+2. **Edit `DESIGN.md`** for full control (all 33 categories) or `sigil.tokens.md` for core overrides
+3. **Run `sigil design compile`** to regenerate CSS + Tailwind from DESIGN.md
+4. **Never edit component files to change colors/spacing/fonts** — components read from CSS variables
+5. **Use OKLCH for all colors** — no hex, no rgb, no hsl
+6. **Run `sigil doctor`** after changes to validate
 
 The token system is designed so that a single edit propagates everywhere. An agent changing `--s-primary` from indigo to emerald updates buttons, links, focus rings, gradients, glows, and badges — without touching any component file.
 

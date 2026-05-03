@@ -16,7 +16,7 @@ export function SigilFrame({ children }: { children: ReactNode }) {
   let marginPattern: GutterPattern = "none";
   let contentMax = 1200;
   let railGap = 50;
-  let gridCell = 50;
+  let gridCell = 16;
   let crossStroke = 1.5;
   let marginBorder: string | undefined;
   let isEdgeless = false;

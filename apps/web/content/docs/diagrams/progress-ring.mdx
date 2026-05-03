@@ -1,6 +1,6 @@
 ---
 title: ProgressRing
-description: "Concentric multi-ring progress indicator (Apple Watch style)."
+description: "A ProgressRing component from the Sigil design system."
 ---
 
 ## Import
@@ -9,37 +9,33 @@ description: "Concentric multi-ring progress indicator (Apple Watch style)."
 import { ProgressRing } from "@sigil-ui/components";
 ```
 
-## Preview
+## Usage
 
-<ComponentPreview>
-  <ProgressRing
-    tracks={[
-      { label: "Move", value: 78, max: 100 },
-      { label: "Exercise", value: 45, max: 100 },
-      { label: "Stand", value: 92, max: 100 },
-    ]}
-  />
-</ComponentPreview>
+```tsx
+<ProgressRing>...</ProgressRing>
+```
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `tracks` | `ProgressRingTrack[]` | — | Ring tracks with value/max |
-| `width` | `number` | `160` | SVG width |
-| `height` | `number` | `160` | SVG height |
-| `thickness` | `number` | `8` | Ring thickness |
-| `gap` | `number` | `4` | Gap between rings |
-| `showLegend` | `boolean` | `true` | Show legend |
+| `tracks` | `ProgressRingTrack[]` | — | — |
+| `width` | `number` | — | — |
+| `height` | `number` | — | — |
+| `thickness` | `number` | `8` | Track thickness. |
+| `gap` | `number` | `4` | Gap between rings. |
+| `showLegend` | `boolean` | `true` | Show legend. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-error` | First ring color |
-| `--s-success` | Second ring color |
-| `--s-info` | Third ring color |
-| `--s-border` | Track background |
-| `--s-text` | Legend percentage |
-| `--s-text-muted` | Legend label |
-| `--s-font-mono` | Percentage font |
+| `--s-error` | Error |
+| `--s-success` | Success |
+| `--s-info` | Info |
+| `--s-warning` | Warning |
+| `--s-border` | Border |
+| `--s-radius-full` | Radius full |
+| `--s-text-muted` | Text muted |
+| `--s-font-mono` | Font mono |
+| `--s-text` | Text |

@@ -1,6 +1,6 @@
 ---
 title: Switch
-description: A toggle switch for boolean settings. Built on Radix Switch with token-driven track and thumb colors.
+description: "A Switch component from the Sigil design system."
 ---
 
 ## Import
@@ -9,78 +9,37 @@ description: A toggle switch for boolean settings. Built on Radix Switch with to
 import { Switch } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <Switch />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx
-<Switch />
+<Switch>Switch content</Switch>
 ```
-
-## With label
-
-```tsx
-<Stack direction="row" gap={8} align="center">
-  <Switch id="dark-mode" />
-  <Label htmlFor="dark-mode">Dark mode</Label>
-</Stack>
-```
-
-## Controlled
-
-```tsx
-import { useState } from "react";
-
-function NotificationToggle() {
-  const [enabled, setEnabled] = useState(false);
-
-  return (
-    <Stack direction="row" gap={8} align="center">
-      <Switch checked={enabled} onCheckedChange={setEnabled} />
-      <Label>Notifications {enabled ? "on" : "off"}</Label>
-    </Stack>
-  );
-}
-```
-
-## Sizes
-
-```tsx
-<Switch size="sm" />
-<Switch size="md" />
-<Switch size="lg" />
-```
-
-## Disabled
-
-```tsx
-<Switch disabled />
-<Switch disabled checked />
-```
-
-## Token integration
-
-| CSS Variable | Used for |
-|---|---|
-| `--s-primary` | Checked track color |
-| `--s-surface` | Unchecked track color |
-| `--s-border` | Track border |
-| `--s-text-disabled` | Disabled state |
-| `--s-radius-full` | Track and thumb radius |
-| `--s-duration-fast` | Toggle transition |
-| `--s-ease-spring` | Thumb slide easing |
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `checked` | `boolean` | — | Controlled checked state |
-| `defaultChecked` | `boolean` | `false` | Default checked state |
-| `onCheckedChange` | `(checked: boolean) => void` | — | Change handler |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | Switch size |
-| `disabled` | `boolean` | `false` | Disable interactions |
-| `className` | `string` | — | Additional CSS classes |
+| `size` | `"sm" | "md" | "lg"` | — | — |
+| `label` | `string` | — | — |
+| `thumbIcon` | `ReactNode` | — | Content rendered inside the thumb (e.g. an icon). |
+| `thumbClassName` | `string` | — | Additional classes applied to the thumb element. |
 
-## Accessibility
+## Token integration
 
-- Uses `role="switch"` with `aria-checked`
-- Toggles on Space and Enter
-- Focus ring uses `--s-border-interactive`
+| CSS Variable | Purpose |
+|---|---|
+| `--s-radius-full` | Radius full |
+| `--s-border` | Border |
+| `--s-primary` | Primary |
+| `--s-duration-fast` | Duration fast |
+| `--s-ring` | Ring |
+| `--s-ring-offset` | Ring offset |
+| `--s-background` | Background |
+| `--s-shadow-sm` | Shadow sm |
+| `--s-text` | Text |
