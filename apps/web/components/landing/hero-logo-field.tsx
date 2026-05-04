@@ -557,43 +557,14 @@ const STYLE_BLOCK = `
     var(--s-primary, oklch(0.55 0.2 275)) 84%,
     var(--s-text-muted, oklch(0.55 0 0))
   );
-  position: absolute;
-  inset: 0;
-  overflow: visible;
-  pointer-events: none;
-  z-index: 0;
-}
-@media (max-width: 1023px) {
-  .hero-logo-field {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    overflow: visible;
-    margin-top: 24px;
-    pointer-events: auto;
-    z-index: auto;
-  }
+  position: relative;
+  width: 100%;
 }
 .hero-logo-field__grid {
-  pointer-events: auto;
-  overflow: visible;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  margin-top: 20px;
-  width: min(54vw, 580px);
-  min-width: 480px;
+  width: 100%;
 }
 @media (max-width: 1023px) {
   .hero-logo-field__grid {
-    position: static;
-    right: auto;
-    top: auto;
-    transform: none;
-    margin-top: 0;
-    min-width: 0;
-    width: 100%;
     grid-template-columns: repeat(6, 1fr) !important;
     grid-template-rows: auto !important;
     gap: 4px !important;
@@ -716,7 +687,6 @@ export function HeroLogoField() {
   const appliedQueue = useRef<string[]>([]);
   const [formats, setFormats] = useState<string[]>(["bold"]);
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
   const componentRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -744,22 +714,6 @@ export function HeroLogoField() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  useEffect(() => {
-    if (isMobile) return;
-    const wrapper = wrapperRef.current;
-    const grid = containerRef.current;
-    if (!wrapper || !grid) return;
-    const sync = () => {
-      const scale = Math.min(1, wrapper.clientWidth / 480);
-      wrapper.style.setProperty("--hlf-scale", String(scale));
-      wrapper.style.setProperty("--hlf-h", `${grid.scrollHeight * scale + 4}px`);
-    };
-    sync();
-    const obs = new ResizeObserver(sync);
-    obs.observe(wrapper);
-    obs.observe(grid);
-    return () => obs.disconnect();
-  }, [isMobile]);
 
 
   useEffect(() => {
@@ -904,10 +858,7 @@ export function HeroLogoField() {
   const cellBg = "var(--s-surface, var(--s-background))";
 
   return (
-    <div
-      ref={wrapperRef}
-      className="hero-logo-field"
-    >
+    <div className="hero-logo-field">
       <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
 
       <div
@@ -917,7 +868,7 @@ export function HeroLogoField() {
           opacity: mounted ? 1 : 0,
           transition: "opacity 600ms ease",
           gridTemplateColumns: "repeat(7, 1fr)",
-          gridTemplateRows: "auto auto auto auto 1fr 1fr",
+          gridTemplateRows: "auto auto auto auto auto auto",
           gap: 5,
         }}
       >
@@ -1132,9 +1083,8 @@ export function HeroLogoField() {
             className={`h-full ${applied("Coverage") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("Coverage") ? "var(--s-primary)" : "var(--s-border)",
-              background: cellBg,
-              boxShadow: applied("Coverage") ? "0 0 24px color-mix(in oklch, var(--s-primary) 30%, transparent), 0 8px 16px rgb(0 0 0 / 0.12)" : undefined,
-              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), box-shadow var(--s-duration-slow,600ms)",
+              background: applied("Coverage") ? "color-mix(in oklch, var(--s-primary) 10%, var(--s-surface, var(--s-background)))" : cellBg,
+              transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
             <CardContent className="p-2 h-full flex flex-col">

@@ -93,12 +93,36 @@ export function DocsPresetBar() {
 
   const applyPreset = useCallback(
     async (name: string) => {
-      if (name === "default") {
-        if (styleRef.current) styleRef.current.textContent = "";
-        return;
+      let css: string | null = null;
+      if (name !== "default") {
+        css = await loadPresetCSS(name);
+        if (!css) return;
       }
-      const css = await loadPresetCSS(name);
-      if (css) injectCSS(css);
+
+      const apply = () => {
+        if (name === "default") {
+          if (styleRef.current) styleRef.current.textContent = "";
+        } else {
+          injectCSS(css!);
+        }
+      };
+
+      if (typeof document.startViewTransition === "function") {
+        const vt = document.startViewTransition(apply);
+        vt.finished.catch(() => {});
+      } else {
+        document.documentElement.setAttribute("data-switching-preset", "");
+        apply();
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            setTimeout(() => {
+              document.documentElement.removeAttribute(
+                "data-switching-preset",
+              );
+            }, 450);
+          });
+        });
+      }
     },
     [injectCSS],
   );

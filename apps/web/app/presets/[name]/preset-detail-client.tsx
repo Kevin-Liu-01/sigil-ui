@@ -715,7 +715,7 @@ export default function PresetDetailPage() {
       <LandingNavbar />
       <BorderStack>
         {/* Hero */}
-        <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+        <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
           <TextureBg opacity={0.3} />
           <div className="relative z-[1] max-w-3xl">
             <Link href="/presets" className="inline-flex items-center gap-1.5 mb-6 text-[var(--s-text-muted)] hover:text-[var(--s-text)] transition-colors duration-[var(--s-duration-fast,150ms)] no-underline">
@@ -768,7 +768,7 @@ export default function PresetDetailPage() {
         {/* Quick stats */}
         {preset && !loading && (
           <>
-            <SigilSection padding="24px">
+            <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
               <GapPixelGrid columns={{ sm: 2, md: 4, lg: 6 }}>
                 <GapPixelCell className="p-4">
                   <MonoLabel size="sm" className="mb-1 block text-[var(--s-text-muted)]">Display Font</MonoLabel>
@@ -802,7 +802,7 @@ export default function PresetDetailPage() {
 
         {/* Tabbed content */}
         {preset && !loading && (
-          <SigilSection padding="32px 24px 64px">
+          <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y, 6rem)">
             {/* Tab bar */}
             <div className="flex flex-wrap items-center gap-2 mb-6 border-b border-[var(--s-border-muted)] pb-4">
               {TABS.map((tab) => (
@@ -887,7 +887,7 @@ export default function PresetDetailPage() {
         )}
 
         {loading && (
-          <SigilSection padding="48px 24px">
+          <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
             <div className="flex flex-col gap-3">
               {Array.from({ length: 8 }).map((_, i) => (
                 <div key={i} className="h-12 bg-[var(--s-surface)] animate-pulse" />

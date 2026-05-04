@@ -443,10 +443,10 @@ export function SigilPageGrid({
   };
 
   const marginCell = gridCell;
-  const marginCssL = !edgeless && showMarginLines
+  const marginCssL = showMarginLines
     ? getSigilPatternStyles(marginPattern, marginCell, "left")
     : null;
-  const marginCssR = !edgeless && showMarginLines
+  const marginCssR = showMarginLines
     ? getSigilPatternStyles(marginPattern, marginCell, "right")
     : null;
 
@@ -478,7 +478,7 @@ export function SigilPageGrid({
         });
       }
     }
-    if (!edgeless) {
+    if (!edgeless || css) {
       const prop = `border${innerEdge}` as keyof CSSProperties;
       Object.assign(container, {
         [prop]: marginBorder ?? `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${STRUCTURAL_LINE_COLOR}`,

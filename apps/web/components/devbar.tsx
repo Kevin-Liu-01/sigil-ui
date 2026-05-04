@@ -909,8 +909,54 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const { activePreset, setPreset } = useSigilTokens();
   const { play, enabled: soundEnabled, setEnabled: setSoundEnabled, setActivePreset: setSoundPreset } = useSigilSound();
 
+  const canvasMode = devbar?.canvasMode ?? false;
+
+  const prevCanvasRef = useRef(canvasMode);
+  const [phase, setPhase] = useState<ToolbarPhase>(canvasMode ? "studio" : "presets");
+  const phaseRef = useRef(phase);
+  phaseRef.current = phase;
+  const phaseTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const [studioReady, setStudioReady] = useState(false);
+  const studioTimerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const presetsKeyRef = useRef(0);
+
+  useEffect(() => {
+    if (canvasMode === prevCanvasRef.current) return;
+    prevCanvasRef.current = canvasMode;
+    clearTimeout(phaseTimerRef.current);
+    const cur = phaseRef.current;
+    if (canvasMode) {
+      setPhase("presets-out");
+      phaseTimerRef.current = setTimeout(() => setPhase("studio"), PRESET_EXIT_MS);
+    } else if (cur === "studio") {
+      setPhase("studio-out");
+      phaseTimerRef.current = setTimeout(() => {
+        presetsKeyRef.current++;
+        setPhase("presets");
+      }, STUDIO_EXIT_MS);
+    } else {
+      presetsKeyRef.current++;
+      setPhase("presets");
+    }
+  }, [canvasMode]);
+
+  useEffect(() => () => clearTimeout(phaseTimerRef.current), []);
+
+  useEffect(() => {
+    clearTimeout(studioTimerRef.current);
+    if (phase === "studio") {
+      studioTimerRef.current = setTimeout(() => setStudioReady(true), 30);
+      return () => { clearTimeout(studioTimerRef.current); setStudioReady(false); };
+    }
+    setStudioReady(false);
+  }, [phase]);
+
   if (!devbar) return null;
-  const { sidebarOpen, setSidebarOpen, canvasMode, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas } = devbar;
+  const { sidebarOpen, setSidebarOpen, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas } = devbar;
+
+  const showPresets = phase === "presets" || phase === "presets-out";
+  const showStudio = phase === "studio" || phase === "studio-out";
+  const studioAnimated = phase === "studio" && studioReady;
 
   const handleRandomize = () => {
     const p = PRESET_DATA[Math.floor(Math.random() * PRESET_DATA.length)]!;
@@ -952,9 +998,13 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
       {/* Sigil button */}
       {tbtn(<Grid3X3 size={11} style={{ color: "var(--db-accent)" }} />, () => { if (canvasMode) exitCanvas(); else enterCanvas(); }, canvasMode, isMobile ? undefined : "Studio")}
 
-      {/* Preset strip (hidden in canvas mode) */}
-      {!canvasMode && (
-        <>
+      {/* Preset strip — each preset staggers in/out individually */}
+      {showPresets && (
+        <div key={`${phase}-${presetsKeyRef.current}`} style={{
+          display: "flex", alignItems: "center", gap: 2,
+          flex: 1, minWidth: 0,
+          pointerEvents: phase === "presets-out" ? "none" : "auto",
+        }}>
           {divider}
           <div className="devbar-preset-strip" style={{
             flex: 1, display: "flex", gap: 1, overflowX: "auto", overflowY: "hidden",
@@ -962,6 +1012,7 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
           } as React.CSSProperties}>
             {PRESET_DATA.map((p, i) => {
               const active = activePreset.replace("*", "") === p.name;
+              const exiting = phase === "presets-out";
               return (
                 <button key={p.name} type="button" onClick={() => handlePresetClick(p.name)} style={{
                   flexShrink: 0, display: "flex", alignItems: "center", gap: 4,
@@ -970,8 +1021,10 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
                   border: "none",
                   fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 400,
                   color: active ? "var(--db-accent)" : "var(--db-muted)",
-                  cursor: "pointer", transition: "all 100ms ease", whiteSpace: "nowrap",
-                  animation: `devbar-preset-in 400ms ${EASE_SPRING} ${i * 15}ms both`,
+                  cursor: "pointer", whiteSpace: "nowrap",
+                  animation: exiting
+                    ? `devbar-preset-out 200ms ${EASE_SPRING} ${i * 10}ms both`
+                    : `devbar-preset-in 400ms ${EASE_SPRING} ${i * 15}ms both`,
                 }}>
                   <div style={{ width: 8, height: 8, borderRadius: 2, background: p.colors[0], border: "0.5px solid rgba(128,128,128,0.15)", flexShrink: 0 }} />
                   {p.name}
@@ -980,19 +1033,39 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
             })}
           </div>
           {divider}
-        </>
+        </div>
       )}
 
-      {/* Spacer in canvas mode */}
-      {canvasMode && <div style={{ flex: 1 }} />}
+      {/* Studio spacer */}
+      {showStudio && <div style={{ flex: 1 }} />}
 
       {/* Controls */}
       <div style={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
         {tbtn(<Shuffle size={11} />, handleRandomize, false)}
         {divider}
         {tbtn(<Monitor size={11} />, () => { if (canvasMode) exitCanvas(); else enterCanvas(); }, canvasMode, isMobile ? undefined : "Canvas")}
-        {canvasMode && !isMobile && tbtn(dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />, () => setDock(dock === "left" ? "right" : "left"), false)}
-        {canvasMode && tbtn(<MessageSquare size={11} />, () => setAgentOpen(!agentOpen), agentOpen, isMobile ? undefined : "Agent")}
+        {showStudio && !isMobile && (
+          <div style={{
+            display: "flex", alignItems: "center",
+            opacity: studioAnimated ? 1 : 0,
+            transform: studioAnimated ? "translateY(0)" : "translateY(5px)",
+            transition: "opacity 180ms ease-out, transform 180ms ease-out",
+            pointerEvents: studioAnimated ? "auto" : "none",
+          }}>
+            {tbtn(dock === "left" ? <PanelLeft size={11} /> : <PanelRight size={11} />, () => setDock(dock === "left" ? "right" : "left"), false)}
+          </div>
+        )}
+        {showStudio && (
+          <div style={{
+            display: "flex", alignItems: "center",
+            opacity: studioAnimated ? 1 : 0,
+            transform: studioAnimated ? "translateY(0)" : "translateY(5px)",
+            transition: "opacity 180ms ease-out 40ms, transform 180ms ease-out 40ms",
+            pointerEvents: studioAnimated ? "auto" : "none",
+          }}>
+            {tbtn(<MessageSquare size={11} />, () => setAgentOpen(!agentOpen), agentOpen, isMobile ? undefined : "Agent")}
+          </div>
+        )}
         {divider}
         {tbtn(soundEnabled ? <Volume2 size={11} /> : <VolumeX size={11} />, () => setSoundEnabled(!soundEnabled), soundEnabled)}
       </div>
@@ -1006,6 +1079,10 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
 
 const EASE_SPRING = "cubic-bezier(0.32, 0.72, 0, 1)";
 const DUR = "380ms";
+
+type ToolbarPhase = "presets" | "presets-out" | "studio" | "studio-out";
+const PRESET_EXIT_MS = 550;
+const STUDIO_EXIT_MS = 220;
 
 /* ================================================================== */
 /*  Edge Toggle Handle                                                 */
@@ -1103,7 +1180,7 @@ function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolea
       <div style={{
         width: "100%",
         borderRadius: showFrame ? 8 : 0,
-        border: showFrame ? "1px solid var(--db-border)" : "none",
+        border: showFrame ? "1px solid var(--db-border)" : "1px solid transparent",
         overflow: showFrame ? "hidden" : undefined,
         transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>
@@ -1507,13 +1584,9 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
       </div>
 
       {/* Toolbar: fixed in normal mode, in-flow in canvas mode */}
-      {canvasMode ? (
+      <div style={canvasMode ? undefined : { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}>
         <Toolbar isMobile={isMobile} />
-      ) : (
-        <div style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}>
-          <Toolbar isMobile={isMobile} />
-        </div>
-      )}
+      </div>
 
       {/* Overlay sidebar (normal mode + mobile canvas) */}
       {(!canvasMode || isMobile) && <SidebarPanel mode="normal" dock={dock} open={sidebarOpen} isMobile={isMobile} />}
@@ -1584,6 +1657,10 @@ const DEVBAR_STYLES = `
   @keyframes devbar-preset-in {
     from { opacity: 0; transform: translateY(6px) scale(0.92); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @keyframes devbar-preset-out {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to   { opacity: 0; transform: translateY(-4px) scale(0.95); }
   }
   @keyframes devbar-tab-poke {
     from { opacity: 0; transform: translateY(-50%) translateX(-20px); }

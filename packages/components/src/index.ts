@@ -183,6 +183,10 @@ export {
 export { Toolbar, ToolbarButton, ToolbarSeparator, ToolbarToggleGroup, ToolbarToggleItem, ToolbarLink, type ToolbarProps } from "./navigation/Toolbar";
 export { SocialIcons, type SocialIconsProps, type SocialLink } from "./navigation/SocialIcons";
 export * from "./navigation/AppSurfaces";
+export {
+  MagneticNav, MagneticNavItem, MagneticNavLink,
+  type MagneticNavProps, type MagneticNavItemProps, type MagneticNavLinkProps,
+} from "./navigation/MagneticNav";
 
 // ---------------------------------------------------------------------------
 // Overlays
@@ -475,3 +479,11 @@ export { ParallaxLayer, type ParallaxLayerProps } from "./animation/ParallaxLaye
 export { Marquee, type MarqueeProps } from "./animation/Marquee";
 export { Ripple, type RippleProps } from "./animation/Ripple";
 export { Pulse, type PulseProps } from "./animation/Pulse";
+
+// ---------------------------------------------------------------------------
+// Effects
+// ---------------------------------------------------------------------------
+export {
+  ProximityGlow, ProximityGlowCard,
+  type ProximityGlowProps, type ProximityGlowCardProps,
+} from "./effects/ProximityGlow";

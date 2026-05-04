@@ -404,7 +404,7 @@ export default function PresetDesignClient() {
       <LandingNavbar />
       <BorderStack>
         {/* Hero */}
-        <SigilSection borderTop padding="64px 24px 32px" style={{ position: "relative", overflow: "hidden" }}>
+        <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
           <TextureBg opacity={0.2} />
           <div className="relative z-[1] max-w-4xl">
             <Link
@@ -456,7 +456,7 @@ export default function PresetDesignClient() {
 
         {/* Quick start */}
         {!loading && (
-          <SigilSection padding="24px">
+          <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
             <GapPixelGrid columns={{ md: 3 }}>
               <GapPixelCell className="p-4">
                 <MonoLabel size="sm" className="mb-2 block text-[var(--s-text-muted)]">1. Download</MonoLabel>
@@ -483,7 +483,7 @@ export default function PresetDesignClient() {
         <Divider pattern="diagonal" size="sm" showBorders />
 
         {/* The DESIGN.md content */}
-        <SigilSection padding="24px 24px 64px">
+        <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y, 6rem)">
           {loading ? (
             <div className="flex flex-col gap-3">
               {Array.from({ length: 12 }).map((_, i) => (

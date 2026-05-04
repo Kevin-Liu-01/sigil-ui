@@ -174,7 +174,7 @@ export default function PresetsPage() {
 
       <BorderStack>
         {/* Hero */}
-        <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+        <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
           <TextureBg opacity={0.3} />
           <div className="relative z-[1] mb-12 max-w-3xl">
             <MonoLabel variant="accent" className="mb-4 block">
@@ -216,7 +216,7 @@ export default function PresetsPage() {
         <Divider pattern="vertical" size="md" showBorders />
 
         {/* Category filter + grid */}
-        <SigilSection padding="32px 24px 48px">
+        <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
           <div className="flex flex-wrap items-center gap-2 mb-8">
             {CATEGORIES.map((cat) => (
               <button
@@ -250,7 +250,7 @@ export default function PresetsPage() {
         <Divider pattern="diagonal" size="sm" showBorders />
 
         {/* Comparison */}
-        <SigilSection padding="48px 24px">
+        <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
           <div className="mb-8 max-w-2xl">
             <MonoLabel className="mb-3 block">Compare Presets</MonoLabel>
             <DensityText role="headline" as="h2" className="mb-3">
@@ -267,7 +267,7 @@ export default function PresetsPage() {
         <Divider pattern="vertical" size="sm" showBorders />
 
         {/* How It Works */}
-        <SigilSection padding="48px 24px 64px">
+        <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y, 6rem)">
           <div className="mb-8 max-w-2xl">
             <MonoLabel className="mb-3 block">How It Works</MonoLabel>
             <DensityText role="headline" as="h2">

@@ -141,6 +141,7 @@ function InstallCommand({ className }: { className?: string }) {
 }
 
 const PRESET_DOTS: { name: string; color: string }[] = [
+  { name: "default", color: "#000000"},
   { name: "sigil", color: "#9b99e8" },
   { name: "noir", color: "#d97706" },
   { name: "forge", color: "#ea580c" },
@@ -170,56 +171,60 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="clamp(48px, 12vw, 144px) var(--s-section-padding-x, var(--s-page-margin, 24px)) clamp(48px, 5vw, 96px)" style={{ position: "relative", maxWidth: "100vw" }}>
+    <LandingSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative">
       <TextureBg opacity={0.3} />
-      <div className="relative z-[1] mb-12">
-        <InstallCommand className="mb-4" />
+      <div className="relative z-[1] flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
+        <div className="flex-1 min-w-0 shrink-0 lg:max-w-[45%]">
+          <InstallCommand className="mb-2" />
 
-        <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
-          An Agent-First <br /> Design System.
-        </h1>
+          <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
+            An Agent-First <br /> Design System.
+          </h1>
 
-        <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
-          <span className="hidden lg:inline">
-            {SIGIL_PRODUCT_STATS.componentCountLabel} components, {SIGIL_PRODUCT_STATS.presetCount} presets, {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
-          </span>
-          One token file controls every color, font, radius, and animation. Agents and humans edit the same surface.
-        </DensityText>
+          <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
+            <span className="hidden lg:inline">
+              {SIGIL_PRODUCT_STATS.componentCountLabel} components, {SIGIL_PRODUCT_STATS.presetCount} presets, {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
+            </span>
+            One token file controls every color, font, radius, and animation. Agents and humans edit the same surface.
+          </DensityText>
 
-        <div className="flex items-center gap-3 flex-wrap">
-          <AccentCTA asChild>
-            <a href="/docs" className="no-underline">Get Started</a>
-          </AccentCTA>
-          <a
-            href="/docs/components/button"
-            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
-          >
-            View Components
-          </a>
+          <div className="flex items-center gap-3 flex-wrap">
+            <AccentCTA asChild>
+              <a href="/docs" className="no-underline">Get Started</a>
+            </AccentCTA>
+            <a
+              href="/docs/components/button"
+              className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            >
+              View Components
+            </a>
+          </div>
+
+          <div className="flex items-center gap-2.5 mt-5">
+            {PRESET_DOTS.map((p) => (
+              <button
+                key={p.name}
+                type="button"
+                title={p.name}
+                onClick={() => handlePresetDot(p.name)}
+                className="w-2.5 h-2.5 border border-[var(--s-border)] p-0 cursor-pointer transition-transform duration-[var(--s-duration-fast,150ms)] hover:scale-150"
+                style={{ background: p.color }}
+              />
+            ))}
+          </div>
         </div>
 
-        <div className="flex items-center gap-2.5 mt-5">
-          {PRESET_DOTS.map((p) => (
-            <button
-              key={p.name}
-              type="button"
-              title={p.name}
-              onClick={() => handlePresetDot(p.name)}
-              className="w-2.5 h-2.5 border border-[var(--s-border)] p-0 cursor-pointer transition-transform duration-[var(--s-duration-fast,150ms)] hover:scale-150"
-              style={{ background: p.color }}
-            />
-          ))}
+        <div className="flex-1 min-w-0 flex items-center justify-center">
+          <HeroLogoField />
         </div>
-        <HeroLogoField />
       </div>
-
     </LandingSection>
   );
 }
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop padding="24px var(--s-section-padding-x, var(--s-page-margin, 24px))">
+    <LandingSection borderTop padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <div className="s-transition-all">
         <HeroShowcase />
       </div>
@@ -229,7 +234,7 @@ function ProductSurfaceSection() {
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="48px var(--s-section-padding-x, var(--s-page-margin, 24px))">
+    <LandingSection borderTop padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <ComponentGalleryCTA />
     </LandingSection>
   );
@@ -241,7 +246,7 @@ function ComponentGalleryBannerSection() {
 
 function LayerSection() {
   return (
-    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection borderTop className="relative overflow-hidden">
       <TextureBg opacity={0.3} />
       <div className="relative z-[1]">
         <SectionHeader
@@ -257,7 +262,7 @@ function LayerSection() {
 
 function TokenSystemSection() {
   return (
-    <LandingSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection borderTop className="relative overflow-hidden">
       <TextureBg opacity={0.3} />
       <div className="relative z-[1]">
         <SectionHeader
@@ -286,7 +291,7 @@ function TokenSystemSection() {
 
 function UnderTheHoodSection() {
   return (
-    <LandingSection id="components" borderTop style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection id="components" borderTop className="relative overflow-hidden">
       <TextureBg opacity={0.25} />
       <div className="relative z-[1]">
         <SectionHeader
@@ -852,7 +857,7 @@ function PresetsSection() {
   }, []);
 
   return (
-    <LandingSection id="presets" borderTop style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection id="presets" borderTop className="relative overflow-hidden">
       <TextureBg opacity={0.25} />
       <div className="relative z-[1]">
         <SectionHeader
@@ -1062,7 +1067,7 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y, 72px) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+    <LandingSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
       <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
         <div>
           <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
@@ -1123,12 +1128,9 @@ function QuickStartSection() {
           {QUICK_START_STEPS.map((step, index) => (
             <div
               key={step.title}
-              className="group relative overflow-hidden border border-[var(--s-border)] bg-[var(--s-surface)] p-5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
+              className="group border border-[var(--s-border)] border-l-[3px] bg-[var(--s-surface)] p-5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
+              style={{ borderLeftColor: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color }}
             >
-              <div
-                className="absolute inset-y-0 left-0 w-1"
-                style={{ background: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color }}
-              />
               <div className="mb-4 flex items-start justify-between gap-4">
                 <div>
                   <MonoLabel variant="accent" size="xs" className="mb-2 block">
@@ -1178,7 +1180,7 @@ function FinalCTA() {
   return (
     <>
     <Divider size="md" showCross fadeEdges />
-    <LandingSection padding="var(--s-section-padding-y, 72px) var(--s-section-padding-x, var(--s-page-margin, 24px))" style={{ position: "relative", overflow: "hidden" }}>
+    <LandingSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative overflow-hidden">
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
         <div>
@@ -1203,34 +1205,18 @@ function FinalCTA() {
         </div>
         <div className="hidden grid-cols-2 gap-3 md:grid">
           <div
-            className="relative min-h-[320px] overflow-hidden border border-[var(--s-border)]"
-            style={{
-              borderStyle: "var(--s-border-style, solid)",
-              borderRadius: "var(--s-radius-md, 8px)",
-              background: "var(--s-background)",
-            }}
+            className="flex flex-col min-h-[320px] overflow-hidden border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-md,8px)] bg-[var(--s-background)]"
           >
             <FooterQuadrantDiagram />
-            <div
-              className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
-              style={{ color: "var(--s-text-muted)" }}
-            >
+            <div className="mt-auto p-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]">
               blueprint variants / 20
             </div>
           </div>
           <div
-            className="relative min-h-[320px] overflow-hidden border border-[var(--s-border)]"
-            style={{
-              borderStyle: "var(--s-border-style, solid)",
-              borderRadius: "var(--s-radius-md, 8px)",
-              background: "var(--s-background)",
-            }}
+            className="flex flex-col min-h-[320px] overflow-hidden border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-md,8px)] bg-[var(--s-background)]"
           >
             <FooterComponentDiagram />
-            <div
-              className="absolute bottom-4 left-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em]"
-              style={{ color: "var(--s-text-muted)" }}
-            >
+            <div className="mt-auto p-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]">
               component blueprint
             </div>
           </div>

@@ -441,9 +441,9 @@
   --s-input-py: 8px;
   --s-badge-px: 10px;
   --s-badge-py: 2px;
-  --s-section-padding-y: 72px;
-  --s-section-py: var(--s-section-padding-y, 72px);
-  --s-section-py-lg: 96px;
+  --s-section-padding-y: 6rem;
+  --s-section-py: var(--s-section-padding-y, 6rem);
+  --s-section-py-lg: 9rem;
   --s-navbar-height: 48px;
   --s-navbar-padding-x: 24px;
   --s-navbar-px: var(--s-navbar-padding-x, 24px);
@@ -576,6 +576,9 @@ body {
   background-color: var(--s-background, #0a0a0f);
   color: var(--s-text, #fafafa);
   line-height: 1.6;
+  transition:
+    background-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -926,8 +929,8 @@ h1, h2, h3, h4, h5, h6 {
 /* Section with bottom border */
 .s-section-border {
   border-bottom: 1px solid var(--s-border-muted);
-  padding-bottom: var(--s-section-padding-y, 75px);
-  margin-bottom: var(--s-section-padding-y, 75px);
+  padding-bottom: var(--s-section-padding-y, 6rem);
+  margin-bottom: var(--s-section-padding-y, 6rem);
 }
 
 /* Monospace data table */
@@ -981,25 +984,58 @@ html[data-switching-theme] *::after {
 }
 
 /* ================================================================== */
+/* View Transitions API (smooth preset & font crossfade)               */
+/* ================================================================== */
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 300ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ================================================================== */
 /* Preset Transition System                                            */
 /* ================================================================== */
 
 .s-transition-all,
-.s-transition-all * {
+.s-transition-all > * {
   transition:
-    background-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    color 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    fill 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    stroke 400ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    fill 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.s-transition-all :is(section, header, footer, nav, main, article, aside),
+.s-transition-all :is(h1, h2, h3, h4, h5, h6, p, a, button, span, label, li),
+.s-transition-all :is(svg, path, rect, circle, polygon, line, polyline),
+.s-transition-all [class*="sigil-"] {
+  transition: inherit;
 }
 
 .s-transition-all *:focus,
 .s-transition-all *:active {
   transition-duration: 100ms;
+}
+
+/* CSS fallback for browsers without View Transitions API              */
+html[data-switching-preset],
+html[data-switching-preset] *,
+html[data-switching-preset] *::before,
+html[data-switching-preset] *::after {
+  transition:
+    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-radius 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    fill 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    stroke 350ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
 /* ================================================================== */
@@ -1081,8 +1117,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section {
-  padding-top: var(--s-section-padding-y, 75px);
-  padding-bottom: var(--s-section-padding-y, 75px);
+  padding-top: var(--s-section-padding-y, 6rem);
+  padding-bottom: var(--s-section-padding-y, 6rem);
   padding-left: var(--s-align-rail-margin, 24px);
   padding-right: var(--s-align-rail-margin, 24px);
   max-width: var(--s-align-rail-width, 1200px);
@@ -1090,8 +1126,8 @@ html[data-switching-theme] *::after {
 }
 
 .s-section-hero {
-  padding-top: var(--s-section-padding-y-hero, 125px);
-  padding-bottom: var(--s-section-padding-y-hero, 125px);
+  padding-top: var(--s-section-padding-y-hero, 9rem);
+  padding-bottom: var(--s-section-padding-y-hero, 9rem);
 }
 
 .s-divider {
@@ -1270,7 +1306,8 @@ nav[data-fd-sidebar] {
 }
 
 /* ================================================================== */
-/* Smooth token transitions (preset switching in docs)                 */
+/* Docs code blocks: suppress per-element transitions (View           */
+/* Transitions crossfade handles the visual change instead)            */
 /* ================================================================== */
 
 .sigil-preview *,
@@ -1322,4 +1359,83 @@ nav[data-fd-sidebar] {
 
 [data-slot="token-pipeline"] .sigil-token-scan {
   animation: sigil-token-scan 3s ease-in-out infinite;
+}
+
+/* ================================================================== */
+/* MagneticNav — anchor-positioned sliding indicator                   */
+/* ================================================================== */
+
+.sigil-magnetic-nav-item:has(
+    .sigil-magnetic-nav-link:is(:hover, :focus-visible, [data-active])
+  ) {
+  anchor-name: --sigil-magnetic-target;
+}
+
+.sigil-magnetic-nav-list::before {
+  content: "";
+  position: absolute;
+  position-anchor: --sigil-magnetic-target;
+  left: anchor(left);
+  top: anchor(top);
+  width: anchor-size(width);
+  height: anchor-size(height);
+  background: var(--s-surface, oklch(0.5 0 0 / 0.08));
+  border-radius: var(--s-radius-md, 8px);
+  border: 1px var(--s-border-style, solid) var(--s-border, oklch(0.5 0 0 / 0.1));
+  transition:
+    left var(--s-duration-fast, 150ms) var(--s-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    top var(--s-duration-fast, 150ms) var(--s-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    width var(--s-duration-fast, 150ms) var(--s-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    height var(--s-duration-fast, 150ms) var(--s-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sigil-magnetic-nav-list:has(
+    .sigil-magnetic-nav-link:is(:hover, :focus-visible, [data-active])
+  )::before {
+  opacity: 1;
+}
+
+/* ================================================================== */
+/* ProximityGlow — pointer-tracking glow border via mask-composite     */
+/* ================================================================== */
+
+[data-glow] {
+  --glow-angle: 180;
+  --glow-active: 0;
+}
+
+[data-glow]::before,
+[data-glow]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: conic-gradient(
+    from calc((var(--glow-angle) - (var(--glow-spread, 60) * 0.5)) * 1deg),
+    transparent 0deg,
+    var(--s-primary, oklch(0.7 0.15 250)),
+    transparent calc(var(--glow-spread, 60) * 1deg)
+  );
+  mask-clip: padding-box, border-box;
+  mask-composite: intersect;
+  -webkit-mask-clip: padding-box, border-box;
+  -webkit-mask-composite: source-in, xor;
+  mask:
+    linear-gradient(transparent, transparent),
+    conic-gradient(
+      from calc((var(--glow-angle) - (var(--glow-spread, 60) * 0.5)) * 1deg),
+      transparent 0deg,
+      #fff,
+      transparent calc(var(--glow-spread, 60) * 1deg)
+    );
+  opacity: var(--glow-active, 0);
+  transition: opacity var(--s-duration-fast, 150ms);
+}
+
+[data-glow]::after {
+  filter: blur(calc(var(--glow-blur, 4) * 1px));
+  opacity: calc(var(--glow-active, 0) * 0.5);
 }

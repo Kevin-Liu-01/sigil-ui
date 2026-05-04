@@ -210,7 +210,7 @@ export default function WalkthroughPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1]">
         <MonoLabel variant="accent" className="block mb-4">/ Walkthrough</MonoLabel>
@@ -669,7 +669,7 @@ export default function PricingPage() {
       <Divider pattern="vertical" size="md" showBorders />
 
       {/* Final CTA */}
-      <SigilSection borderTop padding="80px 24px">
+      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <div className="text-center mx-auto max-w-xl">
           <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-4">
             Ready to build?

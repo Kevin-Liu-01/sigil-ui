@@ -1,0 +1,106 @@
+---
+title: MagneticNav
+description: "Navigation with a sliding magnetic highlight indicator — pure CSS anchor positioning, no JS."
+---
+
+## Import
+
+```tsx
+import { MagneticNav, MagneticNavItem, MagneticNavLink } from "@sigil-ui/components";
+```
+
+## Preview
+
+<ComponentPreview>
+  <MagneticNav>
+    <MagneticNavItem><MagneticNavLink href="#" active>Home</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">Docs</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">Components</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">Presets</MagneticNavLink></MagneticNavItem>
+  </MagneticNav>
+</ComponentPreview>
+
+## Usage
+
+```tsx
+<MagneticNav>
+  <MagneticNavItem>
+    <MagneticNavLink href="/" active>Home</MagneticNavLink>
+  </MagneticNavItem>
+  <MagneticNavItem>
+    <MagneticNavLink href="/docs">Docs</MagneticNavLink>
+  </MagneticNavItem>
+  <MagneticNavItem>
+    <MagneticNavLink href="/blog">Blog</MagneticNavLink>
+  </MagneticNavItem>
+</MagneticNav>
+```
+
+## How it works
+
+A `::before` pseudo-element on the `<ul>` uses CSS anchor positioning to track whichever `<li>` contains a hovered, focused, or active link:
+
+```css
+li:has(a:is(:hover, :focus-visible, [data-active])) {
+  anchor-name: --sigil-magnetic-target;
+}
+
+ul::before {
+  position-anchor: --sigil-magnetic-target;
+  left: anchor(left);
+  top: anchor(top);
+  width: anchor-size(width);
+  height: anchor-size(height);
+}
+```
+
+The indicator transitions smoothly between positions using `--s-duration-fast` and `--s-ease-out` tokens. No JavaScript required.
+
+## Vertical
+
+<ComponentPreview>
+  <MagneticNav orientation="vertical">
+    <MagneticNavItem><MagneticNavLink href="#" active>Overview</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">Installation</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">Theming</MagneticNavLink></MagneticNavItem>
+    <MagneticNavItem><MagneticNavLink href="#">CLI</MagneticNavLink></MagneticNavItem>
+  </MagneticNav>
+</ComponentPreview>
+
+## Sub-components
+
+- `<MagneticNav>` — outer `<nav>` wrapper
+- `<MagneticNavItem>` — `<li>` wrapper for each link
+- `<MagneticNavLink>` — `<a>` with `active` prop for current page
+
+## Props
+
+### MagneticNav
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction of the nav list. |
+
+### MagneticNavLink
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `active` | `boolean` | `false` | Mark this link as the currently active page. Sets `aria-current="page"`. |
+
+## Token integration
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-navbar-item-gap` | Gap between nav items |
+| `--s-radius-lg` | List container radius |
+| `--s-radius-md` | Link and indicator radius |
+| `--s-button-padding-x` | Link horizontal padding |
+| `--s-spacing-xs` | Link vertical padding |
+| `--s-button-font-weight` | Link font weight |
+| `--s-text` | Active/hovered link color |
+| `--s-text-muted` | Inactive link color |
+| `--s-surface` | Indicator background |
+| `--s-border` | Indicator border color |
+| `--s-border-style` | Indicator border style |
+| `--s-duration-fast` | Transition speed |
+| `--s-ease-out` | Transition easing |

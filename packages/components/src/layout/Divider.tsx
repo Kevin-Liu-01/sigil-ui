@@ -34,17 +34,16 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   decorative?: boolean;
 }
 
-const CELL = 50;
-const THIN = CELL / 3;
-const BORDER_PX = 2;
-
-const sizeMap: Record<NonNullable<DividerProps["size"]>, number> = {
-  xs: THIN - BORDER_PX,
-  sm: THIN - BORDER_PX,
-  md: THIN * 2 - BORDER_PX,
-  lg: CELL - BORDER_PX,
-  xl: CELL * 2 - BORDER_PX,
-};
+function getThickness(size: NonNullable<DividerProps["size"]>, gridCell: number): number {
+  const half = Math.round(gridCell / 2);
+  switch (size) {
+    case "xs": return half;
+    case "sm": return half;
+    case "md": return gridCell;
+    case "lg": return gridCell * 2;
+    case "xl": return gridCell * 3;
+  }
+}
 
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
 const STRUCTURAL_BORDER =
@@ -131,8 +130,8 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   ref,
 ) {
   const gridConfig = usePageGridConfig();
-  const rawCell = gridConfig?.gridCell ?? 16;
-  const thickness = sizeMap[size];
+  const rawCell = gridConfig?.gridCell ?? 48;
+  const thickness = getThickness(size, rawCell);
   const cell = Math.min(rawCell, thickness);
   const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
@@ -161,6 +160,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
       )}
       style={{
         [isHorizontal ? "height" : "width"]: thickness,
+        boxSizing: "border-box",
         ...(showBorders
           ? isHorizontal
             ? { borderTop: STRUCTURAL_BORDER, borderBottom: STRUCTURAL_BORDER }

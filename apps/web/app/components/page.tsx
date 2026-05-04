@@ -76,7 +76,7 @@ export default function ComponentsPage() {
       <LandingNavbar />
 
       {/* ── Hero ── */}
-      <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1] mb-12 max-w-3xl">
           <MonoLabel variant="accent" className="mb-4 block">
@@ -135,12 +135,12 @@ export default function ComponentsPage() {
       <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ── Component Showcase ── */}
-      <SigilSection padding="48px 24px">
+      <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <ComponentShowcase />
       </SigilSection>
 
       {/* ── Component Anatomy ── */}
-      <SigilSection padding="64px 24px">
+      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <div className="mb-10 max-w-2xl">
           <MonoLabel variant="accent" className="mb-4 block">
             HOW TOKENS FLOW
@@ -167,7 +167,7 @@ export default function ComponentsPage() {
       <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* ── Build with tokens ── */}
-      <SigilSection padding="64px 24px">
+      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <div className="mb-10 max-w-2xl">
           <MonoLabel variant="accent" className="mb-4 block">
             WHY TOKENS

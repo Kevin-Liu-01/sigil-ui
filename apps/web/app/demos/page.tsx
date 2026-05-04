@@ -156,7 +156,7 @@ export default function DemosPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="96px 24px 48px" style={{ position: "relative", overflow: "hidden" }}>
+      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1] mb-6">
           <MonoLabel variant="accent" className="block mb-4">
@@ -190,7 +190,7 @@ export default function DemosPage() {
       <Divider pattern="diagonal" size="sm" showBorders />
 
       {/* Info + CTA */}
-      <SigilSection padding="64px 24px">
+      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <GapPixelGrid columns={{ md: 3 }}>
           {INFO_CARDS.map((card) => (
             <GapPixelCell key={card.label} className="p-6 flex flex-col gap-3">

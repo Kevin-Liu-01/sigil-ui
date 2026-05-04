@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { NavbarLogo } from "@/components/landing/hero-logo-field";
-import { Star, PanelsTopLeft, Menu, X, Search, BookOpen, Sparkles, ArrowRight } from "lucide-react";
+import { Star, PanelsTopLeft, Menu, X, Search, BookOpen, ArrowDown } from "lucide-react";
 import { SigilThemeToggle } from "./theme-toggle";
 
 const NAV_LINKS = [
@@ -72,7 +72,7 @@ export function LandingNavbar() {
       style={{
         maxWidth: "var(--s-content-max, 1200px)",
         paddingInline: "var(--s-navbar-padding-x, 24px)",
-        height: "var(--s-navbar-height, 48px)",
+        height: "calc(var(--s-navbar-height, 48px) + 1px)",
         boxSizing: "border-box",
       }}
     >
@@ -207,8 +207,60 @@ export function LandingNavbar() {
 
 const BANNER_DISMISS_KEY = "sigil-v1-banner-dismissed";
 
+const PACKAGES = [
+  { label: "components", pkg: "@sigil-ui/components" },
+  { label: "primitives", pkg: "@sigil-ui/primitives" },
+  { label: "tokens", pkg: "@sigil-ui/tokens" },
+  { label: "presets", pkg: "@sigil-ui/presets" },
+  { label: "cli", pkg: "@sigil-ui/cli" },
+  { label: "create-app", pkg: "create-sigil-app" },
+] as const;
+
+function NpmIcon({ size = 14 }: { size?: number }) {
+  return (
+    <svg viewBox="0 0 256 256" width={size} height={size} aria-label="npm">
+      <rect fill="#C12127" width="256" height="256" rx="12" />
+      <path fill="#fff" d="M42.7 42.7h170.6v170.6H128V71.1H85.3v142.2H42.7z" />
+    </svg>
+  );
+}
+
+function formatDownloads(n: number): string {
+  if (n >= 1000000) return `${(n / 1000000).toFixed(1)}M`;
+  if (n >= 1000) return `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k`;
+  return String(n);
+}
+
+function useNpmDownloads(): Record<string, number> {
+  const [downloads, setDownloads] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const cached = sessionStorage.getItem("sigil-npm-downloads");
+    if (cached) {
+      try { setDownloads(JSON.parse(cached)); return; } catch {}
+    }
+
+    const results: Record<string, number> = {};
+    Promise.allSettled(
+      PACKAGES.map((p) =>
+        fetch(`https://api.npmjs.org/downloads/point/last-week/${encodeURIComponent(p.pkg)}`)
+          .then((r) => r.json())
+          .then((data) => {
+            if (typeof data?.downloads === "number") results[p.pkg] = data.downloads;
+          })
+      )
+    ).then(() => {
+      setDownloads(results);
+      sessionStorage.setItem("sigil-npm-downloads", JSON.stringify(results));
+    });
+  }, []);
+
+  return downloads;
+}
+
 function ReleaseBanner() {
   const [visible, setVisible] = useState(false);
+  const downloads = useNpmDownloads();
 
   useEffect(() => {
     if (!localStorage.getItem(BANNER_DISMISS_KEY)) setVisible(true);
@@ -217,38 +269,48 @@ function ReleaseBanner() {
   if (!visible) return null;
 
   return (
-    <div
-      className="absolute left-0 right-0 z-40 flex items-center justify-center"
-      style={{ top: "100%" }}
-    >
+    <div className="w-full flex items-center justify-center">
       <div
-        className="relative flex items-center justify-center gap-2 text-[12px] font-medium border-b border-[var(--s-border)] overflow-hidden w-full"
+        className="relative flex items-center justify-center gap-2.5 text-[12px] font-medium border-b border-[var(--s-grid-line-color,var(--s-border-muted))] overflow-hidden w-full"
         style={{
           maxWidth: "var(--s-content-max, 1200px)",
           paddingInline: "var(--s-navbar-padding-x, 24px)",
-          height: "var(--s-banner-height, 24px)",
+          height: "calc(var(--s-grid-cell, 48px) - 1px)",
           boxSizing: "border-box",
           background:
-            "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 8%, var(--s-background)), color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 8%, var(--s-background)))",
-          backdropFilter: "blur(16px) saturate(1.5)",
-          WebkitBackdropFilter: "blur(16px) saturate(1.5)",
+            "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 6%, var(--s-background)), color-mix(in oklch, var(--s-primary) 10%, var(--s-background)), color-mix(in oklch, var(--s-primary) 6%, var(--s-background)))",
           color: "var(--s-text)",
         }}
       >
-        <Sparkles size={12} className="shrink-0 text-[var(--s-primary)]" />
-        <span className="text-[var(--s-text-muted)]">
-          <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
-          {" "}is live &mdash;{" "}
-          <a
-            href="https://www.npmjs.com/org/sigil-ui"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-0.5 font-semibold text-[var(--s-primary)] no-underline hover:underline"
-          >
-            View on npm
-            <ArrowRight size={11} className="translate-y-px" />
-          </a>
-        </span>
+        <NpmIcon size={16} />
+        <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
+        <span className="text-[var(--s-text-muted)] hidden sm:inline">is live</span>
+
+        <div className="hidden md:block w-px h-3.5 bg-[var(--s-border)] mx-0.5" />
+
+        <div className="hidden md:flex items-center gap-1.5">
+          {PACKAGES.map((pkg) => {
+            const count = downloads[pkg.pkg];
+            return (
+              <a
+                key={pkg.label}
+                href={`https://www.npmjs.com/package/${pkg.pkg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-1.5 h-[26px] pl-2.5 pr-2.5 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[11px] font-medium text-[var(--s-text)] no-underline hover:border-[var(--s-primary)] hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_25%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
+              >
+                <span className="font-[family-name:var(--s-font-mono)] tracking-[-0.02em]">{pkg.label}</span>
+                {count != null && (
+                  <span className="inline-flex items-center gap-0.5 font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] group-hover:text-[var(--s-primary)] tabular-nums transition-colors duration-[var(--s-duration-fast,150ms)]">
+                    <ArrowDown size={8} className="opacity-50" />
+                    {formatDownloads(count)}
+                  </span>
+                )}
+              </a>
+            );
+          })}
+        </div>
+
         <button
           type="button"
           onClick={() => {

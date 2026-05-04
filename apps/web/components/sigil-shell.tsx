@@ -1,18 +1,24 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, type ReactNode } from "react";
 import { SigilTokensProvider, useSigilTokens } from "./sandbox/token-provider";
 import { SigilDevBar, DevBarProvider } from "./devbar";
 import { SigilSoundProvider } from "./sound-provider";
 
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
 function TokenStyleInjector() {
   const { tokens } = useSigilTokens();
   const styleRef = useRef<HTMLStyleElement | null>(null);
+  const prevCssRef = useRef("");
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (!styleRef.current) {
       styleRef.current =
-        (document.querySelector("style[data-sigil-tokens]") as HTMLStyleElement) ?? null;
+        (document.querySelector(
+          "style[data-sigil-tokens]",
+        ) as HTMLStyleElement) ?? null;
       if (!styleRef.current) {
         styleRef.current = document.createElement("style");
         styleRef.current.setAttribute("data-sigil-tokens", "true");
@@ -85,11 +91,15 @@ function TokenStyleInjector() {
       const motion = tokens.motion as Record<string, unknown>;
       for (const [key, value] of Object.entries(motion)) {
         if (key === "duration" && value && typeof value === "object") {
-          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+          for (const [k, v] of Object.entries(
+            value as Record<string, unknown>,
+          )) {
             if (typeof v === "string") addVar(`--s-duration-${k}`, v);
           }
         } else if (key === "easing" && value && typeof value === "object") {
-          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+          for (const [k, v] of Object.entries(
+            value as Record<string, unknown>,
+          )) {
             if (typeof v === "string") addVar(`--s-ease-${k}`, v);
           }
         } else {
@@ -102,7 +112,9 @@ function TokenStyleInjector() {
       const borders = tokens.borders as Record<string, unknown>;
       for (const [key, value] of Object.entries(borders)) {
         if (key === "width" && value && typeof value === "object") {
-          for (const [k, v] of Object.entries(value as Record<string, unknown>)) {
+          for (const [k, v] of Object.entries(
+            value as Record<string, unknown>,
+          )) {
             if (typeof v === "string") addVar(`--s-border-width-${k}`, v);
           }
         } else if (typeof value === "string") {
@@ -140,10 +152,28 @@ function TokenStyleInjector() {
     if (darkVars.length > 0) {
       blocks.push(`.dark, [data-theme="dark"] {\n${darkVars.join("\n")}\n}`);
     }
-    styleRef.current.textContent = blocks.join("\n");
+
+    const css = blocks.join("\n");
+    if (css === prevCssRef.current) return;
+    prevCssRef.current = css;
+
+    styleRef.current.textContent = css;
 
     if (tokens.typography?.["font-body"]) {
-      document.body.style.fontFamily = tokens.typography["font-body"] as string;
+      const fontFamily = tokens.typography["font-body"] as string;
+      const probe = `400 16px ${fontFamily}`;
+      if (document.fonts.check(probe)) {
+        document.body.style.fontFamily = fontFamily;
+      } else {
+        document.fonts.load(probe).then(
+          () => {
+            document.body.style.fontFamily = fontFamily;
+          },
+          () => {
+            document.body.style.fontFamily = fontFamily;
+          },
+        );
+      }
     }
   }, [tokens]);
 

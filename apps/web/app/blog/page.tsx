@@ -90,7 +90,7 @@ export default function BlogPage() {
         <LandingNavbar />
 
         {/* ── Hero ── */}
-        <SigilSection borderTop style={{ position: "relative", overflow: "hidden" }}>
+        <SigilSection borderTop className="relative overflow-hidden">
           <TextureBg opacity={0.3} />
           <div className="relative z-[1] flex flex-col gap-4 max-w-[640px]">
             <MonoLabel variant="accent">/ Blog</MonoLabel>

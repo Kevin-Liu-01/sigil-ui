@@ -136,8 +136,8 @@ export const _templatePreset: SigilPreset = {
       "badge-px": "7px",
       "badge-py": "2px",
 
-      "section-py": "72px",
-      "section-py-lg": "96px",
+      "section-py": "6rem",
+      "section-py-lg": "9rem",
 
       "navbar-height": "48px",
       "navbar-px": "20px",
@@ -490,8 +490,8 @@ export const _templatePreset: SigilPreset = {
     // 20. SECTIONS (10 fields)
     // -----------------------------------------------------------------------
     sections: {
-      "padding-y": "72px",
-      "padding-y-hero": "120px",
+      "padding-y": "6rem",
+      "padding-y-hero": "9rem",
       "padding-x": "24px",
       "max-width": "1200px",
       gap: "32px",

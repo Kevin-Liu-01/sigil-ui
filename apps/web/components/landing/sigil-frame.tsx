@@ -44,7 +44,7 @@ export function SigilFrame({ children }: { children: ReactNode }) {
   const frame = (
     <SigilFrameBase
       showGutterGrid={!isEdgeless}
-      showMarginLines={!isEdgeless}
+      showMarginLines={!isEdgeless || marginPattern !== "none"}
       gutterPattern={gutterPattern}
       marginPattern={marginPattern}
       marginBorder={marginBorder}

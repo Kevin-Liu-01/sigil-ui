@@ -36,6 +36,8 @@ import {
   Footer as SigilFooter, Sidebar, SidebarHeader, SidebarContent, SidebarItem,
   NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink,
   Menubar, MenubarMenu, MenubarTrigger, MenubarContent, MenubarItem, SocialIcons,
+  MagneticNav, MagneticNavItem, MagneticNavLink,
+  ProximityGlow, ProximityGlowCard,
   Divider, HRule,
   AnimateOnScroll,
   FadeIn, SlideIn, ScaleIn, BlurFade, Stagger, AnimateOnMount,
@@ -212,6 +214,7 @@ const DOC_PATH_OVERRIDES: Record<string, string | null> = {
   LeaderboardTable: null,
   LineChart: null,
   LoadingSpinner: "/docs/components/loading-spinner",
+  MagneticNav: "/docs/navigation/magnetic-nav",
   MatrixDiagram: null,
   MermaidDiagram: null,
   MetricCard: null,
@@ -229,6 +232,7 @@ const DOC_PATH_OVERRIDES: Record<string, string | null> = {
   PageShell: "/docs/layout/page-shell",
   "Page Shell": "/docs/layout/page-shell",
   ProgressRing: null,
+  ProximityGlow: "/docs/effects/proximity-glow",
   RadioGroup: "/docs/components/radio-group",
   RadarChart: null,
   ScrollArea: "/docs/components/scroll-area",
@@ -810,6 +814,27 @@ const CELLS: ComponentCell[] = [
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
+  )},
+
+  { name: "MagneticNav", category: "Navigation", variants: 1, span: 2, render: () => (
+    <MagneticNav>
+      <MagneticNavItem><MagneticNavLink href="#" active>Home</MagneticNavLink></MagneticNavItem>
+      <MagneticNavItem><MagneticNavLink href="#">Docs</MagneticNavLink></MagneticNavItem>
+      <MagneticNavItem><MagneticNavLink href="#">Components</MagneticNavLink></MagneticNavItem>
+      <MagneticNavItem><MagneticNavLink href="#">Presets</MagneticNavLink></MagneticNavItem>
+    </MagneticNav>
+  )},
+  { name: "ProximityGlow", category: "Navigation", variants: 1, span: 2, render: () => (
+    <ProximityGlow className="flex gap-3 w-full">
+      <ProximityGlowCard className="flex-1 text-center">
+        <div className="text-[10px] font-semibold text-[var(--s-text)]">Card A</div>
+        <div className="text-[9px] text-[var(--s-text-muted)] mt-1">Hover near me</div>
+      </ProximityGlowCard>
+      <ProximityGlowCard className="flex-1 text-center">
+        <div className="text-[10px] font-semibold text-[var(--s-text)]">Card B</div>
+        <div className="text-[9px] text-[var(--s-text-muted)] mt-1">Glow border</div>
+      </ProximityGlowCard>
+    </ProximityGlow>
   )},
 
   /* ================================================================ */

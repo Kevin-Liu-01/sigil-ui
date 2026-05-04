@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { flushSync } from "react-dom";
 import type { SigilPreset, SigilTokens } from "@sigil-ui/tokens";
 import { presets, defaultPreset, type PresetName } from "@sigil-ui/presets";
 
@@ -51,8 +52,56 @@ export function SigilTokensProvider({
     const loader = presets[name as PresetName];
     if (!loader) return;
     const preset = await loader();
-    setTokens(preset.tokens);
-    setActivePreset(name);
+
+    if (typeof document !== "undefined") {
+      const typo = preset.tokens.typography as
+        | Record<string, unknown>
+        | undefined;
+      if (typo) {
+        const families = ["font-display", "font-body", "font-mono"]
+          .map((k) => typo[k])
+          .filter((v): v is string => typeof v === "string");
+        if (families.length > 0) {
+          const loads = families.flatMap((f) => [
+            document.fonts.load(`400 16px ${f}`).catch(() => []),
+            document.fonts.load(`700 16px ${f}`).catch(() => []),
+          ]);
+          await Promise.race([
+            Promise.allSettled(loads),
+            new Promise<void>((r) => setTimeout(r, 300)),
+          ]);
+        }
+      }
+    }
+
+    const apply = () => {
+      flushSync(() => {
+        setTokens(preset.tokens);
+        setActivePreset(name);
+      });
+    };
+
+    if (typeof document === "undefined") {
+      apply();
+      return;
+    }
+
+    if (typeof document.startViewTransition === "function") {
+      const vt = document.startViewTransition(apply);
+      vt.finished.catch(() => {});
+    } else {
+      document.documentElement.setAttribute("data-switching-preset", "");
+      apply();
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTimeout(() => {
+            document.documentElement.removeAttribute(
+              "data-switching-preset",
+            );
+          }, 450);
+        });
+      });
+    }
   }, []);
 
   const setTokensDirect = useCallback(
