@@ -134,6 +134,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       className={robotoMono.variable}
       suppressHydrationWarning
     >
+      <head>
+        {/*
+          Demo fonts referenced by the hero diagram's typography demo.
+          Registered under their canonical Google Font names so the demo's
+          literal `font-family: "Space Grotesk"` / `"DM Sans"` swaps land.
+        */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;700&display=swap"
+        />
+      </head>
       <body suppressHydrationWarning>
         <script
           type="application/ld+json"

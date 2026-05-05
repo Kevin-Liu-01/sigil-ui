@@ -899,15 +899,13 @@ function MeterRow() {
 function CalendarCard() {
   const [selected, setSelected] = useState<Date | undefined>(() => createDemoDate());
   return (
-    <div className="w-full overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <SigilCalendar
-        mode="single"
-        selected={selected}
-        onSelect={setSelected}
-        captionLayout="dropdown"
-        className="p-2 w-full [--cell-size:1.5rem] [&_table]:w-full [&_table]:text-[10px] [&_button]:text-[10px] [&_th]:text-[8px] [&_td]:p-0.5 [&_select]:text-[10px] [&_.rdp-dropdowns]:text-[10px] [&_.rdp-dropdown_root]:text-[10px] [&_.rdp-caption_label]:text-[10px]"
-      />
-    </div>
+    <SigilCalendar
+      mode="single"
+      selected={selected}
+      onSelect={setSelected}
+      captionLayout="dropdown"
+      className="p-2 w-full [--cell-size:1.5rem] [&_table]:w-full [&_table]:text-[10px] [&_button]:text-[10px] [&_th]:text-[8px] [&_td]:p-0.5 [&_select]:text-[10px] [&_.rdp-dropdowns]:text-[10px] [&_.rdp-dropdown_root]:text-[10px] [&_.rdp-caption_label]:text-[10px]"
+    />
   );
 }
 

@@ -265,7 +265,7 @@ const HERO_TOKEN_STEPS = [
   { token: "--s-primary", before: "primary: oklch(0.55 0.12 275)", line: "primary: oklch(0.66 0.18 275)", label: "primary geometry" },
   { token: "--s-border", before: "border: oklch(0.20 0.01 260)", line: "border: oklch(0.24 0.01 260)", label: "cell outline" },
   { token: "--s-radius-md", before: "radius-md: 8px", line: "radius-md: 16px", label: "component corners" },
-  { token: "--s-duration-slow", before: "duration-slow: 300ms", line: "duration-slow: 600ms", label: "draw timing" },
+  { token: "--s-duration-slow", before: "duration-slow: 600ms", line: "duration-slow: 300ms", label: "draw timing" },
   { token: "--s-font-display", before: 'font-display: "IBM Plex Sans"', line: 'font-display: "Space Grotesk"', label: "heading typeface" },
   { token: "--s-success", before: "success: oklch(0.60 0.15 145)", line: "success: oklch(0.72 0.19 145)", label: "positive signal" },
   { token: "--s-radius-sm", before: "radius-sm: 0", line: "radius-sm: 9999px", label: "badge shape" },
@@ -618,13 +618,50 @@ const STYLE_BLOCK = `
 .hero-logo-field__apply {
   animation: hlf-apply-style 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
+@keyframes hlf-duration-sweep {
+  /* Continuously slides a soft accent stripe across the bar from left to
+     right and loops without snap-back. The animation-duration is bound via
+     --hlf-tick-duration so the sweep visibly speeds up / slows down with the
+     demoed duration token. */
+  0%   { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(100%, 0, 0); }
+}
+.hero-logo-field__duration-bar {
+  --hlf-tick-color: var(--s-primary-strong, oklch(0.66 0.18 275));
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  background: color-mix(in oklch, var(--hlf-tick-color) 22%, transparent);
+}
+.hero-logo-field__duration-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in oklch, var(--hlf-tick-color) 60%, transparent) 20%,
+    var(--hlf-tick-color) 50%,
+    color-mix(in oklch, var(--hlf-tick-color) 60%, transparent) 80%,
+    transparent 100%
+  );
+  will-change: transform;
+  /* Linear timing keeps the sweep at constant velocity — the whole point of
+     a duration demo is to show the speed faithfully. */
+  animation: hlf-duration-sweep var(--hlf-tick-duration, 600ms) linear infinite;
+}
 .hero-logo-field__line-active {
-  background: color-mix(in oklch, var(--s-primary) 10%, transparent);
-  border-left-color: color-mix(in oklch, var(--s-primary) 70%, transparent);
+  /* Loading state — neutral white tint so it reads as "in flight" rather
+     than "applied". Turns primary-blue once isDone via __line-done. */
+  background: color-mix(in oklch, var(--s-text) 10%, transparent);
+  border-left-color: color-mix(in oklch, var(--s-text) 70%, transparent);
   transition: background-color var(--s-duration-normal, 200ms), border-color var(--s-duration-normal, 200ms);
 }
 .hero-logo-field__line-done {
-  border-left-color: color-mix(in oklch, var(--s-primary) 30%, transparent);
+  border-left-color: color-mix(in oklch, oklch(0.66 0.18 275) 60%, transparent);
 }
 `;
 
@@ -868,6 +905,10 @@ export function HeroLogoField() {
           opacity: mounted ? 1 : 0,
           transition: "opacity 400ms cubic-bezier(0.32, 0.72, 0, 1)",
           gridTemplateColumns: "repeat(7, 1fr)",
+          // All rows auto-size — the right column's natural height
+          // (UsageCard + Calendar + TokenAction) determines the row-span-3
+          // sigil.tokens.md panel's height. The panel's inner scroll area
+          // (overflow: auto, flex: 1) absorbs any markdown overflow.
           gridTemplateRows: "auto auto auto auto auto auto",
           gap: 5,
         }}
@@ -909,7 +950,13 @@ export function HeroLogoField() {
                         key={t.token}
                         {...(isActive ? { "data-active-token": true } : {})}
                         className={isActive ? "hero-logo-field__line-active" : isDone ? "hero-logo-field__line-done" : undefined}
-                        style={{ color: isActive ? "var(--s-primary)" : isDone ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms", paddingLeft: 6, borderLeft: "2px solid transparent", display: "flex", alignItems: "center", gap: 3 }}
+                        // Loading (isActive, mid-typing) reads as plain white;
+                        // turns the bright accent purple once the update has
+                        // been applied. Uses an explicit literal because
+                        // var(--s-primary) is light-gray in dark mode and
+                        // wouldn't visually differentiate from the loading
+                        // state.
+                        style={{ color: isDone ? "oklch(0.66 0.18 275)" : isActive ? "var(--s-text)" : "var(--s-text-muted)", transition: "color 300ms", paddingLeft: 6, borderLeft: "2px solid transparent", display: "flex", alignItems: "center", gap: 3 }}
                       >
                         <Icon size={7} style={{ opacity: 0.4, flexShrink: 0 }} />
                         {isActive && isTyping && labelParts ? (
@@ -927,7 +974,15 @@ export function HeroLogoField() {
           </div>
         </div>
 
-        <div ref={setComponentRef("UsageCard")} className="hero-logo-field__mobile-half" style={{ "--m-order": 2, gridColumn: "4 / 6" } as React.CSSProperties}>
+        <div
+          ref={setComponentRef("UsageCard")}
+          className="hero-logo-field__mobile-half"
+          style={{
+            "--m-order": 2,
+            gridColumn: "4 / 6",
+            ...(applied("UsageCard") ? { "--s-primary": "oklch(0.66 0.18 275)" } : {}),
+          } as React.CSSProperties}
+        >
           <Card
             className={`overflow-hidden h-full ${applied("UsageCard") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -939,10 +994,10 @@ export function HeroLogoField() {
             <CardContent className="p-2.5">
               <div className="mb-1 flex items-center justify-between">
                 <span style={{ ...mono9, color: "var(--s-text-muted)" }}>usage</span>
-                <Badge size="sm" className="text-[7px]" style={applied("UsageCard") ? { background: "oklch(0.66 0.18 275)", borderColor: "oklch(0.66 0.18 275)" } : undefined}>live</Badge>
+                <Badge size="sm" className="text-[7px]" style={applied("UsageCard") ? { background: "var(--s-primary)", borderColor: "var(--s-primary)" } : undefined}>live</Badge>
               </div>
-              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: applied("UsageCard") ? "oklch(0.66 0.18 275)" : "var(--s-text)", transition: "color 600ms" }}>12.4k</div>
-              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" style={applied("UsageCard") ? { "--progress-color": "oklch(0.66 0.18 275)" } as React.CSSProperties : undefined} />
+              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: applied("UsageCard") ? "var(--s-primary)" : "var(--s-text)", transition: "color 600ms" }}>12.4k</div>
+              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" />
             </CardContent>
           </Card>
         </div>
@@ -992,7 +1047,9 @@ export function HeroLogoField() {
           </Card>
         </div>
 
-        {/* Row 2: DatePicker spans right 4 cols */}
+        {/* Row 2: DatePicker spans right 4 cols. The wrapper flexes vertically
+            so the Calendar fills the leftover height in the column, which
+            bottom-aligns the right side with the sigil.tokens.md panel. */}
         <div
           ref={setComponentRef("DatePicker")}
           className={`overflow-hidden hero-logo-field__mobile-half hero-logo-field__mobile-row2 ${radiusApplied ? "hero-logo-field__apply" : ""}`}
@@ -1000,7 +1057,7 @@ export function HeroLogoField() {
             "--m-order": 3,
             gridColumn: "4 / 8",
             border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
-            borderRadius: radiusApplied ? "var(--s-radius-lg, 16px)" : "var(--s-radius-md,8px)",
+            borderRadius: radiusApplied ? "var(--s-radius-lg)" : "var(--s-radius-md)",
             background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
             transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
           } as React.CSSProperties}
@@ -1010,20 +1067,45 @@ export function HeroLogoField() {
             selected={new Date()}
             captionLayout="label"
             disableNavigation={false}
-            className="p-1 w-full [--cell-size:1rem] [&_table]:w-full [&_table]:text-[8px] [&_table]:table-fixed [&_button]:text-[8px] [&_button]:p-0 [&_button]:h-4 [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[8px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-row]:h-4 [&_.rdp-cell]:p-px [&_.rdp-day]:h-4 [&_.rdp-day]:w-full [&_.rdp-day_selected]:h-4 [&_.rdp-day_selected]:w-full [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
+            // Override the Calendar component's `aspect-square` on day cells
+            // so they stay flat rectangles (width is wide, but height is
+            // small) — keeps the natural calendar height ≤ ~180px so the
+            // right column never out-grows the sigil.tokens.md panel.
+            className="border-0 rounded-none bg-transparent p-2 w-full [--cell-size:1.25rem] [&_table]:w-full [&_table]:text-[9px] [&_table]:table-fixed [&_.rdp-day]:!aspect-auto [&_.rdp-day]:h-5 [&_button]:text-[9px] [&_button]:p-0 [&_button]:h-5 [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[9px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-cell]:p-px [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
           />
         </div>
 
-        {/* Row 3: TokenAction spans right 4 cols */}
+        {/* Row 3: TokenAction spans right 4 cols. Wrapped in a rounded box that
+            mirrors the Calendar above so the right edge + corners line up
+            visually. The bottom "duration tick" bar is the actual demo: its
+            animation-duration is the value being demonstrated, so the bar
+            visibly speeds up (300ms) → slows down (600ms) when applied. */}
         <div ref={setComponentRef("TokenAction")} className="hero-logo-field__mobile-hide" style={{ gridColumn: "4 / 8" }}>
-          <div className={`grid grid-cols-[1fr_auto] gap-2 ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`} style={{ transition: `all ${applied("TokenAction") ? "600ms" : "var(--s-duration-slow,300ms)"}` }}>
-            <Input
-              value="sigil.tokens.md"
-              readOnly
-              className={`h-7 text-[9px] ${applied("TokenAction") ? "hero-logo-field__typed" : ""}`}
-              key={applied("TokenAction") ? "typed" : "idle"}
-            />
-            <Button size="sm" className="h-7 px-2.5 text-[9px]">{applied("TokenAction") ? "Saved" : "Apply"}</Button>
+          <div
+            className={`relative overflow-hidden ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`}
+            style={{
+              border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${applied("TokenAction") ? "var(--s-primary)" : "var(--s-border)"}`,
+              // Use the active preset's radius-md so the box matches the
+              // preset's structural language (only the Calendar above
+              // demonstrates the radius-md → radius-lg animation).
+              borderRadius: "var(--s-radius-md)",
+              background: applied("TokenAction") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
+              padding: "6px 8px",
+              transition: "background-color 600ms, border-color 600ms",
+              // Bind the duration-bar sweep to the demoed duration value.
+              "--hlf-tick-duration": applied("TokenAction") ? "300ms" : "600ms",
+            } as React.CSSProperties}
+          >
+            <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
+              <Input
+                value="sigil.tokens.md"
+                readOnly
+                className={`h-7 text-[9px] ${applied("TokenAction") ? "hero-logo-field__typed" : ""}`}
+                key={applied("TokenAction") ? "typed" : "idle"}
+              />
+              <Button size="sm" className="h-7 px-2.5 text-[9px]">{applied("TokenAction") ? "Saved" : "Apply"}</Button>
+            </div>
+            <div aria-hidden="true" className="hero-logo-field__duration-bar" />
           </div>
         </div>
 
@@ -1193,7 +1275,7 @@ export function HeroLogoField() {
             className={`h-full ${applied("Switches") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("Switches") ? "var(--s-primary)" : "var(--s-border)",
-              background: applied("Switches") ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-surface, var(--s-background)))" : cellBg,
+              background: applied("Switches") ? "color-mix(in oklch, var(--s-primary) 28%, var(--s-surface, var(--s-background)))" : cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
