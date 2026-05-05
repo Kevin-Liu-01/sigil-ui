@@ -217,7 +217,8 @@ const MONO_FONTS = ["PP Fraktion Mono", "PP Supply Mono", "PP Neue Bit"];
 
 const GUTTER_PATTERNS: GutterPattern[] = [
   "grid", "dots", "crosshatch", "diagonal", "diamond", "horizontal",
-  "horizontal-thin", "horizontal-wide", "hexagon", "triangle", "zigzag",
+  "horizontal-thin", "horizontal-fine", "horizontal-wide",
+  "hexagon", "triangle", "zigzag",
   "checker", "plus", "brick", "wave", "none",
 ];
 

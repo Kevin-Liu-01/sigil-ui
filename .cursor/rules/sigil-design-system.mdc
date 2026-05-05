@@ -93,13 +93,17 @@ The rail's 1px line lives at the BOTTOM of each grid cell (rail-line rows = `cel
 
 **Rail / gutter pattern convention (enforced in `getSigilPatternStyles`):**
 
-The page rail's repeating horizontal-line patterns (`horizontal`, `horizontal-thin`, `horizontal-wide`, and the horizontal axis of `grid`) place the 1px line at the **END of each tile** (the bottom):
+The page rail's repeating horizontal-line patterns place the 1px line at the **END of each tile** (the bottom). The flavors:
 
-```
-linear-gradient(to top, COLOR 1px, transparent 1px)
-```
+- `horizontal` — 1 line per `cell` (`linear-gradient(to top, COLOR 1px, transparent 1px)` with `background-size: 100% cell`).
+- `horizontal-thin` — **3 lines per `cell`** (instrument ruling, dedalus reticle).
+- `horizontal-fine` — **5 lines per `cell`** (denser ruler ticks).
+- `horizontal-wide` — 1 line per `3 × cell`.
+- The horizontal axis of `grid` follows the same `to top, COLOR 1px, transparent 1px` convention.
 
-NOT at the top (`to bottom`). With the line at the bottom:
+For multi-line variants (`horizontal-thin` / `horizontal-fine`), the engine emits a single `repeating-linear-gradient` whose final stop lands exactly on the cell boundary, so even fractional inner stops (e.g. `50/3` for cell=50) render at consistent positions and the bottom-most line always coincides with the next cell line. Without this, browser per-tile subpixel rounding accumulates ~2px of drift per ~13k px scrolled.
+
+With the line at the bottom of every cell:
 
 - For tile N at `[N × cell, (N+1) × cell)`, the rail line occupies `[(N+1)·cell − 1, (N+1)·cell)`.
 - A `box-sizing: border-box` band of `height = cell` and `border-bottom: 1px` placed at the top of tile N has its bottom border at `[N·cell + cell − 1, N·cell + cell)` — which is exactly the rail line position. ✓

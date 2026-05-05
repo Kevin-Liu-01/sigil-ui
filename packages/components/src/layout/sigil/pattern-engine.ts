@@ -245,6 +245,12 @@ export function getSigilPatternStyles(
       // boundary alongside the `horizontal` margin pattern.
       return buildSubdividedHorizontal(C, cell, 3);
     }
+    case "horizontal-fine": {
+      // 5 lines per cell — denser than `horizontal-thin` for an
+      // instrument-ruler feel. Same drift-free repeat strategy: the
+      // 5th line lands exactly on every cell boundary.
+      return buildSubdividedHorizontal(C, cell, 5);
+    }
     case "horizontal-wide": {
       // Integer multiple of an integer cell — already drift-free, but
       // guard against a fractional `cell` with `Math.round`.
