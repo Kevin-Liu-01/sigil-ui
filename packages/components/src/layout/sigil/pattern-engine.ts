@@ -122,6 +122,27 @@ function getBrickLines(
 }
 
 /**
+ * Snap a desired tile period to the largest integer divisor of `cell`
+ * that's `<= target`. Same idea as the `horizontal-thin` repeat strategy
+ * but for 2D patterns (diamond, etc.) whose tile size depends on `cell`.
+ * Using a cell-divisor guarantees the tile is integer pixels AND that
+ * the pattern re-aligns with the `cell` grid at every cell boundary,
+ * instead of drifting subpixel-by-subpixel from a fractional period.
+ *
+ * Example: `cell=50, target=12.5` (the historic `s/2` for diamond) is
+ * fractional and would rasterize as alternating 12/13px tiles. Snapping
+ * picks `10` (50/5), so 5 diamonds per cell, every cell boundary clean.
+ */
+function snapPeriod(cell: number, target: number, min = 4): number {
+  const c = Math.max(1, Math.round(cell));
+  const t = Math.max(min, Math.floor(target));
+  for (let d = t; d >= min; d--) {
+    if (c % d === 0) return d;
+  }
+  return min;
+}
+
+/**
  * Build a `repeating-linear-gradient` background that paints `subdivisions`
  * 1px lines per `cell`-tall block. The gradient itself repeats every `cell`
  * px (an integer length), so each block is recomputed from a clean integer
@@ -191,12 +212,18 @@ export function getSigilPatternStyles(
         backgroundSize: `${s}px ${s}px`,
       };
     }
-    case "dots":
+    case "dots": {
+      // `s/2` is the dot offset from the inside edge. Round to integer so
+      // the dot lands on a clean device-pixel column instead of being
+      // anti-aliased across two columns (visible as a smudge for cell=50
+      // where s/2 = 12.5).
+      const half = Math.round(s / 2);
       return {
         backgroundImage: `radial-gradient(circle, ${C} 1px, transparent 1px)`,
         backgroundSize: `${s}px ${s}px`,
-        backgroundPosition: R ? `left ${s / 2}px` : `right ${s / 2}px`,
+        backgroundPosition: R ? `left ${half}px` : `right ${half}px`,
       };
+    }
     case "crosshatch": {
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
@@ -216,7 +243,12 @@ export function getSigilPatternStyles(
       };
     }
     case "diamond": {
-      const h = s / 2;
+      // `s/2` is fractional whenever `s` is odd (cell=50 → s=25 → 12.5),
+      // which makes the browser rasterize each diamond tile as alternating
+      // 12/13 px blocks. Snap to the largest cell-divisor `<= s/2` so the
+      // tile is integer pixels AND the diamond grid re-aligns with the
+      // structural cell grid at every cell boundary.
+      const h = snapPeriod(cell, s / 2);
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
       return {
@@ -291,7 +323,10 @@ export function getSigilPatternStyles(
       };
     }
     case "checker": {
-      const h = s / 2;
+      // The two layers are offset by `s/2` in both axes to interlock; round
+      // to integer so the offset lands on a clean device-pixel boundary
+      // rather than being anti-aliased across two rows/columns.
+      const h = Math.round(s / 2);
       const a = R ? -45 : 45;
       return {
         backgroundImage: [
