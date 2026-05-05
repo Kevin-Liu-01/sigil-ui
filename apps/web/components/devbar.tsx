@@ -43,7 +43,11 @@ import {
   SegmentedControl,
   SegmentedControlItem,
 } from "@sigil-ui/components";
-import { useSigilTokens } from "./sandbox/token-provider";
+import {
+  useSigilActions,
+  useSigilActivePreset,
+  useSigilTokens,
+} from "./sandbox/token-provider";
 import { useSigilSound } from "./sound-provider";
 import { SpringCurveEditor, EasingCurveEditor, SubSection } from "./studio-editors";
 import type { SigilTokens, GutterPattern } from "@sigil-ui/tokens";
@@ -950,7 +954,13 @@ const TOOLBAR_DOCK_ICONS: Record<ToolbarDock, typeof PanelTop> = {
 
 function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const devbar = useDevBar();
-  const { activePreset, setPreset } = useSigilTokens();
+  // Narrow subscriptions: Toolbar reads activePreset for highlighting and
+  // setPreset for the preset strip — but never the full tokens object. The
+  // legacy useSigilTokens() hook would re-render this on every patchTokens
+  // call (slider drags etc.) even though Toolbar's UI doesn't depend on
+  // those fields, which made every preset switch ~30+ buttons heavier.
+  const activePreset = useSigilActivePreset();
+  const { setPreset } = useSigilActions();
   const { play, enabled: soundEnabled, setEnabled: setSoundEnabled, setActivePreset: setSoundPreset } = useSigilSound();
 
   const canvasMode = devbar?.canvasMode ?? false;

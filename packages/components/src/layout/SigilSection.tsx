@@ -1,11 +1,11 @@
 "use client";
 
-import { type ReactNode, type CSSProperties, type ElementType } from "react";
+import { memo, type ReactNode, type CSSProperties, type ElementType } from "react";
 import { cn } from "../utils";
 import {
+  useIsInsidePageGrid,
   usePageGridConfig,
   SigilGutter,
-  type PageGridConfig,
 } from "./SigilPageGrid";
 import type { GutterPattern } from "@sigil-ui/tokens";
 
@@ -105,7 +105,11 @@ function CrossMark({
 /* CrossRow — 4 crosses at gutter/border intersections                  */
 /* ------------------------------------------------------------------ */
 
-function CrossRow({
+// Memoised so it only re-renders when railGap / crossStroke / position
+// actually change. PageGridContext lives one level up (in CrossRowConnector)
+// so the memo bail keeps SigilSection's render path cheap on preset switches
+// where these primitives happen to match between presets.
+const CrossRow = memo(function CrossRow({
   position,
   railGap,
   crossStroke,
@@ -144,6 +148,23 @@ function CrossRow({
         </div>
       ))}
     </>
+  );
+});
+
+// Tiny connector that subscribes to PageGridContext and feeds the primitive
+// props into CrossRow. Isolating the subscription here means SigilSection
+// itself does NOT subscribe to the heavy context — so sections without
+// `showCrosses` (the common case) stay fully out of the preset-switch
+// re-render cascade.
+function CrossRowConnector({ position }: { position: "top" | "bottom" }) {
+  const config = usePageGridConfig();
+  if (!config) return null;
+  return (
+    <CrossRow
+      position={position}
+      railGap={config.railGap}
+      crossStroke={config.crossStroke}
+    />
   );
 }
 
@@ -208,9 +229,14 @@ export function SigilSection({
   showGutterGrid = true,
   showMarginLines = true,
 }: SigilSectionProps) {
-  const gridConfig = usePageGridConfig();
+  // Subscribe only to the lightweight boolean context — its value is set
+  // once at provider mount and never changes, so this hook never causes a
+  // re-render after the initial paint. The heavy per-preset config lives
+  // in PageGridContext and is only read by CrossRowConnector below, on
+  // demand, when the section actually renders crosses.
+  const insideGrid = useIsInsidePageGrid();
 
-  if (gridConfig) {
+  if (insideGrid) {
     return (
       <InnerSection
         id={id}
@@ -221,7 +247,6 @@ export function SigilSection({
         borderBottom={borderBottom}
         showCrosses={showCrosses}
         padding={padding}
-        config={gridConfig}
       >
         {children}
       </InnerSection>
@@ -264,7 +289,6 @@ function InnerSection({
   borderBottom,
   showCrosses,
   padding,
-  config,
 }: {
   children: ReactNode;
   className?: string;
@@ -275,7 +299,6 @@ function InnerSection({
   borderBottom: boolean;
   showCrosses: boolean;
   padding: string;
-  config: PageGridConfig;
 }) {
   const hasBorder = borderTop || borderBottom;
   const paddingStyle = hasBorder
@@ -293,21 +316,9 @@ function InnerSection({
         ...style,
       }}
     >
-      {showCrosses && borderTop && (
-        <CrossRow
-          position="top"
-          railGap={config.railGap}
-          crossStroke={config.crossStroke}
-        />
-      )}
+      {showCrosses && borderTop && <CrossRowConnector position="top" />}
       {children}
-      {showCrosses && borderBottom && (
-        <CrossRow
-          position="bottom"
-          railGap={config.railGap}
-          crossStroke={config.crossStroke}
-        />
-      )}
+      {showCrosses && borderBottom && <CrossRowConnector position="bottom" />}
     </Tag>
   );
 }

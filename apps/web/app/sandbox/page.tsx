@@ -17,7 +17,6 @@ import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 
 import {
   SigilTokensProvider,
-  SandboxTokenInjector,
   useSigilTokens,
 } from "../../components/sandbox/token-provider";
 import { ComponentPreview } from "../../components/sandbox/component-preview";
@@ -70,8 +69,11 @@ export default function SandboxPage() {
   }
 
   return (
-    <SigilTokensProvider initialPreset={presetName} initialTokens={currentPreset.tokens}>
-      <SandboxTokenInjector />
+    <SigilTokensProvider
+      initialPreset={presetName}
+      initialTokens={currentPreset.tokens}
+      styleTagAttr="data-sigil-sandbox"
+    >
       <SandboxWorkbench
         presetName={presetName}
         presetList={ALL_PRESET_NAMES}

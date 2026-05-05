@@ -17,7 +17,7 @@ import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy"
 import { ComponentStackDiagram } from "@/components/landing/component-stack";
 import { PresetComparisonView } from "@/components/landing/preset-comparison";
 import { MarkdownEditorPreview } from "@/components/landing/markdown-editor";
-import { useSigilTokens } from "@/components/sandbox/token-provider";
+import { useSigilActions } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 import { TextureBg } from "@/components/texture-bg";
@@ -157,8 +157,7 @@ function Hero() {
   let setPreset: ((name: string) => Promise<void>) | null = null;
   let sound: ReturnType<typeof useSigilSound> = { play: () => {}, enabled: false, setEnabled: () => {}, activePreset: "sigil", setActivePreset: () => {} };
   try {
-    const ctx = useSigilTokens();
-    setPreset = ctx.setPreset;
+    setPreset = useSigilActions().setPreset;
   } catch {
     /* no provider */
   }

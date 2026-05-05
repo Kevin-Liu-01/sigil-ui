@@ -2,7 +2,9 @@
 
 import {
   createContext,
+  memo,
   useContext,
+  useMemo,
   type ReactNode,
   type CSSProperties,
 } from "react";
@@ -317,12 +319,20 @@ const DEFAULTS: PageGridConfig = {
 
 const PageGridContext = createContext<PageGridConfig | null>(null);
 
+// Separate "am I inside a SigilPageGrid?" context with a stable boolean
+// value that never changes after mount. Components that only need to know
+// whether they're inside a grid (e.g. SigilSection picking Inner vs
+// Standalone variant) subscribe to this instead of PageGridContext, so
+// they don't re-render every time the structural config changes (which
+// happens on every preset switch).
+const IsInsidePageGridContext = createContext(false);
+
 export function usePageGridConfig() {
   return useContext(PageGridContext);
 }
 
 export function useIsInsidePageGrid() {
-  return useContext(PageGridContext) !== null;
+  return useContext(IsInsidePageGridContext);
 }
 
 /* ------------------------------------------------------------------ */
@@ -419,7 +429,7 @@ export interface SigilPageGridProps {
   edgeless?: boolean;
 }
 
-export function SigilPageGrid({
+function SigilPageGridImpl({
   children,
   className,
   contentMax = DEFAULTS.contentMax,
@@ -435,19 +445,39 @@ export function SigilPageGrid({
 }: SigilPageGridProps) {
   const gutterHasPattern = gutterPattern !== "none" && showGutterGrid;
   const effectiveRailGap = edgeless || !gutterHasPattern ? 0 : railGap;
-  const config: PageGridConfig = {
-    railGap: effectiveRailGap,
-    contentMax,
-    gridCell,
-    crossStroke,
-    gutterPattern,
-    marginPattern,
-    edgeless,
-  };
 
-  const gridCols: CSSProperties = {
-    gridTemplateColumns: `1fr ${effectiveRailGap}px minmax(0, ${contentMax}px) ${effectiveRailGap}px 1fr`,
-  };
+  // Memoise the context value so PageGridContext consumers (every
+  // SigilSection and Divider on the page — typically 30+ instances) only
+  // re-render when one of these structural fields actually changes, not on
+  // every parent re-render. Without this the context value is a fresh
+  // object literal each render and forces a cascading re-render storm.
+  const config = useMemo<PageGridConfig>(
+    () => ({
+      railGap: effectiveRailGap,
+      contentMax,
+      gridCell,
+      crossStroke,
+      gutterPattern,
+      marginPattern,
+      edgeless,
+    }),
+    [
+      effectiveRailGap,
+      contentMax,
+      gridCell,
+      crossStroke,
+      gutterPattern,
+      marginPattern,
+      edgeless,
+    ],
+  );
+
+  const gridCols = useMemo<CSSProperties>(
+    () => ({
+      gridTemplateColumns: `1fr ${effectiveRailGap}px minmax(0, ${contentMax}px) ${effectiveRailGap}px 1fr`,
+    }),
+    [effectiveRailGap, contentMax],
+  );
 
   const marginCell = gridCell;
   const marginCssL = showMarginLines
@@ -498,6 +528,7 @@ export function SigilPageGrid({
   const marginR = buildMarginStyle(marginCssR, "Left");
 
   return (
+    <IsInsidePageGridContext.Provider value={true}>
     <PageGridContext.Provider value={config}>
       <div data-slot="sigilpagegrid" className={cn("grid min-h-dvh", className)} style={gridCols}>
         <div aria-hidden="true" style={marginL.container}>
@@ -516,8 +547,15 @@ export function SigilPageGrid({
         </div>
       </div>
     </PageGridContext.Provider>
+    </IsInsidePageGridContext.Provider>
   );
 }
+
+// React.memo bails out when no prop changes — combined with the memoised
+// context value above, switching presets that don't touch sigil/layout
+// tokens (e.g. just a color tweak) no longer cascades a re-render through
+// every SigilSection / Divider on the page.
+export const SigilPageGrid = memo(SigilPageGridImpl);
 
 /* ------------------------------------------------------------------ */
 /* SigilFrame — the outermost page wrapper                              */

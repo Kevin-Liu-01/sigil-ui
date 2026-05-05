@@ -2,7 +2,7 @@
 
 import { useCallback, useRef } from "react";
 import { presets, type PresetName } from "@sigil-ui/presets";
-import { useSigilTokens } from "./token-provider";
+import { useSigilActions, useSigilActivePreset } from "./token-provider";
 
 const PRESET_DATA = [
   { name: "sigil", mood: "precise, structural", colors: ["#9b99e8", "#da8325", "#0a0a0f", "#fafafa"] },
@@ -39,7 +39,8 @@ const PRESET_DATA = [
 ] as const;
 
 export function PresetBar() {
-  const { activePreset, setPreset } = useSigilTokens();
+  const activePreset = useSigilActivePreset();
+  const { setPreset } = useSigilActions();
   const scrollRef = useRef<HTMLDivElement>(null);
   const activeName = activePreset.replace("*", "");
 

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { presetCatalog, type PresetCatalogEntry } from "@sigil-ui/presets";
 import { Badge, Button } from "@sigil-ui/components";
-import { useSigilTokens } from "@/components/sandbox/token-provider";
+import { useSigilActions, useSigilActivePreset } from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 import { Check } from "lucide-react";
 
@@ -95,9 +95,8 @@ export function PresetGrid() {
   let sound: ReturnType<typeof useSigilSound> = { play: () => {}, enabled: false, setEnabled: () => {}, activePreset: "sigil", setActivePreset: () => {} };
 
   try {
-    const ctx = useSigilTokens();
-    setPreset = ctx.setPreset;
-    activePreset = ctx.activePreset;
+    setPreset = useSigilActions().setPreset;
+    activePreset = useSigilActivePreset();
   } catch { /* no provider */ }
   try {
     sound = useSigilSound();
