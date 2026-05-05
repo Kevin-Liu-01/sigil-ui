@@ -13,11 +13,14 @@ trigger: when auditing the Sigil component library for visual, runtime, or token
 | Script | Purpose |
 |---|---|
 | `scripts/audit-components.mjs` | Crawls every `/docs/components/<slug>` page; checks runtime errors, hydration, token compliance, screenshots each preview block. |
+| `scripts/audit-visual.mjs` | Per-doc visual quality scan — flags components rendering too narrow (cards < 240px, sections < 400px), extreme aspect ratios, or tiny dominant elements. Whitelists known-small (icons, badges) and known-tall (sidebars). |
 | `scripts/audit-showcase.mjs` | Loads `/components` and clicks through every category tab; verifies each filter view hydrates and renders the expected cell count. |
 | `scripts/audit-showcase-deep.mjs` | Loads `/components` "All" view; walks every cell's DOM looking for NaN, `undefined`, `[object Object]`, or empty containers. Captures a full-page screenshot. |
+| `scripts/audit-showcase-visual.mjs` | Per-cell visual scan across all 18 category tabs on `/components`; flags showcase cells whose card/section shrinks below 100px or 150px. |
 | `scripts/validate-showcase-docs.mjs` | Static validator: every entry on the showcase resolves to either a real MDX file or an explicit `docPath: null`. Reports missing docs and duplicate names. |
 | `scripts/improve-bare-demos.mjs` | Bulk-upgrades bare `<X />` MDX previews to richer examples with realistic props. |
 | `scripts/fix-broken-demos.mjs` | Targeted MDX rewrites for components with wrong prop names. |
+| `scripts/fix-narrow-demos.mjs` | Bulk-applies `<ComponentPreview vertical>` + sized containers to demos that render too narrow. |
 | `scripts/add-missing-previews.mjs` | Adds a `## Preview` section to docs that have no `<ComponentPreview>` block at all. |
 
 ## When to Use

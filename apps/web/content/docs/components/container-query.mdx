@@ -11,8 +11,15 @@ import { ContainerQuery } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <ContainerQuery><Card><CardHeader><CardTitle>Container-aware surface</CardTitle></CardHeader></Card></ContainerQuery>
+<ComponentPreview vertical>
+  <ContainerQuery className="w-full">
+    <Card>
+      <CardHeader>
+        <CardTitle>Container-aware surface</CardTitle>
+        <CardDescription>Resize the parent and watch this card's typography respond.</CardDescription>
+      </CardHeader>
+    </Card>
+  </ContainerQuery>
 </ComponentPreview>
 
 ## Usage

@@ -11,8 +11,10 @@ import { SpinnerOverlay } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <div className="relative h-32 rounded-[var(--s-card-radius)] border border-[color:var(--s-border)]"><SpinnerOverlay /></div>
+<ComponentPreview vertical>
+  <div className="relative h-40 w-full rounded-[var(--s-card-radius,8px)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] bg-[var(--s-surface)]">
+    <SpinnerOverlay />
+  </div>
 </ComponentPreview>
 
 ## Usage

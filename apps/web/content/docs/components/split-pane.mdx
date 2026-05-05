@@ -11,8 +11,11 @@ import { SplitPane } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <SplitPane left={<Card><CardHeader><CardTitle>Left</CardTitle></CardHeader></Card>} right={<Card><CardHeader><CardTitle>Right</CardTitle></CardHeader></Card>} />
+<ComponentPreview vertical>
+  <SplitPane
+    left={<Card><CardHeader><CardTitle>Source</CardTitle><CardDescription>DESIGN.md authoring surface.</CardDescription></CardHeader></Card>}
+    right={<Card><CardHeader><CardTitle>Compiled</CardTitle><CardDescription>CSS variables emitted at build time.</CardDescription></CardHeader></Card>}
+  />
 </ComponentPreview>
 
 ## Usage

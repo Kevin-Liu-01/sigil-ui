@@ -1,15 +1,19 @@
 # Sigil Component Library — Full Audit Report
 
 **Status:**
-- **298/298** doc pages clean (100%)
-- **361/361** showcase cells render without errors (100%)
-- **18/18** /components category tabs hydrate cleanly (100%)
-- **361/361** showcase entries resolve to real docs or explicit `null` (100%)
+- **298/298** doc pages clean (no errors, no hydration mismatches, no console errors)
+- **298/298** doc pages pass visual quality (no narrow cards, no tiny elements, no aspect-ratio collapses)
+- **361/361** showcase cells render without errors
+- **361/361** showcase cells pass per-cell visual quality across all 18 categories
+- **18/18** /components category tabs hydrate cleanly
+- **361/361** showcase entries resolve to real docs or explicit `null`
 
 **Auditors:**
 - `scripts/audit-components.mjs` (per-doc-page, ~38 s for all 298)
+- `scripts/audit-visual.mjs` (per-doc visual quality, ~50 s for all 298)
 - `scripts/audit-showcase.mjs` (per-category tab, ~19 s for all 18)
 - `scripts/audit-showcase-deep.mjs` (per-cell DOM scan, ~3 s for all 361)
+- `scripts/audit-showcase-visual.mjs` (per-cell visual quality across all categories, ~7 s)
 - `scripts/validate-showcase-docs.mjs` (static reconciliation)
 
 ---

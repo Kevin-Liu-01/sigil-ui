@@ -10,7 +10,7 @@ export const ContainerQuery = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivE
   { className, ...props },
   ref,
 ) {
-  return <div ref={ref} className={cn("@container", className)} {...props} />;
+  return <div ref={ref} className={cn("@container w-full", className)} {...props} />;
 });
 
 export interface SplitPaneProps extends HTMLAttributes<HTMLDivElement> {
