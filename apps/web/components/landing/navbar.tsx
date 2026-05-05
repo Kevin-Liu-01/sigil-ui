@@ -79,7 +79,7 @@ export function LandingNavbar() {
       {/* ── Logo ── */}
       <a href="/" className="flex items-center gap-2.5 no-underline text-[var(--s-text)] shrink-0 group">
         <NavbarLogo />
-        <span className="font-[family-name:var(--s-font-display)] font-bold text-[15px] tracking-[-0.03em] transition-colors duration-200 group-hover:text-[var(--s-primary)]">
+        <span className="font-[family-name:var(--s-font-display)] font-bold text-[15px] tracking-[-0.03em] transition-colors duration-[var(--s-duration-fast,150ms)] group-hover:text-[var(--s-primary)]">
           sigil<span className="opacity-30 font-light">/</span>
           <span className="font-medium text-[13px]">UI</span>
         </span>
@@ -91,7 +91,7 @@ export function LandingNavbar() {
           <a
             key={link.label}
             href={link.href}
-            className="relative px-3 py-1.5 rounded-[var(--s-radius-sm,6px)] text-[13px] font-medium no-underline text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-200"
+            className="relative px-3 py-1.5 rounded-[var(--s-radius-sm,6px)] text-[13px] font-medium no-underline text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
           >
             {link.label}
           </a>
@@ -104,7 +104,7 @@ export function LandingNavbar() {
         <button
           type="button"
           onClick={openSearch}
-          className="hidden md:inline-flex items-center gap-2 h-8 pl-2.5 pr-2 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] cursor-pointer transition-all duration-200"
+          className="hidden md:inline-flex items-center gap-2 h-8 pl-2.5 pr-2 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)]"
         >
           <Search size={13} className="shrink-0 opacity-60" />
           <span className="text-[12px] opacity-60 hidden lg:inline">Search</span>
@@ -121,16 +121,18 @@ export function LandingNavbar() {
           href="https://github.com/Kevin-Liu-01/sigil-ui"
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:inline-flex items-center gap-1.5 h-8 px-2.5 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] no-underline text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] transition-all duration-200"
+          className="hidden md:inline-flex items-center gap-1.5 h-8 px-2.5 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] no-underline text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] transition-all duration-[var(--s-duration-fast,150ms)]"
         >
           <GitHubIcon size={14} />
-          {stars !== null && (
+          {stars !== null ? (
             <>
               <Star size={10} className="fill-current opacity-60" />
               <span className="font-[family-name:var(--s-font-mono)] text-[11px] font-semibold tabular-nums">
                 {stars >= 1000 ? `${(stars / 1000).toFixed(1)}k` : stars}
               </span>
             </>
+          ) : (
+            <span className="w-6 h-3 rounded-[2px] bg-[var(--s-border)] animate-pulse" />
           )}
         </a>
 
@@ -140,7 +142,7 @@ export function LandingNavbar() {
         {/* Docs */}
         <a
           href="/docs"
-          className="hidden md:inline-flex items-center gap-1.5 h-8 px-3 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] no-underline text-[12px] font-semibold tracking-[-0.01em] text-[var(--s-text)] hover:border-[var(--s-border-strong)] active:scale-[0.97] transition-all duration-200"
+          className="hidden md:inline-flex items-center gap-1.5 h-8 px-3 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] no-underline text-[12px] font-semibold tracking-[-0.01em] text-[var(--s-text)] hover:border-[var(--s-border-strong)] active:scale-[0.97] transition-all duration-[var(--s-duration-fast,150ms)]"
         >
           <BookOpen size={13} />
           Docs
@@ -149,7 +151,7 @@ export function LandingNavbar() {
         {/* Sandbox CTA */}
         <a
           href="/sandbox"
-          className="hidden md:inline-flex items-center gap-1.5 h-8 px-3.5 rounded-[var(--s-radius-sm,6px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] no-underline text-[12px] font-semibold tracking-[-0.01em] hover:brightness-110 active:scale-[0.97] transition-all duration-200 shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_50%,transparent),0_1px_3px_color-mix(in_oklch,var(--s-primary)_20%,transparent)]"
+          className="hidden md:inline-flex items-center gap-1.5 h-8 px-3.5 rounded-[var(--s-radius-sm,6px)] bg-[var(--s-primary)] text-[var(--s-primary-contrast,#fff)] no-underline text-[12px] font-semibold tracking-[-0.01em] hover:brightness-110 active:scale-[0.97] transition-all duration-[var(--s-duration-fast,150ms)] shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_50%,transparent),0_1px_3px_color-mix(in_oklch,var(--s-primary)_20%,transparent)]"
         >
           <PanelsTopLeft size={13} />
           Sandbox
@@ -158,7 +160,7 @@ export function LandingNavbar() {
         {/* Mobile menu toggle */}
         <button
           type="button"
-          className="inline-flex lg:hidden items-center justify-center h-8 w-8 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] cursor-pointer transition-all duration-200"
+          className="inline-flex lg:hidden items-center justify-center h-8 w-8 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:border-[var(--s-border-strong)] cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)]"
           aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen((open) => !open)}
@@ -166,7 +168,7 @@ export function LandingNavbar() {
           <div className="relative w-4 h-4">
             <Menu
               size={16}
-              className="absolute inset-0 transition-all duration-300"
+              className="absolute inset-0 transition-all duration-[var(--s-duration-normal,200ms)]"
               style={{
                 opacity: mobileOpen ? 0 : 1,
                 transform: mobileOpen ? "rotate(90deg) scale(0.5)" : "rotate(0) scale(1)",
@@ -174,7 +176,7 @@ export function LandingNavbar() {
             />
             <X
               size={16}
-              className="absolute inset-0 transition-all duration-300"
+              className="absolute inset-0 transition-all duration-[var(--s-duration-normal,200ms)]"
               style={{
                 opacity: mobileOpen ? 1 : 0,
                 transform: mobileOpen ? "rotate(0) scale(1)" : "rotate(-90deg) scale(0.5)",
@@ -317,7 +319,7 @@ function ReleaseBanner() {
             setVisible(false);
             localStorage.setItem(BANNER_DISMISS_KEY, "1");
           }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-150"
+          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
           aria-label="Dismiss banner"
         >
           <X size={12} />
@@ -347,7 +349,7 @@ function MobileMenu({ onNavigate, stars }: { onNavigate: () => void; stars: numb
             key={link.label}
             href={link.href}
             onClick={onNavigate}
-            className="flex items-center gap-3 rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] no-underline hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-200"
+            className="flex items-center gap-3 rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] no-underline hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
             style={{
               animation: `navbar-mobile-in 250ms cubic-bezier(0.16, 1, 0.3, 1) ${50 + i * 30}ms both`,
             }}
@@ -363,7 +365,7 @@ function MobileMenu({ onNavigate, stars }: { onNavigate: () => void; stars: numb
               window.dispatchEvent(new Event("sigil:open-search"));
               onNavigate();
             }}
-            className="flex items-center gap-3 w-full rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] bg-transparent border-0 cursor-pointer hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-200"
+            className="flex items-center gap-3 w-full rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] bg-transparent border-0 cursor-pointer hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
           >
             <Search size={14} className="opacity-50" />
             Search
@@ -374,7 +376,7 @@ function MobileMenu({ onNavigate, stars }: { onNavigate: () => void; stars: numb
             target="_blank"
             rel="noopener noreferrer"
             onClick={onNavigate}
-            className="flex items-center gap-3 rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] no-underline hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-200"
+            className="flex items-center gap-3 rounded-[var(--s-radius-sm,6px)] px-3 py-2.5 text-[14px] font-medium text-[var(--s-text-muted)] no-underline hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_6%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
           >
             <GitHubIcon size={14} />
             <span>GitHub</span>
@@ -393,7 +395,7 @@ function MobileMenu({ onNavigate, stars }: { onNavigate: () => void; stars: numb
           <a
             href="/docs"
             onClick={onNavigate}
-            className="flex-1 flex items-center justify-center gap-2 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-2.5 text-[13px] font-semibold text-[var(--s-text)] no-underline transition-all duration-200 active:scale-[0.98]"
+            className="flex-1 flex items-center justify-center gap-2 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] px-4 py-2.5 text-[13px] font-semibold text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,150ms)] active:scale-[0.98]"
           >
             <BookOpen size={14} />
             Docs
@@ -401,7 +403,7 @@ function MobileMenu({ onNavigate, stars }: { onNavigate: () => void; stars: numb
           <a
             href="/sandbox"
             onClick={onNavigate}
-            className="flex-1 flex items-center justify-center gap-2 rounded-[var(--s-radius-sm,6px)] bg-[var(--s-primary)] px-4 py-2.5 text-[13px] font-semibold text-[var(--s-primary-contrast,#fff)] no-underline shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_50%,transparent),0_1px_3px_color-mix(in_oklch,var(--s-primary)_20%,transparent)] transition-all duration-200 active:scale-[0.98]"
+            className="flex-1 flex items-center justify-center gap-2 rounded-[var(--s-radius-sm,6px)] bg-[var(--s-primary)] px-4 py-2.5 text-[13px] font-semibold text-[var(--s-primary-contrast,#fff)] no-underline shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_50%,transparent),0_1px_3px_color-mix(in_oklch,var(--s-primary)_20%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)] active:scale-[0.98]"
           >
             <PanelsTopLeft size={14} />
             Sandbox

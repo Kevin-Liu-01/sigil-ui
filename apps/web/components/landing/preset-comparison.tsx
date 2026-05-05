@@ -26,7 +26,7 @@ const PRESETS = {
     primary: "#d97706",
     text: "#e5e5e5",
     border: "#262626",
-    fontDisplay: "'Inter', sans-serif",
+    fontDisplay: "'Geist', sans-serif",
   },
   forge: {
     bg: "#0c0a09",
@@ -50,7 +50,7 @@ const PRESETS = {
     primary: "#171717",
     text: "#171717",
     border: "#e5e5e5",
-    fontDisplay: "'Inter', sans-serif",
+    fontDisplay: "'Geist', sans-serif",
   },
   flux: {
     bg: "#0f172a",

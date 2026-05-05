@@ -492,7 +492,7 @@ export function SigilPageGrid({
 
   return (
     <PageGridContext.Provider value={config}>
-      <div data-slot="sigilpagegrid" className={cn("grid min-h-screen", className)} style={gridCols}>
+      <div data-slot="sigilpagegrid" className={cn("grid min-h-dvh", className)} style={gridCols}>
         <div aria-hidden="true" style={marginL.container}>
           {marginL.overlay && <div style={marginL.overlay} />}
         </div>

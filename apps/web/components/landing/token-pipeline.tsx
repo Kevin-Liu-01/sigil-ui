@@ -131,7 +131,7 @@ type OrbitStyle = React.CSSProperties & {
 function TokenFileCard({ activeGroup }: { activeGroup: TokenGroup }) {
   return (
     <div
-      className="relative z-[3] w-full max-w-[360px] border bg-[var(--s-background)]/95 p-4 shadow-[var(--s-shadow-lg)] backdrop-blur transition-transform duration-300 lg:absolute lg:left-8 lg:top-8"
+      className="relative z-[3] w-full max-w-[360px] border bg-[var(--s-background)]/95 p-4 shadow-[var(--s-shadow-lg)] backdrop-blur transition-transform duration-[var(--s-duration-normal,200ms)] lg:absolute lg:left-8 lg:top-8"
       style={{
         borderColor: "var(--s-border)",
         borderRadius: "var(--s-radius-lg, 12px)",
@@ -156,7 +156,7 @@ function TokenFileCard({ activeGroup }: { activeGroup: TokenGroup }) {
             <div
               key={group}
               className={cn(
-                "border px-3 py-2 transition-all duration-300",
+                "border px-3 py-2 transition-all duration-[var(--s-duration-normal,200ms)]",
                 isActive && "bg-[var(--s-primary)]/[0.07] sm:translate-x-2",
               )}
               style={{
@@ -227,7 +227,7 @@ function CompilerSpine({ activeGroup }: { activeGroup: TokenGroup }) {
           <div
             key={group}
             className={cn(
-              "h-1.5 rounded-[var(--s-radius-full,9999px)] transition-all duration-300",
+              "h-1.5 rounded-[var(--s-radius-full,9999px)] transition-all duration-[var(--s-duration-normal,200ms)]",
               group === activeGroup
                 ? "bg-[var(--s-primary)]"
                 : "bg-[var(--s-border)]",
@@ -375,7 +375,7 @@ function EffectStack({
             type="button"
             onClick={() => onSelect(group)}
             className={cn(
-              "group border bg-[var(--s-background)]/90 p-3 text-left backdrop-blur transition-all duration-300",
+              "group border bg-[var(--s-background)]/90 p-3 text-left backdrop-blur transition-all duration-[var(--s-duration-normal,200ms)]",
               isActive
                 ? "translate-y-0 border-[var(--s-primary)] text-[var(--s-text)] shadow-[var(--s-shadow-md)]"
                 : "translate-y-1 border-[var(--s-border)] text-[var(--s-text-muted)] opacity-70 hover:opacity-100",
@@ -486,7 +486,7 @@ export function TokenPipelineDiagram({
             type="button"
             onClick={() => setActiveIndex(i)}
             className={cn(
-              "cursor-pointer border-0 bg-transparent p-0 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.15em] transition-colors duration-200",
+              "cursor-pointer border-0 bg-transparent p-0 font-[family-name:var(--s-font-mono)] text-[9px] uppercase tracking-[0.15em] transition-colors duration-[var(--s-duration-fast,150ms)]",
               i === activeIndex
                 ? "text-[var(--s-primary)]"
                 : "text-[var(--s-text-muted)]",

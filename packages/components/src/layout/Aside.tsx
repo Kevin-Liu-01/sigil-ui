@@ -19,7 +19,7 @@ export const Aside = forwardRef<HTMLElement, AsideProps>(function Aside(
       data-slot="aside"
       className={cn(
         "shrink-0 overflow-y-auto",
-        sticky && "sticky top-0 h-screen",
+        sticky && "sticky top-0 h-dvh",
         borderSide === "left" && "border-l",
         borderSide === "right" && "border-r",
         borderSide !== "none" && "border-[color:var(--s-border)]",

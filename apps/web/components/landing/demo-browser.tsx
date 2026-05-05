@@ -124,7 +124,7 @@ export function DemoBrowser({
 
       {/* Content area */}
       <div
-        className="group-hover:-translate-y-0.5 group-hover:shadow-lg transition-all"
+        className="group-hover:-translate-y-0.5 group-hover:shadow-[var(--s-shadow-lg)] transition-all"
         style={{
           height: isSmall ? 200 : "auto",
           minHeight: isSmall ? undefined : 200,

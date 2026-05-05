@@ -419,7 +419,7 @@ function TestimonialCardWrapper(props: Record<string, any>) {
     <TestimonialCard
       quote={props.quote ?? "Sigil UI completely transformed our design workflow. The preset system is incredibly powerful."}
       author={props.author ?? "Alex Chen"}
-      role={props.role ?? "Lead Designer, Acme Corp"}
+      role={props.role ?? "Lead Designer, Meridian Labs"}
     />
   );
 }
@@ -559,7 +559,7 @@ function AvatarWrapper(props: Record<string, any>) {
   return (
     <div className="flex gap-3 p-4 items-center">
       <Avatar name={props.name ?? "Kevin Liu"} size={props.size ?? "md"} />
-      <Avatar name="Jane Doe" size="sm" />
+      <Avatar name="Lina Torres" size="sm" />
       <Avatar name="AB" size="lg" />
     </div>
   );
@@ -579,7 +579,7 @@ function LogoBarWrapper(props: Record<string, any>) {
   return (
     <LogoBar
       logos={props.logos ?? [
-        { src: "https://placehold.co/120x40/1a1a1a/666?text=Acme", alt: "Acme" },
+        { src: "https://placehold.co/120x40/1a1a1a/666?text=Meridian", alt: "Meridian" },
         { src: "https://placehold.co/120x40/1a1a1a/666?text=Globex", alt: "Globex" },
         { src: "https://placehold.co/120x40/1a1a1a/666?text=Initech", alt: "Initech" },
         { src: "https://placehold.co/120x40/1a1a1a/666?text=Umbrella", alt: "Umbrella" },
@@ -777,7 +777,7 @@ export function CanvasItem({
       style={style}
       onClick={handleClick}
       className={[
-        "group relative rounded-lg border transition-all duration-150",
+        "group relative rounded-[var(--s-radius-md,8px)] border transition-all duration-[var(--s-duration-fast,150ms)]",
         "bg-[var(--s-surface)]",
         selected
           ? "border-[var(--s-primary)] ring-1 ring-[var(--s-primary)]/20"

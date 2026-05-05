@@ -621,7 +621,7 @@ const STYLE_BLOCK = `
 .hero-logo-field__line-active {
   background: color-mix(in oklch, var(--s-primary) 10%, transparent);
   border-left-color: color-mix(in oklch, var(--s-primary) 70%, transparent);
-  transition: background-color 300ms, border-color 300ms;
+  transition: background-color var(--s-duration-normal, 200ms), border-color var(--s-duration-normal, 200ms);
 }
 .hero-logo-field__line-done {
   border-left-color: color-mix(in oklch, var(--s-primary) 30%, transparent);
@@ -866,7 +866,7 @@ export function HeroLogoField() {
         className="grid hero-logo-field__grid"
         style={{
           opacity: mounted ? 1 : 0,
-          transition: "opacity 600ms ease",
+          transition: "opacity 400ms cubic-bezier(0.32, 0.72, 0, 1)",
           gridTemplateColumns: "repeat(7, 1fr)",
           gridTemplateRows: "auto auto auto auto auto auto",
           gap: 5,
@@ -1000,7 +1000,7 @@ export function HeroLogoField() {
             "--m-order": 3,
             gridColumn: "4 / 8",
             border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
-            borderRadius: radiusApplied ? "16px" : "var(--s-radius-md,8px)",
+            borderRadius: radiusApplied ? "var(--s-radius-lg, 16px)" : "var(--s-radius-md,8px)",
             background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
             transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
           } as React.CSSProperties}

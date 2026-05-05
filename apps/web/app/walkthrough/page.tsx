@@ -151,17 +151,17 @@ const INIT_LINES = [
 const PRESET_CREATE_LINES = [
   { text: "sigil preset create", prefix: "$", color: "var(--s-text)", delay: 600 },
   { text: "", delay: 300 },
-  { text: "? Preset name:  acme-brand", prefix: "?", color: "var(--s-primary)", delay: 500 },
+  { text: "? Preset name:  meridian", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "? Start from:  sigil (structural)", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "? Primary color:  #4f46e5 → oklch(0.53 0.21 275)", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "? Display font:  \"Inter\", system-ui, sans-serif", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "? Border radius:  8px (rounded)", prefix: "?", color: "var(--s-primary)", delay: 500 },
   { text: "", delay: 200 },
-  { text: "Created presets/acme-brand.ts", prefix: "✓", color: "var(--s-success)", delay: 400 },
+  { text: "Created presets/meridian.ts", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "Updated sigil.tokens.md (519 fields)", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "Regenerated CSS variables", prefix: "✓", color: "var(--s-success)", delay: 400 },
   { text: "", delay: 200 },
-  { text: "Custom preset acme-brand is now active.", prefix: "✓", color: "var(--s-success)", delay: 300 },
+  { text: "Custom preset meridian is now active.", prefix: "✓", color: "var(--s-success)", delay: 300 },
 ];
 
 const PRESET_LIST_LINES = [
@@ -173,7 +173,7 @@ const PRESET_LIST_LINES = [
   { text: "Colorful     flux · shard · prism · vex · dsgn · dusk", prefix: " ", color: "var(--s-text-muted)", delay: 200 },
   { text: "Editorial    etch · rune · strata · glyph · mrkr", prefix: " ", color: "var(--s-text-muted)", delay: 200 },
   { text: "Industrial   alloy · forge · anvil · rivet · brass", prefix: " ", color: "var(--s-text-muted)", delay: 200 },
-  { text: "Custom       acme-brand (active)", prefix: "★", color: "var(--s-primary)", delay: 400 },
+  { text: "Custom       meridian (active)", prefix: "★", color: "var(--s-primary)", delay: 400 },
 ];
 
 const ADD_LINES = [

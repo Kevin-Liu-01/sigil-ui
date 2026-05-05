@@ -125,7 +125,7 @@ export function PresetGrid() {
         <button
           type="button"
           onClick={() => setActiveFilter("all")}
-          className="font-[family-name:var(--s-font-mono)] text-[11px] px-3 py-1 border cursor-pointer transition-all duration-150"
+          className="font-[family-name:var(--s-font-mono)] text-[11px] px-3 py-1 border cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)]"
           style={{
             borderColor: activeFilter === "all" ? "var(--s-primary)" : "var(--s-border-muted)",
             background: activeFilter === "all" ? "var(--s-primary-muted)" : "transparent",
@@ -139,7 +139,7 @@ export function PresetGrid() {
             key={cat}
             type="button"
             onClick={() => setActiveFilter(cat)}
-            className="font-[family-name:var(--s-font-mono)] text-[11px] px-3 py-1 border cursor-pointer transition-all duration-150"
+            className="font-[family-name:var(--s-font-mono)] text-[11px] px-3 py-1 border cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)]"
             style={{
               borderColor: activeFilter === cat ? "var(--s-primary)" : "var(--s-border-muted)",
               background: activeFilter === cat ? "var(--s-primary-muted)" : "transparent",

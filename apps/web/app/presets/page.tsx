@@ -203,12 +203,12 @@ export default function PresetsPage() {
               <AccentCTA asChild>
                 <a href="/docs/presets">Preset Docs</a>
               </AccentCTA>
-              <button
-                type="button"
-                className="inline-flex items-center justify-center h-10 px-6 text-[13px] font-[family-name:var(--s-font-mono)] font-semibold uppercase tracking-[0.08em] bg-transparent text-[var(--s-text)] border border-[var(--s-border)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
+              <a
+                href="/docs/cli#preset-create"
+                className="inline-flex items-center justify-center h-10 px-6 text-[13px] font-[family-name:var(--s-font-mono)] font-semibold uppercase tracking-[0.08em] no-underline bg-transparent text-[var(--s-text)] border border-[var(--s-border)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
               >
                 Create Custom Preset
-              </button>
+              </a>
             </div>
           </div>
         </SigilSection>
@@ -240,7 +240,7 @@ export default function PresetsPage() {
             ))}
           </div>
 
-          <GapPixelGrid columns={{ sm: 2, md: 3, lg: 4 }}>
+          <GapPixelGrid columns={{ sm: 2, md: 3, lg: 4 }} data-stagger>
             {filtered.map((preset) => (
               <PresetCard key={preset.name} preset={preset} />
             ))}
@@ -275,7 +275,7 @@ export default function PresetsPage() {
             </DensityText>
           </div>
 
-          <GapPixelGrid columns={{ md: 3 }} className="mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-[5fr_4fr_3fr] gap-px mb-10" style={{ background: "var(--s-border)" }}>
             {STEPS.map((step) => (
               <CardCell
                 key={step.number}
@@ -287,7 +287,7 @@ export default function PresetsPage() {
                 </TabularValue>
               </CardCell>
             ))}
-          </GapPixelGrid>
+          </div>
 
           <AccentCTA asChild>
             <a href="/sandbox">Try in Sandbox</a>

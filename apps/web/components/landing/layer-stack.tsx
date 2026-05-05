@@ -38,7 +38,7 @@ const LAYERS: LayerDef[] = [
     items: [
       { label: "--s-primary", value: "oklch(0.7 0.15 280)" },
       { label: "--s-radius-md", value: "6px" },
-      { label: "--s-font-display", value: '"Inter"' },
+      { label: "--s-font-display", value: '"PP Pangram Sans"' },
       { label: "--s-duration-fast", value: "150ms" },
     ],
     description:
@@ -450,7 +450,7 @@ export function LayerStackDiagram({
         {/* ────────────────── Narrative Panel ────────────────── */}
         <div className="relative overflow-hidden border-t border-[var(--s-border)] bg-[var(--s-surface)]/60 p-5 lg:border-l lg:border-t-0 lg:p-6">
           <div
-            className="absolute inset-y-0 left-0 w-1 transition-colors duration-300"
+            className="absolute inset-y-0 left-0 w-1 transition-colors duration-[var(--s-duration-normal,200ms)]"
             style={{ backgroundColor: activeLayer?.color ?? "var(--s-text)" }}
           />
           <div className="mb-5 flex items-center justify-between gap-4">
@@ -495,7 +495,7 @@ export function LayerStackDiagram({
                   style={isSelected ? { borderColor: layer.color } : undefined}
                 >
                   <span
-                    className="absolute top-2 right-2 size-2 rounded-full transition-opacity duration-150"
+                    className="absolute top-2 right-2 size-2 rounded-full transition-opacity duration-[var(--s-duration-fast,150ms)]"
                     style={{ backgroundColor: layer.color, opacity: isSelected ? 1 : 0.35 }}
                   />
                   <MonoLabel
@@ -522,7 +522,7 @@ export function LayerStackDiagram({
               <div className="flex items-baseline gap-3">
               <TabularValue
                 size="lg"
-                className="font-bold transition-colors duration-300"
+                className="font-bold transition-colors duration-[var(--s-duration-normal,200ms)]"
                 style={{ color: activeLayer?.color ?? "var(--s-primary)" }}
               >
                 {activeLayer?.num ?? "00"}

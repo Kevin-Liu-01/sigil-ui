@@ -44,7 +44,7 @@ export const Sidebar = forwardRef<HTMLElement, SidebarProps>(function Sidebar(
         data-slot="sidebar"
         data-collapsed={collapsed || undefined}
         className={cn(
-          "sticky top-0 flex h-screen flex-col border-r border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
+          "sticky top-0 flex h-dvh flex-col border-r border-[color:var(--s-border)] border-[style:var(--s-border-style,solid)]",
           "bg-[var(--s-surface)] text-[var(--s-text)]",
           "transition-[width] duration-[var(--s-duration-normal,200ms)] ease-[var(--s-ease-out)]",
           collapsed ? "w-[var(--s-sidebar-collapsed,48px)]" : "w-[var(--s-sidebar-width,256px)]",

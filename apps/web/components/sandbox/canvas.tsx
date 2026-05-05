@@ -177,11 +177,11 @@ function EmptyState({ isOver }: { isOver: boolean }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-[50vh] select-none relative">
       <div
-        className="flex flex-col items-center gap-4 transition-transform duration-200"
+        className="flex flex-col items-center gap-4 transition-transform duration-[var(--s-duration-fast,150ms)]"
         style={{ transform: isOver ? "scale(1.03)" : "scale(1)" }}
       >
         <div
-          className="w-16 h-16 rounded-2xl flex items-center justify-center transition-colors duration-200"
+          className="w-16 h-16 rounded-[var(--s-radius-xl,16px)] flex items-center justify-center transition-colors duration-[var(--s-duration-fast,150ms)]"
           style={{
             border: `2px dashed ${isOver ? "var(--s-primary)" : "var(--s-border)"}`,
             background: isOver ? "var(--s-primary-muted, rgba(0,0,0,0.03))" : "transparent",

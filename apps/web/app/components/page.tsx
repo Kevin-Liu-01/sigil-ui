@@ -117,7 +117,7 @@ export default function ComponentsPage() {
 
       {/* ── Stats bar ── */}
       <SigilSection padding="0">
-        <GapPixelGrid columns={{ sm: 2, md: 4 }}>
+        <GapPixelGrid columns={{ sm: 2, md: 4 }} data-stagger>
           {STATS.map((stat) => (
             <GapPixelCell
               key={stat.label}
@@ -178,7 +178,7 @@ export default function ComponentsPage() {
           </DensityText>
         </div>
 
-        <GapPixelGrid columns={{ md: 3 }}>
+        <GapPixelGrid columns={{ md: 2 }} data-stagger>
           {TOKEN_CARDS.map((card) => (
             <CardCell
               key={card.title}

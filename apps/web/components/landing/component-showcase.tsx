@@ -1128,7 +1128,7 @@ const CELLS: ComponentCell[] = [
   { name: "TestimonialCard", category: "Marketing", variants: 1, span: 2, render: () => (
     <TestimonialCard
       quote="Sigil completely changed how we build."
-      author="Jane Doe"
+      author="Maren Voss"
       role="CTO"
       className="w-full"
     />
@@ -1244,7 +1244,7 @@ const CELLS: ComponentCell[] = [
     <div className="w-full">
       <div className="text-[10px] text-[var(--s-text-subtle)] mb-1">&ldquo;</div>
       <div className="text-[10px] text-[var(--s-text)] leading-relaxed">Sigil changed how we build UIs.</div>
-      <div className="mt-2 text-[9px] font-medium text-[var(--s-text-muted)]">Jane D. &mdash; CTO</div>
+      <div className="mt-2 text-[9px] font-medium text-[var(--s-text-muted)]">Maren V. &mdash; CTO</div>
     </div>
   )},
   { name: "LogoCloudSection", category: "Sections", variants: 1, render: () => (

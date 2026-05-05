@@ -1030,7 +1030,7 @@ function FontStackRow() {
         <Palette size={12} className="text-[var(--s-text-muted)]" />
         Font triad
       </span>
-      <span className="text-[9px] font-mono text-[var(--s-text-muted)] truncate ml-2">Inter · Mono · Display</span>
+      <span className="text-[9px] font-mono text-[var(--s-text-muted)] truncate ml-2">Pangram · Mono · Display</span>
     </div>
   );
 }

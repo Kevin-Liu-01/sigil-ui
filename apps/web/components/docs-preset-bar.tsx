@@ -238,7 +238,7 @@ const BAR_STYLES = `
     backdrop-filter: blur(16px) saturate(1.4);
     -webkit-backdrop-filter: blur(16px) saturate(1.4);
     border-top: 1px solid rgba(255, 255, 255, 0.06);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    font-family: var(--s-font-body, -apple-system, BlinkMacSystemFont, system-ui, sans-serif);
     --docs-bar-accent: #a0a0b0;
     --docs-bar-muted: #6a6a78;
     --docs-bar-surface: rgba(255, 255, 255, 0.04);

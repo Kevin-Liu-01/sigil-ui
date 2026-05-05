@@ -106,6 +106,9 @@ function InstallCommand({ className }: { className?: string }) {
     navigator.clipboard.writeText(INSTALL_CMD).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
+    }).catch(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1000);
     });
   }, []);
 
@@ -332,16 +335,16 @@ function PresetMorphDemo({ index, setIndex }: { index: number; setIndex: (i: num
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1fr] items-start">
       <div
-        className="overflow-hidden border transition-all duration-[600ms]"
+        className="overflow-hidden border transition-all duration-[400ms]"
         style={{
           background: p.bg, color: p.text, borderColor: p.border,
           borderRadius: 8,
-          transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)",
+          transitionTimingFunction: "cubic-bezier(0.32, 0.72, 0, 1)",
         }}
       >
         <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: `1px solid ${p.border}` }}>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 transition-all duration-[600ms]" style={{ background: p.primary, borderRadius: Number.parseInt(p.radius) / 2 || 2 }} />
+            <div className="w-3 h-3 transition-all duration-[400ms]" style={{ background: p.primary, borderRadius: Number.parseInt(p.radius) / 2 || 2 }} />
             <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: "-0.01em" }}>Sigil / {p.name}</span>
           </div>
           <div className="flex gap-3">
@@ -389,7 +392,7 @@ function PresetMorphDemo({ index, setIndex }: { index: number; setIndex: (i: num
               onClick={() => setIndex(i)}
             >
               <div
-                className="w-5 h-5 border-2 transition-all duration-300"
+                className="w-5 h-5 border-2 transition-all duration-[var(--s-duration-normal,200ms)]"
                 style={{
                   background: preset.primary,
                   borderColor: index === i ? "var(--s-text)" : "transparent",
@@ -541,7 +544,7 @@ function CliDiagram({ variant, accent }: { variant: string; accent?: boolean }) 
       <div className="flex gap-1.5">
         <div className="w-9 border flex flex-col gap-[5px] p-2" style={{ borderColor: bd, background: fill }}>
           <div className="h-[2px] w-full" style={{ background: dim }} />
-          <div className="h-[2px] w-full" style={{ background: "#f87171", opacity: 0.7 }} />
+          <div className="h-[2px] w-full" style={{ background: "var(--s-error, oklch(0.65 0.2 25))", opacity: 0.7 }} />
           <div className="h-[2px] w-full" style={{ background: dim }} />
         </div>
         <div className="w-9 border flex flex-col gap-[5px] p-2" style={{ borderColor: hi, background: fill }}>
@@ -874,7 +877,7 @@ function PresetsSection() {
         </div>
 
         <div className="mt-12">
-          <GapPixelGrid columns={{ md: 3 }}>
+          <GapPixelGrid columns={{ md: 2 }} data-stagger>
             <GapPixelCell className="p-6">
               <MonoLabel variant="accent" className="block mb-3">START FROM A PRESET</MonoLabel>
               <div
@@ -901,18 +904,22 @@ function PresetsSection() {
                 Pick a base, set brand colors and fonts, and a custom preset is generated.
               </DensityText>
             </GapPixelCell>
+          </GapPixelGrid>
+          <GapPixelGrid columns={{ md: 1 }} className="mt-0">
             <GapPixelCell className="p-6">
               <MonoLabel variant="accent" className="block mb-3">EDIT TOKENS DIRECTLY</MonoLabel>
-              <div
-                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3 leading-relaxed"
-                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
-              >
-                <div className="text-[var(--s-text-muted)]">## Colors</div>
-                <div className="text-[var(--s-primary)]">primary: oklch(0.65 0.2 150)</div>
+              <div className="flex flex-col md:flex-row gap-4 md:items-start">
+                <div
+                  className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 leading-relaxed md:w-1/3"
+                  style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+                >
+                  <div className="text-[var(--s-text-muted)]">## Colors</div>
+                  <div className="text-[var(--s-primary)]">primary: oklch(0.65 0.2 150)</div>
+                </div>
+                <DensityText role="body" as="p" muted className="md:w-2/3 m-0">
+                  Open sigil.tokens.md and change any of 519 fields. Your file is the source of truth.
+                </DensityText>
               </div>
-              <DensityText role="body" as="p" muted>
-                Open sigil.tokens.md and change any of 519 fields. Your file is the source of truth.
-              </DensityText>
             </GapPixelCell>
           </GapPixelGrid>
         </div>
@@ -1124,7 +1131,7 @@ function QuickStartSection() {
           </div>
         </div>
 
-        <div className="grid gap-3">
+        <div className="grid gap-3" data-stagger>
           {QUICK_START_STEPS.map((step, index) => (
             <div
               key={step.title}

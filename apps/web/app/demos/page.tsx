@@ -178,7 +178,7 @@ export default function DemosPage() {
 
       {/* Featured demos */}
       <SigilSection>
-        <FeaturedGrid featuredRatio="2fr" columns={3}>
+        <FeaturedGrid featuredRatio="2fr" columns={3} data-stagger>
           <FeaturedCard demo={featured} />
           <SideCard demo={side} />
           {remaining.map((demo) => (
@@ -191,8 +191,14 @@ export default function DemosPage() {
 
       {/* Info + CTA */}
       <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
-        <GapPixelGrid columns={{ md: 3 }}>
-          {INFO_CARDS.map((card) => (
+        <GapPixelGrid columns={{ md: 2 }} data-stagger>
+          <GapPixelCell className="p-6 flex flex-col gap-3 md:row-span-2">
+            <MonoLabel variant="accent">{INFO_CARDS[0].label}</MonoLabel>
+            <DensityText role="body" as="p" muted className="m-0 leading-relaxed">
+              {INFO_CARDS[0].body}
+            </DensityText>
+          </GapPixelCell>
+          {INFO_CARDS.slice(1).map((card) => (
             <GapPixelCell key={card.label} className="p-6 flex flex-col gap-3">
               <MonoLabel variant="accent">{card.label}</MonoLabel>
               <DensityText role="body" as="p" muted className="m-0 leading-relaxed">

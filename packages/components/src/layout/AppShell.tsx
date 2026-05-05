@@ -22,7 +22,7 @@ export const AppShell = forwardRef<HTMLDivElement, AppShellProps>(function AppSh
     <div
       ref={ref}
       data-slot="app-shell"
-      className={cn("min-h-screen", className)}
+      className={cn("min-h-dvh", className)}
       style={{
         display: "grid",
         gridTemplateRows: `${header ? "auto" : ""} 1fr ${footer ? "auto" : ""}`.trim(),
