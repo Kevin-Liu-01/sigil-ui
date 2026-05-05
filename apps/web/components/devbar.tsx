@@ -19,6 +19,8 @@ import {
   Monitor,
   PanelLeft,
   PanelRight,
+  PanelTop,
+  PanelBottom,
   X,
   RotateCcw,
   Download,
@@ -51,6 +53,10 @@ import type { SigilTokens, GutterPattern } from "@sigil-ui/tokens";
 /* ================================================================== */
 
 export type DockPosition = "left" | "right";
+export type ToolbarDock = "top" | "right" | "bottom" | "left";
+
+const TOOLBAR_DOCK_KEY = "sigil-toolbar-dock";
+const TOOLBAR_DOCK_ORDER: ToolbarDock[] = ["bottom", "top", "left", "right"];
 
 type DevBarState = {
   sidebarOpen: boolean;
@@ -60,6 +66,9 @@ type DevBarState = {
   frameVisible: boolean;
   dock: DockPosition;
   setDock: (d: DockPosition) => void;
+  toolbarDock: ToolbarDock;
+  setToolbarDock: (d: ToolbarDock) => void;
+  cycleToolbarDock: () => void;
   agentOpen: boolean;
   setAgentOpen: (v: boolean) => void;
   enterCanvas: () => void;
@@ -74,15 +83,43 @@ export function useDevBar() {
 
 const PHASE_DELAY = 300;
 
+function isToolbarDock(v: unknown): v is ToolbarDock {
+  return v === "top" || v === "right" || v === "bottom" || v === "left";
+}
+
 export function DevBarProvider({ children }: { children: ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [canvasMode, setCanvasMode] = useState(false);
   const [frameVisible, setFrameVisible] = useState(false);
   const [dock, setDock] = useState<DockPosition>("left");
+  const [toolbarDock, setToolbarDockState] = useState<ToolbarDock>("bottom");
   const [agentOpen, setAgentOpen] = useState(false);
   const exitTimer1 = useRef<ReturnType<typeof setTimeout>>(undefined);
   const exitTimer2 = useRef<ReturnType<typeof setTimeout>>(undefined);
   const enterTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  // Restore toolbar dock preference from storage
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(TOOLBAR_DOCK_KEY);
+      if (isToolbarDock(saved)) setToolbarDockState(saved);
+    } catch { /* ignore */ }
+  }, []);
+
+  const setToolbarDock = useCallback((d: ToolbarDock) => {
+    setToolbarDockState(d);
+    try { localStorage.setItem(TOOLBAR_DOCK_KEY, d); } catch { /* ignore */ }
+  }, []);
+
+  const cycleToolbarDock = useCallback(() => {
+    setToolbarDockState((cur) => {
+      const next = TOOLBAR_DOCK_ORDER[
+        (TOOLBAR_DOCK_ORDER.indexOf(cur) + 1) % TOOLBAR_DOCK_ORDER.length
+      ]!;
+      try { localStorage.setItem(TOOLBAR_DOCK_KEY, next); } catch { /* ignore */ }
+      return next;
+    });
+  }, []);
 
   const clearTimers = useCallback(() => {
     clearTimeout(enterTimer.current);
@@ -110,8 +147,8 @@ export function DevBarProvider({ children }: { children: ReactNode }) {
   useEffect(() => () => clearTimers(), [clearTimers]);
 
   const ctx = useMemo<DevBarState>(
-    () => ({ sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, frameVisible, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas }),
-    [sidebarOpen, canvasMode, frameVisible, dock, agentOpen, enterCanvas, exitCanvas],
+    () => ({ sidebarOpen, setSidebarOpen, canvasMode, setCanvasMode, frameVisible, dock, setDock, toolbarDock, setToolbarDock, cycleToolbarDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas }),
+    [sidebarOpen, canvasMode, frameVisible, dock, toolbarDock, setToolbarDock, cycleToolbarDock, agentOpen, enterCanvas, exitCanvas],
   );
 
   return <DevBarContext.Provider value={ctx}>{children}</DevBarContext.Provider>;
@@ -904,12 +941,22 @@ function SidebarContent({ onClose }: { onClose: () => void }) {
 /*  Toolbar                                                            */
 /* ================================================================== */
 
+const TOOLBAR_DOCK_ICONS: Record<ToolbarDock, typeof PanelTop> = {
+  top: PanelTop,
+  right: PanelRight,
+  bottom: PanelBottom,
+  left: PanelLeft,
+};
+
 function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const devbar = useDevBar();
   const { activePreset, setPreset } = useSigilTokens();
   const { play, enabled: soundEnabled, setEnabled: setSoundEnabled, setActivePreset: setSoundPreset } = useSigilSound();
 
   const canvasMode = devbar?.canvasMode ?? false;
+  const toolbarDock = devbar?.toolbarDock ?? "bottom";
+  // Vertical layout when docked left or right (applies in both canvas and non-canvas).
+  const isVertical = toolbarDock === "left" || toolbarDock === "right";
 
   const prevCanvasRef = useRef(canvasMode);
   const [phase, setPhase] = useState<ToolbarPhase>(canvasMode ? "studio" : "presets");
@@ -952,7 +999,8 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   }, [phase]);
 
   if (!devbar) return null;
-  const { sidebarOpen, setSidebarOpen, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas } = devbar;
+  const { sidebarOpen, setSidebarOpen, dock, setDock, agentOpen, setAgentOpen, enterCanvas, exitCanvas, cycleToolbarDock } = devbar;
+  const ToolbarDockIcon = TOOLBAR_DOCK_ICONS[toolbarDock];
 
   const showPresets = phase === "presets" || phase === "presets-out";
   const showStudio = phase === "studio" || phase === "studio-out";
@@ -974,23 +1022,37 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
   const tbtn = (icon: ReactNode, onClick: () => void, active: boolean, label?: string) => (
     <button type="button" onClick={onClick} style={{
       display: "flex", alignItems: "center", gap: 4,
-      padding: label ? "5px 10px 5px 7px" : "5px 7px",
+      padding: label && !isVertical ? "5px 10px 5px 7px" : "5px 7px",
       borderRadius: 6,
       background: active ? "var(--db-accent-dim)" : "transparent",
       border: "none",
       fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 500,
       color: active ? "var(--db-accent)" : "var(--db-muted)",
       cursor: "pointer", transition: "all 120ms ease-out", flexShrink: 0,
-    }}>{icon}{label && <span>{label}</span>}</button>
+    }}>{icon}{label && !isVertical && <span>{label}</span>}</button>
   );
 
-  const divider = <div style={{ width: 1, height: 16, background: "var(--db-border)", flexShrink: 0, opacity: 0.6 }} />;
+  const divider = (
+    <div style={{
+      ...(isVertical
+        ? { height: 1, width: 16 }
+        : { width: 1, height: 16 }),
+      background: "var(--db-border)", flexShrink: 0, opacity: 0.6,
+    }} />
+  );
 
   return (
     <div className="devbar-chrome" style={{
-      height: TOOLBAR_H, flexShrink: 0, display: "flex", alignItems: "center",
-      padding: "0 6px", background: "var(--db-surface)",
-      borderTop: canvasMode ? "none" : "1px solid var(--db-border)",
+      ...(isVertical
+        ? { width: TOOLBAR_H, height: "100%", flexDirection: "column" }
+        : { height: TOOLBAR_H, width: "100%" }),
+      flexShrink: 0, display: "flex", alignItems: "center",
+      padding: isVertical ? "6px 0" : "0 6px",
+      background: "var(--db-surface)",
+      borderTop: !canvasMode && toolbarDock === "bottom" ? "1px solid var(--db-border)" : undefined,
+      borderBottom: !canvasMode && toolbarDock === "top" ? "1px solid var(--db-border)" : undefined,
+      borderRight: !canvasMode && toolbarDock === "left" ? "1px solid var(--db-border)" : undefined,
+      borderLeft: !canvasMode && toolbarDock === "right" ? "1px solid var(--db-border)" : undefined,
       backdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
       WebkitBackdropFilter: canvasMode ? "none" : "blur(16px) saturate(1.4)",
       zIndex: 10001, gap: 2,
@@ -1002,21 +1064,28 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
       {showPresets && (
         <div key={`${phase}-${presetsKeyRef.current}`} style={{
           display: "flex", alignItems: "center", gap: 2,
-          flex: 1, minWidth: 0,
+          flex: 1, minWidth: 0, minHeight: 0,
+          flexDirection: isVertical ? "column" : "row",
           pointerEvents: phase === "presets-out" ? "none" : "auto",
         }}>
           {divider}
           <div className="devbar-preset-strip" style={{
-            flex: 1, display: "flex", gap: 1, overflowX: "auto", overflowY: "hidden",
-            minWidth: 0, padding: "2px 4px",
+            flex: 1, display: "flex", gap: 1,
+            flexDirection: isVertical ? "column" : "row",
+            ...(isVertical
+              ? { overflowX: "hidden", overflowY: "auto", minHeight: 0, padding: "4px 2px", alignItems: "center" }
+              : { overflowX: "auto", overflowY: "hidden", minWidth: 0, padding: "2px 4px" }),
           } as React.CSSProperties}>
             {PRESET_DATA.map((p, i) => {
               const active = activePreset.replace("*", "") === p.name;
               const exiting = phase === "presets-out";
               return (
-                <button key={p.name} type="button" onClick={() => handlePresetClick(p.name)} style={{
-                  flexShrink: 0, display: "flex", alignItems: "center", gap: 4,
-                  padding: "4px 8px 4px 6px", borderRadius: 5,
+                <button key={p.name} type="button" onClick={() => handlePresetClick(p.name)} title={p.name} style={{
+                  flexShrink: 0, display: "flex", alignItems: "center",
+                  ...(isVertical
+                    ? { padding: 5, justifyContent: "center" }
+                    : { gap: 4, padding: "4px 8px 4px 6px" }),
+                  borderRadius: 5,
                   background: active ? "var(--db-accent-dim)" : "transparent",
                   border: "none",
                   fontFamily: FONT, fontSize: 10, fontWeight: active ? 600 : 400,
@@ -1026,8 +1095,15 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
                     ? `devbar-preset-out 200ms ${EASE_SPRING} ${i * 10}ms both`
                     : `devbar-preset-in 400ms ${EASE_SPRING} ${i * 15}ms both`,
                 }}>
-                  <div style={{ width: 8, height: 8, borderRadius: 2, background: p.colors[0], border: "0.5px solid rgba(128,128,128,0.15)", flexShrink: 0 }} />
-                  {p.name}
+                  <div style={{
+                    width: isVertical ? 14 : 8,
+                    height: isVertical ? 14 : 8,
+                    borderRadius: isVertical ? 3 : 2,
+                    background: p.colors[0],
+                    border: "0.5px solid rgba(128,128,128,0.15)",
+                    flexShrink: 0,
+                  }} />
+                  {!isVertical && p.name}
                 </button>
               );
             })}
@@ -1040,8 +1116,16 @@ function Toolbar({ isMobile = false }: { isMobile?: boolean }) {
       {showStudio && <div style={{ flex: 1 }} />}
 
       {/* Controls */}
-      <div style={{ display: "flex", alignItems: "center", gap: 1, flexShrink: 0 }}>
+      <div style={{
+        display: "flex", alignItems: "center", gap: 1, flexShrink: 0,
+        flexDirection: isVertical ? "column" : "row",
+      }}>
         {tbtn(<Shuffle size={11} />, handleRandomize, false)}
+        {!canvasMode && tbtn(
+          <ToolbarDockIcon size={11} />,
+          cycleToolbarDock,
+          false,
+        )}
         {divider}
         {tbtn(<Monitor size={11} />, () => { if (canvasMode) exitCanvas(); else enterCanvas(); }, canvasMode, isMobile ? undefined : "Canvas")}
         {showStudio && !isMobile && (
@@ -1180,7 +1264,7 @@ function ContentArea({ children, canvas }: { children: ReactNode; canvas: boolea
       <div style={{
         width: "100%",
         borderRadius: showFrame ? 8 : 0,
-        border: showFrame ? "1px solid var(--db-border)" : "1px solid transparent",
+        border: showFrame ? "1px solid var(--db-border)" : "0px solid transparent",
         overflow: showFrame ? "hidden" : undefined,
         transition: `border-radius ${DUR} ${EASE_SPRING}, border-color ${DUR} ${EASE_SPRING}, box-shadow 500ms ease`,
       }}>
@@ -1538,21 +1622,63 @@ function CanvasViewport({ children, dock }: { children: ReactNode; dock: DockPos
 /*  Main DevBar                                                        */
 /* ================================================================== */
 
+function toolbarFixedStyle(dock: ToolbarDock): React.CSSProperties {
+  switch (dock) {
+    case "top":
+      return { position: "fixed", top: 0, left: 0, right: 0, zIndex: 10001 };
+    case "left":
+      return { position: "fixed", top: 0, bottom: 0, left: 0, zIndex: 10001 };
+    case "right":
+      return { position: "fixed", top: 0, bottom: 0, right: 0, zIndex: 10001 };
+    case "bottom":
+    default:
+      return { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 };
+  }
+}
+
 export function SigilDevBar({ children }: { children: ReactNode }) {
   const devbar = useDevBar();
   const isMobile = useIsMobile();
+
+  // Reserve space on the docked side so the fixed toolbar never covers content
+  // (article body, sidebars, TOC, etc.). Applied via body[data-devbar-toolbar-dock].
+  const toolbarDock = devbar?.toolbarDock ?? "bottom";
+  const canvasMode = devbar?.canvasMode ?? false;
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    if (canvasMode) {
+      // Canvas mode handles its own layout — don't pad the body.
+      document.body.removeAttribute("data-devbar-toolbar-dock");
+      return;
+    }
+    document.body.setAttribute("data-devbar-toolbar-dock", toolbarDock);
+    return () => {
+      document.body.removeAttribute("data-devbar-toolbar-dock");
+    };
+  }, [toolbarDock, canvasMode]);
+
   if (!devbar) return <>{children}</>;
 
-  const { sidebarOpen, setSidebarOpen, canvasMode, dock, agentOpen, setAgentOpen } = devbar;
+  const { sidebarOpen, setSidebarOpen, dock, agentOpen, setAgentOpen } = devbar;
   const isLeftDock = dock === "left";
   const showInFlowSidebar = canvasMode && !isMobile;
   const showInFlowAgent = canvasMode && !isMobile;
 
+  // Mobile canvas always uses bottom-docked horizontal toolbar (vertical bar
+  // would be unusable on phones). On desktop, dock applies in both modes.
+  const effectiveDock: ToolbarDock = canvasMode && isMobile ? "bottom" : toolbarDock;
+  const isVerticalDock = effectiveDock === "left" || effectiveDock === "right";
+  const toolbarFirst = effectiveDock === "top" || effectiveDock === "left";
+
   return (
-    <div className="devbar-root" style={{
+    <div className="devbar-root" data-toolbar-dock={effectiveDock} style={{
       position: canvasMode ? "fixed" : "relative",
       inset: canvasMode ? 0 : undefined,
-      display: "flex", flexDirection: "column",
+      display: "flex",
+      // Canvas mode places the toolbar in flow, so the outer flex axis tracks
+      // the dock direction. Non-canvas mode uses position-fixed for the bar,
+      // so the outer can stay a simple column.
+      flexDirection: canvasMode && isVerticalDock ? "row" : "column",
       background: canvasMode ? "var(--db-surface)" : undefined,
       zIndex: canvasMode ? 9998 : undefined,
       minHeight: canvasMode ? undefined : "100dvh",
@@ -1560,12 +1686,13 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
     }}>
       <style>{DEVBAR_STYLES}</style>
 
+      {/* In-flow toolbar BEFORE content (top/left docks, canvas mode only) */}
+      {canvasMode && toolbarFirst && <Toolbar isMobile={isMobile} />}
+
       {/* Main row: sidebar + content + agent */}
       <div style={{
         flex: 1, display: "flex", flexDirection: "row",
         minHeight: 0, minWidth: 0, overflow: canvasMode ? "hidden" : undefined, position: "relative",
-        paddingBottom: canvasMode ? 0 : TOOLBAR_H,
-        transition: `padding-bottom ${DUR} ${EASE_SPRING}`,
       }}>
         {/* In-flow sidebar (canvas desktop only) */}
         {showInFlowSidebar && isLeftDock && <SidebarPanel mode="canvas" dock={dock} open={sidebarOpen} isMobile={false} />}
@@ -1583,10 +1710,16 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
         )}
       </div>
 
-      {/* Toolbar: fixed in normal mode, in-flow in canvas mode */}
-      <div style={canvasMode ? undefined : { position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 10001 }}>
-        <Toolbar isMobile={isMobile} />
-      </div>
+      {/* In-flow toolbar AFTER content (bottom/right docks, canvas mode only) */}
+      {canvasMode && !toolbarFirst && <Toolbar isMobile={isMobile} />}
+
+      {/* Non-canvas: fixed-position toolbar on the docked side. Body padding
+          (via DEVBAR_STYLES) reserves space so content is never covered. */}
+      {!canvasMode && (
+        <div style={toolbarFixedStyle(effectiveDock)}>
+          <Toolbar isMobile={isMobile} />
+        </div>
+      )}
 
       {/* Overlay sidebar (normal mode + mobile canvas) */}
       {(!canvasMode || isMobile) && <SidebarPanel mode="normal" dock={dock} open={sidebarOpen} isMobile={isMobile} />}
@@ -1605,6 +1738,14 @@ export function SigilDevBar({ children }: { children: ReactNode }) {
 /* ================================================================== */
 
 const DEVBAR_STYLES = `
+  /* Reserve space on the side the toolbar is docked, so the fixed toolbar
+     never covers article, sidebar, or TOC content — even inside layouts
+     (like fumadocs) that use 100dvh internally. */
+  body[data-devbar-toolbar-dock="bottom"] { padding-bottom: ${TOOLBAR_H}px; }
+  body[data-devbar-toolbar-dock="top"]    { padding-top:    ${TOOLBAR_H}px; }
+  body[data-devbar-toolbar-dock="left"]   { padding-left:   ${TOOLBAR_H}px; }
+  body[data-devbar-toolbar-dock="right"]  { padding-right:  ${TOOLBAR_H}px; }
+
   .devbar-root {
     --db-bg: #ffffff;
     --db-surface: #f8f8fa;

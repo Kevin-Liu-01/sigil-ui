@@ -2,7 +2,6 @@ import { DocsLayout } from "fumadocs-ui/layouts/docs";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import type { ReactNode } from "react";
 import { source } from "../../lib/source";
-import { DocsPresetBar } from "../../components/docs-preset-bar";
 
 function SigilLogo() {
   return (
@@ -53,7 +52,6 @@ export default function Layout({ children }: { children: ReactNode }) {
         }}
       >
         {children}
-        <DocsPresetBar />
       </DocsLayout>
     </RootProvider>
   );
