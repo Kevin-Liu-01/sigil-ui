@@ -9,6 +9,20 @@ description: Feature comparison table with check/cross icons or custom text per 
 import { ComparisonSection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <ComparisonSection
+    title="Compare plans"
+    columns={["Hobby", "Pro", "Team"]}
+    features={[
+      { label: "Projects",     values: ["1", "Unlimited", "Unlimited"] },
+      { label: "Custom domain", values: [false, true, true] },
+      { label: "SSO",          values: [false, false, true] },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

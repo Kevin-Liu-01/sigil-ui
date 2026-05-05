@@ -12,7 +12,9 @@ import { Meter } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <Meter />
+  <div className="flex flex-col gap-2 w-full max-w-sm">
+    <Meter value={72} max={100} label="Storage" />
+  </div>
 </ComponentPreview>
 
 ## Usage

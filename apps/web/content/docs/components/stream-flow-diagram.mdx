@@ -9,6 +9,16 @@ description: A token-stream visualization showing a source emitting tokens with 
 import { StreamFlowDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <StreamFlowDiagram
+    source={{ label: "DESIGN.md" }}
+    tokens={["primary", "radius-md", "duration-fast"]}
+    output="CSS variables"
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

@@ -12,7 +12,13 @@ import { FloatingUI } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <FloatingUI />
+  <FloatingUI
+    layers={[
+      <div key="a" className="px-4 py-3 text-sm text-[var(--s-text)]">Layer 1 — base panel</div>,
+      <div key="b" className="px-4 py-3 text-sm text-[var(--s-text)]">Layer 2 — overlay</div>,
+      <div key="c" className="px-4 py-3 text-sm text-[var(--s-text)]">Layer 3 — toolbar</div>,
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage

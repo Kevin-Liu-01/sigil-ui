@@ -1,61 +1,110 @@
 ---
 title: Carousel
-description: "A Carousel component from the Sigil design system."
+description: "An accessible Embla-powered slider with keyboard support, optional 3D tilt, and dot pagination."
 ---
 
 ## Import
 
 ```tsx
-import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@sigil-ui/components";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+  CarouselDots,
+} from "@sigil-ui/components";
 ```
 
 ## Preview
 
-<ComponentPreview>
-  <Carousel className="w-full max-w-xs">
-  <CarouselContent>
-    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 1</div></CarouselItem>
-    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 2</div></CarouselItem>
-    <CarouselItem><div className="p-6 border border-[var(--s-border)] text-center">Slide 3</div></CarouselItem>
-  </CarouselContent>
-  <CarouselPrevious />
-  <CarouselNext />
-</Carousel>
+<ComponentPreview vertical>
+  <Carousel className="w-full max-w-md mx-auto">
+    <CarouselContent>
+      <CarouselItem>
+        <div className="flex aspect-[16/9] items-center justify-center rounded-[var(--s-radius-md,8px)] bg-[var(--s-surface)] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] text-[var(--s-text)]">
+          <div className="text-center">
+            <div className="font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.12em] text-[var(--s-text-muted)] mb-2">Slide 01</div>
+            <div className="font-[family-name:var(--s-font-display)] text-3xl font-bold tracking-tight">Sigil tokens</div>
+          </div>
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <div className="flex aspect-[16/9] items-center justify-center rounded-[var(--s-radius-md,8px)] bg-[var(--s-surface-elevated,var(--s-surface))] border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)] text-[var(--s-text)]">
+          <div className="text-center">
+            <div className="font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.12em] text-[var(--s-text-muted)] mb-2">Slide 02</div>
+            <div className="font-[family-name:var(--s-font-display)] text-3xl font-bold tracking-tight">46 presets</div>
+          </div>
+        </div>
+      </CarouselItem>
+      <CarouselItem>
+        <div className="flex aspect-[16/9] items-center justify-center rounded-[var(--s-radius-md,8px)] bg-[var(--s-primary)]/10 border border-[style:var(--s-border-style,solid)] border-[color:var(--s-primary)] text-[var(--s-primary)]">
+          <div className="text-center">
+            <div className="font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.12em] mb-2">Slide 03</div>
+            <div className="font-[family-name:var(--s-font-display)] text-3xl font-bold tracking-tight">350+ components</div>
+          </div>
+        </div>
+      </CarouselItem>
+    </CarouselContent>
+    <CarouselPrevious />
+    <CarouselNext />
+    <CarouselDots />
+  </Carousel>
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Carousel>...</Carousel>
+<Carousel className="w-full max-w-md">
+  <CarouselContent>
+    <CarouselItem>...</CarouselItem>
+    <CarouselItem>...</CarouselItem>
+  </CarouselContent>
+  <CarouselPrevious />
+  <CarouselNext />
+  <CarouselDots />
+</Carousel>
 ```
 
 ## Sub-components
 
-This component includes the following parts:
-
-- `<CarouselContent>`
-- `<CarouselItem>`
-- `<CarouselPrevious>`
-- `<CarouselNext>`
+- `<CarouselContent>` — overflow viewport
+- `<CarouselItem>` — individual slide (full-basis by default)
+- `<CarouselPrevious>` / `<CarouselNext>` — nav buttons (rendered inside the slide by default)
+- `<CarouselDots>` — pagination dots, hidden when there's only one slide
 
 ## Props
 
+### Carousel
+
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `orientation` | `"horizontal" | "vertical"` | — | — |
-| `opts` | `Parameters<typeof useEmblaCarousel>[0]` | — | — |
-| `tilt` | `boolean` | — | Enable 3D tilt perspective on slides. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Slide axis. |
+| `opts` | `EmblaOptionsType` | — | Options forwarded to `useEmblaCarousel`. |
+| `tilt` | `boolean` | `false` | Enables 3D tilt perspective on slides. |
+
+### CarouselPrevious / CarouselNext
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `placement` | `"inside" \| "outside"` | `"inside"` | Where the button sits relative to the slide rail. |
+
+## Keyboard
+
+- `←` / `→` move horizontal carousels.
+- `↑` / `↓` move vertical carousels.
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-duration-normal` | Duration normal |
-| `--s-radius-full` | Radius full |
-| `--s-border-style` | Border style |
-| `--s-border` | Border |
-| `--s-surface` | Surface |
-| `--s-text` | Text |
-| `--s-shadow-sm` | Shadow sm |
-| `--s-duration-fast` | Duration fast |
-| `--s-primary` | Primary |
+| `--s-card-radius` / `--s-radius-md` | Viewport corner radius |
+| `--s-surface` | Nav button background |
+| `--s-surface-elevated` | Nav button hover background |
+| `--s-border` / `--s-border-style` | Nav button border |
+| `--s-shadow-md` | Nav button elevation |
+| `--s-text` / `--s-text-muted` | Nav button text colors |
+| `--s-primary` | Active dot color, nav hover text |
+| `--s-radius-full` | Nav buttons + dots |
+| `--s-duration-fast` / `--s-duration-normal` | Transitions |
+| `--s-focus-ring-color` / `--s-focus-ring-width` | Focus ring |

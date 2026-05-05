@@ -21,6 +21,7 @@ export interface StatsSectionProps extends Omit<HTMLAttributes<HTMLElement>, "ti
 
 export const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
   function StatsSection({ label, title, description, stats, variant = "bordered", className, ...props }, ref) {
+    const safeStats = stats ?? [];
     return (
       <section
         ref={ref}
@@ -33,9 +34,9 @@ export const StatsSection = forwardRef<HTMLElement, StatsSectionProps>(
 
           <div className={cn(
             "grid gap-6",
-            stats.length <= 3 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-2 md:grid-cols-4",
+            safeStats.length <= 3 ? "grid-cols-1 md:grid-cols-3" : "grid-cols-2 md:grid-cols-4",
           )}>
-            {stats.map((stat, i) => (
+            {safeStats.map((stat, i) => (
               <div
                 key={i}
                 className={cn(

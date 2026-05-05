@@ -12,7 +12,16 @@ import { FeatureSection } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <FeatureSection title="Features" items={[{ title: "Token-driven", description: "All visual properties flow from tokens." }, { title: "350+ Components", description: "Everything you need out of the box." }]} />
+  <FeatureSection
+    label="WHY SIGIL"
+    title="Edit tokens, not components"
+    description="Change one value, every consumer updates."
+    features={[
+      { title: "Token-driven", description: "519 fields compile to CSS custom properties." },
+      { title: "46 presets", description: "Switch the entire visual identity in one command." },
+      { title: "Agent-friendly", description: "MDX-first DESIGN.md you can hand to any LLM." },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage

@@ -11,8 +11,14 @@ import { CostCalculator } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <CostCalculator />
+<ComponentPreview vertical>
+  <CostCalculator
+    sliders={[
+      { label: "Active users", value: 1500, unit: "users", min: 0, max: 10000, step: 100 },
+      { label: "API calls",    value: 250000, unit: "/mo", min: 0, max: 1000000, step: 10000 },
+    ]}
+    estimate={{ brandName: "Sigil", brandCost: 175, competitorName: "Other", competitorCost: 420, savingsNote: "Includes 90% utilization." }}
+  />
 </ComponentPreview>
 
 ## Usage

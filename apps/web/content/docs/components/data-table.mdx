@@ -1,6 +1,6 @@
 ---
 title: DataTable
-description: "A DataTable component from the Sigil design system."
+description: "A token-driven data table with custom cell renderers, click handling, and empty states."
 ---
 
 ## Import
@@ -11,29 +11,62 @@ import { DataTable } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <DataTable columns={[{ header: "Name", accessorKey: "name" }, { header: "Status", accessorKey: "status" }]} data={[{ name: "Project Alpha", status: "Active" }, { name: "Project Beta", status: "Draft" }]} />
+<ComponentPreview vertical>
+  <DataTable
+    columns={[
+      { key: "name", header: "Project" },
+      { key: "owner", header: "Owner" },
+      { key: "status", header: "Status" },
+      { key: "spend", header: "Spend" },
+    ]}
+    data={[
+      { name: "Apollo", owner: "Riley", status: "Active", spend: "$1,240" },
+      { name: "Vega", owner: "Jordan", status: "Draft", spend: "$0" },
+      { name: "Cassia", owner: "Mei", status: "Active", spend: "$840" },
+      { name: "Onyx", owner: "Sam", status: "Paused", spend: "$320" },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<DataTable>...</DataTable>
+<DataTable
+  columns={[
+    { key: "name", header: "Name" },
+    { key: "status", header: "Status" },
+  ]}
+  data={[{ name: "Project Alpha", status: "Active" }]}
+/>
 ```
+
+Each column accepts either `key` (Sigil convention) or `accessorKey` (TanStack convention) — they're treated as aliases.
 
 ## Props
 
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `columns` | `DataTableColumn<T>[]` | — | — |
-| `data` | `T[]` | — | — |
-| `emptyMessage` | `string` | — | — |
-| `onRowClick` | `(row: T, index: number) => void` | — | — |
-| `rowClassName` | `string | ((row: T, index: number) => string)` | — | — |
-| `getRowId` | `(row: T, index: number) => string` | — | — |
+| `columns` | `DataTableColumn<T>[]` | — | Column definitions. |
+| `data` | `T[]` | — | Row data. |
+| `emptyMessage` | `string` | `"No results."` | Shown when `data` is empty. |
+| `onRowClick` | `(row: T, index: number) => void` | — | Click handler that adds `cursor-pointer` to rows. |
+| `rowClassName` | `string \| (row, index) => string` | — | Per-row className override. |
+| `getRowId` | `(row: T, index: number) => string` | — | Stable React key for each row. |
+
+### `DataTableColumn<T>`
+
+| Field | Type | Description |
+|---|---|---|
+| `key` | `string` | Column id and default property accessor. |
+| `accessorKey` | `string` | Alias for `key`. |
+| `header` | `ReactNode` | Header label. |
+| `cell` | `(row, index) => ReactNode` | Optional custom cell renderer. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-text-muted` | Text muted |
+| `--s-text` / `--s-text-muted` | Cell text colors |
+| `--s-border` / `--s-border-muted` | Row separators (inherited from Table) |
+| `--s-surface` | Hover row background (inherited from TableRow) |
+| `--s-radius-md` | Frame radius |

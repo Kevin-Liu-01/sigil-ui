@@ -1494,7 +1494,7 @@ const CELLS: ComponentCell[] = [
       </div>
     </Diagram>
   )},
-  { name: "Sigil Diagram Mark", category: "Diagrams", variants: 12, render: () => (
+  { name: "Sigil Diagram Mark", category: "Diagrams", variants: 12, docPath: null, render: () => (
     <div
       className="relative flex h-24 w-full items-center justify-center overflow-hidden"
       style={{

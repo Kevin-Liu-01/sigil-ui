@@ -12,7 +12,11 @@ import { CodeBlock } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <CodeBlock language="tsx">{'const greeting = "Hello, Sigil!";'}</CodeBlock>
+  <CodeBlock language="tsx" code={`import { Button } from "@sigil-ui/components";
+
+export function CTA() {
+  return <Button>Ship it</Button>;
+}`} />
 </ComponentPreview>
 
 ## Usage

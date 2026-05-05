@@ -33,7 +33,7 @@ export const TestimonialsSection = forwardRef<HTMLElement, TestimonialsSectionPr
           {title && <SectionHeading label={label} title={title} description={description} align="center" />}
 
           <div className={cn("grid grid-cols-1 gap-6", columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3")}>
-            {testimonials.map((t, i) => (
+            {(testimonials ?? []).map((t, i) => (
               <div
                 key={i}
                 className="flex flex-col gap-4 p-6 rounded-[var(--s-radius-card,0px)] border border-[color:var(--s-border-muted)] bg-[var(--s-surface)]"

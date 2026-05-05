@@ -9,6 +9,19 @@ description: Alternating rows of text and media for deep-dive feature explanatio
 import { FeatureShowcaseSection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <FeatureShowcaseSection
+    label="Highlights"
+    title="What ships out of the box"
+    rows={[
+      { eyebrow: "Tokens", title: "519 design tokens", description: "Every color, font, and radius." },
+      { eyebrow: "Components", title: "350+ React components", description: "All read from var(--s-*)." },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

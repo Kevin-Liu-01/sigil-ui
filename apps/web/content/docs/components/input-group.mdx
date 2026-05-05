@@ -12,7 +12,11 @@ import { InputGroup, InputGroupInput, InputGroupTextarea, InputGroupAddon, Input
 ## Preview
 
 <ComponentPreview>
-  <InputGroup />
+  <InputGroup className="w-full max-w-sm">
+    <InputGroupAddon>$</InputGroupAddon>
+    <InputGroupInput placeholder="0.00" />
+    <InputGroupAddon>USD</InputGroupAddon>
+  </InputGroup>
 </ComponentPreview>
 
 ## Usage

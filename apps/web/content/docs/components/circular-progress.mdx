@@ -12,7 +12,12 @@ import { CircularProgress } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <CircularProgress />
+  <div className="flex items-center gap-6">
+    <CircularProgress value={25} />
+    <CircularProgress value={50} />
+    <CircularProgress value={75} />
+    <CircularProgress value={100} />
+  </div>
 </ComponentPreview>
 
 ## Usage

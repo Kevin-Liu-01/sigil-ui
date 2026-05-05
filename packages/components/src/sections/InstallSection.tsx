@@ -19,18 +19,19 @@ export interface InstallSectionProps extends HTMLAttributes<HTMLElement> {
 
 export const InstallSection = forwardRef<HTMLElement, InstallSectionProps>(
   function InstallSection({ label, title = "Get started", description, note, commands, className, ...props }, ref) {
+    const safeCommands = commands ?? [];
     const [activeTab, setActiveTab] = useState(0);
     const [copied, setCopied] = useState(false);
 
     const handleCopy = useCallback(async () => {
-      const cmd = commands[activeTab]?.command;
+      const cmd = safeCommands[activeTab]?.command;
       if (!cmd) return;
       try {
         await navigator.clipboard.writeText(cmd);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch { /* noop */ }
-    }, [commands, activeTab]);
+    }, [safeCommands, activeTab]);
 
     return (
       <section
@@ -59,7 +60,7 @@ export const InstallSection = forwardRef<HTMLElement, InstallSectionProps>(
             </div>
 
             <div className="flex flex-col gap-0">
-              {commands.map((cmd, i) => (
+              {safeCommands.map((cmd, i) => (
                 <div
                   key={i}
                   className={cn(

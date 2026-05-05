@@ -12,11 +12,13 @@ import { CodeTabs, CodePreview, CopyButton, TokenPreview, ThemeSwatch, ThemeSwit
 ## Preview
 
 <ComponentPreview>
-  <CodeTabs items={["npm", "pnpm", "yarn"]}>
-  <div>npm install @sigil-ui/components</div>
-  <div>pnpm add @sigil-ui/components</div>
-  <div>yarn add @sigil-ui/components</div>
-</CodeTabs>
+  <CodeTabs
+    tabs={[
+      { value: "npm",  label: "npm",  language: "bash", code: "npm install @sigil-ui/components" },
+      { value: "pnpm", label: "pnpm", language: "bash", code: "pnpm add @sigil-ui/components" },
+      { value: "yarn", label: "yarn", language: "bash", code: "yarn add @sigil-ui/components" },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage

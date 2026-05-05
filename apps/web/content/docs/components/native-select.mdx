@@ -12,7 +12,12 @@ import { NativeSelect } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <NativeSelect />
+  <NativeSelect className="w-full max-w-xs" defaultValue="published">
+    <option value="draft">Draft</option>
+    <option value="review">In Review</option>
+    <option value="published">Published</option>
+    <option value="archived">Archived</option>
+  </NativeSelect>
 </ComponentPreview>
 
 ## Usage

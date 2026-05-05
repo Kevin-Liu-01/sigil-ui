@@ -9,6 +9,19 @@ description: Full-page layout shell with header, sidebar, main content, and foot
 import { AppShell } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <AppShell
+    header={<div className="px-4 py-2 text-sm font-medium border-b border-[color:var(--s-border)] bg-[var(--s-surface)]">Header</div>}
+    sidebar={<div className="p-3 text-xs text-[var(--s-text-muted)]">Sidebar</div>}
+    sidebarWidth={160}
+    className="h-48 w-full max-w-2xl border border-[color:var(--s-border)] bg-[var(--s-background)] overflow-hidden"
+  >
+    <div className="p-4 text-sm text-[var(--s-text)]">Main content area</div>
+  </AppShell>
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

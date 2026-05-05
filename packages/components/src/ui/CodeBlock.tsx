@@ -20,14 +20,15 @@ export const CodeBlock = forwardRef<HTMLDivElement, CodeBlockProps>(function Cod
   ref,
 ) {
   const [copied, setCopied] = useState(false);
-  const lines = code.split("\n");
+  const safeCode = code ?? "";
+  const lines = safeCode.split("\n");
 
   const handleCopy = useCallback(() => {
-    navigator.clipboard.writeText(code).then(() => {
+    navigator.clipboard.writeText(safeCode).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     });
-  }, [code]);
+  }, [safeCode]);
 
   return (
     <div

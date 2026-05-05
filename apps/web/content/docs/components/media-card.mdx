@@ -11,8 +11,16 @@ import { MediaCard } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <MediaCard media={<img src="https://placehold.co/640x360/png" alt="Preview" />} title="Media card" description="Image plus content." />
+<ComponentPreview vertical>
+  <MediaCard
+    media={
+      <div className="aspect-[16/9] bg-[var(--s-surface-elevated,var(--s-surface))] flex items-center justify-center">
+        <span className="font-[family-name:var(--s-font-mono)] text-xs uppercase tracking-[0.12em] text-[var(--s-text-muted)]">media slot</span>
+      </div>
+    }
+    title="Media card"
+    description="Image plus title plus optional CTA. Drop any node into the media slot."
+  />
 </ComponentPreview>
 
 ## Usage

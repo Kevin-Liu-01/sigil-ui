@@ -9,6 +9,22 @@ description: A radial ecosystem layout with a center node and ring nodes connect
 import { EcosystemDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <EcosystemDiagram
+    center={{ label: "Sigil core" }}
+    ring={[
+      { label: "Tokens" },
+      { label: "Components" },
+      { label: "Presets" },
+      { label: "CLI" },
+      { label: "Docs" },
+      { label: "Demos" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

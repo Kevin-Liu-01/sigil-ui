@@ -1,6 +1,6 @@
 ---
 title: Calendar
-description: "A Calendar component from the Sigil design system."
+description: "A token-driven calendar built on react-day-picker with single, range, and dropdown navigation modes."
 ---
 
 ## Import
@@ -11,29 +11,68 @@ import { Calendar } from "@sigil-ui/components";
 
 ## Preview
 
-<ComponentPreview>
-  <Calendar />
+<ComponentPreview vertical>
+  <Calendar mode="single" defaultMonth={new Date(2026, 4, 1)} selected={new Date(2026, 4, 12)} />
+</ComponentPreview>
+
+## Variants
+
+### Range selection
+
+<ComponentPreview vertical>
+  <Calendar
+    mode="range"
+    defaultMonth={new Date(2026, 4, 1)}
+    selected={{ from: new Date(2026, 4, 8), to: new Date(2026, 4, 19) }}
+    numberOfMonths={1}
+  />
+</ComponentPreview>
+
+### Caption-only navigation (no dropdowns)
+
+<ComponentPreview vertical>
+  <Calendar mode="single" captionLayout="label" defaultMonth={new Date(2026, 4, 1)} />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<Calendar>...</Calendar>
+const [date, setDate] = React.useState<Date>();
+
+<Calendar mode="single" selected={date} onSelect={setDate} />
 ```
+
+For ranges:
+
+```tsx
+const [range, setRange] = React.useState<DateRange>();
+
+<Calendar mode="range" selected={range} onSelect={setRange} />
+```
+
+## Props
+
+The Calendar accepts every prop from [`react-day-picker`'s DayPicker](https://daypicker.dev/api/interfaces/DayPickerProps), plus a Sigil-themed default.
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `mode` | `"single" \| "multiple" \| "range"` | `"single"` | Selection behavior. |
+| `captionLayout` | `"label" \| "dropdown" \| "dropdown-months" \| "dropdown-years"` | `"dropdown"` | Header navigation style. |
+| `showOutsideDays` | `boolean` | `true` | Show days from the previous/next month in the grid. |
+| `fixedWeeks` | `boolean` | `true` | Always render six weeks. |
+| `startMonth` / `endMonth` | `Date` | ±100 / +10 yrs | Bounds for the dropdown selectors. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-background` | Background |
-| `--s-radius-sm` | Radius sm |
-| `--s-text-muted` | Text muted |
-| `--s-duration-fast` | Duration fast |
-| `--s-surface` | Surface |
-| `--s-text` | Text |
-| `--s-radius-md` | Radius md |
-| `--s-radius-none` | Radius none |
-| `--s-surface-elevated` | Surface elevated |
-| `--s-border` | Border |
-| `--s-ring` | Ring |
-| `--s-primary` | Primary |
+| `--s-background` | Calendar surface |
+| `--s-surface` / `--s-surface-elevated` | Hover, dropdown panel |
+| `--s-border` / `--s-border-style` | Calendar frame |
+| `--s-text` / `--s-text-muted` / `--s-text-subtle` | Day text hierarchy |
+| `--s-primary` / `--s-primary-contrast` | Selected day fill, today indicator dot |
+| `--s-radius-sm` / `--s-radius-md` / `--s-card-radius` | Frame and day pill radii |
+| `--s-shadow-lg` | Dropdown elevation |
+| `--s-duration-fast` | Hover/select transitions |
+| `--s-focus-ring-color` / `--s-focus-ring-width` | Keyboard focus ring |
+| `--s-font-mono` | Weekday label typography |

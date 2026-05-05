@@ -9,6 +9,14 @@ description: RTL/LTR context provider and hook for bidirectional layout support.
 import { DirectionProvider, useDirection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview>
+  <DirectionProvider dir="ltr">
+    <div className="text-sm text-[var(--s-text)]">Left-to-right context (default).</div>
+  </DirectionProvider>
+</ComponentPreview>
+
 ## Usage
 
 Wrap your app (or a subtree) with `DirectionProvider` to set the text direction:

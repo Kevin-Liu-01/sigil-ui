@@ -29,13 +29,15 @@ export interface CostCalculatorProps extends HTMLAttributes<HTMLDivElement> {
 
 export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
   function CostCalculator({ sliders, estimate, sliderRenderer, className, ...rest }, ref) {
-    const savings = estimate.competitorCost
-      ? estimate.competitorCost - estimate.brandCost
+    const safeSliders = sliders ?? [];
+    const safeEstimate: CostEstimate = estimate ?? { brandName: "Plan", brandCost: 0 };
+    const savings = safeEstimate.competitorCost
+      ? safeEstimate.competitorCost - safeEstimate.brandCost
       : 0;
-    const savingsPct = estimate.competitorCost
-      ? Math.round((savings / estimate.competitorCost) * 100)
+    const savingsPct = safeEstimate.competitorCost
+      ? Math.round((savings / safeEstimate.competitorCost) * 100)
       : 0;
-    const maxCost = Math.max(estimate.brandCost, estimate.competitorCost ?? 0);
+    const maxCost = Math.max(safeEstimate.brandCost, safeEstimate.competitorCost ?? 0);
 
     return (
       <div
@@ -59,7 +61,7 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
               Configure
             </legend>
             <div className="flex flex-col gap-4">
-              {sliders.map((s) => (
+              {safeSliders.map((s) => (
                 sliderRenderer ? sliderRenderer(s) : (
                   <div key={s.label} className="flex items-center gap-3">
                     <span className="text-[13px] font-[family:var(--s-font-mono)] w-24 shrink-0" style={{ color: "var(--s-text-secondary)" }}>
@@ -100,16 +102,16 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
               {/* Brand bar */}
               <div>
                 <div className="flex justify-between text-[13px] font-[family:var(--s-font-mono)] mb-1">
-                  <span style={{ color: "var(--s-text-secondary)" }}>{estimate.brandName}</span>
+                  <span style={{ color: "var(--s-text-secondary)" }}>{safeEstimate.brandName}</span>
                   <span className="font-bold tabular-nums" style={{ color: "var(--s-text)" }}>
-                    ${estimate.brandCost.toFixed(2)}
+                    ${safeEstimate.brandCost.toFixed(2)}
                   </span>
                 </div>
                 <div className="h-2 rounded-[var(--s-radius-full)]" style={{ background: "var(--s-border-muted)" }}>
                   <div
                     className="h-2 rounded-[var(--s-radius-full)]"
                     style={{
-                      width: maxCost > 0 ? `${(estimate.brandCost / maxCost) * 100}%` : "0%",
+                      width: maxCost > 0 ? `${(safeEstimate.brandCost / maxCost) * 100}%` : "0%",
                       background: "var(--s-primary)",
                     }}
                   />
@@ -117,19 +119,19 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
               </div>
 
               {/* Competitor bar */}
-              {estimate.competitorCost != null && (
+              {safeEstimate.competitorCost != null && (
                 <div>
                   <div className="flex justify-between text-[13px] font-[family:var(--s-font-mono)] mb-1">
-                    <span style={{ color: "var(--s-text-muted)" }}>{estimate.competitorName ?? "Competitor"}</span>
+                    <span style={{ color: "var(--s-text-muted)" }}>{safeEstimate.competitorName ?? "Competitor"}</span>
                     <span className="font-bold tabular-nums" style={{ color: "var(--s-text-muted)" }}>
-                      ${estimate.competitorCost.toFixed(2)}
+                      ${safeEstimate.competitorCost.toFixed(2)}
                     </span>
                   </div>
                   <div className="h-2 rounded-[var(--s-radius-full)]" style={{ background: "var(--s-border-muted)" }}>
                     <div
                       className="h-2 rounded-[var(--s-radius-full)]"
                       style={{
-                        width: maxCost > 0 ? `${((estimate.competitorCost ?? 0) / maxCost) * 100}%` : "0%",
+                        width: maxCost > 0 ? `${((safeEstimate.competitorCost ?? 0) / maxCost) * 100}%` : "0%",
                         background: "var(--s-error)",
                       }}
                     />
@@ -138,7 +140,7 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
               )}
 
               {/* Savings note */}
-              {estimate.savingsNote && (
+              {safeEstimate.savingsNote && (
                 <div
                   className="text-[12px] font-[family:var(--s-font-mono)] p-3"
                   style={{
@@ -148,7 +150,7 @@ export const CostCalculator = forwardRef<HTMLDivElement, CostCalculatorProps>(
                   }}
                 >
                   <div className="text-[10px] font-semibold uppercase tracking-wider mb-1">Idle Savings</div>
-                  {estimate.savingsNote}
+                  {safeEstimate.savingsNote}
                 </div>
               )}
 

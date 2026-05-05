@@ -9,3 +9,7 @@ dist/
 .playwright-cli/
 .playwright-mcp/
 output/playwright/
+# Timestamped audit runs are large and ephemeral. The committed report
+# (AUDIT_REPORT.md) plus the latest run live alongside this file.
+output/audit/2*/
+output/audit/*.log

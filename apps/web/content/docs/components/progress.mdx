@@ -12,7 +12,10 @@ import { Progress } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <Progress />
+  <div className="flex flex-col gap-3 w-full max-w-sm">
+    <div className="flex items-center justify-between text-sm text-[var(--s-text-muted)]"><span>Uploading</span><span className="tabular-nums">68%</span></div>
+    <Progress value={68} />
+  </div>
 </ComponentPreview>
 
 ## Usage

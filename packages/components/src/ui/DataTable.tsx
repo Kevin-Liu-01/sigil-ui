@@ -12,7 +12,10 @@ import {
 import { cn } from "../utils";
 
 export interface DataTableColumn<T> {
+  /** Unique column id and default property accessor on the row. */
   key: string;
+  /** TanStack-style alias for `key`. */
+  accessorKey?: string;
   header: ReactNode;
   cell?: (row: T, index: number) => ReactNode;
 }
@@ -43,9 +46,10 @@ function DataTableInner<T extends Record<string, unknown>>(
     <Table ref={ref} data-slot="data-table" className={className}>
       <TableHeader>
         <TableRow>
-          {columns.map((col) => (
-            <TableHead key={col.key}>{col.header}</TableHead>
-          ))}
+          {columns.map((col, colIdx) => {
+            const colKey = col.key ?? col.accessorKey ?? String(colIdx);
+            return <TableHead key={colKey}>{col.header}</TableHead>;
+          })}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -74,13 +78,17 @@ function DataTableInner<T extends Record<string, unknown>>(
                   rowCls,
                 )}
               >
-                {columns.map((col) => (
-                  <TableCell key={col.key}>
-                    {col.cell
-                      ? col.cell(row, rowIdx)
-                      : (row[col.key] as ReactNode) ?? null}
-                  </TableCell>
-                ))}
+                {columns.map((col, colIdx) => {
+                  const accessor = col.key ?? col.accessorKey ?? "";
+                  const colKey = accessor || String(colIdx);
+                  return (
+                    <TableCell key={colKey}>
+                      {col.cell
+                        ? col.cell(row, rowIdx)
+                        : ((accessor ? row[accessor] : null) as ReactNode) ?? null}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             );
           })

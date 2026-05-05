@@ -100,8 +100,8 @@ export {
 export { Combobox, type ComboboxProps, type ComboboxOption } from "./ui/Combobox";
 export { Calendar, CalendarDayButton, type CalendarProps } from "./ui/Calendar";
 export {
-  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext,
-  type CarouselProps, type CarouselContentProps, type CarouselItemProps, type CarouselButtonProps,
+  Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, CarouselDots,
+  type CarouselProps, type CarouselContentProps, type CarouselItemProps, type CarouselButtonProps, type CarouselDotsProps,
 } from "./ui/Carousel";
 export { Alert, AlertTitle, AlertDescription, type AlertProps, type AlertTitleProps, type AlertDescriptionProps, type AlertVariant, type AlertFill } from "./ui/Alert";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent, type CollapsibleContentProps } from "./ui/Collapsible";
@@ -116,7 +116,10 @@ export { AspectRatio, type AspectRatioProps } from "./ui/AspectRatio";
 export { DataTable, type DataTableProps } from "./ui/DataTable";
 export { ChartContainer, ChartTooltip, ChartLegend } from "./ui/Chart";
 export { Field, Fieldset, FieldLabel, FieldDescription, FieldError } from "./ui/Field";
-export { CheckboxGroup, CheckboxGroupItem, type CheckboxGroupProps } from "./ui/CheckboxGroup";
+export {
+  CheckboxGroup, CheckboxGroupItem,
+  type CheckboxGroupProps, type CheckboxGroupItemProps, type CheckboxGroupItemConfig,
+} from "./ui/CheckboxGroup";
 export { Stepper, type StepperProps, type StepperStepConfig } from "./ui/Stepper";
 export {
   ResizablePanelGroup, ResizablePanel, ResizableHandle,

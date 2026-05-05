@@ -1,6 +1,6 @@
 ---
 title: CheckboxGroup
-description: "A CheckboxGroup component from the Sigil design system."
+description: "A multi-select checkbox group with shared state, sub-labels, and disabled support."
 ---
 
 ## Import
@@ -12,13 +12,35 @@ import { CheckboxGroup, CheckboxGroupItem } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <CheckboxGroup />
+  <CheckboxGroup
+    defaultValue={["build", "deploy"]}
+    items={[
+      { value: "build", label: "Build", description: "Compile, bundle, and emit production artifacts." },
+      { value: "test", label: "Test", description: "Run the full unit + integration test suite." },
+      { value: "deploy", label: "Deploy", description: "Push to the production environment." },
+      { value: "rollback", label: "Rollback", description: "Reserved — paid plans only.", disabled: true },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage
 
 ```tsx
-<CheckboxGroup>...</CheckboxGroup>
+<CheckboxGroup defaultValue={["a"]} onValueChange={(value) => console.log(value)}>
+  <CheckboxGroupItem value="a" label="Option A" description="Short explainer." />
+  <CheckboxGroupItem value="b" label="Option B" />
+</CheckboxGroup>
+```
+
+You can also pass an `items` array as a shorthand:
+
+```tsx
+<CheckboxGroup
+  items={[
+    { value: "a", label: "Option A" },
+    { value: "b", label: "Option B" },
+  ]}
+/>
 ```
 
 ## Sub-components
@@ -29,19 +51,37 @@ This component includes the following parts:
 
 ## Props
 
+### CheckboxGroup
+
 | Prop | Type | Default | Description |
 |---|---|---|---|
-| `value` | `string[]` | — | — |
-| `onValueChange` | `(value: string[]) => void` | — | — |
-| `disabled` | `boolean` | — | — |
+| `value` | `string[]` | — | Controlled selection. |
+| `defaultValue` | `string[]` | `[]` | Uncontrolled initial selection. |
+| `onValueChange` | `(value: string[]) => void` | — | Called with the next selection on every toggle. |
+| `disabled` | `boolean` | `false` | Disables every item in the group. |
+| `name` | `string` | — | Form field name applied to each underlying checkbox. |
+| `items` | `CheckboxGroupItemConfig[]` | — | Shorthand for rendering items without children. |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Stacks items in a column or wraps them in a row. |
+
+### CheckboxGroupItem
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `value` | `string` | — | Item value used to identify the selection. |
+| `label` | `ReactNode` | — | Primary label text. |
+| `description` | `ReactNode` | — | Optional secondary copy displayed below the label. |
+| `disabled` | `boolean` | `false` | Disables this individual item. |
 
 ## Token integration
 
 | CSS Variable | Purpose |
 |---|---|
-| `--s-radius-sm` | Radius sm |
-| `--s-border-style` | Border style |
-| `--s-border` | Border |
-| `--s-primary` | Primary |
-| `--s-ring` | Ring |
-| `--s-text` | Text |
+| `--s-text` | Item label color |
+| `--s-text-muted` | Item description color |
+| `--s-primary` | Selected checkbox fill |
+| `--s-primary-contrast` | Checkmark color on selected state |
+| `--s-border` | Unselected checkbox border |
+| `--s-border-style` | Border style (solid / dashed / dotted) |
+| `--s-radius-sm` | Checkbox corner radius |
+| `--s-focus-ring-color` | Focus ring color |
+| `--s-focus-ring-width` | Focus ring width |

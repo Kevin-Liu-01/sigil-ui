@@ -25,15 +25,18 @@ export interface SankeyDiagramProps extends Omit<SVGAttributes<SVGSVGElement>, "
 
 export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
   function SankeyDiagram({ sources, targets, links, width: w = 400, height: h = 200, className, ...props }, ref) {
+    const safeSources = sources ?? [];
+    const safeTargets = targets ?? [];
+    const safeLinks = links ?? [];
     const nodeW = 16;
     const pad = 40;
     const innerH = h - pad * 2;
 
-    const srcTotal = sources.reduce((s, n) => s + n.value, 0) || 1;
-    const tgtTotal = targets.reduce((s, n) => s + n.value, 0) || 1;
+    const srcTotal = safeSources.reduce((s, n) => s + n.value, 0) || 1;
+    const tgtTotal = safeTargets.reduce((s, n) => s + n.value, 0) || 1;
 
     let srcY = pad;
-    const srcPositions = sources.map(n => {
+    const srcPositions = safeSources.map(n => {
       const barH = (n.value / srcTotal) * innerH;
       const pos = { y: srcY, h: barH };
       srcY += barH + 4;
@@ -41,7 +44,7 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
     });
 
     let tgtY = pad;
-    const tgtPositions = targets.map(n => {
+    const tgtPositions = safeTargets.map(n => {
       const barH = (n.value / tgtTotal) * innerH;
       const pos = { y: tgtY, h: barH };
       tgtY += barH + 4;
@@ -58,7 +61,7 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
         className={cn("shrink-0", className)}
         {...props}
       >
-        {links.map((link, i) => {
+        {safeLinks.map((link, i) => {
           const sp = srcPositions[link.source];
           const tp = tgtPositions[link.target];
           if (!sp || !tp) return null;
@@ -78,7 +81,7 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
           );
         })}
 
-        {sources.map((n, i) => (
+        {safeSources.map((n, i) => (
           <g key={`s${i}`}>
             <rect x={0} y={srcPositions[i].y} width={nodeW} height={srcPositions[i].h} rx={2} fill={n.color ?? "var(--s-primary)"} opacity={0.8} />
             <text x={nodeW + 6} y={srcPositions[i].y + srcPositions[i].h / 2 + 3} fontSize={9} fill="var(--s-text-muted)" fontFamily="var(--s-font-mono, monospace)">
@@ -87,7 +90,7 @@ export const SankeyDiagram = forwardRef<SVGSVGElement, SankeyDiagramProps>(
           </g>
         ))}
 
-        {targets.map((n, i) => (
+        {safeTargets.map((n, i) => (
           <g key={`t${i}`}>
             <rect x={w - nodeW} y={tgtPositions[i].y} width={nodeW} height={tgtPositions[i].h} rx={2} fill={n.color ?? "var(--s-primary)"} opacity={0.8} />
             <text x={w - nodeW - 6} y={tgtPositions[i].y + tgtPositions[i].h / 2 + 3} fontSize={9} fill="var(--s-text-muted)" fontFamily="var(--s-font-mono, monospace)" textAnchor="end">

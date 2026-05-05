@@ -1282,13 +1282,15 @@ nav[data-fd-sidebar] {
 /* Fumadocs overrides — prose tables                                   */
 /* ================================================================== */
 
-[data-fd-doc] table {
+/* Scope these to prose tables only — never bleed into component previews
+   (Calendar, DataTable, etc.) which render their own table elements. */
+[data-fd-doc] table:not(.sigil-preview table):not([data-slot] table) {
   border-collapse: collapse;
   width: 100%;
   font-size: 0.875rem;
 }
 
-[data-fd-doc] th {
+[data-fd-doc] table:not(.sigil-preview table):not([data-slot] table) th {
   font-weight: 600;
   text-align: left;
   padding: 8px 12px;
@@ -1299,10 +1301,18 @@ nav[data-fd-sidebar] {
   color: var(--s-text-secondary);
 }
 
-[data-fd-doc] td {
+[data-fd-doc] table:not(.sigil-preview table):not([data-slot] table) td {
   padding: 8px 12px;
   border-bottom: 1px solid var(--s-border-muted);
   vertical-align: top;
+}
+
+/* Reset any accidentally-applied prose-table styling inside previews. */
+.sigil-preview td,
+.sigil-preview th {
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
 }
 
 /* ================================================================== */

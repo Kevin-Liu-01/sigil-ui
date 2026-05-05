@@ -37,7 +37,7 @@ export const FeatureSection = forwardRef<HTMLElement, FeatureSectionProps>(
           <SectionHeading label={label} title={title} description={description} align={align} />
 
           <div className={cn("grid grid-cols-1 gap-6", colMap[columns])}>
-            {features.map((feature, i) => (
+            {(features ?? []).map((feature, i) => (
               <div
                 key={i}
                 className={cn(

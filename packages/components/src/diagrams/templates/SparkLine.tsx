@@ -16,17 +16,18 @@ export interface SparkLineProps extends Omit<SVGAttributes<SVGSVGElement>, "widt
 
 export const SparkLine = forwardRef<SVGSVGElement, SparkLineProps>(
   function SparkLine({ data, width: w = 120, height: h = 32, color, filled = true, showEndDot = true, className, ...props }, ref) {
-    if (data.length < 2) return null;
+    const safeData = data ?? [];
+    if (safeData.length < 2) return null;
     const pad = 2;
     const dotR = 2.5;
     const plotW = w - pad * 2;
     const plotH = h - pad * 2;
-    const min = Math.min(...data);
-    const max = Math.max(...data);
+    const min = Math.min(...safeData);
+    const max = Math.max(...safeData);
     const range = max - min || 1;
 
-    const pts = data.map((v, i) => ({
-      x: pad + (i / (data.length - 1)) * plotW,
+    const pts = safeData.map((v, i) => ({
+      x: pad + (i / (safeData.length - 1)) * plotW,
       y: pad + plotH - ((v - min) / range) * plotH,
     }));
 

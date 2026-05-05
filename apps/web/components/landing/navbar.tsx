@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { NavbarLogo } from "@/components/landing/hero-logo-field";
-import { Star, PanelsTopLeft, Menu, X, Search, BookOpen, ArrowDown } from "lucide-react";
+import { Star, PanelsTopLeft, Menu, X, Search, BookOpen, ArrowDown, ChevronDown, ChevronUp } from "lucide-react";
 import { SigilThemeToggle } from "./theme-toggle";
 
 const NAV_LINKS = [
@@ -261,68 +261,122 @@ function useNpmDownloads(): Record<string, number> {
 }
 
 function ReleaseBanner() {
-  const [visible, setVisible] = useState(false);
+  const [mode, setMode] = useState<"hidden" | "expanded" | "collapsed">("hidden");
   const downloads = useNpmDownloads();
 
   useEffect(() => {
-    if (!localStorage.getItem(BANNER_DISMISS_KEY)) setVisible(true);
+    const stored = localStorage.getItem(BANNER_DISMISS_KEY);
+    setMode(stored ? "collapsed" : "expanded");
   }, []);
 
-  if (!visible) return null;
+  if (mode === "hidden") return null;
+  const collapsed = mode === "collapsed";
+
+  const collapse = () => {
+    setMode("collapsed");
+    localStorage.setItem(BANNER_DISMISS_KEY, "collapsed");
+  };
+  const expand = () => {
+    setMode("expanded");
+    localStorage.removeItem(BANNER_DISMISS_KEY);
+  };
 
   return (
-    <div className="w-full flex items-center justify-center">
-      <div
-        className="relative flex items-center justify-center gap-2.5 text-[12px] font-medium border-b border-[var(--s-grid-line-color,var(--s-border-muted))] overflow-hidden w-full"
-        style={{
-          maxWidth: "var(--s-content-max, 1200px)",
-          paddingInline: "var(--s-navbar-padding-x, 24px)",
-          height: "calc(var(--s-grid-cell, 48px) - 1px)",
-          boxSizing: "border-box",
-          background:
-            "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 6%, var(--s-background)), color-mix(in oklch, var(--s-primary) 10%, var(--s-background)), color-mix(in oklch, var(--s-primary) 6%, var(--s-background)))",
-          color: "var(--s-text)",
-        }}
-      >
-        <NpmIcon size={16} />
-        <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
-        <span className="text-[var(--s-text-muted)] hidden sm:inline">is live</span>
+    <div
+      className="w-full flex items-start justify-center overflow-hidden transition-[height] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+      style={{
+        height: collapsed ? "22px" : "calc(var(--s-grid-cell, 48px) - 1px)",
+      }}
+    >
+      <div className="relative w-full h-[calc(var(--s-grid-cell,48px)-1px)] flex items-center justify-center">
+        {/* ── Expanded full banner ── */}
+        <div
+          aria-hidden={collapsed}
+          className="absolute inset-0 flex items-center justify-center transition-[opacity,transform] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{
+            opacity: collapsed ? 0 : 1,
+            transform: collapsed ? "translateY(-6px)" : "translateY(0)",
+            pointerEvents: collapsed ? "none" : "auto",
+          }}
+        >
+          <div
+            className="relative flex items-center justify-center gap-2.5 text-[12px] font-medium border-b border-[var(--s-grid-line-color,var(--s-border-muted))] overflow-hidden w-full h-full"
+            style={{
+              maxWidth: "var(--s-content-max, 1200px)",
+              paddingInline: "var(--s-navbar-padding-x, 24px)",
+              boxSizing: "border-box",
+              background:
+                "linear-gradient(90deg, color-mix(in oklch, var(--s-primary) 6%, var(--s-background)), color-mix(in oklch, var(--s-primary) 10%, var(--s-background)), color-mix(in oklch, var(--s-primary) 6%, var(--s-background)))",
+              color: "var(--s-text)",
+            }}
+          >
+            <NpmIcon size={16} />
+            <span className="font-semibold text-[var(--s-text)]">Sigil UI v1.0.0</span>
+            <span className="text-[var(--s-text-muted)] hidden sm:inline">is live</span>
 
-        <div className="hidden md:block w-px h-3.5 bg-[var(--s-border)] mx-0.5" />
+            <div className="hidden md:block w-px h-3.5 bg-[var(--s-border)] mx-0.5" />
 
-        <div className="hidden md:flex items-center gap-1.5">
-          {PACKAGES.map((pkg) => {
-            const count = downloads[pkg.pkg];
-            return (
-              <a
-                key={pkg.label}
-                href={`https://www.npmjs.com/package/${pkg.pkg}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 h-[26px] pl-2.5 pr-2.5 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[11px] font-medium text-[var(--s-text)] no-underline hover:border-[var(--s-primary)] hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_25%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
-              >
-                <span className="font-[family-name:var(--s-font-mono)] tracking-[-0.02em]">{pkg.label}</span>
-                {count != null && (
-                  <span className="inline-flex items-center gap-0.5 font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] group-hover:text-[var(--s-primary)] tabular-nums transition-colors duration-[var(--s-duration-fast,150ms)]">
-                    <ArrowDown size={8} className="opacity-50" />
-                    {formatDownloads(count)}
-                  </span>
-                )}
-              </a>
-            );
-          })}
+            <div className="hidden md:flex items-center gap-1.5">
+              {PACKAGES.map((pkg) => {
+                const count = downloads[pkg.pkg];
+                return (
+                  <a
+                    key={pkg.label}
+                    href={`https://www.npmjs.com/package/${pkg.pkg}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    tabIndex={collapsed ? -1 : 0}
+                    className="group inline-flex items-center gap-1.5 h-[26px] pl-2.5 pr-2.5 rounded-[var(--s-radius-sm,6px)] border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] bg-[var(--s-surface)] text-[11px] font-medium text-[var(--s-text)] no-underline hover:border-[var(--s-primary)] hover:shadow-[0_0_0_1px_color-mix(in_oklch,var(--s-primary)_25%,transparent)] transition-all duration-[var(--s-duration-fast,150ms)]"
+                  >
+                    <span className="font-[family-name:var(--s-font-mono)] tracking-[-0.02em]">{pkg.label}</span>
+                    {count != null && (
+                      <span className="inline-flex items-center gap-0.5 font-[family-name:var(--s-font-mono)] text-[10px] text-[var(--s-text-muted)] group-hover:text-[var(--s-primary)] tabular-nums transition-colors duration-[var(--s-duration-fast,150ms)]">
+                        <ArrowDown size={8} className="opacity-50" />
+                        {formatDownloads(count)}
+                      </span>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+
+            <button
+              type="button"
+              onClick={collapse}
+              tabIndex={collapsed ? -1 : 0}
+              className="absolute right-2 top-1/2 -translate-y-1/2 inline-flex items-center justify-center h-6 w-6 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
+              aria-label="Collapse banner"
+            >
+              <ChevronUp size={13} />
+            </button>
+          </div>
         </div>
 
+        {/* ── Collapsed tab ── */}
         <button
           type="button"
-          onClick={() => {
-            setVisible(false);
-            localStorage.setItem(BANNER_DISMISS_KEY, "1");
+          onClick={expand}
+          aria-label="Expand release banner"
+          aria-hidden={!collapsed}
+          tabIndex={collapsed ? 0 : -1}
+          className="absolute top-0 left-1/2 inline-flex items-center gap-1.5 h-[20px] pl-2 pr-1.5 no-underline cursor-pointer border border-t-0 border-[var(--s-grid-line-color,var(--s-border-muted))] border-[style:var(--s-border-style,solid)] text-[var(--s-text)] hover:brightness-[1.08] active:brightness-95 transition-[opacity,transform,filter,background] duration-[380ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{
+            background:
+              "linear-gradient(180deg, color-mix(in oklch, var(--s-primary) 14%, var(--s-background)), color-mix(in oklch, var(--s-primary) 7%, var(--s-background)))",
+            borderBottomLeftRadius: "var(--s-radius-sm, 6px)",
+            borderBottomRightRadius: "var(--s-radius-sm, 6px)",
+            transform: collapsed
+              ? "translate(-50%, 0) scale(1)"
+              : "translate(-50%, -8px) scale(0.9)",
+            opacity: collapsed ? 1 : 0,
+            pointerEvents: collapsed ? "auto" : "none",
           }}
-          className="absolute right-2 top-1/2 -translate-y-1/2 p-1 rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
-          aria-label="Dismiss banner"
         >
-          <X size={12} />
+          <NpmIcon size={10} />
+          <span className="font-[family-name:var(--s-font-mono)] text-[10px] font-semibold tracking-[-0.01em] tabular-nums">
+            Sigil v1.0.0
+          </span>
+          <ChevronDown size={11} className="opacity-70" />
         </button>
       </div>
     </div>

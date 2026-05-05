@@ -12,7 +12,15 @@ import { SplitButton } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <SplitButton />
+  <SplitButton
+    items={[
+      { label: "Save and continue" },
+      { label: "Save as draft" },
+      { label: "Discard changes" },
+    ]}
+  >
+    Save
+  </SplitButton>
 </ComponentPreview>
 
 ## Usage

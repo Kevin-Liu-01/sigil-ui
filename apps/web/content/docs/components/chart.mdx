@@ -19,6 +19,20 @@ npx @sigil-ui/cli add chart
 import { ChartContainer, ChartTooltip, ChartLegend } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <BarChart
+    groups={[
+      { label: "Mon", bars: [{ value: 14, color: "var(--s-primary)" }] },
+      { label: "Tue", bars: [{ value: 22, color: "var(--s-primary)" }] },
+      { label: "Wed", bars: [{ value: 18, color: "var(--s-primary)" }] },
+      { label: "Thu", bars: [{ value: 30, color: "var(--s-primary)" }] },
+      { label: "Fri", bars: [{ value: 26, color: "var(--s-primary)" }] },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 Wrap any Recharts, Chart.js, or custom SVG chart. The container injects token colors as CSS variables scoped to the chart area.

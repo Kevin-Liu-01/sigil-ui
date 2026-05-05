@@ -9,6 +9,19 @@ description: A step-by-step pipeline visualization with numbered nodes and anima
 import { PipelineDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <PipelineDiagram
+    steps={[
+      { id: "design", label: "DESIGN.md",    description: "Source" },
+      { id: "compile", label: "compile",     description: "tokens.ts" },
+      { id: "css",    label: "CSS vars",     description: "--s-*" },
+      { id: "render", label: "Components",   description: "consumers" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

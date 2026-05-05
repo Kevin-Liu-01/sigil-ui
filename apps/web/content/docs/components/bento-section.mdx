@@ -9,6 +9,21 @@ description: Bento grid layout with configurable cell spans for feature showcase
 import { BentoSection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <BentoSection
+    label="Platform"
+    title="Everything in one place"
+    cells={[
+      { title: "Analytics", description: "Real-time insights",   span: "2x1" },
+      { title: "Security",  description: "Enterprise-grade",     span: "1x1" },
+      { title: "API",       description: "REST and GraphQL",     span: "1x1" },
+      { title: "Dashboard", description: "Custom views",         span: "2x1" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

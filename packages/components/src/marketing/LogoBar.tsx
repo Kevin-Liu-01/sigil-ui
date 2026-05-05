@@ -29,7 +29,7 @@ export const LogoBar = forwardRef<HTMLDivElement, LogoBarProps>(function LogoBar
       )}
       {...rest}
     >
-      {logos.map((logo) => (
+      {(logos ?? []).map((logo) => (
         <img
           key={logo.src}
           src={logo.src}

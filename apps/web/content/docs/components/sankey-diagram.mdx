@@ -9,6 +9,26 @@ description: An SVG Sankey flow diagram showing weighted connections between sou
 import { SankeyDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <SankeyDiagram
+    sources={[
+      { id: "tokens",  label: "Tokens",  value: 60 },
+      { id: "presets", label: "Presets", value: 40 },
+    ]}
+    targets={[
+      { id: "ui",     label: "UI",     value: 70 },
+      { id: "themes", label: "Themes", value: 30 },
+    ]}
+    links={[
+      { source: "tokens",  target: "ui",     value: 60 },
+      { source: "presets", target: "ui",     value: 10 },
+      { source: "presets", target: "themes", value: 30 },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

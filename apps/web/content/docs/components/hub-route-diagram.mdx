@@ -9,6 +9,34 @@ description: A source-to-hub routing diagram that fans out to categorized left a
 import { HubRouteDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <HubRouteDiagram
+    source={{ label: "Edge" }}
+    hub={{
+      label: "API gateway",
+      layers: [
+        { id: "auth", label: "Auth" },
+        { id: "rate", label: "Rate limit" },
+        { id: "log",  label: "Audit log" },
+      ],
+    }}
+    leftLabel="Inputs"
+    leftTargets={[
+      { id: "web", label: "Web" },
+      { id: "mob", label: "Mobile" },
+      { id: "cli", label: "CLI" },
+    ]}
+    rightLabel="Services"
+    rightTargets={[
+      { id: "billing",  label: "Billing" },
+      { id: "notify",   label: "Notifications" },
+      { id: "analytics", label: "Analytics" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

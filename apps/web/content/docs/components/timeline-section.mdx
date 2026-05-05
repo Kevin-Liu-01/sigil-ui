@@ -9,6 +9,20 @@ description: Vertical timeline with date, title, description, and optional icon 
 import { TimelineSection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <TimelineSection
+    label="Roadmap"
+    title="What's shipping next"
+    events={[
+      { date: "Q2 2026", title: "Token diff",       description: "Visualize preset deltas." },
+      { date: "Q3 2026", title: "Design extract",   description: "URL → DESIGN.md." },
+      { date: "Q4 2026", title: "Headless cores",   description: "All overlays portable." },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

@@ -9,6 +9,21 @@ description: Tabbed code block section for showcasing usage examples or config f
 import { CodeShowcaseSection } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <CodeShowcaseSection
+    label="Quick start"
+    title="Get started in seconds"
+    description="Copy, paste, ship."
+    tabs={[
+      { label: "npm",  language: "bash", code: "npm install @sigil-ui/components" },
+      { label: "pnpm", language: "bash", code: "pnpm add @sigil-ui/components" },
+      { label: "yarn", language: "bash", code: "yarn add @sigil-ui/components" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

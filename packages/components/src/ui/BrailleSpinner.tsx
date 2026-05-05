@@ -143,7 +143,7 @@ export function BrailleSpinner({
   label,
   className,
 }: BrailleSpinnerProps) {
-  const spinner = SPINNERS[name];
+  const spinner = SPINNERS[name] ?? SPINNERS.orbit;
   const [frameIndex, setFrameIndex] = useState(0);
 
   useEffect(() => {

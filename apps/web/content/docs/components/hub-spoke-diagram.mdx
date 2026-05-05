@@ -9,6 +9,20 @@ description: A hub-and-spoke layout with a central node connected to left and ri
 import { HubSpokeDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <HubSpokeDiagram
+    hub={{ id: "core", label: "Core" }}
+    spokes={[
+      { id: "a", label: "Tokens" },
+      { id: "b", label: "Components" },
+      { id: "c", label: "Presets" },
+      { id: "d", label: "CLI" },
+    ]}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

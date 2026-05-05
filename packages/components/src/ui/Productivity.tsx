@@ -25,16 +25,17 @@ export const CodeTabs = forwardRef<HTMLDivElement, CodeTabsProps>(function CodeT
   { tabs, defaultValue, className, ...props },
   ref,
 ) {
-  if (tabs.length === 0) {
+  const safeTabs = tabs ?? [];
+  if (safeTabs.length === 0) {
     return <div ref={ref} className={cn("text-sm text-[var(--s-text-muted)]", className)} {...props}>No code tabs available.</div>;
   }
   return (
     <div ref={ref} className={className} {...props}>
-      <Tabs defaultValue={defaultValue ?? tabs[0]?.value}>
+      <Tabs defaultValue={defaultValue ?? safeTabs[0]?.value}>
         <TabsList>
-          {tabs.map((tab) => <TabsTrigger key={tab.value} value={tab.value}>{tab.label}</TabsTrigger>)}
+          {safeTabs.map((tab) => <TabsTrigger key={tab.value} value={tab.value}>{tab.label}</TabsTrigger>)}
         </TabsList>
-        {tabs.map((tab) => (
+        {safeTabs.map((tab) => (
           <TabsContent key={tab.value} value={tab.value}>
             <CodeBlock code={tab.code} language={tab.language} />
           </TabsContent>

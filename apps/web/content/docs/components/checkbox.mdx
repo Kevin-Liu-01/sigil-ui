@@ -12,7 +12,11 @@ import { Checkbox } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <Checkbox />
+  <div className="flex flex-col gap-3">
+    <Checkbox label="Subscribe to product updates" defaultChecked />
+    <Checkbox label="Send weekly digest" />
+    <Checkbox label="Beta features" disabled />
+  </div>
 </ComponentPreview>
 
 ## Usage

@@ -12,7 +12,11 @@ import { Switch } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <Switch />
+  <div className="flex flex-col gap-3">
+    <Switch label="Email notifications" defaultChecked />
+    <Switch label="Push notifications" />
+    <Switch label="SMS alerts" disabled />
+  </div>
 </ComponentPreview>
 
 ## Usage

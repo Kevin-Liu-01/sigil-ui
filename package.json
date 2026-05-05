@@ -10,11 +10,13 @@
     "typecheck": "turbo typecheck",
     "audit:contrast": "tsx scripts/audit-contrast.ts",
     "audit:sigil": "node scripts/audit-sigil.mjs",
+    "audit:components": "node scripts/audit-components.mjs",
     "smoke:create-app": "node scripts/smoke-create-sigil-app.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "^2.31.0",
     "culori": "^4.0.2",
+    "playwright": "^1.59.1",
     "tsx": "^4.21.0",
     "turbo": "^2.4.0",
     "typescript": "^5.8.0"

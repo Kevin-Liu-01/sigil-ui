@@ -25,6 +25,10 @@ export interface HubRouteDiagramProps extends HTMLAttributes<HTMLDivElement> {
 
 export const HubRouteDiagram = forwardRef<HTMLDivElement, HubRouteDiagramProps>(
   function HubRouteDiagram({ source, hub, leftTargets, rightTargets, leftLabel, rightLabel, className, ...props }, ref) {
+    const safeSource = source ?? { label: "Source" };
+    const safeHub = hub ?? { label: "Hub", layers: [] };
+    const safeLeft = leftTargets ?? [];
+    const safeRight = rightTargets ?? [];
     return (
       <div
         ref={ref}
@@ -40,16 +44,16 @@ export const HubRouteDiagram = forwardRef<HTMLDivElement, HubRouteDiagramProps>(
         <div className="flex items-center justify-between gap-4">
           <div className="flex flex-col items-center gap-1 shrink-0">
             <div className="flex items-center gap-2 px-3 py-2 rounded-[var(--s-radius-md,0px)] border border-[color:var(--s-border)] bg-[var(--s-background)] text-sm font-medium text-[var(--s-text)] [&_svg]:size-4">
-              {source.icon}{source.label}
+              {safeSource.icon}{safeSource.label}
             </div>
           </div>
 
           <svg width="40" height="2" className="shrink-0" aria-hidden><line x1="0" y1="1" x2="40" y2="1" stroke="var(--s-border-strong)" strokeWidth="1.5" strokeDasharray="6 4" /></svg>
 
           <div className="flex-1 max-w-xs rounded-[var(--s-radius-lg,0px)] border-2 border-[color:var(--s-primary)] bg-[var(--s-primary-muted)] p-4">
-            <div className="text-xs font-bold text-[var(--s-primary)] mb-3 text-center font-[family-name:var(--s-font-mono)] uppercase tracking-wider">{hub.label}</div>
+            <div className="text-xs font-bold text-[var(--s-primary)] mb-3 text-center font-[family-name:var(--s-font-mono)] uppercase tracking-wider">{safeHub.label}</div>
             <div className="grid grid-cols-2 gap-2">
-              {hub.layers.map((layer, i) => (
+              {safeHub.layers.map((layer, i) => (
                 <div key={i} className="flex items-center gap-1.5 px-2 py-1.5 rounded-[var(--s-radius-sm,0px)] bg-[var(--s-background)] border border-[color:var(--s-border-muted)] text-[10px] text-[var(--s-text)] [&_svg]:size-3">
                   {layer.icon}<span className="font-medium">{layer.label}</span>
                 </div>
@@ -65,7 +69,7 @@ export const HubRouteDiagram = forwardRef<HTMLDivElement, HubRouteDiagramProps>(
           <div className="flex flex-col gap-3">
             {leftLabel && <div className="text-[9px] font-semibold uppercase tracking-wider text-[var(--s-text-muted)] font-[family-name:var(--s-font-mono)]">{leftLabel}</div>}
             <div className="flex flex-wrap gap-1.5">
-              {leftTargets.map((t, i) => (
+              {safeLeft.map((t, i) => (
                 <div key={i} className="flex items-center gap-1 px-2 py-1 rounded-[var(--s-radius-sm,0px)] border border-[color:var(--s-border-muted)] bg-[var(--s-background)] text-[10px] text-[var(--s-text)] [&_svg]:size-3">
                   {t.icon}{t.label}
                 </div>
@@ -73,7 +77,7 @@ export const HubRouteDiagram = forwardRef<HTMLDivElement, HubRouteDiagramProps>(
             </div>
             {rightLabel && <div className="text-[9px] font-semibold uppercase tracking-wider text-[var(--s-text-muted)] font-[family-name:var(--s-font-mono)] mt-2">{rightLabel}</div>}
             <div className="flex flex-wrap gap-1.5">
-              {rightTargets.map((t, i) => (
+              {safeRight.map((t, i) => (
                 <div key={i} className="flex items-center gap-1 px-2 py-1 rounded-[var(--s-radius-sm,0px)] border border-[color:var(--s-border-muted)] bg-[var(--s-background)] text-[10px] text-[var(--s-text)] [&_svg]:size-3">
                   {t.icon}{t.label}
                 </div>

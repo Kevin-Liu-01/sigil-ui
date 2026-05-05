@@ -9,6 +9,17 @@ description: Renders Mermaid chart syntax as an SVG diagram with dark and defaul
 import { MermaidDiagram } from "@sigil-ui/components";
 ```
 
+## Preview
+
+<ComponentPreview vertical>
+  <MermaidDiagram
+    chart={`graph LR
+      A[Tokens] --> B[CSS]
+      B --> C[Components]
+      C --> D[App]`}
+  />
+</ComponentPreview>
+
 ## Usage
 
 ```tsx

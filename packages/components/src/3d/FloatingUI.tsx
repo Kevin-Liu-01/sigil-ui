@@ -23,6 +23,7 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
   { layers, offset = 20, shadowDepth = "md", className, style, ...rest },
   ref,
 ) {
+  const safeLayers = layers ?? [];
   return (
     <div
       ref={ref}
@@ -30,12 +31,12 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
       className={cn("relative", className)}
       style={{
         width: "100%",
-        minHeight: `${(layers.length - 1) * offset + 60}px`,
+        minHeight: `${(Math.max(safeLayers.length, 1) - 1) * offset + 60}px`,
         ...style,
       }}
       {...rest}
     >
-      {layers.map((layer, i) => (
+      {safeLayers.map((layer, i) => (
         <div
           key={i}
           className={cn(
@@ -45,7 +46,7 @@ export const FloatingUI = forwardRef<HTMLDivElement, FloatingUIProps>(function F
           )}
           style={{
             top: `${i * offset}px`,
-            zIndex: layers.length - i,
+            zIndex: safeLayers.length - i,
           }}
         >
           {layer}

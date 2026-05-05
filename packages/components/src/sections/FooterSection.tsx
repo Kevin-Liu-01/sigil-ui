@@ -19,6 +19,7 @@ export interface FooterSectionProps extends HTMLAttributes<HTMLElement> {
 
 export const FooterSection = forwardRef<HTMLElement, FooterSectionProps>(
   function FooterSection({ logo, tagline, groups, socials, copyright, legal, className, ...props }, ref) {
+    const safeGroups = groups ?? [];
     return (
       <footer
         ref={ref}
@@ -43,7 +44,7 @@ export const FooterSection = forwardRef<HTMLElement, FooterSectionProps>(
               )}
             </div>
 
-            {groups.map((group, i) => (
+            {safeGroups.map((group, i) => (
               <div key={i}>
                 <h3 className="text-[length:var(--s-footer-group-title-size,0.875rem)] font-[var(--s-footer-group-title-weight,600)] text-[var(--s-text)] mb-3">{group.title}</h3>
                 <ul className="flex flex-col gap-[var(--s-footer-link-gap,8px)]">

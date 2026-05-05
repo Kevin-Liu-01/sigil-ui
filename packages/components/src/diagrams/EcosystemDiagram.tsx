@@ -16,6 +16,7 @@ export interface EcosystemDiagramProps extends HTMLAttributes<HTMLDivElement> {
 
 export const EcosystemDiagram = forwardRef<HTMLDivElement, EcosystemDiagramProps>(
   function EcosystemDiagram({ center, ring, size = 280, className, ...props }, ref) {
+    const safeRing = ring ?? [];
     const radius = size / 2 - 40;
     const cx = size / 2;
     const cy = size / 2;
@@ -36,8 +37,8 @@ export const EcosystemDiagram = forwardRef<HTMLDivElement, EcosystemDiagramProps
           aria-hidden
         >
           <circle cx={cx} cy={cy} r={radius} fill="none" stroke="var(--s-border-muted)" strokeWidth="1" strokeDasharray="4 4" />
-          {ring.map((_, i) => {
-            const angle = (i / (ring.length || 1)) * Math.PI * 2 - Math.PI / 2;
+          {safeRing.map((_, i) => {
+            const angle = (i / (safeRing.length || 1)) * Math.PI * 2 - Math.PI / 2;
             const nx = cx + radius * Math.cos(angle);
             const ny = cy + radius * Math.sin(angle);
             return (
@@ -61,8 +62,8 @@ export const EcosystemDiagram = forwardRef<HTMLDivElement, EcosystemDiagramProps
           {center.sublabel && <span className="text-[9px] text-[var(--s-text-muted)]">{center.sublabel}</span>}
         </div>
 
-        {ring.map((node, i) => {
-          const angle = (i / (ring.length || 1)) * Math.PI * 2 - Math.PI / 2;
+        {safeRing.map((node, i) => {
+          const angle = (i / (safeRing.length || 1)) * Math.PI * 2 - Math.PI / 2;
           const nx = cx + radius * Math.cos(angle);
           const ny = cy + radius * Math.sin(angle);
           return (

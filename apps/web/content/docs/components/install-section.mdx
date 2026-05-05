@@ -12,7 +12,15 @@ import { InstallSection } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <InstallSection package="@sigil-ui/components" />
+  <InstallSection
+    label="Get started"
+    title="Install in seconds"
+    commands={[
+      { label: "npm",  command: "npm install @sigil-ui/components" },
+      { label: "pnpm", command: "pnpm add @sigil-ui/components" },
+      { label: "yarn", command: "yarn add @sigil-ui/components" },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage

@@ -12,7 +12,12 @@ import { FeatureGrid } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <FeatureGrid items={[{ title: "Fast", description: "Optimized for performance" }, { title: "Accessible", description: "WCAG 2.1 compliant" }, { title: "Themeable", description: "44 presets included" }]} />
+  <FeatureGrid
+    rows={[
+      { eyebrow: "Tokens", title: "Single source of truth", description: "Every value lives in one DESIGN.md you can read and edit." },
+      { eyebrow: "Components", title: "350+ token-driven primitives", description: "Buttons, cards, charts, layouts. All read from var(--s-*)." },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage

@@ -12,7 +12,16 @@ import { StatsSection } from "@sigil-ui/components";
 ## Preview
 
 <ComponentPreview>
-  <StatsSection items={[{ label: "Components", value: "350+" }, { label: "Presets", value: "44" }, { label: "Tokens", value: "519" }]} />
+  <StatsSection
+    label="By the numbers"
+    title="Sigil at a glance"
+    stats={[
+      { value: "350+", label: "Components" },
+      { value: "519", label: "Design tokens" },
+      { value: "46", label: "Presets" },
+      { value: "33", label: "Token categories" },
+    ]}
+  />
 </ComponentPreview>
 
 ## Usage
