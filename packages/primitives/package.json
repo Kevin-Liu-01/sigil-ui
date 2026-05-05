@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/primitives",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Headless behavior primitives for Sigil UI — Radix for core components, Base UI for extended primitives",
   "license": "MIT",
   "type": "module",

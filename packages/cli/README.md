@@ -208,11 +208,14 @@ The generated `.sigil/skills/` bundle includes:
 |-------|---------|
 | `sigil-tokens` | Editing colors, typography, spacing, shadows, motion, and token CSS |
 | `sigil-preset` | Creating or choosing full visual presets |
+| `sigil-design` | Generating, compiling, or auditing a unified `DESIGN.md` spec |
+| `sigil-messaging` | Writing or reviewing copy, READMEs, marketing, and stat counts |
 | `sigil-component` | Creating, modifying, reviewing, or registering components |
 | `sigil-layout` | Composing sections, grids, rails, and app shells |
 | `sigil-playbook` | Building complete pages in the Sigil aesthetic |
 | `sigil-migration` | Migrating from shadcn/ui or another design system |
 | `sigil-polish` | Typography, surfaces, animations, performance, and interaction polish |
+| `sigil-audit` | Running browser + static audits across the component library |
 
 ## Configuration (`sigil.config.ts`)
 

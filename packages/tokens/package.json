@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/tokens",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "519 design tokens that compile from markdown to CSS custom properties, Tailwind v4 config, and TypeScript types",
   "license": "MIT",
   "type": "module",

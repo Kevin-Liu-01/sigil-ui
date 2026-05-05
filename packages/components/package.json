@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/components",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "350+ React components styled entirely through design tokens — every color, font, and radius reads from CSS custom properties",
   "license": "MIT",
   "type": "module",

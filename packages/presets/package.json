@@ -1,6 +1,6 @@
 {
   "name": "@sigil-ui/presets",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "46 curated presets for Sigil UI — each rewrites all 519 tokens to create a distinct visual identity with matched font pairings",
   "license": "MIT",
   "type": "module",

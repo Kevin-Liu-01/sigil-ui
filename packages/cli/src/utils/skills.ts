@@ -26,6 +26,20 @@ export const SIGIL_SKILLS: SigilSkill[] = [
     files: ["SKILL.md"],
   },
   {
+    id: "sigil-design",
+    label: "Sigil Design",
+    task: "Generate, compile, or audit a DESIGN.md spec",
+    trigger: "DESIGN.md, design extraction, compile to CSS/Tailwind/W3C JSON",
+    files: ["SKILL.md"],
+  },
+  {
+    id: "sigil-messaging",
+    label: "Sigil Messaging",
+    task: "Write or update copy, READMEs, marketing, and stats",
+    trigger: "README, docs copy, llms.txt, marketing pages, positioning",
+    files: ["SKILL.md"],
+  },
+  {
     id: "sigil-component",
     label: "Sigil Component",
     task: "Create, modify, or review components",
@@ -59,6 +73,13 @@ export const SIGIL_SKILLS: SigilSkill[] = [
     task: "Polish visual details and interactions",
     trigger: "typography, surfaces, animations, performance, micro-interactions",
     files: ["SKILL.md", "typography.md", "surfaces.md", "animations.md", "performance.md"],
+  },
+  {
+    id: "sigil-audit",
+    label: "Sigil Audit",
+    task: "Run browser + static audits over the component library",
+    trigger: "audit components, visual regression, doc-vs-showcase reconciliation",
+    files: ["SKILL.md"],
   },
 ];
 
