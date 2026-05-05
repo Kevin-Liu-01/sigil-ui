@@ -305,6 +305,8 @@ When `sigil init` or `create-sigil-app` runs, it generates `.sigil/AGENTS.md` in
 
 Read the relevant skill file before starting a task:
 
+### Sigil Skills (in-repo)
+
 | Task | Skill File |
 |------|-----------|
 | Edit/extend tokens | `skills/sigil-tokens/SKILL.md` |
@@ -316,6 +318,33 @@ Read the relevant skill file before starting a task:
 | Build pages (10 composition rules) | `skills/sigil-playbook/SKILL.md` |
 | Migrate from shadcn | `skills/sigil-migration/SKILL.md` |
 | Polish UI details | `skills/sigil-polish/SKILL.md` |
+
+### Taste Skills (user-level, anti-slop framework)
+
+Imported from [github.com/Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill). These are user-level Cursor skills at `~/.cursor/skills/taste-*/SKILL.md` that auto-trigger based on the task description. The core enforcement rule is `.cursor/rules/taste-enforcement.mdc` (always applied).
+
+| Task | Skill |
+|------|-------|
+| General anti-slop frontend (default) | `taste-core` |
+| GPT/Codex stricter variant (Python RNG, AIDA, GSAP) | `taste-gpt` |
+| Image-first design then implementation | `taste-image-to-code` |
+| Audit existing UI for generic patterns + targeted fixes | `taste-redesign` |
+| Calm, expensive, double-bezel cards, spring physics | `taste-soft` |
+| Output completeness (ban placeholders/truncation) | `taste-output` |
+| Editorial monochrome, muted pastels, bento grids | `taste-minimalist` |
+| Swiss typography, CRT terminals, rigid grids | `taste-brutalist` |
+| Generate Google Stitch-compatible DESIGN.md | `taste-stitch` |
+| Generate web section reference images | `taste-imagegen-web` |
+| Generate mobile screen + flow images | `taste-imagegen-mobile` |
+| Generate brand-kit overview images (logos, palette, mockups) | `taste-brandkit` |
+
+**Selection guide for visual-style skills:**
+- `taste-soft` -> default for premium SaaS, marketing pages, Linear/Vercel-tier polish
+- `taste-minimalist` -> Notion/workspace-style document UI, pure editorial
+- `taste-brutalist` -> data dashboards, terminals, technical/declassified-blueprint feel
+- `taste-core` -> any frontend task where no specific style is requested
+
+When in doubt, the Sigil-specific design system rules in `.cursor/rules/sigil-design-system.mdc` and `.cursor/rules/taste-enforcement.mdc` take precedence over individual taste skills, since they enforce the token consumption pattern (`var(--s-*)`) Sigil requires.
 
 ## Build System
 

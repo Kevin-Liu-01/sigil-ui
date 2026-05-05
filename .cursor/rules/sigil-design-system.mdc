@@ -3,6 +3,8 @@
 > Imported from Kevin's wiki and the Dedalus design language. These rules are non-negotiable when writing or reviewing Sigil code.
 >
 > **Full references:** [style/design.md](../../style/design.md) (motion guide) | [style/ux-principles.md](../../style/ux-principles.md) (product UX) | [style/style.md](../../style/style.md) (engineering philosophy) | [skills/sigil-polish/](../../skills/sigil-polish/SKILL.md) (interface polish skill with typography, surfaces, animations, performance deep-dives)
+>
+> **Anti-slop enforcement:** Also read [taste-enforcement.mdc](./taste-enforcement.mdc) for banned AI visual patterns, variance dials, content quality rules, performance guardrails, and output completeness requirements. The [taste-skills-index.mdc](./taste-skills-index.mdc) catalogs the 12 user-level taste skills (taste-core, taste-soft, taste-minimalist, taste-brutalist, etc.) that auto-trigger based on task description.
 
 ## Custom Preset Rule (MANDATORY — Enforced Before All Other Rules)
 
@@ -166,10 +168,19 @@ The Sigil aesthetic: structural visibility inspired by engineering instruments. 
 
 - Random gradients with no material logic
 - Generic centered hero + dashboard + blur blobs
+- 3 equal cards in a row for feature sections (use bento, zig-zag, or asymmetric grid)
 - Too many font families (max: the triad)
 - Pill buttons everywhere with no hierarchy
 - Glassmorphism on white for no reason
 - Fake 3D from stacking drop shadows
+- Inter / Roboto / Open Sans as primary typeface for a new visual language
+- Pure `#000000` for backgrounds or text
+- AI copywriting clichés: "Elevate", "Seamless", "Unleash", "Next-Gen", "Delve"
+- Generic placeholder content: "John Doe", "Acme Corp", lorem ipsum, `99.99%`
+- `h-screen` for full-height sections (use `min-h-[100dvh]`)
+- Emojis in code, markup, headings, or alt text
+
+> See [taste-enforcement.mdc](./taste-enforcement.mdc) for the complete banned-patterns list with variance dials, creative arsenal, and performance guardrails.
 
 ## React Rules
 
@@ -195,18 +206,39 @@ The Sigil aesthetic: structural visibility inspired by engineering instruments. 
 
 Before shipping any component or page:
 
+### Token & System
 - [ ] Colors use tokens, not hardcoded hex
 - [ ] Spacing is on the 4/8px grid
 - [ ] Nested radii are concentric
 - [ ] Shadows use `var(--s-shadow-*)`, not Tailwind classes
 - [ ] Durations use `var(--s-duration-*)`, not hardcoded ms
 - [ ] Border styles use `var(--s-border-style)` token
+- [ ] Component reads from preset tokens, not hardcoded values
+
+### Typography & Content
 - [ ] Headings use balanced wrapping (`text-wrap: balance`)
 - [ ] Numbers that update are tabular (`tabular-nums`)
+- [ ] No AI copywriting clichés in visible text
+- [ ] No generic names, fake round numbers, or lorem ipsum
+- [ ] No emojis in code, markup, or content
+
+### Visual Quality
 - [ ] Icons are optically aligned
 - [ ] Images have subtle edges when needed
+- [ ] No banned layout patterns (centered hero + blur, 3-card equal rows)
+- [ ] Mobile collapse guaranteed for asymmetric layouts
+
+### Motion & Performance
 - [ ] Interactive animations can be interrupted
 - [ ] Enters are staggered, exits are softer
 - [ ] No animation without a purpose
 - [ ] High-frequency interactions have zero animation
-- [ ] Component reads from preset tokens, not hardcoded values
+- [ ] Spring physics for interactive elements (no linear easing)
+- [ ] Perpetual animations isolated in `React.memo` leaf components
+- [ ] No `h-screen` — only `min-h-[100dvh]`
+
+### States
+- [ ] Loading state with skeletal loaders
+- [ ] Empty state with guidance
+- [ ] Error state with inline reporting
+- [ ] Active/pressed tactile feedback (`scale-[0.98]` or `-translate-y-[1px]`)
