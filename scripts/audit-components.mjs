@@ -226,6 +226,16 @@ async function auditPage(ctx, slug, outDir, attempt = 0) {
       flags.appError = /Application error|This page is not (yet )?available|Internal Server Error/i.test(body);
       flags.hydrationFail = /Hydration failed|did not match|Text content does not match/i.test(body);
       flags.missingComponent = /Element type is invalid|is not defined/i.test(body);
+      // Static DOM check: a <button> nesting a <button> is invalid HTML
+      // and triggers React's "<button> cannot be a descendant of <button>"
+      // hydration warning. Catch it before runtime by walking the DOM.
+      flags.nestedButton = false;
+      for (const btn of document.querySelectorAll("button")) {
+        if (btn.querySelector("button")) {
+          flags.nestedButton = true;
+          break;
+        }
+      }
       return flags;
     });
     result.flags = catastrophic;
@@ -284,6 +294,9 @@ function deriveFindings(result, staticInfo) {
   }
   if (result.flags?.missingComponent) {
     findings.push({ id: "missing-component", severity: "error", note: "Element type is invalid / undefined" });
+  }
+  if (result.flags?.nestedButton) {
+    findings.push({ id: "nested-button", severity: "error", note: "<button> nested inside <button> — invalid HTML, will trigger hydration warning" });
   }
   for (const err of result.pageErrors ?? []) {
     findings.push({ id: "page-error", severity: "error", note: err });

@@ -2269,7 +2269,12 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "FeatureCard", category: "UI", variants: 1, span: 2, render: () => (
-    <FeatureCard className="w-full" title="Feature" description="Feature summary card" />
+    <FeatureCard
+      className="w-full h-full"
+      icon={<Zap size={20} />}
+      title="Feature"
+      description="Token-driven summary card for landing-page feature grids."
+    />
   )},
   { name: "PricingCard", category: "UI", variants: 1, span: 2, render: () => (
     <PricingCard
@@ -2410,8 +2415,10 @@ export function ComponentShowcase() {
                       }}
                     >
                       <div
-                        className={`flex min-w-0 flex-1 items-center justify-center w-full overflow-visible [&>*]:max-w-full ${
-                          cell.span && cell.span > 1 ? "[&>*]:w-full" : ""
+                        className={`flex min-w-0 flex-1 justify-center w-full overflow-visible [&>*]:max-w-full ${
+                          cell.span && cell.span > 1
+                            ? "items-stretch [&>*]:w-full [&>*]:h-full"
+                            : "items-center"
                         }`}
                       >
                         {cell.render()}

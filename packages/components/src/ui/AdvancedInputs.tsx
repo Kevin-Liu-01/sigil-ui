@@ -134,21 +134,51 @@ export const MultiSelect = forwardRef<HTMLButtonElement, MultiSelectProps>(funct
         </button>
       </PopoverTrigger>
       <PopoverContent align="start" className="w-[var(--radix-popover-trigger-width)] p-1">
-        {options.map((option) => (
-          <button
-            key={option.value}
-            type="button"
-            disabled={option.disabled}
-            onClick={() => toggle(option.value)}
-            className={cn(
-              "flex w-full items-center gap-2 rounded-[var(--s-radius-sm,4px)] px-2 py-2 text-left text-sm",
-              "hover:bg-[var(--s-surface)] disabled:opacity-50",
-            )}
-          >
-            <Checkbox checked={currentValue.includes(option.value)} tabIndex={-1} aria-hidden />
-            {option.label}
-          </button>
-        ))}
+        {options.map((option) => {
+          const isChecked = currentValue.includes(option.value);
+          return (
+            <button
+              key={option.value}
+              type="button"
+              role="option"
+              aria-selected={isChecked}
+              disabled={option.disabled}
+              onClick={() => toggle(option.value)}
+              className={cn(
+                "flex w-full items-center gap-2 rounded-[var(--s-radius-sm,4px)] px-2 py-2 text-left text-sm",
+                "hover:bg-[var(--s-surface)] disabled:opacity-50",
+              )}
+            >
+              {/* Visual checkbox indicator. Cannot be a real Checkbox here
+                  because that renders a <button> which can't nest inside
+                  this row button. */}
+              <span
+                aria-hidden
+                data-state={isChecked ? "checked" : "unchecked"}
+                className={cn(
+                  "inline-flex size-4 shrink-0 items-center justify-center",
+                  "rounded-[var(--s-radius-sm,3px)]",
+                  "border border-[style:var(--s-border-style,solid)] border-[color:var(--s-border)]",
+                  "bg-[var(--s-background)] text-[var(--s-primary-contrast)]",
+                  "data-[state=checked]:bg-[var(--s-primary)] data-[state=checked]:border-[color:var(--s-primary)]",
+                )}
+              >
+                {isChecked ? (
+                  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden>
+                    <path
+                      d="M2.5 6l2.5 2.5 4.5-5"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : null}
+              </span>
+              {option.label}
+            </button>
+          );
+        })}
       </PopoverContent>
     </Popover>
   );

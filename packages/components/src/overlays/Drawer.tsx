@@ -2,8 +2,10 @@
 
 import {
   forwardRef,
+  isValidElement,
   type ComponentPropsWithoutRef,
   type HTMLAttributes,
+  type ReactElement,
 } from "react";
 import { Drawer as DrawerBase } from "@base-ui/react/drawer";
 import { cn } from "../utils";
@@ -14,8 +16,42 @@ export function Drawer(props: DrawerProps) {
   return <DrawerBase.Root {...props} />;
 }
 
-export const DrawerTrigger = DrawerBase.Trigger;
-export const DrawerClose = DrawerBase.Close;
+/**
+ * Drawer trigger. Accepts the Radix-style `asChild` prop to merge into the
+ * provided child element instead of rendering its own <button>. Without
+ * this, Base UI's Drawer.Trigger always wraps children in a <button>,
+ * which produces invalid <button>-in-<button> DOM when combined with our
+ * <Button> component.
+ */
+type DrawerTriggerProps = ComponentPropsWithoutRef<typeof DrawerBase.Trigger> & {
+  asChild?: boolean;
+};
+
+export function DrawerTrigger({ asChild, render, children, ...props }: DrawerTriggerProps) {
+  if (asChild && isValidElement(children)) {
+    return <DrawerBase.Trigger render={children as ReactElement} {...props} />;
+  }
+  return (
+    <DrawerBase.Trigger render={render} {...props}>
+      {children}
+    </DrawerBase.Trigger>
+  );
+}
+
+type DrawerCloseProps = ComponentPropsWithoutRef<typeof DrawerBase.Close> & {
+  asChild?: boolean;
+};
+
+export function DrawerClose({ asChild, render, children, ...props }: DrawerCloseProps) {
+  if (asChild && isValidElement(children)) {
+    return <DrawerBase.Close render={children as ReactElement} {...props} />;
+  }
+  return (
+    <DrawerBase.Close render={render} {...props}>
+      {children}
+    </DrawerBase.Close>
+  );
+}
 
 export const DrawerContent = forwardRef<
   HTMLDivElement,
