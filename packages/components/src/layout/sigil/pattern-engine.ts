@@ -122,22 +122,43 @@ function getBrickLines(
 }
 
 /**
- * Snap a desired period to the largest integer divisor of `cell` that's
- * `<= target`. This guarantees the thin/wide horizontal patterns sum to
- * an exact multiple of `cell`, so they always re-align with the base
- * `cell` grid and no cumulative subpixel drift accumulates over a long
- * scroll. Without this, e.g. `cell=50, target=16.667` gets rasterized
- * as alternating 16/17px tiles whose cumulative position drifts ~2px
- * per 13k px scrolled relative to the 50px margin pattern — visible at
- * the bottom of long pages.
+ * Build a `repeating-linear-gradient` background that paints `subdivisions`
+ * 1px lines per `cell`-tall block. The gradient itself repeats every `cell`
+ * px (an integer length), so each block is recomputed from a clean integer
+ * boundary — internal stops at fractional positions like `cell/3` render at
+ * the same relative position in every block and never accumulate drift over
+ * a long scroll. The bottom-most line lands exactly on the `cell` boundary
+ * so it coincides with the parent margin's `horizontal` (period = cell)
+ * pattern at every cell line.
  */
-function snapToCellDivisor(cell: number, target: number, min = 2): number {
+function buildSubdividedHorizontal(
+  color: string,
+  cell: number,
+  subdivisions: number,
+): { backgroundImage: string; backgroundSize: string } {
   const c = Math.max(1, Math.round(cell));
-  const t = Math.max(min, Math.floor(target));
-  for (let d = t; d >= min; d--) {
-    if (c % d === 0) return d;
+  const n = Math.max(1, Math.round(subdivisions));
+  const stops: string[] = [];
+  let prev = 0;
+  for (let i = 1; i <= n; i++) {
+    // i-th line bottom sits at i*c/n (the n-th line lands exactly on `c`).
+    const lineEnd = (i * c) / n;
+    const lineStart = lineEnd - 1;
+    if (lineStart > prev) {
+      stops.push(`transparent ${prev}px`);
+      stops.push(`transparent ${lineStart}px`);
+    }
+    stops.push(`${color} ${lineStart}px`);
+    stops.push(`${color} ${lineEnd}px`);
+    prev = lineEnd;
   }
-  return min;
+  return {
+    backgroundImage: `repeating-linear-gradient(to bottom, ${stops.join(", ")})`,
+    // `100% ${c}px` keeps the gradient anchored to integer cell boundaries
+    // even though `repeating-linear-gradient` already repeats internally —
+    // this avoids the engine spreading the pattern across the element.
+    backgroundSize: `100% ${c}px`,
+  };
 }
 
 /**
@@ -215,15 +236,14 @@ export function getSigilPatternStyles(
         backgroundSize: `100% ${cell}px`,
       };
     case "horizontal-thin": {
-      // Snap to an integer divisor of `cell` so every 3rd-ish thin line
-      // lands exactly on a `cell` boundary. Avoids the cumulative drift
-      // a literal `cell / 3` (16.667px for cell=50) accumulates from
-      // per-tile subpixel rounding over a long scroll.
-      const thin = snapToCellDivisor(cell, cell / 3);
-      return {
-        backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
-        backgroundSize: `100% ${thin}px`,
-      };
+      // 3 lines per cell — matches the dedalus reticle (which gets 3
+      // cleanly because gridCell=48). For cell=50 the inner stops sit at
+      // 16.67 / 33.33 (fractional), but `repeating-linear-gradient` repeats
+      // the entire 50px block from a clean integer boundary, so each cell
+      // renders the same 3 lines at the same relative positions — no
+      // cumulative drift, and the bottom line lands exactly on every cell
+      // boundary alongside the `horizontal` margin pattern.
+      return buildSubdividedHorizontal(C, cell, 3);
     }
     case "horizontal-wide": {
       // Integer multiple of an integer cell — already drift-free, but
