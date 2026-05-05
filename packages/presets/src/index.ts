@@ -47,29 +47,20 @@ export { oceanPreset } from "./ocean";
 export { rosePreset } from "./rose";
 
 import type { SigilPreset } from "@sigil-ui/tokens";
-import { defaultTokens } from "@sigil-ui/tokens";
+import { defaultTokens, deepMerge } from "@sigil-ui/tokens";
 
-function deepMergeTokens(base: Record<string, unknown>, override: Record<string, unknown>): Record<string, unknown> {
-  const result: Record<string, unknown> = { ...base };
-  for (const [key, value] of Object.entries(override)) {
-    const baseValue = result[key];
-    if (
-      typeof baseValue === "object" && baseValue !== null && !Array.isArray(baseValue) &&
-      typeof value === "object" && value !== null && !Array.isArray(value) &&
-      !("light" in (baseValue as Record<string, unknown>) && "dark" in (baseValue as Record<string, unknown>))
-    ) {
-      result[key] = deepMergeTokens(baseValue as Record<string, unknown>, value as Record<string, unknown>);
-    } else if (value !== undefined) {
-      result[key] = value;
-    }
-  }
-  return result;
-}
-
+/**
+ * Resolve a partial preset by deep-merging it onto the default token
+ * skeleton. Lazy-imported preset modules can ship sparse `tokens` and
+ * still satisfy the full `SigilTokens` shape at the point of use.
+ */
 function resolvePreset(preset: SigilPreset): SigilPreset {
   return {
     ...preset,
-    tokens: deepMergeTokens(defaultTokens as unknown as Record<string, unknown>, preset.tokens as unknown as Record<string, unknown>) as unknown as SigilPreset["tokens"],
+    tokens: deepMerge(
+      defaultTokens as unknown as Record<string, unknown>,
+      preset.tokens as unknown as Record<string, unknown>,
+    ) as unknown as SigilPreset["tokens"],
   };
 }
 

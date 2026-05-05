@@ -26,7 +26,8 @@
     "src"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsup && node scripts/build-css.mjs",
+    "build:css": "node scripts/build-css.mjs",
     "dev": "tsup --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"

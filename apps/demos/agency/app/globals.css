@@ -2,6 +2,7 @@
 @source "../../../../packages";
 @source "../../../../apps";
 
+@import "@sigil-ui/tokens/css";
 :root {
   --r-background: #0a0a0f;
   --r-surface: #141419;

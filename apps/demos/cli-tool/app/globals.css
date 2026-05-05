@@ -1,23 +1,12 @@
+/* Reference Sigil-dogfooded demo. The site's full token surface (519
+   variables across 33 categories) comes straight from the published
+   @sigil-ui/tokens package — no per-demo `:root` block, no parallel
+   token system. To switch the visual identity, change the preset that
+   feeds the import (or run `sigil preset <name>`). */
 @import "tailwindcss";
 @source "../../../../packages";
 @source "../../../../apps";
-
-:root {
-  --r-background: #050510;
-  --r-surface: #0a0a1f;
-  --r-primary: #3b82f6;
-  --r-primary-hover: #60a5fa;
-  --r-text: #e0e0ff;
-  --r-text-muted: #6b7094;
-  --r-border: rgba(59, 130, 246, 0.15);
-  --r-radius: 12px;
-  --r-radius-sm: 8px;
-  --r-radius-lg: 16px;
-  --r-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
-  --r-font-sans: system-ui, -apple-system, sans-serif;
-  --r-font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
-  --r-transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-}
+@import "@sigil-ui/tokens/css";
 
 * {
   margin: 0;
@@ -26,8 +15,8 @@
 }
 
 body {
-  background: var(--r-background);
-  color: var(--r-text);
-  font-family: var(--r-font-sans);
+  background: var(--s-background);
+  color: var(--s-text);
+  font-family: var(--s-font-body, "PP Mori", system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
 }

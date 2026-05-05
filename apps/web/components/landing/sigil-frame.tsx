@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
-import { useSigilTokenValues } from "@/components/sandbox/token-provider";
+import { useOptionalSigilTokenValues } from "@/components/sandbox/token-provider";
 import { SigilFrame as SigilFrameBase } from "@sigil-ui/components";
 import type { GutterPattern, SigilTokens } from "@sigil-ui/tokens";
 
@@ -66,10 +66,7 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
 }
 
 export function SigilFrame({ children }: { children: ReactNode }) {
-  let tokens: SigilTokens | null = null;
-  try {
-    tokens = useSigilTokenValues();
-  } catch { /* no provider */ }
+  const tokens: SigilTokens | null = useOptionalSigilTokenValues();
 
   // Derive only the slice we care about. useMemo keeps the config object
   // identity stable when the input slices haven't changed (e.g. a

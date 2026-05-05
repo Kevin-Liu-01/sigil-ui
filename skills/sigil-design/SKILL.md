@@ -1,3 +1,8 @@
+---
+name: sigil-design
+description: Generate, parse, and compile a unified DESIGN.md (33 categories, 519 tokens) that compiles to CSS, Tailwind v4, and W3C JSON. Use when creating a new design reference, extracting tokens from an existing site (`sigil design extract`), switching a project's visual identity, generating compiled token output, or auditing a design against the spec. Triggers on "DESIGN.md", "design reference", "compile tokens", "extract design system", "sigil design", or "design.md format".
+---
+
 # Skill — sigil-design
 
 > Generate, parse, and compile a unified `DESIGN.md` that serves as

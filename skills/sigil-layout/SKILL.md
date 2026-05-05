@@ -22,9 +22,9 @@ Sigil provides three structural-visibility primitives:
 
 | Component        | Purpose                                   | Token Namespace     |
 |-----------------|-------------------------------------------|---------------------|
-| `SigilGrid`   | Background grid pattern (dot/line/cross)  | `--sigil-grid-*`  |
-| `SigilCross`  | Crosshair alignment markers               | `--sigil-cross-*` |
-| `SigilRail`   | Vertical/horizontal rails for alignment   | `--sigil-rail-*`  |
+| `SigilGrid`   | Background grid pattern (dot/line/cross)  | `--s-grid-*`  |
+| `SigilCross`  | Crosshair alignment markers               | `--s-cross-*` |
+| `SigilRail`   | Vertical/horizontal rails for alignment   | `--s-rail-*`  |
 
 ### 2. Page layout pattern
 
@@ -57,17 +57,17 @@ Use the token-defined content max-width and spacing:
 
 ```css
 .section {
-  max-width: var(--sigil-content-max);
+  max-width: var(--s-content-max);
   margin-inline: auto;
-  padding-inline: var(--sigil-spacing-4);
-  padding-block: var(--sigil-spacing-8);
+  padding-inline: var(--s-spacing-4);
+  padding-block: var(--s-spacing-8);
 }
 ```
 
-The `--sigil-content-max` varies by preset:
-- `sigil`, `midnight`, `soft`: 1280px (standard)
-- `brutalist`: 1200px (slightly tighter)
-- `editorial`: 720px (narrow, optimized for reading)
+The `--s-content-max` varies by preset (see `packages/presets/src/<name>.ts`):
+- Most structural/colorful presets (`sigil`, `cobalt`, `kova`, `helix`, `flux`, ...): 1200–1400px
+- Minimal/editorial presets (`crux`, `arc`, `etch`, `rune`, `glyph`): narrower (often 1024–1200px)
+- Edgeless presets (`vast`, `aura`, `field`, `clay`, `sage`, `ink`, `sand`, `plum`, `moss`, `coral`, `dune`, `ocean`, `rose`): 1400px+
 
 ### 4. Grid compositions
 
@@ -76,8 +76,8 @@ The `--sigil-content-max` varies by preset:
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--sigil-rail-gap);
-  max-width: var(--sigil-content-max);
+  gap: var(--s-rail-gap);
+  max-width: var(--s-content-max);
 }
 ```
 
@@ -86,7 +86,7 @@ The `--sigil-content-max` varies by preset:
 .sidebar-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: var(--sigil-rail-gap);
+  gap: var(--s-rail-gap);
   min-height: 100dvh;
 }
 ```
@@ -96,7 +96,7 @@ The `--sigil-content-max` varies by preset:
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: var(--sigil-rail-gap);
+  gap: var(--s-rail-gap);
 }
 ```
 
@@ -106,18 +106,18 @@ Use fluid spacing that scales with the viewport, and semantic breakpoints:
 
 ```css
 .section {
-  padding-block: var(--sigil-spacing-6);
+  padding-block: var(--s-spacing-6);
 }
 
 @media (min-width: 768px) {
   .section {
-    padding-block: var(--sigil-spacing-8);
+    padding-block: var(--s-spacing-8);
   }
 }
 
 @media (min-width: 1024px) {
   .section {
-    padding-block: var(--sigil-spacing-9);
+    padding-block: var(--s-spacing-9);
   }
 }
 ```
@@ -125,13 +125,13 @@ Use fluid spacing that scales with the viewport, and semantic breakpoints:
 ## Rules
 
 1. **Always use SigilGrid as the outermost wrapper** for pages that show the structural grid pattern.
-2. **Use SigilRail for content alignment** — it centers content within `--sigil-content-max` and applies `--sigil-rail-gap`.
-3. **Never hardcode spacing** — use `var(--sigil-spacing-N)` where N is the index into the spacing scale (0-indexed).
-4. **Card radius from tokens** — cards should use `var(--sigil-card-radius)`, not `var(--sigil-radius-md)`.
+2. **Use SigilRail for content alignment** — it centers content within `--s-content-max` and applies `--s-rail-gap`.
+3. **Never hardcode spacing** — use `var(--s-spacing-N)` where N is the index into the spacing scale (0-indexed).
+4. **Card radius from tokens** — cards should use `var(--s-card-radius)`, not `var(--s-radius-md)`.
 5. **Sections stack vertically** — use flexbox column or plain block flow, not grid, for section stacking.
 6. **Grid for card layouts** — use CSS Grid with `auto-fill`/`auto-fit` for responsive card grids.
-7. **Gap from rail-gap** — inter-component spacing should use `--sigil-rail-gap` for consistency with the grid system.
-8. **Dark mode via class** — use `.dark` on `<html>` or a parent. Tokens auto-switch via `var(--sigil-background-light)` / `var(--sigil-background-dark)`.
+7. **Gap from rail-gap** — inter-component spacing should use `--s-rail-gap` for consistency with the grid system.
+8. **Dark mode via class** — use `.dark` on `<html>` or a parent. Tokens auto-switch via `var(--s-background-light)` / `var(--s-background-dark)`.
 9. **Full-bleed sections** — for edge-to-edge backgrounds, use a full-width wrapper with a centered inner container.
 10. **Min-height patterns** — hero sections should be `min-height: 100dvh`, card sections should be `min-height: auto`.
 
@@ -182,8 +182,8 @@ function Hero() {
 }
 
 .hero-content {
-  max-width: var(--sigil-content-max);
+  max-width: var(--s-content-max);
   margin-inline: auto;
-  padding-inline: var(--sigil-spacing-4);
+  padding-inline: var(--s-spacing-4);
 }
 ```

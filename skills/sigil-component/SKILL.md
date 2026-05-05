@@ -58,14 +58,14 @@ Components consume tokens exclusively through CSS custom properties. Never hardc
 
 ```css
 .sigil-button {
-  font-family: var(--sigil-font-body);
-  background: var(--sigil-primary);
-  color: var(--sigil-text-light);
-  border-radius: var(--sigil-radius-md);
-  padding: var(--sigil-spacing-2) var(--sigil-spacing-4);
-  box-shadow: var(--sigil-shadow-sm);
-  transition-duration: var(--sigil-duration-fast);
-  transition-timing-function: var(--sigil-easing-default);
+  font-family: var(--s-font-body);
+  background: var(--s-primary);
+  color: var(--s-text-light);
+  border-radius: var(--s-radius-md);
+  padding: var(--s-spacing-2) var(--s-spacing-4);
+  box-shadow: var(--s-shadow-sm);
+  transition-duration: var(--s-duration-fast);
+  transition-timing-function: var(--s-easing-default);
 }
 ```
 
@@ -95,13 +95,13 @@ export { MyComponent } from "./my-component.js";
 
 1. **Always use `forwardRef`** — every component must forward refs for composition.
 2. **Always accept `className`** — merge with `clsx(internalClasses, className)` so consumers can extend.
-3. **Never import token values directly** — use CSS custom properties (`var(--sigil-*)`).
+3. **Never import token values directly** — use CSS custom properties (`var(--s-*)`).
 4. **Use semantic class names** — prefix with `sigil-` (e.g., `sigil-card`, `sigil-button--ghost`).
 5. **Props over classes** — expose variant/size/intent as typed props, map to class names internally.
 6. **Slot pattern** — use `@radix-ui/react-slot` with an `asChild` prop when the component should render as a different element.
 7. **No inline styles for tokens** — all token-dependent styling goes through CSS classes that reference custom properties.
 8. **All colors in OKLCH** — the token system uses OKLCH exclusively. Never use hex/rgb/hsl in component CSS.
-9. **Respect motion tokens** — all transitions use `--sigil-duration-`* and `--sigil-easing-*`.
+9. **Respect motion tokens** — all transitions use `--s-duration-`* and `--s-easing-*`.
 10. **Barrel export** — every component must be exported from `packages/components/src/index.ts`.
 
 ## Examples
@@ -140,13 +140,13 @@ The `sigil-grid`, `sigil-cross`, and `sigil-rail` components use tokens from the
 
 ```css
 .sigil-grid {
-  --cell: var(--sigil-grid-cell);
+  --cell: var(--s-grid-cell);
   background-size: var(--cell) var(--cell);
 }
 
 .sigil-cross {
-  --arm: var(--sigil-cross-arm);
-  --stroke: var(--sigil-cross-stroke);
+  --arm: var(--s-cross-arm);
+  --stroke: var(--s-cross-stroke);
 }
 ```
 

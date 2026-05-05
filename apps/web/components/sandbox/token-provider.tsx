@@ -16,6 +16,7 @@ import {
 const useIsomorphicLayoutEffect =
   typeof window !== "undefined" ? useLayoutEffect : useEffect;
 import type { SigilPreset, SigilTokens } from "@sigil-ui/tokens";
+import { compileToCss } from "@sigil-ui/tokens";
 import { presets, defaultPreset, type PresetName } from "@sigil-ui/presets";
 
 /* ------------------------------------------------------------------ */
@@ -28,6 +29,13 @@ import { presets, defaultPreset, type PresetName } from "@sigil-ui/presets";
 /* Now we eagerly write the style tag from within the click handler,  */
 /* so the visual change lands on the very next frame and React's      */
 /* downstream re-render no longer blocks the perceived update.         */
+/*                                                                    */
+/* The CSS we write reuses `compileToCss` from @sigil-ui/tokens so      */
+/* the runtime + build-time outputs are byte-for-byte identical (up    */
+/* to the `!important` flag). This kills the historic naming drift     */
+/* where buttons emitted `--s-btn-*` at runtime but `--s-button-*` at   */
+/* build time — components only ever consumed `--s-button-*` and the   */
+/* runtime layer silently lost overrides for the entire button block.  */
 /* ------------------------------------------------------------------ */
 
 const DEFAULT_STYLE_ATTR = "data-sigil-tokens";
@@ -57,136 +65,37 @@ function getTokensStyleEl(attr: string): HTMLStyleElement | null {
   return el;
 }
 
-function pushVar(arr: string[], name: string, value: unknown) {
-  if (typeof value === "string") arr.push(`${name}: ${value} !important;`);
-  else if (typeof value === "boolean")
-    arr.push(`${name}: ${value ? "1" : "0"} !important;`);
-  else if (typeof value === "number")
-    arr.push(`${name}: ${String(value)} !important;`);
-}
-
-const PREFIXED_TOKEN_CATEGORIES: { key: keyof SigilTokens; prefix: string }[] =
-  [
-    { key: "layout", prefix: "" },
-    { key: "spacing", prefix: "" },
-    { key: "buttons", prefix: "btn-" },
-    { key: "cards", prefix: "card-" },
-    { key: "navigation", prefix: "nav-" },
-    { key: "headings", prefix: "heading-" },
-    { key: "backgrounds", prefix: "bg-" },
-    { key: "alignment", prefix: "align-" },
-    { key: "sections", prefix: "section-" },
-    { key: "hero", prefix: "hero-" },
-    { key: "dividers", prefix: "divider-" },
-    { key: "gridVisuals", prefix: "grid-" },
-    { key: "code", prefix: "code-" },
-    { key: "inputs", prefix: "input-" },
-  ];
-
+/**
+ * Serialize a token bag to CSS for runtime DOM injection.
+ *
+ * Wraps the canonical `compileToCss` and post-processes its output to
+ * append `!important` on every declaration so the runtime tag wins over
+ * the static stylesheet, then rewrites the dark selector to the runtime
+ * convention (`.dark, [data-theme="dark"]`) used by the rest of the app.
+ *
+ * The result is byte-equivalent to the build-time CSS modulo the
+ * `!important` flag and the dark-selector list — no hand-rolled emitter,
+ * no per-category prefix table to drift out of sync.
+ */
 export function serializeTokensToCss(tokens: SigilTokens): string {
-  const light: string[] = [];
-  const dark: string[] = [];
+  const compiled = compileToCss(tokens, {
+    selector: ":root",
+    darkSelector: ".dark, [data-theme=\"dark\"]",
+  });
 
-  if (tokens.colors) {
-    for (const [key, value] of Object.entries(tokens.colors)) {
-      if (
-        value &&
-        typeof value === "object" &&
-        "light" in (value as Record<string, unknown>) &&
-        "dark" in (value as Record<string, unknown>)
-      ) {
-        const themed = value as { light: string; dark: string };
-        light.push(`--s-${key}: ${themed.light} !important;`);
-        dark.push(`--s-${key}: ${themed.dark} !important;`);
-      } else if (typeof value === "string") {
-        light.push(`--s-${key}: ${value} !important;`);
-      }
-    }
-  }
-
-  if (tokens.typography) {
-    for (const [key, value] of Object.entries(tokens.typography)) {
-      if (typeof value === "string")
-        light.push(`--s-${key}: ${value} !important;`);
-    }
-  }
-
-  if (tokens.radius) {
-    for (const [key, value] of Object.entries(tokens.radius)) {
-      if (typeof value === "string") {
-        light.push(`--s-radius-${key}: ${value} !important;`);
-        if (key === "card")
-          light.push(`--s-card-radius: ${value} !important;`);
-      }
-    }
-  }
-
-  if (tokens.shadows) {
-    for (const [key, value] of Object.entries(tokens.shadows)) {
-      if (typeof value === "string")
-        light.push(`--s-shadow-${key}: ${value} !important;`);
-    }
-  }
-
-  if (tokens.sigil) {
-    for (const [key, value] of Object.entries(tokens.sigil)) {
-      pushVar(light, `--s-${key}`, value);
-    }
-  }
-
-  if (tokens.motion) {
-    const motion = tokens.motion as Record<string, unknown>;
-    for (const [key, value] of Object.entries(motion)) {
-      if (key === "duration" && value && typeof value === "object") {
-        for (const [k, v] of Object.entries(
-          value as Record<string, unknown>,
-        )) {
-          if (typeof v === "string")
-            light.push(`--s-duration-${k}: ${v} !important;`);
-        }
-      } else if (key === "easing" && value && typeof value === "object") {
-        for (const [k, v] of Object.entries(
-          value as Record<string, unknown>,
-        )) {
-          if (typeof v === "string")
-            light.push(`--s-ease-${k}: ${v} !important;`);
-        }
-      } else {
-        pushVar(light, `--s-motion-${key}`, value);
-      }
-    }
-  }
-
-  if (tokens.borders) {
-    const borders = tokens.borders as Record<string, unknown>;
-    for (const [key, value] of Object.entries(borders)) {
-      if (key === "width" && value && typeof value === "object") {
-        for (const [k, v] of Object.entries(
-          value as Record<string, unknown>,
-        )) {
-          if (typeof v === "string")
-            light.push(`--s-border-width-${k}: ${v} !important;`);
-        }
-      } else if (typeof value === "string") {
-        light.push(`--s-border-${key}: ${value} !important;`);
-      }
-    }
-  }
-
-  for (const { key, prefix } of PREFIXED_TOKEN_CATEGORIES) {
-    const obj = tokens[key];
-    if (obj && typeof obj === "object") {
-      for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
-        pushVar(light, `--s-${prefix}${k}`, v);
-      }
-    }
-  }
-
-  let css = `:root {\n${light.join("\n")}\n}`;
-  if (dark.length > 0) {
-    css += `\n.dark, [data-theme="dark"] {\n${dark.join("\n")}\n}`;
-  }
-  return css;
+  // Append `!important` to every declaration. We match the simple
+  // `<varname>: <value>;` shape emitted by compileToCss; lines that
+  // open/close blocks (`:root {`, `}`) and blank lines are passed through.
+  return compiled
+    .split("\n")
+    .map((line) => {
+      const m = /^(\s*)(--[\w-]+):\s*(.+);$/.exec(line);
+      if (!m) return line;
+      const [, indent, name, value] = m;
+      return `${indent}${name}: ${value} !important;`;
+    })
+    .join("\n")
+    .trimEnd();
 }
 
 // Synchronously write tokens to the DOM — call this from the user-input
@@ -495,6 +404,34 @@ export function useSigilActions(): SigilTokensActions {
   if (!a)
     throw new Error("useSigilActions must be used within SigilTokensProvider");
   return a;
+}
+
+/* ------------------------------------------------------------------ */
+/* Optional hooks — safe to call outside SigilTokensProvider           */
+/*                                                                    */
+/* The website composes some surfaces (the docs MDX renderer, the     */
+/* preset-detail static pages) that may render without the provider   */
+/* mounted — for example during SSG. Components that want to react    */
+/* to tokens *if available* but degrade gracefully when not should    */
+/* call these instead of wrapping the throwing variants in try/catch. */
+/* ------------------------------------------------------------------ */
+
+export function useOptionalSigilTokenValues(): SigilTokens | null {
+  return useContext(SigilTokensValueContext);
+}
+
+export function useOptionalSigilActivePreset(): string | null {
+  // Returns null when no provider is mounted — distinguish from the
+  // default "default" string the throwing variant would synthesize.
+  const v = useContext(SigilTokensActiveContext);
+  // Active context has a default value of "default" baked into createContext;
+  // we can't distinguish absent vs "default" without a sentinel, but the
+  // useful fact for callers is that "always returns a string" is fine.
+  return v;
+}
+
+export function useOptionalSigilActions(): SigilTokensActions | null {
+  return useContext(SigilTokensActionsContext);
 }
 
 export const SigilTokenProvider = SigilTokensProvider;

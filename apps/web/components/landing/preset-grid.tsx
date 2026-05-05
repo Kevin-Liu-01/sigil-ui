@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { presetCatalog, type PresetCatalogEntry } from "@sigil-ui/presets";
 import { Badge, Button } from "@sigil-ui/components";
-import { useSigilActions, useSigilActivePreset } from "@/components/sandbox/token-provider";
+import {
+  useOptionalSigilActions,
+  useOptionalSigilActivePreset,
+} from "@/components/sandbox/token-provider";
 import { useSigilSound } from "@/components/sound-provider";
 import { Check } from "lucide-react";
 
@@ -27,7 +30,7 @@ function PresetCard({ preset, isActive, onApply }: { preset: PresetCatalogEntry;
       style={{
         border: isActive ? "2px solid var(--s-primary)" : "1px solid var(--s-border-muted)",
         background: isActive ? "var(--s-surface-elevated)" : "var(--s-surface)",
-        transition: "all 200ms ease",
+        transition: "all var(--s-duration-normal, 200ms) var(--s-ease-default, ease)",
       }}
       onMouseEnter={(e) => {
         if (!isActive) e.currentTarget.style.borderColor = "var(--s-border-strong)";
@@ -88,19 +91,25 @@ function PresetCard({ preset, isActive, onApply }: { preset: PresetCatalogEntry;
   );
 }
 
+const NOOP_SOUND: ReturnType<typeof useSigilSound> = {
+  play: () => {},
+  enabled: false,
+  setEnabled: () => {},
+  activePreset: "sigil",
+  setActivePreset: () => {},
+};
+
 export function PresetGrid() {
   const [activeFilter, setActiveFilter] = useState<Category | "all">("all");
-  let setPreset: ((name: string) => Promise<void>) | null = null;
-  let activePreset = "sigil";
-  let sound: ReturnType<typeof useSigilSound> = { play: () => {}, enabled: false, setEnabled: () => {}, activePreset: "sigil", setActivePreset: () => {} };
-
-  try {
-    setPreset = useSigilActions().setPreset;
-    activePreset = useSigilActivePreset();
-  } catch { /* no provider */ }
+  const actions = useOptionalSigilActions();
+  const setPreset = actions?.setPreset;
+  const activePreset = useOptionalSigilActivePreset() ?? "sigil";
+  let sound: ReturnType<typeof useSigilSound> = NOOP_SOUND;
   try {
     sound = useSigilSound();
-  } catch { /* no sound provider */ }
+  } catch {
+    /* no sound provider — fall back to the no-op shim */
+  }
 
   const handleApply = (name: string) => {
     setPreset?.(name);

@@ -87,6 +87,11 @@ skills/              Agent skills for specific workflows
   sigil-playbook/    Page composition (10 rules from Reticle design language)
   sigil-migration/   Migrate from shadcn/ui
   sigil-polish/      Interface polish: typography, surfaces, animations, performance (5 files)
+  sigil-design/      Generate, parse, and compile DESIGN.md
+  sigil-messaging/   Canonical positioning, copy, stats, naming, tone
+  sigil-audit/       Browser/static audits (scripts/audit-*.mjs against `next start`)
+  sigil-scene/       Scene file authoring convention (*.scene.tsx for animated blocks)
+  sigil-cli/         Consolidated CLI reference: init, convert, add, preset, design, inspire, adapter, docs, diff, doctor
 ```
 
 ## Token System (519 Configurable Fields)
@@ -318,6 +323,9 @@ Read the relevant skill file before starting a task:
 | Build pages (10 composition rules) | `skills/sigil-playbook/SKILL.md` |
 | Migrate from shadcn | `skills/sigil-migration/SKILL.md` |
 | Polish UI details | `skills/sigil-polish/SKILL.md` |
+| Audit a built site (Playwright) | `skills/sigil-audit/SKILL.md` |
+| Author an animated scene file | `skills/sigil-scene/SKILL.md` |
+| Look up a CLI command | `skills/sigil-cli/SKILL.md` |
 
 ### Taste Skills (user-level, anti-slop framework)
 

@@ -48,21 +48,21 @@ Map shadcn CSS variables to Sigil equivalents:
 
 | shadcn variable              | Sigil variable                    |
 |-----------------------------|-------------------------------------|
-| `--background`              | `--sigil-background-light/dark`   |
-| `--foreground`              | `--sigil-text-light/dark`         |
-| `--card`                    | `--sigil-surface-light/dark`      |
-| `--card-foreground`         | `--sigil-text-light/dark`         |
-| `--primary`                 | `--sigil-primary`                 |
+| `--background`              | `--s-background-light/dark`   |
+| `--foreground`              | `--s-text-light/dark`         |
+| `--card`                    | `--s-surface-light/dark`      |
+| `--card-foreground`         | `--s-text-light/dark`         |
+| `--primary`                 | `--s-primary`                 |
 | `--primary-foreground`      | (compute: white/black based on L)   |
-| `--secondary`               | `--sigil-secondary`               |
-| `--muted`                   | `--sigil-surface-light/dark`      |
-| `--muted-foreground`        | `--sigil-text-muted-light/dark`   |
-| `--accent`                  | `--sigil-primary-muted`           |
-| `--destructive`             | `--sigil-error`                   |
-| `--border`                  | `--sigil-border-light/dark`       |
-| `--input`                   | `--sigil-border-light/dark`       |
-| `--ring`                    | `--sigil-border-interactive`      |
-| `--radius`                  | `--sigil-radius-md`               |
+| `--secondary`               | `--s-secondary`               |
+| `--muted`                   | `--s-surface-light/dark`      |
+| `--muted-foreground`        | `--s-text-muted-light/dark`   |
+| `--accent`                  | `--s-primary-muted`           |
+| `--destructive`             | `--s-error`                   |
+| `--border`                  | `--s-border-light/dark`       |
+| `--input`                   | `--s-border-light/dark`       |
+| `--ring`                    | `--s-border-interactive`      |
+| `--radius`                  | `--s-radius-md`               |
 
 ### 4. Step-by-step migration
 
@@ -79,33 +79,33 @@ Create `src/styles/shadcn-compat.css` to bridge shadcn variables to Sigil tokens
 
 ```css
 :root {
-  --background: var(--sigil-background-light);
-  --foreground: var(--sigil-text-light);
-  --card: var(--sigil-surface-light);
-  --card-foreground: var(--sigil-text-light);
-  --primary: var(--sigil-primary);
+  --background: var(--s-background-light);
+  --foreground: var(--s-text-light);
+  --card: var(--s-surface-light);
+  --card-foreground: var(--s-text-light);
+  --primary: var(--s-primary);
   --primary-foreground: oklch(1 0 0);
-  --secondary: var(--sigil-secondary);
-  --muted: var(--sigil-surface-light);
-  --muted-foreground: var(--sigil-text-muted-light);
-  --accent: var(--sigil-primary-muted);
-  --destructive: var(--sigil-error);
-  --border: var(--sigil-border-light);
-  --input: var(--sigil-border-light);
-  --ring: var(--sigil-border-interactive-light);
-  --radius: var(--sigil-radius-md);
+  --secondary: var(--s-secondary);
+  --muted: var(--s-surface-light);
+  --muted-foreground: var(--s-text-muted-light);
+  --accent: var(--s-primary-muted);
+  --destructive: var(--s-error);
+  --border: var(--s-border-light);
+  --input: var(--s-border-light);
+  --ring: var(--s-border-interactive-light);
+  --radius: var(--s-radius-md);
 }
 
 .dark {
-  --background: var(--sigil-background-dark);
-  --foreground: var(--sigil-text-dark);
-  --card: var(--sigil-surface-dark);
-  --card-foreground: var(--sigil-text-dark);
-  --muted: var(--sigil-surface-dark);
-  --muted-foreground: var(--sigil-text-muted-dark);
-  --border: var(--sigil-border-dark);
-  --input: var(--sigil-border-dark);
-  --ring: var(--sigil-border-interactive-dark);
+  --background: var(--s-background-dark);
+  --foreground: var(--s-text-dark);
+  --card: var(--s-surface-dark);
+  --card-foreground: var(--s-text-dark);
+  --muted: var(--s-surface-dark);
+  --muted-foreground: var(--s-text-muted-dark);
+  --border: var(--s-border-dark);
+  --input: var(--s-border-dark);
+  --ring: var(--s-border-interactive-dark);
 }
 ```
 

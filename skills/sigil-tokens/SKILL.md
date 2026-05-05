@@ -33,14 +33,14 @@ All tokens are defined as TypeScript types in `packages/tokens/src/types.ts` and
 
 | Category     | Type               | CSS Prefix                | Example                          |
 |-------------|--------------------|--------------------------|---------------------------------|
-| Colors      | `ColorTokens`      | `--sigil-`             | `--sigil-primary`             |
-| Typography  | `TypographyTokens` | `--sigil-font-`        | `--sigil-font-display`        |
-| Spacing     | `SpacingTokens`    | `--sigil-spacing-`     | `--sigil-spacing-4`           |
-| Sigil     | `SigilGridTokens`| `--sigil-`             | `--sigil-grid-cell`           |
-| Radius      | `RadiusTokens`     | `--sigil-radius-`      | `--sigil-radius-md`           |
-| Shadows     | `ShadowTokens`     | `--sigil-shadow-`      | `--sigil-shadow-lg`           |
-| Motion      | `MotionTokens`     | `--sigil-duration-` / `--sigil-easing-` | `--sigil-duration-fast` |
-| Borders     | `BorderTokens`     | `--sigil-border-width-`| `--sigil-border-width-thin`   |
+| Colors      | `ColorTokens`      | `--s-`             | `--s-primary`             |
+| Typography  | `TypographyTokens` | `--s-font-`        | `--s-font-display`        |
+| Spacing     | `SpacingTokens`    | `--s-spacing-`     | `--s-spacing-4`           |
+| Sigil     | `SigilGridTokens`| `--s-`             | `--s-grid-cell`           |
+| Radius      | `RadiusTokens`     | `--s-radius-`      | `--s-radius-md`           |
+| Shadows     | `ShadowTokens`     | `--s-shadow-`      | `--s-shadow-lg`           |
+| Motion      | `MotionTokens`     | `--s-duration-` / `--s-easing-` | `--s-duration-fast` |
+| Borders     | `BorderTokens`     | `--s-border-width-`| `--s-border-width-thin`   |
 
 ### 3. Adding a new token
 
@@ -127,7 +127,7 @@ primary: "oklch(0.65 0.15 280)",
 
 Check the cascade:
 1. Is the token CSS imported? (`@import "@sigil-ui/tokens/css"`)
-2. Is the variable name correct? (Check `--sigil-` prefix)
+2. Is the variable name correct? (Check `--s-` prefix)
 3. Is it a themed token? (May need `.dark` class on root)
 4. Is it overridden by a more specific selector?
 

@@ -1,5 +1,6 @@
 import type { PresetMetadata, SigilPreset, SigilTokens } from "./types";
 import { defaultTokens } from "./tokens";
+import { deepMerge, type DeepPartial } from "./compile/merge";
 
 /**
  * The default Sigil preset — precision-instrument aesthetic with
@@ -39,41 +40,10 @@ export function mergePresets(
 ): SigilPreset {
   return {
     name: name ?? base.name,
-    tokens: deepMerge(base.tokens, overrides) as SigilTokens,
+    tokens: deepMerge(
+      base.tokens as unknown as Record<string, unknown>,
+      overrides as Record<string, unknown>,
+    ) as unknown as SigilTokens,
     metadata: { ...base.metadata, ...metadata },
   };
 }
-
-// ---------------------------------------------------------------------------
-// Deep merge utility
-// ---------------------------------------------------------------------------
-
-type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends object ? DeepPartial<T[K]> : T[K];
-};
-
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-function deepMerge(
-  target: Record<string, unknown>,
-  source: Record<string, unknown>,
-): Record<string, unknown> {
-  const result: Record<string, unknown> = { ...target };
-
-  for (const key of Object.keys(source)) {
-    const sourceVal = source[key];
-    const targetVal = target[key];
-
-    if (isPlainObject(sourceVal) && isPlainObject(targetVal)) {
-      result[key] = deepMerge(targetVal, sourceVal);
-    } else if (sourceVal !== undefined) {
-      result[key] = sourceVal;
-    }
-  }
-
-  return result;
-}
-
-export type { DeepPartial };

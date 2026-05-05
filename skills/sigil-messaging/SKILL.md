@@ -1,3 +1,8 @@
+---
+name: sigil-messaging
+description: Canonical source of truth for Sigil positioning, copy, stats, naming, and tone. Use when writing or updating any README, docs page, marketing surface, llms.txt, social post, or agent-generated copy that mentions Sigil. Triggers on "Sigil messaging", "Sigil copy", "what is Sigil", "Sigil positioning", "Sigil stats", "Sigil tagline", or any task that produces text describing the product.
+---
+
 # Skill — sigil-messaging
 
 > Canonical source of truth for all Sigil UI positioning, copy, stats, naming,

@@ -6,9 +6,13 @@ export {
   compileToTailwind,
   compileToTs,
   compileToW3CJson,
+  deepMerge,
+  isThemedColor,
   parseDesignMarkdown,
   parseMarkdownTokens,
 } from "./compile";
+
+export type { DeepPartial } from "./compile";
 
 export { createPreset, mergePresets, sigilPreset } from "./presets";
 
@@ -57,5 +61,3 @@ export type {
   ThemedColor,
   TypographyTokens,
 } from "./types";
-
-export type { DeepPartial } from "./presets";

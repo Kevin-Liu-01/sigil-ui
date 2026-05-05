@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "tokens:build": "node scripts/build-tokens-css.mjs"
   },
   "dependencies": {
     "@ai-sdk/gateway": "^3.0.104",
