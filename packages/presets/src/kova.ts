@@ -138,6 +138,11 @@ export const kovaPreset: SigilPreset = {
       "card-radius": "6px",
       "gutter-pattern": "dots",
       "margin-pattern": "wave",
+      "band-height": "36px",
+      "divider-thickness-sm": "19px",
+      "divider-thickness-md": "37px",
+      "divider-thickness-lg": "73px",
+      "divider-thickness-xl": "109px",
     },
     radius: {
       none: "0px",

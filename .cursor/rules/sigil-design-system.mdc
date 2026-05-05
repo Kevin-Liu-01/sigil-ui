@@ -63,6 +63,61 @@ Rules:
 - Canonical ladder: 4, 8, 12, 16, 20, 24, 28, 32, 40, 48, 56, 64, 72, 80, 96.
 - BANNED: Arbitrary spacing like `37px`, `13px`, `7px`. Every value must be on the scale or derived from a token.
 
+## Structural Band Heights — No Border-Compensation Math In Components (MANDATORY)
+
+When a component renders a horizontal band that aligns to the grid (navbar inner row, banner, divider), its height must INCLUDE the structural border. The pixel math for that compensation lives in the **preset**, never in the component.
+
+**The tokens (defined in `sigil` group, emitted as `--s-*`):**
+
+| Token | Value (default preset, `grid-cell = 50px`) | Formula | Use for |
+|---|---|---|---|
+| `--s-band-height` | `50px` | `grid-cell` | Single-bordered bands (navbar inner row, release banner). |
+| `--s-divider-thickness-sm` | `26px` | `round(grid-cell / 2) + 1` | `<Divider size="xs"\|"sm">` w/ `showBorders` |
+| `--s-divider-thickness-md` | `51px` | `grid-cell + 1` | `<Divider size="md">` w/ `showBorders` |
+| `--s-divider-thickness-lg` | `101px` | `grid-cell × 2 + 1` | `<Divider size="lg">` w/ `showBorders` |
+| `--s-divider-thickness-xl` | `151px` | `grid-cell × 3 + 1` | `<Divider size="xl">` w/ `showBorders` |
+
+**Why the formulas differ:**
+
+The rail's 1px line lives at the BOTTOM of each grid cell (rail-line rows = `cell − 1, 2·cell − 1, 3·cell − 1, …`). With `box-sizing: border-box`, the box's first row is the top border and its last row is the bottom border.
+
+- A **band** has ONE structural border (typically `border-bottom`). Outer height = `grid-cell` puts the bottom border on a rail line. The "first row of the box" is the page edge for the navbar, with no rail line above to align with.
+
+- A **divider** has TWO structural borders, sitting mid-page. To make the divider visually occupy exactly N full cells, BOTH borders must sit on rail lines — the top border on one rail line and the bottom border on the rail line N cells later. The number of rows in the box from one of those rail lines to the other (inclusive of both) is `N × grid-cell + 1`.
+
+  - `+0` (`N × cell`)  → divider 1px shorter than a cell; bottom border 1px before the next rail line.
+  - `+1` (`N × cell + 1`)  → top + bottom borders on rail lines; divider visually spans exactly N cells.  ← correct
+  - `+2` (`N × cell + 2`)  → bottom border 1px past the next rail line.
+
+**Do not** ship `+0` or `+2`; only `+1` makes the divider's outer edges coincide with rail lines, which is what the rest of the design system relies on.
+
+**Rail / gutter pattern convention (enforced in `getSigilPatternStyles`):**
+
+The page rail's repeating horizontal-line patterns (`horizontal`, `horizontal-thin`, `horizontal-wide`, and the horizontal axis of `grid`) place the 1px line at the **END of each tile** (the bottom):
+
+```
+linear-gradient(to top, COLOR 1px, transparent 1px)
+```
+
+NOT at the top (`to bottom`). With the line at the bottom:
+
+- For tile N at `[N × cell, (N+1) × cell)`, the rail line occupies `[(N+1)·cell − 1, (N+1)·cell)`.
+- A `box-sizing: border-box` band of `height = cell` and `border-bottom: 1px` placed at the top of tile N has its bottom border at `[N·cell + cell − 1, N·cell + cell)` — which is exactly the rail line position. ✓
+
+If the rail line were at the top of each tile (`to bottom`), there would be a fundamental 1px gap: the band's bottom border would land 1px BEFORE the next rail line, leaving a visible misalignment. Always use `to top` (or `to left` for vertical gutters) for these patterns. Any new pattern with a 1px line repeated every cell must follow this convention.
+
+**Hero / section padding:**
+
+When a section's bottom should land on a rail grid line, calibrate the section's `padding-y` token in the preset, not in the component. The default landing-page hero uses `--s-hero-padding-y` (set in `default.ts` `hero.padding-y`) so it can be tuned independently of `--s-section-padding-y`.
+
+**Rules:**
+
+- Components consume these vars directly: `height: var(--s-band-height)`. Use the matching CSS token, not raw `var(--s-grid-cell)` plus inline math.
+- BANNED inside components: `calc(var(--s-grid-cell) + 1px)`, `calc(var(--s-grid-cell) - 1px)`, `thickness + 2`, or any `+ 1px` / `- 1px` height fudge. If you find yourself writing one, you're patching what the preset should provide.
+- If a band needs a different visual height (e.g. half-cell + single border), add a new `sigil.<name>-height` token in `packages/tokens/src/types.ts` + `tokens.ts`, ship it in `packages/presets/src/default.ts`, and consume `var(--s-<name>-height)`.
+- Box-sizing on these bands is always `border-box`, so the token value IS the outer box height.
+- The page hero / sections do NOT get pixel shaves like `calc(var(--s-section-padding-y) - 1.5px)` to "fix" rail alignment. If a section appears off-grid, the band, divider, or section padding TOKEN is wrong — fix the token, not the page-level styling.
+
 ## Radius Rules
 
 - Concentric rule: outer radius = inner radius + padding. When nesting rounded elements, the outer must be larger by exactly the padding amount.

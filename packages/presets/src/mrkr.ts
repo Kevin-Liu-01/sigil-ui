@@ -139,6 +139,11 @@ export const mrkrPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "checker",
       "margin-pattern": "dots",
+      "band-height": "44px",
+      "divider-thickness-sm": "23px",
+      "divider-thickness-md": "45px",
+      "divider-thickness-lg": "89px",
+      "divider-thickness-xl": "133px",
     },
     radius: {
       none: "0px",

@@ -141,6 +141,11 @@ export const helixPreset: SigilPreset = {
       "gutter-pattern": "none",
       "margin-pattern": "hexagon",
       "margin-border": "1px solid var(--s-border-muted)",
+      "band-height": "44px",
+      "divider-thickness-sm": "23px",
+      "divider-thickness-md": "45px",
+      "divider-thickness-lg": "89px",
+      "divider-thickness-xl": "133px",
     },
     radius: {
       none: "0px",

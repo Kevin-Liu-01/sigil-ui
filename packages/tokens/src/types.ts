@@ -230,6 +230,54 @@ export type SigilGridTokens = {
   readonly "gutter-border"?: string;
   readonly "margin-border"?: string;
   readonly "gutter-visible"?: boolean;
+  /**
+   * Outer height of a structural horizontal band (navbar inner row, release
+   * banner) that occupies exactly one `grid-cell` of vertical space.
+   *
+   * **Rule of thumb: `band-height = grid-cell` (no `+ 1px`).**
+   *
+   * The band has a single 1px border (typically `border-bottom`). With
+   * `box-sizing: border-box` and `height = grid-cell`, the band's bottom
+   * border lands EXACTLY on the rail grid line for the next cell — i.e.
+   * the structural border IS the grid line, not a stripe past it.
+   *
+   * Stacking two such bands (navbar + banner) yields `2 × grid-cell`, which
+   * is also a clean grid multiple. The hero section below then aligns to
+   * the rail by construction.
+   *
+   * Components MUST use `var(--s-band-height)` directly. NEVER write
+   * `calc(var(--s-grid-cell) + 1px)` or `+ 1px`/`- 1px` adjustments inside
+   * a component — the calculation lives in the preset.
+   */
+  readonly "band-height"?: string;
+  /**
+   * Outer thickness for `<Divider size="xs"|"sm">` when `showBorders` is
+   * true. Equals `round(grid-cell / 2) + 1` — half a cell with both
+   * structural borders sitting on rail lines. The +1 is required for
+   * double-bordered alignment with `box-sizing: border-box`: the top
+   * border occupies the box's first row and the bottom border its last
+   * row, so the box must span (last rail line) − (first rail line) + 1
+   * rows. Going `+0` makes the divider visually 1px shorter than a cell;
+   * `+2` overshoots by 1px past the next rail line.
+   */
+  readonly "divider-thickness-sm"?: string;
+  /**
+   * Outer thickness for `<Divider size="md">` when `showBorders` is true.
+   * Equals `grid-cell + 1`. Both top and bottom borders sit on rail
+   * lines so the divider visually spans exactly one full cell. See
+   * `divider-thickness-sm` for the geometric reasoning.
+   */
+  readonly "divider-thickness-md"?: string;
+  /**
+   * Outer thickness for `<Divider size="lg">` when `showBorders` is true.
+   * Equals `grid-cell × 2 + 1`.
+   */
+  readonly "divider-thickness-lg"?: string;
+  /**
+   * Outer thickness for `<Divider size="xl">` when `showBorders` is true.
+   * Equals `grid-cell × 3 + 1`.
+   */
+  readonly "divider-thickness-xl"?: string;
 };
 
 // ---------------------------------------------------------------------------

@@ -140,6 +140,11 @@ export const cipherPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "grid",
       "margin-pattern": "checker",
+      "band-height": "28px",
+      "divider-thickness-sm": "15px",
+      "divider-thickness-md": "29px",
+      "divider-thickness-lg": "57px",
+      "divider-thickness-xl": "85px",
     },
     radius: {
       none: "0px",

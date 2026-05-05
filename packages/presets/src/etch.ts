@@ -142,6 +142,11 @@ export const etchPreset: SigilPreset = {
       "gutter-pattern": "horizontal",
       "margin-pattern": "plus",
       "margin-border": "1px solid var(--s-border-muted)",
+      "band-height": "40px",
+      "divider-thickness-sm": "21px",
+      "divider-thickness-md": "41px",
+      "divider-thickness-lg": "81px",
+      "divider-thickness-xl": "121px",
     },
     radius: {
       none: "0px",

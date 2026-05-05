@@ -203,6 +203,11 @@ export const _templatePreset: SigilPreset = {
       "gutter-border": "1px solid var(--s-border-muted)",
       "margin-border": "1px solid var(--s-border-muted)",
       "gutter-visible": true,
+      "band-height": "48px",
+      "divider-thickness-sm": "25px",
+      "divider-thickness-md": "49px",
+      "divider-thickness-lg": "97px",
+      "divider-thickness-xl": "145px",
     },
 
     // -----------------------------------------------------------------------

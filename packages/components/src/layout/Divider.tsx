@@ -45,6 +45,30 @@ function getThickness(size: NonNullable<DividerProps["size"]>, gridCell: number)
   }
 }
 
+/**
+ * Outer thickness CSS values for a `showBorders` divider. Equal to
+ * `N × grid-cell + 1` so BOTH the top and bottom structural borders
+ * sit on rail lines (the divider visually spans exactly N full cells).
+ *
+ * With `box-sizing: border-box` and the rail's 1px line at the BOTTOM
+ * of each grid cell, the top border (first row of the box) and the
+ * bottom border (last row of the box) need rows that are exactly
+ * N × grid-cell apart. Including both rows in the box yields a height
+ * of N × grid-cell + 1.
+ *
+ * IMPORTANT: do NOT recompute this with `calc(... ± 1px)` in the
+ * component. The pixel math lives in the preset
+ * (`sigil.divider-thickness-*` → `--s-divider-thickness-*`). The
+ * fallbacks here keep things working if a preset omits these tokens.
+ */
+const BORDERED_THICKNESS_VAR: Record<NonNullable<DividerProps["size"]>, string> = {
+  xs: "var(--s-divider-thickness-sm, 26px)",
+  sm: "var(--s-divider-thickness-sm, 26px)",
+  md: "var(--s-divider-thickness-md, 51px)",
+  lg: "var(--s-divider-thickness-lg, 101px)",
+  xl: "var(--s-divider-thickness-xl, 151px)",
+};
+
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
 const STRUCTURAL_BORDER =
   "var(--s-divider-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
@@ -56,7 +80,10 @@ function getLegacyVerticalPatternCSS(
 ): SigilPatternStyles {
   const s = cell * scale;
   return {
-    backgroundImage: `linear-gradient(to right, ${COLOR} 1px, transparent 1px)`,
+    // Line at the END (right edge) of each tile so it aligns with the
+    // structural right-border of cells, matching the SigilPageGrid rail
+    // convention (see horizontal patterns: line at bottom of each tile).
+    backgroundImage: `linear-gradient(to left, ${COLOR} 1px, transparent 1px)`,
     backgroundSize: `${s}px 100%`,
   };
 }
@@ -135,6 +162,13 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   const cell = Math.min(rawCell, thickness);
   const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
+  // Outer dimension. When borders are shown we read the preset-provided
+  // `--s-divider-thickness-*` tokens, which already include the +2px border
+  // compensation. When borders are off, the un-bordered numeric thickness is
+  // exactly one (or N) grid cell.
+  const outerThickness: string | number = showBorders
+    ? BORDERED_THICKNESS_VAR[size]
+    : thickness;
   const resolvedPattern = resolveDividerPattern(pattern, gridConfig);
   const patternCss =
     resolvedPattern === "vertical"
@@ -159,7 +193,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
         className,
       )}
       style={{
-        [isHorizontal ? "height" : "width"]: thickness,
+        [isHorizontal ? "height" : "width"]: outerThickness,
         boxSizing: "border-box",
         ...(showBorders
           ? isHorizontal

@@ -138,6 +138,11 @@ export const onyxPreset: SigilPreset = {
       "card-radius": "24px",
       "gutter-pattern": "wave",
       "margin-pattern": "dots",
+      "band-height": "56px",
+      "divider-thickness-sm": "29px",
+      "divider-thickness-md": "57px",
+      "divider-thickness-lg": "113px",
+      "divider-thickness-xl": "169px",
     },
     radius: {
       none: "0px",

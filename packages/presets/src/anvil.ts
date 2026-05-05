@@ -142,6 +142,11 @@ export const anvilPreset: SigilPreset = {
       "gutter-pattern": "plus",
       "margin-pattern": "diamond",
       "margin-border": "2px solid var(--s-border-muted)",
+      "band-height": "52px",
+      "divider-thickness-sm": "27px",
+      "divider-thickness-md": "53px",
+      "divider-thickness-lg": "105px",
+      "divider-thickness-xl": "157px",
     },
     radius: {
       none: "0px",

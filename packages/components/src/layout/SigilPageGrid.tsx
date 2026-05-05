@@ -128,10 +128,14 @@ export function getSigilPatternStyles(
   const s = Math.max(Math.round(cell * scale), 8);
   switch (pattern) {
     case "grid": {
+      // Lines are placed at the END of each tile (bottom-right) so that they
+      // visually coincide with the 1px structural border on a `box-sizing:
+      // border-box` band of height = grid-cell. If the line were at the
+      // TOP of the tile, it would sit 1px below where bands actually end.
       return {
         backgroundImage: [
-          `linear-gradient(${R ? "to left" : "to right"}, ${C} 1px, transparent 1px)`,
-          `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+          `linear-gradient(${R ? "to right" : "to left"}, ${C} 1px, transparent 1px)`,
+          `linear-gradient(to top, ${C} 1px, transparent 1px)`,
         ].join(", "),
         backgroundSize: `${s}px ${s}px`,
       };
@@ -174,22 +178,25 @@ export function getSigilPatternStyles(
         backgroundSize: `${h}px ${h}px`,
       };
     }
+    // For all "horizontal-*" patterns: line at the END of each tile (bottom)
+    // so it lines up with the 1px structural border of bands/dividers above.
+    // `to top` puts the color stop at the bottom of each tile.
     case "horizontal":
       return {
-        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+        backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${cell}px`,
       };
     case "horizontal-thin": {
       const thin = cell / 3;
       return {
-        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+        backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${thin}px`,
       };
     }
     case "horizontal-wide": {
       const wide = cell * 3;
       return {
-        backgroundImage: `linear-gradient(to bottom, ${C} 1px, transparent 1px)`,
+        backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
         backgroundSize: `100% ${wide}px`,
       };
     }

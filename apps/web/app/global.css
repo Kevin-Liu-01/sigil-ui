@@ -269,6 +269,16 @@
   --s-rail-gap: 50px;
   --s-content-max: 1200px;
 
+  /* Structural band heights — preset-level pixel calculations. Components
+     consume these directly (var(--s-band-height), var(--s-divider-thickness-*))
+     and never apply `+1px`/`-1px` math themselves. See the
+     "Structural Band Heights" section in .cursor/rules/sigil-design-system.mdc. */
+  --s-band-height: 48px;           /* navbar / banner: grid-cell, single border */
+  --s-divider-thickness-sm: 25px;  /* round(48 / 2) + 1 — ½ cell, two borders */
+  --s-divider-thickness-md: 49px;  /* 48 + 1 */
+  --s-divider-thickness-lg: 97px;  /* 48 × 2 + 1 */
+  --s-divider-thickness-xl: 145px; /* 48 × 3 + 1 */
+
   /* Border widths */
   --s-border-width-thin: 1px;
   --s-border-width-medium: 1.5px;
@@ -444,6 +454,9 @@
   --s-section-padding-y: 6rem;
   --s-section-py: var(--s-section-padding-y, 6rem);
   --s-section-py-lg: 9rem;
+  /* Hero-specific padding — calibrated against grid-cell so the first
+     divider lands on a grid line. See default preset hero.padding-y. */
+  --s-hero-padding-y: 82px;
   --s-navbar-height: 48px;
   --s-navbar-padding-x: 24px;
   --s-navbar-px: var(--s-navbar-padding-x, 24px);

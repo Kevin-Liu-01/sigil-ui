@@ -140,6 +140,11 @@ export const glyphPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "wave",
       "margin-pattern": "dots",
+      "band-height": "68px",
+      "divider-thickness-sm": "35px",
+      "divider-thickness-md": "69px",
+      "divider-thickness-lg": "137px",
+      "divider-thickness-xl": "205px",
     },
     radius: {
       none: "0px",

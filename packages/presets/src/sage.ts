@@ -140,6 +140,11 @@ export const sagePreset: SigilPreset = {
       "margin-pattern": "dots",
       "gutter-border": "none",
       "gutter-visible": false,
+      "band-height": "60px",
+      "divider-thickness-sm": "31px",
+      "divider-thickness-md": "61px",
+      "divider-thickness-lg": "121px",
+      "divider-thickness-xl": "181px",
     },
     radius: {
       none: "0px",

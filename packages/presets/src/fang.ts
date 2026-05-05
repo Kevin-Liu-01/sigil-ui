@@ -142,6 +142,11 @@ export const fangPreset: SigilPreset = {
       "gutter-pattern": "zigzag",
       "margin-pattern": "crosshatch",
       "margin-border": "1px solid var(--s-border-muted)",
+      "band-height": "32px",
+      "divider-thickness-sm": "17px",
+      "divider-thickness-md": "33px",
+      "divider-thickness-lg": "65px",
+      "divider-thickness-xl": "97px",
     },
     radius: {
       none: "0px",

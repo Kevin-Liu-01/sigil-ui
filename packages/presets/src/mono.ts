@@ -139,6 +139,11 @@ export const monoPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "grid",
       "margin-pattern": "checker",
+      "band-height": "32px",
+      "divider-thickness-sm": "17px",
+      "divider-thickness-md": "33px",
+      "divider-thickness-lg": "65px",
+      "divider-thickness-xl": "97px",
     },
     radius: {
       none: "0px",

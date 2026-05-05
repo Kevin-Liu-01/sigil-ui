@@ -140,6 +140,11 @@ export const auraPreset: SigilPreset = {
       "margin-pattern": "dots",
       "gutter-border": "none",
       "gutter-visible": false,
+      "band-height": "48px",
+      "divider-thickness-sm": "25px",
+      "divider-thickness-md": "49px",
+      "divider-thickness-lg": "97px",
+      "divider-thickness-xl": "145px",
     },
     radius: {
       none: "0px",

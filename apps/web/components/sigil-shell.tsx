@@ -133,6 +133,7 @@ function TokenStyleInjector() {
       { key: "backgrounds", prefix: "bg-" },
       { key: "alignment", prefix: "align-" },
       { key: "sections", prefix: "section-" },
+      { key: "hero", prefix: "hero-" },
       { key: "dividers", prefix: "divider-" },
       { key: "gridVisuals", prefix: "grid-" },
       { key: "code", prefix: "code-" },

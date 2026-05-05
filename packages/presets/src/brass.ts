@@ -141,6 +141,11 @@ export const brassPreset: SigilPreset = {
       "gutter-pattern": "zigzag",
       "margin-pattern": "horizontal",
       "margin-border": "1px solid var(--s-border-muted)",
+      "band-height": "56px",
+      "divider-thickness-sm": "29px",
+      "divider-thickness-md": "57px",
+      "divider-thickness-lg": "113px",
+      "divider-thickness-xl": "169px",
     },
     radius: {
       none: "0px",

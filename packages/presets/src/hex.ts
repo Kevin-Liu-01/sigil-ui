@@ -139,6 +139,11 @@ export const hexPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "hexagon",
       "margin-pattern": "crosshatch",
+      "band-height": "64px",
+      "divider-thickness-sm": "33px",
+      "divider-thickness-md": "65px",
+      "divider-thickness-lg": "129px",
+      "divider-thickness-xl": "193px",
     },
     radius: {
       none: "0px",

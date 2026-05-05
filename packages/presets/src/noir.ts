@@ -139,6 +139,11 @@ export const noirPreset: SigilPreset = {
       "card-radius": "20px",
       "gutter-pattern": "horizontal",
       "margin-pattern": "wave",
+      "band-height": "64px",
+      "divider-thickness-sm": "33px",
+      "divider-thickness-md": "65px",
+      "divider-thickness-lg": "129px",
+      "divider-thickness-xl": "193px",
     },
     radius: {
       none: "0px",

@@ -138,6 +138,11 @@ export const cruxPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "none",
       "margin-pattern": "none",
+      "band-height": "72px",
+      "divider-thickness-sm": "37px",
+      "divider-thickness-md": "73px",
+      "divider-thickness-lg": "145px",
+      "divider-thickness-xl": "217px",
     },
     radius: {
       none: "0px",

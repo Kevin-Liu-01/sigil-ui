@@ -72,7 +72,9 @@ export function LandingNavbar() {
       style={{
         maxWidth: "var(--s-content-max, 1200px)",
         paddingInline: "var(--s-navbar-padding-x, 24px)",
-        height: "calc(var(--s-navbar-height, 48px) + 1px)",
+        // Use the structural band height token — never `calc(... + 1px)`.
+        // The +1px compensation lives in the preset (--s-band-height).
+        height: "var(--s-band-height, 51px)",
         boxSizing: "border-box",
       }}
     >
@@ -285,10 +287,13 @@ function ReleaseBanner() {
     <div
       className="w-full flex items-start justify-center overflow-hidden transition-[height] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        height: collapsed ? "22px" : "calc(var(--s-grid-cell, 48px) - 1px)",
+        // Band height already includes the +1px structural border
+        // compensation in the preset (--s-band-height). NEVER add `+ 1px`
+        // or `- 1px` here. The pixel calculation lives in the preset.
+        height: collapsed ? "22px" : "var(--s-band-height, 51px)",
       }}
     >
-      <div className="relative w-full h-[calc(var(--s-grid-cell,48px)-1px)] flex items-center justify-center">
+      <div className="relative w-full h-[var(--s-band-height,51px)] flex items-center justify-center">
         {/* ── Expanded full banner ── */}
         <div
           aria-hidden={collapsed}

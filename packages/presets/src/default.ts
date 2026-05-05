@@ -156,6 +156,31 @@ export const defaultPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "horizontal-thin",
       "margin-pattern": "horizontal",
+      // Structural band heights aligned to the rail grid. NEVER reproduce
+      // these calculations inside components — consume the var directly.
+      //
+      // The rail's repeating 1px line lives at the BOTTOM of each grid
+      // cell (see `getSigilPatternStyles`: `linear-gradient(to top, …)`).
+      //
+      // band-height          = grid-cell        (single border)
+      // divider-thickness-sm = round(cell / 2) + 1  (½ cell)
+      // divider-thickness-md = grid-cell + 1        (1 cell)
+      // divider-thickness-lg = grid-cell × 2 + 1    (2 cells)
+      // divider-thickness-xl = grid-cell × 3 + 1    (3 cells)
+      //
+      // Dividers fill EXACTLY N visual cells: the divider's top border
+      // sits on the rail line at the end of the previous cell, AND its
+      // bottom border sits on the rail line at the end of the divider's
+      // last cell — both rail lines ARE the divider's structural borders.
+      // The +1 is required because with `box-sizing: border-box`, the box
+      // top row is the top border and the box bottom row is the bottom
+      // border, so the box must span (last rail line) − (first rail line)
+      // + 1 rows = N × grid-cell + 1.
+      "band-height": "50px",
+      "divider-thickness-sm": "26px",
+      "divider-thickness-md": "51px",
+      "divider-thickness-lg": "101px",
+      "divider-thickness-xl": "151px",
     },
     radius: {
       none: "0px",
@@ -498,7 +523,14 @@ export const defaultPreset: SigilPreset = {
     },
     hero: {
       "min-height": "auto",
-      "padding-y": "150px",
+      // Hero padding is calibrated so the hero section bottom (and the
+      // first divider top) lands on a grid line. With band-height = 50px
+      // (header = 2 cells = 100px), `padding-y = 82px` gives a total hero
+      // height that's a multiple of grid-cell (50px) for the current
+      // landing-page hero copy. If the hero copy changes height, retune
+      // this token — DO NOT shave pixels off the section padding inside
+      // the page component.
+      "padding-y": "82px",
       "padding-y-sm": "100px",
       "padding-x": "var(--s-page-margin, 28px)",
       "content-max": "640px",

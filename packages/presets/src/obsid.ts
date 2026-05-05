@@ -140,6 +140,11 @@ export const obsidPreset: SigilPreset = {
       "card-radius": "4px",
       "gutter-pattern": "hexagon",
       "margin-pattern": "diagonal",
+      "band-height": "40px",
+      "divider-thickness-sm": "21px",
+      "divider-thickness-md": "41px",
+      "divider-thickness-lg": "81px",
+      "divider-thickness-xl": "121px",
     },
     radius: {
       none: "0px",

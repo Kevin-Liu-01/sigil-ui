@@ -141,6 +141,11 @@ export const duskPreset: SigilPreset = {
       "margin-pattern": "none",
       "gutter-border": "none",
       "gutter-visible": false,
+      "band-height": "52px",
+      "divider-thickness-sm": "27px",
+      "divider-thickness-md": "53px",
+      "divider-thickness-lg": "105px",
+      "divider-thickness-xl": "157px",
     },
     radius: {
       none: "0px",

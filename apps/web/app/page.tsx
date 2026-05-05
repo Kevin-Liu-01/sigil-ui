@@ -174,7 +174,7 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative">
+    <LandingSection borderTop padding="var(--s-hero-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative">
       <TextureBg opacity={0.3} />
       <div className="relative z-[1] flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
         <div className="flex-1 min-w-0 shrink-0 lg:max-w-[45%]">
