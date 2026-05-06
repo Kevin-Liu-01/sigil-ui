@@ -9,7 +9,7 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
-import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, FileUp, Volume2, Sparkles } from "lucide-react";
+import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, FileUp, Volume2, Sparkles, Radio } from "lucide-react";
 import { OklchText } from "../oklch-text";
 
 /* ── Timing ──────────────────────────────────────────────────── */
@@ -1406,6 +1406,7 @@ export function HeroLogoField() {
               {[
                 { id: "sound", icon: Volume2, label: "sound", checked: applied("UsageCard") },
                 { id: "motion", icon: Sparkles, label: "motion", checked: true },
+                { id: "live", icon: Radio, label: "live", checked: applied("UsageCard") },
               ].map(({ id, icon: Icon, label, checked }) => (
                 <div key={id} className="flex items-center justify-between gap-2">
                   <span className="inline-flex items-center gap-1 min-w-0">
@@ -1417,15 +1418,14 @@ export function HeroLogoField() {
                       {label}
                     </span>
                   </span>
+                  {/* Switch radius is left to the active preset's
+                      --s-radius-full (so it reads sharp in the default
+                      preset, pill in rounded presets, etc.) */}
                   <Switch
                     size="sm"
                     checked={checked}
                     onCheckedChange={() => {}}
-                    // Override the preset's --s-radius-full (0px in the
-                    // default preset) so the switch reads as a proper pill,
-                    // not a sharp rectangle.
-                    className="rounded-full shrink-0"
-                    thumbClassName="rounded-full"
+                    className="shrink-0"
                   />
                 </div>
               ))}
