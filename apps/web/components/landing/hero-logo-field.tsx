@@ -75,12 +75,167 @@ function TokensFilePicker({ accept, hasFile = false, onFileSelected }: TokensFil
 }
 
 /**
+ * Catmull-Rom -> cubic Bezier path. Renders a far smoother spark line
+ * than straight L-segments without pulling in a charting lib.
+ */
+function smoothPathFromPoints(pts: { x: number; y: number }[]): string {
+  if (pts.length === 0) return "";
+  if (pts.length === 1) return `M ${pts[0].x} ${pts[0].y}`;
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+  }
+  return d;
+}
+
+/**
+ * AnimatedSparkLine
+ *
+ * Tweens a smooth (Catmull-Rom -> Bezier) path toward a moving target
+ * data array using requestAnimationFrame. Two pieces of state drive it:
+ *
+ * 1. `target` (controlled prop) — a ring buffer that the parent shifts
+ *    on a slow tick (every ~`tickMs`). New values get pushed onto the
+ *    right; oldest fall off the left.
+ * 2. `displayed` (internal ref) — animates toward `target` at 60fps with
+ *    an exponential lerp (`smooth`). Because we lerp every cell of the
+ *    array, when the target shifts left the visual flow looks like the
+ *    line is sliding across rather than snapping.
+ */
+interface AnimatedSparkLineProps {
+  data: number[];
+  width?: number;
+  height?: number;
+  color?: string;
+  /** Lerp factor per frame, 0..1. Higher = snappier. */
+  smooth?: number;
+  /** Subtle vertical padding inside the SVG. */
+  padding?: number;
+}
+
+function AnimatedSparkLine({
+  data,
+  width = 200,
+  height = 58,
+  color = "var(--s-primary)",
+  smooth = 0.18,
+  padding = 4,
+}: AnimatedSparkLineProps) {
+  const targetRef = useRef<number[]>(data);
+  const displayedRef = useRef<number[]>(data.slice());
+  const [, force] = useState(0);
+  const gradientId = React.useId();
+  const glowId = React.useId();
+
+  useEffect(() => {
+    targetRef.current = data;
+    if (displayedRef.current.length !== data.length) {
+      displayedRef.current = data.slice();
+    }
+  }, [data]);
+
+  useEffect(() => {
+    let raf = 0;
+    let mounted = true;
+    const step = () => {
+      const target = targetRef.current;
+      const cur = displayedRef.current;
+      let dirty = false;
+      for (let i = 0; i < cur.length; i++) {
+        const t = target[i] ?? cur[i];
+        const next = cur[i] + (t - cur[i]) * smooth;
+        if (Math.abs(next - cur[i]) > 0.001) dirty = true;
+        cur[i] = next;
+      }
+      if (dirty) force((n) => (n + 1) % 1_000_000);
+      if (mounted) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => {
+      mounted = false;
+      cancelAnimationFrame(raf);
+    };
+  }, [smooth]);
+
+  const pts = React.useMemo(() => {
+    const cur = displayedRef.current;
+    const target = targetRef.current;
+    // Compute domain across both displayed and target so the y-scale
+    // doesn't bounce as the rolling window moves.
+    const all = cur.length ? cur.concat(target) : target;
+    const min = Math.min(...all);
+    const max = Math.max(...all);
+    const range = Math.max(0.0001, max - min);
+    const plotW = width - padding * 2;
+    const plotH = height - padding * 2;
+    return cur.map((v, i) => ({
+      x: padding + (i / Math.max(1, cur.length - 1)) * plotW,
+      y: padding + plotH - ((v - min) / range) * plotH,
+    }));
+    // Trigger recompute every render (force-toggled by rAF).
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height, padding, force]);
+
+  if (pts.length < 2) return null;
+  const lineD = smoothPathFromPoints(pts);
+  const last = pts[pts.length - 1];
+  const areaD = `${lineD} L ${last.x} ${height - padding} L ${pts[0].x} ${height - padding} Z`;
+
+  return (
+    <svg
+      data-slot="spark-line"
+      width={width}
+      height={height}
+      viewBox={`0 0 ${width} ${height}`}
+      preserveAspectRatio="none"
+      className="w-full h-full shrink-0"
+    >
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity={0.32} />
+          <stop offset="55%" stopColor={color} stopOpacity={0.08} />
+          <stop offset="100%" stopColor={color} stopOpacity={0} />
+        </linearGradient>
+        <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.6" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      <path d={areaD} fill={`url(#${gradientId})`} />
+      <path
+        d={lineD}
+        fill="none"
+        stroke={color}
+        strokeWidth={1.4}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        filter={`url(#${glowId})`}
+      />
+      <circle cx={last.x} cy={last.y} r={2.4} fill={color} />
+      <circle cx={last.x} cy={last.y} r={4.5} fill={color} fillOpacity={0.18} />
+    </svg>
+  );
+}
+
+/**
  * Live "requests / min" card. Rolls a fixed-length window of values on a
  * timer to feel like a real-time stream, with a subtly drifting p99.
  *
  * - `length` data points are kept; on each tick we shift left and push a
- *   new value derived from the previous one (smooth random walk + small
- *   chance of a spike) to avoid ugly noise.
+ *   new value derived from the previous one (smooth random walk + a
+ *   meaningful chance of a small spike) to read busy without looking
+ *   like noise.
  * - `p99` drifts by ±1ms every few ticks, clamped to a sane range.
  * - When `accent` is true (apply state), the line/dot use the demo accent.
  */
@@ -90,11 +245,16 @@ interface LiveRequestsCardProps {
   length?: number;
 }
 
-function LiveRequestsCard({ accent = false, intervalMs = 700, length = 14 }: LiveRequestsCardProps) {
-  const seed = React.useMemo(
-    () => [8, 11, 9, 13, 10, 12, 16, 14, 18, 15, 19, 17, 13, 20].slice(-length),
-    [length],
-  );
+function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: LiveRequestsCardProps) {
+  const seed = React.useMemo(() => {
+    // Hand-shaped seed with peaks/valleys so the first paint already
+    // looks busy instead of starting from a flat warmup.
+    const base = [
+      9, 12, 8, 14, 11, 17, 10, 13, 9, 15, 12, 19, 14, 11, 16, 22,
+      13, 10, 18, 12, 15, 9, 14, 21, 11, 17, 13, 16, 12, 20, 14, 18,
+    ];
+    return base.slice(-length);
+  }, [length]);
   const [data, setData] = useState<number[]>(seed);
   const [p99, setP99] = useState<number>(12);
 
@@ -104,12 +264,15 @@ function LiveRequestsCard({ accent = false, intervalMs = 700, length = 14 }: Liv
       tick += 1;
       setData((prev) => {
         const last = prev[prev.length - 1] ?? 12;
-        const drift = (Math.random() - 0.5) * 6;
-        const spike = Math.random() < 0.12 ? (Math.random() - 0.4) * 8 : 0;
-        const next = Math.max(4, Math.min(24, Math.round(last + drift + spike)));
+        // Larger random walk + higher spike rate so the line reads as a
+        // busy, real-time request graph instead of a smooth sine wave.
+        const drift = (Math.random() - 0.5) * 7.5;
+        const spikeUp = Math.random() < 0.22 ? Math.random() * 9 : 0;
+        const spikeDown = Math.random() < 0.18 ? -Math.random() * 6 : 0;
+        const next = Math.max(3, Math.min(26, last + drift + spikeUp + spikeDown));
         return [...prev.slice(1), next];
       });
-      if (tick % 4 === 0) {
+      if (tick % 8 === 0) {
         setP99((prev) => {
           const drift = Math.random() < 0.5 ? -1 : 1;
           return Math.max(8, Math.min(22, prev + drift));
@@ -118,6 +281,8 @@ function LiveRequestsCard({ accent = false, intervalMs = 700, length = 14 }: Liv
     }, intervalMs);
     return () => window.clearInterval(id);
   }, [intervalMs]);
+
+  const lineColor = accent ? "oklch(0.70 0.22 190)" : "var(--s-primary)";
 
   return (
     <>
@@ -130,20 +295,12 @@ function LiveRequestsCard({ accent = false, intervalMs = 700, length = 14 }: Liv
           <span
             aria-hidden
             className="hero-logo-field__live-dot"
-            style={{ background: accent ? "oklch(0.70 0.22 190)" : "var(--s-primary)" }}
+            style={{ background: lineColor }}
           />
           p99 {p99}ms
         </span>
       </div>
-      <SparkLine
-        data={data}
-        width={200}
-        height={58}
-        filled
-        className="w-full h-full"
-        color={accent ? "oklch(0.70 0.22 190)" : undefined}
-        style={{ transition: "all 320ms cubic-bezier(0.22, 1, 0.36, 1)" }}
-      />
+      <AnimatedSparkLine data={data} width={220} height={62} color={lineColor} smooth={0.22} />
     </>
   );
 }
