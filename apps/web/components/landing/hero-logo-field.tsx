@@ -804,6 +804,11 @@ export function HeroLogoField() {
   const [tokenFileName, setTokenFileName] = useState("sigil.tokens.md");
   const [spacingValue, setSpacingValue] = useState(16);
   const [radiusValue, setRadiusValue] = useState(8);
+  const [switchState, setSwitchState] = useState<Record<string, boolean>>({
+    sound: false,
+    motion: true,
+    live: true,
+  });
 
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
@@ -1404,31 +1409,41 @@ export function HeroLogoField() {
           >
             <CardContent className="p-2 flex flex-col gap-1.5 justify-center h-full">
               {[
-                { id: "sound", icon: Volume2, label: "sound", checked: applied("UsageCard") },
-                { id: "motion", icon: Sparkles, label: "motion", checked: true },
-                { id: "live", icon: Radio, label: "live", checked: applied("UsageCard") },
-              ].map(({ id, icon: Icon, label, checked }) => (
-                <div key={id} className="flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-1 min-w-0">
-                    <Icon size={9} className="shrink-0" style={{ color: checked ? "var(--s-text)" : "var(--s-text-muted)" }} />
-                    <span
-                      className="font-[family-name:var(--s-font-mono)] truncate"
-                      style={{ fontSize: 8, letterSpacing: "0.05em", color: checked ? "var(--s-text)" : "var(--s-text-muted)" }}
-                    >
-                      {label}
+                { id: "sound", icon: Volume2, label: "sound" },
+                { id: "motion", icon: Sparkles, label: "motion" },
+                { id: "live", icon: Radio, label: "live" },
+              ].map(({ id, icon: Icon, label }) => {
+                const checked = switchState[id] ?? false;
+                const toggle = () =>
+                  setSwitchState((prev) => ({ ...prev, [id]: !prev[id] }));
+                return (
+                  <label
+                    key={id}
+                    htmlFor={`hlf-switch-${id}`}
+                    className="flex items-center justify-between gap-2 cursor-pointer select-none"
+                  >
+                    <span className="inline-flex items-center gap-1 min-w-0">
+                      <Icon size={9} className="shrink-0" style={{ color: checked ? "var(--s-text)" : "var(--s-text-muted)" }} />
+                      <span
+                        className="font-[family-name:var(--s-font-mono)] truncate"
+                        style={{ fontSize: 8, letterSpacing: "0.05em", color: checked ? "var(--s-text)" : "var(--s-text-muted)" }}
+                      >
+                        {label}
+                      </span>
                     </span>
-                  </span>
-                  {/* Switch radius is left to the active preset's
-                      --s-radius-full (so it reads sharp in the default
-                      preset, pill in rounded presets, etc.) */}
-                  <Switch
-                    size="sm"
-                    checked={checked}
-                    onCheckedChange={() => {}}
-                    className="shrink-0"
-                  />
-                </div>
-              ))}
+                    {/* Switch radius is left to the active preset's
+                        --s-radius-full (so it reads sharp in the default
+                        preset, pill in rounded presets, etc.) */}
+                    <Switch
+                      id={`hlf-switch-${id}`}
+                      size="sm"
+                      checked={checked}
+                      onCheckedChange={toggle}
+                      className="shrink-0"
+                    />
+                  </label>
+                );
+              })}
             </CardContent>
           </Card>
         </div>
