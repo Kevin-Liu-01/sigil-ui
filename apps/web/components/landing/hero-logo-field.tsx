@@ -74,6 +74,83 @@ function TokensFilePicker({ accept, hasFile = false, onFileSelected }: TokensFil
   );
 }
 
+/**
+ * Live "requests / min" card. Rolls a fixed-length window of values on a
+ * timer to feel like a real-time stream, with a subtly drifting p99.
+ *
+ * - `length` data points are kept; on each tick we shift left and push a
+ *   new value derived from the previous one (smooth random walk + small
+ *   chance of a spike) to avoid ugly noise.
+ * - `p99` drifts by ±1ms every few ticks, clamped to a sane range.
+ * - When `accent` is true (apply state), the line/dot use the demo accent.
+ */
+interface LiveRequestsCardProps {
+  accent?: boolean;
+  intervalMs?: number;
+  length?: number;
+}
+
+function LiveRequestsCard({ accent = false, intervalMs = 700, length = 14 }: LiveRequestsCardProps) {
+  const seed = React.useMemo(
+    () => [8, 11, 9, 13, 10, 12, 16, 14, 18, 15, 19, 17, 13, 20].slice(-length),
+    [length],
+  );
+  const [data, setData] = useState<number[]>(seed);
+  const [p99, setP99] = useState<number>(12);
+
+  useEffect(() => {
+    let tick = 0;
+    const id = window.setInterval(() => {
+      tick += 1;
+      setData((prev) => {
+        const last = prev[prev.length - 1] ?? 12;
+        const drift = (Math.random() - 0.5) * 6;
+        const spike = Math.random() < 0.12 ? (Math.random() - 0.4) * 8 : 0;
+        const next = Math.max(4, Math.min(24, Math.round(last + drift + spike)));
+        return [...prev.slice(1), next];
+      });
+      if (tick % 4 === 0) {
+        setP99((prev) => {
+          const drift = Math.random() < 0.5 ? -1 : 1;
+          return Math.max(8, Math.min(22, prev + drift));
+        });
+      }
+    }, intervalMs);
+    return () => window.clearInterval(id);
+  }, [intervalMs]);
+
+  return (
+    <>
+      <div className="mb-1 px-0.5 flex items-center justify-between">
+        <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
+        <span
+          className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums inline-flex items-center gap-1"
+          style={{ color: "var(--s-text-muted)" }}
+        >
+          <span
+            aria-hidden
+            className="hero-logo-field__live-dot"
+            style={{ background: accent ? "oklch(0.70 0.22 190)" : "var(--s-primary)" }}
+          />
+          p99 {p99}ms
+        </span>
+      </div>
+      <SparkLine
+        data={data}
+        width={200}
+        height={58}
+        filled
+        className="w-full h-full"
+        color={accent ? "oklch(0.70 0.22 190)" : undefined}
+        style={{ transition: "all 320ms cubic-bezier(0.22, 1, 0.36, 1)" }}
+      />
+    </>
+  );
+}
+
+/* `mono9` is declared later — forward-reference via lazy lookup. */
+const mono9 = { fontFamily: "var(--s-font-mono)", fontSize: 9, letterSpacing: "0.05em" } as const;
+
 /* ── Single uniform stroke preset ────────────────────────────── */
 const S = { fill: "none" as const, strokeWidth: 0.25, pathLength: 1 };
 const G = { fill: "none" as const, strokeWidth: 0.25, pathLength: 1 };
@@ -729,6 +806,21 @@ const STYLE_BLOCK = `
      a duration demo is to show the speed faithfully. */
   animation: hlf-duration-sweep var(--hlf-tick-duration, 600ms) linear infinite;
 }
+/* Live "•" dot pulsing next to the p99 readout in the requests/min card —
+   reads as "this stream is live", not "this is a static screenshot". */
+@keyframes hlf-live-pulse {
+  0%, 100% { opacity: 1;   transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.7); }
+}
+.hero-logo-field__live-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  box-shadow: 0 0 6px currentColor;
+  animation: hlf-live-pulse 1.4s ease-in-out infinite;
+}
+
 .hero-logo-field__line-active {
   /* Loading state — neutral white tint so it reads as "in flight" rather
      than "applied". Turns primary-blue once isDone via __line-done. */
@@ -1341,11 +1433,7 @@ export function HeroLogoField() {
             }}
           >
             <CardContent className="p-0.5 flex-col flex ">
-              <div className="mb-1 px-0.5 flex items-center justify-between">
-                <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
-                <span className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums" style={{ color: "var(--s-text-muted)" }}>p99 12ms</span>
-              </div>
-              <SparkLine data={[8, 11, 9, 13, 10, 12, 16, 14, 18, 15, 19, 17, 13, 20]} width={200} height={58} filled className="w-full h-full" color={applied("SparkLine") ? "oklch(0.70 0.22 190)" : undefined} />
+              <LiveRequestsCard accent={applied("SparkLine")} />
             </CardContent>
           </Card>
         </div>
