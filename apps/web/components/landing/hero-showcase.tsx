@@ -1077,12 +1077,86 @@ function RadiusPreviewRow() {
 }
 
 function SpacingScaleRow() {
+  const tokens = [
+    { name: "xs", value: 4 },
+    { name: "sm", value: 8 },
+    { name: "md", value: 12 },
+    { name: "lg", value: 16 },
+    { name: "xl", value: 24 },
+    { name: "2xl", value: 32 },
+  ] as const;
+  const maxValue = tokens[tokens.length - 1].value;
+
   return (
-    <div className="flex flex-col gap-2 p-2.5 flex-1" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <span className="text-[9px] text-[var(--s-text-muted)]">Spacing Scale</span>
-      <div className="flex items-end gap-1 w-full flex-1">
-        {[4, 8, 12, 16, 24, 32].map((s) => (
-          <div key={s} className="flex-1 bg-[var(--s-primary)]" style={{ minHeight: s, opacity: 0.6, borderRadius: 1 }} />
+    <div
+      className="flex flex-col gap-2.5 p-3 flex-1"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+      }}
+    >
+      <div className="flex items-baseline justify-between">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">
+          Spacing Scale
+        </span>
+        <span className="text-[7px] font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] tracking-[0.16em] uppercase">
+          px
+        </span>
+      </div>
+      {/* Bars row — fixed pixel height so the visual proportions are
+          predictable and the smallest token (4) still renders visibly. */}
+      <div className="grid grid-cols-6 gap-1.5 items-end" style={{ height: 64 }}>
+        {tokens.map((t) => {
+          const heightPct = (t.value / maxValue) * 100;
+          return (
+            <div
+              key={t.name}
+              className="flex flex-col items-center justify-end gap-1 h-full min-w-0"
+            >
+              <span
+                className="text-[8px] font-[family-name:var(--s-font-mono)] tabular-nums leading-none"
+                style={{ color: "var(--s-text)" }}
+              >
+                {t.value}
+              </span>
+              <div
+                className="w-full"
+                style={{
+                  height: `${heightPct}%`,
+                  // Saturated cap on top fading to a softer body — each
+                  // bar reads as a stacked token, not a flat block.
+                  background:
+                    "linear-gradient(180deg," +
+                    " color-mix(in oklch, var(--s-primary) 78%, transparent) 0%," +
+                    " color-mix(in oklch, var(--s-primary) 30%, transparent) 100%)",
+                  borderTop: "1.5px solid var(--s-primary)",
+                  borderRadius:
+                    "var(--s-radius-sm, 2px) var(--s-radius-sm, 2px) 0 0",
+                  boxShadow:
+                    "inset 0 1px 0 color-mix(in oklch, var(--s-primary) 25%, transparent)",
+                }}
+                aria-hidden
+              />
+            </div>
+          );
+        })}
+      </div>
+      {/* Baseline + token names. Token names sit BELOW the baseline so the
+          bars rest on a single ruler line, like architectural drawings. */}
+      <div className="relative grid grid-cols-6 gap-1.5">
+        <div
+          className="absolute left-0 right-0 -top-2 h-px"
+          style={{ background: "var(--s-border)" }}
+          aria-hidden
+        />
+        {tokens.map((t) => (
+          <span
+            key={t.name}
+            className="text-[7px] font-[family-name:var(--s-font-mono)] uppercase tracking-[0.12em] leading-none text-center"
+            style={{ color: "var(--s-text-muted)" }}
+          >
+            {t.name}
+          </span>
         ))}
       </div>
     </div>
