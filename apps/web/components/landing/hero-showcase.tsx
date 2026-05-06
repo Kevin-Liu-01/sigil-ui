@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Button,
   Card,
@@ -861,11 +861,74 @@ function DateRangeRow() {
 }
 
 function TagInputRow() {
+  const [tags, setTags] = useState<string[]>(["react", "typescript"]);
+  const [draft, setDraft] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const addTag = (raw: string) => {
+    const value = raw.trim().toLowerCase().replace(/[^a-z0-9.+#-]/g, "");
+    if (!value) return;
+    setTags((prev) => (prev.includes(value) ? prev : [...prev, value]));
+    setDraft("");
+  };
+
+  const removeTag = (value: string) => {
+    setTags((prev) => prev.filter((t) => t !== value));
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      addTag(draft);
+    } else if (e.key === "Backspace" && draft === "" && tags.length > 0) {
+      // Familiar tag-input UX: backspace on an empty input pops the
+      // most-recent tag.
+      e.preventDefault();
+      setTags((prev) => prev.slice(0, -1));
+    }
+  };
+
   return (
-    <div className="flex items-center gap-1.5 h-9 px-2" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <Badge size="sm" variant="secondary" className="text-[9px] gap-0.5 shrink-0">react <span className="text-[var(--s-text-muted)] ml-0.5 cursor-pointer">&times;</span></Badge>
-      <Badge size="sm" variant="secondary" className="text-[9px] gap-0.5 shrink-0">typescript <span className="text-[var(--s-text-muted)] ml-0.5 cursor-pointer">&times;</span></Badge>
-      <span className="flex-1 text-[10px] text-[var(--s-text-muted)] px-1">Add tag...</span>
+    <div
+      className="flex items-center flex-wrap gap-1.5 min-h-9 px-2 py-1 cursor-text transition-colors duration-[var(--s-duration-fast,150ms)] focus-within:border-[var(--s-primary)]"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+      }}
+      onClick={() => inputRef.current?.focus()}
+    >
+      {tags.map((tag) => (
+        <Badge
+          key={tag}
+          size="sm"
+          variant="secondary"
+          className="text-[9px] gap-0.5 shrink-0 pr-0.5"
+        >
+          <span>{tag}</span>
+          <button
+            type="button"
+            aria-label={`Remove ${tag}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              removeTag(tag);
+            }}
+            className="inline-flex items-center justify-center w-3 h-3 rounded-[var(--s-radius-sm,2px)] cursor-pointer text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_12%,transparent)] transition-colors duration-[var(--s-duration-fast,150ms)]"
+          >
+            <span aria-hidden style={{ fontSize: 11, lineHeight: 1 }}>×</span>
+          </button>
+        </Badge>
+      ))}
+      <input
+        ref={inputRef}
+        type="text"
+        value={draft}
+        onChange={(e) => setDraft(e.target.value)}
+        onKeyDown={onKeyDown}
+        onBlur={() => draft && addTag(draft)}
+        placeholder={tags.length === 0 ? "Add tag..." : "Add..."}
+        className="flex-1 min-w-[60px] bg-transparent outline-none text-[10px] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)] px-1"
+        aria-label="Add tag"
+      />
     </div>
   );
 }
