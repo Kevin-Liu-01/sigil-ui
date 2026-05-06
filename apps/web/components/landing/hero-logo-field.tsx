@@ -261,6 +261,28 @@ const HERO_CELLS = [
   { x: 66, y: 66, stroke: P, fill: "url(#hlf-hatch-pri-soft)" },
 ] as const;
 
+// Real preset → primary color map. The values are the canonical accent
+// colors taken from packages/presets and mirrored in apps/web/components/devbar.tsx.
+// These are used by the PresetSwatches cell so each tile actually inherits
+// its preset's brand color instead of all reading from --s-primary.
+type PresetSwatch = { name: string; color: string };
+const PRESET_SWATCH_ROW_A: PresetSwatch[] = [
+  { name: "sigil", color: "#9b99e8" },
+  { name: "onyx", color: "#a855f7" },
+  { name: "forge", color: "#ea580c" },
+  { name: "flux", color: "#06b6d4" },
+  { name: "vex", color: "#ec4899" },
+  { name: "arc", color: "#7c3aed" },
+];
+const PRESET_SWATCH_ROW_B: PresetSwatch[] = [
+  { name: "rune", color: "#b45309" },
+  { name: "kova", color: "#38bdf8" },
+  { name: "cobalt", color: "#2563eb" },
+  { name: "helix", color: "#059669" },
+  { name: "cipher", color: "#22c55e" },
+  { name: "prism", color: "#8b5cf6" },
+];
+
 const HERO_TOKEN_STEPS = [
   { token: "--s-primary", before: "primary: oklch(0.55 0.12 275)", line: "primary: oklch(0.66 0.18 275)", label: "primary geometry" },
   { token: "--s-border", before: "border: oklch(0.20 0.01 260)", line: "border: oklch(0.24 0.01 260)", label: "cell outline" },
@@ -991,7 +1013,7 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-1.5">
+            <CardContent className="pt-1.5 pb-0.5 px-1.5">
               <div className="flex items-center justify-between">
                 <span style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>usage</span>
                 <Badge size="sm" className="text-[7px] px-1 py-0" style={applied("UsageCard") ? { background: "var(--s-primary)", borderColor: "var(--s-primary)" } : undefined}>live</Badge>
@@ -1011,38 +1033,41 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-1.5">
-              <div className="mb-1" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset</div>
-              <div className="flex gap-1">
-                {["sigil", "onyx", "rune", "flux", "prism"].map((name, itemIdx) => (
-                  <span
-                    key={name}
-                    style={{
-                      width: 11, height: 11,
-                      border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
-                      borderRadius: "var(--s-radius-sm,4px)",
-                      background: applied("PresetSwatches")
-                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 12%, transparent)"
-                        : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
-                    }}
-                  />
-                ))}
-              </div>
-              <div className="flex mt-1 gap-1">
-                {["kova", "cobalt", "helix", "hex", "crux"].map((name, itemIdx) => (
-                  <span
-                    key={name}
-                    style={{
-                      width: 11, height: 11,
-                      border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
-                      borderRadius: "var(--s-radius-sm,4px)",
-                      background: applied("PresetSwatches")
-                        ? itemIdx === 0 ? "var(--s-primary)" : "color-mix(in oklch, var(--s-primary) 12%, transparent)"
-                        : itemIdx === activeStepIndex % 3 ? "var(--s-primary)" : "transparent",
-                    }}
-                  />
-                ))}
-              </div>
+            <CardContent className="p-1 px-1.5 flex flex-col justify-center">
+              <div className="mb-1" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset selection</div>
+              {[PRESET_SWATCH_ROW_A, PRESET_SWATCH_ROW_B].map((row, rowIdx) => (
+                <div key={rowIdx} className={rowIdx === 0 ? "flex gap-1" : "flex mt-1 gap-1"}>
+                  {row.map((swatch, itemIdx) => {
+                    // The "active" swatch in each row reflects the current
+                    // preset cycle and lights up with a ring + slight scale.
+                    const isActive = applied("PresetSwatches")
+                      ? rowIdx === 0 && itemIdx === 0
+                      : rowIdx === 0 && itemIdx === activeStepIndex % row.length;
+                    return (
+                      <button
+                        key={swatch.name}
+                        type="button"
+                        aria-label={swatch.name}
+                        title={swatch.name}
+                        className="shrink-0 cursor-pointer p-0 transition-transform duration-[var(--s-duration-fast,150ms)] hover:scale-110"
+                        style={{
+                          width: 12,
+                          height: 12,
+                          background: swatch.color,
+                          borderRadius: "var(--s-radius-sm,3px)",
+                          border: isActive
+                            ? `1.5px solid var(--s-text)`
+                            : `1px solid color-mix(in oklch, ${swatch.color} 60%, var(--s-border))`,
+                          boxShadow: isActive
+                            ? `0 0 0 1.5px var(--s-background), 0 0 0 2.5px ${swatch.color}`
+                            : "none",
+                          transform: isActive ? "scale(1.08)" : "scale(1)",
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>
