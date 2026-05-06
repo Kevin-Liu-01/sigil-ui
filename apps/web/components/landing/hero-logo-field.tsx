@@ -991,13 +991,13 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2.5">
-              <div className="mb-1 flex items-center justify-between">
-                <span style={{ ...mono9, color: "var(--s-text-muted)" }}>usage</span>
-                <Badge size="sm" className="text-[7px]" style={applied("UsageCard") ? { background: "var(--s-primary)", borderColor: "var(--s-primary)" } : undefined}>live</Badge>
+            <CardContent className="p-1.5">
+              <div className="flex items-center justify-between">
+                <span style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>usage</span>
+                <Badge size="sm" className="text-[7px] px-1 py-0" style={applied("UsageCard") ? { background: "var(--s-primary)", borderColor: "var(--s-primary)" } : undefined}>live</Badge>
               </div>
-              <div className="font-[family-name:var(--s-font-mono)] text-base font-bold tabular-nums" style={{ color: applied("UsageCard") ? "var(--s-primary)" : "var(--s-text)", transition: "color 600ms" }}>12.4k</div>
-              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1.5 h-1" />
+              <div className="font-[family-name:var(--s-font-mono)] text-[13px] font-bold tabular-nums leading-tight" style={{ color: applied("UsageCard") ? "var(--s-primary)" : "var(--s-text)", transition: "color 600ms" }}>12.4k</div>
+              <Progress value={applied("UsageCard") ? 88 : 72} className="mt-1 h-[3px]" />
             </CardContent>
           </Card>
         </div>
@@ -1011,14 +1011,14 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2.5">
-              <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>preset</div>
+            <CardContent className="p-1.5">
+              <div className="mb-1" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset</div>
               <div className="flex gap-1">
                 {["sigil", "onyx", "rune", "flux", "prism"].map((name, itemIdx) => (
                   <span
                     key={name}
                     style={{
-                      width: 16, height: 16,
+                      width: 11, height: 11,
                       border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                       borderRadius: "var(--s-radius-sm,4px)",
                       background: applied("PresetSwatches")
@@ -1033,7 +1033,7 @@ export function HeroLogoField() {
                   <span
                     key={name}
                     style={{
-                      width: 16, height: 16,
+                      width: 11, height: 11,
                       border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-primary)",
                       borderRadius: "var(--s-radius-sm,4px)",
                       background: applied("PresetSwatches")
