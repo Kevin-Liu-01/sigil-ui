@@ -9,7 +9,7 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
-import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, FileUp } from "lucide-react";
+import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, FileUp, Volume2, Sparkles } from "lucide-react";
 import { OklchText } from "../oklch-text";
 
 /* ── Timing ──────────────────────────────────────────────────── */
@@ -1388,7 +1388,7 @@ export function HeroLogoField() {
                   <span style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</span>
                   <span className="font-[family-name:var(--s-font-mono)] tabular-nums" style={{ fontSize: 9, color: "var(--s-text)" }}>{radiusValue}px</span>
                 </div>
-                <Slider value={[radiusValue]} onValueChange={(v: number[]) => setRadiusValue(v[0])} min={0} max={24} step={2} className="w-full" />
+                <Slider value={[radiusValue]} onValueChange={(v: number[]) => setRadiusValue(v[0])} min={0} max={24} step={2} className="w-full"  />
               </div>
             </CardContent>
           </Card>
@@ -1402,15 +1402,33 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2.5 flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>sound</span>
-                <Switch checked={applied("UsageCard")} onCheckedChange={() => {}} />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="font-[family-name:var(--s-font-mono)] text-[8px]" style={{ color: "var(--s-text-muted)" }}>motion</span>
-                <Switch defaultChecked onCheckedChange={() => {}} />
-              </div>
+            <CardContent className="p-2 flex flex-col gap-1.5 justify-center h-full">
+              {[
+                { id: "sound", icon: Volume2, label: "sound", checked: applied("UsageCard") },
+                { id: "motion", icon: Sparkles, label: "motion", checked: true },
+              ].map(({ id, icon: Icon, label, checked }) => (
+                <div key={id} className="flex items-center justify-between gap-2">
+                  <span className="inline-flex items-center gap-1 min-w-0">
+                    <Icon size={9} className="shrink-0" style={{ color: checked ? "var(--s-text)" : "var(--s-text-muted)" }} />
+                    <span
+                      className="font-[family-name:var(--s-font-mono)] truncate"
+                      style={{ fontSize: 8, letterSpacing: "0.05em", color: checked ? "var(--s-text)" : "var(--s-text-muted)" }}
+                    >
+                      {label}
+                    </span>
+                  </span>
+                  <Switch
+                    size="sm"
+                    checked={checked}
+                    onCheckedChange={() => {}}
+                    // Override the preset's --s-radius-full (0px in the
+                    // default preset) so the switch reads as a proper pill,
+                    // not a sharp rectangle.
+                    className="rounded-full shrink-0"
+                    thumbClassName="rounded-full"
+                  />
+                </div>
+              ))}
             </CardContent>
           </Card>
         </div>
