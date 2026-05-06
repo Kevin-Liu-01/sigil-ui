@@ -798,12 +798,67 @@ function PriceRangeRow() {
   );
 }
 
+// Static index of fake "components" the search input filters over. Twelve
+// items so the empty-query state still reads "12 results".
+const SEARCH_INDEX = [
+  "Button", "Card", "Input", "Select", "Switch", "Tabs",
+  "Avatar", "Badge", "Tooltip", "Dialog", "Slider", "Calendar",
+];
+
 function SearchCountRow() {
+  const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const matches = query.trim()
+    ? SEARCH_INDEX.filter((name) => name.toLowerCase().includes(query.toLowerCase().trim()))
+    : SEARCH_INDEX;
+  const hasQuery = query.trim().length > 0;
+
   return (
-    <div className="flex items-center gap-2 h-9 px-3" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
+    <div
+      className="flex items-center gap-2 h-9 px-3 cursor-text transition-colors duration-[var(--s-duration-fast,150ms)] focus-within:border-[var(--s-primary)]"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+      }}
+      onClick={() => inputRef.current?.focus()}
+    >
       <Search size={13} className="text-[var(--s-text-muted)] shrink-0" />
-      <span className="flex-1 text-[11px] text-[var(--s-text-muted)]">Search...</span>
-      <span className="text-[10px] tabular-nums text-[var(--s-text-muted)] shrink-0">12 results</span>
+      <input
+        ref={inputRef}
+        type="search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search..."
+        className="flex-1 min-w-0 bg-transparent outline-none text-[11px] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)]"
+        aria-label="Search components"
+      />
+      {hasQuery && (
+        <button
+          type="button"
+          aria-label="Clear search"
+          onClick={(e) => {
+            e.stopPropagation();
+            setQuery("");
+            inputRef.current?.focus();
+          }}
+          className="inline-flex items-center justify-center w-4 h-4 shrink-0 rounded-[var(--s-radius-sm,2px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[color-mix(in_oklch,var(--s-text)_10%,transparent)] cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
+        >
+          <span aria-hidden style={{ fontSize: 11, lineHeight: 1 }}>×</span>
+        </button>
+      )}
+      <span
+        className="text-[10px] tabular-nums shrink-0 transition-colors duration-[var(--s-duration-fast,150ms)]"
+        style={{
+          color:
+            hasQuery && matches.length === 0
+              ? "var(--s-warning)"
+              : "var(--s-text-muted)",
+        }}
+        aria-live="polite"
+      >
+        {matches.length === 0 ? "no matches" : `${matches.length} ${matches.length === 1 ? "result" : "results"}`}
+      </span>
     </div>
   );
 }
@@ -818,20 +873,159 @@ function UrlInputRow() {
   );
 }
 
+const AI_MODELS = ["Auto", "GPT-5", "Claude", "Gemini"] as const;
+const AI_MAX_CHARS = 1200;
+
 function AiChatRow() {
+  const [draft, setDraft] = useState("");
+  const [modelIdx, setModelIdx] = useState(0);
+  const [attached, setAttached] = useState<string | null>(null);
+  const [lastSent, setLastSent] = useState<string | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const hasContent = draft.trim().length > 0;
+  // Token meter: combine the prompt length with a notional cost for any
+  // attachment so the bar reacts to both inputs.
+  const usedChars = draft.length + (attached ? 320 : 0);
+  const usedPct = Math.min(100, Math.round((usedChars / AI_MAX_CHARS) * 100));
+  const overLimit = usedPct >= 95;
+
+  const send = () => {
+    if (!hasContent) return;
+    setLastSent(draft.trim());
+    setDraft("");
+    setAttached(null);
+    // Auto-clear the "sent" toast after a moment so the demo cycles back.
+    window.setTimeout(() => setLastSent(null), 1800);
+    textareaRef.current?.focus();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // Cmd/Ctrl+Enter or plain Enter (without shift) submits.
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
+  };
+
   return (
-    <div className="flex flex-col" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)", overflow: "hidden" }}>
-      <div className="p-2.5 pb-4">
-        <span className="text-[11px] text-[var(--s-text-muted)]">Ask, Search or Chat...</span>
+    <div
+      className="flex flex-col"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+        overflow: "hidden",
+      }}
+    >
+      <div className="p-2.5 pb-3">
+        {lastSent ? (
+          <div
+            className="text-[10px] flex items-center gap-1.5"
+            style={{ color: "var(--s-success)" }}
+          >
+            <span aria-hidden>✓</span>
+            <span className="truncate">Sent: "{lastSent}"</span>
+          </div>
+        ) : (
+          <textarea
+            ref={textareaRef}
+            value={draft}
+            onChange={(e) => setDraft(e.target.value.slice(0, AI_MAX_CHARS))}
+            onKeyDown={onKeyDown}
+            placeholder="Ask, Search or Chat..."
+            rows={1}
+            className="w-full bg-transparent outline-none resize-none text-[11px] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)] leading-tight"
+            style={{ minHeight: 16, maxHeight: 60 }}
+            aria-label="Compose message"
+          />
+        )}
+        {attached && (
+          <div className="mt-1.5 inline-flex items-center gap-1 text-[9px] px-1.5 py-0.5 font-[family-name:var(--s-font-mono)]"
+            style={{
+              color: "var(--s-text)",
+              background: "color-mix(in oklch, var(--s-primary) 10%, transparent)",
+              border: "1px solid color-mix(in oklch, var(--s-primary) 30%, transparent)",
+              borderRadius: "var(--s-radius-sm, 3px)",
+            }}
+          >
+            <span>📎</span>
+            <span className="truncate max-w-[120px]">{attached}</span>
+            <button
+              type="button"
+              aria-label="Remove attachment"
+              onClick={() => setAttached(null)}
+              className="ml-0.5 cursor-pointer text-[var(--s-text-muted)] hover:text-[var(--s-text)]"
+            >
+              ×
+            </button>
+          </div>
+        )}
       </div>
       <div className="flex items-center gap-2 px-2.5 pb-2">
-        <button type="button" className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full text-[var(--s-text-muted)]" style={{ border: "1px solid var(--s-border)" }}>
-          <Plus size={12} />
+        <button
+          type="button"
+          aria-label="Attach file"
+          onClick={() =>
+            setAttached((prev) =>
+              prev
+                ? null
+                : `screenshot-${Math.floor(Math.random() * 99) + 1}.png`,
+            )
+          }
+          className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[color-mix(in_oklch,var(--s-text)_8%,transparent)]"
+          style={{
+            border: "1px solid var(--s-border)",
+            color: attached ? "var(--s-primary)" : "var(--s-text-muted)",
+            background: attached
+              ? "color-mix(in oklch, var(--s-primary) 12%, transparent)"
+              : "transparent",
+          }}
+        >
+          <Plus
+            size={12}
+            style={{
+              transform: attached ? "rotate(45deg)" : "rotate(0deg)",
+              transition:
+                "transform var(--s-duration-fast, 150ms) ease-out",
+            }}
+          />
         </button>
-        <Badge size="sm" variant="outline" className="text-[9px]">Auto</Badge>
+        <button
+          type="button"
+          onClick={() => setModelIdx((i) => (i + 1) % AI_MODELS.length)}
+          aria-label={`Model: ${AI_MODELS[modelIdx]}. Click to change.`}
+          className="cursor-pointer"
+        >
+          <Badge size="sm" variant="outline" className="text-[9px]">
+            {AI_MODELS[modelIdx]}
+          </Badge>
+        </button>
         <span className="flex-1" />
-        <span className="text-[9px] tabular-nums text-[var(--s-text-muted)]">52% used</span>
-        <button type="button" className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full bg-[var(--s-text)] text-[var(--s-background)]">
+        <span
+          className="text-[9px] tabular-nums font-[family-name:var(--s-font-mono)] transition-colors duration-[var(--s-duration-fast,150ms)]"
+          style={{
+            color: overLimit ? "var(--s-warning)" : "var(--s-text-muted)",
+          }}
+        >
+          {usedPct}% used
+        </span>
+        <button
+          type="button"
+          onClick={send}
+          disabled={!hasContent}
+          aria-label="Send message"
+          className="flex items-center justify-center shrink-0 w-6 h-6 rounded-full cursor-pointer transition-all duration-[var(--s-duration-fast,150ms)] disabled:cursor-not-allowed"
+          style={{
+            background: hasContent
+              ? "var(--s-text)"
+              : "color-mix(in oklch, var(--s-text) 22%, transparent)",
+            color: hasContent
+              ? "var(--s-background)"
+              : "var(--s-text-muted)",
+            transform: hasContent ? "scale(1)" : "scale(0.96)",
+            opacity: hasContent ? 1 : 0.7,
+          }}
+        >
           <ArrowUp size={12} />
         </button>
       </div>
