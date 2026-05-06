@@ -9,7 +9,7 @@ import {
   ToggleGroup, ToggleGroupItem,
 } from "@sigil-ui/components";
 import { MarkdownChrome, TokenPreviewGlyph, type TokenPreviewKind } from "./token-visuals";
-import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers } from "lucide-react";
+import { Palette, RectangleHorizontal, SquareSlash, Clock, Type, Layers, FileUp } from "lucide-react";
 import { OklchText } from "../oklch-text";
 
 /* ── Timing ──────────────────────────────────────────────────── */
@@ -17,6 +17,62 @@ const CYCLE_MS = 4200;
 const PHASE_MS = 1050;
 const STAGGER_MS = 40;
 const ANIM_MS = 3400;
+
+/* ── Compact file picker used inside the TokenAction cell ────── */
+
+interface TokensFilePickerProps {
+  accept?: string;
+  onFileSelected?: (file: File) => void;
+}
+
+/**
+ * Tiny token-row file picker. Renders an icon button matching the row's
+ * h-7 size; clicking it opens the native file dialog. Shows a checkmark
+ * tint after a file is selected so the demo reads as "loaded a file".
+ */
+function TokensFilePicker({ accept, onFileSelected }: TokensFilePickerProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [hasFile, setHasFile] = useState(false);
+
+  const handleClick = useCallback(() => {
+    inputRef.current?.click();
+  }, []);
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setHasFile(true);
+    onFileSelected?.(file);
+  }, [onFileSelected]);
+
+  return (
+    <>
+      <input
+        ref={inputRef}
+        type="file"
+        accept={accept}
+        onChange={handleChange}
+        className="sr-only"
+      />
+      <button
+        type="button"
+        aria-label="Open token file"
+        onClick={handleClick}
+        className="inline-flex h-7 w-7 items-center justify-center shrink-0 cursor-pointer transition-colors duration-[var(--s-duration-fast,150ms)]"
+        style={{
+          border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)",
+          borderRadius: "var(--s-radius-sm,4px)",
+          background: hasFile
+            ? "color-mix(in oklch, var(--s-primary) 12%, var(--s-surface, var(--s-background)))"
+            : "var(--s-surface, var(--s-background))",
+          color: hasFile ? "var(--s-primary)" : "var(--s-text-muted)",
+        }}
+      >
+        <FileUp size={11} aria-hidden />
+      </button>
+    </>
+  );
+}
 
 /* ── Single uniform stroke preset ────────────────────────────── */
 const S = { fill: "none" as const, strokeWidth: 0.25, pathLength: 1 };
@@ -1143,7 +1199,8 @@ export function HeroLogoField() {
               "--hlf-tick-duration": applied("TokenAction") ? "300ms" : "600ms",
             } as React.CSSProperties}
           >
-            <div className="grid grid-cols-[1fr_auto] gap-2 items-center">
+            <div className="grid grid-cols-[auto_1fr_auto] gap-2 items-center">
+              <TokensFilePicker accept=".md,.toml,.css" />
               <Input
                 value="sigil.tokens.md"
                 readOnly
