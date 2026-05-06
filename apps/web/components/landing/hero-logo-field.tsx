@@ -1544,13 +1544,17 @@ export function HeroLogoField() {
           >
             <CardContent className="p-2 flex items-center justify-center h-full">
               <div
-                className="grid grid-cols-2 grid-rows-2 gap-1.5 w-full"
+                className="grid grid-cols-6 gap-1.5 w-full"
                 style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}
               >
-                <Button size="sm" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Primary</Button>
-                <Button size="sm" variant="outline" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Outline</Button>
-                <Button size="sm" variant="secondary" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Secondary</Button>
-                <Button size="sm" variant="ghost" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Ghost</Button>
+                {/* Row 1: Primary + Outline are equal-weight calls to action. */}
+                <Button size="sm" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Primary</Button>
+                <Button size="sm" variant="outline" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Outline</Button>
+                {/* Row 2: Secondary stretches wider than Ghost so labels can
+                    breathe ("Secondary" is the longest word) and to give the
+                    grid a more editorial, less symmetrical rhythm. */}
+                <Button size="sm" variant="secondary" className="col-span-4 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Secondary</Button>
+                <Button size="sm" variant="ghost" className="col-span-2 h-7 w-full px-1 text-[8px] leading-none justify-center">Ghost</Button>
               </div>
             </CardContent>
           </Card>
