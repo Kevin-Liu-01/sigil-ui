@@ -802,6 +802,8 @@ export function HeroLogoField() {
   const appliedQueue = useRef<string[]>([]);
   const [formats, setFormats] = useState<string[]>(["bold"]);
   const [tokenFileName, setTokenFileName] = useState("sigil.tokens.md");
+  const [spacingValue, setSpacingValue] = useState(16);
+  const [radiusValue, setRadiusValue] = useState(8);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
@@ -1237,14 +1239,14 @@ export function HeroLogoField() {
         </div>
         <div ref={setComponentRef("CommitGrid")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 8, gridColumn: "2 / 4" } as React.CSSProperties}>
           <Card
-            className={`h-full ${applied("CommitGrid") ? "hero-logo-field__apply" : ""}`}
+            className={`h-full flex items-center justify-center ${applied("CommitGrid") ? "hero-logo-field__apply" : ""}`}
             style={{
               borderColor: applied("CommitGrid") ? "var(--s-primary)" : "var(--s-border)",
               background: applied("CommitGrid") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2 h-full">
+            <CardContent className="h-full px-1 py-1.5">
               <CommitGrid data={COMMIT_DAYS} weeks={10} cellSize={10} gap={2} showDayLabels={false} showMonthLabels={false} color={applied("CommitGrid") ? "var(--s-success, #22c55e)" : "var(--s-primary)"} />
             </CardContent>
           </Card>
@@ -1256,7 +1258,6 @@ export function HeroLogoField() {
               borderColor: applied("Badges") ? "var(--s-primary)" : "var(--s-border)",
               background: cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
-              borderRadius: radiusApplied ? "8px" : "0px",
             }}
           >
             <CardContent className="p-2 h-full flex flex-col justify-between" style={{ gap: 4 }}>
@@ -1374,14 +1375,20 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2.5 flex flex-col gap-2">
+            <CardContent className="px-2.5 py-2 flex flex-col gap-2">
               <div>
-                <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>spacing</div>
-                <Slider defaultValue={[16]} min={4} max={48} step={4} className="w-full" />
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <span style={{ ...mono9, color: "var(--s-text-muted)" }}>spacing</span>
+                  <span className="font-[family-name:var(--s-font-mono)] tabular-nums" style={{ fontSize: 9, color: "var(--s-text)" }}>{spacingValue}px</span>
+                </div>
+                <Slider value={[spacingValue]} onValueChange={(v: number[]) => setSpacingValue(v[0])} min={4} max={48} step={4} className="w-full" />
               </div>
               <div>
-                <div className="mb-1" style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</div>
-                <Slider defaultValue={[8]} min={0} max={24} step={2} className="w-full" />
+                <div className="mb-1 flex items-center justify-between gap-2">
+                  <span style={{ ...mono9, color: "var(--s-text-muted)" }}>radius</span>
+                  <span className="font-[family-name:var(--s-font-mono)] tabular-nums" style={{ fontSize: 9, color: "var(--s-text)" }}>{radiusValue}px</span>
+                </div>
+                <Slider value={[radiusValue]} onValueChange={(v: number[]) => setRadiusValue(v[0])} min={0} max={24} step={2} className="w-full" />
               </div>
             </CardContent>
           </Card>
