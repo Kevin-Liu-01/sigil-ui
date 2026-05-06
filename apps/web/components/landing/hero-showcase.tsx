@@ -772,14 +772,178 @@ function StatusBadgesRow() {
 }
 
 function ChatInputRow() {
+  const [draft, setDraft] = useState("");
+  const [attached, setAttached] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [recDuration, setRecDuration] = useState(0);
+  const [sentFlash, setSentFlash] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!recording) {
+      setRecDuration(0);
+      return;
+    }
+    const start = performance.now();
+    const id = window.setInterval(() => {
+      setRecDuration(Math.floor((performance.now() - start) / 1000));
+    }, 250);
+    return () => window.clearInterval(id);
+  }, [recording]);
+
+  const hasText = draft.trim().length > 0;
+  const hasContent = hasText || attached;
+  const submitMode = hasContent || recording;
+
+  const send = () => {
+    if (!submitMode) return;
+    setRecording(false);
+    setDraft("");
+    setAttached(false);
+    setSentFlash(true);
+    window.setTimeout(() => setSentFlash(false), 1200);
+    inputRef.current?.focus();
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  };
+
+  const formatDuration = (s: number) =>
+    `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
   return (
-    <div className="flex items-center gap-2 p-1.5 pl-1" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <button type="button" className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]" style={{ border: "1px solid var(--s-border)" }}>
-        <Plus size={14} />
+    <div
+      className="flex items-center gap-2 p-1.5 pl-1 cursor-text transition-colors duration-[var(--s-duration-fast,150ms)] focus-within:border-[var(--s-primary)]"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+      }}
+      onClick={() => !recording && inputRef.current?.focus()}
+    >
+      {/* Local keyframes for the recording pulse + waveform bars. */}
+      <style>{`
+        @keyframes hsr-pulse-dot {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.3; transform: scale(0.6); }
+        }
+        @keyframes hsr-wave {
+          0%, 100% { transform: scaleY(0.25); }
+          50% { transform: scaleY(1); }
+        }
+      `}</style>
+      <button
+        type="button"
+        aria-label={attached ? "Remove attachment" : "Add attachment"}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (recording) return;
+          setAttached((p) => !p);
+        }}
+        disabled={recording}
+        className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full transition-all duration-[var(--s-duration-fast,150ms)] cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 hover:bg-[var(--s-surface-elevated)]"
+        style={{
+          border: "1px solid var(--s-border)",
+          color: attached ? "var(--s-primary)" : "var(--s-text-muted)",
+          background: attached
+            ? "color-mix(in oklch, var(--s-primary) 12%, transparent)"
+            : "transparent",
+        }}
+      >
+        <Plus
+          size={14}
+          style={{
+            transform: attached ? "rotate(45deg)" : "rotate(0deg)",
+            transition: "transform var(--s-duration-fast, 150ms) ease-out",
+          }}
+        />
       </button>
-      <span className="flex-1 text-[11px] text-[var(--s-text-muted)]">Send a message...</span>
-      <button type="button" className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]">
-        <AudioLines size={14} />
+
+      {recording ? (
+        <div className="flex-1 flex items-center gap-2 min-w-0">
+          <span
+            aria-hidden
+            className="inline-block w-1.5 h-1.5 rounded-full shrink-0"
+            style={{
+              background: "var(--s-error, oklch(0.62 0.22 22))",
+              animation: "hsr-pulse-dot 1.2s ease-in-out infinite",
+            }}
+          />
+          <span
+            className="text-[10px] font-[family-name:var(--s-font-mono)] tabular-nums shrink-0"
+            style={{ color: "var(--s-text)" }}
+          >
+            {formatDuration(recDuration)}
+          </span>
+          <div
+            className="flex-1 flex items-center justify-center gap-[2px]"
+            style={{ height: 14 }}
+            aria-hidden
+          >
+            {Array.from({ length: 18 }).map((_, i) => (
+              <span
+                key={i}
+                className="block flex-1 rounded-full"
+                style={{
+                  height: "100%",
+                  maxWidth: 2,
+                  background: "color-mix(in oklch, var(--s-error, oklch(0.62 0.22 22)) 70%, transparent)",
+                  transformOrigin: "center",
+                  animation: `hsr-wave ${0.6 + (i % 5) * 0.12}s ease-in-out ${i * -0.07}s infinite`,
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      ) : sentFlash ? (
+        <span
+          className="flex-1 text-[11px] flex items-center gap-1.5"
+          style={{ color: "var(--s-success)" }}
+        >
+          <span aria-hidden>✓</span>
+          Sent
+        </span>
+      ) : (
+        <input
+          ref={inputRef}
+          type="text"
+          value={draft}
+          onChange={(e) => setDraft(e.target.value)}
+          onKeyDown={onKeyDown}
+          placeholder={attached ? "1 file attached — add a note" : "Send a message..."}
+          className="flex-1 min-w-0 bg-transparent outline-none text-[11px] text-[var(--s-text)] placeholder:text-[var(--s-text-muted)]"
+          aria-label="Send a message"
+        />
+      )}
+
+      <button
+        type="button"
+        aria-label={
+          recording
+            ? "Stop recording and send"
+            : submitMode
+              ? "Send message"
+              : "Start voice recording"
+        }
+        onClick={(e) => {
+          e.stopPropagation();
+          if (submitMode) send();
+          else setRecording(true);
+        }}
+        className="flex items-center justify-center shrink-0 w-7 h-7 rounded-full transition-all duration-[var(--s-duration-fast,150ms)] cursor-pointer"
+        style={{
+          background: submitMode
+            ? recording
+              ? "var(--s-error, oklch(0.62 0.22 22))"
+              : "var(--s-text)"
+            : "transparent",
+          color: submitMode ? "var(--s-background)" : "var(--s-text-muted)",
+        }}
+      >
+        {submitMode ? <ArrowUp size={14} /> : <AudioLines size={14} />}
       </button>
     </div>
   );
