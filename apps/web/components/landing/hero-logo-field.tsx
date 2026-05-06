@@ -905,11 +905,11 @@ export function HeroLogoField() {
           opacity: mounted ? 1 : 0,
           transition: "opacity 400ms cubic-bezier(0.32, 0.72, 0, 1)",
           gridTemplateColumns: "repeat(7, 1fr)",
-          // All rows auto-size — the right column's natural height
-          // (UsageCard + Calendar + TokenAction) determines the row-span-3
-          // sigil.tokens.md panel's height. The panel's inner scroll area
-          // (overflow: auto, flex: 1) absorbs any markdown overflow.
-          gridTemplateRows: "auto auto auto auto auto auto",
+          // The sigil.tokens.md panel (row-span-3) is content-sized and
+          // determines the column height. Row 2 (DatePicker / Calendar)
+          // flexes — it grows or shrinks to absorb the leftover space the
+          // panel makes after rows 1 and 3 take their natural sizes.
+          gridTemplateRows: "auto 1fr auto auto auto auto",
           gap: 5,
         }}
       >
@@ -932,7 +932,7 @@ export function HeroLogoField() {
             <span style={{ fontWeight: 700 }}>sigil.tokens.md</span>
             <span style={{ fontSize: 9, color: "var(--s-text-muted)" }}>{appliedSet.size}/{activeStepIndices.length}</span>
           </div>
-          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 10, lineHeight: 1.5, overflow: "auto", flex: 1, minHeight: 0 }}>
+          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 10, lineHeight: 1.5 }}>
             {TOKEN_SECTIONS.map((section, si) => {
               const Icon = section.icon;
               return (
@@ -1056,6 +1056,11 @@ export function HeroLogoField() {
           style={{
             "--m-order": 3,
             gridColumn: "4 / 8",
+            // Wrapper fills row 2 so the calendar shrinks/grows to match the
+            // height the panel makes available.
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
             border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
             borderRadius: radiusApplied ? "var(--s-radius-lg)" : "var(--s-radius-md)",
             background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
@@ -1067,11 +1072,11 @@ export function HeroLogoField() {
             selected={new Date()}
             captionLayout="label"
             disableNavigation={false}
-            // Override the Calendar component's `aspect-square` on day cells
-            // so they stay flat rectangles (width is wide, but height is
-            // small) — keeps the natural calendar height ≤ ~180px so the
-            // right column never out-grows the sigil.tokens.md panel.
-            className="border-0 rounded-none bg-transparent p-2 w-full [--cell-size:1.25rem] [&_table]:w-full [&_table]:text-[9px] [&_table]:table-fixed [&_.rdp-day]:!aspect-auto [&_.rdp-day]:h-5 [&_button]:text-[9px] [&_button]:p-0 [&_button]:h-5 [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[9px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-cell]:p-px [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
+            // Calendar fills the wrapper and its internal table flexes so day
+            // rows distribute the available height. `aspect-auto` prevents
+            // cells from inflating into tall squares — they stay rectangular
+            // and grow only to fill the row's allocated height.
+            className="border-0 rounded-none bg-transparent p-2 w-full h-full flex flex-col [--cell-size:1.25rem] [&>div]:flex-1 [&>div]:flex [&>div]:flex-col [&>div]:min-h-0 [&_table]:w-full [&_table]:flex-1 [&_table]:text-[9px] [&_table]:table-fixed [&_table]:min-h-0 [&_tbody]:flex [&_tbody]:flex-col [&_tbody]:flex-1 [&_tbody]:min-h-0 [&_.rdp-row]:flex [&_.rdp-row]:flex-1 [&_.rdp-row]:min-h-0 [&_.rdp-day]:!aspect-auto [&_.rdp-day]:h-full [&_button]:text-[9px] [&_button]:p-0 [&_button]:h-full [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[9px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-cell]:p-px [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
           />
         </div>
 
