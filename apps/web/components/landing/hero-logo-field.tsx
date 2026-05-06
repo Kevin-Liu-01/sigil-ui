@@ -22,17 +22,18 @@ const ANIM_MS = 3400;
 
 interface TokensFilePickerProps {
   accept?: string;
+  /** Controlled: parent decides whether to show the "loaded" tint. */
+  hasFile?: boolean;
   onFileSelected?: (file: File) => void;
 }
 
 /**
  * Tiny token-row file picker. Renders an icon button matching the row's
- * h-7 size; clicking it opens the native file dialog. Shows a checkmark
+ * h-7 size; clicking it opens the native file dialog. Shows a primary
  * tint after a file is selected so the demo reads as "loaded a file".
  */
-function TokensFilePicker({ accept, onFileSelected }: TokensFilePickerProps) {
+function TokensFilePicker({ accept, hasFile = false, onFileSelected }: TokensFilePickerProps) {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [hasFile, setHasFile] = useState(false);
 
   const handleClick = useCallback(() => {
     inputRef.current?.click();
@@ -41,7 +42,6 @@ function TokensFilePicker({ accept, onFileSelected }: TokensFilePickerProps) {
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setHasFile(true);
     onFileSelected?.(file);
   }, [onFileSelected]);
 
@@ -801,6 +801,7 @@ export function HeroLogoField() {
   const [appliedSet, setAppliedSet] = useState<Set<string>>(new Set());
   const appliedQueue = useRef<string[]>([]);
   const [formats, setFormats] = useState<string[]>(["bold"]);
+  const [tokenFileName, setTokenFileName] = useState("sigil.tokens.md");
 
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
@@ -1147,7 +1148,7 @@ export function HeroLogoField() {
             // `radius-md: 8px → 16px` looks like, so the wrapper has to
             // render visible rounding regardless of the active preset's
             // (potentially 0px) radius tokens.
-            borderRadius: radiusApplied ? "16px" : "8px",
+            borderRadius: radiusApplied ? "8px" : "0px",
             background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
             transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
           } as React.CSSProperties}
@@ -1196,7 +1197,6 @@ export function HeroLogoField() {
               // Literal 8px to match the Calendar's idle radius — the
               // calendar's animation goes 8px → 16px, this box stays at the
               // baseline.
-              borderRadius: "8px",
               background: applied("TokenAction") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
               padding: "6px 8px",
               transition: "background-color 600ms, border-color 600ms",
@@ -1205,12 +1205,18 @@ export function HeroLogoField() {
             } as React.CSSProperties}
           >
             <div className="grid grid-cols-[auto_1fr_auto] gap-1 items-center">
-              <TokensFilePicker accept=".md,.toml,.css" />
+              <TokensFilePicker
+                accept=".md,.toml,.css"
+                hasFile={tokenFileName !== "sigil.tokens.md"}
+                onFileSelected={(file) => setTokenFileName(file.name)}
+              />
               <Input
-                value="sigil.tokens.md"
+                value={tokenFileName}
                 readOnly
                 className={`h-7 text-[9px] ${applied("TokenAction") ? "hero-logo-field__typed" : ""}`}
-                key={applied("TokenAction") ? "typed" : "idle"}
+                // Re-key whenever the typed-in animation should replay (apply
+                // step lands or a new file is uploaded).
+                key={`${tokenFileName}-${applied("TokenAction") ? "typed" : "idle"}`}
               />
               <Button size="sm" className="h-7 px-2.5 text-[9px]">{applied("TokenAction") ? "Saved" : "Apply"}</Button>
             </div>
@@ -1250,6 +1256,7 @@ export function HeroLogoField() {
               borderColor: applied("Badges") ? "var(--s-primary)" : "var(--s-border)",
               background: cellBg,
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
+              borderRadius: radiusApplied ? "8px" : "0px",
             }}
           >
             <CardContent className="p-2 h-full flex flex-col justify-between" style={{ gap: 4 }}>
