@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useCallback, cloneElement } from "react";
+import React, { useEffect, useLayoutEffect, useState, useRef, useCallback, useMemo, cloneElement } from "react";
 import type { ReactElement } from "react";
 import {
   Avatar, AvatarGroup, Badge, Button, Calendar, Card, CardContent, Checkbox,
@@ -97,147 +97,197 @@ function smoothPathFromPoints(pts: { x: number; y: number }[]): string {
 }
 
 /**
- * AnimatedSparkLine
+ * ContinuousSparkLine
  *
- * Tweens a smooth (Catmull-Rom -> Bezier) path toward a moving target
- * data array using requestAnimationFrame. Two pieces of state drive it:
+ * A real-time-looking sparkline that scrolls leftward continuously.
  *
- * 1. `target` (controlled prop) — a ring buffer that the parent shifts
- *    on a slow tick (every ~`tickMs`). New values get pushed onto the
- *    right; oldest fall off the left.
- * 2. `displayed` (internal ref) — animates toward `target` at 60fps with
- *    an exponential lerp (`smooth`). Because we lerp every cell of the
- *    array, when the target shifts left the visual flow looks like the
- *    line is sliding across rather than snapping.
+ * Architecture (the trick is the rendered SVG is one step wider than its
+ * visible container, with the latest data point sitting just past the
+ * right edge under translateX(0)):
+ *
+ *   Buffer length = K. K-2 visible intervals, K-1 visible points + 1
+ *   hidden point off the right. SVG width = visibleW + stepX. Container
+ *   uses overflow:hidden to clip the off-right point.
+ *
+ * Animation cycle (driven by parent's `pushTick` counter):
+ *   - useLayoutEffect synchronously snaps `transform: translateX(0)`
+ *     before the browser paints the new buffer. New buffer's point 0
+ *     lands exactly where the old buffer's point 1 was at translateX
+ *     (-stepX), so there's no visual jump on tick.
+ *   - rAF callback then sets `transition: transform Tms linear` and
+ *     animates to `translateX(-stepX)`. Over T ms the line slides left
+ *     by exactly one step; the previously hidden right point slides
+ *     into view at the right edge.
+ *
+ * The "end dot" is rendered OUTSIDE the translating SVG at a fixed
+ * container position (right edge - padding). Its y is a CSS-transitioned
+ * value derived from `buffer[K - 2]` so it eases to each new latest
+ * value rather than snapping.
  */
-interface AnimatedSparkLineProps {
-  data: number[];
-  width?: number;
-  height?: number;
-  color?: string;
-  /** Lerp factor per frame, 0..1. Higher = snappier. */
-  smooth?: number;
-  /** Subtle vertical padding inside the SVG. */
-  padding?: number;
+interface ContinuousSparkLineProps {
+  buffer: number[];
+  pushTick: number;
+  width: number;
+  height: number;
+  color: string;
+  /** Horizontal padding inside the visible plot area (px). */
+  paddingX?: number;
+  /** Vertical padding so the line + glow stay inside the card border. */
+  paddingY?: number;
+  /** Tick interval in ms — must match the parent's setInterval. */
+  intervalMs: number;
+  /** Fixed y-domain so the curve doesn't bounce-rescale on every tick. */
+  yDomain?: [number, number];
 }
 
-function AnimatedSparkLine({
-  data,
-  width = 200,
-  height = 58,
-  color = "var(--s-primary)",
-  smooth = 0.18,
-  padding = 4,
-}: AnimatedSparkLineProps) {
-  const targetRef = useRef<number[]>(data);
-  const displayedRef = useRef<number[]>(data.slice());
-  const [, force] = useState(0);
+function ContinuousSparkLine({
+  buffer,
+  pushTick,
+  width,
+  height,
+  color,
+  paddingX = 4,
+  paddingY = 9,
+  intervalMs,
+  yDomain = [4, 24],
+}: ContinuousSparkLineProps) {
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const lastTickRef = useRef<number>(pushTick);
   const gradientId = React.useId();
   const glowId = React.useId();
 
-  useEffect(() => {
-    targetRef.current = data;
-    if (displayedRef.current.length !== data.length) {
-      displayedRef.current = data.slice();
-    }
-  }, [data]);
+  const K = buffer.length;
+  const plotW = Math.max(1, width - paddingX * 2);
+  const stepX = plotW / Math.max(1, K - 2);
+  const svgWidth = width + stepX;
+  // CSS transform uses a percentage of the SVG's own width so the
+  // visual step matches the viewBox step regardless of how the SVG is
+  // scaled by the container.
+  const stepXPercent = (stepX / svgWidth) * 100;
 
-  useEffect(() => {
-    let raf = 0;
-    let mounted = true;
-    const step = () => {
-      const target = targetRef.current;
-      const cur = displayedRef.current;
-      let dirty = false;
-      for (let i = 0; i < cur.length; i++) {
-        const t = target[i] ?? cur[i];
-        const next = cur[i] + (t - cur[i]) * smooth;
-        if (Math.abs(next - cur[i]) > 0.001) dirty = true;
-        cur[i] = next;
-      }
-      if (dirty) force((n) => (n + 1) % 1_000_000);
-      if (mounted) raf = requestAnimationFrame(step);
-    };
-    raf = requestAnimationFrame(step);
-    return () => {
-      mounted = false;
-      cancelAnimationFrame(raf);
-    };
-  }, [smooth]);
+  useLayoutEffect(() => {
+    if (pushTick === lastTickRef.current) return;
+    lastTickRef.current = pushTick;
+    const svg = svgRef.current;
+    if (!svg) return;
+    // Use the Web Animations API rather than CSS transitions because the
+    // browser otherwise collapses the snap-to-0 + slide-to-stepX writes
+    // into a single computed-style update on the same JS task and the
+    // transition never plays. WAAPI gives us a discrete animation we can
+    // cancel + restart on every tick reliably.
+    svg.getAnimations().forEach((a) => a.cancel());
+    svg.animate(
+      [
+        { transform: "translateX(0%)" },
+        { transform: `translateX(-${stepXPercent}%)` },
+      ],
+      {
+        duration: intervalMs,
+        easing: "linear",
+        fill: "forwards",
+      },
+    );
+  }, [pushTick, intervalMs, stepXPercent]);
 
-  const pts = React.useMemo(() => {
-    const cur = displayedRef.current;
-    const target = targetRef.current;
-    // Compute domain across both displayed and target so the y-scale
-    // doesn't bounce as the rolling window moves.
-    const all = cur.length ? cur.concat(target) : target;
-    const min = Math.min(...all);
-    const max = Math.max(...all);
-    const range = Math.max(0.0001, max - min);
-    const plotW = width - padding * 2;
-    const plotH = height - padding * 2;
-    return cur.map((v, i) => ({
-      x: padding + (i / Math.max(1, cur.length - 1)) * plotW,
-      y: padding + plotH - ((v - min) / range) * plotH,
-    }));
-    // Trigger recompute every render (force-toggled by rAF).
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [width, height, padding, force]);
+  const [yMin, yMax] = yDomain;
+  const yRange = Math.max(0.0001, yMax - yMin);
+  const plotH = Math.max(1, height - paddingY * 2);
+  const valueToY = (v: number) =>
+    paddingY + plotH - ((Math.max(yMin, Math.min(yMax, v)) - yMin) / yRange) * plotH;
 
-  if (pts.length < 2) return null;
+  const pts = buffer.map((v, i) => ({ x: paddingX + i * stepX, y: valueToY(v) }));
   const lineD = smoothPathFromPoints(pts);
+  const first = pts[0];
   const last = pts[pts.length - 1];
-  const areaD = `${lineD} L ${last.x} ${height - padding} L ${pts[0].x} ${height - padding} Z`;
+  const areaD = `${lineD} L ${last.x} ${height - paddingY} L ${first.x} ${height - paddingY} Z`;
+
+  // The dot rides at the right edge of the visible area, vertically
+  // tracking the most-recently "settled" data point (buffer[K - 2]).
+  const dotValue = buffer[Math.max(0, K - 2)];
+  const dotY = valueToY(dotValue);
+  const dotR = 2.4;
 
   return (
-    <svg
-      data-slot="spark-line"
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
-      preserveAspectRatio="none"
-      className="w-full h-full shrink-0"
+    <div
+      style={{
+        overflow: "hidden",
+        position: "relative",
+        width: "100%",
+        height,
+      }}
     >
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity={0.32} />
-          <stop offset="55%" stopColor={color} stopOpacity={0.08} />
-          <stop offset="100%" stopColor={color} stopOpacity={0} />
-        </linearGradient>
-        <filter id={glowId} x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.6" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      <path d={areaD} fill={`url(#${gradientId})`} />
-      <path
-        d={lineD}
-        fill="none"
-        stroke={color}
-        strokeWidth={1.4}
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        filter={`url(#${glowId})`}
+      <svg
+        ref={svgRef}
+        data-slot="spark-line"
+        width={svgWidth}
+        height={height}
+        viewBox={`0 0 ${svgWidth} ${height}`}
+        preserveAspectRatio="none"
+        style={{
+          display: "block",
+          width: `${(svgWidth / width) * 100}%`,
+          height: "100%",
+          willChange: "transform",
+        }}
+      >
+        <defs>
+          <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={color} stopOpacity={0.28} />
+            <stop offset="55%" stopColor={color} stopOpacity={0.08} />
+            <stop offset="100%" stopColor={color} stopOpacity={0} />
+          </linearGradient>
+          <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="0.9" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path d={areaD} fill={`url(#${gradientId})`} />
+        <path
+          d={lineD}
+          fill="none"
+          stroke={color}
+          strokeWidth={1.3}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          filter={`url(#${glowId})`}
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+      {/* Fixed-position end dot — does NOT translate with the SVG. Its
+          y eases to the latest settled value on every tick. */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          right: paddingX + 1,
+          top: dotY,
+          width: dotR * 2,
+          height: dotR * 2,
+          marginTop: -dotR,
+          marginRight: -dotR,
+          borderRadius: "9999px",
+          background: color,
+          boxShadow: `0 0 6px ${color}, 0 0 0 3px color-mix(in oklch, ${color} 18%, transparent)`,
+          transition: `top ${Math.min(intervalMs, 220)}ms cubic-bezier(0.22, 1, 0.36, 1)`,
+          pointerEvents: "none",
+        }}
       />
-      <circle cx={last.x} cy={last.y} r={2.4} fill={color} />
-      <circle cx={last.x} cy={last.y} r={4.5} fill={color} fillOpacity={0.18} />
-    </svg>
+    </div>
   );
 }
 
 /**
  * Live "requests / min" card. Rolls a fixed-length window of values on a
- * timer to feel like a real-time stream, with a subtly drifting p99.
+ * timer to feel like a real-time stream.
  *
- * - `length` data points are kept; on each tick we shift left and push a
- *   new value derived from the previous one (smooth random walk + a
- *   meaningful chance of a small spike) to read busy without looking
- *   like noise.
- * - `p99` drifts by ±1ms every few ticks, clamped to a sane range.
- * - When `accent` is true (apply state), the line/dot use the demo accent.
+ * - On every tick we drop the leftmost value, push a new one onto the
+ *   right (smooth random walk + small spike chance), and bump
+ *   `pushTick` so ContinuousSparkLine kicks off its translate animation.
+ * - `p99` drifts by ±1ms every several ticks.
+ * - `accent` flips the line color to the demo accent for the apply state.
  */
 interface LiveRequestsCardProps {
   accent?: boolean;
@@ -246,32 +296,39 @@ interface LiveRequestsCardProps {
 }
 
 function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: LiveRequestsCardProps) {
-  const seed = React.useMemo(() => {
-    // Hand-shaped seed with peaks/valleys so the first paint already
-    // looks busy instead of starting from a flat warmup.
+  const seed = useMemo(() => {
+    // Hand-shaped seed with gentle peaks/valleys so the first paint
+    // already reads as "live data" instead of a flat warmup.
     const base = [
-      9, 12, 8, 14, 11, 17, 10, 13, 9, 15, 12, 19, 14, 11, 16, 22,
-      13, 10, 18, 12, 15, 9, 14, 21, 11, 17, 13, 16, 12, 20, 14, 18,
+      11, 13, 10, 14, 12, 15, 11, 13, 10, 14, 12, 16, 13, 11, 15, 17,
+      14, 12, 15, 13, 16, 12, 14, 17, 13, 15, 12, 14, 13, 15, 14, 13,
     ];
     return base.slice(-length);
   }, [length]);
-  const [data, setData] = useState<number[]>(seed);
+  const [buffer, setBuffer] = useState<number[]>(seed);
+  const [pushTick, setPushTick] = useState(0);
   const [p99, setP99] = useState<number>(12);
 
   useEffect(() => {
     let tick = 0;
     const id = window.setInterval(() => {
       tick += 1;
-      setData((prev) => {
+      setBuffer((prev) => {
         const last = prev[prev.length - 1] ?? 12;
-        // Larger random walk + higher spike rate so the line reads as a
-        // busy, real-time request graph instead of a smooth sine wave.
-        const drift = (Math.random() - 0.5) * 7.5;
-        const spikeUp = Math.random() < 0.22 ? Math.random() * 9 : 0;
-        const spikeDown = Math.random() < 0.18 ? -Math.random() * 6 : 0;
-        const next = Math.max(3, Math.min(26, last + drift + spikeUp + spikeDown));
+        // Realistic-feeling stream: a small random walk dominates, with
+        // an occasional small spike. Dropped from the previous version
+        // (~22% / 18% spikes, drift 7.5) to ~7% / 5% with drift 2.6 so
+        // the line reads as steady traffic instead of an EKG.
+        const drift = (Math.random() - 0.5) * 2.6;
+        const spikeUp = Math.random() < 0.07 ? Math.random() * 4 : 0;
+        const spikeDown = Math.random() < 0.05 ? -Math.random() * 3 : 0;
+        // Soft restoring force back toward 13 keeps long runs from
+        // wandering off to the clamp boundaries.
+        const restore = (13 - last) * 0.06;
+        const next = Math.max(6, Math.min(22, last + drift + restore + spikeUp + spikeDown));
         return [...prev.slice(1), next];
       });
+      setPushTick((t) => t + 1);
       if (tick % 8 === 0) {
         setP99((prev) => {
           const drift = Math.random() < 0.5 ? -1 : 1;
@@ -300,7 +357,17 @@ function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: Liv
           p99 {p99}ms
         </span>
       </div>
-      <AnimatedSparkLine data={data} width={220} height={62} color={lineColor} smooth={0.22} />
+      <ContinuousSparkLine
+        buffer={buffer}
+        pushTick={pushTick}
+        width={220}
+        height={62}
+        color={lineColor}
+        intervalMs={intervalMs}
+        paddingX={4}
+        paddingY={9}
+        yDomain={[5, 23]}
+      />
     </>
   );
 }
