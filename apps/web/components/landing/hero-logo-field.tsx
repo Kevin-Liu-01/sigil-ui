@@ -328,7 +328,6 @@ const PRESET_SWATCH_ROW_A: PresetSwatch[] = [
   { name: "forge", color: "#ea580c" },
   { name: "flux", color: "#06b6d4" },
   { name: "vex", color: "#ec4899" },
-  { name: "arc", color: "#7c3aed" },
 ];
 const PRESET_SWATCH_ROW_B: PresetSwatch[] = [
   { name: "rune", color: "#b45309" },
@@ -336,7 +335,6 @@ const PRESET_SWATCH_ROW_B: PresetSwatch[] = [
   { name: "cobalt", color: "#2563eb" },
   { name: "helix", color: "#059669" },
   { name: "cipher", color: "#22c55e" },
-  { name: "prism", color: "#8b5cf6" },
 ];
 
 const HERO_TOKEN_STEPS = [
@@ -1456,12 +1454,15 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-2.5">
-              <div className="grid grid-cols-6 gap-1.5" style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}>
-                <Button size="sm" className="col-span-3 h-6 px-2 text-[8px]">Primary</Button>
-                <Button size="sm" variant="outline" className="col-span-3 h-6 px-2 text-[8px]">Outline</Button>
-                <Button size="sm" variant="secondary" className="col-span-4 h-6 px-2 text-[8px]">Secondary</Button>
-                <Button size="sm" variant="ghost" className="col-span-2 h-6 px-2 text-[8px]">Ghost</Button>
+            <CardContent className="p-2 flex items-center justify-center h-full">
+              <div
+                className="grid grid-cols-2 grid-rows-2 gap-1.5 w-full"
+                style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}
+              >
+                <Button size="sm" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Primary</Button>
+                <Button size="sm" variant="outline" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Outline</Button>
+                <Button size="sm" variant="secondary" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Secondary</Button>
+                <Button size="sm" variant="ghost" className="h-7 w-full min-w-0 px-1 text-[8px] leading-none justify-center">Ghost</Button>
               </div>
             </CardContent>
           </Card>
