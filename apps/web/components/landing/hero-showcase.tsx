@@ -1205,16 +1205,211 @@ function TokenPreviewStrip() {
   );
 }
 
+/**
+ * Catmull-Rom -> cubic Bezier path. Same helper as the hero chart but
+ * inlined here so this component stays self-contained.
+ */
+function smoothPathFromPoints(pts: { x: number; y: number }[]): string {
+  if (pts.length === 0) return "";
+  if (pts.length === 1) return `M ${pts[0].x} ${pts[0].y}`;
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? p2;
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${p2.x} ${p2.y}`;
+  }
+  return d;
+}
+
 function MiniSparkline() {
+  // Hand-shaped data: a slow climb with two false starts and a strong
+  // finish so the "↑ 23%" trend reads visually.
+  const data = [4, 6, 5, 8, 6, 9, 7, 10, 8, 12, 10, 14, 11, 15, 13, 17, 14, 18];
+
+  // Chart geometry — viewBox coordinates. preserveAspectRatio="none"
+  // stretches it to fit the container; `non-scaling-stroke` keeps the
+  // line + dot crisp regardless of stretch.
+  const W = 400;
+  const H = 150;
+  const padX = 14;
+  const padTop = 12;
+  const padBottom = 18;
+  const plotW = W - padX * 2;
+  const plotH = H - padTop - padBottom;
+  const baselineY = H - padBottom;
+
+  const minV = Math.min(...data);
+  const maxV = Math.max(...data);
+  const range = Math.max(0.0001, maxV - minV);
+  const valueToY = (v: number) =>
+    padTop + plotH - ((v - minV) / range) * plotH;
+
+  const pts = data.map((v, i) => ({
+    x: padX + (i / (data.length - 1)) * plotW,
+    y: valueToY(v),
+  }));
+  const lineD = smoothPathFromPoints(pts);
+  const last = pts[pts.length - 1];
+  const first = pts[0];
+  const areaD = `${lineD} L ${last.x} ${baselineY} L ${first.x} ${baselineY} Z`;
+
+  // Three subtle horizontal guides at 25 / 50 / 75% of the plot.
+  const guides = [0.25, 0.5, 0.75].map((t) => padTop + plotH * t);
+
   return (
-    <div className="flex flex-col flex-1 overflow-hidden" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-      <div className="flex items-center justify-between px-3 pt-3 pb-1">
-        <span className="text-[10px] font-medium text-[var(--s-text)]">Requests / min</span>
-        <span className="text-[9px] tabular-nums text-[var(--s-success)]">↑ 23%</span>
+    <div
+      className="flex flex-col flex-1 overflow-hidden"
+      style={{
+        border: "1px solid var(--s-border)",
+        borderRadius: "var(--s-radius-md, 6px)",
+      }}
+    >
+      <div className="flex items-center justify-between px-3 pt-2.5 pb-1.5">
+        <span className="text-[10px] font-medium text-[var(--s-text)]">
+          Requests / min
+        </span>
+        <span
+          className="inline-flex items-center gap-1 px-1.5 py-0.5 text-[9px] tabular-nums font-medium font-[family-name:var(--s-font-mono)]"
+          style={{
+            color: "var(--s-success)",
+            background:
+              "color-mix(in oklch, var(--s-success) 14%, transparent)",
+            borderRadius: "var(--s-radius-sm, 3px)",
+          }}
+          aria-label="up 23 percent"
+        >
+          <span aria-hidden style={{ fontSize: 9, lineHeight: 1 }}>
+            ↑
+          </span>
+          23%
+        </span>
       </div>
       <div className="relative flex-1 min-h-0">
-        <SparkLine data={[4, 7, 5, 9, 6, 8, 12, 10, 14, 11, 15, 13]} width={400} height={150} filled className="absolute inset-0 w-full h-full" style={{ display: "block" }} preserveAspectRatio="none" />
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          preserveAspectRatio="none"
+          className="absolute inset-0 w-full h-full"
+          style={{ display: "block" }}
+        >
+          <defs>
+            <linearGradient id="ms-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop
+                offset="0%"
+                stopColor="var(--s-primary)"
+                stopOpacity={0.34}
+              />
+              <stop
+                offset="55%"
+                stopColor="var(--s-primary)"
+                stopOpacity={0.1}
+              />
+              <stop
+                offset="100%"
+                stopColor="var(--s-primary)"
+                stopOpacity={0}
+              />
+            </linearGradient>
+            <filter
+              id="ms-glow"
+              x="-30%"
+              y="-30%"
+              width="160%"
+              height="160%"
+            >
+              <feGaussianBlur stdDeviation="0.9" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+          {/* Dashed horizontal guides — barely there but give the chart
+              a sense of grid without being noisy. */}
+          {guides.map((y, i) => (
+            <line
+              key={i}
+              x1={padX}
+              x2={W - padX}
+              y1={y}
+              y2={y}
+              stroke="var(--s-border)"
+              strokeWidth={0.5}
+              strokeDasharray="2 4"
+              opacity={0.5}
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+          {/* Baseline */}
+          <line
+            x1={padX}
+            x2={W - padX}
+            y1={baselineY}
+            y2={baselineY}
+            stroke="var(--s-border)"
+            strokeWidth={0.75}
+            vectorEffect="non-scaling-stroke"
+          />
+          <path d={areaD} fill="url(#ms-fill)" />
+          <path
+            d={lineD}
+            fill="none"
+            stroke="var(--s-primary)"
+            strokeWidth={1.6}
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            filter="url(#ms-glow)"
+            vectorEffect="non-scaling-stroke"
+          />
+          {/* Vertical drop line at the latest point — anchors the dot
+              and reads as "this is now". */}
+          <line
+            x1={last.x}
+            x2={last.x}
+            y1={last.y}
+            y2={baselineY}
+            stroke="var(--s-primary)"
+            strokeWidth={0.5}
+            strokeDasharray="2 3"
+            opacity={0.45}
+            vectorEffect="non-scaling-stroke"
+          />
+          <circle
+            cx={last.x}
+            cy={last.y}
+            r={5.5}
+            fill="var(--s-primary)"
+            fillOpacity={0.18}
+          />
+          <circle cx={last.x} cy={last.y} r={2.6} fill="var(--s-primary)" />
+        </svg>
       </div>
+      <div
+        className="grid grid-cols-3 gap-2 px-3 py-2 border-t"
+        style={{ borderColor: "var(--s-border)" }}
+      >
+        <MiniStat label="now" value="1.7K" />
+        <MiniStat label="peak" value="2.1K" />
+        <MiniStat label="p99" value="12ms" />
+      </div>
+    </div>
+  );
+}
+
+function MiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col gap-0.5 min-w-0">
+      <span className="text-[7px] uppercase tracking-[0.08em] font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)]">
+        {label}
+      </span>
+      <span className="text-[11px] tabular-nums font-medium text-[var(--s-text)] truncate">
+        {value}
+      </span>
     </div>
   );
 }
