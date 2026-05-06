@@ -44,9 +44,16 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
         className,
       )}
       style={{
-        borderRadius: "9999px",
+        borderRadius: "var(--s-radius-avatar, 9999px)",
         overflow: "hidden",
         aspectRatio: "1 / 1",
+        // Ring is rendered as a box-shadow ON THE AVATAR ITSELF so it
+        // follows whatever border-radius the avatar actually has. By
+        // default no ring; AvatarGroup activates it by setting the two
+        // --avatar-ring-* custom properties on the wrapping div, which
+        // cascade down to this element.
+        boxShadow:
+          "0 0 0 var(--avatar-ring-width, 0) var(--avatar-ring-color, transparent)",
         ...style,
       }}
       {...props}
@@ -72,7 +79,9 @@ export const Avatar = forwardRef<HTMLSpanElement, AvatarProps>(function Avatar(
           backgroundColor: "var(--s-surface)",
           color: "var(--s-text-muted)",
           fontWeight: 500,
-          borderRadius: "9999px",
+          // Inherit the avatar's actual border-radius so the fallback
+          // matches whatever shape the consumer applied.
+          borderRadius: "inherit",
         }}
       >
         {resolvedFallback}
@@ -112,10 +121,15 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               width: "fit-content",
               height: "fit-content",
               position: "relative",
-              borderRadius: "9999px",
-              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-background))",
               zIndex: visible.length - i,
               marginLeft: i === 0 ? 0 : "-0.5rem",
+              // Activate the ring on the inner Avatar via CSS variables
+              // so the shadow follows the avatar's actual border-radius
+              // (square, rounded, full pill, whatever) instead of being
+              // baked to a circle on this wrapper.
+              ["--avatar-ring-width" as string]: "2px",
+              ["--avatar-ring-color" as string]:
+                "var(--avatar-group-ring, var(--s-background))",
             }}
           >
             {child}
@@ -128,12 +142,13 @@ export const AvatarGroup = forwardRef<HTMLDivElement, AvatarGroupProps>(
               sizeMap[size],
             )}
             style={{
-              borderRadius: "9999px",
+              borderRadius: "var(--s-radius-avatar, 9999px)",
               overflow: "hidden",
               backgroundColor: "var(--s-surface-elevated, var(--s-surface))",
               color: "var(--s-text-muted)",
               fontWeight: 500,
-              boxShadow: "0 0 0 2px var(--avatar-group-ring, var(--s-background))",
+              boxShadow:
+                "0 0 0 2px var(--avatar-group-ring, var(--s-background))",
               marginLeft: "-0.5rem",
               zIndex: 0,
             }}
