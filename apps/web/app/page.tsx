@@ -185,7 +185,7 @@ function Hero() {
             An Agent-First <br /> Design System.
           </h1>
 
-          <DensityText role="body" as="p" muted className="mb-6 max-w-[528px] leading-relaxed">
+          <DensityText role="body" as="p" muted className="mb-6 max-w-md leading-relaxed">
             <span className="hidden lg:inline">
               {SIGIL_PRODUCT_STATS.componentCountLabel} components, {SIGIL_PRODUCT_STATS.presetCount} presets, {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
             </span>

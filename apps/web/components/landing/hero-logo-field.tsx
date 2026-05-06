@@ -343,7 +343,7 @@ function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: Liv
 
   return (
     <>
-      <div className="mb-1 px-0.5 flex items-center justify-between">
+      <div className=" px-0.5 flex items-center justify-between">
         <span style={{ ...mono9, color: "var(--s-text-muted)" }}>requests / min</span>
         <span
           className="font-[family-name:var(--s-font-mono)] text-[8px] tabular-nums inline-flex items-center gap-1"
@@ -361,11 +361,11 @@ function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: Liv
         buffer={buffer}
         pushTick={pushTick}
         width={220}
-        height={62}
+        height={58}
         color={lineColor}
         intervalMs={intervalMs}
         paddingX={4}
-        paddingY={9}
+        paddingY={2}
         yDomain={[5, 23]}
       />
     </>
