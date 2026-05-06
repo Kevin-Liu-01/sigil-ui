@@ -1090,7 +1090,7 @@ export function HeroLogoField() {
             }}
           >
             <CardContent className="p-1 px-1.5 flex flex-col justify-center">
-              <div className="mb-1" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset selection</div>
+              <div className="mb-0.5" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset</div>
               {[PRESET_SWATCH_ROW_A, PRESET_SWATCH_ROW_B].map((row, rowIdx) => (
                 <div key={rowIdx} className={rowIdx === 0 ? "flex gap-1" : "flex mt-1 gap-1"}>
                   {row.map((swatch, itemIdx) => {
@@ -1143,7 +1143,11 @@ export function HeroLogoField() {
             display: "flex",
             flexDirection: "column",
             border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${radiusApplied ? "var(--s-primary)" : "var(--s-border)"}`,
-            borderRadius: radiusApplied ? "var(--s-radius-lg)" : "var(--s-radius-md)",
+            // Literal pixel values — the demo is illustrating what
+            // `radius-md: 8px → 16px` looks like, so the wrapper has to
+            // render visible rounding regardless of the active preset's
+            // (potentially 0px) radius tokens.
+            borderRadius: radiusApplied ? "16px" : "8px",
             background: radiusApplied ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
             transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms), border-radius var(--s-duration-slow,600ms)",
           } as React.CSSProperties}
@@ -1189,9 +1193,10 @@ export function HeroLogoField() {
             style={{
               border: `var(--s-border-thin,1px) var(--s-border-style,solid) ${applied("TokenAction") ? "var(--s-primary)" : "var(--s-border)"}`,
               // Use the active preset's radius-md so the box matches the
-              // preset's structural language (only the Calendar above
-              // demonstrates the radius-md → radius-lg animation).
-              borderRadius: "var(--s-radius-md)",
+              // Literal 8px to match the Calendar's idle radius — the
+              // calendar's animation goes 8px → 16px, this box stays at the
+              // baseline.
+              borderRadius: "8px",
               background: applied("TokenAction") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
               padding: "6px 8px",
               transition: "background-color 600ms, border-color 600ms",
@@ -1199,7 +1204,7 @@ export function HeroLogoField() {
               "--hlf-tick-duration": applied("TokenAction") ? "300ms" : "600ms",
             } as React.CSSProperties}
           >
-            <div className="grid grid-cols-[auto_1fr_auto] gap-2 items-center">
+            <div className="grid grid-cols-[auto_1fr_auto] gap-1 items-center">
               <TokensFilePicker accept=".md,.toml,.css" />
               <Input
                 value="sigil.tokens.md"
