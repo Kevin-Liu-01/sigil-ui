@@ -1072,11 +1072,28 @@ export function HeroLogoField() {
             selected={new Date()}
             captionLayout="label"
             disableNavigation={false}
-            // Calendar fills the wrapper and its internal table flexes so day
-            // rows distribute the available height. `aspect-auto` prevents
-            // cells from inflating into tall squares — they stay rectangular
-            // and grow only to fill the row's allocated height.
-            className="border-0 rounded-none bg-transparent p-2 w-full h-full flex flex-col [--cell-size:1.25rem] [&>div]:flex-1 [&>div]:flex [&>div]:flex-col [&>div]:min-h-0 [&_table]:w-full [&_table]:flex-1 [&_table]:text-[9px] [&_table]:table-fixed [&_table]:min-h-0 [&_tbody]:flex [&_tbody]:flex-col [&_tbody]:flex-1 [&_tbody]:min-h-0 [&_.rdp-row]:flex [&_.rdp-row]:flex-1 [&_.rdp-row]:min-h-0 [&_.rdp-day]:!aspect-auto [&_.rdp-day]:h-full [&_button]:text-[9px] [&_button]:p-0 [&_button]:h-full [&_button]:w-full [&_button]:min-w-0 [&_th]:text-[7px] [&_th]:h-4 [&_th]:p-0 [&_td]:p-px [&_.rdp-caption]:text-[9px] [&_.rdp-caption]:py-0 [&_.rdp-caption]:h-5 [&_.rdp-nav]:gap-0 [&_.rdp-nav_button]:h-4 [&_.rdp-nav_button]:w-4 [&_.rdp-nav_button]:p-0 [&_.rdp-head_row]:h-4 [&_.rdp-cell]:p-px [&_select]:hidden [&_.rdp-dropdown]:hidden [&_.rdp-dropdowns]:hidden"
+            className="border-0 rounded-none bg-transparent p-2 w-full h-full flex flex-col [--cell-size:1.25rem] [&_[data-slot=calendar-day]]:text-[9px] [&_[data-slot=calendar-day]]:leading-none"
+            // Override the Calendar component's internal class names directly
+            // (the Calendar spreads user-provided classNames LAST, so these
+            // fully replace the defaults rather than merge into them).
+            classNames={{
+              months: "relative flex flex-col flex-1 min-h-0",
+              month: "flex w-full flex-col flex-1 min-h-0 gap-1",
+              nav: "absolute inset-x-0 top-0 flex w-full items-center justify-between pointer-events-none",
+              button_previous: "pointer-events-auto z-[1] inline-flex h-5 w-5 items-center justify-center rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[var(--s-surface)] select-none",
+              button_next: "pointer-events-auto z-[1] inline-flex h-5 w-5 items-center justify-center rounded-[var(--s-radius-sm,4px)] text-[var(--s-text-muted)] hover:text-[var(--s-text)] hover:bg-[var(--s-surface)] select-none",
+              month_caption: "flex h-5 w-full items-center justify-center px-6",
+              caption_label: "text-[10px] font-medium text-[var(--s-text)] select-none",
+              table: "w-full flex-1 flex flex-col min-h-0 border-collapse",
+              weekdays: "flex h-4",
+              weekday: "flex-1 text-center font-[family-name:var(--s-font-mono,inherit)] text-[7px] font-medium uppercase tracking-[0.08em] text-[var(--s-text-muted)] inline-flex items-center justify-center select-none",
+              week: "mt-0.5 flex w-full flex-1 min-h-0",
+              day: "group/day relative aspect-auto flex-1 p-0 text-center select-none",
+              outside: "text-[var(--s-text-muted)] opacity-50",
+              dropdowns: "hidden",
+              dropdown: "hidden",
+              dropdown_root: "hidden",
+            }}
           />
         </div>
 
