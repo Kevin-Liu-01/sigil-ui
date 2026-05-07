@@ -3,21 +3,9 @@
 @source "../../../../apps";
 
 @import "@sigil-ui/tokens/css";
+
 :root {
-  --r-background: #0c0d0e;
-  --r-surface: #141516;
-  --r-primary: #10b981;
-  --r-primary-hover: #059669;
-  --r-text: #e4e4e7;
-  --r-text-muted: #71717a;
-  --r-border: #27272a;
-  --r-radius: 4px;
-  --r-radius-sm: 2px;
-  --r-radius-lg: 6px;
-  --r-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --r-font-sans: "IBM Plex Mono", ui-monospace, monospace;
-  --r-font-mono: "IBM Plex Mono", ui-monospace, monospace;
-  --r-transition: 120ms ease;
+  --s-line: color-mix(in oklab, var(--s-border) 64%, var(--s-background, #fff));
 }
 
 * {
@@ -27,8 +15,45 @@
 }
 
 body {
-  background: var(--r-background);
-  color: var(--r-text);
-  font-family: var(--r-font-sans);
+  background: var(--s-background);
+  color: var(--s-text);
+  font-family: var(--s-font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Screen Lines — full-viewport hairlines */
+.s-screen-line-top {
+  position: relative;
+}
+.s-screen-line-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+.s-screen-line-bottom {
+  position: relative;
+}
+.s-screen-line-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+/* Container Column — vertical border edges */
+.s-container-column {
+  border-left: 1px solid var(--s-line);
+  border-right: 1px solid var(--s-line);
 }

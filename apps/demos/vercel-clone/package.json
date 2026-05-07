@@ -13,7 +13,8 @@
     "next": "^15.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "@sigil-ui/tokens": "workspace:*"
+    "@sigil-ui/tokens": "workspace:*",
+    "@sigil-ui/components": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

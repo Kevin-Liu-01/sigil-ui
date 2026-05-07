@@ -8,7 +8,9 @@ import type { SigilPreset } from "@sigil-ui/tokens";
  * must flip between near-black and near-white across modes. Other presets
  * use single OKLCH values with moderate lightness that work in both modes.
  *
- * global.css must mirror these values so there's no flash on initial load.
+ * This preset compiles to `apps/web/app/_generated/sigil-tokens.css` via
+ * `build-tokens-css.mjs`. The runtime `SigilTokensProvider` skips injection
+ * on initial load when this preset is active — the static CSS IS the default.
  */
 export const defaultPreset: SigilPreset = {
   name: "default",

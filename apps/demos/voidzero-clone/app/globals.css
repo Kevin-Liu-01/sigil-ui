@@ -3,21 +3,9 @@
 @source "../../../../apps";
 
 @import "@sigil-ui/tokens/css";
+
 :root {
-  --r-background: #ffffff;
-  --r-surface: #f8f8fc;
-  --r-primary: #7c3aed;
-  --r-primary-hover: #6d28d9;
-  --r-text: #1a1a2e;
-  --r-text-muted: #6b7280;
-  --r-border: #e5e7eb;
-  --r-radius: 8px;
-  --r-radius-sm: 4px;
-  --r-radius-lg: 12px;
-  --r-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-  --r-font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --r-font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
-  --r-transition: 150ms ease;
+  --s-line: color-mix(in oklab, var(--s-border) 64%, var(--s-background, #fff));
 }
 
 * {
@@ -27,8 +15,45 @@
 }
 
 body {
-  background: var(--r-background);
-  color: var(--r-text);
-  font-family: var(--r-font-sans);
+  background: var(--s-background);
+  color: var(--s-text);
+  font-family: var(--s-font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Screen Lines — full-viewport hairlines */
+.s-screen-line-top {
+  position: relative;
+}
+.s-screen-line-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+.s-screen-line-bottom {
+  position: relative;
+}
+.s-screen-line-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+/* Container Column — vertical border edges */
+.s-container-column {
+  border-left: 1px solid var(--s-line);
+  border-right: 1px solid var(--s-line);
 }

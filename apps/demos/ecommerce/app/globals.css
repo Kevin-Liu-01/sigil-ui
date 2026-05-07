@@ -3,33 +3,57 @@
 @source "../../../../apps";
 
 @import "@sigil-ui/tokens/css";
+
 :root {
-  --s-background: #ffffff;
-  --s-surface: #ffffff;
-  --s-surface-elevated: #ffffff;
-  --s-surface-sunken: #f5f5f5;
-  --s-primary: #000000;
-  --s-primary-hover: #333333;
-  --s-primary-muted: rgba(0, 0, 0, 0.06);
-  --s-secondary: #666666;
-  --s-text: #000000;
-  --s-text-secondary: #555555;
-  --s-text-muted: #999999;
-  --s-text-subtle: #bbbbbb;
-  --s-border: #e5e5e5;
-  --s-border-muted: #f0f0f0;
-  --s-border-strong: #000000;
-  --s-success: #10b981;
-  --s-warning: #f59e0b;
-  --s-error: #ef4444;
-  --s-font-display: "Helvetica Neue", "Arial", system-ui, sans-serif;
-  --s-font-body: "Helvetica Neue", "Arial", system-ui, sans-serif;
-  --s-font-mono: "Courier", "Courier New", monospace;
+  --s-line: color-mix(in oklab, var(--s-border) 64%, var(--s-background, #fff));
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  font-family: var(--s-font-body);
   background: var(--s-background);
   color: var(--s-text);
+  font-family: var(--s-font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Screen Lines — full-viewport hairlines */
+.s-screen-line-top {
+  position: relative;
+}
+.s-screen-line-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+.s-screen-line-bottom {
+  position: relative;
+}
+.s-screen-line-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+/* Container Column — vertical border edges */
+.s-container-column {
+  border-left: 1px solid var(--s-line);
+  border-right: 1px solid var(--s-line);
 }

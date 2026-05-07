@@ -1,12 +1,12 @@
-/* Reference Sigil-dogfooded demo. The site's full token surface (519
-   variables across 33 categories) comes straight from the published
-   @sigil-ui/tokens package — no per-demo `:root` block, no parallel
-   token system. To switch the visual identity, change the preset that
-   feeds the import (or run `sigil preset <name>`). */
 @import "tailwindcss";
 @source "../../../../packages";
 @source "../../../../apps";
+
 @import "@sigil-ui/tokens/css";
+
+:root {
+  --s-line: color-mix(in oklab, var(--s-border) 64%, var(--s-background, #fff));
+}
 
 * {
   margin: 0;
@@ -17,6 +17,43 @@
 body {
   background: var(--s-background);
   color: var(--s-text);
-  font-family: var(--s-font-body, "PP Mori", system-ui, sans-serif);
+  font-family: var(--s-font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Screen Lines — full-viewport hairlines */
+.s-screen-line-top {
+  position: relative;
+}
+.s-screen-line-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+.s-screen-line-bottom {
+  position: relative;
+}
+.s-screen-line-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+/* Container Column — vertical border edges */
+.s-container-column {
+  border-left: 1px solid var(--s-line);
+  border-right: 1px solid var(--s-line);
 }

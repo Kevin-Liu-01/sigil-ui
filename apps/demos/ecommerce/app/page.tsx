@@ -1,278 +1,195 @@
-const PRODUCTS = [
-  {
-    name: "2016 CLOGS",
-    price: 115,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=600&fit=crop",
-    sizes: ["5", "6", "7", "8", "9", "10", "11", "12", "13", "14"],
-    sizeType: "us",
-  },
-  {
-    name: "BLACK BEAR CLAW MULES",
-    price: 125,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=600&h=600&fit=crop",
-    sizes: ["4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
-    sizeType: "us",
-  },
-  {
-    name: "YELLOW SAPPHIRE ZIP HOODIE",
-    price: 140,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    sizeType: "letter",
-  },
-  {
-    name: "CLAY SHOE",
-    price: 135,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=600&h=600&fit=crop",
-    sizes: ["6", "7", "8", "9", "10", "11", "12", "13", "14"],
-    sizeType: "us",
-  },
-  {
-    name: "ONYX RUNNER V2",
-    price: 160,
-    status: "PRE-ORDER",
-    image: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=600&h=600&fit=crop",
-    sizes: ["7", "8", "9", "10", "11", "12", "13"],
-    sizeType: "us",
-  },
-  {
-    name: "MESH TRAINING SHORT",
-    price: 85,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=600&h=600&fit=crop",
-    sizes: ["S", "M", "L", "XL"],
-    sizeType: "letter",
-  },
-  {
-    name: "EMERALD SLIDE",
-    price: 95,
-    status: "SHIPS IMMEDIATELY",
-    image: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?w=600&h=600&fit=crop",
-    sizes: ["6", "7", "8", "9", "10", "11", "12"],
-    sizeType: "us",
-  },
-  {
-    name: "VINTAGE GRAPHIC TEE",
-    price: 55,
-    status: "LIMITED",
-    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=600&fit=crop",
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    sizeType: "letter",
-  },
+"use client";
+
+import React from "react";
+import {
+  Button,
+  Badge,
+  Input,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
+
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
+
+const featured = [
+  { name: "Classic Runner", price: "$135", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 20%, var(--s-surface)) 0%, var(--s-surface) 100%)" },
+  { name: "Linen Overshirt", price: "$89", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-secondary, var(--s-primary)) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)" },
+  { name: "Canvas Tote", price: "$45", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 10%, var(--s-surface)) 0%, var(--s-surface) 100%)" },
 ];
 
-function SizeSelector({ sizes, type }: { sizes: string[]; type: string }) {
+const clothing = [
+  { name: "Wool Blazer", price: "$220" },
+  { name: "Cotton Crew", price: "$48" },
+  { name: "Pleated Trouser", price: "$110" },
+];
+
+const accessories = [
+  { name: "Leather Belt", price: "$65" },
+  { name: "Silk Scarf", price: "$78" },
+  { name: "Watch Strap", price: "$42" },
+];
+
+const homeItems = [
+  { name: "Stoneware Mug", price: "$28" },
+  { name: "Linen Throw", price: "$95" },
+  { name: "Brass Candleholder", price: "$55" },
+];
+
+const faqs = [
+  { q: "What are the shipping options?", a: "We offer standard (5-7 days), express (2-3 days), and overnight shipping. Free standard shipping on orders over $100." },
+  { q: "How do returns work?", a: "Returns are accepted within 30 days of purchase. Items must be unworn with tags attached. We provide a prepaid return label." },
+  { q: "How do I find my size?", a: "Check our size guide on each product page. We use standard US sizing. When in doubt, size up." },
+  { q: "What payment methods do you accept?", a: "We accept all major credit cards, Apple Pay, Google Pay, and Shop Pay. Afterpay available on orders over $50." },
+];
+
+function ProductCard({ name, price, gradient }: { name: string; price: string; gradient?: string }) {
   return (
-    <div className="flex flex-wrap gap-1 mt-3">
-      {sizes.map((size) => (
-        <button
-          key={size}
-          className="min-w-[32px] h-[32px] px-1.5 text-xs border border-[var(--s-border)] hover:border-[var(--s-border-strong)] transition-colors flex items-center justify-center"
-          style={{ fontFamily: "var(--s-font-mono)", letterSpacing: "0.02em" }}
-        >
-          {size}
-        </button>
+    <div>
+      <PlaceholderImage aspect="4/5" gradient={gradient} label={name} />
+      <div className="mt-3 flex items-center justify-between">
+        <span style={{ fontFamily: "var(--s-font-display)", fontSize: 13, fontWeight: 600 }}>{name}</span>
+        <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 12, fontWeight: 500 }}>{price}</span>
+      </div>
+    </div>
+  );
+}
+
+function CategoryGrid({ items }: { items: { name: string; price: string }[] }) {
+  return (
+    <BentoGrid columns={3} gap="1rem">
+      {items.map((item) => (
+        <BentoGridCell key={item.name}>
+          <ProductCard name={item.name} price={item.price} />
+        </BentoGridCell>
       ))}
-    </div>
+    </BentoGrid>
   );
 }
 
-function ProductCard({ product }: { product: (typeof PRODUCTS)[number] }) {
+export default function Page() {
   return (
-    <div className="group">
-      <div className="aspect-square bg-[var(--s-surface-sunken)] overflow-hidden mb-3">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-      <h3
-        className="text-sm font-bold tracking-wide"
-        style={{ fontFamily: "var(--s-font-body)", letterSpacing: "0.04em" }}
-      >
-        {product.name}
-      </h3>
-
-      <p
-        className="text-[10px] tracking-widest mt-0.5"
-        style={{
-          fontFamily: "var(--s-font-mono)",
-          color: "var(--s-text-muted)",
-          textTransform: "uppercase",
-        }}
-      >
-        {product.status}
-      </p>
-
-      <p className="text-sm font-bold mt-1">${product.price}</p>
-
-      <SizeSelector sizes={product.sizes} type={product.sizeType} />
-
-      <button
-        className="w-full mt-3 py-2.5 text-[11px] font-bold tracking-[0.15em] uppercase transition-colors"
-        style={{
-          fontFamily: "var(--s-font-mono)",
-          background: "var(--s-text)",
-          color: "var(--s-background)",
-        }}
-      >
-        SELECT SIZE{product.sizeType === "us" ? " (US)" : ""}
-      </button>
-    </div>
-  );
-}
-
-export default function EcommercePage() {
-  return (
-    <div className="min-h-screen" style={{ background: "var(--s-background)" }}>
-      {/* Top banner */}
-      <div
-        className="text-center py-2 text-[10px] tracking-[0.2em] uppercase font-bold"
-        style={{
-          fontFamily: "var(--s-font-mono)",
-          background: "var(--s-text)",
-          color: "var(--s-background)",
-        }}
-      >
-        FREE SHIPPING ON ALL ORDERS OVER $200 &mdash; ALL ORDERS SHIP WITHIN 2 BUSINESS DAYS
-      </div>
-
+    <DemoShell>
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 py-5 border-b border-[var(--s-border)]">
-        <button
-          className="text-xs font-bold tracking-[0.15em] uppercase"
-          style={{ fontFamily: "var(--s-font-mono)" }}
-        >
-          MENU
-        </button>
-
-        <div className="absolute left-1/2 -translate-x-1/2">
-          <div
-            className="border-2 border-[var(--s-text)] px-3 py-1.5 text-center leading-tight"
-            style={{ fontFamily: "var(--s-font-body)" }}
-          >
-            <div className="text-[11px] font-bold tracking-wider">Sigil</div>
-            <div className="text-[11px] font-bold tracking-wider">Studios</div>
+      <Panel as="nav">
+        <div className="flex items-center justify-between px-4 py-3">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 700, letterSpacing: "0.04em" }}>Store</span>
+          <div className="hidden md:flex items-center gap-5">
+            {["New", "Sale", "Collections"].map((link) => (
+              <a key={link} href="#" className="transition-opacity hover:opacity-70" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{link}</a>
+            ))}
           </div>
+          <Button variant="outline" size="sm">Cart (0)</Button>
         </div>
+      </Panel>
 
-        <div className="flex items-center gap-5">
-          <button
-            className="text-xs font-bold tracking-[0.15em] uppercase"
-            style={{ fontFamily: "var(--s-font-mono)" }}
-          >
-            SEARCH
-          </button>
-          <button
-            className="text-xs font-bold tracking-[0.15em] uppercase"
-            style={{ fontFamily: "var(--s-font-mono)" }}
-          >
-            CART
-          </button>
+      {/* Hero */}
+      <PanelSpacer />
+      <Panel className="p-4">
+        <PlaceholderImage aspect="21/9" label="Summer Collection" gradient="linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 18%, var(--s-surface)) 0%, var(--s-surface) 100%)" />
+      </Panel>
+
+      {/* Featured */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Featured</PanelHeader>
+        <div className="p-4">
+          <BentoGrid columns={3} gap="1rem">
+            {featured.map((p) => (
+              <BentoGridCell key={p.name}>
+                <ProductCard name={p.name} price={p.price} gradient={p.gradient} />
+              </BentoGridCell>
+            ))}
+          </BentoGrid>
         </div>
-      </nav>
+      </Panel>
 
-      {/* Product Grid */}
-      <main className="max-w-[1400px] mx-auto px-6 py-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
-          {PRODUCTS.map((product) => (
-            <ProductCard key={product.name} product={product} />
-          ))}
+      {/* Categories */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Categories</PanelHeader>
+        <div className="p-4">
+          <Tabs defaultValue="clothing">
+            <TabsList>
+              <TabsTrigger value="clothing">Clothing</TabsTrigger>
+              <TabsTrigger value="accessories">Accessories</TabsTrigger>
+              <TabsTrigger value="home">Home</TabsTrigger>
+            </TabsList>
+            <TabsContent value="clothing">
+              <CategoryGrid items={clothing} />
+            </TabsContent>
+            <TabsContent value="accessories">
+              <CategoryGrid items={accessories} />
+            </TabsContent>
+            <TabsContent value="home">
+              <CategoryGrid items={homeItems} />
+            </TabsContent>
+          </Tabs>
         </div>
-      </main>
+      </Panel>
 
-      {/* More Items */}
-      <section className="border-t border-[var(--s-border)] py-12">
-        <h2
-          className="text-center text-lg font-bold tracking-[0.15em] uppercase"
-          style={{ fontFamily: "var(--s-font-body)" }}
-        >
-          MORE ITEMS TO CONSIDER
-        </h2>
-      </section>
+      {/* FAQ */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>FAQ</PanelHeader>
+        <div className="p-4">
+          <Accordion type="single" collapsible>
+            {faqs.map((faq, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger>{faq.q}</AccordionTrigger>
+                <AccordionContent>{faq.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </Panel>
 
       {/* Footer */}
-      <footer className="border-t border-[var(--s-border)] px-6 py-10">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div>
-            <h4
-              className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
-              style={{ fontFamily: "var(--s-font-mono)" }}
-            >
-              SHOP
-            </h4>
-            {["All Products", "New Arrivals", "Footwear", "Apparel", "Accessories"].map((link) => (
-              <p key={link} className="text-sm text-[var(--s-text-secondary)] mb-2 cursor-pointer hover:text-[var(--s-text)]">
-                {link}
-              </p>
+      <PanelSpacer />
+      <Panel as="footer">
+        <div className="flex items-center justify-between px-4 py-4">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>© 2026 Store</span>
+          <div className="flex gap-4">
+            {["Shipping", "Returns", "Contact"].map((link) => (
+              <a key={link} href="#" className="transition-opacity hover:opacity-70" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>{link}</a>
             ))}
-          </div>
-          <div>
-            <h4
-              className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
-              style={{ fontFamily: "var(--s-font-mono)" }}
-            >
-              INFO
-            </h4>
-            {["About", "Sizing", "Shipping", "Returns", "Contact"].map((link) => (
-              <p key={link} className="text-sm text-[var(--s-text-secondary)] mb-2 cursor-pointer hover:text-[var(--s-text)]">
-                {link}
-              </p>
-            ))}
-          </div>
-          <div>
-            <h4
-              className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
-              style={{ fontFamily: "var(--s-font-mono)" }}
-            >
-              FOLLOW
-            </h4>
-            {["Instagram", "Twitter", "TikTok"].map((link) => (
-              <p key={link} className="text-sm text-[var(--s-text-secondary)] mb-2 cursor-pointer hover:text-[var(--s-text)]">
-                {link}
-              </p>
-            ))}
-          </div>
-          <div>
-            <h4
-              className="text-[10px] font-bold tracking-[0.2em] uppercase mb-4"
-              style={{ fontFamily: "var(--s-font-mono)" }}
-            >
-              NEWSLETTER
-            </h4>
-            <div className="flex border border-[var(--s-border)]">
-              <input
-                type="email"
-                placeholder="EMAIL"
-                className="flex-1 px-3 py-2 text-xs tracking-wider bg-transparent outline-none"
-                style={{ fontFamily: "var(--s-font-mono)" }}
-              />
-              <button
-                className="px-4 py-2 text-xs font-bold tracking-wider"
-                style={{
-                  fontFamily: "var(--s-font-mono)",
-                  background: "var(--s-text)",
-                  color: "var(--s-background)",
-                }}
-              >
-                JOIN
-              </button>
-            </div>
           </div>
         </div>
-
-        <div className="mt-10 pt-6 border-t border-[var(--s-border)] text-center">
-          <p className="text-[10px] tracking-widest text-[var(--s-text-muted)] uppercase" style={{ fontFamily: "var(--s-font-mono)" }}>
-            Built with Sigil UI &mdash; Soft preset
-          </p>
-        </div>
-      </footer>
-    </div>
+      </Panel>
+    </DemoShell>
   );
 }

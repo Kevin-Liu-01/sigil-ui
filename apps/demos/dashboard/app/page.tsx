@@ -1,249 +1,253 @@
-const kpis = [
-  { label: "Total Users", value: "24,891", change: "+12.5%", up: true },
-  { label: "Revenue", value: "$84,230", change: "+8.2%", up: true },
-  { label: "Active Sessions", value: "1,429", change: "-3.1%", up: false },
-  { label: "Conversion Rate", value: "3.24%", change: "+0.8%", up: true },
+"use client";
+
+import React from "react";
+import {
+  Button,
+  Badge,
+  Avatar,
+  Switch,
+  Label,
+  Progress,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
+
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
+
+const stats = [
+  { label: "Users", value: "12,847", change: "+12.5%", positive: true },
+  { label: "Revenue", value: "$48.2K", change: "+8.1%", positive: true },
+  { label: "Uptime", value: "98.5%", change: "", positive: true },
+  { label: "Avg Load", value: "2.4s", change: "", positive: false },
 ];
 
-const tableData = [
-  { id: "USR-001", name: "Alice Chen", email: "alice@example.com", plan: "Pro", revenue: "$2,340", status: "Active" },
-  { id: "USR-002", name: "Bob Martinez", email: "bob@example.com", plan: "Enterprise", revenue: "$12,800", status: "Active" },
-  { id: "USR-003", name: "Carol Wu", email: "carol@example.com", plan: "Hobby", revenue: "$0", status: "Churned" },
-  { id: "USR-004", name: "David Kim", email: "david@example.com", plan: "Pro", revenue: "$1,920", status: "Active" },
-  { id: "USR-005", name: "Eva Johansson", email: "eva@example.com", plan: "Pro", revenue: "$3,100", status: "Active" },
-  { id: "USR-006", name: "Frank Okafor", email: "frank@example.com", plan: "Enterprise", revenue: "$18,500", status: "Active" },
-  { id: "USR-007", name: "Grace Li", email: "grace@example.com", plan: "Hobby", revenue: "$0", status: "Trial" },
-  { id: "USR-008", name: "Hiro Tanaka", email: "hiro@example.com", plan: "Pro", revenue: "$890", status: "Active" },
+const events = [
+  { time: "2m ago", text: "Deployment #482 succeeded", type: "success" },
+  { time: "14m ago", text: "Alert: CPU spike on us-east-1", type: "warning" },
+  { time: "1h ago", text: "User alice@co.com upgraded to Pro", type: "info" },
+  { time: "3h ago", text: "Database backup completed", type: "success" },
+  { time: "5h ago", text: "SSL certificate renewed", type: "info" },
 ];
 
-const sidebarItems = [
-  { label: "Overview", icon: "◈", active: true },
-  { label: "Analytics", icon: "◆" },
-  { label: "Users", icon: "◇" },
-  { label: "Revenue", icon: "◆" },
-  { label: "Settings", icon: "◇" },
+const trafficMetrics = [
+  { label: "Page Views", value: 82, max: 100 },
+  { label: "Unique Visitors", value: 64, max: 100 },
+  { label: "Bounce Rate", value: 31, max: 100 },
+];
+
+const revenueMetrics = [
+  { label: "MRR", value: 72, max: 100 },
+  { label: "ARR Growth", value: 58, max: 100 },
+  { label: "Churn", value: 12, max: 100 },
+];
+
+const userMetrics = [
+  { label: "Signups", value: 89, max: 100 },
+  { label: "Activations", value: 74, max: 100 },
+  { label: "Retention", value: 66, max: 100 },
+];
+
+const teamMembers = [
+  { name: "Alice Chen", role: "Admin" },
+  { name: "Bob Martinez", role: "Editor" },
+  { name: "Carol Wu", role: "Viewer" },
 ];
 
 export default function Page() {
   return (
-    <div className="flex min-h-screen" style={{ background: "var(--r-background)", color: "var(--r-text)" }}>
-      {/* Sidebar */}
-      <aside
-        className="hidden lg:flex flex-col w-60 shrink-0 p-4"
-        style={{ background: "var(--r-surface)", borderRight: "1px solid var(--r-border)" }}
-      >
-        <div className="flex items-center gap-2 px-3 py-4 mb-4">
-          <div className="h-8 w-8 rounded-lg" style={{ background: "var(--r-primary)" }} />
-          <span className="text-base font-semibold">Dashboard</span>
+    <DemoShell maxWidth="64rem">
+      {/* Navbar */}
+      <Panel as="nav">
+        <div className="flex items-center justify-between px-4 py-3">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 700, letterSpacing: "0.02em" }}>Dashboard</span>
+          <Avatar fallback="KL" size="sm" />
         </div>
-        <nav className="flex-1 space-y-1">
-          {sidebarItems.map((item) => (
-            <a
-              key={item.label}
-              href="#"
-              className="flex items-center gap-3 px-3 py-2.5 text-sm rounded-lg transition-colors"
-              style={{
-                background: item.active ? "rgba(59,130,246,0.1)" : "transparent",
-                color: item.active ? "var(--r-primary)" : "var(--r-text-muted)",
-                fontWeight: item.active ? 600 : 400,
-              }}
-            >
-              <span>{item.icon}</span>
-              {item.label}
-            </a>
-          ))}
-        </nav>
-        <div
-          className="mt-auto p-3 rounded-lg text-sm"
-          style={{ background: "rgba(59,130,246,0.05)", border: "1px solid var(--r-border)" }}
-        >
-          <p className="font-medium" style={{ color: "var(--r-primary)" }}>Upgrade to Pro</p>
-          <p className="mt-1 text-xs" style={{ color: "var(--r-text-muted)" }}>
-            Unlock advanced analytics and unlimited exports.
-          </p>
-        </div>
-      </aside>
+      </Panel>
 
-      {/* Main */}
-      <main className="flex-1 p-6 lg:p-10 overflow-auto">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold tracking-tight">Analytics Overview</h1>
-              <p className="text-sm mt-1" style={{ color: "var(--r-text-muted)" }}>
-                Last 30 days performance
-              </p>
-            </div>
-            <button
-              className="px-4 py-2 text-sm font-medium"
-              style={{
-                background: "var(--r-primary)",
-                color: "#ffffff",
-                borderRadius: "var(--r-radius-sm)",
-              }}
-            >
-              Export Report
-            </button>
-          </div>
-
-          {/* KPI Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-            {kpis.map((kpi) => (
-              <div
-                key={kpi.label}
-                className="p-5"
-                style={{
-                  background: "var(--r-surface)",
-                  border: "1px solid var(--r-border)",
-                  borderRadius: "var(--r-radius)",
-                }}
-              >
-                <p className="text-sm mb-1" style={{ color: "var(--r-text-muted)" }}>
-                  {kpi.label}
-                </p>
-                <p className="text-2xl font-bold tracking-tight">{kpi.value}</p>
-                <p
-                  className="text-xs mt-2 font-medium"
-                  style={{ color: kpi.up ? "#22c55e" : "#ef4444" }}
-                >
-                  {kpi.change} vs last period
-                </p>
-              </div>
+      {/* Overview Stats */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Overview</PanelHeader>
+        <div className="p-4">
+          <BentoGrid columns={4} gap="1rem">
+            {stats.map((s) => (
+              <BentoGridCell key={s.label}>
+                <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm, 6px)", border: "1px solid var(--s-border)" }}>
+                  <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.04em", textTransform: "uppercase" as const, color: "var(--s-text-muted)" }}>{s.label}</span>
+                  <div className="mt-1" style={{ fontFamily: "var(--s-font-display)", fontSize: 22, fontWeight: 700 }}>{s.value}</div>
+                  {s.change && (
+                    <span style={{ fontSize: 12, fontWeight: 500, color: s.positive ? "var(--s-success, oklch(0.7 0.15 145))" : "var(--s-error, oklch(0.65 0.2 25))" }}>{s.change}</span>
+                  )}
+                </div>
+              </BentoGridCell>
             ))}
-          </div>
-
-          {/* Chart placeholder */}
-          <div
-            className="mb-8 p-6 h-48 flex items-center justify-center"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius)",
-            }}
-          >
-            <div className="flex items-end gap-2 h-24">
-              {[40, 65, 45, 80, 55, 70, 90, 60, 75, 85, 50, 95].map((h, i) => (
-                <div
-                  key={i}
-                  className="w-6 rounded-t transition-all"
-                  style={{
-                    height: `${h}%`,
-                    background: `rgba(59,130,246,${0.3 + (h / 100) * 0.7})`,
-                    borderRadius: "4px 4px 0 0",
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* Data Table */}
-          <div
-            className="overflow-x-auto"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius)",
-            }}
-          >
-            <div className="flex items-center justify-between px-5 py-4" style={{ borderBottom: "1px solid var(--r-border)" }}>
-              <h2 className="text-lg font-semibold">Recent Users</h2>
-              <div
-                className="flex items-center gap-2 px-3 py-1.5 text-sm"
-                style={{
-                  border: "1px solid var(--r-border)",
-                  borderRadius: "var(--r-radius-sm)",
-                  color: "var(--r-text-muted)",
-                }}
-              >
-                <span>🔍</span>
-                <span>Search users…</span>
-              </div>
-            </div>
-            <table className="w-full text-sm">
-              <thead>
-                <tr style={{ borderBottom: "1px solid var(--r-border)" }}>
-                  {["ID", "Name", "Email", "Plan", "Revenue", "Status"].map((h) => (
-                    <th
-                      key={h}
-                      className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider"
-                      style={{ color: "var(--r-text-muted)" }}
-                    >
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {tableData.map((row, i) => (
-                  <tr
-                    key={row.id}
-                    className="transition-colors hover:bg-white/[0.02]"
-                    style={{
-                      borderBottom: i < tableData.length - 1 ? "1px solid var(--r-border)" : "none",
-                    }}
-                  >
-                    <td className="px-5 py-3 font-mono text-xs" style={{ color: "var(--r-text-muted)" }}>
-                      {row.id}
-                    </td>
-                    <td className="px-5 py-3 font-medium">{row.name}</td>
-                    <td className="px-5 py-3" style={{ color: "var(--r-text-muted)" }}>
-                      {row.email}
-                    </td>
-                    <td className="px-5 py-3">
-                      <span
-                        className="px-2 py-0.5 text-xs rounded-full font-medium"
-                        style={{
-                          background:
-                            row.plan === "Enterprise"
-                              ? "rgba(59,130,246,0.15)"
-                              : row.plan === "Pro"
-                                ? "rgba(139,92,246,0.15)"
-                                : "rgba(255,255,255,0.05)",
-                          color:
-                            row.plan === "Enterprise"
-                              ? "#60a5fa"
-                              : row.plan === "Pro"
-                                ? "#a78bfa"
-                                : "var(--r-text-muted)",
-                        }}
-                      >
-                        {row.plan}
-                      </span>
-                    </td>
-                    <td className="px-5 py-3 font-mono text-xs">{row.revenue}</td>
-                    <td className="px-5 py-3">
-                      <span
-                        className="inline-flex items-center gap-1 text-xs font-medium"
-                        style={{
-                          color:
-                            row.status === "Active"
-                              ? "#22c55e"
-                              : row.status === "Trial"
-                                ? "#eab308"
-                                : "#ef4444",
-                        }}
-                      >
-                        <span
-                          className="h-1.5 w-1.5 rounded-full"
-                          style={{
-                            background:
-                              row.status === "Active"
-                                ? "#22c55e"
-                                : row.status === "Trial"
-                                  ? "#eab308"
-                                  : "#ef4444",
-                          }}
-                        />
-                        {row.status}
-                      </span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          </BentoGrid>
         </div>
-      </main>
-    </div>
+      </Panel>
+
+      {/* Analytics */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Analytics</PanelHeader>
+        <div className="p-4">
+          <Tabs defaultValue="traffic">
+            <TabsList>
+              <TabsTrigger value="traffic">Traffic</TabsTrigger>
+              <TabsTrigger value="revenue">Revenue</TabsTrigger>
+              <TabsTrigger value="users">Users</TabsTrigger>
+            </TabsList>
+            <TabsContent value="traffic">
+              <PlaceholderImage aspect="3/1" label="Traffic Chart" className="mb-4" />
+              <div className="space-y-3">
+                {trafficMetrics.map((m) => (
+                  <div key={m.label} className="flex items-center gap-3">
+                    <span className="w-28 shrink-0" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>{m.label}</span>
+                    <Progress value={m.value} className="flex-1" />
+                    <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600, width: 32, textAlign: "right" as const }}>{m.value}%</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="revenue">
+              <PlaceholderImage aspect="3/1" label="Revenue Chart" className="mb-4" />
+              <div className="space-y-3">
+                {revenueMetrics.map((m) => (
+                  <div key={m.label} className="flex items-center gap-3">
+                    <span className="w-28 shrink-0" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>{m.label}</span>
+                    <Progress value={m.value} className="flex-1" />
+                    <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600, width: 32, textAlign: "right" as const }}>{m.value}%</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="users">
+              <PlaceholderImage aspect="3/1" label="Users Chart" className="mb-4" />
+              <div className="space-y-3">
+                {userMetrics.map((m) => (
+                  <div key={m.label} className="flex items-center gap-3">
+                    <span className="w-28 shrink-0" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>{m.label}</span>
+                    <Progress value={m.value} className="flex-1" />
+                    <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 600, width: 32, textAlign: "right" as const }}>{m.value}%</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </Panel>
+
+      {/* Recent Events */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Recent Events</PanelHeader>
+        <div className="divide-y" style={{ borderColor: "var(--s-border)" }}>
+          {events.map((e, i) => (
+            <div key={i} className="flex items-center gap-3 px-4 py-3">
+              <Badge variant={e.type === "success" ? "default" : e.type === "warning" ? "outline" : "secondary"} className="shrink-0">
+                {e.type}
+              </Badge>
+              <span style={{ fontSize: 13, flex: 1 }}>{e.text}</span>
+              <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)", whiteSpace: "nowrap" as const }}>{e.time}</span>
+            </div>
+          ))}
+        </div>
+      </Panel>
+
+      {/* Settings */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Settings</PanelHeader>
+        <div className="p-4">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="notifications">
+              <AccordionTrigger>Notifications</AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-4 py-2">
+                  {["Email alerts", "Push notifications", "Weekly digest"].map((label) => (
+                    <div key={label} className="flex items-center justify-between">
+                      <Label style={{ fontSize: 13 }}>{label}</Label>
+                      <Switch defaultChecked={label !== "Weekly digest"} />
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="api-keys">
+              <AccordionTrigger>API Keys</AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-2 py-2">
+                  {["sk-prod-****-abcd", "sk-dev-****-efgh"].map((key) => (
+                    <div key={key} className="flex items-center justify-between p-2" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm, 6px)", border: "1px solid var(--s-border)" }}>
+                      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 12 }}>{key}</span>
+                      <Button variant="ghost" size="sm">Copy</Button>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="team">
+              <AccordionTrigger>Team</AccordionTrigger>
+              <AccordionContent>
+                <div className="space-y-3 py-2">
+                  {teamMembers.map((m) => (
+                    <div key={m.name} className="flex items-center gap-3">
+                      <Avatar fallback={m.name.split(" ").map((n) => n[0]).join("")} size="sm" />
+                      <div className="flex-1">
+                        <div style={{ fontSize: 13, fontWeight: 500 }}>{m.name}</div>
+                        <div style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)" }}>{m.role}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </Panel>
+
+      {/* Footer */}
+      <PanelSpacer />
+      <Panel as="footer">
+        <div className="flex items-center justify-between px-4 py-4">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>© 2026 Dashboard</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>Built with Sigil UI</span>
+        </div>
+      </Panel>
+    </DemoShell>
   );
 }

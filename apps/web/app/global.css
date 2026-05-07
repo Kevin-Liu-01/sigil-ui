@@ -187,6 +187,47 @@
 @import "./_generated/sigil-tokens.css";
 
 /* ================================================================== */
+/* Token Aliases & Legacy Compat                                      */
+/*                                                                    */
+/* Variables consumed by the app that aren't part of the compiled     */
+/* preset output (sigil-tokens.css). Aliases, backward-compat         */
+/* bridges, and app-level overrides live here.                        */
+/* ================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* Focus ring aliases */
+  --s-ring: var(--s-primary);
+  --s-ring-offset: var(--s-background);
+
+  /* Accent palette (derived from semantic tokens) */
+  --s-accent-indigo: var(--s-primary);
+  --s-accent-emerald: var(--s-success);
+  --s-accent-amber: var(--s-warning);
+  --s-accent-sky: var(--s-info);
+  --s-accent-fuchsia: var(--s-primary);
+  --s-accent-rose: var(--s-error);
+
+  /* Backward-compat aliases */
+  --s-bg: var(--s-background);
+  --s-section-py: var(--s-section-padding-y, 6rem);
+  --s-navbar-px: var(--s-navbar-padding-x, 24px);
+  --s-footer-py: var(--s-footer-padding-y, 48px);
+
+  /* Legacy --s-btn-* → --s-button-* bridge (consumed by older components) */
+  --s-btn-font-weight: var(--s-button-font-weight, 500);
+  --s-btn-text-transform: var(--s-button-text-transform, none);
+  --s-btn-letter-spacing: var(--s-button-letter-spacing, 0em);
+  --s-btn-font-family: var(--s-button-font-family, inherit);
+  --s-btn-border-width: var(--s-button-border-width, 1px);
+  --s-btn-hover-effect: var(--s-button-hover-effect, darken);
+  --s-btn-active-scale: var(--s-button-active-scale, 0.98);
+  --s-btn-icon-gap: var(--s-button-icon-gap, 8px);
+  --s-btn-min-width: var(--s-button-min-width, 0px);
+}
+
+/* ================================================================== */
 /* Font faces — local fallback                                        */
 /* ==================================================================
 
@@ -247,6 +288,86 @@ h1, h2, h3, h4, h5, h6 {
     ),
     linear-gradient(90deg, var(--s-grid-line-color, var(--s-border)) 0.5px, transparent 0.5px);
   background-size: var(--s-grid-cell) var(--s-grid-cell);
+}
+
+/* ================================================================== */
+/* Derived line color — ultra-subtle structural borders                */
+/* ================================================================== */
+/* Sits between --s-border and --s-background. Used for grid cell      */
+/* borders, container column edges, and hairlines that should be       */
+/* barely visible until hover reveals the full --s-border.             */
+
+:root {
+  --s-line: color-mix(in oklab, var(--s-border) 64%, var(--s-background, #fff));
+}
+
+/* ================================================================== */
+/* Screen Lines — full-viewport hairlines, grid-independent            */
+/* ================================================================== */
+/* Override --s-screen-line-color on any ancestor to tint the lines.   */
+
+.s-screen-line-top {
+  position: relative;
+}
+.s-screen-line-top::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+.s-screen-line-bottom {
+  position: relative;
+}
+.s-screen-line-bottom::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -100vw;
+  z-index: 1;
+  width: 200vw;
+  height: 1px;
+  pointer-events: none;
+  background: var(--s-screen-line-color, var(--s-line));
+}
+
+/* ================================================================== */
+/* Container Column — vertical border edges on content wrapper         */
+/* ================================================================== */
+
+.s-container-column {
+  border-left: 1px solid var(--s-line);
+  border-right: 1px solid var(--s-line);
+}
+
+/* ================================================================== */
+/* Dot Grid — radial-gradient dot pattern, grid-independent            */
+/* ================================================================== */
+
+.s-dot-grid {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--s-border) 5%, transparent) var(--s-grid-dot-size, 1px),
+    transparent 0
+  );
+  background-size:
+    var(--s-dot-grid-spacing, 10px)
+    var(--s-dot-grid-spacing, 10px);
+}
+
+.s-dot-grid-subtle {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--s-border) 3%, transparent)
+      var(--s-grid-dot-size, 1px),
+    transparent 0
+  );
+  background-size:
+    var(--s-dot-grid-spacing, 10px)
+    var(--s-dot-grid-spacing, 10px);
 }
 
 /* ================================================================== */

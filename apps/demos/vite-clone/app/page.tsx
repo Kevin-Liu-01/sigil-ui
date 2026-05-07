@@ -1,339 +1,238 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import {
+  Button,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
 
-const installCommands: Record<string, string> = {
-  npm: "$ npm create vite@latest",
-  Yarn: "$ yarn create vite",
-  pnpm: "$ pnpm create vite",
-  Bun: "$ bun create vite",
-  Deno: "$ deno init --npm vite",
-};
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState("npm");
-
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: "var(--r-background)",
-        color: "var(--r-text)",
-        fontFamily: "var(--r-font-sans)",
-      }}
-    >
-      {/* Announcement Banner */}
-      <div
-        className="relative flex items-center justify-center px-4 py-2.5 text-white text-sm"
-        style={{
-          background: "linear-gradient(135deg, #646cff 0%, #bd34fe 50%, #646cff 100%)",
-          fontFamily: "var(--r-font-mono)",
-        }}
-      >
-        <span className="tracking-wide text-xs sm:text-sm font-medium">
-          ANNOUNCING VITE+ ALPHA — THE UNIFIED JAVASCRIPT TOOLCHAIN
-        </span>
-        <button
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white transition-colors"
-          aria-label="Dismiss"
-        >
-          ✕
-        </button>
-      </div>
-
-      {/* Navbar */}
-      <nav
-        className="flex items-center justify-between px-6 lg:px-12 py-4"
-        style={{ borderBottom: "1px solid var(--r-border)" }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="text-xl" role="img" aria-label="lightning">
-            ⚡
-          </span>
-          <span className="text-lg font-bold tracking-tight">VITE</span>
+    <DemoShell>
+      {/* Nav */}
+      <Panel as="nav" className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center gap-3">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 18, fontWeight: 700, letterSpacing: "-0.03em" }}>Vite</span>
+          <Badge>v6</Badge>
         </div>
-        <div
-          className="hidden md:flex items-center gap-6 text-sm font-medium"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Guide</a>
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Config</a>
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Plugins</a>
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Resources</a>
-          <span
-            className="px-2 py-0.5 text-xs rounded"
-            style={{ background: "var(--r-surface)", color: "var(--r-text-muted)" }}
-          >
-            v6.2
-          </span>
+        <div className="hidden md:flex items-center gap-5">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Guide</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Config</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Plugins</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Resources</span>
         </div>
-        <div className="flex items-center gap-4">
-          <div
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius)",
-              color: "var(--r-text-muted)",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            Search
-          </div>
-          <a href="#" style={{ color: "var(--r-text-muted)" }} aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-          </a>
-        </div>
-      </nav>
+        <Button size="sm">Get Started</Button>
+      </Panel>
 
       {/* Hero */}
-      <section className="relative px-6 lg:px-12 pt-24 pb-20 text-center overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(100, 108, 255, 0.15), transparent 70%)",
-          }}
-        />
-        <p
-          className="relative text-sm font-medium mb-4"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          by <span style={{ color: "var(--r-secondary)" }}>VOID(0)</span>
-        </p>
-        <h1
-          className="relative text-5xl sm:text-6xl lg:text-8xl font-extrabold tracking-[-0.04em] leading-[0.95] mb-6"
-        >
-          The Build Tool{" "}
-          <span
-            style={{
-              background: "linear-gradient(135deg, #646cff, #bd34fe)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            for the
-          </span>
-          <br />
-          Web
+      <PanelSpacer />
+      <Panel className="px-4 py-16 text-center">
+        <h1 style={{ fontFamily: "var(--s-font-display)", fontSize: "clamp(2.5rem, 6vw, 4rem)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+          Next Generation Frontend Tooling
         </h1>
-        <p
-          className="relative max-w-xl mx-auto text-lg leading-relaxed mb-8"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          Vite is a build tool that aims to provide a faster and leaner development
-          experience for modern web projects.
+        <p className="mx-auto mt-4 max-w-lg" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--s-text-muted)" }}>
+          Instant server start with native ESM, lightning-fast HMR that stays fast regardless of app size, and optimized builds powered by Rolldown.
         </p>
-        <div className="relative flex items-center justify-center gap-3">
-          <button
-            className="px-6 py-3 text-sm font-semibold transition-colors"
-            style={{
-              background: "var(--r-primary)",
-              color: "#ffffff",
-              borderRadius: "var(--r-radius-lg)",
-              border: "none",
-            }}
-          >
-            Get Started
-          </button>
-          <button
-            className="px-6 py-3 text-sm font-semibold transition-colors"
-            style={{
-              background: "transparent",
-              color: "var(--r-text)",
-              borderRadius: "var(--r-radius-lg)",
-              border: "1px solid var(--r-border)",
-            }}
-          >
-            View on GitHub
-          </button>
+        <div className="flex items-center justify-center gap-3 mt-8">
+          <Button>Get Started</Button>
+          <Button variant="outline">View on GitHub</Button>
         </div>
-      </section>
+      </Panel>
 
-      {/* Tabbed Install Command */}
-      <section className="px-6 lg:px-12 pb-20">
-        <div className="max-w-xl mx-auto">
-          <div
-            className="flex items-center gap-0 text-sm overflow-x-auto"
-            style={{
-              borderBottom: "1px solid var(--r-border)",
-            }}
-          >
-            {Object.keys(installCommands).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className="px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors"
-                style={{
-                  color: activeTab === tab ? "var(--r-primary)" : "var(--r-text-muted)",
-                  borderBottom: activeTab === tab ? "2px solid var(--r-primary)" : "2px solid transparent",
-                  background: "transparent",
-                }}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-          <div
-            className="p-4 text-sm"
-            style={{
-              background: "var(--r-surface)",
-              borderRadius: "0 0 var(--r-radius) var(--r-radius)",
-              fontFamily: "var(--r-font-mono)",
-              color: "var(--r-text-muted)",
-            }}
-          >
-            {installCommands[activeTab]}
-          </div>
+      {/* Hero Image */}
+      <Panel className="px-4 py-4">
+        <PlaceholderImage aspect="21/9" label="Dev Server" />
+      </Panel>
+
+      {/* Features */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Features</PanelHeader>
+        <div className="px-4 py-6">
+          <BentoGrid columns={3} gap="1rem">
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Instant Server Start</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>On-demand file serving over native ESM, no bundling required during development.</p>
+              </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Lightning HMR</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>Hot Module Replacement that stays fast regardless of app size. Updates in milliseconds.</p>
+              </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Optimized Build</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>Pre-configured Rolldown bundler with multi-page and library mode support.</p>
+              </div>
+            </BentoGridCell>
+          </BentoGrid>
         </div>
-      </section>
+      </Panel>
 
-      {/* Logo Cloud */}
-      <section
-        className="px-6 lg:px-12 py-16 text-center"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <p
-          className="text-sm mb-8"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          Trusted by the world&apos;s best software teams
-        </p>
-        <div
-          className="flex flex-wrap items-center justify-center gap-10 text-sm font-medium"
-          style={{ color: "var(--r-text-muted)", fontFamily: "var(--r-font-mono)" }}
-        >
-          {["Google", "Apple", "Shopify", "Cloudflare", "Stripe", "GitLab"].map((name) => (
-            <span key={name} className="opacity-50 hover:opacity-100 transition-opacity">
-              {name}
-            </span>
-          ))}
+      {/* Ecosystem */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Ecosystem</PanelHeader>
+        <div className="px-4 py-6">
+          <Tabs defaultValue="frameworks">
+            <TabsList>
+              <TabsTrigger value="frameworks">Frameworks</TabsTrigger>
+              <TabsTrigger value="plugins">Plugins</TabsTrigger>
+              <TabsTrigger value="templates">Templates</TabsTrigger>
+            </TabsList>
+            <TabsContent value="frameworks">
+              <BentoGrid columns={3} gap="1rem" className="mt-4">
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>React</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>First-class React support with Fast Refresh and JSX transform.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Vue</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Deep Vue integration with SFC support and reactive HMR.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Svelte</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Native Svelte compilation with optimized output and HMR.</p>
+                  </div>
+                </BentoGridCell>
+              </BentoGrid>
+            </TabsContent>
+            <TabsContent value="plugins">
+              <BentoGrid columns={3} gap="1rem" className="mt-4">
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>PWA</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Zero-config PWA support with service worker generation.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>SSR</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Server-side rendering with streaming and hydration support.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Legacy</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Browser compatibility transforms for older environments.</p>
+                  </div>
+                </BentoGridCell>
+              </BentoGrid>
+            </TabsContent>
+            <TabsContent value="templates">
+              <BentoGrid columns={3} gap="1rem" className="mt-4">
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Starter</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Minimal template with TypeScript and ESLint configured.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Library</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Publish-ready library template with DTS generation.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Monorepo</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Multi-package workspace with shared configs and tooling.</p>
+                  </div>
+                </BentoGridCell>
+              </BentoGrid>
+            </TabsContent>
+          </Tabs>
         </div>
-      </section>
+      </Panel>
 
-      {/* Feature Cards */}
-      <section
-        className="px-6 lg:px-12 py-20"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              icon: "⚡",
-              title: "Instant Server Start",
-              desc: "On demand file serving over native ESM, no bundling required during development.",
-            },
-            {
-              icon: "🔥",
-              title: "Lightning Fast HMR",
-              desc: "Hot Module Replacement that stays fast regardless of app size. Updates in milliseconds.",
-            },
-            {
-              icon: "🛠",
-              title: "Rich Features",
-              desc: "Out-of-the-box support for TypeScript, JSX, CSS, and more. No configuration needed.",
-            },
-            {
-              icon: "📦",
-              title: "Optimized Build",
-              desc: "Pre-configured Rolldown build with multi-page and library mode support.",
-            },
-            {
-              icon: "🔌",
-              title: "Universal Plugins",
-              desc: "Shared plugin interface between dev and build powered by a superset of Rollup's plugin API.",
-            },
-            {
-              icon: "🏷",
-              title: "Fully Typed APIs",
-              desc: "Flexible programmatic APIs with full TypeScript typing for a robust developer experience.",
-            },
-          ].map((card) => (
-            <div
-              key={card.title}
-              className="p-6 transition-all hover:translate-y-[-2px]"
-              style={{
-                background: "var(--r-surface)",
-                border: "1px solid var(--r-border)",
-                borderRadius: "var(--r-radius-lg)",
-              }}
-            >
-              <div className="text-2xl mb-3">{card.icon}</div>
-              <h3 className="text-base font-semibold mb-2">{card.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
-                {card.desc}
-              </p>
-            </div>
-          ))}
+      {/* FAQ */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>FAQ</PanelHeader>
+        <div className="px-4 py-6">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="webpack">
+              <AccordionTrigger>How does Vite differ from webpack?</AccordionTrigger>
+              <AccordionContent>
+                Vite leverages native ES modules during development for instant server start, while webpack bundles everything upfront. In production, Vite uses Rolldown for optimized builds with tree-shaking and code splitting.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="frameworks">
+              <AccordionTrigger>Which frameworks does Vite support?</AccordionTrigger>
+              <AccordionContent>
+                Vite has first-class support for React, Vue, Svelte, Solid, Qwik, Lit, and Preact through official and community plugins. Any framework that compiles to standard JavaScript can work with Vite.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="production">
+              <AccordionTrigger>Is Vite production-ready?</AccordionTrigger>
+              <AccordionContent>
+                Yes. Vite is used in production by thousands of companies including Google, Apple, Shopify, and Cloudflare. The production build uses Rolldown for optimized, tree-shaken output with code splitting.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="migration">
+              <AccordionTrigger>How do I migrate from Create React App?</AccordionTrigger>
+              <AccordionContent>
+                Migration is straightforward: install Vite, create a vite.config.ts, move your index.html to the root, and update your scripts. Most CRA projects can be migrated in under 30 minutes.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-      </section>
-
-      {/* CTA */}
-      <section
-        className="px-6 lg:px-12 py-24 text-center"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-6">
-          Ready to get started?
-        </h2>
-        <button
-          className="px-8 py-3 text-sm font-semibold"
-          style={{
-            background: "var(--r-primary)",
-            color: "#ffffff",
-            borderRadius: "var(--r-radius-lg)",
-            border: "none",
-          }}
-        >
-          Get Started
-        </button>
-      </section>
+      </Panel>
 
       {/* Footer */}
-      <footer
-        className="px-6 lg:px-12 py-16"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="flex items-start gap-2">
-            <span className="text-lg">⚡</span>
-            <span className="text-base font-bold tracking-tight">VITE</span>
-          </div>
-          {[
-            { heading: "Guide", links: ["Getting Started", "Features", "CLI", "Using Plugins"] },
-            { heading: "Resources", links: ["Team", "Releases", "Community", "DEV.to"] },
-            { heading: "Social", links: ["GitHub", "X / Twitter", "Discord", "Mastodon"] },
-          ].map((col) => (
-            <div key={col.heading}>
-              <h4
-                className="text-xs font-semibold tracking-wider uppercase mb-4"
-                style={{ color: "var(--r-text-muted)" }}
-              >
-                {col.heading}
-              </h4>
-              <ul className="space-y-2 text-sm" style={{ color: "var(--r-text-muted)" }}>
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="hover:text-[var(--r-text)] transition-colors">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div
-          className="max-w-6xl mx-auto mt-12 pt-6 text-xs"
-          style={{ borderTop: "1px solid var(--r-border)", color: "var(--r-text-muted)" }}
-        >
-          Released under the MIT License. Copyright © 2024 Evan You & Vite Contributors.
-        </div>
-      </footer>
-    </div>
+      <PanelSpacer />
+      <Panel as="footer" className="px-4 py-6 text-center">
+        <p style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>
+          &copy; 2026 Vite Contributors &middot; MIT License
+        </p>
+      </Panel>
+    </DemoShell>
   );
 }

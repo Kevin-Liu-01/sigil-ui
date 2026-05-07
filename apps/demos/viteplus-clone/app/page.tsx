@@ -1,519 +1,228 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import {
+  Button,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
+
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
 
 export default function Page() {
-  const [activeWorkflow, setActiveWorkflow] = useState("create");
-
-  const terminalOutputs: Record<string, string[]> = {
-    create: [
-      "$ vp create",
-      "",
-      "┌  Vite+ — Create a new project",
-      "│",
-      "◆  Select a template:",
-      "│  ● React + TypeScript (recommended)",
-      "│  ○ Vue + TypeScript",
-      "│  ○ Svelte + TypeScript",
-      "│  ○ Vanilla",
-      "│",
-      "◆  Project directory: ./my-app",
-      "│",
-      "◇  Dependencies installed via pnpm",
-      "│",
-      "└  Done in 1.2s",
-    ],
-    dev: [
-      "$ vp dev",
-      "",
-      "  VITE+ v1.0.0  ready in 89ms",
-      "",
-      "  ➜  Local:   http://localhost:5173/",
-      "  ➜  Network: http://192.168.1.5:5173/",
-      "  ➜  press h + enter to show help",
-    ],
-    check: [
-      "$ vp check",
-      "",
-      "  Checking types... done in 340ms",
-      "  Linting... done in 120ms",
-      "  Formatting... done in 80ms",
-      "",
-      "  ✓ No issues found",
-    ],
-    test: [
-      "$ vp test",
-      "",
-      "  ✓ src/App.test.tsx (3 tests) 12ms",
-      "  ✓ src/utils.test.ts (5 tests) 8ms",
-      "",
-      "  Test Files  2 passed (2)",
-      "  Tests       8 passed (8)",
-      "  Duration    340ms",
-    ],
-    build: [
-      "$ vp build",
-      "",
-      "  vite+ v1.0.0 building for production...",
-      "  ✓ 847 modules transformed.",
-      "",
-      "  dist/index.html        0.46 kB │ gzip:  0.30 kB",
-      "  dist/assets/index.css  14.20 kB │ gzip:  3.84 kB",
-      "  dist/assets/index.js   82.34 kB │ gzip: 26.12 kB",
-      "",
-      "  ✓ built in 420ms",
-    ],
-  };
-
   return (
-    <div
-      className="min-h-screen"
-      style={{
-        background: "var(--r-background)",
-        color: "var(--r-text)",
-        fontFamily: "var(--r-font-sans)",
-      }}
-    >
-      {/* Navbar */}
-      <nav
-        className="flex items-center justify-between px-6 lg:px-12 py-4"
-        style={{ borderBottom: "1px solid var(--r-border)" }}
-      >
-        <div className="flex items-center gap-1.5">
-          <span className="text-lg">⚡</span>
-          <span className="text-lg font-bold tracking-tight">VITE+</span>
+    <DemoShell>
+      {/* Nav */}
+      <Panel as="nav" className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center gap-3">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 18, fontWeight: 700, letterSpacing: "-0.03em" }}>Vite+</span>
+          <Badge>Enterprise</Badge>
         </div>
-        <div
-          className="hidden md:flex items-center gap-6 text-sm font-medium"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Guide</a>
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Config</a>
-          <a href="#" className="hover:text-[var(--r-text)] transition-colors">Resources</a>
+        <div className="hidden md:flex items-center gap-5">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Features</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Pricing</span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Docs</span>
         </div>
-        <div className="flex items-center gap-4">
-          <div
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 text-sm"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius)",
-              color: "var(--r-text-muted)",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.3-4.3" />
-            </svg>
-            Search
-          </div>
-          <a href="#" style={{ color: "var(--r-text-muted)" }} aria-label="GitHub">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-          </a>
-          <a href="#" style={{ color: "var(--r-text-muted)" }} aria-label="X">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-            </svg>
-          </a>
-        </div>
-      </nav>
+        <Button size="sm">Start Trial</Button>
+      </Panel>
 
       {/* Hero */}
-      <section className="relative px-6 lg:px-12 pt-24 pb-16 text-center overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            background: "radial-gradient(ellipse at 50% 0%, rgba(99, 102, 241, 0.1), transparent 60%)",
-          }}
-        />
-        <div
-          className="relative mx-auto mb-6 w-16 h-16 flex items-center justify-center text-3xl"
-          style={{
-            background: "linear-gradient(135deg, #6366f1, #818cf8)",
-            borderRadius: "16px",
-            boxShadow: "0 8px 32px rgba(99, 102, 241, 0.25)",
-          }}
-        >
-          ⚡
+      <PanelSpacer />
+      <Panel className="px-4 py-16 text-center">
+        <div className="flex justify-center mb-4">
+          <Badge variant="outline">Built on Vite</Badge>
         </div>
-        <h1 className="relative text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.04em] leading-[1.0] mb-6">
-          The{" "}
-          <span style={{ color: "var(--r-primary)" }}>Uni</span>fied
-          <br />
-          Toolchain for{" "}
-          <span style={{ color: "var(--r-primary)" }}>the</span>
-          <br />
-          <span style={{ color: "var(--r-primary)" }}>Web</span>
+        <h1 style={{ fontFamily: "var(--s-font-display)", fontSize: "clamp(2.5rem, 6vw, 4rem)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05 }}>
+          Vite, supercharged for teams
         </h1>
-        <p
-          className="relative max-w-lg mx-auto text-base leading-relaxed mb-2"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          One command to create, develop, check, test, and build.
-          Powered by Vite, OXC, and Rolldown.
+        <p className="mx-auto mt-4 max-w-lg" style={{ fontSize: 15, lineHeight: 1.6, color: "var(--s-text-muted)" }}>
+          Remote caching, module federation, and build analytics — enterprise-grade features on top of the Vite you already love.
         </p>
-        <p
-          className="relative max-w-md mx-auto text-sm leading-relaxed mb-8"
-          style={{ color: "var(--r-text-muted)" }}
-        >
-          A single tool that replaces your bundler, linter, formatter,
-          test runner, and type checker.
-        </p>
-        <div className="relative flex items-center justify-center gap-3">
-          <button
-            className="px-6 py-3 text-sm font-semibold text-white"
-            style={{
-              background: "var(--r-primary)",
-              borderRadius: "var(--r-radius-lg)",
-              border: "none",
-            }}
-          >
-            Get started
-          </button>
-          <button
-            className="px-6 py-3 text-sm font-semibold"
-            style={{
-              background: "transparent",
-              color: "var(--r-text)",
-              borderRadius: "var(--r-radius-lg)",
-              border: "1px solid var(--r-border)",
-            }}
-          >
-            Read the Announcement
-          </button>
+        <div className="flex items-center justify-center gap-3 mt-8">
+          <Button>Start Free Trial</Button>
+          <Button variant="outline">View Documentation</Button>
         </div>
-      </section>
+      </Panel>
 
-      {/* Terminal Demo */}
-      <section className="px-6 lg:px-12 pb-4">
-        <div
-          className="max-w-2xl mx-auto overflow-hidden"
-          style={{
-            background: "#1b1b1f",
-            borderRadius: "var(--r-radius-lg)",
-            border: "1px solid #2e2e32",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.12)",
-          }}
-        >
-          {/* Window chrome */}
-          <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: "1px solid #2e2e32" }}>
-            <div className="w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#febc2e" }} />
-            <div className="w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
-          </div>
-          <div className="p-5 text-sm leading-relaxed" style={{ fontFamily: "var(--r-font-mono)" }}>
-            {terminalOutputs[activeWorkflow].map((line, i) => (
-              <div key={i} className="whitespace-pre" style={{
-                color: line.startsWith("$")
-                  ? "#e4e4e7"
-                  : line.includes("✓") || line.includes("✓") || line.includes("Done") || line.includes("ready")
-                    ? "#10b981"
-                  : line.includes("●")
-                    ? "#6366f1"
-                  : line.startsWith("  ➜")
-                    ? "#818cf8"
-                  : "#a1a1aa",
-              }}>
-                {line || "\u00A0"}
+      {/* Hero Image */}
+      <Panel className="px-4 py-4">
+        <PlaceholderImage aspect="21/9" label="Team Dashboard" />
+      </Panel>
+
+      {/* Features */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Features</PanelHeader>
+        <div className="px-4 py-6">
+          <BentoGrid columns={3} gap="1rem">
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Remote Caching</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>Share build artifacts across your team. Never rebuild what a teammate already built.</p>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Workflow Tab Bar */}
-      <section className="px-6 lg:px-12 pb-20">
-        <div className="flex items-center justify-center gap-1 max-w-2xl mx-auto pt-4">
-          {["create", "dev", "check", "test", "build"].map((tab) => (
-            <button
-              key={tab}
-              onClick={() => setActiveWorkflow(tab)}
-              className="px-4 py-2 text-sm font-medium transition-all"
-              style={{
-                background: activeWorkflow === tab ? "var(--r-primary)" : "var(--r-surface)",
-                color: activeWorkflow === tab ? "#ffffff" : "var(--r-text-muted)",
-                borderRadius: "var(--r-radius)",
-                border: activeWorkflow === tab ? "none" : "1px solid var(--r-border)",
-              }}
-            >
-              {tab}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Install Section */}
-      <section
-        className="px-6 lg:px-12 py-20"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div>
-            <p
-              className="text-[10px] font-semibold tracking-[0.25em] uppercase mb-3"
-              style={{ color: "var(--r-primary)", fontFamily: "var(--r-font-mono)" }}
-            >
-              Getting Started
-            </p>
-            <h2 className="text-3xl font-bold tracking-tight mb-4">
-              Install vp globally
-            </h2>
-            <p className="text-sm leading-relaxed mb-3" style={{ color: "var(--r-text-muted)" }}>
-              The Vite+ CLI manages your runtime, package manager, and
-              development tools in a single binary.
-            </p>
-            <p className="text-xs" style={{ color: "var(--r-text-muted)" }}>
-              For CI, use{" "}
-              <code
-                className="px-1.5 py-0.5"
-                style={{
-                  background: "var(--r-surface)",
-                  borderRadius: "var(--r-radius-sm)",
-                  fontFamily: "var(--r-font-mono)",
-                }}
-              >
-                setup-vp
-              </code>
-              .
-            </p>
-          </div>
-          <div className="space-y-4">
-            {[
-              {
-                label: "macOS / Linux",
-                cmd: 'curl -fsSL https://get.viteplus.dev | sh',
-              },
-              {
-                label: "Windows / PowerShell",
-                cmd: "irm https://get.viteplus.dev/install.ps1 | iex",
-              },
-            ].map((block) => (
-              <div key={block.label}>
-                <p
-                  className="text-xs font-medium mb-2"
-                  style={{ color: "var(--r-text-muted)" }}
-                >
-                  {block.label}
-                </p>
-                <div
-                  className="flex items-center justify-between px-4 py-3 text-sm"
-                  style={{
-                    background: "var(--r-surface)",
-                    border: "1px solid var(--r-border)",
-                    borderRadius: "var(--r-radius)",
-                    fontFamily: "var(--r-font-mono)",
-                  }}
-                >
-                  <code style={{ color: "var(--r-text)" }}>{block.cmd}</code>
-                  <button
-                    className="ml-3 px-2 py-1 text-xs shrink-0"
-                    style={{
-                      color: "var(--r-text-muted)",
-                      background: "var(--r-background)",
-                      border: "1px solid var(--r-border)",
-                      borderRadius: "var(--r-radius-sm)",
-                    }}
-                  >
-                    Copy
-                  </button>
-                </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Module Federation</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>Share code between apps at runtime. Deploy micro-frontends independently.</p>
               </div>
-            ))}
-          </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="p-4">
+                <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Build Analytics</h3>
+                <p className="mt-2" style={{ fontSize: 13, lineHeight: 1.5, color: "var(--s-text-muted)" }}>Deep insights into build performance, bundle composition, and cache hit rates.</p>
+              </div>
+            </BentoGridCell>
+          </BentoGrid>
         </div>
-      </section>
+      </Panel>
 
-      {/* Feature Cards */}
-      <section
-        className="px-6 lg:px-12 py-20"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Card 1: Runtime & Package Manager */}
-          <div
-            className="p-6"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-lg)",
-            }}
-          >
-            <h3 className="text-base font-semibold mb-3">
-              Manages your runtime and package manager
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--r-text-muted)" }}>
-              Pin exact Node.js versions and package managers per project. No more nvm, fnm, or corepack.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["pnpm", "npm", "yarn", "bun"].map((pm) => (
-                <span
-                  key={pm}
-                  className="px-2.5 py-1 text-xs font-medium"
-                  style={{
-                    background: "var(--r-background)",
-                    border: "1px solid var(--r-border)",
-                    borderRadius: "var(--r-radius-sm)",
-                    fontFamily: "var(--r-font-mono)",
-                  }}
-                >
-                  {pm}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Card 2: Simplifies Development */}
-          <div
-            className="p-6"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-lg)",
-            }}
-          >
-            <h3 className="text-base font-semibold mb-3">
-              Simplifies everyday development
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--r-text-muted)" }}>
-              One CLI that wraps create, dev, check, test, and build. Consistent interface across all your projects.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              {["vp env", "vp install", "vp dev", "vp check", "vp test", "vp build"].map((cmd) => (
-                <span
-                  key={cmd}
-                  className="px-2.5 py-1 text-xs font-medium"
-                  style={{
-                    background: "var(--r-primary)",
-                    color: "#ffffff",
-                    borderRadius: "var(--r-radius)",
-                    fontFamily: "var(--r-font-mono)",
-                  }}
-                >
-                  {cmd}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* Card 3: Frameworks */}
-          <div
-            className="p-6"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-lg)",
-            }}
-          >
-            <h3 className="text-base font-semibold mb-3">
-              Powering your favorite frameworks
-            </h3>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--r-text-muted)" }}>
-              First-class templates for React, Vue, Svelte, Solid, Qwik, Astro, and more. Zero config to get started.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              {["React", "Vue", "Svelte", "Solid", "Qwik", "Astro"].map((fw) => (
-                <div
-                  key={fw}
-                  className="w-10 h-10 flex items-center justify-center text-xs font-bold"
-                  style={{
-                    background: "var(--r-background)",
-                    border: "1px solid var(--r-border)",
-                    borderRadius: "var(--r-radius)",
-                    color: "var(--r-text-muted)",
-                  }}
-                >
-                  {fw[0]}
-                </div>
-              ))}
-            </div>
-          </div>
+      {/* Plans */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Plans</PanelHeader>
+        <div className="px-4 py-6">
+          <Tabs defaultValue="team">
+            <TabsList>
+              <TabsTrigger value="team">Team</TabsTrigger>
+              <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
+            </TabsList>
+            <TabsContent value="team">
+              <BentoGrid columns={3} gap="1rem" className="mt-4">
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Remote Cache</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Up to 50GB shared cache storage with 30-day retention.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Team Dashboard</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Build analytics, cache insights, and team usage metrics.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Priority Support</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Email support with 24-hour SLA and community Discord access.</p>
+                  </div>
+                </BentoGridCell>
+              </BentoGrid>
+            </TabsContent>
+            <TabsContent value="enterprise">
+              <BentoGrid columns={3} gap="1rem" className="mt-4">
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Unlimited Cache</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Unlimited storage with 90-day retention and custom purge rules.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>SSO &amp; RBAC</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>SAML/OIDC single sign-on with role-based access controls.</p>
+                  </div>
+                </BentoGridCell>
+                <BentoGridCell>
+                  <div className="p-4">
+                    <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Dedicated Support</h4>
+                    <p className="mt-1" style={{ fontSize: 12, color: "var(--s-text-muted)" }}>Dedicated engineer, Slack channel, 1-hour SLA, onboarding assistance.</p>
+                  </div>
+                </BentoGridCell>
+              </BentoGrid>
+            </TabsContent>
+          </Tabs>
         </div>
-      </section>
+      </Panel>
 
-      {/* Two-Column Features */}
-      <section
-        className="px-6 lg:px-12 py-20"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div
-            className="p-8"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-lg)",
-            }}
-          >
-            <h3 className="text-xl font-bold mb-3">A trusted stack to standardize on</h3>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
-              Vite+ is built on proven open-source foundations: Vite for dev serving
-              and building, OXC for parsing and linting, Rolldown for bundling, and
-              Vitest for testing. Each tool is best-in-class. Together, they form a
-              cohesive, reliable foundation that engineering teams can adopt with confidence.
-            </p>
-          </div>
-          <div
-            className="p-8"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-lg)",
-            }}
-          >
-            <h3 className="text-xl font-bold mb-3">Stay fast at scale</h3>
-            <p className="text-sm leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
-              Native-speed tooling means your build pipeline stays fast as your codebase
-              grows. No more quadratic slowdowns from JavaScript-based tools. Vite+ scales
-              linearly — 10x the code, same build time. CI pipelines finish in seconds,
-              not minutes.
-            </p>
-          </div>
+      {/* FAQ */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>FAQ</PanelHeader>
+        <div className="px-4 py-6">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="oss">
+              <AccordionTrigger>Is Vite+ open source?</AccordionTrigger>
+              <AccordionContent>
+                The core Vite runtime remains fully open source. Vite+ adds enterprise features (remote caching, analytics, federation orchestration) as a commercial layer on top of the open-source foundation.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="existing">
+              <AccordionTrigger>Can I use Vite+ with my existing Vite project?</AccordionTrigger>
+              <AccordionContent>
+                Yes. Vite+ is a drop-in enhancement — install the package, add your team token, and your existing vite.config.ts works without modification. Enterprise features activate automatically.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="cache">
+              <AccordionTrigger>How does remote caching work?</AccordionTrigger>
+              <AccordionContent>
+                Build artifacts are hashed and stored in a shared cloud cache. When any team member builds the same input, the output is restored instantly instead of recomputed — saving minutes on every build.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="security">
+              <AccordionTrigger>What about security and compliance?</AccordionTrigger>
+              <AccordionContent>
+                Vite+ is SOC 2 Type II certified. Cache artifacts are encrypted at rest and in transit. Enterprise plans include audit logs, IP allowlisting, and custom data retention policies.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-      </section>
+      </Panel>
+
+      {/* CTA */}
+      <PanelSpacer />
+      <Panel className="px-4 py-16 text-center">
+        <h2 style={{ fontFamily: "var(--s-font-display)", fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 700, letterSpacing: "-0.03em" }}>
+          Ready to supercharge your builds?
+        </h2>
+        <div className="mt-6">
+          <Button>Start Free Trial</Button>
+        </div>
+      </Panel>
 
       {/* Footer */}
-      <footer
-        className="px-6 lg:px-12 py-16"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
-          <div className="flex items-start gap-1.5">
-            <span className="text-lg">⚡</span>
-            <span className="text-base font-bold tracking-tight">VITE+</span>
-          </div>
-          {[
-            { heading: "Guide", links: ["Getting Started", "Installation", "CLI Reference", "Configuration"] },
-            { heading: "Resources", links: ["Blog", "Changelog", "Roadmap", "Contributing"] },
-            { heading: "Social", links: ["GitHub", "X / Twitter", "Discord", "Bluesky"] },
-          ].map((col) => (
-            <div key={col.heading}>
-              <h4
-                className="text-xs font-semibold tracking-wider uppercase mb-4"
-                style={{ color: "var(--r-text-muted)" }}
-              >
-                {col.heading}
-              </h4>
-              <ul className="space-y-2 text-sm" style={{ color: "var(--r-text-muted)" }}>
-                {col.links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="hover:text-[var(--r-text)] transition-colors">
-                      {link}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <div
-          className="max-w-6xl mx-auto mt-12 pt-6 text-xs"
-          style={{ borderTop: "1px solid var(--r-border)", color: "var(--r-text-muted)" }}
-        >
-          Released under the MIT License. Copyright © 2024 VoidZero Inc. & Vite+ Contributors.
-        </div>
-      </footer>
-    </div>
+      <PanelSpacer />
+      <Panel as="footer" className="px-4 py-6 text-center">
+        <p style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>
+          &copy; 2026 VitePlus
+        </p>
+      </Panel>
+    </DemoShell>
   );
 }

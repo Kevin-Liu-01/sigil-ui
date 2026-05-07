@@ -1,319 +1,203 @@
-export default function Page() {
-  const terminalLines = [
-    { type: "prompt", text: "$ bolt install react next tailwindcss" },
-    { type: "output", text: "  ◆ Resolving dependencies..." },
-    { type: "output", text: "  ◆ Downloading 847 packages..." },
-    { type: "success", text: "  ✓ Installed 847 packages in 1.2s" },
-    { type: "blank", text: "" },
-    { type: "prompt", text: "$ bolt dev" },
-    { type: "output", text: "  ◆ Starting dev server..." },
-    { type: "success", text: "  ✓ Ready on http://localhost:3000 (240ms)" },
-  ];
+"use client";
 
-  const commands = [
-    { cmd: "bolt init", desc: "Initialize a new project with bolt.config.ts", flags: "--template, --preset" },
-    { cmd: "bolt install", desc: "Install dependencies with automatic lockfile resolution", flags: "--frozen, --dev, --save-exact" },
-    { cmd: "bolt dev", desc: "Start the development server with HMR", flags: "--port, --host, --https" },
-    { cmd: "bolt build", desc: "Create a production build with tree-shaking", flags: "--analyze, --sourcemap" },
-    { cmd: "bolt publish", desc: "Publish packages to npm with changelog generation", flags: "--tag, --access, --otp" },
-    { cmd: "bolt run", desc: "Execute scripts defined in package.json", flags: "--filter, --parallel" },
-  ];
+import React from "react";
+import {
+  Button,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
 
-  const configCode = `// bolt.config.ts
-import { defineConfig } from "bolt";
-
-export default defineConfig({
-  // Package manager configuration
-  nodeLinker: "hoisted",
-  shamefullyHoist: false,
-
-  // Build settings
-  build: {
-    target: "es2022",
-    sourcemap: true,
-    minify: "oxc",
-  },
-
-  // Dev server
-  dev: {
-    port: 3000,
-    hmr: { overlay: true },
-  },
-
-  // Workspace settings
-  workspace: {
-    packages: ["packages/*", "apps/*"],
-    catalog: true,
-  },
-});`;
-
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
   return (
-    <div className="min-h-screen" style={{ background: "var(--s-background)", color: "var(--s-text)" }}>
-      {/* Navbar */}
-      <nav
-        className="flex items-center justify-between px-6 py-4"
-        style={{ borderBottom: "1px solid var(--s-border)" }}
-      >
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
+
+const commands = [
+  { cmd: "init", desc: "Scaffold a new Sigil project with interactive preset selection." },
+  { cmd: "add", desc: "Copy components into your project. They consume tokens, never hardcode." },
+  { cmd: "preset", desc: "Switch visual identity. One command rewrites all 519 tokens." },
+  { cmd: "design", desc: "Generate, compile, or sync DESIGN.md from current tokens." },
+  { cmd: "doctor", desc: "Validate project health — config, tokens, deps, CSS imports." },
+  { cmd: "diff", desc: "Show token CSS changes since last sync." },
+];
+
+export default function Page() {
+  return (
+    <DemoShell>
+      {/* Nav */}
+      <Panel as="nav" className="flex items-center justify-between px-4 py-3">
         <div className="flex items-center gap-3">
-          <span className="text-lg font-bold" style={{ fontFamily: "var(--s-font-mono)", color: "var(--s-primary)" }}>
-            ⚡ bolt
-          </span>
-          <span
-            className="text-xs px-2 py-0.5"
-            style={{
-              background: "rgba(59,130,246,0.1)",
-              color: "var(--s-primary)",
-              borderRadius: "var(--s-radius-sm)",
-              fontFamily: "var(--s-font-mono)",
-            }}
-          >
-            v3.0.0
-          </span>
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 16, fontWeight: 700 }}>sigil-cli</span>
+          <Badge variant="outline">v2.0</Badge>
         </div>
-        <div className="hidden md:flex items-center gap-6 text-sm" style={{ color: "var(--s-text-muted)" }}>
-          <a href="#" className="hover:text-white transition-colors">Docs</a>
-          <a href="#" className="hover:text-white transition-colors">Blog</a>
-          <a href="#" className="hover:text-white transition-colors">GitHub</a>
+        <div className="flex items-center gap-5 text-sm" style={{ color: "var(--s-text-muted)" }}>
+          <a href="#">Docs</a>
+          <a href="#">GitHub</a>
         </div>
-      </nav>
+      </Panel>
 
       {/* Hero */}
-      <section className="px-6 pt-24 pb-16 text-center">
-        <h1
-          className="text-5xl md:text-7xl font-bold tracking-tight"
-          style={{ fontFamily: "var(--s-font-mono)" }}
-        >
-          <span style={{ color: "var(--s-primary)" }}>bolt</span>
-          <span className="text-3xl md:text-5xl" style={{ color: "var(--s-text-muted)" }}> — the fastest</span>
-          <br />
-          <span>package manager</span>
+      <PanelSpacer />
+      <Panel className="px-4 py-16 md:py-24">
+        <Badge className="mb-4">CLI Tool</Badge>
+        <h1 style={{ fontFamily: "var(--s-font-display)", fontSize: 40, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+          The developer toolkit
         </h1>
-        <p
-          className="mt-6 max-w-lg mx-auto text-lg"
-          style={{ color: "var(--s-text-muted)" }}
-        >
-          10x faster installs. Intelligent caching. Zero-config monorepo support.
-          Drop-in replacement for npm, yarn, and pnpm.
+        <p className="mt-4 max-w-md text-base" style={{ color: "var(--s-text-muted)", lineHeight: 1.7 }}>
+          Init projects, add components, switch presets, compile design tokens, and validate
+          everything — from your terminal. One CLI for the entire Sigil workflow.
         </p>
+      </Panel>
 
-        {/* Install command */}
+      {/* Install Command */}
+      <Panel className="px-4 py-5">
         <div
-          className="mt-10 inline-flex items-center gap-3 px-5 py-3"
+          className="flex items-center gap-3 px-4 py-3"
           style={{
             background: "var(--s-surface)",
+            borderRadius: "var(--s-radius-md, 8px)",
             border: "1px solid var(--s-border)",
-            borderRadius: "var(--s-radius-md)",
             fontFamily: "var(--s-font-mono)",
+            fontSize: 14,
           }}
         >
           <span style={{ color: "var(--s-text-muted)" }}>$</span>
-          <span>curl -fsSL https://bolt.dev/install | sh</span>
-          <button
-            className="ml-2 px-2 py-1 text-xs hover:bg-white/5 transition-colors"
-            style={{
-              border: "1px solid var(--s-border)",
-              borderRadius: "var(--s-radius-sm)",
-              color: "var(--s-text-muted)",
-            }}
-          >
-            Copy
-          </button>
+          <span>npm install -g @sigil-ui/cli</span>
+          <Button size="sm" variant="ghost" className="ml-auto">Copy</Button>
         </div>
-      </section>
+      </Panel>
 
-      {/* Terminal */}
-      <section className="px-6 pb-24">
-        <div className="max-w-2xl mx-auto">
-          <div
-            className="overflow-hidden"
-            style={{
-              background: "#0c0c1a",
-              border: "1px solid var(--s-border)",
-              borderRadius: "var(--s-radius-md)",
-              boxShadow: "0 8px 48px rgba(59,130,246,0.1)",
-            }}
-          >
-            {/* Terminal header */}
-            <div
-              className="flex items-center gap-2 px-4 py-3"
-              style={{ borderBottom: "1px solid var(--s-border)" }}
-            >
-              <div className="flex gap-1.5">
-                <div className="h-3 w-3 rounded-full" style={{ background: "#ff5f57" }} />
-                <div className="h-3 w-3 rounded-full" style={{ background: "#febc2e" }} />
-                <div className="h-3 w-3 rounded-full" style={{ background: "#28c840" }} />
-              </div>
-              <span className="ml-2 text-xs" style={{ color: "var(--s-text-muted)", fontFamily: "var(--s-font-mono)" }}>
-                ~/my-project
-              </span>
-            </div>
-
-            {/* Terminal body */}
-            <div className="p-4 space-y-1" style={{ fontFamily: "var(--s-font-mono)", fontSize: "0.8125rem" }}>
-              {terminalLines.map((line, i) => (
-                <div key={i}>
-                  {line.type === "blank" ? (
-                    <br />
-                  ) : (
-                    <span
-                      style={{
-                        color:
-                          line.type === "prompt"
-                            ? "var(--s-text)"
-                            : line.type === "success"
-                              ? "#22c55e"
-                              : "var(--s-text-muted)",
-                      }}
-                    >
-                      {line.text}
-                    </span>
-                  )}
+      {/* Commands */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Commands</PanelHeader>
+        <div className="p-4">
+          <BentoGrid columns={3} gap="0.75rem">
+            {commands.map((c) => (
+              <BentoGridCell key={c.cmd}>
+                <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)" }}>
+                  <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 13, fontWeight: 600, color: "var(--s-primary)" }}>sigil {c.cmd}</span>
+                  <p className="mt-1.5 text-sm" style={{ color: "var(--s-text-muted)", lineHeight: 1.5 }}>{c.desc}</p>
                 </div>
-              ))}
-              <div className="flex items-center mt-2">
-                <span style={{ color: "var(--s-text)" }}>$ </span>
-                <span
-                  className="ml-1 w-2 h-4 inline-block animate-pulse"
-                  style={{ background: "var(--s-primary)" }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benchmarks */}
-      <section className="px-6 py-20" style={{ borderTop: "1px solid var(--s-border)" }}>
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold mb-8 text-center">Benchmarks</h2>
-          <div className="space-y-4">
-            {[
-              { name: "bolt", time: "1.2s", pct: 100 },
-              { name: "pnpm", time: "8.4s", pct: 14 },
-              { name: "yarn", time: "12.1s", pct: 10 },
-              { name: "npm", time: "18.7s", pct: 6 },
-            ].map((b) => (
-              <div key={b.name} className="flex items-center gap-4">
-                <span className="w-12 text-sm text-right" style={{ fontFamily: "var(--s-font-mono)", color: "var(--s-text-muted)" }}>
-                  {b.name}
-                </span>
-                <div className="flex-1 h-8 relative" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm)" }}>
-                  <div
-                    className="h-full flex items-center px-3"
-                    style={{
-                      width: `${b.pct}%`,
-                      minWidth: "60px",
-                      background: b.name === "bolt" ? "var(--s-primary)" : "rgba(59,130,246,0.15)",
-                      borderRadius: "var(--s-radius-sm)",
-                    }}
-                  >
-                    <span
-                      className="text-xs font-mono font-bold"
-                      style={{ color: b.name === "bolt" ? "#050510" : "var(--s-text-muted)" }}
-                    >
-                      {b.time}
-                    </span>
-                  </div>
-                </div>
-              </div>
+              </BentoGridCell>
             ))}
-          </div>
-          <p className="text-xs text-center mt-4" style={{ color: "var(--s-text-muted)" }}>
-            Cold install, 847 packages, no lockfile. M4 MacBook Pro.
-          </p>
+          </BentoGrid>
         </div>
-      </section>
+      </Panel>
 
-      {/* Config code block */}
-      <section className="px-6 py-20" style={{ borderTop: "1px solid var(--s-border)" }}>
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl font-bold mb-2">Configuration</h2>
-          <p className="text-sm mb-6" style={{ color: "var(--s-text-muted)" }}>
-            Zero config by default. Full control when you need it.
-          </p>
-          <div
-            className="overflow-x-auto"
-            style={{
-              background: "#0c0c1a",
-              border: "1px solid var(--s-border)",
-              borderRadius: "var(--s-radius-md)",
-            }}
-          >
-            <div className="flex items-center justify-between px-4 py-2" style={{ borderBottom: "1px solid var(--s-border)" }}>
-              <span className="text-xs" style={{ color: "var(--s-text-muted)", fontFamily: "var(--s-font-mono)" }}>
-                bolt.config.ts
-              </span>
-              <button className="text-xs px-2 py-1 rounded hover:bg-white/5 transition-colors" style={{ color: "var(--s-text-muted)" }}>
-                Copy
-              </button>
-            </div>
-            <pre
-              className="p-4 text-sm leading-relaxed overflow-x-auto"
-              style={{ fontFamily: "var(--s-font-mono)", color: "#cdd6f4" }}
-            >
-              <code>{configCode}</code>
-            </pre>
-          </div>
+      {/* Usage */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Usage</PanelHeader>
+        <div className="p-4">
+          <Tabs defaultValue="init">
+            <TabsList>
+              <TabsTrigger value="init">Init</TabsTrigger>
+              <TabsTrigger value="add">Add</TabsTrigger>
+              <TabsTrigger value="preset">Preset</TabsTrigger>
+            </TabsList>
+            <TabsContent value="init">
+              <div className="mt-4 p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)", fontFamily: "var(--s-font-mono)", fontSize: 13, lineHeight: 1.8 }}>
+                <div><span style={{ color: "var(--s-text-muted)" }}>$</span> npx @sigil-ui/cli init</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ◆ Detected Next.js project</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ◆ Choose a preset: cobalt</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Generated token CSS (519 variables)</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Created .sigil/AGENTS.md</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Ready — run `sigil doctor` to validate</div>
+              </div>
+            </TabsContent>
+            <TabsContent value="add">
+              <div className="mt-4 p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)", fontFamily: "var(--s-font-mono)", fontSize: 13, lineHeight: 1.8 }}>
+                <div><span style={{ color: "var(--s-text-muted)" }}>$</span> npx @sigil-ui/cli add Button Badge Tabs</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ◆ Copying 3 components...</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ components/ui/Button.tsx</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ components/ui/Badge.tsx</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ components/ui/Tabs.tsx</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Added 3 components</div>
+              </div>
+            </TabsContent>
+            <TabsContent value="preset">
+              <div className="mt-4 p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)", fontFamily: "var(--s-font-mono)", fontSize: 13, lineHeight: 1.8 }}>
+                <div><span style={{ color: "var(--s-text-muted)" }}>$</span> npx @sigil-ui/cli preset onyx</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ◆ Switching to preset: onyx</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ◆ Regenerating token CSS...</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Updated 519 tokens across 33 categories</div>
+                <div style={{ color: "var(--s-text-muted)" }}>  ✓ Visual identity changed — restart dev server</div>
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
-      </section>
+      </Panel>
 
-      {/* Command reference */}
-      <section className="px-6 py-20" style={{ borderTop: "1px solid var(--s-border)" }}>
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold mb-6">Command Reference</h2>
-          <div
-            className="overflow-x-auto"
-            style={{
-              background: "var(--s-surface)",
-              border: "1px solid var(--s-border)",
-              borderRadius: "var(--s-radius-md)",
-            }}
-          >
-            <table className="w-full text-sm">
-              <thead>
-                <tr style={{ borderBottom: "1px solid var(--s-border)" }}>
-                  <th className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider" style={{ color: "var(--s-text-muted)" }}>Command</th>
-                  <th className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider" style={{ color: "var(--s-text-muted)" }}>Description</th>
-                  <th className="text-left px-5 py-3 font-medium text-xs uppercase tracking-wider" style={{ color: "var(--s-text-muted)" }}>Key Flags</th>
-                </tr>
-              </thead>
-              <tbody>
-                {commands.map((cmd, i) => (
-                  <tr
-                    key={cmd.cmd}
-                    style={{
-                      borderBottom: i < commands.length - 1 ? "1px solid var(--s-border)" : "none",
-                    }}
-                  >
-                    <td className="px-5 py-3" style={{ fontFamily: "var(--s-font-mono)", color: "var(--s-primary)" }}>
-                      {cmd.cmd}
-                    </td>
-                    <td className="px-5 py-3" style={{ color: "var(--s-text-muted)" }}>
-                      {cmd.desc}
-                    </td>
-                    <td className="px-5 py-3 text-xs" style={{ fontFamily: "var(--s-font-mono)", color: "var(--s-text-muted)" }}>
-                      {cmd.flags}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {/* FAQ */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>FAQ</PanelHeader>
+        <div className="p-4">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="install">
+              <AccordionTrigger>Do I need to install globally?</AccordionTrigger>
+              <AccordionContent>No — you can use npx to run any command without installing. Global install just saves you from typing the prefix each time.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="frameworks">
+              <AccordionTrigger>Which frameworks are supported?</AccordionTrigger>
+              <AccordionContent>Next.js, Vite, Remix, and Astro are all detected automatically by sigil init. The components are framework-agnostic React.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="preset-custom">
+              <AccordionTrigger>Can I create my own preset?</AccordionTrigger>
+              <AccordionContent>Run sigil preset create to scaffold a custom preset from any existing base. All 519 fields are pre-populated — just change the values you want.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="ci">
+              <AccordionTrigger>Can I run sigil doctor in CI?</AccordionTrigger>
+              <AccordionContent>Yes. It exits with code 1 on validation failure, so you can add it to your GitHub Actions or any CI pipeline as a quality gate.</AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-      </section>
+      </Panel>
 
       {/* Footer */}
-      <footer className="px-6 py-8" style={{ borderTop: "1px solid var(--s-border)" }}>
-        <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <span className="text-sm" style={{ fontFamily: "var(--s-font-mono)", color: "var(--s-primary)" }}>⚡ bolt</span>
-          <div className="flex gap-6 text-sm" style={{ color: "var(--s-text-muted)" }}>
-            <a href="#" className="hover:text-white transition-colors">GitHub</a>
-            <a href="#" className="hover:text-white transition-colors">Discord</a>
-            <a href="#" className="hover:text-white transition-colors">Changelog</a>
-          </div>
-          <p className="text-xs" style={{ color: "var(--s-text-muted)" }}>MIT License</p>
+      <PanelSpacer />
+      <Panel as="footer" className="flex items-center justify-between px-4 py-4">
+        <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>sigil-cli · MIT License</span>
+        <div className="flex items-center gap-4 text-sm" style={{ color: "var(--s-text-muted)" }}>
+          <a href="#">GitHub</a>
+          <a href="#">Changelog</a>
+          <a href="#">Discord</a>
         </div>
-      </footer>
-    </div>
+      </Panel>
+    </DemoShell>
   );
 }

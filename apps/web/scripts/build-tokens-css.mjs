@@ -2,17 +2,14 @@
 /**
  * Build-time generator for `apps/web/app/_generated/sigil-tokens.css`.
  *
- * The generated file is the single source of truth for the web app's
- * runtime CSS variables. Today the file is hand-authored to preserve
- * the exact OKLCH light-mode palette of the live site; this script is
- * the dogfood pipeline that will eventually replace that hand-authored
- * source with `compileToCss(preset.tokens)` output.
+ * Compiles the active preset (default: "default") into CSS custom
+ * properties. The output IS the static stylesheet — components read
+ * `var(--s-*)` from it on first paint, with zero runtime injection
+ * needed. The `SigilTokensProvider` only creates a `<style>` tag when
+ * a user explicitly switches presets at runtime.
  *
- * Usage (manual): pnpm --filter @sigil-ui/web run tokens:build
- *
- * Until the typed `webPreset` definition mirrors the live values
- * exactly, this script writes to a `.preview.css` sibling so we can
- * diff the two outputs without disturbing the production file.
+ * Usage: pnpm --filter @sigil-ui/web run tokens:build
+ * Override preset: SIGIL_PRESET=cobalt pnpm ... tokens:build
  */
 
 import { fileURLToPath } from "node:url";
@@ -23,6 +20,21 @@ import { presets } from "@sigil-ui/presets";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
+
+const HEADER = `\
+/* ================================================================== */
+/* Sigil Tokens — apps/web  (AUTO-GENERATED — do not edit by hand)    */
+/*                                                                    */
+/* Source: build-tokens-css.mjs → compileToCss(preset.tokens)         */
+/* Regenerate: pnpm --filter @sigil-ui/web run tokens:build           */
+/*                                                                    */
+/* This file is the single source of truth for the web app's CSS      */
+/* variables. The runtime SigilTokensProvider reads from this file    */
+/* on first paint and only injects a <style> when a preset is         */
+/* explicitly switched.                                               */
+/* ================================================================== */
+
+`;
 
 async function main() {
   const presetName = process.env.SIGIL_PRESET ?? "default";
@@ -40,8 +52,8 @@ async function main() {
 
   const outDir = resolve(ROOT, "app/_generated");
   mkdirSync(outDir, { recursive: true });
-  const outPath = resolve(outDir, "sigil-tokens.preview.css");
-  writeFileSync(outPath, css, "utf8");
+  const outPath = resolve(outDir, "sigil-tokens.css");
+  writeFileSync(outPath, HEADER + css, "utf8");
   console.log(`[build-tokens-css] preset=${presetName} → ${outPath} (${css.length} bytes)`);
 }
 

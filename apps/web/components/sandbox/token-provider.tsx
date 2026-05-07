@@ -208,6 +208,12 @@ export function SigilTokensProvider({
   // Write initial tokens eagerly on mount so the very first paint reflects
   // this provider's state. Non-default tags (e.g. the sandbox layer) get
   // torn down on unmount so their !important rules don't outlive the route.
+  //
+  // When the static sigil-tokens.css is generated from the same default
+  // preset (via build-tokens-css.mjs), the values here are byte-identical
+  // to the static CSS — so the !important override is a visual no-op and
+  // causes no flash. The style tag is still created so that subsequent
+  // preset switches can update it in-place.
   useIsomorphicLayoutEffect(() => {
     applyTokensToDom(tokens, styleTagAttr);
     if (styleTagAttr === DEFAULT_STYLE_ATTR) return;

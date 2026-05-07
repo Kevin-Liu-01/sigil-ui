@@ -34,6 +34,7 @@ export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
 export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
 export { Divider, type DividerPattern, type DividerProps } from "./layout/Divider";
 export { HRule, type HRuleProps } from "./layout/HRule";
+export { BentoGrid, BentoCell as BentoGridCell, type BentoGridProps, type BentoCellProps as BentoGridCellProps } from "./layout/BentoGrid";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";
 export { LayoutControls, type LayoutControlsProps } from "./layout/LayoutControls";
 export { SectionDivider, type SectionDividerProps, type SectionDividerPattern } from "./layout/SectionDivider";
@@ -490,3 +491,17 @@ export {
   ProximityGlow, ProximityGlowCard,
   type ProximityGlowProps, type ProximityGlowCardProps,
 } from "./effects/ProximityGlow";
+
+// ---------------------------------------------------------------------------
+// EvilCharts (animated Recharts + Motion)
+// ---------------------------------------------------------------------------
+export {
+  EvilLineChart,
+  EvilAreaChart,
+  EvilBarChart,
+  EvilPieChart,
+  EvilBrush,
+  useEvilBrush,
+  type EvilBrushRange,
+  type ChartConfig,
+} from "./charts";

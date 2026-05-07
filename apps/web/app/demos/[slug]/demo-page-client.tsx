@@ -301,53 +301,59 @@ export default function DemoPageClient({ slug }: { slug: string }) {
 /*  Demo router                                                                */
 /* -------------------------------------------------------------------------- */
 
-function DemoContent({ slug }: { slug: string }) {
-  const back = (
-    <a href="/demos" className="fixed top-4 left-4 z-50 no-underline">
-      <FrostedPanel edge="bottom" variant="frosted" className="px-3 py-1.5 text-[13px]">
-        <span className="font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)]">← Demos</span>
-      </FrostedPanel>
-    </a>
-  );
+/* All demos extracted to individual template files */
+import AISaasDemoNew from "./templates/ai-saas";
+import DashboardDemoNew from "./templates/dashboard";
+import StartupDemoNew from "./templates/startup";
+import PortfolioDemoNew from "./templates/portfolio";
+import BlogDemoNew from "./templates/blog";
+import EcommerceDemoNew from "./templates/ecommerce";
+import DevDocsDemoNew from "./templates/dev-docs";
+import AgencyDemoNew from "./templates/agency";
+import CliToolDemoNew from "./templates/cli-tool";
+import PlaygroundDemoNew from "./templates/playground";
+import LinearCloneDemoNew from "./templates/linear-clone";
+import VercelCloneDemoNew from "./templates/vercel-clone";
+import DedalusCloneDemoNew from "./templates/dedalus-clone";
+import VoidZeroCloneDemoNew from "./templates/voidzero-clone";
+import OxideCloneDemoNew from "./templates/oxide-clone";
+import ViteCloneDemoNew from "./templates/vite-clone";
+import VitePlusCloneDemoNew from "./templates/viteplus-clone";
 
-  switch (slug) {
-    case "ai-saas":
-      return <>{back}<AISaasDemo /></>;
-    case "dashboard":
-      return <>{back}<DashboardDemo /></>;
-    case "ecommerce":
-      return <>{back}<EcommerceDemo /></>;
-    case "dev-docs":
-      return <>{back}<DevDocsDemo /></>;
-    case "startup":
-      return <>{back}<StartupDemo /></>;
-    case "portfolio":
-      return <>{back}<PortfolioDemo /></>;
-    case "blog":
-      return <>{back}<BlogDemo /></>;
-    case "agency":
-      return <>{back}<AgencyDemo /></>;
-    case "cli-tool":
-      return <>{back}<CliToolDemo /></>;
-    case "playground":
-      return <>{back}<PlaygroundDemo /></>;
-    case "linear-clone":
-      return <>{back}<LinearCloneDemo /></>;
-    case "vercel-clone":
-      return <>{back}<VercelCloneDemo /></>;
-    case "dedalus-clone":
-      return <>{back}<DedalusCloneDemo /></>;
-    case "voidzero-clone":
-      return <>{back}<VoidZeroCloneDemo /></>;
-    case "oxide-clone":
-      return <>{back}<OxideCloneDemo /></>;
-    case "vite-clone":
-      return <>{back}<ViteCloneDemo /></>;
-    case "viteplus-clone":
-      return <>{back}<VitePlusCloneDemo /></>;
-    default:
-      notFound();
-  }
+const TEMPLATE_MAP: Record<string, React.ComponentType> = {
+  "ai-saas": AISaasDemoNew,
+  dashboard: DashboardDemoNew,
+  startup: StartupDemoNew,
+  portfolio: PortfolioDemoNew,
+  blog: BlogDemoNew,
+  ecommerce: EcommerceDemoNew,
+  "dev-docs": DevDocsDemoNew,
+  agency: AgencyDemoNew,
+  "cli-tool": CliToolDemoNew,
+  playground: PlaygroundDemoNew,
+  "linear-clone": LinearCloneDemoNew,
+  "vercel-clone": VercelCloneDemoNew,
+  "dedalus-clone": DedalusCloneDemoNew,
+  "voidzero-clone": VoidZeroCloneDemoNew,
+  "oxide-clone": OxideCloneDemoNew,
+  "vite-clone": ViteCloneDemoNew,
+  "viteplus-clone": VitePlusCloneDemoNew,
+};
+
+function DemoContent({ slug }: { slug: string }) {
+  const Template = TEMPLATE_MAP[slug];
+  if (!Template) notFound();
+
+  return (
+    <>
+      <a href="/demos" className="fixed top-4 left-4 z-50 no-underline">
+        <FrostedPanel edge="bottom" variant="frosted" className="px-3 py-1.5 text-[13px]">
+          <span className="font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)]">← Demos</span>
+        </FrostedPanel>
+      </a>
+      <Template />
+    </>
+  );
 }
 
 /* -------------------------------------------------------------------------- */

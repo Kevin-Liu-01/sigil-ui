@@ -1,335 +1,208 @@
-export default function Page() {
-  const features = [
-    {
-      title: "Issue tracking",
-      desc: "Create, assign, and track issues with keyboard-first workflows and real-time sync across your team.",
-    },
-    {
-      title: "Cycles",
-      desc: "Fixed-length sprints that automatically roll over incomplete work. Measure velocity, not vanity metrics.",
-    },
-    {
-      title: "Roadmaps",
-      desc: "Connect issues to projects to initiatives. See the big picture without losing track of the details.",
-    },
-    {
-      title: "Workflows",
-      desc: "Automate repetitive work with custom rules. Triage, assign, and transition issues automatically.",
-    },
-    {
-      title: "Integrations",
-      desc: "GitHub, GitLab, Slack, Figma, Sentry — connect the tools your team already uses.",
-    },
-    {
-      title: "Analytics",
-      desc: "Understand how your team ships. Track cycle time, throughput, and bottlenecks in real time.",
-    },
-  ];
+"use client";
 
-  const logos = ["Stripe", "Vercel", "Notion", "Loom", "Pitch", "Retool"];
+import React from "react";
+import {
+  Button,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
 
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
   return (
-    <div className="min-h-screen" style={{ background: "var(--r-background)", color: "var(--r-text)" }}>
-      {/* Navbar — sticky */}
-      <nav
-        className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 backdrop-blur-xl"
-        style={{
-          background: "rgba(9, 9, 11, 0.8)",
-          borderBottom: "1px solid var(--r-border)",
-        }}
-      >
-        <div className="flex items-center gap-8">
-          <span className="text-base font-semibold tracking-tight">Acme</span>
-          <div className="hidden md:flex items-center gap-6 text-sm" style={{ color: "var(--r-text-muted)" }}>
-            <a href="#" className="hover:text-white transition-colors">Features</a>
-            <a href="#" className="hover:text-white transition-colors">Method</a>
-            <a href="#" className="hover:text-white transition-colors">Customers</a>
-            <a href="#" className="hover:text-white transition-colors">Changelog</a>
-            <a href="#" className="hover:text-white transition-colors">Pricing</a>
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <DemoShell>
+      {/* Nav */}
+      <Panel as="nav" className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center gap-6">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.04em" }}>Linear</span>
+          <div className="hidden md:flex items-center gap-5">
+            {["Features", "Method", "Pricing", "Company"].map((link) => (
+              <a key={link} href="#" style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)" }}>{link}</a>
+            ))}
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button
-            className="px-4 py-2 text-sm font-medium"
-            style={{ color: "var(--r-text-muted)" }}
-          >
-            Log in
-          </button>
-          <button
-            className="px-4 py-2 text-sm font-medium"
-            style={{
-              background: "var(--r-text)",
-              color: "var(--r-background)",
-              borderRadius: "var(--r-radius-sm)",
-            }}
-          >
-            Sign up
-          </button>
+        <div className="flex items-center gap-2">
+          <Button size="sm">Get started</Button>
+          <Button variant="ghost" size="sm">Login</Button>
         </div>
-      </nav>
+      </Panel>
 
       {/* Hero */}
-      <section className="relative px-6 pt-32 pb-24 text-center overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: "radial-gradient(ellipse 60% 50% at 50% -10%, var(--r-gradient-start), transparent)",
-          }}
-        />
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium mb-8"
-            style={{
-              background: "var(--r-surface)",
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-full)",
-              color: "var(--r-text-muted)",
-            }}
-          >
-            <span
-              className="inline-block w-1.5 h-1.5"
-              style={{ background: "var(--r-primary)", borderRadius: "var(--r-radius-full)" }}
-            />
-            Introducing Acme Cycles 2.0
-          </div>
-          <h1 className="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05]">
-            The project management{" "}
-            <br className="hidden md:block" />
-            system for modern teams
-          </h1>
-          <p
-            className="mt-6 text-lg max-w-xl mx-auto leading-relaxed"
-            style={{ color: "var(--r-text-muted)" }}
-          >
-            Streamline issues, projects, and product roadmaps.
-            Built for the way modern software teams work.
-          </p>
-          <div className="mt-10 flex items-center justify-center gap-4">
-            <button
-              className="px-6 py-3 text-sm font-medium"
-              style={{
-                background: "linear-gradient(to bottom, var(--r-gradient-start), var(--r-gradient-end))",
-                color: "#fff",
-                borderRadius: "var(--r-radius-sm)",
-              }}
-            >
-              Get started free
-            </button>
-            <button
-              className="px-6 py-3 text-sm font-medium"
-              style={{
-                background: "var(--r-surface)",
-                border: "1px solid var(--r-border)",
-                borderRadius: "var(--r-radius-sm)",
-                color: "var(--r-text-muted)",
-              }}
-            >
-              Talk to sales
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Logo cloud */}
-      <section className="px-6 py-16" style={{ borderTop: "1px solid var(--r-border)" }}>
-        <p className="text-center text-xs font-medium uppercase tracking-widest mb-8" style={{ color: "var(--r-text-subtle)" }}>
-          Trusted by the best teams in the world
+      <PanelSpacer />
+      <Panel className="px-4 py-16 md:py-24 text-center">
+        <h1 style={{ fontFamily: "var(--s-font-display)", fontSize: "clamp(2rem, 5vw, 3.25rem)", fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.1, maxWidth: "38rem", margin: "0 auto" }}>
+          Linear is a purpose-built tool for planning and building products
+        </h1>
+        <p style={{ fontFamily: "var(--s-font-body)", fontSize: 15, color: "var(--s-text-muted)", maxWidth: "28rem", margin: "1.25rem auto 0", lineHeight: 1.6 }}>
+          Streamline issues, projects, and product roadmaps. Built for the way modern software teams work.
         </p>
-        <div className="flex items-center justify-center gap-12 flex-wrap">
-          {logos.map((name) => (
-            <span
-              key={name}
-              className="text-sm font-medium tracking-wide"
-              style={{ color: "var(--r-text-subtle)" }}
-            >
-              {name}
-            </span>
-          ))}
+        <div className="flex items-center justify-center gap-3 mt-8">
+          <Button>Get started free</Button>
+          <Button variant="outline">Talk to sales</Button>
         </div>
-      </section>
+      </Panel>
 
-      {/* Large cinematic text */}
-      <section
-        className="px-6 py-32 text-center"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <h2 className="text-4xl md:text-6xl lg:text-[5rem] font-semibold tracking-tight leading-[1.1]">
-          A new species
-          <br />
-          <span style={{ color: "var(--r-text-subtle)" }}>of tool.</span>
-        </h2>
-      </section>
+      {/* Hero image */}
+      <Panel>
+        <PlaceholderImage aspect="21/9" label="Linear Interface" />
+      </Panel>
 
-      {/* Feature cards */}
-      <section
-        className="px-6 py-24"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-sm font-medium uppercase tracking-widest mb-12" style={{ color: "var(--r-text-subtle)" }}>
-            Features
-          </h2>
-          <div className="grid md:grid-cols-3 gap-px" style={{ background: "var(--r-border)" }}>
-            {features.map((f) => (
-              <div
-                key={f.title}
-                className="p-8"
-                style={{ background: "var(--r-background)" }}
-              >
-                <h3 className="text-base font-semibold mb-3">{f.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
-                  {f.desc}
+      {/* Features */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Built for speed</PanelHeader>
+        <div className="p-4">
+          <BentoGrid columns={3} gap="1rem">
+            <BentoGridCell>
+              <div className="space-y-2">
+                <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Issue Tracking</span>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.5 }}>
+                  Create, assign, and track issues with keyboard-first workflows and real-time sync across your team.
                 </p>
               </div>
-            ))}
-          </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="space-y-2">
+                <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Cycles</span>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.5 }}>
+                  Fixed-length sprints that automatically roll over incomplete work. Measure velocity, not vanity metrics.
+                </p>
+              </div>
+            </BentoGridCell>
+            <BentoGridCell>
+              <div className="space-y-2">
+                <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Roadmaps</span>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.5 }}>
+                  Connect issues to projects to initiatives. See the big picture without losing track of the details.
+                </p>
+              </div>
+            </BentoGridCell>
+          </BentoGrid>
         </div>
-      </section>
+      </Panel>
 
-      {/* Bento grid */}
-      <section className="px-6 py-24" style={{ borderTop: "1px solid var(--r-border)" }}>
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-sm font-medium uppercase tracking-widest mb-12" style={{ color: "var(--r-text-subtle)" }}>
-            Built for speed
-          </h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {/* Large cell — spans 2 cols */}
-            <div
-              className="md:col-span-2 p-8 flex flex-col justify-end min-h-[280px]"
-              style={{
-                background: "var(--r-surface)",
-                borderRadius: "var(--r-radius-lg)",
-                border: "1px solid var(--r-border)",
-              }}
-            >
-              <h3 className="text-lg font-semibold mb-2">Keyboard-first design</h3>
-              <p className="text-sm" style={{ color: "var(--r-text-muted)" }}>
-                Every action is one keystroke away. Cmd+K to search, C to create, S to set status.
+      {/* Integrations — Tabs */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>Integrations</PanelHeader>
+        <div className="p-4">
+          <Tabs defaultValue="github">
+            <TabsList>
+              <TabsTrigger value="github">GitHub</TabsTrigger>
+              <TabsTrigger value="slack">Slack</TabsTrigger>
+              <TabsTrigger value="figma">Figma</TabsTrigger>
+            </TabsList>
+            <TabsContent value="github" className="pt-4">
+              <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                Auto-link pull requests to issues. Close issues on merge. Sync labels, branches, and deployment status bidirectionally.
               </p>
-            </div>
-            {/* Small cell */}
-            <div
-              className="p-8 flex flex-col justify-end min-h-[280px]"
-              style={{
-                background: "var(--r-surface)",
-                borderRadius: "var(--r-radius-lg)",
-                border: "1px solid var(--r-border)",
-              }}
-            >
-              <h3 className="text-lg font-semibold mb-2">Real-time sync</h3>
-              <p className="text-sm" style={{ color: "var(--r-text-muted)" }}>
-                Changes appear instantly across all connected clients. No refresh needed.
+              <PlaceholderImage aspect="3/1" label="GitHub Integration" className="mt-4" />
+            </TabsContent>
+            <TabsContent value="slack" className="pt-4">
+              <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                Create issues from Slack messages. Get notifications on issue updates. Use slash commands to search and triage without leaving Slack.
               </p>
-            </div>
-            {/* Small cell */}
-            <div
-              className="p-8 flex flex-col justify-end min-h-[280px]"
-              style={{
-                background: "var(--r-surface)",
-                borderRadius: "var(--r-radius-lg)",
-                border: "1px solid var(--r-border)",
-              }}
-            >
-              <h3 className="text-lg font-semibold mb-2">50ms responses</h3>
-              <p className="text-sm" style={{ color: "var(--r-text-muted)" }}>
-                Local-first architecture with optimistic updates. The UI never waits for the server.
+              <PlaceholderImage aspect="3/1" label="Slack Integration" className="mt-4" />
+            </TabsContent>
+            <TabsContent value="figma" className="pt-4">
+              <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                Embed Figma files in issues. Preview designs inline. Link design specs to implementation issues for seamless handoff.
               </p>
-            </div>
-            {/* Large cell — spans 2 cols */}
-            <div
-              className="md:col-span-2 p-8 flex flex-col justify-end min-h-[280px]"
-              style={{
-                background: "var(--r-surface)",
-                borderRadius: "var(--r-radius-lg)",
-                border: "1px solid var(--r-border)",
-              }}
-            >
-              <h3 className="text-lg font-semibold mb-2">GitHub & GitLab</h3>
-              <p className="text-sm" style={{ color: "var(--r-text-muted)" }}>
-                Auto-link PRs to issues. Close issues on merge. Sync labels, branches, and deployment status.
-              </p>
-            </div>
-          </div>
+              <PlaceholderImage aspect="3/1" label="Figma Integration" className="mt-4" />
+            </TabsContent>
+          </Tabs>
         </div>
-      </section>
+      </Panel>
 
-      {/* CTA band */}
-      <section
-        className="px-6 py-24 text-center"
-        style={{
-          borderTop: "1px solid var(--r-border)",
-          background: "var(--r-surface)",
-        }}
-      >
-        <h2 className="text-4xl md:text-5xl font-semibold tracking-tight">
-          Available today.
-        </h2>
-        <p className="mt-4 text-base" style={{ color: "var(--r-text-muted)" }}>
-          Free for teams up to 250 issues. No credit card required.
-        </p>
-        <div className="mt-10 flex items-center justify-center gap-4">
-          <button
-            className="px-6 py-3 text-sm font-medium"
-            style={{
-              background: "linear-gradient(to bottom, var(--r-gradient-start), var(--r-gradient-end))",
-              color: "#fff",
-              borderRadius: "var(--r-radius-sm)",
-            }}
-          >
-            Get started
-          </button>
-          <button
-            className="px-6 py-3 text-sm font-medium"
-            style={{
-              border: "1px solid var(--r-border)",
-              borderRadius: "var(--r-radius-sm)",
-              color: "var(--r-text-muted)",
-            }}
-          >
-            Contact sales
-          </button>
+      {/* FAQ — Accordion */}
+      <PanelSpacer />
+      <Panel>
+        <PanelHeader>FAQ</PanelHeader>
+        <div className="p-4">
+          <Accordion type="single" collapsible>
+            <AccordionItem value="pricing">
+              <AccordionTrigger>How does pricing work?</AccordionTrigger>
+              <AccordionContent>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                  Linear is free for teams up to 250 issues. Pro plans start at $8/user/month with unlimited issues, cycles, and roadmaps.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="migration">
+              <AccordionTrigger>Can I migrate from Jira?</AccordionTrigger>
+              <AccordionContent>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                  Yes. Our import tool brings over issues, labels, assignees, and comments. Most teams complete migration in under 10 minutes.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="security">
+              <AccordionTrigger>Is my data secure?</AccordionTrigger>
+              <AccordionContent>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                  SOC 2 Type II certified. Data encrypted at rest and in transit. SAML SSO and SCIM provisioning available on Enterprise.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="api">
+              <AccordionTrigger>Do you have a public API?</AccordionTrigger>
+              <AccordionContent>
+                <p style={{ fontFamily: "var(--s-font-body)", fontSize: 13, color: "var(--s-text-muted)", lineHeight: 1.6 }}>
+                  Full GraphQL API with webhooks. Build custom integrations, automate workflows, and sync data with any system.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
-      </section>
+      </Panel>
 
       {/* Footer */}
-      <footer
-        className="px-6 py-16"
-        style={{ borderTop: "1px solid var(--r-border)" }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
-            <div className="col-span-2 md:col-span-1">
-              <span className="text-base font-semibold">Acme</span>
-            </div>
-            {[
-              { heading: "Product", links: ["Features", "Integrations", "Pricing", "Changelog"] },
-              { heading: "Company", links: ["About", "Blog", "Careers", "Press"] },
-              { heading: "Resources", links: ["Documentation", "API Reference", "Guides", "Status"] },
-              { heading: "Legal", links: ["Privacy", "Terms", "Security", "DPA"] },
-              { heading: "Connect", links: ["Twitter", "GitHub", "Discord", "LinkedIn"] },
-            ].map((col) => (
-              <div key={col.heading}>
-                <h4 className="text-sm font-medium mb-4" style={{ color: "var(--r-text-subtle)" }}>
-                  {col.heading}
-                </h4>
-                <ul className="space-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-sm hover:text-white transition-colors"
-                        style={{ color: "var(--r-text-muted)" }}
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+      <PanelSpacer />
+      <Panel as="footer" className="px-4 py-6 flex items-center justify-between">
+        <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>Linear Clone — Sigil UI</span>
+        <div className="flex items-center gap-4">
+          {["Twitter", "GitHub", "Discord"].map((link) => (
+            <a key={link} href="#" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{link}</a>
+          ))}
         </div>
-      </footer>
-    </div>
+      </Panel>
+    </DemoShell>
   );
 }

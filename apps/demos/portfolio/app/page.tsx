@@ -1,305 +1,258 @@
 "use client";
 
-import { useState } from "react";
+import React from "react";
+import {
+  Button,
+  Badge,
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  BentoGrid,
+  BentoGridCell,
+} from "@sigil-ui/components";
 
-const projects = [
-  { id: 1, title: "VOID PROTOCOL", category: "BRANDING", year: "2025", desc: "A visual identity system for a decentralized compute network. Black and white typography with generative elements." },
-  { id: 2, title: "GRIDLOCK", category: "WEB APP", year: "2025", desc: "Real-time collaboration canvas with brutalist UI patterns. 60fps pan-zoom with WebGL rendering." },
-  { id: 3, title: "NEON SYNTAX", category: "DEV TOOL", year: "2024", desc: "A code editor theme engine that generates palettes from album art. 50K installs on VS Code Marketplace." },
-  { id: 4, title: "CONCRETE", category: "DESIGN SYSTEM", year: "2024", desc: "A component library built on constraint-driven design. Zero border-radius, maximum information density." },
-  { id: 5, title: "PULSE", category: "MOBILE APP", year: "2024", desc: "Health tracking with radical transparency. Shows raw sensor data alongside insights." },
-  { id: 6, title: "TERRAFORM", category: "INSTALLATION", year: "2023", desc: "Generative landscape projected across a 40-meter warehouse wall. Written in Rust + wgpu." },
-];
-
-function ProjectPattern({ id, className }: { id: number; className?: string }) {
-  const c = "var(--r-text)";
-
-  switch (id) {
-    case 1:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {[20, 35, 50, 65, 80].map((r) => (
-            <circle key={r} cx={100} cy={80} r={r} fill="none" stroke={c} strokeWidth={1} opacity={0.2} />
-          ))}
-          {Array.from({ length: 12 }, (_, i) => {
-            const a = (i * 30 * Math.PI) / 180;
-            return (
-              <line key={i} x1={100 + 15 * Math.cos(a)} y1={80 + 15 * Math.sin(a)} x2={100 + 80 * Math.cos(a)} y2={80 + 80 * Math.sin(a)} stroke={c} strokeWidth={0.5} opacity={0.15} />
-            );
-          })}
-          <circle cx={100} cy={80} r={4} fill={c} opacity={0.25} />
-        </svg>
-      );
-    case 2:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {Array.from({ length: 10 }, (_, row) =>
-            Array.from({ length: 13 }, (_, col) => {
-              const filled = (row * 7 + col * 13 + row * col) % 5 < 2;
-              return (
-                <rect key={`${row}-${col}`} x={col * 15 + 3} y={row * 15 + 5} width={12} height={12} fill={filled ? c : "none"} stroke={c} strokeWidth={0.5} opacity={filled ? 0.2 : 0.1} />
-              );
-            })
-          )}
-        </svg>
-      );
-    case 3:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {(
-            [
-              [15, [[20, 35, 0.15], [60, 50, 0.15], [120, 25, 0.15]]],
-              [28, [[30, 20, 0.15], [55, 65, 0.15]]],
-              [41, [[30, 40, 0.3], [80, 30, 0.15], [120, 45, 0.15]]],
-              [54, [[40, 25, 0.15], [70, 55, 0.3]]],
-              [67, [[40, 80, 0.15]]],
-              [80, [[30, 15, 0.15], [50, 40, 0.3], [100, 20, 0.15]]],
-              [93, [[30, 60, 0.15], [100, 30, 0.15]]],
-              [106, [[20, 45, 0.3], [75, 25, 0.15]]],
-              [119, [[20, 30, 0.15], [60, 70, 0.15]]],
-              [132, [[20, 55, 0.15]]],
-              [145, [[20, 20, 0.15], [50, 35, 0.3]]],
-            ] as [number, number[][]][]
-          ).map(([y, segs]) =>
-            segs.map(([x, w, o], i) => (
-              <rect key={`${y}-${i}`} x={x} y={y} width={w} height={4} fill={c} opacity={o} rx={1} />
-            ))
-          )}
-        </svg>
-      );
-    case 4:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {([
-            [20, 10, 160, 25, 0.25],
-            [20, 40, 75, 35, 0.15],
-            [100, 40, 80, 35, 0.2],
-            [20, 80, 50, 20, 0.15],
-            [75, 80, 50, 20, 0.25],
-            [130, 80, 50, 20, 0.15],
-            [20, 105, 110, 15, 0.2],
-            [135, 105, 45, 15, 0.15],
-            [20, 125, 35, 30, 0.15],
-            [60, 125, 60, 30, 0.25],
-            [125, 125, 55, 30, 0.15],
-          ] as number[][]).map(([x, y, w, h, o], i) => (
-            <rect key={i} x={x} y={y} width={w} height={h} fill="none" stroke={c} strokeWidth={1.5} opacity={o} />
-          ))}
-        </svg>
-      );
-    case 5:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {[40, 60, 100, 120].map((y) => (
-            <line key={y} x1={0} y1={y} x2={200} y2={y} stroke={c} strokeWidth={0.5} opacity={0.08} />
-          ))}
-          <polyline
-            points="0,80 30,80 40,80 50,60 60,100 70,40 80,120 90,55 100,80 110,80 130,80 140,75 150,85 160,80 200,80"
-            fill="none"
-            stroke={c}
-            strokeWidth={2}
-            opacity={0.25}
-          />
-          <polyline
-            points="0,80 30,80 40,80 50,60 60,100 70,40 80,120 90,55 100,80 110,80 130,80 140,75 150,85 160,80 200,80"
-            fill="none"
-            stroke={c}
-            strokeWidth={6}
-            opacity={0.06}
-          />
-        </svg>
-      );
-    case 6:
-      return (
-        <svg className={className} viewBox="0 0 200 160" width="100%" height="100%">
-          {[
-            "M100,80 C115,65 130,60 140,65 C150,70 155,80 150,90 C145,100 130,105 115,100 C105,95 95,85 100,80Z",
-            "M90,80 C105,55 135,45 155,55 C170,65 175,85 165,100 C155,115 130,120 110,112 C95,105 80,95 90,80Z",
-            "M75,85 C90,45 135,30 165,45 C185,55 195,80 180,105 C165,130 125,140 100,128 C80,118 65,100 75,85Z",
-            "M60,90 C75,35 130,15 170,35 C200,50 210,85 195,115 C175,145 120,158 85,140 C60,125 50,108 60,90Z",
-            "M45,95 C60,25 125,0 175,25 C215,45 225,90 205,125 C185,160 115,175 70,150 C40,130 35,110 45,95Z",
-          ].map((d, i) => (
-            <path key={i} d={d} fill="none" stroke={c} strokeWidth={1} opacity={0.25 - i * 0.03} />
-          ))}
-        </svg>
-      );
-    default:
-      return null;
-  }
+function Panel({ children, className = "", as: Tag = "section" }: { children: React.ReactNode; className?: string; as?: "section" | "nav" | "footer" | "header" | "div" | "aside" }) {
+  return <Tag className={`s-screen-line-top s-screen-line-bottom s-container-column ${className}`}>{children}</Tag>;
+}
+function PanelSpacer() {
+  return <div className="s-screen-line-top s-screen-line-bottom s-container-column h-8" />;
+}
+function PanelHeader({ children, right }: { children: React.ReactNode; right?: React.ReactNode }) {
+  return (
+    <header className="s-screen-line-bottom flex items-center justify-between px-4 py-2.5">
+      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, fontWeight: 500, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{children}</span>
+      {right}
+    </header>
+  );
+}
+function DemoShell({ children, maxWidth = "56rem" }: { children: React.ReactNode; maxWidth?: string }) {
+  return (
+    <div className="min-h-screen overflow-x-clip" style={{ background: "var(--s-background)", color: "var(--s-text)", fontFamily: "var(--s-font-body)" }}>
+      <div className="mx-auto px-2" style={{ maxWidth }}>{children}</div>
+    </div>
+  );
+}
+function PlaceholderImage({ aspect = "16/9", gradient, label, className = "" }: { aspect?: string; gradient?: string; label?: string; className?: string }) {
+  return (
+    <div className={`relative flex items-center justify-center overflow-hidden ${className}`} style={{ aspectRatio: aspect, background: gradient ?? "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 0%, var(--s-surface) 100%)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+      {label && <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, letterSpacing: "0.06em", textTransform: "uppercase" as const, color: "var(--s-text-muted)", opacity: 0.6 }}>{label}</span>}
+    </div>
+  );
 }
 
+const projects = [
+  { title: "Meridian", category: "Brand Identity", year: "2026", desc: "Visual identity system for a climate-tech startup. Custom type, motion system, and tokenized design language.", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 20%, var(--s-surface)) 0%, var(--s-surface) 100%)" },
+  { title: "Lattice", category: "Web Application", year: "2025", desc: "Real-time collaboration canvas with multiplayer cursors, infinite zoom, and WebGL rendering pipeline.", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 10%, var(--s-surface)) 0%, color-mix(in oklch, var(--s-primary) 25%, var(--s-surface)) 100%)" },
+  { title: "Sonnet", category: "Design System", year: "2025", desc: "Token-driven component library for a Series B fintech. 200+ components, 12 presets, full dark mode.", gradient: "linear-gradient(135deg, var(--s-surface) 0%, color-mix(in oklch, var(--s-primary) 15%, var(--s-surface)) 100%)" },
+  { title: "Archive", category: "Editorial", year: "2024", desc: "Long-form publishing platform with typographic precision. Custom reading metrics and scroll-driven animations.", gradient: "linear-gradient(135deg, color-mix(in oklch, var(--s-primary) 12%, var(--s-surface)) 0%, var(--s-surface) 100%)" },
+];
+
+const skills = {
+  design: [
+    { name: "Visual Design", level: "Expert" },
+    { name: "Typography", level: "Expert" },
+    { name: "Motion Design", level: "Advanced" },
+    { name: "Design Systems", level: "Expert" },
+    { name: "Brand Identity", level: "Advanced" },
+    { name: "Prototyping", level: "Advanced" },
+  ],
+  engineering: [
+    { name: "React / Next.js", level: "Expert" },
+    { name: "TypeScript", level: "Expert" },
+    { name: "CSS / Tailwind", level: "Expert" },
+    { name: "WebGL / Three.js", level: "Advanced" },
+    { name: "Node.js", level: "Advanced" },
+    { name: "Rust / WASM", level: "Intermediate" },
+  ],
+  tools: [
+    { name: "Figma", level: "Expert" },
+    { name: "VS Code / Cursor", level: "Expert" },
+    { name: "Git / GitHub", level: "Expert" },
+    { name: "Blender", level: "Intermediate" },
+    { name: "After Effects", level: "Advanced" },
+    { name: "Vercel / AWS", level: "Advanced" },
+  ],
+};
+
+const aboutItems = [
+  { title: "Background", content: "Design engineer with 8 years of experience building products at the intersection of design and engineering. Previously at Linear, Vercel, and a YC-backed startup." },
+  { title: "Experience", content: "Led design engineering at three companies from 0→1. Built design systems used by 50+ engineers. Shipped consumer and B2B products serving millions of users." },
+  { title: "Education", content: "B.S. Computer Science from Carnegie Mellon. Minor in Human-Computer Interaction. Teaching assistant for Interactive Design Studio." },
+  { title: "Interests", content: "Generative art, typography, open-source tooling, mechanical keyboards, film photography. Occasional speaker at design engineering conferences." },
+];
+
 export default function Page() {
-  const [selected, setSelected] = useState<typeof projects[number] | null>(null);
-
   return (
-    <div className="min-h-screen" style={{ background: "var(--r-background)", color: "var(--r-text)" }}>
-      {/* Header */}
-      <header
-        className="flex items-center justify-between px-6 py-4"
-        style={{ borderBottom: "3px solid var(--r-border)" }}
-      >
-        <span className="text-xl font-black tracking-tighter uppercase">Portfolio</span>
-        <div className="flex items-center gap-6 text-sm font-bold uppercase tracking-wider">
-          <a href="#" className="hover:line-through transition-all">Work</a>
-          <a href="#" className="hover:line-through transition-all">About</a>
-          <a
-            href="#"
-            className="px-4 py-2 font-bold"
-            style={{
-              background: "var(--r-primary)",
-              border: "2px solid var(--r-border)",
-              boxShadow: "var(--r-shadow)",
-            }}
-          >
-            Contact
-          </a>
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="px-6 py-20" style={{ borderBottom: "3px solid var(--r-border)" }}>
-        <h1 className="text-6xl md:text-[8rem] font-black leading-[0.9] tracking-tighter uppercase">
-          Selected<br />
-          <span style={{ color: "var(--r-background)", WebkitTextStroke: "3px var(--r-text)" } as React.CSSProperties}>
-            Work
-          </span>
-        </h1>
-        <p className="mt-6 max-w-lg text-lg font-medium" style={{ color: "var(--r-text-muted)" }}>
-          Design engineering at the intersection of systems thinking and visual culture.
-          Everything ships.
-        </p>
-      </section>
-
-      {/* Project Grid */}
-      <section className="px-6 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0">
-          {projects.map((project) => (
-            <button
-              key={project.id}
-              onClick={() => setSelected(project)}
-              className="text-left p-6 transition-all hover:bg-[var(--r-primary)] group"
-              style={{ border: "2px solid var(--r-border)" }}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--r-text-muted)" }}>
-                  {project.category}
-                </span>
-                <span className="text-xs font-mono">{project.year}</span>
-              </div>
-              <div
-                className="w-full h-40 mb-4 flex items-center justify-center"
-                style={{
-                  background: "var(--r-surface)",
-                  border: "2px solid var(--r-border)",
-                }}
-              >
-                <ProjectPattern id={project.id} className="opacity-60 group-hover:opacity-100 transition-opacity" />
-              </div>
-              <h3 className="text-xl font-black uppercase tracking-tight">{project.title}</h3>
-              <p className="mt-2 text-sm line-clamp-2" style={{ color: "var(--r-text-muted)" }}>
-                {project.desc}
-              </p>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Carousel / Horizontal scroll */}
-      <section className="px-6 py-16" style={{ borderTop: "3px solid var(--r-border)" }}>
-        <h2 className="text-3xl font-black uppercase tracking-tight mb-8">Experiments</h2>
-        <div className="flex gap-0 overflow-x-auto pb-4" style={{ scrollSnapType: "x mandatory" }}>
-          {["GLITCH—01", "WAVE—02", "GRID—03", "PULSE—04", "VOID—05"].map((label, i) => (
-            <div
-              key={label}
-              className="shrink-0 w-72 h-48 flex items-end p-4"
-              style={{
-                background: i % 2 === 0 ? "var(--r-text)" : "var(--r-primary)",
-                border: "2px solid var(--r-border)",
-                scrollSnapAlign: "start",
-              }}
-            >
-              <span
-                className="text-sm font-black uppercase tracking-widest"
-                style={{ color: i % 2 === 0 ? "var(--r-background)" : "var(--r-text)" }}
-              >
-                {label}
-              </span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="px-6 py-8 flex items-center justify-between" style={{ borderTop: "3px solid var(--r-border)" }}>
-        <span className="text-sm font-bold uppercase">© 2026</span>
-        <div className="flex gap-6 text-sm font-bold uppercase">
-          <a href="#" className="hover:line-through">GitHub</a>
-          <a href="#" className="hover:line-through">Twitter</a>
-          <a href="#" className="hover:line-through">Are.na</a>
-        </div>
-      </footer>
-
-      {/* Dialog/Modal */}
-      {selected && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-6"
-          style={{ background: "rgba(0,0,0,0.5)" }}
-          onClick={() => setSelected(null)}
-        >
-          <div
-            className="w-full max-w-lg p-8"
-            style={{
-              background: "var(--r-background)",
-              border: "3px solid var(--r-border)",
-              boxShadow: "8px 8px 0px var(--r-border)",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "var(--r-text-muted)" }}>
-                {selected.category} — {selected.year}
-              </span>
-              <button
-                onClick={() => setSelected(null)}
-                className="h-8 w-8 flex items-center justify-center font-bold text-lg hover:bg-[var(--r-primary)] transition-colors"
-                style={{ border: "2px solid var(--r-border)" }}
-              >
-                ✕
-              </button>
-            </div>
-            <div
-              className="w-full h-48 mb-6 flex items-center justify-center"
-              style={{ background: "var(--r-surface)", border: "2px solid var(--r-border)" }}
-            >
-              <ProjectPattern id={selected.id} />
-            </div>
-            <h2 className="text-3xl font-black uppercase tracking-tight mb-4">{selected.title}</h2>
-            <p className="text-base leading-relaxed" style={{ color: "var(--r-text-muted)" }}>
-              {selected.desc}
-            </p>
-            <div className="mt-8 flex gap-4">
-              <a
-                href="#"
-                className="px-6 py-3 text-sm font-bold uppercase"
-                style={{
-                  background: "var(--r-primary)",
-                  border: "2px solid var(--r-border)",
-                  boxShadow: "var(--r-shadow)",
-                }}
-              >
-                View Project
-              </a>
-              <a
-                href="#"
-                className="px-6 py-3 text-sm font-bold uppercase"
-                style={{ border: "2px solid var(--r-border)" }}
-              >
-                GitHub →
-              </a>
-            </div>
+    <DemoShell>
+      {/* Navbar */}
+      <Panel as="nav">
+        <div className="flex items-center justify-between px-4 py-3">
+          <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 700, letterSpacing: "-0.02em" }}>Alex Chen</span>
+          <div className="flex items-center gap-5">
+            {["Work", "About", "Contact"].map((link) => (
+              <a key={link} href="#" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)" }}>{link}</a>
+            ))}
           </div>
         </div>
-      )}
-    </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* Hero */}
+      <Panel>
+        <div className="px-4 py-16">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)", textTransform: "uppercase" as const }}>Design Engineer</span>
+          <h1 className="mt-3" style={{ fontFamily: "var(--s-font-display)", fontSize: 40, fontWeight: 700, letterSpacing: "-0.03em", lineHeight: 1.1 }}>Crafting digital experiences</h1>
+          <p className="mt-3" style={{ maxWidth: 440, fontSize: 14, lineHeight: 1.6, color: "var(--s-text-muted)" }}>
+            I design and build interfaces that feel intentional. Currently focused on design systems, creative tooling, and the space where aesthetics meet engineering rigor.
+          </p>
+        </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* Selected Work */}
+      <Panel>
+        <PanelHeader>Selected Work</PanelHeader>
+        <div className="p-4">
+          <BentoGrid columns={2} gap="0.5rem">
+            {projects.map((project) => (
+              <BentoGridCell key={project.title}>
+                <div className="overflow-hidden" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+                  <PlaceholderImage aspect="16/10" gradient={project.gradient} label={project.category} />
+                  <div className="p-4">
+                    <div className="flex items-center justify-between">
+                      <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.02em" }}>{project.title}</h3>
+                      <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)" }}>{project.year}</span>
+                    </div>
+                    <p className="mt-1.5" style={{ fontSize: 12, lineHeight: 1.5, color: "var(--s-text-muted)" }}>{project.desc}</p>
+                    <Button variant="ghost" size="sm" className="mt-3">View project →</Button>
+                  </div>
+                </div>
+              </BentoGridCell>
+            ))}
+          </BentoGrid>
+        </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* Skills */}
+      <Panel>
+        <PanelHeader>Skills</PanelHeader>
+        <div className="p-4">
+          <Tabs defaultValue="design">
+            <TabsList>
+              <TabsTrigger value="design">Design</TabsTrigger>
+              <TabsTrigger value="engineering">Engineering</TabsTrigger>
+              <TabsTrigger value="tools">Tools</TabsTrigger>
+            </TabsList>
+            <TabsContent value="design">
+              <div className="mt-3">
+                <BentoGrid columns={3} gap="0.5rem">
+                  {skills.design.map((s) => (
+                    <BentoGridCell key={s.name}>
+                      <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+                        <div style={{ fontSize: 13, fontWeight: 500 }}>{s.name}</div>
+                        <div className="mt-1" style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)", letterSpacing: "0.04em" }}>{s.level}</div>
+                      </div>
+                    </BentoGridCell>
+                  ))}
+                </BentoGrid>
+              </div>
+            </TabsContent>
+            <TabsContent value="engineering">
+              <div className="mt-3">
+                <BentoGrid columns={3} gap="0.5rem">
+                  {skills.engineering.map((s) => (
+                    <BentoGridCell key={s.name}>
+                      <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+                        <div style={{ fontSize: 13, fontWeight: 500 }}>{s.name}</div>
+                        <div className="mt-1" style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)", letterSpacing: "0.04em" }}>{s.level}</div>
+                      </div>
+                    </BentoGridCell>
+                  ))}
+                </BentoGrid>
+              </div>
+            </TabsContent>
+            <TabsContent value="tools">
+              <div className="mt-3">
+                <BentoGrid columns={3} gap="0.5rem">
+                  {skills.tools.map((s) => (
+                    <BentoGridCell key={s.name}>
+                      <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
+                        <div style={{ fontSize: 13, fontWeight: 500 }}>{s.name}</div>
+                        <div className="mt-1" style={{ fontFamily: "var(--s-font-mono)", fontSize: 10, color: "var(--s-text-muted)", letterSpacing: "0.04em" }}>{s.level}</div>
+                      </div>
+                    </BentoGridCell>
+                  ))}
+                </BentoGrid>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* About */}
+      <Panel>
+        <PanelHeader>About</PanelHeader>
+        <div className="p-4">
+          <Accordion type="single" collapsible>
+            {aboutItems.map((item, i) => (
+              <AccordionItem key={i} value={`about-${i}`}>
+                <AccordionTrigger>{item.title}</AccordionTrigger>
+                <AccordionContent>{item.content}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* Contact */}
+      <Panel>
+        <PanelHeader>Contact</PanelHeader>
+        <div className="p-4">
+          <p style={{ fontSize: 13, lineHeight: 1.6, color: "var(--s-text-muted)" }}>
+            Open to freelance projects, collaborations, and interesting conversations.
+          </p>
+          <div className="mt-4 space-y-2">
+            {[
+              { label: "Email", value: "alex@alexchen.design" },
+              { label: "GitHub", value: "github.com/alexchen" },
+              { label: "Twitter", value: "@alexchen_" },
+            ].map((item) => (
+              <div key={item.label} className="flex items-center gap-3">
+                <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, letterSpacing: "0.04em", color: "var(--s-text-muted)", minWidth: 52 }}>{item.label}</span>
+                <a href="#" style={{ fontSize: 13, color: "var(--s-primary)" }}>{item.value}</a>
+              </div>
+            ))}
+          </div>
+          <Button size="sm" className="mt-4">Send a message</Button>
+        </div>
+      </Panel>
+
+      <PanelSpacer />
+
+      {/* Footer */}
+      <Panel as="footer">
+        <div className="flex items-center justify-between px-4 py-3">
+          <span style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>Alex Chen © 2026</span>
+          <div className="flex gap-4">
+            {["GitHub", "Twitter", "Dribbble"].map((link) => (
+              <a key={link} href="#" style={{ fontFamily: "var(--s-font-mono)", fontSize: 11, color: "var(--s-text-muted)" }}>{link}</a>
+            ))}
+          </div>
+        </div>
+      </Panel>
+    </DemoShell>
   );
 }

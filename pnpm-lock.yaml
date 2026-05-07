@@ -29,6 +29,9 @@ importers:
 
   apps/demos/agency:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -63,6 +66,9 @@ importers:
 
   apps/demos/ai-saas:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -97,6 +103,9 @@ importers:
 
   apps/demos/blog:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -131,6 +140,9 @@ importers:
 
   apps/demos/cli-tool:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -165,6 +177,9 @@ importers:
 
   apps/demos/dashboard:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -199,6 +214,9 @@ importers:
 
   apps/demos/dedalus-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -233,6 +251,9 @@ importers:
 
   apps/demos/dev-docs:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -267,6 +288,9 @@ importers:
 
   apps/demos/ecommerce:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -301,6 +325,9 @@ importers:
 
   apps/demos/linear-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -335,6 +362,9 @@ importers:
 
   apps/demos/oxide-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -369,6 +399,9 @@ importers:
 
   apps/demos/playground:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -403,6 +436,9 @@ importers:
 
   apps/demos/portfolio:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -437,6 +473,9 @@ importers:
 
   apps/demos/startup:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -471,6 +510,9 @@ importers:
 
   apps/demos/vercel-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -505,6 +547,9 @@ importers:
 
   apps/demos/vite-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -539,6 +584,9 @@ importers:
 
   apps/demos/viteplus-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -573,6 +621,9 @@ importers:
 
   apps/demos/voidzero-clone:
     dependencies:
+      '@sigil-ui/components':
+        specifier: workspace:*
+        version: link:../../../packages/components
       '@sigil-ui/tokens':
         specifier: workspace:*
         version: link:../../../packages/tokens
@@ -852,6 +903,9 @@ importers:
       mermaid:
         specifier: ^11.14.0
         version: 11.14.0
+      motion:
+        specifier: ^12.38.0
+        version: 12.38.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       react:
         specifier: ^18.0.0 || ^19.0.0
         version: 19.2.5
