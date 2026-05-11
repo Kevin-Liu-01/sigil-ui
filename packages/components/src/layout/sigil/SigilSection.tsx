@@ -2,6 +2,8 @@
 
 import {
   memo,
+  useCallback,
+  useState,
   type CSSProperties,
   type ElementType,
   type ReactNode,
@@ -14,6 +16,10 @@ import {
   buildGridCols,
   SECTION_BORDER,
 } from "./grid-helpers";
+import {
+  mergeSnapIntoPaddingStyle,
+  useSnapBottomToGridPadding,
+} from "./grid-snap-padding";
 import { SigilGutter } from "./SigilGutter";
 
 /* ------------------------------------------------------------------ */
@@ -64,11 +70,9 @@ function CrossMark({
  */
 const CrossRow = memo(function CrossRow({
   position,
-  railGap,
   crossStroke,
 }: {
   position: "top" | "bottom";
-  railGap: number;
   crossStroke: number;
 }) {
   const size = 12;
@@ -76,11 +80,12 @@ const CrossRow = memo(function CrossRow({
   const verticalStyle =
     position === "top" ? { top: -half } : { bottom: -half };
 
+  // `--s-rail-gap` tracks the same track as `SigilPageGrid` columns (rem-safe).
   const horizontals: CSSProperties[] = [
-    { left: -(railGap + half) },
+    { left: `calc(-1 * var(--s-rail-gap, 50px) - ${half}px)` },
     { left: -half },
     { right: -half },
-    { right: -(railGap + half) },
+    { right: `calc(-1 * var(--s-rail-gap, 50px) - ${half}px)` },
   ];
 
   return (
@@ -117,7 +122,6 @@ function CrossRowConnector({ position }: { position: "top" | "bottom" }) {
   return (
     <CrossRow
       position={position}
-      railGap={config.railGap}
       crossStroke={config.crossStroke}
     />
   );
@@ -154,6 +158,12 @@ export interface SigilSectionProps {
   showGutterGrid?: boolean;
   /** Show margin lines in standalone mode. @default true */
   showMarginLines?: boolean;
+  /**
+   * When inside `SigilPageGrid`, add vertical padding so the section's lower edge
+   * snaps to the next full resolved `--s-grid-cell` from the content origin. The
+   * snap amount is split across top/bottom padding to keep inner content centered.
+   */
+  snapBottomToGrid?: boolean;
 }
 
 /**
@@ -176,13 +186,15 @@ export function SigilSection({
   borderTop = false,
   borderBottom = false,
   showCrosses = false,
-  padding = "var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 25px))",
+  padding =
+    "var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 25px))",
   contentMax = 1200,
   railGap = 50,
   gutterPattern = "grid",
   marginPattern = "horizontal",
   showGutterGrid = true,
   showMarginLines = true,
+  snapBottomToGrid,
 }: SigilSectionProps) {
   // Subscribe only to the lightweight boolean context — its value is
   // set once at provider mount and never changes, so this hook never
@@ -190,6 +202,8 @@ export function SigilSection({
   // config lives in `PageGridContext` and is only read by
   // `CrossRowConnector` below, on demand.
   const insideGrid = useIsInsidePageGrid();
+  const effectiveSnapBottom =
+    snapBottomToGrid ?? insideGrid;
 
   if (insideGrid) {
     return (
@@ -202,6 +216,7 @@ export function SigilSection({
         borderBottom={borderBottom}
         showCrosses={showCrosses}
         padding={padding}
+        snapBottomToGrid={effectiveSnapBottom}
       >
         {children}
       </InnerSection>
@@ -224,6 +239,7 @@ export function SigilSection({
       marginPattern={marginPattern}
       showGutterGrid={showGutterGrid}
       showMarginLines={showMarginLines}
+      snapBottomToGrid={effectiveSnapBottom}
     >
       {children}
     </StandaloneSection>
@@ -244,6 +260,7 @@ type InnerSectionProps = {
   borderBottom: boolean;
   showCrosses: boolean;
   padding: string;
+  snapBottomToGrid?: boolean;
 };
 
 function InnerSection({
@@ -256,22 +273,37 @@ function InnerSection({
   borderBottom,
   showCrosses,
   padding,
+  snapBottomToGrid = false,
 }: InnerSectionProps) {
+  const [sectionEl, setSectionEl] = useState<HTMLElement | null>(null);
+  const setSectionRef = useCallback((node: HTMLElement | null) => {
+    setSectionEl(node);
+  }, []);
+
+  const snapPadPx = useSnapBottomToGridPadding(snapBottomToGrid, sectionEl);
+
   const hasBorder = borderTop || borderBottom;
-  const paddingStyle = hasBorder
+  const paddingStyleRaw = hasBorder
     ? borderCompensatedPadding(padding, borderTop, borderBottom)
     : { padding };
+  const paddingStyle = mergeSnapIntoPaddingStyle(paddingStyleRaw, snapPadPx);
 
   return (
     <Tag
+      ref={setSectionRef}
       id={id}
       data-slot="sigilsection"
+      data-grid-snap-bottom={snapBottomToGrid ? "true" : undefined}
+      data-sigil-snap-pad={
+        snapBottomToGrid && snapPadPx > 0 ? String(Math.round(snapPadPx * 1000) / 1000) : undefined
+      }
       className={cn("relative", className)}
       style={{
+        boxSizing: "border-box",
+        ...style,
         ...paddingStyle,
         borderTop: borderTop ? SECTION_BORDER : undefined,
         borderBottom: borderBottom ? SECTION_BORDER : undefined,
-        ...style,
       }}
     >
       {showCrosses && borderTop && <CrossRowConnector position="top" />}
@@ -308,12 +340,21 @@ function StandaloneSection({
   railGap,
   gutterPattern = "grid",
   showGutterGrid = true,
+  snapBottomToGrid = false,
 }: StandaloneSectionProps) {
+  const [paddedEl, setPaddedEl] = useState<HTMLElement | null>(null);
+  const setPaddedRef = useCallback((node: HTMLElement | null) => {
+    setPaddedEl(node);
+  }, []);
+
+  const snapPadPx = useSnapBottomToGridPadding(snapBottomToGrid, paddedEl);
+
   const gridCols = buildGridCols(railGap, contentMax);
   const hasBorder = borderTop || borderBottom;
-  const paddingStyle = hasBorder
+  const paddingStyleRaw = hasBorder
     ? borderCompensatedPadding(padding, borderTop, borderBottom)
     : { padding };
+  const paddingStyle = mergeSnapIntoPaddingStyle(paddingStyleRaw, snapPadPx);
 
   return (
     <Tag
@@ -329,20 +370,28 @@ function StandaloneSection({
         side="left"
       />
       <div
+        ref={setPaddedRef}
+        data-grid-snap-bottom={snapBottomToGrid ? "true" : undefined}
+        data-sigil-snap-pad={
+          snapBottomToGrid && snapPadPx > 0
+            ? String(Math.round(snapPadPx * 1000) / 1000)
+            : undefined
+        }
         className="relative"
         style={{
+          boxSizing: "border-box",
+          background: "var(--s-background)",
           ...paddingStyle,
           borderTop: borderTop ? SECTION_BORDER : undefined,
           borderBottom: borderBottom ? SECTION_BORDER : undefined,
-          background: "var(--s-background)",
         }}
       >
         {showCrosses && borderTop && (
-          <CrossRow position="top" railGap={railGap} crossStroke={1.5} />
+          <CrossRow position="top" crossStroke={1.5} />
         )}
         {children}
         {showCrosses && borderBottom && (
-          <CrossRow position="bottom" railGap={railGap} crossStroke={1.5} />
+          <CrossRow position="bottom" crossStroke={1.5} />
         )}
       </div>
       <SigilGutter

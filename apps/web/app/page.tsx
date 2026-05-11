@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, type CSSProperties } from "react";
 import { Copy, Check as CheckIcon } from "lucide-react";
 
 import { HeroShowcase } from "@/components/landing/hero-showcase";
@@ -37,6 +37,46 @@ import {
   Badge,
 } from "@sigil-ui/components";
 
+/**
+ * Landing vertical rhythm — every length derives from `--s-grid-cell` so section
+ * snap + gutter rulers stay phase-locked (browser QA: screenshot rails vs bands).
+ */
+const grid = {
+  gapXs: { gap: "calc(var(--s-grid-cell) / 6)" } as CSSProperties,
+  gapSm: { gap: "calc(var(--s-grid-cell) / 5)" } as CSSProperties,
+  gapMd: { gap: "calc(var(--s-grid-cell) / 4)" } as CSSProperties,
+  gapLg: { gap: "calc(var(--s-grid-cell) / 3)" } as CSSProperties,
+  mtMajor: { marginTop: "calc(4 * var(--s-grid-cell) / 3)" } as CSSProperties,
+  mtSection: { marginTop: "var(--s-grid-cell)" } as CSSProperties,
+  mtBlock: { marginTop: "calc(var(--s-grid-cell) / 2)" } as CSSProperties,
+  mbTight: { marginBottom: "calc(var(--s-grid-cell) / 12)" } as CSSProperties,
+  mbSm: { marginBottom: "calc(var(--s-grid-cell) / 6)" } as CSSProperties,
+  mbMd: { marginBottom: "calc(var(--s-grid-cell) / 4)" } as CSSProperties,
+  mbLg: { marginBottom: "calc(var(--s-grid-cell) / 3)" } as CSSProperties,
+  mbXl: { marginBottom: "calc(var(--s-grid-cell) / 2)" } as CSSProperties,
+  mbHero: { marginBottom: "calc(2 * var(--s-grid-cell) / 3)" } as CSSProperties,
+  padMono: { padding: "calc(var(--s-grid-cell) / 6) calc(var(--s-grid-cell) / 4)" } as CSSProperties,
+  installInner: {
+    gap: "calc(var(--s-grid-cell) / 4)",
+    paddingLeft: "calc(var(--s-grid-cell) / 3)",
+    paddingRight: "calc(var(--s-grid-cell) / 3)",
+    paddingTop: "calc(var(--s-grid-cell) / 5)",
+    paddingBottom: "calc(var(--s-grid-cell) / 4)",
+  } as CSSProperties,
+  btnGhost: {
+    paddingLeft: "calc(var(--s-grid-cell) / 3)",
+    paddingRight: "calc(var(--s-grid-cell) / 3)",
+    paddingTop: "calc(var(--s-grid-cell) / 5)",
+    paddingBottom: "calc(var(--s-grid-cell) / 5)",
+  } as CSSProperties,
+  btnGhostLg: {
+    paddingLeft: "calc(var(--s-grid-cell) / 2)",
+    paddingRight: "calc(var(--s-grid-cell) / 2)",
+    paddingTop: "calc(var(--s-grid-cell) / 4)",
+    paddingBottom: "calc(var(--s-grid-cell) / 4)",
+  } as CSSProperties,
+};
+
 /* ================================================================ */
 /* Edgeless-aware section wrapper                                     */
 /* ================================================================ */
@@ -49,6 +89,7 @@ function LandingSection(props: React.ComponentProps<typeof SigilSection>) {
       borderTop={false}
       borderBottom={!edgeless && props.borderBottom}
       showCrosses={!edgeless && props.showCrosses}
+      snapBottomToGrid={props.snapBottomToGrid ?? !edgeless}
     />
   );
 }
@@ -78,11 +119,25 @@ function SectionHeader({
   maxDescWidth?: number;
 }) {
   return (
-    <div className="mb-10">
-      <div className="flex items-baseline justify-between mb-4">
+    <div
+      style={{
+        marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+      }}
+    >
+      <div
+        className="flex items-baseline justify-between"
+        style={{
+          marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+        }}
+      >
         <MonoLabel variant="accent" size="sm">/ {label}</MonoLabel>
       </div>
-      <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-[var(--s-heading-h2-tracking,-0.02em)] leading-[var(--s-heading-h2-leading,1.15)] text-[var(--s-text)] mb-3">
+      <h2
+        className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-[var(--s-heading-h2-tracking,-0.02em)] leading-[var(--s-heading-h2-leading,1.15)] text-[var(--s-text)]"
+        style={{
+          marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+        }}
+      >
         {heading}
       </h2>
       {description && (
@@ -126,10 +181,11 @@ function InstallCommand({ className }: { className?: string }) {
       onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") copy(); }}
     >
       <div
-        className="inline-flex items-center gap-3 px-5 pt-2.5 pb-3 font-[family-name:var(--s-font-mono)] text-[14px] tracking-[0.01em] text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] group-hover:text-[var(--s-text)]"
+        className="inline-flex items-center font-[family-name:var(--s-font-mono)] text-[14px] tracking-[0.01em] text-[var(--s-text-muted)] transition-colors duration-[var(--s-duration-fast,150ms)] group-hover:text-[var(--s-text)]"
         style={{
           background: "var(--s-background)",
           borderRadius: "var(--s-radius-xl, 16px) var(--s-radius-xl, 16px) 0 0",
+          ...grid.installInner,
         }}
       >
         <span>{INSTALL_CMD}</span>
@@ -175,36 +231,63 @@ function Hero() {
   };
 
   return (
-    <LandingSection borderTop padding="var(--s-hero-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative">
+    <LandingSection
+      borderTop
+      padding="var(--s-hero-padding-y, clamp(16px, 2vw, var(--s-grid-cell))) var(--s-section-padding-x, clamp(12px, 3vw, calc(var(--s-grid-cell) * 2)))"
+      className="relative"
+    >
       <TextureBg opacity={0.3} />
-      <div className="relative z-[1] flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
-        <div className="flex-1 min-w-0 shrink-0 lg:max-w-[45%]">
-          <InstallCommand className="mb-2" />
+      <div
+        className="relative z-[1] flex flex-col lg:flex-row lg:items-center"
+        style={{ gap: "var(--s-section-subsection-gap, var(--s-grid-cell))" }}
+      >
+        <div className="flex-1 min-w-0 shrink-0 lg:max-w-[36%]">
+          <div style={{ marginBottom: "calc(var(--s-grid-cell) / 6)" }}>
+            <InstallCommand />
+          </div>
 
-          <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] mb-4 max-w-3xl">
+          <h1
+            className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)] max-w-3xl"
+            style={{
+              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+            }}
+          >
             An Agent-First <br /> Design System.
           </h1>
 
-          <DensityText role="body" as="p" muted className="mb-6 max-w-md leading-relaxed">
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-md leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
             <span className="hidden lg:inline">
               {SIGIL_PRODUCT_STATS.componentCountLabel} components, {SIGIL_PRODUCT_STATS.presetCount} presets, {SIGIL_PRODUCT_STATS.tokenCount} tokens.{" "}
             </span>
             One token file controls every color, font, radius, and animation. Agents and humans edit the same surface.
           </DensityText>
 
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex flex-wrap items-center" style={grid.gapMd}>
             <AccentCTA asChild>
               <a href="/docs" className="no-underline">Get Started</a>
             </AccentCTA>
             <a
               href="/docs/components/button"
-              className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+              className="inline-flex items-center bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+              style={grid.btnGhost}
             >
               View Components
             </a>
           </div>
 
-          <div className="flex items-center gap-2.5 mt-5">
+          <div
+            className="flex items-center"
+            style={{
+              marginTop: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))",
+              gap: "calc(var(--s-grid-cell) / 5)",
+            }}
+          >
             {PRESET_DOTS.map((p) => (
               <button
                 key={p.name}
@@ -228,7 +311,10 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+    <LandingSection
+      borderTop
+      padding="var(--s-section-padding-y-sm, calc(1 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
+    >
       <div className="s-transition-all">
         <HeroShowcase />
       </div>
@@ -238,7 +324,10 @@ function ProductSurfaceSection() {
 
 function ComponentGalleryBannerSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+    <LandingSection
+      borderTop
+      padding="var(--s-section-padding-y-sm, calc(1 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
+    >
       <ComponentGalleryCTA />
     </LandingSection>
   );
@@ -276,9 +365,15 @@ function TokenSystemSection() {
         />
         <TokenPipelineDiagram />
 
-        <div className="mt-20">
-          <MonoLabel variant="accent" className="block mb-3">LIVE TOKEN EDITOR</MonoLabel>
-          <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
+        <div style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}>
+          <MonoLabel variant="accent" className="block" style={grid.mbMd}>LIVE TOKEN EDITOR</MonoLabel>
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-lg leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
             Every line in sigil.tokens.md maps to a CSS variable. Edit a value and see the component update live.
           </DensityText>
           <MarkdownEditorPreview />
@@ -305,9 +400,15 @@ function UnderTheHoodSection() {
         />
         <ComponentStackDiagram />
 
-        <div className="mt-20">
-          <MonoLabel variant="accent" className="block mb-3">HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
-          <DensityText role="body" as="p" muted className="mb-6 max-w-lg leading-relaxed">
+        <div style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}>
+          <MonoLabel variant="accent" className="block" style={grid.mbMd}>HOW TOKENS FLOW INTO COMPONENTS</MonoLabel>
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-lg leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
             Every visual property resolves to one named token. No hardcoded values — components read CSS variables directly.
           </DensityText>
           <ComponentAnatomyDiagram />
@@ -535,18 +636,27 @@ function CLIVoronoiSection() {
               }}
             >
               <div
-                className="font-[family-name:var(--s-font-mono)] text-[13px] font-semibold tracking-[0.03em] mb-3 px-4 py-2 border whitespace-nowrap"
-                style={{ color: cmdColor, borderColor: cmdBorder, background: cmdBg }}
+                className="font-[family-name:var(--s-font-mono)] text-[13px] font-semibold tracking-[0.03em] border whitespace-nowrap"
+                style={{
+                  color: cmdColor,
+                  borderColor: cmdBorder,
+                  background: cmdBg,
+                  marginBottom: "calc(var(--s-grid-cell) / 4)",
+                  paddingLeft: "calc(var(--s-grid-cell) / 3)",
+                  paddingRight: "calc(var(--s-grid-cell) / 3)",
+                  paddingTop: "calc(var(--s-grid-cell) / 6)",
+                  paddingBottom: "calc(var(--s-grid-cell) / 6)",
+                }}
               >
                 $ {tile.command}
               </div>
               <div
-                className="font-semibold text-[18px] tracking-[-0.02em] leading-tight mb-4"
-                style={{ color: fg }}
+                className="font-semibold text-[18px] tracking-[-0.02em] leading-tight"
+                style={{ color: fg, marginBottom: "calc(var(--s-grid-cell) / 3)" }}
               >
                 {tile.title}
               </div>
-              <div className="mb-4" style={{ transform: "scale(1.35)", transformOrigin: "center" }}>
+              <div style={{ marginBottom: "calc(var(--s-grid-cell) / 3)", transform: "scale(1.35)", transformOrigin: "center" }}>
                 <CliDiagram variant={tile.diagram} accent={tile.accent} />
               </div>
               <div className="text-[13px] leading-[1.5] max-w-[220px]" style={{ color: fgMuted }}>
@@ -613,18 +723,18 @@ function PresetsSection() {
 
         <PresetMorphScene index={morphIndex} setIndex={setMorphIndex} />
 
-        <div className="mt-16">
-          <MonoLabel variant="accent" className="block mb-4">COMPARE ALL PRESETS</MonoLabel>
+        <div style={grid.mtMajor}>
+          <MonoLabel variant="accent" className="block" style={grid.mbLg}>COMPARE ALL PRESETS</MonoLabel>
           <PresetComparisonView />
         </div>
 
-        <div className="mt-12">
+        <div style={grid.mtSection}>
           <GapPixelGrid columns={{ md: 2 }} data-stagger>
             <GapPixelCell className="p-6">
-              <MonoLabel variant="accent" className="block mb-3">START FROM A PRESET</MonoLabel>
+              <MonoLabel variant="accent" className="block" style={grid.mbMd}>START FROM A PRESET</MonoLabel>
               <div
-                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
-                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+                className="font-[family-name:var(--s-font-mono)] text-[12px]"
+                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)", ...grid.padMono, marginBottom: "calc(var(--s-grid-cell) / 4)" }}
               >
                 <span className="text-[var(--s-text-muted)]">$</span>{" "}
                 <span className="text-[var(--s-text)]">sigil preset noir</span>
@@ -634,10 +744,10 @@ function PresetsSection() {
               </DensityText>
             </GapPixelCell>
             <GapPixelCell className="p-6">
-              <MonoLabel variant="accent" className="block mb-3">CREATE YOUR OWN</MonoLabel>
+              <MonoLabel variant="accent" className="block" style={grid.mbMd}>CREATE YOUR OWN</MonoLabel>
               <div
-                className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 mb-3"
-                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+                className="font-[family-name:var(--s-font-mono)] text-[12px]"
+                style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)", ...grid.padMono, marginBottom: "calc(var(--s-grid-cell) / 4)" }}
               >
                 <span className="text-[var(--s-text-muted)]">$</span>{" "}
                 <span className="text-[var(--s-text)]">sigil preset create</span>
@@ -649,11 +759,11 @@ function PresetsSection() {
           </GapPixelGrid>
           <GapPixelGrid columns={{ md: 1 }} className="mt-0">
             <GapPixelCell className="p-6">
-              <MonoLabel variant="accent" className="block mb-3">EDIT TOKENS DIRECTLY</MonoLabel>
-              <div className="flex flex-col md:flex-row gap-4 md:items-start">
+              <MonoLabel variant="accent" className="block" style={grid.mbMd}>EDIT TOKENS DIRECTLY</MonoLabel>
+              <div className="flex flex-col md:flex-row md:items-start" style={grid.gapLg}>
                 <div
-                  className="font-[family-name:var(--s-font-mono)] text-[12px] p-3 leading-relaxed md:w-1/3"
-                  style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)" }}
+                  className="font-[family-name:var(--s-font-mono)] text-[12px] leading-relaxed md:w-1/3"
+                  style={{ background: "var(--s-surface)", border: "1px solid var(--s-border)", ...grid.padMono }}
                 >
                   <div className="text-[var(--s-text-muted)]">## Colors</div>
                   <div className="text-[var(--s-primary)]">primary: oklch(0.65 0.2 150)</div>
@@ -666,13 +776,17 @@ function PresetsSection() {
           </GapPixelGrid>
         </div>
 
-        <div className="mt-10 flex gap-3">
+        <div
+          className="flex"
+          style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))", ...grid.gapMd }}
+        >
           <AccentCTA asChild>
             <a href="/presets" className="no-underline">Browse Presets</a>
           </AccentCTA>
           <a
             href="/sandbox"
-            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            className="inline-flex items-center bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            style={grid.btnGhost}
           >
             Create Custom Preset
           </a>
@@ -717,7 +831,7 @@ function DemoSitesSection() {
               style={{ background: "linear-gradient(135deg, var(--s-primary), color-mix(in oklch, var(--s-primary) 40%, var(--s-surface)))" }}
             >
               <div>
-                <DensityText role="headline" as="h3" className="text-[var(--s-primary-contrast,#fff)] text-xl mb-1">AI SaaS Landing</DensityText>
+                <DensityText role="headline" as="h3" className="text-[var(--s-primary-contrast,#fff)] text-xl" style={grid.mbTight}>AI SaaS Landing</DensityText>
                 <MonoLabel variant="inverse" size="xs">sigil preset</MonoLabel>
               </div>
             </div>
@@ -737,7 +851,7 @@ function DemoSitesSection() {
               <DensityText role="nav" as="h3" className="text-white font-semibold">Dashboard</DensityText>
             </div>
             <div className="p-4">
-              <MonoLabel className="mb-2 block">cobalt</MonoLabel>
+              <MonoLabel className="block" style={grid.mbSm}>cobalt</MonoLabel>
               <DensityText role="body" as="p" muted className="text-xs">Analytics dashboard with KPIs and data tables.</DensityText>
             </div>
           </a>
@@ -748,11 +862,11 @@ function DemoSitesSection() {
           <GapPixelCell key={demo.slug} className="p-0">
             <a href={`/demos/${demo.slug}`} className="block no-underline group">
               <div className="p-5">
-                <div className="flex items-baseline justify-between mb-2">
+                <div className="flex items-baseline justify-between" style={grid.mbSm}>
                   <TabularValue size="xs" muted>{demo.num}</TabularValue>
                   <MonoLabel size="xs">{demo.preset}</MonoLabel>
                 </div>
-                <DensityText role="nav" as="h3" className="font-semibold mb-1">{demo.name}</DensityText>
+                <DensityText role="nav" as="h3" className="font-semibold" style={grid.mbTight}>{demo.name}</DensityText>
                 <DensityText role="body" as="p" muted className="text-xs line-clamp-2">{demo.description}</DensityText>
               </div>
             </a>
@@ -760,7 +874,7 @@ function DemoSitesSection() {
         ))}
       </FeaturedGrid>
 
-      <div className="mt-8">
+      <div style={{ marginTop: "var(--s-section-gap, calc(var(--s-grid-cell) / 2))" }}>
         <AccentCTA asChild>
           <a href="/demos" className="no-underline">View All 17 Templates</a>
         </AccentCTA>
@@ -816,11 +930,32 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <LandingSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
-      <div className="mb-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+    <LandingSection
+      borderTop
+      padding="var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
+    >
+      <div
+        className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
+        style={{
+          marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))",
+          gap: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))",
+        }}
+      >
         <div>
-          <MonoLabel variant="accent" size="sm" className="mb-4 block">/ Quick Start</MonoLabel>
-          <h2 className="mb-4 max-w-[620px] font-[family-name:var(--s-font-display)] text-[clamp(36px,5vw,72px)] font-bold leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)]">
+          <MonoLabel
+            variant="accent"
+            size="sm"
+            className="block"
+            style={{ marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))" }}
+          >
+            / Quick Start
+          </MonoLabel>
+          <h2
+            className="max-w-[620px] font-[family-name:var(--s-font-display)] text-[clamp(36px,5vw,72px)] font-bold leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)]"
+            style={{
+              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+            }}
+          >
             Get started in 30 seconds.
           </h2>
           <DensityText role="body" as="p" muted className="max-w-[600px] leading-relaxed">
@@ -845,7 +980,10 @@ function QuickStartSection() {
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+      <div
+        className="grid lg:grid-cols-[1.05fr_0.95fr]"
+        style={{ gap: "calc(var(--s-grid-cell) / 2)" }}
+      >
         <div className="relative overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)] p-4 sm:p-6">
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -854,17 +992,17 @@ function QuickStartSection() {
               backgroundSize: "32px 32px",
             }}
           />
-          <div className="relative z-[1] mb-4 flex items-center justify-between gap-4">
+          <div className="relative z-[1] flex items-center justify-between" style={{ ...grid.mbLg, ...grid.gapLg }}>
             <MonoLabel variant="accent">installer trace</MonoLabel>
             <Badge variant="outline" className="font-[family-name:var(--s-font-mono)]">live output</Badge>
           </div>
           <div className="relative z-[1]">
             <Terminal lines={CLI_LINES} title="create-sigil-app" />
           </div>
-          <div className="relative z-[1] mt-4 grid grid-cols-2 gap-2 sm:grid-cols-4">
+          <div className="relative z-[1] grid grid-cols-2 sm:grid-cols-4" style={{ ...grid.mtBlock, ...grid.gapSm }}>
             {GENERATED_FILES.map((file) => (
-              <div key={file.path} className="border border-[var(--s-border)] bg-[var(--s-surface)] p-3">
-                <MonoLabel size="xs" className="mb-2 block normal-case tracking-normal">
+              <div key={file.path} className="border border-[var(--s-border)] bg-[var(--s-surface)]" style={{ padding: "calc(var(--s-grid-cell) / 6)" }}>
+                <MonoLabel size="xs" className="block normal-case tracking-normal" style={grid.mbSm}>
                   {file.path}
                 </MonoLabel>
                 <DensityText role="chrome" muted>{file.detail}</DensityText>
@@ -873,16 +1011,19 @@ function QuickStartSection() {
           </div>
         </div>
 
-        <div className="grid gap-3" data-stagger>
+        <div className="grid" style={grid.gapMd} data-stagger>
           {QUICK_START_STEPS.map((step, index) => (
             <div
               key={step.title}
-              className="group border border-[var(--s-border)] border-l-[3px] bg-[var(--s-surface)] p-5 transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
-              style={{ borderLeftColor: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color }}
+              className="group border border-[var(--s-border)] border-l-[3px] bg-[var(--s-surface)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
+              style={{
+                borderLeftColor: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color,
+                padding: "calc(var(--s-grid-cell) / 2)",
+              }}
             >
-              <div className="mb-4 flex items-start justify-between gap-4">
+              <div className="flex items-start justify-between" style={{ ...grid.mbLg, ...grid.gapLg }}>
                 <div>
-                  <MonoLabel variant="accent" size="xs" className="mb-2 block">
+                  <MonoLabel variant="accent" size="xs" className="block" style={grid.mbSm}>
                     {String(index + 1).padStart(2, "0")} / {step.time}
                   </MonoLabel>
                   <DensityText role="headline" as="h3" className="text-xl font-semibold tracking-tight">
@@ -891,7 +1032,16 @@ function QuickStartSection() {
                 </div>
                 <TabularValue muted>{step.time.split("-")[1]}</TabularValue>
               </div>
-              <div className="mb-4 overflow-x-auto whitespace-nowrap border border-[var(--s-border)] bg-[var(--s-background)] px-3 py-2 font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]">
+              <div
+                className="overflow-x-auto whitespace-nowrap border border-[var(--s-border)] bg-[var(--s-background)] font-[family-name:var(--s-font-mono)] text-[12px] text-[var(--s-text)]"
+                style={{
+                  ...grid.mbLg,
+                  paddingLeft: "calc(var(--s-grid-cell) / 4)",
+                  paddingRight: "calc(var(--s-grid-cell) / 4)",
+                  paddingTop: "calc(var(--s-grid-cell) / 6)",
+                  paddingBottom: "calc(var(--s-grid-cell) / 6)",
+                }}
+              >
                 <span className="text-[var(--s-text-muted)]">$</span> {step.command}
               </div>
               <DensityText role="body" as="p" muted className="leading-relaxed">
@@ -902,20 +1052,28 @@ function QuickStartSection() {
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col gap-3 border border-[var(--s-border)] bg-[color-mix(in_oklch,var(--s-primary)_5%,var(--s-background))] p-5 sm:flex-row sm:items-center sm:justify-between">
+      <div
+        className="flex flex-col border border-[var(--s-border)] bg-[color-mix(in_oklch,var(--s-primary)_5%,var(--s-background))] sm:flex-row sm:items-center sm:justify-between"
+        style={{
+          ...grid.mtBlock,
+          ...grid.gapMd,
+          padding: "calc(var(--s-grid-cell) / 2)",
+        }}
+      >
         <div>
-          <MonoLabel variant="accent" className="mb-1 block">ready for agents</MonoLabel>
+          <MonoLabel variant="accent" className="block" style={grid.mbTight}>ready for agents</MonoLabel>
           <DensityText role="body" as="p" muted>
             The generated project tells humans and AI the same rule: edit tokens, not component styling.
           </DensityText>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap" style={grid.gapMd}>
           <AccentCTA asChild>
             <a href="/docs" className="no-underline">Start Now</a>
           </AccentCTA>
           <a
             href="/sandbox"
-            className="inline-flex items-center border border-[var(--s-border)] bg-transparent px-5 py-2.5 font-[family-name:var(--s-font-mono)] text-[13px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            className="inline-flex items-center border border-[var(--s-border)] bg-transparent font-[family-name:var(--s-font-mono)] text-[13px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+            style={grid.btnGhost}
           >
             Try Sandbox
           </a>
@@ -929,35 +1087,45 @@ function FinalCTA() {
   return (
     <>
     <Divider size="md" showCross fadeEdges />
-    <LandingSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))" className="relative overflow-hidden">
+    <LandingSection
+      padding="var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
+      className="relative overflow-hidden"
+    >
       <TextureBg opacity={0.45} darkOpacity={0.35} />
-      <div className="relative z-[1] mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1fr_360px]">
+      <div
+        className="relative z-[1] mx-auto grid max-w-5xl items-center md:grid-cols-[1fr_360px]"
+        style={{ gap: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+      >
         <div>
-          <h2 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[var(--s-heading-h1-leading,1.1)] tracking-[var(--s-heading-h1-tracking,-0.025em)] text-[var(--s-text)]">
+          <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold leading-[var(--s-heading-h1-leading,1.1)] tracking-[var(--s-heading-h1-tracking,-0.025em)] text-[var(--s-text)]" style={grid.mbLg}>
             Start building.
           </h2>
-          <DensityText role="body" as="p" muted className="mb-8 max-w-md leading-relaxed">
+          <DensityText role="body" as="p" muted className="max-w-md leading-relaxed" style={grid.mbXl}>
             {SIGIL_PRODUCT_STATS.componentCountLabel} components. {SIGIL_PRODUCT_STATS.presetCount} presets. {SIGIL_PRODUCT_STATS.tokenCount} tokens.
             One file controls everything — start building in 30 seconds.
           </DensityText>
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center" style={grid.gapMd}>
             <AccentCTA size="lg" asChild>
               <a href="/docs" className="no-underline">Get Started</a>
             </AccentCTA>
             <a
               href="/docs/components/button"
-              className="inline-flex items-center border border-[var(--s-border)] bg-transparent px-6 py-3 font-[family-name:var(--s-font-mono)] text-[14px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+              className="inline-flex items-center border border-[var(--s-border)] bg-transparent font-[family-name:var(--s-font-mono)] text-[14px] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]"
+              style={grid.btnGhostLg}
             >
               Read the Docs
             </a>
           </div>
         </div>
-        <div className="hidden grid-cols-2 gap-3 md:grid">
+        <div className="hidden grid-cols-2 md:grid" style={grid.gapMd}>
           <div
             className="flex flex-col min-h-[320px] overflow-hidden border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-md,8px)] bg-[var(--s-background)]"
           >
             <FooterQuadrantDiagram />
-            <div className="mt-auto p-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]">
+            <div
+              className="mt-auto font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]"
+              style={{ padding: "calc(var(--s-grid-cell) / 3)" }}
+            >
               blueprint variants / 20
             </div>
           </div>
@@ -965,7 +1133,10 @@ function FinalCTA() {
             className="flex flex-col min-h-[320px] overflow-hidden border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] rounded-[var(--s-radius-md,8px)] bg-[var(--s-background)]"
           >
             <FooterComponentDiagram />
-            <div className="mt-auto p-4 font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]">
+            <div
+              className="mt-auto font-[family-name:var(--s-font-mono)] text-[10px] uppercase tracking-[0.08em] text-[var(--s-text-muted)]"
+              style={{ padding: "calc(var(--s-grid-cell) / 3)" }}
+            >
               component blueprint
             </div>
           </div>
@@ -991,41 +1162,41 @@ export default function LandingPage() {
 
       <ProductSurfaceSection />
 
-      <LandingDivider pattern="vertical" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       <ComponentGalleryBannerSection />
 
-      <LandingDivider pattern="vertical" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       {/* Architecture */}
       <LayerSection />
 
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="md" showBorders />
 
       {/* Token System — pipeline + live editor */}
       <TokenSystemSection />
 
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="md" showBorders />
 
       {/* Under the Hood — anatomy + stack */}
       <UnderTheHoodSection />
 
-      <LandingDivider pattern="vertical" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       {/* Presets — morphing demo + comparison + paths */}
       <PresetsSection />
 
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="md" showBorders />
 
       {/* CLI Surface — Voronoi bento */}
       <CLIVoronoiSection />
 
-      <LandingDivider pattern="vertical" size="sm" showBorders />
+      <LandingDivider pattern="vertical" size="md" showBorders />
 
       {/* 3D Components */}
       <ThreeDSection />
 
-      <LandingDivider pattern="diagonal" size="sm" showBorders />
+      <LandingDivider pattern="diagonal" size="md" showBorders />
 
       {/* Demos */}
       <DemoSitesSection />

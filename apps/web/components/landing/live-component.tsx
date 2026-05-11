@@ -659,7 +659,7 @@ export function ComponentGalleryCTA() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(115deg, transparent 0%, transparent 42%, color-mix(in oklch, var(--s-primary) 10%, transparent) 42%, color-mix(in oklch, var(--s-primary) 18%, transparent) 100%)",
+                "linear-gradient(115deg, transparent 0%, transparent 28%, color-mix(in oklch, var(--s-primary) 4%, transparent) 42%, color-mix(in oklch, var(--s-primary) 12%, transparent) 72%, color-mix(in oklch, var(--s-primary) 18%, transparent) 100%)",
             }}
           />
           <div
@@ -677,7 +677,8 @@ export function ComponentGalleryCTA() {
                 background:
                   "linear-gradient(var(--s-border-muted) 1px, transparent 1px), linear-gradient(90deg, var(--s-border-muted) 1px, transparent 1px)",
                 backgroundSize: "18px 18px",
-                padding: 14,
+                display: "flex",
+                flexDirection: "column",
                 color: "var(--s-text-muted)",
                 fontFamily: "var(--s-font-mono, monospace)",
                 fontSize: 10,
@@ -685,14 +686,28 @@ export function ComponentGalleryCTA() {
                 letterSpacing: "0.12em",
               }}
             >
-              <div style={{ marginBottom: 34 }}>blueprint</div>
-              <div style={{ height: 22, border: "1px solid var(--s-border)" }} />
-              <div style={{ marginTop: 12, width: "72%", height: 8, background: "var(--s-border-muted)" }} />
-              <div style={{ marginTop: 7, width: "54%", height: 8, background: "var(--s-border-muted)" }} />
+              {/* Header — matches CardHeader p-6 pb-0 */}
+              <div style={{ padding: "24px 24px 0" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                  <div style={{ width: "52%", height: 10, background: "var(--s-border)", opacity: 0.45 }} />
+                  <div style={{ width: 40, height: 16, border: "1px solid var(--s-border)", opacity: 0.4 }} />
+                </div>
+              </div>
+              {/* Content — matches Card gap-4 (16px) + CardContent p-6 pt-4 */}
+              <div style={{ flex: 1, padding: "32px 24px 24px", display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ height: "var(--s-input-height, 36px)", border: "1px solid var(--s-border)", opacity: 0.5 }} />
+                <div style={{ display: "flex", gap: 0, alignItems: "center", height: 6 }}>
+                  <div style={{ flex: 1, height: "100%", background: "var(--s-border)", opacity: 0.5 }} />
+                  <div style={{ width: "28%", height: "100%", background: "var(--s-border-muted)", opacity: 0.3 }} />
+                </div>
+                <div style={{ marginTop: "auto", height: 32, background: "var(--s-border)", opacity: 0.35 }} />
+              </div>
             </div>
             <Card
               style={{
                 position: "relative",
+                display: "flex",
+                flexDirection: "column",
                 background: "var(--s-surface-elevated)",
                 boxShadow: "var(--s-shadow-md)",
               }}
@@ -703,11 +718,13 @@ export function ComponentGalleryCTA() {
                   <Badge>Live</Badge>
                 </div>
               </CardHeader>
-              <CardContent>
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <CardContent style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
                   <Input placeholder="Search components..." />
                   <Progress value={72} />
-                  <Button size="sm">Install</Button>
+                  <div style={{ marginTop: "auto" }}>
+                    <Button size="sm" style={{ width: "100%" }}>Install</Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>

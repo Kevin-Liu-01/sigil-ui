@@ -940,35 +940,6 @@ const STYLE_BLOCK = `
 .hero-logo-field__grid {
   width: 100%;
 }
-@media (max-width: 1023px) {
-  .hero-logo-field__grid {
-    grid-template-columns: repeat(6, 1fr) !important;
-    grid-template-rows: auto !important;
-    gap: 4px !important;
-  }
-  .hero-logo-field__grid > * {
-    order: var(--m-order, 0);
-  }
-  .hero-logo-field__mobile-hide {
-    display: none !important;
-  }
-  .hero-logo-field__mobile-full {
-    grid-column: 1 / -1 !important;
-  }
-  .hero-logo-field__mobile-half {
-    grid-column: span 3 !important;
-  }
-  .hero-logo-field__mobile-third {
-    grid-column: span 2 !important;
-  }
-  .hero-logo-field__mobile-row2 {
-    grid-row: span 2 !important;
-  }
-  .hero-logo-field .row-span-3.hero-logo-field__mobile-full {
-    grid-row: span 1 !important;
-    max-height: 160px;
-  }
-}
 .hero-logo-field__inspect-frame {
   stroke-dasharray: 432;
   stroke-dashoffset: 432;
@@ -1081,11 +1052,6 @@ const STEP_KEYS = [
 
 const TOTAL_STEPS = 13;
 
-const MOBILE_VISIBLE_KEYS = new Set(["UsageCard", "DatePicker", "KPI", "CommitGrid", "Badges", "Coverage", "SparkLine", "Team", "Sliders", "Switches", "Buttons"]);
-const MOBILE_STEP_INDICES = STEP_KEYS.reduce<number[]>((acc, key, i) => {
-  if (MOBILE_VISIBLE_KEYS.has(key)) acc.push(i);
-  return acc;
-}, []);
 const ALL_STEP_INDICES = Array.from({ length: STEP_KEYS.length }, (_, i) => i);
 
 function seededRandom(seed: number) {
@@ -1108,6 +1074,10 @@ const COMMIT_DAYS = (() => {
   return days;
 })();
 
+const DIAGRAM_MIN_W = 540;
+const DIAGRAM_ASPECT_DESKTOP = 540 / 460;
+const DIAGRAM_ASPECT_MOBILE = 540 / 640;
+
 export function HeroLogoField() {
   const [mounted, setMounted] = useState(false);
   const [idx, setIdx] = useState(0);
@@ -1124,6 +1094,7 @@ export function HeroLogoField() {
     live: true,
   });
 
+  const wrapRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const mdScrollRef = useRef<HTMLDivElement>(null);
   const componentRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -1131,9 +1102,25 @@ export function HeroLogoField() {
   const [cursorTarget, setCursorTarget] = useState<{ left: number; top: number } | null>(null);
   const [clicking, setClicking] = useState(false);
   const [labelParts, setLabelParts] = useState<{ prefix: string; value: string; isNew: boolean } | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const activeStepIndices = ALL_STEP_INDICES;
 
-  const activeStepIndices = isMobile ? MOBILE_STEP_INDICES : ALL_STEP_INDICES;
+  const [diagramScale, setDiagramScale] = useState(1);
+  const [diagramAspect, setDiagramAspect] = useState(DIAGRAM_ASPECT_DESKTOP);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    let prevW = 0;
+    const ro = new ResizeObserver(() => {
+      const w = wrap.clientWidth;
+      if (w === prevW) return;
+      prevW = w;
+      setDiagramScale(Math.min(1, w / DIAGRAM_MIN_W));
+      setDiagramAspect(w < 1024 ? DIAGRAM_ASPECT_MOBILE : DIAGRAM_ASPECT_DESKTOP);
+    });
+    ro.observe(wrap);
+    return () => ro.disconnect();
+  }, []);
 
   const setComponentRef = useCallback((key: string) => (el: HTMLDivElement | null) => {
     componentRefs.current[key] = el;
@@ -1143,27 +1130,18 @@ export function HeroLogoField() {
     requestAnimationFrame(() => setMounted(true));
   }, []);
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
-    setIsMobile(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
-
 
 
   useEffect(() => {
     if (!mounted) return;
-    const steps = isMobile ? MOBILE_STEP_INDICES : ALL_STEP_INDICES;
     const interval = setInterval(() => {
       setPhase((current) => {
         if (current >= 3) {
-          const currentKey = STEP_KEYS[steps[idx % steps.length]];
+          const currentKey = STEP_KEYS[ALL_STEP_INDICES[idx % ALL_STEP_INDICES.length]];
           appliedQueue.current = [...appliedQueue.current.filter((k) => k !== currentKey), currentKey];
           setAppliedSet(new Set(appliedQueue.current));
           const nextIdx = idx + 1;
-          if (nextIdx >= steps.length) {
+          if (nextIdx >= ALL_STEP_INDICES.length) {
             setTimeout(() => {
               appliedQueue.current = [];
               setAppliedSet(new Set());
@@ -1178,7 +1156,7 @@ export function HeroLogoField() {
       });
     }, PHASE_MS);
     return () => clearInterval(interval);
-  }, [mounted, idx, isMobile]);
+  }, [mounted, idx]);
 
   useEffect(() => {
     if (phase < 1) {
@@ -1187,24 +1165,24 @@ export function HeroLogoField() {
     }
     const target = componentRefs.current[STEP_KEYS[activeStepIndices[idx % activeStepIndices.length]]];
     if (!target) return;
-    const pad = isMobile ? 3 : 6;
+    const pad = 6;
     setSelRect({
       top: target.offsetTop - pad,
       left: target.offsetLeft - pad,
       width: target.offsetWidth + pad * 2,
       height: target.offsetHeight + pad * 2,
     });
-  }, [idx, phase, activeStepIndices, isMobile]);
+  }, [idx, phase, activeStepIndices]);
 
   useEffect(() => {
     const target = componentRefs.current[STEP_KEYS[activeStepIndices[idx % activeStepIndices.length]]];
     if (!target) return;
-    const pad = isMobile ? 3 : 6;
+    const pad = 6;
     setCursorTarget({
       left: target.offsetLeft + target.offsetWidth + pad - 10,
       top: target.offsetTop + target.offsetHeight + pad - 10,
     });
-  }, [idx, mounted, activeStepIndices, isMobile]);
+  }, [idx, mounted, activeStepIndices]);
 
   useEffect(() => {
     if (phase === 1) {
@@ -1295,7 +1273,14 @@ export function HeroLogoField() {
   const cellBg = "var(--s-surface, var(--s-background))";
 
   return (
-    <div className="hero-logo-field">
+    <div
+      ref={wrapRef}
+      className="hero-logo-field"
+      style={{
+        aspectRatio: diagramAspect,
+        overflow: "hidden",
+      }}
+    >
       <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
 
       <div
@@ -1305,19 +1290,20 @@ export function HeroLogoField() {
           opacity: mounted ? 1 : 0,
           transition: "opacity 400ms cubic-bezier(0.32, 0.72, 0, 1)",
           gridTemplateColumns: "repeat(7, 1fr)",
-          // The sigil.tokens.md panel (row-span-3) is content-sized and
-          // determines the column height. Row 2 (DatePicker / Calendar)
-          // flexes — it grows or shrinks to absorb the leftover space the
-          // panel makes after rows 1 and 3 take their natural sizes.
           gridTemplateRows: "auto 1fr auto auto auto auto",
-          gap: 5,
+          gap: "calc(var(--s-grid-cell, 40px) / 8)",
+          minWidth: DIAGRAM_MIN_W,
+          height: "100%",
+          ...(diagramScale < 1 ? {
+            transform: `scale(${diagramScale})`,
+            transformOrigin: "top left",
+          } : {}),
         }}
       >
         {/* Row 1: sigil.tokens.md (3 cols) + UsageCard (2) + PresetSwatches (2) */}
         <div
-          className="row-span-3 hero-logo-field__mobile-full"
+          className="row-span-3"
           style={{
-            "--m-order": 1,
             gridColumn: "1 / 4",
             border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-strong, var(--s-border))",
             borderRadius: "var(--s-radius-md,8px)",
@@ -1376,9 +1362,7 @@ export function HeroLogoField() {
 
         <div
           ref={setComponentRef("UsageCard")}
-          className="hero-logo-field__mobile-half"
           style={{
-            "--m-order": 2,
             gridColumn: "4 / 6",
             ...(applied("UsageCard") ? { "--s-primary": "oklch(0.66 0.18 275)" } : {}),
           } as React.CSSProperties}
@@ -1402,7 +1386,7 @@ export function HeroLogoField() {
           </Card>
         </div>
 
-        <div ref={setComponentRef("PresetSwatches")} className="hero-logo-field__mobile-hide" style={{ gridColumn: "6 / 8" }}>
+        <div ref={setComponentRef("PresetSwatches")} style={{ gridColumn: "6 / 8" }}>
           <Card
             className={`overflow-hidden h-full ${applied("PresetSwatches") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1416,8 +1400,6 @@ export function HeroLogoField() {
               {[PRESET_SWATCH_ROW_A, PRESET_SWATCH_ROW_B].map((row, rowIdx) => (
                 <div key={rowIdx} className={rowIdx === 0 ? "flex gap-1" : "flex mt-1 gap-1"}>
                   {row.map((swatch, itemIdx) => {
-                    // The "active" swatch in each row reflects the current
-                    // preset cycle and lights up with a ring + slight scale.
                     const isActive = applied("PresetSwatches")
                       ? rowIdx === 0 && itemIdx === 0
                       : rowIdx === 0 && itemIdx === activeStepIndex % row.length;
@@ -1455,9 +1437,8 @@ export function HeroLogoField() {
             bottom-aligns the right side with the sigil.tokens.md panel. */}
         <div
           ref={setComponentRef("DatePicker")}
-          className={`overflow-hidden hero-logo-field__mobile-half hero-logo-field__mobile-row2 ${radiusApplied ? "hero-logo-field__apply" : ""}`}
+          className={`overflow-hidden ${radiusApplied ? "hero-logo-field__apply" : ""}`}
           style={{
-            "--m-order": 3,
             gridColumn: "4 / 8",
             // Wrapper fills row 2 so the calendar shrinks/grows to match the
             // height the panel makes available.
@@ -1509,7 +1490,7 @@ export function HeroLogoField() {
             visually. The bottom "duration tick" bar is the actual demo: its
             animation-duration is the value being demonstrated, so the bar
             visibly speeds up (300ms) → slows down (600ms) when applied. */}
-        <div ref={setComponentRef("TokenAction")} className="hero-logo-field__mobile-hide" style={{ gridColumn: "4 / 8" }}>
+        <div ref={setComponentRef("TokenAction")} style={{ gridColumn: "4 / 8" }}>
           <div
             className={`relative overflow-hidden ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1546,7 +1527,7 @@ export function HeroLogoField() {
         </div>
 
         {/* Row 4: KPI + CommitGrid + Badges + Coverage/ToggleGroup */}
-        <div ref={setComponentRef("KPI")} className="h-full hero-logo-field__mobile-half" style={{ "--m-order": 4, gridColumn: "1 / 2" } as React.CSSProperties}>
+        <div ref={setComponentRef("KPI")} className="h-full" style={{ gridColumn: "1 / 2" }}>
           <KPI
             label="ARR"
             value="$7.52m"
@@ -1556,7 +1537,7 @@ export function HeroLogoField() {
             style={{ fontFamily: applied("KPI") ? '"Space Grotesk", var(--s-font-display)' : undefined }}
           />
         </div>
-        <div ref={setComponentRef("CommitGrid")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 8, gridColumn: "2 / 4" } as React.CSSProperties}>
+        <div ref={setComponentRef("CommitGrid")} className="h-full" style={{ gridColumn: "2 / 4" }}>
           <Card
             className={`h-full flex items-center justify-center ${applied("CommitGrid") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1570,7 +1551,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Badges")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 9, gridColumn: "4 / 5" } as React.CSSProperties}>
+        <div ref={setComponentRef("Badges")} className="h-full" style={{ gridColumn: "4 / 5" }}>
           <Card
             className={`h-full ${applied("Badges") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1596,7 +1577,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Coverage")} className="h-full hero-logo-field__mobile-half" style={{ "--m-order": 11, gridColumn: "5 / 8" } as React.CSSProperties}>
+        <div ref={setComponentRef("Coverage")} className="h-full" style={{ gridColumn: "5 / 8" }}>
           <Card
             className={`h-full ${applied("Coverage") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1647,7 +1628,7 @@ export function HeroLogoField() {
         </div>
 
         {/* Row 5: SparkLine + Team + Sliders + Switches + Buttons */}
-        <div ref={setComponentRef("SparkLine")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 5, gridColumn: "1 / 3" } as React.CSSProperties}>
+        <div ref={setComponentRef("SparkLine")} className="h-full" style={{ gridColumn: "1 / 3" }}>
           <Card
             className={`h-full ${applied("SparkLine") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1661,7 +1642,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Team")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 6, gridColumn: "3 / 4" } as React.CSSProperties}>
+        <div ref={setComponentRef("Team")} className="h-full" style={{ gridColumn: "3 / 4" }}>
           <Card
             className={`h-full ${applied("Team") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1680,7 +1661,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Sliders")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 7, gridColumn: "4 / 5" } as React.CSSProperties}>
+        <div ref={setComponentRef("Sliders")} className="h-full" style={{ gridColumn: "4 / 5" }}>
           <Card
             className={`h-full ${applied("Sliders") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1708,7 +1689,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Switches")} className="h-full hero-logo-field__mobile-third" style={{ "--m-order": 10, gridColumn: "5 / 6" } as React.CSSProperties}>
+        <div ref={setComponentRef("Switches")} className="h-full" style={{ gridColumn: "5 / 6" }}>
           <Card
             className={`h-full ${applied("Switches") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1757,7 +1738,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Buttons")} className="h-full hero-logo-field__mobile-half" style={{ "--m-order": 12, gridColumn: "6 / 8" } as React.CSSProperties}>
+        <div ref={setComponentRef("Buttons")} className="h-full" style={{ gridColumn: "6 / 8" }}>
           <Card
             className={`h-full ${applied("Buttons") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1771,12 +1752,8 @@ export function HeroLogoField() {
                 className="grid grid-cols-6 gap-1.5 w-full"
                 style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}
               >
-                {/* Row 1: Primary + Outline are equal-weight calls to action. */}
                 <Button size="sm" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Primary</Button>
                 <Button size="sm" variant="outline" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Outline</Button>
-                {/* Row 2: Secondary stretches wider than Ghost so labels can
-                    breathe ("Secondary" is the longest word) and to give the
-                    grid a more editorial, less symmetrical rhythm. */}
                 <Button size="sm" variant="secondary" className="col-span-4 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Secondary</Button>
                 <Button size="sm" variant="ghost" className="col-span-2 h-7 w-full px-1 text-[8px] leading-none justify-center">Ghost</Button>
               </div>
@@ -1852,7 +1829,6 @@ export function HeroLogoField() {
         {/* ── Cursor (moves independently, clicks on select) ─── */}
         <div
           aria-hidden="true"
-          className="hero-logo-field__mobile-hide"
           style={{
             position: "absolute",
             left: cursorTarget?.left ?? 0,

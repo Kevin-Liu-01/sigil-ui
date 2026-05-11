@@ -21,6 +21,28 @@ import { Divider } from "@sigil-ui/components";
 <Divider>Divider content</Divider>
 ```
 
+## Structural rhythm
+
+Horizontal `Divider` bands advance layout by exact multiples of
+`--s-grid-cell`.
+
+```tsx
+<SigilPageGrid>
+  <SigilSection snapBottomToGrid>...</SigilSection>
+  <Divider size="md" showBorders />
+  <SigilSection snapBottomToGrid>...</SigilSection>
+</SigilPageGrid>
+```
+
+The `md` size is one full cell. Borders are visual strokes, not layout borders,
+so a bordered divider remains exactly `var(--s-grid-cell)` tall. The top stroke
+is painted one pixel above the divider box and the bottom stroke is painted
+inside it; this avoids the common "everything is aligned but looks 1px low"
+problem caused by real CSS borders painting inside the next box.
+
+Do not set divider thickness tokens to `calc(var(--s-grid-cell) + 1px)`.
+The layout box must stay on full-cell intervals.
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -43,6 +65,8 @@ import { Divider } from "@sigil-ui/components";
 | `--s-grid-line-color` | Grid line color |
 | `--s-border-muted` | Border muted |
 | `--s-divider-border` | Divider border |
+| `--s-divider-thickness-md` | One full-cell divider height |
+| `--s-grid-cell` | Structural vertical period |
 | `--s-border-width-thin` | Border width thin |
 | `--s-border-style` | Border style |
 | `--s-border` | Border |

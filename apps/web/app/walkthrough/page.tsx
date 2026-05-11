@@ -54,8 +54,13 @@ function Step({
   children: React.ReactNode;
 }) {
   return (
-    <SigilSection borderTop>
-      <div className="flex items-start gap-6 mb-8">
+    <SigilSection>
+      <div
+        className="flex items-start gap-6"
+        style={{
+          marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+        }}
+      >
         <div
           className="shrink-0 w-12 h-12 flex items-center justify-center border border-[var(--s-primary)]"
           style={{ background: "color-mix(in oklch, var(--s-primary) 10%, transparent)" }}
@@ -219,7 +224,15 @@ export default function WalkthroughPage() {
           From Zero to Production in 7 Steps.
         </h1>
 
-        <DensityText role="body" as="p" muted className="mb-8 max-w-xl leading-relaxed">
+        <DensityText
+          role="body"
+          as="p"
+          muted
+          className="max-w-xl leading-relaxed"
+          style={{
+            marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+          }}
+        >
           A complete walkthrough of building with Sigil — from first install to
           shipping a fully token-driven product page. Each step includes interactive
           visualizations so you understand the system, not just the commands.
@@ -282,7 +295,13 @@ export default function WalkthroughPage() {
 
         <div className="mt-12">
           <MonoLabel variant="accent" className="block mb-4">THE COMPILATION PIPELINE</MonoLabel>
-          <DensityText role="body" as="p" muted className="mb-6 max-w-xl leading-relaxed">
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-xl leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
             Your token markdown file compiles into CSS custom properties. Every component
             reads those properties via <code className="text-[var(--s-primary)]">var(--s-*)</code>.
             Change the source, everything downstream updates.
@@ -345,17 +364,29 @@ export default function WalkthroughPage() {
 
         {/* Custom preset creation terminal */}
         <MonoLabel variant="accent" className="block mb-4">CREATING A CUSTOM PRESET</MonoLabel>
-        <DensityText role="body" as="p" muted className="mb-6 max-w-xl leading-relaxed">
+        <DensityText
+          role="body"
+          as="p"
+          muted
+          className="max-w-xl leading-relaxed"
+          style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+        >
           <code className="text-[var(--s-primary)]">sigil preset create</code> walks you through
           naming your preset, choosing a base, setting brand colors and fonts, and writing the result
           to your token file. Your project uses <em>your</em> preset — not a library preset.
         </DensityText>
-        <div className="max-w-[720px] mb-10">
+        <div
+          className="max-w-[720px]"
+          style={{ marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+        >
           <Terminal lines={PRESET_CREATE_LINES} title="~/ my-app — zsh" />
         </div>
 
         {/* What your token file looks like after */}
-        <GapPixelGrid columns={{ md: 2 }} className="mb-10">
+        <GapPixelGrid
+          columns={{ md: 2 }}
+          style={{ marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+        >
           <GapPixelCell className="p-6">
             <MonoLabel variant="accent" className="block mb-3">YOUR sigil.tokens.md (AFTER)</MonoLabel>
             <div
@@ -400,17 +431,26 @@ export default function WalkthroughPage() {
 
         {/* Curated presets as secondary option */}
         <MonoLabel className="block mb-4">OR BROWSE 44 CURATED PRESETS</MonoLabel>
-        <DensityText role="body" as="p" muted className="mb-6 max-w-xl leading-relaxed">
+        <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-xl leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
           Don't want to start from scratch? Use a curated preset as your base — then customize.
           Click the preset pills below to compare visual identities.
         </DensityText>
         <PresetComparisonView />
 
-        <div className="mt-8 max-w-[720px]">
+        <div
+          className="max-w-[720px]"
+          style={{ marginTop: "var(--s-section-gap, calc(var(--s-grid-cell) / 2))" }}
+        >
           <Terminal lines={PRESET_LIST_LINES} title="~/ my-app — zsh" />
         </div>
 
-        <div className="mt-10">
+        <div style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}>
           <GapPixelGrid columns={{ md: 3 }}>
             {[
               { family: "Structural", presets: "sigil · kova · cobalt · helix · hex", desc: "Engineering precision, grids, measurements" },
@@ -439,12 +479,21 @@ export default function WalkthroughPage() {
         heading="Import what you need."
         description="Components are copied into your project so you own the code. Every component reads from var(--s-*) tokens — no hardcoded colors, fonts, or spacing."
       >
-        <div className="max-w-[720px] mb-10">
+        <div
+          className="max-w-[720px]"
+          style={{ marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+        >
           <Terminal lines={ADD_LINES} title="~/ my-app — zsh" />
         </div>
 
         <MonoLabel variant="accent" className="block mb-4">HOW COMPONENTS CONSUME TOKENS</MonoLabel>
-        <DensityText role="body" as="p" muted className="mb-6 max-w-xl leading-relaxed">
+        <DensityText
+            role="body"
+            as="p"
+            muted
+            className="max-w-xl leading-relaxed"
+            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          >
           A Button reads <code className="text-[var(--s-primary)]">--s-primary</code> for fill,{" "}
           <code className="text-[var(--s-primary)]">--s-radius-md</code> for corners,{" "}
           <code className="text-[var(--s-primary)]">--s-duration-fast</code> for transitions.
@@ -452,7 +501,7 @@ export default function WalkthroughPage() {
         </DensityText>
         <ComponentAnatomyDiagram />
 
-        <div className="mt-10">
+        <div style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}>
           <GapPixelGrid columns={{ md: 4 }}>
             {[
               { name: "Button", variants: "9 variants", cat: "UI" },
@@ -490,7 +539,7 @@ export default function WalkthroughPage() {
       >
         <MarkdownEditorPreview />
 
-        <div className="mt-10">
+        <div style={{ marginTop: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}>
           <MonoLabel variant="accent" className="block mb-4">519 CONFIGURABLE FIELDS</MonoLabel>
           <GapPixelGrid columns={{ sm: 2, md: 4 }}>
             {[
@@ -524,7 +573,10 @@ export default function WalkthroughPage() {
         heading="Compose with the playbook."
         description="Ten compositional rules that make any page 'just work'. Gap-pixel grids, mono labels, border stacks, density text — the structural vocabulary of every Sigil page."
       >
-        <GapPixelGrid columns={{ md: 2 }} className="mb-10">
+        <GapPixelGrid
+          columns={{ md: 2 }}
+          style={{ marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+        >
           <GapPixelCell className="p-0">
             <CodeBlock filename="app/pricing/page.tsx">
 {`import {
@@ -611,7 +663,10 @@ export default function PricingPage() {
         heading="Run doctor. Deploy."
         description="sigil doctor validates your entire setup — config, tokens, CSS, components, dependencies, and active preset. Green across the board means you're ready to ship."
       >
-        <div className="max-w-[720px] mb-10">
+        <div
+          className="max-w-[720px]"
+          style={{ marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))" }}
+        >
           <Terminal lines={DOCTOR_LINES} title="~/ my-app — zsh" />
         </div>
 
@@ -669,16 +724,29 @@ export default function PricingPage() {
       <Divider pattern="vertical" size="md" showBorders />
 
       {/* Final CTA */}
-      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
         <div className="text-center mx-auto max-w-xl">
           <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-4">
             Ready to build?
           </h2>
-          <DensityText role="body" as="p" muted className="mb-8 mx-auto max-w-md leading-relaxed">
+          <DensityText
+            role="body"
+            as="p"
+            muted
+            className="mx-auto max-w-md leading-relaxed"
+            style={{
+              marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+            }}
+          >
             You've seen the full workflow. One file, {SIGIL_PRODUCT_STATS.tokenCount} tokens, {SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components, {SIGIL_PRODUCT_STATS.presetCount} presets.
             The design system that compiles from a token layer.
           </DensityText>
-          <div className="flex items-center justify-center gap-3 flex-wrap mb-8">
+          <div
+            className="flex items-center justify-center gap-3 flex-wrap"
+            style={{
+              marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+            }}
+          >
             <AccentCTA size="lg" asChild>
               <a href="/docs" className="no-underline">Get Started</a>
             </AccentCTA>

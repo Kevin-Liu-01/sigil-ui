@@ -204,10 +204,10 @@ export const _templatePreset: SigilPreset = {
       "margin-border": "1px solid var(--s-border-muted)",
       "gutter-visible": true,
       "band-height": "48px",
-      "divider-thickness-sm": "25px",
-      "divider-thickness-md": "49px",
-      "divider-thickness-lg": "97px",
-      "divider-thickness-xl": "145px",
+      "divider-thickness-sm": "calc(var(--s-grid-cell) / 2)",
+      "divider-thickness-md": "var(--s-grid-cell)",
+      "divider-thickness-lg": "calc(2 * var(--s-grid-cell))",
+      "divider-thickness-xl": "calc(3 * var(--s-grid-cell))",
     },
 
     // -----------------------------------------------------------------------

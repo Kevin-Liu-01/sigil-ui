@@ -1008,6 +1008,16 @@ nav[data-fd-sidebar] {
   border-right-color: var(--s-border) !important;
 }
 
+/* Collapsed-state mini-rail: the floating panel that holds the toggle +
+   search buttons when the sidebar is minimized. By default Fumadocs gives
+   it a card surface (bg-fd-muted + border + shadow-lg); we want the
+   buttons to float without a surrounding container chrome. */
+[data-sidebar-panel] {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 /* ================================================================== */
 /* Fumadocs overrides — content typography                             */
 /* ================================================================== */

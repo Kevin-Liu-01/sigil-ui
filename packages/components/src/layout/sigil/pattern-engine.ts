@@ -143,61 +143,58 @@ function snapPeriod(cell: number, target: number, min = 4): number {
 }
 
 /**
- * Build a `repeating-linear-gradient` background that paints `subdivisions`
- * 1px lines per `cell`-tall block. The gradient itself repeats every `cell`
- * px (an integer length), so each block is recomputed from a clean integer
- * boundary — internal stops at fractional positions like `cell/3` render at
- * the same relative position in every block and never accumulate drift over
- * a long scroll. The bottom-most line lands exactly on the `cell` boundary
- * so it coincides with the parent margin's `horizontal` (period = cell)
- * pattern at every cell line.
+ * Ruler subdivisions inside one vertical period of height `f × --s-grid-cell`.
+ * Uses `var(--s-grid-cell)` so the pattern tracks zoom / root font-size like
+ * the rail tokens, instead of hard-coded px from JS.
  */
-function buildSubdividedHorizontal(
+function buildSubdividedHorizontalVar(
   color: string,
-  cell: number,
   subdivisions: number,
+  f: number,
 ): { backgroundImage: string; backgroundSize: string } {
-  const c = Math.max(1, Math.round(cell));
   const n = Math.max(1, Math.round(subdivisions));
+  const factor = Math.max(0.001, f);
   const stops: string[] = [];
-  let prev = 0;
   for (let i = 1; i <= n; i++) {
-    // i-th line bottom sits at i*c/n (the n-th line lands exactly on `c`).
-    const lineEnd = (i * c) / n;
-    const lineStart = lineEnd - 1;
-    if (lineStart > prev) {
-      stops.push(`transparent ${prev}px`);
-      stops.push(`transparent ${lineStart}px`);
+    const lineEnd = `calc(var(--s-grid-cell) * ${factor} * ${i} / ${n})`;
+    const lineStart = `calc(var(--s-grid-cell) * ${factor} * ${i} / ${n} - 1px)`;
+    if (i === 1) {
+      stops.push("transparent 0px", `transparent ${lineStart}`);
+    } else {
+      const prevEnd = `calc(var(--s-grid-cell) * ${factor} * ${i - 1} / ${n})`;
+      stops.push(`transparent ${prevEnd}`, `transparent ${lineStart}`);
     }
-    stops.push(`${color} ${lineStart}px`);
-    stops.push(`${color} ${lineEnd}px`);
-    prev = lineEnd;
+    stops.push(`${color} ${lineStart}`, `${color} ${lineEnd}`);
   }
   return {
     backgroundImage: `repeating-linear-gradient(to bottom, ${stops.join(", ")})`,
-    // `100% ${c}px` keeps the gradient anchored to integer cell boundaries
-    // even though `repeating-linear-gradient` already repeats internally —
-    // this avoids the engine spreading the pattern across the element.
-    backgroundSize: `100% ${c}px`,
+    backgroundSize: `100% calc(var(--s-grid-cell) * ${factor})`,
   };
 }
 
 /**
- * Resolve a `GutterPattern` name + cell size to a CSS-ready
- * `SigilPatternStyles` descriptor, or `null` for `"none"`.
+ * Resolve a `GutterPattern` to CSS background styles.
  *
- * `side` mirrors the pattern across the vertical axis so the
- * inside edge (toward the content) reads as the "anchor" side.
+ * @param patternBase - Effective pattern period in the same "px space" as the
+ *   active preset (e.g. full `gridCell`, or a thinner divider band).
+ * @param referenceCell - Preset `gridCell` (unscaled). Used to form
+ *   `calc(var(--s-grid-cell) * factor)` so patterns track `--s-grid-cell`
+ *   (rem) under zoom and font-size. Also used for diamond snap + SVG tiles.
+ * @param side - Mirrors the pattern for right-hand rails.
  */
 export function getSigilPatternStyles(
   pattern: GutterPattern,
-  cell: number,
+  patternBase: number,
   side: PatternSide = "left",
+  referenceCell: number = patternBase,
 ): SigilPatternStyles | null {
   const C = COLOR;
   const R = side === "right";
-  const scale = PATTERN_CELL_SCALE[pattern] ?? 1;
-  const s = Math.max(Math.round(cell * scale), 8);
+  const tileScale = PATTERN_CELL_SCALE[pattern] ?? 1;
+  const ref = Math.max(1, referenceCell);
+  const f = Math.max(0.001, patternBase / ref);
+  const s = Math.max(Math.round(patternBase * tileScale), 8);
+  const varTile = `max(8px, calc(var(--s-grid-cell) * ${tileScale * f}))`;
   switch (pattern) {
     case "grid": {
       // Lines at the END of each tile (bottom-right) so they coincide
@@ -209,36 +206,36 @@ export function getSigilPatternStyles(
           `linear-gradient(${R ? "to right" : "to left"}, ${C} 1px, transparent 1px)`,
           `linear-gradient(to top, ${C} 1px, transparent 1px)`,
         ].join(", "),
-        backgroundSize: `${s}px ${s}px`,
+        backgroundSize: `${varTile} ${varTile}`,
       };
     }
     case "dots": {
-      // `s/2` is the dot offset from the inside edge. Round to integer so
-      // the dot lands on a clean device-pixel column instead of being
-      // anti-aliased across two columns (visible as a smudge for cell=50
-      // where s/2 = 12.5).
-      const half = Math.round(s / 2);
+      const halfTile = `calc(${varTile} / 2)`;
       return {
         backgroundImage: `radial-gradient(circle, ${C} 1px, transparent 1px)`,
-        backgroundSize: `${s}px ${s}px`,
-        backgroundPosition: R ? `left ${half}px` : `right ${half}px`,
+        backgroundSize: `${varTile} ${varTile}`,
+        backgroundPosition: R ? `left ${halfTile}` : `right ${halfTile}`,
       };
     }
     case "crosshatch": {
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
+      const period = `calc(${varTile} - 1px)`;
+      const end = varTile;
       return {
         backgroundImage: [
-          `repeating-linear-gradient(${a}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
-          `repeating-linear-gradient(${b}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
+          `repeating-linear-gradient(${a}deg, transparent, transparent ${period}, ${C} ${period}, ${C} ${end})`,
+          `repeating-linear-gradient(${b}deg, transparent, transparent ${period}, ${C} ${period}, ${C} ${end})`,
         ].join(", "),
         backgroundSize: "100% 100%, 100% 100%",
       };
     }
     case "diagonal": {
       const angle = R ? -45 : 45;
+      const period = `calc(${varTile} - 1px)`;
+      const end = varTile;
       return {
-        backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${s - 1}px, ${C} ${s - 1}px, ${C} ${s}px)`,
+        backgroundImage: `repeating-linear-gradient(${angle}deg, transparent, transparent ${period}, ${C} ${period}, ${C} ${end})`,
         backgroundSize: "100% 100%",
       };
     }
@@ -248,7 +245,7 @@ export function getSigilPatternStyles(
       // 12/13 px blocks. Snap to the largest cell-divisor `<= s/2` so the
       // tile is integer pixels AND the diamond grid re-aligns with the
       // structural cell grid at every cell boundary.
-      const h = snapPeriod(cell, s / 2);
+      const h = snapPeriod(ref, s / 2);
       const a = R ? -45 : 45;
       const b = R ? 45 : -45;
       return {
@@ -265,7 +262,7 @@ export function getSigilPatternStyles(
     case "horizontal":
       return {
         backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
-        backgroundSize: `100% ${cell}px`,
+        backgroundSize: `100% calc(var(--s-grid-cell) * ${f})`,
       };
     case "horizontal-thin": {
       // 3 lines per cell — matches the dedalus reticle (which gets 3
@@ -275,21 +272,18 @@ export function getSigilPatternStyles(
       // renders the same 3 lines at the same relative positions — no
       // cumulative drift, and the bottom line lands exactly on every cell
       // boundary alongside the `horizontal` margin pattern.
-      return buildSubdividedHorizontal(C, cell, 3);
+      return buildSubdividedHorizontalVar(C, 3, f);
     }
     case "horizontal-fine": {
       // 5 lines per cell — denser than `horizontal-thin` for an
       // instrument-ruler feel. Same drift-free repeat strategy: the
       // 5th line lands exactly on every cell boundary.
-      return buildSubdividedHorizontal(C, cell, 5);
+      return buildSubdividedHorizontalVar(C, 5, f);
     }
     case "horizontal-wide": {
-      // Integer multiple of an integer cell — already drift-free, but
-      // guard against a fractional `cell` with `Math.round`.
-      const wide = Math.round(cell) * 3;
       return {
         backgroundImage: `linear-gradient(to top, ${C} 1px, transparent 1px)`,
-        backgroundSize: `100% ${wide}px`,
+        backgroundSize: `100% calc(var(--s-grid-cell) * ${3 * f})`,
       };
     }
     case "hexagon": {
@@ -319,36 +313,32 @@ export function getSigilPatternStyles(
           `linear-gradient(${a3}deg, ${C} 25%, transparent 25%)`,
           `linear-gradient(${a4}deg, ${C} 25%, transparent 25%)`,
         ].join(", "),
-        backgroundSize: `${s}px ${s}px`,
+        backgroundSize: `${varTile} ${varTile}`,
       };
     }
     case "checker": {
-      // The two layers are offset by `s/2` in both axes to interlock; round
-      // to integer so the offset lands on a clean device-pixel boundary
-      // rather than being anti-aliased across two rows/columns.
-      const h = Math.round(s / 2);
+      const halfTile = `calc(${varTile} / 2)`;
       const a = R ? -45 : 45;
       return {
         backgroundImage: [
           `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
           `linear-gradient(${a}deg, ${C} 25%, transparent 25%, transparent 75%, ${C} 75%)`,
         ].join(", "),
-        backgroundSize: `${s}px ${s}px`,
+        backgroundSize: `${varTile} ${varTile}`,
         backgroundPosition: R
-          ? `left ${h}px top ${h}px, left top`
-          : `right top, right ${h}px top ${h}px`,
+          ? `left ${halfTile} top ${halfTile}, left top`
+          : `right top, right ${halfTile} top ${halfTile}`,
       };
     }
     case "plus": {
-      const mid = Math.floor(s / 2);
       const dir = R ? "to left" : "to right";
       const vDir = R ? "to top" : "to bottom";
       return {
         backgroundImage: [
-          `linear-gradient(${dir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
-          `linear-gradient(${vDir}, transparent ${mid}px, ${C} ${mid}px, ${C} ${mid + 1}px, transparent ${mid + 1}px)`,
+          `linear-gradient(${dir}, transparent 49.5%, ${C} 49.5%, ${C} 50.5%, transparent 50.5%)`,
+          `linear-gradient(${vDir}, transparent 49.5%, ${C} 49.5%, ${C} 50.5%, transparent 50.5%)`,
         ].join(", "),
-        backgroundSize: `${s}px ${s}px`,
+        backgroundSize: `${varTile} ${varTile}`,
       };
     }
     case "brick": {

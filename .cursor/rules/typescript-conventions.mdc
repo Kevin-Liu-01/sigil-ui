@@ -1,0 +1,55 @@
+# TypeScript Conventions
+
+> Imported from Kevin's wiki (`wiki/style/typescript.md`).
+> Cross-reference: `sigil-design-system.mdc` (TypeScript Rules section).
+
+## General Principles
+
+- Prefer functional style. Classes only when the domain demands it (SDK clients).
+- `const` over `let`; never `var`.
+- `===` over `==`.
+- Template literals over string concatenation.
+- Named exports over default exports.
+- If a function name contains "and", split it.
+
+## Types
+
+- `type` over `interface` unless declaration merging is needed. Interfaces can accidentally merge across files; `type` aliases are closed.
+- `unknown` over `any`. If `any` is unavoidable, add `// eslint-disable-next-line` with justification.
+- `satisfies` to validate object shapes without widening.
+- `import type` for type-only imports (enforced by `typescript/consistent-type-imports`).
+- Derive types from values with `as const`, not the other way around.
+- Discriminated unions with exhaustive `switch` for domain variants.
+- Branded types (`string & { readonly __brand: "X" }`) for nominal safety.
+
+## Error Handling
+
+- `Result<T, E>` from `@/lib/utils/functional` for domain logic with expected failures.
+- `Zod` for validating external input at API boundaries.
+- `catch (error: unknown)`, narrow with `error instanceof Error`.
+- Early returns over deeply nested conditionals.
+- No ternaries for control flow. Ternaries are for value selection only.
+
+## Console Warnings
+
+Label `console.warn` and `console.error` calls with their origin:
+
+```ts
+console.warn("[FileName::functionName::L42] description");
+```
+
+## Linting
+
+Use Ultracite (`bun x ultracite@latest init`) for oxlint configuration. Zero-config presets with framework-specific rules. Custom ESLint rules layer on top for repo-specific architectural policy only (see `react-conventions.mdc`).
+
+## Type Checking
+
+Use **tsgo** (TS 7, native Go implementation) for type checking. Do not use `tsc`. ~10x faster, identical type errors. Combined with oxlint, full-repo validation runs in ~250-500ms.
+
+## Formatting
+
+Formatting is handled exclusively by `oxfmt`. No Prettier configuration. Run `pnpm format` to format, `pnpm format --check` to verify.
+
+## Imports
+
+Group: builtins/external first, then internal (`@/`, `~/`), then relative. Alphabetize within groups. Use `import type` for type-only imports.

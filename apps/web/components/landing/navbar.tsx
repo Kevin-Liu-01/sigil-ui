@@ -68,14 +68,21 @@ export function LandingNavbar() {
 
   const inner = (
     <div
-      className="mx-auto flex items-center justify-between w-full overflow-hidden border-y border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="mx-auto flex items-center justify-between w-full overflow-hidden border-b border-[var(--s-grid-line-color,var(--s-border-muted))] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
         maxWidth: "var(--s-content-max, 1200px)",
         paddingInline: "var(--s-navbar-padding-x, 24px)",
         // Use the structural band height token — never `calc(... + 1px)`.
         // The +1px compensation lives in the preset (--s-band-height).
-        height: "var(--s-band-height, 51px)",
+        height: "var(--s-band-height, var(--s-grid-cell))",
         boxSizing: "border-box",
+        // Chrome (translucent surface + backdrop blur) lives on the navbar
+        // row only — NOT on the parent <header>. Otherwise the banner
+        // wrapper below inherits the header surface and shows a wide
+        // opaque strip when the banner is collapsed.
+        background: "color-mix(in oklch, var(--s-background) 85%, transparent)",
+        backdropFilter: "blur(16px) saturate(1.5)",
+        WebkitBackdropFilter: "blur(16px) saturate(1.5)",
       }}
     >
       {/* ── Logo ── */}
@@ -194,9 +201,11 @@ export function LandingNavbar() {
     <header
       className="sticky top-0 z-50 w-full transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        background: "color-mix(in oklch, var(--s-background) 85%, transparent)",
-        backdropFilter: "blur(16px) saturate(1.5)",
-        WebkitBackdropFilter: "blur(16px) saturate(1.5)",
+        // Header is a transparent structural wrapper. The visible chrome
+        // (translucent surface + backdrop blur) lives on the navbar row
+        // and the expanded banner so the wrapper around the collapsed
+        // banner pill stays fully transparent.
+        background: "transparent",
         boxShadow: scrolled
           ? "0 1px 3px color-mix(in oklch, var(--s-background) 30%, transparent), 0 4px 12px color-mix(in oklch, var(--s-background) 15%, transparent)"
           : "none",
@@ -285,15 +294,17 @@ function ReleaseBanner() {
 
   return (
     <div
-      className="w-full flex items-start justify-center overflow-hidden transition-[height] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className="w-full flex items-start justify-center transition-[height] duration-[450ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        // Band height already includes the +1px structural border
-        // compensation in the preset (--s-band-height). NEVER add `+ 1px`
-        // or `- 1px` here. The pixel calculation lives in the preset.
-        height: collapsed ? "22px" : "var(--s-band-height, 51px)",
+        // Reserve a full structural band when expanded so the banner sits
+        // on the grid rhythm. When collapsed, reserve ZERO vertical space
+        // so page sections flow up to the navbar — the pill is absolute
+        // and overhangs into the page below via overflow: visible.
+        height: collapsed ? "0px" : "var(--s-band-height, var(--s-grid-cell))",
+        overflow: collapsed ? "visible" : "hidden",
       }}
     >
-      <div className="relative w-full h-[var(--s-band-height,51px)] flex items-center justify-center">
+      <div className="relative w-full h-[var(--s-band-height,var(--s-grid-cell))] flex items-center justify-center">
         {/* ── Expanded full banner ── */}
         <div
           aria-hidden={collapsed}

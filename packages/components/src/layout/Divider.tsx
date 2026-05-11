@@ -1,6 +1,15 @@
 "use client";
 
-import { forwardRef, type HTMLAttributes, type ReactNode } from "react";
+import {
+  forwardRef,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type HTMLAttributes,
+  type MutableRefObject,
+  type ReactNode,
+} from "react";
 import type { GutterPattern } from "@sigil-ui/tokens";
 import { cn } from "../utils";
 import {
@@ -46,45 +55,47 @@ function getThickness(size: NonNullable<DividerProps["size"]>, gridCell: number)
 }
 
 /**
- * Outer thickness CSS values for a `showBorders` divider. Equal to
- * `N × grid-cell + 1` so BOTH the top and bottom structural borders
- * sit on rail lines (the divider visually spans exactly N full cells).
- *
- * With `box-sizing: border-box` and the rail's 1px line at the BOTTOM
- * of each grid cell, the top border (first row of the box) and the
- * bottom border (last row of the box) need rows that are exactly
- * N × grid-cell apart. Including both rows in the box yields a height
- * of N × grid-cell + 1.
- *
- * IMPORTANT: do NOT recompute this with `calc(... ± 1px)` in the
- * component. The pixel math lives in the preset
- * (`sigil.divider-thickness-*` → `--s-divider-thickness-*`). The
- * fallbacks here keep things working if a preset omits these tokens.
+ * Unbordered band = exact multiples of `--s-grid-cell`.
+ * Bordered bands are also exact multiples of `--s-grid-cell`; `box-sizing:
+ * border-box` keeps the two 1px borders inside the band so stacked section and
+ * divider boundaries advance by full cells without cumulative +1px drift.
  */
+function gridBandOuterThickness(size: NonNullable<DividerProps["size"]>): string {
+  switch (size) {
+    case "xs":
+    case "sm":
+      return "calc(var(--s-grid-cell) / 2)";
+    case "md":
+      return "var(--s-grid-cell)";
+    case "lg":
+      return "calc(2 * var(--s-grid-cell))";
+    case "xl":
+      return "calc(3 * var(--s-grid-cell))";
+  }
+}
+
 const BORDERED_THICKNESS_VAR: Record<NonNullable<DividerProps["size"]>, string> = {
-  xs: "var(--s-divider-thickness-sm, 26px)",
-  sm: "var(--s-divider-thickness-sm, 26px)",
-  md: "var(--s-divider-thickness-md, 51px)",
-  lg: "var(--s-divider-thickness-lg, 101px)",
-  xl: "var(--s-divider-thickness-xl, 151px)",
+  xs: "var(--s-divider-thickness-sm, calc(var(--s-grid-cell) / 2))",
+  sm: "var(--s-divider-thickness-sm, calc(var(--s-grid-cell) / 2))",
+  md: "var(--s-divider-thickness-md, var(--s-grid-cell))",
+  lg: "var(--s-divider-thickness-lg, calc(2 * var(--s-grid-cell)))",
+  xl: "var(--s-divider-thickness-xl, calc(3 * var(--s-grid-cell)))",
 };
 
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
-const STRUCTURAL_BORDER =
-  "var(--s-divider-border, var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-grid-line-color, var(--s-border-muted)))";
 const EDGE_FADE = 50;
 
 function getLegacyVerticalPatternCSS(
   cell: number,
   scale: number,
 ): SigilPatternStyles {
-  const s = cell * scale;
+  const f = Math.max(0.001, (cell * scale) / Math.max(cell, 1));
   return {
     // Line at the END (right edge) of each tile so it aligns with the
     // structural right-border of cells, matching the SigilPageGrid rail
     // convention (see horizontal patterns: line at bottom of each tile).
     backgroundImage: `linear-gradient(to left, ${COLOR} 1px, transparent 1px)`,
-    backgroundSize: `${s}px 100%`,
+    backgroundSize: `calc(var(--s-grid-cell) * ${f}) 100%`,
   };
 }
 
@@ -137,6 +148,31 @@ function getMaskImage(orientation: NonNullable<DividerProps["orientation"]>) {
     : `linear-gradient(to bottom, transparent 0, black ${EDGE_FADE}px, black calc(100% - ${EDGE_FADE}px), transparent 100%)`;
 }
 
+/**
+ * Nudge `background-position` / mask-position so repeating rail patterns in the
+ * content-column divider stay phase-locked with gutter/margin patterns, which
+ * paint from y=0 of the page grid. Dividers start mid-column; without this
+ * offset their tiles repeat from the band's local origin and drift.
+ */
+function mergeStructuralBgYOffset(
+  base: string | undefined,
+  yPx: number,
+): string | undefined {
+  if (yPx === 0) return base;
+  const v = `${-yPx}px`;
+  if (!base?.trim()) return `0px ${v}`;
+  const t = base.trim();
+  const calcSecond = /^0\s+(calc\(.+\))$/.exec(t);
+  if (calcSecond) {
+    const inner = calcSecond[1].slice(5, -1);
+    return `0 calc(${inner} + ${v})`;
+  }
+  if (t.endsWith(" 0")) {
+    return `${t.slice(0, -2)} ${v}`;
+  }
+  return `${t} ${v}`;
+}
+
 /** Decorative patterned divider band — horizontal between sections or vertical between panes. */
 export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider(
   {
@@ -156,33 +192,83 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   },
   ref,
 ) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+  const [patternYPx, setPatternYPx] = useState(0);
+
+  const setRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      rootRef.current = node;
+      if (typeof ref === "function") ref(node);
+      else if (ref && typeof ref === "object") {
+        (ref as MutableRefObject<HTMLDivElement | null>).current = node;
+      }
+    },
+    [ref],
+  );
+
   const gridConfig = usePageGridConfig();
   const rawCell = gridConfig?.gridCell ?? 48;
   const thickness = getThickness(size, rawCell);
   const cell = Math.min(rawCell, thickness);
   const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
-  // Outer dimension. When borders are shown we read the preset-provided
-  // `--s-divider-thickness-*` tokens, which already include the +2px border
-  // compensation. When borders are off, the un-bordered numeric thickness is
-  // exactly one (or N) grid cell.
   const outerThickness: string | number = showBorders
     ? BORDERED_THICKNESS_VAR[size]
-    : thickness;
+    : gridBandOuterThickness(size);
   const resolvedPattern = resolveDividerPattern(pattern, gridConfig);
   const patternCss =
     resolvedPattern === "vertical"
       ? getLegacyVerticalPatternCSS(rawCell, scale)
-      : getSigilPatternStyles(resolvedPattern, cell * scale);
+      : getSigilPatternStyles(resolvedPattern, cell * scale, "left", rawCell);
+  const phase = (cell * scale) / (2 * Math.max(rawCell, 1));
   const legacyPatternOffset = isHorizontal
-    ? `${(cell * scale) / 2}px 0`
-    : `0 ${(cell * scale) / 2}px`;
-  const patternPosition = patternCss?.backgroundPosition
+    ? `calc(var(--s-grid-cell) * ${phase}) 0`
+    : `0 calc(var(--s-grid-cell) * ${phase})`;
+  const patternPositionRaw = patternCss?.backgroundPosition
     ?? (resolvedPattern === "vertical" ? legacyPatternOffset : undefined);
+  const patternPosition = mergeStructuralBgYOffset(
+    patternPositionRaw,
+    patternYPx,
+  );
+  const structuralStrokeShadow = showBorders
+    ? isHorizontal
+      ? `0 -1px 0 ${COLOR}, inset 0 -1px 0 ${COLOR}`
+      : `-1px 0 0 ${COLOR}, inset -1px 0 0 ${COLOR}`
+    : undefined;
+
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const content = root.closest("[data-layout='sigil-content']") as HTMLElement | null;
+    if (!content) return;
+
+    const measure = () => {
+      const r = rootRef.current;
+      if (!r) return;
+      const cr = content.getBoundingClientRect();
+      const rr = r.getBoundingClientRect();
+      // Phase-lock Y offset with gutters (same origin as section snap). Keep
+      // sub-pixel precision — rounding here visibly shifts thin ruler patterns.
+      const yPx = rr.top - cr.top;
+      setPatternYPx((prev) => (Math.abs(prev - yPx) < 1e-6 ? prev : yPx));
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(content);
+    ro.observe(root);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [gridConfig?.gridCell, resolvedPattern, size, showBorders]);
+
+  const patternInset = { top: 0, right: 0, bottom: 0, left: 0 };
 
   return (
     <div
-      ref={ref}
+      ref={setRefs}
       data-slot="divider"
       role={decorative ? "none" : "separator"}
       aria-orientation={decorative ? undefined : orientation}
@@ -195,28 +281,27 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
       style={{
         [isHorizontal ? "height" : "width"]: outerThickness,
         boxSizing: "border-box",
-        ...(showBorders
-          ? isHorizontal
-            ? { borderTop: STRUCTURAL_BORDER, borderBottom: STRUCTURAL_BORDER }
-            : { borderLeft: STRUCTURAL_BORDER, borderRight: STRUCTURAL_BORDER }
-          : {}),
+        boxShadow: structuralStrokeShadow,
         ...style,
       }}
       {...rest}
     >
 
       <div
-        className="absolute inset-0"
+        className="absolute"
         style={{
+          ...patternInset,
           ...(patternCss?.isMask
             ? {
               backgroundColor: COLOR,
               WebkitMaskImage: patternCss.backgroundImage,
               WebkitMaskSize: patternCss.backgroundSize,
               WebkitMaskRepeat: "repeat",
+              WebkitMaskOrigin: "border-box",
               maskImage: patternCss.backgroundImage,
               maskSize: patternCss.backgroundSize,
               maskRepeat: "repeat",
+              maskOrigin: "border-box",
               ...(patternPosition
                 ? {
                   WebkitMaskPosition: patternPosition,
@@ -227,6 +312,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
             : {
               backgroundImage: patternCss?.backgroundImage,
               backgroundSize: patternCss?.backgroundSize,
+              backgroundOrigin: "border-box",
               ...(patternPosition ? { backgroundPosition: patternPosition } : {}),
             }),
           opacity,

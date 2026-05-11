@@ -1,0 +1,126 @@
+# Design & Animation Rules
+
+> Imported from Kevin's wiki (`wiki/style/design-and-animation.md`). Source: Emil Kowalski's design engineering philosophy.
+> Cross-reference: `sigil-design-system.mdc` (Seven Motion Rules, Enter/Exit Asymmetry), `frontier-stack.mdc` (tool selection).
+
+## Core Philosophy
+
+Taste is trained, not innate. Reverse engineer animations. Inspect interactions. Unseen details compound — a thousand barely audible voices all singing in tune. Beauty is leverage.
+
+## Animation Frequency Framework
+
+| Frequency | Decision |
+|-----------|----------|
+| 100+ times/day (keyboard shortcuts, command palette) | No animation. Ever. |
+| Tens of times/day (hover effects, list navigation) | Remove or drastically reduce |
+| Occasional (modals, drawers, toasts) | Standard animation |
+| Rare/first-time (onboarding, celebrations) | Can add delight |
+
+Never animate keyboard-initiated actions.
+
+## Easing Decision Flowchart
+
+```
+Entering or exiting viewport? → ease-out
+Moving/morphing on screen? → ease-in-out
+Hover/color change? → ease
+Constant motion (marquee, progress)? → linear
+Default → ease-out
+```
+
+Use custom curves — built-in CSS easings lack punch:
+
+```css
+--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+```
+
+Never use `ease-in` for UI animations. It starts slow, making the interface feel sluggish.
+
+## Duration Guidelines
+
+| Element Type | Duration |
+|-------------|----------|
+| Button press feedback | 100-160ms |
+| Tooltips, small popovers | 125-200ms |
+| Dropdowns, selects | 150-250ms |
+| Modals, drawers | 200-500ms |
+| Marketing/explanatory | Can be longer |
+
+- UI animations stay under 300ms
+- Larger elements animate slower than smaller ones
+- Exit animations ~20% faster than entrance
+- Match duration to distance
+
+## Spring Animations
+
+Springs feel more natural — they simulate real physics with no fixed duration.
+
+When to use: drag interactions with momentum, elements that feel "alive", gestures that can be interrupted, decorative mouse-tracking.
+
+Apple's approach (recommended): `{ type: "spring", duration: 0.5, bounce: 0.2 }`. Keep bounce subtle (0.1-0.3). Avoid bounce in most UI contexts. Springs maintain velocity when interrupted — CSS animations restart from zero.
+
+## clip-path Techniques
+
+`clip-path: inset(top right bottom left)` — one of the most powerful animation tools. Use for: hold-to-delete overlays, tab color transitions (duplicate + clip), image reveals on scroll, comparison sliders.
+
+## Gesture Rules
+
+- Momentum-based dismissal: calculate velocity (`distance / time`). If > 0.11, dismiss.
+- Damping at boundaries: the more they drag past the edge, the less it moves.
+- Pointer capture once dragging starts (`setPointerCapture`).
+- Multi-touch protection: ignore additional touch points after initial drag.
+- Friction instead of hard stops.
+
+## Performance
+
+- Only animate `transform` and `opacity` (GPU-composited).
+- Motion `x`/`y`/`scale` are NOT hardware-accelerated. Use `transform: "translateX(100px)"` for GPU.
+- CSS animations run off main thread. Use CSS for predetermined, JS for dynamic.
+- Don't animate CSS variables on parents — recalculates all children.
+- WAAPI (`element.animate()`) gives JS control with CSS performance.
+
+## Accessibility
+
+- `prefers-reduced-motion`: keep opacity/color, remove movement.
+- Gate hover behind `@media (hover: hover) and (pointer: fine)`.
+- 44px minimum hit area on touch targets.
+
+## Component Rules
+
+1. **Scale buttons on press**: `transform: scale(0.97)` on `:active`, 160ms ease-out.
+2. **Never animate from scale(0)**: Start from `scale(0.95)`, not `scale(0)`.
+3. **Origin-aware popovers**: `transform-origin` to trigger location. Exception: modals stay centered.
+4. **Skip tooltip delay on subsequent hovers**: `[data-instant] { transition-duration: 0ms; }`.
+5. **CSS transitions over keyframes**: Transitions are interruptible; keyframes restart from zero.
+6. **Blur to mask crossfades**: `filter: blur(2px)` during transition. Under 20px.
+7. **Asymmetric enter/exit**: Enter chunked and staggered (60-100ms). Exits have reduced travel.
+8. **Stagger animations**: 30-80ms between items. Never block interaction during stagger.
+9. **Use `@starting-style`** for entry animations (replaces `useEffect` + `setMounted(true)`).
+
+## Review Checklist
+
+| Issue | Fix |
+|-------|-----|
+| `transition: all` | Specify exact properties |
+| `scale(0)` entry | `scale(0.95)` with `opacity: 0` |
+| `ease-in` on UI element | `ease-out` or custom curve |
+| `transform-origin: center` on popover | Trigger location (modals exempt) |
+| Animation on keyboard action | Remove entirely |
+| Duration > 300ms on UI element | 150-250ms |
+| Hover without media query | `@media (hover: hover) and (pointer: fine)` |
+| Keyframes on rapid triggers | CSS transitions |
+| Motion `x`/`y` under load | `transform: "translateX()"` |
+| Same enter/exit speed | Exit ~20% faster |
+| Everything appears at once | Stagger 30-80ms |
+
+## The Sonner Principles
+
+From building Sonner (13M+ weekly npm downloads):
+
+1. No hooks, no context, no setup. Insert once, call from anywhere.
+2. Good defaults > options. Ship beautiful out of the box.
+3. Handle edge cases invisibly. Pause timers on hidden tabs. Fill gaps between stacked toasts.
+4. Match motion to mood. Playful = bouncier. Dashboard = crisp and fast.
+5. Review animations the next day with fresh eyes.

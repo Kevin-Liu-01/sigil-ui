@@ -115,11 +115,11 @@ export const defaultPreset: SigilPreset = {
       "input-py": "8px",
       "badge-px": "10px",
       "badge-py": "2px",
-      "section-py": "6.25rem",
-      "section-py-lg": "9.375rem",
+      "section-py": "calc(2 * var(--s-grid-cell))",
+      "section-py-lg": "calc(3 * var(--s-grid-cell))",
       "navbar-height": "50px",
       "navbar-px": "25px",
-      "footer-py": "48px",
+      "footer-py": "calc(1 * var(--s-grid-cell))",
       "modal-padding": "24px",
       "popover-padding": "16px",
       "tooltip-padding": "6px 12px",
@@ -165,10 +165,10 @@ export const defaultPreset: SigilPreset = {
       // cell (see `getSigilPatternStyles`: `linear-gradient(to top, …)`).
       //
       // band-height          = grid-cell        (single border)
-      // divider-thickness-sm = round(cell / 2) + 1  (½ cell)
-      // divider-thickness-md = grid-cell + 1        (1 cell)
-      // divider-thickness-lg = grid-cell × 2 + 1    (2 cells)
-      // divider-thickness-xl = grid-cell × 3 + 1    (3 cells)
+      // divider-thickness-sm = cell / 2             (½ cell)
+      // divider-thickness-md = grid-cell            (1 cell)
+      // divider-thickness-lg = grid-cell × 2        (2 cells)
+      // divider-thickness-xl = grid-cell × 3        (3 cells)
       //
       // Dividers fill EXACTLY N visual cells: the divider's top border
       // sits on the rail line at the end of the previous cell, AND its
@@ -179,10 +179,10 @@ export const defaultPreset: SigilPreset = {
       // border, so the box must span (last rail line) − (first rail line)
       // + 1 rows = N × grid-cell + 1.
       "band-height": "50px",
-      "divider-thickness-sm": "26px",
-      "divider-thickness-md": "51px",
-      "divider-thickness-lg": "101px",
-      "divider-thickness-xl": "151px",
+      "divider-thickness-sm": "calc(var(--s-grid-cell) / 2)",
+      "divider-thickness-md": "var(--s-grid-cell)",
+      "divider-thickness-lg": "calc(2 * var(--s-grid-cell))",
+      "divider-thickness-xl": "calc(3 * var(--s-grid-cell))",
     },
     radius: {
       none: "0px",
@@ -371,22 +371,25 @@ export const defaultPreset: SigilPreset = {
       "title-align": "left",
     },
     sections: {
-      "padding-y": "6.25rem",
-      "padding-y-hero": "9.375rem",
-      "padding-y-sm": "3.125rem",
+      "padding-y": "calc(2 * var(--s-grid-cell))",
+      "padding-y-hero": "calc(3 * var(--s-grid-cell))",
+      "padding-y-sm": "calc(1 * var(--s-grid-cell))",
       "padding-x": "25px",
       "max-width": "1200px",
-      gap: "25px",
-      "padding-y-lg": "9.375rem",
-      "padding-y-xl": "12.5rem",
+      gap: "calc(var(--s-grid-cell) / 2)",
+      "padding-y-lg": "calc(3 * var(--s-grid-cell))",
+      "padding-y-xl": "calc(4 * var(--s-grid-cell))",
       "title-align": "left",
       "heading-size": "clamp(1.5rem, 4vw, 2.5rem)",
       "heading-align": "center",
       "heading-max-width": "40rem",
-      "heading-margin-bottom": "16px",
+      "heading-margin-bottom": "calc(var(--s-grid-cell) / 4)",
+      "header-block-margin-bottom": "calc(1 * var(--s-grid-cell))",
+      "label-row-margin-bottom": "calc(var(--s-grid-cell) / 3)",
+      "subsection-gap": "calc(2 * var(--s-grid-cell))",
       "description-max-width": "32rem",
-      "description-gap": "14px",
-      "content-gap": "28px",
+      "description-gap": "calc(var(--s-grid-cell) / 4)",
+      "content-gap": "calc(var(--s-grid-cell) / 2)",
       "grid-columns": "3",
       "grid-gap": "28px",
       "alternate-bg": "var(--s-surface)",
@@ -525,15 +528,10 @@ export const defaultPreset: SigilPreset = {
     },
     hero: {
       "min-height": "auto",
-      // Hero padding is calibrated so the hero section bottom (and the
-      // first divider top) lands on a grid line. With band-height = 50px
-      // (header = 2 cells = 100px), `padding-y = 82px` gives a total hero
-      // height that's a multiple of grid-cell (50px) for the current
-      // landing-page hero copy. If the hero copy changes height, retune
-      // this token — DO NOT shave pixels off the section padding inside
-      // the page component.
-      "padding-y": "82px",
-      "padding-y-sm": "100px",
+      // Vertical padding is an integer multiple of --s-grid-cell so gutter
+      // horizontal rulers stay phase-locked with section + divider bands.
+      "padding-y": "calc(2 * var(--s-grid-cell))",
+      "padding-y-sm": "calc(1 * var(--s-grid-cell))",
       "padding-x": "var(--s-page-margin, 28px)",
       "content-max": "640px",
       "content-align": "center",
@@ -556,7 +554,7 @@ export const defaultPreset: SigilPreset = {
       "gradient-overlay": "none",
     },
     cta: {
-      "padding-y": "100px",
+      "padding-y": "calc(2 * var(--s-grid-cell))",
       "padding-x": "var(--s-page-margin, 28px)",
       "max-width": "var(--s-content-max, 1200px)",
       layout: "centered",
@@ -570,10 +568,10 @@ export const defaultPreset: SigilPreset = {
       "actions-margin-top": "36px",
       "action-padding-x": "28px",
       "action-padding-y": "14px",
-      "split-gap": "50px",
+      "split-gap": "calc(1 * var(--s-grid-cell))",
     },
     footer: {
-      "padding-y": "50px",
+      "padding-y": "calc(1 * var(--s-grid-cell))",
       "border-top": "1px solid var(--s-border-muted)",
       columns: "4",
       "column-gap": "36px",
@@ -586,7 +584,7 @@ export const defaultPreset: SigilPreset = {
       "group-title-weight": "500",
       "social-icon-size": "20px",
       "social-gap": "14px",
-      "bottom-bar-padding": "50px 0",
+      "bottom-bar-padding": "calc(1 * var(--s-grid-cell)) 0",
       "bottom-bar-border": "1px solid var(--s-border-muted)",
     },
     banner: {

@@ -247,37 +247,23 @@ export type SigilGridTokens = {
    * the rail by construction.
    *
    * Components MUST use `var(--s-band-height)` directly. NEVER write
-   * `calc(var(--s-grid-cell) + 1px)` or `+ 1px`/`- 1px` adjustments inside
+   * `var(--s-grid-cell)` or `+ 1px`/`- 1px` adjustments inside
    * a component — the calculation lives in the preset.
    */
   readonly "band-height"?: string;
   /**
-   * Outer thickness for `<Divider size="xs"|"sm">` when `showBorders` is
-   * true. Equals `round(grid-cell / 2) + 1` — half a cell with both
-   * structural borders sitting on rail lines. The +1 is required for
-   * double-bordered alignment with `box-sizing: border-box`: the top
-   * border occupies the box's first row and the bottom border its last
-   * row, so the box must span (last rail line) − (first rail line) + 1
-   * rows. Going `+0` makes the divider visually 1px shorter than a cell;
-   * `+2` overshoots by 1px past the next rail line.
+   * Legacy optional override for divider band height (px/rem). Prefer
+   * leaving this unset: `<Divider>` derives outer thickness from
+   * `calc(N × var(--s-grid-cell))` with `border-box` borders inside the
+   * band so the stack stays phase-locked to the rail grid across zoom and
+   * root font-size changes.
    */
   readonly "divider-thickness-sm"?: string;
-  /**
-   * Outer thickness for `<Divider size="md">` when `showBorders` is true.
-   * Equals `grid-cell + 1`. Both top and bottom borders sit on rail
-   * lines so the divider visually spans exactly one full cell. See
-   * `divider-thickness-sm` for the geometric reasoning.
-   */
+  /** @see divider-thickness-sm */
   readonly "divider-thickness-md"?: string;
-  /**
-   * Outer thickness for `<Divider size="lg">` when `showBorders` is true.
-   * Equals `grid-cell × 2 + 1`.
-   */
+  /** @see divider-thickness-sm */
   readonly "divider-thickness-lg"?: string;
-  /**
-   * Outer thickness for `<Divider size="xl">` when `showBorders` is true.
-   * Equals `grid-cell × 3 + 1`.
-   */
+  /** @see divider-thickness-sm */
   readonly "divider-thickness-xl"?: string;
 };
 
@@ -620,6 +606,12 @@ export type SectionStyleTokens = {
   readonly "heading-align"?: "left" | "center";
   readonly "heading-max-width"?: string;
   readonly "heading-margin-bottom"?: string;
+  /** Space below the whole section title stack (label + heading + description). Snap: multiples of `--s-grid-cell`. */
+  readonly "header-block-margin-bottom"?: string;
+  /** Space below the mono label row before the heading. Often `calc(var(--s-grid-cell) / 3)` for ~1rem at G=48px. */
+  readonly "label-row-margin-bottom"?: string;
+  /** Gap between major blocks inside a section (replaces ad-hoc `mt-20`). Typically `calc(2 * var(--s-grid-cell))`. */
+  readonly "subsection-gap"?: string;
   readonly "description-max-width"?: string;
   readonly "description-gap"?: string;
   readonly "content-gap"?: string;

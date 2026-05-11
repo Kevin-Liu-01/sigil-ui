@@ -1,0 +1,126 @@
+---
+title: Structural Grid Rhythm
+description: How Sigil keeps sections, dividers, rails, and gutter ruler patterns phase-locked to full grid-cell intervals.
+---
+
+## The Contract
+
+Sigil page layouts use one vertical structural period:
+
+```txt
+G = resolved pixel height of var(--s-grid-cell)
+```
+
+Every `SigilSection` boundary and every horizontal `Divider` boundary must land
+on a full multiple of `G`, measured from the top of the `SigilPageGrid` content
+column (`[data-layout="sigil-content"]`).
+
+This is stricter than "looks close." The browser check is:
+
+```js
+(sectionOrDividerEdge - contentOriginTop) % G === 0
+```
+
+Allow a tiny float epsilon when measuring through `getBoundingClientRect()`, but
+do not design around half-cell snap.
+
+## Components In The System
+
+| Component | Responsibility |
+|---|---|
+| `SigilPageGrid` | Creates the content origin with `data-layout="sigil-content"` and renders rail/gutter tracks. |
+| `SigilSection` | Measures its own border box and adds snap padding so its bottom edge lands on the next full cell. |
+| `Divider` | Occupies exactly `N * G` layout height; its visual strokes do not add layout pixels. |
+| `SigilGutter` | Paints rail/ruler patterns from the shared page origin. |
+
+## Full Cells, Not Half Cells
+
+Some gutter patterns draw subdivisions inside a cell. That does not change the
+layout period. Sections and dividers still advance by full cells:
+
+```txt
+section bottom  = k * G
+divider top     = k * G
+divider bottom  = (k + N) * G
+```
+
+Do not snap section boundaries to `G / 2`. It can make arithmetic look cleaner
+for subdivided patterns while visually placing dividers between the major cells.
+
+## Divider Border Model
+
+`Divider` uses exact token heights:
+
+| Size | Height |
+|---|---|
+| `sm` / `xs` | `calc(var(--s-grid-cell) / 2)` |
+| `md` | `var(--s-grid-cell)` |
+| `lg` | `calc(2 * var(--s-grid-cell))` |
+| `xl` | `calc(3 * var(--s-grid-cell))` |
+
+Borders are visual strokes, not layout borders:
+
+- no real `border-top` / `border-bottom`
+- `height` remains exactly `G`
+- top stroke paints at `-1px`
+- bottom stroke paints inside the divider
+
+This avoids cumulative `+1px` drift while keeping visible divider strokes aligned
+to rail lines.
+
+## Section Snap Model
+
+`SigilSection` computes the base span before snap padding:
+
+```txt
+baseSpan = sectionBottom - contentOriginTop - previousSnapPadding
+snap     = ceil(baseSpan / G) * G - baseSpan
+```
+
+The snap amount is split across top and bottom padding so inner content stays
+centered in the expanded section:
+
+```txt
+paddingTop    += floor(snap / 2)
+paddingBottom += snap - floor(snap / 2)
+```
+
+The fractional remainder belongs on the bottom padding. If both halves are
+fractional, browser rasterization can introduce subpixel drift over long pages.
+
+## Authoring Rules
+
+- Use `<Divider size="md" showBorders />` for one full structural band.
+- Avoid `Divider size="sm"` between sections unless intentionally breaking the
+  major-cell rhythm.
+- Keep section block padding as whole-cell multiples, for example
+  `calc(2 * var(--s-grid-cell))`.
+- Use fractional cell values (`G / 2`, `G / 3`, `G / 4`) only for interior
+  component spacing, not for section or divider outer boundaries.
+- Do not add `+1px` to `--s-divider-thickness-*`.
+- Rebuild workspace package `dist` outputs when verifying `apps/web`; the local
+  app imports built package entries.
+
+## Browser Verification
+
+Run this against a local page before signing off any grid rhythm change:
+
+```bash
+node scripts/audit-grid-alignment.mjs --base=http://localhost:3000
+```
+
+The audit measures the resolved pixel value of `--s-grid-cell` in the browser,
+then checks every `[data-slot="sigilsection"]` and `[data-slot="divider"]`
+boundary against the full-cell rhythm.
+
+For visual confirmation, also capture a screenshot at the target viewport and
+compare:
+
+- section bottom line
+- divider top line
+- divider bottom line
+- left/right gutter major cell lines
+
+If a line is "one pixel low," check whether it is a real CSS border painting
+inside the box. The fix is usually visual stroke placement, not changing layout
+height.

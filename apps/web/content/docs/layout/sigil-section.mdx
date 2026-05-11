@@ -21,6 +21,37 @@ import { SigilSection } from "@sigil-ui/components";
 <SigilSection>...</SigilSection>
 ```
 
+## Structural rhythm
+
+When `SigilSection` is rendered inside `SigilPageGrid`, it can snap its outer
+bottom edge to the next full `--s-grid-cell` interval from the page-grid content
+origin. This keeps following `Divider` bands aligned with the gutter ruler
+system.
+
+The snap padding is split across top and bottom padding so the section content
+stays centered in the expanded section. The fractional remainder is applied to
+bottom padding so the final outer boundary remains exact.
+
+```tsx
+<SigilPageGrid>
+  <SigilSection snapBottomToGrid>
+    <YourContent />
+  </SigilSection>
+  <Divider size="md" showBorders />
+</SigilPageGrid>
+```
+
+Use full-cell padding for section boundaries:
+
+```tsx
+<SigilSection
+  padding="calc(2 * var(--s-grid-cell)) var(--s-section-padding-x)"
+/>
+```
+
+Use fractional cell values only for interior component spacing, not for section
+outer rhythm.
+
 ## Props
 
 | Prop | Type | Default | Description |
@@ -37,6 +68,7 @@ import { SigilSection } from "@sigil-ui/components";
 | `marginPattern` | `GutterPattern` | — | Margin pattern for standalone mode. |
 | `showGutterGrid` | `boolean` | `true` | Show gutter grid in standalone mode. |
 | `showMarginLines` | `boolean` | `true` | Show margin lines in standalone mode. |
+| `snapBottomToGrid` | `boolean` | `true` inside `SigilPageGrid` | Add vertical snap padding so the section bottom lands on the next full `--s-grid-cell` interval. |
 
 ## Token integration
 

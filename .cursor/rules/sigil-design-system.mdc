@@ -5,6 +5,15 @@
 > **Full references:** [style/design.md](../../style/design.md) (motion guide) | [style/ux-principles.md](../../style/ux-principles.md) (product UX) | [style/style.md](../../style/style.md) (engineering philosophy) | [skills/sigil-polish/](../../skills/sigil-polish/SKILL.md) (interface polish skill with typography, surfaces, animations, performance deep-dives)
 >
 > **Anti-slop enforcement:** Also read [taste-enforcement.mdc](./taste-enforcement.mdc) for banned AI visual patterns, variance dials, content quality rules, performance guardrails, and output completeness requirements. The [taste-skills-index.mdc](./taste-skills-index.mdc) catalogs the 12 user-level taste skills (taste-core, taste-soft, taste-minimalist, taste-brutalist, etc.) that auto-trigger based on task description.
+>
+> **Companion rule files (imported from wiki):**
+> - [css-ui-enforcement.mdc](./css-ui-enforcement.mdc) — Tailwind + `cn()` first, `globals.css` only, scrollbars, hit areas, no `style`+`className` soup
+> - [react-conventions.mdc](./react-conventions.mdc) — Hooks, linting (Ultracite/oxlint), architecture-policy ESLint rules, Vercel 69 rules, RSC safety
+> - [typescript-conventions.mdc](./typescript-conventions.mdc) — Types, error handling (`Result<T,E>`, Zod), console labels, tsgo, oxfmt
+> - [design-animation-rules.mdc](./design-animation-rules.mdc) — Animation frequency framework, easing flowchart, springs, clip-path, gestures, accessibility, Sonner principles
+> - [frontier-stack.mdc](./frontier-stack.mdc) — Default animation/3D/rendering stack, decision matrix, json-render for generative UI
+> - [dashboard-design.mdc](./dashboard-design.mdc) — Dashboard design system (14px base, stat cards, charts, sidebar, empty states, 6-rule cheatsheet)
+> - [interface-micro-polish.mdc](./interface-micro-polish.mdc) — Dark 1px card shadow, image outlines, icon animation, staggered enters, softer exits
 
 ## Custom Preset Rule (MANDATORY — Enforced Before All Other Rules)
 
@@ -72,24 +81,20 @@ When a component renders a horizontal band that aligns to the grid (navbar inner
 | Token | Value (default preset, `grid-cell = 50px`) | Formula | Use for |
 |---|---|---|---|
 | `--s-band-height` | `50px` | `grid-cell` | Single-bordered bands (navbar inner row, release banner). |
-| `--s-divider-thickness-sm` | `26px` | `round(grid-cell / 2) + 1` | `<Divider size="xs"\|"sm">` w/ `showBorders` |
-| `--s-divider-thickness-md` | `51px` | `grid-cell + 1` | `<Divider size="md">` w/ `showBorders` |
-| `--s-divider-thickness-lg` | `101px` | `grid-cell × 2 + 1` | `<Divider size="lg">` w/ `showBorders` |
-| `--s-divider-thickness-xl` | `151px` | `grid-cell × 3 + 1` | `<Divider size="xl">` w/ `showBorders` |
+| `--s-divider-thickness-sm` | `25px` | `grid-cell / 2` | `<Divider size="xs"\|"sm">` w/ `showBorders` |
+| `--s-divider-thickness-md` | `50px` | `grid-cell` | `<Divider size="md">` w/ `showBorders` |
+| `--s-divider-thickness-lg` | `100px` | `grid-cell × 2` | `<Divider size="lg">` w/ `showBorders` |
+| `--s-divider-thickness-xl` | `150px` | `grid-cell × 3` | `<Divider size="xl">` w/ `showBorders` |
 
-**Why the formulas differ:**
+**Why the formulas match:**
 
-The rail's 1px line lives at the BOTTOM of each grid cell (rail-line rows = `cell − 1, 2·cell − 1, 3·cell − 1, …`). With `box-sizing: border-box`, the box's first row is the top border and its last row is the bottom border.
+All horizontal structural bands, including dividers, advance the layout by exact
+multiples of `grid-cell`. Borders are included inside the band via
+`box-sizing: border-box`, which avoids cumulative `+1px` drift between adjacent
+sections and dividers.
 
-- A **band** has ONE structural border (typically `border-bottom`). Outer height = `grid-cell` puts the bottom border on a rail line. The "first row of the box" is the page edge for the navbar, with no rail line above to align with.
-
-- A **divider** has TWO structural borders, sitting mid-page. To make the divider visually occupy exactly N full cells, BOTH borders must sit on rail lines — the top border on one rail line and the bottom border on the rail line N cells later. The number of rows in the box from one of those rail lines to the other (inclusive of both) is `N × grid-cell + 1`.
-
-  - `+0` (`N × cell`)  → divider 1px shorter than a cell; bottom border 1px before the next rail line.
-  - `+1` (`N × cell + 1`)  → top + bottom borders on rail lines; divider visually spans exactly N cells.  ← correct
-  - `+2` (`N × cell + 2`)  → bottom border 1px past the next rail line.
-
-**Do not** ship `+0` or `+2`; only `+1` makes the divider's outer edges coincide with rail lines, which is what the rest of the design system relies on.
+**Do not** add `+1px` to divider thickness. The divider's outer box must advance
+by exact full-cell multiples; the 1px borders live inside that box.
 
 **Rail / gutter pattern convention (enforced in `getSigilPatternStyles`):**
 
@@ -240,6 +245,24 @@ The Sigil aesthetic: structural visibility inspired by engineering instruments. 
 - Emojis in code, markup, headings, or alt text
 
 > See [taste-enforcement.mdc](./taste-enforcement.mdc) for the complete banned-patterns list with variance dials, creative arsenal, and performance guardrails.
+
+## Accessibility Rules
+
+- `prefers-reduced-motion`: keep opacity/color transitions, remove movement/transform animations.
+- Gate hover effects behind `@media (hover: hover) and (pointer: fine)`.
+- 44px minimum hit area on touch targets (use Tailwind `before:` pseudo for expansion — see `css-ui-enforcement.mdc`).
+- WCAG AA contrast on all text/UI pairs (see Contrast Rules above).
+- All interactive components must be keyboard-accessible.
+- Focus rings use `--s-focus-*` tokens, never browser defaults.
+
+## Gesture Rules
+
+- Momentum-based dismissal: calculate velocity (`distance / time`). If > 0.11, dismiss.
+- Damping at boundaries: the more they drag past the edge, the less it moves.
+- Pointer capture once dragging starts (`setPointerCapture`).
+- Multi-touch protection: ignore additional touch points after initial drag.
+- Friction instead of hard stops.
+- See `design-animation-rules.mdc` for full gesture and spring animation guidance.
 
 ## React Rules
 

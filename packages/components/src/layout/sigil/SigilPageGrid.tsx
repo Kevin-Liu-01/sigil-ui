@@ -123,7 +123,8 @@ function SigilPageGridImpl({
             visible={gutterVisible}
           />
           <div
-            className="flex min-w-0 flex-col"
+            className="sigil-page-content flex min-w-0 flex-col"
+            data-layout="sigil-content"
             style={{ background: "var(--s-background)" }}
           >
             {children}

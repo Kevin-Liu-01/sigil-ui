@@ -1,0 +1,98 @@
+# Interface Micro-Polish
+
+> Imported from Kevin's wiki (`wiki/design/interface-micro-polish.md`).
+> Great interfaces improve because lots of tiny choices stop being wrong at the same time.
+
+## Text Wrapping
+
+- `text-wrap: balance` for short headings, badges, marketing copy. Reduces orphaned words.
+- `text-wrap: pretty` for longer prose only when browser cost is acceptable.
+- Manual line breaks for hero headlines when composition matters most.
+
+## Concentric Border Radius
+
+Nested surfaces must be mathematically related: **outer radius = inner radius + padding**.
+
+Example: outer 20px, padding 8px, inner 12px. Define radius pairs as tokens when nesting happens often. Check: cards with headers, inset panels, grouped buttons, avatars in frames.
+
+## Crispy Text Rendering
+
+Apply `antialiased` globally at the layout level (`<body className="font-sans antialiased">`). Do not use as a bandage for wrong font weight.
+
+## Tabular Numbers
+
+Any changing or comparative numeric UI: `font-variant-numeric: tabular-nums` (Tailwind: `tabular-nums`). Apply to counters, timers, KPIs, dashboard metrics, prices, dates that update. Prevents twitching when digits change.
+
+## Optical Alignment
+
+Pure geometry often looks wrong. Adjust icon padding slightly when needed. Fix the SVG itself when possible instead of stacking utility margins. Treat visual center as a perception problem, not box-model.
+
+## Shadows Instead of Borders
+
+When you want depth, subtle layered shadows beat hard borders:
+
+```css
+box-shadow:
+  0 0 0 1px rgb(0 0 0 / 0.06),
+  0 1px 2px -1px rgb(0 0 0 / 0.06),
+  0 2px 4px 0 rgb(0 0 0 / 0.04);
+```
+
+Transition `box-shadow` only on small components. Brutalist designs may still prefer borders.
+
+## Dark UI Card Shadows (The 1px Rule)
+
+The difference between good dark UI and great dark UI:
+
+```css
+box-shadow:
+  inset 0 1px 0 0 rgba(255, 255, 255, 0.02),  /* top edge catch-light */
+  0 0px 0 0 rgba(0, 0, 0, 0.25);               /* grounding shadow */
+```
+
+- **Inner shadow:** white at 2% opacity, Y offset 1px, inset. Simulates light hitting the top edge. Invisible at a glance, but the card reads as physical.
+- **Drop shadow:** black at 25% opacity, Y offset 0px. Grounds the card symmetrically.
+
+Apply to every card, panel, and elevated surface in dark mode. Safe to keep in both themes (invisible on light backgrounds).
+
+## Image and Media Outlines
+
+Low-opacity edge so media sits confidently:
+
+```css
+outline: 1px solid rgb(0 0 0 / 0.1);
+outline-offset: -1px;
+```
+
+Invert for dark mode. Apply to screenshots, product images, video frames, avatars on noisy backgrounds.
+
+## Contextual Icon Animation
+
+When icons swap based on state (copy/check, mute/unmute, open/close), animate with opacity, scale, and slight blur. Keep amplitude small. Responsive, not theatrical.
+
+## Interruptible Animations
+
+- **Transitions** for interactive state changes (dropdowns, popovers, drawers, toggles, hover) — they retarget cleanly.
+- **Keyframes** for staged one-shot sequences and decorative choreography.
+
+If a user reverses direction midway and the old animation keeps playing, it feels broken.
+
+## Staggered Enters
+
+Split large groups into semantic chunks. Stagger title, description, buttons. 60-100ms between sections. Tighter stagger for words than containers. Keep blur small and short-lived.
+
+## Softer Exits
+
+Exits have reduced travel distance compared to enters. Keep directional hint but soften it. Enter may use `calc(-100% - 4px)`; exit may use `-12px`. Asymmetry makes the interface feel calmer.
+
+## Quick Checklist
+
+- [ ] Headings use balanced wrapping
+- [ ] Numbers that update are tabular
+- [ ] Nested radii are concentric
+- [ ] Icons are optically aligned
+- [ ] Images have subtle edges when needed
+- [ ] Interactive animations can be interrupted
+- [ ] Enters are chunked and staggered
+- [ ] Exits are softer than enters
+- [ ] Dark mode cards have 1px inner shadow (white 2%) + drop shadow (black 25%)

@@ -120,18 +120,15 @@ export const defaultTokens: SigilTokens = {
     "gutter-border": "1px solid",
     "margin-border": "none",
     "gutter-visible": true,
-    // Structural band heights — preset-level pixel calculations.
-    // The rail's 1px line lives at the BOTTOM of each grid cell.
-    //   band-height         = grid-cell           (single border, bottom on rail)
-    //   divider-thickness-* = N × grid-cell + 1   (top + bottom borders both on rails)
-    // The +1 on dividers is geometrically required because two structural
-    // borders straddling N cells need (last rail line) − (first rail line)
-    // + 1 rows when `box-sizing: border-box` is used.
+    // Structural band heights — preset-level; emitted as rem via compiler.
+    // Divider bands in components use `calc(N × var(--s-grid-cell))` with
+    // borders inside the band (`border-box`) so height stays an exact
+    // multiple of `--s-grid-cell` (no +1px layout drift).
     "band-height": "50px",
-    "divider-thickness-sm": "26px",
-    "divider-thickness-md": "51px",
-    "divider-thickness-lg": "101px",
-    "divider-thickness-xl": "151px",
+    "divider-thickness-sm": "25px",
+    "divider-thickness-md": "50px",
+    "divider-thickness-lg": "100px",
+    "divider-thickness-xl": "150px",
   },
 
   radius: {

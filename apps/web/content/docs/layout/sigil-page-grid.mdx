@@ -35,6 +35,22 @@ import { SigilPageGrid } from "@sigil-ui/components";
 </SigilPageGrid>
 ```
 
+## Content origin
+
+`SigilPageGrid` establishes the vertical measurement origin for structural
+rhythm. The content column is marked with:
+
+```html
+<div data-layout="sigil-content" class="sigil-page-content" />
+```
+
+`SigilSection`, `Divider`, and the grid-alignment audit all measure from this
+origin. If this attribute is missing in a running app, section snapping and
+divider phase alignment cannot work.
+
+See [Structural Grid Rhythm](/docs/layout/structural-grid-rhythm) for the full
+contract and browser verification workflow.
+
 ## With visible grid
 
 ```tsx

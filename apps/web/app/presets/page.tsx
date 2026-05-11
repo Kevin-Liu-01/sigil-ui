@@ -268,14 +268,32 @@ export default function PresetsPage() {
 
         {/* How It Works */}
         <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y, 6rem)">
-          <div className="mb-8 max-w-2xl">
-            <MonoLabel className="mb-3 block">How It Works</MonoLabel>
+          <div
+            className="max-w-2xl"
+            style={{
+              marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+            }}
+          >
+            <MonoLabel
+              className="block"
+              style={{
+                marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+              }}
+            >
+              How It Works
+            </MonoLabel>
             <DensityText role="headline" as="h2">
               Three steps. Zero component edits.
             </DensityText>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-[5fr_4fr_3fr] gap-px mb-10" style={{ background: "var(--s-border)" }}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-[5fr_4fr_3fr] gap-px"
+            style={{
+              background: "var(--s-border)",
+              marginBottom: "var(--s-section-subsection-gap, calc(2 * var(--s-grid-cell)))",
+            }}
+          >
             {STEPS.map((step) => (
               <CardCell
                 key={step.number}

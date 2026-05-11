@@ -141,15 +141,28 @@ export default function ComponentsPage() {
 
       {/* ── Component Anatomy ── */}
       <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
-        <div className="mb-10 max-w-2xl">
-          <MonoLabel variant="accent" className="mb-4 block">
+        <div
+          className="max-w-2xl"
+          style={{
+            marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+          }}
+        >
+          <MonoLabel
+            variant="accent"
+            className="block"
+            style={{
+              marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+            }}
+          >
             HOW TOKENS FLOW
           </MonoLabel>
 
           <DensityText
             role="headline"
             as="h2"
-            className="mb-4"
+            style={{
+              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+            }}
           >
             Every component reads from tokens.
           </DensityText>
@@ -168,12 +181,29 @@ export default function ComponentsPage() {
 
       {/* ── Build with tokens ── */}
       <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
-        <div className="mb-10 max-w-2xl">
-          <MonoLabel variant="accent" className="mb-4 block">
+        <div
+          className="max-w-2xl"
+          style={{
+            marginBottom: "var(--s-section-header-block-margin-bottom, calc(1 * var(--s-grid-cell)))",
+          }}
+        >
+          <MonoLabel
+            variant="accent"
+            className="block"
+            style={{
+              marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+            }}
+          >
             WHY TOKENS
           </MonoLabel>
 
-          <DensityText role="headline" as="h2" className="mb-4">
+          <DensityText
+            role="headline"
+            as="h2"
+            style={{
+              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+            }}
+          >
             Build with tokens, not overrides.
           </DensityText>
         </div>

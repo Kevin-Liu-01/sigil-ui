@@ -124,16 +124,42 @@ Use fluid spacing that scales with the viewport, and semantic breakpoints:
 
 ## Rules
 
-1. **Always use SigilGrid as the outermost wrapper** for pages that show the structural grid pattern.
-2. **Use SigilRail for content alignment** — it centers content within `--s-content-max` and applies `--s-rail-gap`.
-3. **Never hardcode spacing** — use `var(--s-spacing-N)` where N is the index into the spacing scale (0-indexed).
-4. **Card radius from tokens** — cards should use `var(--s-card-radius)`, not `var(--s-radius-md)`.
-5. **Sections stack vertically** — use flexbox column or plain block flow, not grid, for section stacking.
-6. **Grid for card layouts** — use CSS Grid with `auto-fill`/`auto-fit` for responsive card grids.
-7. **Gap from rail-gap** — inter-component spacing should use `--s-rail-gap` for consistency with the grid system.
-8. **Dark mode via class** — use `.dark` on `<html>` or a parent. Tokens auto-switch via `var(--s-background-light)` / `var(--s-background-dark)`.
-9. **Full-bleed sections** — for edge-to-edge backgrounds, use a full-width wrapper with a centered inner container.
-10. **Min-height patterns** — hero sections should be `min-height: 100dvh`, card sections should be `min-height: auto`.
+1. **Use `SigilFrame` / `SigilPageGrid` for structural pages** — it creates the `data-layout="sigil-content"` origin that sections and dividers measure from.
+2. **Snap page bands to full cells** — `SigilSection` and horizontal `Divider` boundaries must land on full resolved `--s-grid-cell` intervals, never half-cell intervals.
+3. **Do not add `+1px` to divider heights** — divider layout height is exactly `N * var(--s-grid-cell)`; visual strokes live inside/outside via paint, not layout.
+4. **Keep content centered when snapping** — split snap padding across top/bottom; put fractional remainder on the bottom so total height stays exact.
+5. **Use `Divider size="md"` between sections** — it represents one full structural cell. Avoid `sm` between page sections unless intentionally breaking the major rhythm.
+6. **Never hardcode section spacing** — use `var(--s-grid-cell)` multiples or established section tokens for outer rhythm.
+7. **Use fractional cell values only inside components** — `G / 2`, `G / 3`, `G / 4` are fine for labels, button gaps, and local stacks, not for section boundaries.
+8. **Card radius from tokens** — cards should use `var(--s-card-radius)`, not `var(--s-radius-md)`.
+9. **Sections stack vertically** — use flexbox column or plain block flow, not grid, for section stacking.
+10. **Grid for card layouts** — use CSS Grid with `auto-fill`/`auto-fit` for responsive card grids.
+11. **Full-bleed sections** — for edge-to-edge backgrounds, use a full-width wrapper with a centered inner container.
+
+## Structural Rhythm Verification
+
+When touching `SigilPageGrid`, `SigilSection`, `Divider`, `SigilGutter`, section
+padding tokens, or divider thickness tokens, verify in a real browser:
+
+```bash
+# with the web app running
+node scripts/audit-grid-alignment.mjs --base=http://localhost:3000
+```
+
+The audit measures the resolved browser pixel height of `--s-grid-cell` and
+checks every `[data-slot="sigilsection"]` and `[data-slot="divider"]` boundary.
+
+Debugging order:
+
+1. Confirm the live DOM includes `[data-layout="sigil-content"]`. If not, rebuild
+   `packages/components/dist` or start the package watcher.
+2. Confirm `@sigil-ui/components`, `@sigil-ui/presets`, and `@sigil-ui/tokens`
+   are rebuilt; `apps/web` imports built package entries.
+3. If numeric boundaries pass but the screenshot is 1px off, inspect paint
+   geometry (`border-top` paints inside the box). Fix visual stroke placement,
+   not layout height.
+4. If snap padding toggles on/off, measure base geometry by subtracting the
+   previous snap padding before computing the next snap.
 
 ## Examples
 

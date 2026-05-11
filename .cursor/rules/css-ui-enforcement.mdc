@@ -1,0 +1,91 @@
+# CSS UI Enforcement
+
+> Hard UI conventions imported from Kevin's wiki (`wiki/style/css-ui-enforcement.md`).
+> Default surface: **Tailwind utilities + `cn()`** only. Raw CSS is a last resort.
+> Cross-reference: `sigil-design-system.mdc` (token consumption), `taste-enforcement.mdc` (anti-slop).
+
+## ENFORCE: Tailwind + `cn()` first; `globals.css` only for "nowhere else" rules
+
+**Ship UI as:**
+- `className={cn(...)}` everywhere: layout, spacing, color, typography, states, responsive, dark mode.
+- `cn()` = `clsx` + `tailwind-merge` (from `~/lib/utils`).
+
+**Avoid:**
+- Co-located `.css` / `.module.css` for ordinary component styling — if it can be a utility, it must be.
+- `<style>` tags, ad-hoc `.scss`, and one-off stylesheets per feature.
+
+**`globals.css` (or equivalent) — allowed only for what Tailwind cannot own cleanly:**
+- `@layer base` resets
+- `@font-face`
+- Document-wide scrollbar defaults
+- `@property` registrations
+- Global `@keyframes`
+- `:root` / `html` / `body` theme plumbing
+- Third-party overrides that must target foreign selectors
+
+If a rule *could* be a utility on the element, do not put it in globals.
+
+## ENFORCE: No `style` + `className` soup (React)
+
+Do not mix Tailwind on `className` with ad-hoc `style={{ ... }}` on the same node.
+
+**Do instead:**
+- Static visuals → Tailwind on `className` via `cn()`.
+- Dynamic but design-shaped → CSS variables on `:root` / theme layer or inline `--token` plus Tailwind arbitrary values.
+
+**Exceptions:**
+- Runtime-only values (drag position, live chart layout, embed constraints).
+- No "couldn't find the class" exception.
+
+## ENFORCE: Scrollbars (thin + neutral)
+
+Prefer Tailwind scrollbar plugin if the project has one. Otherwise define **once** in `globals.css`:
+
+```css
+* {
+  scrollbar-width: thin;
+  scrollbar-color: gray transparent;
+}
+```
+
+Add `::-webkit-scrollbar` rules in the same global block. Never per-component.
+
+## ENFORCE: Hit area expansion (Tailwind-first)
+
+Prefer Tailwind pseudo utilities on the interactive node:
+
+```tsx
+className={cn(
+  "relative before:absolute before:inset-x-0 before:-inset-y-2.5 before:content-['']",
+  className,
+)}
+```
+
+If the same expansion repeats 20+ times, add a utility in `@theme`, not a CSS module. Pair with 44px minimum guidance.
+
+## Pattern: `@property` for animatable gradients
+
+Register in globals, consume via utilities + arbitrary values on the component:
+
+```css
+/* globals.css */
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+```
+
+Keep markup `cn()`-first.
+
+## Pattern: Fluid type
+
+Prefer Tailwind `text-*` + responsive/font-size tokens. If `clamp()` is needed, add it **once** under `@layer base` in globals, not per file.
+
+## Pattern: Scroll-driven timelines
+
+Centralize `@keyframes` / timeline plumbing in globals; visible components still use `cn()` for layout.
+
+## Agent context cost
+
+Evaluate `lean-ctx` at repo bootstrap for reducing Cursor/Claude Code token load. Wire before prompt-layer tuning.
