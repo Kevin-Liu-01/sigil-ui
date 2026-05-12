@@ -759,11 +759,13 @@ export type HeroTokens = {
   readonly "padding-y-sm"?: string;
   readonly "padding-x"?: string;
   readonly "content-max"?: string;
+  readonly "content-basis"?: string;
   readonly "content-align"?: "center" | "left" | "right";
   readonly "layout"?: "centered" | "split" | "stacked" | "asymmetric";
   readonly "media-position"?: "right" | "left" | "behind" | "below";
   readonly "media-width"?: string;
   readonly "media-radius"?: string;
+  readonly "split-gap"?: string;
   readonly "title-size"?: string;
   readonly "title-max-width"?: string;
   readonly "description-size"?: string;

@@ -1074,10 +1074,6 @@ const COMMIT_DAYS = (() => {
   return days;
 })();
 
-const DIAGRAM_W = 540;
-const DIAGRAM_H_DESKTOP = 460;
-const DIAGRAM_H_MOBILE = 640;
-
 export function HeroLogoField() {
   const [mounted, setMounted] = useState(false);
   const [idx, setIdx] = useState(0);
@@ -1103,42 +1099,6 @@ export function HeroLogoField() {
   const [clicking, setClicking] = useState(false);
   const [labelParts, setLabelParts] = useState<{ prefix: string; value: string; isNew: boolean } | null>(null);
   const activeStepIndices = ALL_STEP_INDICES;
-
-  const [diagramFrame, setDiagramFrame] = useState({
-    scale: 1,
-    height: DIAGRAM_H_DESKTOP,
-    naturalHeight: DIAGRAM_H_DESKTOP,
-  });
-
-  useLayoutEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-    let prevW = 0;
-    let prevMobile = false;
-    const mq = window.matchMedia("(max-width: 1023px)");
-    const syncFrame = () => {
-      const w = wrap.clientWidth;
-      const isMobile = mq.matches;
-      if (w === prevW && isMobile === prevMobile) return;
-      prevW = w;
-      prevMobile = isMobile;
-      const naturalHeight = isMobile ? DIAGRAM_H_MOBILE : DIAGRAM_H_DESKTOP;
-      const scale = Math.min(1, w / DIAGRAM_W);
-      setDiagramFrame({
-        scale,
-        height: naturalHeight * scale,
-        naturalHeight,
-      });
-    };
-    const ro = new ResizeObserver(syncFrame);
-    ro.observe(wrap);
-    mq.addEventListener("change", syncFrame);
-    syncFrame();
-    return () => {
-      ro.disconnect();
-      mq.removeEventListener("change", syncFrame);
-    };
-  }, []);
 
   const setComponentRef = useCallback((key: string) => (el: HTMLDivElement | null) => {
     componentRefs.current[key] = el;
@@ -1295,8 +1255,8 @@ export function HeroLogoField() {
       ref={wrapRef}
       className="hero-logo-field"
       style={{
-        height: diagramFrame.height,
-        overflow: "hidden",
+        overflow: "visible",
+        width: "100%",
       }}
     >
       <style dangerouslySetInnerHTML={{ __html: STYLE_BLOCK }} />
@@ -1307,22 +1267,19 @@ export function HeroLogoField() {
         style={{
           opacity: mounted ? 1 : 0,
           transition: "opacity 400ms cubic-bezier(0.32, 0.72, 0, 1)",
-          gridTemplateColumns: "repeat(7, 1fr)",
-          gridTemplateRows: "auto 1fr auto auto auto auto",
+          gridTemplateColumns: "repeat(12, minmax(0, 1fr))",
+          gridTemplateRows: "auto auto auto",
           gap: "calc(var(--s-grid-cell, 40px) / 8)",
-          width: DIAGRAM_W,
-          height: diagramFrame.naturalHeight,
-          ...(diagramFrame.scale < 1 ? {
-            transform: `scale(${diagramFrame.scale})`,
-            transformOrigin: "top left",
-          } : {}),
+          width: "100%",
+          position: "relative",
         }}
       >
         {/* Row 1: sigil.tokens.md (3 cols) + UsageCard (2) + PresetSwatches (2) */}
         <div
-          className="row-span-3"
           style={{
-            gridColumn: "1 / 4",
+            gridColumn: "1 / 6",
+            gridRow: "1",
+            height: "100%",
             border: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border-strong, var(--s-border))",
             borderRadius: "var(--s-radius-md,8px)",
             background: "var(--s-surface, var(--s-background))",
@@ -1332,11 +1289,11 @@ export function HeroLogoField() {
             flexDirection: "column",
           } as React.CSSProperties}
         >
-          <div style={{ ...mono9, fontSize: 10, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", padding: "4px 8px", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--s-surface-elevated, var(--s-surface))", flexShrink: 0 }}>
+          <div style={{ ...mono9, fontSize: 10, borderBottom: "var(--s-border-thin,1px) var(--s-border-style,solid) var(--s-border)", padding: "calc(var(--s-grid-cell, 40px) / 10) calc(var(--s-grid-cell, 40px) / 5)", color: "var(--s-text)", display: "flex", justifyContent: "space-between", alignItems: "center", background: "var(--s-surface-elevated, var(--s-surface))", flexShrink: 0 }}>
             <span style={{ fontWeight: 700 }}>sigil.tokens.md</span>
             <span style={{ fontSize: 9, color: "var(--s-text-muted)" }}>{appliedSet.size}/{activeStepIndices.length}</span>
           </div>
-          <div ref={mdScrollRef} style={{ ...mono10, padding: "4px 8px", fontSize: 10, lineHeight: 1.5 }}>
+          <div ref={mdScrollRef} style={{ ...mono10, padding: "calc(var(--s-grid-cell, 40px) / 10) calc(var(--s-grid-cell, 40px) / 5)", fontSize: 10, lineHeight: 1.5, flex: 1, minHeight: 0, overflow: "hidden" }}>
             {TOKEN_SECTIONS.map((section, si) => {
               const Icon = section.icon;
               return (
@@ -1379,9 +1336,20 @@ export function HeroLogoField() {
         </div>
 
         <div
+          style={{
+            gridColumn: "6 / 13",
+            gridRow: "1",
+            display: "grid",
+            gridTemplateColumns: "repeat(7, minmax(0, 1fr))",
+            gridTemplateRows: "auto minmax(0, 1fr) auto",
+            gap: "calc(var(--s-grid-cell, 40px) / 8)",
+            alignSelf: "stretch",
+          }}
+        >
+        <div
           ref={setComponentRef("UsageCard")}
           style={{
-            gridColumn: "4 / 6",
+            gridColumn: "1 / 5",
             ...(applied("UsageCard") ? { "--s-primary": "oklch(0.66 0.18 275)" } : {}),
           } as React.CSSProperties}
         >
@@ -1404,7 +1372,7 @@ export function HeroLogoField() {
           </Card>
         </div>
 
-        <div ref={setComponentRef("PresetSwatches")} style={{ gridColumn: "6 / 8" }}>
+        <div ref={setComponentRef("PresetSwatches")} style={{ gridColumn: "5 / 8" }}>
           <Card
             className={`overflow-hidden h-full ${applied("PresetSwatches") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1413,7 +1381,7 @@ export function HeroLogoField() {
               transition: "background-color var(--s-duration-slow,600ms), border-color var(--s-duration-slow,600ms)",
             }}
           >
-            <CardContent className="p-1 px-1.5 flex flex-col justify-center">
+            <CardContent className="p-1 px-1.5 flex flex-col justify-center h-full">
               <div className="mb-0.5" style={{ ...mono9, fontSize: 8, color: "var(--s-text-muted)" }}>preset</div>
               {[PRESET_SWATCH_ROW_A, PRESET_SWATCH_ROW_B].map((row, rowIdx) => (
                 <div key={rowIdx} className={rowIdx === 0 ? "flex gap-1" : "flex mt-1 gap-1"}>
@@ -1450,14 +1418,14 @@ export function HeroLogoField() {
           </Card>
         </div>
 
-        {/* Row 2: DatePicker spans right 4 cols. The wrapper flexes vertically
+        {/* Row 2: DatePicker spans the right stack. The wrapper flexes vertically
             so the Calendar fills the leftover height in the column, which
             bottom-aligns the right side with the sigil.tokens.md panel. */}
         <div
           ref={setComponentRef("DatePicker")}
           className={`overflow-hidden ${radiusApplied ? "hero-logo-field__apply" : ""}`}
           style={{
-            gridColumn: "4 / 8",
+            gridColumn: "1 / 8",
             // Wrapper fills row 2 so the calendar shrinks/grows to match the
             // height the panel makes available.
             height: "100%",
@@ -1508,7 +1476,7 @@ export function HeroLogoField() {
             visually. The bottom "duration tick" bar is the actual demo: its
             animation-duration is the value being demonstrated, so the bar
             visibly speeds up (300ms) → slows down (600ms) when applied. */}
-        <div ref={setComponentRef("TokenAction")} style={{ gridColumn: "4 / 8" }}>
+        <div ref={setComponentRef("TokenAction")} style={{ gridColumn: "1 / 8" }}>
           <div
             className={`relative overflow-hidden ${applied("TokenAction") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1518,7 +1486,7 @@ export function HeroLogoField() {
               // calendar's animation goes 8px → 16px, this box stays at the
               // baseline.
               background: applied("TokenAction") ? "color-mix(in oklch, var(--s-primary) 8%, var(--s-surface, var(--s-background)))" : cellBg,
-              padding: "6px 8px",
+              padding: "calc(var(--s-grid-cell, 40px) / 8) calc(var(--s-grid-cell, 40px) / 5)",
               transition: "background-color 600ms, border-color 600ms",
               // Bind the duration-bar sweep to the demoed duration value.
               "--hlf-tick-duration": applied("TokenAction") ? "300ms" : "600ms",
@@ -1543,9 +1511,10 @@ export function HeroLogoField() {
             <div aria-hidden="true" className="hero-logo-field__duration-bar" />
           </div>
         </div>
+        </div>
 
         {/* Row 4: KPI + CommitGrid + Badges + Coverage/ToggleGroup */}
-        <div ref={setComponentRef("KPI")} className="h-full" style={{ gridColumn: "1 / 2" }}>
+        <div ref={setComponentRef("KPI")} className="h-full" style={{ gridColumn: "1 / 4" }}>
           <KPI
             label="ARR"
             value="$7.52m"
@@ -1555,7 +1524,7 @@ export function HeroLogoField() {
             style={{ fontFamily: applied("KPI") ? '"Space Grotesk", var(--s-font-display)' : undefined }}
           />
         </div>
-        <div ref={setComponentRef("CommitGrid")} className="h-full" style={{ gridColumn: "2 / 4" }}>
+        <div ref={setComponentRef("CommitGrid")} className="h-full" style={{ gridColumn: "4 / 8" }}>
           <Card
             className={`h-full flex items-center justify-center ${applied("CommitGrid") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1569,7 +1538,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Badges")} className="h-full" style={{ gridColumn: "4 / 5" }}>
+        <div ref={setComponentRef("Badges")} className="h-full" style={{ gridColumn: "8 / 10" }}>
           <Card
             className={`h-full ${applied("Badges") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1595,7 +1564,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Coverage")} className="h-full" style={{ gridColumn: "5 / 8" }}>
+        <div ref={setComponentRef("Coverage")} className="h-full" style={{ gridColumn: "10 / 13" }}>
           <Card
             className={`h-full ${applied("Coverage") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1660,7 +1629,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Team")} className="h-full" style={{ gridColumn: "3 / 4" }}>
+        <div ref={setComponentRef("Team")} className="h-full" style={{ gridColumn: "3 / 5" }}>
           <Card
             className={`h-full ${applied("Team") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1679,7 +1648,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Sliders")} className="h-full" style={{ gridColumn: "4 / 5" }}>
+        <div ref={setComponentRef("Sliders")} className="h-full" style={{ gridColumn: "5 / 8" }}>
           <Card
             className={`h-full ${applied("Sliders") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1707,7 +1676,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Switches")} className="h-full" style={{ gridColumn: "5 / 6" }}>
+        <div ref={setComponentRef("Switches")} className="h-full" style={{ gridColumn: "8 / 10" }}>
           <Card
             className={`h-full ${applied("Switches") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1756,7 +1725,7 @@ export function HeroLogoField() {
             </CardContent>
           </Card>
         </div>
-        <div ref={setComponentRef("Buttons")} className="h-full" style={{ gridColumn: "6 / 8" }}>
+        <div ref={setComponentRef("Buttons")} className="h-full" style={{ gridColumn: "10 / 13" }}>
           <Card
             className={`h-full ${applied("Buttons") ? "hero-logo-field__apply" : ""}`}
             style={{
@@ -1767,13 +1736,13 @@ export function HeroLogoField() {
           >
             <CardContent className="p-2 flex items-center justify-center h-full">
               <div
-                className="grid grid-cols-6 gap-1.5 w-full"
+                className="grid grid-cols-2 gap-1.5 w-full"
                 style={{ fontFamily: applied("Buttons") ? '"DM Sans", var(--s-font-body)' : undefined }}
               >
-                <Button size="sm" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Primary</Button>
-                <Button size="sm" variant="outline" className="col-span-3 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Outline</Button>
-                <Button size="sm" variant="secondary" className="col-span-4 h-7 w-full px-1.5 text-[8px] leading-none justify-center">Secondary</Button>
-                <Button size="sm" variant="ghost" className="col-span-2 h-7 w-full px-1 text-[8px] leading-none justify-center">Ghost</Button>
+                <Button size="sm" className="min-h-[calc(var(--s-grid-cell,40px)*0.65)] w-full px-1.5 text-[8px] leading-none justify-center">Primary</Button>
+                <Button size="sm" variant="outline" className="min-h-[calc(var(--s-grid-cell,40px)*0.65)] w-full px-1.5 text-[8px] leading-none justify-center">Outline</Button>
+                <Button size="sm" variant="secondary" className="min-h-[calc(var(--s-grid-cell,40px)*0.65)] w-full px-1.5 text-[8px] leading-none justify-center">Secondary</Button>
+                <Button size="sm" variant="ghost" className="min-h-[calc(var(--s-grid-cell,40px)*0.65)] w-full px-1 text-[8px] leading-none justify-center">Ghost</Button>
               </div>
             </CardContent>
           </Card>

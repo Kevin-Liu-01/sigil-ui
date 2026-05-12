@@ -32,8 +32,11 @@ export const PATTERN_COLOR = COLOR;
 const PATTERN_CELL_SCALE: Partial<Record<GutterPattern, number>> = {
   grid: 0.5,
   dots: 0.5,
-  crosshatch: 0.5,
-  diagonal: 0.5,
+  // Diagonal rules read better as a denser texture in 1-cell divider bands.
+  // Half-cell spacing (25px at the default 50px grid cell) looked too sparse
+  // and made the band feel like disconnected slashes instead of a hatch.
+  crosshatch: 0.25,
+  diagonal: 0.25,
   diamond: 0.5,
   hexagon: 0.5,
   triangle: 0.5,

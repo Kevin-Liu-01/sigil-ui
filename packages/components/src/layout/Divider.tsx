@@ -37,7 +37,7 @@ export interface DividerProps extends HTMLAttributes<HTMLDivElement> {
   showCross?: boolean;
   /** Optional label rendered in the center. */
   label?: ReactNode;
-  /** Fade the pattern near the endpoints with a mask. @default true */
+  /** @deprecated Divider edge fades were removed; this prop is now ignored. */
   fadeEdges?: boolean;
   /** If true, this is purely decorative (aria-hidden). @default true */
   decorative?: boolean;
@@ -83,7 +83,6 @@ const BORDERED_THICKNESS_VAR: Record<NonNullable<DividerProps["size"]>, string> 
 };
 
 const COLOR = "var(--s-grid-line-color, var(--s-border-muted))";
-const EDGE_FADE = 50;
 
 function getLegacyVerticalPatternCSS(
   cell: number,
@@ -142,12 +141,6 @@ function CrossMark() {
   );
 }
 
-function getMaskImage(orientation: NonNullable<DividerProps["orientation"]>) {
-  return orientation === "horizontal"
-    ? `linear-gradient(to right, transparent 0, black ${EDGE_FADE}px, black calc(100% - ${EDGE_FADE}px), transparent 100%)`
-    : `linear-gradient(to bottom, transparent 0, black ${EDGE_FADE}px, black calc(100% - ${EDGE_FADE}px), transparent 100%)`;
-}
-
 /**
  * Nudge `background-position` / mask-position so repeating rail patterns in the
  * content-column divider stay phase-locked with gutter/margin patterns, which
@@ -184,7 +177,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
     showBorders = true,
     showCross = false,
     label,
-    fadeEdges = true,
+    fadeEdges: _fadeEdges,
     decorative = true,
     className,
     style,
@@ -211,7 +204,6 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   const rawCell = gridConfig?.gridCell ?? 48;
   const thickness = getThickness(size, rawCell);
   const cell = Math.min(rawCell, thickness);
-  const maskImage = getMaskImage(orientation);
   const isHorizontal = orientation === "horizontal";
   const outerThickness: string | number = showBorders
     ? BORDERED_THICKNESS_VAR[size]
@@ -330,12 +322,6 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
               ...(patternPosition ? { backgroundPosition: patternPosition } : {}),
             }),
           opacity,
-          ...(fadeEdges && !patternCss?.isMask
-            ? {
-              WebkitMaskImage: maskImage,
-              maskImage,
-            }
-            : {}),
         }}
       />
 

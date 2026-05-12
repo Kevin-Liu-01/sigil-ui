@@ -3,6 +3,7 @@
 import {
   memo,
   useCallback,
+  useLayoutEffect,
   useState,
   type CSSProperties,
   type ElementType,
@@ -294,6 +295,34 @@ type InnerSectionProps = {
   snapBottomToGrid?: boolean;
 };
 
+function useCollapseTopBorderAfterDivider(
+  sectionEl: HTMLElement | null,
+  borderTop: boolean,
+): boolean {
+  const [collapse, setCollapse] = useState(false);
+
+  useLayoutEffect(() => {
+    if (!borderTop || !sectionEl) {
+      setCollapse(false);
+      return;
+    }
+
+    const measure = () => {
+      const previous = sectionEl.previousElementSibling;
+      setCollapse(previous?.getAttribute("data-slot") === "divider");
+    };
+
+    measure();
+    const parent = sectionEl.parentElement;
+    if (!parent) return;
+    const observer = new MutationObserver(measure);
+    observer.observe(parent, { childList: true });
+    return () => observer.disconnect();
+  }, [sectionEl, borderTop]);
+
+  return collapse;
+}
+
 function InnerSection({
   children,
   className,
@@ -311,11 +340,13 @@ function InnerSection({
     setSectionEl(node);
   }, []);
 
+  const collapseTopBorder = useCollapseTopBorderAfterDivider(sectionEl, borderTop);
+  const visibleBorderTop = borderTop && !collapseTopBorder;
   const snapPadPx = useSnapBottomToGridPadding(snapBottomToGrid, sectionEl);
 
-  const hasBorder = borderTop || borderBottom;
+  const hasBorder = visibleBorderTop || borderBottom;
   const paddingStyleRaw = hasBorder
-    ? borderCompensatedPadding(padding, borderTop, borderBottom)
+    ? borderCompensatedPadding(padding, visibleBorderTop, borderBottom)
     : { padding };
   const paddingStyle = mergeSnapIntoPaddingStyle(paddingStyleRaw, snapPadPx);
 
@@ -333,11 +364,11 @@ function InnerSection({
         boxSizing: "border-box",
         ...style,
         ...paddingStyle,
-        borderTop: borderTop ? SECTION_BORDER : undefined,
+        borderTop: visibleBorderTop ? SECTION_BORDER : undefined,
         borderBottom: borderBottom ? SECTION_BORDER : undefined,
       }}
     >
-      {showCrosses && borderTop && <CrossRowConnector position="top" />}
+      {showCrosses && visibleBorderTop && <CrossRowConnector position="top" />}
       {children}
       {showCrosses && borderBottom && <CrossRowConnector position="bottom" />}
     </Tag>
@@ -373,22 +404,29 @@ function StandaloneSection({
   showGutterGrid = true,
   snapBottomToGrid = false,
 }: StandaloneSectionProps) {
+  const [sectionEl, setSectionEl] = useState<HTMLElement | null>(null);
   const [paddedEl, setPaddedEl] = useState<HTMLElement | null>(null);
+  const setSectionRef = useCallback((node: HTMLElement | null) => {
+    setSectionEl(node);
+  }, []);
   const setPaddedRef = useCallback((node: HTMLElement | null) => {
     setPaddedEl(node);
   }, []);
 
+  const collapseTopBorder = useCollapseTopBorderAfterDivider(sectionEl, borderTop);
+  const visibleBorderTop = borderTop && !collapseTopBorder;
   const snapPadPx = useSnapBottomToGridPadding(snapBottomToGrid, paddedEl);
 
   const gridCols = buildGridCols(railGap, contentMax);
-  const hasBorder = borderTop || borderBottom;
+  const hasBorder = visibleBorderTop || borderBottom;
   const paddingStyleRaw = hasBorder
-    ? borderCompensatedPadding(padding, borderTop, borderBottom)
+    ? borderCompensatedPadding(padding, visibleBorderTop, borderBottom)
     : { padding };
   const paddingStyle = mergeSnapIntoPaddingStyle(paddingStyleRaw, snapPadPx);
 
   return (
     <Tag
+      ref={setSectionRef}
       id={id}
       data-slot="sigilsection"
       className={cn("grid", className)}
@@ -413,11 +451,11 @@ function StandaloneSection({
           boxSizing: "border-box",
           background: "var(--s-background)",
           ...paddingStyle,
-          borderTop: borderTop ? SECTION_BORDER : undefined,
+          borderTop: visibleBorderTop ? SECTION_BORDER : undefined,
           borderBottom: borderBottom ? SECTION_BORDER : undefined,
         }}
       >
-        {showCrosses && borderTop && (
+        {showCrosses && visibleBorderTop && (
           <CrossRow position="top" crossStroke={1.5} />
         )}
         {children}
