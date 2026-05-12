@@ -71,7 +71,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Controls</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={2} gap="1rem">
+          <BentoGrid columns={{ md: 2 }} gap="1rem">
             <BentoGridCell>
               <div className="space-y-4">
                 <div>

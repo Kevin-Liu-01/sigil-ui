@@ -26,6 +26,18 @@ import { SigilGrid, SigilGridCell } from "@sigil-ui/components";
 <SigilGrid>...</SigilGrid>
 ```
 
+`SigilGrid` is for local component grids and decorative cell layouts. It is not
+the page shell. For full pages, use:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilSection space="normal">...</SigilSection>
+</SigilPage>
+```
+
+Use `SigilGrid` inside sections when you need a compact grid with visible cell
+intersections.
+
 ## Sub-components
 
 This component includes the following parts:

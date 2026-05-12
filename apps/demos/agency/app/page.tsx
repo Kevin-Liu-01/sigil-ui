@@ -112,7 +112,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Selected Work</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={2} gap="1rem">
+          <BentoGrid columns={{ md: 2 }} gap="1rem">
             {projects.map((project) => (
               <BentoGridCell key={project.name}>
                 <div style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)", overflow: "hidden" }}>
@@ -145,7 +145,7 @@ export default function Page() {
             </TabsList>
             {(["strategy", "design", "development"] as const).map((tab) => (
               <TabsContent key={tab} value={tab}>
-                <BentoGrid columns={3} gap="0.75rem" className="mt-4">
+                <BentoGrid columns={{ md: 3 }} gap="0.75rem" className="mt-4">
                   {serviceItems[tab].map((item) => (
                     <BentoGridCell key={item.name}>
                       <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)" }}>

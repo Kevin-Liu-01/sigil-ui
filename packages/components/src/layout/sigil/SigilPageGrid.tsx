@@ -4,6 +4,7 @@ import {
   memo,
   useMemo,
   type CSSProperties,
+  type ElementType,
   type ReactNode,
 } from "react";
 import { cn } from "../../utils";
@@ -17,6 +18,8 @@ import {
   DEFAULTS,
   IsInsidePageGridContext,
   PageGridContext,
+  type SigilBandStroke,
+  type SigilRhythmMode,
   type PageGridConfig,
 } from "./grid-context";
 import {
@@ -27,6 +30,7 @@ import { SigilGutter } from "./SigilGutter";
 
 export interface SigilPageGridProps {
   children: ReactNode;
+  as?: ElementType;
   className?: string;
   contentMax?: number;
   railGap?: number;
@@ -40,10 +44,17 @@ export interface SigilPageGridProps {
   marginBorder?: string;
   /** Strip all gutter/margin decoration — gutters become invisible empty space. */
   edgeless?: boolean;
+  /** Layout rhythm mode. `locked` snaps bands to cells; `hairline` flows freely. */
+  rhythm?: SigilRhythmMode;
+  /** Enable section snap in locked rhythm mode. */
+  snap?: boolean;
+  /** Paint policy for structural band strokes. */
+  bandStroke?: SigilBandStroke;
 }
 
 function SigilPageGridImpl({
   children,
+  as: Tag = "div",
   className,
   contentMax = DEFAULTS.contentMax,
   railGap = DEFAULTS.railGap,
@@ -55,6 +66,9 @@ function SigilPageGridImpl({
   marginPattern = "horizontal",
   marginBorder,
   edgeless = false,
+  rhythm = DEFAULTS.rhythm,
+  snap = DEFAULTS.snap,
+  bandStroke = DEFAULTS.bandStroke,
 }: SigilPageGridProps) {
   const gutterHasPattern = gutterPattern !== "none" && showGutterGrid;
   const effectiveRailGap = edgeless || !gutterHasPattern ? 0 : railGap;
@@ -74,6 +88,9 @@ function SigilPageGridImpl({
       gutterPattern,
       marginPattern,
       edgeless,
+      rhythm,
+      snap,
+      bandStroke,
     }),
     [
       effectiveRailGap,
@@ -83,6 +100,9 @@ function SigilPageGridImpl({
       gutterPattern,
       marginPattern,
       edgeless,
+      rhythm,
+      snap,
+      bandStroke,
     ],
   );
 
@@ -107,10 +127,16 @@ function SigilPageGridImpl({
   return (
     <IsInsidePageGridContext.Provider value={true}>
       <PageGridContext.Provider value={config}>
-        <div
+        <Tag
           data-slot="sigilpagegrid"
           className={cn("grid min-h-dvh", className)}
-          style={gridCols}
+          data-rhythm={rhythm}
+          style={{
+            ...gridCols,
+            "--s-rail-gap": `${effectiveRailGap}px`,
+            "--s-content-max": `${contentMax}px`,
+            "--s-grid-cell": `${gridCell}px`,
+          } as CSSProperties}
         >
           <div aria-hidden="true" style={marginL.container}>
             {marginL.overlay && <div style={marginL.overlay} />}
@@ -139,7 +165,7 @@ function SigilPageGridImpl({
           <div aria-hidden="true" style={marginR.container}>
             {marginR.overlay && <div style={marginR.overlay} />}
           </div>
-        </div>
+        </Tag>
       </PageGridContext.Provider>
     </IsInsidePageGridContext.Provider>
   );

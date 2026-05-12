@@ -181,7 +181,7 @@ export function LandingFooter({ fullBleed = false }: { fullBleed?: boolean }) {
   return (
     <>
       <SectionDivider size="md" showCross fadeEdges />
-      <SigilSection as="footer" showCrosses padding="var(--s-footer-padding-y, 48px) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-footer-padding-y, 48px)">
+      <SigilSection as="footer" showCrosses space="footer">
         {footerContent}
       </SigilSection>
     </>

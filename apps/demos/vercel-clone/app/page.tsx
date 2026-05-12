@@ -97,7 +97,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Infrastructure</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             <BentoGridCell>
               <div className="space-y-2">
                 <span style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Edge Network</span>

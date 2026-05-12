@@ -132,12 +132,12 @@ function EvilBrush({
       </div>
       {/* Drag handles */}
       <div
-        className="absolute inset-y-0 w-1.5 cursor-col-resize rounded-sm bg-current opacity-40 hover:opacity-70"
+        className="absolute inset-y-0 w-1.5 cursor-col-resize rounded-[var(--s-radius-sm)] bg-current opacity-40 hover:opacity-70"
         style={{ left: `${startPercent}%`, transform: "translateX(-50%)" }}
         onMouseDown={(e) => { isDragging.current = "start"; e.preventDefault(); }}
       />
       <div
-        className="absolute inset-y-0 w-1.5 cursor-col-resize rounded-sm bg-current opacity-40 hover:opacity-70"
+        className="absolute inset-y-0 w-1.5 cursor-col-resize rounded-[var(--s-radius-sm)] bg-current opacity-40 hover:opacity-70"
         style={{ left: `${endPercent}%`, transform: "translateX(-50%)" }}
         onMouseDown={(e) => { isDragging.current = "end"; e.preventDefault(); }}
       />

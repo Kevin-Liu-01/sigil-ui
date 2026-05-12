@@ -4,9 +4,9 @@ import { forwardRef, useEffect, useRef, useState, type HTMLAttributes } from "re
 import { cn } from "../../utils";
 
 function resolveToken(token: string): string {
-  if (typeof window === "undefined") return "#888";
+  if (typeof window === "undefined") return "currentColor";
   const raw = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
-  if (!raw) return "#888";
+  if (!raw) return "currentColor";
   if (raw.startsWith("#") || raw.startsWith("rgb")) return raw;
   if (raw.startsWith("oklch")) {
     const el = document.createElement("div");

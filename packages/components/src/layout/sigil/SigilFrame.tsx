@@ -32,9 +32,9 @@ export interface SigilFrameProps extends SigilPageGridProps {
  * ```
  */
 export function SigilFrame({
-  as: _Tag = "div",
+  as: Tag = "div",
   children,
   ...props
 }: SigilFrameProps & { children: ReactNode }) {
-  return <SigilPageGrid {...props}>{children}</SigilPageGrid>;
+  return <SigilPageGrid as={Tag} {...props}>{children}</SigilPageGrid>;
 }

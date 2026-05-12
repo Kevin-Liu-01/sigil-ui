@@ -31,6 +31,20 @@ npx create-sigil-app my-app -y   # defaults: minimal template, sigil preset
 
 Templates are token-native starter pages generated from the Sigil template manifest. They are intentionally not copied from the older demo apps; each template starts with the active preset, the Sigil token CSS pipeline, and source-owned Next.js files.
 
+Generated templates should use the clean Sigil layout grammar:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilHero>...</SigilHero>
+  <SigilDivider />
+  <SigilSection space="normal">...</SigilSection>
+</SigilPage>
+```
+
+For free-flow editorial templates, use `rhythm="hairline"` with `Hairline`.
+Do not generate local grid maps or raw `calc(var(--s-grid-cell) / n)` spacing in
+app code.
+
 | Template | Description |
 |----------|-------------|
 | `ai-saas` | AI product landing with workflow cards and conversion sections |
@@ -91,4 +105,5 @@ When asked to create a new Sigil project:
 4. **After creation, read `.sigil/AGENTS.md`** to understand the project setup
 5. **Read the relevant `.sigil/skills/<name>/SKILL.md`** before editing tokens, presets, components, layouts, pages, migrations, or polish details
 6. **All visual changes go through the token layer** — the created project is already wired for this. Edit the token CSS file or switch presets. Do not manually add Tailwind classes to component files.
-7. **Run `npx @sigil-ui/cli doctor`** to validate the setup before starting development
+7. **Use Sigil layout primitives first** — `SigilPage`, `SigilHero`, `SigilSection`, `SigilDivider`, `Hairline`, `SigilSectionHeader`, and `SigilActionRow`
+8. **Run `npx @sigil-ui/cli doctor`** to validate the setup before starting development

@@ -1,0 +1,33 @@
+---
+title: SigilViewCode
+description: Toggle between a live demo and the source code that produced it.
+---
+
+## Import
+
+```tsx
+import { SigilViewCode } from "@sigil-ui/components";
+```
+
+## Usage
+
+Use `SigilViewCode` for demos, examples, and docs pages where readers need both
+the rendered surface and the implementation.
+
+```tsx
+<SigilViewCode code={source}>
+  <DemoTemplate />
+</SigilViewCode>
+```
+
+The component owns the view/code switcher so demo pages do not need local tab
+state, local toolbar markup, or one-off code panels.
+
+## Props
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `code` | `string` | — | Source code to render in code mode |
+| `defaultView` | `"preview" | "code"` | `"preview"` | Initial mode |
+| `previewLabel` | `string` | `"View"` | Label for preview tab |
+| `codeLabel` | `string` | `"Code"` | Label for source tab |

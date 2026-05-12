@@ -115,7 +115,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Getting Started</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="0.5rem">
+          <BentoGrid columns={{ md: 3 }} gap="0.5rem">
             {guideCards.map((card) => (
               <BentoGridCell key={card.title}>
                 <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>

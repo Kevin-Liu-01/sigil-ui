@@ -3,7 +3,11 @@
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import { useOptionalSigilTokenValues } from "@/components/sandbox/token-provider";
 import { SigilFrame as SigilFrameBase } from "@sigil-ui/components";
-import type { GutterPattern, SigilTokens } from "@sigil-ui/tokens";
+import type {
+  GutterPattern,
+  SigilTokens,
+} from "@sigil-ui/tokens";
+import type { SigilBandStroke, SigilRhythmMode } from "@sigil-ui/components";
 
 const EdgelessContext = createContext(false);
 
@@ -21,6 +25,9 @@ type StructuralConfig = {
   marginBorder: string | undefined;
   isEdgeless: boolean;
   effectiveContentMax: number;
+  rhythm: SigilRhythmMode;
+  snap: boolean;
+  bandStroke: SigilBandStroke;
 };
 
 function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
@@ -31,10 +38,14 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
   let gridCell = 16;
   let crossStroke = 1.5;
   let marginBorder: string | undefined;
+  let rhythm: SigilRhythmMode = "locked";
+  let snap = true;
+  let bandStroke: SigilBandStroke = "visual";
 
   if (tokens) {
     const sigil = tokens.sigil as Record<string, unknown>;
     const layout = tokens.layout as Record<string, unknown> | undefined;
+    const pageRhythm = tokens.pageRhythm as Record<string, unknown> | undefined;
 
     if (sigil?.["gutter-pattern"]) gutterPattern = sigil["gutter-pattern"] as GutterPattern;
     if (sigil?.["margin-pattern"]) marginPattern = sigil["margin-pattern"] as GutterPattern;
@@ -44,6 +55,17 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
     if (layout?.["content-max"]) contentMax = parseInt(layout["content-max"] as string) || contentMax;
     const mb = sigil?.["margin-border"] as string | undefined;
     if (mb && mb !== "none") marginBorder = mb;
+    if (pageRhythm?.mode === "hairline" || pageRhythm?.mode === "locked") {
+      rhythm = pageRhythm.mode;
+    }
+    if (typeof pageRhythm?.snap === "boolean") snap = pageRhythm.snap;
+    if (
+      pageRhythm?.["band-stroke"] === "visual" ||
+      pageRhythm?.["band-stroke"] === "border" ||
+      pageRhythm?.["band-stroke"] === "none"
+    ) {
+      bandStroke = pageRhythm["band-stroke"];
+    }
   }
 
   const isEdgeless = tokens
@@ -62,6 +84,9 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
     marginBorder,
     isEdgeless,
     effectiveContentMax,
+    rhythm,
+    snap,
+    bandStroke,
   };
 }
 
@@ -87,6 +112,9 @@ export function SigilFrame({ children }: { children: ReactNode }) {
       (tokens?.sigil as Record<string, unknown> | undefined)?.["margin-border"],
       (tokens?.sigil as Record<string, unknown> | undefined)?.["gutter-visible"],
       (tokens?.layout as Record<string, unknown> | undefined)?.["content-max"],
+      (tokens?.pageRhythm as Record<string, unknown> | undefined)?.mode,
+      (tokens?.pageRhythm as Record<string, unknown> | undefined)?.snap,
+      (tokens?.pageRhythm as Record<string, unknown> | undefined)?.["band-stroke"],
     ],
   );
 
@@ -101,6 +129,9 @@ export function SigilFrame({ children }: { children: ReactNode }) {
       railGap={config.railGap}
       gridCell={config.gridCell}
       crossStroke={config.crossStroke}
+      rhythm={config.rhythm}
+      snap={config.snap}
+      bandStroke={config.bandStroke}
     >
       {children}
     </SigilFrameBase>

@@ -5,7 +5,8 @@ import { usePageGridConfig } from "./grid-context";
 import { measureStructuralCellPx, splitCssPadding } from "./grid-helpers";
 
 function addCssLength(value: CSSProperties["paddingTop"], add: string): string {
-  const base = value === undefined || value === "" ? "0px" : String(value);
+  const raw = value === undefined || value === "" ? "0px" : String(value);
+  const base = raw.trim() === "0" ? "0px" : raw;
   return `calc(${base} + ${add})`;
 }
 
@@ -30,9 +31,9 @@ export function mergeSnapIntoPaddingStyle(
     return {
       ...base,
       padding: undefined,
-      paddingTop: `calc(${t} + ${topAdd})`,
+      paddingTop: addCssLength(t, topAdd),
       paddingRight: r,
-      paddingBottom: `calc(${b} + ${bottomAdd})`,
+      paddingBottom: addCssLength(b, bottomAdd),
       paddingLeft: l,
     };
   }

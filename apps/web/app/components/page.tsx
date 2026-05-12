@@ -76,7 +76,7 @@ export default function ComponentsPage() {
       <LandingNavbar />
 
       {/* ── Hero ── */}
-      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
+      <SigilSection borderTop space="hero" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1] mb-12 max-w-3xl">
           <MonoLabel variant="accent" className="mb-4 block">
@@ -116,7 +116,7 @@ export default function ComponentsPage() {
       <Divider pattern="vertical" size="md" showBorders />
 
       {/* ── Stats bar ── */}
-      <SigilSection padding="0">
+      <SigilSection space="none">
         <GapPixelGrid columns={{ sm: 2, md: 4 }} data-stagger>
           {STATS.map((stat) => (
             <GapPixelCell
@@ -132,15 +132,15 @@ export default function ComponentsPage() {
         </GapPixelGrid>
       </SigilSection>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ── Component Showcase ── */}
-      <SigilSection padding="var(--s-section-padding-y-sm, 3rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection space="compact">
         <ComponentShowcase />
       </SigilSection>
 
       {/* ── Component Anatomy ── */}
-      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection space="normal">
         <div
           className="max-w-2xl"
           style={{
@@ -151,7 +151,7 @@ export default function ComponentsPage() {
             variant="accent"
             className="block"
             style={{
-              marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+              marginBottom: "var(--s-section-label-row-margin-bottom)",
             }}
           >
             HOW TOKENS FLOW
@@ -161,7 +161,7 @@ export default function ComponentsPage() {
             role="headline"
             as="h2"
             style={{
-              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+              marginBottom: "var(--s-section-heading-margin-bottom)",
             }}
           >
             Every component reads from tokens.
@@ -177,10 +177,10 @@ export default function ComponentsPage() {
         <ComponentAnatomyDiagram />
       </SigilSection>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ── Build with tokens ── */}
-      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection space="normal">
         <div
           className="max-w-2xl"
           style={{
@@ -191,7 +191,7 @@ export default function ComponentsPage() {
             variant="accent"
             className="block"
             style={{
-              marginBottom: "var(--s-section-label-row-margin-bottom, calc(var(--s-grid-cell) / 3))",
+              marginBottom: "var(--s-section-label-row-margin-bottom)",
             }}
           >
             WHY TOKENS
@@ -201,7 +201,7 @@ export default function ComponentsPage() {
             role="headline"
             as="h2"
             style={{
-              marginBottom: "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
+              marginBottom: "var(--s-section-heading-margin-bottom)",
             }}
           >
             Build with tokens, not overrides.

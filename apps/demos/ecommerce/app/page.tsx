@@ -91,7 +91,7 @@ function ProductCard({ name, price, gradient }: { name: string; price: string; g
 
 function CategoryGrid({ items }: { items: { name: string; price: string }[] }) {
   return (
-    <BentoGrid columns={3} gap="1rem">
+    <BentoGrid columns={{ md: 3 }} gap="1rem">
       {items.map((item) => (
         <BentoGridCell key={item.name}>
           <ProductCard name={item.name} price={item.price} />
@@ -128,7 +128,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Featured</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             {featured.map((p) => (
               <BentoGridCell key={p.name}>
                 <ProductCard name={p.name} price={p.price} gradient={p.gradient} />

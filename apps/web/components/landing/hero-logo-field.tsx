@@ -1074,9 +1074,9 @@ const COMMIT_DAYS = (() => {
   return days;
 })();
 
-const DIAGRAM_MIN_W = 540;
-const DIAGRAM_ASPECT_DESKTOP = 540 / 460;
-const DIAGRAM_ASPECT_MOBILE = 540 / 640;
+const DIAGRAM_W = 540;
+const DIAGRAM_H_DESKTOP = 460;
+const DIAGRAM_H_MOBILE = 640;
 
 export function HeroLogoField() {
   const [mounted, setMounted] = useState(false);
@@ -1104,22 +1104,40 @@ export function HeroLogoField() {
   const [labelParts, setLabelParts] = useState<{ prefix: string; value: string; isNew: boolean } | null>(null);
   const activeStepIndices = ALL_STEP_INDICES;
 
-  const [diagramScale, setDiagramScale] = useState(1);
-  const [diagramAspect, setDiagramAspect] = useState(DIAGRAM_ASPECT_DESKTOP);
+  const [diagramFrame, setDiagramFrame] = useState({
+    scale: 1,
+    height: DIAGRAM_H_DESKTOP,
+    naturalHeight: DIAGRAM_H_DESKTOP,
+  });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
     let prevW = 0;
-    const ro = new ResizeObserver(() => {
+    let prevMobile = false;
+    const mq = window.matchMedia("(max-width: 1023px)");
+    const syncFrame = () => {
       const w = wrap.clientWidth;
-      if (w === prevW) return;
+      const isMobile = mq.matches;
+      if (w === prevW && isMobile === prevMobile) return;
       prevW = w;
-      setDiagramScale(Math.min(1, w / DIAGRAM_MIN_W));
-      setDiagramAspect(w < 1024 ? DIAGRAM_ASPECT_MOBILE : DIAGRAM_ASPECT_DESKTOP);
-    });
+      prevMobile = isMobile;
+      const naturalHeight = isMobile ? DIAGRAM_H_MOBILE : DIAGRAM_H_DESKTOP;
+      const scale = Math.min(1, w / DIAGRAM_W);
+      setDiagramFrame({
+        scale,
+        height: naturalHeight * scale,
+        naturalHeight,
+      });
+    };
+    const ro = new ResizeObserver(syncFrame);
     ro.observe(wrap);
-    return () => ro.disconnect();
+    mq.addEventListener("change", syncFrame);
+    syncFrame();
+    return () => {
+      ro.disconnect();
+      mq.removeEventListener("change", syncFrame);
+    };
   }, []);
 
   const setComponentRef = useCallback((key: string) => (el: HTMLDivElement | null) => {
@@ -1277,7 +1295,7 @@ export function HeroLogoField() {
       ref={wrapRef}
       className="hero-logo-field"
       style={{
-        aspectRatio: diagramAspect,
+        height: diagramFrame.height,
         overflow: "hidden",
       }}
     >
@@ -1292,10 +1310,10 @@ export function HeroLogoField() {
           gridTemplateColumns: "repeat(7, 1fr)",
           gridTemplateRows: "auto 1fr auto auto auto auto",
           gap: "calc(var(--s-grid-cell, 40px) / 8)",
-          minWidth: DIAGRAM_MIN_W,
-          height: "100%",
-          ...(diagramScale < 1 ? {
-            transform: `scale(${diagramScale})`,
+          width: DIAGRAM_W,
+          height: diagramFrame.naturalHeight,
+          ...(diagramFrame.scale < 1 ? {
+            transform: `scale(${diagramFrame.scale})`,
             transformOrigin: "top left",
           } : {}),
         }}

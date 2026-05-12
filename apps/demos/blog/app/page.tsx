@@ -113,7 +113,7 @@ export default function Page() {
             </TabsList>
             {["all", "design", "engineering", "product"].map((tab) => (
               <TabsContent key={tab} value={tab}>
-                <BentoGrid columns={2} gap="1rem" className="mt-4">
+                <BentoGrid columns={{ md: 2 }} gap="1rem" className="mt-4">
                   {posts
                     .filter((p) => tab === "all" || p.category.toLowerCase() === tab)
                     .map((post) => (
@@ -141,7 +141,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Topics</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="0.75rem">
+          <BentoGrid columns={{ md: 3 }} gap="0.75rem">
             {topics.map((topic) => (
               <BentoGridCell key={topic.name}>
                 <div className="p-4 text-center" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)" }}>

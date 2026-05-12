@@ -171,6 +171,30 @@ type SigilPreset = {
 };
 ```
 
+## Rhythm Modes In Presets
+
+Every preset now declares how pages should flow:
+
+```ts
+pageRhythm: {
+  mode: "locked",      // or "hairline"
+  snap: true,
+  "band-stroke": "visual",
+  "hairline-width": "1px",
+  "hairline-spacing": "var(--s-section-gap, 0px)",
+  "hairline-style": "solid",
+}
+```
+
+Use `locked` for structural presets (`sigil`, `cobalt`, `kova`, `helix`, `hex`,
+industrial systems) where rails and divider bands should align to full
+`--s-grid-cell` intervals. Use `hairline` for edgeless/editorial presets where
+content should flow naturally and separators are rules instead of bands.
+
+If a visual change affects rhythm, density, divider style, border feel, or page
+chrome, update the preset. Do not patch app pages with local spacing maps or
+component overrides.
+
 ## Deriving a Custom Preset
 
 Use `mergePresets` from `@sigil-ui/tokens` to override specific values without rewriting everything:
@@ -207,3 +231,4 @@ When building UI in a Sigil project:
    ```
 5. **To create a new aesthetic from scratch**, scaffold a custom preset: `npx @sigil-ui/cli preset create`
 6. **Never hardcode colors** — use `var(--s-*)` in all styling
+7. **For layout feel, update `pageRhythm`, `sections`, `sigil`, and `dividers`** before touching React components

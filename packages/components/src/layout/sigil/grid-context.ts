@@ -3,6 +3,9 @@
 import { createContext, useContext } from "react";
 import type { GutterPattern } from "@sigil-ui/tokens";
 
+export type SigilRhythmMode = "locked" | "hairline";
+export type SigilBandStroke = "visual" | "border" | "none";
+
 /**
  * Structural configuration shared by every component inside a
  * `SigilFrame` / `SigilPageGrid` boundary. These values change only
@@ -18,6 +21,9 @@ export interface PageGridConfig {
   gutterPattern: GutterPattern;
   marginPattern: GutterPattern;
   edgeless: boolean;
+  rhythm: SigilRhythmMode;
+  snap: boolean;
+  bandStroke: SigilBandStroke;
 }
 
 export const DEFAULTS: PageGridConfig = {
@@ -28,6 +34,9 @@ export const DEFAULTS: PageGridConfig = {
   gutterPattern: "grid",
   marginPattern: "horizontal",
   edgeless: false,
+  rhythm: "locked",
+  snap: true,
+  bandStroke: "visual",
 };
 
 export const PageGridContext = createContext<PageGridConfig | null>(null);

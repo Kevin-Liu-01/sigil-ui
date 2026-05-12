@@ -105,7 +105,28 @@ sigil add badge --dir lib/ui         # custom output directory
 
 Components are copied as source so you own them, but they still read from token CSS variables. The CLI resolves source from `@sigil-ui/components` and creates small local support helpers when needed. The right way to restyle is still through the token layer.
 
-**Available components:** button, card, input, badge, dialog, dropdown, tabs, tooltip, sigil-grid, sigil-cross, sigil-rail, sigil-card
+**Available starters include:** button, card, input, badge, dialog, dropdown,
+tabs, tooltip, and Sigil layout primitives such as `SigilPage`, `SigilSection`,
+`SigilDivider`, `Hairline`, and composition helpers.
+
+The preferred layout API for generated pages is:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilHero>...</SigilHero>
+  <SigilDivider />
+  <SigilSection space="normal">...</SigilSection>
+</SigilPage>
+```
+
+For editorial templates:
+
+```tsx
+<SigilPage rhythm="hairline" chrome="minimal">
+  <SigilSection>...</SigilSection>
+  <Hairline />
+</SigilPage>
+```
 
 ### `sigil preset` — Manage Presets
 
@@ -199,6 +220,7 @@ When `sigil init` generates agent instructions, it creates a markdown file that 
 - How to make visual changes (edit tokens, not components)
 - Which installed Sigil skill to read before editing
 - Available CLI commands
+- The preset-vs-component rule: visual changes update tokens/presets; behavior changes update components/primitives
 
 This is critical for agent-driven development. The agent reads this file and knows to update the central spec instead of manually editing Tailwind classes across component files.
 

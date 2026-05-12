@@ -112,19 +112,97 @@ This means:
 ## Usage
 
 ```tsx
-import { Button, Card, Input, Badge } from "@sigil-ui/components";
+import {
+  AccentCTA,
+  Button,
+  Card,
+  Input,
+  SigilActionRow,
+  SigilDivider,
+  SigilGhostLink,
+  SigilHero,
+  SigilHeroContent,
+  SigilHeroLayout,
+  SigilHeroMedia,
+  SigilPage,
+  SigilSection,
+  SigilSectionHeader,
+} from "@sigil-ui/components";
 
 function Example() {
   return (
-    <Card>
-      <Input placeholder="Enter your email" />
-      <Button variant="default" size="md">
-        Subscribe <Badge variant="success">Free</Badge>
-      </Button>
-    </Card>
+    <SigilPage rhythm="locked" chrome="rails">
+      <SigilHero>
+        <SigilHeroLayout>
+          <SigilHeroContent>
+            <SigilSectionHeader
+              label="Launch"
+              heading="Token-driven by default."
+              description="Sigil owns rhythm, rails, dividers, and spacing."
+            />
+            <SigilActionRow>
+              <AccentCTA>Start</AccentCTA>
+              <SigilGhostLink href="/docs">Docs</SigilGhostLink>
+            </SigilActionRow>
+          </SigilHeroContent>
+          <SigilHeroMedia>
+            <Card>
+              <Input placeholder="Enter your email" />
+              <Button variant="primary">Subscribe</Button>
+            </Card>
+          </SigilHeroMedia>
+        </SigilHeroLayout>
+      </SigilHero>
+      <SigilDivider />
+      <SigilSection space="normal">...</SigilSection>
+    </SigilPage>
   );
 }
 ```
+
+## Clean Sigil Layout API
+
+Use compound layout primitives before writing raw wrappers:
+
+| Component | Purpose |
+|---|---|
+| `SigilPage` | Page shell with `rhythm="locked"` / `rhythm="hairline"` and `chrome` modes |
+| `SigilHero` + hero parts | Hero section with readable content/media structure |
+| `SigilSection` | Section band with named `space` presets |
+| `SigilDivider` | Locked full-cell divider band |
+| `Hairline` | Free-flow editorial rule |
+| `SigilSectionHeader` | Standard label/heading/description block |
+| `SigilActionRow` | CTA/action row |
+| `SigilStack` / `SigilInline` | Token-rhythm stack and inline layout |
+| `SigilMonoBlock` | Token-rhythm code/command block |
+| `SigilViewCode` | Demo preview/source toggle |
+
+Application code should not own local `grid` maps, repeated
+`calc(var(--s-grid-cell) / n)` math, or ad hoc `SigilSection padding="..."`
+strings. If a page needs a recurring layout pattern, add a component here and let
+it read tokens.
+
+## Preset vs Component Decisions
+
+Change the preset/token layer when the request is visual:
+
+- color, contrast, theme, mode
+- font, type scale, tracking, leading
+- spacing, section rhythm, divider band height
+- border radius, border style, shadows
+- animation duration/easing/hover feel
+- layout density or locked vs hairline rhythm
+
+Change component code only when the request is behavioral or structural:
+
+- new accessibility behavior or ARIA wiring
+- different DOM semantics
+- a new typed variant that maps to existing tokens
+- a reusable primitive that removes repeated app code
+- bug fixes in measurement, state, or interaction
+
+Run `node scripts/audit-sigil-authoring.mjs` after layout/component work to catch
+visual decisions that leaked into the wrong layer.
 
 ## Adding Components to Your Project
 

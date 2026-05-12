@@ -111,7 +111,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Capabilities</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             {features.map((f) => (
               <BentoGridCell key={f.title}>
                 <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm, 6px)", border: "1px solid var(--s-border)" }}>
@@ -140,7 +140,7 @@ export default function Page() {
           Pricing
         </PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             {pricingTiers.map((tier) => (
               <BentoGridCell key={tier.name}>
                 <div className="flex flex-col h-full p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm, 6px)", border: tier.highlighted ? "1px solid var(--s-primary)" : "1px solid var(--s-border)" }}>
@@ -159,7 +159,7 @@ export default function Page() {
                       </li>
                     ))}
                   </ul>
-                  <Button variant={tier.highlighted ? "default" : "outline"} className="w-full">
+                  <Button variant={tier.highlighted ? "primary" : "outline"} className="w-full">
                     {tier.name === "Enterprise" ? "Contact Sales" : "Get Started"}
                   </Button>
                 </div>

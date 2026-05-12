@@ -120,7 +120,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Features</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="0.5rem">
+          <BentoGrid columns={{ md: 3 }} gap="0.5rem">
             {features.map((f) => (
               <BentoGridCell key={f.title}>
                 <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -139,7 +139,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Traction</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={4} gap="0.5rem">
+          <BentoGrid columns={{ md: 4 }} gap="0.5rem">
             {stats.map((s) => (
               <BentoGridCell key={s.label}>
                 <div className="p-4 text-center" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -165,7 +165,7 @@ export default function Page() {
           </Tabs>
         }>Pricing</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="0.5rem">
+          <BentoGrid columns={{ md: 3 }} gap="0.5rem">
             {pricingPlans.map((plan) => (
               <BentoGridCell key={plan.name}>
                 <div className="p-4 flex flex-col" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -179,7 +179,7 @@ export default function Page() {
                       <li key={f} style={{ fontSize: 12, color: "var(--s-text-muted)" }}>• {f}</li>
                     ))}
                   </ul>
-                  <Button variant={plan.name === "Pro" ? "default" : "outline"} size="sm" className="mt-4">
+                  <Button variant={plan.name === "Pro" ? "primary" : "outline"} size="sm" className="mt-4">
                     {plan.name === "Enterprise" ? "Contact sales" : "Get started"}
                   </Button>
                 </div>

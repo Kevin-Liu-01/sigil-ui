@@ -105,7 +105,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Commands</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={3} gap="0.75rem">
+          <BentoGrid columns={{ md: 3 }} gap="0.75rem">
             {commands.map((c) => (
               <BentoGridCell key={c.cmd}>
                 <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-md, 8px)", border: "1px solid var(--s-border)" }}>

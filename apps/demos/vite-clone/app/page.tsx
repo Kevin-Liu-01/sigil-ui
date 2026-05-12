@@ -88,7 +88,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Features</PanelHeader>
         <div className="px-4 py-6">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             <BentoGridCell>
               <div className="p-4">
                 <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Instant Server Start</h3>
@@ -123,7 +123,7 @@ export default function Page() {
               <TabsTrigger value="templates">Templates</TabsTrigger>
             </TabsList>
             <TabsContent value="frameworks">
-              <BentoGrid columns={3} gap="1rem" className="mt-4">
+              <BentoGrid columns={{ md: 3 }} gap="1rem" className="mt-4">
                 <BentoGridCell>
                   <div className="p-4">
                     <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>React</h4>
@@ -145,7 +145,7 @@ export default function Page() {
               </BentoGrid>
             </TabsContent>
             <TabsContent value="plugins">
-              <BentoGrid columns={3} gap="1rem" className="mt-4">
+              <BentoGrid columns={{ md: 3 }} gap="1rem" className="mt-4">
                 <BentoGridCell>
                   <div className="p-4">
                     <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>PWA</h4>
@@ -167,7 +167,7 @@ export default function Page() {
               </BentoGrid>
             </TabsContent>
             <TabsContent value="templates">
-              <BentoGrid columns={3} gap="1rem" className="mt-4">
+              <BentoGrid columns={{ md: 3 }} gap="1rem" className="mt-4">
                 <BentoGridCell>
                   <div className="p-4">
                     <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Starter</h4>

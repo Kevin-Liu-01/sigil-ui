@@ -254,6 +254,40 @@ style/
 
 ---
 
+## Clean Layout API
+
+Sigil layout should read like page structure. Token math, grid snap, divider
+stroke placement, and gutter phase alignment live inside the component package.
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilHero>
+    <SigilHeroLayout>
+      <SigilHeroContent>
+        <SigilSectionHeader
+          label="Components"
+          heading="Browse the full component system."
+          description="Sections, dividers, and rails stay aligned automatically."
+        />
+        <SigilActionRow>
+          <AccentCTA>Browse Components</AccentCTA>
+          <SigilGhostLink href="/docs">Read Docs</SigilGhostLink>
+        </SigilActionRow>
+      </SigilHeroContent>
+      <SigilHeroMedia>{/* product visual */}</SigilHeroMedia>
+    </SigilHeroLayout>
+  </SigilHero>
+  <SigilDivider />
+</SigilPage>
+```
+
+Use `rhythm="locked"` for structural pages with full-cell snap. Use
+`rhythm="hairline"` with `<Hairline />` for editorial or free-flow layouts.
+Application code should not carry local `grid` maps or repeated
+`calc(var(--s-grid-cell) / n)` rhythm math.
+
+---
+
 ## Agent-First
 
 Sigil is designed for AI agents to use — not just to read, but to operate within.

@@ -90,7 +90,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Features</PanelHeader>
         <div className="px-4 py-6">
-          <BentoGrid columns={3} gap="1rem">
+          <BentoGrid columns={{ md: 3 }} gap="1rem">
             <BentoGridCell>
               <div className="p-4">
                 <h3 style={{ fontFamily: "var(--s-font-display)", fontSize: 15, fontWeight: 600, letterSpacing: "-0.03em" }}>Remote Caching</h3>
@@ -124,7 +124,7 @@ export default function Page() {
               <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
             </TabsList>
             <TabsContent value="team">
-              <BentoGrid columns={3} gap="1rem" className="mt-4">
+              <BentoGrid columns={{ md: 3 }} gap="1rem" className="mt-4">
                 <BentoGridCell>
                   <div className="p-4">
                     <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Remote Cache</h4>
@@ -146,7 +146,7 @@ export default function Page() {
               </BentoGrid>
             </TabsContent>
             <TabsContent value="enterprise">
-              <BentoGrid columns={3} gap="1rem" className="mt-4">
+              <BentoGrid columns={{ md: 3 }} gap="1rem" className="mt-4">
                 <BentoGridCell>
                   <div className="p-4">
                     <h4 style={{ fontFamily: "var(--s-font-display)", fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em" }}>Unlimited Cache</h4>

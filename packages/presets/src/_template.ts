@@ -721,6 +721,12 @@ export const _templatePreset: SigilPreset = {
     // 33. PAGE RHYTHM (14 fields)
     // -----------------------------------------------------------------------
     pageRhythm: {
+      mode: "locked",
+      snap: true,
+      "band-stroke": "visual",
+      "hairline-width": "1px",
+      "hairline-spacing": "var(--s-section-gap, 0px)",
+      "hairline-style": "solid",
       "density": "normal" as const,
       "section-gap": "0px",
       "section-gap-sm": "0px",

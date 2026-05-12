@@ -556,6 +556,12 @@ export const defaultTokens: SigilTokens = {
   },
 
   pageRhythm: {
+    "mode": "locked" as const,
+    "snap": true,
+    "band-stroke": "visual" as const,
+    "hairline-width": "1px",
+    "hairline-spacing": "var(--s-section-gap, 0px)",
+    "hairline-style": "solid" as const,
     "density": "normal" as const,
     "section-gap": "0px",
     "section-gap-sm": "0px",

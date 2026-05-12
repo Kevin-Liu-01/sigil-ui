@@ -550,6 +550,12 @@ export const shardPreset: SigilPreset = {
       radius: "0px",
     },
     pageRhythm: {
+      mode: "locked",
+      snap: true,
+      "band-stroke": "visual",
+      "hairline-width": "1px",
+      "hairline-spacing": "var(--s-section-gap, 0px)",
+      "hairline-style": "solid",
       density: "normal",
       "section-gap": "0px",
       "section-gap-sm": "0px",

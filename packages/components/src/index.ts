@@ -25,14 +25,29 @@ export { PageGrid, type PageGridProps } from "./layout/PageGrid";
 export { Margin, type MarginProps } from "./layout/Margin";
 export { Gutter, type GutterProps } from "./layout/Gutter";
 export {
-  SigilPageGrid, SigilFrame, SigilGutter, SigilFullBleed,
+  SigilPageGrid, SigilFrame, SigilPage, SigilGutter, SigilFullBleed,
+  SIGIL_RHYTHM_STYLES,
+  SigilActionRow, SigilGhostLink, SigilHero, SigilHeroContent,
+  SigilHeroDescription, SigilHeroLayout, SigilHeroMedia, SigilHeroTitle,
+  SigilInline, SigilMonoBlock,
+  SigilRhythmBox, SigilSectionHeader, SigilStack,
+  SigilViewCode,
   useIsInsidePageGrid, usePageGridConfig,
   type SigilPageGridProps, type SigilFrameProps, type SigilFullBleedProps,
+  type SigilPageProps, type SigilPageChrome, type SigilRhythmMode, type SigilBandStroke,
   type PageGridConfig, type SigilGutterProps,
+  type SigilActionRowProps, type SigilGhostLinkProps, type SigilInlineProps,
+  type SigilHeroContentProps, type SigilHeroDescriptionProps,
+  type SigilHeroLayoutProps, type SigilHeroMediaProps, type SigilHeroProps,
+  type SigilHeroTitleProps,
+  type SigilMonoBlockProps, type SigilRhythmBoxProps,
+  type SigilSectionHeaderProps, type SigilStackProps, type SigilViewCodeProps,
 } from "./layout/SigilPageGrid";
 export { SigilSection, type SigilSectionProps } from "./layout/SigilSection";
 export { SigilNavbar, type SigilNavbarProps } from "./layout/SigilNavbar";
 export { Divider, type DividerPattern, type DividerProps } from "./layout/Divider";
+export { Divider as SigilDivider } from "./layout/Divider";
+export { Hairline, type HairlineProps } from "./layout/Hairline";
 export { HRule, type HRuleProps } from "./layout/HRule";
 export { BentoGrid, BentoCell as BentoGridCell, type BentoGridProps, type BentoCellProps as BentoGridCellProps } from "./layout/BentoGrid";
 export { VoronoiBento, VoronoiCell, type VoronoiBentoProps } from "./layout/VoronoiBento";

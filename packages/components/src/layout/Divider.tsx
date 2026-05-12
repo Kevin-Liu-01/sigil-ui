@@ -207,6 +207,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
   );
 
   const gridConfig = usePageGridConfig();
+  if (gridConfig?.edgeless) return null;
   const rawCell = gridConfig?.gridCell ?? 48;
   const thickness = getThickness(size, rawCell);
   const cell = Math.min(rawCell, thickness);
@@ -230,10 +231,22 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
     patternPositionRaw,
     patternYPx,
   );
-  const structuralStrokeShadow = showBorders
+  const bandStroke = gridConfig?.bandStroke ?? "visual";
+  const structuralStrokeShadow = showBorders && bandStroke === "visual"
     ? isHorizontal
       ? `0 -1px 0 ${COLOR}, inset 0 -1px 0 ${COLOR}`
       : `-1px 0 0 ${COLOR}, inset -1px 0 0 ${COLOR}`
+    : undefined;
+  const structuralBorder = showBorders && bandStroke === "border"
+    ? isHorizontal
+      ? {
+          borderTop: `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${COLOR}`,
+          borderBottom: `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${COLOR}`,
+        }
+      : {
+          borderLeft: `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${COLOR}`,
+          borderRight: `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${COLOR}`,
+        }
     : undefined;
 
   useLayoutEffect(() => {
@@ -282,6 +295,7 @@ export const Divider = forwardRef<HTMLDivElement, DividerProps>(function Divider
         [isHorizontal ? "height" : "width"]: outerThickness,
         boxSizing: "border-box",
         boxShadow: structuralStrokeShadow,
+        ...structuralBorder,
         ...style,
       }}
       {...rest}

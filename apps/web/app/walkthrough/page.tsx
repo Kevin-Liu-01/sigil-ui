@@ -215,7 +215,7 @@ export default function WalkthroughPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
+      <SigilSection borderTop space="hero" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1]">
         <MonoLabel variant="accent" className="block mb-4">/ Walkthrough</MonoLabel>
@@ -282,7 +282,7 @@ export default function WalkthroughPage() {
         </GapPixelGrid>
       </Step>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ---- Step 2: Understand the system ---- */}
       <Step
@@ -300,7 +300,7 @@ export default function WalkthroughPage() {
             as="p"
             muted
             className="max-w-xl leading-relaxed"
-            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+            style={{ marginBottom: "var(--s-section-content-gap)" }}
           >
             Your token markdown file compiles into CSS custom properties. Every component
             reads those properties via <code className="text-[var(--s-primary)]">var(--s-*)</code>.
@@ -310,7 +310,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ---- Step 3: Define your preset ---- */}
       <Step
@@ -369,7 +369,7 @@ export default function WalkthroughPage() {
           as="p"
           muted
           className="max-w-xl leading-relaxed"
-          style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+          style={{ marginBottom: "var(--s-section-content-gap)" }}
         >
           <code className="text-[var(--s-primary)]">sigil preset create</code> walks you through
           naming your preset, choosing a base, setting brand colors and fonts, and writing the result
@@ -436,7 +436,7 @@ export default function WalkthroughPage() {
             as="p"
             muted
             className="max-w-xl leading-relaxed"
-            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+            style={{ marginBottom: "var(--s-section-content-gap)" }}
           >
           Don't want to start from scratch? Use a curated preset as your base — then customize.
           Click the preset pills below to compare visual identities.
@@ -445,7 +445,7 @@ export default function WalkthroughPage() {
 
         <div
           className="max-w-[720px]"
-          style={{ marginTop: "var(--s-section-gap, calc(var(--s-grid-cell) / 2))" }}
+          style={{ marginTop: "var(--s-section-gap)" }}
         >
           <Terminal lines={PRESET_LIST_LINES} title="~/ my-app — zsh" />
         </div>
@@ -470,7 +470,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <Divider pattern="vertical" size="sm" showBorders />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* ---- Step 4: Add components ---- */}
       <Step
@@ -492,7 +492,7 @@ export default function WalkthroughPage() {
             as="p"
             muted
             className="max-w-xl leading-relaxed"
-            style={{ marginBottom: "var(--s-section-content-gap, calc(var(--s-grid-cell) / 2))" }}
+            style={{ marginBottom: "var(--s-section-content-gap)" }}
           >
           A Button reads <code className="text-[var(--s-primary)]">--s-primary</code> for fill,{" "}
           <code className="text-[var(--s-primary)]">--s-radius-md</code> for corners,{" "}
@@ -528,7 +528,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ---- Step 5: Edit tokens ---- */}
       <Step
@@ -564,7 +564,7 @@ export default function WalkthroughPage() {
         </div>
       </Step>
 
-      <Divider pattern="vertical" size="sm" showBorders />
+      <Divider pattern="vertical" size="md" showBorders />
 
       {/* ---- Step 6: Build pages ---- */}
       <Step
@@ -654,7 +654,7 @@ export default function PricingPage() {
         </DensityText>
       </Step>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* ---- Step 7: Ship ---- */}
       <Step
@@ -724,7 +724,7 @@ export default function PricingPage() {
       <Divider pattern="vertical" size="md" showBorders />
 
       {/* Final CTA */}
-      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection space="normal">
         <div className="text-center mx-auto max-w-xl">
           <h2 className="font-[family-name:var(--s-font-display)] text-[clamp(28px,4vw,48px)] font-bold tracking-tight leading-[1.1] text-[var(--s-text)] mb-4">
             Ready to build?

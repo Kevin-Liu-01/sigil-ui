@@ -123,8 +123,8 @@ function LoadingIndicator({ isLoading }: { isLoading: boolean }) {
   if (!isLoading) return null;
   return (
     <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
-      <div className="text-primary bg-background flex items-center justify-center gap-2 rounded-md border px-2 py-0.5 text-sm">
-        <div className="border-border border-t-primary h-3 w-3 animate-spin rounded-full border" />
+      <div className="flex items-center justify-center gap-2 rounded-[var(--s-radius-md)] border border-[var(--s-border)] bg-[var(--s-background)] px-2 py-0.5 text-sm text-[var(--s-primary)]">
+        <div className="h-3 w-3 animate-spin rounded-[var(--s-radius-full)] border border-[var(--s-border)] border-t-[var(--s-primary)]" />
         <span>Loading</span>
       </div>
     </div>

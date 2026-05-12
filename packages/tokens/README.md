@@ -65,6 +65,25 @@ The complete TypeScript type system for 519 design tokens across 33 categories:
 
 Sane defaults for every required token. These are what you get before applying a preset.
 
+## Layout Rhythm Tokens
+
+Page rhythm is an explicit token contract. Components consume this contract; app
+pages should not reproduce it with inline math.
+
+| Token | Meaning |
+|---|---|
+| `pageRhythm.mode` | `locked` for full-cell structural pages, `hairline` for free-flow editorial pages |
+| `pageRhythm.snap` | Enables `SigilSection` bottom snap in locked mode |
+| `pageRhythm.band-stroke` | How structural divider strokes are painted (`visual`, `border`, `none`) |
+| `pageRhythm.hairline-width` | Rule thickness for `Hairline` |
+| `pageRhythm.hairline-spacing` | Spacing around `Hairline` |
+| `pageRhythm.hairline-style` | Rule style for hairline mode |
+
+Structural dimensions live in `sigil` (`grid-cell`, `band-height`,
+`divider-thickness-*`). Hairline styling lives in `dividers` / `pageRhythm`.
+Do not use `+1px` band-height hacks; layout boxes stay on exact cell multiples
+and strokes are paint.
+
 ### Preset Utilities (`presets.ts`)
 
 - `createPreset(name, tokens, metadata)` — build a preset from scratch
@@ -129,8 +148,9 @@ When an agent needs to change how a Sigil project looks:
 2. **Edit `DESIGN.md`** for full control (all 33 categories) or `sigil.tokens.md` for core overrides
 3. **Run `sigil design compile`** to regenerate CSS + Tailwind from DESIGN.md
 4. **Never edit component files to change colors/spacing/fonts** — components read from CSS variables
-5. **Use OKLCH for all colors** — no hex, no rgb, no hsl
-6. **Run `sigil doctor`** after changes to validate
+5. **Choose the right rhythm mode** — locked grid pages use `SigilPage rhythm="locked"`; editorial pages use `rhythm="hairline"`
+6. **Use OKLCH for all colors** — no hex, no rgb, no hsl
+7. **Run `sigil doctor`** after changes to validate
 
 The token system is designed so that a single edit propagates everywhere. An agent changing `--s-primary` from indigo to emerald updates buttons, links, focus rings, gradients, glows, and badges — without touching any component file.
 

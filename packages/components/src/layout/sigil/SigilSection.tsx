@@ -146,6 +146,8 @@ export interface SigilSectionProps {
   showCrosses?: boolean;
   /** CSS padding string. Uses `var(--s-section-py)` and `var(--s-page-margin)` by default. */
   padding?: string;
+  /** Named structural spacing preset. Prefer this over hand-authored padding strings. */
+  space?: "none" | "compact" | "normal" | "spacious" | "hero" | "footer";
   /** Content max width for standalone mode (outside SigilPageGrid). */
   contentMax?: number;
   /** Rail gap for standalone mode (outside SigilPageGrid). */
@@ -188,6 +190,7 @@ export function SigilSection({
   showCrosses = false,
   padding =
     "var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 25px))",
+  space,
   contentMax = 1200,
   railGap = 50,
   gutterPattern = "grid",
@@ -202,8 +205,13 @@ export function SigilSection({
   // config lives in `PageGridContext` and is only read by
   // `CrossRowConnector` below, on demand.
   const insideGrid = useIsInsidePageGrid();
+  const gridConfig = usePageGridConfig();
+  const resolvedPadding = resolveSectionPadding(space, padding);
+  const effectiveBorderTop = !gridConfig?.edgeless && borderTop;
+  const effectiveBorderBottom = !gridConfig?.edgeless && borderBottom;
+  const effectiveShowCrosses = !gridConfig?.edgeless && showCrosses;
   const effectiveSnapBottom =
-    snapBottomToGrid ?? insideGrid;
+    snapBottomToGrid ?? (insideGrid && !gridConfig?.edgeless && gridConfig?.rhythm === "locked" && gridConfig.snap);
 
   if (insideGrid) {
     return (
@@ -212,10 +220,10 @@ export function SigilSection({
         className={className}
         style={style}
         as={as}
-        borderTop={borderTop}
-        borderBottom={borderBottom}
-        showCrosses={showCrosses}
-        padding={padding}
+        borderTop={effectiveBorderTop}
+        borderBottom={effectiveBorderBottom}
+        showCrosses={effectiveShowCrosses}
+        padding={resolvedPadding}
         snapBottomToGrid={effectiveSnapBottom}
       >
         {children}
@@ -229,10 +237,10 @@ export function SigilSection({
       className={className}
       style={style}
       as={as}
-      borderTop={borderTop}
-      borderBottom={borderBottom}
-      showCrosses={showCrosses}
-      padding={padding}
+      borderTop={effectiveBorderTop}
+      borderBottom={effectiveBorderBottom}
+      showCrosses={effectiveShowCrosses}
+      padding={resolvedPadding}
       contentMax={contentMax}
       railGap={railGap}
       gutterPattern={gutterPattern}
@@ -244,6 +252,29 @@ export function SigilSection({
       {children}
     </StandaloneSection>
   );
+}
+
+function resolveSectionPadding(
+  space: SigilSectionProps["space"],
+  fallback: string,
+): string {
+  const x = "var(--s-section-padding-x, var(--s-page-margin, 25px))";
+  switch (space) {
+    case "none":
+      return "0";
+    case "compact":
+      return `var(--s-section-padding-y-sm, var(--s-grid-cell)) ${x}`;
+    case "normal":
+      return `var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) ${x}`;
+    case "spacious":
+      return `calc(3 * var(--s-grid-cell)) ${x}`;
+    case "hero":
+      return `var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) ${x} var(--s-section-padding-y-sm, var(--s-grid-cell))`;
+    case "footer":
+      return `var(--s-footer-padding-y, var(--s-grid-cell)) ${x}`;
+    default:
+      return fallback;
+  }
 }
 
 /* ------------------------------------------------------------------ */

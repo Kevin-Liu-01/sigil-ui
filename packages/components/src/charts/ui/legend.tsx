@@ -100,9 +100,9 @@ function LegendIndicator({
     case "square":
       return <div className="h-2 w-2 shrink-0" style={fillStyle} />;
     case "circle":
-      return <div className="h-2 w-2 shrink-0 rounded-full" style={fillStyle} />;
+      return <div className="h-2 w-2 shrink-0 rounded-[var(--s-radius-full)]" style={fillStyle} />;
     case "circle-outline":
-      return <div className="h-2.5 w-2.5 shrink-0 rounded-full p-[1.5px]" style={outlineStyle} />;
+      return <div className="h-2.5 w-2.5 shrink-0 rounded-[var(--s-radius-full)] p-[1.5px]" style={outlineStyle} />;
     case "vertical-bar":
       return <div className="h-3 w-1 shrink-0 rounded-[2px]" style={fillStyle} />;
     case "horizontal-bar":

@@ -120,7 +120,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Selected Work</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={2} gap="0.5rem">
+          <BentoGrid columns={{ md: 2 }} gap="0.5rem">
             {projects.map((project) => (
               <BentoGridCell key={project.title}>
                 <div className="overflow-hidden" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -154,7 +154,7 @@ export default function Page() {
             </TabsList>
             <TabsContent value="design">
               <div className="mt-3">
-                <BentoGrid columns={3} gap="0.5rem">
+                <BentoGrid columns={{ md: 3 }} gap="0.5rem">
                   {skills.design.map((s) => (
                     <BentoGridCell key={s.name}>
                       <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -168,7 +168,7 @@ export default function Page() {
             </TabsContent>
             <TabsContent value="engineering">
               <div className="mt-3">
-                <BentoGrid columns={3} gap="0.5rem">
+                <BentoGrid columns={{ md: 3 }} gap="0.5rem">
                   {skills.engineering.map((s) => (
                     <BentoGridCell key={s.name}>
                       <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
@@ -182,7 +182,7 @@ export default function Page() {
             </TabsContent>
             <TabsContent value="tools">
               <div className="mt-3">
-                <BentoGrid columns={3} gap="0.5rem">
+                <BentoGrid columns={{ md: 3 }} gap="0.5rem">
                   {skills.tools.map((s) => (
                     <BentoGridCell key={s.name}>
                       <div className="p-3" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>

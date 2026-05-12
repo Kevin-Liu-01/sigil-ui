@@ -6,7 +6,7 @@ description: A page-level 12-column grid with structural-visibility rail lines, 
 ## Import
 
 ```tsx
-import { SigilPageGrid } from "@sigil-ui/components";
+import { SigilPage, SigilPageGrid } from "@sigil-ui/components";
 ```
 
 ## Preview
@@ -23,6 +23,15 @@ import { SigilPageGrid } from "@sigil-ui/components";
 ## Usage
 
 `SigilPageGrid` is the top-level page layout grid. It provides a 12-column system with structural-visibility overlays — the grid lines, cross marks, and gutter patterns that make Sigil's design language visible.
+
+For application pages, prefer `SigilPage`. It wraps `SigilPageGrid` with the
+rhythm/chrome API:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilSection>Content</SigilSection>
+</SigilPage>
+```
 
 ```tsx
 <SigilPageGrid>

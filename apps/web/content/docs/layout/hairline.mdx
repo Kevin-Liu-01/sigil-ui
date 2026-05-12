@@ -1,0 +1,37 @@
+---
+title: Hairline
+description: A free-flow rule for editorial and hairline rhythm pages.
+---
+
+## Import
+
+```tsx
+import { Hairline } from "@sigil-ui/components";
+```
+
+## Usage
+
+Use `Hairline` when a page should not reserve a structural divider band.
+
+```tsx
+<SigilPage rhythm="hairline" chrome="minimal">
+  <SigilSection>First block</SigilSection>
+  <Hairline />
+  <SigilSection>Second block</SigilSection>
+</SigilPage>
+```
+
+## Difference From Divider
+
+| Component | Layout behavior |
+|---|---|
+| `SigilDivider` / `Divider` | Reserves a structural band (`N * --s-grid-cell`) |
+| `Hairline` | Draws a rule only; content flow is natural |
+
+## Tokens
+
+| CSS Variable | Purpose |
+|---|---|
+| `--s-rhythm-hairline-width` | Rule thickness |
+| `--s-rhythm-hairline-spacing` | Spacing around the rule |
+| `--s-divider-color` | Rule color fallback |

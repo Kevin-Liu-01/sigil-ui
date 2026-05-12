@@ -289,10 +289,15 @@ Run `sigil doctor` after any change. Run `sigil diff` before committing.
 ### Building new pages
 ```
 1. Read .sigil/AGENTS.md to understand the active preset's mood
-2. Use existing Sigil components from the components directory
-3. Reference token variables (var(--s-*)) for any custom CSS
-4. Follow the component conventions for any new components
-5. Do not introduce hardcoded colors, spacing, or fonts
+2. Use `SigilPage` as the page shell:
+   - `rhythm="locked"` + `SigilDivider` for structural full-cell pages
+   - `rhythm="hairline"` + `Hairline` for free-flow/editorial pages
+3. Compose with `SigilSection space="hero|compact|normal|spacious|footer"`,
+   `SigilSectionHeader`, `SigilActionRow`, `SigilStack`, `SigilMonoBlock`,
+   and `SigilGhostLink` before writing local layout math
+4. Reference token variables (var(--s-*)) for any truly custom CSS
+5. Follow the component conventions for any new components
+6. Do not introduce hardcoded colors, spacing, or fonts
 ```
 
 ## Project-Specific Agent Instructions

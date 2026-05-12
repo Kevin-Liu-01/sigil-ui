@@ -12,6 +12,20 @@
 
 Primitives handle the hard accessibility and interaction logic. Tokens handle the visual design. Components wire them together. When an agent wants to change how something looks, it edits tokens. When it wants to change how something behaves, it works with primitives.
 
+## Boundary With Components
+
+Use primitives only for behavior:
+
+- focus management
+- keyboard interaction
+- aria state
+- portals and dismissable layers
+- controlled/uncontrolled interaction state
+
+Do not encode Sigil visuals here. Layout rhythm (`SigilPage`, `SigilSection`,
+`SigilDivider`, `Hairline`) and styled UI belong in `@sigil-ui/components`.
+Colors, spacing, radius, shadow, and motion belong in tokens/presets.
+
 ## Installation
 
 ```bash

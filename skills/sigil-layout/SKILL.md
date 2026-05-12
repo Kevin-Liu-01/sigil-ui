@@ -5,7 +5,7 @@ trigger: when composing page layouts, sections, or grid structures using Sigil U
 
 # Sigil Layout
 
-> Compose page layouts using Sigil's grid system, rail components, and structural-visibility primitives.
+> Compose page layouts using Sigil's page, section, rhythm, and structural-visibility primitives.
 
 ## When to Use
 
@@ -16,42 +16,88 @@ trigger: when composing page layouts, sections, or grid structures using Sigil U
 
 ## How to Use
 
-### 1. Core layout primitives
+### 1. Core page primitives
 
-Sigil provides three structural-visibility primitives:
+Sigil page code should describe content and structure. Token math, snap padding,
+gutter phase, and divider stroke placement live inside package primitives.
 
-| Component        | Purpose                                   | Token Namespace     |
-|-----------------|-------------------------------------------|---------------------|
-| `SigilGrid`   | Background grid pattern (dot/line/cross)  | `--s-grid-*`  |
-| `SigilCross`  | Crosshair alignment markers               | `--s-cross-*` |
-| `SigilRail`   | Vertical/horizontal rails for alignment   | `--s-rail-*`  |
+| Component | Purpose |
+|---|---|
+| `SigilPage` | Page shell with `rhythm="locked"` / `rhythm="hairline"` and `chrome` modes |
+| `SigilHero` | Hero section root with built-in section spacing |
+| `SigilHeroLayout` / `Content` / `Media` | Hero composition parts |
+| `SigilSection` | Section band with named `space` presets |
+| `SigilDivider` | Locked full-cell structural divider band |
+| `Hairline` | Free-flow editorial rule |
+| `SigilSectionHeader` | Canonical label/heading/description stack |
+| `SigilActionRow` | Token-rhythm CTA/action row |
+| `SigilStack` | Token-rhythm vertical stack |
+| `SigilMonoBlock` | Token-rhythm mono/code block |
+| `SigilGhostLink` | Secondary link CTA |
 
 ### 2. Page layout pattern
 
 ```tsx
-import { SigilGrid, SigilRail, SigilCard } from "@sigil-ui/components";
+import {
+  AccentCTA,
+  SigilActionRow,
+  SigilDivider,
+  SigilGhostLink,
+  SigilHero,
+  SigilHeroContent,
+  SigilHeroLayout,
+  SigilHeroMedia,
+  SigilPage,
+  SigilSection,
+  SigilSectionHeader,
+} from "@sigil-ui/components";
 
 export function LandingPage() {
   return (
-    <SigilGrid>
-      <SigilRail>
-        <section className="hero">
-          <h1>Title</h1>
-          <p>Subtitle</p>
-        </section>
-
-        <section className="features">
-          <SigilCard>Feature 1</SigilCard>
-          <SigilCard>Feature 2</SigilCard>
-          <SigilCard>Feature 3</SigilCard>
-        </section>
-      </SigilRail>
-    </SigilGrid>
+    <SigilPage rhythm="locked" chrome="rails">
+      <SigilHero>
+        <SigilHeroLayout>
+          <SigilHeroContent>
+            <SigilSectionHeader
+              label="Components"
+              heading="Browse the full component system."
+              description="Tokens and grid rhythm are handled by Sigil."
+            />
+            <SigilActionRow>
+              <AccentCTA>Browse Components</AccentCTA>
+              <SigilGhostLink href="/docs">Read Docs</SigilGhostLink>
+            </SigilActionRow>
+          </SigilHeroContent>
+          <SigilHeroMedia>{/* product visual */}</SigilHeroMedia>
+        </SigilHeroLayout>
+      </SigilHero>
+      <SigilDivider />
+    </SigilPage>
   );
 }
 ```
 
-### 3. Content width and spacing
+### 3. Rhythm modes
+
+Use locked rhythm for structural grid pages:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilSection space="normal">...</SigilSection>
+  <SigilDivider />
+</SigilPage>
+```
+
+Use hairline rhythm for free-flow/editorial pages:
+
+```tsx
+<SigilPage rhythm="hairline" chrome="minimal">
+  <SigilSection space="normal">...</SigilSection>
+  <Hairline />
+</SigilPage>
+```
+
+### 4. Content width and spacing
 
 Use the token-defined content max-width and spacing:
 
@@ -69,7 +115,7 @@ The `--s-content-max` varies by preset (see `packages/presets/src/<name>.ts`):
 - Minimal/editorial presets (`crux`, `arc`, `etch`, `rune`, `glyph`): narrower (often 1024–1200px)
 - Edgeless presets (`vast`, `aura`, `field`, `clay`, `sage`, `ink`, `sand`, `plum`, `moss`, `coral`, `dune`, `ocean`, `rose`): 1400px+
 
-### 4. Grid compositions
+### 5. Grid compositions
 
 **Two-column layout:**
 ```css
@@ -149,6 +195,23 @@ node scripts/audit-grid-alignment.mjs --base=http://localhost:3000
 The audit measures the resolved browser pixel height of `--s-grid-cell` and
 checks every `[data-slot="sigilsection"]` and `[data-slot="divider"]` boundary.
 
+Preferred page API:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilSection>...</SigilSection>
+  <SigilDivider />
+</SigilPage>
+
+<SigilPage rhythm="hairline" chrome="minimal">
+  <SigilSection>...</SigilSection>
+  <Hairline />
+</SigilPage>
+```
+
+Use `SigilSectionHeader`, `SigilActionRow`, `SigilStack`, and `SigilMonoBlock`
+instead of page-local `grid` maps or repeated inline rhythm styles.
+
 Debugging order:
 
 1. Confirm the live DOM includes `[data-layout="sigil-content"]`. If not, rebuild
@@ -168,16 +231,11 @@ Debugging order:
 ```tsx
 function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="dashboard-shell">
-      <aside className="dashboard-sidebar">
-        <nav>{/* sidebar nav */}</nav>
-      </aside>
-      <main className="dashboard-main">
-        <SigilGrid opacity={0.3}>
-          <SigilRail>{children}</SigilRail>
-        </SigilGrid>
-      </main>
-    </div>
+    <SigilPage rhythm="locked" chrome="rails">
+      <SigilSection space="normal">
+        {children}
+      </SigilSection>
+    </SigilPage>
   );
 }
 ```
@@ -187,29 +245,15 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
 ```tsx
 function Hero() {
   return (
-    <section className="hero-bleed">
-      <SigilGrid>
-        <div className="hero-content">
-          <h1>Sigil UI</h1>
-          <p>Structural-visibility design system</p>
-        </div>
-      </SigilGrid>
-    </section>
+    <SigilPage rhythm="locked" chrome="rails">
+      <SigilSection space="hero">
+        <SigilSectionHeader
+          label="Sigil UI"
+          heading="Structural-visibility design system."
+          description="Rails, dividers, and section snap are handled by Sigil."
+        />
+      </SigilSection>
+    </SigilPage>
   );
-}
-```
-
-```css
-.hero-bleed {
-  width: 100%;
-  min-height: 100dvh;
-  display: flex;
-  align-items: center;
-}
-
-.hero-content {
-  max-width: var(--s-content-max);
-  margin-inline: auto;
-  padding-inline: var(--s-spacing-4);
 }
 ```

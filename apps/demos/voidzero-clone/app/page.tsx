@@ -89,7 +89,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Projects</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={2} gap="1rem">
+          <BentoGrid columns={{ md: 2 }} gap="1rem">
             <BentoGridCell>
               <div className="p-5" style={{ background: "var(--s-surface)", borderRadius: "var(--s-grid-cell-radius, var(--s-radius-sm, 6px))" }}>
                 <Badge className="mb-3">Bundler</Badge>

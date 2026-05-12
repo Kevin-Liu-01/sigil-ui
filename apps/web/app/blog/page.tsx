@@ -176,7 +176,7 @@ export default function BlogPage() {
           </FeaturedGrid>
         </SigilSection>
 
-        <Divider pattern="diagonal" size="sm" showBorders />
+        <Divider pattern="diagonal" size="md" showBorders />
 
         {/* ── Post Grid ── */}
         <SigilSection>
@@ -213,7 +213,7 @@ export default function BlogPage() {
           </GapPixelGrid>
         </SigilSection>
 
-        <Divider pattern="vertical" size="sm" showBorders />
+        <Divider pattern="vertical" size="md" showBorders />
 
         {/* ── Newsletter CTA ── */}
         <SigilSection>

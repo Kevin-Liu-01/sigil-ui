@@ -8,15 +8,15 @@ export type TooltipRoundness = "sm" | "md" | "lg" | "xl";
 export type TooltipVariant = "default" | "frosted-glass";
 
 const roundnessMap: Record<TooltipRoundness, string> = {
-  sm: "rounded-sm",
-  md: "rounded-md",
-  lg: "rounded-lg",
-  xl: "rounded-xl",
+  sm: "rounded-[var(--s-radius-sm)]",
+  md: "rounded-[var(--s-radius-md)]",
+  lg: "rounded-[var(--s-radius-lg)]",
+  xl: "rounded-[var(--s-radius-xl)]",
 };
 
 const variantMap: Record<TooltipVariant, string> = {
-  default: "bg-background",
-  "frosted-glass": "bg-background/70 backdrop-blur-sm",
+  default: "bg-[var(--s-background)]",
+  "frosted-glass": "bg-[color-mix(in_oklch,var(--s-background)_70%,transparent)] backdrop-blur-[var(--s-overlay-blur,8px)]",
 };
 
 function ChartTooltipContent({
@@ -78,7 +78,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "border-border/50 grid min-w-32 items-start gap-1.5 border px-2.5 py-1.5 text-xs shadow-xl",
+        "grid min-w-32 items-start gap-1.5 border border-[color-mix(in_oklch,var(--s-border)_50%,transparent)] px-2.5 py-1.5 text-xs shadow-[var(--s-shadow-xl)]",
         roundnessMap[roundness],
         variantMap[variant],
         className,

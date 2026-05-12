@@ -34,6 +34,7 @@ import {
   BorderStack,
   FrostedPanel,
   AccentActive,
+  SigilViewCode,
 } from "@sigil-ui/components";
 
 /* -------------------------------------------------------------------------- */
@@ -256,7 +257,13 @@ export const DEMOS: Record<string, DemoEntry> = {
 /*  Root client component                                                      */
 /* -------------------------------------------------------------------------- */
 
-export default function DemoPageClient({ slug }: { slug: string }) {
+export default function DemoPageClient({
+  slug,
+  source,
+}: {
+  slug: string;
+  source: string;
+}) {
   const demo = DEMOS[slug];
   if (!demo) notFound();
 
@@ -292,7 +299,7 @@ export default function DemoPageClient({ slug }: { slug: string }) {
         fontFamily: p.fontBody,
       }}
     >
-      <DemoContent slug={slug} />
+      <DemoContent slug={slug} source={source} />
     </div>
   );
 }
@@ -340,7 +347,7 @@ const TEMPLATE_MAP: Record<string, React.ComponentType> = {
   "viteplus-clone": VitePlusCloneDemoNew,
 };
 
-function DemoContent({ slug }: { slug: string }) {
+function DemoContent({ slug, source }: { slug: string; source: string }) {
   const Template = TEMPLATE_MAP[slug];
   if (!Template) notFound();
 
@@ -351,7 +358,9 @@ function DemoContent({ slug }: { slug: string }) {
           <span className="font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)]">← Demos</span>
         </FrostedPanel>
       </a>
-      <Template />
+      <SigilViewCode code={source}>
+        <Template />
+      </SigilViewCode>
     </>
   );
 }

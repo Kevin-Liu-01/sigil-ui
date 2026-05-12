@@ -156,7 +156,7 @@ export default function DemosPage() {
       <LandingNavbar />
 
       {/* Hero */}
-      <SigilSection borderTop padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px)) var(--s-section-padding-y-sm, 3rem)" className="relative overflow-hidden">
+      <SigilSection borderTop space="hero" className="relative overflow-hidden">
         <TextureBg opacity={0.3} />
         <div className="relative z-[1] mb-6">
           <MonoLabel variant="accent" className="block mb-4">
@@ -187,10 +187,10 @@ export default function DemosPage() {
         </FeaturedGrid>
       </SigilSection>
 
-      <Divider pattern="diagonal" size="sm" showBorders />
+      <Divider pattern="diagonal" size="md" showBorders />
 
       {/* Info + CTA */}
-      <SigilSection padding="var(--s-section-padding-y, 6rem) var(--s-section-padding-x, var(--s-page-margin, 24px))">
+      <SigilSection space="normal">
         <GapPixelGrid columns={{ md: 2 }} data-stagger>
           <GapPixelCell className="p-6 flex flex-col gap-3 md:row-span-2">
             <MonoLabel variant="accent">{INFO_CARDS[0].label}</MonoLabel>

@@ -82,7 +82,7 @@ export const SignaturePad = forwardRef<HTMLDivElement, SignaturePadProps>(functi
   useEffect(() => {
     const ctx = getCtx();
     if (!ctx) return;
-    ctx.strokeStyle = strokeColor ?? "var(--s-text, #000)";
+    ctx.strokeStyle = strokeColor ?? "var(--s-text)";
     ctx.lineWidth = strokeWidth;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";

@@ -851,6 +851,22 @@ export type BannerTokens = {
 // ---------------------------------------------------------------------------
 
 export type PageRhythmTokens = {
+  /**
+   * `locked` means page bands snap to full `--s-grid-cell` intervals and
+   * structural dividers occupy exact cell multiples. `hairline` means the page
+   * can flow freely and dividers are visual rules, not layout bands.
+   */
+  readonly "mode"?: "locked" | "hairline";
+  /** Enable section-bottom snap in locked mode. */
+  readonly "snap"?: boolean;
+  /** Paint policy for locked band strokes. `visual` avoids border layout drift. */
+  readonly "band-stroke"?: "visual" | "border" | "none";
+  /** Default thickness for free-flow hairline rules. */
+  readonly "hairline-width"?: string;
+  /** Default spacing around free-flow hairline rules. */
+  readonly "hairline-spacing"?: string;
+  /** Default style for free-flow hairline rules. */
+  readonly "hairline-style"?: "solid" | "dashed" | "dotted" | "none";
   readonly "density"?: "compact" | "normal" | "spacious" | "editorial";
   readonly "section-gap"?: string;
   readonly "section-gap-sm"?: string;

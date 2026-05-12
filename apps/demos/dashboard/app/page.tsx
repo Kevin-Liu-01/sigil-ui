@@ -104,7 +104,7 @@ export default function Page() {
       <Panel>
         <PanelHeader>Overview</PanelHeader>
         <div className="p-4">
-          <BentoGrid columns={4} gap="1rem">
+          <BentoGrid columns={{ md: 4 }} gap="1rem">
             {stats.map((s) => (
               <BentoGridCell key={s.label}>
                 <div className="p-4" style={{ background: "var(--s-surface)", borderRadius: "var(--s-radius-sm, 6px)", border: "1px solid var(--s-border)" }}>
@@ -178,7 +178,7 @@ export default function Page() {
         <div className="divide-y" style={{ borderColor: "var(--s-border)" }}>
           {events.map((e, i) => (
             <div key={i} className="flex items-center gap-3 px-4 py-3">
-              <Badge variant={e.type === "success" ? "default" : e.type === "warning" ? "outline" : "secondary"} className="shrink-0">
+              <Badge variant={e.type === "success" ? "success" : e.type === "warning" ? "outline" : "secondary"} className="shrink-0">
                 {e.type}
               </Badge>
               <span style={{ fontSize: 13, flex: 1 }}>{e.text}</span>

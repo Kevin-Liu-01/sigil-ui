@@ -5,7 +5,7 @@ description: How Sigil keeps sections, dividers, rails, and gutter ruler pattern
 
 ## The Contract
 
-Sigil page layouts use one vertical structural period:
+Locked Sigil page layouts use one vertical structural period:
 
 ```txt
 G = resolved pixel height of var(--s-grid-cell)
@@ -22,7 +22,8 @@ This is stricter than "looks close." The browser check is:
 ```
 
 Allow a tiny float epsilon when measuring through `getBoundingClientRect()`, but
-do not design around half-cell snap.
+do not design around half-cell snap. Use `rhythm="hairline"` when a page should
+flow without full-cell structural boundaries.
 
 ## Components In The System
 
@@ -30,7 +31,7 @@ do not design around half-cell snap.
 |---|---|
 | `SigilPageGrid` | Creates the content origin with `data-layout="sigil-content"` and renders rail/gutter tracks. |
 | `SigilSection` | Measures its own border box and adds snap padding so its bottom edge lands on the next full cell. |
-| `Divider` | Occupies exactly `N * G` layout height; its visual strokes do not add layout pixels. |
+| `SigilDivider` / `Divider` | Occupies exactly `N * G` layout height; its visual strokes do not add layout pixels. |
 | `SigilGutter` | Paints rail/ruler patterns from the shared page origin. |
 
 ## Full Cells, Not Half Cells
@@ -49,7 +50,7 @@ for subdivided patterns while visually placing dividers between the major cells.
 
 ## Divider Border Model
 
-`Divider` uses exact token heights:
+`SigilDivider` / `Divider` uses exact token heights:
 
 | Size | Height |
 |---|---|

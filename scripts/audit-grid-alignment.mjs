@@ -66,7 +66,8 @@ const result = await page.evaluate(() => {
     return raw > G / 2 ? raw - G : raw;
   };
 
-  const sections = [...document.querySelectorAll("[data-slot='sigilsection']")].map(
+  const pageChildren = [...content.children];
+  const sections = pageChildren.filter((el) => el.getAttribute("data-slot") === "sigilsection").map(
     (section, index) => {
       const b = box(section);
       const top = b.top - origin;
@@ -84,7 +85,7 @@ const result = await page.evaluate(() => {
     },
   );
 
-  const dividers = [...document.querySelectorAll("[data-slot='divider']")].map(
+  const dividers = pageChildren.filter((el) => el.getAttribute("data-slot") === "divider").map(
     (divider, index) => {
       const b = box(divider);
       const fill = divider.firstElementChild;

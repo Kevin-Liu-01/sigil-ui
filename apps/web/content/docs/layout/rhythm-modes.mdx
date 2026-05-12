@@ -1,0 +1,117 @@
+---
+title: Rhythm Modes
+description: Choose between locked full-cell structural layout and free-flow hairline composition.
+---
+
+## Overview
+
+Sigil separates two page rhythm models:
+
+| Mode | Use when | Boundary behavior |
+|---|---|---|
+| `locked` | Structural pages with visible rails, ruler gutters, and divider bands | Sections and `SigilDivider` bands snap to full `--s-grid-cell` intervals |
+| `hairline` | Editorial, minimal, or edgeless pages | Content flows naturally; `Hairline` renders visual rules without reserving grid bands |
+
+## Locked rhythm
+
+Locked rhythm is the default for structural Sigil pages.
+
+```tsx
+import { SigilPage, SigilSection, SigilDivider } from "@sigil-ui/components";
+
+export function Page() {
+  return (
+    <SigilPage rhythm="locked" chrome="rails">
+      <SigilSection>
+        Content
+      </SigilSection>
+      <SigilDivider />
+      <SigilSection>
+        More content
+      </SigilSection>
+    </SigilPage>
+  );
+}
+```
+
+In locked rhythm:
+
+- `SigilPage` provides the measurable content origin.
+- `SigilSection` snaps its outer boundary to the next full cell.
+- `SigilDivider` is a full-cell band.
+- divider strokes are paint, not layout borders.
+
+For page heroes, prefer the compound hero parts so app code stays readable:
+
+```tsx
+<SigilPage rhythm="locked" chrome="rails">
+  <SigilHero>
+    <SigilHeroLayout>
+      <SigilHeroContent>
+        <SigilHeroTitle>Build with tokens.</SigilHeroTitle>
+        <SigilHeroDescription>
+          Sigil handles grid rhythm, padding, and divider alignment.
+        </SigilHeroDescription>
+      </SigilHeroContent>
+      <SigilHeroMedia>{/* product visual */}</SigilHeroMedia>
+    </SigilHeroLayout>
+  </SigilHero>
+</SigilPage>
+```
+
+## Hairline rhythm
+
+Hairline rhythm keeps pages readable and natural when the full structural grid is
+too heavy.
+
+```tsx
+import { Hairline, SigilPage, SigilSection } from "@sigil-ui/components";
+
+export function EditorialPage() {
+  return (
+    <SigilPage rhythm="hairline" chrome="minimal">
+      <SigilSection>
+        Content
+      </SigilSection>
+      <Hairline />
+      <SigilSection>
+        More content
+      </SigilSection>
+    </SigilPage>
+  );
+}
+```
+
+In hairline rhythm:
+
+- section snap is disabled by default;
+- `Hairline` is a rule, not a band;
+- spacing comes from hairline and section tokens;
+- pages do not need to obey full-cell vertical boundaries.
+
+## Tokens
+
+Rhythm mode is controlled by `pageRhythm` tokens:
+
+| Token | Purpose |
+|---|---|
+| `mode` | `locked` or `hairline` |
+| `snap` | Enables section-bottom snap in locked mode |
+| `band-stroke` | `visual`, `border`, or `none` for structural bands |
+| `hairline-width` | Rule thickness in hairline mode |
+| `hairline-spacing` | Vertical spacing around hairlines |
+| `hairline-style` | Hairline rule style |
+
+## Verification
+
+Locked rhythm must pass:
+
+```bash
+node scripts/audit-grid-alignment.mjs --base=http://localhost:3000
+```
+
+For full page QA, run:
+
+```bash
+node scripts/audit-layout-system.mjs --base=http://localhost:3000 --quick
+```
