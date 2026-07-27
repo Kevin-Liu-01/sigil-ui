@@ -4,6 +4,17 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 
+@theme inline {
+  --font-display: var(--s-font-display);
+  --font-body: var(--s-font-body);
+  --font-mono: var(--s-font-mono);
+  --tracking-tighter: var(--s-tracking-tighter);
+  --tracking-tight: var(--s-tracking-tight);
+  --tracking-normal: var(--s-tracking-normal);
+  --tracking-wide: var(--s-tracking-wide);
+  --tracking-wider: var(--s-tracking-wider);
+}
+
 /* ================================================================== */
 /* Font Faces — Pangram Pangram Collection                            */
 /* ================================================================== */
@@ -250,6 +261,7 @@ html {
 body {
   margin: 0;
   font-family: var(--s-font-body);
+  letter-spacing: var(--s-tracking-normal, 0.01em);
   background-color: var(--s-background, #0a0a0f);
   color: var(--s-text, #fafafa);
   line-height: 1.6;
@@ -1191,7 +1203,7 @@ nav[data-fd-sidebar] {
     conic-gradient(
       from calc((var(--glow-angle) - (var(--glow-spread, 60) * 0.5)) * 1deg),
       transparent 0deg,
-      #fff,
+      white,
       transparent calc(var(--glow-spread, 60) * 1deg)
     );
   opacity: var(--glow-active, 0);
@@ -1231,3 +1243,128 @@ nav[data-fd-sidebar] {
 [data-stagger] > *:nth-child(10) { --stagger-index: 9; }
 [data-stagger] > *:nth-child(11) { --stagger-index: 10; }
 [data-stagger] > *:nth-child(12) { --stagger-index: 11; }
+
+/* ================================================================== */
+/* DESIGN.md — rendered canonical preset specification                 */
+/* ================================================================== */
+
+.design-markdown {
+  max-width: var(--s-prose-max);
+  padding: var(--s-card-padding);
+  color: var(--s-text-secondary);
+  font-family: var(--s-font-body);
+  font-size: var(--s-size-sm);
+  line-height: var(--s-leading-relaxed);
+  overflow-wrap: anywhere;
+}
+
+.design-markdown > :first-child {
+  margin-top: 0;
+}
+
+.design-markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.design-markdown h1,
+.design-markdown h2,
+.design-markdown h3 {
+  color: var(--s-text);
+  font-family: var(--s-font-display);
+  font-weight: var(--s-heading-weight);
+  letter-spacing: var(--s-heading-tracking);
+  text-wrap: balance;
+}
+
+.design-markdown h1 {
+  margin-block: 0 var(--s-space-24);
+  font-size: var(--s-size-3xl);
+  line-height: var(--s-leading-tight);
+}
+
+.design-markdown h2 {
+  margin-block: var(--s-space-48) var(--s-space-16);
+  padding-top: var(--s-space-16);
+  border-top: var(--s-divider-width) var(--s-divider-style) var(--s-border-muted);
+  font-size: var(--s-size-2xl);
+  line-height: var(--s-leading-tight);
+}
+
+.design-markdown h3 {
+  margin-block: var(--s-space-24) var(--s-space-12);
+  font-size: var(--s-size-lg);
+}
+
+.design-markdown p,
+.design-markdown ul,
+.design-markdown ol,
+.design-markdown blockquote,
+.design-markdown table,
+.design-markdown pre {
+  margin-block: var(--s-space-12);
+}
+
+.design-markdown ul,
+.design-markdown ol {
+  padding-left: var(--s-space-24);
+}
+
+.design-markdown blockquote {
+  border-left: var(--s-border-thick) var(--s-border-style) var(--s-primary);
+  padding-left: var(--s-space-16);
+  color: var(--s-text-muted);
+}
+
+.design-markdown table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-family: var(--s-font-mono);
+  font-size: var(--s-size-xs);
+}
+
+.design-markdown th,
+.design-markdown td {
+  min-width: calc(3 * var(--s-grid-cell));
+  padding: var(--s-table-cell-py) var(--s-table-cell-px);
+  border: var(--s-border-width-thin) var(--s-border-style) var(--s-border-muted);
+  text-align: left;
+  vertical-align: top;
+}
+
+.design-markdown th {
+  color: var(--s-text);
+  background: var(--s-background);
+  font-weight: var(--s-weight-semibold);
+}
+
+.design-markdown code {
+  color: var(--s-text);
+  background: var(--s-code-bg);
+  font-family: var(--s-font-mono);
+  font-size: var(--s-code-font-size);
+}
+
+.design-markdown :not(pre) > code {
+  padding: var(--s-space-4) var(--s-space-8);
+}
+
+.design-markdown pre {
+  overflow-x: auto;
+  padding: var(--s-code-padding);
+  border: var(--s-border-width-thin) var(--s-border-style) var(--s-border-muted);
+  background: var(--s-code-bg);
+}
+
+.design-markdown pre code {
+  padding: 0;
+  background: transparent;
+}
+
+@media (min-width: 64rem) {
+  .design-markdown {
+    max-width: none;
+    padding: var(--s-card-padding-lg);
+  }
+}

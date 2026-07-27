@@ -11,7 +11,11 @@ import {
 } from "react";
 import { cn } from "../../utils";
 import type { GutterPattern } from "@sigil-ui/tokens";
-import { useIsInsidePageGrid, usePageGridConfig } from "./grid-context";
+import {
+  DEFAULTS,
+  useIsInsidePageGrid,
+  usePageGridConfig,
+} from "./grid-context";
 import {
   borderCompensatedPadding,
   buildGridCols,
@@ -23,6 +27,8 @@ import {
   useSnapBottomToGridPadding,
 } from "./grid-snap-padding";
 import { SigilGutter } from "./SigilGutter";
+import { getSigilPatternStyles } from "./pattern-engine";
+import { buildMarginStyle } from "./margin-styles";
 
 /* ------------------------------------------------------------------ */
 /* Cross marks                                                        */
@@ -154,6 +160,12 @@ export interface SigilSectionProps {
   contentMax?: number;
   /** Rail gap for standalone mode (outside SigilPageGrid). */
   railGap?: number;
+  /** Structural cell size for standalone gutter and margin patterns. */
+  gridCell?: number;
+  /** Cross stroke for standalone intersection marks. */
+  crossStroke?: number;
+  /** Border on standalone margin columns' inner edges. */
+  marginBorder?: string;
   /** Gutter pattern for standalone mode. */
   gutterPattern?: GutterPattern;
   /** Margin pattern for standalone mode. */
@@ -193,8 +205,11 @@ export function SigilSection({
   padding =
     "var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 25px))",
   space,
-  contentMax = 1200,
-  railGap = 50,
+  contentMax = DEFAULTS.contentMax,
+  railGap = DEFAULTS.railGap,
+  gridCell = DEFAULTS.gridCell,
+  crossStroke = DEFAULTS.crossStroke,
+  marginBorder,
   gutterPattern = "grid",
   marginPattern = "horizontal",
   showGutterGrid = true,
@@ -245,6 +260,9 @@ export function SigilSection({
       padding={resolvedPadding}
       contentMax={contentMax}
       railGap={railGap}
+      gridCell={gridCell}
+      crossStroke={crossStroke}
+      marginBorder={marginBorder}
       gutterPattern={gutterPattern}
       marginPattern={marginPattern}
       showGutterGrid={showGutterGrid}
@@ -383,6 +401,9 @@ function InnerSection({
 type StandaloneSectionProps = InnerSectionProps & {
   contentMax: number;
   railGap: number;
+  gridCell: number;
+  crossStroke: number;
+  marginBorder?: string;
   gutterPattern?: GutterPattern;
   marginPattern?: GutterPattern;
   showGutterGrid?: boolean;
@@ -401,8 +422,13 @@ function StandaloneSection({
   padding,
   contentMax,
   railGap,
+  gridCell,
+  crossStroke,
+  marginBorder,
   gutterPattern = "grid",
+  marginPattern = "horizontal",
   showGutterGrid = true,
+  showMarginLines = true,
   snapBottomToGrid = false,
 }: StandaloneSectionProps) {
   const [sectionEl, setSectionEl] = useState<HTMLElement | null>(null);
@@ -419,6 +445,14 @@ function StandaloneSection({
   const snapPadPx = useSnapBottomToGridPadding(snapBottomToGrid, paddedEl);
 
   const gridCols = buildGridCols(railGap, contentMax);
+  const marginCssL = showMarginLines
+    ? getSigilPatternStyles(marginPattern, gridCell, "left")
+    : null;
+  const marginCssR = showMarginLines
+    ? getSigilPatternStyles(marginPattern, gridCell, "right")
+    : null;
+  const marginL = buildMarginStyle(marginCssL, "Right", false, marginBorder);
+  const marginR = buildMarginStyle(marginCssR, "Left", false, marginBorder);
   const hasBorder = visibleBorderTop || borderBottom;
   const paddingStyleRaw = hasBorder
     ? borderCompensatedPadding(padding, visibleBorderTop, borderBottom)
@@ -435,12 +469,16 @@ function StandaloneSection({
         ...gridCols,
         "--s-frame-rail-gap": `min(${railGap}px, max(var(--s-gutter-sm, 16px), 4vw))`,
         "--s-frame-content-max": `${contentMax}px`,
+        "--s-grid-cell": `${gridCell}px`,
         ...style,
       } as CSSProperties}
     >
-      <div aria-hidden="true" />
+      <div aria-hidden="true" style={marginL.container}>
+        {marginL.overlay && <div style={marginL.overlay} />}
+      </div>
       <SigilGutter
         showGrid={showGutterGrid}
+        gridCell={gridCell}
         pattern={gutterPattern}
         side="left"
       />
@@ -462,19 +500,22 @@ function StandaloneSection({
         }}
       >
         {showCrosses && visibleBorderTop && (
-          <CrossRow position="top" crossStroke={1.5} />
+          <CrossRow position="top" crossStroke={crossStroke} />
         )}
         {children}
         {showCrosses && borderBottom && (
-          <CrossRow position="bottom" crossStroke={1.5} />
+          <CrossRow position="bottom" crossStroke={crossStroke} />
         )}
       </div>
       <SigilGutter
         showGrid={showGutterGrid}
+        gridCell={gridCell}
         pattern={gutterPattern}
         side="right"
       />
-      <div aria-hidden="true" />
+      <div aria-hidden="true" style={marginR.container}>
+        {marginR.overlay && <div style={marginR.overlay} />}
+      </div>
     </Tag>
   );
 }

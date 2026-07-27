@@ -29,7 +29,7 @@ export interface PageGridConfig {
 export const DEFAULTS: PageGridConfig = {
   railGap: 50,
   contentMax: 1200,
-  gridCell: 16,
+  gridCell: 50,
   crossStroke: 1.5,
   gutterPattern: "grid",
   marginPattern: "horizontal",

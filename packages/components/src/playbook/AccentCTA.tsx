@@ -93,7 +93,7 @@ export const AccentActive = forwardRef<HTMLDivElement, AccentActiveProps>(
         data-slot="accent-active"
         data-active={active || undefined}
         className={cn(
-          "transition-colors duration-[var(--s-duration-fast)]",
+          "border-[length:var(--s-border-width-thin,1px)] border-[style:var(--s-border-style,solid)] transition-colors duration-[var(--s-duration-fast)]",
           active
             ? "border-[color:color-mix(in_oklch,var(--s-primary)_40%,transparent)] bg-[color-mix(in_oklch,var(--s-primary)_10%,transparent)] text-[var(--s-primary)]"
             : "border-[color:var(--s-border)] bg-transparent text-[var(--s-text-muted)]",

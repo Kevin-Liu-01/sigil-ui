@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const alloyPreset: SigilPreset = {
+export const alloyPreset: SigilPreset = completePreset({
   name: "alloy",
   metadata: {
     description: "Mixed metals industrial. Warm metallics, exposed structure, compositional weight.",
@@ -591,4 +592,4 @@ export const alloyPreset: SigilPreset = {
     },
 
   },
-};
+});

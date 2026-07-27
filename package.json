@@ -12,6 +12,7 @@
     "audit:contrast": "tsx scripts/audit-contrast.ts",
     "audit:sigil": "node scripts/audit-sigil.mjs",
     "audit:components": "node scripts/audit-components.mjs",
+    "audit:presets": "tsx scripts/audit-presets.ts",
     "audit:layout": "node scripts/audit-layout-system.mjs",
     "audit:layout:quick": "node scripts/audit-layout-system.mjs --quick --skip-screenshots",
     "audit:grid": "node scripts/audit-grid-alignment.mjs",

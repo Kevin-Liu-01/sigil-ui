@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const glyphPreset: SigilPreset = {
+export const glyphPreset: SigilPreset = completePreset({
   name: "glyph",
   metadata: {
     description: "Typographic character — type-as-design, letter-focused, the typeface IS the decoration.",
@@ -566,4 +567,4 @@ export const glyphPreset: SigilPreset = {
     },
 
   },
-};
+});

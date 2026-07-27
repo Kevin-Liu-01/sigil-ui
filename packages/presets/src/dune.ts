@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const dunePreset: SigilPreset = {
+export const dunePreset: SigilPreset = completePreset({
   name: "dune",
   metadata: {
     description: "Golden desert warmth with vast, open feeling. Sharp edges, deep amber tones, serif display type.",
@@ -588,4 +589,4 @@ export const dunePreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

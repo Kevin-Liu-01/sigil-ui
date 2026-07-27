@@ -8,7 +8,7 @@ import {
   type PatternSide,
 } from "./pattern-engine";
 import { DEFAULTS } from "./grid-context";
-import { STRUCTURAL_LINE_COLOR } from "./grid-helpers";
+import { STRUCTURAL_BORDER } from "./grid-helpers";
 
 export interface SigilGutterProps {
   showGrid?: boolean;
@@ -87,8 +87,9 @@ export function SigilGutter({
         className="absolute top-0 bottom-0"
         style={{
           [side === "left" ? "right" : "left"]: 0,
-          width: "var(--s-border-width-thin, 1px)",
-          background: STRUCTURAL_LINE_COLOR,
+          width: 0,
+          [side === "left" ? "borderRight" : "borderLeft"]:
+            STRUCTURAL_BORDER,
           zIndex: 1,
         }}
       />

@@ -13,6 +13,7 @@ import {
   AccentCTA,
   AccentActive,
   CardCell,
+  Button,
 } from "@sigil-ui/components";
 import { presetCatalog, type PresetCatalogEntry } from "@sigil-ui/presets";
 import { LandingNavbar } from "@/components/landing/navbar";
@@ -20,6 +21,7 @@ import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
 import { PresetComparisonView } from "@/components/landing/preset-comparison";
 import { TextureBg } from "@/components/texture-bg";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 
 const CATEGORIES = [
   "All",
@@ -77,12 +79,12 @@ const STEPS = [
   {
     number: "02",
     title: "Customize your token file",
-    description: "DESIGN.md is yours — change any of 519 fields to match your brand exactly. Compiles to CSS + Tailwind.",
+    description: `DESIGN.md is yours — change any of ${SIGIL_PRODUCT_STATS.tokenCount} fields to match your brand exactly. Compiles to CSS + Tailwind.`,
   },
   {
     number: "03",
     title: "Everything updates",
-    description: "CSS recompiles, 350+ token-driven components refresh — zero component-level edits required.",
+    description: `CSS recompiles, ${SIGIL_PRODUCT_STATS.componentCountLabel} token-driven components refresh — zero component-level edits required.`,
   },
 ] as const;
 
@@ -98,9 +100,9 @@ function PresetCard({ preset }: { preset: PresetCatalogEntry }) {
       <GapPixelCell className="flex flex-col h-full transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface-elevated)]">
         <div
           style={{
-            height: 28,
+            height: "var(--s-space-24)",
             background: hueColor,
-            borderBottom: "1px solid var(--s-border-muted)",
+            borderBottom: "var(--s-border-thin) var(--s-border-style) var(--s-border-muted)",
           }}
           aria-hidden
         />
@@ -114,9 +116,9 @@ function PresetCard({ preset }: { preset: PresetCatalogEntry }) {
               <span
                 className="inline-block shrink-0 border border-[var(--s-border-muted)]"
                 style={{
-                  width: 14,
-                  height: 14,
-                  borderRadius: "50%",
+                  width: "var(--s-size-sm)",
+                  height: "var(--s-size-sm)",
+                  borderRadius: "var(--s-radius-full)",
                   background: hueColor,
                 }}
                 aria-hidden
@@ -180,9 +182,9 @@ export default function PresetsPage() {
               / Presets
             </MonoLabel>
 
-            <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
+            <h1 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(var(--s-size-3xl),5vw,var(--s-size-5xl))] font-[var(--s-heading-display-weight)] leading-[var(--s-heading-display-leading)] tracking-[var(--s-heading-display-tracking)] text-[var(--s-text)]">
               {presetCatalog.length} Curated Presets.<br />
-              <span className="text-[var(--s-primary)]">519 tokens each.</span>
+              <span className="text-[var(--s-primary)]">{SIGIL_PRODUCT_STATS.tokenCount} tokens each.</span>
             </h1>
 
             <DensityText
@@ -202,12 +204,9 @@ export default function PresetsPage() {
               <AccentCTA asChild>
                 <a href="/docs/presets">Preset Docs</a>
               </AccentCTA>
-              <a
-                href="/docs/cli#preset-create"
-                className="inline-flex items-center justify-center h-10 px-6 text-[13px] font-[family-name:var(--s-font-mono)] font-semibold uppercase tracking-[0.08em] no-underline bg-transparent text-[var(--s-text)] border border-[var(--s-border)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-surface)]"
-              >
-                Create Custom Preset
-              </a>
+              <Button asChild variant="outline" size="lg">
+                <a href="/docs/cli#preset-create">Create Custom Preset</a>
+              </Button>
             </div>
           </div>
         </SigilSection>
@@ -222,11 +221,12 @@ export default function PresetsPage() {
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className="border cursor-pointer p-0 bg-transparent"
+                aria-pressed={activeCategory === cat}
+                className="cursor-pointer border-0 bg-transparent p-0"
               >
                 <AccentActive
                   active={activeCategory === cat}
-                  className="px-3 py-1.5 border-0"
+                  className="px-3 py-1.5"
                 >
                   <MonoLabel
                     size="sm"

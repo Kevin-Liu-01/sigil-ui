@@ -102,16 +102,16 @@ function LegendIndicator({
     case "circle":
       return <div className="h-2 w-2 shrink-0 rounded-[var(--s-radius-full)]" style={fillStyle} />;
     case "circle-outline":
-      return <div className="h-2.5 w-2.5 shrink-0 rounded-[var(--s-radius-full)] p-[1.5px]" style={outlineStyle} />;
+      return <div className="h-2.5 w-2.5 shrink-0 rounded-[var(--s-radius-full)] p-[var(--s-border-medium)]" style={outlineStyle} />;
     case "vertical-bar":
-      return <div className="h-3 w-1 shrink-0 rounded-[2px]" style={fillStyle} />;
+      return <div className="h-3 w-1 shrink-0 rounded-[var(--s-radius-sm)]" style={fillStyle} />;
     case "horizontal-bar":
-      return <div className="h-1 w-3 shrink-0 rounded-[2px]" style={fillStyle} />;
+      return <div className="h-1 w-3 shrink-0 rounded-[var(--s-radius-sm)]" style={fillStyle} />;
     case "rounded-square-outline":
-      return <div className="h-2.5 w-2.5 shrink-0 rounded-[3px] p-[1.5px]" style={outlineStyle} />;
+      return <div className="h-2.5 w-2.5 shrink-0 rounded-[var(--s-radius-sm)] p-[var(--s-border-medium)]" style={outlineStyle} />;
     case "rounded-square":
     default:
-      return <div className="h-2 w-2 shrink-0 rounded-[2px]" style={fillStyle} />;
+      return <div className="h-2 w-2 shrink-0 rounded-[var(--s-radius-sm)]" style={fillStyle} />;
   }
 }
 
@@ -126,9 +126,9 @@ function getLegendFillStyle(dataKey: string, colorsCount: number): React.CSSProp
 
 function getLegendOutlineStyle(dataKey: string, colorsCount: number): React.CSSProperties {
   const maskStyle: React.CSSProperties = {
-    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    WebkitMask: "linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)",
     WebkitMaskComposite: "xor",
-    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    mask: "linear-gradient(white 0 0) content-box, linear-gradient(white 0 0)",
     maskComposite: "exclude",
   };
   if (colorsCount <= 1) return { backgroundColor: `var(--color-${dataKey}-0)`, ...maskStyle };

@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const strataPreset: SigilPreset = {
+export const strataPreset: SigilPreset = completePreset({
   name: "strata",
   metadata: {
     description: "Geological layers — earth tones, stratified typography, sedimentary depth.",
@@ -565,4 +566,4 @@ export const strataPreset: SigilPreset = {
     },
 
   },
-};
+});

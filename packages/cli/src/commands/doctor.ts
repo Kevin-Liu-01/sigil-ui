@@ -86,11 +86,11 @@ function checkTokensFile(cwd: string): DiagnosticResult {
   }
 
   const content = fs.readFileSync(tokensPath, "utf-8");
-  if (!content.includes("@import")) {
+  if (!content.includes("@import") && !content.includes("--s-")) {
     return {
       label: "Tokens",
       status: "warn",
-      message: "Token file exists but has no @import — may not load base tokens",
+      message: "Token file has neither an @import nor compiled --s-* custom properties",
     };
   }
 
@@ -165,6 +165,7 @@ function checkCssImport(cwd: string): DiagnosticResult {
     "src/index.css",
     "app/globals.css",
     "styles/globals.css",
+    "apps/web/app/global.css",
   ];
 
   for (const candidate of globalCandidates) {

@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const helixPreset: SigilPreset = {
+export const helixPreset: SigilPreset = completePreset({
   name: "helix",
   metadata: {
     description: "DNA spiral — biotech precision, organic curves, clean scientific aesthetic.",
@@ -561,4 +562,4 @@ export const helixPreset: SigilPreset = {
     },
 
   },
-};
+});

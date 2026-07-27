@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const basaltPreset: SigilPreset = {
+export const basaltPreset: SigilPreset = completePreset({
   name: "basalt",
   metadata: {
     description: "Dark volcanic. Hexagonal, columnar, geological. Deep navy-black with teal-green accents.",
@@ -591,4 +592,4 @@ export const basaltPreset: SigilPreset = {
     },
 
   },
-};
+});

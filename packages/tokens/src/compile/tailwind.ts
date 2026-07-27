@@ -27,6 +27,9 @@ export function compileToTailwind(
   lines.push(`${indent(1)}--font-display: var(--${p}-font-display);`);
   lines.push(`${indent(1)}--font-body: var(--${p}-font-body);`);
   lines.push(`${indent(1)}--font-mono: var(--${p}-font-mono);`);
+  for (const key of ["tighter", "tight", "normal", "wide", "wider"] as const) {
+    lines.push(`${indent(1)}--tracking-${key}: var(--${p}-tracking-${key});`);
+  }
 
   // Spacing → --spacing-*
   lines.push("");

@@ -56,7 +56,7 @@ export function getPresetInfo(name: string): PresetInfo | undefined {
   return PRESET_CATALOG.find((p) => p.name === name);
 }
 
-export const PRESET_NAMES = PRESET_CATALOG.map((p) => p.name);
+export const PRESET_NAMES: PresetName[] = ["default", ...PRESET_CATALOG.map((p) => p.name)];
 
 export const PROJECT_TYPES = [
   { value: "saas", label: "SaaS / Dashboard", description: "Admin panels, analytics, settings" },

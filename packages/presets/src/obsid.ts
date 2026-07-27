@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const obsidPreset: SigilPreset = {
+export const obsidPreset: SigilPreset = completePreset({
   name: "obsid",
   metadata: {
     description: "Obsidian mirror — volcanic glass, reflective dark surfaces, razor-sharp edges.",
@@ -566,4 +567,4 @@ export const obsidPreset: SigilPreset = {
     },
 
   },
-};
+});

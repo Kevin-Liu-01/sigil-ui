@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const brassPreset: SigilPreset = {
+export const brassPreset: SigilPreset = completePreset({
   name: "brass",
   metadata: {
     description: "Vintage warmth — art deco elegance, warm metallics, paper-like ivory.",
@@ -567,4 +568,4 @@ export const brassPreset: SigilPreset = {
     },
 
   },
-};
+});

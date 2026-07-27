@@ -35,7 +35,7 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
   let marginPattern: GutterPattern = "none";
   let contentMax = 1200;
   let railGap = 50;
-  let gridCell = 16;
+  let gridCell = 50;
   let crossStroke = 1.5;
   let marginBorder: string | undefined;
   let rhythm: SigilRhythmMode = "locked";
@@ -54,7 +54,10 @@ function deriveStructuralConfig(tokens: SigilTokens | null): StructuralConfig {
     if (sigil?.["rail-gap"]) railGap = parseInt(sigil["rail-gap"] as string) || railGap;
     if (layout?.["content-max"]) contentMax = parseInt(layout["content-max"] as string) || contentMax;
     const mb = sigil?.["margin-border"] as string | undefined;
-    if (mb && mb !== "none") marginBorder = mb;
+    // "none" is an intentional token value. Dropping it here made the
+    // layout primitive fall back to a visible border, producing a doubled
+    // outer rail beside the gutter edge.
+    if (mb) marginBorder = mb;
     if (pageRhythm?.mode === "hairline" || pageRhythm?.mode === "locked") {
       rhythm = pageRhythm.mode;
     }

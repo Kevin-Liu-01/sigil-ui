@@ -365,6 +365,10 @@ function scanTokenViolations() {
         const ctx = src.slice(Math.max(0, start - 20), start + m[0].length + 20);
         // skip patterns inside `var(--s-*)` definitions
         if (ctx.includes("--s-")) return false;
+        // Recharts emits these legacy defaults; selector literals target its
+        // generated DOM and are not authored component colors.
+        if (p.id === "hex-color" && /\[stroke=['"]$/.test(src.slice(Math.max(0, start - 10), start))) return false;
+        if (p.id === "hex-color" && src[start - 1] === "&") return false;
         return true;
       });
       if (matches.length === 0) continue;

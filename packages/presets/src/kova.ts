@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const kovaPreset: SigilPreset = {
+export const kovaPreset: SigilPreset = completePreset({
   name: "kova",
   metadata: {
     description: "Finnish hard. Cold precision, Nordic minimalism, ice and steel.",
@@ -590,4 +591,4 @@ export const kovaPreset: SigilPreset = {
     },
 
   },
-};
+});

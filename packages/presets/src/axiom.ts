@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const axiomPreset: SigilPreset = {
+export const axiomPreset: SigilPreset = completePreset({
   name: "axiom",
   metadata: {
     description: "Mathematical truth — clean systematic layout, proof-like structure, absolute precision.",
@@ -570,4 +571,4 @@ export const axiomPreset: SigilPreset = {
     },
 
   },
-};
+});

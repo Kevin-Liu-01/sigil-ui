@@ -18,7 +18,8 @@ const sourceFiles = walk(componentRoot).filter((file) => /\.(tsx?|json)$/.test(f
 const violations = scanTokenViolations(sourceFiles);
 const staleCliDocs = scanStaleCliDocs([webDocsRoot]);
 const presetNames = extractStringValues(read(presetCatalogPath), /\bname:\s*"([^"]+)"/g);
-const productFactDrift = scanProductFactDrift(presetNames.size);
+const totalPresetCount = presetNames.size + 2; // default + kitchen-sink template
+const productFactDrift = scanProductFactDrift(totalPresetCount);
 
 const report = {
   exports: {
@@ -37,7 +38,8 @@ const report = {
   tokenViolations: violations,
   staleCliDocs,
   productFacts: {
-    presetCount: presetNames.size,
+    catalogCount: presetNames.size,
+    presetCount: totalPresetCount,
     drift: productFactDrift,
   },
 };
@@ -137,6 +139,7 @@ function scanTokenViolations(files) {
         const context = source.slice(Math.max(0, start - 12), start + match[0].length + 12);
         if (pattern.id === "hex-color" && path.basename(file) === "ColorPicker.tsx") return false;
         if (pattern.id === "hex-color" && source[start - 1] === "&") return false;
+        if (pattern.id === "hex-color" && /\[stroke=['"]$/.test(source.slice(Math.max(0, start - 10), start))) return false;
         return !context.includes("--s-");
       });
       if (matches.length === 0) continue;
@@ -219,16 +222,15 @@ function scanProductFactDrift(presetCount) {
 function printReport(data) {
   console.log("Sigil audit");
   console.log(`- exports: ${data.exports.count}`);
-  console.log(`- docs: web=${data.docs.webCount}, docs=${data.docs.docsCount}`);
-  console.log(`- missing web docs from docs app: ${data.docs.missingInWeb.length}`);
-  console.log(`- missing docs app pages from web: ${data.docs.missingInDocs.length}`);
+  console.log(`- docs: ${data.docs.count}`);
   console.log(`- showcase demos: ${data.demos.showcaseCount}`);
   console.log(`- canvas demos: ${data.demos.canvasCount}`);
   console.log(`- exported without showcase: ${data.demos.exportedWithoutShowcase.length}`);
   console.log(`- exported without canvas baseline: ${data.demos.exportedWithoutCanvas.length}`);
   console.log(`- token-pattern findings: ${data.tokenViolations.length}`);
   console.log(`- stale CLI docs: ${data.staleCliDocs.length}`);
-  console.log(`- preset catalog count: ${data.productFacts.presetCount}`);
+  console.log(`- curated preset catalog: ${data.productFacts.catalogCount}`);
+  console.log(`- total presets: ${data.productFacts.presetCount}`);
   console.log(`- product fact drift: ${data.productFacts.drift.length}`);
 
   if (data.staleCliDocs.length > 0) {
@@ -251,4 +253,3 @@ function printReport(data) {
     }
   }
 }
-

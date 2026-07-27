@@ -3,6 +3,9 @@
 import { forwardRef, Children, type HTMLAttributes, type ReactNode } from "react";
 import { cn } from "../utils";
 
+const STACK_BORDER =
+  "var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-border)";
+
 export interface BorderStackProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
   /** Which borders to show. @default "between" */
@@ -67,11 +70,15 @@ export const BorderStack = forwardRef<HTMLDivElement, BorderStackProps>(
         {items.map((child, i) => (
           <div
             key={i}
-            className={cn(
-              borders === "all" && "border-b border-[color:var(--s-border)]",
-              borders === "all" && i === 0 && "border-t",
-              borders === "between" && i > 0 && "border-t border-[color:var(--s-border)]",
-            )}
+            data-slot="border-stack-item"
+            style={{
+              borderTop:
+                (borders === "all" && i === 0) ||
+                (borders === "between" && i > 0)
+                  ? STACK_BORDER
+                  : undefined,
+              borderBottom: borders === "all" ? STACK_BORDER : undefined,
+            }}
           >
             {child}
           </div>

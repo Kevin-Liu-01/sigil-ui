@@ -453,7 +453,8 @@ export function SigilMonoBlock({
         padding:
           "calc(var(--s-grid-cell) / 6) calc(var(--s-grid-cell) / 4)",
         background: "var(--s-surface)",
-        border: "1px solid var(--s-border)",
+        border:
+          "var(--s-border-width-thin, 1px) var(--s-border-style, solid) var(--s-border)",
         ...style,
       }}
       {...props}

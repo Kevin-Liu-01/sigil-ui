@@ -9,11 +9,7 @@ import {
 } from "react";
 import { cn } from "../../utils";
 import type { GutterPattern } from "@sigil-ui/tokens";
-import {
-  getSigilPatternStyles,
-  PATTERN_COLOR,
-  type SigilPatternStyles,
-} from "./pattern-engine";
+import { getSigilPatternStyles } from "./pattern-engine";
 import {
   DEFAULTS,
   IsInsidePageGridContext,
@@ -24,9 +20,9 @@ import {
 } from "./grid-context";
 import {
   buildGridCols,
-  STRUCTURAL_LINE_COLOR,
 } from "./grid-helpers";
 import { SigilGutter } from "./SigilGutter";
+import { buildMarginStyle } from "./margin-styles";
 
 export interface SigilPageGridProps {
   children: ReactNode;
@@ -70,8 +66,10 @@ function SigilPageGridImpl({
   snap = DEFAULTS.snap,
   bandStroke = DEFAULTS.bandStroke,
 }: SigilPageGridProps) {
-  const gutterHasPattern = gutterPattern !== "none" && showGutterGrid;
-  const effectiveRailGap = edgeless || !gutterHasPattern ? 0 : railGap;
+  // Pattern visibility and layout spacing are separate concerns. A plain
+  // gutter remains useful breathing room; only explicit edgeless mode should
+  // collapse the rail tracks.
+  const effectiveRailGap = edgeless ? 0 : railGap;
 
   // Memoise the context value so PageGridContext consumers (every
   // SigilSection / Divider on the page — typically 30+ instances) only
@@ -171,53 +169,6 @@ function SigilPageGridImpl({
       </PageGridContext.Provider>
     </IsInsidePageGridContext.Provider>
   );
-}
-
-function buildMarginStyle(
-  css: SigilPatternStyles | null,
-  innerEdge: "Right" | "Left",
-  edgeless: boolean,
-  marginBorder: string | undefined,
-): { container: CSSProperties; overlay: CSSProperties | null } {
-  const anchorPos = innerEdge === "Right" ? "right top" : "left top";
-  const container: CSSProperties = {
-    backgroundColor: "var(--s-background)",
-    position: "relative",
-    overflow: "hidden",
-  };
-  let overlay: CSSProperties | null = null;
-  if (css) {
-    if (css.isMask) {
-      overlay = {
-        position: "absolute",
-        inset: 0,
-        backgroundColor: PATTERN_COLOR,
-        WebkitMaskImage: css.backgroundImage,
-        WebkitMaskSize: css.backgroundSize,
-        WebkitMaskRepeat: "repeat",
-        maskImage: css.backgroundImage,
-        maskSize: css.backgroundSize,
-        maskRepeat: "repeat",
-        WebkitMaskPosition: css.backgroundPosition ?? anchorPos,
-        maskPosition: css.backgroundPosition ?? anchorPos,
-      };
-    } else {
-      Object.assign(container, {
-        backgroundImage: css.backgroundImage,
-        backgroundSize: css.backgroundSize,
-        backgroundPosition: css.backgroundPosition ?? anchorPos,
-      });
-    }
-  }
-  if (!edgeless || css) {
-    const prop = `border${innerEdge}` as keyof CSSProperties;
-    Object.assign(container, {
-      [prop]:
-        marginBorder ??
-        `var(--s-border-width-thin, 1px) var(--s-border-style, solid) ${STRUCTURAL_LINE_COLOR}`,
-    });
-  }
-  return { container, overlay };
 }
 
 /**

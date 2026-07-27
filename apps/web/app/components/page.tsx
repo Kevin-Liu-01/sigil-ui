@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   SigilSection,
   Divider,
@@ -11,35 +10,7 @@ import {
   DensityText,
   AccentCTA,
   CardCell,
-  FeaturedGrid,
   Button,
-  Badge,
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Input,
-  Switch,
-  Checkbox,
-  Slider,
-  Progress,
-  Separator,
-  Avatar,
-  Tabs,
-  TabsList,
-  TabsTrigger,
-  TabsContent,
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-  Tooltip,
-  TooltipProvider,
-  Select,
-  SelectTrigger,
-  SelectContent,
-  SelectItem,
-  SelectValue,
 } from "@sigil-ui/components";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
@@ -47,12 +18,13 @@ import { SigilFrame } from "@/components/landing/sigil-frame";
 import { ComponentShowcase } from "@/components/landing/component-showcase";
 import { ComponentAnatomyDiagram } from "@/components/landing/component-anatomy";
 import { TextureBg } from "@/components/texture-bg";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 
 const STATS = [
-  { value: "350+", label: "Token-Driven Components" },
-  { value: "28+13", label: "Radix + Base UI Primitives" },
-  { value: "519", label: "Design Tokens" },
-  { value: "46", label: "Presets" },
+  { value: SIGIL_PRODUCT_STATS.componentCountLabel, label: "Token-Driven Components" },
+  { value: `${SIGIL_PRODUCT_STATS.primitiveCount}+`, label: "Headless Primitives" },
+  { value: String(SIGIL_PRODUCT_STATS.tokenCount), label: "Design Tokens" },
+  { value: String(SIGIL_PRODUCT_STATS.presetCount), label: "Presets" },
 ] as const;
 
 const TOKEN_CARDS = [
@@ -66,7 +38,7 @@ const TOKEN_CARDS = [
   },
   {
     title: "Agent-friendly",
-    body: "AI agents edit tokens.md — a single markdown file. Components respond deterministically. No ambiguity, no hunting through files.",
+    body: "AI agents and humans edit DESIGN.md — one readable source of truth. Components respond deterministically without hunting through files.",
   },
 ] as const;
 
@@ -83,8 +55,8 @@ export default function ComponentsPage() {
             / Components
           </MonoLabel>
 
-          <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">
-            350+ Token-Driven Components.
+          <h1 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(var(--s-size-3xl),5vw,var(--s-size-5xl))] font-[var(--s-heading-display-weight)] leading-[var(--s-heading-display-leading)] tracking-[var(--s-heading-display-tracking)] text-[var(--s-text)]">
+            {SIGIL_PRODUCT_STATS.componentCountLabel} Token-Driven Components.
           </h1>
 
           <DensityText
@@ -103,12 +75,9 @@ export default function ComponentsPage() {
             <AccentCTA asChild>
               <a href="/docs/components/button">View Docs</a>
             </AccentCTA>
-            <a
-              href="/sandbox"
-              className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)] uppercase tracking-[0.08em]"
-            >
-              Open Sandbox
-            </a>
+            <Button asChild variant="outline" size="lg">
+              <a href="/sandbox">Open Sandbox</a>
+            </Button>
           </div>
         </div>
       </SigilSection>
@@ -226,12 +195,9 @@ export default function ComponentsPage() {
           <AccentCTA asChild>
             <a href="/docs">Get Started</a>
           </AccentCTA>
-          <a
-            href="/docs/theming"
-            className="inline-flex items-center px-5 py-2.5 bg-transparent text-[var(--s-text)] font-[family-name:var(--s-font-mono)] text-[13px] font-medium border border-[var(--s-border)] border-[style:var(--s-border-style,solid)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)] uppercase tracking-[0.08em]"
-          >
-            Read the Docs
-          </a>
+          <Button asChild variant="outline" size="lg">
+            <a href="/docs/theming">Read the Docs</a>
+          </Button>
         </div>
       </SigilSection>
 

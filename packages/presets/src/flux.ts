@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const fluxPreset: SigilPreset = {
+export const fluxPreset: SigilPreset = completePreset({
   name: "flux",
   metadata: {
     description: "Dynamic change. Gradient-heavy, movement-focused, energetic flow state.",
@@ -592,4 +593,4 @@ export const fluxPreset: SigilPreset = {
     },
 
   },
-};
+});

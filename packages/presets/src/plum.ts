@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const plumPreset: SigilPreset = {
+export const plumPreset: SigilPreset = completePreset({
   name: "plum",
   metadata: {
     description: "Luxurious plum surfaces with magenta depth. Dark-first preset with mauve light mode, elegant serif display, dramatic plum-tinted glows.",
@@ -588,4 +589,4 @@ export const plumPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

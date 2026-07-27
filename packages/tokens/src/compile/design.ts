@@ -36,8 +36,8 @@ export function compileDesignMd(doc: DesignDocument): string {
   out.push(`# ${metadata.brand} — Style Reference`);
   out.push(`> ${metadata.tagline}`);
   out.push("");
-  out.push(`**Theme:** ${metadata.theme}`);
-  out.push(`**Preset:** ${metadata.preset}`);
+  out.push(`**Theme:** ${metadata.theme}  `);
+  out.push(`**Preset:** ${metadata.preset}  `);
   out.push(`**Density:** ${metadata.density}`);
   out.push("");
   if (metadata.description) out.push(metadata.description);

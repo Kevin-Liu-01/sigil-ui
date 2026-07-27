@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const auraPreset: SigilPreset = {
+export const auraPreset: SigilPreset = completePreset({
   name: "aura",
   metadata: {
     description: "Ethereal dark with luminous violet glow. No gutter decoration, ambient gradients.",
@@ -588,4 +589,4 @@ export const auraPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

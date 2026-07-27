@@ -11,7 +11,7 @@
  * All 33 token categories. All ~519 fields. No gaps.
  */
 
-import type { SigilPreset } from "@sigil-ui/tokens";
+import { deepMerge, type SigilPreset } from "@sigil-ui/tokens";
 
 export const _templatePreset: SigilPreset = {
   name: "_template",
@@ -100,14 +100,14 @@ export const _templatePreset: SigilPreset = {
       "leading-relaxed": "1.625",
       "leading-loose": "2",
 
-      "tracking-tighter": "-0.04em",
-      "tracking-tight": "-0.02em",
-      "tracking-normal": "0em",
-      "tracking-wide": "0.02em",
-      "tracking-wider": "0.04em",
+      "tracking-tighter": "-0.03em",
+      "tracking-tight": "-0.015em",
+      "tracking-normal": "0.01em",
+      "tracking-wide": "0.035em",
+      "tracking-wider": "0.06em",
 
       "heading-weight": "600",
-      "heading-tracking": "-0.02em",
+      "heading-tracking": "-0.015em",
       "heading-transform": "none",
       "heading-family": "'PP Neue Montreal', system-ui, sans-serif",
     },
@@ -302,7 +302,7 @@ export const _templatePreset: SigilPreset = {
     buttons: {
       "font-weight": "600",
       "text-transform": "none",
-      "letter-spacing": "0em",
+      "letter-spacing": "0.01em",
       "font-family": "'PP Neue Montreal', system-ui, sans-serif",
       "border-width": "1px",
       "hover-effect": "darken",
@@ -341,11 +341,11 @@ export const _templatePreset: SigilPreset = {
     headings: {
       "h1-size": "2.125rem",
       "h1-weight": "700",
-      "h1-tracking": "-0.025em",
+      "h1-tracking": "-0.015em",
       "h1-leading": "1.2",
       "h2-size": "1.75rem",
       "h2-weight": "600",
-      "h2-tracking": "-0.02em",
+      "h2-tracking": "-0.01em",
       "h2-leading": "1.15",
       "h3-size": "1.4375rem",
       "h3-weight": "600",
@@ -353,11 +353,11 @@ export const _templatePreset: SigilPreset = {
       "h3-leading": "1.2",
       "h4-size": "1.1875rem",
       "h4-weight": "600",
-      "h4-tracking": "0em",
+      "h4-tracking": "0.005em",
       "h4-leading": "1.3",
       "display-size": "3.5rem",
       "display-weight": "800",
-      "display-tracking": "-0.04em",
+      "display-tracking": "-0.02em",
       "display-leading": "1.1",
     },
 
@@ -746,3 +746,21 @@ export const _templatePreset: SigilPreset = {
     },
   },
 };
+
+/**
+ * Resolve a curated preset against the canonical kitchen-sink template.
+ *
+ * This normalizes legacy curated definitions against the current canonical
+ * shape. The exported object always contains every field for direct imports,
+ * the lazy registry, DESIGN.md generation, and audits alike. New custom
+ * presets must still start from this template and populate the full surface.
+ */
+export function completePreset(preset: SigilPreset): SigilPreset {
+  return {
+    ...preset,
+    tokens: deepMerge(
+      _templatePreset.tokens as unknown as Record<string, unknown>,
+      preset.tokens as unknown as Record<string, unknown>,
+    ) as unknown as SigilPreset["tokens"],
+  };
+}

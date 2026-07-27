@@ -1,4 +1,5 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
 /**
  * Default preset — the authoritative neutral zinc theme.
@@ -12,7 +13,7 @@ import type { SigilPreset } from "@sigil-ui/tokens";
  * `build-tokens-css.mjs`. The runtime `SigilTokensProvider` skips injection
  * on initial load when this preset is active — the static CSS IS the default.
  */
-export const defaultPreset: SigilPreset = {
+export const defaultPreset: SigilPreset = completePreset({
   name: "default",
   metadata: {
     description:
@@ -22,49 +23,49 @@ export const defaultPreset: SigilPreset = {
   },
   tokens: {
     colors: {
-      background: { light: "#ffffff", dark: "#0a0a0f" },
-      surface: { light: "#f8f8fa", dark: "#141419" },
-      "surface-elevated": { light: "#ffffff", dark: "#1a1a22" },
-      "surface-sunken": { light: "#f0f0f4", dark: "#06060a" },
+      background: { light: "oklch(1 0 0)", dark: "oklch(0.1473 0.0107 285.0074)" },
+      surface: { light: "oklch(0.9797 0.0026 286.3507)", dark: "oklch(0.1935 0.01 285.4272)" },
+      "surface-elevated": { light: "oklch(1 0 0)", dark: "oklch(0.2215 0.0155 285.0636)" },
+      "surface-sunken": { light: "oklch(0.9563 0.0053 286.2985)", dark: "oklch(0.1246 0.0103 284.804)" },
 
-      primary: { light: "#18181b", dark: "#e4e4e7" },
-      "primary-hover": { light: "#27272a", dark: "#d4d4d8" },
-      "primary-muted": { light: "rgba(24, 24, 27, 0.1)", dark: "rgba(228, 228, 231, 0.1)" },
-      "primary-contrast": { light: "#ffffff", dark: "#0a0a0f" },
+      primary: { light: "oklch(0.2103 0.0059 285.8851)", dark: "oklch(0.9197 0.004 286.3201)" },
+      "primary-hover": { light: "oklch(0.2739 0.0055 286.0326)", dark: "oklch(0.8711 0.0055 286.2859)" },
+      "primary-muted": { light: "oklch(0.2103 0.0059 285.8851 / 0.1)", dark: "oklch(0.9197 0.004 286.3201 / 0.1)" },
+      "primary-contrast": { light: "oklch(1 0 0)", dark: "oklch(0.1473 0.0107 285.0074)" },
 
-      secondary: { light: "#f4f4f5", dark: "#27272a" },
-      "secondary-hover": { light: "#e4e4e7", dark: "#3f3f46" },
-      "secondary-muted": { light: "rgba(244, 244, 245, 0.6)", dark: "rgba(39, 39, 42, 0.6)" },
+      secondary: { light: "oklch(0.9674 0.0013 286.3748)", dark: "oklch(0.2739 0.0055 286.0326)" },
+      "secondary-hover": { light: "oklch(0.9197 0.004 286.3201)", dark: "oklch(0.3703 0.0119 285.8054)" },
+      "secondary-muted": { light: "oklch(0.9674 0.0013 286.3748 / 0.6)", dark: "oklch(0.2739 0.0055 286.0326 / 0.6)" },
 
-      accent: { light: "#f4f4f5", dark: "#27272a" },
-      "accent-hover": { light: "#e4e4e7", dark: "#3f3f46" },
-      "accent-muted": { light: "rgba(244, 244, 245, 0.6)", dark: "rgba(39, 39, 42, 0.6)" },
+      accent: { light: "oklch(0.9674 0.0013 286.3748)", dark: "oklch(0.2739 0.0055 286.0326)" },
+      "accent-hover": { light: "oklch(0.9197 0.004 286.3201)", dark: "oklch(0.3703 0.0119 285.8054)" },
+      "accent-muted": { light: "oklch(0.9674 0.0013 286.3748 / 0.6)", dark: "oklch(0.2739 0.0055 286.0326 / 0.6)" },
 
-      text: { light: "#0a0a0f", dark: "#fafafa" },
-      "text-secondary": { light: "#4a4a55", dark: "#a0a0aa" },
-      "text-muted": { light: "#8a8a95", dark: "#8888a0" },
-      "text-subtle": { light: "#a8a8b3", dark: "#646470" },
-      "text-disabled": { light: "#c8c8d0", dark: "#3a3a44" },
-      "text-inverse": { light: "#fafafa", dark: "#0a0a0f" },
+      text: { light: "oklch(0.1473 0.0107 285.0074)", dark: "oklch(0.9851 0 0)" },
+      "text-secondary": { light: "oklch(0.4132 0.0182 285.5764)", dark: "oklch(0.7089 0.0144 286.0268)" },
+      "text-muted": { light: "oklch(0.637 0.0163 285.9285)", dark: "oklch(0.635 0.0357 285.3383)" },
+      "text-subtle": { light: "oklch(0.735 0.0157 286.0072)", dark: "oklch(0.5075 0.0188 285.7093)" },
+      "text-disabled": { light: "oklch(0.8352 0.011 286.1583)", dark: "oklch(0.3524 0.0172 285.4824)" },
+      "text-inverse": { light: "oklch(0.9851 0 0)", dark: "oklch(0.1473 0.0107 285.0074)" },
 
-      border: { light: "#8a8a98", dark: "#38384e" },
-      "border-muted": { light: "#d0d0d8", dark: "#28283b" },
-      "border-strong": { light: "#808090", dark: "#3c3c50" },
-      "border-interactive": { light: "#18181b", dark: "#e4e4e7" },
+      border: { light: "oklch(0.638 0.0207 285.7973)", dark: "oklch(0.3503 0.0381 284.2617)" },
+      "border-muted": { light: "oklch(0.86 0.011 286.1671)", dark: "oklch(0.2857 0.0346 283.9948)" },
+      "border-strong": { light: "oklch(0.6053 0.024 285.6594)", dark: "oklch(0.3646 0.0343 284.5726)" },
+      "border-interactive": { light: "oklch(0.2103 0.0059 285.8851)", dark: "oklch(0.9197 0.004 286.3201)" },
 
-      success: "#059669",
-      "success-muted": { light: "#ecfdf5", dark: "#052e16" },
-      warning: "#d97706",
-      "warning-muted": { light: "#fffbeb", dark: "#451a03" },
-      error: "#dc2626",
-      "error-muted": { light: "#fef2f2", dark: "#450a0a" },
-      info: "#2563eb",
-      "info-muted": { light: "#eff6ff", dark: "#172554" },
+      success: "oklch(0.596 0.1274 163.2254)",
+      "success-muted": { light: "oklch(0.9793 0.0207 166.113)", dark: "oklch(0.2664 0.0628 152.9343)" },
+      warning: "oklch(0.6658 0.1574 58.3183)",
+      "warning-muted": { light: "oklch(0.9869 0.0214 95.2774)", dark: "oklch(0.2791 0.0742 45.6352)" },
+      error: "oklch(0.5771 0.2152 27.325)",
+      "error-muted": { light: "oklch(0.9705 0.0129 17.3795)", dark: "oklch(0.2575 0.0886 26.0418)" },
+      info: "oklch(0.5461 0.2152 262.8809)",
+      "info-muted": { light: "oklch(0.9705 0.0142 254.6042)", dark: "oklch(0.2823 0.0874 267.9352)" },
 
-      "gradient-start": "#18181b",
-      "gradient-end": "#71717a",
-      glow: "rgba(24, 24, 27, 0.15)",
-      highlight: { light: "#fef9c3", dark: "rgba(250, 204, 21, 0.15)" },
+      "gradient-start": "oklch(0.2103 0.0059 285.8851)",
+      "gradient-end": "oklch(0.5517 0.0138 285.9384)",
+      glow: "oklch(0.2103 0.0059 285.8851 / 0.15)",
+      highlight: { light: "oklch(0.9729 0.0693 103.1933)", dark: "oklch(0.8606 0.1731 91.9357 / 0.15)" },
     },
     typography: {
       "font-display": '"PP Mori", system-ui, sans-serif',
@@ -89,13 +90,13 @@ export const defaultPreset: SigilPreset = {
       "leading-normal": "1.5",
       "leading-relaxed": "1.625",
       "leading-loose": "2",
-      "tracking-tighter": "-0.04em",
-      "tracking-tight": "-0.025em",
-      "tracking-normal": "0em",
-      "tracking-wide": "0.025em",
-      "tracking-wider": "0.05em",
+      "tracking-tighter": "-0.03em",
+      "tracking-tight": "-0.015em",
+      "tracking-normal": "0.01em",
+      "tracking-wide": "0.035em",
+      "tracking-wider": "0.06em",
       "heading-weight": "600",
-      "heading-tracking": "-0.025em",
+      "heading-tracking": "-0.015em",
       "heading-transform": "none",
       "heading-family": '"PP Mori", system-ui, sans-serif',
     },
@@ -158,6 +159,9 @@ export const defaultPreset: SigilPreset = {
       "card-radius": "0px",
       "gutter-pattern": "horizontal-thin",
       "margin-pattern": "horizontal",
+      "gutter-border": "1px solid var(--s-border-muted)",
+      "margin-border": "none",
+      "gutter-visible": true,
       // Structural band heights aligned to the rail grid. NEVER reproduce
       // these calculations inside components — consume the var directly.
       //
@@ -245,7 +249,7 @@ export const defaultPreset: SigilPreset = {
     buttons: {
       "font-weight": "500",
       "text-transform": "none",
-      "letter-spacing": "0em",
+      "letter-spacing": "0.01em",
       "font-family": "inherit",
       "border-width": "1px",
       "hover-effect": "darken",
@@ -270,11 +274,11 @@ export const defaultPreset: SigilPreset = {
     headings: {
       "h1-size": "2.25rem",
       "h1-weight": "700",
-      "h1-tracking": "-0.025em",
+      "h1-tracking": "-0.015em",
       "h1-leading": "1.1",
       "h2-size": "1.875rem",
       "h2-weight": "600",
-      "h2-tracking": "-0.02em",
+      "h2-tracking": "-0.01em",
       "h2-leading": "1.15",
       "h3-size": "1.5rem",
       "h3-weight": "600",
@@ -282,11 +286,11 @@ export const defaultPreset: SigilPreset = {
       "h3-leading": "1.2",
       "h4-size": "1.25rem",
       "h4-weight": "600",
-      "h4-tracking": "0em",
+      "h4-tracking": "0.005em",
       "h4-leading": "1.3",
       "display-size": "3.75rem",
       "display-weight": "800",
-      "display-tracking": "-0.03em",
+      "display-tracking": "-0.02em",
       "display-leading": "1.05",
     },
     navigation: {
@@ -626,4 +630,4 @@ export const defaultPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

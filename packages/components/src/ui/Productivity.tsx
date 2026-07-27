@@ -58,7 +58,7 @@ export const CodePreview = forwardRef<HTMLDivElement, CodePreviewProps>(function
   return (
     <div ref={ref} className={cn("grid overflow-hidden rounded-[var(--s-card-radius,10px)] border border-[color:var(--s-border)]", className)} {...props}>
       <div className="bg-[var(--s-background)] p-4">{preview}</div>
-      {code && <CodeBlock code={code} language={language} className="rounded-none border-x-0 border-b-0" />}
+      {code && <CodeBlock code={code} language={language} className="rounded-[var(--s-radius-none)] border-x-0 border-b-0" />}
     </div>
   );
 });
@@ -235,7 +235,7 @@ export const ActivityTimeline = forwardRef<HTMLOListElement, ActivityTimelinePro
   return (
     <ol ref={ref} className={cn("grid gap-4 border-l border-[color:var(--s-border)] pl-4", className)} {...props}>
       {items?.map((item, index) => (
-        <li key={index} className="relative grid gap-1 before:absolute before:-left-[21px] before:top-1.5 before:size-2 before:rounded-full before:bg-[var(--s-primary)]">
+        <li key={index} className="relative grid gap-1 before:absolute before:-left-[var(--s-space-20)] before:top-1.5 before:size-2 before:rounded-[var(--s-radius-full)] before:bg-[var(--s-primary)]">
           <div className="font-medium text-[var(--s-text)]">{item.title}</div>
           {item.description && <div className="text-sm text-[var(--s-text-muted)]">{item.description}</div>}
           {item.meta && <div className="text-xs text-[var(--s-text-muted)]">{item.meta}</div>}
@@ -277,4 +277,3 @@ export const KeyboardKey = forwardRef<HTMLElement, HTMLAttributes<HTMLElement>>(
 ) {
   return <kbd ref={ref} className={cn("rounded-[var(--s-radius-sm,4px)] border border-[color:var(--s-border)] bg-[var(--s-surface)] px-1.5 py-0.5 font-mono text-xs shadow-[var(--s-shadow-sm)]", className)} {...props} />;
 });
-

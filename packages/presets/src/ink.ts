@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const inkPreset: SigilPreset = {
+export const inkPreset: SigilPreset = completePreset({
   name: "ink",
   metadata: {
     description: "Deep indigo surfaces with violet-tinted depth. Dark-first preset with lavender light mode, modern sans typography, indigo-tinted glows.",
@@ -588,4 +589,4 @@ export const inkPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

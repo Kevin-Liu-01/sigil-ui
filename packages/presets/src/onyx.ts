@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const onyxPreset: SigilPreset = {
+export const onyxPreset: SigilPreset = completePreset({
   name: "onyx",
   metadata: {
     description: "Luxury dark. Gem-like depth, premium refinement, amethyst and gold.",
@@ -590,4 +591,4 @@ export const onyxPreset: SigilPreset = {
     },
 
   },
-};
+});

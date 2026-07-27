@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const mossPreset: SigilPreset = {
+export const mossPreset: SigilPreset = completePreset({
   name: "moss",
   metadata: {
     description: "Dark forest green with organic-tech energy. Deep mossy backgrounds, bright green primaries, warm gold accent.",
@@ -588,4 +589,4 @@ export const mossPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

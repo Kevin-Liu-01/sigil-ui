@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const sandPreset: SigilPreset = {
+export const sandPreset: SigilPreset = completePreset({
   name: "sand",
   metadata: {
     description: "Desert warm sand surfaces with golden depth. Tinted backgrounds in both modes, elegant serif display, clean minimal edges.",
@@ -588,4 +589,4 @@ export const sandPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

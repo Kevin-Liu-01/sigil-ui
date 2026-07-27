@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const fieldPreset: SigilPreset = {
+export const fieldPreset: SigilPreset = completePreset({
   name: "field",
   metadata: {
     description: "Clean utilitarian open space. Forest green accent, monospace-forward, functional precision.",
@@ -588,4 +589,4 @@ export const fieldPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

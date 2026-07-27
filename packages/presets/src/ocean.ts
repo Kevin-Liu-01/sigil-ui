@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const oceanPreset: SigilPreset = {
+export const oceanPreset: SigilPreset = completePreset({
   name: "ocean",
   metadata: {
     description: "Deep teal ocean with calming depth. Teal-tinted backgrounds, fluid radii, seafoam accents.",
@@ -588,4 +589,4 @@ export const oceanPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

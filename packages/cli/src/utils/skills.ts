@@ -114,7 +114,8 @@ export function getMissingSigilSkillFiles(cwd: string): string[] {
   for (const skill of SIGIL_SKILLS) {
     for (const file of skill.files) {
       const relativePath = path.join(".sigil", "skills", skill.id, file);
-      if (!fs.existsSync(path.join(cwd, relativePath))) {
+      const sourcePath = path.join("skills", skill.id, file);
+      if (!fs.existsSync(path.join(cwd, relativePath)) && !fs.existsSync(path.join(cwd, sourcePath))) {
         missing.push(relativePath.replaceAll(path.sep, "/"));
       }
     }
@@ -124,7 +125,10 @@ export function getMissingSigilSkillFiles(cwd: string): string[] {
 }
 
 export function hasSigilCursorRule(cwd: string): boolean {
-  return fs.existsSync(path.join(cwd, ".cursor", "rules", "sigil-skills.mdc"));
+  return (
+    fs.existsSync(path.join(cwd, ".cursor", "rules", "sigil-skills.mdc")) ||
+    fs.existsSync(path.join(cwd, ".cursor", "rules", "sigil-design-system.mdc"))
+  );
 }
 
 export function generateRequiredSkillsSection(): string {

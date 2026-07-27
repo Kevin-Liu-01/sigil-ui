@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const sagePreset: SigilPreset = {
+export const sagePreset: SigilPreset = completePreset({
   name: "sage",
   metadata: {
     description: "Botanical sage-green surfaces with forest depth. Tinted backgrounds in both modes, classic serif headings, calm natural palette.",
@@ -588,4 +589,4 @@ export const sagePreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

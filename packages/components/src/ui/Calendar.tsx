@@ -318,9 +318,9 @@ function CalendarDayButton({
         "data-[range-start=true]:bg-[var(--s-primary)] data-[range-start=true]:text-[var(--s-primary-contrast)] data-[range-start=true]:font-medium",
         "data-[range-end=true]:bg-[var(--s-primary)] data-[range-end=true]:text-[var(--s-primary-contrast)] data-[range-end=true]:font-medium",
         // range middle
-        "data-[range-middle=true]:rounded-none data-[range-middle=true]:bg-transparent data-[range-middle=true]:text-[var(--s-text)]",
+        "data-[range-middle=true]:rounded-[var(--s-radius-none)] data-[range-middle=true]:bg-transparent data-[range-middle=true]:text-[var(--s-text)]",
         // today indicator: subtle dot under the number
-        "data-[today=true]:after:absolute data-[today=true]:after:bottom-1 data-[today=true]:after:left-1/2 data-[today=true]:after:h-[3px] data-[today=true]:after:w-[3px] data-[today=true]:after:-translate-x-1/2 data-[today=true]:after:rounded-full data-[today=true]:after:bg-[var(--s-primary)]",
+        "data-[today=true]:after:absolute data-[today=true]:after:bottom-1 data-[today=true]:after:left-1/2 data-[today=true]:after:size-[var(--s-control-track-height)] data-[today=true]:after:-translate-x-1/2 data-[today=true]:after:rounded-[var(--s-radius-full)] data-[today=true]:after:bg-[var(--s-primary)]",
         "disabled:pointer-events-none disabled:opacity-40",
         className,
       )}

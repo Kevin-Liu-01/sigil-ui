@@ -12,13 +12,23 @@ import {
   AccentActive,
   AccentCTA,
   BorderStack,
+  Button,
+  Badge,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+  Input,
   GapPixelGrid,
   GapPixelCell,
 } from "@sigil-ui/components";
 import { LandingNavbar } from "@/components/landing/navbar";
 import { LandingFooter } from "@/components/landing/footer";
 import { SigilFrame } from "@/components/landing/sigil-frame";
+import { SigilTokensProvider } from "@/components/sandbox/token-provider";
 import { TextureBg } from "@/components/texture-bg";
+import { SIGIL_PRODUCT_STATS } from "@/lib/product-stats";
 import {
   Palette,
   Type,
@@ -55,7 +65,7 @@ import {
   Check,
 } from "lucide-react";
 import type { SigilPreset, SigilTokens } from "@sigil-ui/tokens";
-import { presetCatalog, type PresetCatalogEntry } from "@sigil-ui/presets";
+import { presetCatalog } from "@sigil-ui/presets";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -103,6 +113,11 @@ const CATEGORY_META: CategoryMeta[] = [
   { key: "media", label: "Media", icon: ImageIcon, description: "Radius, border, outline, shadow, object-fit" },
   { key: "controls", label: "Controls", icon: SlidersHorizontal, description: "Heights, hit area, track/thumb styling" },
   { key: "componentSurfaces", label: "Component Surfaces", icon: Box, description: "Background, border, text, hover/active/selected states" },
+  { key: "hero", label: "Hero", icon: Heading, description: "Hero height, layout, content width, typography, and actions" },
+  { key: "cta", label: "CTA", icon: MousePointerClick, description: "Call-to-action layout, spacing, typography, and action sizing" },
+  { key: "footer", label: "Footer", icon: Rows3, description: "Footer columns, gaps, logo, links, socials, and bottom bar" },
+  { key: "banner", label: "Banner", icon: Compass, description: "Announcement height, position, typography, icon, and dismissal" },
+  { key: "pageRhythm", label: "Page Rhythm", icon: LayoutGrid, description: "Page density, section rhythm, alternation, dividers, and scroll behavior" },
 ];
 
 const TABS = ["Preview", "Colors", "Typography", "Shapes", "Tokens", "Output", "DESIGN.md"] as const;
@@ -246,97 +261,44 @@ function TokenSection({ meta, tokens, forceOpen }: { meta: CategoryMeta; tokens:
 // Component Preview
 // ---------------------------------------------------------------------------
 
-function ComponentPreview({ tokens }: { tokens: SigilTokens }) {
-  const primary = resolveColor(tokens.colors.primary) ?? "oklch(0.55 0.15 280)";
-  const surface = resolveColor(tokens.colors.surface) ?? "oklch(0.97 0 0)";
-  const bg = resolveColor(tokens.colors.background) ?? "oklch(0.99 0 0)";
-  const text = resolveColor(tokens.colors.text) ?? "oklch(0.15 0 0)";
-  const border = resolveColor(tokens.colors.border) ?? "oklch(0.90 0 0)";
-  const radius = tokens.radius?.md ?? "8px";
-  const fontDisplay = tokens.typography["font-display"].split(",")[0].replace(/['"]/g, "");
-
+function ComponentPreview() {
   return (
-    <div className="p-6 border border-[var(--s-border-muted)] bg-[var(--s-surface)]" style={{ borderRadius: radius }}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Buttons */}
+    <div className="border border-[style:var(--s-border-style)] border-[color:var(--s-border-muted)] bg-[var(--s-surface)] p-[var(--s-card-padding)]">
+      <div className="grid grid-cols-1 gap-[var(--s-grid-gap)] md:grid-cols-2">
         <div className="flex flex-col gap-3">
           <MonoLabel size="sm" className="mb-1">Buttons</MonoLabel>
           <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center h-9 px-4 text-[13px] font-medium text-white cursor-pointer transition-transform active:scale-[0.97]"
-              style={{ background: primary, borderRadius: radius, border: "none" }}
-            >
-              Primary Action
-            </button>
-            <button
-              type="button"
-              className="inline-flex items-center justify-center h-9 px-4 text-[13px] font-medium cursor-pointer transition-all"
-              style={{ background: "transparent", borderRadius: radius, border: `1px solid ${primary}`, color: primary }}
-            >
-              Secondary
-            </button>
-            <button
-              type="button"
-              className="inline-flex items-center justify-center h-9 px-4 text-[13px] font-medium cursor-pointer transition-all"
-              style={{ background: "transparent", border: "none", color: text, opacity: 0.7 }}
-            >
-              Ghost
-            </button>
+            <Button>Primary Action</Button>
+            <Button variant="outline">Secondary</Button>
+            <Button variant="ghost">Ghost</Button>
           </div>
         </div>
 
-        {/* Input */}
         <div className="flex flex-col gap-3">
           <MonoLabel size="sm" className="mb-1">Input</MonoLabel>
-          <div
-            className="flex items-center h-9 px-3 text-[13px]"
-            style={{ background: bg, border: `1px solid ${border}`, borderRadius: radius, color: text }}
-          >
-            <span style={{ opacity: 0.5 }}>Search or type a command...</span>
-          </div>
-          <div
-            className="flex items-center h-9 px-3 text-[13px]"
-            style={{ background: bg, border: `1px solid ${primary}`, borderRadius: radius, color: text, boxShadow: `0 0 0 2px color-mix(in oklch, ${primary} 20%, transparent)` }}
-          >
-            Focused input
-          </div>
+          <Input aria-label="Preset component preview input" placeholder="Search or type a command…" />
+          <Input aria-label="Preset component preview error input" defaultValue="Token-driven input" error="Example validation message" />
         </div>
 
-        {/* Card */}
         <div className="flex flex-col gap-3">
           <MonoLabel size="sm" className="mb-1">Card</MonoLabel>
-          <div
-            className="p-4 flex flex-col gap-2"
-            style={{ background: surface, border: `1px solid ${border}`, borderRadius: radius }}
-          >
-            <span className="text-[14px] font-semibold" style={{ color: text, fontFamily: fontDisplay }}>{fontDisplay} Card Title</span>
-            <span className="text-[12px]" style={{ color: text, opacity: 0.6 }}>Card description with body text showing the typography stack in action.</span>
-          </div>
+          <Card>
+            <CardHeader>
+              <CardTitle>Token-driven card</CardTitle>
+              <CardDescription>Typography, borders, radius, spacing, and shadow all come from this preset.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <TabularValue size="xs" muted>var(--s-card-*)</TabularValue>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Badge + Tags */}
         <div className="flex flex-col gap-3">
           <MonoLabel size="sm" className="mb-1">Badges & Tags</MonoLabel>
           <div className="flex flex-wrap gap-2">
-            <span
-              className="inline-flex items-center px-2.5 py-0.5 text-[11px] font-medium"
-              style={{ background: primary, color: "white", borderRadius: radius }}
-            >
-              Active
-            </span>
-            <span
-              className="inline-flex items-center px-2.5 py-0.5 text-[11px] font-medium"
-              style={{ background: "transparent", border: `1px solid ${border}`, color: text, borderRadius: radius }}
-            >
-              Default
-            </span>
-            <span
-              className="inline-flex items-center px-2.5 py-0.5 text-[11px] font-medium"
-              style={{ background: surface, color: text, borderRadius: radius, opacity: 0.7 }}
-            >
-              Muted
-            </span>
+            <Badge>Active</Badge>
+            <Badge variant="outline">Default</Badge>
+            <Badge variant="secondary">Muted</Badge>
           </div>
         </div>
       </div>
@@ -687,7 +649,7 @@ export default function PresetDetailPage() {
       .map((meta) => ({ meta, tokens: (preset.tokens as Record<string, unknown>)[meta.key] as Record<string, unknown> }));
   }, [preset]);
 
-  const totalTokens = useMemo(() => sections.reduce((acc, s) => acc + Object.keys(s.tokens).length, 0), [sections]);
+  const totalTokens = SIGIL_PRODUCT_STATS.tokenCount;
 
   const [filterText, setFilterText] = useState("");
   const [expandAll, setExpandAll] = useState(false);
@@ -710,10 +672,10 @@ export default function PresetDetailPage() {
       .filter(Boolean) as typeof sections;
   }, [sections, filterText]);
 
-  return (
+  const page = (
     <SigilFrame>
       <LandingNavbar />
-      <BorderStack>
+      <BorderStack borders="none">
         {/* Hero */}
         <SigilSection borderTop space="hero" className="relative overflow-hidden">
           <TextureBg opacity={0.3} />
@@ -730,13 +692,13 @@ export default function PresetDetailPage() {
               </div>
             ) : error ? (
               <div>
-                <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)] mb-4">Preset not found</h1>
+                <h1 className="mb-4 font-[family-name:var(--s-font-display)] text-[clamp(var(--s-size-3xl),5vw,var(--s-size-5xl))] font-[var(--s-heading-display-weight)] leading-[var(--s-heading-display-leading)] tracking-[var(--s-heading-display-tracking)] text-[var(--s-text)]">Preset not found</h1>
                 <DensityText role="body" as="p" muted>{error}</DensityText>
               </div>
             ) : (
               <>
                 <div className="flex items-center gap-3 mb-2">
-                  <h1 className="font-[family-name:var(--s-font-display)] font-bold text-[clamp(32px,5vw,56px)] leading-[1.08] tracking-[-0.03em] text-[var(--s-text)]">{catalogEntry?.label ?? name}</h1>
+                  <h1 className="font-[family-name:var(--s-font-display)] text-[clamp(var(--s-size-3xl),5vw,var(--s-size-5xl))] font-[var(--s-heading-display-weight)] leading-[var(--s-heading-display-leading)] tracking-[var(--s-heading-display-tracking)] text-[var(--s-text)]">{catalogEntry?.label ?? name}</h1>
                   {preset && (
                     <span
                       className="inline-block h-5 w-5 rounded-full border border-[var(--s-border)]"
@@ -749,7 +711,7 @@ export default function PresetDetailPage() {
                 <div className="flex flex-wrap items-center gap-3 mb-4">
                   {catalogEntry && <MonoLabel variant="accent" size="sm">{catalogEntry.category}</MonoLabel>}
                   {preset?.metadata.mood && <TabularValue size="xs" muted>{preset.metadata.mood}</TabularValue>}
-                  <TabularValue size="xs" muted>{sections.length} categories &middot; {totalTokens} tokens</TabularValue>
+                  <TabularValue size="xs" muted>{SIGIL_PRODUCT_STATS.categoryCount} categories &middot; {totalTokens} tokens</TabularValue>
                 </div>
                 {preset?.metadata.tags && preset.metadata.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5">
@@ -792,7 +754,7 @@ export default function PresetDetailPage() {
                 </GapPixelCell>
                 <GapPixelCell className="p-4">
                   <MonoLabel size="sm" className="mb-1 block text-[var(--s-text-muted)]">Categories</MonoLabel>
-                  <TabularValue size="xs">{sections.length} / 33</TabularValue>
+                  <TabularValue size="xs">{sections.length} / {SIGIL_PRODUCT_STATS.categoryCount}</TabularValue>
                 </GapPixelCell>
               </GapPixelGrid>
             </SigilSection>
@@ -820,7 +782,7 @@ export default function PresetDetailPage() {
             </div>
 
             {/* Preview tab */}
-            {activeTab === "Preview" && <ComponentPreview tokens={preset.tokens} />}
+            {activeTab === "Preview" && <ComponentPreview />}
 
             {/* Colors tab */}
             {activeTab === "Colors" && <ColorPalette tokens={preset.tokens} />}
@@ -901,4 +863,10 @@ export default function PresetDetailPage() {
       <LandingFooter />
     </SigilFrame>
   );
+
+  return preset ? (
+    <SigilTokensProvider initialPreset={preset} styleTagAttr="data-sigil-preset-detail">
+      {page}
+    </SigilTokensProvider>
+  ) : page;
 }

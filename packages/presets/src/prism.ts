@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const prismPreset: SigilPreset = {
+export const prismPreset: SigilPreset = completePreset({
   name: "prism",
   metadata: {
     description: "Light spectrum — colorful rainbow celebration, playful gradients, joyful UI.",
@@ -566,4 +567,4 @@ export const prismPreset: SigilPreset = {
     },
 
   },
-};
+});

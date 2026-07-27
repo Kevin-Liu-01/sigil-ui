@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const vastPreset: SigilPreset = {
+export const vastPreset: SigilPreset = completePreset({
   name: "vast",
   metadata: {
     description: "Expansive open space. Warm editorial tones, generous whitespace, no gutter decoration.",
@@ -588,4 +589,4 @@ export const vastPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

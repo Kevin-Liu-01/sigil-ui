@@ -148,7 +148,7 @@ export const Callout = forwardRef<HTMLDivElement, CalloutProps>(function Callout
 });
 
 export const BannerAlert = forwardRef<HTMLDivElement, CalloutProps>(function BannerAlert({ className, ...props }, ref) {
-  return <Callout ref={ref} className={cn("rounded-none border-x-0", className)} {...props} />;
+  return <Callout ref={ref} className={cn("rounded-[var(--s-radius-none)] border-x-0", className)} {...props} />;
 });
 
 export interface StateProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {

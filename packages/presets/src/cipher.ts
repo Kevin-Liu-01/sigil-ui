@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const cipherPreset: SigilPreset = {
+export const cipherPreset: SigilPreset = completePreset({
   name: "cipher",
   metadata: {
     description: "Encrypted hacker — monospace-heavy, terminal green, encoded aesthetic.",
@@ -561,4 +562,4 @@ export const cipherPreset: SigilPreset = {
     },
 
   },
-};
+});

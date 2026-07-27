@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const coralPreset: SigilPreset = {
+export const coralPreset: SigilPreset = completePreset({
   name: "coral",
   metadata: {
     description: "Soft coral pink with warm, friendly energy. Rounded surfaces, approachable typography, inviting palettes.",
@@ -588,4 +589,4 @@ export const coralPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

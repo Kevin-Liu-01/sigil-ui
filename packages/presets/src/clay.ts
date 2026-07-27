@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const clayPreset: SigilPreset = {
+export const clayPreset: SigilPreset = completePreset({
   name: "clay",
   metadata: {
     description: "Warm terracotta surfaces with earthy depth. Tinted backgrounds in both modes, handcrafted serif typography, soft warm shadows.",
@@ -588,4 +589,4 @@ export const clayPreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

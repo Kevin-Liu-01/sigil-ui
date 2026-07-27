@@ -178,7 +178,7 @@ function Hero() {
 
           <SigilInline
             marginTop="lg"
-            gap="calc(var(--s-grid-cell) / 12)"
+            gap="xs"
             className="max-w-full flex-wrap"
           >
             {HERO_PRESETS.map((name) => (
@@ -190,7 +190,7 @@ function Hero() {
                 onPointerEnter={() => void preloadPreset?.(name)}
                 onFocus={() => void preloadPreset?.(name)}
                 onClick={() => handlePresetDot(name)}
-                className="min-h-[var(--s-control-hit-area,2.75rem)] cursor-pointer border border-[var(--s-border)] bg-[var(--s-surface)] px-[calc(var(--s-grid-cell)/12)] font-[family-name:var(--s-font-mono)] text-[var(--s-badge-font-size,0.625rem)] uppercase tracking-[var(--s-tracking-wide,0.08em)] text-[var(--s-text-muted)] transition-[background-color,border-color,color,transform] duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary)] hover:text-[var(--s-text)] active:scale-[var(--s-button-active-scale,0.98)]"
+                className="min-h-[var(--s-control-hit-area,2.75rem)] cursor-pointer border border-[var(--s-border)] bg-[var(--s-surface)] px-[var(--s-badge-padding-x)] font-[family-name:var(--s-font-mono)] text-[var(--s-badge-font-size,0.625rem)] uppercase tracking-[var(--s-tracking-wide,0.08em)] text-[var(--s-text-muted)] transition-[background-color,border-color,color,transform] duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary)] hover:text-[var(--s-text)] active:scale-[var(--s-button-active-scale,0.98)]"
               >
                 {name === "default" ? "base" : name}
               </button>

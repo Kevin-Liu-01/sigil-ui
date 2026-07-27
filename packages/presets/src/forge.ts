@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const forgePreset: SigilPreset = {
+export const forgePreset: SigilPreset = completePreset({
   name: "forge",
   metadata: {
     description: "Hot metal. Orange fire, heavy weight, blacksmith intensity. Built to endure.",
@@ -591,4 +592,4 @@ export const forgePreset: SigilPreset = {
     },
 
   },
-};
+});

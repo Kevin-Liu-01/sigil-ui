@@ -2034,46 +2034,117 @@ function PresetDots() {
 }
 
 /* ================================================================ */
-/*  Export — curated 4-column gallery                                  */
+/*  Export — balanced 4-column component gallery                      */
 /* ================================================================ */
+
+function DeployColumn() {
+  return (
+    <div className="flex flex-col gap-3">
+      <DeployCard />
+      <ToolbarRow />
+      <BuildStatus />
+      <StatusBadgesRow />
+      <ChatInputRow />
+      <SliderRow />
+      <BadgeRow />
+      <VerifiedRow />
+      <ToggleGroupRow />
+      <MentionRow />
+      <ConnectedRow />
+      <MeterRow />
+      <EnvironmentRow />
+      <DatePickerRow />
+      <CommitMessageRow />
+      <UptimeRow />
+      <LatencyBuildRow />
+      <VoronoiRow />
+      <TrafficCommitRow />
+      <SessionCountRow />
+      <QuickActionsRow />
+    </div>
+  );
+}
+
+function TokensColumn() {
+  return (
+    <div className="flex flex-col gap-3">
+      <TokenEditorCard />
+      <TokenPreviewCard />
+      <GPUCounterRow />
+      <TintingRow />
+      <PriceRangeRow />
+      <SpinnersShowcase />
+      <BreadcrumbRow />
+      <UrlInputRow />
+      <CalendarCard />
+      <AlertWarningRow />
+      <FontStackRow />
+      <RadiusPreviewRow />
+      <TokenPreviewStrip />
+      <SpacingScaleRow />
+    </div>
+  );
+}
+
+function AnalyticsColumn() {
+  return (
+    <div className="flex flex-col gap-3">
+      <AnalyticsKPIs />
+      <CheckboxRow />
+      <TabsRow />
+      <AnalyticsTable />
+      <SearchCountRow />
+      <SkeletonRow />
+      <ActivityFeed />
+      <TwoFactorRow />
+      <ProgressRow />
+      <TagInputRow />
+      <SearchRow />
+      <ButtonRow />
+      <DeployHistoryRow />
+      <RatingRow />
+      <AlertSuccessRow />
+      <KbdShortcutRow />
+      <ErrorActiveRow />
+      <SkeletonCardRow />
+      <MiniSparkline />
+    </div>
+  );
+}
+
+function OnboardingColumn() {
+  return (
+    <div className="flex flex-col gap-3">
+      <OnboardingStepper />
+      <PlanSelector />
+      <PaginationRow />
+      <AiChatRow />
+      <AvatarStackRow />
+      <InviteCard />
+      <NotificationsRow />
+      <DateRangeRow />
+      <AlertRow />
+      <StarRatingRow />
+      <KeyValueRow />
+      <WifiRow />
+      <StorageMeterRow />
+      <RegionBadgesRow />
+      <CacheHitRow />
+      <HotkeyRow />
+      <LatencyAreaRow />
+    </div>
+  );
+}
 
 export function HeroShowcase({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div className={className} style={style}>
       <div className="hero-gallery">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-3">
-          {/* Col 1 — Deploy */}
-          <div className="flex flex-col gap-3">
-            <DeployCard />
-            <ToolbarRow />
-            <BuildStatus />
-            <ChatInputRow />
-            <QuickActionsRow />
-          </div>
-          {/* Col 2 — Tokens */}
-          <div className="flex flex-col gap-3">
-            <TokenEditorCard />
-            <TokenPreviewCard />
-            <PriceRangeRow />
-            <CalendarCard />
-            <SpacingScaleRow />
-          </div>
-          {/* Col 3 — Analytics */}
-          <div className="flex flex-col gap-3">
-            <AnalyticsKPIs />
-            <AnalyticsTable />
-            <ActivityFeed />
-            <ProgressRow />
-            <MiniSparkline />
-          </div>
-          {/* Col 4 — Onboarding */}
-          <div className="flex flex-col gap-3">
-            <OnboardingStepper />
-            <PlanSelector />
-            <AiChatRow />
-            <InviteCard />
-            <NotificationsRow />
-          </div>
+        <div className="grid grid-cols-1 items-stretch gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <DeployColumn />
+          <TokensColumn />
+          <AnalyticsColumn />
+          <OnboardingColumn />
         </div>
       </div>
     </div>

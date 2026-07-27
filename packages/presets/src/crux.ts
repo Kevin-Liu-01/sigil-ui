@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const cruxPreset: SigilPreset = {
+export const cruxPreset: SigilPreset = completePreset({
   name: "crux",
   metadata: {
     description: "Decisive minimal. Maximum whitespace. The essential kernel, nothing more.",
@@ -590,4 +591,4 @@ export const cruxPreset: SigilPreset = {
     },
 
   },
-};
+});

@@ -1,6 +1,7 @@
 import type { SigilPreset } from "@sigil-ui/tokens";
+import { completePreset } from "./_template";
 
-export const rosePreset: SigilPreset = {
+export const rosePreset: SigilPreset = completePreset({
   name: "rose",
   metadata: {
     description: "Dusty rose elegance with refined serif typography. Blush-tinted surfaces, deep burgundy dark mode, elegant radii.",
@@ -588,4 +589,4 @@ export const rosePreset: SigilPreset = {
       "responsive-breakpoint": "768px",
     },
   },
-};
+});

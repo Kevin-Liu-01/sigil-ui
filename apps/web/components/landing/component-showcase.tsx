@@ -1772,7 +1772,7 @@ const CELLS: ComponentCell[] = [
     />
   )},
   { name: "ChangelogTable", category: "Diagrams", variants: 1, span: 2, render: () => (
-    <ChangelogTable releases={[{ version: "2.0", date: "Apr 2026", entries: [{ type: "added", description: "44 presets" }, { type: "fixed", description: "Docs links" }] }]} />
+    <ChangelogTable releases={[{ version: "2.0", date: "Apr 2026", entries: [{ type: "added", description: "46 presets" }, { type: "fixed", description: "Docs links" }] }]} />
   )},
   { name: "StatusTable", category: "Diagrams", variants: 1, span: 2, render: () => (
     <StatusTable title="Status" services={[{ name: "API", status: "operational", uptime: "99.9%" }, { name: "Docs", status: "degraded", lastIncident: "1h ago" }]} />
@@ -2136,7 +2136,7 @@ const CELLS: ComponentCell[] = [
       <PreviewCardTrigger render={<button type="button" className="text-xs underline text-[var(--s-primary)] bg-transparent border-0 cursor-pointer" />}>
         Hover for preview
       </PreviewCardTrigger>
-      <PreviewCardContent title="Sigil UI" description="A token-driven design system with 44 presets." />
+      <PreviewCardContent title="Sigil UI" description="A token-driven design system with 46 presets." />
     </PreviewCard>
   )},
   /* ================================================================ */
@@ -2282,7 +2282,7 @@ const CELLS: ComponentCell[] = [
       title="Team"
       description="For teams"
       price="$29"
-      features={["300+ components", "44 presets"]}
+      features={["350+ components", "46 presets"]}
       action={<Button size="sm">Start</Button>}
     />
   )},
