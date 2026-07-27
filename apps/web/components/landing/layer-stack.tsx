@@ -31,86 +31,87 @@ interface LayerDef {
 
 const LAYERS: LayerDef[] = [
   {
-    id: "tokens",
+    id: "inputs",
     num: "01",
-    title: "TOKENS",
-    subtitle: "519 configurable fields",
+    title: "INPUTS",
+    subtitle: "intent + ecosystem",
     items: [
-      { label: "--s-primary", value: "oklch(0.7 0.15 280)" },
-      { label: "--s-radius-md", value: "6px" },
-      { label: "--s-font-display", value: '"PP Pangram Sans"' },
-      { label: "--s-duration-fast", value: "150ms" },
+      { label: "DESIGN.md" },
+      { label: "style / guidelines" },
+      { label: "presets" },
+      { label: "skills + MCPs" },
     ],
     description:
-      "519 CSS custom properties that define every visual decision in the system. Colors, fonts, spacing, radius, shadows, and motion — all in one place.",
-    color: "oklch(0.50 0.24 275)",
+      "Project intent enters as a readable design spec, preset, reference, or agent workflow. Sigil turns that context into enforceable constraints instead of leaving it as prose.",
+    color: "var(--s-primary)",
   },
   {
-    id: "presets",
+    id: "tokens",
     num: "02",
-    title: "PRESETS",
-    subtitle: "44 curated + custom",
+    title: "ABSORPTION",
+    subtitle: "compile + normalize",
     items: [
-      { label: "sigil" },
-      { label: "noir" },
-      { label: "forge" },
-      { label: "+ your own" },
+      { label: "519 tokens" },
+      { label: "CSS variables" },
+      { label: "Tailwind theme" },
+      { label: "W3C JSON" },
     ],
     description:
-      "A preset is a complete set of 519 token values that defines a visual identity. Switch presets and the entire UI transforms in one command.",
-    color: "oklch(0.56 0.20 45)",
+      "The compiler absorbs design intent into one normalized token graph. Adapters map existing systems into the same contract, so changes propagate programmatically.",
+    color: "var(--s-info, var(--s-primary))",
   },
   {
     id: "components",
     num: "03",
-    title: "COMPONENTS",
-    subtitle: "350+ token-driven",
+    title: "WRAPPERS",
+    subtitle: "proven upstream behavior",
     items: [
-      { label: "Button" },
-      { label: "Card" },
-      { label: "Input" },
-      { label: "Badge" },
+      { label: "Base UI" },
+      { label: "Radix" },
+      { label: "charts" },
+      { label: "carousels" },
     ],
     description:
-      "350+ React components that read from token variables. They never hardcode colors, spacing, or motion — so they survive every preset switch without changing a line.",
-    color: "oklch(0.52 0.20 160)",
+      "Sigil adopts mature behavior libraries and wraps them in the token contract. Accessibility and interaction stay upstream; the visual system stays coherent and editable.",
+    color: "var(--s-success, var(--s-primary))",
   },
   {
     id: "pages",
     num: "04",
-    title: "PAGES",
-    subtitle: "17 production templates",
+    title: "OUTPUTS",
+    subtitle: "coherent by construction",
     items: [
-      { label: "Landing" },
-      { label: "Dashboard" },
-      { label: "E-commerce" },
+      { label: "components" },
+      { label: "pages" },
+      { label: "docs" },
+      { label: "agent rules" },
     ],
     description:
-      "Compose components into production screens. Every page inherits the active token set — no page-level overrides or one-off styling needed.",
-    color: "oklch(0.52 0.22 330)",
+      "Components, pages, documentation, and agent instructions all inherit the same compiled decisions. Teams extend one system instead of maintaining parallel libraries.",
+    color: "var(--s-warning, var(--s-primary))",
   },
 ];
 
 const LAYER_NOTES: Record<string, string[]> = {
-  tokens: [
-    "Colors use OKLCH. Spacing follows a 4px grid. All values are semantic, never raw.",
-    "Change --s-primary and every button, link, badge, and focus ring updates at once.",
-    "Agents edit tokens first. The layers above never need manual changes.",
+  inputs: [
+    "DESIGN.md holds the design intent in a form humans and agents can both edit.",
+    "Presets, style rules, skills, MCPs, and references are inputs — not disconnected sources of truth.",
+    "The constraint pipeline makes contextual guidance enforceable downstream.",
   ],
-  presets: [
-    "sigil preset noir — one command rewrites all 519 tokens simultaneously.",
-    "44 built-in presets across 7 categories: structural, minimal, dark, colorful, editorial, industrial, edgeless.",
-    "Create custom presets from any base. Every field is overridable.",
+  tokens: [
+    "One compiler emits CSS variables, Tailwind theme values, and W3C token JSON.",
+    "Adapters absorb shadcn, Bootstrap, Material, and extracted references into the same graph.",
+    "Change one semantic decision and every downstream consumer receives it.",
   ],
   components: [
-    "Read-only consumers of tokens. They never own colors, spacing, or motion values.",
-    "Built on Base UI primitives — keyboard navigation, focus management, ARIA handled.",
-    "Button, Card, Input, Badge, and 196 more — all available via sigil add.",
+    "Base UI and Radix handle focus management, keyboard navigation, and ARIA behavior.",
+    "Charting, carousel, and other specialist libraries keep their mature engines.",
+    "Sigil supplies the shared token bindings and composition constraints instead of cloning behavior.",
   ],
   pages: [
-    "17 templates: landing, dashboard, e-commerce, docs, portfolio, blog, and more.",
-    "Drag-and-drop composition in the sandbox. Export clean code.",
-    "Switch the preset after the page is built. Everything adapts.",
+    "Token-bound components, templates, docs, and agent rules ship from the same system.",
+    "Add or swap an upstream primitive without creating a second visual language.",
+    "Switch presets after composition; the output adapts without scattered component edits.",
   ],
 };
 
@@ -193,9 +194,9 @@ export function LayerStackDiagram({
   const activeNotes = activeLayer
     ? LAYER_NOTES[activeLayer.id] ?? []
     : [
-        "Each layer has one job. Tokens define. Presets bundle. Components consume. Pages compose.",
+        "Intent enters once, compiles into constraints, wraps proven behavior, and ships as coherent UI.",
         "Select a layer to isolate it and see what it contains.",
-        "Changes flow upward — edit a token and every layer above inherits it automatically.",
+        "Sigil maintains the contract and adapters — not duplicate copies of upstream libraries.",
       ];
 
   const handleSetActive = useCallback((id: string | null) => setActive(id), []);
@@ -287,7 +288,7 @@ export function LayerStackDiagram({
             viewBox={`0 0 ${svgW} ${svgH}`}
             className="relative z-[1] w-full max-w-[640px] select-none"
             role="img"
-            aria-label="Isometric layer stack: tokens, presets, components, pages"
+            aria-label="Isometric Sigil pipeline: inputs, absorption, wrappers, outputs"
           >
             <defs>
               <filter id="iso-glow">
@@ -400,7 +401,7 @@ export function LayerStackDiagram({
                   {layer.id === "tokens" && (
                     <TopFaceTokenLines geo={geo} ox={ox} oy={oy} active={isActive} />
                   )}
-                  {layer.id === "presets" && (
+                  {layer.id === "inputs" && (
                     <TopFacePresetDots geo={geo} ox={ox} oy={oy} active={isActive} />
                   )}
                   {layer.id === "components" && (
@@ -411,7 +412,7 @@ export function LayerStackDiagram({
                   )}
 
                   {/* Isometric number — flush with the top face (skip for prism layers) */}
-                  {layer.id !== "presets" && (
+                  {layer.id !== "inputs" && (
                     <g transform={`translate(${geo.center[0] + ox}, ${geo.center[1] + oy})`}>
                       <text
                         x="0" y="0"
@@ -848,4 +849,3 @@ function TopFacePageIcon({ geo, ox, oy, active }: FaceProps) {
     </g>
   );
 }
-

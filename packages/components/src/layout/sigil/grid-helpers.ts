@@ -86,12 +86,16 @@ export function measureStructuralCellPx(): number {
  * Five-column structural grid using the same CSS variables the token compiler
  * emits (`--s-rail-gap`, `--s-content-max`). This keeps rail + content tracks
  * aligned with the structural grid when users zoom, change root font size, or
- * resize — numeric props from JS are not used so we never drift from `:root`.
+ * resize. Frame-level variables preserve explicit component props without
+ * breaking the responsive token fallback.
  */
+export const RESPONSIVE_RAIL_GAP =
+  "var(--s-frame-rail-gap, min(var(--s-rail-gap, 50px), max(var(--s-gutter-sm, 16px), 4vw)))";
+
 export function buildGridCols(_railGap?: number, _contentMax?: number): CSSProperties {
   return {
     gridTemplateColumns:
-      "1fr var(--s-rail-gap, 50px) minmax(0, var(--s-content-max, 1200px)) var(--s-rail-gap, 50px) 1fr",
+      `minmax(0, 1fr) ${RESPONSIVE_RAIL_GAP} minmax(0, min(var(--s-frame-content-max, var(--s-content-max, 1200px)), calc(100vw - ${RESPONSIVE_RAIL_GAP} - ${RESPONSIVE_RAIL_GAP}))) ${RESPONSIVE_RAIL_GAP} minmax(0, 1fr)`,
   };
 }
 

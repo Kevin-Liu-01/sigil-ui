@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
+    "readme:hero": "node scripts/build-readme-hero.mjs",
     "start": "next start",
     "tokens:build": "node scripts/build-tokens-css.mjs"
   },
@@ -21,6 +22,7 @@
     "@web-kits/audio": "^0.1.0",
     "ai": "^6.0.168",
     "clsx": "^2.1.1",
+    "culori": "^4.0.2",
     "fumadocs-core": "^16.8.2",
     "fumadocs-mdx": "^14.3.1",
     "fumadocs-ui": "^16.8.2",

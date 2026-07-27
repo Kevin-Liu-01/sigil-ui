@@ -415,7 +415,10 @@ export function TokenPipelineDiagram({
 
   useEffect(() => {
     const id = setInterval(
-      () => setActiveIndex((i) => (i + 1) % TOKEN_GROUPS.length),
+      () => {
+        if (document.documentElement.hasAttribute("data-sigil-preset-switching")) return;
+        setActiveIndex((i) => (i + 1) % TOKEN_GROUPS.length);
+      },
       interval,
     );
     return () => clearInterval(id);

@@ -15,6 +15,7 @@ import { useIsInsidePageGrid, usePageGridConfig } from "./grid-context";
 import {
   borderCompensatedPadding,
   buildGridCols,
+  RESPONSIVE_RAIL_GAP,
   SECTION_BORDER,
 } from "./grid-helpers";
 import {
@@ -81,12 +82,12 @@ const CrossRow = memo(function CrossRow({
   const verticalStyle =
     position === "top" ? { top: -half } : { bottom: -half };
 
-  // `--s-rail-gap` tracks the same track as `SigilPageGrid` columns (rem-safe).
+  // The responsive rail variable tracks the same column as `SigilPageGrid`.
   const horizontals: CSSProperties[] = [
-    { left: `calc(-1 * var(--s-rail-gap, 50px) - ${half}px)` },
+    { left: `calc(-1 * ${RESPONSIVE_RAIL_GAP} - ${half}px)` },
     { left: -half },
     { right: -half },
-    { right: `calc(-1 * var(--s-rail-gap, 50px) - ${half}px)` },
+    { right: `calc(-1 * ${RESPONSIVE_RAIL_GAP} - ${half}px)` },
   ];
 
   return (
@@ -430,7 +431,12 @@ function StandaloneSection({
       id={id}
       data-slot="sigilsection"
       className={cn("grid", className)}
-      style={{ ...gridCols, ...style }}
+      style={{
+        ...gridCols,
+        "--s-frame-rail-gap": `min(${railGap}px, max(var(--s-gutter-sm, 16px), 4vw))`,
+        "--s-frame-content-max": `${contentMax}px`,
+        ...style,
+      } as CSSProperties}
     >
       <div aria-hidden="true" />
       <SigilGutter

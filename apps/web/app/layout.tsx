@@ -19,6 +19,12 @@ const robotoMono = Roboto_Mono({
 
 const siteDescription = `${SIGIL_ONE_LINER} ${SIGIL_PRODUCT_SUMMARY} — all styled through CSS custom properties. Switch presets and every component updates instantly.`;
 const ogDescription = `One token file. ${SIGIL_PRODUCT_SUMMARY}. Switch presets and your entire UI updates — colors, fonts, spacing, radius, motion, everything.`;
+const homeSocialImage = {
+  url: "/api/og-home",
+  width: 1200,
+  height: 630,
+  alt: "Sigil UI — one markdown file controls your entire design system",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -60,6 +66,7 @@ export const metadata: Metadata = {
     siteName: "Sigil UI",
     title: "Sigil UI — One Token File Controls Everything",
     description: ogDescription,
+    images: [homeSocialImage],
   },
   twitter: {
     card: "summary_large_image",
@@ -67,6 +74,7 @@ export const metadata: Metadata = {
     creator: "@kevinliu",
     title: "Sigil UI — One Token File Controls Everything",
     description: ogDescription,
+    images: [homeSocialImage],
   },
 };
 

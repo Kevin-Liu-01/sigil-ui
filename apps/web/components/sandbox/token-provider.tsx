@@ -46,6 +46,11 @@ const DEFAULT_STYLE_ATTR = "data-sigil-tokens";
 // short-circuited per attr via lastCssByAttr.
 const styleElByAttr = new Map<string, HTMLStyleElement>();
 const lastCssByAttr = new Map<string, string>();
+const cssByTokenBag = new WeakMap<SigilTokens, string>();
+const loadedPresetCache = new Map<string, SigilPreset>([
+  ["default", defaultPreset],
+]);
+const loadingPresetCache = new Map<string, Promise<SigilPreset>>();
 
 function getTokensStyleEl(attr: string): HTMLStyleElement | null {
   if (typeof document === "undefined") return null;
@@ -78,6 +83,9 @@ function getTokensStyleEl(attr: string): HTMLStyleElement | null {
  * no per-category prefix table to drift out of sync.
  */
 export function serializeTokensToCss(tokens: SigilTokens): string {
+  const cached = cssByTokenBag.get(tokens);
+  if (cached) return cached;
+
   const compiled = compileToCss(tokens, {
     selector: ":root",
     darkSelector: ".dark, [data-theme=\"dark\"]",
@@ -86,7 +94,7 @@ export function serializeTokensToCss(tokens: SigilTokens): string {
   // Append `!important` to every declaration. We match the simple
   // `<varname>: <value>;` shape emitted by compileToCss; lines that
   // open/close blocks (`:root {`, `}`) and blank lines are passed through.
-  return compiled
+  const serialized = compiled
     .split("\n")
     .map((line) => {
       const m = /^(\s*)(--[\w-]+):\s*(.+);$/.exec(line);
@@ -96,6 +104,9 @@ export function serializeTokensToCss(tokens: SigilTokens): string {
     })
     .join("\n")
     .trimEnd();
+
+  cssByTokenBag.set(tokens, serialized);
+  return serialized;
 }
 
 // Synchronously write tokens to the DOM — call this from the user-input
@@ -134,8 +145,57 @@ function scheduleReactCommit(commit: () => void) {
   });
 }
 
+function warmPresetFonts(preset: SigilPreset) {
+  if (typeof document === "undefined" || !("fonts" in document)) return;
+
+  const typography = preset.tokens.typography as
+    | Record<string, unknown>
+    | undefined;
+  if (!typography) return;
+
+  const families = ["font-display", "font-body", "font-mono"]
+    .map((key) => typography[key])
+    .filter((value): value is string => typeof value === "string");
+
+  for (const family of families) {
+    document.fonts.load(`400 16px ${family}`).catch(() => {});
+    document.fonts.load(`700 16px ${family}`).catch(() => {});
+  }
+}
+
+function recordPresetApply(name: string, startedAt?: number) {
+  if (
+    startedAt === undefined ||
+    typeof performance === "undefined" ||
+    typeof document === "undefined"
+  ) {
+    return;
+  }
+
+  performance.mark("sigil:preset:applied");
+  performance.measure(
+    "sigil:preset:apply",
+    "sigil:preset:start",
+    "sigil:preset:applied",
+  );
+
+  const applyMs = performance.now() - startedAt;
+  document.documentElement.dataset.sigilPresetApplyMs = applyMs.toFixed(2);
+  document.documentElement.dataset.sigilPresetName = name;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.documentElement.dataset.sigilPresetPaintMs = (
+        performance.now() - startedAt
+      ).toFixed(2);
+      delete document.documentElement.dataset.sigilPresetSwitching;
+    });
+  });
+}
+
 type SigilTokensActions = {
   setPreset: (name: string) => Promise<void>;
+  preloadPreset: (name: string) => Promise<void>;
   setTokens: (tokens: SigilTokens, name?: string) => void;
   patchTokens: (
     category: keyof SigilTokens,
@@ -199,11 +259,15 @@ export function SigilTokensProvider({
   // earlier (still-loading) preset from racing in after the newer one.
   const presetSeqRef = useRef(0);
   // Cache loaded preset modules so repeat switches don't re-import.
-  const presetCacheRef = useRef(new Map<string, SigilPreset>());
+  const presetCacheRef = useRef(loadedPresetCache);
   // Stable ref to the current attribute so memoised actions can read it
   // without breaking memoisation when the attr prop changes.
   const styleAttrRef = useRef(styleTagAttr);
   styleAttrRef.current = styleTagAttr;
+
+  if (typeof initialPreset === "object") {
+    presetCacheRef.current.set(resolvedName, initialPreset);
+  }
 
   // Write initial tokens eagerly on mount so the very first paint reflects
   // this provider's state. Non-default tags (e.g. the sandbox layer) get
@@ -229,31 +293,14 @@ export function SigilTokensProvider({
   }, [styleTagAttr]);
 
   const applyPreset = useCallback(
-    (preset: SigilPreset, name: string, seq: number) => {
+    (preset: SigilPreset, name: string, seq: number, startedAt?: number) => {
       // Discard stale applies if a newer preset switch has started.
       if (seq !== presetSeqRef.current) return;
-
-      // Fire-and-forget font preload; tokens apply immediately so the swap
-      // is visible on the next frame. Modern browsers will repaint with
-      // fallback glyphs, then swap once the font is ready (display: swap).
-      if (typeof document !== "undefined" && "fonts" in document) {
-        const typo = preset.tokens.typography as
-          | Record<string, unknown>
-          | undefined;
-        if (typo) {
-          const families = ["font-display", "font-body", "font-mono"]
-            .map((k) => typo[k])
-            .filter((v): v is string => typeof v === "string");
-          for (const f of families) {
-            document.fonts.load(`400 16px ${f}`).catch(() => {});
-            document.fonts.load(`700 16px ${f}`).catch(() => {});
-          }
-        }
-      }
 
       // Eager DOM write — visual swap happens on the next paint without
       // waiting for React to reconcile every consumer of useSigilTokens.
       applyTokensToDom(preset.tokens, styleAttrRef.current);
+      recordPresetApply(name, startedAt);
 
       // The visual swap is already done; everything React does from here
       // on is editor / consumer bookkeeping. Mark it as a transition so
@@ -302,25 +349,76 @@ export function SigilTokensProvider({
     [],
   );
 
+  const loadPreset = useCallback(async (name: string) => {
+    const cached = presetCacheRef.current.get(name);
+    if (cached) return cached;
+
+    const loader = presets[name as PresetName];
+    if (!loader) return null;
+
+    let loading = loadingPresetCache.get(name);
+    if (!loading) {
+      loading = loader().then((preset) => {
+        presetCacheRef.current.set(name, preset);
+        loadingPresetCache.delete(name);
+        // Compile once while the preset is loading or prewarming. The click
+        // path can then replace the style tag with a cached string.
+        serializeTokensToCss(preset.tokens);
+        return preset;
+      });
+      loadingPresetCache.set(name, loading);
+    }
+    return loading;
+  }, []);
+
+  const preloadPreset = useCallback(
+    async (name: string) => {
+      const preset = await loadPreset(name);
+      if (preset) {
+        serializeTokensToCss(preset.tokens);
+        warmPresetFonts(preset);
+      }
+    },
+    [loadPreset],
+  );
+
   const setPreset = useCallback(
     async (name: string) => {
-      const loader = presets[name as PresetName];
-      if (!loader) return;
+      if (!presetCacheRef.current.has(name) && !presets[name as PresetName]) {
+        return;
+      }
       const seq = ++presetSeqRef.current;
+      const startedAt =
+        typeof performance === "undefined" ? undefined : performance.now();
+      if (typeof performance !== "undefined") {
+        performance.clearMarks("sigil:preset:start");
+        performance.clearMarks("sigil:preset:applied");
+        performance.clearMeasures("sigil:preset:apply");
+        performance.mark("sigil:preset:start");
+      }
+      if (typeof document !== "undefined") {
+        document.documentElement.dataset.sigilPresetSwitching = "";
+      }
 
       // Synchronous path for already-loaded presets — no await tick before
       // we schedule the state update.
       const cached = presetCacheRef.current.get(name);
       if (cached) {
-        applyPreset(cached, name, seq);
+        applyPreset(cached, name, seq, startedAt);
         return;
       }
 
-      const preset = await loader();
-      presetCacheRef.current.set(name, preset);
-      applyPreset(preset, name, seq);
+      try {
+        const preset = await loadPreset(name);
+        if (preset) applyPreset(preset, name, seq, startedAt);
+      } catch (error) {
+        if (seq === presetSeqRef.current && typeof document !== "undefined") {
+          delete document.documentElement.dataset.sigilPresetSwitching;
+        }
+        throw error;
+      }
     },
-    [applyPreset],
+    [applyPreset, loadPreset],
   );
 
   const setTokensDirect = useCallback(
@@ -360,8 +458,8 @@ export function SigilTokensProvider({
   // Actions are stable across renders — consumers that only need to call
   // setPreset / setTokens / patchTokens never re-render on token changes.
   const actions = useMemo<SigilTokensActions>(
-    () => ({ setPreset, setTokens: setTokensDirect, patchTokens }),
-    [setPreset, setTokensDirect, patchTokens],
+    () => ({ setPreset, preloadPreset, setTokens: setTokensDirect, patchTokens }),
+    [setPreset, preloadPreset, setTokensDirect, patchTokens],
   );
 
   // Legacy combined value for back-compat callers of useSigilTokens().

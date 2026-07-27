@@ -133,8 +133,10 @@ function SigilPageGridImpl({
           data-rhythm={rhythm}
           style={{
             ...gridCols,
-            "--s-rail-gap": `${effectiveRailGap}px`,
-            "--s-content-max": `${contentMax}px`,
+            "--s-frame-rail-gap": effectiveRailGap === 0
+              ? "0px"
+              : `min(${effectiveRailGap}px, max(var(--s-gutter-sm, 16px), 4vw))`,
+            "--s-frame-content-max": `${contentMax}px`,
             "--s-grid-cell": `${gridCell}px`,
           } as CSSProperties}
         >

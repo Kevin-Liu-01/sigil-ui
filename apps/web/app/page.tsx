@@ -102,19 +102,12 @@ function InstallCommand({ className }: { className?: string }) {
   );
 }
 
-const PRESET_DOTS: { name: string; color: string }[] = [
-  { name: "default", color: "#000000"},
-  { name: "sigil", color: "#9b99e8" },
-  { name: "noir", color: "#d97706" },
-  { name: "forge", color: "#ea580c" },
-  { name: "vex", color: "#ec4899" },
-  { name: "arc", color: "#7c3aed" },
-  { name: "cipher", color: "#22c55e" },
-];
+const HERO_PRESETS = ["default", "sigil", "noir", "forge", "vex", "arc", "cipher"];
 
 function Hero() {
   const actions = useOptionalSigilActions();
   const setPreset = actions?.setPreset;
+  const preloadPreset = actions?.preloadPreset;
   let sound: ReturnType<typeof useSigilSound> = {
     play: () => {},
     enabled: false,
@@ -132,6 +125,27 @@ function Hero() {
     setPreset?.(name);
     sound.play("preset");
   };
+
+  useEffect(() => {
+    if (!preloadPreset) return;
+
+    const warmVisiblePresets = () => {
+      for (const name of HERO_PRESETS) void preloadPreset(name);
+    };
+    const idleWindow = window as unknown as {
+      requestIdleCallback?: Window["requestIdleCallback"];
+      cancelIdleCallback?: Window["cancelIdleCallback"];
+    };
+    if (!idleWindow.requestIdleCallback) {
+      const timeout = globalThis.setTimeout(warmVisiblePresets, 0);
+      return () => globalThis.clearTimeout(timeout);
+    }
+
+    const idle = idleWindow.requestIdleCallback(warmVisiblePresets, {
+      timeout: 800,
+    });
+    return () => idleWindow.cancelIdleCallback?.(idle);
+  }, [preloadPreset]);
 
   return (
       <SigilHero>
@@ -162,16 +176,24 @@ function Hero() {
             </SigilGhostLink>
           </SigilActionRow>
 
-          <SigilInline marginTop="lg" gap="sm">
-            {PRESET_DOTS.map((p) => (
+          <SigilInline
+            marginTop="lg"
+            gap="calc(var(--s-grid-cell) / 12)"
+            className="max-w-full flex-wrap"
+          >
+            {HERO_PRESETS.map((name) => (
               <button
-                key={p.name}
+                key={name}
                 type="button"
-                title={p.name}
-                onClick={() => handlePresetDot(p.name)}
-                className="w-2.5 h-2.5 border border-[var(--s-border)] p-0 cursor-pointer transition-transform duration-[var(--s-duration-fast,150ms)] hover:scale-150"
-                style={{ background: p.color }}
-              />
+                title={name}
+                aria-label={`Switch to ${name} preset`}
+                onPointerEnter={() => void preloadPreset?.(name)}
+                onFocus={() => void preloadPreset?.(name)}
+                onClick={() => handlePresetDot(name)}
+                className="min-h-[var(--s-control-hit-area,2.75rem)] cursor-pointer border border-[var(--s-border)] bg-[var(--s-surface)] px-[calc(var(--s-grid-cell)/12)] font-[family-name:var(--s-font-mono)] text-[var(--s-badge-font-size,0.625rem)] uppercase tracking-[var(--s-tracking-wide,0.08em)] text-[var(--s-text-muted)] transition-[background-color,border-color,color,transform] duration-[var(--s-duration-fast,150ms)] hover:border-[var(--s-primary)] hover:text-[var(--s-text)] active:scale-[var(--s-button-active-scale,0.98)]"
+              >
+                {name === "default" ? "base" : name}
+              </button>
             ))}
           </SigilInline>
         </SigilHeroContent>
@@ -186,23 +208,15 @@ function Hero() {
 
 function ProductSurfaceSection() {
   return (
-    <SigilSection
-      borderTop
-      padding="var(--s-section-padding-y-sm, calc(1 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
-    >
-      <div className="s-transition-all">
-        <HeroShowcase />
-      </div>
+    <SigilSection borderTop space="compact" className="landing-deferred-section">
+      <HeroShowcase />
     </SigilSection>
   );
 }
 
 function ComponentGalleryBannerSection() {
   return (
-    <SigilSection
-      borderTop
-      padding="var(--s-section-padding-y-sm, calc(1 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
-    >
+    <SigilSection borderTop space="compact" className="landing-deferred-section">
       <ComponentGalleryCTA />
     </SigilSection>
   );
@@ -214,13 +228,13 @@ function ComponentGalleryBannerSection() {
 
 function LayerSection() {
   return (
-    <SigilSection borderTop className="relative overflow-hidden">
+    <SigilSection borderTop className="landing-deferred-section relative overflow-hidden">
       <TextureBg opacity={0.3} />
       <div className="relative z-[1]">
         <SigilSectionHeader
           label="Architecture"
-          heading="Four layers. One editable surface."
-          description="Tokens define every visual primitive. Presets bundle them into complete identities. Components consume them via CSS variables. Pages compose components. You only ever edit the token layer."
+          heading="From project intent to production UI."
+          description="DESIGN.md, presets, guidelines, skills, MCPs, and proven upstream libraries enter one constraint pipeline. Sigil absorbs them into tokens and adapters, then emits coherent components and pages without forking behavior libraries."
         />
         <LayerStackDiagram />
       </div>
@@ -230,13 +244,13 @@ function LayerSection() {
 
 function TokenSystemSection() {
   return (
-    <SigilSection borderTop className="relative overflow-hidden">
+    <SigilSection borderTop className="landing-deferred-section relative overflow-hidden">
       <TextureBg opacity={0.3} />
       <div className="relative z-[1]">
         <SigilSectionHeader
           label="Token System"
-          heading="Edit one file. Everything recompiles."
-          description={`sigil.tokens.md compiles to ${SIGIL_PRODUCT_STATS.tokenCount} CSS custom properties. Every component reads them. Change a value, and ${SIGIL_PRODUCT_STATS.componentCountLabel} components update — no manual edits across files.`}
+          heading="DESIGN.md is the source of truth."
+          description={`The human-readable spec compiles to ${SIGIL_PRODUCT_STATS.tokenCount} CSS custom properties, Tailwind theme values, and W3C tokens. Change the intent once and ${SIGIL_PRODUCT_STATS.componentCountLabel} components update without scattered edits.`}
         />
         <TokenPipelineDiagram />
 
@@ -249,7 +263,7 @@ function TokenSystemSection() {
             className="max-w-lg leading-relaxed"
             style={{ marginBottom: "var(--s-section-content-gap)" }}
           >
-            Every line in sigil.tokens.md maps to a CSS variable. Edit a value and see the component update live.
+            Every design decision maps to a named token. Edit the spec and watch the compiled interface update live.
           </DensityText>
           <MarkdownEditorPreview />
         </div>
@@ -265,13 +279,13 @@ function TokenSystemSection() {
 
 function UnderTheHoodSection() {
   return (
-    <SigilSection id="components" borderTop className="relative overflow-hidden">
+    <SigilSection id="components" borderTop className="landing-deferred-section relative overflow-hidden">
       <TextureBg opacity={0.25} />
       <div className="relative z-[1]">
         <SigilSectionHeader
           label="Under the Hood"
-          heading="Radix primitives. Token-driven styling. One import."
-          description="Each component bundles the behavior primitive, animation engine, and token bindings it needs. Select one to see what ships inside."
+          heading="Own the constraints. Reuse the primitives."
+          description="Sigil wraps Base UI, Radix, charting, carousel, and other proven libraries with one token contract. Upstream owns difficult behavior; Sigil owns the visual language, adapters, and agent-editable surface."
         />
         <ComponentStackDiagram />
 
@@ -383,7 +397,7 @@ function CLIVoronoiSection() {
   const VB_H = 780;
 
   return (
-    <SigilSection borderTop>
+    <SigilSection borderTop className="landing-deferred-section">
       <SigilSectionHeader
         label="CLI"
         heading="Set up, switch presets, audit, and validate — from the terminal."
@@ -563,7 +577,7 @@ function CLIVoronoiSection() {
 
 function ThreeDSection() {
   return (
-    <SigilSection borderTop>
+    <SigilSection borderTop className="landing-deferred-section">
       <SigilSectionHeader
         label="3D Components"
         heading="Projected UI without leaving CSS."
@@ -577,12 +591,15 @@ function ThreeDSection() {
 function PresetsSection() {
   const [morphIndex, setMorphIndex] = useState(0);
   useEffect(() => {
-    const id = setInterval(() => setMorphIndex((prev) => (prev + 1) % MINI_PRESETS.length), 2200);
+    const id = setInterval(() => {
+      if (document.documentElement.hasAttribute("data-sigil-preset-switching")) return;
+      setMorphIndex((prev) => (prev + 1) % MINI_PRESETS.length);
+    }, 2200);
     return () => clearInterval(id);
   }, []);
 
   return (
-    <SigilSection id="presets" borderTop className="relative overflow-hidden">
+    <SigilSection id="presets" borderTop className="landing-deferred-section relative overflow-hidden">
       <TextureBg opacity={0.25} />
       <div className="relative z-[1]">
         <SigilSectionHeader
@@ -677,7 +694,7 @@ const DEMOS = [
 
 function DemoSitesSection() {
   return (
-    <SigilSection borderTop>
+    <SigilSection borderTop className="landing-deferred-section">
       <SigilSectionHeader
         label="Demos"
         heading="17 templates. Real sites, real presets."
@@ -783,6 +800,12 @@ const QUICK_START_STEPS = [
   },
 ];
 
+const QUICK_START_ACCENTS = [
+  "var(--s-primary)",
+  "var(--s-info, var(--s-primary))",
+  "var(--s-success, var(--s-primary))",
+];
+
 const GENERATED_FILES = [
   { path: "sigil.tokens.md", detail: `${SIGIL_PRODUCT_STATS.tokenCount} token system` },
   { path: "app/sigil.css", detail: "CSS variables" },
@@ -792,10 +815,7 @@ const GENERATED_FILES = [
 
 function QuickStartSection() {
   return (
-    <SigilSection
-      borderTop
-      padding="var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
-    >
+    <SigilSection borderTop space="normal" className="landing-deferred-section">
       <div
         className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-end"
         style={{
@@ -879,7 +899,7 @@ function QuickStartSection() {
               key={step.title}
               className="group border border-[var(--s-border)] border-l-[3px] bg-[var(--s-surface)] transition-colors duration-[var(--s-duration-fast,150ms)] hover:bg-[var(--s-background)]"
               style={{
-                borderLeftColor: index === 0 ? "var(--s-primary)" : PRESET_DOTS[index + 1]?.color,
+                borderLeftColor: QUICK_START_ACCENTS[index],
                 padding: "var(--s-section-content-gap)",
               }}
             >
@@ -947,7 +967,7 @@ function FinalCTA() {
     <SigilDivider size="md" showCross fadeEdges />
     <SigilSection
       padding="var(--s-section-padding-y, calc(2 * var(--s-grid-cell))) var(--s-section-padding-x, var(--s-page-margin, 24px))"
-      className="relative overflow-hidden"
+      className="landing-deferred-section relative overflow-hidden"
     >
       <TextureBg opacity={0.45} darkOpacity={0.35} />
       <div

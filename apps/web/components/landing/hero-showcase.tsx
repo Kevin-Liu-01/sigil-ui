@@ -112,18 +112,6 @@ function createDemoDate(): Date {
   return new Date(2026, 3, 24);
 }
 
-const TRANSITION_CSS = `
-.hero-gallery, .hero-gallery * {
-  transition:
-    background-color 400ms ${EASING},
-    border-color 400ms ${EASING},
-    color 400ms ${EASING},
-    box-shadow 400ms ${EASING},
-    border-radius 400ms ${EASING},
-    transform 200ms ${EASING};
-}
-`;
-
 /* ================================================================ */
 /*  Deploy cards                                                      */
 /* ================================================================ */
@@ -2046,13 +2034,12 @@ function PresetDots() {
 }
 
 /* ================================================================ */
-/*  Export — masonry-style 4-column grid of discrete cards             */
+/*  Export — curated 4-column gallery                                  */
 /* ================================================================ */
 
 export function HeroShowcase({ className, style }: { className?: string; style?: React.CSSProperties }) {
   return (
     <div className={className} style={style}>
-      <style dangerouslySetInnerHTML={{ __html: TRANSITION_CSS }} />
       <div className="hero-gallery">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-stretch gap-3">
           {/* Col 1 — Deploy */}
@@ -2060,107 +2047,32 @@ export function HeroShowcase({ className, style }: { className?: string; style?:
             <DeployCard />
             <ToolbarRow />
             <BuildStatus />
-            <StatusBadgesRow />
             <ChatInputRow />
-            <SliderRow />
-            <BadgeRow />
-            <VerifiedRow />
-            <ToggleGroupRow />
-            <MentionRow />
-            <ConnectedRow />
-            <MeterRow />
-            <EnvironmentRow />
-            <DatePickerRow />
-            <CommitMessageRow />
-            <UptimeRow />
-            <LatencyBuildRow />
-            <VoronoiRow />
-            <TrafficCommitRow />
-            <div className="grid grid-cols-2 gap-3">
-              <SessionCountRow />
-              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><CircleCheck size={12} className="text-[var(--s-success)]" />Pipeline healthy</span>
-                <span className="text-[9px] font-mono text-[var(--s-text-muted)]">0 failures</span>
-              </div>
-            </div>
-            <div className="flex-1 flex flex-col justify-end"><QuickActionsRow /></div>
+            <QuickActionsRow />
           </div>
           {/* Col 2 — Tokens */}
           <div className="flex flex-col gap-3">
             <TokenEditorCard />
             <TokenPreviewCard />
-            <GPUCounterRow />
-            <TintingRow />
             <PriceRangeRow />
-            <SpinnersShowcase />
-            <BreadcrumbRow />
-            <UrlInputRow />
             <CalendarCard />
-            <AlertWarningRow />
-            <FontStackRow />
-            <RadiusPreviewRow />
-            <TokenPreviewStrip />
             <SpacingScaleRow />
           </div>
           {/* Col 3 — Analytics */}
           <div className="flex flex-col gap-3">
             <AnalyticsKPIs />
-            <CheckboxRow />
-            <TabsRow />
             <AnalyticsTable />
-            <SearchCountRow />
-            <SkeletonRow />
             <ActivityFeed />
-            <TwoFactorRow />
             <ProgressRow />
-            <TagInputRow />
-            <SearchRow />
-            <ButtonRow />
-            <DeployHistoryRow />
-            <RatingRow />
-            <AlertSuccessRow />
-            <KbdShortcutRow />
-            <ErrorActiveRow />
-            <SkeletonCardRow />
-            <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-              <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><BarChart3 size={12} className="text-[var(--s-primary)]" />Avg response</span>
-              <span className="text-[10px] font-mono tabular-nums text-[var(--s-text)]">240ms</span>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><RefreshCw size={12} className="text-[var(--s-text-muted)]" />Last sync</span>
-                <span className="text-[9px] font-mono tabular-nums text-[var(--s-text-muted)]">2m ago</span>
-              </div>
-              <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-                <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><Sparkles size={12} className="text-[var(--s-warning)]" />Plan usage</span>
-                <span className="text-[9px] font-mono tabular-nums text-[var(--s-text-muted)]">82%</span>
-              </div>
-            </div>
             <MiniSparkline />
           </div>
           {/* Col 4 — Onboarding */}
           <div className="flex flex-col gap-3">
             <OnboardingStepper />
             <PlanSelector />
-            <PaginationRow />
             <AiChatRow />
-            <AvatarStackRow />
             <InviteCard />
             <NotificationsRow />
-            <DateRangeRow />
-            <AlertRow />
-            <StarRatingRow />
-            <KeyValueRow />
-            <WifiRow />
-            <StorageMeterRow />
-            <RegionBadgesRow />
-            <CacheHitRow />
-            <div className="flex items-center justify-between p-2.5" style={{ border: "1px solid var(--s-border)", borderRadius: "var(--s-radius-md, 6px)" }}>
-              <span className="text-[10px] text-[var(--s-text)] flex items-center gap-1.5"><Check size={12} className="text-[var(--s-success)]" />SSO enabled</span>
-              <Badge size="sm" variant="outline" className="text-[8px]">SAML</Badge>
-            </div>
-            <HotkeyRow />
-            <LatencyAreaRow />
           </div>
         </div>
       </div>

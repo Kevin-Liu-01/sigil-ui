@@ -62,7 +62,10 @@ export function TokenFlowDiagram({ className }: { className?: string }) {
   const [cursor, setCursor] = useState(true);
 
   useEffect(() => {
-    const id = setInterval(() => setCursor((v) => !v), 530);
+    const id = setInterval(() => {
+      if (document.documentElement.hasAttribute("data-sigil-preset-switching")) return;
+      setCursor((v) => !v);
+    }, 530);
     return () => clearInterval(id);
   }, []);
 

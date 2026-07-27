@@ -15,6 +15,10 @@ import { OklchText } from "../oklch-text";
 /* ── Timing ──────────────────────────────────────────────────── */
 const CYCLE_MS = 4200;
 const PHASE_MS = 1050;
+
+function isPresetSwitching() {
+  return document.documentElement.hasAttribute("data-sigil-preset-switching");
+}
 const STAGGER_MS = 40;
 const ANIM_MS = 3400;
 
@@ -312,6 +316,7 @@ function LiveRequestsCard({ accent = false, intervalMs = 320, length = 32 }: Liv
   useEffect(() => {
     let tick = 0;
     const id = window.setInterval(() => {
+      if (isPresetSwitching()) return;
       tick += 1;
       setBuffer((prev) => {
         const last = prev[prev.length - 1] ?? 12;
@@ -1113,6 +1118,7 @@ export function HeroLogoField() {
   useEffect(() => {
     if (!mounted) return;
     const interval = setInterval(() => {
+      if (isPresetSwitching()) return;
       setPhase((current) => {
         if (current >= 3) {
           const currentKey = STEP_KEYS[ALL_STEP_INDICES[idx % ALL_STEP_INDICES.length]];
@@ -1850,6 +1856,7 @@ export function FooterLogo() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (isPresetSwitching()) return;
       setIdx((i) => (i + 1) % VARIANTS.length);
     }, CYCLE_MS);
     return () => clearInterval(interval);
@@ -1882,6 +1889,7 @@ export function FooterQuadrantDiagram() {
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (isPresetSwitching()) return;
       setIdx((i) => (i + 1) % HERO_VARIANTS.length);
     }, CYCLE_MS);
     return () => clearInterval(interval);

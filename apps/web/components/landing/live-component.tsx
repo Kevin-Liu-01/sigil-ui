@@ -518,14 +518,10 @@ const VARIANT_COUNTS: Record<string, number> = {
 export function ComponentGalleryCTA() {
   return (
     <div
+      data-slot="component-gallery-cta"
+      className="relative col-span-full min-w-0 overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)]"
       style={{
-        position: "relative",
-        gridColumn: "1 / -1",
-        minHeight: 300,
-        overflow: "hidden",
-        border: "1px solid var(--s-border)",
-        marginRight: -1,
-        marginBottom: -1,
+        minHeight: "calc(6 * var(--s-grid-cell))",
         background:
           "linear-gradient(115deg, color-mix(in oklch, var(--s-background) 92%, var(--s-primary)) 0%, var(--s-background) 42%, color-mix(in oklch, var(--s-primary) 20%, var(--s-background)) 100%)",
       }}
@@ -565,32 +561,22 @@ export function ComponentGalleryCTA() {
       />
 
       <div
+        className="relative z-[1] grid min-w-0 grid-cols-1 items-center gap-[var(--s-section-content-gap)] p-[var(--s-card-padding)] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]"
         style={{
-          position: "relative",
-          zIndex: 1,
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 0.9fr) minmax(320px, 1.1fr)",
-          gap: 24,
-          minHeight: 300,
-          padding: 24,
-          alignItems: "center",
+          minHeight: "calc(6 * var(--s-grid-cell))",
         }}
       >
-        <div>
+        <div className="min-w-0">
           <div
+            className="inline-flex items-center border border-[var(--s-border)] bg-[var(--s-background)] font-[family-name:var(--s-font-mono)] text-[var(--s-primary)]"
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              marginBottom: 16,
-              padding: "6px 9px",
-              border: "1px solid var(--s-border)",
-              background: "var(--s-background)",
-              fontFamily: "var(--s-font-mono, monospace)",
-              fontSize: 10,
+              gap: "var(--s-spacing-2, 0.5rem)",
+              marginBottom: "var(--s-section-heading-margin-bottom)",
+              padding:
+                "var(--s-badge-padding-y, 0.375rem) var(--s-badge-padding-x, 0.625rem)",
+              fontSize: "var(--s-badge-font-size, 0.625rem)",
               textTransform: "uppercase",
-              letterSpacing: "0.16em",
-              color: "var(--s-primary)",
+              letterSpacing: "var(--s-tracking-widest, 0.16em)",
             }}
           >
             <span
@@ -604,32 +590,34 @@ export function ComponentGalleryCTA() {
             token scaffold to production UI
           </div>
           <h3
+            className="break-words text-balance font-[family-name:var(--s-font-display)] font-bold text-[var(--s-text)]"
             style={{
               margin: 0,
-              maxWidth: 520,
-              color: "var(--s-text)",
-              fontFamily: "var(--s-font-display)",
-              fontSize: "clamp(28px, 4vw, 48px)",
-              lineHeight: 0.98,
-              letterSpacing: "-0.04em",
-              fontWeight: 700,
+              maxWidth: "var(--s-content-max-narrow, 36rem)",
+              fontSize: "var(--s-heading-h2-size, clamp(1.75rem, 4vw, 3rem))",
+              lineHeight: "var(--s-heading-h2-leading, 1.05)",
+              letterSpacing: "var(--s-heading-h2-tracking, -0.03em)",
             }}
           >
             Browse the full component system.
           </h3>
           <p
+            className="text-pretty text-[var(--s-text-muted)]"
             style={{
-              margin: "14px 0 22px",
-              maxWidth: 500,
-              color: "var(--s-text-muted)",
-              lineHeight: 1.6,
-              fontSize: 14,
+              margin:
+                "var(--s-section-description-gap) 0 var(--s-section-content-gap)",
+              maxWidth: "var(--s-content-max-narrow, 36rem)",
+              lineHeight: "var(--s-body-leading-relaxed, 1.6)",
+              fontSize: "var(--s-body-size-sm, 0.875rem)",
             }}
           >
             Start with blueprint-level primitives, then drop in finished components
             that already inherit the active preset.
           </p>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <div
+            className="flex flex-wrap"
+            style={{ gap: "var(--s-button-icon-gap, 0.75rem)" }}
+          >
             <Button asChild>
               <a href="/components" style={{ textDecoration: "none" }}>
                 Browse Components
@@ -644,13 +632,9 @@ export function ComponentGalleryCTA() {
         </div>
 
         <div
+          className="relative min-w-0 overflow-hidden border border-[var(--s-border)] bg-[var(--s-background)] shadow-[var(--s-shadow-lg)]"
           style={{
-            position: "relative",
-            minHeight: 200,
-            border: "1px solid var(--s-border)",
-            background: "var(--s-background)",
-            boxShadow: "var(--s-shadow-lg)",
-            overflow: "hidden",
+            minHeight: "calc(4 * var(--s-grid-cell))",
           }}
         >
           <div
@@ -663,24 +647,17 @@ export function ComponentGalleryCTA() {
             }}
           />
           <div
+            className="absolute grid grid-cols-1 gap-[var(--s-section-heading-margin-bottom)] sm:grid-cols-2"
             style={{
-              position: "absolute",
-              inset: 16,
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 12,
+              inset: "var(--s-card-padding)",
             }}
           >
             <div
+              className="hidden flex-col border border-dashed border-[var(--s-border)] font-[family-name:var(--s-font-mono)] text-[var(--s-text-muted)] sm:flex"
               style={{
-                border: "1px dashed var(--s-border)",
                 background:
                   "linear-gradient(var(--s-border-muted) 1px, transparent 1px), linear-gradient(90deg, var(--s-border-muted) 1px, transparent 1px)",
                 backgroundSize: "18px 18px",
-                display: "flex",
-                flexDirection: "column",
-                color: "var(--s-text-muted)",
-                fontFamily: "var(--s-font-mono, monospace)",
                 fontSize: 10,
                 textTransform: "uppercase",
                 letterSpacing: "0.12em",
@@ -745,12 +722,7 @@ export function LiveComponentGrid({ className, showCta = true }: LiveComponentGr
 
   return (
     <div
-      className={className}
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: 0,
-      }}
+      className={`grid min-w-0 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 ${className ?? ""}`}
     >
       {GRID_CELLS.map((name) => {
         const renderFn = COMPONENT_MAP[name];

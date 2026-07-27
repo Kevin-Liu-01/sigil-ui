@@ -1,18 +1,9 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset=".github/logo-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset=".github/logo-light.svg">
-    <img alt="Sigil UI" src=".github/logo-light.svg" width="80">
-  </picture>
-</p>
-
-<h1 align="center">Sigil UI</h1>
-
-<p align="center">
-  <strong>One markdown file controls your entire design system.</strong>
+  <img src=".github/readme-hero.svg" alt="Sigil UI — one file, everything recompiles" width="100%">
 </p>
 
 <p align="center">
+  <strong>One markdown file controls your entire design system.</strong><br>
   A token-driven React design system where one DESIGN.md defines every color, font, radius, shadow, and animation.<br>
   350+ components. 46 presets. 519 tokens. 33 categories. Compiles to CSS + Tailwind v4.<br>
   Edit the markdown. Everything recompiles. Switch presets for a completely different visual identity.

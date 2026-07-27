@@ -754,29 +754,23 @@ html[data-switching-theme] *::after {
 /* Preset Transition System                                            */
 /* ================================================================== */
 
+/* The landing page is intentionally rich. Defer off-screen section
+   layout/paint so a root token swap only touches what can be seen. The
+   `auto` intrinsic size is replaced with the measured size after first
+   reveal, preventing repeat scroll jumps. */
+.landing-deferred-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto calc(20 * var(--s-grid-cell));
+}
+
 .s-transition-all,
 .s-transition-all > * {
   transition:
-    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    fill 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    stroke 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 250ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.s-transition-all :is(section, header, footer, nav, main, article, aside),
-.s-transition-all :is(h1, h2, h3, h4, h5, h6, p, a, button, span, label, li),
-.s-transition-all :is(svg, path, rect, circle, polygon, line, polyline),
-.s-transition-all [class*="sigil-"] {
-  transition: inherit;
-}
-
-.s-transition-all *:focus,
-.s-transition-all *:active {
-  transition-duration: 100ms;
+    background-color var(--s-duration-fast) var(--s-ease-out),
+    border-color var(--s-duration-fast) var(--s-ease-out),
+    color var(--s-duration-fast) var(--s-ease-out),
+    box-shadow var(--s-duration-fast) var(--s-ease-out),
+    transform var(--s-duration-fast) var(--s-ease-out);
 }
 
 /* CSS fallback for browsers without View Transitions API              */
@@ -784,15 +778,7 @@ html[data-switching-preset],
 html[data-switching-preset] *,
 html[data-switching-preset] *::before,
 html[data-switching-preset] *::after {
-  transition:
-    background-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    color 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    border-radius 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    fill 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    stroke 350ms cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 250ms cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-duration: var(--s-duration-instant, 0ms) !important;
 }
 
 /* ================================================================== */

@@ -265,6 +265,23 @@ Quality is validated at every layer:
 
 Run `sigil doctor` after any change. Run `sigil diff` before committing.
 
+## Social Preview Crawlers
+
+Open Graph and Twitter image routes must remain public and explicitly crawlable.
+The generated `robots.txt` must include this Twitterbot rule even when the
+wildcard rule already allows the site:
+
+```text
+User-agent: Twitterbot
+Allow: /
+Allow: /api/og
+Allow: /api/og-home
+```
+
+If social images move, update `apps/web/app/robots.ts`, metadata image URLs,
+and cache/CORS headers together. Every social image endpoint must return `200`
+without cookies or authentication and use an image content type.
+
 ## Agent Workflow
 
 ### Setting up a new project

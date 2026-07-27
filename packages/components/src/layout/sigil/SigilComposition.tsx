@@ -23,14 +23,14 @@ export function SigilSectionHeader({
   label,
   heading,
   description,
-  maxDescriptionWidth = 576,
+  maxDescriptionWidth = "var(--s-content-max-narrow, 36rem)",
   className,
   style,
   ...props
 }: SigilSectionHeaderProps) {
   return (
     <div
-      className={className}
+      className={cn("min-w-0", className)}
       style={{
         marginBottom:
           "var(--s-section-header-block-margin-bottom, var(--s-grid-cell))",
@@ -50,7 +50,7 @@ export function SigilSectionHeader({
       <DensityText
         role="headline"
         as="h2"
-        className="font-[family-name:var(--s-font-display)] text-[clamp(24px,3vw,40px)] font-bold tracking-[var(--s-heading-h2-tracking,-0.02em)] leading-[var(--s-heading-h2-leading,1.15)] text-[var(--s-text)]"
+        className="break-words text-balance font-[family-name:var(--s-font-display)] text-[var(--s-heading-h2-size,clamp(1.5rem,3vw,2.5rem))] font-bold tracking-[var(--s-heading-h2-tracking,-0.02em)] leading-[var(--s-heading-h2-leading,1.15)] text-[var(--s-text)]"
         style={{
           marginBottom:
             "var(--s-section-heading-margin-bottom, calc(var(--s-grid-cell) / 4))",
@@ -63,7 +63,7 @@ export function SigilSectionHeader({
           role="body"
           as="p"
           muted
-          className="leading-relaxed"
+          className="text-pretty leading-relaxed"
           style={{ maxWidth: maxDescriptionWidth }}
         >
           {description}
@@ -238,7 +238,7 @@ export function SigilGhostLink({
   return (
     <a
       className={cn(
-        "inline-flex items-center border border-[var(--s-border)] bg-transparent font-[family-name:var(--s-font-mono)] font-medium text-[var(--s-text)] no-underline transition-all duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]",
+        "inline-flex items-center border border-[var(--s-border)] bg-transparent font-[family-name:var(--s-font-mono)] font-medium text-[var(--s-text)] no-underline transition-[background-color,border-color,color,box-shadow,transform] duration-[var(--s-duration-fast,200ms)] hover:bg-[var(--s-surface)]",
         size === "lg" ? "text-[14px]" : "text-[13px]",
         className,
       )}
@@ -291,12 +291,16 @@ export function SigilHeroContent({
 }: SigilHeroContentProps) {
   return (
     <div
-      className={cn("min-w-0 flex-1 shrink-0", className)}
+      className={cn(
+        "w-full min-w-0 flex-1 basis-auto shrink-0 lg:basis-[var(--sigil-hero-content-basis)]",
+        className,
+      )}
       style={{
         maxWidth: "var(--s-hero-content-max, 36rem)",
-        flexBasis: "var(--s-hero-content-basis, min(42%, var(--s-hero-content-max, 36rem)))",
+        "--sigil-hero-content-basis":
+          "var(--s-hero-content-basis, min(42%, var(--s-hero-content-max, 36rem)))",
         ...style,
-      }}
+      } as CSSProperties}
       {...props}
     />
   );
@@ -307,11 +311,14 @@ export interface SigilHeroMediaProps extends HTMLAttributes<HTMLDivElement> {}
 export function SigilHeroMedia({ className, style, ...props }: SigilHeroMediaProps) {
   return (
     <div
-      className={cn("flex min-w-0 flex-1 items-center justify-center", className)}
+      className={cn(
+        "flex w-full min-w-0 flex-1 basis-auto items-center justify-center lg:basis-[var(--sigil-hero-media-basis)]",
+        className,
+      )}
       style={{
-        flexBasis: "var(--s-hero-media-width, 50%)",
+        "--sigil-hero-media-basis": "var(--s-hero-media-width, 50%)",
         ...style,
-      }}
+      } as CSSProperties}
       {...props}
     />
   );
@@ -330,7 +337,7 @@ export function SigilHeroTitle({
   return (
     <Tag
       className={cn(
-        "font-[family-name:var(--s-font-display)] font-bold leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)]",
+        "break-words text-balance font-[family-name:var(--s-font-display)] font-bold leading-[var(--s-heading-display-leading,1.08)] tracking-[var(--s-heading-display-tracking,-0.03em)] text-[var(--s-text)]",
         className,
       )}
       style={{
@@ -359,7 +366,7 @@ export function SigilHeroDescription({
       role="body"
       as="p"
       muted
-      className={cn("leading-relaxed", className)}
+      className={cn("text-pretty leading-relaxed", className)}
       style={{
         fontSize: "var(--s-hero-description-size, var(--s-body-size, 1rem))",
         maxWidth: "var(--s-hero-description-max-width, 28rem)",
